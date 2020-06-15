@@ -1,0 +1,14 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+targets=@stlwrx_target@
+
+gtk_binary_version=@GTK3_BINARY_VERSION@
+gtk_host=@host@
+
+Name: STLWRT-UnixPrint
+Description: STLWRT Unix print support, GTK+ 3 emulation mode
+Version: @GTK3_VERSION@
+Requires: gtk+-3.0 @STLWRT_PACKAGES@
+Cflags: -I${includedir}/stlwrt

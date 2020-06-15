@@ -1,0 +1,15 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+targets=@stlwrx_target@
+
+gtk_binary_version=@GTK3_BINARY_VERSION@
+gtk_host=@host@
+
+Name: STLWRT
+Description: STLWRT Graphical UI Library, GTK+ 3 emulation mode
+Version: @GTK3_VERSION@
+Requires: gdk-3.0 @STLWRT_PACKAGES@
+Libs: -L${libdir} -lgtk-3 @STLWRT_EXTRA_LIBS@
+Cflags: -I${includedir}/stlwrt @STLWRT_EXTRA_CFLAGS@ -DSTLWRT_GTK_COMPAT=3

@@ -1,0 +1,27 @@
+
+A NOTE ABOUT THE CONTENTS OF THIS FILE:
+=======================================
+
+As STLWRT is based around GTK+ 2.24.32, the authors of that version of GTK+ are
+partly to be thanked for STLWRT.  However, STLWRT has deviated significantly
+from GTK+ and there were too many contributors to GTK+ to list here; therefore
+this file lists only people who have contributed directly to STLWRT.  This file
+implicitly thanks all who contributed to GTK+ 2, even though no one who
+contributed only to GTK+ is listed here.  That doesn't mean, however, that if
+you once contributed to GTK+ and you contribute directly to STLWRT that you
+won't be listed here.  If anyone believes they've been left off this list,
+please file a bug report.
+
+Also, if you add yourself to this list, please keep the list in alphabetical
+order, sorted first by surname.  In addition to your name, also add the general
+contributions you've made to STLWRT over time (such as "bug fixes", "beta
+tester", "general STLWRT fanatic / guru", "project leader", or the like).
+
+						  -- Gordon N. Squash,
+						     original pioneer of STLWRT,
+						     April 6, 2020.
+
+********************************************************************************
+
+Gordon N. Squash	-- Original pioneer of STLWRT; current project leader.
+

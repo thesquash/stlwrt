@@ -1,0 +1,12 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+targets=@stlwrx_target@
+
+Name: STLWRX
+Description: STLWRT Drawing Kit, GDK 3 emulation mode
+Version: @GDK3_VERSION@
+Requires: @STLWRX_PACKAGES@
+Libs: -L${libdir} -lgdk-3 @STLWRX_EXTRA_LIBS@
+Cflags: -I${includedir}/stlwrt @STLWRX_EXTRA_CFLAGS@ -DSTLWRT_GTK_COMPAT=3

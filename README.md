@@ -1,23 +1,61 @@
 # STLWRT
 
-This is the pre-alpha version of STLWRT, the graphical toolkit based on [GTK+](
-https://www.gtk.org) 2 which aims to emulate GTK+ 3 and later versions as
-necessary.  The user is presented with a traditional interface; the application
-is presented with whatever application programming or binary interface it
-prefers.  I have released this in hopes that I can obtain help from the
-community and to prove to others who have challenged this project in the past
-that this project is not "vaporware".
+Let me tell you more about this wacky graphical toolkit of mine.
 
-However, due to time constraints I am not able to release the full glory of this
-document right now; I am only able to give pointers to where to find things,
-what STLWRT is missing right now, et cetera.  Please do not expect much from
-STLWRT now, as it's a complex project and honestly, I've only just begun this
-journey.  Please do not attempt to even compile STLWRT right now; it's got a lot
-of work to do before it can compile.  I've just been pressured to release this
-stuff before it's really ready, and I encourage frank feedback about this
-software (for example: "You really could be doing it better if you put the GTK
-emulation in...", or "There's a better way to do..." -- not "This stinks!" or
-":lol:", please.)
+First, it's still not compilable.  **For all of you who think it's insane that
+after all these three months STLWRT is still not compilable**, consider where
+we would be if I had not taken the initiative.  We would still have nothing.
+And besides, GTK 4 may be released in September or October, sure -- it's up to
+3.99.0 right now as I type this on July 11th -- but remember how long it took
+for applications to get ported over to GTK+ 3?  *Years*.  And the changes in
+GTK+ 3, for the most part, were incremental, with the changes getting more
+numerous as GTK+ 3 evolved.  I just tested GTK+ 3.0.0 on my development
+platform, and I can tell you two things:
+
+ 1. It can't run very many modern "GTK+ 3" applications (the only one I made
+    work was the MATE About dialog; and
+ 
+ 2. It looks more similar to GTK+ 2 than to modern GTK+ 3.
+
+If you don't believe me, try building it yourself sometime.  Just understand
+you'll need to make a few changes to the source code to make it run on a
+contemporary operating system; you can request the patch from me if you want.
+
+Remember when Wayland displaced X11?  Neither do I.  Big projects like these
+take time to develop, and sorry but my schedule is pretty packed and nobody's
+volunteered to help me *develop* STLWRT yet.  Sure, plenty of people have
+offered to be beta testers.  That's very nice, but I also need someone who can
+bang on keys even when I can't.
+
+OK.  Moving on to the second thing, as you can see I've updated the README here.
+It reflects my current plans for STLWRT and will continue to reflect what I'm
+doing currently.
+
+Finally, let me tell you my current plans.
+
+## My current plans for STLWRT
+
+Some time ago I made much ado about wanting to write STLWRT so that when a
+STLWRT object was created / instantiated, STLWRT would create two copies of the
+object, one "fat" and one "skinny".  The former was for compatibility with GTK+
+2 applications and modules; the latter with GTK+ 3 applications and modules.
+
+I was planning on that, but realized that was too cumbersome.
+
+Now I think STLWRT needs to create either fat or skinny objects, not both.  At
+runtime, when the various STLWRT object types are registered, STLWRT has to
+determine if the application in question is running in GTK+ 2 mode or GTK+ 3 or
+later mode.  If the former is true, then STLWRT registers all STLWRT objects as
+being the "fat" type; if the latter is true, STLWRT registers all STLWRT objects
+as being the "skinny" type.
+
+This means that modules, such as theme engines, need to be rewritten for STLWRT,
+since a lot of GTK+ 2 theme engines took advantage of the "fat" objects.  I just
+got hold of some old GTK+ 3 theme engines from before the GTK project realized
+they were going to use CSS for styling, but after they knew they would be
+switching to "skinny" objects.  These theme engines will prove useful to STLWRT
+because they do not require that the objects passed to them are "fat"; they
+work just as well with "skinny" objects.
 
 ## The directory layout
 
@@ -25,10 +63,9 @@ emulation in...", or "There's a better way to do..." -- not "This stinks!" or
    worthy of note by itself:  GTK+ 2 had built-in icons; for a time GTK+ 3 did
    too, but no longer.  I personally think icons are an integral part of GTK and
    find that GTK+ 3 without icons is dismal, so I kept the icons from GTK+ 2.
-   In fact, I actually intend on carrying over the default icons from GTK+ 2.10,
-   because they fit in better with the default theme (formerly Raleigh; in
-   STLWRT it's just called Default) than the newer default icons do, in my
-   opinion.  You can already see quite a few of the old-style icons in STLWRT.
+   In fact, I carryied over the default icons from GTK+ 2.10, because they fit
+   in better with the default theme (formerly Raleigh; in STLWRT it's just
+   called Default) than the newer default icons do, in my opinion.
    This is something I'd like input from the community on: old versus new icons.
  
  * `include`, like in many projects, is where the C header files for STLWRT are
@@ -59,7 +96,8 @@ emulation in...", or "There's a better way to do..." -- not "This stinks!" or
    probably don't need to be here.  This includes the Pixbuf-based theme engine
    and several print backends, all copied directly from GTK+ 2.  GAIL is
    missing but I'm not really sure what good it did anybody after all; if
-   anybody knows, please tell me.
+   anybody knows, please tell me.  But as I wrote above, I'll be converting
+   the modules to be STLWRT-friendly.
  
  * `po` and `po-properties` contain translation stuff.  Which brings me to
    another point:  I'm going to need translators for STLWRT, because there will
@@ -123,54 +161,3 @@ fixing everything all at once, which is why STLWRT is where it is.  But the
 fact is GTK+ 2 was kind of poorly structured; it worked, but if you actually
 want to change any code, that's tough.  STLWRT I hope will be more maintainable
 thanks to its wildly different source code layout.
-
-## The future
-
-Currently the biigest problem for STLWRT is that:  In GTK, GTK objects are
-structures which contain their parent object as a member of the structure.  In
-GTK+ 2, it was not uncommon to insert several properties of the object in the
-structure itself.  In GTK+ 3 and later, putting properties into the structure
-became a no-no, so the structures got smaller.  GTK+ 3 applications and modules
-expect the structures to be the smaller size; GTK+ 2 applications and modules
-(including theme engines) often access the public members of the structures
-and would crash if the public members weren't present.  My current idea is:  GTK
-objects can have a special "private area" to themselves which goes along with
-the instance of an object.  My idea is to create an all-encompassing
-StlwrtObject which all STLWRT objects, widget or not, inherit from.
-StlwrtObject's contructor would supersede the default constructor for an object
-and would actually allocate *two* instances of an object:  the "fat" GTK+ 2
-version and the "skinny" GTK+ 3 version.  Then add a private area to both
-instances whose declaration looks like this:
-
-        struct StlwrtObjectPrivate
-        {
-          gpointer *fat_instance;
-          gpointer *skinny_instance;
-        };
-
-The private areas would be identical between the fat instance and the skinny
-instance so that, no matter which size of object you get, you can always get to
-the one you prefer by using:
-
-        StlwrtObjectPrivate *private = G_TYPE_INSTANCE_GET_PRIVATE(widget,
-                                           STLWRT_TYPE_OBJECT,
-                                           StlwrtObjectPrivate);
-        
-        /*
-         * Now use private->fat_instance or private->skinny_instance, depending
-         * on what version you need to pass to another function.
-         */
-
-The appropriate version of the object would then be passed off to the
-application depending on what version of GTK the application wants to pretend
-it's using.  The same goes for modules:  If a module was intended for use with
-GTK+ 2, then pass the "fat" versions of objects to the module; otherwise, pass
-the "skinny" versions of objects to the module.
-
-## A closing note
-
-You may think I'm crazy, but stop psychoanalyzing me and just read the code and
-comment!  ;-)
-
-Gordon N. Squash
-June 24th, 2020

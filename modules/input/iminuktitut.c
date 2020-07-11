@@ -1,4 +1,4 @@
-/* STLWRT - A modern implementation of GTK+ 2 capable of running GTK+ 3 applications
+/* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * Copyright (C) 2000 Red Hat Software
  * Copyright (C) 2000 SuSE Linux Ltd
  *

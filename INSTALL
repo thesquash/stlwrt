@@ -1,7 +1,7 @@
 Prerequisites
 =============
 
-STLWRT requires the following packages:
+GTK+ requires the following packages:
 
  - The GLib, Pango, GdkPixbuf, ATK and cairo libraries. STLWRT requires at least
    GLib 2.28.0, Pango 1.20, GdkPixbuf 2.21.0, ATK 1.29.2 and cairo 1.6.0.
@@ -15,10 +15,9 @@ Installation procedure
 First change directory (cd) into the directory where you unpacked the STLWRT
 sources:
 
-  $ tar -xzf stlwrt-[version].tar.gz    # unpack the sources
-  $ cd stlwrt-[version]			# change to the toplevel directory
-  $ mkdir build                         # make a directory where the built libraries will go
-  $ cd build                            # go to that directory
-  $ ../configure			# run the `configure' script
-  $ make				# build STLWRT
-  $ sudo make install			# install STLWRT
+  $ tar -xzf stlwrt-[version].tar.gz             # unpack the sources
+  $ cd stlwrt-[version]			         # change to the toplevel directory
+  $ ./configure				         # run the `configure' script
+  $ make				         # build STLWRT
+  [ Become root if necessary ]
+  $ sudo make install			         # install STLWRT

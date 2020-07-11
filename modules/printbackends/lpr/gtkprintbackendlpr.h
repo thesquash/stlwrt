@@ -1,4 +1,4 @@
-/* STLWRT - A modern implementation of GTK+ 2 capable of running GTK+ 3 applications
+/* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtkprintbackendlpr.h: LPR implementation of GtkPrintBackend 
  * for printing to lpr 
  * Copyright (C) 2006, 2007 Red Hat, Inc.

@@ -1,4 +1,4 @@
-/* STLWRT - A modern implementation of GTK+ 2 capable of running GTK+ 3 applications
+/* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * Copyright (C) 2020 Gordon N. Squash.
  *
  * This library is free software; you can redistribute it and/or

@@ -66,7 +66,7 @@ emulation in...", or "There's a better way to do..." -- not "This stinks!" or
    be a full configuration tool with lots of options, and a few of the old GTK
    messages made no sense as they were, so those need to be fixed too.
  
- * `public-libs`:  This is the code for the wrapper libraries, the libraries
+ * `libgtk`:  This is the code for the wrapper libraries, the libraries
    that actually emulate one version of GTK or another.  These libraries should
    eventually contain code to "wrap around" functions in STLWRT -- with
    functions named after the original GTK functions which call the appropriate
@@ -77,7 +77,7 @@ emulation in...", or "There's a better way to do..." -- not "This stinks!" or
    library depending on what version of GTK needs to be emulated.  See the next
    bullet point for more information about this stuff.
  
- * `source`:  This is the main STLWRT library itself.  Publicly-accessible
+ * `libstlwrt`:  This is the main STLWRT library itself.  Publicly-accessible
    functions (functions intended for use by applications) names should take the
    following form:  They should be preceded by version information enclosed in
    underscores.  If the function is to be used no matter what version of GTK is
@@ -173,4 +173,4 @@ You may think I'm crazy, but stop psychoanalyzing me and just read the code and
 comment!  ;-)
 
 Gordon N. Squash
-June 15th, 2020
+June 24th, 2020

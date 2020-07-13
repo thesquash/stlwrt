@@ -63,14 +63,21 @@ G_BEGIN_DECLS
 /* Definitions only used within this file. */
 
 #define STLWRT_DEFINE_TYPE_EXTENDED(TN, t_n, T_P, _f_, _C_) \
-         _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN (TN, t_n, T_P, _f_) \
+         _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_PRE(TN, t_n, T_P) \
+         _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_FAT (TN, t_n, T_P, _f_) \
+         _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_SKINNY (TN, t_n, T_P, _f_) \
          {_C_;} \
-         _STLWRT_DEFINE_TYPE_EXTENDED_END()
+         _STLWRT_DEFINE_TYPE_EXTENDED_END() \
+         
 
 
-#define _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN(TypeName, type_name, TYPE_PARENT, flags) \
-  _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_PRE(TypeName, type_name, TYPE_PARENT) \
-  _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_REGISTER(TypeName, type_name, TYPE_PARENT, flags) \
+#define _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_FAT(TypeName, type_name, TYPE_PARENT, flags) \
+  _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_FAT_PRE(TypeName, type_name, TYPE_PARENT) \
+  _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_FAT_REGISTER(TypeName, type_name, TYPE_PARENT, flags) \
+  
+#define _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_SKINNY(TypeName, type_name, TYPE_PARENT, flags) \
+  _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_SKINNY_PRE(TypeName, type_name, TYPE_PARENT) \
+  _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_SKINNY_REGISTER(TypeName, type_name, TYPE_PARENT, flags) \
 
 
 
@@ -78,7 +85,6 @@ G_BEGIN_DECLS
 \
 static void     type_name##_init              (TypeName        *self); \
 static void     type_name##_class_init        (TypeName##Class *klass); \
-static GType    type_name##_get_type_once     (void); \
 static gpointer type_name##_parent_class = NULL; \
 static gint     TypeName##_private_offset; \
 \
@@ -90,41 +96,57 @@ type_name##_get_instance_private (TypeName *self) \
 { \
   return (G_STRUCT_MEMBER_P (self, TypeName##_private_offset)); \
 } \
-\
+
+
+#define _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_FAT_PRE(TypeName, type_name, TYPE_PARENT) \
 GType \
-__##type_name##_get_type (void) \
+_T2_##type_name##_get_type (void) \
 { \
-  static volatile gsize g_define_type_id__volatile = 0;
+  static GType this_stlwrt_type = 0;
   /* Prelude goes here */
 
 /* Added for _STLWRT_DEFINE_TYPE_EXTENDED_WITH_PRELUDE */
-#define _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_REGISTER(TypeName, type_name, TYPE_PARENT, flags) \
-  if (g_once_init_enter (&g_define_type_id__volatile))  \
+#define _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_FAT_REGISTER(TypeName, type_name, TYPE_PARENT, flags) \
+  if (this_stlwrt_type == 0)  \
     { \
-      GType g_define_type_id = type_name##_get_type_once (); \
-      g_once_init_leave (&g_define_type_id__volatile, g_define_type_id); \
-    }					\
-  return g_define_type_id__volatile;	\
-} /* closes type_name##_get_type() */ \
-\
-G_GNUC_NO_INLINE \
-static GType \
-type_name##_get_type_once (void) \
+      this_stlwrt_type = g_type_register_static_simple (TYPE_PARENT, \
+                                     g_intern_static_string (#TypeName), \
+                                     sizeof (TypeName##ClassFat), \
+                                     (GClassInitFunc)(void (*)(void)) type_name##_class_intern_init, \
+                                     sizeof (TypeName##Fat), \
+                                     (GInstanceInitFunc)(void (*)(void)) type_name##_init, \
+                                     (GTypeFlags) flags); \
+      { \
+        /* custom code follows */
+
+
+#define _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_SKINNY_PRE(TypeName, type_name, TYPE_PARENT) \
+GType \
+_3T_##type_name##_get_type (void) \
 { \
-  GType g_define_type_id = \
-        g_type_register_static_simple (TYPE_PARENT, \
-                                       g_intern_static_string (#TypeName), \
-                                       sizeof (TypeName##Class), \
-                                       (GClassInitFunc)(void (*)(void)) type_name##_class_intern_init, \
-                                       sizeof (TypeName), \
-                                       (GInstanceInitFunc)(void (*)(void)) type_name##_init, \
-                                       (GTypeFlags) flags); \
-    { /* custom code follows */
+  static GType this_stlwrt_type = 0;
+  /* Prelude goes here */
+
+/* Added for _STLWRT_DEFINE_TYPE_EXTENDED_WITH_PRELUDE */
+#define _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_SKINNY_REGISTER(TypeName, type_name, TYPE_PARENT, flags) \
+  if (this_stlwrt_type == 0)  \
+    { \
+      this_stlwrt_type = g_type_register_static_simple (TYPE_PARENT, \
+                                     g_intern_static_string (#TypeName), \
+                                     sizeof (TypeName##ClassSkinny), \
+                                     (GClassInitFunc)(void (*)(void)) type_name##_class_intern_init, \
+                                     sizeof (TypeName##Skinny), \
+                                     (GInstanceInitFunc)(void (*)(void)) type_name##_init, \
+                                     (GTypeFlags) flags); \
+      { \
+        /* custom code follows */
+
+
 #define _STLWRT_DEFINE_TYPE_EXTENDED_END()	\
       /* following custom code */	\
     }					\
-  return g_define_type_id; \
-} /* closes type_name##_get_type_once() */
+  return this_stlwrt_type;	\
+} /* closes __type_name##_get_type() */
 
 
 #define _STLWRT_DEFINE_TYPE_EXTENDED_CLASS_INIT(TypeName, type_name) \
@@ -137,11 +159,10 @@ static void     type_name##_class_intern_init (gpointer klass) \
 }
 
 
-#define _STLWRT_DEFINE_TYPE_EXTENDED_END()	\
-      /* following custom code */	\
-    }					\
-  return g_define_type_id; \
-} /* closes type_name##_get_type_once() */
+#define STLWRT_ADD_PRIVATE(TypeName) { \
+  TypeName##_private_offset = \
+    g_type_add_instance_private (this_stlwrt_type, sizeof (TypeName##Private)); \
+}
 
 
 #define STLWRT_DEFINE_INTERFACE_WITH_CODE(TN, t_n, T_P, _C_)     _STLWRT_DEFINE_INTERFACE_EXTENDED_BEGIN(TN, t_n, T_P) {_C_;} _STLWRT_DEFINE_INTERFACE_EXTENDED_END()
@@ -177,73 +198,6 @@ __##type_name##_get_type (void) \
     }						\
   return g_define_type_id__volatile;			\
 } /* closes type_name##_get_type() */
-
-
-
-
-/* More definitions used by STLWRT components. */
-
-#define STLWRT_TYPE_OBJECT            (__stlwrt_object_get_type ())
-#define STLWRT_OBJECT(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), STLWRT_TYPE_OBJECT, StlwrtObject))
-#define STLWRT_OBJECT_CLASS(class)    (G_TYPE_CHECK_CLASS_CAST ((class), STLWRT_TYPE_OBJECT, StlwrtObjectClass))
-#define STLWRT_IS_OBJECT(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), STLWRT_TYPE_OBJECT))
-#define STLWRT_IS_OBJECT_CLASS(class) (G_TYPE_CHECK_CLASS_TYPE ((class), STLWRT_TYPE_OBJECT))
-#define STLWRT_OBJECT_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), STLWRT_TYPE_OBJECT, StlwrtObjectClass))
-
-typedef struct _StlwrtObject        StlwrtObject;
-typedef struct _StlwrtObjectClass   StlwrtObjectClass;
-typedef struct _StlwrtObjectPrivate StlwrtObjectPrivate;
-
-struct _StlwrtObject
-{
-  GInitiallyUnowned parent;
-};
-
-struct _StlwrtObjectClass
-{
-  GInitiallyUnownedClass parent_class;
-
-  /*
-   * The top-level type, directly or indirectly derived from StlwrtObject,
-   * which is also an object that is part of the STLWRT library.  See the
-   * documentation about StlwrtObject itself.
-   */
-  GType	top_level_stlwrt_type;
-  
-  gint	fat_instance_size;
-  gint	skinny_instance_size;
-  
-
-  /* Padding for future expansion */
-  void (*_stlwrt_reserved1) (void);
-  void (*_stlwrt_reserved2) (void);
-  void (*_stlwrt_reserved3) (void);
-  void (*_stlwrt_reserved4) (void);
-};
-
-GType         __stlwrt_object_get_type              (void) G_GNUC_CONST;
-
-void          __stlwrt_object_class_register_type   (StlwrtObjectClass  *klass,
-						     GType high_level_type,
-						     gint  fat_instance_size,
-						     gint  skinny_instance_size);
-
-StlwrtObject* __stlwrt_object_get_fat_instance      (StlwrtObjectClass  *object);
-
-StlwrtObject* __stlwrt_object_get_skinny_instance   (StlwrtObjectClass  *object);
-
-
-
-/* This global variable should not be set by applications; it is set by
-   components of STLWRT to the major version of GTK that STLWRT is pretending
-   to be at any moment.  When execution is handed off to a GTK+ 3 application,
-   this variable is set to 3; when control is handed off to a GTK+ 2 module,
-   this variable is set to 2, and so on.  This variable is used directly by
-   StlwrtObject to determine whether to return to the calling function a new
-   "fat" StlwrtObject (the kind that would be returned by GTK+ 2) or a "skinny"
-   StlwrtObject (the kind returned by GTK+ 3 and later).
- */
-extern int	_stlwrt_operation_mode;
 
 
 G_END_DECLS

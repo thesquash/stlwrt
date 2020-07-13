@@ -97,7 +97,7 @@ static void      gtk_tree_row_ref_reordered (RowRefList        *refs,
                                              gint              *new_order);
 
 GType
-____gtk_tree_model_get_type (void)
+__gtk_tree_model_get_type (void)
 {
   static GType tree_model_type = 0;
 

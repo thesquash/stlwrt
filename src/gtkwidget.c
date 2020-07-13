@@ -7035,7 +7035,7 @@ do_screen_change (GtkWidget *widget,
 }
 
 static void
-_____gtk_widget_propagate_hierarchy_changed_recurse (GtkWidget *widget,
+___gtk_widget_propagate_hierarchy_changed_recurse (GtkWidget *widget,
 						gpointer   client_data)
 {
   HierarchyChangedInfo *info = client_data;
@@ -7056,7 +7056,7 @@ _____gtk_widget_propagate_hierarchy_changed_recurse (GtkWidget *widget,
       
       if (GTK_IS_CONTAINER (widget))
 	__gtk_container_forall (GTK_CONTAINER (widget),
-			      _____gtk_widget_propagate_hierarchy_changed_recurse,
+			      ___gtk_widget_propagate_hierarchy_changed_recurse,
 			      client_data);
       
       g_object_unref (widget);
@@ -7092,7 +7092,7 @@ ___gtk_widget_propagate_hierarchy_changed (GtkWidget    *widget,
   if (previous_toplevel)
     g_object_ref (previous_toplevel);
 
-  _____gtk_widget_propagate_hierarchy_changed_recurse (widget, &info);
+  ___gtk_widget_propagate_hierarchy_changed_recurse (widget, &info);
 
   if (previous_toplevel)
     g_object_unref (previous_toplevel);
@@ -7101,7 +7101,7 @@ ___gtk_widget_propagate_hierarchy_changed (GtkWidget    *widget,
 }
 
 static void
-_____gtk_widget_propagate_screen_changed_recurse (GtkWidget *widget,
+___gtk_widget_propagate_screen_changed_recurse (GtkWidget *widget,
 					     gpointer   client_data)
 {
   HierarchyChangedInfo *info = client_data;
@@ -7112,7 +7112,7 @@ _____gtk_widget_propagate_screen_changed_recurse (GtkWidget *widget,
   
   if (GTK_IS_CONTAINER (widget))
     __gtk_container_forall (GTK_CONTAINER (widget),
-			  _____gtk_widget_propagate_screen_changed_recurse,
+			  ___gtk_widget_propagate_screen_changed_recurse,
 			  client_data);
   
   g_object_unref (widget);
@@ -7187,7 +7187,7 @@ ___gtk_widget_propagate_screen_changed (GtkWidget    *widget,
   if (previous_screen)
     g_object_ref (previous_screen);
 
-  _____gtk_widget_propagate_screen_changed_recurse (widget, &info);
+  ___gtk_widget_propagate_screen_changed_recurse (widget, &info);
 
   if (previous_screen)
     g_object_unref (previous_screen);

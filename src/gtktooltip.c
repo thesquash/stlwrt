@@ -1250,7 +1250,7 @@ gtk_tooltip_show_tooltip (GdkDisplay *display)
 }
 
 static void
-_____gtk_tooltip_hide_tooltip (GtkTooltip *tooltip)
+___gtk_tooltip_hide_tooltip (GtkTooltip *tooltip)
 {
   if (!tooltip)
     return;
@@ -1382,7 +1382,7 @@ ___gtk_tooltip_focus_in (GtkWidget *widget)
   return_value = gtk_tooltip_run_requery (&widget, tooltip, &x, &y);
   if (!return_value)
     {
-      _____gtk_tooltip_hide_tooltip (tooltip);
+      ___gtk_tooltip_hide_tooltip (tooltip);
       return;
     }
 
@@ -1417,7 +1417,7 @@ ___gtk_tooltip_focus_out (GtkWidget *widget)
       tooltip->keyboard_widget = NULL;
     }
 
-  _____gtk_tooltip_hide_tooltip (tooltip);
+  ___gtk_tooltip_hide_tooltip (tooltip);
 }
 
 void
@@ -1456,7 +1456,7 @@ ___gtk_tooltip_toggle_keyboard_mode (GtkWidget *widget)
 	  tooltip->keyboard_widget = NULL;
 	}
 
-      _____gtk_tooltip_hide_tooltip (tooltip);
+      ___gtk_tooltip_hide_tooltip (tooltip);
     }
 }
 
@@ -1478,7 +1478,7 @@ ___gtk_tooltip_hide (GtkWidget *widget)
 
   if (widget == tooltip->tooltip_widget
       || toplevel->window == tooltip->toplevel_window)
-    _____gtk_tooltip_hide_tooltip (tooltip);
+    ___gtk_tooltip_hide_tooltip (tooltip);
 }
 
 static gboolean
@@ -1534,7 +1534,7 @@ ___gtk_tooltip_handle_event (GdkEvent *event)
 					      &x, &y);
 
       if (!return_value)
-	_____gtk_tooltip_hide_tooltip (current_tooltip);
+	___gtk_tooltip_hide_tooltip (current_tooltip);
       else
 	gtk_tooltip_start_delay (display);
 
@@ -1559,7 +1559,7 @@ ___gtk_tooltip_handle_event (GdkEvent *event)
   if (!has_tooltip_widget)
     {
       if (current_tooltip)
-	_____gtk_tooltip_hide_tooltip (current_tooltip);
+	___gtk_tooltip_hide_tooltip (current_tooltip);
 
       return;
     }
@@ -1572,7 +1572,7 @@ ___gtk_tooltip_handle_event (GdkEvent *event)
       case GDK_KEY_PRESS:
       case GDK_DRAG_ENTER:
       case GDK_GRAB_BROKEN:
-	_____gtk_tooltip_hide_tooltip (current_tooltip);
+	___gtk_tooltip_hide_tooltip (current_tooltip);
 	break;
 
       case GDK_MOTION_NOTIFY:
@@ -1610,7 +1610,7 @@ ___gtk_tooltip_handle_event (GdkEvent *event)
 			       || y >= tip_area.y + tip_area.height);
 
 	    if (hide_tooltip)
-	      _____gtk_tooltip_hide_tooltip (current_tooltip);
+	      ___gtk_tooltip_hide_tooltip (current_tooltip);
 	    else
 	      gtk_tooltip_start_delay (display);
 	  }

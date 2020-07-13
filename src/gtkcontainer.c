@@ -1887,7 +1887,7 @@ tab_compare (gconstpointer a,
 }
 
 static GList *
-_____gtk_container_focus_sort_tab (GtkContainer     *container,
+___gtk_container_focus_sort_tab (GtkContainer     *container,
 			      GList            *children,
 			      GtkDirectionType  direction,
 			      GtkWidget        *old_focus)
@@ -2008,7 +2008,7 @@ up_down_compare (gconstpointer a,
 }
 
 static GList *
-_____gtk_container_focus_sort_up_down (GtkContainer     *container,
+___gtk_container_focus_sort_up_down (GtkContainer     *container,
 				  GList            *children,
 				  GtkDirectionType  direction,
 				  GtkWidget        *old_focus)
@@ -2135,7 +2135,7 @@ left_right_compare (gconstpointer a,
 }
 
 static GList *
-_____gtk_container_focus_sort_left_right (GtkContainer     *container,
+___gtk_container_focus_sort_left_right (GtkContainer     *container,
 				     GList            *children,
 				     GtkDirectionType  direction,
 				     GtkWidget        *old_focus)
@@ -2232,7 +2232,7 @@ _____gtk_container_focus_sort_left_right (GtkContainer     *container,
 }
 
 /**
- * _____gtk_container_focus_sort:
+ * ___gtk_container_focus_sort:
  * @container: a #GtkContainer
  * @children:  a list of descendents of @container (they don't
  *             have to be direct children)
@@ -2269,13 +2269,13 @@ ___gtk_container_focus_sort (GtkContainer     *container,
     {
     case GTK_DIR_TAB_FORWARD:
     case GTK_DIR_TAB_BACKWARD:
-      return _____gtk_container_focus_sort_tab (container, visible_children, direction, old_focus);
+      return ___gtk_container_focus_sort_tab (container, visible_children, direction, old_focus);
     case GTK_DIR_UP:
     case GTK_DIR_DOWN:
-      return _____gtk_container_focus_sort_up_down (container, visible_children, direction, old_focus);
+      return ___gtk_container_focus_sort_up_down (container, visible_children, direction, old_focus);
     case GTK_DIR_LEFT:
     case GTK_DIR_RIGHT:
-      return _____gtk_container_focus_sort_left_right (container, visible_children, direction, old_focus);
+      return ___gtk_container_focus_sort_left_right (container, visible_children, direction, old_focus);
     }
 
   g_assert_not_reached ();

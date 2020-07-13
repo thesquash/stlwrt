@@ -969,7 +969,7 @@ gtk_accel_map_class_init (GtkAccelMapClass *accel_map_class)
 }
 
 static void
-_____gtk_accel_map_init (GtkAccelMap *accel_map)
+___gtk_accel_map_init (GtkAccelMap *accel_map)
 {
 }
 

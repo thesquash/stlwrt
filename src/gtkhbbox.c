@@ -88,7 +88,7 @@ __gtk_hbutton_box_get_spacing_default (void)
 /* get default value for layout style */
 
 GtkButtonBoxStyle
-_____gtk_hbutton_box_get_layout_default (void)
+___gtk_hbutton_box_get_layout_default (void)
 {
   return default_layout_style;
 }

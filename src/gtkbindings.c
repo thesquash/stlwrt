@@ -792,7 +792,7 @@ __gtk_binding_entry_remove (GtkBindingSet	 *binding_set,
 }
 
 /**
- * _____gtk_binding_entry_add_signall:
+ * ___gtk_binding_entry_add_signall:
  * @binding_set:  a #GtkBindingSet to add a signal to
  * @keyval:       key value
  * @modifiers:    key modifier
@@ -804,7 +804,7 @@ __gtk_binding_entry_remove (GtkBindingSet	 *binding_set,
  * @binding_set.
  */
 void
-_____gtk_binding_entry_add_signall (GtkBindingSet  *binding_set,
+___gtk_binding_entry_add_signall (GtkBindingSet  *binding_set,
                                guint	       keyval,
                                GdkModifierType modifiers,
                                const gchar    *signal_name,
@@ -844,7 +844,7 @@ ___gtk_binding_entry_add_signall (GtkBindingSet  *binding_set,
       tmp_arg = slist->data;
       if (!tmp_arg)
 	{
-	  g_warning ("_____gtk_binding_entry_add_signall(): arg[%u] is `NULL'", n);
+	  g_warning ("___gtk_binding_entry_add_signall(): arg[%u] is `NULL'", n);
 	  binding_signal_free (signal);
 	  return;
 	}
@@ -866,13 +866,13 @@ ___gtk_binding_entry_add_signall (GtkBindingSet  *binding_set,
 	  arg->d.string_data = g_strdup (tmp_arg->d.string_data);
 	  if (!arg->d.string_data)
 	    {
-	      g_warning ("_____gtk_binding_entry_add_signall(): value of `string' arg[%u] is `NULL'", n);
+	      g_warning ("___gtk_binding_entry_add_signall(): value of `string' arg[%u] is `NULL'", n);
 	      binding_signal_free (signal);
 	      return;
 	    }
 	  break;
 	default:
-	  g_warning ("_____gtk_binding_entry_add_signall(): unsupported type `%s' for arg[%u]",
+	  g_warning ("___gtk_binding_entry_add_signall(): unsupported type `%s' for arg[%u]",
 		     g_type_name (arg->arg_type), n);
 	  binding_signal_free (signal);
 	  return;
@@ -1586,7 +1586,7 @@ gtk_binding_parse_bind (GScanner       *scanner,
 }
 
 /**
- * _____gtk_binding_parse_binding:
+ * ___gtk_binding_parse_binding:
  * @scanner: GtkRC scanner
  *
  * Parse a binding entry from a gtkrc file.
@@ -1596,7 +1596,7 @@ gtk_binding_parse_bind (GScanner       *scanner,
  * Deprecated: 2.12: There should be no need to call this function outside GTK+.
  */
 guint
-_____gtk_binding_parse_binding (GScanner *scanner)
+___gtk_binding_parse_binding (GScanner *scanner)
 {
   return ___gtk_binding_parse_binding (scanner);
 }
@@ -1696,7 +1696,7 @@ binding_set_delete (GtkBindingSet *binding_set)
 /**
  * ___gtk_binding_reset_parsed:
  * 
- * Remove all binding sets that were added by _____gtk_binding_parse_binding().
+ * Remove all binding sets that were added by ___gtk_binding_parse_binding().
  */
 void
 ___gtk_binding_reset_parsed (void)

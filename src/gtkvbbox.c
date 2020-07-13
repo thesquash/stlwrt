@@ -135,7 +135,7 @@ __gtk_vbutton_box_get_spacing_default (void)
 }
 
 /**
- * _____gtk_vbutton_box_get_layout_default:
+ * ___gtk_vbutton_box_get_layout_default:
  *
  * Retrieves the current layout used to arrange buttons in button box widgets.
  *
@@ -144,7 +144,7 @@ __gtk_vbutton_box_get_spacing_default (void)
  * Deprecated: 2.0: Use __gtk_button_box_get_layout() instead.
  */
 GtkButtonBoxStyle
-_____gtk_vbutton_box_get_layout_default (void)
+___gtk_vbutton_box_get_layout_default (void)
 {
   return default_layout_style;
 }

@@ -153,7 +153,7 @@ static GSList *    gtk_rc_styles_match               (GSList          *rc_styles
                                                       gchar           *path_reversed);
 static GtkStyle *  gtk_rc_style_to_style             (GtkRcContext    *context,
 						      GtkRcStyle      *rc_style);
-static GtkStyle*   _____gtk_rc_init_style                 (GtkRcContext    *context,
+static GtkStyle*   ___gtk_rc_init_style                 (GtkRcContext    *context,
 						      GSList          *rc_styles);
 static void        __gtk_rc_parse_default_files        (GtkRcContext    *context);
 static void        __gtk_rc_parse_named                (GtkRcContext    *context,
@@ -2023,7 +2023,7 @@ __gtk_rc_get_style (GtkWidget *widget)
     rc_styles = g_slist_prepend (rc_styles, widget_rc_style);
 
   if (rc_styles)
-    return _____gtk_rc_init_style (context, rc_styles);
+    return ___gtk_rc_init_style (context, rc_styles);
   else
     {
       if (!context->default_style)
@@ -2140,7 +2140,7 @@ __gtk_rc_get_style_by_paths (GtkSettings *settings,
   rc_styles = sort_and_dereference_sets (rc_styles);
   
   if (rc_styles)
-    return _____gtk_rc_init_style (context, rc_styles);
+    return ___gtk_rc_init_style (context, rc_styles);
 
   return NULL;
 }
@@ -2398,7 +2398,7 @@ gtk_rc_style_to_style (GtkRcContext *context,
 
 /* Reuses or frees rc_styles */
 static GtkStyle *
-_____gtk_rc_init_style (GtkRcContext *context,
+___gtk_rc_init_style (GtkRcContext *context,
 		   GSList       *rc_styles)
 {
   GtkStyle *style = NULL;

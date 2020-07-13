@@ -1343,7 +1343,7 @@ __gdk_display_set_double_click_distance (GdkDisplay *display,
 }
 
 GType
-____gdk_event_get_type (void)
+__gdk_event_get_type (void)
 {
   static GType our_type = 0;
   

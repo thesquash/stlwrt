@@ -26,7 +26,7 @@
 #error "Only <gtk/gtk.h> can be included directly."
 #endif
 
-#include <glib/glib.h>
+#include <glib.h>
 
 
 G_BEGIN_DECLS

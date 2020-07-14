@@ -42,8 +42,8 @@ G_BEGIN_DECLS
 typedef struct _GtkTargetList    GtkTargetList;
 typedef struct _GtkTargetEntry   GtkTargetEntry;
 
-#define GTK_TYPE_SELECTION_DATA (__gtk_selection_data_get_type ())
-#define GTK_TYPE_TARGET_LIST    (__gtk_target_list_get_type ())
+#define GTK_TYPE_SELECTION_DATA (gtk_selection_data_get_type ())
+#define GTK_TYPE_TARGET_LIST    (gtk_target_list_get_type ())
 
 /* The contents of a selection are returned in a GtkSelectionData
  * structure. selection/target identify the request.  type specifies
@@ -211,11 +211,17 @@ gboolean ___gtk_selection_notify		  (GtkWidget         *widget,
 gboolean ___gtk_selection_property_notify	  (GtkWidget         *widget,
 					   GdkEventProperty  *event);
 
-GType             __gtk_selection_data_get_type (void) G_GNUC_CONST;
+GType             _T2_gtk_selection_data_get_type (void) G_GNUC_CONST;
+GType             _3T_gtk_selection_data_get_type (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType             gtk_selection_data_get_type (void) G_GNUC_CONST;
 GtkSelectionData *__gtk_selection_data_copy     (GtkSelectionData *data);
 void		  __gtk_selection_data_free     (GtkSelectionData *data);
 
-GType             __gtk_target_list_get_type    (void) G_GNUC_CONST;
+GType             _T2_gtk_target_list_get_type    (void) G_GNUC_CONST;
+GType             _3T_gtk_target_list_get_type    (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType             gtk_target_list_get_type    (void) G_GNUC_CONST;
 
 G_END_DECLS
 

@@ -34,7 +34,7 @@
 G_BEGIN_DECLS
 
 
-#define GTK_TYPE_TREE_STORE			(__gtk_tree_store_get_type ())
+#define GTK_TYPE_TREE_STORE			(gtk_tree_store_get_type ())
 #define GTK_TREE_STORE(obj)			(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_TREE_STORE, GtkTreeStore))
 #define GTK_TREE_STORE_CLASS(klass)		(G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_TREE_STORE, GtkTreeStoreClass))
 #define GTK_IS_TREE_STORE(obj)			(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TREE_STORE))
@@ -76,7 +76,10 @@ struct _GtkTreeStoreClass
 };
 
 
-GType         __gtk_tree_store_get_type         (void) G_GNUC_CONST;
+GType         _T2_gtk_tree_store_get_type         (void) G_GNUC_CONST;
+GType         _3T_gtk_tree_store_get_type         (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType         gtk_tree_store_get_type         (void) G_GNUC_CONST;
 GtkTreeStore *__gtk_tree_store_new              (gint          n_columns,
 					       ...);
 GtkTreeStore *__gtk_tree_store_newv             (gint          n_columns,

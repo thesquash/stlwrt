@@ -38,7 +38,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_TOGGLE_BUTTON                  (__gtk_toggle_button_get_type ())
+#define GTK_TYPE_TOGGLE_BUTTON                  (gtk_toggle_button_get_type ())
 #define GTK_TOGGLE_BUTTON(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_TOGGLE_BUTTON, GtkToggleButton))
 #define GTK_TOGGLE_BUTTON_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_TOGGLE_BUTTON, GtkToggleButtonClass))
 #define GTK_IS_TOGGLE_BUTTON(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TOGGLE_BUTTON))
@@ -74,7 +74,10 @@ struct _GtkToggleButtonClass
 };
 
 
-GType      __gtk_toggle_button_get_type          (void) G_GNUC_CONST;
+GType      _T2_gtk_toggle_button_get_type          (void) G_GNUC_CONST;
+GType      _3T_gtk_toggle_button_get_type          (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType      gtk_toggle_button_get_type          (void) G_GNUC_CONST;
 
 GtkWidget* __gtk_toggle_button_new               (void);
 GtkWidget* __gtk_toggle_button_new_with_label    (const gchar     *label);

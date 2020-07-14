@@ -32,7 +32,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_PRINTER_OPTION_SET             (__gtk_printer_option_set_get_type ())
+#define GTK_TYPE_PRINTER_OPTION_SET             (gtk_printer_option_set_get_type ())
 #define GTK_PRINTER_OPTION_SET(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PRINTER_OPTION_SET, GtkPrinterOptionSet))
 #define GTK_IS_PRINTER_OPTION_SET(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_PRINTER_OPTION_SET))
 
@@ -71,7 +71,10 @@ typedef void (*GtkPrinterOptionSetFunc) (GtkPrinterOption  *option,
 					 gpointer           user_data);
 
 
-GType   __gtk_printer_option_set_get_type       (void) G_GNUC_CONST;
+GType   _T2_gtk_printer_option_set_get_type       (void) G_GNUC_CONST;
+GType   _3T_gtk_printer_option_set_get_type       (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType   gtk_printer_option_set_get_type       (void) G_GNUC_CONST;
 
 GtkPrinterOptionSet *gtk_printer_option_set_new              (void);
 void                 gtk_printer_option_set_add              (GtkPrinterOptionSet     *set,

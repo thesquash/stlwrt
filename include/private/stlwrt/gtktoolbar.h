@@ -52,7 +52,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_TOOLBAR            (__gtk_toolbar_get_type ())
+#define GTK_TYPE_TOOLBAR            (gtk_toolbar_get_type ())
 #define GTK_TOOLBAR(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_TOOLBAR, GtkToolbar))
 #define GTK_TOOLBAR_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_TOOLBAR, GtkToolbarClass))
 #define GTK_IS_TOOLBAR(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TOOLBAR))
@@ -141,7 +141,10 @@ struct _GtkToolbarClass
   void (*_gtk_reserved3) (void);
 };
 
-GType           __gtk_toolbar_get_type                (void) G_GNUC_CONST;
+GType           _T2_gtk_toolbar_get_type                (void) G_GNUC_CONST;
+GType           _3T_gtk_toolbar_get_type                (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType           gtk_toolbar_get_type                (void) G_GNUC_CONST;
 GtkWidget *     __gtk_toolbar_new                     (void);
 
 void            __gtk_toolbar_insert                  (GtkToolbar      *toolbar,

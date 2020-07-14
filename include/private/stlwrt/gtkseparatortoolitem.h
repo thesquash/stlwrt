@@ -31,7 +31,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_SEPARATOR_TOOL_ITEM            (__gtk_separator_tool_item_get_type ())
+#define GTK_TYPE_SEPARATOR_TOOL_ITEM            (gtk_separator_tool_item_get_type ())
 #define GTK_SEPARATOR_TOOL_ITEM(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_SEPARATOR_TOOL_ITEM, GtkSeparatorToolItem))
 #define GTK_SEPARATOR_TOOL_ITEM_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_SEPARATOR_TOOL_ITEM, GtkSeparatorToolItemClass))
 #define GTK_IS_SEPARATOR_TOOL_ITEM(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_SEPARATOR_TOOL_ITEM))
@@ -63,7 +63,10 @@ struct _GtkSeparatorToolItemClass
   void (* _gtk_reserved4) (void);
 };
 
-GType        __gtk_separator_tool_item_get_type (void) G_GNUC_CONST;
+GType        _T2_gtk_separator_tool_item_get_type (void) G_GNUC_CONST;
+GType        _3T_gtk_separator_tool_item_get_type (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType        gtk_separator_tool_item_get_type (void) G_GNUC_CONST;
 GtkToolItem *__gtk_separator_tool_item_new      (void);
 
 gboolean     __gtk_separator_tool_item_get_draw (GtkSeparatorToolItem *item);

@@ -48,7 +48,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_ENTRY                  (__gtk_entry_get_type ())
+#define GTK_TYPE_ENTRY                  (gtk_entry_get_type ())
 #define GTK_ENTRY(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_ENTRY, GtkEntry))
 #define GTK_ENTRY_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_ENTRY, GtkEntryClass))
 #define GTK_IS_ENTRY(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_ENTRY))
@@ -166,7 +166,10 @@ struct _GtkEntryClass
   void (*_gtk_reserved2)      (void);
 };
 
-GType      __gtk_entry_get_type       		(void) G_GNUC_CONST;
+GType      _T2_gtk_entry_get_type       		(void) G_GNUC_CONST;
+GType      _3T_gtk_entry_get_type       		(void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType      gtk_entry_get_type       		(void) G_GNUC_CONST;
 GtkWidget* __gtk_entry_new            		(void);
 GtkWidget* __gtk_entry_new_with_buffer            (GtkEntryBuffer *buffer);
 

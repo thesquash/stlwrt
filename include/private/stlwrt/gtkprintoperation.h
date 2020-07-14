@@ -38,7 +38,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_PRINT_OPERATION		(__gtk_print_operation_get_type ())
+#define GTK_TYPE_PRINT_OPERATION		(gtk_print_operation_get_type ())
 #define GTK_PRINT_OPERATION(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PRINT_OPERATION, GtkPrintOperation))
 #define GTK_PRINT_OPERATION_CLASS(klass)    	(G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_PRINT_OPERATION, GtkPrintOperationClass))
 #define GTK_IS_PRINT_OPERATION(obj) 		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_PRINT_OPERATION))
@@ -141,7 +141,10 @@ typedef enum
 
 GQuark __gtk_print_error_quark (void);
 
-GType                   __gtk_print_operation_get_type               (void) G_GNUC_CONST;
+GType                   _T2_gtk_print_operation_get_type               (void) G_GNUC_CONST;
+GType                   _3T_gtk_print_operation_get_type               (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType                   gtk_print_operation_get_type               (void) G_GNUC_CONST;
 GtkPrintOperation *     __gtk_print_operation_new                    (void);
 void                    __gtk_print_operation_set_default_page_setup (GtkPrintOperation  *op,
 								    GtkPageSetup       *default_page_setup);

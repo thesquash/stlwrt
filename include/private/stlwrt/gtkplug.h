@@ -38,7 +38,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_PLUG            (__gtk_plug_get_type ())
+#define GTK_TYPE_PLUG            (gtk_plug_get_type ())
 #define GTK_PLUG(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PLUG, GtkPlug))
 #define GTK_PLUG_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_PLUG, GtkPlugClass))
 #define GTK_IS_PLUG(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_PLUG))
@@ -78,7 +78,10 @@ struct _GtkPlugClass
 };
 
 
-GType      __gtk_plug_get_type  (void) G_GNUC_CONST;
+GType      _T2_gtk_plug_get_type  (void) G_GNUC_CONST;
+GType      _3T_gtk_plug_get_type  (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType      gtk_plug_get_type  (void) G_GNUC_CONST;
 
 #ifndef GDK_MULTIHEAD_SAFE
 void       __gtk_plug_construct (GtkPlug         *plug,

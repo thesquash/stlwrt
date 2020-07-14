@@ -36,7 +36,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_TOOL_SHELL            (__gtk_tool_shell_get_type ())
+#define GTK_TYPE_TOOL_SHELL            (gtk_tool_shell_get_type ())
 #define GTK_TOOL_SHELL(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_TOOL_SHELL, GtkToolShell))
 #define GTK_IS_TOOL_SHELL(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TOOL_SHELL))
 #define GTK_TOOL_SHELL_GET_IFACE(obj)  (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GTK_TYPE_TOOL_SHELL, GtkToolShellIface))
@@ -75,7 +75,10 @@ struct _GtkToolShellIface
   GtkSizeGroup *     (*get_text_size_group)  (GtkToolShell *shell);
 };
 
-GType              __gtk_tool_shell_get_type             (void) G_GNUC_CONST;
+GType              _T2_gtk_tool_shell_get_type             (void) G_GNUC_CONST;
+GType              _3T_gtk_tool_shell_get_type             (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType              gtk_tool_shell_get_type             (void) G_GNUC_CONST;
 
 GtkIconSize        __gtk_tool_shell_get_icon_size        (GtkToolShell *shell);
 GtkOrientation     __gtk_tool_shell_get_orientation      (GtkToolShell *shell);

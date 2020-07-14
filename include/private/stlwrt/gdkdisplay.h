@@ -38,7 +38,7 @@ typedef struct _GdkDisplayClass GdkDisplayClassFat;
 typedef struct _GdkDisplayClass GdkDisplayClassSkinny;
 typedef struct _GdkDisplayPointerHooks GdkDisplayPointerHooks;
 
-#define GDK_TYPE_DISPLAY              (__gdk_display_get_type ())
+#define GDK_TYPE_DISPLAY              (gdk_display_get_type ())
 #define GDK_DISPLAY_OBJECT(object)    (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_DISPLAY, GdkDisplay))
 #define GDK_DISPLAY_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_DISPLAY, GdkDisplayClass))
 #define GDK_IS_DISPLAY(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_DISPLAY))
@@ -140,7 +140,10 @@ struct _GdkDisplayPointerHooks
 				    gint            *win_y);
 };
 
-GType       __gdk_display_get_type (void) G_GNUC_CONST;
+GType       _T2_gdk_display_get_type (void) G_GNUC_CONST;
+GType       _3T_gdk_display_get_type (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType       gdk_display_get_type (void) G_GNUC_CONST;
 GdkDisplay *__gdk_display_open                (const gchar *display_name);
 
 const gchar * __gdk_display_get_name         (GdkDisplay *display);

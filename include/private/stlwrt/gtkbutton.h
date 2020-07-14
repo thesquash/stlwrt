@@ -39,7 +39,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_BUTTON                 (__gtk_button_get_type ())
+#define GTK_TYPE_BUTTON                 (gtk_button_get_type ())
 #define GTK_BUTTON(obj)                 (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_BUTTON, GtkButton))
 #define GTK_BUTTON_CLASS(klass)         (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_BUTTON, GtkButtonClass))
 #define GTK_IS_BUTTON(obj)              (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_BUTTON))
@@ -91,7 +91,10 @@ struct _GtkButtonClass
 };
 
 
-GType          __gtk_button_get_type          (void) G_GNUC_CONST;
+GType          _T2_gtk_button_get_type          (void) G_GNUC_CONST;
+GType          _3T_gtk_button_get_type          (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType          gtk_button_get_type          (void) G_GNUC_CONST;
 GtkWidget*     __gtk_button_new               (void);
 GtkWidget*     __gtk_button_new_with_label    (const gchar    *label);
 GtkWidget*     __gtk_button_new_from_stock    (const gchar    *stock_id);

@@ -39,7 +39,7 @@
 G_BEGIN_DECLS
 
 
-#define GTK_TYPE_BOX            (__gtk_box_get_type ())
+#define GTK_TYPE_BOX            (gtk_box_get_type ())
 #define GTK_BOX(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_BOX, GtkBox))
 #define GTK_BOX_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_BOX, GtkBoxClass))
 #define GTK_IS_BOX(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_BOX))
@@ -104,7 +104,10 @@ struct _GtkBoxChild
 };
 #endif
 
-GType       __gtk_box_get_type            (void) G_GNUC_CONST;
+GType       _T2_gtk_box_get_type            (void) G_GNUC_CONST;
+GType       _3T_gtk_box_get_type            (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType       gtk_box_get_type            (void) G_GNUC_CONST;
 GtkWidget*  __gtk_box_new                 (GtkOrientation  orientation,
                                          gboolean        homogeneous,
                                          gint            spacing);

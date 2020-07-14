@@ -42,7 +42,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_SPIN_BUTTON                  (__gtk_spin_button_get_type ())
+#define GTK_TYPE_SPIN_BUTTON                  (gtk_spin_button_get_type ())
 #define GTK_SPIN_BUTTON(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_SPIN_BUTTON, GtkSpinButton))
 #define GTK_SPIN_BUTTON_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_SPIN_BUTTON, GtkSpinButtonClass))
 #define GTK_IS_SPIN_BUTTON(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_SPIN_BUTTON))
@@ -123,7 +123,10 @@ struct _GtkSpinButtonClass
 };
 
 
-GType		__gtk_spin_button_get_type	   (void) G_GNUC_CONST;
+GType		_T2_gtk_spin_button_get_type	   (void) G_GNUC_CONST;
+GType		_3T_gtk_spin_button_get_type	   (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType		gtk_spin_button_get_type	   (void) G_GNUC_CONST;
 
 void		__gtk_spin_button_configure	   (GtkSpinButton  *spin_button,
 						    GtkAdjustment  *adjustment,

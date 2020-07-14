@@ -31,7 +31,7 @@
 G_BEGIN_DECLS
 
 
-#define GTK_TYPE_IM_CONTEXT_SIMPLE              (__gtk_im_context_simple_get_type ())
+#define GTK_TYPE_IM_CONTEXT_SIMPLE              (gtk_im_context_simple_get_type ())
 #define GTK_IM_CONTEXT_SIMPLE(obj)              (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_IM_CONTEXT_SIMPLE, GtkIMContextSimple))
 #define GTK_IM_CONTEXT_SIMPLE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_IM_CONTEXT_SIMPLE, GtkIMContextSimpleClass))
 #define GTK_IS_IM_CONTEXT_SIMPLE(obj)           (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_IM_CONTEXT_SIMPLE))
@@ -65,7 +65,10 @@ struct _GtkIMContextSimpleClass
   GtkIMContextClass parent_class;
 };
 
-GType         __gtk_im_context_simple_get_type  (void) G_GNUC_CONST;
+GType         _T2_gtk_im_context_simple_get_type  (void) G_GNUC_CONST;
+GType         _3T_gtk_im_context_simple_get_type  (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType         gtk_im_context_simple_get_type  (void) G_GNUC_CONST;
 GtkIMContext *__gtk_im_context_simple_new       (void);
 
 void          __gtk_im_context_simple_add_table (GtkIMContextSimple *context_simple,

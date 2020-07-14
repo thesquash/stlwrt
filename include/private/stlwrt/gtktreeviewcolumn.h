@@ -33,7 +33,7 @@
 G_BEGIN_DECLS
 
 
-#define GTK_TYPE_TREE_VIEW_COLUMN	     (__gtk_tree_view_column_get_type ())
+#define GTK_TYPE_TREE_VIEW_COLUMN	     (gtk_tree_view_column_get_type ())
 #define GTK_TREE_VIEW_COLUMN(obj)	     (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_TREE_VIEW_COLUMN, GtkTreeViewColumn))
 #define GTK_TREE_VIEW_COLUMN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_TREE_VIEW_COLUMN, GtkTreeViewColumnClass))
 #define GTK_IS_TREE_VIEW_COLUMN(obj)	     (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TREE_VIEW_COLUMN))
@@ -123,7 +123,10 @@ struct _GtkTreeViewColumnClass
   void (*_gtk_reserved4) (void);
 };
 
-GType                   __gtk_tree_view_column_get_type            (void) G_GNUC_CONST;
+GType                   _T2_gtk_tree_view_column_get_type            (void) G_GNUC_CONST;
+GType                   _3T_gtk_tree_view_column_get_type            (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType                   gtk_tree_view_column_get_type            (void) G_GNUC_CONST;
 GtkTreeViewColumn      *__gtk_tree_view_column_new                 (void);
 GtkTreeViewColumn      *__gtk_tree_view_column_new_with_attributes (const gchar             *title,
 								  GtkCellRenderer         *cell,

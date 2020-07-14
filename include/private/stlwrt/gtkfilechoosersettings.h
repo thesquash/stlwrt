@@ -28,7 +28,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_FILE_CHOOSER_SETTINGS_TYPE (___gtk_file_chooser_settings_get_type ())
+#define GTK_FILE_CHOOSER_SETTINGS_TYPE (_gtk_file_chooser_settings_get_type ())
 
 /* Column numbers for the file list */
 enum {
@@ -68,7 +68,7 @@ struct _GtkFileChooserSettingsClass
   GObjectClass parent_class;
 };
 
-GType ___gtk_file_chooser_settings_get_type (void) G_GNUC_CONST;
+GType _gtk_file_chooser_settings_get_type (void) G_GNUC_CONST;
 
 GtkFileChooserSettings *_gtk_file_chooser_settings_new (void);
 

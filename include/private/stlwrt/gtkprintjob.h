@@ -32,7 +32,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_PRINT_JOB                  (__gtk_print_job_get_type ())
+#define GTK_TYPE_PRINT_JOB                  (gtk_print_job_get_type ())
 #define GTK_PRINT_JOB(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PRINT_JOB, GtkPrintJob))
 #define GTK_PRINT_JOB_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_PRINT_JOB, GtkPrintJobClass))
 #define GTK_IS_PRINT_JOB(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_PRINT_JOB))
@@ -89,7 +89,10 @@ struct _GtkPrintJobClass
   void (*_gtk_reserved7) (void);
 };
 
-GType                    __gtk_print_job_get_type               (void) G_GNUC_CONST;
+GType                    _T2_gtk_print_job_get_type               (void) G_GNUC_CONST;
+GType                    _3T_gtk_print_job_get_type               (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType                    gtk_print_job_get_type               (void) G_GNUC_CONST;
 GtkPrintJob             *gtk_print_job_new                    (const gchar              *title,
 							       GtkPrinter               *printer,
 							       GtkPrintSettings         *settings,

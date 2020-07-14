@@ -31,7 +31,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_COMBO_BOX             (__gtk_combo_box_get_type ())
+#define GTK_TYPE_COMBO_BOX             (gtk_combo_box_get_type ())
 #define GTK_COMBO_BOX(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_COMBO_BOX, GtkComboBox))
 #define GTK_COMBO_BOX_CLASS(vtable)    (G_TYPE_CHECK_CLASS_CAST ((vtable), GTK_TYPE_COMBO_BOX, GtkComboBoxClass))
 #define GTK_IS_COMBO_BOX(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_COMBO_BOX))
@@ -70,7 +70,10 @@ struct _GtkComboBoxClass
 
 
 /* construction */
-GType         __gtk_combo_box_get_type                 (void) G_GNUC_CONST;
+GType         _T2_gtk_combo_box_get_type                 (void) G_GNUC_CONST;
+GType         _3T_gtk_combo_box_get_type                 (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType         gtk_combo_box_get_type                 (void) G_GNUC_CONST;
 GtkWidget    *__gtk_combo_box_new                      (void);
 GtkWidget    *__gtk_combo_box_new_with_entry           (void);
 GtkWidget    *__gtk_combo_box_new_with_model           (GtkTreeModel *model);

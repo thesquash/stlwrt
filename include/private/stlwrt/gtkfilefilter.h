@@ -30,7 +30,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_FILE_FILTER              (__gtk_file_filter_get_type ())
+#define GTK_TYPE_FILE_FILTER              (gtk_file_filter_get_type ())
 #define GTK_FILE_FILTER(obj)              (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_FILE_FILTER, GtkFileFilter))
 #define GTK_IS_FILE_FILTER(obj)           (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FILE_FILTER))
 
@@ -58,7 +58,10 @@ struct _GtkFileFilterInfo
   const gchar *mime_type;
 };
 
-GType __gtk_file_filter_get_type (void) G_GNUC_CONST;
+GType _T2_gtk_file_filter_get_type (void) G_GNUC_CONST;
+GType _3T_gtk_file_filter_get_type (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType gtk_file_filter_get_type (void) G_GNUC_CONST;
 
 GtkFileFilter *       __gtk_file_filter_new      (void);
 void                  __gtk_file_filter_set_name (GtkFileFilter *filter,

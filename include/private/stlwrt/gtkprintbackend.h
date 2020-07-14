@@ -47,7 +47,7 @@ typedef enum
 
 GQuark     gtk_print_backend_error_quark      (void);
 
-#define GTK_TYPE_PRINT_BACKEND                  (__gtk_print_backend_get_type ())
+#define GTK_TYPE_PRINT_BACKEND                  (gtk_print_backend_get_type ())
 #define GTK_PRINT_BACKEND(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PRINT_BACKEND, GtkPrintBackend))
 #define GTK_PRINT_BACKEND_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_PRINT_BACKEND, GtkPrintBackendClass))
 #define GTK_IS_PRINT_BACKEND(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_PRINT_BACKEND))
@@ -138,7 +138,10 @@ struct _GtkPrintBackendClass
   void (*_gtk_reserved4) (void);
 };
 
-GType   __gtk_print_backend_get_type       (void) G_GNUC_CONST;
+GType   _T2_gtk_print_backend_get_type       (void) G_GNUC_CONST;
+GType   _3T_gtk_print_backend_get_type       (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType   gtk_print_backend_get_type       (void) G_GNUC_CONST;
 
 GList      *gtk_print_backend_get_printer_list     (GtkPrintBackend         *print_backend);
 gboolean    gtk_print_backend_printer_list_is_done (GtkPrintBackend         *print_backend);

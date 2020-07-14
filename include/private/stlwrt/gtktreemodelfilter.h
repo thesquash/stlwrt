@@ -31,7 +31,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_TREE_MODEL_FILTER              (__gtk_tree_model_filter_get_type ())
+#define GTK_TYPE_TREE_MODEL_FILTER              (gtk_tree_model_filter_get_type ())
 #define GTK_TREE_MODEL_FILTER(obj)              (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_TREE_MODEL_FILTER, GtkTreeModelFilter))
 #define GTK_TREE_MODEL_FILTER_CLASS(vtable)     (G_TYPE_CHECK_CLASS_CAST ((vtable), GTK_TYPE_TREE_MODEL_FILTER, GtkTreeModelFilterClass))
 #define GTK_IS_TREE_MODEL_FILTER(obj)           (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TREE_MODEL_FILTER))
@@ -73,7 +73,10 @@ struct _GtkTreeModelFilterClass
 };
 
 /* base */
-GType         __gtk_tree_model_filter_get_type                   (void) G_GNUC_CONST;
+GType         _T2_gtk_tree_model_filter_get_type                   (void) G_GNUC_CONST;
+GType         _3T_gtk_tree_model_filter_get_type                   (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType         gtk_tree_model_filter_get_type                   (void) G_GNUC_CONST;
 GtkTreeModel *__gtk_tree_model_filter_new                        (GtkTreeModel                 *child_model,
                                                                 GtkTreePath                  *root);
 void          __gtk_tree_model_filter_set_visible_func           (GtkTreeModelFilter           *filter,

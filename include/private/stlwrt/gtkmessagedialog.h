@@ -38,7 +38,7 @@
 G_BEGIN_DECLS
 
 
-#define GTK_TYPE_MESSAGE_DIALOG                  (__gtk_message_dialog_get_type ())
+#define GTK_TYPE_MESSAGE_DIALOG                  (gtk_message_dialog_get_type ())
 #define GTK_MESSAGE_DIALOG(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_MESSAGE_DIALOG, GtkMessageDialog))
 #define GTK_MESSAGE_DIALOG_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_MESSAGE_DIALOG, GtkMessageDialogClass))
 #define GTK_IS_MESSAGE_DIALOG(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_MESSAGE_DIALOG))
@@ -99,7 +99,10 @@ typedef enum
   GTK_BUTTONS_OK_CANCEL
 } GtkButtonsType;
 
-GType      __gtk_message_dialog_get_type (void) G_GNUC_CONST;
+GType      _T2_gtk_message_dialog_get_type (void) G_GNUC_CONST;
+GType      _3T_gtk_message_dialog_get_type (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType      gtk_message_dialog_get_type (void) G_GNUC_CONST;
 
 GtkWidget* __gtk_message_dialog_new      (GtkWindow      *parent,
                                         GtkDialogFlags  flags,

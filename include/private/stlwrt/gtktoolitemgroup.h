@@ -32,7 +32,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_TOOL_ITEM_GROUP           (__gtk_tool_item_group_get_type ())
+#define GTK_TYPE_TOOL_ITEM_GROUP           (gtk_tool_item_group_get_type ())
 #define GTK_TOOL_ITEM_GROUP(obj)           (G_TYPE_CHECK_INSTANCE_CAST (obj, GTK_TYPE_TOOL_ITEM_GROUP, GtkToolItemGroup))
 #define GTK_TOOL_ITEM_GROUP_CLASS(cls)     (G_TYPE_CHECK_CLASS_CAST (cls, GTK_TYPE_TOOL_ITEM_GROUP, GtkToolItemGroupClass))
 #define GTK_IS_TOOL_ITEM_GROUP(obj)        (G_TYPE_CHECK_INSTANCE_TYPE (obj, GTK_TYPE_TOOL_ITEM_GROUP))
@@ -61,7 +61,10 @@ struct _GtkToolItemGroupClass
   GtkContainerClass parent_class;
 };
 
-GType                 __gtk_tool_item_group_get_type          (void) G_GNUC_CONST;
+GType                 _T2_gtk_tool_item_group_get_type          (void) G_GNUC_CONST;
+GType                 _3T_gtk_tool_item_group_get_type          (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType                 gtk_tool_item_group_get_type          (void) G_GNUC_CONST;
 GtkWidget*            __gtk_tool_item_group_new               (const gchar        *label);
 
 void                  __gtk_tool_item_group_set_label         (GtkToolItemGroup   *group,

@@ -28,7 +28,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_SEARCH_ENGINE_SIMPLE		(___gtk_search_engine_simple_get_type ())
+#define GTK_TYPE_SEARCH_ENGINE_SIMPLE		(_gtk_search_engine_simple_get_type ())
 #define GTK_SEARCH_ENGINE_SIMPLE(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_SEARCH_ENGINE_SIMPLE, GtkSearchEngineSimple))
 #define GTK_SEARCH_ENGINE_SIMPLE_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_SEARCH_ENGINE_SIMPLE, GtkSearchEngineSimpleClass))
 #define GTK_IS_SEARCH_ENGINE_SIMPLE(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_SEARCH_ENGINE_SIMPLE))
@@ -53,7 +53,7 @@ struct _GtkSearchEngineSimpleClass
   GtkSearchEngineClass parent_class;
 };
 
-GType            ___gtk_search_engine_simple_get_type (void);
+GType            _gtk_search_engine_simple_get_type (void);
 
 GtkSearchEngine* _gtk_search_engine_simple_new      (void);
 

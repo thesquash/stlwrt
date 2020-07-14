@@ -46,7 +46,7 @@ typedef enum
   GTK_TREE_VIEW_DROP_INTO_OR_AFTER
 } GtkTreeViewDropPosition;
 
-#define GTK_TYPE_TREE_VIEW		(__gtk_tree_view_get_type ())
+#define GTK_TYPE_TREE_VIEW		(gtk_tree_view_get_type ())
 #define GTK_TREE_VIEW(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_TREE_VIEW, GtkTreeView))
 #define GTK_TREE_VIEW_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_TREE_VIEW, GtkTreeViewClass))
 #define GTK_IS_TREE_VIEW(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TREE_VIEW))
@@ -142,7 +142,10 @@ typedef void     (*GtkTreeViewSearchPositionFunc) (GtkTreeView  *tree_view,
 
 
 /* Creators */
-GType                  __gtk_tree_view_get_type                      (void) G_GNUC_CONST;
+GType                  _T2_gtk_tree_view_get_type                      (void) G_GNUC_CONST;
+GType                  _3T_gtk_tree_view_get_type                      (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType                  gtk_tree_view_get_type                      (void) G_GNUC_CONST;
 GtkWidget             *__gtk_tree_view_new                           (void);
 GtkWidget             *__gtk_tree_view_new_with_model                (GtkTreeModel              *model);
 

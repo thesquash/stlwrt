@@ -33,7 +33,7 @@
 
 G_BEGIN_DECLS
 
-#define GDK_TYPE_APP_LAUNCH_CONTEXT         (__gdk_app_launch_context_get_type ())
+#define GDK_TYPE_APP_LAUNCH_CONTEXT         (gdk_app_launch_context_get_type ())
 #define GDK_APP_LAUNCH_CONTEXT(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GDK_TYPE_APP_LAUNCH_CONTEXT, GdkAppLaunchContext))
 #define GDK_APP_LAUNCH_CONTEXT_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), GDK_TYPE_APP_LAUNCH_CONTEXT, GdkAppLaunchContextClass))
 #define GDK_IS_APP_LAUNCH_CONTEXT(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GDK_TYPE_APP_LAUNCH_CONTEXT))
@@ -58,7 +58,10 @@ struct GdkAppLaunchContextClass
   GAppLaunchContextClass parent_class;
 };
 
-GType                __gdk_app_launch_context_get_type      (void);
+GType                _T2_gdk_app_launch_context_get_type      (void);
+GType                _3T_gdk_app_launch_context_get_type      (void);
+/* Supplied in the STLWRT public libraries */
+GType                gdk_app_launch_context_get_type      (void);
 
 GdkAppLaunchContext *__gdk_app_launch_context_new           (void);
 void                 __gdk_app_launch_context_set_display   (GdkAppLaunchContext *context,

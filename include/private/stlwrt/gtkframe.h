@@ -39,7 +39,7 @@
 G_BEGIN_DECLS
 
 
-#define GTK_TYPE_FRAME                  (__gtk_frame_get_type ())
+#define GTK_TYPE_FRAME                  (gtk_frame_get_type ())
 #define GTK_FRAME(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_FRAME, GtkFrame))
 #define GTK_FRAME_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_FRAME, GtkFrameClass))
 #define GTK_IS_FRAME(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FRAME))
@@ -72,7 +72,10 @@ struct _GtkFrameClass
 };
 
 
-GType      __gtk_frame_get_type         (void) G_GNUC_CONST;
+GType      _T2_gtk_frame_get_type         (void) G_GNUC_CONST;
+GType      _3T_gtk_frame_get_type         (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType      gtk_frame_get_type         (void) G_GNUC_CONST;
 GtkWidget* __gtk_frame_new              (const gchar   *label);
 
 void                  __gtk_frame_set_label (GtkFrame    *frame,

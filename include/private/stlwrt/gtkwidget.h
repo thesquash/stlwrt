@@ -133,7 +133,7 @@ typedef enum
 /* Macro for casting a pointer to a GtkWidget or GtkWidgetClass pointer.
  * Macros for testing whether `widget' or `klass' are of type GTK_TYPE_WIDGET.
  */
-#define GTK_TYPE_WIDGET			  (__gtk_widget_get_type ())
+#define GTK_TYPE_WIDGET			  (gtk_widget_get_type ())
 #define GTK_WIDGET(widget)		  (G_TYPE_CHECK_INSTANCE_CAST ((widget), GTK_TYPE_WIDGET, GtkWidget))
 #define GTK_WIDGET_CLASS(klass)		  (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_WIDGET, GtkWidgetClass))
 #define GTK_IS_WIDGET(widget)		  (G_TYPE_CHECK_INSTANCE_TYPE ((widget), GTK_TYPE_WIDGET))
@@ -183,7 +183,7 @@ typedef enum
 #endif
 
 
-#define GTK_TYPE_REQUISITION              (__gtk_requisition_get_type ())
+#define GTK_TYPE_REQUISITION              (gtk_requisition_get_type ())
 
 /* forward declaration to avoid excessive includes (and concurrent includes)
  */
@@ -546,7 +546,10 @@ struct _GtkWidgetShapeInfo
   GdkBitmap *shape_mask;
 };
 
-GType	   __gtk_widget_get_type		  (void) G_GNUC_CONST;
+GType	   _T2_gtk_widget_get_type		  (void) G_GNUC_CONST;
+GType	   _3T_gtk_widget_get_type		  (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType	   gtk_widget_get_type		  (void) G_GNUC_CONST;
 GtkWidget* __gtk_widget_new		  (GType		type,
 					   const gchar	       *first_property_name,
 					   ...);
@@ -1021,7 +1024,10 @@ void       __gtk_widget_set_has_tooltip       (GtkWidget   *widget,
 					     gboolean     has_tooltip);
 gboolean   __gtk_widget_get_has_tooltip       (GtkWidget   *widget);
 
-GType           __gtk_requisition_get_type (void) G_GNUC_CONST;
+GType           _T2_gtk_requisition_get_type (void) G_GNUC_CONST;
+GType           _3T_gtk_requisition_get_type (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType           gtk_requisition_get_type (void) G_GNUC_CONST;
 GtkRequisition *__gtk_requisition_copy     (const GtkRequisition *requisition);
 void            __gtk_requisition_free     (GtkRequisition       *requisition);
 

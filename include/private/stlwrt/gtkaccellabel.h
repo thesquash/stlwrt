@@ -41,7 +41,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_ACCEL_LABEL		(__gtk_accel_label_get_type ())
+#define GTK_TYPE_ACCEL_LABEL		(gtk_accel_label_get_type ())
 #define GTK_ACCEL_LABEL(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_ACCEL_LABEL, GtkAccelLabel))
 #define GTK_ACCEL_LABEL_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_ACCEL_LABEL, GtkAccelLabelClass))
 #define GTK_IS_ACCEL_LABEL(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_ACCEL_LABEL))
@@ -97,7 +97,10 @@ struct _GtkAccelLabelClass
 #define	gtk_accel_label_accelerator_width	gtk_accel_label_get_accel_width
 #endif /* GTK_DISABLE_DEPRECATED */
 
-GType	   __gtk_accel_label_get_type	     (void) G_GNUC_CONST;
+GType	   _T2_gtk_accel_label_get_type	     (void) G_GNUC_CONST;
+GType	   _3T_gtk_accel_label_get_type	     (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType	   gtk_accel_label_get_type	     (void) G_GNUC_CONST;
 GtkWidget* __gtk_accel_label_new		     (const gchar   *string);
 GtkWidget* __gtk_accel_label_get_accel_widget  (GtkAccelLabel *accel_label);
 guint	   __gtk_accel_label_get_accel_width   (GtkAccelLabel *accel_label);

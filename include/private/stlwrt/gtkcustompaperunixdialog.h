@@ -25,7 +25,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_CUSTOM_PAPER_UNIX_DIALOG                  (__gtk_custom_paper_unix_dialog_get_type ())
+#define GTK_TYPE_CUSTOM_PAPER_UNIX_DIALOG                  (gtk_custom_paper_unix_dialog_get_type ())
 #define GTK_CUSTOM_PAPER_UNIX_DIALOG(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_CUSTOM_PAPER_UNIX_DIALOG, GtkCustomPaperUnixDialog))
 #define GTK_CUSTOM_PAPER_UNIX_DIALOG_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_CUSTOM_PAPER_UNIX_DIALOG, GtkCustomPaperUnixDialogClass))
 #define GTK_IS_CUSTOM_PAPER_UNIX_DIALOG(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_CUSTOM_PAPER_UNIX_DIALOG))
@@ -60,7 +60,10 @@ struct _GtkCustomPaperUnixDialogClass
   void (*_gtk_reserved7) (void);
 };
 
-GType             __gtk_custom_paper_unix_dialog_get_type           (void) G_GNUC_CONST;
+GType             _T2_gtk_custom_paper_unix_dialog_get_type           (void) G_GNUC_CONST;
+GType             _3T_gtk_custom_paper_unix_dialog_get_type           (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType             gtk_custom_paper_unix_dialog_get_type           (void) G_GNUC_CONST;
 GtkWidget *       _gtk_custom_paper_unix_dialog_new                (GtkWindow   *parent,
 								   const gchar *title);
 GtkUnit           _gtk_print_get_default_user_units                (void);

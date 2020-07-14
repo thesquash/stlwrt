@@ -39,7 +39,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_WINDOW			(__gtk_window_get_type ())
+#define GTK_TYPE_WINDOW			(gtk_window_get_type ())
 #define GTK_WINDOW(obj)			(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_WINDOW, GtkWindow))
 #define GTK_WINDOW_CLASS(klass)		(G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_WINDOW, GtkWindowClass))
 #define GTK_IS_WINDOW(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_WINDOW))
@@ -146,7 +146,7 @@ struct _GtkWindowClass
   void (*_gtk_reserved4) (void);
 };
 
-#define GTK_TYPE_WINDOW_GROUP             (__gtk_window_group_get_type ())
+#define GTK_TYPE_WINDOW_GROUP             (gtk_window_group_get_type ())
 #define GTK_WINDOW_GROUP(object)          (G_TYPE_CHECK_INSTANCE_CAST ((object), GTK_TYPE_WINDOW_GROUP, GtkWindowGroup))
 #define GTK_WINDOW_GROUP_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_WINDOW_GROUP, GtkWindowGroupClass))
 #define GTK_IS_WINDOW_GROUP(object)       (G_TYPE_CHECK_INSTANCE_TYPE ((object), GTK_TYPE_WINDOW_GROUP))
@@ -177,7 +177,10 @@ struct _GtkWindowGroupClass
 #define gtk_window_set_default_icon_from_file gtk_window_set_default_icon_from_file_utf8
 #endif
 
-GType      __gtk_window_get_type                 (void) G_GNUC_CONST;
+GType      _T2_gtk_window_get_type                 (void) G_GNUC_CONST;
+GType      _3T_gtk_window_get_type                 (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType      gtk_window_get_type                 (void) G_GNUC_CONST;
 GtkWidget* __gtk_window_new                      (GtkWindowType        type);
 void       __gtk_window_set_title                (GtkWindow           *window,
 						const gchar         *title);
@@ -396,7 +399,10 @@ GtkWindowType __gtk_window_get_window_type     (GtkWindow     *window);
 
 /* Window groups
  */
-GType            __gtk_window_group_get_type      (void) G_GNUC_CONST;
+GType            _T2_gtk_window_group_get_type      (void) G_GNUC_CONST;
+GType            _3T_gtk_window_group_get_type      (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType            gtk_window_group_get_type      (void) G_GNUC_CONST;
 
 GtkWindowGroup * __gtk_window_group_new           (void);
 void             __gtk_window_group_add_window    (GtkWindowGroup     *window_group,

@@ -29,7 +29,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_PAGE_SETUP_UNIX_DIALOG                  (__gtk_page_setup_unix_dialog_get_type ())
+#define GTK_TYPE_PAGE_SETUP_UNIX_DIALOG                  (gtk_page_setup_unix_dialog_get_type ())
 #define GTK_PAGE_SETUP_UNIX_DIALOG(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PAGE_SETUP_UNIX_DIALOG, GtkPageSetupUnixDialog))
 #define GTK_PAGE_SETUP_UNIX_DIALOG_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_PAGE_SETUP_UNIX_DIALOG, GtkPageSetupUnixDialogClass))
 #define GTK_IS_PAGE_SETUP_UNIX_DIALOG(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_PAGE_SETUP_UNIX_DIALOG))
@@ -64,7 +64,10 @@ struct _GtkPageSetupUnixDialogClass
   void (*_gtk_reserved7) (void);
 };
 
-GType 		  __gtk_page_setup_unix_dialog_get_type	        (void) G_GNUC_CONST;
+GType 		  _T2_gtk_page_setup_unix_dialog_get_type	        (void) G_GNUC_CONST;
+GType 		  _3T_gtk_page_setup_unix_dialog_get_type	        (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType 		  gtk_page_setup_unix_dialog_get_type	        (void) G_GNUC_CONST;
 GtkWidget *       gtk_page_setup_unix_dialog_new                (const gchar            *title,
 								 GtkWindow              *parent);
 void              gtk_page_setup_unix_dialog_set_page_setup     (GtkPageSetupUnixDialog *dialog,

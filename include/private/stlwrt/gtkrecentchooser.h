@@ -33,7 +33,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_RECENT_CHOOSER			(__gtk_recent_chooser_get_type ())
+#define GTK_TYPE_RECENT_CHOOSER			(gtk_recent_chooser_get_type ())
 #define GTK_RECENT_CHOOSER(obj)			(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_RECENT_CHOOSER, GtkRecentChooser))
 #define GTK_IS_RECENT_CHOOSER(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_RECENT_CHOOSER))
 #define GTK_RECENT_CHOOSER_GET_IFACE(inst)	(G_TYPE_INSTANCE_GET_INTERFACE ((inst), GTK_TYPE_RECENT_CHOOSER, GtkRecentChooserIface))
@@ -116,7 +116,10 @@ struct _GtkRecentChooserIface
   void		    (* selection_changed)  (GtkRecentChooser  *chooser);
 };
 
-GType   __gtk_recent_chooser_get_type    (void) G_GNUC_CONST;
+GType   _T2_gtk_recent_chooser_get_type    (void) G_GNUC_CONST;
+GType   _3T_gtk_recent_chooser_get_type    (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType   gtk_recent_chooser_get_type    (void) G_GNUC_CONST;
 
 /*
  * Configuration

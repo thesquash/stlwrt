@@ -38,7 +38,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_FIXED                  (__gtk_fixed_get_type ())
+#define GTK_TYPE_FIXED                  (gtk_fixed_get_type ())
 #define GTK_FIXED(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_FIXED, GtkFixed))
 #define GTK_FIXED_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_FIXED, GtkFixedClass))
 #define GTK_IS_FIXED(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FIXED))
@@ -72,7 +72,10 @@ struct _GtkFixedChild
 };
 
 
-GType      __gtk_fixed_get_type          (void) G_GNUC_CONST;
+GType      _T2_gtk_fixed_get_type          (void) G_GNUC_CONST;
+GType      _3T_gtk_fixed_get_type          (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType      gtk_fixed_get_type          (void) G_GNUC_CONST;
 GtkWidget* __gtk_fixed_new               (void);
 void       __gtk_fixed_put               (GtkFixed       *fixed,
                                         GtkWidget      *widget,

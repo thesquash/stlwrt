@@ -33,7 +33,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_ICON_VIEW            (__gtk_icon_view_get_type ())
+#define GTK_TYPE_ICON_VIEW            (gtk_icon_view_get_type ())
 #define GTK_ICON_VIEW(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_ICON_VIEW, GtkIconView))
 #define GTK_ICON_VIEW_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_ICON_VIEW, GtkIconViewClass))
 #define GTK_IS_ICON_VIEW(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_ICON_VIEW))
@@ -90,7 +90,10 @@ struct _GtkIconViewClass
   gboolean (* activate_cursor_item)  (GtkIconView      *icon_view);
 };
 
-GType          __gtk_icon_view_get_type          (void) G_GNUC_CONST;
+GType          _T2_gtk_icon_view_get_type          (void) G_GNUC_CONST;
+GType          _3T_gtk_icon_view_get_type          (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType          gtk_icon_view_get_type          (void) G_GNUC_CONST;
 GtkWidget *    __gtk_icon_view_new               (void);
 GtkWidget *    __gtk_icon_view_new_with_model    (GtkTreeModel   *model);
 

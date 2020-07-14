@@ -40,7 +40,7 @@
 G_BEGIN_DECLS
 
 
-#define GTK_TYPE_VIEWPORT            (__gtk_viewport_get_type ())
+#define GTK_TYPE_VIEWPORT            (gtk_viewport_get_type ())
 #define GTK_VIEWPORT(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_VIEWPORT, GtkViewport))
 #define GTK_VIEWPORT_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_VIEWPORT, GtkViewportClass))
 #define GTK_IS_VIEWPORT(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_VIEWPORT))
@@ -74,7 +74,10 @@ struct _GtkViewportClass
 };
 
 
-GType          __gtk_viewport_get_type        (void) G_GNUC_CONST;
+GType          _T2_gtk_viewport_get_type        (void) G_GNUC_CONST;
+GType          _3T_gtk_viewport_get_type        (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType          gtk_viewport_get_type        (void) G_GNUC_CONST;
 GtkWidget*     __gtk_viewport_new             (GtkAdjustment *hadjustment,
 					     GtkAdjustment *vadjustment);
 GtkAdjustment* __gtk_viewport_get_hadjustment (GtkViewport   *viewport);

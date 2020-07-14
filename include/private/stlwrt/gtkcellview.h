@@ -31,7 +31,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_CELL_VIEW                (__gtk_cell_view_get_type ())
+#define GTK_TYPE_CELL_VIEW                (gtk_cell_view_get_type ())
 #define GTK_CELL_VIEW(obj)                (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_CELL_VIEW, GtkCellView))
 #define GTK_CELL_VIEW_CLASS(vtable)       (G_TYPE_CHECK_CLASS_CAST ((vtable), GTK_TYPE_CELL_VIEW, GtkCellViewClass))
 #define GTK_IS_CELL_VIEW(obj)             (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_CELL_VIEW))
@@ -57,7 +57,10 @@ struct _GtkCellViewClass
   GtkWidgetClass parent_class;
 };
 
-GType             __gtk_cell_view_get_type               (void) G_GNUC_CONST;
+GType             _T2_gtk_cell_view_get_type               (void) G_GNUC_CONST;
+GType             _3T_gtk_cell_view_get_type               (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType             gtk_cell_view_get_type               (void) G_GNUC_CONST;
 GtkWidget        *__gtk_cell_view_new                    (void);
 GtkWidget        *__gtk_cell_view_new_with_text          (const gchar     *text);
 GtkWidget        *__gtk_cell_view_new_with_markup        (const gchar     *markup);

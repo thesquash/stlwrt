@@ -39,7 +39,7 @@
 G_BEGIN_DECLS
 
 
-#define GTK_TYPE_VBUTTON_BOX            (__gtk_vbutton_box_get_type ())
+#define GTK_TYPE_VBUTTON_BOX            (gtk_vbutton_box_get_type ())
 #define GTK_VBUTTON_BOX(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_VBUTTON_BOX, GtkVButtonBox))
 #define GTK_VBUTTON_BOX_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_VBUTTON_BOX, GtkVButtonBoxClass))
 #define GTK_IS_VBUTTON_BOX(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_VBUTTON_BOX))
@@ -63,7 +63,10 @@ struct _GtkVButtonBoxClass
 };
 
 
-GType      __gtk_vbutton_box_get_type (void) G_GNUC_CONST;
+GType      _T2_gtk_vbutton_box_get_type (void) G_GNUC_CONST;
+GType      _3T_gtk_vbutton_box_get_type (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType      gtk_vbutton_box_get_type (void) G_GNUC_CONST;
 GtkWidget *__gtk_vbutton_box_new      (void);
 
 /* buttons can be added by __gtk_container_add() */

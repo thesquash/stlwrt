@@ -39,7 +39,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_VOLUME_BUTTON                 (__gtk_volume_button_get_type ())
+#define GTK_TYPE_VOLUME_BUTTON                 (gtk_volume_button_get_type ())
 #define GTK_VOLUME_BUTTON(obj)                 (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_VOLUME_BUTTON, GtkVolumeButton))
 #define GTK_VOLUME_BUTTON_CLASS(klass)         (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_VOLUME_BUTTON, GtkVolumeButtonClass))
 #define GTK_IS_VOLUME_BUTTON(obj)              (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_VOLUME_BUTTON))
@@ -67,7 +67,10 @@ struct _GtkVolumeButtonClass
   void (*_gtk_reserved4) (void);
 };
 
-GType		__gtk_volume_button_get_type	(void) G_GNUC_CONST;
+GType		_T2_gtk_volume_button_get_type	(void) G_GNUC_CONST;
+GType		_3T_gtk_volume_button_get_type	(void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType		gtk_volume_button_get_type	(void) G_GNUC_CONST;
 GtkWidget*	__gtk_volume_button_new		(void);
 
 G_END_DECLS

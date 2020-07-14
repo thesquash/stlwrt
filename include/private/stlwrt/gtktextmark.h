@@ -64,7 +64,7 @@ typedef struct _GtkTextMark      GtkTextMarkSkinny;
 typedef struct _GtkTextMarkClass GtkTextMarkClassFat;
 typedef struct _GtkTextMarkClass GtkTextMarkClassSkinny;
 
-#define GTK_TYPE_TEXT_MARK              (__gtk_text_mark_get_type ())
+#define GTK_TYPE_TEXT_MARK              (gtk_text_mark_get_type ())
 #define GTK_TEXT_MARK(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GTK_TYPE_TEXT_MARK, GtkTextMark))
 #define GTK_TEXT_MARK_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_TEXT_MARK, GtkTextMarkClass))
 #define GTK_IS_TEXT_MARK(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GTK_TYPE_TEXT_MARK))
@@ -89,7 +89,10 @@ struct _GtkTextMarkClass
   void (*_gtk_reserved4) (void);
 };
 
-GType        __gtk_text_mark_get_type   (void) G_GNUC_CONST;
+GType        _T2_gtk_text_mark_get_type   (void) G_GNUC_CONST;
+GType        _3T_gtk_text_mark_get_type   (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType        gtk_text_mark_get_type   (void) G_GNUC_CONST;
 
 void           __gtk_text_mark_set_visible (GtkTextMark *mark,
                                           gboolean     setting);

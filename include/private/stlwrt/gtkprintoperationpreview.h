@@ -31,7 +31,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_PRINT_OPERATION_PREVIEW                  (__gtk_print_operation_preview_get_type ())
+#define GTK_TYPE_PRINT_OPERATION_PREVIEW                  (gtk_print_operation_preview_get_type ())
 #define GTK_PRINT_OPERATION_PREVIEW(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PRINT_OPERATION_PREVIEW, GtkPrintOperationPreview))
 #define GTK_IS_PRINT_OPERATION_PREVIEW(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_PRINT_OPERATION_PREVIEW))
 #define GTK_PRINT_OPERATION_PREVIEW_GET_IFACE(obj)        (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GTK_TYPE_PRINT_OPERATION_PREVIEW, GtkPrintOperationPreviewIface))
@@ -68,7 +68,10 @@ struct _GtkPrintOperationPreviewIface
   void (*_gtk_reserved7) (void);
 };
 
-GType   __gtk_print_operation_preview_get_type       (void) G_GNUC_CONST;
+GType   _T2_gtk_print_operation_preview_get_type       (void) G_GNUC_CONST;
+GType   _3T_gtk_print_operation_preview_get_type       (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType   gtk_print_operation_preview_get_type       (void) G_GNUC_CONST;
 
 void     __gtk_print_operation_preview_render_page (GtkPrintOperationPreview *preview,
 						  gint                      page_nr);

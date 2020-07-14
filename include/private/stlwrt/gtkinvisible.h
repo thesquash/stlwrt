@@ -36,7 +36,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_INVISIBLE		(__gtk_invisible_get_type ())
+#define GTK_TYPE_INVISIBLE		(gtk_invisible_get_type ())
 #define GTK_INVISIBLE(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_INVISIBLE, GtkInvisible))
 #define GTK_INVISIBLE_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_INVISIBLE, GtkInvisibleClass))
 #define GTK_IS_INVISIBLE(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_INVISIBLE))
@@ -68,7 +68,10 @@ struct _GtkInvisibleClass
   void (*_gtk_reserved4) (void);
 };
 
-GType __gtk_invisible_get_type (void) G_GNUC_CONST;
+GType _T2_gtk_invisible_get_type (void) G_GNUC_CONST;
+GType _3T_gtk_invisible_get_type (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType gtk_invisible_get_type (void) G_GNUC_CONST;
 
 GtkWidget* __gtk_invisible_new            (void);
 GtkWidget* __gtk_invisible_new_for_screen (GdkScreen    *screen);

@@ -28,7 +28,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_SEARCH_ENGINE_TRACKER		(___gtk_search_engine_tracker_get_type ())
+#define GTK_TYPE_SEARCH_ENGINE_TRACKER		(_gtk_search_engine_tracker_get_type ())
 #define GTK_SEARCH_ENGINE_TRACKER(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_SEARCH_ENGINE_TRACKER, GtkSearchEngineTracker))
 #define GTK_SEARCH_ENGINE_TRACKER_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_SEARCH_ENGINE_TRACKER, GtkSearchEngineTrackerClass))
 #define GTK_IS_SEARCH_ENGINE_TRACKER(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_SEARCH_ENGINE_TRACKER))
@@ -53,7 +53,7 @@ struct _GtkSearchEngineTrackerClass
   GtkSearchEngineClass parent_class;
 };
 
-GType            ___gtk_search_engine_tracker_get_type (void);
+GType            _gtk_search_engine_tracker_get_type (void);
 
 GtkSearchEngine* _gtk_search_engine_tracker_new      (void);
 

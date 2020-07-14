@@ -518,7 +518,7 @@ void _gdk_windowing_display_set_sm_client_id (GdkDisplay  *display,
 void _gdk_windowing_window_set_composited (GdkWindow *window,
 					   gboolean composited);
 
-#define GDK_TYPE_PAINTABLE            (___gdk_paintable_get_type ())
+#define GDK_TYPE_PAINTABLE            (_gdk_paintable_get_type ())
 #define GDK_PAINTABLE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GDK_TYPE_PAINTABLE, GdkPaintable))
 #define GDK_IS_PAINTABLE(obj)	      (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GDK_TYPE_PAINTABLE))
 #define GDK_PAINTABLE_GET_IFACE(obj)  (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GDK_TYPE_PAINTABLE, GdkPaintableIface))
@@ -536,11 +536,11 @@ struct _GdkPaintableIface
   void (* end_paint)                (GdkPaintable    *paintable);
 };
 
-GType ___gdk_paintable_get_type (void) G_GNUC_CONST;
+GType _gdk_paintable_get_type (void) G_GNUC_CONST;
 
 /* Implementation types */
-GType ___gdk_window_impl_get_type (void) G_GNUC_CONST;
-GType ___gdk_pixmap_impl_get_type (void) G_GNUC_CONST;
+GType _gdk_window_impl_get_type (void) G_GNUC_CONST;
+GType _gdk_pixmap_impl_get_type (void) G_GNUC_CONST;
 
 
 /**
@@ -689,10 +689,13 @@ GdkRegion  *_gdk_region_new_from_yxbanded_rects (GdkRectangle *rects, int n_rect
  *****************************/
 typedef struct _GdkOffscreenWindow      GdkOffscreenWindowFat;
 typedef struct _GdkOffscreenWindow      GdkOffscreenWindowSkinny;
-#define GDK_TYPE_OFFSCREEN_WINDOW            (__gdk_offscreen_window_get_type())
+#define GDK_TYPE_OFFSCREEN_WINDOW            (gdk_offscreen_window_get_type())
 #define GDK_OFFSCREEN_WINDOW(object)         (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_OFFSCREEN_WINDOW, GdkOffscreenWindow))
 #define GDK_IS_OFFSCREEN_WINDOW(object)      (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_OFFSCREEN_WINDOW))
-GType __gdk_offscreen_window_get_type (void);
+GType _T2_gdk_offscreen_window_get_type (void);
+GType _3T_gdk_offscreen_window_get_type (void);
+/* Supplied in the STLWRT public libraries */
+GType gdk_offscreen_window_get_type (void);
 GdkDrawable * _gdk_offscreen_window_get_real_drawable (GdkOffscreenWindow *window);
 void       _gdk_offscreen_window_new                 (GdkWindow     *window,
 						      GdkScreen     *screen,

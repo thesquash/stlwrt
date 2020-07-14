@@ -37,7 +37,7 @@ typedef struct _GdkPangoRendererClass   GdkPangoRendererClassFat;
 typedef struct _GdkPangoRendererClass   GdkPangoRendererClassSkinny;
 typedef struct _GdkPangoRendererPrivate GdkPangoRendererPrivate;
 
-#define GDK_TYPE_PANGO_RENDERER            (__gdk_pango_renderer_get_type())
+#define GDK_TYPE_PANGO_RENDERER            (gdk_pango_renderer_get_type())
 #define GDK_PANGO_RENDERER(object)         (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_PANGO_RENDERER, GdkPangoRenderer))
 #define GDK_IS_PANGO_RENDERER(object)      (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_PANGO_RENDERER))
 #define GDK_PANGO_RENDERER_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_PANGO_RENDERER, GdkPangoRendererClass))
@@ -89,7 +89,10 @@ struct _GdkPangoRendererClass
   PangoRendererClass parent_class;
 };
 
-GType __gdk_pango_renderer_get_type (void) G_GNUC_CONST;
+GType _T2_gdk_pango_renderer_get_type (void) G_GNUC_CONST;
+GType _3T_gdk_pango_renderer_get_type (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType gdk_pango_renderer_get_type (void) G_GNUC_CONST;
 
 PangoRenderer *__gdk_pango_renderer_new         (GdkScreen *screen);
 PangoRenderer *__gdk_pango_renderer_get_default (GdkScreen *screen);

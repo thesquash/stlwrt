@@ -58,14 +58,14 @@ struct _GdkColor
 typedef struct _GdkColormapClass GdkColormapClassFat;
 typedef struct _GdkColormapClass GdkColormapClassSkinny;
 
-#define GDK_TYPE_COLORMAP              (__gdk_colormap_get_type ())
+#define GDK_TYPE_COLORMAP              (gdk_colormap_get_type ())
 #define GDK_COLORMAP(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_COLORMAP, GdkColormap))
 #define GDK_COLORMAP_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_COLORMAP, GdkColormapClass))
 #define GDK_IS_COLORMAP(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_COLORMAP))
 #define GDK_IS_COLORMAP_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GDK_TYPE_COLORMAP))
 #define GDK_COLORMAP_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GDK_TYPE_COLORMAP, GdkColormapClass))
 
-#define GDK_TYPE_COLOR                 (__gdk_color_get_type ())
+#define GDK_TYPE_COLOR                 (gdk_color_get_type ())
 
 struct _GdkColormap
 {
@@ -88,7 +88,10 @@ struct _GdkColormapClass
 
 };
 
-GType        __gdk_colormap_get_type (void) G_GNUC_CONST;
+GType        _T2_gdk_colormap_get_type (void) G_GNUC_CONST;
+GType        _3T_gdk_colormap_get_type (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType        gdk_colormap_get_type (void) G_GNUC_CONST;
 
 GdkColormap* __gdk_colormap_new	  (GdkVisual   *visual,
 				   gboolean	allocate);
@@ -142,7 +145,10 @@ gboolean  __gdk_color_equal     (const GdkColor *colora,
 			       const GdkColor *colorb);
 gchar *   __gdk_color_to_string (const GdkColor *color);
 
-GType     __gdk_color_get_type (void) G_GNUC_CONST;
+GType     _T2_gdk_color_get_type (void) G_GNUC_CONST;
+GType     _3T_gdk_color_get_type (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType     gdk_color_get_type (void) G_GNUC_CONST;
 
 /* The following functions are deprecated */
 #ifndef GDK_DISABLE_DEPRECATED

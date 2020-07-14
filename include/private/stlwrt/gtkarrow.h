@@ -39,7 +39,7 @@
 G_BEGIN_DECLS
 
 
-#define GTK_TYPE_ARROW                  (__gtk_arrow_get_type ())
+#define GTK_TYPE_ARROW                  (gtk_arrow_get_type ())
 #define GTK_ARROW(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_ARROW, GtkArrow))
 #define GTK_ARROW_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_ARROW, GtkArrowClass))
 #define GTK_IS_ARROW(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_ARROW))
@@ -66,7 +66,10 @@ struct _GtkArrowClass
 };
 
 
-GType      __gtk_arrow_get_type   (void) G_GNUC_CONST;
+GType      _T2_gtk_arrow_get_type   (void) G_GNUC_CONST;
+GType      _3T_gtk_arrow_get_type   (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType      gtk_arrow_get_type   (void) G_GNUC_CONST;
 GtkWidget* __gtk_arrow_new        (GtkArrowType   arrow_type,
 				 GtkShadowType  shadow_type);
 void       __gtk_arrow_set        (GtkArrow      *arrow,

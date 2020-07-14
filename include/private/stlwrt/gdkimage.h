@@ -57,7 +57,7 @@ typedef enum
 typedef struct _GdkImageClass GdkImageClassFat;
 typedef struct _GdkImageClass GdkImageClassSkinny;
 
-#define GDK_TYPE_IMAGE              (__gdk_image_get_type ())
+#define GDK_TYPE_IMAGE              (gdk_image_get_type ())
 #define GDK_IMAGE(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_IMAGE, GdkImage))
 #define GDK_IMAGE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_IMAGE, GdkImageClass))
 #define GDK_IS_IMAGE(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_IMAGE))
@@ -92,7 +92,10 @@ struct _GdkImageClass
   GObjectClass parent_class;
 };
 
-GType     __gdk_image_get_type   (void) G_GNUC_CONST;
+GType     _T2_gdk_image_get_type   (void) G_GNUC_CONST;
+GType     _3T_gdk_image_get_type   (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType     gdk_image_get_type   (void) G_GNUC_CONST;
 
 #ifndef GDK_DISABLE_DEPRECATED
 GdkImage*  __gdk_image_new       (GdkImageType  type,

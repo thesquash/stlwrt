@@ -38,7 +38,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_RADIO_BUTTON		       (__gtk_radio_button_get_type ())
+#define GTK_TYPE_RADIO_BUTTON		       (gtk_radio_button_get_type ())
 #define GTK_RADIO_BUTTON(obj)		       (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_RADIO_BUTTON, GtkRadioButton))
 #define GTK_RADIO_BUTTON_CLASS(klass)	       (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_RADIO_BUTTON, GtkRadioButtonClass))
 #define GTK_IS_RADIO_BUTTON(obj)	       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_RADIO_BUTTON))
@@ -72,7 +72,10 @@ struct _GtkRadioButtonClass
 };
 
 
-GType	   __gtk_radio_button_get_type	     (void) G_GNUC_CONST;
+GType	   _T2_gtk_radio_button_get_type	     (void) G_GNUC_CONST;
+GType	   _3T_gtk_radio_button_get_type	     (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType	   gtk_radio_button_get_type	     (void) G_GNUC_CONST;
 
 GtkWidget* __gtk_radio_button_new                           (GSList         *group);
 GtkWidget* __gtk_radio_button_new_from_widget               (GtkRadioButton *radio_group_member);

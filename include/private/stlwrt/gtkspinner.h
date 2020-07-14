@@ -34,7 +34,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_SPINNER           (__gtk_spinner_get_type ())
+#define GTK_TYPE_SPINNER           (gtk_spinner_get_type ())
 #define GTK_SPINNER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_SPINNER, GtkSpinner))
 #define GTK_SPINNER_CLASS(obj)     (G_TYPE_CHECK_CLASS_CAST ((obj), GTK_SPINNER,  GtkSpinnerClass))
 #define GTK_IS_SPINNER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_SPINNER))
@@ -58,7 +58,10 @@ struct _GtkSpinnerClass
   GtkDrawingAreaClass parent_class;
 };
 
-GType      __gtk_spinner_get_type  (void) G_GNUC_CONST;
+GType      _T2_gtk_spinner_get_type  (void) G_GNUC_CONST;
+GType      _3T_gtk_spinner_get_type  (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType      gtk_spinner_get_type  (void) G_GNUC_CONST;
 GtkWidget *__gtk_spinner_new (void);
 void       __gtk_spinner_start      (GtkSpinner *spinner);
 void       __gtk_spinner_stop       (GtkSpinner *spinner);

@@ -49,7 +49,7 @@ G_BEGIN_DECLS
  * The color picker emits the "color_set" signal when the color is set.
  */
 
-#define GTK_TYPE_COLOR_BUTTON             (__gtk_color_button_get_type ())
+#define GTK_TYPE_COLOR_BUTTON             (gtk_color_button_get_type ())
 #define GTK_COLOR_BUTTON(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_COLOR_BUTTON, GtkColorButton))
 #define GTK_COLOR_BUTTON_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_COLOR_BUTTON, GtkColorButtonClass))
 #define GTK_IS_COLOR_BUTTON(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_COLOR_BUTTON))
@@ -83,7 +83,10 @@ struct _GtkColorButtonClass {
 };
 
 
-GType      __gtk_color_button_get_type       (void) G_GNUC_CONST;
+GType      _T2_gtk_color_button_get_type       (void) G_GNUC_CONST;
+GType      _3T_gtk_color_button_get_type       (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType      gtk_color_button_get_type       (void) G_GNUC_CONST;
 GtkWidget *__gtk_color_button_new            (void);
 GtkWidget *__gtk_color_button_new_with_color (const GdkColor *color);
 void       __gtk_color_button_set_color      (GtkColorButton *color_button,

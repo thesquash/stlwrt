@@ -31,7 +31,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_PRINT_UNIX_DIALOG                  (__gtk_print_unix_dialog_get_type ())
+#define GTK_TYPE_PRINT_UNIX_DIALOG                  (gtk_print_unix_dialog_get_type ())
 #define GTK_PRINT_UNIX_DIALOG(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PRINT_UNIX_DIALOG, GtkPrintUnixDialog))
 #define GTK_PRINT_UNIX_DIALOG_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_PRINT_UNIX_DIALOG, GtkPrintUnixDialogClass))
 #define GTK_IS_PRINT_UNIX_DIALOG(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_PRINT_UNIX_DIALOG))
@@ -67,7 +67,10 @@ struct _GtkPrintUnixDialogClass
   void (*_gtk_reserved7) (void);
 };
 
-GType                __gtk_print_unix_dialog_get_type                (void) G_GNUC_CONST;
+GType                _T2_gtk_print_unix_dialog_get_type                (void) G_GNUC_CONST;
+GType                _3T_gtk_print_unix_dialog_get_type                (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType                gtk_print_unix_dialog_get_type                (void) G_GNUC_CONST;
 GtkWidget *          gtk_print_unix_dialog_new                     (const gchar *title,
                                                                     GtkWindow   *parent);
 

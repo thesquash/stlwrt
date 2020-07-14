@@ -35,7 +35,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_SOCKET            (__gtk_socket_get_type ())
+#define GTK_TYPE_SOCKET            (gtk_socket_get_type ())
 #define GTK_SOCKET(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_SOCKET, GtkSocket))
 #define GTK_SOCKET_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_SOCKET, GtkSocketClass))
 #define GTK_IS_SOCKET(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_SOCKET))
@@ -87,7 +87,10 @@ struct _GtkSocketClass
 };
 
 
-GType          __gtk_socket_get_type (void) G_GNUC_CONST;
+GType          _T2_gtk_socket_get_type (void) G_GNUC_CONST;
+GType          _3T_gtk_socket_get_type (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType          gtk_socket_get_type (void) G_GNUC_CONST;
 GtkWidget*     __gtk_socket_new      (void);
 
 void            __gtk_socket_add_id (GtkSocket       *socket_,

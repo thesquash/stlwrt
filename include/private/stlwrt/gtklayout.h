@@ -43,7 +43,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_LAYOUT            (__gtk_layout_get_type ())
+#define GTK_TYPE_LAYOUT            (gtk_layout_get_type ())
 #define GTK_LAYOUT(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_LAYOUT, GtkLayout))
 #define GTK_LAYOUT_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_LAYOUT, GtkLayoutClass))
 #define GTK_IS_LAYOUT(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_LAYOUT))
@@ -94,7 +94,10 @@ struct _GtkLayoutClass
   void (*_gtk_reserved4) (void);
 };
 
-GType          __gtk_layout_get_type        (void) G_GNUC_CONST;
+GType          _T2_gtk_layout_get_type        (void) G_GNUC_CONST;
+GType          _3T_gtk_layout_get_type        (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType          gtk_layout_get_type        (void) G_GNUC_CONST;
 GtkWidget*     __gtk_layout_new             (GtkAdjustment *hadjustment,
 				           GtkAdjustment *vadjustment);
 GdkWindow*     __gtk_layout_get_bin_window  (GtkLayout     *layout);

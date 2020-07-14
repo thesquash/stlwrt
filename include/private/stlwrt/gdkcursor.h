@@ -37,7 +37,7 @@
 
 G_BEGIN_DECLS
 
-#define GDK_TYPE_CURSOR (__gdk_cursor_get_type ())
+#define GDK_TYPE_CURSOR (gdk_cursor_get_type ())
 
 /* Cursor types.
  */
@@ -135,7 +135,10 @@ struct _GdkCursor
 /* Cursors
  */
 
-GType      __gdk_cursor_get_type           (void) G_GNUC_CONST;
+GType      _T2_gdk_cursor_get_type           (void) G_GNUC_CONST;
+GType      _3T_gdk_cursor_get_type           (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType      gdk_cursor_get_type           (void) G_GNUC_CONST;
 
 GdkCursor* __gdk_cursor_new_for_display	 (GdkDisplay      *display,
 					  GdkCursorType    cursor_type);

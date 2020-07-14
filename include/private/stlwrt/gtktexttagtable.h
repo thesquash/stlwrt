@@ -38,7 +38,7 @@ G_BEGIN_DECLS
 
 typedef void (* GtkTextTagTableForeach) (GtkTextTag *tag, gpointer data);
 
-#define GTK_TYPE_TEXT_TAG_TABLE            (__gtk_text_tag_table_get_type ())
+#define GTK_TYPE_TEXT_TAG_TABLE            (gtk_text_tag_table_get_type ())
 #define GTK_TEXT_TAG_TABLE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_TEXT_TAG_TABLE, GtkTextTagTable))
 #define GTK_TEXT_TAG_TABLE_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_TEXT_TAG_TABLE, GtkTextTagTableClass))
 #define GTK_IS_TEXT_TAG_TABLE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TEXT_TAG_TABLE))
@@ -74,7 +74,10 @@ struct _GtkTextTagTableClass
   void (*_gtk_reserved4) (void);
 };
 
-GType          __gtk_text_tag_table_get_type (void) G_GNUC_CONST;
+GType          _T2_gtk_text_tag_table_get_type (void) G_GNUC_CONST;
+GType          _3T_gtk_text_tag_table_get_type (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType          gtk_text_tag_table_get_type (void) G_GNUC_CONST;
 
 GtkTextTagTable *__gtk_text_tag_table_new      (void);
 void             __gtk_text_tag_table_add      (GtkTextTagTable        *table,

@@ -27,14 +27,14 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_FILE_CHOOSER_DEFAULT    (___gtk_file_chooser_default_get_type ())
+#define GTK_TYPE_FILE_CHOOSER_DEFAULT    (_gtk_file_chooser_default_get_type ())
 #define GTK_FILE_CHOOSER_DEFAULT(obj)    (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_FILE_CHOOSER_DEFAULT, GtkFileChooserDefault))
 #define GTK_IS_FILE_CHOOSER_DEFAULT(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FILE_CHOOSER_DEFAULT))
 
 typedef struct _GtkFileChooserDefault      GtkFileChooserDefaultFat;
 typedef struct _GtkFileChooserDefault      GtkFileChooserDefaultSkinny;
 
-GType      ___gtk_file_chooser_default_get_type (void) G_GNUC_CONST;
+GType      _gtk_file_chooser_default_get_type (void) G_GNUC_CONST;
 GtkWidget *_gtk_file_chooser_default_new      (void);
 
 G_END_DECLS

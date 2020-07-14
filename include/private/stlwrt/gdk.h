@@ -158,9 +158,12 @@ void     __gdk_rectangle_union     (const GdkRectangle *src1,
 				  const GdkRectangle *src2,
 				  GdkRectangle       *dest);
 
-GType __gdk_rectangle_get_type (void) G_GNUC_CONST;
+GType _T2_gdk_rectangle_get_type (void) G_GNUC_CONST;
+GType _3T_gdk_rectangle_get_type (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType gdk_rectangle_get_type (void) G_GNUC_CONST;
 
-#define GDK_TYPE_RECTANGLE (__gdk_rectangle_get_type ())
+#define GDK_TYPE_RECTANGLE (gdk_rectangle_get_type ())
 
 /* Miscellaneous */
 #ifndef GDK_MULTIHEAD_SAFE

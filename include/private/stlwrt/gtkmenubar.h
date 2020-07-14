@@ -39,7 +39,7 @@
 G_BEGIN_DECLS
 
 
-#define	GTK_TYPE_MENU_BAR               (__gtk_menu_bar_get_type ())
+#define	GTK_TYPE_MENU_BAR               (gtk_menu_bar_get_type ())
 #define GTK_MENU_BAR(obj)               (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_MENU_BAR, GtkMenuBar))
 #define GTK_MENU_BAR_CLASS(klass)       (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_MENU_BAR, GtkMenuBarClass))
 #define GTK_IS_MENU_BAR(obj)            (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_MENU_BAR))
@@ -68,7 +68,10 @@ struct _GtkMenuBarClass
 };
 
 
-GType      __gtk_menu_bar_get_type        (void) G_GNUC_CONST;
+GType      _T2_gtk_menu_bar_get_type        (void) G_GNUC_CONST;
+GType      _3T_gtk_menu_bar_get_type        (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType      gtk_menu_bar_get_type        (void) G_GNUC_CONST;
 GtkWidget* __gtk_menu_bar_new             (void);
 
 GtkPackDirection __gtk_menu_bar_get_pack_direction (GtkMenuBar       *menubar);

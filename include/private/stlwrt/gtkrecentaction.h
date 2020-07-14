@@ -32,7 +32,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_RECENT_ACTION                  (__gtk_recent_action_get_type ())
+#define GTK_TYPE_RECENT_ACTION                  (gtk_recent_action_get_type ())
 #define GTK_RECENT_ACTION(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_RECENT_ACTION, GtkRecentAction))
 #define GTK_IS_RECENT_ACTION(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_RECENT_ACTION))
 #define GTK_RECENT_ACTION_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_RECENT_ACTION, GtkRecentActionClass))
@@ -58,7 +58,10 @@ struct _GtkRecentActionClass
   GtkActionClass parent_class;
 };
 
-GType      __gtk_recent_action_get_type         (void) G_GNUC_CONST;
+GType      _T2_gtk_recent_action_get_type         (void) G_GNUC_CONST;
+GType      _3T_gtk_recent_action_get_type         (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType      gtk_recent_action_get_type         (void) G_GNUC_CONST;
 GtkAction *__gtk_recent_action_new              (const gchar      *name,
                                                const gchar      *label,
                                                const gchar      *tooltip,

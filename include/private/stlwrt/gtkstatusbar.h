@@ -37,7 +37,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_STATUSBAR            (__gtk_statusbar_get_type ())
+#define GTK_TYPE_STATUSBAR            (gtk_statusbar_get_type ())
 #define GTK_STATUSBAR(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_STATUSBAR, GtkStatusbar))
 #define GTK_STATUSBAR_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_STATUSBAR, GtkStatusbarClass))
 #define GTK_IS_STATUSBAR(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_STATUSBAR))
@@ -89,7 +89,10 @@ struct _GtkStatusbarClass
 };
 
 
-GType      __gtk_statusbar_get_type     	(void) G_GNUC_CONST;
+GType      _T2_gtk_statusbar_get_type     	(void) G_GNUC_CONST;
+GType      _3T_gtk_statusbar_get_type     	(void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType      gtk_statusbar_get_type     	(void) G_GNUC_CONST;
 GtkWidget* __gtk_statusbar_new          	(void);
 /* If you don't want to use contexts, 0 is a predefined global
  * context_id you can pass to push/pop/remove

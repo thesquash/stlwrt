@@ -32,7 +32,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_TREE_SORTABLE            (__gtk_tree_sortable_get_type ())
+#define GTK_TYPE_TREE_SORTABLE            (gtk_tree_sortable_get_type ())
 #define GTK_TREE_SORTABLE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_TREE_SORTABLE, GtkTreeSortable))
 #define GTK_TREE_SORTABLE_CLASS(obj)      (G_TYPE_CHECK_CLASS_CAST ((obj), GTK_TYPE_TREE_SORTABLE, GtkTreeSortableIface))
 #define GTK_IS_TREE_SORTABLE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TREE_SORTABLE))
@@ -79,7 +79,10 @@ struct _GtkTreeSortableIface
 };
 
 
-GType    __gtk_tree_sortable_get_type              (void) G_GNUC_CONST;
+GType    _T2_gtk_tree_sortable_get_type              (void) G_GNUC_CONST;
+GType    _3T_gtk_tree_sortable_get_type              (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType    gtk_tree_sortable_get_type              (void) G_GNUC_CONST;
 
 void     __gtk_tree_sortable_sort_column_changed   (GtkTreeSortable        *sortable);
 gboolean __gtk_tree_sortable_get_sort_column_id    (GtkTreeSortable        *sortable,

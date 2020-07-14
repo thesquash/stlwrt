@@ -30,7 +30,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_OFFSCREEN_WINDOW         (__gtk_offscreen_window_get_type ())
+#define GTK_TYPE_OFFSCREEN_WINDOW         (gtk_offscreen_window_get_type ())
 #define GTK_OFFSCREEN_WINDOW(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GTK_TYPE_OFFSCREEN_WINDOW, GtkOffscreenWindow))
 #define GTK_OFFSCREEN_WINDOW_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST ((k), GTK_TYPE_OFFSCREEN_WINDOW, GtkOffscreenWindowClass))
 #define GTK_IS_OFFSCREEN_WINDOW(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GTK_TYPE_OFFSCREEN_WINDOW))
@@ -52,7 +52,10 @@ struct _GtkOffscreenWindowClass
   GtkWindowClass parent_class;
 };
 
-GType      __gtk_offscreen_window_get_type   (void) G_GNUC_CONST;
+GType      _T2_gtk_offscreen_window_get_type   (void) G_GNUC_CONST;
+GType      _3T_gtk_offscreen_window_get_type   (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType      gtk_offscreen_window_get_type   (void) G_GNUC_CONST;
 
 GtkWidget *__gtk_offscreen_window_new        (void);
 GdkPixmap *__gtk_offscreen_window_get_pixmap (GtkOffscreenWindow *offscreen);

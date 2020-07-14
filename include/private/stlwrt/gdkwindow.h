@@ -253,7 +253,7 @@ struct _GdkPointerHooks
 typedef struct _GdkWindowObject GdkWindowObject;
 typedef struct _GdkWindowObjectClass GdkWindowObjectClass;
 
-#define GDK_TYPE_WINDOW              (__gdk_window_object_get_type ())
+#define GDK_TYPE_WINDOW              (gdk_window_object_get_type ())
 #define GDK_WINDOW(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_WINDOW, GdkWindow))
 #define GDK_WINDOW_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_WINDOW, GdkWindowObjectClass))
 #define GDK_IS_WINDOW(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_WINDOW))
@@ -329,7 +329,10 @@ struct _GdkWindowObjectClass
 
 /* Windows
  */
-GType         __gdk_window_object_get_type       (void) G_GNUC_CONST;
+GType         _T2_gdk_window_object_get_type       (void) G_GNUC_CONST;
+GType         _3T_gdk_window_object_get_type       (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType         gdk_window_object_get_type       (void) G_GNUC_CONST;
 GdkWindow*    __gdk_window_new                   (GdkWindow     *parent,
                                                 GdkWindowAttr *attributes,
                                                 gint           attributes_mask);
@@ -729,7 +732,7 @@ GdkPointerHooks *__gdk_set_pointer_hooks (const GdkPointerHooks *new_hooks);
 
 #define GDK_ROOT_PARENT()             (__gdk_get_default_root_window ())
 #define gdk_window_get_size            gdk_drawable_get_size
-#define __gdk_window_get_type            gdk_window_get_window_type
+#define gdk_window_get_type            gdk_window_get_window_type
 #define gdk_window_get_colormap        gdk_drawable_get_colormap
 #define gdk_window_set_colormap        gdk_drawable_set_colormap
 #define gdk_window_ref                 g_object_ref

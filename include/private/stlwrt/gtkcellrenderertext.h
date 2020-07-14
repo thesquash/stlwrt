@@ -32,7 +32,7 @@
 G_BEGIN_DECLS
 
 
-#define GTK_TYPE_CELL_RENDERER_TEXT		(__gtk_cell_renderer_text_get_type ())
+#define GTK_TYPE_CELL_RENDERER_TEXT		(gtk_cell_renderer_text_get_type ())
 #define GTK_CELL_RENDERER_TEXT(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_CELL_RENDERER_TEXT, GtkCellRendererText))
 #define GTK_CELL_RENDERER_TEXT_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_CELL_RENDERER_TEXT, GtkCellRendererTextClass))
 #define GTK_IS_CELL_RENDERER_TEXT(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_CELL_RENDERER_TEXT))
@@ -96,7 +96,10 @@ struct _GtkCellRendererTextClass
   void (*_gtk_reserved4) (void);
 };
 
-GType            __gtk_cell_renderer_text_get_type (void) G_GNUC_CONST;
+GType            _T2_gtk_cell_renderer_text_get_type (void) G_GNUC_CONST;
+GType            _3T_gtk_cell_renderer_text_get_type (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType            gtk_cell_renderer_text_get_type (void) G_GNUC_CONST;
 GtkCellRenderer *__gtk_cell_renderer_text_new      (void);
 
 void             __gtk_cell_renderer_text_set_fixed_height_from_font (GtkCellRendererText *renderer,

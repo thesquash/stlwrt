@@ -38,7 +38,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_EDITABLE             (__gtk_editable_get_type ())
+#define GTK_TYPE_EDITABLE             (gtk_editable_get_type ())
 #define GTK_EDITABLE(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_EDITABLE, GtkEditable))
 #define GTK_EDITABLE_CLASS(vtable)    (G_TYPE_CHECK_CLASS_CAST ((vtable), GTK_TYPE_EDITABLE, GtkEditableClass))
 #define GTK_IS_EDITABLE(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_EDITABLE))
@@ -85,7 +85,10 @@ struct _GtkEditableClass
   gint (* get_position)             (GtkEditable    *editable);
 };
 
-GType    __gtk_editable_get_type             (void) G_GNUC_CONST;
+GType    _T2_gtk_editable_get_type             (void) G_GNUC_CONST;
+GType    _3T_gtk_editable_get_type             (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType    gtk_editable_get_type             (void) G_GNUC_CONST;
 void     __gtk_editable_select_region        (GtkEditable *editable,
 					    gint         start_pos,
 					    gint         end_pos);

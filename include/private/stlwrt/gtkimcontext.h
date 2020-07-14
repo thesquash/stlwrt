@@ -31,7 +31,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_IM_CONTEXT              (__gtk_im_context_get_type ())
+#define GTK_TYPE_IM_CONTEXT              (gtk_im_context_get_type ())
 #define GTK_IM_CONTEXT(obj)              (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_IM_CONTEXT, GtkIMContext))
 #define GTK_IM_CONTEXT_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_IM_CONTEXT, GtkIMContextClass))
 #define GTK_IS_IM_CONTEXT(obj)           (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_IM_CONTEXT))
@@ -101,7 +101,10 @@ struct _GtkIMContextClass
   void (*_gtk_reserved6) (void);
 };
 
-GType    __gtk_im_context_get_type            (void) G_GNUC_CONST;
+GType    _T2_gtk_im_context_get_type            (void) G_GNUC_CONST;
+GType    _3T_gtk_im_context_get_type            (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType    gtk_im_context_get_type            (void) G_GNUC_CONST;
 
 void     __gtk_im_context_set_client_window   (GtkIMContext       *context,
 					     GdkWindow          *window);

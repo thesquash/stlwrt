@@ -38,7 +38,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_EVENT_BOX              (__gtk_event_box_get_type ())
+#define GTK_TYPE_EVENT_BOX              (gtk_event_box_get_type ())
 #define GTK_EVENT_BOX(obj)              (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_EVENT_BOX, GtkEventBox))
 #define GTK_EVENT_BOX_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_EVENT_BOX, GtkEventBoxClass))
 #define GTK_IS_EVENT_BOX(obj)           (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_EVENT_BOX))
@@ -60,7 +60,10 @@ struct _GtkEventBoxClass
   GtkBinClass parent_class;
 };
 
-GType	   __gtk_event_box_get_type           (void) G_GNUC_CONST;
+GType	   _T2_gtk_event_box_get_type           (void) G_GNUC_CONST;
+GType	   _3T_gtk_event_box_get_type           (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType	   gtk_event_box_get_type           (void) G_GNUC_CONST;
 GtkWidget* __gtk_event_box_new                (void);
 gboolean   __gtk_event_box_get_visible_window (GtkEventBox *event_box);
 void       __gtk_event_box_set_visible_window (GtkEventBox *event_box,

@@ -39,7 +39,7 @@
 G_BEGIN_DECLS
 
 
-#define GTK_TYPE_VSCROLLBAR            (__gtk_vscrollbar_get_type ())
+#define GTK_TYPE_VSCROLLBAR            (gtk_vscrollbar_get_type ())
 #define GTK_VSCROLLBAR(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_VSCROLLBAR, GtkVScrollbar))
 #define GTK_VSCROLLBAR_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_VSCROLLBAR, GtkVScrollbarClass))
 #define GTK_IS_VSCROLLBAR(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_VSCROLLBAR))
@@ -69,7 +69,10 @@ struct _GtkVScrollbarClass
 };
 
 
-GType      __gtk_vscrollbar_get_type (void) G_GNUC_CONST;
+GType      _T2_gtk_vscrollbar_get_type (void) G_GNUC_CONST;
+GType      _3T_gtk_vscrollbar_get_type (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType      gtk_vscrollbar_get_type (void) G_GNUC_CONST;
 GtkWidget* __gtk_vscrollbar_new      (GtkAdjustment *adjustment);
 
 

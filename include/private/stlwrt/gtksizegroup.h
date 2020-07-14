@@ -30,7 +30,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_SIZE_GROUP            (__gtk_size_group_get_type ())
+#define GTK_TYPE_SIZE_GROUP            (gtk_size_group_get_type ())
 #define GTK_SIZE_GROUP(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_SIZE_GROUP, GtkSizeGroup))
 #define GTK_SIZE_GROUP_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_SIZE_GROUP, GtkSizeGroupClass))
 #define GTK_IS_SIZE_GROUP(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_SIZE_GROUP))
@@ -87,7 +87,10 @@ typedef enum {
   GTK_SIZE_GROUP_BOTH
 } GtkSizeGroupMode;
 
-GType            __gtk_size_group_get_type      (void) G_GNUC_CONST;
+GType            _T2_gtk_size_group_get_type      (void) G_GNUC_CONST;
+GType            _3T_gtk_size_group_get_type      (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType            gtk_size_group_get_type      (void) G_GNUC_CONST;
 
 GtkSizeGroup *   __gtk_size_group_new           (GtkSizeGroupMode  mode);
 void             __gtk_size_group_set_mode      (GtkSizeGroup     *size_group,

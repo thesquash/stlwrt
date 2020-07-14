@@ -33,7 +33,7 @@
 G_BEGIN_DECLS
 
 
-#define GTK_TYPE_LIST_STORE	       (__gtk_list_store_get_type ())
+#define GTK_TYPE_LIST_STORE	       (gtk_list_store_get_type ())
 #define GTK_LIST_STORE(obj)	       (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_LIST_STORE, GtkListStore))
 #define GTK_LIST_STORE_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_LIST_STORE, GtkListStoreClass))
 #define GTK_IS_LIST_STORE(obj)	       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_LIST_STORE))
@@ -77,7 +77,10 @@ struct _GtkListStoreClass
 };
 
 
-GType         __gtk_list_store_get_type         (void) G_GNUC_CONST;
+GType         _T2_gtk_list_store_get_type         (void) G_GNUC_CONST;
+GType         _3T_gtk_list_store_get_type         (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType         gtk_list_store_get_type         (void) G_GNUC_CONST;
 GtkListStore *__gtk_list_store_new              (gint          n_columns,
 					       ...);
 GtkListStore *__gtk_list_store_newv             (gint          n_columns,

@@ -31,7 +31,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_BUILDER                 (__gtk_builder_get_type ())
+#define GTK_TYPE_BUILDER                 (gtk_builder_get_type ())
 #define GTK_BUILDER(obj)                 (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_BUILDER, GtkBuilder))
 #define GTK_BUILDER_CLASS(klass)         (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_BUILDER, GtkBuilderClass))
 #define GTK_IS_BUILDER(obj)              (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_BUILDER))
@@ -94,7 +94,10 @@ typedef void (*GtkBuilderConnectFunc) (GtkBuilder    *builder,
 				       GConnectFlags  flags,
 				       gpointer       user_data);
 
-GType        __gtk_builder_get_type                (void) G_GNUC_CONST;
+GType        _T2_gtk_builder_get_type                (void) G_GNUC_CONST;
+GType        _3T_gtk_builder_get_type                (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType        gtk_builder_get_type                (void) G_GNUC_CONST;
 GtkBuilder*  __gtk_builder_new                     (void);
 
 guint        __gtk_builder_add_from_file           (GtkBuilder    *builder,
@@ -124,6 +127,9 @@ void         __gtk_builder_connect_signals_full    (GtkBuilder    *builder,
 void         __gtk_builder_set_translation_domain  (GtkBuilder   	*builder,
                                                   const gchar  	*domain);
 const gchar* __gtk_builder_get_translation_domain  (GtkBuilder   	*builder);
+GType        _T2_gtk_builder_get_type_from_name      (GtkBuilder   	*builder,
+GType        _3T_gtk_builder_get_type_from_name      (GtkBuilder   	*builder,
+/* Supplied in the STLWRT public libraries */
 GType        gtk_builder_get_type_from_name      (GtkBuilder   	*builder,
                                                   const char   	*type_name);
 

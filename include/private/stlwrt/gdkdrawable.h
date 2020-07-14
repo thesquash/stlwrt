@@ -45,7 +45,7 @@ typedef struct _GdkDrawableClass GdkDrawableClassFat;
 typedef struct _GdkDrawableClass GdkDrawableClassSkinny;
 typedef struct _GdkTrapezoid     GdkTrapezoid;
 
-#define GDK_TYPE_DRAWABLE              (__gdk_drawable_get_type ())
+#define GDK_TYPE_DRAWABLE              (gdk_drawable_get_type ())
 #define GDK_DRAWABLE(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_DRAWABLE, GdkDrawable))
 #define GDK_DRAWABLE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_DRAWABLE, GdkDrawableClass))
 #define GDK_IS_DRAWABLE(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_DRAWABLE))
@@ -238,7 +238,10 @@ struct _GdkTrapezoid
   double y1, x11, x21, y2, x12, x22;
 };
 
-GType           __gdk_drawable_get_type     (void) G_GNUC_CONST;
+GType           _T2_gdk_drawable_get_type     (void) G_GNUC_CONST;
+GType           _3T_gdk_drawable_get_type     (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType           gdk_drawable_get_type     (void) G_GNUC_CONST;
 
 /* Manipulation of drawables
  */

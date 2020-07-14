@@ -38,7 +38,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_SCALE            (__gtk_scale_get_type ())
+#define GTK_TYPE_SCALE            (gtk_scale_get_type ())
 #define GTK_SCALE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_SCALE, GtkScale))
 #define GTK_SCALE_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_SCALE, GtkScaleClass))
 #define GTK_IS_SCALE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_SCALE))
@@ -79,7 +79,10 @@ struct _GtkScaleClass
   void (*_gtk_reserved3) (void);
 };
 
-GType             __gtk_scale_get_type           (void) G_GNUC_CONST;
+GType             _T2_gtk_scale_get_type           (void) G_GNUC_CONST;
+GType             _3T_gtk_scale_get_type           (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType             gtk_scale_get_type           (void) G_GNUC_CONST;
 
 GtkWidget*        __gtk_scale_new                (GtkOrientation orientation,
                                                 GtkAdjustment *adjustment);

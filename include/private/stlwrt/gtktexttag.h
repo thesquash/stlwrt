@@ -68,14 +68,14 @@ typedef struct _GtkTextTagTable GtkTextTagTableSkinny;
 
 typedef struct _GtkTextAttributes GtkTextAttributes;
 
-#define GTK_TYPE_TEXT_TAG            (__gtk_text_tag_get_type ())
+#define GTK_TYPE_TEXT_TAG            (gtk_text_tag_get_type ())
 #define GTK_TEXT_TAG(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_TEXT_TAG, GtkTextTag))
 #define GTK_TEXT_TAG_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_TEXT_TAG, GtkTextTagClass))
 #define GTK_IS_TEXT_TAG(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TEXT_TAG))
 #define GTK_IS_TEXT_TAG_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TEXT_TAG))
 #define GTK_TEXT_TAG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TEXT_TAG, GtkTextTagClass))
 
-#define GTK_TYPE_TEXT_ATTRIBUTES     (__gtk_text_attributes_get_type ())
+#define GTK_TYPE_TEXT_ATTRIBUTES     (gtk_text_attributes_get_type ())
 
 typedef struct _GtkTextTag GtkTextTagFat;
 typedef struct _GtkTextTag GtkTextTagSkinny;
@@ -154,7 +154,10 @@ struct _GtkTextTagClass
   void (*_gtk_reserved4) (void);
 };
 
-GType        __gtk_text_tag_get_type     (void) G_GNUC_CONST;
+GType        _T2_gtk_text_tag_get_type     (void) G_GNUC_CONST;
+GType        _3T_gtk_text_tag_get_type     (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType        gtk_text_tag_get_type     (void) G_GNUC_CONST;
 GtkTextTag  *__gtk_text_tag_new          (const gchar       *name);
 gint         __gtk_text_tag_get_priority (GtkTextTag        *tag);
 void         __gtk_text_tag_set_priority (GtkTextTag        *tag,
@@ -281,7 +284,10 @@ void               __gtk_text_attributes_copy_values (GtkTextAttributes *src,
 void               __gtk_text_attributes_unref       (GtkTextAttributes *values);
 GtkTextAttributes *__gtk_text_attributes_ref         (GtkTextAttributes *values);
 
-GType              __gtk_text_attributes_get_type    (void) G_GNUC_CONST;
+GType              _T2_gtk_text_attributes_get_type    (void) G_GNUC_CONST;
+GType              _3T_gtk_text_attributes_get_type    (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType              gtk_text_attributes_get_type    (void) G_GNUC_CONST;
 
 
 G_END_DECLS

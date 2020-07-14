@@ -38,7 +38,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_ALIGNMENT                  (__gtk_alignment_get_type ())
+#define GTK_TYPE_ALIGNMENT                  (gtk_alignment_get_type ())
 #define GTK_ALIGNMENT(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_ALIGNMENT, GtkAlignment))
 #define GTK_ALIGNMENT_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_ALIGNMENT, GtkAlignmentClass))
 #define GTK_IS_ALIGNMENT(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_ALIGNMENT))
@@ -68,7 +68,10 @@ struct _GtkAlignmentClass
 };
 
 
-GType      __gtk_alignment_get_type   (void) G_GNUC_CONST;
+GType      _T2_gtk_alignment_get_type   (void) G_GNUC_CONST;
+GType      _3T_gtk_alignment_get_type   (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType      gtk_alignment_get_type   (void) G_GNUC_CONST;
 GtkWidget* __gtk_alignment_new        (gfloat             xalign,
 				     gfloat             yalign,
 				     gfloat             xscale,

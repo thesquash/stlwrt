@@ -30,7 +30,7 @@ G_BEGIN_DECLS
 
 
 /* -- type macros --- */
-#define GTK_TYPE_SETTINGS             (__gtk_settings_get_type ())
+#define GTK_TYPE_SETTINGS             (gtk_settings_get_type ())
 #define GTK_SETTINGS(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_SETTINGS, GtkSettings))
 #define GTK_SETTINGS_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_SETTINGS, GtkSettingsClass))
 #define GTK_IS_SETTINGS(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_SETTINGS))
@@ -77,7 +77,10 @@ struct _GtkSettingsValue
 
 
 /* --- functions --- */
-GType		__gtk_settings_get_type		     (void) G_GNUC_CONST;
+GType		_T2_gtk_settings_get_type		     (void) G_GNUC_CONST;
+GType		_3T_gtk_settings_get_type		     (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType		gtk_settings_get_type		     (void) G_GNUC_CONST;
 #ifndef GDK_MULTIHEAD_SAFE
 GtkSettings*	__gtk_settings_get_default	     (void);
 #endif

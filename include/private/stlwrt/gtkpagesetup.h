@@ -35,11 +35,14 @@ G_BEGIN_DECLS
 typedef struct _GtkPageSetup GtkPageSetupFat;
 typedef struct _GtkPageSetup GtkPageSetupSkinny;
 
-#define GTK_TYPE_PAGE_SETUP    (__gtk_page_setup_get_type ())
+#define GTK_TYPE_PAGE_SETUP    (gtk_page_setup_get_type ())
 #define GTK_PAGE_SETUP(obj)    (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PAGE_SETUP, GtkPageSetup))
 #define GTK_IS_PAGE_SETUP(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_PAGE_SETUP))
 
-GType              __gtk_page_setup_get_type          (void) G_GNUC_CONST;
+GType              _T2_gtk_page_setup_get_type          (void) G_GNUC_CONST;
+GType              _3T_gtk_page_setup_get_type          (void) G_GNUC_CONST;
+/* Supplied in the STLWRT public libraries */
+GType              gtk_page_setup_get_type          (void) G_GNUC_CONST;
 GtkPageSetup *     __gtk_page_setup_new               (void);
 GtkPageSetup *     __gtk_page_setup_copy              (GtkPageSetup       *other);
 GtkPageOrientation __gtk_page_setup_get_orientation   (GtkPageSetup       *setup);

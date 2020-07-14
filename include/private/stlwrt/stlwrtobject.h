@@ -104,14 +104,14 @@ type_name##_get_instance_private (TypeName *self) \
 GType \
 _T2_##type_name##_get_type (void) \
 { \
-  static GType this_stlwrt_type = 0;
+  static GType g_define_type_id = 0;
   /* Prelude goes here */
 
 /* Added for _STLWRT_DEFINE_TYPE_EXTENDED_WITH_PRELUDE */
 #define _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_FAT_REGISTER(TypeName, type_name, TYPE_PARENT, flags) \
-  if (this_stlwrt_type == 0)  \
+  if (g_define_type_id == 0)  \
     { \
-      this_stlwrt_type = g_type_register_static_simple (TYPE_PARENT, \
+      g_define_type_id = g_type_register_static_simple (TYPE_PARENT, \
                                      g_intern_static_string (#TypeName), \
                                      sizeof (TypeName##ClassFat), \
                                      (GClassInitFunc)(void (*)(void)) type_name##_class_intern_init, \
@@ -126,14 +126,14 @@ _T2_##type_name##_get_type (void) \
 GType \
 _3T_##type_name##_get_type (void) \
 { \
-  static GType this_stlwrt_type = 0;
+  static GType g_define_type_id = 0;
   /* Prelude goes here */
 
 /* Added for _STLWRT_DEFINE_TYPE_EXTENDED_WITH_PRELUDE */
 #define _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_SKINNY_REGISTER(TypeName, type_name, TYPE_PARENT, flags) \
-  if (this_stlwrt_type == 0)  \
+  if (g_define_type_id == 0)  \
     { \
-      this_stlwrt_type = g_type_register_static_simple (TYPE_PARENT, \
+      g_define_type_id = g_type_register_static_simple (TYPE_PARENT, \
                                      g_intern_static_string (#TypeName), \
                                      sizeof (TypeName##ClassSkinny), \
                                      (GClassInitFunc)(void (*)(void)) type_name##_class_intern_init, \
@@ -145,9 +145,9 @@ _3T_##type_name##_get_type (void) \
 
 
 #define _STLWRT_DEFINE_TYPE_EXTENDED_END()	\
-      /* following custom code */	\
+      } /* following custom code */	\
     }					\
-  return this_stlwrt_type;	\
+  return g_define_type_id;	\
 } /* closes __type_name##_get_type() */
 
 
@@ -160,11 +160,6 @@ static void     type_name##_class_intern_init (gpointer klass) \
   type_name##_class_init ((TypeName##Class*) klass); \
 }
 
-
-#define STLWRT_ADD_PRIVATE(TypeName) { \
-  TypeName##_private_offset = \
-    g_type_add_instance_private (this_stlwrt_type, sizeof (TypeName##Private)); \
-}
 
 
 #define STLWRT_DEFINE_INTERFACE_WITH_CODE(TN, t_n, T_P, _C_)     _STLWRT_DEFINE_INTERFACE_EXTENDED_BEGIN(TN, t_n, T_P) {_C_;} _STLWRT_DEFINE_INTERFACE_EXTENDED_END()

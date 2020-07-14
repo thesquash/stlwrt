@@ -61,7 +61,7 @@ static void gdk_directfb_gc_set_dashes (GdkGC           *gc,
 
 static void gdk_gc_directfb_finalize   (GObject            *object);
 
-G_DEFINE_TYPE (GdkGCDirectFB, _gdk_gc_directfb, GDK_TYPE_GC)
+STLWRT_DEFINE_TYPE (GdkGCDirectFB, _gdk_gc_directfb, GDK_TYPE_GC)
 
 static void
 _gdk_gc_directfb_init (GdkGCDirectFB *directfb_gc)

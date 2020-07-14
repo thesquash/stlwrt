@@ -85,7 +85,7 @@ GdkWindow * _gdk_parent_root = NULL;
 
 static void gdk_window_impl_directfb_paintable_init (GdkPaintableIface *iface);
 
-G_DEFINE_TYPE_WITH_CODE (GdkWindowImplDirectFB,
+STLWRT_DEFINE_TYPE_WITH_CODE (GdkWindowImplDirectFB,
                          gdk_window_impl_directfb,
                          GDK_TYPE_DRAWABLE_IMPL_DIRECTFB,
                          G_IMPLEMENT_INTERFACE (GDK_TYPE_WINDOW_IMPL,

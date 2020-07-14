@@ -126,7 +126,7 @@ static void        gdk_window_impl_iface_init     (GdkWindowImplIface *iface);
     (( time1 < time2 ) && ( time2 - time1 > ((guint32)-1)/2 ))     \
   )
 
-G_DEFINE_TYPE_WITH_CODE (GdkWindowImplX11,
+STLWRT_DEFINE_TYPE_WITH_CODE (GdkWindowImplX11,
                          gdk_window_impl_x11,
                          GDK_TYPE_DRAWABLE_IMPL_X11,
                          G_IMPLEMENT_INTERFACE (GDK_TYPE_WINDOW_IMPL,

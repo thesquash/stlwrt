@@ -52,7 +52,7 @@ static void gdk_image_init             (GdkImage      *image);
 static void gdk_image_class_init       (GdkImageClass *klass);
 static void gdk_image_finalize         (GObject       *object);
 
-G_DEFINE_TYPE (GdkImage, gdk_image, G_TYPE_OBJECT)
+STLWRT_DEFINE_TYPE (GdkImage, gdk_image, G_TYPE_OBJECT)
 
 static void
 gdk_image_init (GdkImage *image)

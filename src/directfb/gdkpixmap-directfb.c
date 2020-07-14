@@ -54,7 +54,7 @@ static void gdk_pixmap_impl_directfb_finalize   (GObject                    *obj
 
 static gpointer parent_class = NULL;
 
-G_DEFINE_TYPE (GdkPixmapImplDirectFB,
+STLWRT_DEFINE_TYPE (GdkPixmapImplDirectFB,
                gdk_pixmap_impl_directfb,
                GDK_TYPE_DRAWABLE_IMPL_DIRECTFB);
 

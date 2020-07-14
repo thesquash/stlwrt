@@ -121,7 +121,7 @@ static const char *const precache_atoms[] = {
   "_NET_VIRTUAL_ROOTS"
 };
 
-G_DEFINE_TYPE (GdkDisplayX11, _gdk_display_x11, GDK_TYPE_DISPLAY)
+STLWRT_DEFINE_TYPE (GdkDisplayX11, _gdk_display_x11, GDK_TYPE_DISPLAY)
 
 static void
 _gdk_display_x11_class_init (GdkDisplayX11Class * class)

@@ -72,7 +72,7 @@ static GdkDragContext *current_dest_drag = NULL;
 
 static void gdk_drag_context_finalize (GObject *object);
 
-G_DEFINE_TYPE (GdkDragContext, gdk_drag_context, G_TYPE_OBJECT)
+STLWRT_DEFINE_TYPE (GdkDragContext, gdk_drag_context, G_TYPE_OBJECT)
 
 static void
 gdk_drag_context_init (GdkDragContext *dragcontext)

@@ -221,9 +221,6 @@ static void     gtk_file_chooser_button_get_property       (GObject          *ob
 							    GParamSpec       *pspec);
 static void     gtk_file_chooser_button_finalize           (GObject          *object);
 
-/* GtkObject Functions */
-static void     gtk_file_chooser_button_destroy            (GtkObject        *object);
-
 /* GtkWidget Functions */
 static void     gtk_file_chooser_button_drag_data_received (GtkWidget        *widget,
 							    GdkDragContext   *context,
@@ -316,7 +313,7 @@ static guint file_chooser_button_signals[LAST_SIGNAL] = { 0 };
  *  GType Declaration  *
  * ******************* */
 
-G_DEFINE_TYPE_WITH_CODE (GtkFileChooserButton, gtk_file_chooser_button, GTK_TYPE_HBOX, { \
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkFileChooserButton, gtk_file_chooser_button, GTK_TYPE_HBOX, { \
     G_IMPLEMENT_INTERFACE (GTK_TYPE_FILE_CHOOSER, gtk_file_chooser_button_file_chooser_iface_init) \
 })
 
@@ -329,19 +326,15 @@ static void
 gtk_file_chooser_button_class_init (GtkFileChooserButtonClass * class)
 {
   GObjectClass *gobject_class;
-  GtkObjectClass *gtkobject_class;
   GtkWidgetClass *widget_class;
 
   gobject_class = G_OBJECT_CLASS (class);
-  gtkobject_class = GTK_OBJECT_CLASS (class);
   widget_class = GTK_WIDGET_CLASS (class);
 
   gobject_class->constructor = gtk_file_chooser_button_constructor;
   gobject_class->set_property = gtk_file_chooser_button_set_property;
   gobject_class->get_property = gtk_file_chooser_button_get_property;
   gobject_class->finalize = gtk_file_chooser_button_finalize;
-
-  gtkobject_class->destroy = gtk_file_chooser_button_destroy;
 
   widget_class->drag_data_received = gtk_file_chooser_button_drag_data_received;
   widget_class->show_all = gtk_file_chooser_button_show_all;
@@ -1049,76 +1042,6 @@ gtk_file_chooser_button_finalize (GObject *object)
     g_object_unref (priv->current_folder_while_inactive);
 
   G_OBJECT_CLASS (gtk_file_chooser_button_parent_class)->finalize (object);
-}
-
-/* ********************* *
- *  GtkObject Functions  *
- * ********************* */
-
-static void
-gtk_file_chooser_button_destroy (GtkObject *object)
-{
-  GtkFileChooserButton *button = GTK_FILE_CHOOSER_BUTTON (object);
-  GtkFileChooserButtonPrivate *priv = button->priv;
-  GtkTreeIter iter;
-  GSList *l;
-
-  if (priv->dialog != NULL)
-    {
-      __gtk_widget_destroy (priv->dialog);
-      priv->dialog = NULL;
-    }
-
-  if (priv->model && __gtk_tree_model_get_iter_first (priv->model, &iter)) do
-    {
-      model_free_row_data (button, &iter);
-    }
-  while (__gtk_tree_model_iter_next (priv->model, &iter));
-
-  if (priv->dnd_select_folder_cancellable)
-    {
-      g_cancellable_cancel (priv->dnd_select_folder_cancellable);
-      priv->dnd_select_folder_cancellable = NULL;
-    }
-
-  if (priv->update_button_cancellable)
-    {
-      g_cancellable_cancel (priv->update_button_cancellable);
-      priv->update_button_cancellable = NULL;
-    }
-
-  if (priv->change_icon_theme_cancellables)
-    {
-      for (l = priv->change_icon_theme_cancellables; l; l = l->next)
-        {
-	  GCancellable *cancellable = G_CANCELLABLE (l->data);
-	  g_cancellable_cancel (cancellable);
-        }
-      g_slist_free (priv->change_icon_theme_cancellables);
-      priv->change_icon_theme_cancellables = NULL;
-    }
-
-  if (priv->model)
-    {
-      g_object_unref (priv->model);
-      priv->model = NULL;
-    }
-
-  if (priv->filter_model)
-    {
-      g_object_unref (priv->filter_model);
-      priv->filter_model = NULL;
-    }
-
-  if (priv->fs)
-    {
-      g_signal_handler_disconnect (priv->fs, priv->fs_volumes_changed_id);
-      g_signal_handler_disconnect (priv->fs, priv->fs_bookmarks_changed_id);
-      g_object_unref (priv->fs);
-      priv->fs = NULL;
-    }
-
-  GTK_OBJECT_CLASS (gtk_file_chooser_button_parent_class)->destroy (object);
 }
 
 

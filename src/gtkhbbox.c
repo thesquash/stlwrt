@@ -35,7 +35,7 @@
 static gint default_spacing = 30;
 static gint default_layout_style = GTK_BUTTONBOX_EDGE;
 
-G_DEFINE_TYPE (GtkHButtonBox, gtk_hbutton_box, GTK_TYPE_BUTTON_BOX)
+STLWRT_DEFINE_TYPE (GtkHButtonBox, gtk_hbutton_box, GTK_TYPE_BUTTON_BOX)
 
 static void
 gtk_hbutton_box_class_init (GtkHButtonBoxClass *class)

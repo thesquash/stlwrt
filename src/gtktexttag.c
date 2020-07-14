@@ -155,7 +155,7 @@ static void gtk_text_tag_get_property (GObject         *object,
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-G_DEFINE_TYPE (GtkTextTag, gtk_text_tag, G_TYPE_OBJECT)
+STLWRT_DEFINE_TYPE (GtkTextTag, gtk_text_tag, G_TYPE_OBJECT)
 
 static void
 gtk_text_tag_class_init (GtkTextTagClass *klass)

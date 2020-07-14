@@ -50,7 +50,7 @@ static void     gtk_recent_chooser_widget_get_property (GObject               *o
 static void     gtk_recent_chooser_widget_finalize     (GObject               *object);
 
 
-G_DEFINE_TYPE_WITH_CODE (GtkRecentChooserWidget,
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkRecentChooserWidget,
 		         gtk_recent_chooser_widget,
 			 GTK_TYPE_VBOX,
 			 G_IMPLEMENT_INTERFACE (GTK_TYPE_RECENT_CHOOSER,

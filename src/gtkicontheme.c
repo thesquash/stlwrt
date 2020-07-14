@@ -256,7 +256,7 @@ static GHashTable *icon_theme_builtin_icons;
 GtkIconCache *_builtin_cache = NULL;
 static GList *builtin_dirs = NULL;
 
-G_DEFINE_TYPE (GtkIconTheme, gtk_icon_theme, G_TYPE_OBJECT)
+STLWRT_DEFINE_TYPE (GtkIconTheme, gtk_icon_theme, G_TYPE_OBJECT)
 
 /**
  * __gtk_icon_theme_new:

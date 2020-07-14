@@ -161,7 +161,7 @@ static void gtk_action_buildable_set_name         (GtkBuildable *buildable,
 						   const gchar  *name);
 static const gchar* gtk_action_buildable_get_name (GtkBuildable *buildable);
 
-G_DEFINE_TYPE_WITH_CODE (GtkAction, gtk_action, G_TYPE_OBJECT,
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkAction, gtk_action, G_TYPE_OBJECT,
 			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
 						gtk_action_buildable_init))
 

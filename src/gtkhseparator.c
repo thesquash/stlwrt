@@ -31,7 +31,7 @@
 #include <gtkorientable.h>
 
 
-G_DEFINE_TYPE (GtkHSeparator, gtk_hseparator, GTK_TYPE_SEPARATOR)
+STLWRT_DEFINE_TYPE (GtkHSeparator, gtk_hseparator, GTK_TYPE_SEPARATOR)
 
 static void
 gtk_hseparator_class_init (GtkHSeparatorClass *class)

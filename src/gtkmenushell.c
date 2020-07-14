@@ -201,7 +201,7 @@ static gboolean gtk_menu_shell_real_move_selected (GtkMenuShell  *menu_shell,
 
 static guint menu_shell_signals[LAST_SIGNAL] = { 0 };
 
-G_DEFINE_ABSTRACT_TYPE (GtkMenuShell, gtk_menu_shell, GTK_TYPE_CONTAINER)
+STLWRT_DEFINE_ABSTRACT_TYPE (GtkMenuShell, gtk_menu_shell, GTK_TYPE_CONTAINER)
 
 static void
 gtk_menu_shell_class_init (GtkMenuShellClass *klass)
@@ -882,7 +882,7 @@ gtk_menu_shell_key_press (GtkWidget   *widget,
   if (!(menu_shell->active_menu_item || priv->in_unselectable_item) && menu_shell->parent_menu_shell)
     return __gtk_widget_event (menu_shell->parent_menu_shell, (GdkEvent *)event);
 
-  if (__gtk_bindings_activate_event (GTK_OBJECT (widget), event))
+  if (__gtk_bindings_activate_event (G_OBJECT (widget), event))
     return TRUE;
 
   g_object_get (__gtk_widget_get_settings (widget),

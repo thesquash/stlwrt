@@ -36,7 +36,7 @@ static gchar * gdk_app_launch_context_get_display (GAppLaunchContext *context,
                                                    GList             *files);
 
 
-G_DEFINE_TYPE_WITH_PRIVATE (GdkAppLaunchContext, gdk_app_launch_context,
+STLWRT_DEFINE_TYPE_WITH_PRIVATE (GdkAppLaunchContext, gdk_app_launch_context,
 	                    G_TYPE_APP_LAUNCH_CONTEXT)
 
 static void

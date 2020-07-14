@@ -66,7 +66,7 @@ struct _GtkBuilderPrivate
   gchar *filename;
 };
 
-G_DEFINE_TYPE (GtkBuilder, gtk_builder, G_TYPE_OBJECT)
+STLWRT_DEFINE_TYPE (GtkBuilder, gtk_builder, G_TYPE_OBJECT)
 
 static void
 gtk_builder_class_init (GtkBuilderClass *klass)

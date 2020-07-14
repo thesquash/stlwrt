@@ -47,7 +47,7 @@
  * fields in an adjustment represent for a scrollbar.
  */
 
-G_DEFINE_TYPE (GtkVScrollbar, gtk_vscrollbar, GTK_TYPE_SCROLLBAR)
+STLWRT_DEFINE_TYPE (GtkVScrollbar, gtk_vscrollbar, GTK_TYPE_SCROLLBAR)
 
 static void
 gtk_vscrollbar_class_init (GtkVScrollbarClass *class)

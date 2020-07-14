@@ -159,9 +159,6 @@ static void     gtk_tree_view_get_property         (GObject         *object,
 						    GValue          *value,
 						    GParamSpec      *pspec);
 
-/* gtkobject signals */
-static void     gtk_tree_view_destroy              (GtkObject        *object);
-
 /* gtkwidget signals */
 static void     gtk_tree_view_realize              (GtkWidget        *widget);
 static void     gtk_tree_view_unrealize            (GtkWidget        *widget);
@@ -486,7 +483,7 @@ static guint tree_view_signals [LAST_SIGNAL] = { 0 };
 /* GType Methods
  */
 
-G_DEFINE_TYPE_WITH_CODE (GtkTreeView, gtk_tree_view, GTK_TYPE_CONTAINER,
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkTreeView, gtk_tree_view, GTK_TYPE_CONTAINER,
 			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
 						gtk_tree_view_buildable_init))
 
@@ -494,7 +491,6 @@ static void
 gtk_tree_view_class_init (GtkTreeViewClass *class)
 {
   GObjectClass *o_class;
-  GtkObjectClass *object_class;
   GtkWidgetClass *widget_class;
   GtkContainerClass *container_class;
   GtkBindingSet *binding_set;
@@ -502,7 +498,6 @@ gtk_tree_view_class_init (GtkTreeViewClass *class)
   binding_set = __gtk_binding_set_by_class (class);
 
   o_class = (GObjectClass *) class;
-  object_class = (GtkObjectClass *) class;
   widget_class = (GtkWidgetClass *) class;
   container_class = (GtkContainerClass *) class;
 
@@ -510,9 +505,6 @@ gtk_tree_view_class_init (GtkTreeViewClass *class)
   o_class->set_property = gtk_tree_view_set_property;
   o_class->get_property = gtk_tree_view_get_property;
   o_class->finalize = gtk_tree_view_finalize;
-
-  /* GtkObject signals */
-  object_class->destroy = gtk_tree_view_destroy;
 
   /* GtkWidget signals */
   widget_class->map = gtk_tree_view_map;
@@ -1581,7 +1573,7 @@ gtk_tree_view_buildable_get_internal_child (GtkBuildable      *buildable,
 						       childname);
 }
 
-/* GtkObject Methods
+/* GObject Methods
  */
 
 static void
@@ -1596,126 +1588,6 @@ gtk_tree_view_free_rbtree (GtkTreeView *tree_view)
   tree_view->priv->prelight_node = NULL;
   tree_view->priv->expanded_collapsed_node = NULL;
   tree_view->priv->expanded_collapsed_tree = NULL;
-}
-
-static void
-gtk_tree_view_destroy (GtkObject *object)
-{
-  GtkTreeView *tree_view = GTK_TREE_VIEW (object);
-  GList *list;
-
-  gtk_tree_view_stop_editing (tree_view, TRUE);
-
-  if (tree_view->priv->columns != NULL)
-    {
-      list = tree_view->priv->columns;
-      while (list)
-	{
-	  GtkTreeViewColumn *column;
-	  column = GTK_TREE_VIEW_COLUMN (list->data);
-	  list = list->next;
-	  __gtk_tree_view_remove_column (tree_view, column);
-	}
-      tree_view->priv->columns = NULL;
-    }
-
-  if (tree_view->priv->tree != NULL)
-    {
-      gtk_tree_view_unref_and_check_selection_tree (tree_view, tree_view->priv->tree);
-
-      gtk_tree_view_free_rbtree (tree_view);
-    }
-
-  if (tree_view->priv->selection != NULL)
-    {
-      _gtk_tree_selection_set_tree_view (tree_view->priv->selection, NULL);
-      g_object_unref (tree_view->priv->selection);
-      tree_view->priv->selection = NULL;
-    }
-
-  if (tree_view->priv->scroll_to_path != NULL)
-    {
-      __gtk_tree_row_reference_free (tree_view->priv->scroll_to_path);
-      tree_view->priv->scroll_to_path = NULL;
-    }
-
-  if (tree_view->priv->drag_dest_row != NULL)
-    {
-      __gtk_tree_row_reference_free (tree_view->priv->drag_dest_row);
-      tree_view->priv->drag_dest_row = NULL;
-    }
-
-  if (tree_view->priv->top_row != NULL)
-    {
-      __gtk_tree_row_reference_free (tree_view->priv->top_row);
-      tree_view->priv->top_row = NULL;
-    }
-
-  if (tree_view->priv->column_drop_func_data &&
-      tree_view->priv->column_drop_func_data_destroy)
-    {
-      tree_view->priv->column_drop_func_data_destroy (tree_view->priv->column_drop_func_data);
-      tree_view->priv->column_drop_func_data = NULL;
-    }
-
-  if (tree_view->priv->destroy_count_destroy &&
-      tree_view->priv->destroy_count_data)
-    {
-      tree_view->priv->destroy_count_destroy (tree_view->priv->destroy_count_data);
-      tree_view->priv->destroy_count_data = NULL;
-    }
-
-  __gtk_tree_row_reference_free (tree_view->priv->cursor);
-  tree_view->priv->cursor = NULL;
-
-  __gtk_tree_row_reference_free (tree_view->priv->anchor);
-  tree_view->priv->anchor = NULL;
-
-  /* destroy interactive search dialog */
-  if (tree_view->priv->search_window)
-    {
-      __gtk_widget_destroy (tree_view->priv->search_window);
-      tree_view->priv->search_window = NULL;
-      tree_view->priv->search_entry = NULL;
-      if (tree_view->priv->typeselect_flush_timeout)
-	{
-	  g_source_remove (tree_view->priv->typeselect_flush_timeout);
-	  tree_view->priv->typeselect_flush_timeout = 0;
-	}
-    }
-
-  if (tree_view->priv->search_destroy && tree_view->priv->search_user_data)
-    {
-      tree_view->priv->search_destroy (tree_view->priv->search_user_data);
-      tree_view->priv->search_user_data = NULL;
-    }
-
-  if (tree_view->priv->search_position_destroy && tree_view->priv->search_position_user_data)
-    {
-      tree_view->priv->search_position_destroy (tree_view->priv->search_position_user_data);
-      tree_view->priv->search_position_user_data = NULL;
-    }
-
-  if (tree_view->priv->row_separator_destroy && tree_view->priv->row_separator_data)
-    {
-      tree_view->priv->row_separator_destroy (tree_view->priv->row_separator_data);
-      tree_view->priv->row_separator_data = NULL;
-    }
-  
-  __gtk_tree_view_set_model (tree_view, NULL);
-
-  if (tree_view->priv->hadjustment)
-    {
-      g_object_unref (tree_view->priv->hadjustment);
-      tree_view->priv->hadjustment = NULL;
-    }
-  if (tree_view->priv->vadjustment)
-    {
-      g_object_unref (tree_view->priv->vadjustment);
-      tree_view->priv->vadjustment = NULL;
-    }
-
-  GTK_OBJECT_CLASS (gtk_tree_view_parent_class)->destroy (object);
 }
 
 

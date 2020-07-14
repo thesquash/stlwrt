@@ -77,7 +77,7 @@ struct _ButtonData
  */
 #define BUTTON_IS_FAKE_ROOT(button) ((button)->type == HOME_BUTTON)
 
-G_DEFINE_TYPE (GtkPathBar, gtk_path_bar, GTK_TYPE_CONTAINER)
+STLWRT_DEFINE_TYPE (GtkPathBar, gtk_path_bar, GTK_TYPE_CONTAINER)
 
 static void gtk_path_bar_finalize                 (GObject          *object);
 static void gtk_path_bar_dispose                  (GObject          *object);
@@ -204,12 +204,10 @@ static void
 gtk_path_bar_class_init (GtkPathBarClass *path_bar_class)
 {
   GObjectClass *gobject_class;
-  GtkObjectClass *object_class;
   GtkWidgetClass *widget_class;
   GtkContainerClass *container_class;
 
   gobject_class = (GObjectClass *) path_bar_class;
-  object_class = (GtkObjectClass *) path_bar_class;
   widget_class = (GtkWidgetClass *) path_bar_class;
   container_class = (GtkContainerClass *) path_bar_class;
 

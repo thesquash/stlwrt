@@ -63,7 +63,6 @@ static void     gtk_container_base_class_init      (GtkContainerClass *klass);
 static void     gtk_container_base_class_finalize  (GtkContainerClass *klass);
 static void     gtk_container_class_init           (GtkContainerClass *klass);
 static void     gtk_container_init                 (GtkContainer      *container);
-static void     gtk_container_destroy              (GtkObject         *object);
 static void     gtk_container_set_property         (GObject         *object,
 						    guint            prop_id,
 						    const GValue    *value,
@@ -200,7 +199,6 @@ static void
 gtk_container_class_init (GtkContainerClass *class)
 {
   GObjectClass *gobject_class = G_OBJECT_CLASS (class);
-  GtkObjectClass *object_class = GTK_OBJECT_CLASS (class);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (class);
 
   parent_class = g_type_class_peek_parent (class);
@@ -210,8 +208,6 @@ gtk_container_class_init (GtkContainerClass *class)
   
   gobject_class->set_property = gtk_container_set_property;
   gobject_class->get_property = gtk_container_get_property;
-
-  object_class->destroy = gtk_container_destroy;
 
   widget_class->show_all = gtk_container_show_all;
   widget_class->hide_all = gtk_container_hide_all;
@@ -1047,31 +1043,6 @@ gtk_container_init (GtkContainer *container)
 }
 
 static void
-gtk_container_destroy (GtkObject *object)
-{
-  GtkContainer *container = GTK_CONTAINER (object);
-
-  if (GTK_CONTAINER_RESIZE_PENDING (container))
-    ___gtk_container_dequeue_resize_handler (container);
-
-  if (container->focus_child)
-    {
-      g_object_unref (container->focus_child);
-      container->focus_child = NULL;
-    }
-
-  /* do this before walking child widgets, to avoid
-   * removing children from focus chain one by one.
-   */
-  if (container->has_focus_chain)
-    __gtk_container_unset_focus_chain (container);
-
-  __gtk_container_foreach (container, (GtkCallback) __gtk_widget_destroy, NULL);
-
-  GTK_OBJECT_CLASS (parent_class)->destroy (object);
-}
-
-static void
 gtk_container_set_property (GObject         *object,
 			    guint            prop_id,
 			    const GValue    *value,
@@ -1533,7 +1504,7 @@ __gtk_container_foreach (GtkContainer *container,
 typedef struct _GtkForeachData	GtkForeachData;
 struct _GtkForeachData
 {
-  GtkObject         *container;
+  GObject         *container;
   GtkCallbackMarshal callback;
   gpointer           callback_data;
 };
@@ -1548,7 +1519,7 @@ __gtk_container_foreach_unmarshal (GtkWidget *child,
   /* first argument */
   args[0].name = NULL;
   args[0].type = G_TYPE_FROM_INSTANCE (child);
-  GTK_VALUE_OBJECT (args[0]) = GTK_OBJECT (child);
+  G_VALUE_OBJECT (args[0]) = G_OBJECT (child);
   
   /* location for return value */
   args[1].name = NULL;
@@ -1570,7 +1541,7 @@ __gtk_container_foreach_full (GtkContainer       *container,
     {
       GtkForeachData fdata;
   
-      fdata.container     = GTK_OBJECT (container);
+      fdata.container     = G_OBJECT (container);
       fdata.callback      = marshal;
       fdata.callback_data = callback_data;
 

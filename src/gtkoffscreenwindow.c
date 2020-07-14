@@ -51,7 +51,7 @@
  * will emit a #GtkWidget::damage-event signal.
  */
 
-G_DEFINE_TYPE (GtkOffscreenWindow, gtk_offscreen_window, GTK_TYPE_WINDOW);
+STLWRT_DEFINE_TYPE (GtkOffscreenWindow, gtk_offscreen_window, GTK_TYPE_WINDOW);
 
 static void
 gtk_offscreen_window_size_request (GtkWidget *widget,

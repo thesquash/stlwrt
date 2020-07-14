@@ -45,7 +45,7 @@
  * All children are allocated the same width.
  */
 
-G_DEFINE_TYPE (GtkVBox, gtk_vbox, GTK_TYPE_BOX)
+STLWRT_DEFINE_TYPE (GtkVBox, gtk_vbox, GTK_TYPE_BOX)
 
 static void
 gtk_vbox_class_init (GtkVBoxClass *class)

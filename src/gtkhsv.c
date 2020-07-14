@@ -88,7 +88,6 @@ enum {
   LAST_SIGNAL
 };
 
-static void     gtk_hsv_destroy        (GtkObject        *object);
 static void     gtk_hsv_map            (GtkWidget        *widget);
 static void     gtk_hsv_unmap          (GtkWidget        *widget);
 static void     gtk_hsv_realize        (GtkWidget        *widget);
@@ -114,20 +113,18 @@ static void     gtk_hsv_move           (GtkHSV           *hsv,
 
 static guint hsv_signals[LAST_SIGNAL];
 
-G_DEFINE_TYPE (GtkHSV, gtk_hsv, GTK_TYPE_WIDGET)
+STLWRT_DEFINE_TYPE (GtkHSV, gtk_hsv, GTK_TYPE_WIDGET)
 
 /* Class initialization function for the HSV color selector */
 static void
 gtk_hsv_class_init (GtkHSVClass *class)
 {
   GObjectClass   *gobject_class;
-  GtkObjectClass *object_class;
   GtkWidgetClass *widget_class;
   GtkHSVClass    *hsv_class;
   GtkBindingSet  *binding_set;
   
   gobject_class = (GObjectClass *) class;
-  object_class = (GtkObjectClass *) class;
   widget_class = (GtkWidgetClass *) class;
   hsv_class = GTK_HSV_CLASS (class);
   
@@ -220,13 +217,6 @@ gtk_hsv_init (GtkHSV *hsv)
   
   priv->size = DEFAULT_SIZE;
   priv->ring_width = DEFAULT_RING_WIDTH;
-}
-
-/* Destroy handler for the HSV color selector */
-static void
-gtk_hsv_destroy (GtkObject *object)
-{
-  GTK_OBJECT_CLASS (gtk_hsv_parent_class)->destroy (object);
 }
 
 /* Default signal handlers */

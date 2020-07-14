@@ -291,7 +291,7 @@ static void gtk_recent_chooser_update                 (GtkActivatable       *act
 static void gtk_recent_chooser_sync_action_properties (GtkActivatable       *activatable,
 						       GtkAction            *action);
 
-G_DEFINE_TYPE_WITH_CODE (GtkRecentChooserDefault,
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkRecentChooserDefault,
 			 _gtk_recent_chooser_default,
 			 GTK_TYPE_VBOX,
 			 G_IMPLEMENT_INTERFACE (GTK_TYPE_RECENT_CHOOSER,

@@ -36,7 +36,6 @@ enum {
 };
 
 
-static void gtk_radio_menu_item_destroy        (GtkObject             *object);
 static void gtk_radio_menu_item_activate       (GtkMenuItem           *menu_item);
 static void gtk_radio_menu_item_set_property   (GObject               *object,
 						guint                  prop_id,
@@ -49,7 +48,7 @@ static void gtk_radio_menu_item_get_property   (GObject               *object,
 
 static guint group_changed_signal = 0;
 
-G_DEFINE_TYPE (GtkRadioMenuItem, gtk_radio_menu_item, GTK_TYPE_CHECK_MENU_ITEM)
+STLWRT_DEFINE_TYPE (GtkRadioMenuItem, gtk_radio_menu_item, GTK_TYPE_CHECK_MENU_ITEM)
 
 GtkWidget*
 __gtk_radio_menu_item_new (GSList *group)
@@ -335,11 +334,9 @@ static void
 gtk_radio_menu_item_class_init (GtkRadioMenuItemClass *klass)
 {
   GObjectClass *gobject_class;  
-  GtkObjectClass *object_class;
   GtkMenuItemClass *menu_item_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
-  object_class = GTK_OBJECT_CLASS (klass);
   menu_item_class = GTK_MENU_ITEM_CLASS (klass);
 
   gobject_class->set_property = gtk_radio_menu_item_set_property;
@@ -359,8 +356,6 @@ gtk_radio_menu_item_class_init (GtkRadioMenuItemClass *klass)
 							P_("The radio menu item whose group this widget belongs to."),
 							GTK_TYPE_RADIO_MENU_ITEM,
 							GTK_PARAM_WRITABLE));
-
-  object_class->destroy = gtk_radio_menu_item_destroy;
 
   menu_item_class->activate = gtk_radio_menu_item_activate;
 
@@ -391,43 +386,6 @@ gtk_radio_menu_item_init (GtkRadioMenuItem *radio_menu_item)
 {
   radio_menu_item->group = g_slist_prepend (NULL, radio_menu_item);
   __gtk_check_menu_item_set_draw_as_radio (GTK_CHECK_MENU_ITEM (radio_menu_item), TRUE);
-}
-
-static void
-gtk_radio_menu_item_destroy (GtkObject *object)
-{
-  GtkRadioMenuItem *radio_menu_item = GTK_RADIO_MENU_ITEM (object);
-  GtkWidget *old_group_singleton = NULL;
-  GtkRadioMenuItem *tmp_menu_item;
-  GSList *tmp_list;
-  gboolean was_in_group;
-
-  was_in_group = radio_menu_item->group && radio_menu_item->group->next;
-  
-  radio_menu_item->group = g_slist_remove (radio_menu_item->group,
-					   radio_menu_item);
-  if (radio_menu_item->group && !radio_menu_item->group->next)
-    old_group_singleton = radio_menu_item->group->data;
-
-  tmp_list = radio_menu_item->group;
-
-  while (tmp_list)
-    {
-      tmp_menu_item = tmp_list->data;
-      tmp_list = tmp_list->next;
-
-      tmp_menu_item->group = radio_menu_item->group;
-    }
-
-  /* this radio menu item is no longer in the group */
-  radio_menu_item->group = NULL;
-  
-  if (old_group_singleton)
-    g_signal_emit (old_group_singleton, group_changed_signal, 0);
-  if (was_in_group)
-    g_signal_emit (radio_menu_item, group_changed_signal, 0);
-
-  GTK_OBJECT_CLASS (gtk_radio_menu_item_parent_class)->destroy (object);
 }
 
 static void

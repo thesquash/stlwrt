@@ -159,7 +159,7 @@ static guint signal_changed = 0;
 
 static GtkRecentManager *recent_manager_singleton = NULL;
 
-G_DEFINE_TYPE (GtkRecentManager, gtk_recent_manager, G_TYPE_OBJECT)
+STLWRT_DEFINE_TYPE (GtkRecentManager, gtk_recent_manager, G_TYPE_OBJECT)
 
 static void
 filename_warning (const gchar *format, 

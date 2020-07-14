@@ -39,7 +39,7 @@ static void gtk_tearoff_menu_item_activate   (GtkMenuItem           *menu_item);
 static void gtk_tearoff_menu_item_parent_set (GtkWidget             *widget,
 					      GtkWidget             *previous);
 
-G_DEFINE_TYPE (GtkTearoffMenuItem, gtk_tearoff_menu_item, GTK_TYPE_MENU_ITEM)
+STLWRT_DEFINE_TYPE (GtkTearoffMenuItem, gtk_tearoff_menu_item, GTK_TYPE_MENU_ITEM)
 
 GtkWidget*
 __gtk_tearoff_menu_item_new (void)

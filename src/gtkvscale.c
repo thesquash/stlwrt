@@ -46,7 +46,7 @@
  * shown can be set using the parent #GtkScale class's functions.
  */
 
-G_DEFINE_TYPE (GtkVScale, gtk_vscale, GTK_TYPE_SCALE)
+STLWRT_DEFINE_TYPE (GtkVScale, gtk_vscale, GTK_TYPE_SCALE)
 
 static void
 gtk_vscale_class_init (GtkVScaleClass *class)
@@ -103,7 +103,7 @@ __gtk_vscale_new_with_range (gdouble min,
                            gdouble max,
                            gdouble step)
 {
-  GtkObject *adj;
+  GObject *adj;
   GtkScale *scale;
   gint digits;
 

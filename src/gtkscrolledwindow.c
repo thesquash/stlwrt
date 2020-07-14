@@ -100,7 +100,6 @@ enum
   LAST_SIGNAL
 };
 
-static void     gtk_scrolled_window_destroy            (GtkObject         *object);
 static void     gtk_scrolled_window_set_property       (GObject           *object,
                                                         guint              prop_id,
                                                         const GValue      *value,
@@ -145,7 +144,7 @@ static void  gtk_scrolled_window_update_real_placement (GtkScrolledWindow *scrol
 
 static guint signals[LAST_SIGNAL] = {0};
 
-G_DEFINE_TYPE (GtkScrolledWindow, gtk_scrolled_window, GTK_TYPE_BIN)
+STLWRT_DEFINE_TYPE (GtkScrolledWindow, gtk_scrolled_window, GTK_TYPE_BIN)
 
 static void
 add_scroll_binding (GtkBindingSet  *binding_set,
@@ -183,19 +182,15 @@ static void
 gtk_scrolled_window_class_init (GtkScrolledWindowClass *class)
 {
   GObjectClass *gobject_class = G_OBJECT_CLASS (class);
-  GtkObjectClass *object_class;
   GtkWidgetClass *widget_class;
   GtkContainerClass *container_class;
   GtkBindingSet *binding_set;
 
-  object_class = (GtkObjectClass*) class;
   widget_class = (GtkWidgetClass*) class;
   container_class = (GtkContainerClass*) class;
 
   gobject_class->set_property = gtk_scrolled_window_set_property;
   gobject_class->get_property = gtk_scrolled_window_get_property;
-
-  object_class->destroy = gtk_scrolled_window_destroy;
 
   widget_class->screen_changed = gtk_scrolled_window_screen_changed;
   widget_class->expose_event = gtk_scrolled_window_expose;
@@ -841,35 +836,6 @@ __gtk_scrolled_window_get_shadow_type (GtkScrolledWindow *scrolled_window)
   g_return_val_if_fail (GTK_IS_SCROLLED_WINDOW (scrolled_window), GTK_SHADOW_NONE);
 
   return scrolled_window->shadow_type;
-}
-
-static void
-gtk_scrolled_window_destroy (GtkObject *object)
-{
-  GtkScrolledWindow *scrolled_window = GTK_SCROLLED_WINDOW (object);
-
-  if (scrolled_window->hscrollbar)
-    {
-      g_signal_handlers_disconnect_by_func (__gtk_range_get_adjustment (GTK_RANGE (scrolled_window->hscrollbar)),
-					    gtk_scrolled_window_adjustment_changed,
-					    scrolled_window);
-      __gtk_widget_unparent (scrolled_window->hscrollbar);
-      __gtk_widget_destroy (scrolled_window->hscrollbar);
-      g_object_unref (scrolled_window->hscrollbar);
-      scrolled_window->hscrollbar = NULL;
-    }
-  if (scrolled_window->vscrollbar)
-    {
-      g_signal_handlers_disconnect_by_func (__gtk_range_get_adjustment (GTK_RANGE (scrolled_window->vscrollbar)),
-					    gtk_scrolled_window_adjustment_changed,
-					    scrolled_window);
-      __gtk_widget_unparent (scrolled_window->vscrollbar);
-      __gtk_widget_destroy (scrolled_window->vscrollbar);
-      g_object_unref (scrolled_window->vscrollbar);
-      scrolled_window->vscrollbar = NULL;
-    }
-
-  GTK_OBJECT_CLASS (gtk_scrolled_window_parent_class)->destroy (object);
 }
 
 static void

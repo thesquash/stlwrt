@@ -140,7 +140,6 @@ static void gtk_range_get_property   (GObject          *object,
                                       guint             prop_id,
                                       GValue           *value,
                                       GParamSpec       *pspec);
-static void gtk_range_destroy        (GtkObject        *object);
 static void gtk_range_size_request   (GtkWidget        *widget,
                                       GtkRequisition   *requisition);
 static void gtk_range_size_allocate  (GtkWidget        *widget,
@@ -228,7 +227,7 @@ static gboolean      gtk_range_key_press                (GtkWidget     *range,
 							 GdkEventKey   *event);
 
 
-G_DEFINE_ABSTRACT_TYPE_WITH_CODE (GtkRange, gtk_range, GTK_TYPE_WIDGET,
+STLWRT_DEFINE_ABSTRACT_TYPE_WITH_CODE (GtkRange, gtk_range, GTK_TYPE_WIDGET,
                                   G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE,
                                                          NULL))
 
@@ -239,17 +238,13 @@ static void
 gtk_range_class_init (GtkRangeClass *class)
 {
   GObjectClass   *gobject_class;
-  GtkObjectClass *object_class;
   GtkWidgetClass *widget_class;
 
   gobject_class = G_OBJECT_CLASS (class);
-  object_class = (GtkObjectClass*) class;
   widget_class = (GtkWidgetClass*) class;
 
   gobject_class->set_property = gtk_range_set_property;
   gobject_class->get_property = gtk_range_get_property;
-
-  object_class->destroy = gtk_range_destroy;
 
   widget_class->size_request = gtk_range_size_request;
   widget_class->size_allocate = gtk_range_size_allocate;
@@ -1466,42 +1461,6 @@ should_invert (GtkRange *range)
       (!range->inverted && range->flippable && __gtk_widget_get_direction (GTK_WIDGET (range)) == GTK_TEXT_DIR_RTL);
   else
     return range->inverted;
-}
-
-static void
-gtk_range_destroy (GtkObject *object)
-{
-  GtkRange *range = GTK_RANGE (object);
-
-  gtk_range_remove_step_timer (range);
-  gtk_range_remove_update_timer (range);
-
-  if (range->layout->repaint_id)
-    g_source_remove (range->layout->repaint_id);
-  range->layout->repaint_id = 0;
-
-  if (range->adjustment)
-    {
-      g_signal_handlers_disconnect_by_func (range->adjustment,
-					    gtk_range_adjustment_changed,
-					    range);
-      g_signal_handlers_disconnect_by_func (range->adjustment,
-					    gtk_range_adjustment_value_changed,
-					    range);
-      g_object_unref (range->adjustment);
-      range->adjustment = NULL;
-    }
-
-  if (range->layout->n_marks)
-    {
-      g_free (range->layout->marks);
-      range->layout->marks = NULL;
-      g_free (range->layout->mark_pos);
-      range->layout->mark_pos = NULL;
-      range->layout->n_marks = 0;
-    }
-
-  GTK_OBJECT_CLASS (gtk_range_parent_class)->destroy (object);
 }
 
 static void

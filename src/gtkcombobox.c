@@ -263,7 +263,6 @@ static GObject *gtk_combo_box_constructor          (GType                  type,
 						    GObjectConstructParam *construct_properties);
 static void     gtk_combo_box_dispose              (GObject          *object);
 static void     gtk_combo_box_finalize             (GObject          *object);
-static void     gtk_combo_box_destroy              (GtkObject        *object);
 
 static void     gtk_combo_box_set_property         (GObject         *object,
                                                     guint            prop_id,
@@ -522,7 +521,7 @@ static void gtk_combo_box_start_editing (GtkCellEditable *cell_editable,
 					 GdkEvent        *event);
 
 
-G_DEFINE_TYPE_WITH_CODE (GtkComboBox, gtk_combo_box, GTK_TYPE_BIN,
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkComboBox, gtk_combo_box, GTK_TYPE_BIN,
 			 G_IMPLEMENT_INTERFACE (GTK_TYPE_CELL_LAYOUT,
 						gtk_combo_box_cell_layout_init)
 			 G_IMPLEMENT_INTERFACE (GTK_TYPE_CELL_EDITABLE,
@@ -536,7 +535,6 @@ static void
 gtk_combo_box_class_init (GtkComboBoxClass *klass)
 {
   GObjectClass *object_class;
-  GtkObjectClass *gtk_object_class;
   GtkContainerClass *container_class;
   GtkWidgetClass *widget_class;
   GtkBindingSet *binding_set;
@@ -557,9 +555,6 @@ gtk_combo_box_class_init (GtkComboBoxClass *klass)
   widget_class->grab_focus = gtk_combo_box_grab_focus;
   widget_class->style_set = gtk_combo_box_style_set;
   widget_class->state_changed = gtk_combo_box_state_changed;
-
-  gtk_object_class = (GtkObjectClass *)klass;
-  gtk_object_class->destroy = gtk_combo_box_destroy;
 
   object_class = (GObjectClass *)klass;
   object_class->constructor = gtk_combo_box_constructor;
@@ -1414,9 +1409,6 @@ gtk_combo_box_remove (GtkContainer *container,
 
   __gtk_widget_unparent (widget);
   GTK_BIN (container)->child = NULL;
-
-  if (GTK_OBJECT_FLAGS (combo_box) & GTK_IN_DESTRUCTION)
-    return;
 
   __gtk_widget_queue_resize (GTK_WIDGET (container));
 
@@ -4140,12 +4132,12 @@ gtk_combo_box_menu_key_press (GtkWidget   *widget,
 {
   GtkComboBox *combo_box = GTK_COMBO_BOX (data);
 
-  if (!__gtk_bindings_activate_event (GTK_OBJECT (widget), event))
+  if (!__gtk_bindings_activate_event (G_OBJECT (widget), event))
     {
       /* The menu hasn't managed the
        * event, forward it to the combobox
        */
-      __gtk_bindings_activate_event (GTK_OBJECT (combo_box), event);
+      __gtk_bindings_activate_event (G_OBJECT (combo_box), event);
     }
 
   return TRUE;
@@ -4179,12 +4171,12 @@ gtk_combo_box_list_key_press (GtkWidget   *widget,
     return TRUE;
   }
 
-  if (!__gtk_bindings_activate_event (GTK_OBJECT (widget), event))
+  if (!__gtk_bindings_activate_event (G_OBJECT (widget), event))
     {
       /* The list hasn't managed the
        * event, forward it to the combobox
        */
-      __gtk_bindings_activate_event (GTK_OBJECT (combo_box), event);
+      __gtk_bindings_activate_event (G_OBJECT (combo_box), event);
     }
 
   return TRUE;
@@ -5667,30 +5659,6 @@ gtk_combo_box_grab_focus (GtkWidget *widget)
     }
   else
     __gtk_widget_grab_focus (combo_box->priv->button);
-}
-
-static void
-gtk_combo_box_destroy (GtkObject *object)
-{
-  GtkComboBox *combo_box = GTK_COMBO_BOX (object);
-
-  if (combo_box->priv->popup_idle_id > 0)
-    {
-      g_source_remove (combo_box->priv->popup_idle_id);
-      combo_box->priv->popup_idle_id = 0;
-    }
-
-  __gtk_combo_box_popdown (combo_box);
-
-  if (combo_box->priv->row_separator_destroy)
-    combo_box->priv->row_separator_destroy (combo_box->priv->row_separator_data);
-
-  combo_box->priv->row_separator_func = NULL;
-  combo_box->priv->row_separator_data = NULL;
-  combo_box->priv->row_separator_destroy = NULL;
-
-  GTK_OBJECT_CLASS (gtk_combo_box_parent_class)->destroy (object);
-  combo_box->priv->cell_view = NULL;
 }
 
 static void

@@ -97,7 +97,7 @@ static void gtk_box_get_child_property (GtkContainer   *container,
 static GType gtk_box_child_type        (GtkContainer   *container);
 
 
-G_DEFINE_TYPE_WITH_CODE (GtkBox, gtk_box, GTK_TYPE_CONTAINER,
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkBox, gtk_box, GTK_TYPE_CONTAINER,
                                   G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE,
                                                          NULL));
 

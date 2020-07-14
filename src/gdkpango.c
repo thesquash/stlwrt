@@ -71,7 +71,7 @@ enum {
   PROP_SCREEN
 };
 
-G_DEFINE_TYPE (GdkPangoRenderer, gdk_pango_renderer, PANGO_TYPE_RENDERER)
+STLWRT_DEFINE_TYPE (GdkPangoRenderer, gdk_pango_renderer, PANGO_TYPE_RENDERER)
 
 static void
 gdk_pango_renderer_finalize (GObject *object)

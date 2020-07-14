@@ -35,7 +35,7 @@
 
 
 
-G_DEFINE_TYPE (GtkHScale, gtk_hscale, GTK_TYPE_SCALE)
+STLWRT_DEFINE_TYPE (GtkHScale, gtk_hscale, GTK_TYPE_SCALE)
 
 static void
 gtk_hscale_class_init (GtkHScaleClass *class)
@@ -85,7 +85,7 @@ __gtk_hscale_new_with_range (gdouble min,
                            gdouble max,
                            gdouble step)
 {
-  GtkObject *adj;
+  GObject *adj;
   GtkScale *scale;
   gint digits;
 

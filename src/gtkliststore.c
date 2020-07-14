@@ -133,7 +133,7 @@ static void     gtk_list_store_buildable_custom_tag_end (GtkBuildable *buildable
 							 const gchar  *tagname,
 							 gpointer     *data);
 
-G_DEFINE_TYPE_WITH_CODE (GtkListStore, gtk_list_store, G_TYPE_OBJECT,
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkListStore, gtk_list_store, G_TYPE_OBJECT,
 			 G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_MODEL,
 						gtk_list_store_tree_model_init)
 			 G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_DRAG_SOURCE,

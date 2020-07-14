@@ -103,7 +103,6 @@ static void         gtk_accel_label_get_property (GObject            *object,
 						  guint               prop_id,
 						  GValue             *value,
 						  GParamSpec         *pspec);
-static void         gtk_accel_label_destroy      (GtkObject          *object);
 static void         gtk_accel_label_finalize     (GObject            *object);
 static void         gtk_accel_label_size_request (GtkWidget          *widget,
 						  GtkRequisition     *requisition);
@@ -112,20 +111,17 @@ static gboolean     gtk_accel_label_expose_event (GtkWidget          *widget,
 static const gchar *gtk_accel_label_get_string   (GtkAccelLabel      *accel_label);
 
 
-G_DEFINE_TYPE (GtkAccelLabel, gtk_accel_label, GTK_TYPE_LABEL)
+STLWRT_DEFINE_TYPE (GtkAccelLabel, gtk_accel_label, GTK_TYPE_LABEL)
 
 static void
 gtk_accel_label_class_init (GtkAccelLabelClass *class)
 {
   GObjectClass *gobject_class = G_OBJECT_CLASS (class);
-  GtkObjectClass *object_class = GTK_OBJECT_CLASS (class);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (class);
   
   gobject_class->finalize = gtk_accel_label_finalize;
   gobject_class->set_property = gtk_accel_label_set_property;
   gobject_class->get_property = gtk_accel_label_get_property;
-  
-  object_class->destroy = gtk_accel_label_destroy;
    
   widget_class->size_request = gtk_accel_label_size_request;
   widget_class->expose_event = gtk_accel_label_expose_event;
@@ -262,17 +258,6 @@ __gtk_accel_label_new (const gchar *string)
   __gtk_label_set_text (GTK_LABEL (accel_label), string);
   
   return GTK_WIDGET (accel_label);
-}
-
-static void
-gtk_accel_label_destroy (GtkObject *object)
-{
-  GtkAccelLabel *accel_label = GTK_ACCEL_LABEL (object);
-
-  __gtk_accel_label_set_accel_widget (accel_label, NULL);
-  __gtk_accel_label_set_accel_closure (accel_label, NULL);
-  
-  GTK_OBJECT_CLASS (gtk_accel_label_parent_class)->destroy (object);
 }
 
 static void

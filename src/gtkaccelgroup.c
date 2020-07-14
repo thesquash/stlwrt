@@ -88,7 +88,7 @@ enum {
   PROP_MODIFIER_MASK,
 };
 
-G_DEFINE_TYPE (GtkAccelGroup, gtk_accel_group, G_TYPE_OBJECT)
+STLWRT_DEFINE_TYPE (GtkAccelGroup, gtk_accel_group, G_TYPE_OBJECT)
 
 /* --- functions --- */
 static void

@@ -342,7 +342,7 @@ gtk_size_group_buildable_init (GtkBuildableIface *iface)
   iface->custom_finished = gtk_size_group_buildable_custom_finished;
 }
 
-G_DEFINE_TYPE_WITH_CODE (GtkSizeGroup, gtk_size_group, G_TYPE_OBJECT,
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkSizeGroup, gtk_size_group, G_TYPE_OBJECT,
 			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
 						gtk_size_group_buildable_init))
 

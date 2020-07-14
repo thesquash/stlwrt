@@ -168,7 +168,6 @@ static void __gtk_label_get_property      (GObject          *object,
 					 guint             prop_id,
 					 GValue           *value,
 					 GParamSpec       *pspec);
-static void gtk_label_destroy           (GtkObject        *object);
 static void gtk_label_finalize          (GObject          *object);
 static void gtk_label_size_request      (GtkWidget        *widget,
 					 GtkRequisition   *requisition);
@@ -307,7 +306,7 @@ static GQuark quark_angle = 0;
 
 static GtkBuildableIface *buildable_parent_iface = NULL;
 
-G_DEFINE_TYPE_WITH_CODE (GtkLabel, gtk_label, GTK_TYPE_MISC,
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkLabel, gtk_label, GTK_TYPE_MISC,
 			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
 						gtk_label_buildable_interface_init));
 
@@ -338,7 +337,6 @@ static void
 gtk_label_class_init (GtkLabelClass *class)
 {
   GObjectClass *gobject_class = G_OBJECT_CLASS (class);
-  GtkObjectClass *object_class = GTK_OBJECT_CLASS (class);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (class);
   GtkBindingSet *binding_set;
 
@@ -347,8 +345,6 @@ gtk_label_class_init (GtkLabelClass *class)
   gobject_class->set_property = gtk_label_set_property;
   gobject_class->get_property = __gtk_label_get_property;
   gobject_class->finalize = gtk_label_finalize;
-
-  object_class->destroy = gtk_label_destroy;
 
   widget_class->size_request = gtk_label_size_request;
   widget_class->size_allocate = gtk_label_size_allocate;
@@ -2862,16 +2858,6 @@ __gtk_label_get (GtkLabel *label,
   g_return_if_fail (str != NULL);
   
   *str = label->text;
-}
-
-static void
-gtk_label_destroy (GtkObject *object)
-{
-  GtkLabel *label = GTK_LABEL (object);
-
-  __gtk_label_set_mnemonic_widget (label, NULL);
-
-  GTK_OBJECT_CLASS (gtk_label_parent_class)->destroy (object);
 }
 
 static void

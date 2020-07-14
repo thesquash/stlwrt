@@ -63,7 +63,6 @@ static void     gtk_statusbar_buildable_interface_init    (GtkBuildableIface *if
 static GObject *gtk_statusbar_buildable_get_internal_child (GtkBuildable *buildable,
                                                             GtkBuilder   *builder,
                                                             const gchar  *childname);
-static void     gtk_statusbar_destroy           (GtkObject         *object);
 static void     gtk_statusbar_update            (GtkStatusbar      *statusbar,
 						 guint              context_id,
 						 const gchar       *text);
@@ -102,7 +101,7 @@ static void     label_selectable_changed        (GtkWidget         *label,
 
 static guint              statusbar_signals[SIGNAL_LAST] = { 0 };
 
-G_DEFINE_TYPE_WITH_CODE (GtkStatusbar, gtk_statusbar, GTK_TYPE_HBOX,
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkStatusbar, gtk_statusbar, GTK_TYPE_HBOX,
                          G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
                                                 gtk_statusbar_buildable_interface_init));
 
@@ -110,17 +109,13 @@ static void
 gtk_statusbar_class_init (GtkStatusbarClass *class)
 {
   GObjectClass *gobject_class;
-  GtkObjectClass *object_class;
   GtkWidgetClass *widget_class;
 
   gobject_class = (GObjectClass *) class;
-  object_class = (GtkObjectClass *) class;
   widget_class = (GtkWidgetClass *) class;
 
   gobject_class->set_property = gtk_statusbar_set_property;
   gobject_class->get_property = gtk_statusbar_get_property;
-
-  object_class->destroy = gtk_statusbar_destroy;
 
   widget_class->realize = gtk_statusbar_realize;
   widget_class->unrealize = gtk_statusbar_unrealize;
@@ -602,31 +597,6 @@ __gtk_statusbar_get_message_area (GtkStatusbar *statusbar)
   g_return_val_if_fail (GTK_IS_STATUSBAR (statusbar), NULL);
 
   return __gtk_bin_get_child (GTK_BIN (statusbar->frame));
-}
-
-static void
-gtk_statusbar_destroy (GtkObject *object)
-{
-  GtkStatusbar *statusbar = GTK_STATUSBAR (object);
-  GSList *list;
-
-  for (list = statusbar->messages; list; list = list->next)
-    {
-      GtkStatusbarMsg *msg;
-
-      msg = list->data;
-      g_free (msg->text);
-      g_slice_free (GtkStatusbarMsg, msg);
-    }
-  g_slist_free (statusbar->messages);
-  statusbar->messages = NULL;
-
-  for (list = statusbar->keys; list; list = list->next)
-    g_free (list->data);
-  g_slist_free (statusbar->keys);
-  statusbar->keys = NULL;
-
-  GTK_OBJECT_CLASS (gtk_statusbar_parent_class)->destroy (object);
 }
 
 static void

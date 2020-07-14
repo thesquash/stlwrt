@@ -60,7 +60,7 @@ static void	cb_value_changed (GtkVolumeButton *button,
                                   gdouble          value,
                                   gpointer         user_data);
 
-G_DEFINE_TYPE (GtkVolumeButton, gtk_volume_button, GTK_TYPE_SCALE_BUTTON)
+STLWRT_DEFINE_TYPE (GtkVolumeButton, gtk_volume_button, GTK_TYPE_SCALE_BUTTON)
 
 static void
 gtk_volume_button_class_init (GtkVolumeButtonClass *klass)
@@ -71,7 +71,7 @@ static void
 gtk_volume_button_init (GtkVolumeButton *button)
 {
   GtkScaleButton *sbutton = GTK_SCALE_BUTTON (button);
-  GtkObject *adj;
+  GObject *adj;
   const char *icons[] = {
 	"audio-volume-muted",
 	"audio-volume-high",

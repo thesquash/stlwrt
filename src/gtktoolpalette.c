@@ -179,7 +179,7 @@ static const GtkTargetEntry dnd_targets[] =
   { "application/x-gtk-tool-palette-group", GTK_TARGET_SAME_APP, 0 },
 };
 
-G_DEFINE_TYPE_WITH_CODE (GtkToolPalette,
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkToolPalette,
                gtk_tool_palette,
                GTK_TYPE_CONTAINER,
                G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE, NULL));

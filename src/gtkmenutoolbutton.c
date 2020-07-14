@@ -48,8 +48,6 @@ struct _GtkMenuToolButtonPrivate
   GtkMenu   *menu;
 };
 
-static void gtk_menu_tool_button_destroy    (GtkObject              *object);
-
 static int  menu_deactivate_cb              (GtkMenuShell           *menu_shell,
 					     GtkMenuToolButton      *button);
 
@@ -75,7 +73,7 @@ static gint signals[LAST_SIGNAL];
 
 static GtkBuildableIface *parent_buildable_iface;
 
-G_DEFINE_TYPE_WITH_CODE (GtkMenuToolButton, gtk_menu_tool_button, GTK_TYPE_TOOL_BUTTON,
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkMenuToolButton, gtk_menu_tool_button, GTK_TYPE_TOOL_BUTTON,
                          G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
                                                 gtk_menu_tool_button_buildable_interface_init))
 
@@ -214,18 +212,15 @@ static void
 gtk_menu_tool_button_class_init (GtkMenuToolButtonClass *klass)
 {
   GObjectClass *object_class;
-  GtkObjectClass *gtk_object_class;
   GtkWidgetClass *widget_class;
   GtkToolItemClass *toolitem_class;
 
   object_class = (GObjectClass *)klass;
-  gtk_object_class = (GtkObjectClass *)klass;
   widget_class = (GtkWidgetClass *)klass;
   toolitem_class = (GtkToolItemClass *)klass;
 
   object_class->set_property = gtk_menu_tool_button_set_property;
   object_class->get_property = gtk_menu_tool_button_get_property;
-  gtk_object_class->destroy = gtk_menu_tool_button_destroy;
   widget_class->state_changed = gtk_menu_tool_button_state_changed;
   toolitem_class->toolbar_reconfigured = gtk_menu_tool_button_toolbar_reconfigured;
 
@@ -425,31 +420,6 @@ gtk_menu_tool_button_init (GtkMenuToolButton *button)
 		    G_CALLBACK (arrow_button_toggled_cb), button);
   g_signal_connect (arrow_button, "button-press-event",
 		    G_CALLBACK (arrow_button_button_press_event_cb), button);
-}
-
-static void
-gtk_menu_tool_button_destroy (GtkObject *object)
-{
-  GtkMenuToolButton *button;
-
-  button = GTK_MENU_TOOL_BUTTON (object);
-
-  if (button->priv->menu)
-    {
-      g_signal_handlers_disconnect_by_func (button->priv->menu, 
-					    menu_deactivate_cb, 
-					    button);
-      __gtk_menu_detach (button->priv->menu);
-
-      g_signal_handlers_disconnect_by_func (button->priv->arrow_button,
-					    arrow_button_toggled_cb, 
-					    button);
-      g_signal_handlers_disconnect_by_func (button->priv->arrow_button, 
-					    arrow_button_button_press_event_cb, 
-					    button);
-    }
-
-  GTK_OBJECT_CLASS (gtk_menu_tool_button_parent_class)->destroy (object);
 }
 
 static void

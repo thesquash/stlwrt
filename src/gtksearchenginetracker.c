@@ -65,7 +65,7 @@ struct _GtkSearchEngineTrackerPrivate
   gboolean query_pending;
 };
 
-G_DEFINE_TYPE (GtkSearchEngineTracker, _gtk_search_engine_tracker, GTK_TYPE_SEARCH_ENGINE);
+STLWRT_DEFINE_TYPE (GtkSearchEngineTracker, _gtk_search_engine_tracker, GTK_TYPE_SEARCH_ENGINE);
 
 static void
 finalize (GObject *object)

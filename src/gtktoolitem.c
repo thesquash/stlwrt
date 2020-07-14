@@ -157,7 +157,7 @@ static void gtk_tool_item_set_use_action_appearance  (GtkToolItem          *item
 
 static guint toolitem_signals[LAST_SIGNAL] = { 0 };
 
-G_DEFINE_TYPE_WITH_CODE (GtkToolItem, gtk_tool_item, GTK_TYPE_BIN,
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkToolItem, gtk_tool_item, GTK_TYPE_BIN,
 			 G_IMPLEMENT_INTERFACE (GTK_TYPE_ACTIVATABLE,
 						gtk_tool_item_activatable_interface_init))
 

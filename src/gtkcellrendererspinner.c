@@ -99,7 +99,7 @@ static void gtk_cell_renderer_spinner_render       (GtkCellRenderer *cell,
                                                     GdkRectangle    *expose_area,
                                                     guint            flags);
 
-G_DEFINE_TYPE (GtkCellRendererSpinner, gtk_cell_renderer_spinner, GTK_TYPE_CELL_RENDERER)
+STLWRT_DEFINE_TYPE (GtkCellRendererSpinner, gtk_cell_renderer_spinner, GTK_TYPE_CELL_RENDERER)
 
 static void
 gtk_cell_renderer_spinner_class_init (GtkCellRendererSpinnerClass *klass)

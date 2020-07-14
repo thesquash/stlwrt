@@ -164,7 +164,6 @@ enum
   PROP_IM_MODULE
 };
 
-static void gtk_text_view_destroy              (GtkObject        *object);
 static void gtk_text_view_finalize             (GObject          *object);
 static void gtk_text_view_set_property         (GObject         *object,
 						guint            prop_id,
@@ -440,7 +439,7 @@ static gint           text_window_get_height      (GtkTextWindow     *win);
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-G_DEFINE_TYPE (GtkTextView, gtk_text_view, GTK_TYPE_CONTAINER)
+STLWRT_DEFINE_TYPE (GtkTextView, gtk_text_view, GTK_TYPE_CONTAINER)
 
 static void
 add_move_binding (GtkBindingSet  *binding_set,
@@ -469,7 +468,6 @@ static void
 gtk_text_view_class_init (GtkTextViewClass *klass)
 {
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
-  GtkObjectClass *object_class = GTK_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GtkContainerClass *container_class = GTK_CONTAINER_CLASS (klass);
   GtkBindingSet *binding_set;
@@ -479,7 +477,6 @@ gtk_text_view_class_init (GtkTextViewClass *klass)
   gobject_class->set_property = gtk_text_view_set_property;
   gobject_class->get_property = gtk_text_view_get_property;
 
-  object_class->destroy = gtk_text_view_destroy;
   gobject_class->finalize = gtk_text_view_finalize;
 
   widget_class->realize = gtk_text_view_realize;
@@ -2885,34 +2882,6 @@ gtk_text_view_remove_validate_idles (GtkTextView *text_view)
       g_source_remove (text_view->incremental_validate_idle);
       text_view->incremental_validate_idle = 0;
     }
-}
-
-static void
-gtk_text_view_destroy (GtkObject *object)
-{
-  GtkTextView *text_view;
-  GtkTextViewPrivate *priv;
-
-  text_view = GTK_TEXT_VIEW (object);
-  priv = GTK_TEXT_VIEW_GET_PRIVATE (text_view);
-
-  gtk_text_view_remove_validate_idles (text_view);
-  __gtk_text_view_set_buffer (text_view, NULL);
-  gtk_text_view_destroy_layout (text_view);
-
-  if (text_view->scroll_timeout)
-    {
-      g_source_remove (text_view->scroll_timeout);
-      text_view->scroll_timeout = 0;
-    }
-
-  if (priv->im_spot_idle)
-    {
-      g_source_remove (priv->im_spot_idle);
-      priv->im_spot_idle = 0;
-    }
-
-  GTK_OBJECT_CLASS (gtk_text_view_parent_class)->destroy (object);
 }
 
 static void

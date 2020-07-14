@@ -33,7 +33,7 @@ struct _GtkQueryPrivate
   GList *mime_types;
 };
 
-G_DEFINE_TYPE (GtkQuery, _gtk_query, G_TYPE_OBJECT);
+STLWRT_DEFINE_TYPE (GtkQuery, _gtk_query, G_TYPE_OBJECT);
 
 static void
 finalize (GObject *object)

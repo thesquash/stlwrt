@@ -71,7 +71,6 @@ enum
 
 static void gtk_spin_button_editable_init  (GtkEditableClass   *iface);
 static void gtk_spin_button_finalize       (GObject            *object);
-static void gtk_spin_button_destroy        (GtkObject          *object);
 static void gtk_spin_button_set_property   (GObject         *object,
 					    guint            prop_id,
 					    const GValue    *value,
@@ -147,7 +146,7 @@ static guint spinbutton_signals[LAST_SIGNAL] = {0};
 
 #define NO_ARROW 2
 
-G_DEFINE_TYPE_WITH_CODE (GtkSpinButton, gtk_spin_button, GTK_TYPE_ENTRY,
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkSpinButton, gtk_spin_button, GTK_TYPE_ENTRY,
 			 G_IMPLEMENT_INTERFACE (GTK_TYPE_EDITABLE,
 						gtk_spin_button_editable_init))
 
@@ -160,7 +159,6 @@ static void
 gtk_spin_button_class_init (GtkSpinButtonClass *class)
 {
   GObjectClass     *gobject_class = G_OBJECT_CLASS (class);
-  GtkObjectClass   *object_class = GTK_OBJECT_CLASS (class);
   GtkWidgetClass   *widget_class = GTK_WIDGET_CLASS (class);
   GtkEntryClass    *entry_class = GTK_ENTRY_CLASS (class);
   GtkBindingSet    *binding_set;
@@ -169,8 +167,6 @@ gtk_spin_button_class_init (GtkSpinButtonClass *class)
 
   gobject_class->set_property = gtk_spin_button_set_property;
   gobject_class->get_property = gtk_spin_button_get_property;
-
-  object_class->destroy = gtk_spin_button_destroy;
 
   widget_class->map = gtk_spin_button_map;
   widget_class->unmap = gtk_spin_button_unmap;
@@ -500,14 +496,6 @@ gtk_spin_button_finalize (GObject *object)
   __gtk_spin_button_set_adjustment (GTK_SPIN_BUTTON (object), NULL);
   
   G_OBJECT_CLASS (gtk_spin_button_parent_class)->finalize (object);
-}
-
-static void
-gtk_spin_button_destroy (GtkObject *object)
-{
-  gtk_spin_button_stop_spinning (GTK_SPIN_BUTTON (object));
-  
-  GTK_OBJECT_CLASS (gtk_spin_button_parent_class)->destroy (object);
 }
 
 static void
@@ -1717,7 +1705,7 @@ __gtk_spin_button_new_with_range (gdouble min,
 				gdouble max,
 				gdouble step)
 {
-  GtkObject *adj;
+  GObject *adj;
   GtkSpinButton *spin;
   gint digits;
 

@@ -2,7 +2,7 @@
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * Copyright (C) 1995-1997 Peter Mattis, Spencer Kimball and Josh MacDonald
  *
- * GtkBindingSet: Keybinding manager for GtkObjects.
+ * GtkBindingSet: Keybinding manager for GObjects.
  * Copyright (C) 1998 Tim Janik
  *
  * This library is free software; you can redistribute it and/or
@@ -337,7 +337,7 @@ binding_ht_lookup_entry (GtkBindingSet  *set,
 }
 
 static gboolean
-binding_compose_params (GtkObject       *object,
+binding_compose_params (GObject         *object,
 			GtkBindingArg	*args,
 			GSignalQuery	*query,
 			GValue	       **params_p)
@@ -466,7 +466,7 @@ binding_compose_params (GtkObject       *object,
 
 static gboolean
 gtk_binding_entry_activate (GtkBindingEntry *entry,
-			    GtkObject	    *object)
+			    GObject	    *object)
 {
   GtkBindingSignal *sig;
   gboolean old_emission;
@@ -590,7 +590,7 @@ __gtk_binding_set_new (const gchar *set_name)
 
 /**
  * __gtk_binding_set_by_class:
- * @object_class: a valid #GtkObject class
+ * @object_class: a valid #GObject class
  *
  * This function returns the binding set named after the type name of
  * the passed in class structure. New binding sets are created on
@@ -601,10 +601,10 @@ __gtk_binding_set_new (const gchar *set_name)
 GtkBindingSet*
 __gtk_binding_set_by_class (gpointer object_class)
 {
-  GtkObjectClass *class = object_class;
+  GObjectClass   *class = object_class;
   GtkBindingSet* binding_set;
 
-  g_return_val_if_fail (GTK_IS_OBJECT_CLASS (class), NULL);
+  g_return_val_if_fail (G_IS_OBJECT_CLASS (class), NULL);
 
   if (!key_id_class_binding_set)
     key_id_class_binding_set = g_quark_from_static_string (key_class_binding_set);
@@ -668,12 +668,12 @@ gboolean
 __gtk_binding_set_activate (GtkBindingSet	 *binding_set,
 			  guint		  keyval,
 			  GdkModifierType modifiers,
-			  GtkObject	 *object)
+			  GObject	 *object)
 {
   GtkBindingEntry *entry;
   
   g_return_val_if_fail (binding_set != NULL, FALSE);
-  g_return_val_if_fail (GTK_IS_OBJECT (object), FALSE);
+  g_return_val_if_fail (G_IS_OBJECT (object), FALSE);
   
   keyval = __gdk_keyval_to_lower (keyval);
   modifiers = modifiers & BINDING_MOD_MASK ();
@@ -1080,7 +1080,7 @@ __gtk_binding_set_add_path (GtkBindingSet	     *binding_set,
 
 static gboolean
 binding_match_activate (GSList          *pspec_list,
-			GtkObject	*object,
+			GObject 	*object,
 			guint	         path_length,
 			gchar           *path,
 			gchar           *path_reversed,
@@ -1198,7 +1198,7 @@ gtk_binding_entries_sort_patterns (GSList      *entries,
 }
 
 static gboolean
-__gtk_bindings_activate_list (GtkObject *object,
+__gtk_bindings_activate_list (GObject *object,
 			    GSList    *entries,
 			    gboolean   is_release)
 {
@@ -1292,7 +1292,7 @@ __gtk_bindings_activate_list (GtkObject *object,
  * Return value: %TRUE if a binding was found and activated
  */
 gboolean
-__gtk_bindings_activate (GtkObject       *object,
+__gtk_bindings_activate (GObject       *object,
 		       guint	        keyval,
 		       GdkModifierType  modifiers)
 {
@@ -1302,7 +1302,7 @@ __gtk_bindings_activate (GtkObject       *object,
   gboolean handled = FALSE;
   gboolean is_release;
 
-  g_return_val_if_fail (GTK_IS_OBJECT (object), FALSE);
+  g_return_val_if_fail (G_IS_OBJECT (object), FALSE);
 
   if (!GTK_IS_WIDGET (object))
     return FALSE;
@@ -1324,7 +1324,7 @@ __gtk_bindings_activate (GtkObject       *object,
 
 /**
  * __gtk_bindings_activate_event:
- * @object: a #GtkObject (generally must be a widget)
+ * @object: a #GObject (generally must be a widget)
  * @event: a #GdkEventKey
  * 
  * Looks up key bindings for @object to find one matching
@@ -1335,7 +1335,7 @@ __gtk_bindings_activate (GtkObject       *object,
  * Since: 2.4
  */
 gboolean
-__gtk_bindings_activate_event (GtkObject   *object,
+__gtk_bindings_activate_event (GObject   *object,
                              GdkEventKey *event)
 {
   GSList *entries = NULL;
@@ -1343,7 +1343,7 @@ __gtk_bindings_activate_event (GtkObject   *object,
   GtkKeyHash *key_hash;
   gboolean handled = FALSE;
 
-  g_return_val_if_fail (GTK_IS_OBJECT (object), FALSE);
+  g_return_val_if_fail (G_IS_OBJECT (object), FALSE);
 
   if (!GTK_IS_WIDGET (object))
     return FALSE;

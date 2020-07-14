@@ -178,7 +178,7 @@ static guint signals[LAST_SIGNAL] = { 0 };
 
 PangoAttrType gtk_text_attr_appearance_type = 0;
 
-G_DEFINE_TYPE (GtkTextLayout, gtk_text_layout, G_TYPE_OBJECT)
+STLWRT_DEFINE_TYPE (GtkTextLayout, gtk_text_layout, G_TYPE_OBJECT)
 
 static void
 gtk_text_layout_class_init (GtkTextLayoutClass *klass)
@@ -224,7 +224,7 @@ gtk_text_layout_class_init (GtkTextLayoutClass *klass)
                   NULL,
                   G_TYPE_NONE,
                   3,
-                  GTK_TYPE_OBJECT,
+                  G_TYPE_OBJECT,
                   G_TYPE_INT,
                   G_TYPE_INT);
   

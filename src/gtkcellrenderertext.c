@@ -151,7 +151,7 @@ struct _GtkCellRendererTextPrivate
   GtkWidget *entry;
 };
 
-G_DEFINE_TYPE (GtkCellRendererText, gtk_cell_renderer_text, GTK_TYPE_CELL_RENDERER)
+STLWRT_DEFINE_TYPE (GtkCellRendererText, gtk_cell_renderer_text, GTK_TYPE_CELL_RENDERER)
 
 static void
 gtk_cell_renderer_text_init (GtkCellRendererText *celltext)

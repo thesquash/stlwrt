@@ -195,7 +195,6 @@ struct _GtkWindowPrivate
 };
 
 static void gtk_window_dispose            (GObject           *object);
-static void gtk_window_destroy            (GtkObject         *object);
 static void gtk_window_finalize           (GObject           *object);
 static void gtk_window_show               (GtkWidget         *widget);
 static void gtk_window_hide               (GtkWidget         *widget);
@@ -346,7 +345,7 @@ static void gtk_window_buildable_custom_finished (GtkBuildable  *buildable,
 						      gpointer       user_data);
 
 
-G_DEFINE_TYPE_WITH_CODE (GtkWindow, gtk_window, GTK_TYPE_BIN,
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkWindow, gtk_window, GTK_TYPE_BIN,
                          G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
 						gtk_window_buildable_interface_init))
 
@@ -417,12 +416,10 @@ static void
 gtk_window_class_init (GtkWindowClass *klass)
 {
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
-  GtkObjectClass *object_class;
   GtkWidgetClass *widget_class;
   GtkContainerClass *container_class;
   GtkBindingSet *binding_set;
   
-  object_class = (GtkObjectClass*) klass;
   widget_class = (GtkWidgetClass*) klass;
   container_class = (GtkContainerClass*) klass;
   
@@ -437,8 +434,6 @@ gtk_window_class_init (GtkWindowClass *klass)
 
   gobject_class->set_property = gtk_window_set_property;
   gobject_class->get_property = gtk_window_get_property;
-  
-  object_class->destroy = gtk_window_destroy;
 
   widget_class->show = gtk_window_show;
   widget_class->hide = gtk_window_hide;
@@ -4407,33 +4402,6 @@ __gtk_window_reshow_with_initial_size (GtkWindow *window)
   __gtk_widget_hide (widget);
   __gtk_widget_unrealize (widget);
   __gtk_widget_show (widget);
-}
-
-static void
-gtk_window_destroy (GtkObject *object)
-{
-  GtkWindow *window = GTK_WINDOW (object);
-  
-  toplevel_list = g_slist_remove (toplevel_list, window);
-
-  if (window->transient_parent)
-    __gtk_window_set_transient_for (window, NULL);
-
-  /* frees the icons */
-  __gtk_window_set_icon_list (window, NULL);
-  
-  if (window->has_user_ref_count)
-    {
-      window->has_user_ref_count = FALSE;
-      g_object_unref (window);
-    }
-
-  if (window->group)
-    __gtk_window_group_remove_window (window->group, window);
-
-   gtk_window_free_key_hash (window);
-
-   GTK_OBJECT_CLASS (gtk_window_parent_class)->destroy (object);
 }
 
 static void

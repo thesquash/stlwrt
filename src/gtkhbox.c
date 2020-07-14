@@ -47,7 +47,7 @@
  */
 
 
-G_DEFINE_TYPE (GtkHBox, gtk_hbox, GTK_TYPE_BOX)
+STLWRT_DEFINE_TYPE (GtkHBox, gtk_hbox, GTK_TYPE_BOX)
 
 static void
 gtk_hbox_class_init (GtkHBoxClass *class)

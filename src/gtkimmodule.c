@@ -169,7 +169,7 @@ gtk_im_module_finalize (GObject *object)
   parent_class->finalize (object);
 }
 
-G_DEFINE_TYPE (GtkIMModule, gtk_im_module, G_TYPE_TYPE_MODULE)
+STLWRT_DEFINE_TYPE (GtkIMModule, gtk_im_module, G_TYPE_TYPE_MODULE)
 
 static void
 gtk_im_module_class_init (GtkIMModuleClass *class)

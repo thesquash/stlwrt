@@ -57,7 +57,7 @@ static void gtk_fixed_get_child_property (GtkContainer *container,
                                           GValue       *value,
                                           GParamSpec   *pspec);
 
-G_DEFINE_TYPE (GtkFixed, gtk_fixed, GTK_TYPE_CONTAINER)
+STLWRT_DEFINE_TYPE (GtkFixed, gtk_fixed, GTK_TYPE_CONTAINER)
 
 static void
 gtk_fixed_class_init (GtkFixedClass *class)

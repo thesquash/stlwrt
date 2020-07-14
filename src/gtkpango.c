@@ -50,7 +50,7 @@ struct _GtkFillLayoutRendererClass
   PangoRendererClass parent_class;
 };
 
-G_DEFINE_TYPE (GtkFillLayoutRenderer, _gtk_fill_layout_renderer, PANGO_TYPE_RENDERER)
+STLWRT_DEFINE_TYPE (GtkFillLayoutRenderer, _gtk_fill_layout_renderer, PANGO_TYPE_RENDERER)
 
 static void
 gtk_fill_layout_renderer_draw_glyphs (PangoRenderer     *renderer,

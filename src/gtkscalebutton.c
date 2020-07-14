@@ -159,7 +159,7 @@ static void gtk_scale_button_scale_value_changed(GtkRange            *range);
 /* see below for scale definitions */
 static GtkWidget *gtk_scale_button_scale_new    (GtkScaleButton      *button);
 
-G_DEFINE_TYPE_WITH_CODE (GtkScaleButton, gtk_scale_button, GTK_TYPE_BUTTON,
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkScaleButton, gtk_scale_button, GTK_TYPE_BUTTON,
                          G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE,
                                                 NULL))
 
@@ -566,7 +566,7 @@ __gtk_scale_button_new (GtkIconSize   size,
 		      const gchar **icons)
 {
   GtkScaleButton *button;
-  GtkObject *adj;
+  GObject *adj;
 
   adj = __gtk_adjustment_new (min, min, max, step, 10 * step, 0);
 
@@ -1118,7 +1118,7 @@ static gboolean
 gtk_scale_button_key_release (GtkWidget   *widget,
 			      GdkEventKey *event)
 {
-  return __gtk_bindings_activate_event (GTK_OBJECT (widget), event);
+  return __gtk_bindings_activate_event (G_OBJECT (widget), event);
 }
 
 /* This is called when the grab is broken for
@@ -1346,10 +1346,10 @@ cb_dock_key_release (GtkWidget   *widget,
       return TRUE;
     }
 
-  if (!__gtk_bindings_activate_event (GTK_OBJECT (widget), event))
+  if (!__gtk_bindings_activate_event (G_OBJECT (widget), event))
     {
       /* The popup hasn't managed the event, pass onto the button */
-      __gtk_bindings_activate_event (GTK_OBJECT (user_data), event);
+      __gtk_bindings_activate_event (G_OBJECT (user_data), event);
     }
 
   return TRUE;
@@ -1389,7 +1389,7 @@ static gboolean	gtk_scale_button_scale_press   (GtkWidget      *widget,
 static gboolean gtk_scale_button_scale_release (GtkWidget      *widget,
                                                 GdkEventButton *event);
 
-G_DEFINE_TYPE (GtkScaleButtonScale, _gtk_scale_button_scale, GTK_TYPE_SCALE)
+STLWRT_DEFINE_TYPE (GtkScaleButtonScale, _gtk_scale_button_scale, GTK_TYPE_SCALE)
 
 static void
 _gtk_scale_button_scale_class_init (GtkScaleButtonScaleClass *klass)

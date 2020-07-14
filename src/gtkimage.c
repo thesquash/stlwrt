@@ -150,7 +150,6 @@ static void gtk_image_style_set    (GtkWidget      *widget,
 				    GtkStyle       *prev_style);
 static void gtk_image_screen_changed (GtkWidget    *widget,
 				      GdkScreen    *prev_screen);
-static void gtk_image_destroy      (GtkObject      *object);
 static void gtk_image_reset        (GtkImage       *image);
 static void gtk_image_calc_size    (GtkImage       *image);
 
@@ -187,23 +186,18 @@ enum
   PROP_GICON
 };
 
-G_DEFINE_TYPE (GtkImage, gtk_image, GTK_TYPE_MISC)
+STLWRT_DEFINE_TYPE (GtkImage, gtk_image, GTK_TYPE_MISC)
 
 static void
 gtk_image_class_init (GtkImageClass *class)
 {
   GObjectClass *gobject_class;
-  GtkObjectClass *object_class;
   GtkWidgetClass *widget_class;
 
   gobject_class = G_OBJECT_CLASS (class);
   
   gobject_class->set_property = __gtk_image_set_property;
   gobject_class->get_property = __gtk_image_get_property;
-  
-  object_class = GTK_OBJECT_CLASS (class);
-  
-  object_class->destroy = gtk_image_destroy;
 
   widget_class = GTK_WIDGET_CLASS (class);
   
@@ -364,16 +358,6 @@ gtk_image_init (GtkImage *image)
   priv->pixel_size = -1;
 
   priv->filename = NULL;
-}
-
-static void
-gtk_image_destroy (GtkObject *object)
-{
-  GtkImage *image = GTK_IMAGE (object);
-
-  gtk_image_reset (image);
-  
-  GTK_OBJECT_CLASS (gtk_image_parent_class)->destroy (object);
 }
 
 static void 

@@ -90,7 +90,6 @@ struct _GtkButtonPrivate
   GtkAction      *action;
 };
 
-static void gtk_button_destroy        (GtkObject          *object);
 static void gtk_button_dispose        (GObject            *object);
 static void gtk_button_set_property   (GObject            *object,
                                        guint               prop_id,
@@ -157,7 +156,7 @@ static void gtk_button_set_use_action_appearance (GtkButton            *button,
 
 static guint button_signals[LAST_SIGNAL] = { 0 };
 
-G_DEFINE_TYPE_WITH_CODE (GtkButton, gtk_button, GTK_TYPE_BIN,
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkButton, gtk_button, GTK_TYPE_BIN,
 			 G_IMPLEMENT_INTERFACE (GTK_TYPE_ACTIVATABLE,
 						gtk_button_activatable_interface_init))
 
@@ -165,12 +164,10 @@ static void
 gtk_button_class_init (GtkButtonClass *klass)
 {
   GObjectClass *gobject_class;
-  GtkObjectClass *object_class;
   GtkWidgetClass *widget_class;
   GtkContainerClass *container_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
-  object_class = (GtkObjectClass*) klass;
   widget_class = (GtkWidgetClass*) klass;
   container_class = (GtkContainerClass*) klass;
   
@@ -178,8 +175,6 @@ gtk_button_class_init (GtkButtonClass *klass)
   gobject_class->dispose      = gtk_button_dispose;
   gobject_class->set_property = gtk_button_set_property;
   gobject_class->get_property = gtk_button_get_property;
-
-  object_class->destroy = gtk_button_destroy;
 
   widget_class->screen_changed = gtk_button_screen_changed;
   widget_class->realize = gtk_button_realize;
@@ -545,20 +540,6 @@ gtk_button_init (GtkButton *button)
   priv->image_is_stock = TRUE;
   priv->image_position = GTK_POS_LEFT;
   priv->use_action_appearance = TRUE;
-}
-
-static void
-gtk_button_destroy (GtkObject *object)
-{
-  GtkButton *button = GTK_BUTTON (object);
-  
-  if (button->label_text)
-    {
-      g_free (button->label_text);
-      button->label_text = NULL;
-    }
-
-  GTK_OBJECT_CLASS (gtk_button_parent_class)->destroy (object);
 }
 
 static GObject*

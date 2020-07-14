@@ -316,7 +316,7 @@ static void            toolbar_rebuild_menu                 (GtkToolShell       
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), GTK_TYPE_TOOLBAR, GtkToolbarPrivate))
 
 
-G_DEFINE_TYPE_WITH_CODE (GtkToolbar, gtk_toolbar, GTK_TYPE_CONTAINER,
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkToolbar, gtk_toolbar, GTK_TYPE_CONTAINER,
                          G_IMPLEMENT_INTERFACE (GTK_TYPE_TOOL_SHELL,
                                                 toolbar_tool_shell_iface_init)
                          G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE,

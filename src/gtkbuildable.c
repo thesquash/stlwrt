@@ -45,7 +45,7 @@
 
 
 typedef GtkBuildableIface GtkBuildableInterface;
-G_DEFINE_INTERFACE (GtkBuildable, gtk_buildable, G_TYPE_OBJECT)
+STLWRT_DEFINE_INTERFACE (GtkBuildable, gtk_buildable, G_TYPE_OBJECT)
 
 static void
 gtk_buildable_default_init (GtkBuildableInterface *iface)

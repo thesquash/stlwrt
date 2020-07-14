@@ -172,7 +172,7 @@ static void     gtk_font_selection_ref_family            (GtkFontSelection *font
 static void     gtk_font_selection_ref_face              (GtkFontSelection *fontsel,
 							  PangoFontFace    *face);
 
-G_DEFINE_TYPE (GtkFontSelection, gtk_font_selection, GTK_TYPE_VBOX)
+STLWRT_DEFINE_TYPE (GtkFontSelection, gtk_font_selection, GTK_TYPE_VBOX)
 
 static void
 gtk_font_selection_class_init (GtkFontSelectionClass *klass)
@@ -1583,7 +1583,7 @@ static GObject * gtk_font_selection_dialog_buildable_get_internal_child (GtkBuil
 									  GtkBuilder   *builder,
 									  const gchar  *childname);
 
-G_DEFINE_TYPE_WITH_CODE (GtkFontSelectionDialog, gtk_font_selection_dialog,
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkFontSelectionDialog, gtk_font_selection_dialog,
 			 GTK_TYPE_DIALOG,
 			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
 						gtk_font_selection_dialog_buildable_interface_init))

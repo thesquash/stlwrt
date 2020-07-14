@@ -49,7 +49,7 @@ struct _GtkPrintSettingsClass
 
 #define KEYFILE_GROUP_NAME "Print Settings"
 
-G_DEFINE_TYPE (GtkPrintSettings, gtk_print_settings, G_TYPE_OBJECT)
+STLWRT_DEFINE_TYPE (GtkPrintSettings, gtk_print_settings, G_TYPE_OBJECT)
 
 static void
 gtk_print_settings_finalize (GObject *object)

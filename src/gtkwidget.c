@@ -246,7 +246,6 @@ static void	gtk_widget_get_property		 (GObject           *object,
 						  GValue            *value,
 						  GParamSpec        *pspec);
 static void	gtk_widget_dispose		 (GObject	    *object);
-static void	gtk_widget_real_destroy		 (GtkObject	    *object);
 static void	gtk_widget_finalize		 (GObject	    *object);
 static void	gtk_widget_real_show		 (GtkWidget	    *widget);
 static void	gtk_widget_real_hide		 (GtkWidget	    *widget);
@@ -379,54 +378,15 @@ static GQuark		quark_tooltip_window = 0;
 GParamSpecPool         *_gtk_widget_child_property_pool = NULL;
 GObjectNotifyContext   *_gtk_widget_child_property_notify_context = NULL;
 
+
+
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkWidget, gtk_widget, G_TYPE_OBJECT,
+			 G_IMPLEMENT_INTERFACE (ATK_TYPE_IMPLEMENTOR,
+						gtk_widget_accessible_interface_init)
+			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
+						gtk_widget_buildable_interface_init))
+
 /* --- functions --- */
-GType
-__gtk_widget_get_type (void)
-{
-  static GType widget_type = 0;
-
-  if (G_UNLIKELY (widget_type == 0))
-    {
-      const GTypeInfo widget_info =
-      {
-	sizeof (GtkWidgetClass),
-	NULL,		/* base_init */
-	(GBaseFinalizeFunc) gtk_widget_base_class_finalize,
-	(GClassInitFunc) gtk_widget_class_init,
-	NULL,		/* class_finalize */
-	NULL,		/* class_init */
-	sizeof (GtkWidget),
-	0,		/* n_preallocs */
-	(GInstanceInitFunc) gtk_widget_init,
-	NULL,		/* value_table */
-      };
-
-      const GInterfaceInfo accessibility_info =
-      {
-	(GInterfaceInitFunc) gtk_widget_accessible_interface_init,
-	(GInterfaceFinalizeFunc) NULL,
-	NULL /* interface data */
-      };
-
-      const GInterfaceInfo buildable_info =
-      {
-	(GInterfaceInitFunc) gtk_widget_buildable_interface_init,
-	(GInterfaceFinalizeFunc) NULL,
-	NULL /* interface data */
-      };
-
-      widget_type = g_type_register_static (GTK_TYPE_OBJECT, "GtkWidget",
-                                           &widget_info, G_TYPE_FLAG_ABSTRACT);
-
-      g_type_add_interface_static (widget_type, ATK_TYPE_IMPLEMENTOR,
-                                   &accessibility_info) ;
-      g_type_add_interface_static (widget_type, GTK_TYPE_BUILDABLE,
-                                   &buildable_info) ;
-
-    }
-
-  return widget_type;
-}
 
 static void
 child_property_notify_dispatcher (GObject     *object,
@@ -441,7 +401,6 @@ gtk_widget_class_init (GtkWidgetClass *klass)
 {
   static GObjectNotifyContext cpn_context = { 0, NULL, NULL };
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
-  GtkObjectClass *object_class = GTK_OBJECT_CLASS (klass);
   GtkBindingSet *binding_set;
 
   gtk_widget_parent_class = g_type_class_peek_parent (klass);
@@ -475,8 +434,6 @@ gtk_widget_class_init (GtkWidgetClass *klass)
   gobject_class->finalize = gtk_widget_finalize;
   gobject_class->set_property = __gtk_widget_set_property;
   gobject_class->get_property = gtk_widget_get_property;
-
-  object_class->destroy = gtk_widget_real_destroy;
   
   klass->activate_signal = 0;
   klass->set_scroll_adjustments_signal = 0;
@@ -2815,7 +2772,7 @@ gtk_widget_get_property (GObject         *object,
       g_value_set_boolean (value, (__gtk_widget_get_receives_default (widget) != FALSE));
       break;
     case PROP_COMPOSITE_CHILD:
-      g_value_set_boolean (value, (GTK_OBJECT_FLAGS (widget) & GTK_COMPOSITE_CHILD) != 0 );
+      g_value_set_boolean (value, (GTK_WIDGET_FLAGS (widget) & GTK_COMPOSITE_CHILD) != 0 );
       break;
     case PROP_STYLE:
       g_value_set_object (value, __gtk_widget_get_style (widget));
@@ -2876,9 +2833,9 @@ gtk_widget_init (GtkWidget *widget)
   widget->window = NULL;
   widget->parent = NULL;
 
-  GTK_OBJECT_FLAGS (widget) |= GTK_SENSITIVE;
-  GTK_OBJECT_FLAGS (widget) |= GTK_PARENT_SENSITIVE;
-  GTK_OBJECT_FLAGS (widget) |= composite_child_stack ? GTK_COMPOSITE_CHILD : 0;
+  GTK_WIDGET_FLAGS (widget) |= GTK_SENSITIVE;
+  GTK_WIDGET_FLAGS (widget) |= GTK_PARENT_SENSITIVE;
+  GTK_WIDGET_FLAGS (widget) |= composite_child_stack ? GTK_COMPOSITE_CHILD : 0;
   __gtk_widget_set_double_buffered (widget, TRUE);
 
   GTK_PRIVATE_SET_FLAG (widget, GTK_REDRAW_ON_ALLOC);
@@ -3151,32 +3108,6 @@ __gtk_widget_unparent (GtkWidget *widget)
   g_object_unref (widget);
 }
 
-/**
- * __gtk_widget_destroy:
- * @widget: a #GtkWidget
- *
- * Destroys a widget. Equivalent to gtk_object_destroy(), except that
- * you don't have to cast the widget to #GtkObject. When a widget is
- * destroyed, it will break any references it holds to other objects.
- * If the widget is inside a container, the widget will be removed
- * from the container. If the widget is a toplevel (derived from
- * #GtkWindow), it will be removed from the list of toplevels, and the
- * reference GTK+ holds to it will be removed. Removing a
- * widget from its container or the list of toplevels results in the
- * widget being finalized, unless you've added additional references
- * to the widget with g_object_ref().
- *
- * In most cases, only toplevel widgets (windows) require explicit
- * destruction, because when you destroy a toplevel its children will
- * be destroyed as well.
- **/
-void
-__gtk_widget_destroy (GtkWidget *widget)
-{
-  g_return_if_fail (GTK_IS_WIDGET (widget));
-
-  gtk_object_destroy ((GtkObject*) widget);
-}
 
 /**
  * __gtk_widget_destroyed:
@@ -4737,14 +4668,14 @@ static gboolean
 gtk_widget_real_key_press_event (GtkWidget         *widget,
 				 GdkEventKey       *event)
 {
-  return __gtk_bindings_activate_event (GTK_OBJECT (widget), event);
+  return __gtk_bindings_activate_event (G_OBJECT (widget), event);
 }
 
 static gboolean
 gtk_widget_real_key_release_event (GtkWidget         *widget,
 				   GdkEventKey       *event)
 {
-  return __gtk_bindings_activate_event (GTK_OBJECT (widget), event);
+  return __gtk_bindings_activate_event (G_OBJECT (widget), event);
 }
 
 static gboolean
@@ -5526,9 +5457,9 @@ __gtk_widget_set_can_focus (GtkWidget *widget,
   if (can_focus != __gtk_widget_get_can_focus (widget))
     {
       if (can_focus)
-        GTK_OBJECT_FLAGS (widget) |= GTK_CAN_FOCUS;
+        GTK_WIDGET_FLAGS (widget) |= GTK_CAN_FOCUS;
       else
-        GTK_OBJECT_FLAGS (widget) &= ~(GTK_CAN_FOCUS);
+        GTK_WIDGET_FLAGS (widget) &= ~(GTK_CAN_FOCUS);
 
       __gtk_widget_queue_resize (widget);
       g_object_notify (G_OBJECT (widget), "can-focus");
@@ -5551,7 +5482,7 @@ __gtk_widget_get_can_focus (GtkWidget *widget)
 {
   g_return_val_if_fail (GTK_IS_WIDGET (widget), FALSE);
 
-  return (GTK_OBJECT_FLAGS (widget) & GTK_CAN_FOCUS) != 0;
+  return (GTK_WIDGET_FLAGS (widget) & GTK_CAN_FOCUS) != 0;
 }
 
 /**
@@ -5571,7 +5502,7 @@ __gtk_widget_has_focus (GtkWidget *widget)
 {
   g_return_val_if_fail (GTK_IS_WIDGET (widget), FALSE);
 
-  return (GTK_OBJECT_FLAGS (widget) & GTK_HAS_FOCUS) != 0;
+  return (GTK_WIDGET_FLAGS (widget) & GTK_HAS_FOCUS) != 0;
 }
 
 /**
@@ -5620,9 +5551,9 @@ __gtk_widget_set_can_default (GtkWidget *widget,
   if (can_default != __gtk_widget_get_can_default (widget))
     {
       if (can_default)
-        GTK_OBJECT_FLAGS (widget) |= GTK_CAN_DEFAULT;
+        GTK_WIDGET_FLAGS (widget) |= GTK_CAN_DEFAULT;
       else
-        GTK_OBJECT_FLAGS (widget) &= ~(GTK_CAN_DEFAULT);
+        GTK_WIDGET_FLAGS (widget) &= ~(GTK_CAN_DEFAULT);
 
       __gtk_widget_queue_resize (widget);
       g_object_notify (G_OBJECT (widget), "can-default");
@@ -5645,7 +5576,7 @@ __gtk_widget_get_can_default (GtkWidget *widget)
 {
   g_return_val_if_fail (GTK_IS_WIDGET (widget), FALSE);
 
-  return (GTK_OBJECT_FLAGS (widget) & GTK_CAN_DEFAULT) != 0;
+  return (GTK_WIDGET_FLAGS (widget) & GTK_CAN_DEFAULT) != 0;
 }
 
 /**
@@ -5665,7 +5596,7 @@ __gtk_widget_has_default (GtkWidget *widget)
 {
   g_return_val_if_fail (GTK_IS_WIDGET (widget), FALSE);
 
-  return (GTK_OBJECT_FLAGS (widget) & GTK_HAS_DEFAULT) != 0;
+  return (GTK_WIDGET_FLAGS (widget) & GTK_HAS_DEFAULT) != 0;
 }
 
 void
@@ -5673,9 +5604,9 @@ ___gtk_widget_set_has_default (GtkWidget *widget,
                              gboolean   has_default)
 {
   if (has_default)
-    GTK_OBJECT_FLAGS (widget) |= GTK_HAS_DEFAULT;
+    GTK_WIDGET_FLAGS (widget) |= GTK_HAS_DEFAULT;
   else
-    GTK_OBJECT_FLAGS (widget) &= ~(GTK_HAS_DEFAULT);
+    GTK_WIDGET_FLAGS (widget) &= ~(GTK_HAS_DEFAULT);
 }
 
 /**
@@ -5728,9 +5659,9 @@ __gtk_widget_set_receives_default (GtkWidget *widget,
   if (receives_default != __gtk_widget_get_receives_default (widget))
     {
       if (receives_default)
-        GTK_OBJECT_FLAGS (widget) |= GTK_RECEIVES_DEFAULT;
+        GTK_WIDGET_FLAGS (widget) |= GTK_RECEIVES_DEFAULT;
       else
-        GTK_OBJECT_FLAGS (widget) &= ~(GTK_RECEIVES_DEFAULT);
+        GTK_WIDGET_FLAGS (widget) &= ~(GTK_RECEIVES_DEFAULT);
 
       g_object_notify (G_OBJECT (widget), "receives-default");
     }
@@ -5756,7 +5687,7 @@ __gtk_widget_get_receives_default (GtkWidget *widget)
 {
   g_return_val_if_fail (GTK_IS_WIDGET (widget), FALSE);
 
-  return (GTK_OBJECT_FLAGS (widget) & GTK_RECEIVES_DEFAULT) != 0;
+  return (GTK_WIDGET_FLAGS (widget) & GTK_RECEIVES_DEFAULT) != 0;
 }
 
 /**
@@ -5777,7 +5708,7 @@ __gtk_widget_has_grab (GtkWidget *widget)
 {
   g_return_val_if_fail (GTK_IS_WIDGET (widget), FALSE);
 
-  return (GTK_OBJECT_FLAGS (widget) & GTK_HAS_GRAB) != 0;
+  return (GTK_WIDGET_FLAGS (widget) & GTK_HAS_GRAB) != 0;
 }
 
 void
@@ -5785,9 +5716,9 @@ ___gtk_widget_set_has_grab (GtkWidget *widget,
                           gboolean   has_grab)
 {
   if (has_grab)
-    GTK_OBJECT_FLAGS (widget) |= GTK_HAS_GRAB;
+    GTK_WIDGET_FLAGS (widget) |= GTK_HAS_GRAB;
   else
-    GTK_OBJECT_FLAGS (widget) &= ~(GTK_HAS_GRAB);
+    GTK_WIDGET_FLAGS (widget) &= ~(GTK_HAS_GRAB);
 }
 
 /**
@@ -5947,7 +5878,7 @@ __gtk_widget_get_visible (GtkWidget *widget)
 {
   g_return_val_if_fail (GTK_IS_WIDGET (widget), FALSE);
 
-  return (GTK_OBJECT_FLAGS (widget) & GTK_VISIBLE) != 0;
+  return (GTK_WIDGET_FLAGS (widget) & GTK_VISIBLE) != 0;
 }
 
 /**
@@ -5975,9 +5906,9 @@ __gtk_widget_set_has_window (GtkWidget *widget,
   g_return_if_fail (GTK_IS_WIDGET (widget));
 
   if (has_window)
-    GTK_OBJECT_FLAGS (widget) &= ~(GTK_NO_WINDOW);
+    GTK_WIDGET_FLAGS (widget) &= ~(GTK_NO_WINDOW);
   else
-    GTK_OBJECT_FLAGS (widget) |= GTK_NO_WINDOW;
+    GTK_WIDGET_FLAGS (widget) |= GTK_NO_WINDOW;
 }
 
 /**
@@ -5996,7 +5927,7 @@ __gtk_widget_get_has_window (GtkWidget *widget)
 {
   g_return_val_if_fail (GTK_IS_WIDGET (widget), FALSE);
 
-  return !((GTK_OBJECT_FLAGS (widget) & GTK_NO_WINDOW) != 0);
+  return !((GTK_WIDGET_FLAGS (widget) & GTK_NO_WINDOW) != 0);
 }
 
 /**
@@ -6016,7 +5947,7 @@ __gtk_widget_is_toplevel (GtkWidget *widget)
 {
   g_return_val_if_fail (GTK_IS_WIDGET (widget), FALSE);
 
-  return (GTK_OBJECT_FLAGS (widget) & GTK_TOPLEVEL) != 0;
+  return (GTK_WIDGET_FLAGS (widget) & GTK_TOPLEVEL) != 0;
 }
 
 void
@@ -6024,9 +5955,9 @@ ___gtk_widget_set_is_toplevel (GtkWidget *widget,
                              gboolean   is_toplevel)
 {
   if (is_toplevel)
-    GTK_OBJECT_FLAGS (widget) |= GTK_TOPLEVEL;
+    GTK_WIDGET_FLAGS (widget) |= GTK_TOPLEVEL;
   else
-    GTK_OBJECT_FLAGS (widget) &= ~(GTK_TOPLEVEL);
+    GTK_WIDGET_FLAGS (widget) &= ~(GTK_TOPLEVEL);
 }
 
 /**
@@ -6064,7 +5995,7 @@ __gtk_widget_get_realized (GtkWidget *widget)
 {
   g_return_val_if_fail (GTK_IS_WIDGET (widget), FALSE);
 
-  return (GTK_OBJECT_FLAGS (widget) & GTK_REALIZED) != 0;
+  return (GTK_WIDGET_FLAGS (widget) & GTK_REALIZED) != 0;
 }
 
 /**
@@ -6086,9 +6017,9 @@ __gtk_widget_set_realized (GtkWidget *widget,
   g_return_if_fail (GTK_IS_WIDGET (widget));
 
   if (realized)
-    GTK_OBJECT_FLAGS (widget) |= GTK_REALIZED;
+    GTK_WIDGET_FLAGS (widget) |= GTK_REALIZED;
   else
-    GTK_OBJECT_FLAGS (widget) &= ~(GTK_REALIZED);
+    GTK_WIDGET_FLAGS (widget) &= ~(GTK_REALIZED);
 }
 
 /**
@@ -6106,7 +6037,7 @@ __gtk_widget_get_mapped (GtkWidget *widget)
 {
   g_return_val_if_fail (GTK_IS_WIDGET (widget), FALSE);
 
-  return (GTK_OBJECT_FLAGS (widget) & GTK_MAPPED) != 0;
+  return (GTK_WIDGET_FLAGS (widget) & GTK_MAPPED) != 0;
 }
 
 /**
@@ -6128,9 +6059,9 @@ __gtk_widget_set_mapped (GtkWidget *widget,
   g_return_if_fail (GTK_IS_WIDGET (widget));
 
   if (mapped)
-    GTK_OBJECT_FLAGS (widget) |= GTK_MAPPED;
+    GTK_WIDGET_FLAGS (widget) |= GTK_MAPPED;
   else
-    GTK_OBJECT_FLAGS (widget) &= ~(GTK_MAPPED);
+    GTK_WIDGET_FLAGS (widget) &= ~(GTK_MAPPED);
 }
 
 /**
@@ -6168,9 +6099,9 @@ __gtk_widget_set_app_paintable (GtkWidget *widget,
   if (__gtk_widget_get_app_paintable (widget) != app_paintable)
     {
       if (app_paintable)
-        GTK_OBJECT_FLAGS (widget) |= GTK_APP_PAINTABLE;
+        GTK_WIDGET_FLAGS (widget) |= GTK_APP_PAINTABLE;
       else
-        GTK_OBJECT_FLAGS (widget) &= ~(GTK_APP_PAINTABLE);
+        GTK_WIDGET_FLAGS (widget) &= ~(GTK_APP_PAINTABLE);
 
       if (__gtk_widget_is_drawable (widget))
 	__gtk_widget_queue_draw (widget);
@@ -6197,7 +6128,7 @@ __gtk_widget_get_app_paintable (GtkWidget *widget)
 {
   g_return_val_if_fail (GTK_IS_WIDGET (widget), FALSE);
 
-  return (GTK_OBJECT_FLAGS (widget) & GTK_APP_PAINTABLE) != 0;
+  return (GTK_WIDGET_FLAGS (widget) & GTK_APP_PAINTABLE) != 0;
 }
 
 /**
@@ -6235,9 +6166,9 @@ __gtk_widget_set_double_buffered (GtkWidget *widget,
   if (double_buffered != __gtk_widget_get_double_buffered (widget))
     {
       if (double_buffered)
-        GTK_OBJECT_FLAGS (widget) |= GTK_DOUBLE_BUFFERED;
+        GTK_WIDGET_FLAGS (widget) |= GTK_DOUBLE_BUFFERED;
       else
-        GTK_OBJECT_FLAGS (widget) &= ~(GTK_DOUBLE_BUFFERED);
+        GTK_WIDGET_FLAGS (widget) &= ~(GTK_DOUBLE_BUFFERED);
 
       g_object_notify (G_OBJECT (widget), "double-buffered");
     }
@@ -6260,7 +6191,7 @@ __gtk_widget_get_double_buffered (GtkWidget *widget)
 {
   g_return_val_if_fail (GTK_IS_WIDGET (widget), FALSE);
 
-  return (GTK_OBJECT_FLAGS (widget) & GTK_DOUBLE_BUFFERED) != 0;
+  return (GTK_WIDGET_FLAGS (widget) & GTK_DOUBLE_BUFFERED) != 0;
 }
 
 /**
@@ -6322,12 +6253,12 @@ __gtk_widget_set_sensitive (GtkWidget *widget,
 
   if (sensitive)
     {
-      GTK_OBJECT_FLAGS (widget) |= GTK_SENSITIVE;
+      GTK_WIDGET_FLAGS (widget) |= GTK_SENSITIVE;
       data.state = widget->saved_state;
     }
   else
     {
-      GTK_OBJECT_FLAGS (widget) &= ~(GTK_SENSITIVE);
+      GTK_WIDGET_FLAGS (widget) &= ~(GTK_SENSITIVE);
       data.state = __gtk_widget_get_state (widget);
     }
   data.state_restoration = TRUE;
@@ -6364,7 +6295,7 @@ __gtk_widget_get_sensitive (GtkWidget *widget)
 {
   g_return_val_if_fail (GTK_IS_WIDGET (widget), FALSE);
 
-  return (GTK_OBJECT_FLAGS (widget) & GTK_SENSITIVE) != 0;
+  return (GTK_WIDGET_FLAGS (widget) & GTK_SENSITIVE) != 0;
 }
 
 /**
@@ -6384,7 +6315,7 @@ __gtk_widget_is_sensitive (GtkWidget *widget)
   g_return_val_if_fail (GTK_IS_WIDGET (widget), FALSE);
 
   return (__gtk_widget_get_sensitive (widget) &&
-          (GTK_OBJECT_FLAGS (widget) & GTK_PARENT_SENSITIVE) != 0);
+          (GTK_WIDGET_FLAGS (widget) & GTK_PARENT_SENSITIVE) != 0);
 }
 
 /**
@@ -6522,7 +6453,7 @@ __gtk_widget_has_rc_style (GtkWidget *widget)
 {
   g_return_val_if_fail (GTK_IS_WIDGET (widget), FALSE);
 
-  return (GTK_OBJECT_FLAGS (widget) & GTK_RC_STYLE) != 0;
+  return (GTK_WIDGET_FLAGS (widget) & GTK_RC_STYLE) != 0;
 }
 
 /**
@@ -6548,7 +6479,7 @@ __gtk_widget_set_style (GtkWidget *widget,
 
       initial_emission = !__gtk_widget_has_rc_style (widget) && !GTK_WIDGET_USER_STYLE (widget);
       
-      GTK_OBJECT_FLAGS (widget) &= ~(GTK_RC_STYLE);
+      GTK_WIDGET_FLAGS (widget) &= ~(GTK_RC_STYLE);
       GTK_PRIVATE_SET_FLAG (widget, GTK_USER_STYLE);
       
       __gtk_widget_set_style_internal (widget, style, initial_emission);
@@ -6591,7 +6522,7 @@ gtk_widget_reset_rc_style (GtkWidget *widget)
   initial_emission = !__gtk_widget_has_rc_style (widget) && !GTK_WIDGET_USER_STYLE (widget);
 
   GTK_PRIVATE_UNSET_FLAG (widget, GTK_USER_STYLE);
-  GTK_OBJECT_FLAGS (widget) |= GTK_RC_STYLE;
+  GTK_WIDGET_FLAGS (widget) |= GTK_RC_STYLE;
   
   if (__gtk_widget_has_screen (widget))
     new_style = __gtk_rc_get_style (widget);
@@ -8484,7 +8415,7 @@ __gtk_widget_set_composite_name (GtkWidget   *widget,
 			       const gchar *name)
 {
   g_return_if_fail (GTK_IS_WIDGET (widget));
-  g_return_if_fail ((GTK_OBJECT_FLAGS (widget) & GTK_COMPOSITE_CHILD) != 0);
+  g_return_if_fail ((GTK_WIDGET_FLAGS (widget) & GTK_COMPOSITE_CHILD) != 0);
   g_return_if_fail (name != NULL);
 
   if (!quark_composite_name)
@@ -8511,7 +8442,7 @@ __gtk_widget_get_composite_name (GtkWidget *widget)
 {
   g_return_val_if_fail (GTK_IS_WIDGET (widget), NULL);
 
-  if (((GTK_OBJECT_FLAGS (widget) & GTK_COMPOSITE_CHILD) != 0) && widget->parent)
+  if (((GTK_WIDGET_FLAGS (widget) & GTK_COMPOSITE_CHILD) != 0) && widget->parent)
     return ___gtk_container_child_composite_name (GTK_CONTAINER (widget->parent),
 					       widget);
   else
@@ -8789,11 +8720,28 @@ gtk_widget_dispose (GObject *object)
   G_OBJECT_CLASS (gtk_widget_parent_class)->dispose (object);
 }
 
+/**
+ * __gtk_widget_destroy:
+ * @widget: a #GtkWidget
+ *
+ * Destroys a widget. When a widget is
+ * destroyed, it will break any references it holds to other objects.
+ * If the widget is inside a container, the widget will be removed
+ * from the container. If the widget is a toplevel (derived from
+ * #GtkWindow), it will be removed from the list of toplevels, and the
+ * reference GTK+ holds to it will be removed. Removing a
+ * widget from its container or the list of toplevels results in the
+ * widget being finalized, unless you've added additional references
+ * to the widget with g_object_ref().
+ *
+ * In most cases, only toplevel widgets (windows) require explicit
+ * destruction, because when you destroy a toplevel its children will
+ * be destroyed as well.
+ **/
 static void
-gtk_widget_real_destroy (GtkObject *object)
+__gtk_widget_destroy (GtkWidget *object)
 {
-  /* gtk_object_destroy() will already hold a refcount on object */
-  GtkWidget *widget = GTK_WIDGET (object);
+  GtkWidget *widget = object;
 
   /* wipe accelerator closures (keep order) */
   g_object_set_qdata (G_OBJECT (widget), quark_accel_path, NULL);
@@ -8808,7 +8756,7 @@ gtk_widget_real_destroy (GtkObject *object)
   widget->style = __gtk_widget_get_default_style ();
   g_object_ref (widget->style);
 
-  GTK_OBJECT_CLASS (gtk_widget_parent_class)->destroy (object);
+  g_object_unref (object);
 }
 
 static void
@@ -9266,9 +9214,9 @@ gtk_widget_propagate_state (GtkWidget           *widget,
 
 
   if (data->parent_sensitive)
-    GTK_OBJECT_FLAGS (widget) |= GTK_PARENT_SENSITIVE;
+    GTK_WIDGET_FLAGS (widget) |= GTK_PARENT_SENSITIVE;
   else
-    GTK_OBJECT_FLAGS (widget) &= ~(GTK_PARENT_SENSITIVE);
+    GTK_WIDGET_FLAGS (widget) &= ~(GTK_PARENT_SENSITIVE);
 
   if (__gtk_widget_is_sensitive (widget))
     {
@@ -10951,7 +10899,7 @@ __gtk_widget_get_no_show_all (GtkWidget *widget)
 {
   g_return_val_if_fail (GTK_IS_WIDGET (widget), FALSE);
   
-  return (GTK_OBJECT_FLAGS (widget) & GTK_NO_SHOW_ALL) != 0;
+  return (GTK_WIDGET_FLAGS (widget) & GTK_NO_SHOW_ALL) != 0;
 }
 
 /**
@@ -10980,9 +10928,9 @@ __gtk_widget_set_no_show_all (GtkWidget *widget,
     return;
 
   if (no_show_all)
-    GTK_OBJECT_FLAGS (widget) |= GTK_NO_SHOW_ALL;
+    GTK_WIDGET_FLAGS (widget) |= GTK_NO_SHOW_ALL;
   else
-    GTK_OBJECT_FLAGS (widget) &= ~(GTK_NO_SHOW_ALL);
+    GTK_WIDGET_FLAGS (widget) &= ~(GTK_NO_SHOW_ALL);
   
   g_object_notify (G_OBJECT (widget), "no-show-all");
 }
@@ -11384,9 +11332,9 @@ ___gtk_widget_set_has_focus (GtkWidget *widget,
                            gboolean   has_focus)
 {
   if (has_focus)
-    GTK_OBJECT_FLAGS (widget) |= GTK_HAS_FOCUS;
+    GTK_WIDGET_FLAGS (widget) |= GTK_HAS_FOCUS;
   else
-    GTK_OBJECT_FLAGS (widget) &= ~(GTK_HAS_FOCUS);
+    GTK_WIDGET_FLAGS (widget) &= ~(GTK_HAS_FOCUS);
 }
 
 /**

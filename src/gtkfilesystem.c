@@ -127,9 +127,9 @@ struct GtkFileSystemBookmark
   gchar *label;
 };
 
-G_DEFINE_TYPE (GtkFileSystem, _gtk_file_system, G_TYPE_OBJECT)
+STLWRT_DEFINE_TYPE (GtkFileSystem, _gtk_file_system, G_TYPE_OBJECT)
 
-G_DEFINE_TYPE (GtkFolder, _gtk_folder, G_TYPE_OBJECT)
+STLWRT_DEFINE_TYPE (GtkFolder, _gtk_folder, G_TYPE_OBJECT)
 
 
 static void gtk_folder_set_finished_loading (GtkFolder *folder,

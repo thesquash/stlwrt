@@ -81,7 +81,6 @@ static void gtk_menu_item_get_property   (GObject          *object,
 					  guint             prop_id,
 					  GValue           *value,
 					  GParamSpec       *pspec);
-static void gtk_menu_item_destroy        (GtkObject        *object);
 static void gtk_menu_item_size_request   (GtkWidget        *widget,
 					  GtkRequisition   *requisition);
 static void gtk_menu_item_size_allocate  (GtkWidget        *widget,
@@ -157,7 +156,7 @@ static guint menu_item_signals[LAST_SIGNAL] = { 0 };
 
 static GtkBuildableIface *parent_buildable_iface;
 
-G_DEFINE_TYPE_WITH_CODE (GtkMenuItem, gtk_menu_item, GTK_TYPE_BIN,
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkMenuItem, gtk_menu_item, GTK_TYPE_BIN,
 			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
 						gtk_menu_item_buildable_interface_init)
 			 G_IMPLEMENT_INTERFACE (GTK_TYPE_ACTIVATABLE,
@@ -170,15 +169,12 @@ static void
 gtk_menu_item_class_init (GtkMenuItemClass *klass)
 {
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
-  GtkObjectClass *object_class = GTK_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GtkContainerClass *container_class = GTK_CONTAINER_CLASS (klass);
 
   gobject_class->dispose      = gtk_menu_item_dispose;
   gobject_class->set_property = gtk_menu_item_set_property;
   gobject_class->get_property = gtk_menu_item_get_property;
-
-  object_class->destroy = gtk_menu_item_destroy;
 
   widget_class->size_request = gtk_menu_item_size_request;
   widget_class->size_allocate = gtk_menu_item_size_allocate;
@@ -555,17 +551,6 @@ gtk_menu_item_get_property (GObject    *object,
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
     }
-}
-
-static void
-gtk_menu_item_destroy (GtkObject *object)
-{
-  GtkMenuItem *menu_item = GTK_MENU_ITEM (object);
-
-  if (menu_item->submenu)
-    __gtk_widget_destroy (menu_item->submenu);
-
-  GTK_OBJECT_CLASS (gtk_menu_item_parent_class)->destroy (object);
 }
 
 static void

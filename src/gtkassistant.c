@@ -110,7 +110,6 @@ struct _GtkAssistantPrivate
 
 static void     gtk_assistant_class_init         (GtkAssistantClass *class);
 static void     gtk_assistant_init               (GtkAssistant      *assistant);
-static void     gtk_assistant_destroy            (GtkObject         *object);
 static void     gtk_assistant_style_set          (GtkWidget         *widget,
 						  GtkStyle          *old_style);
 static void     gtk_assistant_size_request       (GtkWidget         *widget,
@@ -187,7 +186,7 @@ enum
 static guint signals [LAST_SIGNAL] = { 0 };
 
 
-G_DEFINE_TYPE_WITH_CODE (GtkAssistant, gtk_assistant, GTK_TYPE_WINDOW,
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkAssistant, gtk_assistant, GTK_TYPE_WINDOW,
                          G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
                                                 gtk_assistant_buildable_interface_init))
 
@@ -196,16 +195,12 @@ static void
 gtk_assistant_class_init (GtkAssistantClass *class)
 {
   GObjectClass *gobject_class;
-  GtkObjectClass *object_class;
   GtkWidgetClass *widget_class;
   GtkContainerClass *container_class;
 
   gobject_class   = (GObjectClass *) class;
-  object_class    = (GtkObjectClass *) class;
   widget_class    = (GtkWidgetClass *) class;
   container_class = (GtkContainerClass *) class;
-
-  object_class->destroy = gtk_assistant_destroy;
 
   widget_class->style_set = gtk_assistant_style_set;
   widget_class->size_request = gtk_assistant_size_request;
@@ -995,63 +990,6 @@ remove_page (GtkAssistant *assistant,
   __gtk_widget_destroy (page_info->title);
   g_slice_free (GtkAssistantPage, page_info);
   g_list_free_1 (element);
-}
-
-static void
-gtk_assistant_destroy (GtkObject *object)
-{
-  GtkAssistant *assistant = GTK_ASSISTANT (object);
-  GtkAssistantPrivate *priv = assistant->priv;
-
-  if (priv->header_image)
-    {
-      __gtk_widget_destroy (priv->header_image);
-      priv->header_image = NULL;
-    }
-
-  if (priv->sidebar_image)
-    {
-      __gtk_widget_destroy (priv->sidebar_image);
-      priv->sidebar_image = NULL;
-    }
-
-  if (priv->action_area)
-    {
-      __gtk_widget_destroy (priv->action_area);
-      priv->action_area = NULL;
-    }
-
-  if (priv->size_group)
-    {
-      g_object_unref (priv->size_group);
-      priv->size_group = NULL;
-    }
-
-  if (priv->forward_function)
-    {
-      if (priv->forward_function_data &&
-	  priv->forward_data_destroy)
-	priv->forward_data_destroy (priv->forward_function_data);
-
-      priv->forward_function = NULL;
-      priv->forward_function_data = NULL;
-      priv->forward_data_destroy = NULL;
-    }
-
-  if (priv->visited_pages)
-    {
-      g_slist_free (priv->visited_pages);
-      priv->visited_pages = NULL;
-    }
-
-  /* We set current to NULL so that the remove code doesn't try
-   * to do anything funny */
-  priv->current_page = NULL;
-
-  while (priv->pages)
-    remove_page (GTK_ASSISTANT (object), priv->pages);
-      
-  GTK_OBJECT_CLASS (gtk_assistant_parent_class)->destroy (object);
 }
 
 static GList*

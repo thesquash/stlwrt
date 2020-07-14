@@ -35,7 +35,6 @@ enum {
 };
 
 
-static void     gtk_radio_button_destroy        (GtkObject           *object);
 static gboolean gtk_radio_button_focus          (GtkWidget           *widget,
 						 GtkDirectionType     direction);
 static void     gtk_radio_button_clicked        (GtkButton           *button);
@@ -50,7 +49,7 @@ static void     gtk_radio_button_get_property   (GObject             *object,
 						 GValue              *value,
 						 GParamSpec          *pspec);
 
-G_DEFINE_TYPE (GtkRadioButton, gtk_radio_button, GTK_TYPE_CHECK_BUTTON)
+STLWRT_DEFINE_TYPE (GtkRadioButton, gtk_radio_button, GTK_TYPE_CHECK_BUTTON)
 
 static guint group_changed_signal = 0;
 
@@ -58,13 +57,11 @@ static void
 gtk_radio_button_class_init (GtkRadioButtonClass *class)
 {
   GObjectClass *gobject_class;
-  GtkObjectClass *object_class;
   GtkButtonClass *button_class;
   GtkCheckButtonClass *check_button_class;
   GtkWidgetClass *widget_class;
 
   gobject_class = G_OBJECT_CLASS (class);
-  object_class = (GtkObjectClass*) class;
   widget_class = (GtkWidgetClass*) class;
   button_class = (GtkButtonClass*) class;
   check_button_class = (GtkCheckButtonClass*) class;
@@ -79,7 +76,6 @@ gtk_radio_button_class_init (GtkRadioButtonClass *class)
 							P_("The radio button whose group this widget belongs to."),
 							GTK_TYPE_RADIO_BUTTON,
 							GTK_PARAM_WRITABLE));
-  object_class->destroy = gtk_radio_button_destroy;
 
   widget_class->focus = gtk_radio_button_focus;
 
@@ -408,44 +404,6 @@ __gtk_radio_button_get_group (GtkRadioButton *radio_button)
   return radio_button->group;
 }
 
-
-static void
-gtk_radio_button_destroy (GtkObject *object)
-{
-  GtkWidget *old_group_singleton = NULL;
-  GtkRadioButton *radio_button;
-  GtkRadioButton *tmp_button;
-  GSList *tmp_list;
-  gboolean was_in_group;
-  
-  radio_button = GTK_RADIO_BUTTON (object);
-
-  was_in_group = radio_button->group && radio_button->group->next;
-  
-  radio_button->group = g_slist_remove (radio_button->group, radio_button);
-  if (radio_button->group && !radio_button->group->next)
-    old_group_singleton = radio_button->group->data;
-
-  tmp_list = radio_button->group;
-
-  while (tmp_list)
-    {
-      tmp_button = tmp_list->data;
-      tmp_list = tmp_list->next;
-
-      tmp_button->group = radio_button->group;
-    }
-
-  /* this button is no longer in the group */
-  radio_button->group = NULL;
-
-  if (old_group_singleton)
-    g_signal_emit (old_group_singleton, group_changed_signal, 0);
-  if (was_in_group)
-    g_signal_emit (radio_button, group_changed_signal, 0);
-
-  GTK_OBJECT_CLASS (gtk_radio_button_parent_class)->destroy (object);
-}
 
 static void
 get_coordinates (GtkWidget    *widget,

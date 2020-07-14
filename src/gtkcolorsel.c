@@ -155,7 +155,6 @@ struct _ColorSelectionPrivate
 };
 
 
-static void gtk_color_selection_destroy		(GtkObject		 *object);
 static void gtk_color_selection_finalize        (GObject		 *object);
 static void update_color			(GtkColorSelection	 *colorsel);
 static void gtk_color_selection_set_property    (GObject                 *object,
@@ -256,22 +255,18 @@ static const guchar dropper_mask[] = {
   0x1e, 0x00, 0x00, 0x00,  0x0d, 0x00, 0x00, 0x00,
   0x02, 0x00, 0x00, 0x00 };
 
-G_DEFINE_TYPE (GtkColorSelection, gtk_color_selection, GTK_TYPE_VBOX)
+STLWRT_DEFINE_TYPE (GtkColorSelection, gtk_color_selection, GTK_TYPE_VBOX)
 
 static void
 gtk_color_selection_class_init (GtkColorSelectionClass *klass)
 {
   GObjectClass *gobject_class;
-  GtkObjectClass *object_class;
   GtkWidgetClass *widget_class;
   
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->finalize = gtk_color_selection_finalize;
   gobject_class->set_property = gtk_color_selection_set_property;
   gobject_class->get_property = gtk_color_selection_get_property;
-
-  object_class = GTK_OBJECT_CLASS (klass);
-  object_class->destroy = gtk_color_selection_destroy;
   
   widget_class = GTK_WIDGET_CLASS (klass);
   widget_class->realize = gtk_color_selection_realize;
@@ -570,23 +565,6 @@ gtk_color_selection_get_property (GObject     *object,
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
     }
-}
-
-/* GtkObject methods */
-
-static void
-gtk_color_selection_destroy (GtkObject *object)
-{
-  GtkColorSelection *cselection = GTK_COLOR_SELECTION (object);
-  ColorSelectionPrivate *priv = cselection->private_data;
-
-  if (priv->dropper_grab_widget)
-    {
-      __gtk_widget_destroy (priv->dropper_grab_widget);
-      priv->dropper_grab_widget = NULL;
-    }
-
-  GTK_OBJECT_CLASS (gtk_color_selection_parent_class)->destroy (object);
 }
 
 /* GtkWidget methods */

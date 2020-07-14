@@ -39,7 +39,6 @@
 #include <gtkprivate.h>
 
 
-static void gtk_image_menu_item_destroy              (GtkObject        *object);
 static void gtk_image_menu_item_size_request         (GtkWidget        *widget,
                                                       GtkRequisition   *requisition);
 static void gtk_image_menu_item_size_allocate        (GtkWidget        *widget,
@@ -96,7 +95,7 @@ enum {
 static GtkActivatableIface *parent_activatable_iface;
 
 
-G_DEFINE_TYPE_WITH_CODE (GtkImageMenuItem, gtk_image_menu_item, GTK_TYPE_MENU_ITEM,
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkImageMenuItem, gtk_image_menu_item, GTK_TYPE_MENU_ITEM,
 			 G_IMPLEMENT_INTERFACE (GTK_TYPE_ACTIVATABLE,
 						gtk_image_menu_item_activatable_interface_init))
 
@@ -107,12 +106,9 @@ static void
 gtk_image_menu_item_class_init (GtkImageMenuItemClass *klass)
 {
   GObjectClass *gobject_class = (GObjectClass*) klass;
-  GtkObjectClass *object_class = (GtkObjectClass*) klass;
   GtkWidgetClass *widget_class = (GtkWidgetClass*) klass;
   GtkMenuItemClass *menu_item_class = (GtkMenuItemClass*) klass;
   GtkContainerClass *container_class = (GtkContainerClass*) klass;
-
-  object_class->destroy = gtk_image_menu_item_destroy;
 
   widget_class->screen_changed = gtk_image_menu_item_screen_changed;
   widget_class->size_request = gtk_image_menu_item_size_request;
@@ -291,18 +287,6 @@ gtk_image_menu_item_map (GtkWidget *widget)
     g_object_set (image_menu_item->image,
                   "visible", show_image (image_menu_item),
                   NULL);
-}
-
-static void
-gtk_image_menu_item_destroy (GtkObject *object)
-{
-  GtkImageMenuItem *image_menu_item = GTK_IMAGE_MENU_ITEM (object);
-
-  if (image_menu_item->image)
-    __gtk_container_remove (GTK_CONTAINER (image_menu_item),
-                          image_menu_item->image);
-
-  GTK_OBJECT_CLASS (gtk_image_menu_item_parent_class)->destroy (object);
 }
 
 static void

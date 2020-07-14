@@ -91,7 +91,7 @@ static void gtk_printer_get_property (GObject      *object,
 				      GValue       *value,
 				      GParamSpec   *pspec);
 
-G_DEFINE_TYPE (GtkPrinter, gtk_printer, G_TYPE_OBJECT)
+STLWRT_DEFINE_TYPE (GtkPrinter, gtk_printer, G_TYPE_OBJECT)
 
 static void
 gtk_printer_class_init (GtkPrinterClass *class)

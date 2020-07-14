@@ -33,7 +33,6 @@ enum {
   LAST_ARG
 };
 
-static void gtk_invisible_destroy       (GtkObject         *object);
 static void gtk_invisible_realize       (GtkWidget         *widget);
 static void gtk_invisible_style_set     (GtkWidget         *widget,
 					 GtkStyle          *previous_style);
@@ -53,17 +52,15 @@ static GObject *gtk_invisible_constructor (GType                  type,
 					   guint                  n_construct_properties,
 					   GObjectConstructParam *construct_params);
 
-G_DEFINE_TYPE (GtkInvisible, gtk_invisible, GTK_TYPE_WIDGET)
+STLWRT_DEFINE_TYPE (GtkInvisible, gtk_invisible, GTK_TYPE_WIDGET)
 
 static void
 gtk_invisible_class_init (GtkInvisibleClass *class)
 {
   GObjectClass	 *gobject_class;
-  GtkObjectClass *object_class;
   GtkWidgetClass *widget_class;
 
   widget_class = (GtkWidgetClass*) class;
-  object_class = (GtkObjectClass*) class;
   gobject_class = (GObjectClass*) class;
 
   widget_class->realize = gtk_invisible_realize;
@@ -71,7 +68,6 @@ gtk_invisible_class_init (GtkInvisibleClass *class)
   widget_class->show = gtk_invisible_show;
   widget_class->size_allocate = gtk_invisible_size_allocate;
 
-  object_class->destroy = gtk_invisible_destroy;
   gobject_class->set_property = gtk_invisible_set_property;
   gobject_class->get_property = gtk_invisible_get_property;
   gobject_class->constructor = gtk_invisible_constructor;
@@ -101,20 +97,6 @@ gtk_invisible_init (GtkInvisible *invisible)
   colormap = ___gtk_widget_peek_colormap ();
   if (colormap)
     __gtk_widget_set_colormap (GTK_WIDGET (invisible), colormap);
-}
-
-static void
-gtk_invisible_destroy (GtkObject *object)
-{
-  GtkInvisible *invisible = GTK_INVISIBLE (object);
-  
-  if (invisible->has_user_ref_count)
-    {
-      invisible->has_user_ref_count = FALSE;
-      g_object_unref (invisible);
-    }
-
-  GTK_OBJECT_CLASS (gtk_invisible_parent_class)->destroy (object);  
 }
 
 /**

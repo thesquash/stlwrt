@@ -164,7 +164,7 @@ struct _GtkSearchEngineBeaglePrivate
 };
 
 
-G_DEFINE_TYPE (GtkSearchEngineBeagle, _gtk_search_engine_beagle, GTK_TYPE_SEARCH_ENGINE);
+STLWRT_DEFINE_TYPE (GtkSearchEngineBeagle, _gtk_search_engine_beagle, GTK_TYPE_SEARCH_ENGINE);
 
 static void
 finalize (GObject *object)

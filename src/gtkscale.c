@@ -127,7 +127,7 @@ static void     gtk_scale_buildable_custom_finished  (GtkBuildable  *buildable,
                                                       gpointer       user_data);
 
 
-G_DEFINE_TYPE_WITH_CODE (GtkScale, gtk_scale, GTK_TYPE_RANGE,
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkScale, gtk_scale, GTK_TYPE_RANGE,
                          G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
                                                 gtk_scale_buildable_interface_init))
 
@@ -564,7 +564,7 @@ __gtk_scale_new_with_range (GtkOrientation orientation,
                           gdouble        max,
                           gdouble        step)
 {
-  GtkObject *adj;
+  GObject *adj;
   gint digits;
 
   g_return_val_if_fail (min < max, NULL);

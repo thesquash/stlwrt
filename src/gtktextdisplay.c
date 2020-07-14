@@ -123,7 +123,7 @@ struct _GtkTextRendererClass
   GdkPangoRendererClass parent_class;
 };
 
-G_DEFINE_TYPE (GtkTextRenderer, _gtk_text_renderer, GDK_TYPE_PANGO_RENDERER)
+STLWRT_DEFINE_TYPE (GtkTextRenderer, _gtk_text_renderer, GDK_TYPE_PANGO_RENDERER)
 
 static GdkColor *
 text_renderer_get_error_color (GtkTextRenderer *text_renderer)

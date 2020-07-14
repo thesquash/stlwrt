@@ -68,7 +68,7 @@ static void         gdk_drawable_real_draw_drawable          (GdkDrawable  *draw
 							      gint	    height);
      
 
-G_DEFINE_ABSTRACT_TYPE (GdkDrawable, gdk_drawable, G_TYPE_OBJECT)
+STLWRT_DEFINE_ABSTRACT_TYPE (GdkDrawable, gdk_drawable, G_TYPE_OBJECT)
 
 static void
 gdk_drawable_class_init (GdkDrawableClass *klass)

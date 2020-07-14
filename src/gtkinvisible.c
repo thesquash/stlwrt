@@ -21,6 +21,8 @@
 
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gdk.h>
 #include <gtkinvisible.h>
 #include <gtkprivate.h>

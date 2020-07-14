@@ -19,6 +19,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <string.h>
 #include <gobject/gvaluecollector.h>
 #include <gtktreemodel.h>

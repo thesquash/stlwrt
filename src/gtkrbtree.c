@@ -19,6 +19,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gtkrbtree.h>
 #include <gtkdebug.h>
 

@@ -21,6 +21,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <gtkpagesetup.h>
 #include <gtkprintutils.h>
 #include <gtkprintoperation.h> /* for GtkPrintError */

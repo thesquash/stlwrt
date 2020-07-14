@@ -23,6 +23,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gdkvisual.h>
 #include <gdkscreen.h>
 

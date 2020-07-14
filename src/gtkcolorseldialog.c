@@ -20,6 +20,8 @@
 
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <string.h>
 #include <glib.h>
 #include <gtkcolorseldialog.h>

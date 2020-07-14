@@ -21,6 +21,8 @@
 
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <string.h>
 #include <gtkalignment.h>
 #include <gtkbutton.h>

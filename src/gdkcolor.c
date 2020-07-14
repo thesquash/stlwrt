@@ -21,6 +21,8 @@
 
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <time.h>
 
 #include <gdkscreen.h>

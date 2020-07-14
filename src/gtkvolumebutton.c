@@ -30,6 +30,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <gtkvolumebutton.h>
 #include <gtkstock.h>
 #include <gtktooltip.h>

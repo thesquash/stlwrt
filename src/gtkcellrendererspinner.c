@@ -30,6 +30,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <gtkcellrendererspinner.h>
 #include <gtkiconfactory.h>
 #include <gtkicontheme.h>

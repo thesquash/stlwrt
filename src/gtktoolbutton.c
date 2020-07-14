@@ -22,6 +22,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gtktoolbutton.h>
 #include <gtkbutton.h>
 #include <gtkhbox.h>

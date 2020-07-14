@@ -20,6 +20,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <gtkdebug.h>
 #include <gtkiconcache.h>
 #include <gtkiconcachevalidator.h>

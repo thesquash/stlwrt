@@ -22,6 +22,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gtksearchengine.h>
 #include <gtksearchenginebeagle.h>
 #include <gtksearchenginesimple.h>

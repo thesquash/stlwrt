@@ -21,6 +21,8 @@
 
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <string.h>
 #include <gtkframe.h>
 #include <gtklabel.h>

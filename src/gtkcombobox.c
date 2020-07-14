@@ -19,6 +19,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gtkcombobox.h>
 
 #include <gtkarrow.h>

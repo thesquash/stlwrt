@@ -22,6 +22,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <errno.h> /* errno */
 #include <stdlib.h> /* strtol, strtoul */
 #include <string.h> /* strlen */

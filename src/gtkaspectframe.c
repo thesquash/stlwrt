@@ -40,6 +40,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gtkaspectframe.h>
 #include <gtkprivate.h>
 #include <gtkintl.h>

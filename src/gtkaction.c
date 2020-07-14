@@ -70,6 +70,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <gtkaction.h>
 #include <gtkactiongroup.h>
 #include <gtkaccellabel.h>

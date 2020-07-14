@@ -27,6 +27,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #undef GTK_DISABLE_DEPRECATED
 
 #include <gtkhruler.h>

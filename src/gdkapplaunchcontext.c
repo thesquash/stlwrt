@@ -23,6 +23,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <gdkapplaunchcontext.h>
 #include <gdkinternals.h>
 #include <gdkscreen.h>

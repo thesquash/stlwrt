@@ -21,6 +21,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gtkfilechooserprivate.h>
 #include <gtkfilechooserdialog.h>
 #include <gtkfilechooserwidget.h>

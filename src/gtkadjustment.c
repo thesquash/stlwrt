@@ -21,6 +21,8 @@
 
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gtkadjustment.h>
 
 #include <gtkprivate.h>

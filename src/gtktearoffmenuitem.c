@@ -22,6 +22,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <gtkmenu.h>
 #include <gtktearoffmenuitem.h>
 #include <gtkintl.h>

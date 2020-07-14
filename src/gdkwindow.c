@@ -27,6 +27,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gdkwindow.h>
 #include <gdkwindowimpl.h>
 #include <gdkinternals.h>

@@ -19,6 +19,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <stdlib.h>
 #include <gtkcellrenderertoggle.h>
 #include <gtkintl.h>

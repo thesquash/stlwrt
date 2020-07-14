@@ -27,6 +27,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <string.h>
 #include <stdarg.h>
 

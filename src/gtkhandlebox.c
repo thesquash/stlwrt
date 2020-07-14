@@ -22,6 +22,8 @@
 
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <stdlib.h>
 #include <gtkhandlebox.h>
 #include <gtkinvisible.h>

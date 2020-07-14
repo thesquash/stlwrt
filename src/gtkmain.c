@@ -22,6 +22,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <gtkmain.h>
 
 #include <glib.h>

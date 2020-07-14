@@ -21,6 +21,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <gtkrecentchooserwidget.h>
 #include <gtkrecentchooserdefault.h>
 #include <gtkrecentchooserutils.h>

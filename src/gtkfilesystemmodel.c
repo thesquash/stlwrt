@@ -21,6 +21,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <gtkfilesystemmodel.h>
 
 #include <stdlib.h>

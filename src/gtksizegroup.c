@@ -20,6 +20,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <string.h>
 #include <gtkcontainer.h>
 #include <gtkintl.h>

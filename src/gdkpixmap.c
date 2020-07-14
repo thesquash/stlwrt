@@ -21,6 +21,8 @@
 
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gdkpixmap.h>
 #include <gdkinternals.h>
 #include <gdkpixbuf.h>

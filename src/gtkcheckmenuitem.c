@@ -21,6 +21,8 @@
 
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gtkcheckmenuitem.h>
 #include <gtkaccellabel.h>
 #include <gtkactivatable.h>

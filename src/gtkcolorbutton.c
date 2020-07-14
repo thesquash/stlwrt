@@ -31,6 +31,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <gtkcolorbutton.h>
 #include <gdkkeysyms.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>

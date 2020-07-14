@@ -21,6 +21,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <gtkfilechooserentry.h>
 
 #include <string.h>

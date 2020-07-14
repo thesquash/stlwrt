@@ -23,6 +23,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 /* these must be defined even when HAVE_GNU_FTW is not defined
  * because (really) old versions of GNU libc have ftw.h but do
  * export ftw() and friends only if _XOPEN_SOURCE and _GNU_SOURCE

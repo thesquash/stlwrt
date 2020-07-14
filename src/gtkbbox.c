@@ -26,6 +26,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gtkbbox.h>
 #include <gtkhbbox.h>
 #include <gtkvbbox.h>

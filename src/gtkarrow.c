@@ -46,6 +46,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <math.h>
 #include <gtkarrow.h>
 #include <gtkprivate.h>

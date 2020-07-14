@@ -21,6 +21,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <gtkcomboboxtext.h>
 #include <gtkcombobox.h>
 #include <gtkcellrenderertext.h>

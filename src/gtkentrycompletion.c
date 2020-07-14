@@ -19,6 +19,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gtkentrycompletion.h>
 #include <gtkentryprivate.h>
 #include <gtkcelllayout.h>

@@ -22,6 +22,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <gdkdisplay.h>
 #include <gdkkeys.h>
 

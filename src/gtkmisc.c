@@ -21,6 +21,8 @@
 
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gtkcontainer.h>
 #include <gtkmisc.h>
 #include <gtkintl.h>

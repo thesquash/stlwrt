@@ -31,6 +31,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <errno.h>
 #include <string.h>
 #include <glib.h>

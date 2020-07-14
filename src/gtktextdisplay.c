@@ -79,6 +79,8 @@
 #undef GDK_DISABLE_DEPRECATED
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gtktextdisplay.h>
 #include <gtkintl.h>
 

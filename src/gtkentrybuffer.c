@@ -20,6 +20,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <gtkentrybuffer.h>
 #include <gtkintl.h>
 

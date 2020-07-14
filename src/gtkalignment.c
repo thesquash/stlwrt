@@ -40,6 +40,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gtkalignment.h>
 #include <gtkprivate.h>
 #include <gtkintl.h>

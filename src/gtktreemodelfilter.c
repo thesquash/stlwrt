@@ -20,6 +20,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gtktreemodelfilter.h>
 #include <gtkintl.h>
 #include <gtktreednd.h>

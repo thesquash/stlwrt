@@ -26,6 +26,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gtkeventbox.h>
 #include <gtkprivate.h>
 #include <gtkintl.h>

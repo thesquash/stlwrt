@@ -27,6 +27,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <gtkorientable.h>
 #include <gtkseparator.h>
 #include <gtkprivate.h>

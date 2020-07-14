@@ -19,6 +19,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <string.h>
 #include <gtkimcontext.h>
 #include <gtkmain.h>		/* For ___gtk_boolean_handled_accumulator */

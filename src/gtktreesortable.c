@@ -20,6 +20,8 @@
 
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gtktreesortable.h>
 
 #include <gtkintl.h>

@@ -22,6 +22,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gtkradiotoolbutton.h>
 #include <gtkradiobutton.h>
 #include <gtkintl.h>

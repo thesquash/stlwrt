@@ -21,6 +21,8 @@
 
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gtkaccellabel.h>
 
 #include <gtkradiomenuitem.h>

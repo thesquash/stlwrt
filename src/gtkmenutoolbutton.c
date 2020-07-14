@@ -22,6 +22,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #undef GTK_DISABLE_DEPRECATED /* GtkTooltips */
 
 #include <gtkmenutoolbutton.h>

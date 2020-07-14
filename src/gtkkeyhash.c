@@ -22,6 +22,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <gtkdebug.h>
 #include <gtkkeyhash.h>
 #include <gtkprivate.h>

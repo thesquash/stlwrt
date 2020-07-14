@@ -34,6 +34,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gtkbin.h>
 #include <gtkintl.h>
 

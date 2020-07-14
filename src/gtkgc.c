@@ -22,6 +22,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #undef GDK_DISABLE_DEPRECATED
 
 #include <gtkgc.h>

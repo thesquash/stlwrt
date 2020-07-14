@@ -70,6 +70,8 @@ SOFTWARE.
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <stdlib.h>
 #include <string.h>
 #include <gdkregion.h>

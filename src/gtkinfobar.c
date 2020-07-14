@@ -32,6 +32,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <stdlib.h>
 
 #include <gtkinfobar.h>

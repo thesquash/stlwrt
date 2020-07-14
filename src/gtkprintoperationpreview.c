@@ -21,6 +21,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <gtkprintoperationpreview.h>
 
 #include <gtkintl.h>

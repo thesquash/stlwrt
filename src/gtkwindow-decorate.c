@@ -23,6 +23,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gtkprivate.h>
 #include <gtkwindow.h>
 #include <gtkmain.h>

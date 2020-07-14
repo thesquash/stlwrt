@@ -26,6 +26,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <stdlib.h>
 #include <errno.h>
 #include <string.h>

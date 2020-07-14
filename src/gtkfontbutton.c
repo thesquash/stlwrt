@@ -29,6 +29,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <gtkfontbutton.h>
 
 #include <gtkmain.h>

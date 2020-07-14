@@ -22,6 +22,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <gtktextview.h>
 #include <gtktextutil.h>
 

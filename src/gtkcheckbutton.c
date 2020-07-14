@@ -21,6 +21,8 @@
 
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gtkcheckbutton.h>
 #include <gtklabel.h>
 #include <gtkprivate.h>

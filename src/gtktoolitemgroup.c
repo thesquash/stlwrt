@@ -23,6 +23,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <gtktoolpaletteprivate.h>
 
 #include <gtk/gtk.h>

@@ -22,6 +22,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <gtkrecentchooser.h>
 #include <gtkrecentchooserprivate.h>
 #include <gtkrecentmanager.h>

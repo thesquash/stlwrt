@@ -28,6 +28,8 @@
 #define GTK_MENU_INTERNALS
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <string.h>
 
 #include <gtkaccellabel.h>

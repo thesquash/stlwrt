@@ -21,6 +21,8 @@
 
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <stdarg.h>
 #include <string.h>
 #include <stdlib.h>

@@ -28,6 +28,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <gtkorientable.h>
 #include <gtkvscrollbar.h>
 #include <gtkintl.h>

@@ -22,6 +22,8 @@
  */
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <gdk.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gdkpixbuf.h>

@@ -24,6 +24,8 @@
 
 
 #include "config.h"
+
+#include <stlwrtobject.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>

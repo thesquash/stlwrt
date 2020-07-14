@@ -23,6 +23,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <gdk.h>
 
 #include <gtkshow.h>

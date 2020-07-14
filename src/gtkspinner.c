@@ -32,6 +32,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <gtkintl.h>
 #include <gtkaccessible.h>
 #include <gtkimage.h>

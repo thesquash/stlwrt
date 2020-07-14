@@ -21,6 +21,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #ifdef HAVE_UNISTD_H

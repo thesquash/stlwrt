@@ -48,6 +48,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <atk/atk.h>
 
 #include <gtkassistant.h>

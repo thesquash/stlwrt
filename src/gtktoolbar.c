@@ -34,6 +34,8 @@
 
 #include "config.h"
 
+#include <stlwrtobject.h>
+
 #include <math.h>
 #include <string.h>
 

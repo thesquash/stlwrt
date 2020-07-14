@@ -1,3 +1,4 @@
+#include <glib.h>
 
 #define N_(s) s
 

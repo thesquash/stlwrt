@@ -29,9 +29,6 @@
 #include <gtk/gtktreemodel.h>
 #include <gtk/gtktreesortable.h>
 
-/* Not needed, retained for compatibility -Yosh */
-#include <gtk/gtkobject.h>
-
 
 G_BEGIN_DECLS
 
@@ -62,7 +59,7 @@ typedef void (* GtkTreeCellDataFunc) (GtkTreeViewColumn *tree_column,
 
 struct _GtkTreeViewColumn
 {
-  GtkObject parent;
+  GObject parent;
 
   GtkWidget * (tree_view);
   GtkWidget * (button);
@@ -113,7 +110,7 @@ struct _GtkTreeViewColumn
 
 struct _GtkTreeViewColumnClass
 {
-  GtkObjectClass parent_class;
+  GObjectClass parent_class;
 
   void (*clicked) (GtkTreeViewColumn *tree_column);
 

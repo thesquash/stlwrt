@@ -58,7 +58,7 @@ typedef struct _GtkCellRendererClass GtkCellRendererClass;
 
 struct _GtkCellRenderer
 {
-  GtkObject parent;
+  GObject parent;
 
   gfloat  (xalign);
   gfloat  (yalign);
@@ -80,7 +80,7 @@ struct _GtkCellRenderer
 
 struct _GtkCellRendererClass
 {
-  GtkObjectClass parent_class;
+  GObjectClass parent_class;
 
   /* vtable - not signals */
   void             (* get_size)      (GtkCellRenderer      *cell,

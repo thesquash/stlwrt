@@ -157,7 +157,7 @@ void	   __gtk_grab_remove	   (GtkWidget	       *widget);
 void	   __gtk_init_add		   (GtkFunction	       function,
 				    gpointer	       data);
 void	   __gtk_quit_add_destroy	   (guint	       main_level,
-				    GtkObject	      *object);
+				    GObject	      *object);
 guint	   __gtk_quit_add		   (guint	       main_level,
 				    GtkFunction	       function,
 				    gpointer	       data);

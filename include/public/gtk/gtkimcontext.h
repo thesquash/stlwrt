@@ -27,7 +27,6 @@
 #endif
 
 #include <gdk/gdk.h>
-#include <gtk/gtkobject.h>
 
 
 G_BEGIN_DECLS
@@ -54,7 +53,7 @@ struct _GtkIMContextClass
   /* Yes, this should be GObjectClass, be we can't fix it without breaking
    * binary compatibility - see bug #90935
    */
-  GtkObjectClass parent_class;
+  GObjectClass parent_class;
 
   /*< public >*/
   /* Signals */

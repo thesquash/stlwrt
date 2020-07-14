@@ -225,12 +225,6 @@ GType gtk_buttons_type_get_type (void) G_GNUC_CONST;
 GType gtk_notebook_tab_get_type (void) G_GNUC_CONST;
 #define GTK_TYPE_NOTEBOOK_TAB (gtk_notebook_tab_get_type ())
 
-/* enumerations from "gtkobject.h" */
-GType gtk_object_flags_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_OBJECT_FLAGS (gtk_object_flags_get_type ())
-GType gtk_arg_flags_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_ARG_FLAGS (gtk_arg_flags_get_type ())
-
 /* enumerations from "gtkprintoperation.h" */
 GType gtk_print_status_get_type (void) G_GNUC_CONST;
 #define GTK_TYPE_PRINT_STATUS (gtk_print_status_get_type ())

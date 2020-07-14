@@ -59,9 +59,6 @@
 #include <gdk.h>
 #include <gtkenums.h>
 
-/* Not needed, retained for compatibility -Yosh */
-#include <gtkobject.h>
-
 
 G_BEGIN_DECLS
 

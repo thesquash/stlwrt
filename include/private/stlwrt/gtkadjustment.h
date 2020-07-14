@@ -34,7 +34,6 @@
 #endif
 
 #include <gdk.h>
-#include <gtkobject.h>
 
 G_BEGIN_DECLS
 
@@ -51,7 +50,7 @@ typedef struct _GtkAdjustmentClass  GtkAdjustmentClass;
 
 struct _GtkAdjustment
 {
-  GtkObject parent_instance;
+  GObject parent_instance;
 
   gdouble  (lower);
   gdouble  (upper);
@@ -63,7 +62,7 @@ struct _GtkAdjustment
 
 struct _GtkAdjustmentClass
 {
-  GtkObjectClass parent_class;
+  GObjectClass parent_class;
 
   void (* changed)	 (GtkAdjustment *adjustment);
   void (* value_changed) (GtkAdjustment *adjustment);
@@ -77,7 +76,7 @@ struct _GtkAdjustmentClass
 
 
 GType	   __gtk_adjustment_get_type		(void) G_GNUC_CONST;
-GtkObject* __gtk_adjustment_new			(gdouble	  value,
+GObject* __gtk_adjustment_new			(gdouble	  value,
 						 gdouble	  lower,
 						 gdouble	  upper,
 						 gdouble	  step_increment,

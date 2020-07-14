@@ -47,10 +47,10 @@ GType gtk_identifier_get_type (void) G_GNUC_CONST;
  * provide some fundamental function signatures
  */
 typedef struct _GtkArg	       	     GtkArg;
-typedef struct _GtkObject   	     GtkObject; /* object forward declaration */
+typedef struct _GObject   	     GObject; /* object forward declaration */
 #if !defined (GTK_DISABLE_DEPRECATED) || defined (GTK_COMPILATION)
 typedef gboolean (*GtkFunction)	    (gpointer      data);
-typedef void (*GtkCallbackMarshal)  (GtkObject    *object,
+typedef void (*GtkCallbackMarshal)  (GObject    *object,
 				     gpointer      data,
 				     guint         n_args,
 				     GtkArg       *args);
@@ -97,9 +97,9 @@ typedef GType GtkFundamentalType;
 /* --- type macros --- */
 #define GTK_CLASS_NAME(class)		(g_type_name (G_TYPE_FROM_CLASS (class)))
 #define GTK_CLASS_TYPE(class)		(G_TYPE_FROM_CLASS (class))
-#define GTK_TYPE_IS_OBJECT(type)	(g_type_is_a ((type), GTK_TYPE_OBJECT))
+#define GTK_TYPE_IS_OBJECT(type)	(g_type_is_a ((type), G_TYPE_OBJECT))
 
-/* outdated macros that really shouldn't e used anymore,
+/* outdated macros that really shouldn't be used anymore,
  * use the GLib type system instead
  */
 #define	GTK_TYPE_FUNDAMENTAL_LAST        (G_TYPE_LAST_RESERVED_FUNDAMENTAL - 1)
@@ -121,7 +121,7 @@ typedef GType                   GtkType;
 typedef GTypeInstance           GtkTypeObject;
 typedef GTypeClass              GtkTypeClass;
 typedef GBaseInitFunc           GtkClassInitFunc;
-typedef GInstanceInitFunc       GtkObjectInitFunc;
+typedef GInstanceInitFunc       GObjectInitFunc;
 typedef GSignalCMarshaller      GtkSignalMarshaller;
 
 typedef void (*GtkDestroyNotify)    (gpointer data);
@@ -159,7 +159,7 @@ struct _GtkArg
     gfloat float_data;
     gdouble double_data;
     gchar *string_data;
-    GtkObject *object_data;
+    GObject *object_data;
     gpointer pointer_data;
 
     /* structured values */
@@ -212,7 +212,7 @@ struct _GtkArg
 #define GTK_RETLOC_ENUM(a)	((gint*)	(a).d.pointer_data)
 #define GTK_RETLOC_FLAGS(a)	((guint*)	(a).d.pointer_data)
 #define GTK_RETLOC_BOXED(a)	((gpointer*)	(a).d.pointer_data)
-#define GTK_RETLOC_OBJECT(a)	((GtkObject**)	(a).d.pointer_data)
+#define GTK_RETLOC_OBJECT(a)	((GObject**)	(a).d.pointer_data)
 #define GTK_RETLOC_POINTER(a)	((gpointer*)	(a).d.pointer_data)
 /* GTK_RETLOC_SIGNAL() - no such thing */
 
@@ -228,7 +228,7 @@ struct _GtkTypeInfo
   guint			 object_size;
   guint			 class_size;
   GtkClassInitFunc	 class_init_func;
-  GtkObjectInitFunc	 object_init_func;
+  GObjectInitFunc	 object_init_func;
   gpointer		 reserved_1;
   gpointer		 reserved_2;
   GtkClassInitFunc	 base_class_init_func;

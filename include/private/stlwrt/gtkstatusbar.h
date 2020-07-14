@@ -45,8 +45,10 @@ G_BEGIN_DECLS
 #define GTK_STATUSBAR_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_STATUSBAR, GtkStatusbarClass))
 
 
-typedef struct _GtkStatusbar      GtkStatusbar;
-typedef struct _GtkStatusbarClass GtkStatusbarClass;
+typedef struct _GtkStatusbar      GtkStatusbarFat;
+typedef struct _GtkStatusbar      GtkStatusbarSkinny;
+typedef struct _GtkStatusbarClass GtkStatusbarClassFat;
+typedef struct _GtkStatusbarClass GtkStatusbarClassSkinny;
 
 struct _GtkStatusbar
 {

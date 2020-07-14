@@ -46,8 +46,10 @@ G_BEGIN_DECLS
 #define GTK_MENU_SHELL_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_MENU_SHELL, GtkMenuShellClass))
 
 
-typedef struct _GtkMenuShell	   GtkMenuShell;
-typedef struct _GtkMenuShellClass  GtkMenuShellClass;
+typedef struct _GtkMenuShell	   GtkMenuShellFat;
+typedef struct _GtkMenuShell	   GtkMenuShellSkinny;
+typedef struct _GtkMenuShellClass  GtkMenuShellClassFat;
+typedef struct _GtkMenuShellClass  GtkMenuShellClassSkinny;
 
 struct _GtkMenuShell
 {

@@ -46,8 +46,10 @@ G_BEGIN_DECLS
 #define GTK_CHECK_BUTTON_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_CHECK_BUTTON, GtkCheckButtonClass))
 
 
-typedef struct _GtkCheckButton       GtkCheckButton;
-typedef struct _GtkCheckButtonClass  GtkCheckButtonClass;
+typedef struct _GtkCheckButton       GtkCheckButtonFat;
+typedef struct _GtkCheckButton       GtkCheckButtonSkinny;
+typedef struct _GtkCheckButtonClass  GtkCheckButtonClassFat;
+typedef struct _GtkCheckButtonClass  GtkCheckButtonClassSkinny;
 
 struct _GtkCheckButton
 {

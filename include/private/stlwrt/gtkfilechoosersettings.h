@@ -38,8 +38,10 @@ enum {
   FILE_LIST_COL_NUM_COLUMNS
 };
 
-typedef struct _GtkFileChooserSettings GtkFileChooserSettings;
-typedef struct _GtkFileChooserSettingsClass GtkFileChooserSettingsClass;
+typedef struct _GtkFileChooserSettings GtkFileChooserSettingsFat;
+typedef struct _GtkFileChooserSettings GtkFileChooserSettingsSkinny;
+typedef struct _GtkFileChooserSettingsClass GtkFileChooserSettingsClassFat;
+typedef struct _GtkFileChooserSettingsClass GtkFileChooserSettingsClassSkinny;
 
 struct _GtkFileChooserSettings
 {

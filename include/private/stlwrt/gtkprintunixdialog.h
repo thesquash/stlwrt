@@ -39,8 +39,10 @@ G_BEGIN_DECLS
 #define GTK_PRINT_UNIX_DIALOG_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_PRINT_UNIX_DIALOG, GtkPrintUnixDialogClass))
 
 
-typedef struct _GtkPrintUnixDialog         GtkPrintUnixDialog;
-typedef struct _GtkPrintUnixDialogClass    GtkPrintUnixDialogClass;
+typedef struct _GtkPrintUnixDialog         GtkPrintUnixDialogFat;
+typedef struct _GtkPrintUnixDialog         GtkPrintUnixDialogSkinny;
+typedef struct _GtkPrintUnixDialogClass    GtkPrintUnixDialogClassFat;
+typedef struct _GtkPrintUnixDialogClass    GtkPrintUnixDialogClassSkinny;
 typedef struct GtkPrintUnixDialogPrivate   GtkPrintUnixDialogPrivate;
 
 struct _GtkPrintUnixDialog

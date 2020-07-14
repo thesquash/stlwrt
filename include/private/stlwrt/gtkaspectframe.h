@@ -46,8 +46,10 @@ G_BEGIN_DECLS
 #define GTK_ASPECT_FRAME_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ASPECT_FRAME, GtkAspectFrameClass))
 
 
-typedef struct _GtkAspectFrame       GtkAspectFrame;
-typedef struct _GtkAspectFrameClass  GtkAspectFrameClass;
+typedef struct _GtkAspectFrame       GtkAspectFrameFat;
+typedef struct _GtkAspectFrame       GtkAspectFrameSkinny;
+typedef struct _GtkAspectFrameClass  GtkAspectFrameClassFat;
+typedef struct _GtkAspectFrameClass  GtkAspectFrameClassSkinny;
 
 struct _GtkAspectFrame
 {

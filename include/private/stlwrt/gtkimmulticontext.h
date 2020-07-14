@@ -38,8 +38,10 @@ G_BEGIN_DECLS
 #define GTK_IM_MULTICONTEXT_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_IM_MULTICONTEXT, GtkIMMulticontextClass))
 
 
-typedef struct _GtkIMMulticontext        GtkIMMulticontext;
-typedef struct _GtkIMMulticontextClass   GtkIMMulticontextClass;
+typedef struct _GtkIMMulticontext        GtkIMMulticontextFat;
+typedef struct _GtkIMMulticontext        GtkIMMulticontextSkinny;
+typedef struct _GtkIMMulticontextClass   GtkIMMulticontextClassFat;
+typedef struct _GtkIMMulticontextClass   GtkIMMulticontextClassSkinny;
 typedef struct _GtkIMMulticontextPrivate GtkIMMulticontextPrivate;
 
 struct _GtkIMMulticontext

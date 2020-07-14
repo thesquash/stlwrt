@@ -47,8 +47,10 @@ typedef void (* GtkTreeModelFilterModifyFunc) (GtkTreeModel *model,
                                                gint          column,
                                                gpointer      data);
 
-typedef struct _GtkTreeModelFilter          GtkTreeModelFilter;
-typedef struct _GtkTreeModelFilterClass     GtkTreeModelFilterClass;
+typedef struct _GtkTreeModelFilter          GtkTreeModelFilterFat;
+typedef struct _GtkTreeModelFilter          GtkTreeModelFilterSkinny;
+typedef struct _GtkTreeModelFilterClass     GtkTreeModelFilterClassFat;
+typedef struct _GtkTreeModelFilterClass     GtkTreeModelFilterClassSkinny;
 typedef struct _GtkTreeModelFilterPrivate   GtkTreeModelFilterPrivate;
 
 struct _GtkTreeModelFilter

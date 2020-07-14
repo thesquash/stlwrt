@@ -34,7 +34,8 @@ G_BEGIN_DECLS
 #define GTK_FILE_FILTER(obj)              (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_FILE_FILTER, GtkFileFilter))
 #define GTK_IS_FILE_FILTER(obj)           (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FILE_FILTER))
 
-typedef struct _GtkFileFilter     GtkFileFilter;
+typedef struct _GtkFileFilter     GtkFileFilterFat;
+typedef struct _GtkFileFilter     GtkFileFilterSkinny;
 typedef struct _GtkFileFilterInfo GtkFileFilterInfo;
 
 typedef enum {

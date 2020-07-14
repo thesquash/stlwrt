@@ -44,8 +44,10 @@ G_BEGIN_DECLS
 #define GTK_PANED_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_PANED, GtkPanedClass))
 
 
-typedef struct _GtkPaned        GtkPaned;
-typedef struct _GtkPanedClass   GtkPanedClass;
+typedef struct _GtkPaned        GtkPanedFat;
+typedef struct _GtkPaned        GtkPanedSkinny;
+typedef struct _GtkPanedClass   GtkPanedClassFat;
+typedef struct _GtkPanedClass   GtkPanedClassSkinny;
 typedef struct _GtkPanedPrivate GtkPanedPrivate;
 
 struct _GtkPaned

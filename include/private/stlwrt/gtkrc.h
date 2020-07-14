@@ -38,10 +38,12 @@
 G_BEGIN_DECLS
 
 /* Forward declarations */
-typedef struct _GtkIconFactory  GtkIconFactory;
+typedef struct _GtkIconFactory  GtkIconFactoryFat;
+typedef struct _GtkIconFactory  GtkIconFactorySkinny;
 typedef struct _GtkRcContext    GtkRcContext;
 
-typedef struct _GtkRcStyleClass GtkRcStyleClass;
+typedef struct _GtkRcStyleClass GtkRcStyleClassFat;
+typedef struct _GtkRcStyleClass GtkRcStyleClassSkinny;
 
 #define GTK_TYPE_RC_STYLE              (__gtk_rc_style_get_type ())
 #define GTK_RC_STYLE(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GTK_TYPE_RC_STYLE, GtkRcStyle))

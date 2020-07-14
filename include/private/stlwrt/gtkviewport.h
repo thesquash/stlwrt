@@ -48,8 +48,10 @@ G_BEGIN_DECLS
 #define GTK_VIEWPORT_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_VIEWPORT, GtkViewportClass))
 
 
-typedef struct _GtkViewport       GtkViewport;
-typedef struct _GtkViewportClass  GtkViewportClass;
+typedef struct _GtkViewport       GtkViewportFat;
+typedef struct _GtkViewport       GtkViewportSkinny;
+typedef struct _GtkViewportClass  GtkViewportClassFat;
+typedef struct _GtkViewportClass  GtkViewportClassSkinny;
 
 struct _GtkViewport
 {

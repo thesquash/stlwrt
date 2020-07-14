@@ -41,7 +41,8 @@
 
 G_BEGIN_DECLS
 
-typedef struct _GdkDrawableClass GdkDrawableClass;
+typedef struct _GdkDrawableClass GdkDrawableClassFat;
+typedef struct _GdkDrawableClass GdkDrawableClassSkinny;
 typedef struct _GdkTrapezoid     GdkTrapezoid;
 
 #define GDK_TYPE_DRAWABLE              (__gdk_drawable_get_type ())

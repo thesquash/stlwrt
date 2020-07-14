@@ -41,8 +41,10 @@ G_BEGIN_DECLS
 #define GTK_IS_TREE_STORE_CLASS(klass)		(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TREE_STORE))
 #define GTK_TREE_STORE_GET_CLASS(obj)		(G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TREE_STORE, GtkTreeStoreClass))
 
-typedef struct _GtkTreeStore       GtkTreeStore;
-typedef struct _GtkTreeStoreClass  GtkTreeStoreClass;
+typedef struct _GtkTreeStore       GtkTreeStoreFat;
+typedef struct _GtkTreeStore       GtkTreeStoreSkinny;
+typedef struct _GtkTreeStoreClass  GtkTreeStoreClassFat;
+typedef struct _GtkTreeStoreClass  GtkTreeStoreClassSkinny;
 
 struct _GtkTreeStore
 {

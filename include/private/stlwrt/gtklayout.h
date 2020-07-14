@@ -51,8 +51,10 @@ G_BEGIN_DECLS
 #define GTK_LAYOUT_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_LAYOUT, GtkLayoutClass))
 
 
-typedef struct _GtkLayout        GtkLayout;
-typedef struct _GtkLayoutClass   GtkLayoutClass;
+typedef struct _GtkLayout        GtkLayoutFat;
+typedef struct _GtkLayout        GtkLayoutSkinny;
+typedef struct _GtkLayoutClass   GtkLayoutClassFat;
+typedef struct _GtkLayoutClass   GtkLayoutClassSkinny;
 
 struct _GtkLayout
 {

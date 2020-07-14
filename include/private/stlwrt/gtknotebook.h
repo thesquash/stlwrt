@@ -53,8 +53,10 @@ typedef enum
   GTK_NOTEBOOK_TAB_LAST
 } GtkNotebookTab;
 
-typedef struct _GtkNotebook       GtkNotebook;
-typedef struct _GtkNotebookClass  GtkNotebookClass;
+typedef struct _GtkNotebook       GtkNotebookFat;
+typedef struct _GtkNotebook       GtkNotebookSkinny;
+typedef struct _GtkNotebookClass  GtkNotebookClassFat;
+typedef struct _GtkNotebookClass  GtkNotebookClassSkinny;
 #if !defined (GTK_DISABLE_DEPRECATED) || defined (STLWRT_COMPILATION)
 typedef struct _GtkNotebookPage   GtkNotebookPage;
 #endif

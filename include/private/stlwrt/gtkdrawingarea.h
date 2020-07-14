@@ -46,8 +46,10 @@ G_BEGIN_DECLS
 #define GTK_DRAWING_AREA_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_DRAWING_AREA, GtkDrawingAreaClass))
 
 
-typedef struct _GtkDrawingArea       GtkDrawingArea;
-typedef struct _GtkDrawingAreaClass  GtkDrawingAreaClass;
+typedef struct _GtkDrawingArea       GtkDrawingAreaFat;
+typedef struct _GtkDrawingArea       GtkDrawingAreaSkinny;
+typedef struct _GtkDrawingAreaClass  GtkDrawingAreaClassFat;
+typedef struct _GtkDrawingAreaClass  GtkDrawingAreaClassSkinny;
 
 struct _GtkDrawingArea
 {

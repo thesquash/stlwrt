@@ -50,8 +50,10 @@ G_BEGIN_DECLS
 #define GTK_IS_UI_MANAGER_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_UI_MANAGER))
 #define GTK_UI_MANAGER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), GTK_TYPE_UI_MANAGER, GtkUIManagerClass))
 
-typedef struct _GtkUIManager      GtkUIManager;
-typedef struct _GtkUIManagerClass GtkUIManagerClass;
+typedef struct _GtkUIManager      GtkUIManagerFat;
+typedef struct _GtkUIManager      GtkUIManagerSkinny;
+typedef struct _GtkUIManagerClass GtkUIManagerClassFat;
+typedef struct _GtkUIManagerClass GtkUIManagerClassSkinny;
 typedef struct _GtkUIManagerPrivate GtkUIManagerPrivate;
 
 

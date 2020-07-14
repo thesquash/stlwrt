@@ -47,8 +47,10 @@ G_BEGIN_DECLS
 #define GTK_VBUTTON_BOX_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_VBUTTON_BOX, GtkVButtonBoxClass))
 
 
-typedef struct _GtkVButtonBox       GtkVButtonBox;
-typedef struct _GtkVButtonBoxClass  GtkVButtonBoxClass;
+typedef struct _GtkVButtonBox       GtkVButtonBoxFat;
+typedef struct _GtkVButtonBox       GtkVButtonBoxSkinny;
+typedef struct _GtkVButtonBoxClass  GtkVButtonBoxClassFat;
+typedef struct _GtkVButtonBoxClass  GtkVButtonBoxClassSkinny;
 
 struct _GtkVButtonBox
 {

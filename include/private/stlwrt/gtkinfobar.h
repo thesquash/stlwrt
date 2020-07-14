@@ -53,8 +53,10 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkInfoBarPrivate GtkInfoBarPrivate;
-typedef struct _GtkInfoBarClass GtkInfoBarClass;
-typedef struct _GtkInfoBar GtkInfoBar;
+typedef struct _GtkInfoBarClass GtkInfoBarClassFat;
+typedef struct _GtkInfoBarClass GtkInfoBarClassSkinny;
+typedef struct _GtkInfoBar GtkInfoBarFat;
+typedef struct _GtkInfoBar GtkInfoBarSkinny;
 
 
 struct _GtkInfoBar

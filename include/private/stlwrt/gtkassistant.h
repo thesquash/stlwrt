@@ -70,9 +70,11 @@ typedef enum
   GTK_ASSISTANT_PAGE_PROGRESS
 } GtkAssistantPageType;
 
-typedef struct _GtkAssistant        GtkAssistant;
+typedef struct _GtkAssistant        GtkAssistantFat;
+typedef struct _GtkAssistant        GtkAssistantSkinny;
 typedef struct _GtkAssistantPrivate GtkAssistantPrivate;
-typedef struct _GtkAssistantClass   GtkAssistantClass;
+typedef struct _GtkAssistantClass   GtkAssistantClassFat;
+typedef struct _GtkAssistantClass   GtkAssistantClassSkinny;
 
 struct _GtkAssistant
 {

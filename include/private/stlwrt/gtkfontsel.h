@@ -59,11 +59,15 @@ G_BEGIN_DECLS
 #define GTK_FONT_SELECTION_DIALOG_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_FONT_SELECTION_DIALOG, GtkFontSelectionDialogClass))
 
 
-typedef struct _GtkFontSelection	     GtkFontSelection;
-typedef struct _GtkFontSelectionClass	     GtkFontSelectionClass;
+typedef struct _GtkFontSelection	     GtkFontSelectionFat;
+typedef struct _GtkFontSelection	     GtkFontSelectionSkinny;
+typedef struct _GtkFontSelectionClass	     GtkFontSelectionClassFat;
+typedef struct _GtkFontSelectionClass	     GtkFontSelectionClassSkinny;
 
-typedef struct _GtkFontSelectionDialog	     GtkFontSelectionDialog;
-typedef struct _GtkFontSelectionDialogClass  GtkFontSelectionDialogClass;
+typedef struct _GtkFontSelectionDialog	     GtkFontSelectionDialogFat;
+typedef struct _GtkFontSelectionDialog	     GtkFontSelectionDialogSkinny;
+typedef struct _GtkFontSelectionDialogClass  GtkFontSelectionDialogClassFat;
+typedef struct _GtkFontSelectionDialogClass  GtkFontSelectionDialogClassSkinny;
 
 struct _GtkFontSelection
 {

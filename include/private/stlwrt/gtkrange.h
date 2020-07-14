@@ -51,8 +51,10 @@ G_BEGIN_DECLS
 typedef struct _GtkRangeLayout    GtkRangeLayout;
 typedef struct _GtkRangeStepTimer GtkRangeStepTimer;
 
-typedef struct _GtkRange        GtkRange;
-typedef struct _GtkRangeClass   GtkRangeClass;
+typedef struct _GtkRange        GtkRangeFat;
+typedef struct _GtkRange        GtkRangeSkinny;
+typedef struct _GtkRangeClass   GtkRangeClassFat;
+typedef struct _GtkRangeClass   GtkRangeClassSkinny;
 
 struct _GtkRange
 {

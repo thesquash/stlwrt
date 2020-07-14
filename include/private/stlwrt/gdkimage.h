@@ -54,7 +54,8 @@ typedef enum
   GDK_IMAGE_FASTEST
 } GdkImageType;
 
-typedef struct _GdkImageClass GdkImageClass;
+typedef struct _GdkImageClass GdkImageClassFat;
+typedef struct _GdkImageClass GdkImageClassSkinny;
 
 #define GDK_TYPE_IMAGE              (__gdk_image_get_type ())
 #define GDK_IMAGE(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_IMAGE, GdkImage))

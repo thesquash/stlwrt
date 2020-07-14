@@ -46,8 +46,10 @@ G_BEGIN_DECLS
 #define GTK_SEPARATOR_MENU_ITEM_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_SEPARATOR_MENU_ITEM, GtkSeparatorMenuItemClass))
 
 
-typedef struct _GtkSeparatorMenuItem       GtkSeparatorMenuItem;
-typedef struct _GtkSeparatorMenuItemClass  GtkSeparatorMenuItemClass;
+typedef struct _GtkSeparatorMenuItem       GtkSeparatorMenuItemFat;
+typedef struct _GtkSeparatorMenuItem       GtkSeparatorMenuItemSkinny;
+typedef struct _GtkSeparatorMenuItemClass  GtkSeparatorMenuItemClassFat;
+typedef struct _GtkSeparatorMenuItemClass  GtkSeparatorMenuItemClassSkinny;
 
 struct _GtkSeparatorMenuItem
 {

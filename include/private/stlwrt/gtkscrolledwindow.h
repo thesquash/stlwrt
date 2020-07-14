@@ -50,8 +50,10 @@ G_BEGIN_DECLS
 
 
 
-typedef struct _GtkScrolledWindow       GtkScrolledWindow;
-typedef struct _GtkScrolledWindowClass  GtkScrolledWindowClass;
+typedef struct _GtkScrolledWindow       GtkScrolledWindowFat;
+typedef struct _GtkScrolledWindow       GtkScrolledWindowSkinny;
+typedef struct _GtkScrolledWindowClass  GtkScrolledWindowClassFat;
+typedef struct _GtkScrolledWindowClass  GtkScrolledWindowClassSkinny;
 
 struct _GtkScrolledWindow
 {

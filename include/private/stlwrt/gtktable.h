@@ -46,8 +46,10 @@ G_BEGIN_DECLS
 #define GTK_TABLE_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TABLE, GtkTableClass))
 
 
-typedef struct _GtkTable	GtkTable;
-typedef struct _GtkTableClass	GtkTableClass;
+typedef struct _GtkTable	GtkTableFat;
+typedef struct _GtkTable	GtkTableSkinny;
+typedef struct _GtkTableClass	GtkTableClassFat;
+typedef struct _GtkTableClass	GtkTableClassSkinny;
 typedef struct _GtkTableChild	GtkTableChild;
 typedef struct _GtkTableRowCol	GtkTableRowCol;
 

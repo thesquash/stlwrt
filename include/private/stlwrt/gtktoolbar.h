@@ -87,8 +87,10 @@ typedef enum
   GTK_TOOLBAR_SPACE_LINE
 } GtkToolbarSpaceStyle;
 
-typedef struct _GtkToolbar           GtkToolbar;
-typedef struct _GtkToolbarClass      GtkToolbarClass;
+typedef struct _GtkToolbar           GtkToolbarFat;
+typedef struct _GtkToolbar           GtkToolbarSkinny;
+typedef struct _GtkToolbarClass      GtkToolbarClassFat;
+typedef struct _GtkToolbarClass      GtkToolbarClassSkinny;
 typedef struct _GtkToolbarPrivate    GtkToolbarPrivate;
 
 struct _GtkToolbar

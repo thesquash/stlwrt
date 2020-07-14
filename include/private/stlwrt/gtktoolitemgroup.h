@@ -39,8 +39,10 @@ G_BEGIN_DECLS
 #define GTK_IS_TOOL_ITEM_GROUP_CLASS(obj)  (G_TYPE_CHECK_CLASS_TYPE (obj, GTK_TYPE_TOOL_ITEM_GROUP))
 #define GTK_TOOL_ITEM_GROUP_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TOOL_ITEM_GROUP, GtkToolItemGroupClass))
 
-typedef struct _GtkToolItemGroup        GtkToolItemGroup;
-typedef struct _GtkToolItemGroupClass   GtkToolItemGroupClass;
+typedef struct _GtkToolItemGroup        GtkToolItemGroupFat;
+typedef struct _GtkToolItemGroup        GtkToolItemGroupSkinny;
+typedef struct _GtkToolItemGroupClass   GtkToolItemGroupClassFat;
+typedef struct _GtkToolItemGroupClass   GtkToolItemGroupClassSkinny;
 typedef struct _GtkToolItemGroupPrivate GtkToolItemGroupPrivate;
 
 /**

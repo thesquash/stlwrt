@@ -37,7 +37,8 @@
 
 G_BEGIN_DECLS
 
-typedef struct _GtkIconFactoryClass GtkIconFactoryClass;
+typedef struct _GtkIconFactoryClass GtkIconFactoryClassFat;
+typedef struct _GtkIconFactoryClass GtkIconFactoryClassSkinny;
 
 #define GTK_TYPE_ICON_FACTORY              (__gtk_icon_factory_get_type ())
 #define GTK_ICON_FACTORY(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GTK_TYPE_ICON_FACTORY, GtkIconFactory))

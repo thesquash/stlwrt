@@ -39,8 +39,10 @@ G_BEGIN_DECLS
 #define GTK_IM_CONTEXT_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_IM_CONTEXT, GtkIMContextClass))
 
 
-typedef struct _GtkIMContext       GtkIMContext;
-typedef struct _GtkIMContextClass  GtkIMContextClass;
+typedef struct _GtkIMContext       GtkIMContextFat;
+typedef struct _GtkIMContext       GtkIMContextSkinny;
+typedef struct _GtkIMContextClass  GtkIMContextClassFat;
+typedef struct _GtkIMContextClass  GtkIMContextClassSkinny;
 
 struct _GtkIMContext
 {

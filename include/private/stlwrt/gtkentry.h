@@ -61,8 +61,10 @@ typedef enum
   GTK_ENTRY_ICON_SECONDARY
 } GtkEntryIconPosition;
 
-typedef struct _GtkEntry       GtkEntry;
-typedef struct _GtkEntryClass  GtkEntryClass;
+typedef struct _GtkEntry       GtkEntryFat;
+typedef struct _GtkEntry       GtkEntrySkinny;
+typedef struct _GtkEntryClass  GtkEntryClassFat;
+typedef struct _GtkEntryClass  GtkEntryClassSkinny;
 
 struct _GtkEntry
 {

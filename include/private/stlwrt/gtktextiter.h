@@ -49,7 +49,8 @@ typedef enum {
  * are changed.
  */
 
-typedef struct _GtkTextBuffer GtkTextBuffer;
+typedef struct _GtkTextBuffer GtkTextBufferFat;
+typedef struct _GtkTextBuffer GtkTextBufferSkinny;
 
 #define GTK_TYPE_TEXT_ITER     (__gtk_text_iter_get_type ())
 

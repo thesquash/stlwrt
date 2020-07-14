@@ -49,8 +49,10 @@ G_BEGIN_DECLS
 #define GTK_HSV_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_HSV, GtkHSVClass))
 
 
-typedef struct _GtkHSV      GtkHSV;
-typedef struct _GtkHSVClass GtkHSVClass;
+typedef struct _GtkHSV      GtkHSVFat;
+typedef struct _GtkHSV      GtkHSVSkinny;
+typedef struct _GtkHSVClass GtkHSVClassFat;
+typedef struct _GtkHSVClass GtkHSVClassSkinny;
 
 struct _GtkHSV
 {

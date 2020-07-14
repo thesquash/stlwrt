@@ -38,8 +38,10 @@ G_BEGIN_DECLS
 #define GTK_IS_RECENT_CHOOSER_MENU_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_RECENT_CHOOSER_MENU))
 #define GTK_RECENT_CHOOSER_MENU_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_RECENT_CHOOSER_MENU, GtkRecentChooserMenuClass))
 
-typedef struct _GtkRecentChooserMenu		GtkRecentChooserMenu;
-typedef struct _GtkRecentChooserMenuClass	GtkRecentChooserMenuClass;
+typedef struct _GtkRecentChooserMenu		GtkRecentChooserMenuFat;
+typedef struct _GtkRecentChooserMenu		GtkRecentChooserMenuSkinny;
+typedef struct _GtkRecentChooserMenuClass	GtkRecentChooserMenuClassFat;
+typedef struct _GtkRecentChooserMenuClass	GtkRecentChooserMenuClassSkinny;
 typedef struct _GtkRecentChooserMenuPrivate	GtkRecentChooserMenuPrivate;
 
 struct _GtkRecentChooserMenu

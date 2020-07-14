@@ -32,9 +32,11 @@ G_BEGIN_DECLS
 #define GTK_IS_TRAY_ICON_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TRAY_ICON))
 #define GTK_TRAY_ICON_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TRAY_ICON, GtkTrayIconClass))
 	
-typedef struct _GtkTrayIcon	   GtkTrayIcon;
+typedef struct _GtkTrayIcon	   GtkTrayIconFat;
+typedef struct _GtkTrayIcon	   GtkTrayIconSkinny;
 typedef struct _GtkTrayIconPrivate GtkTrayIconPrivate;
-typedef struct _GtkTrayIconClass   GtkTrayIconClass;
+typedef struct _GtkTrayIconClass   GtkTrayIconClassFat;
+typedef struct _GtkTrayIconClass   GtkTrayIconClassSkinny;
 
 struct _GtkTrayIcon
 {

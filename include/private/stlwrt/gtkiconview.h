@@ -40,8 +40,10 @@ G_BEGIN_DECLS
 #define GTK_IS_ICON_VIEW_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_ICON_VIEW))
 #define GTK_ICON_VIEW_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ICON_VIEW, GtkIconViewClass))
 
-typedef struct _GtkIconView           GtkIconView;
-typedef struct _GtkIconViewClass      GtkIconViewClass;
+typedef struct _GtkIconView           GtkIconViewFat;
+typedef struct _GtkIconView           GtkIconViewSkinny;
+typedef struct _GtkIconViewClass      GtkIconViewClassFat;
+typedef struct _GtkIconViewClass      GtkIconViewClassSkinny;
 typedef struct _GtkIconViewPrivate    GtkIconViewPrivate;
 
 typedef void (* GtkIconViewForeachFunc)     (GtkIconView      *icon_view,

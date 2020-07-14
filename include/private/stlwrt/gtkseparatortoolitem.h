@@ -38,8 +38,10 @@ G_BEGIN_DECLS
 #define GTK_IS_SEPARATOR_TOOL_ITEM_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_SEPARATOR_TOOL_ITEM))
 #define GTK_SEPARATOR_TOOL_ITEM_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), GTK_TYPE_SEPARATOR_TOOL_ITEM, GtkSeparatorToolItemClass))
 
-typedef struct _GtkSeparatorToolItem        GtkSeparatorToolItem;
-typedef struct _GtkSeparatorToolItemClass   GtkSeparatorToolItemClass;
+typedef struct _GtkSeparatorToolItem        GtkSeparatorToolItemFat;
+typedef struct _GtkSeparatorToolItem        GtkSeparatorToolItemSkinny;
+typedef struct _GtkSeparatorToolItemClass   GtkSeparatorToolItemClassFat;
+typedef struct _GtkSeparatorToolItemClass   GtkSeparatorToolItemClassSkinny;
 typedef struct _GtkSeparatorToolItemPrivate GtkSeparatorToolItemPrivate;
 
 struct _GtkSeparatorToolItem

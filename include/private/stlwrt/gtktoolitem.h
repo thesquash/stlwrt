@@ -42,8 +42,10 @@ G_BEGIN_DECLS
 #define GTK_IS_TOOL_ITEM_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TOOL_ITEM))
 #define GTK_TOOL_ITEM_GET_CLASS(o)    (G_TYPE_INSTANCE_GET_CLASS((o), GTK_TYPE_TOOL_ITEM, GtkToolItemClass))
 
-typedef struct _GtkToolItem        GtkToolItem;
-typedef struct _GtkToolItemClass   GtkToolItemClass;
+typedef struct _GtkToolItem        GtkToolItemFat;
+typedef struct _GtkToolItem        GtkToolItemSkinny;
+typedef struct _GtkToolItemClass   GtkToolItemClassFat;
+typedef struct _GtkToolItemClass   GtkToolItemClassSkinny;
 typedef struct _GtkToolItemPrivate GtkToolItemPrivate;
 
 struct _GtkToolItem

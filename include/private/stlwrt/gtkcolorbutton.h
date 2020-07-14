@@ -56,8 +56,10 @@ G_BEGIN_DECLS
 #define GTK_IS_COLOR_BUTTON_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_COLOR_BUTTON))
 #define GTK_COLOR_BUTTON_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_COLOR_BUTTON, GtkColorButtonClass))
 
-typedef struct _GtkColorButton          GtkColorButton;
-typedef struct _GtkColorButtonClass     GtkColorButtonClass;
+typedef struct _GtkColorButton          GtkColorButtonFat;
+typedef struct _GtkColorButton          GtkColorButtonSkinny;
+typedef struct _GtkColorButtonClass     GtkColorButtonClassFat;
+typedef struct _GtkColorButtonClass     GtkColorButtonClassSkinny;
 typedef struct _GtkColorButtonPrivate   GtkColorButtonPrivate;
 
 struct _GtkColorButton {

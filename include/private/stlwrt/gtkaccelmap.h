@@ -38,8 +38,10 @@ G_BEGIN_DECLS
 #define GTK_IS_ACCEL_MAP_CLASS(klass)	  (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_ACCEL_MAP))
 #define GTK_ACCEL_MAP_GET_CLASS(obj)      (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ACCEL_MAP, GtkAccelMapClass))
 
-typedef struct _GtkAccelMap      GtkAccelMap;
-typedef struct _GtkAccelMapClass GtkAccelMapClass;
+typedef struct _GtkAccelMap      GtkAccelMapFat;
+typedef struct _GtkAccelMap      GtkAccelMapSkinny;
+typedef struct _GtkAccelMapClass GtkAccelMapClassFat;
+typedef struct _GtkAccelMapClass GtkAccelMapClassSkinny;
 
 /* --- notifier --- */
 typedef void (*GtkAccelMapForeach)		(gpointer	 data,

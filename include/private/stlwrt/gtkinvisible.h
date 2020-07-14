@@ -44,8 +44,10 @@ G_BEGIN_DECLS
 #define GTK_INVISIBLE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_INVISIBLE, GtkInvisibleClass))
 
 
-typedef struct _GtkInvisible	   GtkInvisible;
-typedef struct _GtkInvisibleClass  GtkInvisibleClass;
+typedef struct _GtkInvisible	   GtkInvisibleFat;
+typedef struct _GtkInvisible	   GtkInvisibleSkinny;
+typedef struct _GtkInvisibleClass  GtkInvisibleClassFat;
+typedef struct _GtkInvisibleClass  GtkInvisibleClassSkinny;
 
 struct _GtkInvisible
 {

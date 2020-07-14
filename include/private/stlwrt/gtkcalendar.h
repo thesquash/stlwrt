@@ -48,8 +48,10 @@ G_BEGIN_DECLS
 #define GTK_CALENDAR_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_CALENDAR, GtkCalendarClass))
 
 
-typedef struct _GtkCalendar	       GtkCalendar;
-typedef struct _GtkCalendarClass       GtkCalendarClass;
+typedef struct _GtkCalendar	       GtkCalendarFat;
+typedef struct _GtkCalendar	       GtkCalendarSkinny;
+typedef struct _GtkCalendarClass       GtkCalendarClassFat;
+typedef struct _GtkCalendarClass       GtkCalendarClassSkinny;
 
 typedef struct _GtkCalendarPrivate     GtkCalendarPrivate;
 

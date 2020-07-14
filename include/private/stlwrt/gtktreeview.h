@@ -53,11 +53,15 @@ typedef enum
 #define GTK_IS_TREE_VIEW_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TREE_VIEW))
 #define GTK_TREE_VIEW_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TREE_VIEW, GtkTreeViewClass))
 
-typedef struct _GtkTreeView           GtkTreeView;
-typedef struct _GtkTreeViewClass      GtkTreeViewClass;
+typedef struct _GtkTreeView           GtkTreeViewFat;
+typedef struct _GtkTreeView           GtkTreeViewSkinny;
+typedef struct _GtkTreeViewClass      GtkTreeViewClassFat;
+typedef struct _GtkTreeViewClass      GtkTreeViewClassSkinny;
 typedef struct _GtkTreeViewPrivate    GtkTreeViewPrivate;
-typedef struct _GtkTreeSelection      GtkTreeSelection;
-typedef struct _GtkTreeSelectionClass GtkTreeSelectionClass;
+typedef struct _GtkTreeSelection      GtkTreeSelectionFat;
+typedef struct _GtkTreeSelection      GtkTreeSelectionSkinny;
+typedef struct _GtkTreeSelectionClass GtkTreeSelectionClassFat;
+typedef struct _GtkTreeSelectionClass GtkTreeSelectionClassSkinny;
 
 struct _GtkTreeView
 {

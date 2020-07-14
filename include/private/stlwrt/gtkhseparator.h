@@ -46,8 +46,10 @@ G_BEGIN_DECLS
 #define GTK_HSEPARATOR_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_HSEPARATOR, GtkHSeparatorClass))
 
 
-typedef struct _GtkHSeparator       GtkHSeparator;
-typedef struct _GtkHSeparatorClass  GtkHSeparatorClass;
+typedef struct _GtkHSeparator       GtkHSeparatorFat;
+typedef struct _GtkHSeparator       GtkHSeparatorSkinny;
+typedef struct _GtkHSeparatorClass  GtkHSeparatorClassFat;
+typedef struct _GtkHSeparatorClass  GtkHSeparatorClassSkinny;
 
 struct _GtkHSeparator
 {

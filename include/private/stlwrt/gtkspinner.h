@@ -41,8 +41,10 @@ G_BEGIN_DECLS
 #define GTK_IS_SPINNER_CLASS(obj)  (G_TYPE_CHECK_CLASS_TYPE ((obj), GTK_TYPE_SPINNER))
 #define GTK_SPINNER_GET_CLASS      (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_SPINNER, GtkSpinnerClass))
 
-typedef struct _GtkSpinner      GtkSpinner;
-typedef struct _GtkSpinnerClass GtkSpinnerClass;
+typedef struct _GtkSpinner      GtkSpinnerFat;
+typedef struct _GtkSpinner      GtkSpinnerSkinny;
+typedef struct _GtkSpinnerClass GtkSpinnerClassFat;
+typedef struct _GtkSpinnerClass GtkSpinnerClassSkinny;
 typedef struct _GtkSpinnerPrivate  GtkSpinnerPrivate;
 
 struct _GtkSpinner

@@ -46,8 +46,10 @@ G_BEGIN_DECLS
 #define GTK_FIXED_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_FIXED, GtkFixedClass))
 
 
-typedef struct _GtkFixed        GtkFixed;
-typedef struct _GtkFixedClass   GtkFixedClass;
+typedef struct _GtkFixed        GtkFixedFat;
+typedef struct _GtkFixed        GtkFixedSkinny;
+typedef struct _GtkFixedClass   GtkFixedClassFat;
+typedef struct _GtkFixedClass   GtkFixedClassSkinny;
 typedef struct _GtkFixedChild   GtkFixedChild;
 
 struct _GtkFixed

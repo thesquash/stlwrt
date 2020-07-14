@@ -41,7 +41,8 @@ G_BEGIN_DECLS
 #define GTK_ORIENTABLE_GET_IFACE(inst)  (G_TYPE_INSTANCE_GET_INTERFACE ((inst), GTK_TYPE_ORIENTABLE, GtkOrientableIface))
 
 
-typedef struct _GtkOrientable       GtkOrientable;         /* Dummy typedef */
+typedef struct _GtkOrientable       GtkOrientableFat;
+typedef struct _GtkOrientable       GtkOrientableSkinny;         /* Dummy typedef */
 typedef struct _GtkOrientableIface  GtkOrientableIface;
 
 struct _GtkOrientableIface

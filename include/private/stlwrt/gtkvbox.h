@@ -46,8 +46,10 @@ G_BEGIN_DECLS
 #define GTK_VBOX_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_VBOX, GtkVBoxClass))
 
 
-typedef struct _GtkVBox	      GtkVBox;
-typedef struct _GtkVBoxClass  GtkVBoxClass;
+typedef struct _GtkVBox	      GtkVBoxFat;
+typedef struct _GtkVBox	      GtkVBoxSkinny;
+typedef struct _GtkVBoxClass  GtkVBoxClassFat;
+typedef struct _GtkVBoxClass  GtkVBoxClassSkinny;
 
 struct _GtkVBox
 {

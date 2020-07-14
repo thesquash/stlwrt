@@ -45,8 +45,10 @@ G_BEGIN_DECLS
 #define GTK_IS_EVENT_BOX_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_EVENT_BOX))
 #define GTK_EVENT_BOX_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_EVENT_BOX, GtkEventBoxClass))
 
-typedef struct _GtkEventBox	  GtkEventBox;
-typedef struct _GtkEventBoxClass  GtkEventBoxClass;
+typedef struct _GtkEventBox	  GtkEventBoxFat;
+typedef struct _GtkEventBox	  GtkEventBoxSkinny;
+typedef struct _GtkEventBoxClass  GtkEventBoxClassFat;
+typedef struct _GtkEventBoxClass  GtkEventBoxClassSkinny;
 
 struct _GtkEventBox
 {

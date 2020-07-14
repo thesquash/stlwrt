@@ -46,8 +46,10 @@ G_BEGIN_DECLS
 #define GTK_MISC_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_MISC, GtkMiscClass))
 
 
-typedef struct _GtkMisc	      GtkMisc;
-typedef struct _GtkMiscClass  GtkMiscClass;
+typedef struct _GtkMisc	      GtkMiscFat;
+typedef struct _GtkMisc	      GtkMiscSkinny;
+typedef struct _GtkMiscClass  GtkMiscClassFat;
+typedef struct _GtkMiscClass  GtkMiscClassSkinny;
 
 struct _GtkMisc
 {

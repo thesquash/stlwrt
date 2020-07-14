@@ -52,14 +52,18 @@ G_BEGIN_DECLS
  * files.
  */
 typedef struct _GtkBorder      GtkBorder;
-typedef struct _GtkStyle       GtkStyle;
-typedef struct _GtkStyleClass  GtkStyleClass;
+typedef struct _GtkStyle       GtkStyleFat;
+typedef struct _GtkStyle       GtkStyleSkinny;
+typedef struct _GtkStyleClass  GtkStyleClassFat;
+typedef struct _GtkStyleClass  GtkStyleClassSkinny;
 typedef struct _GtkThemeEngine GtkThemeEngine;
-typedef struct _GtkRcStyle     GtkRcStyle;
+typedef struct _GtkRcStyle     GtkRcStyleFat;
+typedef struct _GtkRcStyle     GtkRcStyleSkinny;
 typedef struct _GtkIconSet     GtkIconSet;
 typedef struct _GtkIconSource  GtkIconSource;
 typedef struct _GtkRcProperty  GtkRcProperty;
-typedef struct _GtkSettings    GtkSettings;
+typedef struct _GtkSettings    GtkSettingsFat;
+typedef struct _GtkSettings    GtkSettingsSkinny;
 typedef gboolean (*GtkRcPropertyParser) (const GParamSpec *pspec,
 					 const GString    *rc_string,
 					 GValue           *property_value);
@@ -67,7 +71,8 @@ typedef gboolean (*GtkRcPropertyParser) (const GParamSpec *pspec,
 /* We make this forward declaration here, since we pass
  * GtkWidget's to the draw functions.
  */
-typedef struct _GtkWidget      GtkWidget;
+typedef struct _GtkWidget      GtkWidgetFat;
+typedef struct _GtkWidget      GtkWidgetSkinny;
 
 #define GTK_STYLE_ATTACHED(style)	(GTK_STYLE (style)->attach_count > 0)
 

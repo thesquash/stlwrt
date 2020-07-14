@@ -46,8 +46,10 @@ G_BEGIN_DECLS
 #define GTK_HBOX_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_HBOX, GtkHBoxClass))
 
 
-typedef struct _GtkHBox	      GtkHBox;
-typedef struct _GtkHBoxClass  GtkHBoxClass;
+typedef struct _GtkHBox	      GtkHBoxFat;
+typedef struct _GtkHBox	      GtkHBoxSkinny;
+typedef struct _GtkHBoxClass  GtkHBoxClassFat;
+typedef struct _GtkHBoxClass  GtkHBoxClassSkinny;
 
 struct _GtkHBox
 {

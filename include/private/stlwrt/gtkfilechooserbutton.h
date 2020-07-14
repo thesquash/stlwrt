@@ -38,9 +38,11 @@ G_BEGIN_DECLS
 #define GTK_IS_FILE_CHOOSER_BUTTON_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_FILE_CHOOSER_BUTTON))
 #define GTK_FILE_CHOOSER_BUTTON_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_FILE_CHOOSER_BUTTON, GtkFileChooserButtonClass))
 
-typedef struct _GtkFileChooserButton        GtkFileChooserButton;
+typedef struct _GtkFileChooserButton        GtkFileChooserButtonFat;
+typedef struct _GtkFileChooserButton        GtkFileChooserButtonSkinny;
 typedef struct _GtkFileChooserButtonPrivate GtkFileChooserButtonPrivate;
-typedef struct _GtkFileChooserButtonClass   GtkFileChooserButtonClass;
+typedef struct _GtkFileChooserButtonClass   GtkFileChooserButtonClassFat;
+typedef struct _GtkFileChooserButtonClass   GtkFileChooserButtonClassSkinny;
 
 struct _GtkFileChooserButton
 {

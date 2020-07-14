@@ -31,8 +31,10 @@ G_BEGIN_DECLS
 
 /* Pango interaction */
 
-typedef struct _GdkPangoRenderer        GdkPangoRenderer;
-typedef struct _GdkPangoRendererClass   GdkPangoRendererClass;
+typedef struct _GdkPangoRenderer        GdkPangoRendererFat;
+typedef struct _GdkPangoRenderer        GdkPangoRendererSkinny;
+typedef struct _GdkPangoRendererClass   GdkPangoRendererClassFat;
+typedef struct _GdkPangoRendererClass   GdkPangoRendererClassSkinny;
 typedef struct _GdkPangoRendererPrivate GdkPangoRendererPrivate;
 
 #define GDK_TYPE_PANGO_RENDERER            (__gdk_pango_renderer_get_type())

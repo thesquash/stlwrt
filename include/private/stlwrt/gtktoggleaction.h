@@ -47,9 +47,11 @@ G_BEGIN_DECLS
 #define GTK_IS_TOGGLE_ACTION_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TOGGLE_ACTION))
 #define GTK_TOGGLE_ACTION_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), GTK_TYPE_TOGGLE_ACTION, GtkToggleActionClass))
 
-typedef struct _GtkToggleAction        GtkToggleAction;
+typedef struct _GtkToggleAction        GtkToggleActionFat;
+typedef struct _GtkToggleAction        GtkToggleActionSkinny;
 typedef struct _GtkToggleActionPrivate GtkToggleActionPrivate;
-typedef struct _GtkToggleActionClass   GtkToggleActionClass;
+typedef struct _GtkToggleActionClass   GtkToggleActionClassFat;
+typedef struct _GtkToggleActionClass   GtkToggleActionClassSkinny;
 
 struct _GtkToggleAction
 {

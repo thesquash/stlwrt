@@ -59,8 +59,10 @@ typedef enum
 
 #define GTK_TEXT_VIEW_PRIORITY_VALIDATE (GDK_PRIORITY_REDRAW + 5)
 
-typedef struct _GtkTextView GtkTextView;
-typedef struct _GtkTextViewClass GtkTextViewClass;
+typedef struct _GtkTextView GtkTextViewFat;
+typedef struct _GtkTextView GtkTextViewSkinny;
+typedef struct _GtkTextViewClass GtkTextViewClassFat;
+typedef struct _GtkTextViewClass GtkTextViewClassSkinny;
 
 /* Internal private types. */
 typedef struct _GtkTextWindow GtkTextWindow;

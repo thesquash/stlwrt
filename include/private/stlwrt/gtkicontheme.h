@@ -40,8 +40,10 @@ G_BEGIN_DECLS
 #define GTK_ICON_THEME_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ICON_THEME, GtkIconThemeClass))
 
 typedef struct _GtkIconInfo         GtkIconInfo;
-typedef struct _GtkIconTheme        GtkIconTheme;
-typedef struct _GtkIconThemeClass   GtkIconThemeClass;
+typedef struct _GtkIconTheme        GtkIconThemeFat;
+typedef struct _GtkIconTheme        GtkIconThemeSkinny;
+typedef struct _GtkIconThemeClass   GtkIconThemeClassFat;
+typedef struct _GtkIconThemeClass   GtkIconThemeClassSkinny;
 typedef struct _GtkIconThemePrivate GtkIconThemePrivate;
 
 struct _GtkIconTheme

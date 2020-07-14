@@ -47,8 +47,10 @@ G_BEGIN_DECLS
 #define GTK_MENU_GET_CLASS(obj)         (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_MENU, GtkMenuClass))
 
 
-typedef struct _GtkMenu	      GtkMenu;
-typedef struct _GtkMenuClass  GtkMenuClass;
+typedef struct _GtkMenu	      GtkMenuFat;
+typedef struct _GtkMenu	      GtkMenuSkinny;
+typedef struct _GtkMenuClass  GtkMenuClassFat;
+typedef struct _GtkMenuClass  GtkMenuClassSkinny;
 
 typedef void (*GtkMenuPositionFunc) (GtkMenu   *menu,
 				     gint      *x,

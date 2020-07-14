@@ -59,8 +59,10 @@ G_BEGIN_DECLS
 #define GTK_VRULER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_VRULER, GtkVRulerClass))
 
 
-typedef struct _GtkVRuler       GtkVRuler;
-typedef struct _GtkVRulerClass  GtkVRulerClass;
+typedef struct _GtkVRuler       GtkVRulerFat;
+typedef struct _GtkVRuler       GtkVRulerSkinny;
+typedef struct _GtkVRulerClass  GtkVRulerClassFat;
+typedef struct _GtkVRulerClass  GtkVRulerClassSkinny;
 
 struct _GtkVRuler
 {

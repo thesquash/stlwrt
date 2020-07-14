@@ -41,8 +41,10 @@ G_BEGIN_DECLS
 #define GTK_IS_LINK_BUTTON_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_LINK_BUTTON))
 #define GTK_LINK_BUTTON_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_LINK_BUTTON, GtkLinkButtonClass))
 
-typedef struct _GtkLinkButton		GtkLinkButton;
-typedef struct _GtkLinkButtonClass	GtkLinkButtonClass;
+typedef struct _GtkLinkButton		GtkLinkButtonFat;
+typedef struct _GtkLinkButton		GtkLinkButtonSkinny;
+typedef struct _GtkLinkButtonClass	GtkLinkButtonClassFat;
+typedef struct _GtkLinkButtonClass	GtkLinkButtonClassSkinny;
 typedef struct _GtkLinkButtonPrivate	GtkLinkButtonPrivate;
 
 typedef void (*GtkLinkButtonUriFunc) (GtkLinkButton *button,

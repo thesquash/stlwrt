@@ -47,8 +47,10 @@ G_BEGIN_DECLS
 #define GTK_VSCROLLBAR_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_VSCROLLBAR, GtkVScrollbarClass))
 
 
-typedef struct _GtkVScrollbar       GtkVScrollbar;
-typedef struct _GtkVScrollbarClass  GtkVScrollbarClass;
+typedef struct _GtkVScrollbar       GtkVScrollbarFat;
+typedef struct _GtkVScrollbar       GtkVScrollbarSkinny;
+typedef struct _GtkVScrollbarClass  GtkVScrollbarClassFat;
+typedef struct _GtkVScrollbarClass  GtkVScrollbarClassSkinny;
 
 /**
  * GtkVScrollbar:

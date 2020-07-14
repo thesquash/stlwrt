@@ -43,8 +43,10 @@ G_BEGIN_DECLS
  * views.
  */
 
-typedef struct _GtkTextChildAnchor      GtkTextChildAnchor;
-typedef struct _GtkTextChildAnchorClass GtkTextChildAnchorClass;
+typedef struct _GtkTextChildAnchor      GtkTextChildAnchorFat;
+typedef struct _GtkTextChildAnchor      GtkTextChildAnchorSkinny;
+typedef struct _GtkTextChildAnchorClass GtkTextChildAnchorClassFat;
+typedef struct _GtkTextChildAnchorClass GtkTextChildAnchorClassSkinny;
 
 #define GTK_TYPE_TEXT_CHILD_ANCHOR              (__gtk_text_child_anchor_get_type ())
 #define GTK_TEXT_CHILD_ANCHOR(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GTK_TYPE_TEXT_CHILD_ANCHOR, GtkTextChildAnchor))

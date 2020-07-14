@@ -51,8 +51,10 @@ G_BEGIN_DECLS
 #define GTK_HANDLE_BOX_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_HANDLE_BOX, GtkHandleBoxClass))
 
 
-typedef struct _GtkHandleBox       GtkHandleBox;
-typedef struct _GtkHandleBoxClass  GtkHandleBoxClass;
+typedef struct _GtkHandleBox       GtkHandleBoxFat;
+typedef struct _GtkHandleBox       GtkHandleBoxSkinny;
+typedef struct _GtkHandleBoxClass  GtkHandleBoxClassFat;
+typedef struct _GtkHandleBoxClass  GtkHandleBoxClassSkinny;
 
 struct _GtkHandleBox
 {

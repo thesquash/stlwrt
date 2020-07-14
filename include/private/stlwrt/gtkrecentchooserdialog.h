@@ -38,8 +38,10 @@ G_BEGIN_DECLS
 #define GTK_IS_RECENT_CHOOSER_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_RECENT_CHOOSER_DIALOG))
 #define GTK_RECENT_CHOOSER_DIALOG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_RECENT_CHOOSER_DIALOG, GtkRecentChooserDialogClass))
 
-typedef struct _GtkRecentChooserDialog        GtkRecentChooserDialog;
-typedef struct _GtkRecentChooserDialogClass   GtkRecentChooserDialogClass;
+typedef struct _GtkRecentChooserDialog        GtkRecentChooserDialogFat;
+typedef struct _GtkRecentChooserDialog        GtkRecentChooserDialogSkinny;
+typedef struct _GtkRecentChooserDialogClass   GtkRecentChooserDialogClassFat;
+typedef struct _GtkRecentChooserDialogClass   GtkRecentChooserDialogClassSkinny;
 
 typedef struct _GtkRecentChooserDialogPrivate GtkRecentChooserDialogPrivate;
 

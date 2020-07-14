@@ -46,8 +46,10 @@ G_BEGIN_DECLS
 #define GTK_RADIO_MENU_ITEM_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_RADIO_MENU_ITEM, GtkRadioMenuItemClass))
 
 
-typedef struct _GtkRadioMenuItem       GtkRadioMenuItem;
-typedef struct _GtkRadioMenuItemClass  GtkRadioMenuItemClass;
+typedef struct _GtkRadioMenuItem       GtkRadioMenuItemFat;
+typedef struct _GtkRadioMenuItem       GtkRadioMenuItemSkinny;
+typedef struct _GtkRadioMenuItemClass  GtkRadioMenuItemClassFat;
+typedef struct _GtkRadioMenuItemClass  GtkRadioMenuItemClassSkinny;
 
 struct _GtkRadioMenuItem
 {

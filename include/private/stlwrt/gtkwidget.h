@@ -189,12 +189,16 @@ typedef enum
  */
 typedef struct _GtkRequisition	   GtkRequisition;
 typedef struct _GtkSelectionData   GtkSelectionData;
-typedef struct _GtkWidgetClass	   GtkWidgetClass;
+typedef struct _GtkWidgetClass	   GtkWidgetClassFat;
+typedef struct _GtkWidgetClass	   GtkWidgetClassSkinny;
 typedef struct _GtkWidgetAuxInfo   GtkWidgetAuxInfo;
 typedef struct _GtkWidgetShapeInfo GtkWidgetShapeInfo;
-typedef struct _GtkClipboard	   GtkClipboard;
-typedef struct _GtkTooltip         GtkTooltip;
-typedef struct _GtkWindow          GtkWindow;
+typedef struct _GtkClipboard	   GtkClipboardFat;
+typedef struct _GtkClipboard	   GtkClipboardSkinny;
+typedef struct _GtkTooltip         GtkTooltipFat;
+typedef struct _GtkTooltip         GtkTooltipSkinny;
+typedef struct _GtkWindow          GtkWindowFat;
+typedef struct _GtkWindow          GtkWindowSkinny;
 
 /**
  * GtkAllocation:

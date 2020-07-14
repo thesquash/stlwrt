@@ -39,8 +39,10 @@ G_BEGIN_DECLS
 #define GTK_IS_RADIO_TOOL_BUTTON_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_RADIO_TOOL_BUTTON))
 #define GTK_RADIO_TOOL_BUTTON_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), GTK_TYPE_RADIO_TOOL_BUTTON, GtkRadioToolButtonClass))
 
-typedef struct _GtkRadioToolButton      GtkRadioToolButton;
-typedef struct _GtkRadioToolButtonClass GtkRadioToolButtonClass;
+typedef struct _GtkRadioToolButton      GtkRadioToolButtonFat;
+typedef struct _GtkRadioToolButton      GtkRadioToolButtonSkinny;
+typedef struct _GtkRadioToolButtonClass GtkRadioToolButtonClassFat;
+typedef struct _GtkRadioToolButtonClass GtkRadioToolButtonClassSkinny;
 
 struct _GtkRadioToolButton
 {

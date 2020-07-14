@@ -47,8 +47,10 @@ G_BEGIN_DECLS
 #define GTK_FRAME_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_FRAME, GtkFrameClass))
 
 
-typedef struct _GtkFrame       GtkFrame;
-typedef struct _GtkFrameClass  GtkFrameClass;
+typedef struct _GtkFrame       GtkFrameFat;
+typedef struct _GtkFrame       GtkFrameSkinny;
+typedef struct _GtkFrameClass  GtkFrameClassFat;
+typedef struct _GtkFrameClass  GtkFrameClassSkinny;
 
 struct _GtkFrame
 {

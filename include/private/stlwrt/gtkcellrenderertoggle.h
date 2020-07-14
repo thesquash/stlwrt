@@ -38,8 +38,10 @@ G_BEGIN_DECLS
 #define GTK_IS_CELL_RENDERER_TOGGLE_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_CELL_RENDERER_TOGGLE))
 #define GTK_CELL_RENDERER_TOGGLE_GET_CLASS(obj)         (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_CELL_RENDERER_TOGGLE, GtkCellRendererToggleClass))
 
-typedef struct _GtkCellRendererToggle GtkCellRendererToggle;
-typedef struct _GtkCellRendererToggleClass GtkCellRendererToggleClass;
+typedef struct _GtkCellRendererToggle GtkCellRendererToggleFat;
+typedef struct _GtkCellRendererToggle GtkCellRendererToggleSkinny;
+typedef struct _GtkCellRendererToggleClass GtkCellRendererToggleClassFat;
+typedef struct _GtkCellRendererToggleClass GtkCellRendererToggleClassSkinny;
 
 struct _GtkCellRendererToggle
 {

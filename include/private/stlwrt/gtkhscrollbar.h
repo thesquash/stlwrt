@@ -47,8 +47,10 @@ G_BEGIN_DECLS
 #define GTK_HSCROLLBAR_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_HSCROLLBAR, GtkHScrollbarClass))
 
 
-typedef struct _GtkHScrollbar       GtkHScrollbar;
-typedef struct _GtkHScrollbarClass  GtkHScrollbarClass;
+typedef struct _GtkHScrollbar       GtkHScrollbarFat;
+typedef struct _GtkHScrollbar       GtkHScrollbarSkinny;
+typedef struct _GtkHScrollbarClass  GtkHScrollbarClassFat;
+typedef struct _GtkHScrollbarClass  GtkHScrollbarClassSkinny;
 
 struct _GtkHScrollbar
 {

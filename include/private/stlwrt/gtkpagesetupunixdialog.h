@@ -37,8 +37,10 @@ G_BEGIN_DECLS
 #define GTK_PAGE_SETUP_UNIX_DIALOG_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_PAGE_SETUP_UNIX_DIALOG, GtkPageSetupUnixDialogClass))
 
 
-typedef struct _GtkPageSetupUnixDialog         GtkPageSetupUnixDialog;
-typedef struct _GtkPageSetupUnixDialogClass    GtkPageSetupUnixDialogClass;
+typedef struct _GtkPageSetupUnixDialog         GtkPageSetupUnixDialogFat;
+typedef struct _GtkPageSetupUnixDialog         GtkPageSetupUnixDialogSkinny;
+typedef struct _GtkPageSetupUnixDialogClass    GtkPageSetupUnixDialogClassFat;
+typedef struct _GtkPageSetupUnixDialogClass    GtkPageSetupUnixDialogClassSkinny;
 typedef struct GtkPageSetupUnixDialogPrivate   GtkPageSetupUnixDialogPrivate;
 
 struct _GtkPageSetupUnixDialog

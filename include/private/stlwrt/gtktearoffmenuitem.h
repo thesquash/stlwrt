@@ -46,8 +46,10 @@ G_BEGIN_DECLS
 #define GTK_TEAROFF_MENU_ITEM_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TEAROFF_MENU_ITEM, GtkTearoffMenuItemClass))
 
 
-typedef struct _GtkTearoffMenuItem       GtkTearoffMenuItem;
-typedef struct _GtkTearoffMenuItemClass  GtkTearoffMenuItemClass;
+typedef struct _GtkTearoffMenuItem       GtkTearoffMenuItemFat;
+typedef struct _GtkTearoffMenuItem       GtkTearoffMenuItemSkinny;
+typedef struct _GtkTearoffMenuItemClass  GtkTearoffMenuItemClassFat;
+typedef struct _GtkTearoffMenuItemClass  GtkTearoffMenuItemClassSkinny;
 
 struct _GtkTearoffMenuItem
 {

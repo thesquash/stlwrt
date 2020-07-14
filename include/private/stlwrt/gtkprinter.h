@@ -58,10 +58,13 @@ GType __gtk_print_capabilities_get_type (void) G_GNUC_CONST;
 #define GTK_IS_PRINTER_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_PRINTER))
 #define GTK_PRINTER_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_PRINTER, GtkPrinterClass))
 
-typedef struct _GtkPrinter          GtkPrinter;
-typedef struct _GtkPrinterClass     GtkPrinterClass;
+typedef struct _GtkPrinter          GtkPrinterFat;
+typedef struct _GtkPrinter          GtkPrinterSkinny;
+typedef struct _GtkPrinterClass     GtkPrinterClassFat;
+typedef struct _GtkPrinterClass     GtkPrinterClassSkinny;
 typedef struct _GtkPrinterPrivate   GtkPrinterPrivate;
-typedef struct _GtkPrintBackend     GtkPrintBackend;
+typedef struct _GtkPrintBackend     GtkPrintBackendFat;
+typedef struct _GtkPrintBackend     GtkPrintBackendSkinny;
 
 struct _GtkPrintBackend;
 

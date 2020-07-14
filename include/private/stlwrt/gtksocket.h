@@ -43,8 +43,10 @@ G_BEGIN_DECLS
 #define GTK_SOCKET_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_SOCKET, GtkSocketClass))
 
 
-typedef struct _GtkSocket        GtkSocket;
-typedef struct _GtkSocketClass   GtkSocketClass;
+typedef struct _GtkSocket        GtkSocketFat;
+typedef struct _GtkSocket        GtkSocketSkinny;
+typedef struct _GtkSocketClass   GtkSocketClassFat;
+typedef struct _GtkSocketClass   GtkSocketClassSkinny;
 
 struct _GtkSocket
 {

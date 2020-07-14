@@ -33,8 +33,10 @@ G_BEGIN_DECLS
 #define GTK_CUSTOM_PAPER_UNIX_DIALOG_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_CUSTOM_PAPER_UNIX_DIALOG, GtkCustomPaperUnixDialogClass))
 
 
-typedef struct _GtkCustomPaperUnixDialog         GtkCustomPaperUnixDialog;
-typedef struct _GtkCustomPaperUnixDialogClass    GtkCustomPaperUnixDialogClass;
+typedef struct _GtkCustomPaperUnixDialog         GtkCustomPaperUnixDialogFat;
+typedef struct _GtkCustomPaperUnixDialog         GtkCustomPaperUnixDialogSkinny;
+typedef struct _GtkCustomPaperUnixDialogClass    GtkCustomPaperUnixDialogClassFat;
+typedef struct _GtkCustomPaperUnixDialogClass    GtkCustomPaperUnixDialogClassSkinny;
 typedef struct GtkCustomPaperUnixDialogPrivate   GtkCustomPaperUnixDialogPrivate;
 
 struct _GtkCustomPaperUnixDialog

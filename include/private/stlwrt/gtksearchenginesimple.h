@@ -35,8 +35,10 @@ G_BEGIN_DECLS
 #define GTK_IS_SEARCH_ENGINE_SIMPLE_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_SEARCH_ENGINE_SIMPLE))
 #define GTK_SEARCH_ENGINE_SIMPLE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_SEARCH_ENGINE_SIMPLE, GtkSearchEngineSimpleClass))
 
-typedef struct _GtkSearchEngineSimple GtkSearchEngineSimple;
-typedef struct _GtkSearchEngineSimpleClass GtkSearchEngineSimpleClass;
+typedef struct _GtkSearchEngineSimple GtkSearchEngineSimpleFat;
+typedef struct _GtkSearchEngineSimple GtkSearchEngineSimpleSkinny;
+typedef struct _GtkSearchEngineSimpleClass GtkSearchEngineSimpleClassFat;
+typedef struct _GtkSearchEngineSimpleClass GtkSearchEngineSimpleClassSkinny;
 typedef struct _GtkSearchEngineSimplePrivate GtkSearchEngineSimplePrivate;
 
 struct _GtkSearchEngineSimple 

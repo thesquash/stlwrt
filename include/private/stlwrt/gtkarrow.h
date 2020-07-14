@@ -47,8 +47,10 @@ G_BEGIN_DECLS
 #define GTK_ARROW_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ARROW, GtkArrowClass))
 
 
-typedef struct _GtkArrow       GtkArrow;
-typedef struct _GtkArrowClass  GtkArrowClass;
+typedef struct _GtkArrow       GtkArrowFat;
+typedef struct _GtkArrow       GtkArrowSkinny;
+typedef struct _GtkArrowClass  GtkArrowClassFat;
+typedef struct _GtkArrowClass  GtkArrowClassSkinny;
 
 struct _GtkArrow
 {

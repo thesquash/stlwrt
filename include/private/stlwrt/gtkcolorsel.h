@@ -46,8 +46,10 @@ G_BEGIN_DECLS
 #define GTK_COLOR_SELECTION_GET_CLASS(obj)              (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_COLOR_SELECTION, GtkColorSelectionClass))
 
 
-typedef struct _GtkColorSelection       GtkColorSelection;
-typedef struct _GtkColorSelectionClass  GtkColorSelectionClass;
+typedef struct _GtkColorSelection       GtkColorSelectionFat;
+typedef struct _GtkColorSelection       GtkColorSelectionSkinny;
+typedef struct _GtkColorSelectionClass  GtkColorSelectionClassFat;
+typedef struct _GtkColorSelectionClass  GtkColorSelectionClassSkinny;
 
 
 typedef void (* GtkColorSelectionChangePaletteFunc) (const GdkColor    *colors,

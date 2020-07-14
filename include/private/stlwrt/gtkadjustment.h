@@ -45,8 +45,10 @@ G_BEGIN_DECLS
 #define GTK_ADJUSTMENT_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ADJUSTMENT, GtkAdjustmentClass))
 
 
-typedef struct _GtkAdjustment	    GtkAdjustment;
-typedef struct _GtkAdjustmentClass  GtkAdjustmentClass;
+typedef struct _GtkAdjustment	    GtkAdjustmentFat;
+typedef struct _GtkAdjustment	    GtkAdjustmentSkinny;
+typedef struct _GtkAdjustmentClass  GtkAdjustmentClassFat;
+typedef struct _GtkAdjustmentClass  GtkAdjustmentClassSkinny;
 
 struct _GtkAdjustment
 {

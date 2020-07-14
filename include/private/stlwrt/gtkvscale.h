@@ -47,8 +47,10 @@ G_BEGIN_DECLS
 #define GTK_VSCALE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_VSCALE, GtkVScaleClass))
 
 
-typedef struct _GtkVScale       GtkVScale;
-typedef struct _GtkVScaleClass  GtkVScaleClass;
+typedef struct _GtkVScale       GtkVScaleFat;
+typedef struct _GtkVScale       GtkVScaleSkinny;
+typedef struct _GtkVScaleClass  GtkVScaleClassFat;
+typedef struct _GtkVScaleClass  GtkVScaleClassSkinny;
 
 /**
  * GtkVScale:

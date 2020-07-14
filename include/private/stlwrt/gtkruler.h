@@ -58,8 +58,10 @@ G_BEGIN_DECLS
 #define GTK_RULER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_RULER, GtkRulerClass))
 
 
-typedef struct _GtkRuler        GtkRuler;
-typedef struct _GtkRulerClass   GtkRulerClass;
+typedef struct _GtkRuler        GtkRulerFat;
+typedef struct _GtkRuler        GtkRulerSkinny;
+typedef struct _GtkRulerClass   GtkRulerClassFat;
+typedef struct _GtkRulerClass   GtkRulerClassSkinny;
 typedef struct _GtkRulerMetric  GtkRulerMetric;
 
 /* All distances below are in 1/72nd's of an inch. (According to

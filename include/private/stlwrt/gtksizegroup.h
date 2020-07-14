@@ -38,8 +38,10 @@ G_BEGIN_DECLS
 #define GTK_SIZE_GROUP_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_SIZE_GROUP, GtkSizeGroupClass))
 
 
-typedef struct _GtkSizeGroup       GtkSizeGroup;
-typedef struct _GtkSizeGroupClass  GtkSizeGroupClass;
+typedef struct _GtkSizeGroup       GtkSizeGroupFat;
+typedef struct _GtkSizeGroup       GtkSizeGroupSkinny;
+typedef struct _GtkSizeGroupClass  GtkSizeGroupClassFat;
+typedef struct _GtkSizeGroupClass  GtkSizeGroupClassSkinny;
 
 struct _GtkSizeGroup
 {

@@ -54,8 +54,10 @@ struct _GdkKeymapKey
  * in the keymap and see what keyval it corresponds to.
  */
 
-typedef struct _GdkKeymap      GdkKeymap;
-typedef struct _GdkKeymapClass GdkKeymapClass;
+typedef struct _GdkKeymap      GdkKeymapFat;
+typedef struct _GdkKeymap      GdkKeymapSkinny;
+typedef struct _GdkKeymapClass GdkKeymapClassFat;
+typedef struct _GdkKeymapClass GdkKeymapClassSkinny;
 
 #define GDK_TYPE_KEYMAP              (__gdk_keymap_get_type ())
 #define GDK_KEYMAP(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_KEYMAP, GdkKeymap))

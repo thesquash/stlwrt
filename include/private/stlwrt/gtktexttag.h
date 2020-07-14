@@ -63,7 +63,8 @@
 G_BEGIN_DECLS
 
 typedef struct _GtkTextIter GtkTextIter;
-typedef struct _GtkTextTagTable GtkTextTagTable;
+typedef struct _GtkTextTagTable GtkTextTagTableFat;
+typedef struct _GtkTextTagTable GtkTextTagTableSkinny;
 
 typedef struct _GtkTextAttributes GtkTextAttributes;
 
@@ -76,8 +77,10 @@ typedef struct _GtkTextAttributes GtkTextAttributes;
 
 #define GTK_TYPE_TEXT_ATTRIBUTES     (__gtk_text_attributes_get_type ())
 
-typedef struct _GtkTextTag GtkTextTag;
-typedef struct _GtkTextTagClass GtkTextTagClass;
+typedef struct _GtkTextTag GtkTextTagFat;
+typedef struct _GtkTextTag GtkTextTagSkinny;
+typedef struct _GtkTextTagClass GtkTextTagClassFat;
+typedef struct _GtkTextTagClass GtkTextTagClassSkinny;
 
 struct _GtkTextTag
 {

@@ -33,8 +33,10 @@ G_BEGIN_DECLS
 #define GTK_PRINTER_OPTION_WIDGET_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_PRINTER_OPTION_WIDGET, GtkPrinterOptionWidgetClass))
 
 
-typedef struct _GtkPrinterOptionWidget         GtkPrinterOptionWidget;
-typedef struct _GtkPrinterOptionWidgetClass    GtkPrinterOptionWidgetClass;
+typedef struct _GtkPrinterOptionWidget         GtkPrinterOptionWidgetFat;
+typedef struct _GtkPrinterOptionWidget         GtkPrinterOptionWidgetSkinny;
+typedef struct _GtkPrinterOptionWidgetClass    GtkPrinterOptionWidgetClassFat;
+typedef struct _GtkPrinterOptionWidgetClass    GtkPrinterOptionWidgetClassSkinny;
 typedef struct GtkPrinterOptionWidgetPrivate   GtkPrinterOptionWidgetPrivate;
 
 struct _GtkPrinterOptionWidget

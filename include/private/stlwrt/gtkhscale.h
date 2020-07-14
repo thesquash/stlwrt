@@ -46,8 +46,10 @@ G_BEGIN_DECLS
 #define GTK_HSCALE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_HSCALE, GtkHScaleClass))
 
 
-typedef struct _GtkHScale       GtkHScale;
-typedef struct _GtkHScaleClass  GtkHScaleClass;
+typedef struct _GtkHScale       GtkHScaleFat;
+typedef struct _GtkHScale       GtkHScaleSkinny;
+typedef struct _GtkHScaleClass  GtkHScaleClassFat;
+typedef struct _GtkHScaleClass  GtkHScaleClassSkinny;
 
 struct _GtkHScale
 {

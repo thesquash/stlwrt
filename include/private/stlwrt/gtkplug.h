@@ -46,8 +46,10 @@ G_BEGIN_DECLS
 #define GTK_PLUG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_PLUG, GtkPlugClass))
 
 
-typedef struct _GtkPlug        GtkPlug;
-typedef struct _GtkPlugClass   GtkPlugClass;
+typedef struct _GtkPlug        GtkPlugFat;
+typedef struct _GtkPlug        GtkPlugSkinny;
+typedef struct _GtkPlugClass   GtkPlugClassFat;
+typedef struct _GtkPlugClass   GtkPlugClassSkinny;
 
 
 struct _GtkPlug

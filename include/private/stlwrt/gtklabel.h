@@ -47,8 +47,10 @@ G_BEGIN_DECLS
 #define GTK_LABEL_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_LABEL, GtkLabelClass))
 
 
-typedef struct _GtkLabel       GtkLabel;
-typedef struct _GtkLabelClass  GtkLabelClass;
+typedef struct _GtkLabel       GtkLabelFat;
+typedef struct _GtkLabel       GtkLabelSkinny;
+typedef struct _GtkLabelClass  GtkLabelClassFat;
+typedef struct _GtkLabelClass  GtkLabelClassSkinny;
 
 typedef struct _GtkLabelSelectionInfo GtkLabelSelectionInfo;
 

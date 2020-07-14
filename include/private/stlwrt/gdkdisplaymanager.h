@@ -37,8 +37,10 @@
 
 G_BEGIN_DECLS
 
-typedef struct _GdkDisplayManager      GdkDisplayManager;
-typedef struct _GdkDisplayManagerClass GdkDisplayManagerClass;
+typedef struct _GdkDisplayManager      GdkDisplayManagerFat;
+typedef struct _GdkDisplayManager      GdkDisplayManagerSkinny;
+typedef struct _GdkDisplayManagerClass GdkDisplayManagerClassFat;
+typedef struct _GdkDisplayManagerClass GdkDisplayManagerClassSkinny;
 
 #define GDK_TYPE_DISPLAY_MANAGER              (__gdk_display_manager_get_type ())
 #define GDK_DISPLAY_MANAGER(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_DISPLAY_MANAGER, GdkDisplayManager))

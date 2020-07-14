@@ -44,8 +44,10 @@ G_BEGIN_DECLS
 #define GTK_VPANED_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_VPANED, GtkVPanedClass))
 
 
-typedef struct _GtkVPaned      GtkVPaned;
-typedef struct _GtkVPanedClass GtkVPanedClass;
+typedef struct _GtkVPaned      GtkVPanedFat;
+typedef struct _GtkVPaned      GtkVPanedSkinny;
+typedef struct _GtkVPanedClass GtkVPanedClassFat;
+typedef struct _GtkVPanedClass GtkVPanedClassSkinny;
 
 struct _GtkVPaned
 {

@@ -48,10 +48,10 @@ G_BEGIN_DECLS
 #define GTK_RADIO_ACTION_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), GTK_TYPE_RADIO_ACTION, GtkRadioActionClass))
 
 typedef struct _GtkRadioAction        GtkRadioActionFat;
-typedef struct _GtkRadioAction        GtkRadioActionSkinny;
+typedef struct _GtkRadioAction        GtkRadioActionThin;
 typedef struct _GtkRadioActionPrivate GtkRadioActionPrivate;
 typedef struct _GtkRadioActionClass   GtkRadioActionClassFat;
-typedef struct _GtkRadioActionClass   GtkRadioActionClassSkinny;
+typedef struct _GtkRadioActionClass   GtkRadioActionClassThin;
 
 struct _GtkRadioAction
 {

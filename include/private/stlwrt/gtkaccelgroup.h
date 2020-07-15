@@ -59,9 +59,9 @@ typedef enum
 
 /* --- typedefs & structures --- */
 typedef struct _GtkAccelGroup	   GtkAccelGroupFat;
-typedef struct _GtkAccelGroup	   GtkAccelGroupSkinny;
+typedef struct _GtkAccelGroup	   GtkAccelGroupThin;
 typedef struct _GtkAccelGroupClass GtkAccelGroupClassFat;
-typedef struct _GtkAccelGroupClass GtkAccelGroupClassSkinny;
+typedef struct _GtkAccelGroupClass GtkAccelGroupClassThin;
 typedef struct _GtkAccelKey        GtkAccelKey;
 typedef struct _GtkAccelGroupEntry GtkAccelGroupEntry;
 typedef gboolean (*GtkAccelGroupActivate) (GtkAccelGroup  *accel_group,

@@ -53,17 +53,17 @@ G_BEGIN_DECLS
  */
 typedef struct _GtkBorder      GtkBorder;
 typedef struct _GtkStyle       GtkStyleFat;
-typedef struct _GtkStyle       GtkStyleSkinny;
+typedef struct _GtkStyle       GtkStyleThin;
 typedef struct _GtkStyleClass  GtkStyleClassFat;
-typedef struct _GtkStyleClass  GtkStyleClassSkinny;
+typedef struct _GtkStyleClass  GtkStyleClassThin;
 typedef struct _GtkThemeEngine GtkThemeEngine;
 typedef struct _GtkRcStyle     GtkRcStyleFat;
-typedef struct _GtkRcStyle     GtkRcStyleSkinny;
+typedef struct _GtkRcStyle     GtkRcStyleThin;
 typedef struct _GtkIconSet     GtkIconSet;
 typedef struct _GtkIconSource  GtkIconSource;
 typedef struct _GtkRcProperty  GtkRcProperty;
 typedef struct _GtkSettings    GtkSettingsFat;
-typedef struct _GtkSettings    GtkSettingsSkinny;
+typedef struct _GtkSettings    GtkSettingsThin;
 typedef gboolean (*GtkRcPropertyParser) (const GParamSpec *pspec,
 					 const GString    *rc_string,
 					 GValue           *property_value);
@@ -72,7 +72,7 @@ typedef gboolean (*GtkRcPropertyParser) (const GParamSpec *pspec,
  * GtkWidget's to the draw functions.
  */
 typedef struct _GtkWidget      GtkWidgetFat;
-typedef struct _GtkWidget      GtkWidgetSkinny;
+typedef struct _GtkWidget      GtkWidgetThin;
 
 #define GTK_STYLE_ATTACHED(style)	(GTK_STYLE (style)->attach_count > 0)
 

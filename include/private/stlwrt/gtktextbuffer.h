@@ -71,7 +71,7 @@ typedef struct _GtkTextLogAttrCache GtkTextLogAttrCache;
 #define GTK_TEXT_BUFFER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TEXT_BUFFER, GtkTextBufferClass))
 
 typedef struct _GtkTextBufferClass GtkTextBufferClassFat;
-typedef struct _GtkTextBufferClass GtkTextBufferClassSkinny;
+typedef struct _GtkTextBufferClass GtkTextBufferClassThin;
 
 struct _GtkTextBuffer
 {

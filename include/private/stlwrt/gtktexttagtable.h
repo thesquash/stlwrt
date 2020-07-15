@@ -46,7 +46,7 @@ typedef void (* GtkTextTagTableForeach) (GtkTextTag *tag, gpointer data);
 #define GTK_TEXT_TAG_TABLE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TEXT_TAG_TABLE, GtkTextTagTableClass))
 
 typedef struct _GtkTextTagTableClass GtkTextTagTableClassFat;
-typedef struct _GtkTextTagTableClass GtkTextTagTableClassSkinny;
+typedef struct _GtkTextTagTableClass GtkTextTagTableClassThin;
 
 struct _GtkTextTagTable
 {

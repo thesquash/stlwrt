@@ -48,9 +48,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkImage       GtkImageFat;
-typedef struct _GtkImage       GtkImageSkinny;
+typedef struct _GtkImage       GtkImageThin;
 typedef struct _GtkImageClass  GtkImageClassFat;
-typedef struct _GtkImageClass  GtkImageClassSkinny;
+typedef struct _GtkImageClass  GtkImageClassThin;
 
 typedef struct _GtkImagePixmapData  GtkImagePixmapData;
 typedef struct _GtkImageImageData   GtkImageImageData;

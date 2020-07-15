@@ -41,9 +41,9 @@ G_BEGIN_DECLS
 #define GTK_LIST_STORE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_LIST_STORE, GtkListStoreClass))
 
 typedef struct _GtkListStore       GtkListStoreFat;
-typedef struct _GtkListStore       GtkListStoreSkinny;
+typedef struct _GtkListStore       GtkListStoreThin;
 typedef struct _GtkListStoreClass  GtkListStoreClassFat;
-typedef struct _GtkListStoreClass  GtkListStoreClassSkinny;
+typedef struct _GtkListStoreClass  GtkListStoreClassThin;
 
 struct _GtkListStore
 {

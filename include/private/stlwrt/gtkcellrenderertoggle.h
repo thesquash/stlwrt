@@ -39,9 +39,9 @@ G_BEGIN_DECLS
 #define GTK_CELL_RENDERER_TOGGLE_GET_CLASS(obj)         (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_CELL_RENDERER_TOGGLE, GtkCellRendererToggleClass))
 
 typedef struct _GtkCellRendererToggle GtkCellRendererToggleFat;
-typedef struct _GtkCellRendererToggle GtkCellRendererToggleSkinny;
+typedef struct _GtkCellRendererToggle GtkCellRendererToggleThin;
 typedef struct _GtkCellRendererToggleClass GtkCellRendererToggleClassFat;
-typedef struct _GtkCellRendererToggleClass GtkCellRendererToggleClassSkinny;
+typedef struct _GtkCellRendererToggleClass GtkCellRendererToggleClassThin;
 
 struct _GtkCellRendererToggle
 {

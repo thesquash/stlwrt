@@ -48,9 +48,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkFrame       GtkFrameFat;
-typedef struct _GtkFrame       GtkFrameSkinny;
+typedef struct _GtkFrame       GtkFrameThin;
 typedef struct _GtkFrameClass  GtkFrameClassFat;
-typedef struct _GtkFrameClass  GtkFrameClassSkinny;
+typedef struct _GtkFrameClass  GtkFrameClassThin;
 
 struct _GtkFrame
 {

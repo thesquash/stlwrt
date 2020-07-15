@@ -52,9 +52,9 @@ typedef struct _GtkRangeLayout    GtkRangeLayout;
 typedef struct _GtkRangeStepTimer GtkRangeStepTimer;
 
 typedef struct _GtkRange        GtkRangeFat;
-typedef struct _GtkRange        GtkRangeSkinny;
+typedef struct _GtkRange        GtkRangeThin;
 typedef struct _GtkRangeClass   GtkRangeClassFat;
-typedef struct _GtkRangeClass   GtkRangeClassSkinny;
+typedef struct _GtkRangeClass   GtkRangeClassThin;
 
 struct _GtkRange
 {

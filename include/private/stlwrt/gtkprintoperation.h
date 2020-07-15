@@ -46,10 +46,10 @@ G_BEGIN_DECLS
 #define GTK_PRINT_OPERATION_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_PRINT_OPERATION, GtkPrintOperationClass))
 
 typedef struct _GtkPrintOperationClass   GtkPrintOperationClassFat;
-typedef struct _GtkPrintOperationClass   GtkPrintOperationClassSkinny;
+typedef struct _GtkPrintOperationClass   GtkPrintOperationClassThin;
 typedef struct _GtkPrintOperationPrivate GtkPrintOperationPrivate;
 typedef struct _GtkPrintOperation        GtkPrintOperationFat;
-typedef struct _GtkPrintOperation        GtkPrintOperationSkinny;
+typedef struct _GtkPrintOperation        GtkPrintOperationThin;
 
 typedef enum {
   GTK_PRINT_STATUS_INITIAL,

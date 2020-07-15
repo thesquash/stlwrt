@@ -50,9 +50,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkAccelLabel	    GtkAccelLabelFat;
-typedef struct _GtkAccelLabel	    GtkAccelLabelSkinny;
+typedef struct _GtkAccelLabel	    GtkAccelLabelThin;
 typedef struct _GtkAccelLabelClass  GtkAccelLabelClassFat;
-typedef struct _GtkAccelLabelClass  GtkAccelLabelClassSkinny;
+typedef struct _GtkAccelLabelClass  GtkAccelLabelClassThin;
 
 /**
  * GtkAccelLabel:

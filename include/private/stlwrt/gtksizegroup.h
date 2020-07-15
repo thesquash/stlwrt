@@ -39,9 +39,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkSizeGroup       GtkSizeGroupFat;
-typedef struct _GtkSizeGroup       GtkSizeGroupSkinny;
+typedef struct _GtkSizeGroup       GtkSizeGroupThin;
 typedef struct _GtkSizeGroupClass  GtkSizeGroupClassFat;
-typedef struct _GtkSizeGroupClass  GtkSizeGroupClassSkinny;
+typedef struct _GtkSizeGroupClass  GtkSizeGroupClassThin;
 
 struct _GtkSizeGroup
 {

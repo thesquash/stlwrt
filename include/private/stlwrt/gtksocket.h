@@ -44,9 +44,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkSocket        GtkSocketFat;
-typedef struct _GtkSocket        GtkSocketSkinny;
+typedef struct _GtkSocket        GtkSocketThin;
 typedef struct _GtkSocketClass   GtkSocketClassFat;
-typedef struct _GtkSocketClass   GtkSocketClassSkinny;
+typedef struct _GtkSocketClass   GtkSocketClassThin;
 
 struct _GtkSocket
 {

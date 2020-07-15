@@ -36,9 +36,9 @@ G_BEGIN_DECLS
 #define GTK_SEARCH_ENGINE_TRACKER_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_SEARCH_ENGINE_TRACKER, GtkSearchEngineTrackerClass))
 
 typedef struct _GtkSearchEngineTracker GtkSearchEngineTrackerFat;
-typedef struct _GtkSearchEngineTracker GtkSearchEngineTrackerSkinny;
+typedef struct _GtkSearchEngineTracker GtkSearchEngineTrackerThin;
 typedef struct _GtkSearchEngineTrackerClass GtkSearchEngineTrackerClassFat;
-typedef struct _GtkSearchEngineTrackerClass GtkSearchEngineTrackerClassSkinny;
+typedef struct _GtkSearchEngineTrackerClass GtkSearchEngineTrackerClassThin;
 typedef struct _GtkSearchEngineTrackerPrivate GtkSearchEngineTrackerPrivate;
 
 struct _GtkSearchEngineTracker 

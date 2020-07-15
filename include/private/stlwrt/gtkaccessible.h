@@ -38,9 +38,9 @@ G_BEGIN_DECLS
 #define GTK_ACCESSIBLE_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ACCESSIBLE, GtkAccessibleClass))
 
 typedef struct _GtkAccessible                GtkAccessibleFat;
-typedef struct _GtkAccessible                GtkAccessibleSkinny;
+typedef struct _GtkAccessible                GtkAccessibleThin;
 typedef struct _GtkAccessibleClass           GtkAccessibleClassFat;
-typedef struct _GtkAccessibleClass           GtkAccessibleClassSkinny;
+typedef struct _GtkAccessibleClass           GtkAccessibleClassThin;
 
   /*
    * This object is a thin wrapper, in the GTK+ namespace, for AtkObject

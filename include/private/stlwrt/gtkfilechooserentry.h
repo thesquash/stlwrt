@@ -32,7 +32,7 @@ G_BEGIN_DECLS
 #define GTK_IS_FILE_CHOOSER_ENTRY(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FILE_CHOOSER_ENTRY))
 
 typedef struct _GtkFileChooserEntry      GtkFileChooserEntryFat;
-typedef struct _GtkFileChooserEntry      GtkFileChooserEntrySkinny;
+typedef struct _GtkFileChooserEntry      GtkFileChooserEntryThin;
 
 GType              _gtk_file_chooser_entry_get_type           (void) G_GNUC_CONST;
 GtkWidget *        _gtk_file_chooser_entry_new                (gboolean             eat_tab);

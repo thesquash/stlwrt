@@ -39,9 +39,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkIMMulticontext        GtkIMMulticontextFat;
-typedef struct _GtkIMMulticontext        GtkIMMulticontextSkinny;
+typedef struct _GtkIMMulticontext        GtkIMMulticontextThin;
 typedef struct _GtkIMMulticontextClass   GtkIMMulticontextClassFat;
-typedef struct _GtkIMMulticontextClass   GtkIMMulticontextClassSkinny;
+typedef struct _GtkIMMulticontextClass   GtkIMMulticontextClassThin;
 typedef struct _GtkIMMulticontextPrivate GtkIMMulticontextPrivate;
 
 struct _GtkIMMulticontext

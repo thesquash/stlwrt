@@ -48,9 +48,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkVScrollbar       GtkVScrollbarFat;
-typedef struct _GtkVScrollbar       GtkVScrollbarSkinny;
+typedef struct _GtkVScrollbar       GtkVScrollbarThin;
 typedef struct _GtkVScrollbarClass  GtkVScrollbarClassFat;
-typedef struct _GtkVScrollbarClass  GtkVScrollbarClassSkinny;
+typedef struct _GtkVScrollbarClass  GtkVScrollbarClassThin;
 
 /**
  * GtkVScrollbar:

@@ -41,9 +41,9 @@ G_BEGIN_DECLS
 #define GTK_TOOL_PALETTE_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TOOL_PALETTE, GtkToolPaletteClass))
 
 typedef struct _GtkToolPalette           GtkToolPaletteFat;
-typedef struct _GtkToolPalette           GtkToolPaletteSkinny;
+typedef struct _GtkToolPalette           GtkToolPaletteThin;
 typedef struct _GtkToolPaletteClass      GtkToolPaletteClassFat;
-typedef struct _GtkToolPaletteClass      GtkToolPaletteClassSkinny;
+typedef struct _GtkToolPaletteClass      GtkToolPaletteClassThin;
 typedef struct _GtkToolPalettePrivate    GtkToolPalettePrivate;
 
 /**

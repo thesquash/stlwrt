@@ -47,9 +47,9 @@ G_BEGIN_DECLS
 #define GTK_VOLUME_BUTTON_GET_CLASS(obj)       (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_VOLUME_BUTTON, GtkVolumeButtonClass))
 
 typedef struct _GtkVolumeButton       GtkVolumeButtonFat;
-typedef struct _GtkVolumeButton       GtkVolumeButtonSkinny;
+typedef struct _GtkVolumeButton       GtkVolumeButtonThin;
 typedef struct _GtkVolumeButtonClass  GtkVolumeButtonClassFat;
-typedef struct _GtkVolumeButtonClass  GtkVolumeButtonClassSkinny;
+typedef struct _GtkVolumeButtonClass  GtkVolumeButtonClassThin;
 
 struct _GtkVolumeButton
 {

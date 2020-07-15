@@ -48,7 +48,7 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkWindowClass        GtkWindowClassFat;
-typedef struct _GtkWindowClass        GtkWindowClassSkinny;
+typedef struct _GtkWindowClass        GtkWindowClassThin;
 typedef struct _GtkWindowGeometryInfo GtkWindowGeometryInfo;
 typedef struct _GtkWindowGroup        GtkWindowGroup;
 typedef struct _GtkWindowGroupClass   GtkWindowGroupClass;

@@ -71,10 +71,10 @@ typedef enum
 } GtkAssistantPageType;
 
 typedef struct _GtkAssistant        GtkAssistantFat;
-typedef struct _GtkAssistant        GtkAssistantSkinny;
+typedef struct _GtkAssistant        GtkAssistantThin;
 typedef struct _GtkAssistantPrivate GtkAssistantPrivate;
 typedef struct _GtkAssistantClass   GtkAssistantClassFat;
-typedef struct _GtkAssistantClass   GtkAssistantClassSkinny;
+typedef struct _GtkAssistantClass   GtkAssistantClassThin;
 
 struct _GtkAssistant
 {

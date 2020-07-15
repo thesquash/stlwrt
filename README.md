@@ -37,25 +37,25 @@ Finally, let me tell you my current plans.
 
 Some time ago I made much ado about wanting to write STLWRT so that when a
 STLWRT object was created / instantiated, STLWRT would create two copies of the
-object, one "fat" and one "skinny".  The former was for compatibility with GTK+
+object, one "fat" and one "thin".  The former was for compatibility with GTK+
 2 applications and modules; the latter with GTK+ 3 applications and modules.
 
 I was planning on that, but realized that was too cumbersome.
 
-Now I think STLWRT needs to create either fat or skinny objects, not both.  At
+Now I think STLWRT needs to create either fat or thin objects, not both.  At
 runtime, when the various STLWRT object types are registered, STLWRT has to
 determine if the application in question is running in GTK+ 2 mode or GTK+ 3 or
 later mode.  If the former is true, then STLWRT registers all STLWRT objects as
 being the "fat" type; if the latter is true, STLWRT registers all STLWRT objects
-as being the "skinny" type.
+as being the "thin" type.
 
 This means that modules, such as theme engines, need to be rewritten for STLWRT,
 since a lot of GTK+ 2 theme engines took advantage of the "fat" objects.  I just
 got hold of some old GTK+ 3 theme engines from before the GTK project realized
 they were going to use CSS for styling, but after they knew they would be
-switching to "skinny" objects.  These theme engines will prove useful to STLWRT
+switching to "thin" objects.  These theme engines will prove useful to STLWRT
 because they do not require that the objects passed to them are "fat"; they
-work just as well with "skinny" objects.
+work just as well with "thin" objects.
 
 ## The directory layout
 

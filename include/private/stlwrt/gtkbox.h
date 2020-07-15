@@ -48,9 +48,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkBox	      GtkBoxFat;
-typedef struct _GtkBox	      GtkBoxSkinny;
+typedef struct _GtkBox	      GtkBoxThin;
 typedef struct _GtkBoxClass   GtkBoxClassFat;
-typedef struct _GtkBoxClass   GtkBoxClassSkinny;
+typedef struct _GtkBoxClass   GtkBoxClassThin;
 
 struct _GtkBox
 {

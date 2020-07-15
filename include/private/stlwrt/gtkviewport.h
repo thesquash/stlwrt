@@ -49,9 +49,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkViewport       GtkViewportFat;
-typedef struct _GtkViewport       GtkViewportSkinny;
+typedef struct _GtkViewport       GtkViewportThin;
 typedef struct _GtkViewportClass  GtkViewportClassFat;
-typedef struct _GtkViewportClass  GtkViewportClassSkinny;
+typedef struct _GtkViewportClass  GtkViewportClassThin;
 
 struct _GtkViewport
 {

@@ -36,9 +36,9 @@ G_BEGIN_DECLS
 #define GTK_QUERY_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_QUERY, GtkQueryClass))
 
 typedef struct _GtkQuery GtkQueryFat;
-typedef struct _GtkQuery GtkQuerySkinny;
+typedef struct _GtkQuery GtkQueryThin;
 typedef struct _GtkQueryClass GtkQueryClassFat;
-typedef struct _GtkQueryClass GtkQueryClassSkinny;
+typedef struct _GtkQueryClass GtkQueryClassThin;
 typedef struct _GtkQueryPrivate GtkQueryPrivate;
 
 struct _GtkQuery 

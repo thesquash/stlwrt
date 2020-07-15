@@ -47,9 +47,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkToggleButton       GtkToggleButtonFat;
-typedef struct _GtkToggleButton       GtkToggleButtonSkinny;
+typedef struct _GtkToggleButton       GtkToggleButtonThin;
 typedef struct _GtkToggleButtonClass  GtkToggleButtonClassFat;
-typedef struct _GtkToggleButtonClass  GtkToggleButtonClassSkinny;
+typedef struct _GtkToggleButtonClass  GtkToggleButtonClassThin;
 
 struct _GtkToggleButton
 {

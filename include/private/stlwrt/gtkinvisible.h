@@ -45,9 +45,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkInvisible	   GtkInvisibleFat;
-typedef struct _GtkInvisible	   GtkInvisibleSkinny;
+typedef struct _GtkInvisible	   GtkInvisibleThin;
 typedef struct _GtkInvisibleClass  GtkInvisibleClassFat;
-typedef struct _GtkInvisibleClass  GtkInvisibleClassSkinny;
+typedef struct _GtkInvisibleClass  GtkInvisibleClassThin;
 
 struct _GtkInvisible
 {

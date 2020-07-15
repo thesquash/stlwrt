@@ -47,9 +47,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkCheckMenuItem       GtkCheckMenuItemFat;
-typedef struct _GtkCheckMenuItem       GtkCheckMenuItemSkinny;
+typedef struct _GtkCheckMenuItem       GtkCheckMenuItemThin;
 typedef struct _GtkCheckMenuItemClass  GtkCheckMenuItemClassFat;
-typedef struct _GtkCheckMenuItemClass  GtkCheckMenuItemClassSkinny;
+typedef struct _GtkCheckMenuItemClass  GtkCheckMenuItemClassThin;
 
 struct _GtkCheckMenuItem
 {

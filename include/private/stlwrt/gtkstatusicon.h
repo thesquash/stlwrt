@@ -42,9 +42,9 @@ G_BEGIN_DECLS
 #define GTK_STATUS_ICON_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GTK_TYPE_STATUS_ICON, GtkStatusIconClass))
 
 typedef struct _GtkStatusIcon	     GtkStatusIconFat;
-typedef struct _GtkStatusIcon	     GtkStatusIconSkinny;
+typedef struct _GtkStatusIcon	     GtkStatusIconThin;
 typedef struct _GtkStatusIconClass   GtkStatusIconClassFat;
-typedef struct _GtkStatusIconClass   GtkStatusIconClassSkinny;
+typedef struct _GtkStatusIconClass   GtkStatusIconClassThin;
 typedef struct _GtkStatusIconPrivate GtkStatusIconPrivate;
 
 struct _GtkStatusIcon

@@ -59,9 +59,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkRuler        GtkRulerFat;
-typedef struct _GtkRuler        GtkRulerSkinny;
+typedef struct _GtkRuler        GtkRulerThin;
 typedef struct _GtkRulerClass   GtkRulerClassFat;
-typedef struct _GtkRulerClass   GtkRulerClassSkinny;
+typedef struct _GtkRulerClass   GtkRulerClassThin;
 typedef struct _GtkRulerMetric  GtkRulerMetric;
 
 /* All distances below are in 1/72nd's of an inch. (According to

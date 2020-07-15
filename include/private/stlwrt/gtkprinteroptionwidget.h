@@ -34,9 +34,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkPrinterOptionWidget         GtkPrinterOptionWidgetFat;
-typedef struct _GtkPrinterOptionWidget         GtkPrinterOptionWidgetSkinny;
+typedef struct _GtkPrinterOptionWidget         GtkPrinterOptionWidgetThin;
 typedef struct _GtkPrinterOptionWidgetClass    GtkPrinterOptionWidgetClassFat;
-typedef struct _GtkPrinterOptionWidgetClass    GtkPrinterOptionWidgetClassSkinny;
+typedef struct _GtkPrinterOptionWidgetClass    GtkPrinterOptionWidgetClassThin;
 typedef struct GtkPrinterOptionWidgetPrivate   GtkPrinterOptionWidgetPrivate;
 
 struct _GtkPrinterOptionWidget

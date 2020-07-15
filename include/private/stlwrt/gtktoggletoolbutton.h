@@ -40,9 +40,9 @@ G_BEGIN_DECLS
 #define GTK_TOGGLE_TOOL_BUTTON_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS((obj), GTK_TYPE_TOGGLE_TOOL_BUTTON, GtkToggleToolButtonClass))
 
 typedef struct _GtkToggleToolButton        GtkToggleToolButtonFat;
-typedef struct _GtkToggleToolButton        GtkToggleToolButtonSkinny;
+typedef struct _GtkToggleToolButton        GtkToggleToolButtonThin;
 typedef struct _GtkToggleToolButtonClass   GtkToggleToolButtonClassFat;
-typedef struct _GtkToggleToolButtonClass   GtkToggleToolButtonClassSkinny;
+typedef struct _GtkToggleToolButtonClass   GtkToggleToolButtonClassThin;
 typedef struct _GtkToggleToolButtonPrivate GtkToggleToolButtonPrivate;
 
 struct _GtkToggleToolButton

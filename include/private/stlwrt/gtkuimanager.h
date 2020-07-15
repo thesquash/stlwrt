@@ -51,9 +51,9 @@ G_BEGIN_DECLS
 #define GTK_UI_MANAGER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), GTK_TYPE_UI_MANAGER, GtkUIManagerClass))
 
 typedef struct _GtkUIManager      GtkUIManagerFat;
-typedef struct _GtkUIManager      GtkUIManagerSkinny;
+typedef struct _GtkUIManager      GtkUIManagerThin;
 typedef struct _GtkUIManagerClass GtkUIManagerClassFat;
-typedef struct _GtkUIManagerClass GtkUIManagerClassSkinny;
+typedef struct _GtkUIManagerClass GtkUIManagerClassThin;
 typedef struct _GtkUIManagerPrivate GtkUIManagerPrivate;
 
 

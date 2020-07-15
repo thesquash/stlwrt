@@ -48,10 +48,10 @@ G_BEGIN_DECLS
 #define GTK_TOGGLE_ACTION_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), GTK_TYPE_TOGGLE_ACTION, GtkToggleActionClass))
 
 typedef struct _GtkToggleAction        GtkToggleActionFat;
-typedef struct _GtkToggleAction        GtkToggleActionSkinny;
+typedef struct _GtkToggleAction        GtkToggleActionThin;
 typedef struct _GtkToggleActionPrivate GtkToggleActionPrivate;
 typedef struct _GtkToggleActionClass   GtkToggleActionClassFat;
-typedef struct _GtkToggleActionClass   GtkToggleActionClassSkinny;
+typedef struct _GtkToggleActionClass   GtkToggleActionClassThin;
 
 struct _GtkToggleAction
 {

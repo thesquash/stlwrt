@@ -47,9 +47,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkPlug        GtkPlugFat;
-typedef struct _GtkPlug        GtkPlugSkinny;
+typedef struct _GtkPlug        GtkPlugThin;
 typedef struct _GtkPlugClass   GtkPlugClassFat;
-typedef struct _GtkPlugClass   GtkPlugClassSkinny;
+typedef struct _GtkPlugClass   GtkPlugClassThin;
 
 
 struct _GtkPlug

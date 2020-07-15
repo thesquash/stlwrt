@@ -45,9 +45,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkVPaned      GtkVPanedFat;
-typedef struct _GtkVPaned      GtkVPanedSkinny;
+typedef struct _GtkVPaned      GtkVPanedThin;
 typedef struct _GtkVPanedClass GtkVPanedClassFat;
-typedef struct _GtkVPanedClass GtkVPanedClassSkinny;
+typedef struct _GtkVPanedClass GtkVPanedClassThin;
 
 struct _GtkVPaned
 {

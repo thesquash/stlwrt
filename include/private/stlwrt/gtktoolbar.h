@@ -88,9 +88,9 @@ typedef enum
 } GtkToolbarSpaceStyle;
 
 typedef struct _GtkToolbar           GtkToolbarFat;
-typedef struct _GtkToolbar           GtkToolbarSkinny;
+typedef struct _GtkToolbar           GtkToolbarThin;
 typedef struct _GtkToolbarClass      GtkToolbarClassFat;
-typedef struct _GtkToolbarClass      GtkToolbarClassSkinny;
+typedef struct _GtkToolbarClass      GtkToolbarClassThin;
 typedef struct _GtkToolbarPrivate    GtkToolbarPrivate;
 
 struct _GtkToolbar

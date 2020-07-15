@@ -55,7 +55,7 @@ typedef enum
 } GdkImageType;
 
 typedef struct _GdkImageClass GdkImageClassFat;
-typedef struct _GdkImageClass GdkImageClassSkinny;
+typedef struct _GdkImageClass GdkImageClassThin;
 
 #define GDK_TYPE_IMAGE              (gdk_image_get_type ())
 #define GDK_IMAGE(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_IMAGE, GdkImage))

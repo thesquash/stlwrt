@@ -39,10 +39,10 @@ G_BEGIN_DECLS
 #define GTK_FILE_CHOOSER_WIDGET_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_FILE_CHOOSER_WIDGET, GtkFileChooserWidgetClass))
 
 typedef struct _GtkFileChooserWidget        GtkFileChooserWidgetFat;
-typedef struct _GtkFileChooserWidget        GtkFileChooserWidgetSkinny;
+typedef struct _GtkFileChooserWidget        GtkFileChooserWidgetThin;
 typedef struct _GtkFileChooserWidgetPrivate GtkFileChooserWidgetPrivate;
 typedef struct _GtkFileChooserWidgetClass   GtkFileChooserWidgetClassFat;
-typedef struct _GtkFileChooserWidgetClass   GtkFileChooserWidgetClassSkinny;
+typedef struct _GtkFileChooserWidgetClass   GtkFileChooserWidgetClassThin;
 
 struct _GtkFileChooserWidget
 {

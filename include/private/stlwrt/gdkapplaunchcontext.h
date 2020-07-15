@@ -41,9 +41,9 @@ G_BEGIN_DECLS
 #define GDK_APP_LAUNCH_CONTEXT_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GDK_TYPE_APP_LAUNCH_CONTEXT, GdkAppLaunchContextClass))
 
 typedef struct GdkAppLaunchContext	      GdkAppLaunchContextFat;
-typedef struct GdkAppLaunchContext	      GdkAppLaunchContextSkinny;
+typedef struct GdkAppLaunchContext	      GdkAppLaunchContextThin;
 typedef struct GdkAppLaunchContextClass       GdkAppLaunchContextClassFat;
-typedef struct GdkAppLaunchContextClass       GdkAppLaunchContextClassSkinny;
+typedef struct GdkAppLaunchContextClass       GdkAppLaunchContextClassThin;
 typedef struct GdkAppLaunchContextPrivate     GdkAppLaunchContextPrivate;
 
 struct GdkAppLaunchContext

@@ -35,7 +35,7 @@
 G_BEGIN_DECLS
 
 typedef struct _GdkDisplayClass GdkDisplayClassFat;
-typedef struct _GdkDisplayClass GdkDisplayClassSkinny;
+typedef struct _GdkDisplayClass GdkDisplayClassThin;
 typedef struct _GdkDisplayPointerHooks GdkDisplayPointerHooks;
 
 #define GDK_TYPE_DISPLAY              (gdk_display_get_type ())

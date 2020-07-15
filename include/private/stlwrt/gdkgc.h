@@ -39,7 +39,7 @@ G_BEGIN_DECLS
 
 typedef struct _GdkGCValues	      GdkGCValues;
 typedef struct _GdkGCClass	      GdkGCClassFat;
-typedef struct _GdkGCClass	      GdkGCClassSkinny;
+typedef struct _GdkGCClass	      GdkGCClassThin;
 
 /* GC cap styles
  *  CapNotLast:

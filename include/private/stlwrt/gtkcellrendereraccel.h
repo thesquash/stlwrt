@@ -37,9 +37,9 @@ G_BEGIN_DECLS
 #define GTK_CELL_RENDERER_ACCEL_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_CELL_RENDERER_ACCEL, GtkCellRendererAccelClass))
 
 typedef struct _GtkCellRendererAccel      GtkCellRendererAccelFat;
-typedef struct _GtkCellRendererAccel      GtkCellRendererAccelSkinny;
+typedef struct _GtkCellRendererAccel      GtkCellRendererAccelThin;
 typedef struct _GtkCellRendererAccelClass GtkCellRendererAccelClassFat;
-typedef struct _GtkCellRendererAccelClass GtkCellRendererAccelClassSkinny;
+typedef struct _GtkCellRendererAccelClass GtkCellRendererAccelClassThin;
 
 
 typedef enum

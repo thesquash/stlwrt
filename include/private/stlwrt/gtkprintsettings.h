@@ -31,7 +31,7 @@
 G_BEGIN_DECLS
 
 typedef struct _GtkPrintSettings GtkPrintSettingsFat;
-typedef struct _GtkPrintSettings GtkPrintSettingsSkinny;
+typedef struct _GtkPrintSettings GtkPrintSettingsThin;
 
 #define GTK_TYPE_PRINT_SETTINGS    (gtk_print_settings_get_type ())
 #define GTK_PRINT_SETTINGS(obj)    (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PRINT_SETTINGS, GtkPrintSettings))

@@ -53,9 +53,9 @@ G_BEGIN_DECLS
 #define GTK_SCALE_BUTTON_GET_CLASS(obj)       (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_SCALE_BUTTON, GtkScaleButtonClass))
 
 typedef struct _GtkScaleButton        GtkScaleButtonFat;
-typedef struct _GtkScaleButton        GtkScaleButtonSkinny;
+typedef struct _GtkScaleButton        GtkScaleButtonThin;
 typedef struct _GtkScaleButtonClass   GtkScaleButtonClassFat;
-typedef struct _GtkScaleButtonClass   GtkScaleButtonClassSkinny;
+typedef struct _GtkScaleButtonClass   GtkScaleButtonClassThin;
 typedef struct _GtkScaleButtonPrivate GtkScaleButtonPrivate;
 
 struct _GtkScaleButton

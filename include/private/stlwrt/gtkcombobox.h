@@ -39,9 +39,9 @@ G_BEGIN_DECLS
 #define GTK_COMBO_BOX_GET_CLASS(inst)  (G_TYPE_INSTANCE_GET_CLASS ((inst), GTK_TYPE_COMBO_BOX, GtkComboBoxClass))
 
 typedef struct _GtkComboBox        GtkComboBoxFat;
-typedef struct _GtkComboBox        GtkComboBoxSkinny;
+typedef struct _GtkComboBox        GtkComboBoxThin;
 typedef struct _GtkComboBoxClass   GtkComboBoxClassFat;
-typedef struct _GtkComboBoxClass   GtkComboBoxClassSkinny;
+typedef struct _GtkComboBoxClass   GtkComboBoxClassThin;
 typedef struct _GtkComboBoxPrivate GtkComboBoxPrivate;
 
 struct _GtkComboBox

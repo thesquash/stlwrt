@@ -36,10 +36,10 @@ G_BEGIN_DECLS
 #define GTK_COMBO_BOX_TEXT_GET_CLASS(obj)       (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_COMBO_BOX_TEXT, GtkComboBoxTextClass))
 
 typedef struct _GtkComboBoxText             GtkComboBoxTextFat;
-typedef struct _GtkComboBoxText             GtkComboBoxTextSkinny;
+typedef struct _GtkComboBoxText             GtkComboBoxTextThin;
 typedef struct _GtkComboBoxTextPrivate      GtkComboBoxTextPrivate;
 typedef struct _GtkComboBoxTextClass        GtkComboBoxTextClassFat;
-typedef struct _GtkComboBoxTextClass        GtkComboBoxTextClassSkinny;
+typedef struct _GtkComboBoxTextClass        GtkComboBoxTextClassThin;
 
 struct _GtkComboBoxText
 {

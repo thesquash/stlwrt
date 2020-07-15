@@ -47,9 +47,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkImageMenuItem       GtkImageMenuItemFat;
-typedef struct _GtkImageMenuItem       GtkImageMenuItemSkinny;
+typedef struct _GtkImageMenuItem       GtkImageMenuItemThin;
 typedef struct _GtkImageMenuItemClass  GtkImageMenuItemClassFat;
-typedef struct _GtkImageMenuItemClass  GtkImageMenuItemClassSkinny;
+typedef struct _GtkImageMenuItemClass  GtkImageMenuItemClassThin;
 
 struct _GtkImageMenuItem
 {

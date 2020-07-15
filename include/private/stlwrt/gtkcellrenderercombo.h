@@ -38,9 +38,9 @@ G_BEGIN_DECLS
 #define GTK_CELL_RENDERER_COMBO_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_CELL_RENDERER_COMBO, GtkCellRendererTextClass))
 
 typedef struct _GtkCellRendererCombo      GtkCellRendererComboFat;
-typedef struct _GtkCellRendererCombo      GtkCellRendererComboSkinny;
+typedef struct _GtkCellRendererCombo      GtkCellRendererComboThin;
 typedef struct _GtkCellRendererComboClass GtkCellRendererComboClassFat;
-typedef struct _GtkCellRendererComboClass GtkCellRendererComboClassSkinny;
+typedef struct _GtkCellRendererComboClass GtkCellRendererComboClassThin;
 
 struct _GtkCellRendererCombo
 {

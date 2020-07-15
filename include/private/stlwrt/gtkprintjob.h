@@ -40,9 +40,9 @@ G_BEGIN_DECLS
 #define GTK_PRINT_JOB_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_PRINT_JOB, GtkPrintJobClass))
 
 typedef struct _GtkPrintJob          GtkPrintJobFat;
-typedef struct _GtkPrintJob          GtkPrintJobSkinny;
+typedef struct _GtkPrintJob          GtkPrintJobThin;
 typedef struct _GtkPrintJobClass     GtkPrintJobClassFat;
-typedef struct _GtkPrintJobClass     GtkPrintJobClassSkinny;
+typedef struct _GtkPrintJobClass     GtkPrintJobClassThin;
 typedef struct _GtkPrintJobPrivate   GtkPrintJobPrivate;
 
 typedef void (*GtkPrintJobCompleteFunc) (GtkPrintJob *print_job,

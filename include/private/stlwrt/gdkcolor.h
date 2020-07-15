@@ -56,7 +56,7 @@ struct _GdkColor
  */
 
 typedef struct _GdkColormapClass GdkColormapClassFat;
-typedef struct _GdkColormapClass GdkColormapClassSkinny;
+typedef struct _GdkColormapClass GdkColormapClassThin;
 
 #define GDK_TYPE_COLORMAP              (gdk_colormap_get_type ())
 #define GDK_COLORMAP(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_COLORMAP, GdkColormap))

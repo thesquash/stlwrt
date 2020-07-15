@@ -45,9 +45,9 @@ G_BEGIN_DECLS
 #define GTK_CELL_RENDERER_PROGRESS_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_CELL_RENDERER_PROGRESS, GtkCellRendererProgressClass))
 
 typedef struct _GtkCellRendererProgress         GtkCellRendererProgressFat;
-typedef struct _GtkCellRendererProgress         GtkCellRendererProgressSkinny;
+typedef struct _GtkCellRendererProgress         GtkCellRendererProgressThin;
 typedef struct _GtkCellRendererProgressClass    GtkCellRendererProgressClassFat;
-typedef struct _GtkCellRendererProgressClass    GtkCellRendererProgressClassSkinny;
+typedef struct _GtkCellRendererProgressClass    GtkCellRendererProgressClassThin;
 typedef struct _GtkCellRendererProgressPrivate  GtkCellRendererProgressPrivate;
 
 struct _GtkCellRendererProgress

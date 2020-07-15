@@ -39,9 +39,9 @@ enum {
 };
 
 typedef struct _GtkFileChooserSettings GtkFileChooserSettingsFat;
-typedef struct _GtkFileChooserSettings GtkFileChooserSettingsSkinny;
+typedef struct _GtkFileChooserSettings GtkFileChooserSettingsThin;
 typedef struct _GtkFileChooserSettingsClass GtkFileChooserSettingsClassFat;
-typedef struct _GtkFileChooserSettingsClass GtkFileChooserSettingsClassSkinny;
+typedef struct _GtkFileChooserSettingsClass GtkFileChooserSettingsClassThin;
 
 struct _GtkFileChooserSettings
 {

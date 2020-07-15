@@ -44,9 +44,9 @@ G_BEGIN_DECLS
 typedef struct _GtkRecentInfo		GtkRecentInfo;
 typedef struct _GtkRecentData		GtkRecentData;
 typedef struct _GtkRecentManager	GtkRecentManagerFat;
-typedef struct _GtkRecentManager	GtkRecentManagerSkinny;
+typedef struct _GtkRecentManager	GtkRecentManagerThin;
 typedef struct _GtkRecentManagerClass	GtkRecentManagerClassFat;
-typedef struct _GtkRecentManagerClass	GtkRecentManagerClassSkinny;
+typedef struct _GtkRecentManagerClass	GtkRecentManagerClassThin;
 typedef struct _GtkRecentManagerPrivate GtkRecentManagerPrivate;
 
 /**

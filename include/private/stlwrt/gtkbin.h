@@ -47,9 +47,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkBin       GtkBinFat;
-typedef struct _GtkBin       GtkBinSkinny;
+typedef struct _GtkBin       GtkBinThin;
 typedef struct _GtkBinClass  GtkBinClassFat;
-typedef struct _GtkBinClass  GtkBinClassSkinny;
+typedef struct _GtkBinClass  GtkBinClassThin;
 
 struct _GtkBin
 {

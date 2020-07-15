@@ -47,9 +47,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkProgressBar       GtkProgressBarFat;
-typedef struct _GtkProgressBar       GtkProgressBarSkinny;
+typedef struct _GtkProgressBar       GtkProgressBarThin;
 typedef struct _GtkProgressBarClass  GtkProgressBarClassFat;
-typedef struct _GtkProgressBarClass  GtkProgressBarClassSkinny;
+typedef struct _GtkProgressBarClass  GtkProgressBarClassThin;
 
 typedef enum
 {

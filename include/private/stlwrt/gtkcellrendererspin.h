@@ -37,9 +37,9 @@ G_BEGIN_DECLS
 #define GTK_CELL_RENDERER_SPIN_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_CELL_RENDERER_SPIN, GtkCellRendererTextClass))
 
 typedef struct _GtkCellRendererSpin        GtkCellRendererSpinFat;
-typedef struct _GtkCellRendererSpin        GtkCellRendererSpinSkinny;
+typedef struct _GtkCellRendererSpin        GtkCellRendererSpinThin;
 typedef struct _GtkCellRendererSpinClass   GtkCellRendererSpinClassFat;
-typedef struct _GtkCellRendererSpinClass   GtkCellRendererSpinClassSkinny;
+typedef struct _GtkCellRendererSpinClass   GtkCellRendererSpinClassThin;
 typedef struct _GtkCellRendererSpinPrivate GtkCellRendererSpinPrivate;
 
 struct _GtkCellRendererSpin

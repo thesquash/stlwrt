@@ -40,9 +40,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkPrintUnixDialog         GtkPrintUnixDialogFat;
-typedef struct _GtkPrintUnixDialog         GtkPrintUnixDialogSkinny;
+typedef struct _GtkPrintUnixDialog         GtkPrintUnixDialogThin;
 typedef struct _GtkPrintUnixDialogClass    GtkPrintUnixDialogClassFat;
-typedef struct _GtkPrintUnixDialogClass    GtkPrintUnixDialogClassSkinny;
+typedef struct _GtkPrintUnixDialogClass    GtkPrintUnixDialogClassThin;
 typedef struct GtkPrintUnixDialogPrivate   GtkPrintUnixDialogPrivate;
 
 struct _GtkPrintUnixDialog

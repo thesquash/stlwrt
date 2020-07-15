@@ -40,9 +40,9 @@ G_BEGIN_DECLS
 #define GTK_CELL_RENDERER_TEXT_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_CELL_RENDERER_TEXT, GtkCellRendererTextClass))
 
 typedef struct _GtkCellRendererText      GtkCellRendererTextFat;
-typedef struct _GtkCellRendererText      GtkCellRendererTextSkinny;
+typedef struct _GtkCellRendererText      GtkCellRendererTextThin;
 typedef struct _GtkCellRendererTextClass GtkCellRendererTextClassFat;
-typedef struct _GtkCellRendererTextClass GtkCellRendererTextClassSkinny;
+typedef struct _GtkCellRendererTextClass GtkCellRendererTextClassThin;
 
 struct _GtkCellRendererText
 {

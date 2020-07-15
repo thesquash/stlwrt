@@ -93,9 +93,9 @@ typedef enum
 
 
 typedef struct _GtkDialog        GtkDialogFat;
-typedef struct _GtkDialog        GtkDialogSkinny;
+typedef struct _GtkDialog        GtkDialogThin;
 typedef struct _GtkDialogClass   GtkDialogClassFat;
-typedef struct _GtkDialogClass   GtkDialogClassSkinny;
+typedef struct _GtkDialogClass   GtkDialogClassThin;
 
 struct _GtkDialog
 {

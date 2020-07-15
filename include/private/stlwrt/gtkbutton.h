@@ -47,9 +47,9 @@ G_BEGIN_DECLS
 #define GTK_BUTTON_GET_CLASS(obj)       (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_BUTTON, GtkButtonClass))
 
 typedef struct _GtkButton        GtkButtonFat;
-typedef struct _GtkButton        GtkButtonSkinny;
+typedef struct _GtkButton        GtkButtonThin;
 typedef struct _GtkButtonClass   GtkButtonClassFat;
-typedef struct _GtkButtonClass   GtkButtonClassSkinny;
+typedef struct _GtkButtonClass   GtkButtonClassThin;
 
 struct _GtkButton
 {

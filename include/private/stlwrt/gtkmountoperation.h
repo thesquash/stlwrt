@@ -42,9 +42,9 @@ G_BEGIN_DECLS
 #define GTK_MOUNT_OPERATION_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GTK_TYPE_MOUNT_OPERATION, GtkMountOperationClass))
 
 typedef struct _GtkMountOperation         GtkMountOperationFat;
-typedef struct _GtkMountOperation         GtkMountOperationSkinny;
+typedef struct _GtkMountOperation         GtkMountOperationThin;
 typedef struct _GtkMountOperationClass    GtkMountOperationClassFat;
-typedef struct _GtkMountOperationClass    GtkMountOperationClassSkinny;
+typedef struct _GtkMountOperationClass    GtkMountOperationClassThin;
 typedef struct _GtkMountOperationPrivate  GtkMountOperationPrivate;
 
 /**

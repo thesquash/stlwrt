@@ -48,9 +48,9 @@ G_BEGIN_DECLS
 #define GTK_FONT_BUTTON_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_FONT_BUTTON, GtkFontButtonClass))
 
 typedef struct _GtkFontButton        GtkFontButtonFat;
-typedef struct _GtkFontButton        GtkFontButtonSkinny;
+typedef struct _GtkFontButton        GtkFontButtonThin;
 typedef struct _GtkFontButtonClass   GtkFontButtonClassFat;
-typedef struct _GtkFontButtonClass   GtkFontButtonClassSkinny;
+typedef struct _GtkFontButtonClass   GtkFontButtonClassThin;
 typedef struct _GtkFontButtonPrivate GtkFontButtonPrivate;
 
 struct _GtkFontButton {

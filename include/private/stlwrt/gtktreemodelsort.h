@@ -39,9 +39,9 @@ G_BEGIN_DECLS
 #define GTK_TREE_MODEL_SORT_GET_CLASS(obj)		(G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TREE_MODEL_SORT, GtkTreeModelSortClass))
 
 typedef struct _GtkTreeModelSort       GtkTreeModelSortFat;
-typedef struct _GtkTreeModelSort       GtkTreeModelSortSkinny;
+typedef struct _GtkTreeModelSort       GtkTreeModelSortThin;
 typedef struct _GtkTreeModelSortClass  GtkTreeModelSortClassFat;
-typedef struct _GtkTreeModelSortClass  GtkTreeModelSortClassSkinny;
+typedef struct _GtkTreeModelSortClass  GtkTreeModelSortClassThin;
 
 struct _GtkTreeModelSort
 {

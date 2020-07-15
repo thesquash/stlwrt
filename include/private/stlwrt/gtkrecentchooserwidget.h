@@ -39,9 +39,9 @@ G_BEGIN_DECLS
 #define GTK_RECENT_CHOOSER_WIDGET_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_RECENT_CHOOSER_WIDGET, GtkRecentChooserWidgetClass))
 
 typedef struct _GtkRecentChooserWidget        GtkRecentChooserWidgetFat;
-typedef struct _GtkRecentChooserWidget        GtkRecentChooserWidgetSkinny;
+typedef struct _GtkRecentChooserWidget        GtkRecentChooserWidgetThin;
 typedef struct _GtkRecentChooserWidgetClass   GtkRecentChooserWidgetClassFat;
-typedef struct _GtkRecentChooserWidgetClass   GtkRecentChooserWidgetClassSkinny;
+typedef struct _GtkRecentChooserWidgetClass   GtkRecentChooserWidgetClassThin;
 
 typedef struct _GtkRecentChooserWidgetPrivate GtkRecentChooserWidgetPrivate;
 

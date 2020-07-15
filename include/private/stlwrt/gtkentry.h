@@ -62,9 +62,9 @@ typedef enum
 } GtkEntryIconPosition;
 
 typedef struct _GtkEntry       GtkEntryFat;
-typedef struct _GtkEntry       GtkEntrySkinny;
+typedef struct _GtkEntry       GtkEntryThin;
 typedef struct _GtkEntryClass  GtkEntryClassFat;
-typedef struct _GtkEntryClass  GtkEntryClassSkinny;
+typedef struct _GtkEntryClass  GtkEntryClassThin;
 
 struct _GtkEntry
 {

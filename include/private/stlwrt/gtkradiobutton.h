@@ -47,9 +47,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkRadioButton	     GtkRadioButtonFat;
-typedef struct _GtkRadioButton	     GtkRadioButtonSkinny;
+typedef struct _GtkRadioButton	     GtkRadioButtonThin;
 typedef struct _GtkRadioButtonClass  GtkRadioButtonClassFat;
-typedef struct _GtkRadioButtonClass  GtkRadioButtonClassSkinny;
+typedef struct _GtkRadioButtonClass  GtkRadioButtonClassThin;
 
 struct _GtkRadioButton
 {

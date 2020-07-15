@@ -47,9 +47,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkDrawingArea       GtkDrawingAreaFat;
-typedef struct _GtkDrawingArea       GtkDrawingAreaSkinny;
+typedef struct _GtkDrawingArea       GtkDrawingAreaThin;
 typedef struct _GtkDrawingAreaClass  GtkDrawingAreaClassFat;
-typedef struct _GtkDrawingAreaClass  GtkDrawingAreaClassSkinny;
+typedef struct _GtkDrawingAreaClass  GtkDrawingAreaClassThin;
 
 struct _GtkDrawingArea
 {

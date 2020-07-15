@@ -39,7 +39,7 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkBuildable      GtkBuildableFat;
-typedef struct _GtkBuildable      GtkBuildableSkinny; /* Dummy typedef */
+typedef struct _GtkBuildable      GtkBuildableThin; /* Dummy typedef */
 typedef struct _GtkBuildableIface GtkBuildableIface;
 
 /**

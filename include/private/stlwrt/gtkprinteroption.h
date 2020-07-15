@@ -36,9 +36,9 @@ G_BEGIN_DECLS
 #define GTK_IS_PRINTER_OPTION(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_PRINTER_OPTION))
 
 typedef struct _GtkPrinterOption       GtkPrinterOptionFat;
-typedef struct _GtkPrinterOption       GtkPrinterOptionSkinny;
+typedef struct _GtkPrinterOption       GtkPrinterOptionThin;
 typedef struct _GtkPrinterOptionClass  GtkPrinterOptionClassFat;
-typedef struct _GtkPrinterOptionClass  GtkPrinterOptionClassSkinny;
+typedef struct _GtkPrinterOptionClass  GtkPrinterOptionClassThin;
 
 #define GTK_PRINTER_OPTION_GROUP_IMAGE_QUALITY "ImageQuality"
 #define GTK_PRINTER_OPTION_GROUP_FINISHING "Finishing"

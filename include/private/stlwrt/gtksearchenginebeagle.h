@@ -36,9 +36,9 @@ G_BEGIN_DECLS
 #define GTK_SEARCH_ENGINE_BEAGLE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_SEARCH_ENGINE_BEAGLE, GtkSearchEngineBeagleClass))
 
 typedef struct _GtkSearchEngineBeagle GtkSearchEngineBeagleFat;
-typedef struct _GtkSearchEngineBeagle GtkSearchEngineBeagleSkinny;
+typedef struct _GtkSearchEngineBeagle GtkSearchEngineBeagleThin;
 typedef struct _GtkSearchEngineBeagleClass GtkSearchEngineBeagleClassFat;
-typedef struct _GtkSearchEngineBeagleClass GtkSearchEngineBeagleClassSkinny;
+typedef struct _GtkSearchEngineBeagleClass GtkSearchEngineBeagleClassThin;
 typedef struct _GtkSearchEngineBeaglePrivate GtkSearchEngineBeaglePrivate;
 
 struct _GtkSearchEngineBeagle 

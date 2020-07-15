@@ -54,9 +54,9 @@ typedef enum
 #define GTK_CELL_RENDERER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_CELL_RENDERER, GtkCellRendererClass))
 
 typedef struct _GtkCellRenderer GtkCellRendererFat;
-typedef struct _GtkCellRenderer GtkCellRendererSkinny;
+typedef struct _GtkCellRenderer GtkCellRendererThin;
 typedef struct _GtkCellRendererClass GtkCellRendererClassFat;
-typedef struct _GtkCellRendererClass GtkCellRendererClassSkinny;
+typedef struct _GtkCellRendererClass GtkCellRendererClassThin;
 
 struct _GtkCellRenderer
 {

@@ -37,9 +37,9 @@ G_BEGIN_DECLS
 #define GTK_IS_PRINTER_OPTION_SET(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_PRINTER_OPTION_SET))
 
 typedef struct _GtkPrinterOptionSet       GtkPrinterOptionSetFat;
-typedef struct _GtkPrinterOptionSet       GtkPrinterOptionSetSkinny;
+typedef struct _GtkPrinterOptionSet       GtkPrinterOptionSetThin;
 typedef struct _GtkPrinterOptionSetClass  GtkPrinterOptionSetClassFat;
-typedef struct _GtkPrinterOptionSetClass  GtkPrinterOptionSetClassSkinny;
+typedef struct _GtkPrinterOptionSetClass  GtkPrinterOptionSetClassThin;
 
 struct _GtkPrinterOptionSet
 {

@@ -47,9 +47,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkTable	GtkTableFat;
-typedef struct _GtkTable	GtkTableSkinny;
+typedef struct _GtkTable	GtkTableThin;
 typedef struct _GtkTableClass	GtkTableClassFat;
-typedef struct _GtkTableClass	GtkTableClassSkinny;
+typedef struct _GtkTableClass	GtkTableClassThin;
 typedef struct _GtkTableChild	GtkTableChild;
 typedef struct _GtkTableRowCol	GtkTableRowCol;
 

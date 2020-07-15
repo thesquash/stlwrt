@@ -40,9 +40,9 @@ G_BEGIN_DECLS
 #define GTK_ENTRY_COMPLETION_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ENTRY_COMPLETION, GtkEntryCompletionClass))
 
 typedef struct _GtkEntryCompletion            GtkEntryCompletionFat;
-typedef struct _GtkEntryCompletion            GtkEntryCompletionSkinny;
+typedef struct _GtkEntryCompletion            GtkEntryCompletionThin;
 typedef struct _GtkEntryCompletionClass       GtkEntryCompletionClassFat;
-typedef struct _GtkEntryCompletionClass       GtkEntryCompletionClassSkinny;
+typedef struct _GtkEntryCompletionClass       GtkEntryCompletionClassThin;
 typedef struct _GtkEntryCompletionPrivate     GtkEntryCompletionPrivate;
 
 typedef gboolean (* GtkEntryCompletionMatchFunc) (GtkEntryCompletion *completion,

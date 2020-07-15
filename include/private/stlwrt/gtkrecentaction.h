@@ -40,10 +40,10 @@ G_BEGIN_DECLS
 #define GTK_RECENT_ACTION_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_RECENT_ACTION, GtkRecentActionClass))
 
 typedef struct _GtkRecentAction         GtkRecentActionFat;
-typedef struct _GtkRecentAction         GtkRecentActionSkinny;
+typedef struct _GtkRecentAction         GtkRecentActionThin;
 typedef struct _GtkRecentActionPrivate  GtkRecentActionPrivate;
 typedef struct _GtkRecentActionClass    GtkRecentActionClassFat;
-typedef struct _GtkRecentActionClass    GtkRecentActionClassSkinny;
+typedef struct _GtkRecentActionClass    GtkRecentActionClassThin;
 
 struct _GtkRecentAction
 {

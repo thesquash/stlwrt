@@ -60,9 +60,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkHRuler       GtkHRulerFat;
-typedef struct _GtkHRuler       GtkHRulerSkinny;
+typedef struct _GtkHRuler       GtkHRulerThin;
 typedef struct _GtkHRulerClass  GtkHRulerClassFat;
-typedef struct _GtkHRulerClass  GtkHRulerClassSkinny;
+typedef struct _GtkHRulerClass  GtkHRulerClassThin;
 
 struct _GtkHRuler
 {

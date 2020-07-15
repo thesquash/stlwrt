@@ -37,7 +37,7 @@
 G_BEGIN_DECLS
 
 typedef struct _GdkDragContext        GdkDragContextFat;
-typedef struct _GdkDragContext        GdkDragContextSkinny;
+typedef struct _GdkDragContext        GdkDragContextThin;
 
 typedef enum
 {
@@ -66,7 +66,7 @@ typedef enum
  */
 
 typedef struct _GdkDragContextClass GdkDragContextClassFat;
-typedef struct _GdkDragContextClass GdkDragContextClassSkinny;
+typedef struct _GdkDragContextClass GdkDragContextClassThin;
 
 #define GDK_TYPE_DRAG_CONTEXT              (gdk_drag_context_get_type ())
 #define GDK_DRAG_CONTEXT(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_DRAG_CONTEXT, GdkDragContext))

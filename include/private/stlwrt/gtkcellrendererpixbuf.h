@@ -39,9 +39,9 @@ G_BEGIN_DECLS
 #define GTK_CELL_RENDERER_PIXBUF_GET_CLASS(obj)         (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_CELL_RENDERER_PIXBUF, GtkCellRendererPixbufClass))
 
 typedef struct _GtkCellRendererPixbuf GtkCellRendererPixbufFat;
-typedef struct _GtkCellRendererPixbuf GtkCellRendererPixbufSkinny;
+typedef struct _GtkCellRendererPixbuf GtkCellRendererPixbufThin;
 typedef struct _GtkCellRendererPixbufClass GtkCellRendererPixbufClassFat;
-typedef struct _GtkCellRendererPixbufClass GtkCellRendererPixbufClassSkinny;
+typedef struct _GtkCellRendererPixbufClass GtkCellRendererPixbufClassThin;
 
 struct _GtkCellRendererPixbuf
 {

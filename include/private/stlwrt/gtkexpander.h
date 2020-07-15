@@ -41,9 +41,9 @@ G_BEGIN_DECLS
 #define GTK_EXPANDER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_EXPANDER, GtkExpanderClass))
 
 typedef struct _GtkExpander        GtkExpanderFat;
-typedef struct _GtkExpander        GtkExpanderSkinny;
+typedef struct _GtkExpander        GtkExpanderThin;
 typedef struct _GtkExpanderClass   GtkExpanderClassFat;
-typedef struct _GtkExpanderClass   GtkExpanderClassSkinny;
+typedef struct _GtkExpanderClass   GtkExpanderClassThin;
 typedef struct _GtkExpanderPrivate GtkExpanderPrivate;
 
 struct _GtkExpander

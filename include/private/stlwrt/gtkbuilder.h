@@ -41,9 +41,9 @@ G_BEGIN_DECLS
 #define GTK_BUILDER_ERROR                (__gtk_builder_error_quark ())
 
 typedef struct _GtkBuilder        GtkBuilderFat;
-typedef struct _GtkBuilder        GtkBuilderSkinny;
+typedef struct _GtkBuilder        GtkBuilderThin;
 typedef struct _GtkBuilderClass   GtkBuilderClassFat;
-typedef struct _GtkBuilderClass   GtkBuilderClassSkinny;
+typedef struct _GtkBuilderClass   GtkBuilderClassThin;
 typedef struct _GtkBuilderPrivate GtkBuilderPrivate;
 
 typedef enum

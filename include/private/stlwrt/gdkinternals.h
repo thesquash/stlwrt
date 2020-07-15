@@ -688,7 +688,7 @@ GdkRegion  *_gdk_region_new_from_yxbanded_rects (GdkRectangle *rects, int n_rect
  * offscreen window routines *
  *****************************/
 typedef struct _GdkOffscreenWindow      GdkOffscreenWindowFat;
-typedef struct _GdkOffscreenWindow      GdkOffscreenWindowSkinny;
+typedef struct _GdkOffscreenWindow      GdkOffscreenWindowThin;
 #define GDK_TYPE_OFFSCREEN_WINDOW            (gdk_offscreen_window_get_type())
 #define GDK_OFFSCREEN_WINDOW(object)         (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_OFFSCREEN_WINDOW, GdkOffscreenWindow))
 #define GDK_IS_OFFSCREEN_WINDOW(object)      (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_OFFSCREEN_WINDOW))

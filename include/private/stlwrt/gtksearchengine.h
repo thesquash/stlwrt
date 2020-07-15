@@ -36,9 +36,9 @@ G_BEGIN_DECLS
 #define GTK_SEARCH_ENGINE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_SEARCH_ENGINE, GtkSearchEngineClass))
 
 typedef struct _GtkSearchEngine GtkSearchEngineFat;
-typedef struct _GtkSearchEngine GtkSearchEngineSkinny;
+typedef struct _GtkSearchEngine GtkSearchEngineThin;
 typedef struct _GtkSearchEngineClass GtkSearchEngineClassFat;
-typedef struct _GtkSearchEngineClass GtkSearchEngineClassSkinny;
+typedef struct _GtkSearchEngineClass GtkSearchEngineClassThin;
 typedef struct _GtkSearchEnginePrivate GtkSearchEnginePrivate;
 
 struct _GtkSearchEngine 

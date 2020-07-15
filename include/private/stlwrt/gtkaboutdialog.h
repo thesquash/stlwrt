@@ -42,9 +42,9 @@ G_BEGIN_DECLS
 #define GTK_ABOUT_DIALOG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ABOUT_DIALOG, GtkAboutDialogClass))
 
 typedef struct _GtkAboutDialog        GtkAboutDialogFat;
-typedef struct _GtkAboutDialog        GtkAboutDialogSkinny;
+typedef struct _GtkAboutDialog        GtkAboutDialogThin;
 typedef struct _GtkAboutDialogClass   GtkAboutDialogClassFat;
-typedef struct _GtkAboutDialogClass   GtkAboutDialogClassSkinny;
+typedef struct _GtkAboutDialogClass   GtkAboutDialogClassThin;
 
 /**
  * GtkAboutDialog:

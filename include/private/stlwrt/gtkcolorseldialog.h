@@ -47,9 +47,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkColorSelectionDialog       GtkColorSelectionDialogFat;
-typedef struct _GtkColorSelectionDialog       GtkColorSelectionDialogSkinny;
+typedef struct _GtkColorSelectionDialog       GtkColorSelectionDialogThin;
 typedef struct _GtkColorSelectionDialogClass  GtkColorSelectionDialogClassFat;
-typedef struct _GtkColorSelectionDialogClass  GtkColorSelectionDialogClassSkinny;
+typedef struct _GtkColorSelectionDialogClass  GtkColorSelectionDialogClassThin;
 
 
 struct _GtkColorSelectionDialog

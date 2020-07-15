@@ -40,9 +40,9 @@ G_BEGIN_DECLS
 #define GTK_ENTRY_BUFFER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ENTRY_BUFFER, GtkEntryBufferClass))
 
 typedef struct _GtkEntryBuffer            GtkEntryBufferFat;
-typedef struct _GtkEntryBuffer            GtkEntryBufferSkinny;
+typedef struct _GtkEntryBuffer            GtkEntryBufferThin;
 typedef struct _GtkEntryBufferClass       GtkEntryBufferClassFat;
-typedef struct _GtkEntryBufferClass       GtkEntryBufferClassSkinny;
+typedef struct _GtkEntryBufferClass       GtkEntryBufferClassThin;
 typedef struct _GtkEntryBufferPrivate     GtkEntryBufferPrivate;
 
 struct _GtkEntryBuffer

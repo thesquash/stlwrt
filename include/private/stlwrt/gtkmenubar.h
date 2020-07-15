@@ -47,9 +47,9 @@ G_BEGIN_DECLS
 #define GTK_MENU_BAR_GET_CLASS(obj)     (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_MENU_BAR, GtkMenuBarClass))
 
 typedef struct _GtkMenuBar       GtkMenuBarFat;
-typedef struct _GtkMenuBar       GtkMenuBarSkinny;
+typedef struct _GtkMenuBar       GtkMenuBarThin;
 typedef struct _GtkMenuBarClass  GtkMenuBarClassFat;
-typedef struct _GtkMenuBarClass  GtkMenuBarClassSkinny;
+typedef struct _GtkMenuBarClass  GtkMenuBarClassThin;
 
 struct _GtkMenuBar
 {

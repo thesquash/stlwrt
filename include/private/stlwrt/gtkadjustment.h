@@ -46,9 +46,9 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkAdjustment	    GtkAdjustmentFat;
-typedef struct _GtkAdjustment	    GtkAdjustmentSkinny;
+typedef struct _GtkAdjustment	    GtkAdjustmentThin;
 typedef struct _GtkAdjustmentClass  GtkAdjustmentClassFat;
-typedef struct _GtkAdjustmentClass  GtkAdjustmentClassSkinny;
+typedef struct _GtkAdjustmentClass  GtkAdjustmentClassThin;
 
 struct _GtkAdjustment
 {

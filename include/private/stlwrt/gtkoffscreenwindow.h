@@ -38,9 +38,9 @@ G_BEGIN_DECLS
 #define GTK_OFFSCREEN_WINDOW_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GTK_TYPE_OFFSCREEN_WINDOW, GtkOffscreenWindowClass))
 
 typedef struct _GtkOffscreenWindow      GtkOffscreenWindowFat;
-typedef struct _GtkOffscreenWindow      GtkOffscreenWindowSkinny;
+typedef struct _GtkOffscreenWindow      GtkOffscreenWindowThin;
 typedef struct _GtkOffscreenWindowClass GtkOffscreenWindowClassFat;
-typedef struct _GtkOffscreenWindowClass GtkOffscreenWindowClassSkinny;
+typedef struct _GtkOffscreenWindowClass GtkOffscreenWindowClassThin;
 
 struct _GtkOffscreenWindow
 {

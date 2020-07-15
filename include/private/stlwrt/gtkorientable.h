@@ -42,7 +42,7 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkOrientable       GtkOrientableFat;
-typedef struct _GtkOrientable       GtkOrientableSkinny;         /* Dummy typedef */
+typedef struct _GtkOrientable       GtkOrientableThin;         /* Dummy typedef */
 typedef struct _GtkOrientableIface  GtkOrientableIface;
 
 struct _GtkOrientableIface

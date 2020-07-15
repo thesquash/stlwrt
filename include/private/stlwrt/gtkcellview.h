@@ -39,9 +39,9 @@ G_BEGIN_DECLS
 #define GTK_CELL_VIEW_GET_CLASS(inst)     (G_TYPE_INSTANCE_GET_CLASS ((inst), GTK_TYPE_CELL_VIEW, GtkCellViewClass))
 
 typedef struct _GtkCellView             GtkCellViewFat;
-typedef struct _GtkCellView             GtkCellViewSkinny;
+typedef struct _GtkCellView             GtkCellViewThin;
 typedef struct _GtkCellViewClass        GtkCellViewClassFat;
-typedef struct _GtkCellViewClass        GtkCellViewClassSkinny;
+typedef struct _GtkCellViewClass        GtkCellViewClassThin;
 typedef struct _GtkCellViewPrivate      GtkCellViewPrivate;
 
 struct _GtkCellView

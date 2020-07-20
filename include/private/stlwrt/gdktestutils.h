@@ -22,10 +22,6 @@
 #ifndef __GDK_TEST_UTILS_H__
 #define __GDK_TEST_UTILS_H__
 
-#if !defined (__GDK_H_INSIDE__) && !defined (STLWRT_COMPILATION)
-#error "Only <gdk.h> can be included directly."
-#endif
-
 #include <gdkwindow.h>
 
 G_BEGIN_DECLS

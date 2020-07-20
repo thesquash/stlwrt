@@ -114,9 +114,6 @@ typedef enum
   GTK_HAS_GRAB	       = 1 << 15,
   GTK_RC_STYLE	       = 1 << 16,
   GTK_COMPOSITE_CHILD  = 1 << 17,
-#ifndef GTK_DISABLE_DEPRECATED
-  GTK_NO_REPARENT      = 1 << 18,
-#endif
   GTK_APP_PAINTABLE    = 1 << 19,
   GTK_RECEIVES_DEFAULT = 1 << 20,
   GTK_DOUBLE_BUFFERED  = 1 << 21,
@@ -139,48 +136,6 @@ typedef enum
 #define GTK_IS_WIDGET(widget)		  (G_TYPE_CHECK_INSTANCE_TYPE ((widget), GTK_TYPE_WIDGET))
 #define GTK_IS_WIDGET_CLASS(klass)	  (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_WIDGET))
 #define GTK_WIDGET_GET_CLASS(obj)         (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_WIDGET, GtkWidgetClass))
-
-/* Macros for extracting various fields from GtkWidget and GtkWidgetClass.
- */
-#ifndef GTK_DISABLE_DEPRECATED
-/**
- * GTK_WIDGET_TYPE:
- * @wid: a #GtkWidget.
- *
- * Gets the type of a widget.
- *
- * Deprecated: 2.20: Use G_OBJECT_TYPE() instead.
- */
-#define GTK_WIDGET_TYPE(wid)		  (G_OBJECT_TYPE (wid))
-#endif
-
-#ifndef GTK_DISABLE_DEPRECATED
-/**
- * GTK_WIDGET_STATE:
- * @wid: a #GtkWidget.
- *
- * Returns the current state of the widget, as a #GtkStateType.
- *
- * Deprecated: 2.20: Use __gtk_widget_get_state() instead.
- */
-#define GTK_WIDGET_STATE(wid)		  (GTK_WIDGET (wid)->state)
-#endif
-
-#ifndef GTK_DISABLE_DEPRECATED
-/**
- * GTK_WIDGET_SAVED_STATE:
- * @wid: a #GtkWidget.
- *
- * Returns the saved state of the widget, as a #GtkStateType.
- *
- * The saved state will be restored when a widget gets sensitive
- * again, after it has been made insensitive with __gtk_widget_set_state()
- * or __gtk_widget_set_sensitive().
- *
- * Deprecated: 2.20: Do not used it.
- */
-#define GTK_WIDGET_SAVED_STATE(wid)	  (GTK_WIDGET (wid)->saved_state)
-#endif
 
 
 #define GTK_TYPE_REQUISITION              (gtk_requisition_get_type ())
@@ -556,13 +511,6 @@ GtkWidget* __gtk_widget_new		  (GType		type,
 void	   __gtk_widget_destroy		  (GtkWidget	       *widget);
 void	   __gtk_widget_destroyed		  (GtkWidget	       *widget,
 					   GtkWidget	      **widget_pointer);
-#ifndef GTK_DISABLE_DEPRECATED
-GtkWidget* __gtk_widget_ref		  (GtkWidget	       *widget);
-void	   __gtk_widget_unref		  (GtkWidget	       *widget);
-void	   __gtk_widget_set		  (GtkWidget	       *widget,
-					   const gchar         *first_property_name,
-					   ...) G_GNUC_NULL_TERMINATED;
-#endif /* GTK_DISABLE_DEPRECATED */
 #if !defined(GTK_DISABLE_DEPRECATED) || defined (STLWRT_COMPILATION)
 void       __gtk_widget_hide_all            (GtkWidget           *widget);
 #endif
@@ -586,22 +534,10 @@ void	   __gtk_widget_queue_draw_area	  (GtkWidget	       *widget,
 					   gint                 y,
 					   gint                 width,
 					   gint                 height);
-#ifndef GTK_DISABLE_DEPRECATED
-void	   __gtk_widget_queue_clear	  (GtkWidget	       *widget);
-void	   __gtk_widget_queue_clear_area	  (GtkWidget	       *widget,
-					   gint                 x,
-					   gint                 y,
-					   gint                 width,
-					   gint                 height);
-#endif /* GTK_DISABLE_DEPRECATED */
 
 
 void	   __gtk_widget_queue_resize	  (GtkWidget	       *widget);
 void	   __gtk_widget_queue_resize_no_redraw (GtkWidget *widget);
-#ifndef GTK_DISABLE_DEPRECATED
-void	   __gtk_widget_draw		  (GtkWidget	       *widget,
-					   const GdkRectangle  *area);
-#endif /* GTK_DISABLE_DEPRECATED */
 void	   __gtk_widget_size_request	  (GtkWidget	       *widget,
 					   GtkRequisition      *requisition);
 void	   __gtk_widget_size_allocate	  (GtkWidget	       *widget,
@@ -749,14 +685,6 @@ void       __gtk_widget_set_size_request    (GtkWidget           *widget,
 void       __gtk_widget_get_size_request    (GtkWidget           *widget,
                                            gint                *width,
                                            gint                *height);
-#ifndef GTK_DISABLE_DEPRECATED
-void	   __gtk_widget_set_uposition	  (GtkWidget	       *widget,
-					   gint			x,
-					   gint			y);
-void	   __gtk_widget_set_usize		  (GtkWidget	       *widget,
-					   gint			width,
-					   gint			height);
-#endif
 
 void	   __gtk_widget_set_events	  (GtkWidget	       *widget,
 					   gint			events);
@@ -781,42 +709,6 @@ GtkClipboard *__gtk_widget_get_clipboard   (GtkWidget *widget,
 					  GdkAtom    selection);
 GdkPixmap *   __gtk_widget_get_snapshot    (GtkWidget    *widget,
                                           GdkRectangle *clip_rect);
-
-#ifndef GTK_DISABLE_DEPRECATED
-
-/**
- * gtk_widget_set_visual:
- * @widget: a #GtkWidget
- * @visual: a visual
- *
- * This function is deprecated; it does nothing.
- */
-#define __gtk_widget_set_visual(widget,visual)  ((void) 0)
-
-/**
- * gtk_widget_push_visual:
- * @visual: a visual
- *
- * This function is deprecated; it does nothing.
- */
-#define __gtk_widget_push_visual(visual)        ((void) 0)
-
-/**
- * gtk_widget_pop_visual:
- *
- * This function is deprecated; it does nothing.
- */
-#define __gtk_widget_pop_visual()               ((void) 0)
-
-/**
- * gtk_widget_set_default_visual:
- * @visual: a visual
- *
- * This function is deprecated; it does nothing.
- */
-#define __gtk_widget_set_default_visual(visual) ((void) 0)
-
-#endif /* GTK_DISABLE_DEPRECATED */
 
 /* Accessibility support */
 AtkObject*       __gtk_widget_get_accessible               (GtkWidget          *widget);
@@ -880,28 +772,6 @@ void        __gtk_widget_modify_cursor      (GtkWidget            *widget,
 void        __gtk_widget_modify_font        (GtkWidget            *widget,
 					   PangoFontDescription *font_desc);
 
-#ifndef GTK_DISABLE_DEPRECATED
-
-/**
- * gtk_widget_set_rc_style:
- * @widget: a #GtkWidget.
- *
- * Equivalent to <literal>__gtk_widget_set_style (widget, NULL)</literal>.
- *
- * Deprecated: 2.0: Use __gtk_widget_set_style() with a %NULL @style argument instead.
- */
-#define __gtk_widget_set_rc_style(widget)          (__gtk_widget_set_style (widget, NULL))
-
-/**
- * gtk_widget_restore_default_style:
- * @widget: a #GtkWidget.
- *
- * Equivalent to <literal>__gtk_widget_set_style (widget, NULL)</literal>.
- *
- * Deprecated: 2.0: Use __gtk_widget_set_style() with a %NULL @style argument instead.
- */
-#define __gtk_widget_restore_default_style(widget) (__gtk_widget_set_style (widget, NULL))
-#endif
 
 PangoContext *__gtk_widget_create_pango_context (GtkWidget   *widget);
 PangoContext *__gtk_widget_get_pango_context    (GtkWidget   *widget);
@@ -1030,11 +900,6 @@ GType           _3T_gtk_requisition_get_type (void) G_GNUC_CONST;
 GType           gtk_requisition_get_type (void) G_GNUC_CONST;
 GtkRequisition *__gtk_requisition_copy     (const GtkRequisition *requisition);
 void            __gtk_requisition_free     (GtkRequisition       *requisition);
-
-#if	defined (GTK_TRACE_OBJECTS) && defined (__GNUC__)
-#  define gtk_widget_ref g_object_ref
-#  define gtk_widget_unref g_object_unref
-#endif	/* GTK_TRACE_OBJECTS && __GNUC__ */
 
 void              ___gtk_widget_set_has_default             (GtkWidget    *widget,
                                                            gboolean      has_default);

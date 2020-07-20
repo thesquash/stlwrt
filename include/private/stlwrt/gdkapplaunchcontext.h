@@ -24,10 +24,6 @@
 #ifndef __GDK_APP_LAUNCH_CONTEXT_H__
 #define __GDK_APP_LAUNCH_CONTEXT_H__
 
-#if !defined (__GDK_H_INSIDE__) && !defined (STLWRT_COMPILATION)
-#error "Only <gdk.h> can be included directly."
-#endif
-
 #include <gio/gio.h>
 #include <gdkscreen.h>
 

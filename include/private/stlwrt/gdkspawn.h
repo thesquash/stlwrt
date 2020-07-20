@@ -23,10 +23,6 @@
 #ifndef __GDK_SPAWN_H__
 #define __GDK_SPAWN_H__
 
-#if defined(GTK_DISABLE_SINGLE_INCLUDES) && !defined (__GDK_H_INSIDE__) && !defined (STLWRT_COMPILATION)
-#error "Only <gdk.h> can be included directly."
-#endif
-
 #include <gdkscreen.h>
 
 G_BEGIN_DECLS

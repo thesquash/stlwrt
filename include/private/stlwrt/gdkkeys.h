@@ -18,19 +18,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/*
- * Modified by the GTK+ Team and others 1997-2000.  See the AUTHORS
- * file for a list of people on the GTK+ Team.  See the ChangeLog
- * files for a list of changes.  These files are distributed with
- * GTK+ at ftp://ftp.gtk.org/pub/.
- */
-
 #ifndef __GDK_KEYS_H__
 #define __GDK_KEYS_H__
-
-#if defined(GTK_DISABLE_SINGLE_INCLUDES) && !defined (__GDK_H_INSIDE__) && !defined (STLWRT_COMPILATION)
-#error "Only <gdk.h> can be included directly."
-#endif
 
 #include <gdktypes.h>
 

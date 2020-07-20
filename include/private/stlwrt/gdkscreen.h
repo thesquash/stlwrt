@@ -25,10 +25,6 @@
 #ifndef __GDK_SCREEN_H__
 #define __GDK_SCREEN_H__
 
-#if defined(GTK_DISABLE_SINGLE_INCLUDES) && !defined (__GDK_H_INSIDE__) && !defined (STLWRT_COMPILATION)
-#error "Only <gdk.h> can be included directly."
-#endif
-
 #include <cairo.h>
 #include "gdktypes.h"
 #include "gdkdisplay.h"

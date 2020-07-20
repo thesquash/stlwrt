@@ -24,11 +24,6 @@
 #ifndef __GTK_TOOL_SHELL_H__
 #define __GTK_TOOL_SHELL_H__
 
-
-#if !defined (__GTK_H_INSIDE__) && !defined (STLWRT_COMPILATION)
-#error "Only <gtk.h> can be included directly."
-#endif
-
 #include <gtkenums.h>
 #include <pango/pango.h>
 #include <gtksizegroup.h>

@@ -18,19 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Cambridge, MA 02139, USA.
  */
-/*
- * Modified by the GTK+ Team and others 2003.  See the AUTHORS
- * file for a list of people on the GTK+ Team.  See the ChangeLog
- * files for a list of changes.  These files are distributed with
- * GTK+ at ftp://ftp.gtk.org/pub/.
- */
 
 #ifndef __GTK_FONT_BUTTON_H__
 #define __GTK_FONT_BUTTON_H__
-
-#if defined(GTK_DISABLE_SINGLE_INCLUDES) && !defined (__GTK_H_INSIDE__) && !defined (STLWRT_COMPILATION)
-#error "Only <gtk.h> can be included directly."
-#endif
 
 #include <gtkbutton.h>
 

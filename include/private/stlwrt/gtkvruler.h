@@ -18,27 +18,6 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/*
- * Modified by the GTK+ Team and others 1997-2000.  See the AUTHORS
- * file for a list of people on the GTK+ Team.  See the ChangeLog
- * files for a list of changes.  These files are distributed with
- * GTK+ at ftp://ftp.gtk.org/pub/.
- */
-
-/*
- * NOTE this widget is considered too specialized/little-used for
- * GTK+, and will in the future be moved to some other package.  If
- * your application needs this widget, feel free to use it, as the
- * widget does work and is useful in some applications; it's just not
- * of general interest. However, we are not accepting new features for
- * the widget, and it will eventually move out of the GTK+
- * distribution.
- */
-
-#if defined(GTK_DISABLE_SINGLE_INCLUDES) && !defined (__GTK_H_INSIDE__) && !defined (STLWRT_COMPILATION)
-#error "Only <gtk.h> can be included directly."
-#endif
-
 #ifndef GTK_DISABLE_DEPRECATED
 
 #ifndef __GTK_VRULER_H__

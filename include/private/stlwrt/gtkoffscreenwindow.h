@@ -22,10 +22,6 @@
 #ifndef __GTK_OFFSCREEN_WINDOW_H__
 #define __GTK_OFFSCREEN_WINDOW_H__
 
-#if !defined (__GTK_H_INSIDE__) && !defined (STLWRT_COMPILATION)
-#error "Only <gtk.h> can be included directly."
-#endif
-
 #include <gtkwindow.h>
 
 G_BEGIN_DECLS

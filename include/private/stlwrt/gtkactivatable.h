@@ -21,9 +21,6 @@
 #ifndef __GTK_ACTIVATABLE_H__
 #define __GTK_ACTIVATABLE_H__
 
-#if defined(GTK_DISABLE_SINGLE_INCLUDES) && !defined (__GTK_H_INSIDE__) && !defined (STLWRT_COMPILATION)
-#error "Only <gtk.h> can be included directly."
-#endif
 
 #include <gtkaction.h>
 #include <gtktypeutils.h>

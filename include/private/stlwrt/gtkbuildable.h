@@ -22,10 +22,6 @@
 #ifndef __GTK_BUILDABLE_H__
 #define __GTK_BUILDABLE_H__
 
-#if defined(GTK_DISABLE_SINGLE_INCLUDES) && !defined (__GTK_H_INSIDE__) && !defined (STLWRT_COMPILATION)
-#error "Only <gtk.h> can be included directly."
-#endif
-
 #include <gtkbuilder.h>
 #include <gtktypeutils.h>
 

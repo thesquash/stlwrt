@@ -23,10 +23,6 @@
 #ifndef __GTK_TOOL_ITEM_GROUP_H__
 #define __GTK_TOOL_ITEM_GROUP_H__
 
-#if !defined (__GTK_H_INSIDE__) && !defined (STLWRT_COMPILATION)
-#error "Only <gtk.h> can be included directly."
-#endif
-
 #include <gtkcontainer.h>
 #include <gtktoolitem.h>
 

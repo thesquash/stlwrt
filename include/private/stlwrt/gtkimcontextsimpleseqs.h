@@ -32,13 +32,6 @@
  * This file is described in bug report http://bugzilla.gnome.org/show_bug.cgi?id=321896
  */
 
-/*
- * Modified by the GTK+ Team and others 2007, 2008.  See the AUTHORS
- * file for a list of people on the GTK+ Team.  See the ChangeLog
- * files for a list of changes.  These files are distributed with
- * GTK+ at ftp://ftp.gtk.org/pub/.
- */
-
 #ifndef __GTK_IM_CONTEXT_SIMPLE_SEQS_H__
 #define __GTK_IM_CONTEXT_SIMPLE_SEQS_H__
 

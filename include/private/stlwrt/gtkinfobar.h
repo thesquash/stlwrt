@@ -21,20 +21,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/*
- * Modified by the gedit Team, 2005. See the gedit AUTHORS file for a
- * list of people on the gedit Team.
- * See the gedit ChangeLog files for a list of changes.
- *
- * Modified by the GTK+ Team, 2008-2009.
- */
-
 #ifndef __GTK_INFO_BAR_H__
 #define __GTK_INFO_BAR_H__
-
-#if !defined (__GTK_H_INSIDE__) && !defined (STLWRT_COMPILATION)
-#error "Only <gtk.h> can be included directly."
-#endif
 
 #include <gtkhbox.h>
 #include <gtkenums.h>

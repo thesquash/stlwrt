@@ -21,10 +21,6 @@
 #ifndef __GTK_PRINT_UNIX_DIALOG_H__
 #define __GTK_PRINT_UNIX_DIALOG_H__
 
-#if defined(GTK_DISABLE_SINGLE_INCLUDES) && !defined (__GTK_UNIX_PRINT_H_INSIDE__) && !defined (STLWRT_COMPILATION)
-#error "Only <gtkunixprint.h> can be included directly."
-#endif
-
 #include <gtk.h>
 #include <gtkprinter.h>
 #include <gtkprintjob.h>

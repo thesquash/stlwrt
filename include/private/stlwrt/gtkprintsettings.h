@@ -22,10 +22,6 @@
 #ifndef __GTK_PRINT_SETTINGS_H__
 #define __GTK_PRINT_SETTINGS_H__
 
-#if defined(GTK_DISABLE_SINGLE_INCLUDES) && !defined (__GTK_H_INSIDE__) && !defined (STLWRT_COMPILATION)
-#error "Only <gtk.h> can be included directly."
-#endif
-
 #include <gtkpapersize.h>
 
 G_BEGIN_DECLS

@@ -63,7 +63,7 @@ G_BEGIN_DECLS
 #define STLWRT_DEFINE_TYPE_EXTENDED(TN, t_n, T_P, _f_, _C_) \
          _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_PRE(TN, t_n, T_P) \
          _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_FAT (TN, t_n, T_P, _f_) \
-         _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_SKINNY (TN, t_n, T_P, _f_) \
+         _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_THIN (TN, t_n, T_P, _f_) \
          {_C_;} \
          _STLWRT_DEFINE_TYPE_EXTENDED_END() \
          
@@ -73,9 +73,9 @@ G_BEGIN_DECLS
   _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_FAT_PRE(TypeName, type_name, TYPE_PARENT) \
   _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_FAT_REGISTER(TypeName, type_name, TYPE_PARENT, flags) \
   
-#define _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_SKINNY(TypeName, type_name, TYPE_PARENT, flags) \
-  _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_SKINNY_PRE(TypeName, type_name, TYPE_PARENT) \
-  _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_SKINNY_REGISTER(TypeName, type_name, TYPE_PARENT, flags) \
+#define _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_THIN(TypeName, type_name, TYPE_PARENT, flags) \
+  _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_THIN_PRE(TypeName, type_name, TYPE_PARENT) \
+  _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_THIN_REGISTER(TypeName, type_name, TYPE_PARENT, flags) \
 
 
 
@@ -118,7 +118,7 @@ _T2_##type_name##_get_type (void) \
         /* custom code follows */
 
 
-#define _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_SKINNY_PRE(TypeName, type_name, TYPE_PARENT) \
+#define _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_THIN_PRE(TypeName, type_name, TYPE_PARENT) \
 GType \
 _3T_##type_name##_get_type (void) \
 { \
@@ -126,7 +126,7 @@ _3T_##type_name##_get_type (void) \
   /* Prelude goes here */
 
 /* Added for _STLWRT_DEFINE_TYPE_EXTENDED_WITH_PRELUDE */
-#define _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_SKINNY_REGISTER(TypeName, type_name, TYPE_PARENT, flags) \
+#define _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_THIN_REGISTER(TypeName, type_name, TYPE_PARENT, flags) \
   if (g_define_type_id == 0)  \
     { \
       g_define_type_id = g_type_register_static_simple (TYPE_PARENT, \
@@ -155,42 +155,6 @@ static void     type_name##_class_intern_init (gpointer klass) \
     g_type_class_adjust_private_offset (klass, &TypeName##_private_offset); \
   type_name##_class_init ((TypeName##Class*) klass); \
 }
-
-
-
-#define STLWRT_DEFINE_INTERFACE_WITH_CODE(TN, t_n, T_P, _C_)     _STLWRT_DEFINE_INTERFACE_EXTENDED_BEGIN(TN, t_n, T_P) {_C_;} _STLWRT_DEFINE_INTERFACE_EXTENDED_END()
-
-
-#define _STLWRT_DEFINE_INTERFACE_EXTENDED_BEGIN(TypeName, type_name, TYPE_PREREQ) \
-\
-static void     type_name##_default_init        (TypeName##Interface *klass); \
-\
-GType \
-__##type_name##_get_type (void) \
-{ \
-  static volatile gsize g_define_type_id__volatile = 0; \
-  if (g_once_init_enter (&g_define_type_id__volatile))  \
-    { \
-      GType g_define_type_id = \
-        g_type_register_static_simple (G_TYPE_INTERFACE, \
-                                       g_intern_static_string (#TypeName), \
-                                       sizeof (TypeName##Interface), \
-                                       (GClassInitFunc)(void (*)(void)) type_name##_default_init, \
-                                       0, \
-                                       (GInstanceInitFunc)NULL, \
-                                       (GTypeFlags) 0); \
-      if (TYPE_PREREQ != G_TYPE_INVALID) \
-        g_type_interface_add_prerequisite (g_define_type_id, TYPE_PREREQ); \
-      { /* custom code follows */
-
-
-#define _STLWRT_DEFINE_INTERFACE_EXTENDED_END()	\
-        /* following custom code */		\
-      }						\
-      g_once_init_leave (&g_define_type_id__volatile, g_define_type_id); \
-    }						\
-  return g_define_type_id__volatile;			\
-} /* closes type_name##_get_type() */
 
 
 G_END_DECLS

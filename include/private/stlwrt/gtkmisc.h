@@ -36,8 +36,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkMisc	      GtkMiscFat;
 typedef struct _GtkMisc	      GtkMiscThin;
-typedef struct _GtkMiscClass  GtkMiscClassFat;
-typedef struct _GtkMiscClass  GtkMiscClassThin;
+
+typedef struct _GtkMiscClass  GtkMiscClass;
 
 struct _GtkMisc
 {

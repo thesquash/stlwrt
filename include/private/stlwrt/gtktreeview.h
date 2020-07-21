@@ -51,13 +51,13 @@ typedef enum
 
 typedef struct _GtkTreeView           GtkTreeViewFat;
 typedef struct _GtkTreeView           GtkTreeViewThin;
-typedef struct _GtkTreeViewClass      GtkTreeViewClassFat;
-typedef struct _GtkTreeViewClass      GtkTreeViewClassThin;
+
+typedef struct _GtkTreeViewClass      GtkTreeViewClass;
 typedef struct _GtkTreeViewPrivate    GtkTreeViewPrivate;
 typedef struct _GtkTreeSelection      GtkTreeSelectionFat;
 typedef struct _GtkTreeSelection      GtkTreeSelectionThin;
-typedef struct _GtkTreeSelectionClass GtkTreeSelectionClassFat;
-typedef struct _GtkTreeSelectionClass GtkTreeSelectionClassThin;
+
+typedef struct _GtkTreeSelectionClass GtkTreeSelectionClass;
 
 struct _GtkTreeView
 {

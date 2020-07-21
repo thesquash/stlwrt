@@ -36,8 +36,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkAccelMap      GtkAccelMapFat;
 typedef struct _GtkAccelMap      GtkAccelMapThin;
-typedef struct _GtkAccelMapClass GtkAccelMapClassFat;
-typedef struct _GtkAccelMapClass GtkAccelMapClassThin;
+
+typedef struct _GtkAccelMapClass GtkAccelMapClass;
 
 /* --- notifier --- */
 typedef void (*GtkAccelMapForeach)		(gpointer	 data,

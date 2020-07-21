@@ -35,8 +35,8 @@ G_BEGIN_DECLS
 
 
 /* --- typedefs --- */
-typedef struct    _GtkSettingsClass GtkSettingsClassFat;
-typedef struct    _GtkSettingsClass GtkSettingsClassThin;
+
+typedef struct    _GtkSettingsClass GtkSettingsClass;
 typedef struct    _GtkSettingsValue GtkSettingsValue;
 typedef struct    _GtkSettingsPropertyValue GtkSettingsPropertyValue; /* Internal */
 

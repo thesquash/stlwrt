@@ -37,8 +37,8 @@ G_BEGIN_DECLS
 typedef struct _GtkFileChooserDialog        GtkFileChooserDialogFat;
 typedef struct _GtkFileChooserDialog        GtkFileChooserDialogThin;
 typedef struct _GtkFileChooserDialogPrivate GtkFileChooserDialogPrivate;
-typedef struct _GtkFileChooserDialogClass   GtkFileChooserDialogClassFat;
-typedef struct _GtkFileChooserDialogClass   GtkFileChooserDialogClassThin;
+
+typedef struct _GtkFileChooserDialogClass   GtkFileChooserDialogClass;
 
 struct _GtkFileChooserDialog
 {

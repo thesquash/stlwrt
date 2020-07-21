@@ -36,8 +36,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkMenuBar       GtkMenuBarFat;
 typedef struct _GtkMenuBar       GtkMenuBarThin;
-typedef struct _GtkMenuBarClass  GtkMenuBarClassFat;
-typedef struct _GtkMenuBarClass  GtkMenuBarClassThin;
+
+typedef struct _GtkMenuBarClass  GtkMenuBarClass;
 
 struct _GtkMenuBar
 {

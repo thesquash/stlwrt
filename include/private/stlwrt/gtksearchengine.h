@@ -37,8 +37,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkSearchEngine GtkSearchEngineFat;
 typedef struct _GtkSearchEngine GtkSearchEngineThin;
-typedef struct _GtkSearchEngineClass GtkSearchEngineClassFat;
-typedef struct _GtkSearchEngineClass GtkSearchEngineClassThin;
+
+typedef struct _GtkSearchEngineClass GtkSearchEngineClass;
 typedef struct _GtkSearchEnginePrivate GtkSearchEnginePrivate;
 
 struct _GtkSearchEngine 

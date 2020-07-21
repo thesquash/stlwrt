@@ -39,8 +39,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkAboutDialog        GtkAboutDialogFat;
 typedef struct _GtkAboutDialog        GtkAboutDialogThin;
-typedef struct _GtkAboutDialogClass   GtkAboutDialogClassFat;
-typedef struct _GtkAboutDialogClass   GtkAboutDialogClassThin;
+
+typedef struct _GtkAboutDialogClass   GtkAboutDialogClass;
 
 /**
  * GtkAboutDialog:

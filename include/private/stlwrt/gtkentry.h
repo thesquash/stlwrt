@@ -51,8 +51,8 @@ typedef enum
 
 typedef struct _GtkEntry       GtkEntryFat;
 typedef struct _GtkEntry       GtkEntryThin;
-typedef struct _GtkEntryClass  GtkEntryClassFat;
-typedef struct _GtkEntryClass  GtkEntryClassThin;
+
+typedef struct _GtkEntryClass  GtkEntryClass;
 
 struct _GtkEntry
 {

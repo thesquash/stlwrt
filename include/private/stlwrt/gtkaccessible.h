@@ -35,8 +35,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkAccessible                GtkAccessibleFat;
 typedef struct _GtkAccessible                GtkAccessibleThin;
-typedef struct _GtkAccessibleClass           GtkAccessibleClassFat;
-typedef struct _GtkAccessibleClass           GtkAccessibleClassThin;
+
+typedef struct _GtkAccessibleClass           GtkAccessibleClass;
 
   /*
    * This object is a thin wrapper, in the GTK+ namespace, for AtkObject

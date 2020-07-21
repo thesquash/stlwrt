@@ -37,8 +37,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkToolItemGroup        GtkToolItemGroupFat;
 typedef struct _GtkToolItemGroup        GtkToolItemGroupThin;
-typedef struct _GtkToolItemGroupClass   GtkToolItemGroupClassFat;
-typedef struct _GtkToolItemGroupClass   GtkToolItemGroupClassThin;
+
+typedef struct _GtkToolItemGroupClass   GtkToolItemGroupClass;
 typedef struct _GtkToolItemGroupPrivate GtkToolItemGroupPrivate;
 
 /**

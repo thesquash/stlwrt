@@ -37,8 +37,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkPrinterOption       GtkPrinterOptionFat;
 typedef struct _GtkPrinterOption       GtkPrinterOptionThin;
-typedef struct _GtkPrinterOptionClass  GtkPrinterOptionClassFat;
-typedef struct _GtkPrinterOptionClass  GtkPrinterOptionClassThin;
+
+typedef struct _GtkPrinterOptionClass  GtkPrinterOptionClass;
 
 #define GTK_PRINTER_OPTION_GROUP_IMAGE_QUALITY "ImageQuality"
 #define GTK_PRINTER_OPTION_GROUP_FINISHING "Finishing"

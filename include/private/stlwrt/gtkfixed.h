@@ -41,8 +41,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkFixed        GtkFixedFat;
 typedef struct _GtkFixed        GtkFixedThin;
-typedef struct _GtkFixedClass   GtkFixedClassFat;
-typedef struct _GtkFixedClass   GtkFixedClassThin;
+
+typedef struct _GtkFixedClass   GtkFixedClass;
 typedef struct _GtkFixedChild   GtkFixedChild;
 
 struct _GtkFixed

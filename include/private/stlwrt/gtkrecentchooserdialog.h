@@ -36,8 +36,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkRecentChooserDialog        GtkRecentChooserDialogFat;
 typedef struct _GtkRecentChooserDialog        GtkRecentChooserDialogThin;
-typedef struct _GtkRecentChooserDialogClass   GtkRecentChooserDialogClassFat;
-typedef struct _GtkRecentChooserDialogClass   GtkRecentChooserDialogClassThin;
+
+typedef struct _GtkRecentChooserDialogClass   GtkRecentChooserDialogClass;
 
 typedef struct _GtkRecentChooserDialogPrivate GtkRecentChooserDialogPrivate;
 

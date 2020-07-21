@@ -33,8 +33,8 @@
 
 G_BEGIN_DECLS
 
-typedef struct _GtkPrintBackendClass    GtkPrintBackendClassFat;
-typedef struct _GtkPrintBackendClass    GtkPrintBackendClassThin;
+
+typedef struct _GtkPrintBackendClass    GtkPrintBackendClass;
 typedef struct _GtkPrintBackendPrivate  GtkPrintBackendPrivate;
 
 #define GTK_PRINT_BACKEND_ERROR (gtk_print_backend_error_quark ())

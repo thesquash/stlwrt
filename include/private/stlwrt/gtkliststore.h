@@ -38,8 +38,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkListStore       GtkListStoreFat;
 typedef struct _GtkListStore       GtkListStoreThin;
-typedef struct _GtkListStoreClass  GtkListStoreClassFat;
-typedef struct _GtkListStoreClass  GtkListStoreClassThin;
+
+typedef struct _GtkListStoreClass  GtkListStoreClass;
 
 struct _GtkListStore
 {

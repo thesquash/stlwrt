@@ -36,8 +36,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkCellView             GtkCellViewFat;
 typedef struct _GtkCellView             GtkCellViewThin;
-typedef struct _GtkCellViewClass        GtkCellViewClassFat;
-typedef struct _GtkCellViewClass        GtkCellViewClassThin;
+
+typedef struct _GtkCellViewClass        GtkCellViewClass;
 typedef struct _GtkCellViewPrivate      GtkCellViewPrivate;
 
 struct _GtkCellView

@@ -29,8 +29,8 @@ G_BEGIN_DECLS
 
 typedef struct _GdkPangoRenderer        GdkPangoRendererFat;
 typedef struct _GdkPangoRenderer        GdkPangoRendererThin;
-typedef struct _GdkPangoRendererClass   GdkPangoRendererClassFat;
-typedef struct _GdkPangoRendererClass   GdkPangoRendererClassThin;
+
+typedef struct _GdkPangoRendererClass   GdkPangoRendererClass;
 typedef struct _GdkPangoRendererPrivate GdkPangoRendererPrivate;
 
 #define GDK_TYPE_PANGO_RENDERER            (gdk_pango_renderer_get_type())

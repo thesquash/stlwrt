@@ -43,8 +43,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkUIManager      GtkUIManagerFat;
 typedef struct _GtkUIManager      GtkUIManagerThin;
-typedef struct _GtkUIManagerClass GtkUIManagerClassFat;
-typedef struct _GtkUIManagerClass GtkUIManagerClassThin;
+
+typedef struct _GtkUIManagerClass GtkUIManagerClass;
 typedef struct _GtkUIManagerPrivate GtkUIManagerPrivate;
 
 

@@ -40,8 +40,8 @@ enum {
 
 typedef struct _GtkFileChooserSettings GtkFileChooserSettingsFat;
 typedef struct _GtkFileChooserSettings GtkFileChooserSettingsThin;
-typedef struct _GtkFileChooserSettingsClass GtkFileChooserSettingsClassFat;
-typedef struct _GtkFileChooserSettingsClass GtkFileChooserSettingsClassThin;
+
+typedef struct _GtkFileChooserSettingsClass GtkFileChooserSettingsClass;
 
 struct _GtkFileChooserSettings
 {

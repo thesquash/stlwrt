@@ -36,8 +36,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkCellRendererPixbuf GtkCellRendererPixbufFat;
 typedef struct _GtkCellRendererPixbuf GtkCellRendererPixbufThin;
-typedef struct _GtkCellRendererPixbufClass GtkCellRendererPixbufClassFat;
-typedef struct _GtkCellRendererPixbufClass GtkCellRendererPixbufClassThin;
+
+typedef struct _GtkCellRendererPixbufClass GtkCellRendererPixbufClass;
 
 struct _GtkCellRendererPixbuf
 {

@@ -34,8 +34,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkCellRendererAccel      GtkCellRendererAccelFat;
 typedef struct _GtkCellRendererAccel      GtkCellRendererAccelThin;
-typedef struct _GtkCellRendererAccelClass GtkCellRendererAccelClassFat;
-typedef struct _GtkCellRendererAccelClass GtkCellRendererAccelClassThin;
+
+typedef struct _GtkCellRendererAccelClass GtkCellRendererAccelClass;
 
 
 typedef enum

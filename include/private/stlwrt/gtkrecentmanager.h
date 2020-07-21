@@ -41,8 +41,8 @@ typedef struct _GtkRecentInfo		GtkRecentInfo;
 typedef struct _GtkRecentData		GtkRecentData;
 typedef struct _GtkRecentManager	GtkRecentManagerFat;
 typedef struct _GtkRecentManager	GtkRecentManagerThin;
-typedef struct _GtkRecentManagerClass	GtkRecentManagerClassFat;
-typedef struct _GtkRecentManagerClass	GtkRecentManagerClassThin;
+
+typedef struct _GtkRecentManagerClass	GtkRecentManagerClass;
 typedef struct _GtkRecentManagerPrivate GtkRecentManagerPrivate;
 
 /**

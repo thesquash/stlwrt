@@ -36,8 +36,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkCellRendererText      GtkCellRendererTextFat;
 typedef struct _GtkCellRendererText      GtkCellRendererTextThin;
-typedef struct _GtkCellRendererTextClass GtkCellRendererTextClassFat;
-typedef struct _GtkCellRendererTextClass GtkCellRendererTextClassThin;
+
+typedef struct _GtkCellRendererTextClass GtkCellRendererTextClass;
 
 struct _GtkCellRendererText
 {

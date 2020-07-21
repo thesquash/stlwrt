@@ -36,8 +36,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkComboBox        GtkComboBoxFat;
 typedef struct _GtkComboBox        GtkComboBoxThin;
-typedef struct _GtkComboBoxClass   GtkComboBoxClassFat;
-typedef struct _GtkComboBoxClass   GtkComboBoxClassThin;
+
+typedef struct _GtkComboBoxClass   GtkComboBoxClass;
 typedef struct _GtkComboBoxPrivate GtkComboBoxPrivate;
 
 struct _GtkComboBox

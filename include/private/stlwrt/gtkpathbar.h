@@ -28,8 +28,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkPathBar      GtkPathBarFat;
 typedef struct _GtkPathBar      GtkPathBarThin;
-typedef struct _GtkPathBarClass GtkPathBarClassFat;
-typedef struct _GtkPathBarClass GtkPathBarClassThin;
+
+typedef struct _GtkPathBarClass GtkPathBarClass;
 
 
 #define GTK_TYPE_PATH_BAR                 (gtk_path_bar_get_type ())

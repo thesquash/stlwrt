@@ -41,8 +41,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkCheckButton       GtkCheckButtonFat;
 typedef struct _GtkCheckButton       GtkCheckButtonThin;
-typedef struct _GtkCheckButtonClass  GtkCheckButtonClassFat;
-typedef struct _GtkCheckButtonClass  GtkCheckButtonClassThin;
+
+typedef struct _GtkCheckButtonClass  GtkCheckButtonClass;
 
 struct _GtkCheckButton
 {

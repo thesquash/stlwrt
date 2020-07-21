@@ -37,8 +37,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkMenu	      GtkMenuFat;
 typedef struct _GtkMenu	      GtkMenuThin;
-typedef struct _GtkMenuClass  GtkMenuClassFat;
-typedef struct _GtkMenuClass  GtkMenuClassThin;
+
+typedef struct _GtkMenuClass  GtkMenuClass;
 
 typedef void (*GtkMenuPositionFunc) (GtkMenu   *menu,
 				     gint      *x,

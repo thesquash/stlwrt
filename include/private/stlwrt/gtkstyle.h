@@ -42,8 +42,8 @@ G_BEGIN_DECLS
 typedef struct _GtkBorder      GtkBorder;
 typedef struct _GtkStyle       GtkStyleFat;
 typedef struct _GtkStyle       GtkStyleThin;
-typedef struct _GtkStyleClass  GtkStyleClassFat;
-typedef struct _GtkStyleClass  GtkStyleClassThin;
+
+typedef struct _GtkStyleClass  GtkStyleClass;
 typedef struct _GtkThemeEngine GtkThemeEngine;
 typedef struct _GtkRcStyle     GtkRcStyleFat;
 typedef struct _GtkRcStyle     GtkRcStyleThin;

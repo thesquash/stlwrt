@@ -35,8 +35,8 @@ G_BEGIN_DECLS
 typedef struct _GtkTrayIcon	   GtkTrayIconFat;
 typedef struct _GtkTrayIcon	   GtkTrayIconThin;
 typedef struct _GtkTrayIconPrivate GtkTrayIconPrivate;
-typedef struct _GtkTrayIconClass   GtkTrayIconClassFat;
-typedef struct _GtkTrayIconClass   GtkTrayIconClassThin;
+
+typedef struct _GtkTrayIconClass   GtkTrayIconClass;
 
 struct _GtkTrayIcon
 {

@@ -39,8 +39,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkArrow       GtkArrowFat;
 typedef struct _GtkArrow       GtkArrowThin;
-typedef struct _GtkArrowClass  GtkArrowClassFat;
-typedef struct _GtkArrowClass  GtkArrowClassThin;
+
+typedef struct _GtkArrowClass  GtkArrowClass;
 
 struct _GtkArrow
 {

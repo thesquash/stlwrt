@@ -36,8 +36,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkSeparatorToolItem        GtkSeparatorToolItemFat;
 typedef struct _GtkSeparatorToolItem        GtkSeparatorToolItemThin;
-typedef struct _GtkSeparatorToolItemClass   GtkSeparatorToolItemClassFat;
-typedef struct _GtkSeparatorToolItemClass   GtkSeparatorToolItemClassThin;
+
+typedef struct _GtkSeparatorToolItemClass   GtkSeparatorToolItemClass;
 typedef struct _GtkSeparatorToolItemPrivate GtkSeparatorToolItemPrivate;
 
 struct _GtkSeparatorToolItem

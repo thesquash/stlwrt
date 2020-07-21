@@ -37,8 +37,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkAlignment       GtkAlignmentFat;
 typedef struct _GtkAlignment       GtkAlignmentThin;
-typedef struct _GtkAlignmentClass  GtkAlignmentClassFat;
-typedef struct _GtkAlignmentClass  GtkAlignmentClassThin;
+
+typedef struct _GtkAlignmentClass  GtkAlignmentClass;
 typedef struct _GtkAlignmentPrivate GtkAlignmentPrivate;
 
 struct _GtkAlignment

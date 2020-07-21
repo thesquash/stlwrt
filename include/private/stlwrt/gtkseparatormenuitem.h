@@ -36,8 +36,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkSeparatorMenuItem       GtkSeparatorMenuItemFat;
 typedef struct _GtkSeparatorMenuItem       GtkSeparatorMenuItemThin;
-typedef struct _GtkSeparatorMenuItemClass  GtkSeparatorMenuItemClassFat;
-typedef struct _GtkSeparatorMenuItemClass  GtkSeparatorMenuItemClassThin;
+
+typedef struct _GtkSeparatorMenuItemClass  GtkSeparatorMenuItemClass;
 
 struct _GtkSeparatorMenuItem
 {

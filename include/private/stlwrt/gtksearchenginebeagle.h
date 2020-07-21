@@ -37,8 +37,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkSearchEngineBeagle GtkSearchEngineBeagleFat;
 typedef struct _GtkSearchEngineBeagle GtkSearchEngineBeagleThin;
-typedef struct _GtkSearchEngineBeagleClass GtkSearchEngineBeagleClassFat;
-typedef struct _GtkSearchEngineBeagleClass GtkSearchEngineBeagleClassThin;
+
+typedef struct _GtkSearchEngineBeagleClass GtkSearchEngineBeagleClass;
 typedef struct _GtkSearchEngineBeaglePrivate GtkSearchEngineBeaglePrivate;
 
 struct _GtkSearchEngineBeagle 

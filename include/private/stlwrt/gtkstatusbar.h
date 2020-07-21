@@ -36,8 +36,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkStatusbar      GtkStatusbarFat;
 typedef struct _GtkStatusbar      GtkStatusbarThin;
-typedef struct _GtkStatusbarClass GtkStatusbarClassFat;
-typedef struct _GtkStatusbarClass GtkStatusbarClassThin;
+
+typedef struct _GtkStatusbarClass GtkStatusbarClass;
 
 struct _GtkStatusbar
 {

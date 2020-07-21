@@ -35,8 +35,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkPageSetupUnixDialog         GtkPageSetupUnixDialogFat;
 typedef struct _GtkPageSetupUnixDialog         GtkPageSetupUnixDialogThin;
-typedef struct _GtkPageSetupUnixDialogClass    GtkPageSetupUnixDialogClassFat;
-typedef struct _GtkPageSetupUnixDialogClass    GtkPageSetupUnixDialogClassThin;
+
+typedef struct _GtkPageSetupUnixDialogClass    GtkPageSetupUnixDialogClass;
 typedef struct GtkPageSetupUnixDialogPrivate   GtkPageSetupUnixDialogPrivate;
 
 struct _GtkPageSetupUnixDialog

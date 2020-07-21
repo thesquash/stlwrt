@@ -57,8 +57,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkTextMark      GtkTextMarkFat;
 typedef struct _GtkTextMark      GtkTextMarkThin;
-typedef struct _GtkTextMarkClass GtkTextMarkClassFat;
-typedef struct _GtkTextMarkClass GtkTextMarkClassThin;
+
+typedef struct _GtkTextMarkClass GtkTextMarkClass;
 
 #define GTK_TYPE_TEXT_MARK              (gtk_text_mark_get_type ())
 #define GTK_TEXT_MARK(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GTK_TYPE_TEXT_MARK, GtkTextMark))

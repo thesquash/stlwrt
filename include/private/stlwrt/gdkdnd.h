@@ -54,8 +54,8 @@ typedef enum
  * this is used on both source and destination sides.
  */
 
-typedef struct _GdkDragContextClass GdkDragContextClassFat;
-typedef struct _GdkDragContextClass GdkDragContextClassThin;
+
+typedef struct _GdkDragContextClass GdkDragContextClass;
 
 #define GDK_TYPE_DRAG_CONTEXT              (gdk_drag_context_get_type ())
 #define GDK_DRAG_CONTEXT(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_DRAG_CONTEXT, GdkDragContext))

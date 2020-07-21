@@ -40,8 +40,8 @@ G_BEGIN_DECLS
  
 typedef struct _GtkButtonBox       GtkButtonBoxFat;
 typedef struct _GtkButtonBox       GtkButtonBoxThin;
-typedef struct _GtkButtonBoxClass  GtkButtonBoxClassFat;
-typedef struct _GtkButtonBoxClass  GtkButtonBoxClassThin;
+
+typedef struct _GtkButtonBoxClass  GtkButtonBoxClass;
 
 struct _GtkButtonBox
 {

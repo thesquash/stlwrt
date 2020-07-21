@@ -41,8 +41,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkLayout        GtkLayoutFat;
 typedef struct _GtkLayout        GtkLayoutThin;
-typedef struct _GtkLayoutClass   GtkLayoutClassFat;
-typedef struct _GtkLayoutClass   GtkLayoutClassThin;
+
+typedef struct _GtkLayoutClass   GtkLayoutClass;
 
 struct _GtkLayout
 {

@@ -35,8 +35,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkCellRendererProgress         GtkCellRendererProgressFat;
 typedef struct _GtkCellRendererProgress         GtkCellRendererProgressThin;
-typedef struct _GtkCellRendererProgressClass    GtkCellRendererProgressClassFat;
-typedef struct _GtkCellRendererProgressClass    GtkCellRendererProgressClassThin;
+
+typedef struct _GtkCellRendererProgressClass    GtkCellRendererProgressClass;
 typedef struct _GtkCellRendererProgressPrivate  GtkCellRendererProgressPrivate;
 
 struct _GtkCellRendererProgress

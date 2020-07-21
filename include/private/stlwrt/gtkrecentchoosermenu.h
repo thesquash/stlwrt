@@ -36,8 +36,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkRecentChooserMenu		GtkRecentChooserMenuFat;
 typedef struct _GtkRecentChooserMenu		GtkRecentChooserMenuThin;
-typedef struct _GtkRecentChooserMenuClass	GtkRecentChooserMenuClassFat;
-typedef struct _GtkRecentChooserMenuClass	GtkRecentChooserMenuClassThin;
+
+typedef struct _GtkRecentChooserMenuClass	GtkRecentChooserMenuClass;
 typedef struct _GtkRecentChooserMenuPrivate	GtkRecentChooserMenuPrivate;
 
 struct _GtkRecentChooserMenu

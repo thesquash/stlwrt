@@ -45,8 +45,8 @@ struct _GdkKeymapKey
 
 typedef struct _GdkKeymap      GdkKeymapFat;
 typedef struct _GdkKeymap      GdkKeymapThin;
-typedef struct _GdkKeymapClass GdkKeymapClassFat;
-typedef struct _GdkKeymapClass GdkKeymapClassThin;
+
+typedef struct _GdkKeymapClass GdkKeymapClass;
 
 #define GDK_TYPE_KEYMAP              (gdk_keymap_get_type ())
 #define GDK_KEYMAP(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_KEYMAP, GdkKeymap))

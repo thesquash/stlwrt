@@ -39,8 +39,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkCalendar	       GtkCalendarFat;
 typedef struct _GtkCalendar	       GtkCalendarThin;
-typedef struct _GtkCalendarClass       GtkCalendarClassFat;
-typedef struct _GtkCalendarClass       GtkCalendarClassThin;
+
+typedef struct _GtkCalendarClass       GtkCalendarClass;
 
 typedef struct _GtkCalendarPrivate     GtkCalendarPrivate;
 

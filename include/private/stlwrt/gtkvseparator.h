@@ -37,8 +37,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkVSeparator       GtkVSeparatorFat;
 typedef struct _GtkVSeparator       GtkVSeparatorThin;
-typedef struct _GtkVSeparatorClass  GtkVSeparatorClassFat;
-typedef struct _GtkVSeparatorClass  GtkVSeparatorClassThin;
+
+typedef struct _GtkVSeparatorClass  GtkVSeparatorClass;
 
 /**
  * GtkVSeparator:

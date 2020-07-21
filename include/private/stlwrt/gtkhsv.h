@@ -40,8 +40,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkHSV      GtkHSVFat;
 typedef struct _GtkHSV      GtkHSVThin;
-typedef struct _GtkHSVClass GtkHSVClassFat;
-typedef struct _GtkHSVClass GtkHSVClassThin;
+
+typedef struct _GtkHSVClass GtkHSVClass;
 
 struct _GtkHSV
 {

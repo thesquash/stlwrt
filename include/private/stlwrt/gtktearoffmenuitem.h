@@ -36,8 +36,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkTearoffMenuItem       GtkTearoffMenuItemFat;
 typedef struct _GtkTearoffMenuItem       GtkTearoffMenuItemThin;
-typedef struct _GtkTearoffMenuItemClass  GtkTearoffMenuItemClassFat;
-typedef struct _GtkTearoffMenuItemClass  GtkTearoffMenuItemClassThin;
+
+typedef struct _GtkTearoffMenuItemClass  GtkTearoffMenuItemClass;
 
 struct _GtkTearoffMenuItem
 {

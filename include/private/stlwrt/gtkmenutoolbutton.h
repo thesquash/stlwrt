@@ -35,8 +35,8 @@ G_BEGIN_DECLS
 #define GTK_IS_MENU_TOOL_BUTTON_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), GTK_TYPE_MENU_TOOL_BUTTON))
 #define GTK_MENU_TOOL_BUTTON_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GTK_TYPE_MENU_TOOL_BUTTON, GtkMenuToolButtonClass))
 
-typedef struct _GtkMenuToolButtonClass   GtkMenuToolButtonClassFat;
-typedef struct _GtkMenuToolButtonClass   GtkMenuToolButtonClassThin;
+
+typedef struct _GtkMenuToolButtonClass   GtkMenuToolButtonClass;
 typedef struct _GtkMenuToolButton        GtkMenuToolButtonFat;
 typedef struct _GtkMenuToolButton        GtkMenuToolButtonThin;
 typedef struct _GtkMenuToolButtonPrivate GtkMenuToolButtonPrivate;

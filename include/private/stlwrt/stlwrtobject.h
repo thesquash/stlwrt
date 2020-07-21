@@ -109,7 +109,7 @@ _T2_##type_name##_get_type (void) \
     { \
       g_define_type_id = g_type_register_static_simple (TYPE_PARENT, \
                                      g_intern_static_string (#TypeName), \
-                                     sizeof (TypeName##ClassFat), \
+                                     sizeof (TypeName##Class), \
                                      (GClassInitFunc)(void (*)(void)) type_name##_class_intern_init, \
                                      sizeof (TypeName##Fat), \
                                      (GInstanceInitFunc)(void (*)(void)) type_name##_init, \
@@ -131,7 +131,7 @@ _3T_##type_name##_get_type (void) \
     { \
       g_define_type_id = g_type_register_static_simple (TYPE_PARENT, \
                                      g_intern_static_string (#TypeName), \
-                                     sizeof (TypeName##ClassThin), \
+                                     sizeof (TypeName##Class), \
                                      (GClassInitFunc)(void (*)(void)) type_name##_class_intern_init, \
                                      sizeof (TypeName##Thin), \
                                      (GInstanceInitFunc)(void (*)(void)) type_name##_init, \

@@ -38,8 +38,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkToolPalette           GtkToolPaletteFat;
 typedef struct _GtkToolPalette           GtkToolPaletteThin;
-typedef struct _GtkToolPaletteClass      GtkToolPaletteClassFat;
-typedef struct _GtkToolPaletteClass      GtkToolPaletteClassThin;
+
+typedef struct _GtkToolPaletteClass      GtkToolPaletteClass;
 typedef struct _GtkToolPalettePrivate    GtkToolPalettePrivate;
 
 /**

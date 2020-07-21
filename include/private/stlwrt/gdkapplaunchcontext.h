@@ -38,8 +38,8 @@ G_BEGIN_DECLS
 
 typedef struct GdkAppLaunchContext	      GdkAppLaunchContextFat;
 typedef struct GdkAppLaunchContext	      GdkAppLaunchContextThin;
-typedef struct GdkAppLaunchContextClass       GdkAppLaunchContextClassFat;
-typedef struct GdkAppLaunchContextClass       GdkAppLaunchContextClassThin;
+
+typedef struct GdkAppLaunchContextClass       GdkAppLaunchContextClass;
 typedef struct GdkAppLaunchContextPrivate     GdkAppLaunchContextPrivate;
 
 struct GdkAppLaunchContext

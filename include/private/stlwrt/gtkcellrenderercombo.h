@@ -35,8 +35,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkCellRendererCombo      GtkCellRendererComboFat;
 typedef struct _GtkCellRendererCombo      GtkCellRendererComboThin;
-typedef struct _GtkCellRendererComboClass GtkCellRendererComboClassFat;
-typedef struct _GtkCellRendererComboClass GtkCellRendererComboClassThin;
+
+typedef struct _GtkCellRendererComboClass GtkCellRendererComboClass;
 
 struct _GtkCellRendererCombo
 {

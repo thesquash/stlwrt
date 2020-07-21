@@ -37,8 +37,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkEntryBuffer            GtkEntryBufferFat;
 typedef struct _GtkEntryBuffer            GtkEntryBufferThin;
-typedef struct _GtkEntryBufferClass       GtkEntryBufferClassFat;
-typedef struct _GtkEntryBufferClass       GtkEntryBufferClassThin;
+
+typedef struct _GtkEntryBufferClass       GtkEntryBufferClass;
 typedef struct _GtkEntryBufferPrivate     GtkEntryBufferPrivate;
 
 struct _GtkEntryBuffer

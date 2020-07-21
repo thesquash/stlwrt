@@ -36,8 +36,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkIMContext       GtkIMContextFat;
 typedef struct _GtkIMContext       GtkIMContextThin;
-typedef struct _GtkIMContextClass  GtkIMContextClassFat;
-typedef struct _GtkIMContextClass  GtkIMContextClassThin;
+
+typedef struct _GtkIMContextClass  GtkIMContextClass;
 
 struct _GtkIMContext
 {

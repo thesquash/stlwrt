@@ -37,8 +37,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkIMContextSimple       GtkIMContextSimpleFat;
 typedef struct _GtkIMContextSimple       GtkIMContextSimpleThin;
-typedef struct _GtkIMContextSimpleClass  GtkIMContextSimpleClassFat;
-typedef struct _GtkIMContextSimpleClass  GtkIMContextSimpleClassThin;
+
+typedef struct _GtkIMContextSimpleClass  GtkIMContextSimpleClass;
 
 #define GTK_MAX_COMPOSE_LEN 7
 

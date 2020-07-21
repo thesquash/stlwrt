@@ -133,8 +133,8 @@ typedef enum
  */
 typedef struct _GtkRequisition	   GtkRequisition;
 typedef struct _GtkSelectionData   GtkSelectionData;
-typedef struct _GtkWidgetClass	   GtkWidgetClassFat;
-typedef struct _GtkWidgetClass	   GtkWidgetClassThin;
+
+typedef struct _GtkWidgetClass	   GtkWidgetClass;
 typedef struct _GtkWidgetAuxInfo   GtkWidgetAuxInfo;
 typedef struct _GtkWidgetShapeInfo GtkWidgetShapeInfo;
 typedef struct _GtkClipboard	   GtkClipboardFat;

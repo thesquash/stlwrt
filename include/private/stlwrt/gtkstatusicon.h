@@ -39,8 +39,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkStatusIcon	     GtkStatusIconFat;
 typedef struct _GtkStatusIcon	     GtkStatusIconThin;
-typedef struct _GtkStatusIconClass   GtkStatusIconClassFat;
-typedef struct _GtkStatusIconClass   GtkStatusIconClassThin;
+
+typedef struct _GtkStatusIconClass   GtkStatusIconClass;
 typedef struct _GtkStatusIconPrivate GtkStatusIconPrivate;
 
 struct _GtkStatusIcon

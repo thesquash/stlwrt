@@ -37,8 +37,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkSearchEngineTracker GtkSearchEngineTrackerFat;
 typedef struct _GtkSearchEngineTracker GtkSearchEngineTrackerThin;
-typedef struct _GtkSearchEngineTrackerClass GtkSearchEngineTrackerClassFat;
-typedef struct _GtkSearchEngineTrackerClass GtkSearchEngineTrackerClassThin;
+
+typedef struct _GtkSearchEngineTrackerClass GtkSearchEngineTrackerClass;
 typedef struct _GtkSearchEngineTrackerPrivate GtkSearchEngineTrackerPrivate;
 
 struct _GtkSearchEngineTracker 

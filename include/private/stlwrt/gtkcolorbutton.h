@@ -49,8 +49,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkColorButton          GtkColorButtonFat;
 typedef struct _GtkColorButton          GtkColorButtonThin;
-typedef struct _GtkColorButtonClass     GtkColorButtonClassFat;
-typedef struct _GtkColorButtonClass     GtkColorButtonClassThin;
+
+typedef struct _GtkColorButtonClass     GtkColorButtonClass;
 typedef struct _GtkColorButtonPrivate   GtkColorButtonPrivate;
 
 struct _GtkColorButton {

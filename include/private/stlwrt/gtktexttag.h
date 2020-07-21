@@ -74,8 +74,8 @@ typedef struct _GtkTextAttributes GtkTextAttributes;
 
 typedef struct _GtkTextTag GtkTextTagFat;
 typedef struct _GtkTextTag GtkTextTagThin;
-typedef struct _GtkTextTagClass GtkTextTagClassFat;
-typedef struct _GtkTextTagClass GtkTextTagClassThin;
+
+typedef struct _GtkTextTagClass GtkTextTagClass;
 
 struct _GtkTextTag
 {

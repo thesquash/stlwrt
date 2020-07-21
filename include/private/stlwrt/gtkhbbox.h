@@ -36,8 +36,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkHButtonBox       GtkHButtonBoxFat;
 typedef struct _GtkHButtonBox       GtkHButtonBoxThin;
-typedef struct _GtkHButtonBoxClass  GtkHButtonBoxClassFat;
-typedef struct _GtkHButtonBoxClass  GtkHButtonBoxClassThin;
+
+typedef struct _GtkHButtonBoxClass  GtkHButtonBoxClass;
 
 struct _GtkHButtonBox
 {

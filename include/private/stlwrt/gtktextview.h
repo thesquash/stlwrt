@@ -50,8 +50,8 @@ typedef enum
 
 typedef struct _GtkTextView GtkTextViewFat;
 typedef struct _GtkTextView GtkTextViewThin;
-typedef struct _GtkTextViewClass GtkTextViewClassFat;
-typedef struct _GtkTextViewClass GtkTextViewClassThin;
+
+typedef struct _GtkTextViewClass GtkTextViewClass;
 
 /* Internal private types. */
 typedef struct _GtkTextWindow GtkTextWindow;

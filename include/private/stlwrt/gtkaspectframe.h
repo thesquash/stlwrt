@@ -38,8 +38,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkAspectFrame       GtkAspectFrameFat;
 typedef struct _GtkAspectFrame       GtkAspectFrameThin;
-typedef struct _GtkAspectFrameClass  GtkAspectFrameClassFat;
-typedef struct _GtkAspectFrameClass  GtkAspectFrameClassThin;
+
+typedef struct _GtkAspectFrameClass  GtkAspectFrameClass;
 
 struct _GtkAspectFrame
 {

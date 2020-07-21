@@ -38,8 +38,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkIconView           GtkIconViewFat;
 typedef struct _GtkIconView           GtkIconViewThin;
-typedef struct _GtkIconViewClass      GtkIconViewClassFat;
-typedef struct _GtkIconViewClass      GtkIconViewClassThin;
+
+typedef struct _GtkIconViewClass      GtkIconViewClass;
 typedef struct _GtkIconViewPrivate    GtkIconViewPrivate;
 
 typedef void (* GtkIconViewForeachFunc)     (GtkIconView      *icon_view,

@@ -41,8 +41,8 @@ typedef struct _GtkRangeStepTimer GtkRangeStepTimer;
 
 typedef struct _GtkRange        GtkRangeFat;
 typedef struct _GtkRange        GtkRangeThin;
-typedef struct _GtkRangeClass   GtkRangeClassFat;
-typedef struct _GtkRangeClass   GtkRangeClassThin;
+
+typedef struct _GtkRangeClass   GtkRangeClass;
 
 struct _GtkRange
 {

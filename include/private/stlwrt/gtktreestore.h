@@ -39,8 +39,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkTreeStore       GtkTreeStoreFat;
 typedef struct _GtkTreeStore       GtkTreeStoreThin;
-typedef struct _GtkTreeStoreClass  GtkTreeStoreClassFat;
-typedef struct _GtkTreeStoreClass  GtkTreeStoreClassThin;
+
+typedef struct _GtkTreeStoreClass  GtkTreeStoreClass;
 
 struct _GtkTreeStore
 {

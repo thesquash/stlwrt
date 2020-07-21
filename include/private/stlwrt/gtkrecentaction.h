@@ -38,8 +38,8 @@ G_BEGIN_DECLS
 typedef struct _GtkRecentAction         GtkRecentActionFat;
 typedef struct _GtkRecentAction         GtkRecentActionThin;
 typedef struct _GtkRecentActionPrivate  GtkRecentActionPrivate;
-typedef struct _GtkRecentActionClass    GtkRecentActionClassFat;
-typedef struct _GtkRecentActionClass    GtkRecentActionClassThin;
+
+typedef struct _GtkRecentActionClass    GtkRecentActionClass;
 
 struct _GtkRecentAction
 {

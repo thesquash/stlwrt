@@ -38,8 +38,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkBuilder        GtkBuilderFat;
 typedef struct _GtkBuilder        GtkBuilderThin;
-typedef struct _GtkBuilderClass   GtkBuilderClassFat;
-typedef struct _GtkBuilderClass   GtkBuilderClassThin;
+
+typedef struct _GtkBuilderClass   GtkBuilderClass;
 typedef struct _GtkBuilderPrivate GtkBuilderPrivate;
 
 typedef enum

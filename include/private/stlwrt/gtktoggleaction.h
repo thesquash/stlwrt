@@ -41,8 +41,8 @@ G_BEGIN_DECLS
 typedef struct _GtkToggleAction        GtkToggleActionFat;
 typedef struct _GtkToggleAction        GtkToggleActionThin;
 typedef struct _GtkToggleActionPrivate GtkToggleActionPrivate;
-typedef struct _GtkToggleActionClass   GtkToggleActionClassFat;
-typedef struct _GtkToggleActionClass   GtkToggleActionClassThin;
+
+typedef struct _GtkToggleActionClass   GtkToggleActionClass;
 
 struct _GtkToggleAction
 {

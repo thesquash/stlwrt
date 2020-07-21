@@ -37,8 +37,8 @@ G_BEGIN_DECLS
 typedef struct _GtkFileChooserWidget        GtkFileChooserWidgetFat;
 typedef struct _GtkFileChooserWidget        GtkFileChooserWidgetThin;
 typedef struct _GtkFileChooserWidgetPrivate GtkFileChooserWidgetPrivate;
-typedef struct _GtkFileChooserWidgetClass   GtkFileChooserWidgetClassFat;
-typedef struct _GtkFileChooserWidgetClass   GtkFileChooserWidgetClassThin;
+
+typedef struct _GtkFileChooserWidgetClass   GtkFileChooserWidgetClass;
 
 struct _GtkFileChooserWidget
 {

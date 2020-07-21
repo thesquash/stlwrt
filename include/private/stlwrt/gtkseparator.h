@@ -36,8 +36,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkSeparator       GtkSeparatorFat;
 typedef struct _GtkSeparator       GtkSeparatorThin;
-typedef struct _GtkSeparatorClass  GtkSeparatorClassFat;
-typedef struct _GtkSeparatorClass  GtkSeparatorClassThin;
+
+typedef struct _GtkSeparatorClass  GtkSeparatorClass;
 
 struct _GtkSeparator
 {

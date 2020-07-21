@@ -49,13 +49,13 @@ G_BEGIN_DECLS
 
 typedef struct _GtkFontSelection	     GtkFontSelectionFat;
 typedef struct _GtkFontSelection	     GtkFontSelectionThin;
-typedef struct _GtkFontSelectionClass	     GtkFontSelectionClassFat;
-typedef struct _GtkFontSelectionClass	     GtkFontSelectionClassThin;
+
+typedef struct _GtkFontSelectionClass	     GtkFontSelectionClass;
 
 typedef struct _GtkFontSelectionDialog	     GtkFontSelectionDialogFat;
 typedef struct _GtkFontSelectionDialog	     GtkFontSelectionDialogThin;
-typedef struct _GtkFontSelectionDialogClass  GtkFontSelectionDialogClassFat;
-typedef struct _GtkFontSelectionDialogClass  GtkFontSelectionDialogClassThin;
+
+typedef struct _GtkFontSelectionDialogClass  GtkFontSelectionDialogClass;
 
 struct _GtkFontSelection
 {

@@ -35,8 +35,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkPaned        GtkPanedFat;
 typedef struct _GtkPaned        GtkPanedThin;
-typedef struct _GtkPanedClass   GtkPanedClassFat;
-typedef struct _GtkPanedClass   GtkPanedClassThin;
+
+typedef struct _GtkPanedClass   GtkPanedClass;
 typedef struct _GtkPanedPrivate GtkPanedPrivate;
 
 struct _GtkPaned

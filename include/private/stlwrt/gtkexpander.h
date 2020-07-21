@@ -38,8 +38,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkExpander        GtkExpanderFat;
 typedef struct _GtkExpander        GtkExpanderThin;
-typedef struct _GtkExpanderClass   GtkExpanderClassFat;
-typedef struct _GtkExpanderClass   GtkExpanderClassThin;
+
+typedef struct _GtkExpanderClass   GtkExpanderClass;
 typedef struct _GtkExpanderPrivate GtkExpanderPrivate;
 
 struct _GtkExpander

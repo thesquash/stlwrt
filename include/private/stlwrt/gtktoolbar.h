@@ -77,8 +77,8 @@ typedef enum
 
 typedef struct _GtkToolbar           GtkToolbarFat;
 typedef struct _GtkToolbar           GtkToolbarThin;
-typedef struct _GtkToolbarClass      GtkToolbarClassFat;
-typedef struct _GtkToolbarClass      GtkToolbarClassThin;
+
+typedef struct _GtkToolbarClass      GtkToolbarClass;
 typedef struct _GtkToolbarPrivate    GtkToolbarPrivate;
 
 struct _GtkToolbar

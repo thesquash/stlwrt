@@ -39,8 +39,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkSpinner      GtkSpinnerFat;
 typedef struct _GtkSpinner      GtkSpinnerThin;
-typedef struct _GtkSpinnerClass GtkSpinnerClassFat;
-typedef struct _GtkSpinnerClass GtkSpinnerClassThin;
+
+typedef struct _GtkSpinnerClass GtkSpinnerClass;
 typedef struct _GtkSpinnerPrivate  GtkSpinnerPrivate;
 
 struct _GtkSpinner

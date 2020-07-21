@@ -37,8 +37,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkLabel       GtkLabelFat;
 typedef struct _GtkLabel       GtkLabelThin;
-typedef struct _GtkLabelClass  GtkLabelClassFat;
-typedef struct _GtkLabelClass  GtkLabelClassThin;
+
+typedef struct _GtkLabelClass  GtkLabelClass;
 
 typedef struct _GtkLabelSelectionInfo GtkLabelSelectionInfo;
 

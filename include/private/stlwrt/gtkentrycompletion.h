@@ -37,8 +37,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkEntryCompletion            GtkEntryCompletionFat;
 typedef struct _GtkEntryCompletion            GtkEntryCompletionThin;
-typedef struct _GtkEntryCompletionClass       GtkEntryCompletionClassFat;
-typedef struct _GtkEntryCompletionClass       GtkEntryCompletionClassThin;
+
+typedef struct _GtkEntryCompletionClass       GtkEntryCompletionClass;
 typedef struct _GtkEntryCompletionPrivate     GtkEntryCompletionPrivate;
 
 typedef gboolean (* GtkEntryCompletionMatchFunc) (GtkEntryCompletion *completion,

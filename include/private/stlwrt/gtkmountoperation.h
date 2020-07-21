@@ -32,8 +32,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkMountOperation         GtkMountOperationFat;
 typedef struct _GtkMountOperation         GtkMountOperationThin;
-typedef struct _GtkMountOperationClass    GtkMountOperationClassFat;
-typedef struct _GtkMountOperationClass    GtkMountOperationClassThin;
+
+typedef struct _GtkMountOperationClass    GtkMountOperationClass;
 typedef struct _GtkMountOperationPrivate  GtkMountOperationPrivate;
 
 /**

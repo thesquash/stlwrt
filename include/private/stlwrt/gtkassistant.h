@@ -70,8 +70,8 @@ typedef enum
 typedef struct _GtkAssistant        GtkAssistantFat;
 typedef struct _GtkAssistant        GtkAssistantThin;
 typedef struct _GtkAssistantPrivate GtkAssistantPrivate;
-typedef struct _GtkAssistantClass   GtkAssistantClassFat;
-typedef struct _GtkAssistantClass   GtkAssistantClassThin;
+
+typedef struct _GtkAssistantClass   GtkAssistantClass;
 
 struct _GtkAssistant
 {

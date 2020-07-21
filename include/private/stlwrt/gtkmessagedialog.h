@@ -36,8 +36,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkMessageDialog        GtkMessageDialogFat;
 typedef struct _GtkMessageDialog        GtkMessageDialogThin;
-typedef struct _GtkMessageDialogClass   GtkMessageDialogClassFat;
-typedef struct _GtkMessageDialogClass   GtkMessageDialogClassThin;
+
+typedef struct _GtkMessageDialogClass   GtkMessageDialogClass;
 
 struct _GtkMessageDialog
 {

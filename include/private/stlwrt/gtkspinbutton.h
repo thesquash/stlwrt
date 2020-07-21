@@ -59,8 +59,8 @@ typedef enum
 
 typedef struct _GtkSpinButton	    GtkSpinButtonFat;
 typedef struct _GtkSpinButton	    GtkSpinButtonThin;
-typedef struct _GtkSpinButtonClass  GtkSpinButtonClassFat;
-typedef struct _GtkSpinButtonClass  GtkSpinButtonClassThin;
+
+typedef struct _GtkSpinButtonClass  GtkSpinButtonClass;
 
 
 struct _GtkSpinButton

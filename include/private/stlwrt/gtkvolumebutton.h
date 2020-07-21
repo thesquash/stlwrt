@@ -37,8 +37,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkVolumeButton       GtkVolumeButtonFat;
 typedef struct _GtkVolumeButton       GtkVolumeButtonThin;
-typedef struct _GtkVolumeButtonClass  GtkVolumeButtonClassFat;
-typedef struct _GtkVolumeButtonClass  GtkVolumeButtonClassThin;
+
+typedef struct _GtkVolumeButtonClass  GtkVolumeButtonClass;
 
 struct _GtkVolumeButton
 {

@@ -38,8 +38,8 @@ G_BEGIN_DECLS
 typedef struct _GtkIconInfo         GtkIconInfo;
 typedef struct _GtkIconTheme        GtkIconThemeFat;
 typedef struct _GtkIconTheme        GtkIconThemeThin;
-typedef struct _GtkIconThemeClass   GtkIconThemeClassFat;
-typedef struct _GtkIconThemeClass   GtkIconThemeClassThin;
+
+typedef struct _GtkIconThemeClass   GtkIconThemeClass;
 typedef struct _GtkIconThemePrivate GtkIconThemePrivate;
 
 struct _GtkIconTheme

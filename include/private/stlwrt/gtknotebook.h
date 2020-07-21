@@ -43,8 +43,8 @@ typedef enum
 
 typedef struct _GtkNotebook       GtkNotebookFat;
 typedef struct _GtkNotebook       GtkNotebookThin;
-typedef struct _GtkNotebookClass  GtkNotebookClassFat;
-typedef struct _GtkNotebookClass  GtkNotebookClassThin;
+
+typedef struct _GtkNotebookClass  GtkNotebookClass;
 #if !defined (GTK_DISABLE_DEPRECATED) || defined (STLWRT_COMPILATION)
 typedef struct _GtkNotebookPage   GtkNotebookPage;
 #endif

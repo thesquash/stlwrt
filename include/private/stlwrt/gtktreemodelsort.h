@@ -36,8 +36,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkTreeModelSort       GtkTreeModelSortFat;
 typedef struct _GtkTreeModelSort       GtkTreeModelSortThin;
-typedef struct _GtkTreeModelSortClass  GtkTreeModelSortClassFat;
-typedef struct _GtkTreeModelSortClass  GtkTreeModelSortClassThin;
+
+typedef struct _GtkTreeModelSortClass  GtkTreeModelSortClass;
 
 struct _GtkTreeModelSort
 {

@@ -35,8 +35,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkCustomPaperUnixDialog         GtkCustomPaperUnixDialogFat;
 typedef struct _GtkCustomPaperUnixDialog         GtkCustomPaperUnixDialogThin;
-typedef struct _GtkCustomPaperUnixDialogClass    GtkCustomPaperUnixDialogClassFat;
-typedef struct _GtkCustomPaperUnixDialogClass    GtkCustomPaperUnixDialogClassThin;
+
+typedef struct _GtkCustomPaperUnixDialogClass    GtkCustomPaperUnixDialogClass;
 typedef struct GtkCustomPaperUnixDialogPrivate   GtkCustomPaperUnixDialogPrivate;
 
 struct _GtkCustomPaperUnixDialog

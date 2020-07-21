@@ -35,8 +35,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkOffscreenWindow      GtkOffscreenWindowFat;
 typedef struct _GtkOffscreenWindow      GtkOffscreenWindowThin;
-typedef struct _GtkOffscreenWindowClass GtkOffscreenWindowClassFat;
-typedef struct _GtkOffscreenWindowClass GtkOffscreenWindowClassThin;
+
+typedef struct _GtkOffscreenWindowClass GtkOffscreenWindowClass;
 
 struct _GtkOffscreenWindow
 {

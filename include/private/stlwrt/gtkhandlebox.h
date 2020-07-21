@@ -41,8 +41,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkHandleBox       GtkHandleBoxFat;
 typedef struct _GtkHandleBox       GtkHandleBoxThin;
-typedef struct _GtkHandleBoxClass  GtkHandleBoxClassFat;
-typedef struct _GtkHandleBoxClass  GtkHandleBoxClassThin;
+
+typedef struct _GtkHandleBoxClass  GtkHandleBoxClass;
 
 struct _GtkHandleBox
 {

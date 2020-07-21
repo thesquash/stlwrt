@@ -37,8 +37,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkCellRendererSpinner        GtkCellRendererSpinnerFat;
 typedef struct _GtkCellRendererSpinner        GtkCellRendererSpinnerThin;
-typedef struct _GtkCellRendererSpinnerClass   GtkCellRendererSpinnerClassFat;
-typedef struct _GtkCellRendererSpinnerClass   GtkCellRendererSpinnerClassThin;
+
+typedef struct _GtkCellRendererSpinnerClass   GtkCellRendererSpinnerClass;
 typedef struct _GtkCellRendererSpinnerPrivate GtkCellRendererSpinnerPrivate;
 
 struct _GtkCellRendererSpinner

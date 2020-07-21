@@ -37,8 +37,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkPrintJob          GtkPrintJobFat;
 typedef struct _GtkPrintJob          GtkPrintJobThin;
-typedef struct _GtkPrintJobClass     GtkPrintJobClassFat;
-typedef struct _GtkPrintJobClass     GtkPrintJobClassThin;
+
+typedef struct _GtkPrintJobClass     GtkPrintJobClass;
 typedef struct _GtkPrintJobPrivate   GtkPrintJobPrivate;
 
 typedef void (*GtkPrintJobCompleteFunc) (GtkPrintJob *print_job,

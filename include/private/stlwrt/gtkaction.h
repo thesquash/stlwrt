@@ -41,8 +41,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkAction      GtkActionFat;
 typedef struct _GtkAction      GtkActionThin;
-typedef struct _GtkActionClass GtkActionClassFat;
-typedef struct _GtkActionClass GtkActionClassThin;
+
+typedef struct _GtkActionClass GtkActionClass;
 typedef struct _GtkActionPrivate GtkActionPrivate;
 
 struct _GtkAction

@@ -37,8 +37,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkRadioToolButton      GtkRadioToolButtonFat;
 typedef struct _GtkRadioToolButton      GtkRadioToolButtonThin;
-typedef struct _GtkRadioToolButtonClass GtkRadioToolButtonClassFat;
-typedef struct _GtkRadioToolButtonClass GtkRadioToolButtonClassThin;
+
+typedef struct _GtkRadioToolButtonClass GtkRadioToolButtonClass;
 
 struct _GtkRadioToolButton
 {

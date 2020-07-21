@@ -43,8 +43,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkScaleButton        GtkScaleButtonFat;
 typedef struct _GtkScaleButton        GtkScaleButtonThin;
-typedef struct _GtkScaleButtonClass   GtkScaleButtonClassFat;
-typedef struct _GtkScaleButtonClass   GtkScaleButtonClassThin;
+
+typedef struct _GtkScaleButtonClass   GtkScaleButtonClass;
 typedef struct _GtkScaleButtonPrivate GtkScaleButtonPrivate;
 
 struct _GtkScaleButton

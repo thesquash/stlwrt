@@ -37,8 +37,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkColorSelection       GtkColorSelectionFat;
 typedef struct _GtkColorSelection       GtkColorSelectionThin;
-typedef struct _GtkColorSelectionClass  GtkColorSelectionClassFat;
-typedef struct _GtkColorSelectionClass  GtkColorSelectionClassThin;
+
+typedef struct _GtkColorSelectionClass  GtkColorSelectionClass;
 
 
 typedef void (* GtkColorSelectionChangePaletteFunc) (const GdkColor    *colors,

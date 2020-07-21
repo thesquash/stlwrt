@@ -39,8 +39,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkLinkButton		GtkLinkButtonFat;
 typedef struct _GtkLinkButton		GtkLinkButtonThin;
-typedef struct _GtkLinkButtonClass	GtkLinkButtonClassFat;
-typedef struct _GtkLinkButtonClass	GtkLinkButtonClassThin;
+
+typedef struct _GtkLinkButtonClass	GtkLinkButtonClass;
 typedef struct _GtkLinkButtonPrivate	GtkLinkButtonPrivate;
 
 typedef void (*GtkLinkButtonUriFunc) (GtkLinkButton *button,

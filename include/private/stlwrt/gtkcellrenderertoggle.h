@@ -36,8 +36,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkCellRendererToggle GtkCellRendererToggleFat;
 typedef struct _GtkCellRendererToggle GtkCellRendererToggleThin;
-typedef struct _GtkCellRendererToggleClass GtkCellRendererToggleClassFat;
-typedef struct _GtkCellRendererToggleClass GtkCellRendererToggleClassThin;
+
+typedef struct _GtkCellRendererToggleClass GtkCellRendererToggleClass;
 
 struct _GtkCellRendererToggle
 {

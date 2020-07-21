@@ -38,8 +38,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkPrinterOptionSet       GtkPrinterOptionSetFat;
 typedef struct _GtkPrinterOptionSet       GtkPrinterOptionSetThin;
-typedef struct _GtkPrinterOptionSetClass  GtkPrinterOptionSetClassFat;
-typedef struct _GtkPrinterOptionSetClass  GtkPrinterOptionSetClassThin;
+
+typedef struct _GtkPrinterOptionSetClass  GtkPrinterOptionSetClass;
 
 struct _GtkPrinterOptionSet
 {

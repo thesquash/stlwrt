@@ -36,8 +36,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkRadioMenuItem       GtkRadioMenuItemFat;
 typedef struct _GtkRadioMenuItem       GtkRadioMenuItemThin;
-typedef struct _GtkRadioMenuItemClass  GtkRadioMenuItemClassFat;
-typedef struct _GtkRadioMenuItemClass  GtkRadioMenuItemClassThin;
+
+typedef struct _GtkRadioMenuItemClass  GtkRadioMenuItemClass;
 
 struct _GtkRadioMenuItem
 {

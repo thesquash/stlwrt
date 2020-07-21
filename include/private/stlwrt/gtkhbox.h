@@ -36,8 +36,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkHBox	      GtkHBoxFat;
 typedef struct _GtkHBox	      GtkHBoxThin;
-typedef struct _GtkHBoxClass  GtkHBoxClassFat;
-typedef struct _GtkHBoxClass  GtkHBoxClassThin;
+
+typedef struct _GtkHBoxClass  GtkHBoxClass;
 
 struct _GtkHBox
 {

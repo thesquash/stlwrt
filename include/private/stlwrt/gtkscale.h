@@ -36,8 +36,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkScale        GtkScaleFat;
 typedef struct _GtkScale        GtkScaleThin;
-typedef struct _GtkScaleClass   GtkScaleClassFat;
-typedef struct _GtkScaleClass   GtkScaleClassThin;
+
+typedef struct _GtkScaleClass   GtkScaleClass;
 
 struct _GtkScale
 {

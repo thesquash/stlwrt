@@ -41,12 +41,12 @@ G_BEGIN_DECLS
 #define GTK_IS_FOLDER_CLASS(c)  (G_TYPE_CHECK_CLASS_TYPE    ((c), GTK_TYPE_FOLDER))
 #define GTK_FOLDER_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS  ((o), GTK_TYPE_FOLDER, GtkFolderClass))
 
-typedef struct GtkFileSystemClass GtkFileSystemClassFat;
-typedef struct GtkFileSystemClass GtkFileSystemClassThin;
+
+typedef struct GtkFileSystemClass GtkFileSystemClass;
 typedef struct GtkFileSystem GtkFileSystemFat;
 typedef struct GtkFileSystem GtkFileSystemThin;
-typedef struct GtkFolderClass GtkFolderClassFat;
-typedef struct GtkFolderClass GtkFolderClassThin;
+
+typedef struct GtkFolderClass GtkFolderClass;
 typedef struct GtkFolder GtkFolderFat;
 typedef struct GtkFolder GtkFolderThin;
 typedef struct GtkFileSystemVolume GtkFileSystemVolume; /* opaque struct */

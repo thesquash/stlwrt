@@ -35,8 +35,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkEventBox	  GtkEventBoxFat;
 typedef struct _GtkEventBox	  GtkEventBoxThin;
-typedef struct _GtkEventBoxClass  GtkEventBoxClassFat;
-typedef struct _GtkEventBoxClass  GtkEventBoxClassThin;
+
+typedef struct _GtkEventBoxClass  GtkEventBoxClass;
 
 struct _GtkEventBox
 {

@@ -51,8 +51,8 @@ typedef enum
 
 typedef struct _GtkCellRenderer GtkCellRendererFat;
 typedef struct _GtkCellRenderer GtkCellRendererThin;
-typedef struct _GtkCellRendererClass GtkCellRendererClassFat;
-typedef struct _GtkCellRendererClass GtkCellRendererClassThin;
+
+typedef struct _GtkCellRendererClass GtkCellRendererClass;
 
 struct _GtkCellRenderer
 {

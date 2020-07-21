@@ -37,8 +37,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkQuery GtkQueryFat;
 typedef struct _GtkQuery GtkQueryThin;
-typedef struct _GtkQueryClass GtkQueryClassFat;
-typedef struct _GtkQueryClass GtkQueryClassThin;
+
+typedef struct _GtkQueryClass GtkQueryClass;
 typedef struct _GtkQueryPrivate GtkQueryPrivate;
 
 struct _GtkQuery 

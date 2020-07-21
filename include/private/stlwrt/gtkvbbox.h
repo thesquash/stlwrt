@@ -37,8 +37,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkVButtonBox       GtkVButtonBoxFat;
 typedef struct _GtkVButtonBox       GtkVButtonBoxThin;
-typedef struct _GtkVButtonBoxClass  GtkVButtonBoxClassFat;
-typedef struct _GtkVButtonBoxClass  GtkVButtonBoxClassThin;
+
+typedef struct _GtkVButtonBoxClass  GtkVButtonBoxClass;
 
 struct _GtkVButtonBox
 {

@@ -36,8 +36,8 @@ G_BEGIN_DECLS
 
 typedef struct _GtkScrollbar        GtkScrollbarFat;
 typedef struct _GtkScrollbar        GtkScrollbarThin;
-typedef struct _GtkScrollbarClass   GtkScrollbarClassFat;
-typedef struct _GtkScrollbarClass   GtkScrollbarClassThin;
+
+typedef struct _GtkScrollbarClass   GtkScrollbarClass;
 
 struct _GtkScrollbar
 {

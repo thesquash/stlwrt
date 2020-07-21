@@ -41,8 +41,8 @@ G_BEGIN_DECLS
 typedef struct _GtkRadioAction        GtkRadioActionFat;
 typedef struct _GtkRadioAction        GtkRadioActionThin;
 typedef struct _GtkRadioActionPrivate GtkRadioActionPrivate;
-typedef struct _GtkRadioActionClass   GtkRadioActionClassFat;
-typedef struct _GtkRadioActionClass   GtkRadioActionClassThin;
+
+typedef struct _GtkRadioActionClass   GtkRadioActionClass;
 
 struct _GtkRadioAction
 {

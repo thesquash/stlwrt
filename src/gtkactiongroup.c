@@ -115,7 +115,7 @@ static void gtk_action_group_buildable_custom_tag_end (GtkBuildable *buildable,
 						       gpointer     *user_data);
 
 GType
-__gtk_action_group_get_type (void)
+gtk_action_group_get_type (void)
 {
   static GType type = 0;
 

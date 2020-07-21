@@ -34,8 +34,7 @@ G_BEGIN_DECLS
 #define GTK_SCROLLBAR_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_SCROLLBAR, GtkScrollbarClass))
 
 
-typedef struct _GtkScrollbar        GtkScrollbarFat;
-typedef struct _GtkScrollbar        GtkScrollbarThin;
+typedef struct _GtkScrollbar        GtkScrollbar;
 
 typedef struct _GtkScrollbarClass   GtkScrollbarClass;
 
@@ -56,9 +55,6 @@ struct _GtkScrollbarClass
 };
 
 
-GType       _T2_gtk_scrollbar_get_type (void) G_GNUC_CONST;
-GType       _3T_gtk_scrollbar_get_type (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
 GType       gtk_scrollbar_get_type (void) G_GNUC_CONST;
 
 G_END_DECLS

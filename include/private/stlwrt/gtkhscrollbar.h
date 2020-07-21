@@ -35,8 +35,7 @@ G_BEGIN_DECLS
 #define GTK_HSCROLLBAR_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_HSCROLLBAR, GtkHScrollbarClass))
 
 
-typedef struct _GtkHScrollbar       GtkHScrollbarFat;
-typedef struct _GtkHScrollbar       GtkHScrollbarThin;
+typedef struct _GtkHScrollbar       GtkHScrollbar;
 
 typedef struct _GtkHScrollbarClass  GtkHScrollbarClass;
 
@@ -51,9 +50,6 @@ struct _GtkHScrollbarClass
 };
 
 
-GType      _T2_gtk_hscrollbar_get_type (void) G_GNUC_CONST;
-GType      _3T_gtk_hscrollbar_get_type (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
 GType      gtk_hscrollbar_get_type (void) G_GNUC_CONST;
 GtkWidget* __gtk_hscrollbar_new      (GtkAdjustment *adjustment);
 

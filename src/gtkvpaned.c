@@ -44,7 +44,7 @@
  * a handle. See #GtkPaned for details.
  */
 
-STLWRT_DEFINE_TYPE (GtkVPaned, gtk_vpaned, GTK_TYPE_PANED)
+G_DEFINE_TYPE (GtkVPaned, gtk_vpaned, GTK_TYPE_PANED)
 
 static void
 gtk_vpaned_class_init (GtkVPanedClass *class)

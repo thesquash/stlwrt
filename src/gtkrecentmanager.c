@@ -1630,7 +1630,7 @@ gtk_recent_manager_clamp_to_size (GtkRecentManager *manager,
  *****************/
  
 GType
-__gtk_recent_info_get_type (void)
+gtk_recent_info_get_type (void)
 {
   static GType info_type = 0;
   

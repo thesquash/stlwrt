@@ -31,7 +31,7 @@
 #include <gtkseparatormenuitem.h>
 
 
-STLWRT_DEFINE_TYPE (GtkSeparatorMenuItem, gtk_separator_menu_item, GTK_TYPE_MENU_ITEM)
+G_DEFINE_TYPE (GtkSeparatorMenuItem, gtk_separator_menu_item, GTK_TYPE_MENU_ITEM)
 
 static void
 gtk_separator_menu_item_class_init (GtkSeparatorMenuItemClass *class)

@@ -136,7 +136,7 @@ enum
   PROP_MODEL
 };
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkCellView, gtk_cell_view, GTK_TYPE_WIDGET, 
+G_DEFINE_TYPE_WITH_CODE (GtkCellView, gtk_cell_view, GTK_TYPE_WIDGET, 
 			 G_IMPLEMENT_INTERFACE (GTK_TYPE_CELL_LAYOUT,
 						gtk_cell_view_cell_layout_init)
 			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
@@ -735,7 +735,7 @@ __gtk_cell_view_new (void)
 {
   GtkCellView *cellview;
 
-  cellview = g_object_new (__gtk_cell_view_get_type (), NULL);
+  cellview = g_object_new (gtk_cell_view_get_type (), NULL);
 
   return GTK_WIDGET (cellview);
 }

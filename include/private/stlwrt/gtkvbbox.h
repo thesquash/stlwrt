@@ -35,8 +35,7 @@ G_BEGIN_DECLS
 #define GTK_VBUTTON_BOX_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_VBUTTON_BOX, GtkVButtonBoxClass))
 
 
-typedef struct _GtkVButtonBox       GtkVButtonBoxFat;
-typedef struct _GtkVButtonBox       GtkVButtonBoxThin;
+typedef struct _GtkVButtonBox       GtkVButtonBox;
 
 typedef struct _GtkVButtonBoxClass  GtkVButtonBoxClass;
 
@@ -51,9 +50,6 @@ struct _GtkVButtonBoxClass
 };
 
 
-GType      _T2_gtk_vbutton_box_get_type (void) G_GNUC_CONST;
-GType      _3T_gtk_vbutton_box_get_type (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
 GType      gtk_vbutton_box_get_type (void) G_GNUC_CONST;
 GtkWidget *__gtk_vbutton_box_new      (void);
 

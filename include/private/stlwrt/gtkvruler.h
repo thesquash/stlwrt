@@ -38,8 +38,7 @@ G_BEGIN_DECLS
 #define GTK_VRULER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_VRULER, GtkVRulerClass))
 
 
-typedef struct _GtkVRuler       GtkVRulerFat;
-typedef struct _GtkVRuler       GtkVRulerThin;
+typedef struct _GtkVRuler       GtkVRuler;
 
 typedef struct _GtkVRulerClass  GtkVRulerClass;
 
@@ -54,9 +53,6 @@ struct _GtkVRulerClass
 };
 
 
-GType      _T2_gtk_vruler_get_type (void) G_GNUC_CONST;
-GType      _3T_gtk_vruler_get_type (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
 GType      gtk_vruler_get_type (void) G_GNUC_CONST;
 GtkWidget* __gtk_vruler_new      (void);
 

@@ -336,7 +336,7 @@ __gtk_tree_model_sort_new_with_model (GtkTreeModel *child_model)
 
   g_return_val_if_fail (GTK_IS_TREE_MODEL (child_model), NULL);
 
-  retval = g_object_new (__gtk_tree_model_sort_get_type (), NULL);
+  retval = g_object_new (gtk_tree_model_sort_get_type (), NULL);
 
   gtk_tree_model_sort_set_model (GTK_TREE_MODEL_SORT (retval), child_model);
 

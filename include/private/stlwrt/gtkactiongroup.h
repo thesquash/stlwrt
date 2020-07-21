@@ -101,9 +101,7 @@ struct _GtkRadioActionEntry
   gint   value; 
 };
 
-GType           _T2_gtk_action_group_get_type                (void) G_GNUC_CONST;
-GType           _3T_gtk_action_group_get_type                (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
+
 GType           gtk_action_group_get_type                (void) G_GNUC_CONST;
 GtkActionGroup *__gtk_action_group_new                     (const gchar                *name);
 const gchar *__gtk_action_group_get_name          (GtkActionGroup             *action_group);

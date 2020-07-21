@@ -79,7 +79,7 @@ enum
   PROP_TEXT_COLUMN
 };
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkComboBoxEntry, gtk_combo_box_entry, GTK_TYPE_COMBO_BOX,
+G_DEFINE_TYPE_WITH_CODE (GtkComboBoxEntry, gtk_combo_box_entry, GTK_TYPE_COMBO_BOX,
 			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
 						gtk_combo_box_entry_buildable_interface_init))
 
@@ -326,7 +326,7 @@ gtk_combo_box_entry_contents_changed (GtkEntry *entry,
 GtkWidget *
 __gtk_combo_box_entry_new (void)
 {
-  return g_object_new (__gtk_combo_box_entry_get_type (), NULL);
+  return g_object_new (gtk_combo_box_entry_get_type (), NULL);
 }
 
 /**
@@ -356,7 +356,7 @@ __gtk_combo_box_entry_new_with_model (GtkTreeModel *model,
   g_return_val_if_fail (text_column >= 0, NULL);
   g_return_val_if_fail (text_column < __gtk_tree_model_get_n_columns (model), NULL);
 
-  ret = g_object_new (__gtk_combo_box_entry_get_type (),
+  ret = g_object_new (gtk_combo_box_entry_get_type (),
                       "model", model,
                       "text-column", text_column,
                       NULL);

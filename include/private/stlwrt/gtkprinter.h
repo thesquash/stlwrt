@@ -57,8 +57,7 @@ GType gtk_print_capabilities_get_type (void) G_GNUC_CONST;
 #define GTK_IS_PRINTER_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_PRINTER))
 #define GTK_PRINTER_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_PRINTER, GtkPrinterClass))
 
-typedef struct _GtkPrinter          GtkPrinterFat;
-typedef struct _GtkPrinter          GtkPrinterThin;
+typedef struct _GtkPrinter          GtkPrinter;
 
 typedef struct _GtkPrinterClass     GtkPrinterClass;
 typedef struct _GtkPrinterPrivate   GtkPrinterPrivate;
@@ -91,9 +90,7 @@ struct _GtkPrinterClass
   void (*_gtk_reserved7) (void);
 };
 
-GType                    _T2_gtk_printer_get_type              (void) G_GNUC_CONST;
-GType                    _3T_gtk_printer_get_type              (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
+
 GType                    gtk_printer_get_type              (void) G_GNUC_CONST;
 GtkPrinter              *gtk_printer_new                   (const gchar     *name,
 							    GtkPrintBackend *backend,

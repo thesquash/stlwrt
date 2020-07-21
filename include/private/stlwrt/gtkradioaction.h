@@ -38,8 +38,7 @@ G_BEGIN_DECLS
 #define GTK_IS_RADIO_ACTION_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_RADIO_ACTION))
 #define GTK_RADIO_ACTION_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), GTK_TYPE_RADIO_ACTION, GtkRadioActionClass))
 
-typedef struct _GtkRadioAction        GtkRadioActionFat;
-typedef struct _GtkRadioAction        GtkRadioActionThin;
+typedef struct _GtkRadioAction        GtkRadioAction;
 typedef struct _GtkRadioActionPrivate GtkRadioActionPrivate;
 
 typedef struct _GtkRadioActionClass   GtkRadioActionClass;
@@ -66,9 +65,7 @@ struct _GtkRadioActionClass
   void (*_gtk_reserved4) (void);
 };
 
-GType           _T2_gtk_radio_action_get_type          (void) G_GNUC_CONST;
-GType           _3T_gtk_radio_action_get_type          (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
+
 GType           gtk_radio_action_get_type          (void) G_GNUC_CONST;
 GtkRadioAction *__gtk_radio_action_new               (const gchar           *name,
                                                     const gchar           *label,

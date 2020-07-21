@@ -47,7 +47,7 @@
  */
 
 GType
-__gtk_tool_shell_get_type (void)
+gtk_tool_shell_get_type (void)
 {
   static GType type = 0;
 

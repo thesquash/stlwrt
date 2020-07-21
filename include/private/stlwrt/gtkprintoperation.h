@@ -43,8 +43,7 @@ G_BEGIN_DECLS
 
 typedef struct _GtkPrintOperationClass   GtkPrintOperationClass;
 typedef struct _GtkPrintOperationPrivate GtkPrintOperationPrivate;
-typedef struct _GtkPrintOperation        GtkPrintOperationFat;
-typedef struct _GtkPrintOperation        GtkPrintOperationThin;
+typedef struct _GtkPrintOperation        GtkPrintOperation;
 
 typedef enum {
   GTK_PRINT_STATUS_INITIAL,
@@ -136,9 +135,7 @@ typedef enum
 
 GQuark __gtk_print_error_quark (void);
 
-GType                   _T2_gtk_print_operation_get_type               (void) G_GNUC_CONST;
-GType                   _3T_gtk_print_operation_get_type               (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
+
 GType                   gtk_print_operation_get_type               (void) G_GNUC_CONST;
 GtkPrintOperation *     __gtk_print_operation_new                    (void);
 void                    __gtk_print_operation_set_default_page_setup (GtkPrintOperation  *op,

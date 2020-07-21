@@ -32,8 +32,7 @@ G_BEGIN_DECLS
 #define GTK_IS_TRAY_ICON_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TRAY_ICON))
 #define GTK_TRAY_ICON_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TRAY_ICON, GtkTrayIconClass))
 	
-typedef struct _GtkTrayIcon	   GtkTrayIconFat;
-typedef struct _GtkTrayIcon	   GtkTrayIconThin;
+typedef struct _GtkTrayIcon	   GtkTrayIcon;
 typedef struct _GtkTrayIconPrivate GtkTrayIconPrivate;
 
 typedef struct _GtkTrayIconClass   GtkTrayIconClass;
@@ -57,9 +56,7 @@ struct _GtkTrayIconClass
   void (*__gtk_reserved6);
 };
 
-GType          _T2_gtk_tray_icon_get_type         (void) G_GNUC_CONST;
-GType          _3T_gtk_tray_icon_get_type         (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
+
 GType          gtk_tray_icon_get_type         (void) G_GNUC_CONST;
 
 GtkTrayIcon   *_gtk_tray_icon_new_for_screen  (GdkScreen   *screen,

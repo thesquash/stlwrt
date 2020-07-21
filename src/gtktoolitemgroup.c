@@ -114,7 +114,7 @@ struct _GtkToolItemGroupChild
 
 static void gtk_tool_item_group_tool_shell_init (GtkToolShellIface *iface);
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkToolItemGroup, gtk_tool_item_group, GTK_TYPE_CONTAINER,
+G_DEFINE_TYPE_WITH_CODE (GtkToolItemGroup, gtk_tool_item_group, GTK_TYPE_CONTAINER,
 G_IMPLEMENT_INTERFACE (GTK_TYPE_TOOL_SHELL, gtk_tool_item_group_tool_shell_init));
 
 static GtkWidget*

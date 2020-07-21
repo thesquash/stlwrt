@@ -43,8 +43,7 @@ typedef void (* GtkTreeModelFilterModifyFunc) (GtkTreeModel *model,
                                                gint          column,
                                                gpointer      data);
 
-typedef struct _GtkTreeModelFilter          GtkTreeModelFilterFat;
-typedef struct _GtkTreeModelFilter          GtkTreeModelFilterThin;
+typedef struct _GtkTreeModelFilter          GtkTreeModelFilter;
 
 typedef struct _GtkTreeModelFilterClass     GtkTreeModelFilterClass;
 typedef struct _GtkTreeModelFilterPrivate   GtkTreeModelFilterPrivate;
@@ -69,9 +68,6 @@ struct _GtkTreeModelFilterClass
 };
 
 /* base */
-GType         _T2_gtk_tree_model_filter_get_type                   (void) G_GNUC_CONST;
-GType         _3T_gtk_tree_model_filter_get_type                   (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
 GType         gtk_tree_model_filter_get_type                   (void) G_GNUC_CONST;
 GtkTreeModel *__gtk_tree_model_filter_new                        (GtkTreeModel                 *child_model,
                                                                 GtkTreePath                  *root);

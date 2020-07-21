@@ -62,7 +62,7 @@ static void	cb_value_changed (GtkVolumeButton *button,
                                   gdouble          value,
                                   gpointer         user_data);
 
-STLWRT_DEFINE_TYPE (GtkVolumeButton, gtk_volume_button, GTK_TYPE_SCALE_BUTTON)
+G_DEFINE_TYPE (GtkVolumeButton, gtk_volume_button, GTK_TYPE_SCALE_BUTTON)
 
 static void
 gtk_volume_button_class_init (GtkVolumeButtonClass *klass)

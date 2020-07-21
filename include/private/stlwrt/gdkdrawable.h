@@ -227,9 +227,7 @@ struct _GdkTrapezoid
   double y1, x11, x21, y2, x12, x22;
 };
 
-GType           _T2_gdk_drawable_get_type     (void) G_GNUC_CONST;
-GType           _3T_gdk_drawable_get_type     (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
+
 GType           gdk_drawable_get_type     (void) G_GNUC_CONST;
 
 /* Manipulation of drawables

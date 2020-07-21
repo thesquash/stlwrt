@@ -2324,7 +2324,7 @@ gtk_assistant_accessible_class_init (AtkObjectClass *class)
 }
 
 static GType
-__gtk_assistant_accessible_get_type (void)
+gtk_assistant_accessible_get_type (void)
 {
   static GType type = 0;
   
@@ -2363,7 +2363,7 @@ gtk_assistant_accessible_new (GObject *obj)
 
   g_return_val_if_fail (GTK_IS_ASSISTANT (obj), NULL);
 
-  accessible = g_object_new (__gtk_assistant_accessible_get_type (), NULL);
+  accessible = g_object_new (gtk_assistant_accessible_get_type (), NULL);
   atk_object_initialize (accessible, obj);
 
   return accessible;
@@ -2372,7 +2372,7 @@ gtk_assistant_accessible_new (GObject *obj)
 static GType
 gtk_assistant_accessible_factory_get_accessible_type (void)
 {
-  return __gtk_assistant_accessible_get_type ();
+  return gtk_assistant_accessible_get_type ();
 }
 
 static AtkObject*
@@ -2389,7 +2389,7 @@ gtk_assistant_accessible_factory_class_init (AtkObjectFactoryClass *class)
 }
 
 static GType
-__gtk_assistant_accessible_factory_get_type (void)
+gtk_assistant_accessible_factory_get_type (void)
 {
   static GType type = 0;
 
@@ -2433,7 +2433,7 @@ gtk_assistant_get_accessible (GtkWidget *widget)
 	{
 	  atk_registry_set_factory_type (registry,
 					 GTK_TYPE_ASSISTANT,
-					 __gtk_assistant_accessible_factory_get_type ());
+					 gtk_assistant_accessible_factory_get_type ());
 	}
       first_time = FALSE;
     }

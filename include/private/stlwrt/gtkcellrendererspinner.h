@@ -35,8 +35,7 @@ G_BEGIN_DECLS
 #define GTK_IS_CELL_RENDERER_SPINNER_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_CELL_RENDERER_SPINNER))
 #define GTK_CELL_RENDERER_SPINNER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_CELL_RENDERER_SPINNER, GtkCellRendererSpinnerClass))
 
-typedef struct _GtkCellRendererSpinner        GtkCellRendererSpinnerFat;
-typedef struct _GtkCellRendererSpinner        GtkCellRendererSpinnerThin;
+typedef struct _GtkCellRendererSpinner        GtkCellRendererSpinner;
 
 typedef struct _GtkCellRendererSpinnerClass   GtkCellRendererSpinnerClass;
 typedef struct _GtkCellRendererSpinnerPrivate GtkCellRendererSpinnerPrivate;
@@ -58,9 +57,6 @@ struct _GtkCellRendererSpinnerClass
   void (*_gtk_reserved4) (void);
 };
 
-GType            _T2_gtk_cell_renderer_spinner_get_type (void) G_GNUC_CONST;
-GType            _3T_gtk_cell_renderer_spinner_get_type (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
 GType            gtk_cell_renderer_spinner_get_type (void) G_GNUC_CONST;
 GtkCellRenderer *__gtk_cell_renderer_spinner_new      (void);
 

@@ -56,7 +56,7 @@ static const gchar gtk_use_action_appearance_key[]        = "gtk-use-action-appe
 static guint chooser_signals[LAST_SIGNAL] = { 0, };
 
 GType
-__gtk_recent_chooser_get_type (void)
+gtk_recent_chooser_get_type (void)
 {
   static GType chooser_type = 0;
   

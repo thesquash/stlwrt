@@ -27,7 +27,7 @@
 
 
 GType
-__gtk_tree_drag_source_get_type (void)
+gtk_tree_drag_source_get_type (void)
 {
   static GType our_type = 0;
 
@@ -56,7 +56,7 @@ __gtk_tree_drag_source_get_type (void)
 
 
 GType
-__gtk_tree_drag_dest_get_type (void)
+gtk_tree_drag_dest_get_type (void)
 {
   static GType our_type = 0;
 

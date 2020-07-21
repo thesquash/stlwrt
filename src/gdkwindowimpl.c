@@ -29,7 +29,7 @@
 
 
 GType
-__gdk_window_impl_get_type (void)
+gdk_window_impl_get_type (void)
 {
   static GType gtype = 0;
 

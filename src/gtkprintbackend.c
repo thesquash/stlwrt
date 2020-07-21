@@ -110,8 +110,8 @@ struct _GtkPrintBackendModuleClass
   GTypeModuleClass parent_class;
 };
 
-STLWRT_DEFINE_TYPE (GtkPrintBackendModule, _gtk_print_backend_module, G_TYPE_TYPE_MODULE)
-#define GTK_TYPE_PRINT_BACKEND_MODULE      (___gtk_print_backend_module_get_type ())
+G_DEFINE_TYPE (GtkPrintBackendModule, _gtk_print_backend_module, G_TYPE_TYPE_MODULE)
+#define GTK_TYPE_PRINT_BACKEND_MODULE      (_gtk_print_backend_module_get_type ())
 #define GTK_PRINT_BACKEND_MODULE(module)   (G_TYPE_CHECK_INSTANCE_CAST ((module), GTK_TYPE_PRINT_BACKEND_MODULE, GtkPrintBackendModule))
 
 static GSList *loaded_backends;
@@ -351,7 +351,7 @@ gtk_print_backend_load_modules (void)
  *             GtkPrintBackend           *
  *****************************************/
 
-STLWRT_DEFINE_TYPE (GtkPrintBackend, gtk_print_backend, G_TYPE_OBJECT)
+G_DEFINE_TYPE (GtkPrintBackend, gtk_print_backend, G_TYPE_OBJECT)
 
 static void                 fallback_printer_request_details       (GtkPrinter          *printer);
 static gboolean             fallback_printer_mark_conflicts        (GtkPrinter          *printer,

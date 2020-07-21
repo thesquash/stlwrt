@@ -138,9 +138,7 @@ struct _GtkPrintBackendClass
   void (*_gtk_reserved4) (void);
 };
 
-GType   _T2_gtk_print_backend_get_type       (void) G_GNUC_CONST;
-GType   _3T_gtk_print_backend_get_type       (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
+
 GType   gtk_print_backend_get_type       (void) G_GNUC_CONST;
 
 GList      *gtk_print_backend_get_printer_list     (GtkPrintBackend         *print_backend);

@@ -121,7 +121,7 @@ gdk_rectangle_copy (const GdkRectangle *rectangle)
 }
 
 GType
-__gdk_rectangle_get_type (void)
+gdk_rectangle_get_type (void)
 {
   static GType our_type = 0;
   

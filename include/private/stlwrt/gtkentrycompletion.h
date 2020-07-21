@@ -35,8 +35,7 @@ G_BEGIN_DECLS
 #define GTK_IS_ENTRY_COMPLETION_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_ENTRY_COMPLETION))
 #define GTK_ENTRY_COMPLETION_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ENTRY_COMPLETION, GtkEntryCompletionClass))
 
-typedef struct _GtkEntryCompletion            GtkEntryCompletionFat;
-typedef struct _GtkEntryCompletion            GtkEntryCompletionThin;
+typedef struct _GtkEntryCompletion            GtkEntryCompletion;
 
 typedef struct _GtkEntryCompletionClass       GtkEntryCompletionClass;
 typedef struct _GtkEntryCompletionPrivate     GtkEntryCompletionPrivate;
@@ -76,9 +75,6 @@ struct _GtkEntryCompletionClass
 };
 
 /* core */
-GType               _T2_gtk_entry_completion_get_type               (void) G_GNUC_CONST;
-GType               _3T_gtk_entry_completion_get_type               (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
 GType               gtk_entry_completion_get_type               (void) G_GNUC_CONST;
 GtkEntryCompletion *__gtk_entry_completion_new                    (void);
 

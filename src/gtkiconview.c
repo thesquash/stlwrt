@@ -471,7 +471,7 @@ static void     gtk_icon_view_buildable_custom_tag_end   (GtkBuildable  *buildab
 
 static guint icon_view_signals[LAST_SIGNAL] = { 0 };
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkIconView, gtk_icon_view, GTK_TYPE_CONTAINER,
+G_DEFINE_TYPE_WITH_CODE (GtkIconView, gtk_icon_view, GTK_TYPE_CONTAINER,
 			 G_IMPLEMENT_INTERFACE (GTK_TYPE_CELL_LAYOUT,
 						gtk_icon_view_cell_layout_init)
 			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
@@ -7611,11 +7611,11 @@ static gpointer accessible_parent_class;
 static gpointer accessible_item_parent_class;
 static GQuark accessible_private_data_quark = 0;
 
-#define GTK_TYPE_ICON_VIEW_ITEM_ACCESSIBLE      (__gtk_icon_view_item_accessible_get_type ())
+#define GTK_TYPE_ICON_VIEW_ITEM_ACCESSIBLE      (gtk_icon_view_item_accessible_get_type ())
 #define GTK_ICON_VIEW_ITEM_ACCESSIBLE(obj)      (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_ICON_VIEW_ITEM_ACCESSIBLE, GtkIconViewItemAccessible))
 #define GTK_IS_ICON_VIEW_ITEM_ACCESSIBLE(obj)   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_ICON_VIEW_ITEM_ACCESSIBLE))
 
-static GType __gtk_icon_view_item_accessible_get_type (void);
+static GType gtk_icon_view_item_accessible_get_type (void);
 
 enum {
     ACTION_ACTIVATE,
@@ -8832,7 +8832,7 @@ gtk_icon_view_item_accessible_class_init (AtkObjectClass *klass)
 }
 
 static GType
-__gtk_icon_view_item_accessible_get_type (void)
+gtk_icon_view_item_accessible_get_type (void)
 {
   static GType type = 0;
 
@@ -8892,11 +8892,11 @@ __gtk_icon_view_item_accessible_get_type (void)
   return type;
 }
 
-#define GTK_TYPE_ICON_VIEW_ACCESSIBLE      (__gtk_icon_view_accessible_get_type ())
+#define GTK_TYPE_ICON_VIEW_ACCESSIBLE      (gtk_icon_view_accessible_get_type ())
 #define GTK_ICON_VIEW_ACCESSIBLE(obj)      (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_ICON_VIEW_ACCESSIBLE, GtkIconViewAccessible))
 #define GTK_IS_ICON_VIEW_ACCESSIBLE(obj)   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_ICON_VIEW_ACCESSIBLE))
 
-static GType __gtk_icon_view_accessible_get_type (void);
+static GType gtk_icon_view_accessible_get_type (void);
 
 typedef struct
 {
@@ -9018,7 +9018,7 @@ gtk_icon_view_accessible_ref_child (AtkObject *accessible,
         {
           gchar *text;
 
-          obj = g_object_new (__gtk_icon_view_item_accessible_get_type (), NULL);
+          obj = g_object_new (gtk_icon_view_item_accessible_get_type (), NULL);
           gtk_icon_view_item_accessible_info_new (accessible,
                                                   obj,
                                                   index);
@@ -9789,7 +9789,7 @@ gtk_icon_view_accessible_selection_interface_init (AtkSelectionIface *iface)
 }
 
 static GType
-__gtk_icon_view_accessible_get_type (void)
+gtk_icon_view_accessible_get_type (void)
 {
   static GType type = 0;
 
@@ -9856,7 +9856,7 @@ gtk_icon_view_accessible_new (GObject *obj)
 
   g_return_val_if_fail (GTK_IS_WIDGET (obj), NULL);
 
-  accessible = g_object_new (__gtk_icon_view_accessible_get_type (), NULL);
+  accessible = g_object_new (gtk_icon_view_accessible_get_type (), NULL);
   atk_object_initialize (accessible, obj);
 
   return accessible;
@@ -9865,7 +9865,7 @@ gtk_icon_view_accessible_new (GObject *obj)
 static GType
 gtk_icon_view_accessible_factory_get_accessible_type (void)
 {
-  return __gtk_icon_view_accessible_get_type ();
+  return gtk_icon_view_accessible_get_type ();
 }
 
 static AtkObject*
@@ -9882,7 +9882,7 @@ gtk_icon_view_accessible_factory_class_init (AtkObjectFactoryClass *klass)
 }
 
 static GType
-__gtk_icon_view_accessible_factory_get_type (void)
+gtk_icon_view_accessible_factory_get_type (void)
 {
   static GType type = 0;
 
@@ -9935,7 +9935,7 @@ gtk_icon_view_get_accessible (GtkWidget *widget)
       if (g_type_is_a (derived_atk_type, GTK_TYPE_ACCESSIBLE)) 
 	atk_registry_set_factory_type (registry, 
 				       GTK_TYPE_ICON_VIEW,
-				       __gtk_icon_view_accessible_factory_get_type ());
+				       gtk_icon_view_accessible_factory_get_type ());
       first_time = FALSE;
     } 
   return GTK_WIDGET_CLASS (gtk_icon_view_parent_class)->get_accessible (widget);

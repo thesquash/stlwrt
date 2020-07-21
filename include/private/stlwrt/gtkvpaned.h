@@ -33,8 +33,7 @@ G_BEGIN_DECLS
 #define GTK_VPANED_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_VPANED, GtkVPanedClass))
 
 
-typedef struct _GtkVPaned      GtkVPanedFat;
-typedef struct _GtkVPaned      GtkVPanedThin;
+typedef struct _GtkVPaned      GtkVPaned;
 
 typedef struct _GtkVPanedClass GtkVPanedClass;
 
@@ -49,9 +48,6 @@ struct _GtkVPanedClass
 };
 
 
-GType       _T2_gtk_vpaned_get_type (void) G_GNUC_CONST;
-GType       _3T_gtk_vpaned_get_type (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
 GType       gtk_vpaned_get_type (void) G_GNUC_CONST;
 GtkWidget * __gtk_vpaned_new      (void);
 

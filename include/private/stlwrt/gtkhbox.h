@@ -34,8 +34,7 @@ G_BEGIN_DECLS
 #define GTK_HBOX_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_HBOX, GtkHBoxClass))
 
 
-typedef struct _GtkHBox	      GtkHBoxFat;
-typedef struct _GtkHBox	      GtkHBoxThin;
+typedef struct _GtkHBox	      GtkHBox;
 
 typedef struct _GtkHBoxClass  GtkHBoxClass;
 
@@ -50,9 +49,6 @@ struct _GtkHBoxClass
 };
 
 
-GType       _T2_gtk_hbox_get_type (void) G_GNUC_CONST;
-GType       _3T_gtk_hbox_get_type (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
 GType       gtk_hbox_get_type (void) G_GNUC_CONST;
 GtkWidget * __gtk_hbox_new      (gboolean homogeneous,
                                gint     spacing);

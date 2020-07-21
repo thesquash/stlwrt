@@ -34,8 +34,7 @@ G_BEGIN_DECLS
 #define GTK_HBUTTON_BOX_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_HBUTTON_BOX, GtkHButtonBoxClass))
 
 
-typedef struct _GtkHButtonBox       GtkHButtonBoxFat;
-typedef struct _GtkHButtonBox       GtkHButtonBoxThin;
+typedef struct _GtkHButtonBox       GtkHButtonBox;
 
 typedef struct _GtkHButtonBoxClass  GtkHButtonBoxClass;
 
@@ -50,9 +49,6 @@ struct _GtkHButtonBoxClass
 };
 
 
-GType      _T2_gtk_hbutton_box_get_type (void) G_GNUC_CONST;
-GType      _3T_gtk_hbutton_box_get_type (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
 GType      gtk_hbutton_box_get_type (void) G_GNUC_CONST;
 GtkWidget* __gtk_hbutton_box_new      (void);
 

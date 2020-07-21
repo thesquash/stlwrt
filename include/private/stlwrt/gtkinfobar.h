@@ -43,8 +43,7 @@ G_BEGIN_DECLS
 typedef struct _GtkInfoBarPrivate GtkInfoBarPrivate;
 
 typedef struct _GtkInfoBarClass GtkInfoBarClass;
-typedef struct _GtkInfoBar GtkInfoBarFat;
-typedef struct _GtkInfoBar GtkInfoBarThin;
+typedef struct _GtkInfoBar GtkInfoBar;
 
 
 struct _GtkInfoBar
@@ -75,9 +74,7 @@ struct _GtkInfoBarClass
   void (*_gtk_reserved6) (void);
 };
 
-GType          _T2_gtk_info_bar_get_type               (void) G_GNUC_CONST;
-GType          _3T_gtk_info_bar_get_type               (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
+
 GType          gtk_info_bar_get_type               (void) G_GNUC_CONST;
 GtkWidget     *__gtk_info_bar_new                    (void);
 

@@ -34,8 +34,7 @@ G_BEGIN_DECLS
 #define GTK_SEPARATOR_MENU_ITEM_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_SEPARATOR_MENU_ITEM, GtkSeparatorMenuItemClass))
 
 
-typedef struct _GtkSeparatorMenuItem       GtkSeparatorMenuItemFat;
-typedef struct _GtkSeparatorMenuItem       GtkSeparatorMenuItemThin;
+typedef struct _GtkSeparatorMenuItem       GtkSeparatorMenuItem;
 
 typedef struct _GtkSeparatorMenuItemClass  GtkSeparatorMenuItemClass;
 
@@ -50,9 +49,6 @@ struct _GtkSeparatorMenuItemClass
 };
 
 
-GType	   _T2_gtk_separator_menu_item_get_type	   (void) G_GNUC_CONST;
-GType	   _3T_gtk_separator_menu_item_get_type	   (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
 GType	   gtk_separator_menu_item_get_type	   (void) G_GNUC_CONST;
 GtkWidget* __gtk_separator_menu_item_new	           (void);
 

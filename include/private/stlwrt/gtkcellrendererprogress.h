@@ -33,8 +33,7 @@ G_BEGIN_DECLS
 #define GTK_IS_CELL_RENDERER_PROGRESS_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_CELL_RENDERER_PROGRESS))
 #define GTK_CELL_RENDERER_PROGRESS_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_CELL_RENDERER_PROGRESS, GtkCellRendererProgressClass))
 
-typedef struct _GtkCellRendererProgress         GtkCellRendererProgressFat;
-typedef struct _GtkCellRendererProgress         GtkCellRendererProgressThin;
+typedef struct _GtkCellRendererProgress         GtkCellRendererProgress;
 
 typedef struct _GtkCellRendererProgressClass    GtkCellRendererProgressClass;
 typedef struct _GtkCellRendererProgressPrivate  GtkCellRendererProgressPrivate;
@@ -58,9 +57,7 @@ struct _GtkCellRendererProgressClass
   void (*_gtk_reserved4) (void);
 };
 
-GType		 _T2_gtk_cell_renderer_progress_get_type (void) G_GNUC_CONST;
-GType		 _3T_gtk_cell_renderer_progress_get_type (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
+
 GType		 gtk_cell_renderer_progress_get_type (void) G_GNUC_CONST;
 GtkCellRenderer* __gtk_cell_renderer_progress_new      (void);
 

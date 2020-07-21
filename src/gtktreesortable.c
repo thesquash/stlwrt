@@ -30,7 +30,7 @@
 static void gtk_tree_sortable_base_init (gpointer g_class);
 
 GType
-__gtk_tree_sortable_get_type (void)
+gtk_tree_sortable_get_type (void)
 {
   static GType tree_sortable_type = 0;
 

@@ -55,7 +55,7 @@
  * and GTK_CENTIMETERS. GTK_PIXELS is the default unit of measurement.
  */
 
-STLWRT_DEFINE_TYPE (GtkVRuler, gtk_vruler, GTK_TYPE_RULER)
+G_DEFINE_TYPE (GtkVRuler, gtk_vruler, GTK_TYPE_RULER)
 
 static void
 gtk_vruler_class_init (GtkVRulerClass *klass)

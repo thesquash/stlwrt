@@ -43,12 +43,10 @@ G_BEGIN_DECLS
 
 
 typedef struct GtkFileSystemClass GtkFileSystemClass;
-typedef struct GtkFileSystem GtkFileSystemFat;
-typedef struct GtkFileSystem GtkFileSystemThin;
+typedef struct GtkFileSystem GtkFileSystem;
 
 typedef struct GtkFolderClass GtkFolderClass;
-typedef struct GtkFolder GtkFolderFat;
-typedef struct GtkFolder GtkFolderThin;
+typedef struct GtkFolder GtkFolder;
 typedef struct GtkFileSystemVolume GtkFileSystemVolume; /* opaque struct */
 typedef struct GtkFileSystemBookmark GtkFileSystemBookmark; /* opaque struct */
 

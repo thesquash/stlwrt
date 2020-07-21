@@ -35,8 +35,7 @@ G_BEGIN_DECLS
 #define GTK_VSCALE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_VSCALE, GtkVScaleClass))
 
 
-typedef struct _GtkVScale       GtkVScaleFat;
-typedef struct _GtkVScale       GtkVScaleThin;
+typedef struct _GtkVScale       GtkVScale;
 
 typedef struct _GtkVScaleClass  GtkVScaleClass;
 
@@ -57,9 +56,6 @@ struct _GtkVScaleClass
 };
 
 
-GType      _T2_gtk_vscale_get_type       (void) G_GNUC_CONST;
-GType      _3T_gtk_vscale_get_type       (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
 GType      gtk_vscale_get_type       (void) G_GNUC_CONST;
 GtkWidget* __gtk_vscale_new            (GtkAdjustment *adjustment);
 GtkWidget* __gtk_vscale_new_with_range (gdouble        min,

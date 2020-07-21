@@ -64,7 +64,7 @@
 typedef struct _GtkIMModule      GtkIMModule;
 typedef struct _GtkIMModuleClass GtkIMModuleClass;
 
-#define GTK_TYPE_IM_MODULE          (__gtk_im_module_get_type ())
+#define GTK_TYPE_IM_MODULE          (gtk_im_module_get_type ())
 #define GTK_IM_MODULE(im_module)    (G_TYPE_CHECK_INSTANCE_CAST ((im_module), GTK_TYPE_IM_MODULE, GtkIMModule))
 #define GTK_IS_IM_MODULE(im_module) (G_TYPE_CHECK_INSTANCE_TYPE ((im_module), GTK_TYPE_IM_MODULE))
 
@@ -93,7 +93,7 @@ struct _GtkIMModuleClass
   GTypeModuleClass parent_class;
 };
 
-static GType __gtk_im_module_get_type (void);
+static GType gtk_im_module_get_type (void);
 
 static gint n_loaded_contexts = 0;
 static GHashTable *contexts_hash = NULL;

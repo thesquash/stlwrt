@@ -75,7 +75,7 @@ static gint signals[LAST_SIGNAL];
 
 static GtkBuildableIface *parent_buildable_iface;
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkMenuToolButton, gtk_menu_tool_button, GTK_TYPE_TOOL_BUTTON,
+G_DEFINE_TYPE_WITH_CODE (GtkMenuToolButton, gtk_menu_tool_button, GTK_TYPE_TOOL_BUTTON,
                          G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
                                                 gtk_menu_tool_button_buildable_interface_init))
 

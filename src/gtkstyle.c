@@ -6835,7 +6835,7 @@ __gtk_border_free (GtkBorder *border)
 }
 
 GType
-__gtk_border_get_type (void)
+gtk_border_get_type (void)
 {
   static GType our_type = 0;
   

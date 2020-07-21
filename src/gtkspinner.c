@@ -59,7 +59,7 @@
 
 #define GTK_SPINNER_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_SPINNER, GtkSpinnerPrivate))
 
-STLWRT_DEFINE_TYPE (GtkSpinner, gtk_spinner, GTK_TYPE_DRAWING_AREA);
+G_DEFINE_TYPE (GtkSpinner, gtk_spinner, GTK_TYPE_DRAWING_AREA);
 
 enum {
   PROP_0,
@@ -97,7 +97,7 @@ static void gtk_spinner_set_property   (GObject         *object,
 static void gtk_spinner_set_active     (GtkSpinner      *spinner,
                                         gboolean         active);
 static AtkObject *gtk_spinner_get_accessible      (GtkWidget *widget);
-static GType      __gtk_spinner_accessible_get_type (void);
+static GType      gtk_spinner_accessible_get_type (void);
 
 static void
 gtk_spinner_class_init (GtkSpinnerClass *klass)
@@ -396,7 +396,7 @@ gtk_spinner_set_active (GtkSpinner *spinner, gboolean active)
 static GType
 gtk_spinner_accessible_factory_get_accessible_type (void)
 {
-  return __gtk_spinner_accessible_get_type ();
+  return gtk_spinner_accessible_get_type ();
 }
 
 static AtkObject *
@@ -406,7 +406,7 @@ gtk_spinner_accessible_new (GObject *obj)
 
   g_return_val_if_fail (GTK_IS_WIDGET (obj), NULL);
 
-  accessible = g_object_new (__gtk_spinner_accessible_get_type (), NULL);
+  accessible = g_object_new (gtk_spinner_accessible_get_type (), NULL);
   atk_object_initialize (accessible, obj);
 
   return accessible;
@@ -426,7 +426,7 @@ gtk_spinner_accessible_factory_class_init (AtkObjectFactoryClass *klass)
 }
 
 static GType
-__gtk_spinner_accessible_factory_get_type (void)
+gtk_spinner_accessible_factory_get_type (void)
 {
   static GType type = 0;
 
@@ -498,7 +498,7 @@ gtk_spinner_accessible_image_interface_init (AtkImageIface *iface)
 }
 
 static GType
-__gtk_spinner_accessible_get_type (void)
+gtk_spinner_accessible_get_type (void)
 {
   static GType type = 0;
 
@@ -576,7 +576,7 @@ gtk_spinner_get_accessible (GtkWidget *widget)
       if (g_type_is_a (derived_atk_type, GTK_TYPE_ACCESSIBLE))
         atk_registry_set_factory_type (registry,
                                        GTK_TYPE_SPINNER,
-                                       __gtk_spinner_accessible_factory_get_type ());
+                                       gtk_spinner_accessible_factory_get_type ());
       first_time = FALSE;
     }
   return GTK_WIDGET_CLASS (gtk_spinner_parent_class)->get_accessible (widget);

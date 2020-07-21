@@ -34,8 +34,7 @@ G_BEGIN_DECLS
 #define GTK_IS_FILE_CHOOSER_WIDGET_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_FILE_CHOOSER_WIDGET))
 #define GTK_FILE_CHOOSER_WIDGET_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_FILE_CHOOSER_WIDGET, GtkFileChooserWidgetClass))
 
-typedef struct _GtkFileChooserWidget        GtkFileChooserWidgetFat;
-typedef struct _GtkFileChooserWidget        GtkFileChooserWidgetThin;
+typedef struct _GtkFileChooserWidget        GtkFileChooserWidget;
 typedef struct _GtkFileChooserWidgetPrivate GtkFileChooserWidgetPrivate;
 
 typedef struct _GtkFileChooserWidgetClass   GtkFileChooserWidgetClass;
@@ -52,9 +51,7 @@ struct _GtkFileChooserWidgetClass
   GtkVBoxClass parent_class;
 };
 
-GType      _T2_gtk_file_chooser_widget_get_type         (void) G_GNUC_CONST;
-GType      _3T_gtk_file_chooser_widget_get_type         (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
+
 GType      gtk_file_chooser_widget_get_type         (void) G_GNUC_CONST;
 GtkWidget *__gtk_file_chooser_widget_new              (GtkFileChooserAction  action);
 

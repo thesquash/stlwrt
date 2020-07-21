@@ -37,8 +37,7 @@ G_BEGIN_DECLS
 #define GTK_IS_LINK_BUTTON_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_LINK_BUTTON))
 #define GTK_LINK_BUTTON_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_LINK_BUTTON, GtkLinkButtonClass))
 
-typedef struct _GtkLinkButton		GtkLinkButtonFat;
-typedef struct _GtkLinkButton		GtkLinkButtonThin;
+typedef struct _GtkLinkButton		GtkLinkButton;
 
 typedef struct _GtkLinkButtonClass	GtkLinkButtonClass;
 typedef struct _GtkLinkButtonPrivate	GtkLinkButtonPrivate;
@@ -64,9 +63,7 @@ struct _GtkLinkButtonClass
   void (*_gtk_padding4) (void);
 };
 
-GType                 _T2_gtk_link_button_get_type          (void) G_GNUC_CONST;
-GType                 _3T_gtk_link_button_get_type          (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
+
 GType                 gtk_link_button_get_type          (void) G_GNUC_CONST;
 
 GtkWidget *           __gtk_link_button_new               (const gchar   *uri);

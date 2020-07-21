@@ -33,8 +33,7 @@ G_BEGIN_DECLS
 #define GTK_HPANED_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_HPANED, GtkHPanedClass))
 
 
-typedef struct _GtkHPaned      GtkHPanedFat;
-typedef struct _GtkHPaned      GtkHPanedThin;
+typedef struct _GtkHPaned      GtkHPaned;
 
 typedef struct _GtkHPanedClass GtkHPanedClass;
 
@@ -49,9 +48,6 @@ struct _GtkHPanedClass
 };
 
 
-GType       _T2_gtk_hpaned_get_type (void) G_GNUC_CONST;
-GType       _3T_gtk_hpaned_get_type (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
 GType       gtk_hpaned_get_type (void) G_GNUC_CONST;
 GtkWidget * __gtk_hpaned_new      (void);
 

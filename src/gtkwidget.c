@@ -10158,7 +10158,7 @@ __gtk_requisition_free (GtkRequisition *requisition)
 }
 
 GType
-__gtk_requisition_get_type (void)
+gtk_requisition_get_type (void)
 {
   static GType our_type = 0;
   

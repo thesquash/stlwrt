@@ -34,8 +34,7 @@ G_BEGIN_DECLS
 #define GTK_IM_CONTEXT_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_IM_CONTEXT, GtkIMContextClass))
 
 
-typedef struct _GtkIMContext       GtkIMContextFat;
-typedef struct _GtkIMContext       GtkIMContextThin;
+typedef struct _GtkIMContext       GtkIMContext;
 
 typedef struct _GtkIMContextClass  GtkIMContextClass;
 
@@ -47,9 +46,6 @@ struct _GtkIMContext
 struct _GtkIMContextClass
 {
   /*< private >*/
-  /* Yes, this should be GObjectClass, be we can't fix it without breaking
-   * binary compatibility - see bug #90935
-   */
   GObjectClass parent_class;
 
   /*< public >*/
@@ -96,9 +92,7 @@ struct _GtkIMContextClass
   void (*_gtk_reserved6) (void);
 };
 
-GType    _T2_gtk_im_context_get_type            (void) G_GNUC_CONST;
-GType    _3T_gtk_im_context_get_type            (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
+
 GType    gtk_im_context_get_type            (void) G_GNUC_CONST;
 
 void     __gtk_im_context_set_client_window   (GtkIMContext       *context,

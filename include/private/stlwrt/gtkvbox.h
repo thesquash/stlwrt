@@ -34,8 +34,7 @@ G_BEGIN_DECLS
 #define GTK_VBOX_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_VBOX, GtkVBoxClass))
 
 
-typedef struct _GtkVBox	      GtkVBoxFat;
-typedef struct _GtkVBox	      GtkVBoxThin;
+typedef struct _GtkVBox	      GtkVBox;
 
 typedef struct _GtkVBoxClass  GtkVBoxClass;
 
@@ -50,9 +49,6 @@ struct _GtkVBoxClass
 };
 
 
-GType       _T2_gtk_vbox_get_type (void) G_GNUC_CONST;
-GType       _3T_gtk_vbox_get_type (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
 GType       gtk_vbox_get_type (void) G_GNUC_CONST;
 GtkWidget * __gtk_vbox_new      (gboolean homogeneous,
                                gint     spacing);

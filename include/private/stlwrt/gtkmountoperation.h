@@ -30,8 +30,7 @@ G_BEGIN_DECLS
 #define GTK_IS_MOUNT_OPERATION_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), GTK_TYPE_MOUNT_OPERATION))
 #define GTK_MOUNT_OPERATION_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GTK_TYPE_MOUNT_OPERATION, GtkMountOperationClass))
 
-typedef struct _GtkMountOperation         GtkMountOperationFat;
-typedef struct _GtkMountOperation         GtkMountOperationThin;
+typedef struct _GtkMountOperation         GtkMountOperation;
 
 typedef struct _GtkMountOperationClass    GtkMountOperationClass;
 typedef struct _GtkMountOperationPrivate  GtkMountOperationPrivate;
@@ -60,9 +59,6 @@ struct _GtkMountOperationClass
 };
 
 
-GType            _T2_gtk_mount_operation_get_type   (void);
-GType            _3T_gtk_mount_operation_get_type   (void);
-/* Supplied in the STLWRT public libraries */
 GType            gtk_mount_operation_get_type   (void);
 GMountOperation *__gtk_mount_operation_new        (GtkWindow         *parent);
 gboolean         __gtk_mount_operation_is_showing (GtkMountOperation *op);

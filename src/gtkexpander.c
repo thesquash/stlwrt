@@ -137,7 +137,7 @@ static void gtk_expander_buildable_add_child      (GtkBuildable *buildable,
 						   GObject      *child,
 						   const gchar  *type);
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkExpander, gtk_expander, GTK_TYPE_BIN,
+G_DEFINE_TYPE_WITH_CODE (GtkExpander, gtk_expander, GTK_TYPE_BIN,
 			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
 						gtk_expander_buildable_init))
 

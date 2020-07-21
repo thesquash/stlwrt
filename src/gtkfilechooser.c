@@ -630,7 +630,7 @@
 static void gtk_file_chooser_class_init (gpointer g_iface);
 
 GType
-__gtk_file_chooser_get_type (void)
+gtk_file_chooser_get_type (void)
 {
   static GType file_chooser_type = 0;
 

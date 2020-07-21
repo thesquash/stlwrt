@@ -52,7 +52,7 @@ struct _GtkPaperSize
 };
 
 GType
-__gtk_paper_size_get_type (void)
+gtk_paper_size_get_type (void)
 {
   static GType our_type = 0;
   

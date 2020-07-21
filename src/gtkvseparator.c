@@ -44,7 +44,7 @@
  * make it appear sunken into the interface.
  */
 
-STLWRT_DEFINE_TYPE (GtkVSeparator, gtk_vseparator, GTK_TYPE_SEPARATOR)
+G_DEFINE_TYPE (GtkVSeparator, gtk_vseparator, GTK_TYPE_SEPARATOR)
 
 static void
 gtk_vseparator_class_init (GtkVSeparatorClass *klass)

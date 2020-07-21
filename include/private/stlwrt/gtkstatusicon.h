@@ -37,8 +37,7 @@ G_BEGIN_DECLS
 #define GTK_IS_STATUS_ICON_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), GTK_TYPE_STATUS_ICON))
 #define GTK_STATUS_ICON_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GTK_TYPE_STATUS_ICON, GtkStatusIconClass))
 
-typedef struct _GtkStatusIcon	     GtkStatusIconFat;
-typedef struct _GtkStatusIcon	     GtkStatusIconThin;
+typedef struct _GtkStatusIcon	     GtkStatusIcon;
 
 typedef struct _GtkStatusIconClass   GtkStatusIconClass;
 typedef struct _GtkStatusIconPrivate GtkStatusIconPrivate;
@@ -76,9 +75,7 @@ struct _GtkStatusIconClass
   void (*__gtk_reserved2);
 };
 
-GType                 _T2_gtk_status_icon_get_type           (void) G_GNUC_CONST;
-GType                 _3T_gtk_status_icon_get_type           (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
+
 GType                 gtk_status_icon_get_type           (void) G_GNUC_CONST;
 
 GtkStatusIcon        *__gtk_status_icon_new                (void);

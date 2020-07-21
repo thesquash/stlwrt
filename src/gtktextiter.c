@@ -436,7 +436,7 @@ __gtk_text_iter_free (GtkTextIter *iter)
 }
 
 GType
-__gtk_text_iter_get_type (void)
+gtk_text_iter_get_type (void)
 {
   static GType our_type = 0;
   

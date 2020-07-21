@@ -2618,7 +2618,7 @@ icon_data_free (GtkIconData *icon_data)
  * GtkIconInfo
  */
 GType
-__gtk_icon_info_get_type (void)
+gtk_icon_info_get_type (void)
 {
   static GType our_type = 0;
   

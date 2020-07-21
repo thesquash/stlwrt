@@ -38,8 +38,7 @@ G_BEGIN_DECLS
 #define GTK_IS_TOGGLE_ACTION_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TOGGLE_ACTION))
 #define GTK_TOGGLE_ACTION_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), GTK_TYPE_TOGGLE_ACTION, GtkToggleActionClass))
 
-typedef struct _GtkToggleAction        GtkToggleActionFat;
-typedef struct _GtkToggleAction        GtkToggleActionThin;
+typedef struct _GtkToggleAction        GtkToggleAction;
 typedef struct _GtkToggleActionPrivate GtkToggleActionPrivate;
 
 typedef struct _GtkToggleActionClass   GtkToggleActionClass;
@@ -66,9 +65,7 @@ struct _GtkToggleActionClass
   void (*_gtk_reserved4) (void);
 };
 
-GType            _T2_gtk_toggle_action_get_type          (void) G_GNUC_CONST;
-GType            _3T_gtk_toggle_action_get_type          (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
+
 GType            gtk_toggle_action_get_type          (void) G_GNUC_CONST;
 GtkToggleAction *__gtk_toggle_action_new               (const gchar     *name,
                                                       const gchar     *label,

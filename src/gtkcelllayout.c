@@ -29,7 +29,7 @@
 
 
 GType
-__gtk_cell_layout_get_type (void)
+gtk_cell_layout_get_type (void)
 {
   static GType cell_layout_type = 0;
 

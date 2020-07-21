@@ -35,8 +35,7 @@ G_BEGIN_DECLS
 #define GTK_IS_ENTRY_BUFFER_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_ENTRY_BUFFER))
 #define GTK_ENTRY_BUFFER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ENTRY_BUFFER, GtkEntryBufferClass))
 
-typedef struct _GtkEntryBuffer            GtkEntryBufferFat;
-typedef struct _GtkEntryBuffer            GtkEntryBufferThin;
+typedef struct _GtkEntryBuffer            GtkEntryBuffer;
 
 typedef struct _GtkEntryBufferClass       GtkEntryBufferClass;
 typedef struct _GtkEntryBufferPrivate     GtkEntryBufferPrivate;
@@ -89,9 +88,7 @@ struct _GtkEntryBufferClass
   void (*_gtk_reserved5) (void);
 };
 
-GType                     _T2_gtk_entry_buffer_get_type               (void) G_GNUC_CONST;
-GType                     _3T_gtk_entry_buffer_get_type               (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
+
 GType                     gtk_entry_buffer_get_type               (void) G_GNUC_CONST;
 
 GtkEntryBuffer*           __gtk_entry_buffer_new                    (const gchar     *initial_chars,

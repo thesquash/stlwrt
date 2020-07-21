@@ -88,7 +88,7 @@
  * use the semi-public headers, as with gtktextview.c.
  */
 
-#define GTK_TYPE_TEXT_RENDERER            (___gtk_text_renderer_get_type())
+#define GTK_TYPE_TEXT_RENDERER            (_gtk_text_renderer_get_type())
 #define GTK_TEXT_RENDERER(object)         (G_TYPE_CHECK_INSTANCE_CAST ((object), GTK_TYPE_TEXT_RENDERER, GtkTextRenderer))
 #define GTK_IS_TEXT_RENDERER(object)      (G_TYPE_CHECK_INSTANCE_TYPE ((object), GTK_TYPE_TEXT_RENDERER))
 #define GTK_TEXT_RENDERER_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_TEXT_RENDERER, GtkTextRendererClass))

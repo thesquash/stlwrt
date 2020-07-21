@@ -36,8 +36,7 @@ G_BEGIN_DECLS
 
 #define GTK_BUILDER_ERROR                (__gtk_builder_error_quark ())
 
-typedef struct _GtkBuilder        GtkBuilderFat;
-typedef struct _GtkBuilder        GtkBuilderThin;
+typedef struct _GtkBuilder        GtkBuilder;
 
 typedef struct _GtkBuilderClass   GtkBuilderClass;
 typedef struct _GtkBuilderPrivate GtkBuilderPrivate;
@@ -90,9 +89,7 @@ typedef void (*GtkBuilderConnectFunc) (GtkBuilder    *builder,
 				       GConnectFlags  flags,
 				       gpointer       user_data);
 
-GType        _T2_gtk_builder_get_type                (void) G_GNUC_CONST;
-GType        _3T_gtk_builder_get_type                (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
+
 GType        gtk_builder_get_type                (void) G_GNUC_CONST;
 GtkBuilder*  __gtk_builder_new                     (void);
 

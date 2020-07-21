@@ -302,7 +302,7 @@ __gdk_color_equal (const GdkColor *colora,
 }
 
 GType
-__gdk_color_get_type (void)
+gdk_color_get_type (void)
 {
   static GType our_type = 0;
   

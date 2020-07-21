@@ -3129,7 +3129,7 @@ __gtk_selection_data_free (GtkSelectionData *data)
 }
 
 GType
-__gtk_selection_data_get_type (void)
+gtk_selection_data_get_type (void)
 {
   static GType our_type = 0;
   
@@ -3142,7 +3142,7 @@ __gtk_selection_data_get_type (void)
 }
 
 GType
-__gtk_target_list_get_type (void)
+gtk_target_list_get_type (void)
 {
   static GType our_type = 0;
 

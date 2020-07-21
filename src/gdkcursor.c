@@ -29,7 +29,7 @@
 
 
 GType
-__gdk_cursor_get_type (void)
+gdk_cursor_get_type (void)
 {
   static GType our_type = 0;
   

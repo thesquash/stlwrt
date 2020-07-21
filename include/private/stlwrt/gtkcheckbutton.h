@@ -39,8 +39,7 @@ G_BEGIN_DECLS
 #define GTK_CHECK_BUTTON_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_CHECK_BUTTON, GtkCheckButtonClass))
 
 
-typedef struct _GtkCheckButton       GtkCheckButtonFat;
-typedef struct _GtkCheckButton       GtkCheckButtonThin;
+typedef struct _GtkCheckButton       GtkCheckButton;
 
 typedef struct _GtkCheckButtonClass  GtkCheckButtonClass;
 
@@ -64,9 +63,6 @@ struct _GtkCheckButtonClass
 };
 
 
-GType      _T2_gtk_check_button_get_type       (void) G_GNUC_CONST;
-GType      _3T_gtk_check_button_get_type       (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
 GType      gtk_check_button_get_type       (void) G_GNUC_CONST;
 GtkWidget* __gtk_check_button_new               (void);
 GtkWidget* __gtk_check_button_new_with_label    (const gchar *label);

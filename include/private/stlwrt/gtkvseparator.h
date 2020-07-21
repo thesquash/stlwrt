@@ -35,8 +35,7 @@ G_BEGIN_DECLS
 #define GTK_VSEPARATOR_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_VSEPARATOR, GtkVSeparatorClass))
 
 
-typedef struct _GtkVSeparator       GtkVSeparatorFat;
-typedef struct _GtkVSeparator       GtkVSeparatorThin;
+typedef struct _GtkVSeparator       GtkVSeparator;
 
 typedef struct _GtkVSeparatorClass  GtkVSeparatorClass;
 
@@ -57,9 +56,6 @@ struct _GtkVSeparatorClass
 };
 
 
-GType      _T2_gtk_vseparator_get_type (void) G_GNUC_CONST;
-GType      _3T_gtk_vseparator_get_type (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
 GType      gtk_vseparator_get_type (void) G_GNUC_CONST;
 GtkWidget* __gtk_vseparator_new      (void);
 

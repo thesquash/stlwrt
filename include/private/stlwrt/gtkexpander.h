@@ -36,8 +36,7 @@ G_BEGIN_DECLS
 #define GTK_IS_EXPANDER_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_EXPANDER))
 #define GTK_EXPANDER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_EXPANDER, GtkExpanderClass))
 
-typedef struct _GtkExpander        GtkExpanderFat;
-typedef struct _GtkExpander        GtkExpanderThin;
+typedef struct _GtkExpander        GtkExpander;
 
 typedef struct _GtkExpanderClass   GtkExpanderClass;
 typedef struct _GtkExpanderPrivate GtkExpanderPrivate;
@@ -59,9 +58,7 @@ struct _GtkExpanderClass
   void        (* activate) (GtkExpander *expander);
 };
 
-GType                 _T2_gtk_expander_get_type          (void) G_GNUC_CONST;
-GType                 _3T_gtk_expander_get_type          (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
+
 GType                 gtk_expander_get_type          (void) G_GNUC_CONST;
 
 GtkWidget            *__gtk_expander_new               (const gchar *label);

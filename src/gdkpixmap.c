@@ -162,7 +162,7 @@ static void gdk_pixmap_finalize   (GObject              *object);
 static gpointer parent_class = NULL;
 
 GType
-__gdk_pixmap_get_type (void)
+gdk_pixmap_get_type (void)
 {
   static GType object_type = 0;
 
@@ -182,7 +182,7 @@ static void
 gdk_pixmap_init (GdkPixmapObject *pixmap)
 {
   /* 0-initialization is good for all other fields. */
-  pixmap->impl = g_object_new (___gdk_pixmap_impl_get_type (), NULL);
+  pixmap->impl = g_object_new (_gdk_pixmap_impl_get_type (), NULL);
 }
 
 static void

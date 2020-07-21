@@ -38,8 +38,7 @@ G_BEGIN_DECLS
 #define GTK_HRULER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_HRULER, GtkHRulerClass))
 
 
-typedef struct _GtkHRuler       GtkHRulerFat;
-typedef struct _GtkHRuler       GtkHRulerThin;
+typedef struct _GtkHRuler       GtkHRuler;
 
 typedef struct _GtkHRulerClass  GtkHRulerClass;
 
@@ -54,9 +53,6 @@ struct _GtkHRulerClass
 };
 
 
-GType      _T2_gtk_hruler_get_type (void) G_GNUC_CONST;
-GType      _3T_gtk_hruler_get_type (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
 GType      gtk_hruler_get_type (void) G_GNUC_CONST;
 GtkWidget* __gtk_hruler_new      (void);
 

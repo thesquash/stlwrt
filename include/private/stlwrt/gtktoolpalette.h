@@ -36,8 +36,7 @@ G_BEGIN_DECLS
 #define GTK_IS_TOOL_PALETTE_CLASS(obj)  (G_TYPE_CHECK_CLASS_TYPE (obj, GTK_TYPE_TOOL_PALETTE))
 #define GTK_TOOL_PALETTE_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TOOL_PALETTE, GtkToolPaletteClass))
 
-typedef struct _GtkToolPalette           GtkToolPaletteFat;
-typedef struct _GtkToolPalette           GtkToolPaletteThin;
+typedef struct _GtkToolPalette           GtkToolPalette;
 
 typedef struct _GtkToolPaletteClass      GtkToolPaletteClass;
 typedef struct _GtkToolPalettePrivate    GtkToolPalettePrivate;
@@ -84,9 +83,7 @@ struct _GtkToolPaletteClass
   void (*_gtk_reserved6) (void);
 };
 
-GType                          _T2_gtk_tool_palette_get_type              (void) G_GNUC_CONST;
-GType                          _3T_gtk_tool_palette_get_type              (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
+
 GType                          gtk_tool_palette_get_type              (void) G_GNUC_CONST;
 GtkWidget*                     __gtk_tool_palette_new                   (void);
 

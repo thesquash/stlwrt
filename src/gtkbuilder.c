@@ -68,7 +68,7 @@ struct _GtkBuilderPrivate
   gchar *filename;
 };
 
-STLWRT_DEFINE_TYPE (GtkBuilder, gtk_builder, G_TYPE_OBJECT)
+G_DEFINE_TYPE (GtkBuilder, gtk_builder, G_TYPE_OBJECT)
 
 static void
 gtk_builder_class_init (GtkBuilderClass *klass)
@@ -178,9 +178,9 @@ gtk_builder_get_property (GObject    *object,
  * Try to map a type name to a _get_type function
  * and call it, eg:
  *
- * GtkWindow -> __gtk_window_get_type
- * GtkHBox -> __gtk_hbox_get_type
- * GtkUIManager -> __gtk_ui_manager_get_type
+ * GtkWindow -> gtk_window_get_type
+ * GtkHBox -> gtk_hbox_get_type
+ * GtkUIManager -> gtk_ui_manager_get_type
  *
  */
 static GType

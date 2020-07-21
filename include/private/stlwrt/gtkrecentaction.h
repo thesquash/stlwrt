@@ -35,8 +35,7 @@ G_BEGIN_DECLS
 #define GTK_IS_RECENT_ACTION_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_RECENT_ACTION))
 #define GTK_RECENT_ACTION_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_RECENT_ACTION, GtkRecentActionClass))
 
-typedef struct _GtkRecentAction         GtkRecentActionFat;
-typedef struct _GtkRecentAction         GtkRecentActionThin;
+typedef struct _GtkRecentAction         GtkRecentAction;
 typedef struct _GtkRecentActionPrivate  GtkRecentActionPrivate;
 
 typedef struct _GtkRecentActionClass    GtkRecentActionClass;
@@ -54,9 +53,7 @@ struct _GtkRecentActionClass
   GtkActionClass parent_class;
 };
 
-GType      _T2_gtk_recent_action_get_type         (void) G_GNUC_CONST;
-GType      _3T_gtk_recent_action_get_type         (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
+
 GType      gtk_recent_action_get_type         (void) G_GNUC_CONST;
 GtkAction *__gtk_recent_action_new              (const gchar      *name,
                                                const gchar      *label,

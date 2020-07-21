@@ -132,7 +132,7 @@ static GtkBuildableIface    *parent_buildable_iface;
 
 /* --- functions --- */
 GType
-__gtk_container_get_type (void)
+gtk_container_get_type (void)
 {
   static GType container_type = 0;
 

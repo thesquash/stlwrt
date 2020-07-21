@@ -63,9 +63,7 @@ struct _GtkToolButtonClass
   void (* _gtk_reserved4) (void);
 };
 
-GType        _T2_gtk_tool_button_get_type       (void) G_GNUC_CONST;
-GType        _3T_gtk_tool_button_get_type       (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
+
 GType        gtk_tool_button_get_type       (void) G_GNUC_CONST;
 GtkToolItem *__gtk_tool_button_new            (GtkWidget   *icon_widget,
 					     const gchar *label);

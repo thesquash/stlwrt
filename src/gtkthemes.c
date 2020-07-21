@@ -129,7 +129,7 @@ gtk_theme_engine_class_init (GtkThemeEngineClass *class)
 }
 
 GType
-__gtk_theme_engine_get_type (void)
+gtk_theme_engine_get_type (void)
 {
   static GType theme_engine_type = 0;
 

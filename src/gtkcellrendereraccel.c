@@ -645,7 +645,7 @@ gtk_cell_renderer_accel_start_editing (GtkCellRenderer      *cell,
                     G_CALLBACK (grab_key_callback),
                     accel);
 
-  eventbox = g_object_new (___gtk_cell_editable_event_box_get_type (), NULL);
+  eventbox = g_object_new (_gtk_cell_editable_event_box_get_type (), NULL);
   accel->edit_widget = eventbox;
   g_object_add_weak_pointer (G_OBJECT (accel->edit_widget),
                              (gpointer) &accel->edit_widget);

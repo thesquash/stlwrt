@@ -48,7 +48,7 @@
  * shown can be set using the parent #GtkScale class's functions.
  */
 
-STLWRT_DEFINE_TYPE (GtkVScale, gtk_vscale, GTK_TYPE_SCALE)
+G_DEFINE_TYPE (GtkVScale, gtk_vscale, GTK_TYPE_SCALE)
 
 static void
 gtk_vscale_class_init (GtkVScaleClass *class)

@@ -275,7 +275,7 @@
 static void gtk_activatable_class_init (gpointer g_iface);
 
 GType
-__gtk_activatable_get_type (void)
+gtk_activatable_get_type (void)
 {
   static GType activatable_type = 0;
 

@@ -35,8 +35,7 @@ G_BEGIN_DECLS
 #define GTK_IS_TOGGLE_TOOL_BUTTON_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TOGGLE_TOOL_BUTTON))
 #define GTK_TOGGLE_TOOL_BUTTON_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS((obj), GTK_TYPE_TOGGLE_TOOL_BUTTON, GtkToggleToolButtonClass))
 
-typedef struct _GtkToggleToolButton        GtkToggleToolButtonFat;
-typedef struct _GtkToggleToolButton        GtkToggleToolButtonThin;
+typedef struct _GtkToggleToolButton        GtkToggleToolButton;
 
 typedef struct _GtkToggleToolButtonClass   GtkToggleToolButtonClass;
 typedef struct _GtkToggleToolButtonPrivate GtkToggleToolButtonPrivate;
@@ -63,9 +62,7 @@ struct _GtkToggleToolButtonClass
   void (* _gtk_reserved4) (void);
 };
 
-GType        _T2_gtk_toggle_tool_button_get_type       (void) G_GNUC_CONST;
-GType        _3T_gtk_toggle_tool_button_get_type       (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
+
 GType        gtk_toggle_tool_button_get_type       (void) G_GNUC_CONST;
 GtkToolItem *__gtk_toggle_tool_button_new            (void);
 GtkToolItem *__gtk_toggle_tool_button_new_from_stock (const gchar *stock_id);

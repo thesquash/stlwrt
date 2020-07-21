@@ -49,8 +49,7 @@ typedef enum
 #define GTK_IS_TREE_VIEW_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TREE_VIEW))
 #define GTK_TREE_VIEW_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TREE_VIEW, GtkTreeViewClass))
 
-typedef struct _GtkTreeView           GtkTreeViewFat;
-typedef struct _GtkTreeView           GtkTreeViewThin;
+typedef struct _GtkTreeView           GtkTreeView;
 
 typedef struct _GtkTreeViewClass      GtkTreeViewClass;
 typedef struct _GtkTreeViewPrivate    GtkTreeViewPrivate;
@@ -138,9 +137,6 @@ typedef void     (*GtkTreeViewSearchPositionFunc) (GtkTreeView  *tree_view,
 
 
 /* Creators */
-GType                  _T2_gtk_tree_view_get_type                      (void) G_GNUC_CONST;
-GType                  _3T_gtk_tree_view_get_type                      (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
 GType                  gtk_tree_view_get_type                      (void) G_GNUC_CONST;
 GtkWidget             *__gtk_tree_view_new                           (void);
 GtkWidget             *__gtk_tree_view_new_with_model                (GtkTreeModel              *model);

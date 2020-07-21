@@ -99,7 +99,7 @@ static void      gtk_tree_row_ref_reordered (RowRefList        *refs,
                                              gint              *new_order);
 
 GType
-__gtk_tree_model_get_type (void)
+gtk_tree_model_get_type (void)
 {
   static GType tree_model_type = 0;
 
@@ -686,7 +686,7 @@ __gtk_tree_path_copy (const GtkTreePath *path)
 }
 
 GType
-__gtk_tree_path_get_type (void)
+gtk_tree_path_get_type (void)
 {
   static GType our_type = 0;
   
@@ -915,7 +915,7 @@ __gtk_tree_iter_free (GtkTreeIter *iter)
 }
 
 GType
-__gtk_tree_iter_get_type (void)
+gtk_tree_iter_get_type (void)
 {
   static GType our_type = 0;
   
@@ -1668,7 +1668,7 @@ static void gtk_tree_row_reference_unref_path (GtkTreePath  *path,
 
 
 GType
-__gtk_tree_row_reference_get_type (void)
+gtk_tree_row_reference_get_type (void)
 {
   static GType our_type = 0;
   

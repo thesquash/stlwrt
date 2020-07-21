@@ -37,8 +37,7 @@ G_BEGIN_DECLS
 
 
 typedef struct _GtkMenuToolButtonClass   GtkMenuToolButtonClass;
-typedef struct _GtkMenuToolButton        GtkMenuToolButtonFat;
-typedef struct _GtkMenuToolButton        GtkMenuToolButtonThin;
+typedef struct _GtkMenuToolButton        GtkMenuToolButton;
 typedef struct _GtkMenuToolButtonPrivate GtkMenuToolButtonPrivate;
 
 struct _GtkMenuToolButton
@@ -62,9 +61,7 @@ struct _GtkMenuToolButtonClass
   void (*_gtk_reserved4) (void);
 };
 
-GType         _T2_gtk_menu_tool_button_get_type       (void) G_GNUC_CONST;
-GType         _3T_gtk_menu_tool_button_get_type       (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
+
 GType         gtk_menu_tool_button_get_type       (void) G_GNUC_CONST;
 GtkToolItem  *__gtk_menu_tool_button_new            (GtkWidget   *icon_widget,
                                                    const gchar *label);

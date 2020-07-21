@@ -31,7 +31,7 @@
 
 
 GType
-__gdk_font_get_type (void)
+gdk_font_get_type (void)
 {
   static GType our_type = 0;
   

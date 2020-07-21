@@ -126,7 +126,7 @@ delegate_response_requested (GtkFileChooserEmbed *chooser_embed,
 /* publicly callable functions */
 
 GType
-___gtk_file_chooser_embed_get_type (void)
+_gtk_file_chooser_embed_get_type (void)
 {
   static GType file_chooser_embed_type = 0;
 

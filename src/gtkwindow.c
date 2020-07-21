@@ -7554,7 +7554,7 @@ gtk_window_group_class_init (GtkWindowGroupClass *klass)
 }
 
 GType
-__gtk_window_group_get_type (void)
+gtk_window_group_get_type (void)
 {
   static GType window_group_type = 0;
 

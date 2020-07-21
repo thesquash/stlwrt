@@ -82,7 +82,7 @@ struct _GtkEntryBufferPrivate
   guint  normal_text_chars;
 };
 
-STLWRT_DEFINE_TYPE (GtkEntryBuffer, gtk_entry_buffer, G_TYPE_OBJECT);
+G_DEFINE_TYPE (GtkEntryBuffer, gtk_entry_buffer, G_TYPE_OBJECT);
 
 /* --------------------------------------------------------------------------------
  * DEFAULT IMPLEMENTATIONS OF TEXT BUFFER

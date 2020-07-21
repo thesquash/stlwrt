@@ -35,7 +35,7 @@ static void gtk_editable_base_init (gpointer g_class);
 
 
 GType
-__gtk_editable_get_type (void)
+gtk_editable_get_type (void)
 {
   static GType editable_type = 0;
 

@@ -366,7 +366,7 @@ new_region_tag (void)
 }
 
 GType
-__gdk_window_object_get_type (void)
+gdk_window_object_get_type (void)
 {
   static GType object_type = 0;
 
@@ -383,7 +383,7 @@ __gdk_window_object_get_type (void)
 }
 
 GType
-___gdk_paintable_get_type (void)
+_gdk_paintable_get_type (void)
 {
   static GType paintable_type = 0;
 

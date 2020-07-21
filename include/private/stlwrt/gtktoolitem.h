@@ -38,8 +38,7 @@ G_BEGIN_DECLS
 #define GTK_IS_TOOL_ITEM_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TOOL_ITEM))
 #define GTK_TOOL_ITEM_GET_CLASS(o)    (G_TYPE_INSTANCE_GET_CLASS((o), GTK_TYPE_TOOL_ITEM, GtkToolItemClass))
 
-typedef struct _GtkToolItem        GtkToolItemFat;
-typedef struct _GtkToolItem        GtkToolItemThin;
+typedef struct _GtkToolItem        GtkToolItem;
 
 typedef struct _GtkToolItemClass   GtkToolItemClass;
 typedef struct _GtkToolItemPrivate GtkToolItemPrivate;
@@ -75,9 +74,7 @@ struct _GtkToolItemClass
   void (* _gtk_reserved4) (void);
 };
 
-GType        _T2_gtk_tool_item_get_type (void) G_GNUC_CONST;
-GType        _3T_gtk_tool_item_get_type (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
+
 GType        gtk_tool_item_get_type (void) G_GNUC_CONST;
 GtkToolItem *__gtk_tool_item_new      (void);
 

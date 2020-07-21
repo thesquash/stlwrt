@@ -7,7 +7,7 @@
 
 /* enumerations from <gdkcursor.h> */
 GType
-__gdk_cursor_type_get_type (void)
+gdk_cursor_type_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -100,7 +100,7 @@ __gdk_cursor_type_get_type (void)
 }
 /* enumerations from <gdkdnd.h> */
 GType
-__gdk_drag_action_get_type (void)
+gdk_drag_action_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -118,7 +118,7 @@ __gdk_drag_action_get_type (void)
     return etype;
 }
 GType
-__gdk_drag_protocol_get_type (void)
+gdk_drag_protocol_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -138,7 +138,7 @@ __gdk_drag_protocol_get_type (void)
 }
 /* enumerations from <gdkevents.h> */
 GType
-__gdk_filter_return_get_type (void)
+gdk_filter_return_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -153,7 +153,7 @@ __gdk_filter_return_get_type (void)
     return etype;
 }
 GType
-__gdk_event_type_get_type (void)
+gdk_event_type_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -204,7 +204,7 @@ __gdk_event_type_get_type (void)
     return etype;
 }
 GType
-__gdk_event_mask_get_type (void)
+gdk_event_mask_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -238,7 +238,7 @@ __gdk_event_mask_get_type (void)
     return etype;
 }
 GType
-__gdk_visibility_state_get_type (void)
+gdk_visibility_state_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -253,7 +253,7 @@ __gdk_visibility_state_get_type (void)
     return etype;
 }
 GType
-__gdk_scroll_direction_get_type (void)
+gdk_scroll_direction_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -269,7 +269,7 @@ __gdk_scroll_direction_get_type (void)
     return etype;
 }
 GType
-__gdk_notify_type_get_type (void)
+gdk_notify_type_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -287,7 +287,7 @@ __gdk_notify_type_get_type (void)
     return etype;
 }
 GType
-__gdk_crossing_mode_get_type (void)
+gdk_crossing_mode_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -305,7 +305,7 @@ __gdk_crossing_mode_get_type (void)
     return etype;
 }
 GType
-__gdk_property_state_get_type (void)
+gdk_property_state_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -319,7 +319,7 @@ __gdk_property_state_get_type (void)
     return etype;
 }
 GType
-__gdk_window_state_get_type (void)
+gdk_window_state_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -338,7 +338,7 @@ __gdk_window_state_get_type (void)
     return etype;
 }
 GType
-__gdk_setting_action_get_type (void)
+gdk_setting_action_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -353,7 +353,7 @@ __gdk_setting_action_get_type (void)
     return etype;
 }
 GType
-__gdk_owner_change_get_type (void)
+gdk_owner_change_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -369,7 +369,7 @@ __gdk_owner_change_get_type (void)
 }
 /* enumerations from <gdkfont.h> */
 GType
-__gdk_font_type_get_type (void)
+gdk_font_type_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -384,7 +384,7 @@ __gdk_font_type_get_type (void)
 }
 /* enumerations from <gdkgc.h> */
 GType
-__gdk_cap_style_get_type (void)
+gdk_cap_style_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -400,7 +400,7 @@ __gdk_cap_style_get_type (void)
     return etype;
 }
 GType
-__gdk_fill_get_type (void)
+gdk_fill_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -416,7 +416,7 @@ __gdk_fill_get_type (void)
     return etype;
 }
 GType
-__gdk_function_get_type (void)
+gdk_function_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -444,7 +444,7 @@ __gdk_function_get_type (void)
     return etype;
 }
 GType
-__gdk_join_style_get_type (void)
+gdk_join_style_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -459,7 +459,7 @@ __gdk_join_style_get_type (void)
     return etype;
 }
 GType
-__gdk_line_style_get_type (void)
+gdk_line_style_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -474,7 +474,7 @@ __gdk_line_style_get_type (void)
     return etype;
 }
 GType
-__gdk_subwindow_mode_get_type (void)
+gdk_subwindow_mode_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -488,7 +488,7 @@ __gdk_subwindow_mode_get_type (void)
     return etype;
 }
 GType
-__gdk_gc_values_mask_get_type (void)
+gdk_gc_values_mask_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -519,7 +519,7 @@ __gdk_gc_values_mask_get_type (void)
 }
 /* enumerations from <gdkimage.h> */
 GType
-__gdk_image_type_get_type (void)
+gdk_image_type_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -535,7 +535,7 @@ __gdk_image_type_get_type (void)
 }
 /* enumerations from <gdkinput.h> */
 GType
-__gdk_extension_mode_get_type (void)
+gdk_extension_mode_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -550,7 +550,7 @@ __gdk_extension_mode_get_type (void)
     return etype;
 }
 GType
-__gdk_input_source_get_type (void)
+gdk_input_source_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -566,7 +566,7 @@ __gdk_input_source_get_type (void)
     return etype;
 }
 GType
-__gdk_input_mode_get_type (void)
+gdk_input_mode_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -581,7 +581,7 @@ __gdk_input_mode_get_type (void)
     return etype;
 }
 GType
-__gdk_axis_use_get_type (void)
+gdk_axis_use_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -602,7 +602,7 @@ __gdk_axis_use_get_type (void)
 }
 /* enumerations from <gdkproperty.h> */
 GType
-__gdk_prop_mode_get_type (void)
+gdk_prop_mode_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -618,7 +618,7 @@ __gdk_prop_mode_get_type (void)
 }
 /* enumerations from <gdkregion.h> */
 GType
-__gdk_fill_rule_get_type (void)
+gdk_fill_rule_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -632,7 +632,7 @@ __gdk_fill_rule_get_type (void)
     return etype;
 }
 GType
-__gdk_overlap_type_get_type (void)
+gdk_overlap_type_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -648,7 +648,7 @@ __gdk_overlap_type_get_type (void)
 }
 /* enumerations from <gdkrgb.h> */
 GType
-__gdk_rgb_dither_get_type (void)
+gdk_rgb_dither_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -664,7 +664,7 @@ __gdk_rgb_dither_get_type (void)
 }
 /* enumerations from <gdktypes.h> */
 GType
-__gdk_byte_order_get_type (void)
+gdk_byte_order_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -678,7 +678,7 @@ __gdk_byte_order_get_type (void)
     return etype;
 }
 GType
-__gdk_modifier_type_get_type (void)
+gdk_modifier_type_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -708,7 +708,7 @@ __gdk_modifier_type_get_type (void)
     return etype;
 }
 GType
-__gdk_input_condition_get_type (void)
+gdk_input_condition_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -723,7 +723,7 @@ __gdk_input_condition_get_type (void)
     return etype;
 }
 GType
-__gdk_status_get_type (void)
+gdk_status_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -740,7 +740,7 @@ __gdk_status_get_type (void)
     return etype;
 }
 GType
-__gdk_grab_status_get_type (void)
+gdk_grab_status_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -758,7 +758,7 @@ __gdk_grab_status_get_type (void)
 }
 /* enumerations from <gdkvisual.h> */
 GType
-__gdk_visual_type_get_type (void)
+gdk_visual_type_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -777,7 +777,7 @@ __gdk_visual_type_get_type (void)
 }
 /* enumerations from <gdkwindow.h> */
 GType
-__gdk_window_class_get_type (void)
+gdk_window_class_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -791,7 +791,7 @@ __gdk_window_class_get_type (void)
     return etype;
 }
 GType
-__gdk_window_type_get_type (void)
+gdk_window_type_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -810,7 +810,7 @@ __gdk_window_type_get_type (void)
     return etype;
 }
 GType
-__gdk_window_attributes_type_get_type (void)
+gdk_window_attributes_type_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -831,7 +831,7 @@ __gdk_window_attributes_type_get_type (void)
     return etype;
 }
 GType
-__gdk_window_hints_get_type (void)
+gdk_window_hints_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -852,7 +852,7 @@ __gdk_window_hints_get_type (void)
     return etype;
 }
 GType
-__gdk_window_type_hint_get_type (void)
+gdk_window_type_hint_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -878,7 +878,7 @@ __gdk_window_type_hint_get_type (void)
     return etype;
 }
 GType
-__gdk_wm_decoration_get_type (void)
+gdk_wm_decoration_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -897,7 +897,7 @@ __gdk_wm_decoration_get_type (void)
     return etype;
 }
 GType
-__gdk_wm_function_get_type (void)
+gdk_wm_function_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -915,7 +915,7 @@ __gdk_wm_function_get_type (void)
     return etype;
 }
 GType
-__gdk_gravity_get_type (void)
+gdk_gravity_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -937,7 +937,7 @@ __gdk_gravity_get_type (void)
     return etype;
 }
 GType
-__gdk_window_edge_get_type (void)
+gdk_window_edge_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {

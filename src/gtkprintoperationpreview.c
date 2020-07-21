@@ -32,7 +32,7 @@
 static void gtk_print_operation_preview_base_init (gpointer g_iface);
 
 GType
-__gtk_print_operation_preview_get_type (void)
+gtk_print_operation_preview_get_type (void)
 {
   static GType print_operation_preview_type = 0;
 

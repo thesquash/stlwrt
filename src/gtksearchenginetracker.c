@@ -59,13 +59,6 @@
 /*
  * GtkSearchEngineTracker object
  */
-struct _GtkSearchEngineTrackerPrivate
-{
-  GDBusConnection *connection;
-  GCancellable *cancellable;
-  GtkQuery *query;
-  gboolean query_pending;
-};
 
 STLWRT_DEFINE_TYPE (GtkSearchEngineTracker, _gtk_search_engine_tracker, GTK_TYPE_SEARCH_ENGINE);
 

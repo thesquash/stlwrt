@@ -73,15 +73,6 @@ enum {
 #define GTK_CELL_RENDERER_PIXBUF_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_CELL_RENDERER_PIXBUF, GtkCellRendererPixbufPrivate))
 
 typedef struct _GtkCellRendererPixbufPrivate GtkCellRendererPixbufPrivate;
-struct _GtkCellRendererPixbufPrivate
-{
-  gchar *stock_id;
-  GtkIconSize stock_size;
-  gchar *stock_detail;
-  gboolean follow_state;
-  gchar *icon_name;
-  GIcon *gicon;
-};
 
 STLWRT_DEFINE_TYPE (GtkCellRendererPixbuf, gtk_cell_renderer_pixbuf, GTK_TYPE_CELL_RENDERER)
 

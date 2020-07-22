@@ -59,14 +59,6 @@ enum {
   PROP_TRANSLATION_DOMAIN,
 };
 
-struct _GtkBuilderPrivate
-{
-  gchar *domain;
-  GHashTable *objects;
-  GSList *delayed_properties;
-  GSList *signals;
-  gchar *filename;
-};
 
 G_DEFINE_TYPE (GtkBuilder, gtk_builder, G_TYPE_OBJECT)
 

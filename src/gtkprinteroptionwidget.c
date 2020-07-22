@@ -54,19 +54,6 @@ static void deconstruct_widgets (GtkPrinterOptionWidget *widget);
 static void construct_widgets (GtkPrinterOptionWidget *widget);
 static void update_widgets (GtkPrinterOptionWidget *widget);
 
-struct GtkPrinterOptionWidgetPrivate
-{
-  GtkPrinterOption *source;
-  gulong source_changed_handler;
-  
-  GtkWidget *check;
-  GtkWidget *combo;
-  GtkWidget *entry;
-  GtkWidget *image;
-  GtkWidget *label;
-  GtkWidget *filechooser;
-  GtkWidget *box;
-};
 
 enum {
   CHANGED,

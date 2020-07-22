@@ -143,28 +143,6 @@ struct _GtkToolItemGroupInfo
   guint             expand : 1;
 };
 
-struct _GtkToolPalettePrivate
-{
-  GPtrArray* groups;
-
-  GtkAdjustment        *hadjustment;
-  GtkAdjustment        *vadjustment;
-
-  GtkIconSize           icon_size;
-  gboolean              icon_size_set;
-  GtkOrientation        orientation;
-  GtkToolbarStyle       style;
-  gboolean              style_set;
-
-  GtkWidget            *expanding_child;
-
-  GtkSizeGroup         *text_size_group;
-
-  GtkSettings       *settings;
-  gulong             settings_connection;
-
-  guint                 drag_source : 2;
-};
 
 struct _GtkToolPaletteDragData
 {

@@ -35,16 +35,6 @@
 
 #define NONE_ID "gtk-im-context-none"
 
-struct _GtkIMMulticontextPrivate
-{
-  GdkWindow *client_window;
-  GdkRectangle cursor_location;
-  gchar *context_id;
-
-  guint use_preedit : 1;
-  guint have_cursor_location : 1;
-  guint focus_in : 1;
-};
 
 static void     gtk_im_multicontext_finalize           (GObject                 *object);
 

@@ -38,11 +38,6 @@
 
 #define GTK_COMBO_BOX_ENTRY_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_COMBO_BOX_ENTRY, GtkComboBoxEntryPrivate))
 
-struct _GtkComboBoxEntryPrivate
-{
-  GtkCellRenderer *text_renderer;
-  gint text_column;
-};
 
 static void gtk_combo_box_entry_set_property     (GObject               *object,
                                                   guint                  prop_id,

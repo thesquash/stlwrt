@@ -54,12 +54,6 @@ enum {
 
 typedef struct _GtkBoxPrivate GtkBoxPrivate;
 
-struct _GtkBoxPrivate
-{
-  GtkOrientation orientation;
-  guint          default_expand : 1;
-  guint          spacing_set    : 1;
-};
 
 #define GTK_BOX_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_BOX, GtkBoxPrivate))
 

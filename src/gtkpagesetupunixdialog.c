@@ -60,33 +60,6 @@
 
 
 
-struct GtkPageSetupUnixDialogPrivate
-{
-  GtkListStore *printer_list;
-  GtkListStore *page_setup_list;
-  GtkListStore *custom_paper_list;
-  
-  GList *print_backends;
-
-  GtkWidget *printer_combo;
-  GtkWidget *paper_size_combo;
-  GtkWidget *paper_size_label;
-
-  GtkWidget *portrait_radio;
-  GtkWidget *reverse_portrait_radio;
-  GtkWidget *landscape_radio;
-  GtkWidget *reverse_landscape_radio;
-
-  guint request_details_tag;
-  GtkPrinter *request_details_printer;
-  
-  GtkPrintSettings *print_settings;
-
-  /* Save last setup so we can re-set it after selecting manage custom sizes */
-  GtkPageSetup *last_setup;
-
-  gchar *waiting_for_printer;
-};
 
 enum {
   PRINTER_LIST_COL_NAME,

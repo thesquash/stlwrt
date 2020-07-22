@@ -381,10 +381,6 @@ GParamSpecPool         *_gtk_widget_child_property_pool = NULL;
 GObjectNotifyContext   *_gtk_widget_child_property_notify_context = NULL;
 
 
-struct _GtkWidgetPrivate
-{
-  guint32  widget_flags;
-};
 typedef struct _GtkWidgetPrivate GtkWidgetPrivate;
 
 #define GTK_WIDGET_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_WIDGET, GtkWidgetPrivate))

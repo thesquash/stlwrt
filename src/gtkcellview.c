@@ -49,16 +49,6 @@ struct _GtkCellViewCellInfo
   GDestroyNotify destroy;
 };
 
-struct _GtkCellViewPrivate
-{
-  GtkTreeModel *model;
-  GtkTreeRowReference *displayed_row;
-  GList *cell_list;
-  gint spacing;
-
-  GdkColor background;
-  gboolean background_set;
-};
 
 
 static void        gtk_cell_view_cell_layout_init         (GtkCellLayoutIface *iface);

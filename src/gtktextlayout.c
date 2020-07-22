@@ -96,13 +96,6 @@
 
 typedef struct _GtkTextLayoutPrivate GtkTextLayoutPrivate;
 
-struct _GtkTextLayoutPrivate
-{
-  /* Cache the line that the cursor is positioned on, as the keyboard
-     direction only influences the direction of the cursor line.
-  */
-  GtkTextLine *cursor_line;
-};
 
 static GtkTextLineData *gtk_text_layout_real_wrap (GtkTextLayout *layout,
                                                    GtkTextLine *line,

@@ -93,19 +93,6 @@ struct _Node {
 
 #define GTK_UI_MANAGER_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_UI_MANAGER, GtkUIManagerPrivate))
 
-struct _GtkUIManagerPrivate 
-{
-  GtkAccelGroup *accel_group;
-
-  GNode *root_node;
-  GList *action_groups;
-
-  guint last_merge_id;
-
-  guint update_tag;  
-
-  gboolean add_tearoffs;
-};
 
 #define NODE_INFO(node) ((Node *)node->data)
 

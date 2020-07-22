@@ -41,14 +41,6 @@
 
 #define GTK_MENU_TOOL_BUTTON_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GTK_TYPE_MENU_TOOL_BUTTON, GtkMenuToolButtonPrivate))
 
-struct _GtkMenuToolButtonPrivate
-{
-  GtkWidget *button;
-  GtkWidget *arrow;
-  GtkWidget *arrow_button;
-  GtkWidget *box;
-  GtkMenu   *menu;
-};
 
 static int  menu_deactivate_cb              (GtkMenuShell           *menu_shell,
 					     GtkMenuToolButton      *button);

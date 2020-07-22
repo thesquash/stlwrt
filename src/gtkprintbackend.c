@@ -46,15 +46,6 @@ static void gtk_print_backend_get_property (GObject      *object,
                                             GValue       *value,
                                             GParamSpec   *pspec);
 
-struct _GtkPrintBackendPrivate
-{
-  GHashTable *printers;
-  guint printer_list_requested : 1;
-  guint printer_list_done : 1;
-  GtkPrintBackendStatus status;
-  char **auth_info_required;
-  char **auth_info;
-};
 
 enum {
   PRINTER_LIST_CHANGED,

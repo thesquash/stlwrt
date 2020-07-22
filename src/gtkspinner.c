@@ -66,14 +66,6 @@ enum {
   PROP_ACTIVE
 };
 
-struct _GtkSpinnerPrivate
-{
-  guint current;
-  guint num_steps;
-  guint cycle_duration;
-  gboolean active;
-  guint timeout;
-};
 
 static void gtk_spinner_class_init     (GtkSpinnerClass *klass);
 static void gtk_spinner_init           (GtkSpinner      *spinner);

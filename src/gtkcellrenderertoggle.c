@@ -81,12 +81,6 @@ static guint toggle_cell_signals[LAST_SIGNAL] = { 0 };
 #define GTK_CELL_RENDERER_TOGGLE_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_CELL_RENDERER_TOGGLE, GtkCellRendererTogglePrivate))
 
 typedef struct _GtkCellRendererTogglePrivate GtkCellRendererTogglePrivate;
-struct _GtkCellRendererTogglePrivate
-{
-  gint indicator_size;
-
-  guint inconsistent : 1;
-};
 
 
 STLWRT_DEFINE_TYPE (GtkCellRendererToggle, gtk_cell_renderer_toggle, GTK_TYPE_CELL_RENDERER)

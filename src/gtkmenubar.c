@@ -49,11 +49,6 @@ enum {
 };
 
 typedef struct _GtkMenuBarPrivate GtkMenuBarPrivate;
-struct _GtkMenuBarPrivate
-{
-  GtkPackDirection pack_direction;
-  GtkPackDirection child_pack_direction;
-};
 
 #define GTK_MENU_BAR_GET_PRIVATE(o)  \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), GTK_TYPE_MENU_BAR, GtkMenuBarPrivate))

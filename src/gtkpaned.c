@@ -147,13 +147,6 @@ static GType    gtk_paned_child_type            (GtkContainer     *container);
 static void     gtk_paned_grab_notify           (GtkWidget        *widget,
 		                                 gboolean          was_grabbed);
 
-struct _GtkPanedPrivate
-{
-  GtkOrientation  orientation;
-  GtkWidget      *saved_focus;
-  GtkPaned       *first_paned;
-  guint32         grab_time;
-};
 
 
 STLWRT_DEFINE_ABSTRACT_TYPE_WITH_CODE (GtkPaned, gtk_paned, GTK_TYPE_CONTAINER,

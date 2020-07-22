@@ -65,11 +65,6 @@ struct _GtkScaleMark
   GtkPositionType  position;
 };
 
-struct _GtkScalePrivate
-{
-  PangoLayout *layout;
-  GSList      *marks;
-};
 
 enum {
   PROP_0,

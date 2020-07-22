@@ -38,10 +38,6 @@
 #define GTK_CELL_RENDERER_COMBO_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_CELL_RENDERER_COMBO, GtkCellRendererComboPrivate))
 
 typedef struct _GtkCellRendererComboPrivate GtkCellRendererComboPrivate;
-struct _GtkCellRendererComboPrivate
-{
-  GtkWidget *combo;
-};
 
 
 static void gtk_cell_renderer_combo_class_init (GtkCellRendererComboClass *klass);

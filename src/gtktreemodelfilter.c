@@ -82,41 +82,6 @@ struct _FilterLevel
 
 #define GTK_TREE_MODEL_FILTER_GET_PRIVATE(obj)  (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_TREE_MODEL_FILTER, GtkTreeModelFilterPrivate))
 
-struct _GtkTreeModelFilterPrivate
-{
-  gpointer root;
-  gint stamp;
-  guint child_flags;
-  GtkTreeModel *child_model;
-  gint zero_ref_count;
-
-  GtkTreePath *virtual_root;
-
-  GtkTreeModelFilterVisibleFunc visible_func;
-  gpointer visible_data;
-  GDestroyNotify visible_destroy;
-
-  gint modify_n_columns;
-  GType *modify_types;
-  GtkTreeModelFilterModifyFunc modify_func;
-  gpointer modify_data;
-  GDestroyNotify modify_destroy;
-
-  gint visible_column;
-
-  gboolean visible_method_set;
-  gboolean modify_func_set;
-
-  gboolean in_row_deleted;
-  gboolean virtual_root_deleted;
-
-  /* signal ids */
-  guint changed_id;
-  guint inserted_id;
-  guint has_child_toggled_id;
-  guint deleted_id;
-  guint reordered_id;
-};
 
 /* properties */
 enum

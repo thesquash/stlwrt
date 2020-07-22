@@ -133,10 +133,6 @@ struct _GtkRcContext
 
 typedef struct _GtkRcStylePrivate GtkRcStylePrivate;
 
-struct _GtkRcStylePrivate
-{
-  GSList *color_hashes;
-};
 
 static GtkRcContext *gtk_rc_context_get              (GtkSettings     *settings);
 

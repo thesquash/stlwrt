@@ -29,12 +29,6 @@
 #include <gtktypebuiltins.h>
 
 
-struct _GtkRecentChooserWidgetPrivate
-{
-  GtkRecentManager *manager;
-  
-  GtkWidget *chooser;
-};
 
 #define GTK_RECENT_CHOOSER_WIDGET_GET_PRIVATE(obj)	(GTK_RECENT_CHOOSER_WIDGET (obj)->priv)
 

@@ -63,13 +63,6 @@ enum {
 
 #define GTK_ALIGNMENT_GET_PRIVATE(o)  (G_TYPE_INSTANCE_GET_PRIVATE ((o), GTK_TYPE_ALIGNMENT, GtkAlignmentPrivate))
 
-struct _GtkAlignmentPrivate
-{
-  guint padding_top;
-  guint padding_bottom;
-  guint padding_left;
-  guint padding_right;
-};
 
 static void gtk_alignment_size_request  (GtkWidget         *widget,
 					 GtkRequisition    *requisition);

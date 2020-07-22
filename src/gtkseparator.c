@@ -44,10 +44,6 @@ enum {
 
 typedef struct _GtkSeparatorPrivate GtkSeparatorPrivate;
 
-struct _GtkSeparatorPrivate
-{
-  GtkOrientation orientation;
-};
 
 #define GTK_SEPARATOR_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_SEPARATOR, GtkSeparatorPrivate))
 

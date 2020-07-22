@@ -88,26 +88,6 @@ enum
 
 #define GET_PRIVATE(obj)        (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_SCALE_BUTTON, GtkScaleButtonPrivate))
 
-struct _GtkScaleButtonPrivate
-{
-  GtkWidget *dock;
-  GtkWidget *box;
-  GtkWidget *scale;
-  GtkWidget *image;
-
-  GtkIconSize size;
-  GtkOrientation orientation;
-
-  guint click_id;
-  gint click_timeout;
-  guint timeout : 1;
-  gdouble direction;
-  guint32 pop_time;
-
-  gchar **icon_list;
-
-  GtkAdjustment *adjustment; /* needed because it must be settable in init() */
-};
 
 static GObject* gtk_scale_button_constructor    (GType                  type,
                                                  guint                  n_construct_properties,

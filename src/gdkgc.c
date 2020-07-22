@@ -37,29 +37,6 @@ static void gdk_gc_finalize   (GObject      *object);
 
 typedef struct _GdkGCPrivate GdkGCPrivate;
 
-struct _GdkGCPrivate
-{
-  GdkRegion *clip_region;
-
-  guint32 region_tag_applied;
-  int region_tag_offset_x;
-  int region_tag_offset_y;
-
-  GdkRegion *old_clip_region;
-  GdkPixmap *old_clip_mask;
-
-  GdkBitmap *stipple;
-  GdkPixmap *tile;
-
-  GdkPixmap *clip_mask;
-
-  guint32 fg_pixel;
-  guint32 bg_pixel;
-
-  guint subwindow_mode : 1;
-  guint fill : 2;
-  guint exposures : 2;
-};
 
 #define GDK_GC_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GDK_TYPE_GC, GdkGCPrivate))
 

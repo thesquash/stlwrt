@@ -76,41 +76,6 @@ typedef enum
 } IconSuffix;
 
 
-struct _GtkIconThemePrivate
-{
-  guint custom_theme        : 1;
-  guint is_screen_singleton : 1;
-  guint pixbuf_supports_svg : 1;
-  guint themes_valid        : 1;
-  guint check_reload        : 1;
-  guint loading_themes      : 1;
-  
-  char *current_theme;
-  char *fallback_theme;
-  char **search_path;
-  int search_path_len;
-
-  /* A list of all the themes needed to look up icons.
-   * In search order, without duplicates
-   */
-  GList *themes;
-  GHashTable *unthemed_icons;
-  
-  /* Note: The keys of this hashtable are owned by the
-   * themedir and unthemed hashtables.
-   */
-  GHashTable *all_icons;
-
-  /* GdkScreen for the icon theme (may be NULL)
-   */
-  GdkScreen *screen;
-  
-  /* time when we last stat:ed for theme changes */
-  long last_stat_time;
-  GList *dir_mtimes;
-
-  gulong reset_styles_idle;
-};
 
 struct _GtkIconInfo
 {

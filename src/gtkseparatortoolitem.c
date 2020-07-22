@@ -58,10 +58,6 @@ static gint     get_space_size                            (GtkToolItem          
 
 #define GTK_SEPARATOR_TOOL_ITEM_GET_PRIVATE(obj)(G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_SEPARATOR_TOOL_ITEM, GtkSeparatorToolItemPrivate))
 
-struct _GtkSeparatorToolItemPrivate
-{
-  guint draw : 1;
-};
 
 G_DEFINE_TYPE (GtkSeparatorToolItem, gtk_separator_tool_item, GTK_TYPE_TOOL_ITEM)
 

@@ -129,14 +129,6 @@
 
 typedef struct _GtkImagePrivate GtkImagePrivate;
 
-struct _GtkImagePrivate
-{
-  /* Only used with GTK_IMAGE_ANIMATION, GTK_IMAGE_PIXBUF */
-  gchar *filename;
-
-  gint pixel_size;
-  guint need_calc_size : 1;
-};
 
 #define GTK_IMAGE_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_IMAGE, GtkImagePrivate))
 

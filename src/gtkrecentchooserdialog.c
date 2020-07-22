@@ -32,12 +32,6 @@
 
 #include <stdarg.h>
 
-struct _GtkRecentChooserDialogPrivate
-{
-  GtkRecentManager *manager;
-  
-  GtkWidget *chooser;
-};
 
 #define GTK_RECENT_CHOOSER_DIALOG_GET_PRIVATE(obj)	(GTK_RECENT_CHOOSER_DIALOG (obj)->priv)
 

@@ -78,29 +78,6 @@ enum
 
 typedef struct _GtkToolItemGroupChild GtkToolItemGroupChild;
 
-struct _GtkToolItemGroupPrivate
-{
-  GtkWidget         *header;
-  GtkWidget         *label_widget;
-
-  GList             *children;
-
-  gboolean           animation;
-  gint64             animation_start;
-  GSource           *animation_timeout;
-  GtkExpanderStyle   expander_style;
-  gint               expander_size;
-  gint               header_spacing;
-  PangoEllipsizeMode ellipsize;
-
-  gulong             focus_set_id;
-  GtkWidget         *toplevel;
-
-  GtkSettings       *settings;
-  gulong             settings_connection;
-
-  guint              collapsed : 1;
-};
 
 struct _GtkToolItemGroupChild
 {

@@ -56,18 +56,6 @@
 
 #define GTK_COLOR_BUTTON_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_COLOR_BUTTON, GtkColorButtonPrivate))
 
-struct _GtkColorButtonPrivate 
-{
-  GtkWidget *draw_area; /* Widget where we draw the color sample */
-  GtkWidget *cs_dialog; /* Color selection dialog */
-  
-  gchar *title;         /* Title for the color selection window */
-  
-  GdkColor color;
-  guint16 alpha;
-  
-  guint use_alpha : 1;  /* Use alpha or not */
-};
 
 /* Properties */
 enum 

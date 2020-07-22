@@ -95,40 +95,6 @@
 
 #define GTK_ACTION_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_ACTION, GtkActionPrivate))
 
-struct _GtkActionPrivate 
-{
-  const gchar *name; /* interned */
-  gchar *label;
-  gchar *short_label;
-  gchar *tooltip;
-  gchar *stock_id; /* stock icon */
-  gchar *icon_name; /* themed icon */
-  GIcon *gicon;
-
-  guint sensitive          : 1;
-  guint visible            : 1;
-  guint label_set          : 1; /* these two used so we can set label */
-  guint short_label_set    : 1; /* based on stock id */
-  guint visible_horizontal : 1;
-  guint visible_vertical   : 1;
-  guint is_important       : 1;
-  guint hide_if_empty      : 1;
-  guint visible_overflown  : 1;
-  guint always_show_image  : 1;
-  guint recursion_guard    : 1;
-  guint activate_blocked   : 1;
-
-  /* accelerator */
-  guint          accel_count;
-  GtkAccelGroup *accel_group;
-  GClosure      *accel_closure;
-  GQuark         accel_quark;
-
-  GtkActionGroup *action_group;
-
-  /* list of proxy widgets */
-  GSList *proxies;
-};
 
 enum 
 {

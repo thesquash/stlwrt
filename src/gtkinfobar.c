@@ -134,13 +134,6 @@ enum
   PROP_MESSAGE_TYPE
 };
 
-struct _GtkInfoBarPrivate
-{
-  GtkWidget *content_area;
-  GtkWidget *action_area;
-
-  GtkMessageType message_type;
-};
 
 typedef struct _ResponseData ResponseData;
 

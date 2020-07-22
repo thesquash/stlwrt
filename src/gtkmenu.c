@@ -71,40 +71,6 @@ struct _GtkMenuAttachData
   GtkMenuDetachFunc detacher;
 };
 
-struct _GtkMenuPrivate 
-{
-  gint x;
-  gint y;
-  gboolean initially_pushed_in;
-
-  /* info used for the table */
-  guint *heights;
-  gint heights_length;
-
-  gint monitor_num;
-
-  /* Cached layout information */
-  gint n_rows;
-  gint n_columns;
-
-  gchar *title;
-
-  /* Arrow states */
-  GtkStateType lower_arrow_state;
-  GtkStateType upper_arrow_state;
-
-  /* navigation region */
-  int navigation_x;
-  int navigation_y;
-  int navigation_width;
-  int navigation_height;
-
-  guint have_layout           : 1;
-  guint seen_item_enter       : 1;
-  guint have_position         : 1;
-  guint ignore_button_release : 1;
-  guint no_toggle_size        : 1;
-};
 
 typedef struct
 {

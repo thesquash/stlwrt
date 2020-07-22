@@ -47,19 +47,6 @@ enum
   PROP_ORIENTATION
 }; 
 
-struct _GtkCellRendererProgressPrivate
-{
-  gint value;
-  gchar *text;
-  gchar *label;
-  gint min_h;
-  gint min_w;
-  gint pulse;
-  gint offset;
-  gfloat text_xalign;
-  gfloat text_yalign;
-  GtkProgressBarOrientation orientation;
-};
 
 static void gtk_cell_renderer_progress_finalize     (GObject                 *object);
 static void gtk_cell_renderer_progress_get_property (GObject                 *object,

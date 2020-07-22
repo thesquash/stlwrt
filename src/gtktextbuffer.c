@@ -50,16 +50,6 @@
 
 typedef struct _GtkTextBufferPrivate GtkTextBufferPrivate;
 
-struct _GtkTextBufferPrivate
-{
-  GtkTargetList  *copy_target_list;
-  GtkTargetEntry *copy_target_entries;
-  gint            n_copy_target_entries;
-
-  GtkTargetList  *paste_target_list;
-  GtkTargetEntry *paste_target_entries;
-  gint            n_paste_target_entries;
-};
 
 
 typedef struct _ClipboardRequest ClipboardRequest;

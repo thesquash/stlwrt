@@ -107,13 +107,6 @@ typedef struct _GtkTextViewPrivate GtkTextViewPrivate;
 
 #define GTK_TEXT_VIEW_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_TEXT_VIEW, GtkTextViewPrivate))
 
-struct _GtkTextViewPrivate 
-{
-  guint blink_time;  /* time in msec the cursor has blinked since last user event */
-  guint im_spot_idle;
-  gchar *im_module;
-  guint scroll_after_paste : 1;
-};
 
 
 struct _GtkTextPendingScroll

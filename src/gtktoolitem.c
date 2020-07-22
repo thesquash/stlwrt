@@ -98,26 +98,6 @@ enum {
 
 #define GTK_TOOL_ITEM_GET_PRIVATE(o)  (G_TYPE_INSTANCE_GET_PRIVATE ((o), GTK_TYPE_TOOL_ITEM, GtkToolItemPrivate))
 
-struct _GtkToolItemPrivate
-{
-  gchar *tip_text;
-  gchar *tip_private;
-
-  guint visible_horizontal : 1;
-  guint visible_vertical : 1;
-  guint homogeneous : 1;
-  guint expand : 1;
-  guint use_drag_window : 1;
-  guint is_important : 1;
-
-  GdkWindow *drag_window;
-  
-  gchar *menu_item_id;
-  GtkWidget *menu_item;
-
-  GtkAction *action;
-  gboolean   use_action_appearance;
-};
   
 static void gtk_tool_item_finalize     (GObject         *object);
 static void gtk_tool_item_dispose      (GObject         *object);

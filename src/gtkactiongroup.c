@@ -50,17 +50,6 @@
 
 #define GTK_ACTION_GROUP_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_ACTION_GROUP, GtkActionGroupPrivate))
 
-struct _GtkActionGroupPrivate 
-{
-  gchar           *name;
-  gboolean	   sensitive;
-  gboolean	   visible;
-  GHashTable      *actions;
-
-  GtkTranslateFunc translate_func;
-  gpointer         translate_data;
-  GDestroyNotify   translate_notify;
-};
 
 enum 
 {

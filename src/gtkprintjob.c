@@ -46,24 +46,6 @@
 #define O_BINARY 0
 #endif
 
-struct _GtkPrintJobPrivate
-{
-  gchar *title;
-
-  GIOChannel *spool_io;
-  cairo_surface_t *surface;
-
-  GtkPrintStatus status;
-  GtkPrintBackend *backend;  
-  GtkPrinter *printer;
-  GtkPrintSettings *settings;
-  GtkPageSetup *page_setup;
-
-  guint printer_set : 1;
-  guint page_setup_set : 1;
-  guint settings_set  : 1;
-  guint track_print_status : 1;
-};
 
 
 #define GTK_PRINT_JOB_GET_PRIVATE(o)  \

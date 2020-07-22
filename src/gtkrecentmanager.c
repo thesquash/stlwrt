@@ -93,22 +93,6 @@ struct _GtkRecentInfo
 
 #define GTK_RECENT_MANAGER_GET_PRIVATE(obj)     (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_RECENT_MANAGER, GtkRecentManagerPrivate))
 
-struct _GtkRecentManagerPrivate
-{
-  gchar *filename;
-
-  guint is_dirty : 1;
-  
-  gint limit;
-  gint size;
-
-  GBookmarkFile *recent_items;
-
-  GFileMonitor *monitor;
-
-  guint changed_timeout;
-  guint changed_age;
-};
 
 enum
 {
@@ -503,7 +487,8 @@ gtk_recent_manager_monitor_changed (GFileMonitor      *monitor,
  * Retrieves the default storage file
  *
  * The default file is under XDG_DATA_HOME/recently-used.xbel but we also
- * check if the old $HOME/.recently-used.xbel is still there, and rename it
+ * check if the old 
+HOME/.recently-used.xbel is still there, and rename it
  * if needed.
  *
  * Return value: a newly allocated string with the new file

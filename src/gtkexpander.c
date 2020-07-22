@@ -56,23 +56,6 @@ enum
   PROP_LABEL_FILL
 };
 
-struct _GtkExpanderPrivate
-{
-  GtkWidget        *label_widget;
-  GdkWindow        *event_window;
-  gint              spacing;
-
-  GtkExpanderStyle  expander_style;
-  guint             animation_timeout;
-  guint             expand_timer;
-
-  guint             expanded : 1;
-  guint             use_underline : 1;
-  guint             use_markup : 1; 
-  guint             button_down : 1;
-  guint             prelight : 1;
-  guint             label_fill : 1;
-};
 
 static void gtk_expander_set_property (GObject          *object,
 				       guint             prop_id,

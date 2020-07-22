@@ -36,11 +36,6 @@
 
 typedef struct _GtkHandleBoxPrivate GtkHandleBoxPrivate;
 
-struct _GtkHandleBoxPrivate
-{
-  gint orig_x;
-  gint orig_y;
-};
 
 enum {
   PROP_0,

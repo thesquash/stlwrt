@@ -114,47 +114,6 @@ enum {
 
 typedef struct _ColorSelectionPrivate ColorSelectionPrivate;
 
-struct _ColorSelectionPrivate
-{
-  guint has_opacity : 1;
-  guint has_palette : 1;
-  guint changing : 1;
-  guint default_set : 1;
-  guint default_alpha_set : 1;
-  guint has_grab : 1;
-  
-  gdouble color[COLORSEL_NUM_CHANNELS];
-  gdouble old_color[COLORSEL_NUM_CHANNELS];
-  
-  GtkWidget *triangle_colorsel;
-  GtkWidget *hue_spinbutton;
-  GtkWidget *sat_spinbutton;
-  GtkWidget *val_spinbutton;
-  GtkWidget *red_spinbutton;
-  GtkWidget *green_spinbutton;
-  GtkWidget *blue_spinbutton;
-  GtkWidget *opacity_slider;
-  GtkWidget *opacity_label;
-  GtkWidget *opacity_entry;
-  GtkWidget *palette_frame;
-  GtkWidget *hex_entry;
-  
-  /* The Palette code */
-  GtkWidget *custom_palette [GTK_CUSTOM_PALETTE_WIDTH][GTK_CUSTOM_PALETTE_HEIGHT];
-  
-  /* The color_sample stuff */
-  GtkWidget *sample_area;
-  GtkWidget *old_sample;
-  GtkWidget *cur_sample;
-  GtkWidget *colorsel;
-
-  /* Window for grabbing on */
-  GtkWidget *dropper_grab_widget;
-  guint32    grab_time;
-
-  /* Connection to settings */
-  gulong settings_connection;
-};
 
 
 static void gtk_color_selection_finalize        (GObject		 *object);

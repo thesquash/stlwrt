@@ -129,29 +129,6 @@ static guint text_cell_renderer_signals [LAST_SIGNAL];
 #define GTK_CELL_RENDERER_TEXT_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_CELL_RENDERER_TEXT, GtkCellRendererTextPrivate))
 
 typedef struct _GtkCellRendererTextPrivate GtkCellRendererTextPrivate;
-struct _GtkCellRendererTextPrivate
-{
-  guint single_paragraph : 1;
-  guint language_set : 1;
-  guint markup_set : 1;
-  guint ellipsize_set : 1;
-  guint align_set : 1;
-  
-  gulong focus_out_id;
-  PangoLanguage *language;
-  PangoEllipsizeMode ellipsize;
-  PangoWrapMode wrap_mode;
-  PangoAlignment align;
-  
-  gulong populate_popup_id;
-  gulong entry_menu_popdown_timeout;
-  gboolean in_entry_menu;
-  
-  gint width_chars;
-  gint wrap_width;
-  
-  GtkWidget *entry;
-};
 
 STLWRT_DEFINE_TYPE (GtkCellRendererText, gtk_cell_renderer_text, GTK_TYPE_CELL_RENDERER)
 

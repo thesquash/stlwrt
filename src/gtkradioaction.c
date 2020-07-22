@@ -43,11 +43,6 @@
 
 #define GTK_RADIO_ACTION_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_RADIO_ACTION, GtkRadioActionPrivate))
 
-struct _GtkRadioActionPrivate 
-{
-  GSList *group;
-  gint    value;
-};
 
 enum 
 {

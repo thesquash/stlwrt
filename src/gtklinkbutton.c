@@ -46,14 +46,6 @@
 
 
 
-struct _GtkLinkButtonPrivate
-{
-  gchar *uri;
-
-  gboolean visited;
-
-  GtkWidget *popup_menu;
-};
 
 enum
 {

@@ -84,33 +84,7 @@ typedef struct GtkFileSystemPrivate GtkFileSystemPrivate;
 typedef struct GtkFolderPrivate GtkFolderPrivate;
 typedef struct AsyncFuncData AsyncFuncData;
 
-struct GtkFileSystemPrivate
-{
-  GVolumeMonitor *volume_monitor;
 
-  /* This list contains elements that can be
-   * of type GDrive, GVolume and GMount
-   */
-  GSList *volumes;
-
-  /* This list contains GtkFileSystemBookmark structs */
-  GSList *bookmarks;
-  GFile *bookmarks_file;
-
-  GFileMonitor *bookmarks_monitor;
-};
-
-struct GtkFolderPrivate
-{
-  GFile *folder_file;
-  GHashTable *children;
-  GFileMonitor *directory_monitor;
-  GFileEnumerator *enumerator;
-  GCancellable *cancellable;
-  gchar *attributes;
-
-  guint finished_loading : 1;
-};
 
 struct AsyncFuncData
 {

@@ -50,10 +50,6 @@ enum {
 
 #define GTK_TOGGLE_TOOL_BUTTON_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_TOGGLE_TOOL_BUTTON, GtkToggleToolButtonPrivate))
 
-struct _GtkToggleToolButtonPrivate
-{
-  guint active : 1;
-};
   
 
 static void     gtk_toggle_tool_button_set_property        (GObject      *object,

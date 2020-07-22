@@ -58,11 +58,6 @@ typedef enum
   GTK_SETTINGS_SOURCE_APPLICATION
 } GtkSettingsSource;
 
-struct _GtkSettingsValuePrivate
-{
-  GtkSettingsValue public;
-  GtkSettingsSource source;
-};
 
 struct _GtkSettingsPropertyValue
 {

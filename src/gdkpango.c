@@ -42,27 +42,6 @@
  */
 #define MAX_RENDER_PART  PANGO_RENDER_PART_STRIKETHROUGH
 
-struct _GdkPangoRendererPrivate
-{
-  GdkScreen *screen;
-
-  /* GdkPangoRenderer specific state */
-  PangoColor override_color[MAX_RENDER_PART + 1];
-  gboolean override_color_set[MAX_RENDER_PART + 1];
-  
-  GdkBitmap *stipple[MAX_RENDER_PART + 1];
-  PangoColor emboss_color;
-  gboolean embossed;
-
-  cairo_t *cr;
-  PangoRenderPart last_part;
-
-  /* Current target */
-  GdkDrawable *drawable;
-  GdkGC *base_gc;
-
-  gboolean gc_changed;
-};
 
 static PangoAttrType gdk_pango_attr_stipple_type;
 static PangoAttrType gdk_pango_attr_embossed_type;

@@ -64,9 +64,10 @@ typedef enum
  *   to be in position (according to the "mask"). "prec" refers to how
  *   much precision the pixel value contains for a particular primary.
  */
-struct _GdkVisual
+/********************************************************************/
+struct _GdkVisualInstanceProps
 {
-  GObject parent_instance;
+
   
   GdkVisualType  (type);
   gint  (depth);
@@ -86,6 +87,30 @@ struct _GdkVisual
   gint  (blue_shift);
   gint  (blue_prec);
 };
+
+struct _GdkVisualFat
+{
+  GObjectFat   parent_instance;
+
+  struct _GdkVisualInstanceProps instance_properties;
+};
+
+struct _GdkVisualThin
+{
+  GObjectThin  parent_instance;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GdkVisualFat   fat_instance;
+  struct _GdkVisualThin  thin_instance;
+}   GdkVisual;
+/********************************************************************/
+
+
 
 GType         _T2_gdk_visual_get_type            (void) G_GNUC_CONST;
 GType         _3T_gdk_visual_get_type            (void) G_GNUC_CONST;

@@ -38,12 +38,37 @@ typedef struct _GtkIconFactoryClass GtkIconFactoryClass;
 #define GTK_TYPE_ICON_SET                  (gtk_icon_set_get_type ())
 #define GTK_TYPE_ICON_SOURCE               (gtk_icon_source_get_type ())
 
-struct _GtkIconFactory
+/********************************************************************/
+struct _GtkIconFactoryInstanceProps
 {
-  GObject parent_instance;
+
 
   GHashTable * (icons);
 };
+
+struct _GtkIconFactoryFat
+{
+  GObjectFat   parent_instance;
+
+  struct _GtkIconFactoryInstanceProps instance_properties;
+};
+
+struct _GtkIconFactoryThin
+{
+  GObjectThin  parent_instance;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkIconFactoryFat   fat_instance;
+  struct _GtkIconFactoryThin  thin_instance;
+}   GtkIconFactory;
+/********************************************************************/
+
+
 
 struct _GtkIconFactoryClass
 {

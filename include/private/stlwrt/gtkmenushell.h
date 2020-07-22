@@ -53,9 +53,10 @@ struct _GtkMenuShellPrivate
   guint in_unselectable_item : 1;
 };
 
-struct _GtkMenuShell
+/********************************************************************/
+struct _GtkMenuShellInstanceProps
 {
-  GtkContainer container;
+
 
   GList * (children);
   GtkWidget * (active_menu_item);
@@ -72,6 +73,30 @@ struct _GtkMenuShell
   guint  (ignore_enter) : 1;
   guint  (keyboard_mode) : 1;
 };
+
+struct _GtkMenuShellFat
+{
+  GtkContainerFat   container;
+
+  struct _GtkMenuShellInstanceProps instance_properties;
+};
+
+struct _GtkMenuShellThin
+{
+  GtkContainerThin  container;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkMenuShellFat   fat_instance;
+  struct _GtkMenuShellThin  thin_instance;
+}   GtkMenuShell;
+/********************************************************************/
+
+
 
 struct _GtkMenuShellClass
 {

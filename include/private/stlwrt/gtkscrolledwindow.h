@@ -43,9 +43,10 @@ typedef struct _GtkScrolledWindow       GtkScrolledWindowThin;
 
 typedef struct _GtkScrolledWindowClass  GtkScrolledWindowClass;
 
-struct _GtkScrolledWindow
+/********************************************************************/
+struct _GtkScrolledWindowInstanceProps
 {
-  GtkBin container;
+
 
   /*< public >*/
   GtkWidget * (hscrollbar);
@@ -61,6 +62,30 @@ struct _GtkScrolledWindow
 
   guint16  (shadow_type);
 };
+
+struct _GtkScrolledWindowFat
+{
+  GtkBinFat   container;
+
+  struct _GtkScrolledWindowInstanceProps instance_properties;
+};
+
+struct _GtkScrolledWindowThin
+{
+  GtkBinThin  container;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkScrolledWindowFat   fat_instance;
+  struct _GtkScrolledWindowThin  thin_instance;
+}   GtkScrolledWindow;
+/********************************************************************/
+
+
 
 struct _GtkScrolledWindowClass
 {

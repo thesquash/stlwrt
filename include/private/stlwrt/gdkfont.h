@@ -40,12 +40,37 @@ typedef enum
   GDK_FONT_FONTSET
 } GdkFontType;
 
-struct _GdkFont
+/********************************************************************/
+struct _GdkFontInstanceProps
 {
-  GdkFontType type;
+
   gint ascent;
   gint descent;
 };
+
+struct _GdkFontFat
+{
+  GdkFontTypeFat   type;
+
+  struct _GdkFontInstanceProps instance_properties;
+};
+
+struct _GdkFontThin
+{
+  GdkFontTypeThin  type;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GdkFontFat   fat_instance;
+  struct _GdkFontThin  thin_instance;
+}   GdkFont;
+/********************************************************************/
+
+
 
 GType    _T2_gdk_font_get_type  (void) G_GNUC_CONST;
 GType    _3T_gdk_font_get_type  (void) G_GNUC_CONST;

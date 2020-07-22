@@ -77,9 +77,10 @@ typedef struct _GtkTextTag GtkTextTagThin;
 
 typedef struct _GtkTextTagClass GtkTextTagClass;
 
-struct _GtkTextTag
+/********************************************************************/
+struct _GtkTextTagInstanceProps
 {
-  GObject parent_instance;
+
 
   GtkTextTagTable * (table);
 
@@ -132,6 +133,30 @@ struct _GtkTextTag
 
   guint  (pad1) : 1;
 };
+
+struct _GtkTextTagFat
+{
+  GObjectFat   parent_instance;
+
+  struct _GtkTextTagInstanceProps instance_properties;
+};
+
+struct _GtkTextTagThin
+{
+  GObjectThin  parent_instance;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkTextTagFat   fat_instance;
+  struct _GtkTextTagThin  thin_instance;
+}   GtkTextTag;
+/********************************************************************/
+
+
 
 struct _GtkTextTagClass
 {

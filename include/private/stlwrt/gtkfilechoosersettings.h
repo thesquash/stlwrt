@@ -43,9 +43,10 @@ typedef struct _GtkFileChooserSettings GtkFileChooserSettingsThin;
 
 typedef struct _GtkFileChooserSettingsClass GtkFileChooserSettingsClass;
 
-struct _GtkFileChooserSettings
+/********************************************************************/
+struct _GtkFileChooserSettingsInstanceProps
 {
-  GObject object;
+
 
   LocationMode location_mode;
 
@@ -62,6 +63,30 @@ struct _GtkFileChooserSettings
   guint show_hidden      : 1;
   guint show_size_column : 1;
 };
+
+struct _GtkFileChooserSettingsFat
+{
+  GObjectFat   object;
+
+  struct _GtkFileChooserSettingsInstanceProps instance_properties;
+};
+
+struct _GtkFileChooserSettingsThin
+{
+  GObjectThin  object;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkFileChooserSettingsFat   fat_instance;
+  struct _GtkFileChooserSettingsThin  thin_instance;
+}   GtkFileChooserSettings;
+/********************************************************************/
+
+
 
 struct _GtkFileChooserSettingsClass
 {

@@ -55,9 +55,10 @@ struct _GtkButtonPrivate
   GtkAction      *action;
 };
 
-struct _GtkButton
+/********************************************************************/
+struct _GtkButtonInstanceProps
 {
-  GtkBin bin;
+
 
   GdkWindow * (event_window);
 
@@ -75,6 +76,30 @@ struct _GtkButton
   guint  (depress_on_activate) : 1;
   guint  (focus_on_click) : 1;
 };
+
+struct _GtkButtonFat
+{
+  GtkBinFat   bin;
+
+  struct _GtkButtonInstanceProps instance_properties;
+};
+
+struct _GtkButtonThin
+{
+  GtkBinThin  bin;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkButtonFat   fat_instance;
+  struct _GtkButtonThin  thin_instance;
+}   GtkButton;
+/********************************************************************/
+
+
 
 struct _GtkButtonClass
 {

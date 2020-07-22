@@ -44,9 +44,10 @@ typedef struct _GtkRange        GtkRangeThin;
 
 typedef struct _GtkRangeClass   GtkRangeClass;
 
-struct _GtkRange
+/********************************************************************/
+struct _GtkRangeInstanceProps
 {
-  GtkWidget widget;
+
 
   GtkAdjustment * (adjustment);
   GtkUpdateType  (update_policy);
@@ -92,6 +93,30 @@ struct _GtkRange
   guint  (update_timeout_id);
   GdkWindow * (event_window);
 };
+
+struct _GtkRangeFat
+{
+  GtkWidgetFat   widget;
+
+  struct _GtkRangeInstanceProps instance_properties;
+};
+
+struct _GtkRangeThin
+{
+  GtkWidgetThin  widget;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkRangeFat   fat_instance;
+  struct _GtkRangeThin  thin_instance;
+}   GtkRange;
+/********************************************************************/
+
+
 
 struct _GtkRangeClass
 {

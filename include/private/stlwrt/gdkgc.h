@@ -148,9 +148,10 @@ typedef enum
   GDK_GC_JOIN_STYLE    = 1 << 17
 } GdkGCValuesMask;
 
-struct _GdkGCValues
+/********************************************************************/
+struct _GdkGCValuesInstanceProps
 {
-  GdkColor	    foreground;
+
   GdkColor	    background;
   GdkFont	   *font;
   GdkFunction	    function;
@@ -169,6 +170,30 @@ struct _GdkGCValues
   GdkCapStyle	    cap_style;
   GdkJoinStyle	    join_style;
 };
+
+struct _GdkGCValuesFat
+{
+  GdkColorFat  	    foreground;
+
+  struct _GdkGCValuesInstanceProps instance_properties;
+};
+
+struct _GdkGCValuesThin
+{
+  GdkColorThin 	    foreground;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GdkGCValuesFat   fat_instance;
+  struct _GdkGCValuesThin  thin_instance;
+}   GdkGCValues;
+/********************************************************************/
+
+
 
 #define GDK_TYPE_GC              (gdk_gc_get_type ())
 #define GDK_GC(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_GC, GdkGC))
@@ -202,9 +227,10 @@ struct _GdkGCPrivate
   guint exposures : 2;
 };
 
-struct _GdkGC
+/********************************************************************/
+struct _GdkGCInstanceProps
 {
-  GObject parent_instance;
+
 
   gint  (clip_x_origin);
   gint  (clip_y_origin);
@@ -213,6 +239,30 @@ struct _GdkGC
 
   GdkColormap * (colormap);
 };
+
+struct _GdkGCFat
+{
+  GObjectFat   parent_instance;
+
+  struct _GdkGCInstanceProps instance_properties;
+};
+
+struct _GdkGCThin
+{
+  GObjectThin  parent_instance;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GdkGCFat   fat_instance;
+  struct _GdkGCThin  thin_instance;
+}   GdkGC;
+/********************************************************************/
+
+
 
 struct _GdkGCClass 
 {

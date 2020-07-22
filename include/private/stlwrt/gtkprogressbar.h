@@ -53,9 +53,10 @@ typedef enum
   GTK_PROGRESS_TOP_TO_BOTTOM
 } GtkProgressBarOrientation;
 
-struct _GtkProgressBar
+/********************************************************************/
+struct _GtkProgressBarInstanceProps
 {
-  GtkProgress progress;
+
 
   GtkProgressBarStyle        (bar_style);
   GtkProgressBarOrientation  (orientation);
@@ -73,6 +74,30 @@ struct _GtkProgressBar
   guint  (ellipsize) : 3;
   guint  (dirty) : 1;
 };
+
+struct _GtkProgressBarFat
+{
+  GtkProgressFat   progress;
+
+  struct _GtkProgressBarInstanceProps instance_properties;
+};
+
+struct _GtkProgressBarThin
+{
+  GtkProgressThin  progress;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkProgressBarFat   fat_instance;
+  struct _GtkProgressBarThin  thin_instance;
+}   GtkProgressBar;
+/********************************************************************/
+
+
 
 struct _GtkProgressBarClass
 {

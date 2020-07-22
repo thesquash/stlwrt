@@ -44,15 +44,40 @@ typedef enum {
 typedef gboolean (*GtkFileFilterFunc) (const GtkFileFilterInfo *filter_info,
 				       gpointer                 data);
 
-struct _GtkFileFilterInfo
+/********************************************************************/
+struct _GtkFileFilterInfoInstanceProps
 {
-  GtkFileFilterFlags contains;
+
 
   const gchar *filename;
   const gchar *uri;
   const gchar *display_name;
   const gchar *mime_type;
 };
+
+struct _GtkFileFilterInfoFat
+{
+  GtkFileFilterFlagsFat   contains;
+
+  struct _GtkFileFilterInfoInstanceProps instance_properties;
+};
+
+struct _GtkFileFilterInfoThin
+{
+  GtkFileFilterFlagsThin  contains;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkFileFilterInfoFat   fat_instance;
+  struct _GtkFileFilterInfoThin  thin_instance;
+}   GtkFileFilterInfo;
+/********************************************************************/
+
+
 
 GType _T2_gtk_file_filter_get_type (void) G_GNUC_CONST;
 GType _3T_gtk_file_filter_get_type (void) G_GNUC_CONST;

@@ -71,9 +71,10 @@ struct _GtkWindowPrivate
   gchar *startup_id;
 };
 
-struct _GtkWindow
+/********************************************************************/
+struct _GtkWindowInstanceProps
 {
-  GtkBin bin;
+
 
   gchar * (title);
   gchar * (wmclass_name);
@@ -134,6 +135,30 @@ struct _GtkWindow
   GdkScreen      * (screen);
 };
 
+struct _GtkWindowFat
+{
+  GtkBinFat   bin;
+
+  struct _GtkWindowInstanceProps instance_properties;
+};
+
+struct _GtkWindowThin
+{
+  GtkBinThin  bin;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkWindowFat   fat_instance;
+  struct _GtkWindowThin  thin_instance;
+}   GtkWindow;
+/********************************************************************/
+
+
+
 struct _GtkWindowClass
 {
   GtkBinClass parent_class;
@@ -171,12 +196,37 @@ struct _GtkWindowClass
 #define GTK_IS_WINDOW_GROUP_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_WINDOW_GROUP))
 #define GTK_WINDOW_GROUP_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_WINDOW_GROUP, GtkWindowGroupClass))
 
-struct _GtkWindowGroup
+/********************************************************************/
+struct _GtkWindowGroupInstanceProps
 {
-  GObject parent_instance;
+
 
   GSList * (grabs);
 };
+
+struct _GtkWindowGroupFat
+{
+  GObjectFat   parent_instance;
+
+  struct _GtkWindowGroupInstanceProps instance_properties;
+};
+
+struct _GtkWindowGroupThin
+{
+  GObjectThin  parent_instance;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkWindowGroupFat   fat_instance;
+  struct _GtkWindowGroupThin  thin_instance;
+}   GtkWindowGroup;
+/********************************************************************/
+
+
 
 struct _GtkWindowGroupClass
 {

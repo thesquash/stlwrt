@@ -40,9 +40,10 @@ typedef struct _GtkFrame       GtkFrameThin;
 
 typedef struct _GtkFrameClass  GtkFrameClass;
 
-struct _GtkFrame
+/********************************************************************/
+struct _GtkFrameInstanceProps
 {
-  GtkBin bin;
+
 
   GtkWidget * (label_widget);
   gint16  (shadow_type);
@@ -51,6 +52,30 @@ struct _GtkFrame
 
   GtkAllocation  (child_allocation);
 };
+
+struct _GtkFrameFat
+{
+  GtkBinFat   bin;
+
+  struct _GtkFrameInstanceProps instance_properties;
+};
+
+struct _GtkFrameThin
+{
+  GtkBinThin  bin;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkFrameFat   fat_instance;
+  struct _GtkFrameThin  thin_instance;
+}   GtkFrame;
+/********************************************************************/
+
+
 
 struct _GtkFrameClass
 {

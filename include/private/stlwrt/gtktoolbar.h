@@ -59,13 +59,38 @@ typedef enum
 
 typedef struct _GtkToolbarChild	     GtkToolbarChild;
 
-struct _GtkToolbarChild
+/********************************************************************/
+struct _GtkToolbarChildInstanceProps
 {
-  GtkToolbarChildType type;
+
   GtkWidget *widget;
   GtkWidget *icon;
   GtkWidget *label;
 };
+
+struct _GtkToolbarChildFat
+{
+  GtkToolbarChildTypeFat   type;
+
+  struct _GtkToolbarChildInstanceProps instance_properties;
+};
+
+struct _GtkToolbarChildThin
+{
+  GtkToolbarChildTypeThin  type;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkToolbarChildFat   fat_instance;
+  struct _GtkToolbarChildThin  thin_instance;
+}   GtkToolbarChild;
+/********************************************************************/
+
+
 
 #endif /* GTK_DISABLE_DEPRECATED */
 

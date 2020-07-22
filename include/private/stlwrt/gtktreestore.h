@@ -42,9 +42,10 @@ typedef struct _GtkTreeStore       GtkTreeStoreThin;
 
 typedef struct _GtkTreeStoreClass  GtkTreeStoreClass;
 
-struct _GtkTreeStore
+/********************************************************************/
+struct _GtkTreeStoreInstanceProps
 {
-  GObject parent;
+
 
   gint  (stamp);
   gpointer  (root);
@@ -59,6 +60,30 @@ struct _GtkTreeStore
   GDestroyNotify  (default_sort_destroy);
   guint  (columns_dirty) : 1;
 };
+
+struct _GtkTreeStoreFat
+{
+  GObjectFat   parent;
+
+  struct _GtkTreeStoreInstanceProps instance_properties;
+};
+
+struct _GtkTreeStoreThin
+{
+  GObjectThin  parent;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkTreeStoreFat   fat_instance;
+  struct _GtkTreeStoreThin  thin_instance;
+}   GtkTreeStore;
+/********************************************************************/
+
+
 
 struct _GtkTreeStoreClass
 {

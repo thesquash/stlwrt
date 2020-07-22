@@ -39,9 +39,10 @@ typedef struct _GtkAdjustment	    GtkAdjustmentThin;
 
 typedef struct _GtkAdjustmentClass  GtkAdjustmentClass;
 
-struct _GtkAdjustment
+/********************************************************************/
+struct _GtkAdjustmentInstanceProps
 {
-  GObject parent_instance;
+
 
   gdouble  (lower);
   gdouble  (upper);
@@ -50,6 +51,30 @@ struct _GtkAdjustment
   gdouble  (page_increment);
   gdouble  (page_size);
 };
+
+struct _GtkAdjustmentFat
+{
+  GObjectFat   parent_instance;
+
+  struct _GtkAdjustmentInstanceProps instance_properties;
+};
+
+struct _GtkAdjustmentThin
+{
+  GObjectThin  parent_instance;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkAdjustmentFat   fat_instance;
+  struct _GtkAdjustmentThin  thin_instance;
+}   GtkAdjustment;
+/********************************************************************/
+
+
 
 struct _GtkAdjustmentClass
 {

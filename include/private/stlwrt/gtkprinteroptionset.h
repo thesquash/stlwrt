@@ -41,14 +41,39 @@ typedef struct _GtkPrinterOptionSet       GtkPrinterOptionSetThin;
 
 typedef struct _GtkPrinterOptionSetClass  GtkPrinterOptionSetClass;
 
-struct _GtkPrinterOptionSet
+/********************************************************************/
+struct _GtkPrinterOptionSetInstanceProps
 {
-  GObject parent_instance;
+
 
   /*< private >*/
   GPtrArray *array;
   GHashTable *hash;
 };
+
+struct _GtkPrinterOptionSetFat
+{
+  GObjectFat   parent_instance;
+
+  struct _GtkPrinterOptionSetInstanceProps instance_properties;
+};
+
+struct _GtkPrinterOptionSetThin
+{
+  GObjectThin  parent_instance;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkPrinterOptionSetFat   fat_instance;
+  struct _GtkPrinterOptionSetThin  thin_instance;
+}   GtkPrinterOptionSet;
+/********************************************************************/
+
+
 
 struct _GtkPrinterOptionSetClass
 {

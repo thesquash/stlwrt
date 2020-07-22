@@ -39,9 +39,10 @@ typedef struct _GtkPathBarClass GtkPathBarClass;
 #define GTK_IS_PATH_BAR_CLASS(klass)      (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_PATH_BAR))
 #define GTK_PATH_BAR_GET_CLASS(obj)       (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_PATH_BAR, GtkPathBarClass))
 
-struct _GtkPathBar
+/********************************************************************/
+struct _GtkPathBarInstanceProps
 {
-  GtkContainer parent;
+
 
   GtkFileSystem *file_system;
   GFile *root_file;
@@ -73,6 +74,30 @@ struct _GtkPathBar
   guint scrolling_up   : 1;
   guint scrolling_down : 1;
 };
+
+struct _GtkPathBarFat
+{
+  GtkContainerFat   parent;
+
+  struct _GtkPathBarInstanceProps instance_properties;
+};
+
+struct _GtkPathBarThin
+{
+  GtkContainerThin  parent;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkPathBarFat   fat_instance;
+  struct _GtkPathBarThin  thin_instance;
+}   GtkPathBar;
+/********************************************************************/
+
+
 
 struct _GtkPathBarClass
 {

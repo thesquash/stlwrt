@@ -45,12 +45,37 @@ typedef struct _GtkFixed        GtkFixedThin;
 typedef struct _GtkFixedClass   GtkFixedClass;
 typedef struct _GtkFixedChild   GtkFixedChild;
 
-struct _GtkFixed
+/********************************************************************/
+struct _GtkFixedInstanceProps
 {
-  GtkContainer container;
+
 
   GList * (children);
 };
+
+struct _GtkFixedFat
+{
+  GtkContainerFat   container;
+
+  struct _GtkFixedInstanceProps instance_properties;
+};
+
+struct _GtkFixedThin
+{
+  GtkContainerThin  container;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkFixedFat   fat_instance;
+  struct _GtkFixedThin  thin_instance;
+}   GtkFixed;
+/********************************************************************/
+
+
 
 struct _GtkFixedClass
 {

@@ -50,15 +50,40 @@ struct _GtkCellRendererPixbufPrivate
   GIcon *gicon;
 };
 
-struct _GtkCellRendererPixbuf
+/********************************************************************/
+struct _GtkCellRendererPixbufInstanceProps
 {
-  GtkCellRenderer parent;
+
 
   /*< private >*/
   GdkPixbuf * (pixbuf);
   GdkPixbuf * (pixbuf_expander_open);
   GdkPixbuf * (pixbuf_expander_closed);
 };
+
+struct _GtkCellRendererPixbufFat
+{
+  GtkCellRendererFat   parent;
+
+  struct _GtkCellRendererPixbufInstanceProps instance_properties;
+};
+
+struct _GtkCellRendererPixbufThin
+{
+  GtkCellRendererThin  parent;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkCellRendererPixbufFat   fat_instance;
+  struct _GtkCellRendererPixbufThin  thin_instance;
+}   GtkCellRendererPixbuf;
+/********************************************************************/
+
+
 
 struct _GtkCellRendererPixbufClass
 {

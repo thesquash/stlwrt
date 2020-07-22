@@ -39,9 +39,10 @@ typedef struct _GtkStatusbar      GtkStatusbarThin;
 
 typedef struct _GtkStatusbarClass GtkStatusbarClass;
 
-struct _GtkStatusbar
+/********************************************************************/
+struct _GtkStatusbarInstanceProps
 {
-  GtkHBox parent_widget;
+
 
   GtkWidget * (frame);
   GtkWidget * (label);
@@ -56,6 +57,30 @@ struct _GtkStatusbar
 
   guint  (has_resize_grip) : 1;
 };
+
+struct _GtkStatusbarFat
+{
+  GtkHBoxFat   parent_widget;
+
+  struct _GtkStatusbarInstanceProps instance_properties;
+};
+
+struct _GtkStatusbarThin
+{
+  GtkHBoxThin  parent_widget;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkStatusbarFat   fat_instance;
+  struct _GtkStatusbarThin  thin_instance;
+}   GtkStatusbar;
+/********************************************************************/
+
+
 
 struct _GtkStatusbarClass
 {

@@ -41,12 +41,37 @@ typedef struct _GtkBin       GtkBinThin;
 
 typedef struct _GtkBinClass  GtkBinClass;
 
-struct _GtkBin
+/********************************************************************/
+struct _GtkBinInstanceProps
 {
-  GtkContainer container;
+
 
   GtkWidget * (child);
 };
+
+struct _GtkBinFat
+{
+  GtkContainerFat   container;
+
+  struct _GtkBinInstanceProps instance_properties;
+};
+
+struct _GtkBinThin
+{
+  GtkContainerThin  container;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkBinFat   fat_instance;
+  struct _GtkBinThin  thin_instance;
+}   GtkBin;
+/********************************************************************/
+
+
 
 struct _GtkBinClass
 {

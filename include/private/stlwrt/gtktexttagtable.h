@@ -37,9 +37,10 @@ typedef void (* GtkTextTagTableForeach) (GtkTextTag *tag, gpointer data);
 
 typedef struct _GtkTextTagTableClass GtkTextTagTableClass;
 
-struct _GtkTextTagTable
+/********************************************************************/
+struct _GtkTextTagTableInstanceProps
 {
-  GObject parent_instance;
+
 
   GHashTable * (hash);
   GSList * (anonymous);
@@ -47,6 +48,30 @@ struct _GtkTextTagTable
 
   GSList * (buffers);
 };
+
+struct _GtkTextTagTableFat
+{
+  GObjectFat   parent_instance;
+
+  struct _GtkTextTagTableInstanceProps instance_properties;
+};
+
+struct _GtkTextTagTableThin
+{
+  GObjectThin  parent_instance;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkTextTagTableFat   fat_instance;
+  struct _GtkTextTagTableThin  thin_instance;
+}   GtkTextTagTable;
+/********************************************************************/
+
+
 
 struct _GtkTextTagTableClass
 {

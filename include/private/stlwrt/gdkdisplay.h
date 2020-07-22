@@ -68,10 +68,8 @@ typedef struct
   gulong motion_hint_serial; /* 0 == didn't deliver hinted motion event */
 } GdkPointerWindowInfo;
 
-struct _GdkDisplay
+struct _GdkDisplayInstanceProps
 {
-  GObject parent_instance;
-
   /*< private >*/
   GList * (queued_events);
   GList * (queued_tail);
@@ -102,6 +100,27 @@ struct _GdkDisplay
   /* Last reported event time from server */
   guint32  (last_event_time);
 };
+
+struct _GdkDisplayFat
+{
+  GObject parent_instance;
+
+  struct _GdkDisplayInstanceProps instance_properties;
+};
+
+struct _GdkDisplayThin
+{
+  GObject parent_instance;
+
+  gpointer reserved;
+};
+
+typedef union
+{
+  struct _GdkDisplayFat  fat_instance;
+  struct _GdkDisplayThin thin_instance;
+};
+
 
 struct _GdkDisplayClass
 {

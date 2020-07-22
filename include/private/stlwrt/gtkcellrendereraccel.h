@@ -45,9 +45,10 @@ typedef enum
 } GtkCellRendererAccelMode;
 
 
-struct _GtkCellRendererAccel
+/********************************************************************/
+struct _GtkCellRendererAccelInstanceProps
 {
-  GtkCellRendererText parent;
+
 
   /*< private >*/
   guint  (accel_key);
@@ -59,6 +60,30 @@ struct _GtkCellRendererAccel
   GtkWidget * (grab_widget);
   GtkWidget * (sizing_label);
 };
+
+struct _GtkCellRendererAccelFat
+{
+  GtkCellRendererTextFat   parent;
+
+  struct _GtkCellRendererAccelInstanceProps instance_properties;
+};
+
+struct _GtkCellRendererAccelThin
+{
+  GtkCellRendererTextThin  parent;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkCellRendererAccelFat   fat_instance;
+  struct _GtkCellRendererAccelThin  thin_instance;
+}   GtkCellRendererAccel;
+/********************************************************************/
+
+
 
 struct _GtkCellRendererAccelClass
 {

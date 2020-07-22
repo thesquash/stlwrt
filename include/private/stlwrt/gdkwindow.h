@@ -259,9 +259,10 @@ typedef struct _GdkWindowObjectClass GdkWindowObjectClass;
    so we keep the old exported version public, but in reality it is larger. */
 
 /**** DON'T CHANGE THIS STRUCT, the real version is in gdkinternals.h ****/
-struct _GdkWindowObject
+/********************************************************************/
+struct _GdkWindowObjectInstanceProps
 {
-  GdkDrawable parent_instance;
+
 
   GdkDrawable * (impl); /* window-system-specific delegate object */
   
@@ -308,6 +309,30 @@ struct _GdkWindowObject
 
   GdkWindowRedirect * (redirect);
 };
+
+struct _GdkWindowObjectFat
+{
+  GdkDrawableFat   parent_instance;
+
+  struct _GdkWindowObjectInstanceProps instance_properties;
+};
+
+struct _GdkWindowObjectThin
+{
+  GdkDrawableThin  parent_instance;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GdkWindowObjectFat   fat_instance;
+  struct _GdkWindowObjectThin  thin_instance;
+}   GdkWindowObject;
+/********************************************************************/
+
+
 #endif
 #endif
 

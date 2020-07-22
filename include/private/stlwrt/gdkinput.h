@@ -78,16 +78,42 @@ struct _GdkDeviceKey
   GdkModifierType modifiers;
 };
 
-struct _GdkDeviceAxis
+/********************************************************************/
+struct _GdkDeviceAxisInstanceProps
 {
-  GdkAxisUse use;
+
   gdouble    min;
   gdouble    max;
 };
 
-struct _GdkDevice
+struct _GdkDeviceAxisFat
 {
-  GObject parent_instance;
+  GdkAxisUseFat   use;
+
+  struct _GdkDeviceAxisInstanceProps instance_properties;
+};
+
+struct _GdkDeviceAxisThin
+{
+  GdkAxisUseThin  use;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GdkDeviceAxisFat   fat_instance;
+  struct _GdkDeviceAxisThin  thin_instance;
+}   GdkDeviceAxis;
+/********************************************************************/
+
+
+
+/********************************************************************/
+struct _GdkDeviceInstanceProps
+{
+
   /* All fields are read-only */
 	  
   gchar * (name);
@@ -101,6 +127,30 @@ struct _GdkDevice
   gint  (num_keys);
   GdkDeviceKey * (keys);
 };
+
+struct _GdkDeviceFat
+{
+  GObjectFat   parent_instance;
+
+  struct _GdkDeviceInstanceProps instance_properties;
+};
+
+struct _GdkDeviceThin
+{
+  GObjectThin  parent_instance;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GdkDeviceFat   fat_instance;
+  struct _GdkDeviceThin  thin_instance;
+}   GdkDevice;
+/********************************************************************/
+
+
 
 /* We don't allocate each coordinate this big, but we use it to
  * be ANSI compliant and avoid accessing past the defined limits.

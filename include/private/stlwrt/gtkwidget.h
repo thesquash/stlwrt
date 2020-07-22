@@ -193,15 +193,10 @@ struct _GtkWidgetPrivate
   guint32  widget_flags;
 };
 
-struct _GtkWidget
+/********************************************************************/
+struct _GtkWidgetInstanceProps
 {
-  /* The object structure needs to be the first
-   *  element in the widget structure in order for
-   *  the object mechanism to work correctly. This
-   *  allows a GtkWidget pointer to be cast to a
-   *  GObject pointer.
-   */
-  GObject object;
+
   
   /* 16 bits of internally used private flags.
    * this will be packed into the same 4 byte alignment frame that
@@ -258,6 +253,42 @@ struct _GtkWidget
    */
   GtkWidget * (parent);
 };
+
+struct _GtkWidgetFat
+{
+  /* The object structure needs to be the first
+   *  element in the widget structure in order for
+   *  the object mechanism to work correctly. This
+   *  allows a GtkWidget pointer to be cast to a
+   *  GObject pointer.
+   */
+  GObjectFat   object;
+
+  struct _GtkWidgetInstanceProps instance_properties;
+};
+
+struct _GtkWidgetThin
+{
+  /* The object structure needs to be the first
+   *  element in the widget structure in order for
+   *  the object mechanism to work correctly. This
+   *  allows a GtkWidget pointer to be cast to a
+   *  GObject pointer.
+   */
+  GObjectThin  object;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkWidgetFat   fat_instance;
+  struct _GtkWidgetThin  thin_instance;
+}   GtkWidget;
+/********************************************************************/
+
+
 
 /**
  * GtkWidgetClass:

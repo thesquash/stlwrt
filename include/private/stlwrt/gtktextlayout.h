@@ -121,9 +121,10 @@ struct _GtkTextLayoutPrivate
   GtkTextLine *cursor_line;
 };
 
-struct _GtkTextLayout
+/********************************************************************/
+struct _GtkTextLayoutInstanceProps
 {
-  GObject parent_instance;
+
 
   /* width of the display area on-screen,
    * i.e. pixels we should wrap to fit inside. */
@@ -185,6 +186,30 @@ struct _GtkTextLayout
 
   guint overwrite_mode : 1;
 };
+
+struct _GtkTextLayoutFat
+{
+  GObjectFat   parent_instance;
+
+  struct _GtkTextLayoutInstanceProps instance_properties;
+};
+
+struct _GtkTextLayoutThin
+{
+  GObjectThin  parent_instance;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkTextLayoutFat   fat_instance;
+  struct _GtkTextLayoutThin  thin_instance;
+}   GtkTextLayout;
+/********************************************************************/
+
+
 
 struct _GtkTextLayoutClass
 {

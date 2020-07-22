@@ -47,13 +47,38 @@ typedef void (* GtkColorSelectionChangePaletteWithScreenFunc) (GdkScreen        
 							       const GdkColor    *colors,
 							       gint               n_colors);
 
-struct _GtkColorSelection
+/********************************************************************/
+struct _GtkColorSelectionInstanceProps
 {
-  GtkVBox parent_instance;
+
 
   /* < private_data > */
   gpointer  (private_data);
 };
+
+struct _GtkColorSelectionFat
+{
+  GtkVBoxFat   parent_instance;
+
+  struct _GtkColorSelectionInstanceProps instance_properties;
+};
+
+struct _GtkColorSelectionThin
+{
+  GtkVBoxThin  parent_instance;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkColorSelectionFat   fat_instance;
+  struct _GtkColorSelectionThin  thin_instance;
+}   GtkColorSelection;
+/********************************************************************/
+
+
 
 struct _GtkColorSelectionClass
 {

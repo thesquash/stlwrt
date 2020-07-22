@@ -43,9 +43,10 @@ typedef void (* GtkTreeSelectionForeachFunc) (GtkTreeModel      *model,
 					      GtkTreeIter       *iter,
 					      gpointer           data);
 
-struct _GtkTreeSelection
+/********************************************************************/
+struct _GtkTreeSelectionInstanceProps
 {
-  GObject parent;
+
 
   /*< private >*/
 
@@ -55,6 +56,30 @@ struct _GtkTreeSelection
   gpointer  (user_data);
   GDestroyNotify  (destroy);
 };
+
+struct _GtkTreeSelectionFat
+{
+  GObjectFat   parent;
+
+  struct _GtkTreeSelectionInstanceProps instance_properties;
+};
+
+struct _GtkTreeSelectionThin
+{
+  GObjectThin  parent;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkTreeSelectionFat   fat_instance;
+  struct _GtkTreeSelectionThin  thin_instance;
+}   GtkTreeSelection;
+/********************************************************************/
+
+
 
 struct _GtkTreeSelectionClass
 {

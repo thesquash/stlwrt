@@ -39,12 +39,37 @@ typedef struct _GtkRadioButton	     GtkRadioButtonThin;
 
 typedef struct _GtkRadioButtonClass  GtkRadioButtonClass;
 
-struct _GtkRadioButton
+/********************************************************************/
+struct _GtkRadioButtonInstanceProps
 {
-  GtkCheckButton check_button;
+
 
   GSList * (group);
 };
+
+struct _GtkRadioButtonFat
+{
+  GtkCheckButtonFat   check_button;
+
+  struct _GtkRadioButtonInstanceProps instance_properties;
+};
+
+struct _GtkRadioButtonThin
+{
+  GtkCheckButtonThin  check_button;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkRadioButtonFat   fat_instance;
+  struct _GtkRadioButtonThin  thin_instance;
+}   GtkRadioButton;
+/********************************************************************/
+
+
 
 struct _GtkRadioButtonClass
 {

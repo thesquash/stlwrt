@@ -63,9 +63,10 @@ typedef struct _GtkSpinButton	    GtkSpinButtonThin;
 typedef struct _GtkSpinButtonClass  GtkSpinButtonClass;
 
 
-struct _GtkSpinButton
+/********************************************************************/
+struct _GtkSpinButtonInstanceProps
 {
-  GtkEntry entry;
+
 
   GtkAdjustment * (adjustment);
 
@@ -88,6 +89,30 @@ struct _GtkSpinButton
   guint  (wrap) : 1;
   guint  (snap_to_ticks) : 1;
 };
+
+struct _GtkSpinButtonFat
+{
+  GtkEntryFat   entry;
+
+  struct _GtkSpinButtonInstanceProps instance_properties;
+};
+
+struct _GtkSpinButtonThin
+{
+  GtkEntryThin  entry;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkSpinButtonFat   fat_instance;
+  struct _GtkSpinButtonThin  thin_instance;
+}   GtkSpinButton;
+/********************************************************************/
+
+
 
 struct _GtkSpinButtonClass
 {

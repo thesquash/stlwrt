@@ -39,9 +39,10 @@ typedef struct _GtkMenuItem	  GtkMenuItemThin;
 
 typedef struct _GtkMenuItemClass  GtkMenuItemClass;
 
-struct _GtkMenuItem
+/********************************************************************/
+struct _GtkMenuItemInstanceProps
 {
-  GtkBin bin;
+
 
   GtkWidget * (submenu);
   GdkWindow * (event_window);
@@ -58,6 +59,30 @@ struct _GtkMenuItem
   guint  (from_menubar) : 1;
   guint  (timer);
 };
+
+struct _GtkMenuItemFat
+{
+  GtkBinFat   bin;
+
+  struct _GtkMenuItemInstanceProps instance_properties;
+};
+
+struct _GtkMenuItemThin
+{
+  GtkBinThin  bin;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkMenuItemFat   fat_instance;
+  struct _GtkMenuItemThin  thin_instance;
+}   GtkMenuItem;
+/********************************************************************/
+
+
 
 struct _GtkMenuItemClass
 {

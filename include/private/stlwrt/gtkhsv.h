@@ -43,13 +43,38 @@ typedef struct _GtkHSV      GtkHSVThin;
 
 typedef struct _GtkHSVClass GtkHSVClass;
 
-struct _GtkHSV
+/********************************************************************/
+struct _GtkHSVInstanceProps
 {
-  GtkWidget parent_instance;
+
 
   /* Private data */
   gpointer  (priv);
 };
+
+struct _GtkHSVFat
+{
+  GtkWidgetFat   parent_instance;
+
+  struct _GtkHSVInstanceProps instance_properties;
+};
+
+struct _GtkHSVThin
+{
+  GtkWidgetThin  parent_instance;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkHSVFat   fat_instance;
+  struct _GtkHSVThin  thin_instance;
+}   GtkHSV;
+/********************************************************************/
+
+
 
 struct _GtkHSVClass
 {

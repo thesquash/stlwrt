@@ -67,12 +67,37 @@ typedef struct _GtkTextMarkClass GtkTextMarkClass;
 #define GTK_IS_TEXT_MARK_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TEXT_MARK))
 #define GTK_TEXT_MARK_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TEXT_MARK, GtkTextMarkClass))
 
-struct _GtkTextMark
+/********************************************************************/
+struct _GtkTextMarkInstanceProps
 {
-  GObject parent_instance;
+
 
   gpointer  (segment);
 };
+
+struct _GtkTextMarkFat
+{
+  GObjectFat   parent_instance;
+
+  struct _GtkTextMarkInstanceProps instance_properties;
+};
+
+struct _GtkTextMarkThin
+{
+  GObjectThin  parent_instance;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkTextMarkFat   fat_instance;
+  struct _GtkTextMarkThin  thin_instance;
+}   GtkTextMark;
+/********************************************************************/
+
+
 
 struct _GtkTextMarkClass
 {

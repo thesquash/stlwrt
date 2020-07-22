@@ -49,15 +49,40 @@ struct _GtkBoxPrivate
   guint          spacing_set    : 1;
 };
 
-struct _GtkBox
+/********************************************************************/
+struct _GtkBoxInstanceProps
 {
-  GtkContainer container;
+
 
   /*< public >*/
   GList * (children);
   gint16  (spacing);
   guint  (homogeneous) : 1;
 };
+
+struct _GtkBoxFat
+{
+  GtkContainerFat   container;
+
+  struct _GtkBoxInstanceProps instance_properties;
+};
+
+struct _GtkBoxThin
+{
+  GtkContainerThin  container;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkBoxFat   fat_instance;
+  struct _GtkBoxThin  thin_instance;
+}   GtkBox;
+/********************************************************************/
+
+
 
 struct _GtkBoxClass
 {

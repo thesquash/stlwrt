@@ -38,14 +38,39 @@ typedef struct _GtkToggleButton       GtkToggleButtonThin;
 
 typedef struct _GtkToggleButtonClass  GtkToggleButtonClass;
 
-struct _GtkToggleButton
+/********************************************************************/
+struct _GtkToggleButtonInstanceProps
 {
-  GtkButton button;
+
 
   guint  (active) : 1;
   guint  (draw_indicator) : 1;
   guint  (inconsistent) : 1;
 };
+
+struct _GtkToggleButtonFat
+{
+  GtkButtonFat   button;
+
+  struct _GtkToggleButtonInstanceProps instance_properties;
+};
+
+struct _GtkToggleButtonThin
+{
+  GtkButtonThin  button;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkToggleButtonFat   fat_instance;
+  struct _GtkToggleButtonThin  thin_instance;
+}   GtkToggleButton;
+/********************************************************************/
+
+
 
 struct _GtkToggleButtonClass
 {

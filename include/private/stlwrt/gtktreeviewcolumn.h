@@ -55,9 +55,10 @@ typedef void (* GtkTreeCellDataFunc) (GtkTreeViewColumn *tree_column,
 				      gpointer           data);
 
 
-struct _GtkTreeViewColumn
+/********************************************************************/
+struct _GtkTreeViewColumnInstanceProps
 {
-  GObject parent;
+
 
   GtkWidget * (tree_view);
   GtkWidget * (button);
@@ -105,6 +106,30 @@ struct _GtkTreeViewColumn
   guint  (use_resized_width)   : 1;
   guint  (expand)              : 1;
 };
+
+struct _GtkTreeViewColumnFat
+{
+  GObjectFat   parent;
+
+  struct _GtkTreeViewColumnInstanceProps instance_properties;
+};
+
+struct _GtkTreeViewColumnThin
+{
+  GObjectThin  parent;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkTreeViewColumnFat   fat_instance;
+  struct _GtkTreeViewColumnThin  thin_instance;
+}   GtkTreeViewColumn;
+/********************************************************************/
+
+
 
 struct _GtkTreeViewColumnClass
 {

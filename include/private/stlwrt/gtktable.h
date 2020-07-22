@@ -41,9 +41,10 @@ typedef struct _GtkTableClass	GtkTableClass;
 typedef struct _GtkTableChild	GtkTableChild;
 typedef struct _GtkTableRowCol	GtkTableRowCol;
 
-struct _GtkTable
+/********************************************************************/
+struct _GtkTableInstanceProps
 {
-  GtkContainer container;
+
 
   GList * (children);
   GtkTableRowCol * (rows);
@@ -54,6 +55,30 @@ struct _GtkTable
   guint16  (row_spacing);
   guint  (homogeneous) : 1;
 };
+
+struct _GtkTableFat
+{
+  GtkContainerFat   container;
+
+  struct _GtkTableInstanceProps instance_properties;
+};
+
+struct _GtkTableThin
+{
+  GtkContainerThin  container;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkTableFat   fat_instance;
+  struct _GtkTableThin  thin_instance;
+}   GtkTable;
+/********************************************************************/
+
+
 
 struct _GtkTableClass
 {

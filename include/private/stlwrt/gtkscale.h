@@ -46,14 +46,39 @@ struct _GtkScalePrivate
   GSList      *marks;
 };
 
-struct _GtkScale
+/********************************************************************/
+struct _GtkScaleInstanceProps
 {
-  GtkRange range;
+
 
   gint   (digits);
   guint  (draw_value) : 1;
   guint  (value_pos) : 2;
 };
+
+struct _GtkScaleFat
+{
+  GtkRangeFat   range;
+
+  struct _GtkScaleInstanceProps instance_properties;
+};
+
+struct _GtkScaleThin
+{
+  GtkRangeThin  range;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkScaleFat   fat_instance;
+  struct _GtkScaleThin  thin_instance;
+}   GtkScale;
+/********************************************************************/
+
+
 
 struct _GtkScaleClass
 {

@@ -41,9 +41,10 @@ typedef struct _GtkViewport       GtkViewportThin;
 
 typedef struct _GtkViewportClass  GtkViewportClass;
 
-struct _GtkViewport
+/********************************************************************/
+struct _GtkViewportInstanceProps
 {
-  GtkBin bin;
+
 
   GtkShadowType  (shadow_type);
   GdkWindow * (view_window);
@@ -51,6 +52,30 @@ struct _GtkViewport
   GtkAdjustment * (hadjustment);
   GtkAdjustment * (vadjustment);
 };
+
+struct _GtkViewportFat
+{
+  GtkBinFat   bin;
+
+  struct _GtkViewportInstanceProps instance_properties;
+};
+
+struct _GtkViewportThin
+{
+  GtkBinThin  bin;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkViewportFat   fat_instance;
+  struct _GtkViewportThin  thin_instance;
+}   GtkViewport;
+/********************************************************************/
+
+
 
 struct _GtkViewportClass
 {

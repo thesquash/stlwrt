@@ -44,9 +44,10 @@ struct _GtkCellRendererComboPrivate
   GtkWidget *combo;
 };
 
-struct _GtkCellRendererCombo
+/********************************************************************/
+struct _GtkCellRendererComboInstanceProps
 {
-  GtkCellRendererText parent;
+
 
   GtkTreeModel * (model);
   gint           (text_column);
@@ -55,6 +56,30 @@ struct _GtkCellRendererCombo
   /*< private >*/
   guint          (focus_out_id);
 };
+
+struct _GtkCellRendererComboFat
+{
+  GtkCellRendererTextFat   parent;
+
+  struct _GtkCellRendererComboInstanceProps instance_properties;
+};
+
+struct _GtkCellRendererComboThin
+{
+  GtkCellRendererTextThin  parent;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkCellRendererComboFat   fat_instance;
+  struct _GtkCellRendererComboThin  thin_instance;
+}   GtkCellRendererCombo;
+/********************************************************************/
+
+
 
 struct _GtkCellRendererComboClass
 {

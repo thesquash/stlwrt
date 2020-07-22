@@ -38,13 +38,38 @@ typedef struct _GtkInvisible	   GtkInvisibleThin;
 
 typedef struct _GtkInvisibleClass  GtkInvisibleClass;
 
-struct _GtkInvisible
+/********************************************************************/
+struct _GtkInvisibleInstanceProps
 {
-  GtkWidget widget;
+
 
   gboolean    (has_user_ref_count);
   GdkScreen * (screen);
 };
+
+struct _GtkInvisibleFat
+{
+  GtkWidgetFat   widget;
+
+  struct _GtkInvisibleInstanceProps instance_properties;
+};
+
+struct _GtkInvisibleThin
+{
+  GtkWidgetThin  widget;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkInvisibleFat   fat_instance;
+  struct _GtkInvisibleThin  thin_instance;
+}   GtkInvisible;
+/********************************************************************/
+
+
 
 struct _GtkInvisibleClass
 {

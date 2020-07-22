@@ -47,15 +47,40 @@ struct _GtkCellRendererTogglePrivate
   guint inconsistent : 1;
 };
 
-struct _GtkCellRendererToggle
+/********************************************************************/
+struct _GtkCellRendererToggleInstanceProps
 {
-  GtkCellRenderer parent;
+
 
   /*< private >*/
   guint  (active) : 1;
   guint  (activatable) : 1;
   guint  (radio) : 1;
 };
+
+struct _GtkCellRendererToggleFat
+{
+  GtkCellRendererFat   parent;
+
+  struct _GtkCellRendererToggleInstanceProps instance_properties;
+};
+
+struct _GtkCellRendererToggleThin
+{
+  GtkCellRendererThin  parent;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkCellRendererToggleFat   fat_instance;
+  struct _GtkCellRendererToggleThin  thin_instance;
+}   GtkCellRendererToggle;
+/********************************************************************/
+
+
 
 struct _GtkCellRendererToggleClass
 {

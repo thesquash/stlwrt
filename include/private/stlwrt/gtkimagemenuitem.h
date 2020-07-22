@@ -39,14 +39,38 @@ typedef struct _GtkImageMenuItem       GtkImageMenuItemThin;
 
 typedef struct _GtkImageMenuItemClass  GtkImageMenuItemClass;
 
-struct _GtkImageMenuItem
+/********************************************************************/
+struct _GtkImageMenuItemInstanceProps
 {
-  GtkMenuItem menu_item;
+
 
   /*< private >*/
   GtkWidget      * (image);
-
 };
+
+struct _GtkImageMenuItemFat
+{
+  GtkMenuItemFat   menu_item;
+
+  struct _GtkImageMenuItemInstanceProps instance_properties;
+};
+
+struct _GtkImageMenuItemThin
+{
+  GtkMenuItemThin  menu_item;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkImageMenuItemFat   fat_instance;
+  struct _GtkImageMenuItemThin  thin_instance;
+}   GtkImageMenuItem;
+/********************************************************************/
+
+
 
 struct _GtkImageMenuItemClass
 {

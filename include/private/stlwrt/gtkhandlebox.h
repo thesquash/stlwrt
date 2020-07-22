@@ -51,9 +51,10 @@ struct _GtkHandleBoxPrivate
   gint orig_y;
 };
 
-struct _GtkHandleBox
+/********************************************************************/
+struct _GtkHandleBoxInstanceProps
 {
-  GtkBin bin;
+
 
   GdkWindow      * (bin_window);	/* parent window for children */
   GdkWindow      * (float_window);
@@ -74,6 +75,30 @@ struct _GtkHandleBox
   GtkAllocation    (attach_allocation);
   GtkAllocation    (float_allocation);
 };
+
+struct _GtkHandleBoxFat
+{
+  GtkBinFat   bin;
+
+  struct _GtkHandleBoxInstanceProps instance_properties;
+};
+
+struct _GtkHandleBoxThin
+{
+  GtkBinThin  bin;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkHandleBoxFat   fat_instance;
+  struct _GtkHandleBoxThin  thin_instance;
+}   GtkHandleBox;
+/********************************************************************/
+
+
 
 struct _GtkHandleBoxClass
 {

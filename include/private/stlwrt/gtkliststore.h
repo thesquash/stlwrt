@@ -41,9 +41,10 @@ typedef struct _GtkListStore       GtkListStoreThin;
 
 typedef struct _GtkListStoreClass  GtkListStoreClass;
 
-struct _GtkListStore
+/********************************************************************/
+struct _GtkListStoreInstanceProps
 {
-  GObject parent;
+
 
   /*< private >*/
   gint  (stamp);
@@ -60,6 +61,30 @@ struct _GtkListStore
   GDestroyNotify  (default_sort_destroy);
   guint  (columns_dirty) : 1;
 };
+
+struct _GtkListStoreFat
+{
+  GObjectFat   parent;
+
+  struct _GtkListStoreInstanceProps instance_properties;
+};
+
+struct _GtkListStoreThin
+{
+  GObjectThin  parent;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkListStoreFat   fat_instance;
+  struct _GtkListStoreThin  thin_instance;
+}   GtkListStore;
+/********************************************************************/
+
+
 
 struct _GtkListStoreClass
 {

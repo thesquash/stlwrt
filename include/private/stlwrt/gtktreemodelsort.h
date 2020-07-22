@@ -39,9 +39,10 @@ typedef struct _GtkTreeModelSort       GtkTreeModelSortThin;
 
 typedef struct _GtkTreeModelSortClass  GtkTreeModelSortClass;
 
-struct _GtkTreeModelSort
+/********************************************************************/
+struct _GtkTreeModelSortInstanceProps
 {
-  GObject parent;
+
 
   /* < private > */
   gpointer  (root);
@@ -67,6 +68,30 @@ struct _GtkTreeModelSort
   guint  (deleted_id);
   guint  (reordered_id);
 };
+
+struct _GtkTreeModelSortFat
+{
+  GObjectFat   parent;
+
+  struct _GtkTreeModelSortInstanceProps instance_properties;
+};
+
+struct _GtkTreeModelSortThin
+{
+  GObjectThin  parent;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkTreeModelSortFat   fat_instance;
+  struct _GtkTreeModelSortThin  thin_instance;
+}   GtkTreeModelSort;
+/********************************************************************/
+
+
 
 struct _GtkTreeModelSortClass
 {

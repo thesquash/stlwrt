@@ -85,9 +85,10 @@ typedef struct _GtkDialog        GtkDialogThin;
 
 typedef struct _GtkDialogClass   GtkDialogClass;
 
-struct _GtkDialog
+/********************************************************************/
+struct _GtkDialogInstanceProps
 {
-  GtkWindow window;
+
 
   /*< public >*/
   GtkWidget * (vbox);
@@ -96,6 +97,30 @@ struct _GtkDialog
   /*< private >*/
   GtkWidget * (separator);
 };
+
+struct _GtkDialogFat
+{
+  GtkWindowFat   window;
+
+  struct _GtkDialogInstanceProps instance_properties;
+};
+
+struct _GtkDialogThin
+{
+  GtkWindowThin  window;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkDialogFat   fat_instance;
+  struct _GtkDialogThin  thin_instance;
+}   GtkDialog;
+/********************************************************************/
+
+
 
 struct _GtkDialogClass
 {

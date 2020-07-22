@@ -46,9 +46,10 @@ typedef enum {
 typedef gboolean (*GtkRecentFilterFunc) (const GtkRecentFilterInfo *filter_info,
 					 gpointer                   user_data);
 
-struct _GtkRecentFilterInfo
+/********************************************************************/
+struct _GtkRecentFilterInfoInstanceProps
 {
-  GtkRecentFilterFlags contains;
+
 
   const gchar *uri;
   const gchar *display_name;
@@ -58,6 +59,30 @@ struct _GtkRecentFilterInfo
 
   gint age;
 };
+
+struct _GtkRecentFilterInfoFat
+{
+  GtkRecentFilterFlagsFat   contains;
+
+  struct _GtkRecentFilterInfoInstanceProps instance_properties;
+};
+
+struct _GtkRecentFilterInfoThin
+{
+  GtkRecentFilterFlagsThin  contains;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkRecentFilterInfoFat   fat_instance;
+  struct _GtkRecentFilterInfoThin  thin_instance;
+}   GtkRecentFilterInfo;
+/********************************************************************/
+
+
 
 GType                 _T2_gtk_recent_filter_get_type (void) G_GNUC_CONST;
 GType                 _3T_gtk_recent_filter_get_type (void) G_GNUC_CONST;

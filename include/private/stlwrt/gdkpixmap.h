@@ -37,14 +37,39 @@ typedef struct _GdkPixmapObjectClass GdkPixmapObjectClass;
 #define GDK_PIXMAP_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GDK_TYPE_PIXMAP, GdkPixmapObjectClass))
 #define GDK_PIXMAP_OBJECT(object)    ((GdkPixmapObject *) GDK_PIXMAP (object))
 
-struct _GdkPixmapObject
+/********************************************************************/
+struct _GdkPixmapObjectInstanceProps
 {
-  GdkDrawable parent_instance;
+
   
   GdkDrawable * (impl);  /* window-system-specific delegate object */
 
   gint  (depth);
 };
+
+struct _GdkPixmapObjectFat
+{
+  GdkDrawableFat   parent_instance;
+
+  struct _GdkPixmapObjectInstanceProps instance_properties;
+};
+
+struct _GdkPixmapObjectThin
+{
+  GdkDrawableThin  parent_instance;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GdkPixmapObjectFat   fat_instance;
+  struct _GdkPixmapObjectThin  thin_instance;
+}   GdkPixmapObject;
+/********************************************************************/
+
+
 
 struct _GdkPixmapObjectClass
 {

@@ -44,12 +44,37 @@ typedef struct _GtkTextChildAnchorClass GtkTextChildAnchorClass;
 #define GTK_IS_TEXT_CHILD_ANCHOR_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TEXT_CHILD_ANCHOR))
 #define GTK_TEXT_CHILD_ANCHOR_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TEXT_CHILD_ANCHOR, GtkTextChildAnchorClass))
 
-struct _GtkTextChildAnchor
+/********************************************************************/
+struct _GtkTextChildAnchorInstanceProps
 {
-  GObject parent_instance;
+
 
   gpointer  (segment);
 };
+
+struct _GtkTextChildAnchorFat
+{
+  GObjectFat   parent_instance;
+
+  struct _GtkTextChildAnchorInstanceProps instance_properties;
+};
+
+struct _GtkTextChildAnchorThin
+{
+  GObjectThin  parent_instance;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkTextChildAnchorFat   fat_instance;
+  struct _GtkTextChildAnchorThin  thin_instance;
+}   GtkTextChildAnchor;
+/********************************************************************/
+
+
 
 struct _GtkTextChildAnchorClass
 {

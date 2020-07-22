@@ -39,12 +39,37 @@ typedef struct _GtkDrawingArea       GtkDrawingAreaThin;
 
 typedef struct _GtkDrawingAreaClass  GtkDrawingAreaClass;
 
-struct _GtkDrawingArea
+/********************************************************************/
+struct _GtkDrawingAreaInstanceProps
 {
-  GtkWidget widget;
+
 
   gpointer  (draw_data);
 };
+
+struct _GtkDrawingAreaFat
+{
+  GtkWidgetFat   widget;
+
+  struct _GtkDrawingAreaInstanceProps instance_properties;
+};
+
+struct _GtkDrawingAreaThin
+{
+  GtkWidgetThin  widget;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkDrawingAreaFat   fat_instance;
+  struct _GtkDrawingAreaThin  thin_instance;
+}   GtkDrawingArea;
+/********************************************************************/
+
+
 
 struct _GtkDrawingAreaClass
 {

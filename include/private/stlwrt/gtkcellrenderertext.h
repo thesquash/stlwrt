@@ -64,9 +64,10 @@ struct _GtkCellRendererTextPrivate
   GtkWidget *entry;
 };
 
-struct _GtkCellRendererText
+/********************************************************************/
+struct _GtkCellRendererTextInstanceProps
 {
-  GtkCellRenderer parent;
+
 
   /*< private >*/
   gchar * (text);
@@ -100,6 +101,30 @@ struct _GtkCellRendererText
   guint  (editable_set) : 1;
   guint  (calc_fixed_height) : 1;
 };
+
+struct _GtkCellRendererTextFat
+{
+  GtkCellRendererFat   parent;
+
+  struct _GtkCellRendererTextInstanceProps instance_properties;
+};
+
+struct _GtkCellRendererTextThin
+{
+  GtkCellRendererThin  parent;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkCellRendererTextFat   fat_instance;
+  struct _GtkCellRendererTextThin  thin_instance;
+}   GtkCellRendererText;
+/********************************************************************/
+
+
 
 struct _GtkCellRendererTextClass
 {

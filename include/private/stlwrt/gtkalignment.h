@@ -50,15 +50,40 @@ struct _GtkAlignmentPrivate
   guint padding_right;
 };
 
-struct _GtkAlignment
+/********************************************************************/
+struct _GtkAlignmentInstanceProps
 {
-  GtkBin bin;
+
 
   gfloat  (xalign);
   gfloat  (yalign);
   gfloat  (xscale);
   gfloat  (yscale);
 };
+
+struct _GtkAlignmentFat
+{
+  GtkBinFat   bin;
+
+  struct _GtkAlignmentInstanceProps instance_properties;
+};
+
+struct _GtkAlignmentThin
+{
+  GtkBinThin  bin;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkAlignmentFat   fat_instance;
+  struct _GtkAlignmentThin  thin_instance;
+}   GtkAlignment;
+/********************************************************************/
+
+
 
 struct _GtkAlignmentClass
 {

@@ -44,11 +44,36 @@ typedef enum {
   GDK_COLOR_WRITEABLE = 1 << 0
 } GdkColorInfoFlags;
 
-struct _GdkColorInfo
+/********************************************************************/
+struct _GdkColorInfoInstanceProps
 {
-  GdkColorInfoFlags flags;
+
   guint ref_count;
 };
+
+struct _GdkColorInfoFat
+{
+  GdkColorInfoFlagsFat   flags;
+
+  struct _GdkColorInfoInstanceProps instance_properties;
+};
+
+struct _GdkColorInfoThin
+{
+  GdkColorInfoFlagsThin  flags;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GdkColorInfoFat   fat_instance;
+  struct _GdkColorInfoThin  thin_instance;
+}   GdkColorInfo;
+/********************************************************************/
+
+
 
 typedef enum {
   GDK_EVENT_FILTER_REMOVED = 1 << 0

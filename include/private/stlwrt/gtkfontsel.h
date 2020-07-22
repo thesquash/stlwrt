@@ -93,9 +93,10 @@ struct _GtkFontSelectionClass
   void (*_gtk_reserved4) (void);
 };
 
-struct _GtkFontSelectionDialog
+/********************************************************************/
+struct _GtkFontSelectionDialogInstanceProps
 {
-  GtkDialog parent_instance;
+
 
   /*< private >*/
   GtkWidget * (fontsel);
@@ -116,6 +117,30 @@ struct _GtkFontSelectionDialog
   gint  (dialog_width);
   gboolean  (auto_resize);
 };
+
+struct _GtkFontSelectionDialogFat
+{
+  GtkDialogFat   parent_instance;
+
+  struct _GtkFontSelectionDialogInstanceProps instance_properties;
+};
+
+struct _GtkFontSelectionDialogThin
+{
+  GtkDialogThin  parent_instance;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkFontSelectionDialogFat   fat_instance;
+  struct _GtkFontSelectionDialogThin  thin_instance;
+}   GtkFontSelectionDialog;
+/********************************************************************/
+
+
 
 struct _GtkFontSelectionDialogClass
 {

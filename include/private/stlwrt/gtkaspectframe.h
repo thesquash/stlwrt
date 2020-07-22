@@ -41,9 +41,10 @@ typedef struct _GtkAspectFrame       GtkAspectFrameThin;
 
 typedef struct _GtkAspectFrameClass  GtkAspectFrameClass;
 
-struct _GtkAspectFrame
+/********************************************************************/
+struct _GtkAspectFrameInstanceProps
 {
-  GtkFrame frame;
+
 
   gfloat    (xalign);
   gfloat    (yalign);
@@ -52,6 +53,30 @@ struct _GtkAspectFrame
 
   GtkAllocation  (center_allocation);
 };
+
+struct _GtkAspectFrameFat
+{
+  GtkFrameFat   frame;
+
+  struct _GtkAspectFrameInstanceProps instance_properties;
+};
+
+struct _GtkAspectFrameThin
+{
+  GtkFrameThin  frame;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkAspectFrameFat   fat_instance;
+  struct _GtkAspectFrameThin  thin_instance;
+}   GtkAspectFrame;
+/********************************************************************/
+
+
 
 struct _GtkAspectFrameClass
 {

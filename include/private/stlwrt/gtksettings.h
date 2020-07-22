@@ -42,9 +42,10 @@ typedef struct    _GtkSettingsPropertyValue GtkSettingsPropertyValue; /* Interna
 
 
 /* --- structures --- */
-struct _GtkSettings
+/********************************************************************/
+struct _GtkSettingsInstanceProps
 {
-  GObject parent_instance;
+
 
   GData  * (queued_settings);	/* of type GtkSettingsValue* */
   GtkSettingsPropertyValue * (property_values);
@@ -52,6 +53,30 @@ struct _GtkSettings
   GtkRcContext * (rc_context);
   GdkScreen    * (screen);
 };
+
+struct _GtkSettingsFat
+{
+  GObjectFat   parent_instance;
+
+  struct _GtkSettingsInstanceProps instance_properties;
+};
+
+struct _GtkSettingsThin
+{
+  GObjectThin  parent_instance;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkSettingsFat   fat_instance;
+  struct _GtkSettingsThin  thin_instance;
+}   GtkSettings;
+/********************************************************************/
+
+
 
 struct _GtkSettingsClass
 {

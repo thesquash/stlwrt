@@ -44,15 +44,40 @@ typedef struct _GtkCheckMenuItem       GtkCheckMenuItemThin;
 
 typedef struct _GtkCheckMenuItemClass  GtkCheckMenuItemClass;
 
-struct _GtkCheckMenuItem
+/********************************************************************/
+struct _GtkCheckMenuItemInstanceProps
 {
-  GtkMenuItem menu_item;
+
 
   guint  (active) : 1;
   guint  (always_show_toggle) : 1;
   guint  (inconsistent) : 1;
   guint  (draw_as_radio) : 1;
 };
+
+struct _GtkCheckMenuItemFat
+{
+  GtkMenuItemFat   menu_item;
+
+  struct _GtkCheckMenuItemInstanceProps instance_properties;
+};
+
+struct _GtkCheckMenuItemThin
+{
+  GtkMenuItemThin  menu_item;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkCheckMenuItemFat   fat_instance;
+  struct _GtkCheckMenuItemThin  thin_instance;
+}   GtkCheckMenuItem;
+/********************************************************************/
+
+
 
 struct _GtkCheckMenuItemClass
 {

@@ -86,9 +86,10 @@ struct _GtkEntryPrivate
   gchar *im_module;
 };
 
-struct _GtkEntry
+/********************************************************************/
+struct _GtkEntryInstanceProps
 {
-  GtkWidget  widget;
+
 
   gchar       * (text);                        /* COMPAT: Deprecated, not used. Remove in GTK+ 3.x */
 
@@ -147,6 +148,30 @@ struct _GtkEntry
 
   gint           (width_chars);
 };
+
+struct _GtkEntryFat
+{
+  GtkWidgetFat    widget;
+
+  struct _GtkEntryInstanceProps instance_properties;
+};
+
+struct _GtkEntryThin
+{
+  GtkWidgetThin   widget;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkEntryFat   fat_instance;
+  struct _GtkEntryThin  thin_instance;
+}   GtkEntry;
+/********************************************************************/
+
+
 
 struct _GtkEntryClass
 {

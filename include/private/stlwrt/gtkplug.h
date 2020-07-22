@@ -40,9 +40,10 @@ typedef struct _GtkPlug        GtkPlugThin;
 typedef struct _GtkPlugClass   GtkPlugClass;
 
 
-struct _GtkPlug
+/********************************************************************/
+struct _GtkPlugInstanceProps
 {
-  GtkWindow window;
+
 
   GdkWindow * (socket_window);
   GtkWidget * (modality_window);
@@ -51,6 +52,30 @@ struct _GtkPlug
 
   guint  (same_app) : 1;
 };
+
+struct _GtkPlugFat
+{
+  GtkWindowFat   window;
+
+  struct _GtkPlugInstanceProps instance_properties;
+};
+
+struct _GtkPlugThin
+{
+  GtkWindowThin  window;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkPlugFat   fat_instance;
+  struct _GtkPlugThin  thin_instance;
+}   GtkPlug;
+/********************************************************************/
+
+
 
 struct _GtkPlugClass
 {

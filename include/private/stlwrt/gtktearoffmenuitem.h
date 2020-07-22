@@ -39,12 +39,37 @@ typedef struct _GtkTearoffMenuItem       GtkTearoffMenuItemThin;
 
 typedef struct _GtkTearoffMenuItemClass  GtkTearoffMenuItemClass;
 
-struct _GtkTearoffMenuItem
+/********************************************************************/
+struct _GtkTearoffMenuItemInstanceProps
 {
-  GtkMenuItem menu_item;
+
 
   guint  (torn_off) : 1;
 };
+
+struct _GtkTearoffMenuItemFat
+{
+  GtkMenuItemFat   menu_item;
+
+  struct _GtkTearoffMenuItemInstanceProps instance_properties;
+};
+
+struct _GtkTearoffMenuItemThin
+{
+  GtkMenuItemThin  menu_item;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkTearoffMenuItemFat   fat_instance;
+  struct _GtkTearoffMenuItemThin  thin_instance;
+}   GtkTearoffMenuItem;
+/********************************************************************/
+
+
 
 struct _GtkTearoffMenuItemClass
 {

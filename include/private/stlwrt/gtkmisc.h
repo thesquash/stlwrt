@@ -39,9 +39,10 @@ typedef struct _GtkMisc	      GtkMiscThin;
 
 typedef struct _GtkMiscClass  GtkMiscClass;
 
-struct _GtkMisc
+/********************************************************************/
+struct _GtkMiscInstanceProps
 {
-  GtkWidget widget;
+
 
   gfloat  (xalign);
   gfloat  (yalign);
@@ -49,6 +50,30 @@ struct _GtkMisc
   guint16  (xpad);
   guint16  (ypad);
 };
+
+struct _GtkMiscFat
+{
+  GtkWidgetFat   widget;
+
+  struct _GtkMiscInstanceProps instance_properties;
+};
+
+struct _GtkMiscThin
+{
+  GtkWidgetThin  widget;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkMiscFat   fat_instance;
+  struct _GtkMiscThin  thin_instance;
+}   GtkMisc;
+/********************************************************************/
+
+
 
 struct _GtkMiscClass
 {

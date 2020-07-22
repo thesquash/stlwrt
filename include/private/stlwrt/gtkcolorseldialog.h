@@ -41,15 +41,40 @@ typedef struct _GtkColorSelectionDialog       GtkColorSelectionDialogThin;
 typedef struct _GtkColorSelectionDialogClass  GtkColorSelectionDialogClass;
 
 
-struct _GtkColorSelectionDialog
+/********************************************************************/
+struct _GtkColorSelectionDialogInstanceProps
 {
-  GtkDialog parent_instance;
+
 
   GtkWidget * (colorsel);
   GtkWidget * (ok_button);
   GtkWidget * (cancel_button);
   GtkWidget * (help_button);
 };
+
+struct _GtkColorSelectionDialogFat
+{
+  GtkDialogFat   parent_instance;
+
+  struct _GtkColorSelectionDialogInstanceProps instance_properties;
+};
+
+struct _GtkColorSelectionDialogThin
+{
+  GtkDialogThin  parent_instance;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkColorSelectionDialogFat   fat_instance;
+  struct _GtkColorSelectionDialogThin  thin_instance;
+}   GtkColorSelectionDialog;
+/********************************************************************/
+
+
 
 struct _GtkColorSelectionDialogClass
 {

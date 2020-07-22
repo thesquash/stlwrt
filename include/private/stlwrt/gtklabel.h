@@ -42,9 +42,10 @@ typedef struct _GtkLabelClass  GtkLabelClass;
 
 typedef struct _GtkLabelSelectionInfo GtkLabelSelectionInfo;
 
-struct _GtkLabel
+/********************************************************************/
+struct _GtkLabelInstanceProps
 {
-  GtkMisc misc;
+
 
   /*< private >*/
   gchar  * (label);
@@ -73,6 +74,30 @@ struct _GtkLabel
 
   GtkLabelSelectionInfo * (select_info);
 };
+
+struct _GtkLabelFat
+{
+  GtkMiscFat   misc;
+
+  struct _GtkLabelInstanceProps instance_properties;
+};
+
+struct _GtkLabelThin
+{
+  GtkMiscThin  misc;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkLabelFat   fat_instance;
+  struct _GtkLabelThin  thin_instance;
+}   GtkLabel;
+/********************************************************************/
+
+
 
 struct _GtkLabelClass
 {

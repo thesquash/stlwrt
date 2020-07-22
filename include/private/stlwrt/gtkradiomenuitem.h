@@ -39,12 +39,37 @@ typedef struct _GtkRadioMenuItem       GtkRadioMenuItemThin;
 
 typedef struct _GtkRadioMenuItemClass  GtkRadioMenuItemClass;
 
-struct _GtkRadioMenuItem
+/********************************************************************/
+struct _GtkRadioMenuItemInstanceProps
 {
-  GtkCheckMenuItem check_menu_item;
+
 
   GSList * (group);
 };
+
+struct _GtkRadioMenuItemFat
+{
+  GtkCheckMenuItemFat   check_menu_item;
+
+  struct _GtkRadioMenuItemInstanceProps instance_properties;
+};
+
+struct _GtkRadioMenuItemThin
+{
+  GtkCheckMenuItemThin  check_menu_item;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkRadioMenuItemFat   fat_instance;
+  struct _GtkRadioMenuItemThin  thin_instance;
+}   GtkRadioMenuItem;
+/********************************************************************/
+
+
 
 struct _GtkRadioMenuItemClass
 {

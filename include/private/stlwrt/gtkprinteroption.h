@@ -56,9 +56,10 @@ typedef enum {
   GTK_PRINTER_OPTION_TYPE_FILESAVE
 } GtkPrinterOptionType;
 
-struct _GtkPrinterOption
+/********************************************************************/
+struct _GtkPrinterOptionInstanceProps
 {
-  GObject parent_instance;
+
 
   char *name;
   char *display_text;
@@ -75,6 +76,30 @@ struct _GtkPrinterOption
   gboolean has_conflict;
   char *group;
 };
+
+struct _GtkPrinterOptionFat
+{
+  GObjectFat   parent_instance;
+
+  struct _GtkPrinterOptionInstanceProps instance_properties;
+};
+
+struct _GtkPrinterOptionThin
+{
+  GObjectThin  parent_instance;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkPrinterOptionFat   fat_instance;
+  struct _GtkPrinterOptionThin  thin_instance;
+}   GtkPrinterOption;
+/********************************************************************/
+
+
 
 struct _GtkPrinterOptionClass
 {

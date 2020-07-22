@@ -40,9 +40,10 @@ G_BEGIN_DECLS
 typedef struct _GtkContainer	   GtkContainer;
 typedef struct _GtkContainerClass  GtkContainerClass;
 
-struct _GtkContainer
+/********************************************************************/
+struct _GtkContainerInstanceProps
 {
-  GtkWidget widget;
+
 
   GtkWidget * (focus_child);
 
@@ -54,6 +55,30 @@ struct _GtkContainer
   guint  (reallocate_redraws) : 1;
   guint  (has_focus_chain) : 1;
 };
+
+struct _GtkContainerFat
+{
+  GtkWidgetFat   widget;
+
+  struct _GtkContainerInstanceProps instance_properties;
+};
+
+struct _GtkContainerThin
+{
+  GtkWidgetThin  widget;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkContainerFat   fat_instance;
+  struct _GtkContainerThin  thin_instance;
+}   GtkContainer;
+/********************************************************************/
+
+
 
 struct _GtkContainerClass
 {

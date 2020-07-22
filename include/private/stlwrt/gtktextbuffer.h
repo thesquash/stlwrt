@@ -74,9 +74,10 @@ struct _GtkTextBufferPrivate
   gint            n_paste_target_entries;
 };
 
-struct _GtkTextBuffer
+/********************************************************************/
+struct _GtkTextBufferInstanceProps
 {
-  GObject parent_instance;
+
 
   GtkTextTagTable * (tag_table);
   GtkTextBTree * (btree);
@@ -93,6 +94,30 @@ struct _GtkTextBuffer
 
   guint  (has_selection) : 1;
 };
+
+struct _GtkTextBufferFat
+{
+  GObjectFat   parent_instance;
+
+  struct _GtkTextBufferInstanceProps instance_properties;
+};
+
+struct _GtkTextBufferThin
+{
+  GObjectThin  parent_instance;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkTextBufferFat   fat_instance;
+  struct _GtkTextBufferThin  thin_instance;
+}   GtkTextBuffer;
+/********************************************************************/
+
+
 
 struct _GtkTextBufferClass
 {

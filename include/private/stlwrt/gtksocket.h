@@ -37,9 +37,10 @@ typedef struct _GtkSocket        GtkSocketThin;
 
 typedef struct _GtkSocketClass   GtkSocketClass;
 
-struct _GtkSocket
+/********************************************************************/
+struct _GtkSocketInstanceProps
 {
-  GtkContainer container;
+
 
   guint16  (request_width);
   guint16  (request_height);
@@ -60,6 +61,30 @@ struct _GtkSocket
   GtkAccelGroup * (accel_group);
   GtkWidget * (toplevel);
 };
+
+struct _GtkSocketFat
+{
+  GtkContainerFat   container;
+
+  struct _GtkSocketInstanceProps instance_properties;
+};
+
+struct _GtkSocketThin
+{
+  GtkContainerThin  container;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkSocketFat   fat_instance;
+  struct _GtkSocketThin  thin_instance;
+}   GtkSocket;
+/********************************************************************/
+
+
 
 struct _GtkSocketClass
 {

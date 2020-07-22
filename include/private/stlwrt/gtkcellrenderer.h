@@ -60,9 +60,10 @@ struct _GtkCellRendererPrivate
   GdkColor cell_background;
 };
 
-struct _GtkCellRenderer
+/********************************************************************/
+struct _GtkCellRendererInstanceProps
 {
-  GObject parent;
+
 
   gfloat  (xalign);
   gfloat  (yalign);
@@ -81,6 +82,30 @@ struct _GtkCellRenderer
   guint  (sensitive) : 1;
   guint  (editing) : 1;
 };
+
+struct _GtkCellRendererFat
+{
+  GObjectFat   parent;
+
+  struct _GtkCellRendererInstanceProps instance_properties;
+};
+
+struct _GtkCellRendererThin
+{
+  GObjectThin  parent;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkCellRendererFat   fat_instance;
+  struct _GtkCellRendererThin  thin_instance;
+}   GtkCellRenderer;
+/********************************************************************/
+
+
 
 struct _GtkCellRendererClass
 {

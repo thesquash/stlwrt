@@ -43,15 +43,40 @@ typedef struct _GtkButtonBox       GtkButtonBoxThin;
 
 typedef struct _GtkButtonBoxClass  GtkButtonBoxClass;
 
-struct _GtkButtonBox
+/********************************************************************/
+struct _GtkButtonBoxInstanceProps
 {
-  GtkBox box;
+
   gint  (child_min_width);
   gint  (child_min_height);
   gint  (child_ipad_x);
   gint  (child_ipad_y);
   GtkButtonBoxStyle  (layout_style);
 };
+
+struct _GtkButtonBoxFat
+{
+  GtkBoxFat   box;
+
+  struct _GtkButtonBoxInstanceProps instance_properties;
+};
+
+struct _GtkButtonBoxThin
+{
+  GtkBoxThin  box;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkButtonBoxFat   fat_instance;
+  struct _GtkButtonBoxThin  thin_instance;
+}   GtkButtonBox;
+/********************************************************************/
+
+
 
 struct _GtkButtonBoxClass
 {

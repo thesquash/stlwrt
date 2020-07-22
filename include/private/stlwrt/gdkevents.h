@@ -254,12 +254,37 @@ typedef enum
   GDK_OWNER_CHANGE_CLOSE
 } GdkOwnerChange;
 
-struct _GdkEventAny
+/********************************************************************/
+struct _GdkEventAnyInstanceProps
 {
-  GdkEventType type;
+
   GdkWindow *window;
   gint8 send_event;
 };
+
+struct _GdkEventAnyFat
+{
+  GdkEventTypeFat   type;
+
+  struct _GdkEventAnyInstanceProps instance_properties;
+};
+
+struct _GdkEventAnyThin
+{
+  GdkEventTypeThin  type;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GdkEventAnyFat   fat_instance;
+  struct _GdkEventAnyThin  thin_instance;
+}   GdkEventAny;
+/********************************************************************/
+
+
 
 struct _GdkEventExpose
 {
@@ -271,20 +296,70 @@ struct _GdkEventExpose
   gint count; /* If non-zero, how many more events follow. */
 };
 
-struct _GdkEventNoExpose
+/********************************************************************/
+struct _GdkEventNoExposeInstanceProps
 {
-  GdkEventType type;
+
   GdkWindow *window;
   gint8 send_event;
 };
 
-struct _GdkEventVisibility
+struct _GdkEventNoExposeFat
 {
-  GdkEventType type;
+  GdkEventTypeFat   type;
+
+  struct _GdkEventNoExposeInstanceProps instance_properties;
+};
+
+struct _GdkEventNoExposeThin
+{
+  GdkEventTypeThin  type;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GdkEventNoExposeFat   fat_instance;
+  struct _GdkEventNoExposeThin  thin_instance;
+}   GdkEventNoExpose;
+/********************************************************************/
+
+
+
+/********************************************************************/
+struct _GdkEventVisibilityInstanceProps
+{
+
   GdkWindow *window;
   gint8 send_event;
   GdkVisibilityState state;
 };
+
+struct _GdkEventVisibilityFat
+{
+  GdkEventTypeFat   type;
+
+  struct _GdkEventVisibilityInstanceProps instance_properties;
+};
+
+struct _GdkEventVisibilityThin
+{
+  GdkEventTypeThin  type;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GdkEventVisibilityFat   fat_instance;
+  struct _GdkEventVisibilityThin  thin_instance;
+}   GdkEventVisibility;
+/********************************************************************/
+
+
 
 struct _GdkEventMotion
 {
@@ -330,9 +405,10 @@ struct _GdkEventScroll
   gdouble x_root, y_root;
 };
 
-struct _GdkEventKey
+/********************************************************************/
+struct _GdkEventKeyInstanceProps
 {
-  GdkEventType type;
+
   GdkWindow *window;
   gint8 send_event;
   guint32 time;
@@ -345,9 +421,34 @@ struct _GdkEventKey
   guint is_modifier : 1;
 };
 
-struct _GdkEventCrossing
+struct _GdkEventKeyFat
 {
-  GdkEventType type;
+  GdkEventTypeFat   type;
+
+  struct _GdkEventKeyInstanceProps instance_properties;
+};
+
+struct _GdkEventKeyThin
+{
+  GdkEventTypeThin  type;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GdkEventKeyFat   fat_instance;
+  struct _GdkEventKeyThin  thin_instance;
+}   GdkEventKey;
+/********************************************************************/
+
+
+
+/********************************************************************/
+struct _GdkEventCrossingInstanceProps
+{
+
   GdkWindow *window;
   gint8 send_event;
   GdkWindow *subwindow;
@@ -362,13 +463,62 @@ struct _GdkEventCrossing
   guint state;
 };
 
-struct _GdkEventFocus
+struct _GdkEventCrossingFat
 {
-  GdkEventType type;
+  GdkEventTypeFat   type;
+
+  struct _GdkEventCrossingInstanceProps instance_properties;
+};
+
+struct _GdkEventCrossingThin
+{
+  GdkEventTypeThin  type;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GdkEventCrossingFat   fat_instance;
+  struct _GdkEventCrossingThin  thin_instance;
+}   GdkEventCrossing;
+/********************************************************************/
+
+
+
+/********************************************************************/
+struct _GdkEventFocusInstanceProps
+{
+
   GdkWindow *window;
   gint8 send_event;
   gint16 in;
 };
+
+struct _GdkEventFocusFat
+{
+  GdkEventTypeFat   type;
+
+  struct _GdkEventFocusInstanceProps instance_properties;
+};
+
+struct _GdkEventFocusThin
+{
+  GdkEventTypeThin  type;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GdkEventFocusFat   fat_instance;
+  struct _GdkEventFocusThin  thin_instance;
+}   GdkEventFocus;
+/********************************************************************/
+
+
 
 struct _GdkEventConfigure
 {
@@ -380,9 +530,10 @@ struct _GdkEventConfigure
   gint height;
 };
 
-struct _GdkEventProperty
+/********************************************************************/
+struct _GdkEventPropertyInstanceProps
 {
-  GdkEventType type;
+
   GdkWindow *window;
   gint8 send_event;
   GdkAtom atom;
@@ -390,9 +541,34 @@ struct _GdkEventProperty
   guint state;
 };
 
-struct _GdkEventSelection
+struct _GdkEventPropertyFat
 {
-  GdkEventType type;
+  GdkEventTypeFat   type;
+
+  struct _GdkEventPropertyInstanceProps instance_properties;
+};
+
+struct _GdkEventPropertyThin
+{
+  GdkEventTypeThin  type;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GdkEventPropertyFat   fat_instance;
+  struct _GdkEventPropertyThin  thin_instance;
+}   GdkEventProperty;
+/********************************************************************/
+
+
+
+/********************************************************************/
+struct _GdkEventSelectionInstanceProps
+{
+
   GdkWindow *window;
   gint8 send_event;
   GdkAtom selection;
@@ -402,9 +578,34 @@ struct _GdkEventSelection
   GdkNativeWindow requestor;
 };
 
-struct _GdkEventOwnerChange
+struct _GdkEventSelectionFat
 {
-  GdkEventType type;
+  GdkEventTypeFat   type;
+
+  struct _GdkEventSelectionInstanceProps instance_properties;
+};
+
+struct _GdkEventSelectionThin
+{
+  GdkEventTypeThin  type;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GdkEventSelectionFat   fat_instance;
+  struct _GdkEventSelectionThin  thin_instance;
+}   GdkEventSelection;
+/********************************************************************/
+
+
+
+/********************************************************************/
+struct _GdkEventOwnerChangeInstanceProps
+{
+
   GdkWindow *window;
   gint8 send_event;
   GdkNativeWindow owner;
@@ -414,17 +615,66 @@ struct _GdkEventOwnerChange
   guint32 selection_time;
 };
 
+struct _GdkEventOwnerChangeFat
+{
+  GdkEventTypeFat   type;
+
+  struct _GdkEventOwnerChangeInstanceProps instance_properties;
+};
+
+struct _GdkEventOwnerChangeThin
+{
+  GdkEventTypeThin  type;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GdkEventOwnerChangeFat   fat_instance;
+  struct _GdkEventOwnerChangeThin  thin_instance;
+}   GdkEventOwnerChange;
+/********************************************************************/
+
+
+
 /* This event type will be used pretty rarely. It only is important
    for XInput aware programs that are drawing their own cursor */
 
-struct _GdkEventProximity
+/********************************************************************/
+struct _GdkEventProximityInstanceProps
 {
-  GdkEventType type;
+
   GdkWindow *window;
   gint8 send_event;
   guint32 time;
   GdkDevice *device;
 };
+
+struct _GdkEventProximityFat
+{
+  GdkEventTypeFat   type;
+
+  struct _GdkEventProximityInstanceProps instance_properties;
+};
+
+struct _GdkEventProximityThin
+{
+  GdkEventTypeThin  type;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GdkEventProximityFat   fat_instance;
+  struct _GdkEventProximityThin  thin_instance;
+}   GdkEventProximity;
+/********************************************************************/
+
+
 
 struct _GdkEventClient
 {
@@ -440,23 +690,73 @@ struct _GdkEventClient
   } data;
 };
 
-struct _GdkEventSetting
+/********************************************************************/
+struct _GdkEventSettingInstanceProps
 {
-  GdkEventType type;
+
   GdkWindow *window;
   gint8 send_event;
   GdkSettingAction action;
   char *name;
 };
 
-struct _GdkEventWindowState
+struct _GdkEventSettingFat
 {
-  GdkEventType type;
+  GdkEventTypeFat   type;
+
+  struct _GdkEventSettingInstanceProps instance_properties;
+};
+
+struct _GdkEventSettingThin
+{
+  GdkEventTypeThin  type;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GdkEventSettingFat   fat_instance;
+  struct _GdkEventSettingThin  thin_instance;
+}   GdkEventSetting;
+/********************************************************************/
+
+
+
+/********************************************************************/
+struct _GdkEventWindowStateInstanceProps
+{
+
   GdkWindow *window;
   gint8 send_event;
   GdkWindowState changed_mask;
   GdkWindowState new_window_state;
 };
+
+struct _GdkEventWindowStateFat
+{
+  GdkEventTypeFat   type;
+
+  struct _GdkEventWindowStateInstanceProps instance_properties;
+};
+
+struct _GdkEventWindowStateThin
+{
+  GdkEventTypeThin  type;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GdkEventWindowStateFat   fat_instance;
+  struct _GdkEventWindowStateThin  thin_instance;
+}   GdkEventWindowState;
+/********************************************************************/
+
+
 
 struct _GdkEventGrabBroken {
   GdkEventType type;

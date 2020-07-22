@@ -39,9 +39,10 @@ typedef struct _GtkSizeGroup       GtkSizeGroupThin;
 
 typedef struct _GtkSizeGroupClass  GtkSizeGroupClass;
 
-struct _GtkSizeGroup
+/********************************************************************/
+struct _GtkSizeGroupInstanceProps
 {
-  GObject parent_instance;
+
 
   /* <private> */
   GSList * (widgets);
@@ -54,6 +55,30 @@ struct _GtkSizeGroup
 
   GtkRequisition  (requisition);
 };
+
+struct _GtkSizeGroupFat
+{
+  GObjectFat   parent_instance;
+
+  struct _GtkSizeGroupInstanceProps instance_properties;
+};
+
+struct _GtkSizeGroupThin
+{
+  GObjectThin  parent_instance;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkSizeGroupFat   fat_instance;
+  struct _GtkSizeGroupThin  thin_instance;
+}   GtkSizeGroup;
+/********************************************************************/
+
+
 
 struct _GtkSizeGroupClass
 {

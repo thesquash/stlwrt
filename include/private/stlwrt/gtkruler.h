@@ -52,9 +52,10 @@ struct _GtkRulerPrivate
   GtkOrientation orientation;
 };
 
-struct _GtkRuler
+/********************************************************************/
+struct _GtkRulerInstanceProps
 {
-  GtkWidget widget;
+
 
   GdkPixmap * (backing_store);
   GdkGC * (non_gr_exp_gc);		/* unused */
@@ -72,6 +73,30 @@ struct _GtkRuler
   /* The maximum size of the ruler */
   gdouble  (max_size);
 };
+
+struct _GtkRulerFat
+{
+  GtkWidgetFat   widget;
+
+  struct _GtkRulerInstanceProps instance_properties;
+};
+
+struct _GtkRulerThin
+{
+  GtkWidgetThin  widget;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkRulerFat   fat_instance;
+  struct _GtkRulerThin  thin_instance;
+}   GtkRuler;
+/********************************************************************/
+
+
 
 struct _GtkRulerClass
 {

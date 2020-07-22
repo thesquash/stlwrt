@@ -75,9 +75,10 @@ typedef gboolean (*GtkAccelGroupFindFunc) (GtkAccelKey    *key,
  * 
  * An object representing and maintaining a group of accelerators.
  */
-struct _GtkAccelGroup
+/********************************************************************/
+struct _GtkAccelGroupInstanceProps
 {
-  GObject             parent;
+
 
   guint                (lock_count);
   GdkModifierType      (modifier_mask);
@@ -85,6 +86,30 @@ struct _GtkAccelGroup
   guint	               (n_accels);
   GtkAccelGroupEntry * (priv_accels);
 };
+
+struct _GtkAccelGroupFat
+{
+  GObjectFat               parent;
+
+  struct _GtkAccelGroupInstanceProps instance_properties;
+};
+
+struct _GtkAccelGroupThin
+{
+  GObjectThin              parent;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkAccelGroupFat   fat_instance;
+  struct _GtkAccelGroupThin  thin_instance;
+}   GtkAccelGroup;
+/********************************************************************/
+
+
 
 struct _GtkAccelGroupClass
 {
@@ -179,12 +204,37 @@ GtkAccelGroupEntry*	__gtk_accel_group_query	(GtkAccelGroup	*accel_group,
 void		     ___gtk_accel_group_reconnect (GtkAccelGroup *accel_group,
 						 GQuark         accel_path_quark);
 
-struct _GtkAccelGroupEntry
+/********************************************************************/
+struct _GtkAccelGroupEntryInstanceProps
 {
-  GtkAccelKey  key;
+
   GClosure    *closure;
   GQuark       accel_path_quark;
 };
+
+struct _GtkAccelGroupEntryFat
+{
+  GtkAccelKeyFat    key;
+
+  struct _GtkAccelGroupEntryInstanceProps instance_properties;
+};
+
+struct _GtkAccelGroupEntryThin
+{
+  GtkAccelKeyThin   key;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkAccelGroupEntryFat   fat_instance;
+  struct _GtkAccelGroupEntryThin  thin_instance;
+}   GtkAccelGroupEntry;
+/********************************************************************/
+
+
 
 
 #ifndef GTK_DISABLE_DEPRECATED

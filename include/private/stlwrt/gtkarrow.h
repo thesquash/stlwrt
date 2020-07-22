@@ -42,13 +42,38 @@ typedef struct _GtkArrow       GtkArrowThin;
 
 typedef struct _GtkArrowClass  GtkArrowClass;
 
-struct _GtkArrow
+/********************************************************************/
+struct _GtkArrowInstanceProps
 {
-  GtkMisc misc;
+
 
   gint16  (arrow_type);
   gint16  (shadow_type);
 };
+
+struct _GtkArrowFat
+{
+  GtkMiscFat   misc;
+
+  struct _GtkArrowInstanceProps instance_properties;
+};
+
+struct _GtkArrowThin
+{
+  GtkMiscThin  misc;
+
+  gpointer reserved;
+};
+
+
+typedef union
+{
+  struct _GtkArrowFat   fat_instance;
+  struct _GtkArrowThin  thin_instance;
+}   GtkArrow;
+/********************************************************************/
+
+
 
 struct _GtkArrowClass
 {

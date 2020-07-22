@@ -40,6 +40,52 @@ typedef struct _GtkFileChooserButtonPrivate GtkFileChooserButtonPrivate;
 
 typedef struct _GtkFileChooserButtonClass   GtkFileChooserButtonClass;
 
+
+struct _GtkFileChooserButtonPrivate
+{
+  GtkWidget *dialog;
+  GtkWidget *button;
+  GtkWidget *image;
+  GtkWidget *label;
+  GtkWidget *combo_box;
+  GtkCellRenderer *icon_cell;
+  GtkCellRenderer *name_cell;
+
+  GtkTreeModel *model;
+  GtkTreeModel *filter_model;
+
+  GtkFileSystem *fs;
+  GFile *selection_while_inactive;
+  GFile *current_folder_while_inactive;
+
+  gulong combo_box_changed_id;
+  gulong fs_volumes_changed_id;
+  gulong fs_bookmarks_changed_id;
+
+  GCancellable *dnd_select_folder_cancellable;
+  GCancellable *update_button_cancellable;
+  GSList *change_icon_theme_cancellables;
+
+  gint icon_size;
+
+  guint8 n_special;
+  guint8 n_volumes;
+  guint8 n_shortcuts;
+  guint8 n_bookmarks;
+  guint  has_bookmark_separator       : 1;
+  guint  has_current_folder_separator : 1;
+  guint  has_current_folder           : 1;
+  guint  has_other_separator          : 1;
+
+  /* Used for hiding/showing the dialog when the button is hidden */
+  guint  active                       : 1;
+
+  guint  focus_on_click               : 1;
+
+  /* Whether the next async callback from GIO should emit the "selection-changed" signal */
+  guint  is_changing_selection        : 1;
+};
+
 struct _GtkFileChooserButton
 {
   /*< private >*/

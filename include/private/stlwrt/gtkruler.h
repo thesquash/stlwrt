@@ -46,6 +46,12 @@ typedef struct _GtkRulerMetric  GtkRulerMetric;
 /* All distances below are in 1/72nd's of an inch. (According to
  * Adobe that's a point, but points are really 1/72.27 in.)
  */
+
+struct _GtkRulerPrivate
+{
+  GtkOrientation orientation;
+};
+
 struct _GtkRuler
 {
   GtkWidget widget;

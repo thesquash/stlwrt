@@ -39,6 +39,15 @@ typedef struct _GtkPaned        GtkPanedThin;
 typedef struct _GtkPanedClass   GtkPanedClass;
 typedef struct _GtkPanedPrivate GtkPanedPrivate;
 
+
+struct _GtkPanedPrivate
+{
+  GtkOrientation  orientation;
+  GtkWidget      *saved_focus;
+  GtkPaned       *first_paned;
+  guint32         grab_time;
+};
+
 struct _GtkPaned
 {
   GtkContainer container;

@@ -39,6 +39,14 @@ typedef struct _GtkCellRendererToggle GtkCellRendererToggleThin;
 
 typedef struct _GtkCellRendererToggleClass GtkCellRendererToggleClass;
 
+
+struct _GtkCellRendererTogglePrivate
+{
+  gint indicator_size;
+
+  guint inconsistent : 1;
+};
+
 struct _GtkCellRendererToggle
 {
   GtkCellRenderer parent;

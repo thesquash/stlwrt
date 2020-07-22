@@ -42,6 +42,14 @@ typedef struct _GtkRecentChooserDialogClass   GtkRecentChooserDialogClass;
 typedef struct _GtkRecentChooserDialogPrivate GtkRecentChooserDialogPrivate;
 
 
+
+struct _GtkRecentChooserDialogPrivate
+{
+  GtkRecentManager *manager;
+  
+  GtkWidget *chooser;
+};
+
 struct _GtkRecentChooserDialog
 {
   /*< private >*/

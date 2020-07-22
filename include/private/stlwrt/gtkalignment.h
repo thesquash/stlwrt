@@ -41,6 +41,15 @@ typedef struct _GtkAlignment       GtkAlignmentThin;
 typedef struct _GtkAlignmentClass  GtkAlignmentClass;
 typedef struct _GtkAlignmentPrivate GtkAlignmentPrivate;
 
+
+struct _GtkAlignmentPrivate
+{
+  guint padding_top;
+  guint padding_bottom;
+  guint padding_left;
+  guint padding_right;
+};
+
 struct _GtkAlignment
 {
   GtkBin bin;

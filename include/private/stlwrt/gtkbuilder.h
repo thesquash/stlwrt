@@ -56,6 +56,16 @@ typedef enum
 
 GQuark __gtk_builder_error_quark (void);
 
+
+struct _GtkBuilderPrivate
+{
+  gchar *domain;
+  GHashTable *objects;
+  GSList *delayed_properties;
+  GSList *signals;
+  gchar *filename;
+};
+
 struct _GtkBuilder
 {
   GObject parent_instance;

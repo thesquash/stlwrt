@@ -46,6 +46,15 @@ typedef struct _GtkInfoBarClass GtkInfoBarClass;
 typedef struct _GtkInfoBar GtkInfoBar;
 
 
+
+struct _GtkInfoBarPrivate
+{
+  GtkWidget *content_area;
+  GtkWidget *action_area;
+
+  GtkMessageType message_type;
+};
+
 struct _GtkInfoBar
 {
   GtkHBox parent;

@@ -41,6 +41,14 @@ typedef struct _GtkQuery GtkQueryThin;
 typedef struct _GtkQueryClass GtkQueryClass;
 typedef struct _GtkQueryPrivate GtkQueryPrivate;
 
+
+struct _GtkQueryPrivate 
+{
+  gchar *text;
+  gchar *location_uri;
+  GList *mime_types;
+};
+
 struct _GtkQuery 
 {
   GObject parent;

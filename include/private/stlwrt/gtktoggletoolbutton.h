@@ -40,6 +40,12 @@ typedef struct _GtkToggleToolButton        GtkToggleToolButton;
 typedef struct _GtkToggleToolButtonClass   GtkToggleToolButtonClass;
 typedef struct _GtkToggleToolButtonPrivate GtkToggleToolButtonPrivate;
 
+
+struct _GtkToggleToolButtonPrivate
+{
+  guint active : 1;
+};
+
 struct _GtkToggleToolButton
 {
   GtkToolButton parent;

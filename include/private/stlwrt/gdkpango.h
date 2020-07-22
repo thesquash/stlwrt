@@ -64,6 +64,29 @@ typedef struct _GdkPangoRendererPrivate GdkPangoRendererPrivate;
  *
  * Since: 2.6
  **/
+
+struct _GdkPangoRendererPrivate
+{
+  GdkScreen *screen;
+
+  /* GdkPangoRenderer specific state */
+  PangoColor override_color[MAX_RENDER_PART + 1];
+  gboolean override_color_set[MAX_RENDER_PART + 1];
+  
+  GdkBitmap *stipple[MAX_RENDER_PART + 1];
+  PangoColor emboss_color;
+  gboolean embossed;
+
+  cairo_t *cr;
+  PangoRenderPart last_part;
+
+  /* Current target */
+  GdkDrawable *drawable;
+  GdkGC *base_gc;
+
+  gboolean gc_changed;
+};
+
 struct _GdkPangoRenderer
 {
   /*< private >*/

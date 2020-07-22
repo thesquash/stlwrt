@@ -40,6 +40,18 @@ typedef struct _GtkEntryBuffer            GtkEntryBuffer;
 typedef struct _GtkEntryBufferClass       GtkEntryBufferClass;
 typedef struct _GtkEntryBufferPrivate     GtkEntryBufferPrivate;
 
+
+struct _GtkEntryBufferPrivate
+{
+  gint  max_length;
+
+  /* Only valid if this class is not derived */
+  gchar *normal_text;
+  gsize  normal_text_size;
+  gsize  normal_text_bytes;
+  guint  normal_text_chars;
+};
+
 struct _GtkEntryBuffer
 {
   GObject parent_instance;

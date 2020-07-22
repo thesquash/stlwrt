@@ -37,6 +37,8 @@ typedef struct _GtkTrayIconPrivate GtkTrayIconPrivate;
 
 typedef struct _GtkTrayIconClass   GtkTrayIconClass;
 
+
+
 struct _GtkTrayIcon
 {
   GtkPlug parent_instance;

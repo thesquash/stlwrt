@@ -41,6 +41,16 @@ typedef struct _GtkSearchEngineSimple GtkSearchEngineSimpleThin;
 typedef struct _GtkSearchEngineSimpleClass GtkSearchEngineSimpleClass;
 typedef struct _GtkSearchEngineSimplePrivate GtkSearchEngineSimplePrivate;
 
+
+struct _GtkSearchEngineSimplePrivate 
+{
+  GtkQuery *query;
+  
+  SearchThreadData *active_search;
+  
+  gboolean query_finished;
+};
+
 struct _GtkSearchEngineSimple 
 {
   GtkSearchEngine parent;

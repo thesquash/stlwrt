@@ -39,6 +39,16 @@ typedef struct _GtkMessageDialog        GtkMessageDialogThin;
 
 typedef struct _GtkMessageDialogClass   GtkMessageDialogClass;
 
+
+struct _GtkMessageDialogPrivate
+{
+  GtkWidget *message_area; /* vbox for the primary and secondary labels, and any extra content from the caller */
+  GtkWidget *secondary_label;
+  guint message_type : 3;
+  guint has_primary_markup : 1;
+  guint has_secondary_text : 1;
+};
+
 struct _GtkMessageDialog
 {
   /*< private >*/

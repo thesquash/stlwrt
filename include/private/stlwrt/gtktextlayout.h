@@ -112,6 +112,15 @@ typedef struct _GtkTextLineDisplay    GtkTextLineDisplay;
 typedef struct _GtkTextCursorDisplay  GtkTextCursorDisplay;
 typedef struct _GtkTextAttrAppearance GtkTextAttrAppearance;
 
+
+struct _GtkTextLayoutPrivate
+{
+  /* Cache the line that the cursor is positioned on, as the keyboard
+     direction only influences the direction of the cursor line.
+  */
+  GtkTextLine *cursor_line;
+};
+
 struct _GtkTextLayout
 {
   GObject parent_instance;

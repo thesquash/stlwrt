@@ -38,6 +38,12 @@ typedef struct _GtkSeparator       GtkSeparator;
 
 typedef struct _GtkSeparatorClass  GtkSeparatorClass;
 
+
+struct _GtkSeparatorPrivate
+{
+  GtkOrientation orientation;
+};
+
 struct _GtkSeparator
 {
   GtkWidget widget;

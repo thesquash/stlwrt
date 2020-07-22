@@ -39,6 +39,31 @@ typedef struct _GtkCellRendererText      GtkCellRendererTextThin;
 
 typedef struct _GtkCellRendererTextClass GtkCellRendererTextClass;
 
+
+struct _GtkCellRendererTextPrivate
+{
+  guint single_paragraph : 1;
+  guint language_set : 1;
+  guint markup_set : 1;
+  guint ellipsize_set : 1;
+  guint align_set : 1;
+  
+  gulong focus_out_id;
+  PangoLanguage *language;
+  PangoEllipsizeMode ellipsize;
+  PangoWrapMode wrap_mode;
+  PangoAlignment align;
+  
+  gulong populate_popup_id;
+  gulong entry_menu_popdown_timeout;
+  gboolean in_entry_menu;
+  
+  gint width_chars;
+  gint wrap_width;
+  
+  GtkWidget *entry;
+};
+
 struct _GtkCellRendererText
 {
   GtkCellRenderer parent;

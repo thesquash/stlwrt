@@ -42,6 +42,16 @@ typedef struct _GtkSpinner      GtkSpinner;
 typedef struct _GtkSpinnerClass GtkSpinnerClass;
 typedef struct _GtkSpinnerPrivate  GtkSpinnerPrivate;
 
+
+struct _GtkSpinnerPrivate
+{
+  guint current;
+  guint num_steps;
+  guint cycle_duration;
+  gboolean active;
+  guint timeout;
+};
+
 struct _GtkSpinner
 {
   GtkDrawingArea parent;

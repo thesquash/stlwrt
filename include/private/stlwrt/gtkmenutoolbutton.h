@@ -40,6 +40,16 @@ typedef struct _GtkMenuToolButtonClass   GtkMenuToolButtonClass;
 typedef struct _GtkMenuToolButton        GtkMenuToolButton;
 typedef struct _GtkMenuToolButtonPrivate GtkMenuToolButtonPrivate;
 
+
+struct _GtkMenuToolButtonPrivate
+{
+  GtkWidget *button;
+  GtkWidget *arrow;
+  GtkWidget *arrow_button;
+  GtkWidget *box;
+  GtkMenu   *menu;
+};
+
 struct _GtkMenuToolButton
 {
   GtkToolButton parent;

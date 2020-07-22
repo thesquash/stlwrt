@@ -43,6 +43,28 @@ typedef struct _GtkToolItem        GtkToolItem;
 typedef struct _GtkToolItemClass   GtkToolItemClass;
 typedef struct _GtkToolItemPrivate GtkToolItemPrivate;
 
+
+struct _GtkToolItemPrivate
+{
+  gchar *tip_text;
+  gchar *tip_private;
+
+  guint visible_horizontal : 1;
+  guint visible_vertical : 1;
+  guint homogeneous : 1;
+  guint expand : 1;
+  guint use_drag_window : 1;
+  guint is_important : 1;
+
+  GdkWindow *drag_window;
+  
+  gchar *menu_item_id;
+  GtkWidget *menu_item;
+
+  GtkAction *action;
+  gboolean   use_action_appearance;
+};
+
 struct _GtkToolItem
 {
   GtkBin parent;

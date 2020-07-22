@@ -187,6 +187,12 @@ struct _GtkRequisition
  *  of screen real estate). It provides a common base and interface
  *  which actual widgets must adhere to.
  */
+
+struct _GtkWidgetPrivate
+{
+  guint32  widget_flags;
+};
+
 struct _GtkWidget
 {
   /* The object structure needs to be the first

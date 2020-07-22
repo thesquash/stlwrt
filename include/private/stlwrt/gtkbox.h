@@ -41,6 +41,14 @@ typedef struct _GtkBox	      GtkBoxThin;
 
 typedef struct _GtkBoxClass   GtkBoxClass;
 
+
+struct _GtkBoxPrivate
+{
+  GtkOrientation orientation;
+  guint          default_expand : 1;
+  guint          spacing_set    : 1;
+};
+
 struct _GtkBox
 {
   GtkContainer container;

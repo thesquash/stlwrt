@@ -38,6 +38,12 @@ typedef struct _GtkCellRendererCombo      GtkCellRendererComboThin;
 
 typedef struct _GtkCellRendererComboClass GtkCellRendererComboClass;
 
+
+struct _GtkCellRendererComboPrivate
+{
+  GtkWidget *combo;
+};
+
 struct _GtkCellRendererCombo
 {
   GtkCellRendererText parent;

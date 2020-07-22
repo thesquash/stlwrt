@@ -39,6 +39,12 @@ typedef struct _GtkSeparatorToolItem        GtkSeparatorToolItem;
 typedef struct _GtkSeparatorToolItemClass   GtkSeparatorToolItemClass;
 typedef struct _GtkSeparatorToolItemPrivate GtkSeparatorToolItemPrivate;
 
+
+struct _GtkSeparatorToolItemPrivate
+{
+  guint draw : 1;
+};
+
 struct _GtkSeparatorToolItem
 {
   GtkToolItem parent;

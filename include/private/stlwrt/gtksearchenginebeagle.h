@@ -41,6 +41,17 @@ typedef struct _GtkSearchEngineBeagle GtkSearchEngineBeagleThin;
 typedef struct _GtkSearchEngineBeagleClass GtkSearchEngineBeagleClass;
 typedef struct _GtkSearchEngineBeaglePrivate GtkSearchEngineBeaglePrivate;
 
+
+struct _GtkSearchEngineBeaglePrivate 
+{
+  BeagleClient *client;
+  GtkQuery *query;
+
+  BeagleQuery *current_query;
+  char *current_query_uri_prefix;
+  gboolean query_finished;
+};
+
 struct _GtkSearchEngineBeagle 
 {
   GtkSearchEngine parent;

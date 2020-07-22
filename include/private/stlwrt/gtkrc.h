@@ -48,6 +48,12 @@ typedef enum
   GTK_RC_BASE		= 1 << 3
 } GtkRcFlags;
 
+
+struct _GtkRcStylePrivate
+{
+  GSList *color_hashes;
+};
+
 struct _GtkRcStyle
 {
   GObject parent_instance;

@@ -91,6 +91,62 @@ typedef gchar* (*GtkCalendarDetailFunc) (GtkCalendar *calendar,
                                          guint        day,
                                          gpointer     user_data);
 
+
+struct _GtkCalendarPrivate
+{
+  GdkWindow *header_win;
+  GdkWindow *day_name_win;
+  GdkWindow *main_win;
+  GdkWindow *week_win;
+  GdkWindow *arrow_win[4];
+
+  guint header_h;
+  guint day_name_h;
+  guint main_h;
+
+  guint	     arrow_state[4];
+  guint	     arrow_width;
+  guint	     max_month_width;
+  guint	     max_year_width;
+  
+  guint day_width;
+  guint week_width;
+
+  guint min_day_width;
+  guint max_day_char_width;
+  guint max_day_char_ascent;
+  guint max_day_char_descent;
+  guint max_label_char_ascent;
+  guint max_label_char_descent;
+  guint max_week_char_width;
+  
+  /* flags */
+  guint year_before : 1;
+
+  guint need_timer  : 1;
+
+  guint in_drag : 1;
+  guint drag_highlight : 1;
+
+  guint32 timer;
+  gint click_child;
+
+  gint week_start;
+
+  gint drag_start_x;
+  gint drag_start_y;
+
+  /* Optional callback, used to display extra information for each day. */
+  GtkCalendarDetailFunc detail_func;
+  gpointer              detail_func_user_data;
+  GDestroyNotify        detail_func_destroy;
+
+  /* Size requistion for details provided by the hook. */
+  gint detail_height_rows;
+  gint detail_width_chars;
+  gint detail_overflow[6];
+};
+
 struct _GtkCalendar
 {
   GtkWidget widget;

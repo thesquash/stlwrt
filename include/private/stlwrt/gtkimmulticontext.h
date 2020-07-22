@@ -40,6 +40,18 @@ typedef struct _GtkIMMulticontext        GtkIMMulticontextThin;
 typedef struct _GtkIMMulticontextClass   GtkIMMulticontextClass;
 typedef struct _GtkIMMulticontextPrivate GtkIMMulticontextPrivate;
 
+
+struct _GtkIMMulticontextPrivate
+{
+  GdkWindow *client_window;
+  GdkRectangle cursor_location;
+  gchar *context_id;
+
+  guint use_preedit : 1;
+  guint have_cursor_location : 1;
+  guint focus_in : 1;
+};
+
 struct _GtkIMMulticontext
 {
   GtkIMContext object;

@@ -40,6 +40,45 @@ typedef struct _GtkRecentChooserMenu		GtkRecentChooserMenuThin;
 typedef struct _GtkRecentChooserMenuClass	GtkRecentChooserMenuClass;
 typedef struct _GtkRecentChooserMenuPrivate	GtkRecentChooserMenuPrivate;
 
+
+struct _GtkRecentChooserMenuPrivate
+{
+  /* the recent manager object */
+  GtkRecentManager *manager;
+  
+  /* size of the icons of the menu items */  
+  gint icon_size;
+
+  /* max size of the menu item label */
+  gint label_width;
+
+  gint first_recent_item_pos;
+  GtkWidget *placeholder;
+
+  /* RecentChooser properties */
+  gint limit;  
+  guint show_private : 1;
+  guint show_not_found : 1;
+  guint show_tips : 1;
+  guint show_icons : 1;
+  guint local_only : 1;
+  
+  guint show_numbers : 1;
+  
+  GtkRecentSortType sort_type;
+  GtkRecentSortFunc sort_func;
+  gpointer sort_data;
+  GDestroyNotify sort_data_destroy;
+  
+  GSList *filters;
+  GtkRecentFilter *current_filter;
+ 
+  guint local_manager : 1;
+  gulong manager_changed_id;
+
+  gulong populate_id;
+};
+
 struct _GtkRecentChooserMenu
 {
   /*< private >*/

@@ -39,6 +39,13 @@ typedef struct _GtkScale        GtkScaleThin;
 
 typedef struct _GtkScaleClass   GtkScaleClass;
 
+
+struct _GtkScalePrivate
+{
+  PangoLayout *layout;
+  GSList      *marks;
+};
+
 struct _GtkScale
 {
   GtkRange range;

@@ -49,6 +49,39 @@ typedef struct _GtkNotebookClass  GtkNotebookClass;
 typedef struct _GtkNotebookPage   GtkNotebookPage;
 #endif
 
+
+struct _GtkNotebookPrivate
+{
+  gpointer group;
+  gint  mouse_x;
+  gint  mouse_y;
+  gint  pressed_button;
+  guint dnd_timer;
+  guint switch_tab_timer;
+
+  gint  drag_begin_x;
+  gint  drag_begin_y;
+
+  gint  drag_offset_x;
+  gint  drag_offset_y;
+
+  GtkWidget *dnd_window;
+  GtkTargetList *source_targets;
+  GtkNotebookDragOperation operation;
+  GdkWindow *drag_window;
+  gint drag_window_x;
+  gint drag_window_y;
+  GtkNotebookPage *detached_tab;
+
+  guint32 timestamp;
+
+  GtkWidget *action_widget[N_ACTION_WIDGETS];
+
+  guint during_reorder : 1;
+  guint during_detach  : 1;
+  guint has_scrolled   : 1;
+};
+
 struct _GtkNotebook
 {
   GtkContainer container;

@@ -39,6 +39,23 @@ typedef struct _GtkToolButton        GtkToolButton;
 typedef struct _GtkToolButtonClass   GtkToolButtonClass;
 typedef struct _GtkToolButtonPrivate GtkToolButtonPrivate;
 
+
+struct _GtkToolButtonPrivate
+{
+  GtkWidget *button;
+
+  gchar *stock_id;
+  gchar *icon_name;
+  gchar *label_text;
+  GtkWidget *label_widget;
+  GtkWidget *icon_widget;
+
+  GtkSizeGroup *text_size_group;
+
+  guint use_underline : 1;
+  guint contents_invalid : 1;
+};
+
 struct _GtkToolButton
 {
   GtkToolItem parent;

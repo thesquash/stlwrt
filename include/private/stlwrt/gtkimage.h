@@ -136,6 +136,16 @@ typedef enum
  * This struct contain private data only and should be accessed by the functions
  * below.
  */
+
+struct _GtkImagePrivate
+{
+  /* Only used with GTK_IMAGE_ANIMATION, GTK_IMAGE_PIXBUF */
+  gchar *filename;
+
+  gint pixel_size;
+  guint need_calc_size : 1;
+};
+
 struct _GtkImage
 {
   GtkMisc misc;

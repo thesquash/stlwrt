@@ -43,6 +43,13 @@ typedef struct _GtkRadioActionPrivate GtkRadioActionPrivate;
 
 typedef struct _GtkRadioActionClass   GtkRadioActionClass;
 
+
+struct _GtkRadioActionPrivate 
+{
+  GSList *group;
+  gint    value;
+};
+
 struct _GtkRadioAction
 {
   GtkToggleAction parent;

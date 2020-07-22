@@ -47,6 +47,19 @@ typedef struct _GtkActionEntry        GtkActionEntry;
 typedef struct _GtkToggleActionEntry  GtkToggleActionEntry;
 typedef struct _GtkRadioActionEntry   GtkRadioActionEntry;
 
+
+struct _GtkActionGroupPrivate 
+{
+  gchar           *name;
+  gboolean	   sensitive;
+  gboolean	   visible;
+  GHashTable      *actions;
+
+  GtkTranslateFunc translate_func;
+  gpointer         translate_data;
+  GDestroyNotify   translate_notify;
+};
+
 struct _GtkActionGroup
 {
   GObject parent;

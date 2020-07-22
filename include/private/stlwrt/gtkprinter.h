@@ -66,6 +66,30 @@ typedef struct _GtkPrintBackend     GtkPrintBackendThin;
 
 struct _GtkPrintBackend;
 
+
+struct _GtkPrinterPrivate
+{
+  gchar *name;
+  gchar *location;
+  gchar *description;
+  gchar *icon_name;
+
+  guint is_active         : 1;
+  guint is_paused         : 1;
+  guint is_accepting_jobs : 1;
+  guint is_new            : 1;
+  guint is_virtual        : 1;
+  guint is_default        : 1;
+  guint has_details       : 1;
+  guint accepts_pdf       : 1;
+  guint accepts_ps        : 1;
+
+  gchar *state_message;  
+  gint job_count;
+
+  GtkPrintBackend *backend;
+};
+
 struct _GtkPrinter
 {
   GObject parent_instance;

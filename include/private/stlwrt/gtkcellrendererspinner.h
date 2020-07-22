@@ -40,6 +40,15 @@ typedef struct _GtkCellRendererSpinner        GtkCellRendererSpinner;
 typedef struct _GtkCellRendererSpinnerClass   GtkCellRendererSpinnerClass;
 typedef struct _GtkCellRendererSpinnerPrivate GtkCellRendererSpinnerPrivate;
 
+
+struct _GtkCellRendererSpinnerPrivate
+{
+  gboolean active;
+  guint pulse;
+  GtkIconSize icon_size, old_icon_size;
+  gint size;
+};
+
 struct _GtkCellRendererSpinner
 {
   GtkCellRenderer                parent;

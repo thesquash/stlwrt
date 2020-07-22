@@ -37,6 +37,14 @@ typedef struct _GtkCellRendererSpin        GtkCellRendererSpin;
 typedef struct _GtkCellRendererSpinClass   GtkCellRendererSpinClass;
 typedef struct _GtkCellRendererSpinPrivate GtkCellRendererSpinPrivate;
 
+
+struct _GtkCellRendererSpinPrivate
+{
+  GtkAdjustment *adjustment;
+  gdouble climb_rate;
+  guint   digits;
+};
+
 struct _GtkCellRendererSpin
 {
   GtkCellRendererText parent;

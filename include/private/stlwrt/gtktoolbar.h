@@ -81,6 +81,33 @@ typedef struct _GtkToolbar           GtkToolbarThin;
 typedef struct _GtkToolbarClass      GtkToolbarClass;
 typedef struct _GtkToolbarPrivate    GtkToolbarPrivate;
 
+
+struct _GtkToolbarPrivate
+{
+  GList	*	content;
+  
+  GtkWidget *	arrow;
+  GtkWidget *	arrow_button;
+  GtkMenu *	menu;
+  
+  GdkWindow *	event_window;
+  ApiMode	api_mode;
+  GtkSettings *	settings;
+  int		idle_id;
+  GtkToolItem *	highlight_tool_item;
+  gint		max_homogeneous_pixels;
+  
+  GTimer *	timer;
+
+  gulong        settings_connection;
+
+  guint         show_arrow : 1;
+  guint         need_sync : 1;
+  guint         is_sliding : 1;
+  guint         need_rebuild : 1;  /* whether the overflow menu should be regenerated */
+  guint         animation : 1;
+};
+
 struct _GtkToolbar
 {
   GtkContainer container;

@@ -38,6 +38,21 @@ typedef struct _GtkCellRendererProgress         GtkCellRendererProgress;
 typedef struct _GtkCellRendererProgressClass    GtkCellRendererProgressClass;
 typedef struct _GtkCellRendererProgressPrivate  GtkCellRendererProgressPrivate;
 
+
+struct _GtkCellRendererProgressPrivate
+{
+  gint value;
+  gchar *text;
+  gchar *label;
+  gint min_h;
+  gint min_w;
+  gint pulse;
+  gint offset;
+  gfloat text_xalign;
+  gfloat text_yalign;
+  GtkProgressBarOrientation orientation;
+};
+
 struct _GtkCellRendererProgress
 {
   GtkCellRenderer parent_instance;

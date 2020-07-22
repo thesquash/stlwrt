@@ -77,6 +77,19 @@ struct GtkFolderClass
   void (*deleted)          (GtkFolder *folder);
 };
 
+
+struct GtkFolderPrivate
+{
+  GFile *folder_file;
+  GHashTable *children;
+  GFileMonitor *directory_monitor;
+  GFileEnumerator *enumerator;
+  GCancellable *cancellable;
+  gchar *attributes;
+
+  guint finished_loading : 1;
+};
+
 struct GtkFolder
 {
   GObject parent_object;

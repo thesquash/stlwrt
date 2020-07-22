@@ -41,6 +41,14 @@ typedef struct _GtkRecentChooserWidgetClass   GtkRecentChooserWidgetClass;
 
 typedef struct _GtkRecentChooserWidgetPrivate GtkRecentChooserWidgetPrivate;
 
+
+struct _GtkRecentChooserWidgetPrivate
+{
+  GtkRecentManager *manager;
+  
+  GtkWidget *chooser;
+};
+
 struct _GtkRecentChooserWidget
 {
   /*< private >*/

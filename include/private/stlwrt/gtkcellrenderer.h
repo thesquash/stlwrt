@@ -54,6 +54,12 @@ typedef struct _GtkCellRenderer GtkCellRendererThin;
 
 typedef struct _GtkCellRendererClass GtkCellRendererClass;
 
+
+struct _GtkCellRendererPrivate
+{
+  GdkColor cell_background;
+};
+
 struct _GtkCellRenderer
 {
   GObject parent;

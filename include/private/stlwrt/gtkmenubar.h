@@ -38,6 +38,13 @@ typedef struct _GtkMenuBar       GtkMenuBar;
 
 typedef struct _GtkMenuBarClass  GtkMenuBarClass;
 
+
+struct _GtkMenuBarPrivate
+{
+  GtkPackDirection pack_direction;
+  GtkPackDirection child_pack_direction;
+};
+
 struct _GtkMenuBar
 {
   GtkMenuShell menu_shell;

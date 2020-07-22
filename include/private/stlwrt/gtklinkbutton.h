@@ -46,6 +46,16 @@ typedef void (*GtkLinkButtonUriFunc) (GtkLinkButton *button,
 				      const gchar   *link_,
 				      gpointer       user_data);
 
+
+struct _GtkLinkButtonPrivate
+{
+  gchar *uri;
+
+  gboolean visited;
+
+  GtkWidget *popup_menu;
+};
+
 struct _GtkLinkButton
 {
   GtkButton parent_instance;

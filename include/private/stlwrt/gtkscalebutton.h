@@ -47,6 +47,28 @@ typedef struct _GtkScaleButton        GtkScaleButtonThin;
 typedef struct _GtkScaleButtonClass   GtkScaleButtonClass;
 typedef struct _GtkScaleButtonPrivate GtkScaleButtonPrivate;
 
+
+struct _GtkScaleButtonPrivate
+{
+  GtkWidget *dock;
+  GtkWidget *box;
+  GtkWidget *scale;
+  GtkWidget *image;
+
+  GtkIconSize size;
+  GtkOrientation orientation;
+
+  guint click_id;
+  gint click_timeout;
+  guint timeout : 1;
+  gdouble direction;
+  guint32 pop_time;
+
+  gchar **icon_list;
+
+  GtkAdjustment *adjustment; /* needed because it must be settable in init() */
+};
+
 struct _GtkScaleButton
 {
   GtkButton parent;

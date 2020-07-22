@@ -41,6 +41,15 @@ typedef struct _GtkSearchEngineTracker GtkSearchEngineTrackerThin;
 typedef struct _GtkSearchEngineTrackerClass GtkSearchEngineTrackerClass;
 typedef struct _GtkSearchEngineTrackerPrivate GtkSearchEngineTrackerPrivate;
 
+
+struct _GtkSearchEngineTrackerPrivate
+{
+  GDBusConnection *connection;
+  GCancellable *cancellable;
+  GtkQuery *query;
+  gboolean query_pending;
+};
+
 struct _GtkSearchEngineTracker 
 {
   GtkSearchEngine parent;

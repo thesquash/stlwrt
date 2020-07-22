@@ -39,6 +39,18 @@ typedef struct _GtkCellView             GtkCellView;
 typedef struct _GtkCellViewClass        GtkCellViewClass;
 typedef struct _GtkCellViewPrivate      GtkCellViewPrivate;
 
+
+struct _GtkCellViewPrivate
+{
+  GtkTreeModel *model;
+  GtkTreeRowReference *displayed_row;
+  GList *cell_list;
+  gint spacing;
+
+  GdkColor background;
+  gboolean background_set;
+};
+
 struct _GtkCellView
 {
   GtkWidget parent_instance;

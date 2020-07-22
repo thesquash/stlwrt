@@ -177,6 +177,31 @@ struct _GdkGCValues
 #define GDK_IS_GC_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GDK_TYPE_GC))
 #define GDK_GC_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GDK_TYPE_GC, GdkGCClass))
 
+
+struct _GdkGCPrivate
+{
+  GdkRegion *clip_region;
+
+  guint32 region_tag_applied;
+  int region_tag_offset_x;
+  int region_tag_offset_y;
+
+  GdkRegion *old_clip_region;
+  GdkPixmap *old_clip_mask;
+
+  GdkBitmap *stipple;
+  GdkPixmap *tile;
+
+  GdkPixmap *clip_mask;
+
+  guint32 fg_pixel;
+  guint32 bg_pixel;
+
+  guint subwindow_mode : 1;
+  guint fill : 2;
+  guint exposures : 2;
+};
+
 struct _GdkGC
 {
   GObject parent_instance;

@@ -47,6 +47,26 @@ typedef void (*GtkPrintJobCompleteFunc) (GtkPrintJob *print_job,
 
 struct _GtkPrinter;
 
+
+struct _GtkPrintJobPrivate
+{
+  gchar *title;
+
+  GIOChannel *spool_io;
+  cairo_surface_t *surface;
+
+  GtkPrintStatus status;
+  GtkPrintBackend *backend;  
+  GtkPrinter *printer;
+  GtkPrintSettings *settings;
+  GtkPageSetup *page_setup;
+
+  guint printer_set : 1;
+  guint page_setup_set : 1;
+  guint settings_set  : 1;
+  guint track_print_status : 1;
+};
+
 struct _GtkPrintJob
 {
   GObject parent_instance;

@@ -40,6 +40,13 @@ typedef struct _GtkComboBoxEntry             GtkComboBoxEntry;
 typedef struct _GtkComboBoxEntryClass        GtkComboBoxEntryClass;
 typedef struct _GtkComboBoxEntryPrivate      GtkComboBoxEntryPrivate;
 
+
+struct _GtkComboBoxEntryPrivate
+{
+  GtkCellRenderer *text_renderer;
+  gint text_column;
+};
+
 struct _GtkComboBoxEntry
 {
   GtkComboBox parent_instance;

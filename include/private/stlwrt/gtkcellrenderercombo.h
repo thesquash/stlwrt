@@ -39,11 +39,6 @@ typedef struct _GtkCellRendererCombo      GtkCellRendererComboThin;
 typedef struct _GtkCellRendererComboClass GtkCellRendererComboClass;
 
 
-struct _GtkCellRendererComboPrivate
-{
-  GtkWidget *combo;
-};
-
 /********************************************************************/
 struct _GtkCellRendererComboInstanceProps
 {
@@ -55,6 +50,13 @@ struct _GtkCellRendererComboInstanceProps
 
   /*< private >*/
   guint          (focus_out_id);
+};
+
+struct _GtkCellRendererComboPrivate
+{
+  struct _GtkCellRendererComboInstanceProps  instance_properties;
+  
+  GtkWidget *combo;
 };
 
 struct _GtkCellRendererComboFat

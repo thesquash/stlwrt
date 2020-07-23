@@ -42,13 +42,6 @@ typedef struct _GtkBox	      GtkBoxThin;
 typedef struct _GtkBoxClass   GtkBoxClass;
 
 
-struct _GtkBoxPrivate
-{
-  GtkOrientation orientation;
-  guint          default_expand : 1;
-  guint          spacing_set    : 1;
-};
-
 /********************************************************************/
 struct _GtkBoxInstanceProps
 {
@@ -58,6 +51,15 @@ struct _GtkBoxInstanceProps
   GList * (children);
   gint16  (spacing);
   guint  (homogeneous) : 1;
+};
+
+struct _GtkBoxPrivate
+{
+  struct _GtkBoxInstanceProps  instance_properties;
+  
+  GtkOrientation orientation;
+  guint          default_expand : 1;
+  guint          spacing_set    : 1;
 };
 
 struct _GtkBoxFat

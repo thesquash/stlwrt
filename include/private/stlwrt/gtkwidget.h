@@ -188,11 +188,6 @@ struct _GtkRequisition
  *  which actual widgets must adhere to.
  */
 
-struct _GtkWidgetPrivate
-{
-  guint32  widget_flags;
-};
-
 /********************************************************************/
 struct _GtkWidgetInstanceProps
 {
@@ -252,6 +247,13 @@ struct _GtkWidgetInstanceProps
   /* The widget's parent.
    */
   GtkWidget * (parent);
+};
+
+struct _GtkWidgetPrivate
+{
+  struct _GtkWidgetInstanceProps  instance_properties;
+  
+  guint32  widget_flags;
 };
 
 struct _GtkWidgetFat

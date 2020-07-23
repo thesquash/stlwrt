@@ -40,16 +40,6 @@ typedef struct _GtkCellRendererPixbuf GtkCellRendererPixbufThin;
 typedef struct _GtkCellRendererPixbufClass GtkCellRendererPixbufClass;
 
 
-struct _GtkCellRendererPixbufPrivate
-{
-  gchar *stock_id;
-  GtkIconSize stock_size;
-  gchar *stock_detail;
-  gboolean follow_state;
-  gchar *icon_name;
-  GIcon *gicon;
-};
-
 /********************************************************************/
 struct _GtkCellRendererPixbufInstanceProps
 {
@@ -59,6 +49,18 @@ struct _GtkCellRendererPixbufInstanceProps
   GdkPixbuf * (pixbuf);
   GdkPixbuf * (pixbuf_expander_open);
   GdkPixbuf * (pixbuf_expander_closed);
+};
+
+struct _GtkCellRendererPixbufPrivate
+{
+  struct _GtkCellRendererPixbufInstanceProps  instance_properties;
+  
+  gchar *stock_id;
+  GtkIconSize stock_size;
+  gchar *stock_detail;
+  gboolean follow_state;
+  gchar *icon_name;
+  GIcon *gicon;
 };
 
 struct _GtkCellRendererPixbufFat

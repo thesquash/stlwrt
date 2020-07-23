@@ -41,15 +41,6 @@ typedef struct _GtkAlignment       GtkAlignmentThin;
 typedef struct _GtkAlignmentClass  GtkAlignmentClass;
 typedef struct _GtkAlignmentPrivate GtkAlignmentPrivate;
 
-
-struct _GtkAlignmentPrivate
-{
-  guint padding_top;
-  guint padding_bottom;
-  guint padding_left;
-  guint padding_right;
-};
-
 /********************************************************************/
 struct _GtkAlignmentInstanceProps
 {
@@ -59,6 +50,16 @@ struct _GtkAlignmentInstanceProps
   gfloat  (yalign);
   gfloat  (xscale);
   gfloat  (yscale);
+};
+
+struct _GtkAlignmentPrivate
+{
+  struct _GtkAlignmentInstanceProps  instance_properties;
+  
+  guint padding_top;
+  guint padding_bottom;
+  guint padding_left;
+  guint padding_right;
 };
 
 struct _GtkAlignmentFat

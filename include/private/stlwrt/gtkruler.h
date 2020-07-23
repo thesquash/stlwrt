@@ -47,11 +47,6 @@ typedef struct _GtkRulerMetric  GtkRulerMetric;
  * Adobe that's a point, but points are really 1/72.27 in.)
  */
 
-struct _GtkRulerPrivate
-{
-  GtkOrientation orientation;
-};
-
 /********************************************************************/
 struct _GtkRulerInstanceProps
 {
@@ -72,6 +67,13 @@ struct _GtkRulerInstanceProps
   gdouble  (position);
   /* The maximum size of the ruler */
   gdouble  (max_size);
+};
+
+struct _GtkRulerPrivate
+{
+  struct _GtkRulerInstanceProps  instance_properties;
+  
+  GtkOrientation orientation;
 };
 
 struct _GtkRulerFat

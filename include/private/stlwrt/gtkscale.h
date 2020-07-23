@@ -40,12 +40,6 @@ typedef struct _GtkScale        GtkScaleThin;
 typedef struct _GtkScaleClass   GtkScaleClass;
 
 
-struct _GtkScalePrivate
-{
-  PangoLayout *layout;
-  GSList      *marks;
-};
-
 /********************************************************************/
 struct _GtkScaleInstanceProps
 {
@@ -54,6 +48,14 @@ struct _GtkScaleInstanceProps
   gint   (digits);
   guint  (draw_value) : 1;
   guint  (value_pos) : 2;
+};
+
+struct _GtkScalePrivate
+{
+  struct _GtkScaleInstanceProps  instance_properties;
+  
+  PangoLayout *layout;
+  GSList      *marks;
 };
 
 struct _GtkScaleFat

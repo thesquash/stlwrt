@@ -203,8 +203,23 @@ typedef union
 #define GDK_GC_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GDK_TYPE_GC, GdkGCClass))
 
 
+/********************************************************************/
+struct _GdkGCInstanceProps
+{
+
+
+  gint  (clip_x_origin);
+  gint  (clip_y_origin);
+  gint  (ts_x_origin);
+  gint  (ts_y_origin);
+
+  GdkColormap * (colormap);
+};
+
 struct _GdkGCPrivate
 {
+  struct _GdkGCInstanceProps  instance_properties;
+  
   GdkRegion *clip_region;
 
   guint32 region_tag_applied;
@@ -225,19 +240,6 @@ struct _GdkGCPrivate
   guint subwindow_mode : 1;
   guint fill : 2;
   guint exposures : 2;
-};
-
-/********************************************************************/
-struct _GdkGCInstanceProps
-{
-
-
-  gint  (clip_x_origin);
-  gint  (clip_y_origin);
-  gint  (ts_x_origin);
-  gint  (ts_y_origin);
-
-  GdkColormap * (colormap);
 };
 
 struct _GdkGCFat

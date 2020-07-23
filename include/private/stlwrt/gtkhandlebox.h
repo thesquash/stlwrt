@@ -45,12 +45,6 @@ typedef struct _GtkHandleBox       GtkHandleBoxThin;
 typedef struct _GtkHandleBoxClass  GtkHandleBoxClass;
 
 
-struct _GtkHandleBoxPrivate
-{
-  gint orig_x;
-  gint orig_y;
-};
-
 /********************************************************************/
 struct _GtkHandleBoxInstanceProps
 {
@@ -74,6 +68,14 @@ struct _GtkHandleBoxInstanceProps
 
   GtkAllocation    (attach_allocation);
   GtkAllocation    (float_allocation);
+};
+
+struct _GtkHandleBoxPrivate
+{
+  struct _GtkHandleBoxInstanceProps  instance_properties;
+  
+  gint orig_x;
+  gint orig_y;
 };
 
 struct _GtkHandleBoxFat

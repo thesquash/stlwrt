@@ -62,18 +62,6 @@ typedef struct _GtkTextLogAttrCache GtkTextLogAttrCache;
 
 typedef struct _GtkTextBufferClass GtkTextBufferClass;
 
-
-struct _GtkTextBufferPrivate
-{
-  GtkTargetList  *copy_target_list;
-  GtkTargetEntry *copy_target_entries;
-  gint            n_copy_target_entries;
-
-  GtkTargetList  *paste_target_list;
-  GtkTargetEntry *paste_target_entries;
-  gint            n_paste_target_entries;
-};
-
 /********************************************************************/
 struct _GtkTextBufferInstanceProps
 {
@@ -93,6 +81,19 @@ struct _GtkTextBufferInstanceProps
   guint  (modified) : 1;
 
   guint  (has_selection) : 1;
+};
+
+struct _GtkTextBufferPrivate
+{
+  struct _GtkTextBufferInstanceProps  instance_properties;
+  
+  GtkTargetList  *copy_target_list;
+  GtkTargetEntry *copy_target_entries;
+  gint            n_copy_target_entries;
+
+  GtkTargetList  *paste_target_list;
+  GtkTargetEntry *paste_target_entries;
+  gint            n_paste_target_entries;
 };
 
 struct _GtkTextBufferFat

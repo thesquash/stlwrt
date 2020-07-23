@@ -40,19 +40,6 @@ typedef struct _GtkMenuShell	   GtkMenuShellThin;
 typedef struct _GtkMenuShellClass  GtkMenuShellClass;
 
 
-struct _GtkMenuShellPrivate
-{
-  GtkMnemonicHash *mnemonic_hash;
-  GtkKeyHash *key_hash;
-
-  guint take_focus : 1;
-  guint activated_submenu : 1;
-  /* This flag is a crutch to keep mnemonics in the same menu
-   * if the user moves the mouse over an unselectable menuitem.
-   */
-  guint in_unselectable_item : 1;
-};
-
 /********************************************************************/
 struct _GtkMenuShellInstanceProps
 {
@@ -72,6 +59,21 @@ struct _GtkMenuShellInstanceProps
   guint  (menu_flag) : 1;    /* unused */
   guint  (ignore_enter) : 1;
   guint  (keyboard_mode) : 1;
+};
+
+struct _GtkMenuShellPrivate
+{
+  struct _GtkMenuShellInstanceProps  instance_properties;
+  
+  GtkMnemonicHash *mnemonic_hash;
+  GtkKeyHash *key_hash;
+
+  guint take_focus : 1;
+  guint activated_submenu : 1;
+  /* This flag is a crutch to keep mnemonics in the same menu
+   * if the user moves the mouse over an unselectable menuitem.
+   */
+  guint in_unselectable_item : 1;
 };
 
 struct _GtkMenuShellFat

@@ -41,20 +41,6 @@ typedef struct _GtkButton        GtkButtonThin;
 typedef struct _GtkButtonClass   GtkButtonClass;
 
 
-struct _GtkButtonPrivate
-{
-  gfloat          xalign;
-  gfloat          yalign;
-  GtkWidget      *image;
-  guint           align_set             : 1;
-  guint           image_is_stock        : 1;
-  guint           has_grab              : 1;
-  guint           use_action_appearance : 1;
-  guint32         grab_time;
-  GtkPositionType image_position;
-  GtkAction      *action;
-};
-
 /********************************************************************/
 struct _GtkButtonInstanceProps
 {
@@ -75,6 +61,22 @@ struct _GtkButtonInstanceProps
   guint  (depressed) : 1;
   guint  (depress_on_activate) : 1;
   guint  (focus_on_click) : 1;
+};
+
+struct _GtkButtonPrivate
+{
+  struct _GtkButtonInstanceProps  instance_properties;
+  
+  gfloat          xalign;
+  gfloat          yalign;
+  GtkWidget      *image;
+  guint           align_set             : 1;
+  guint           image_is_stock        : 1;
+  guint           has_grab              : 1;
+  guint           use_action_appearance : 1;
+  guint32         grab_time;
+  GtkPositionType image_position;
+  GtkAction      *action;
 };
 
 struct _GtkButtonFat

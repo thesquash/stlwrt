@@ -55,11 +55,6 @@ typedef struct _GtkCellRenderer GtkCellRendererThin;
 typedef struct _GtkCellRendererClass GtkCellRendererClass;
 
 
-struct _GtkCellRendererPrivate
-{
-  GdkColor cell_background;
-};
-
 /********************************************************************/
 struct _GtkCellRendererInstanceProps
 {
@@ -81,6 +76,13 @@ struct _GtkCellRendererInstanceProps
   guint  (cell_background_set) : 1;
   guint  (sensitive) : 1;
   guint  (editing) : 1;
+};
+
+struct _GtkCellRendererPrivate
+{
+  struct _GtkCellRendererInstanceProps  instance_properties;
+  
+  GdkColor cell_background;
 };
 
 struct _GtkCellRendererFat

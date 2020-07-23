@@ -42,35 +42,6 @@ typedef struct _GtkWindowGroup        GtkWindowGroup;
 typedef struct _GtkWindowGroupClass   GtkWindowGroupClass;
 
 
-struct _GtkWindowPrivate
-{
-  GtkMnemonicHash *mnemonic_hash;
-  
-  guint above_initially : 1;
-  guint below_initially : 1;
-  guint fullscreen_initially : 1;
-  guint skips_taskbar : 1;
-  guint skips_pager : 1;
-  guint urgent : 1;
-  guint accept_focus : 1;
-  guint focus_on_map : 1;
-  guint deletable : 1;
-  guint transient_parent_group : 1;
-
-  guint reset_type_hint : 1;
-  guint opacity_set : 1;
-  guint builder_visible : 1;
-
-  guint mnemonics_visible : 1;
-  guint mnemonics_visible_set : 1;
-
-  GdkWindowTypeHint type_hint;
-
-  gdouble opacity;
-
-  gchar *startup_id;
-};
-
 /********************************************************************/
 struct _GtkWindowInstanceProps
 {
@@ -133,6 +104,37 @@ struct _GtkWindowInstanceProps
   
   GdkModifierType  (mnemonic_modifier);
   GdkScreen      * (screen);
+};
+
+struct _GtkWindowPrivate
+{
+  struct _GtkWindowInstanceProps  instance_properties;
+  
+  GtkMnemonicHash *mnemonic_hash;
+  
+  guint above_initially : 1;
+  guint below_initially : 1;
+  guint fullscreen_initially : 1;
+  guint skips_taskbar : 1;
+  guint skips_pager : 1;
+  guint urgent : 1;
+  guint accept_focus : 1;
+  guint focus_on_map : 1;
+  guint deletable : 1;
+  guint transient_parent_group : 1;
+
+  guint reset_type_hint : 1;
+  guint opacity_set : 1;
+  guint builder_visible : 1;
+
+  guint mnemonics_visible : 1;
+  guint mnemonics_visible_set : 1;
+
+  GdkWindowTypeHint type_hint;
+
+  gdouble opacity;
+
+  gchar *startup_id;
 };
 
 struct _GtkWindowFat

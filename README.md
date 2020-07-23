@@ -1,39 +1,21 @@
 # STLWRT
 
-Let me tell you more about this wacky graphical toolkit of mine.
+For anyone who does not know yet, STLWRT is *the* successor to GTK+ 2,
+originally based almost entirely on the original code from GTK+ 2.  STLWRT
+has deviated from the GTK+ 2 code, however, and continues to deviate.
+Ultimately, the goal is to be able to run most GTK+ 2 and many GTK+ 3
+applications using the same STLWRT library, while both types of applications
+keep a conservative, traditional GTK+ 2-esque look and feel.
 
-First, it's still not compilable.  **For all of you who think it's insane that
-after all these three months STLWRT is still not compilable**, consider where
-we would be if I had not taken the initiative.  We would still have nothing.
-And besides, GTK 4 may be released in September or October, sure -- it's up to
-3.99.0 right now as I type this on July 11th -- but remember how long it took
-for applications to get ported over to GTK+ 3?  *Years*.  And the changes in
-GTK+ 3, for the most part, were incremental, with the changes getting more
-numerous as GTK+ 3 evolved.  I just tested GTK+ 3.0.0 on my development
-platform, and I can tell you two things:
-
- 1. It can't run very many modern "GTK+ 3" applications (the only one I made
-    work was the MATE About dialog; and
- 
- 2. It looks more similar to GTK+ 2 than to modern GTK+ 3.
-
-If you don't believe me, try building it yourself sometime.  Just understand
-you'll need to make a few changes to the source code to make it run on a
-contemporary operating system; you can request the patch from me if you want.
-
-Remember when Wayland displaced X11?  Neither do I.  Big projects like these
-take time to develop, and sorry but my schedule is pretty packed and nobody's
-volunteered to help me *develop* STLWRT yet.  Sure, plenty of people have
-offered to be beta testers.  That's very nice, but I also need someone who can
-bang on keys even when I can't.
-
-OK.  Moving on to the second thing, as you can see I've updated the README here.
-It reflects my current plans for STLWRT and will continue to reflect what I'm
-doing currently.
-
-Finally, let me tell you my current plans.
+I emphasized the word "the" above because, as of right now, I do not know of
+anyone else who has any actively maintained fork of any version of GTK.
+If anyone who has such a fork happens to be reading this, please drop me
+a line and let me know; I'd be interested in the design decisions you are
+making and have made, and I hope we may be able to collaborate somehow.
 
 ## My current plans for STLWRT
+
+The conversion to use fat and thin objects is almost done!
 
 Some time ago I made much ado about wanting to write STLWRT so that when a
 STLWRT object was created / instantiated, STLWRT would create two copies of the

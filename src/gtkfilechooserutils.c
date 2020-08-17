@@ -22,7 +22,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <gtkfilechooserutils.h>
 #include <gtkfilechooser.h>
 #include <gtkfilesystem.h>

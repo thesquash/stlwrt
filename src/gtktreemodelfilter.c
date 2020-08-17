@@ -21,7 +21,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <gtktreemodelfilter.h>
 #include <gtkintl.h>
 #include <gtktreednd.h>

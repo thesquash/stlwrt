@@ -20,7 +20,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>

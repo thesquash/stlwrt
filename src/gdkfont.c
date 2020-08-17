@@ -24,7 +24,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <gdkdisplay.h>
 #include <gdkfont.h>
 #include <gdkinternals.h>

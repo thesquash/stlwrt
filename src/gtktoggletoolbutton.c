@@ -22,7 +22,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <gtktoggletoolbutton.h>
 #include <gtkcheckmenuitem.h>
 #include <gtklabel.h>

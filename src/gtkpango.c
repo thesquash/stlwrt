@@ -26,7 +26,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <pango/pangocairo.h>
 #include <gtkintl.h>
 

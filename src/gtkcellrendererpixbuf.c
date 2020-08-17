@@ -20,7 +20,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <stdlib.h>
 #include <gtkcellrendererpixbuf.h>
 #include <gtkiconfactory.h>

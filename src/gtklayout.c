@@ -26,7 +26,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <gdkconfig.h>
 
 #include <gtklayout.h>

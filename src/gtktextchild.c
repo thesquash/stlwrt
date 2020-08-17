@@ -51,7 +51,7 @@
 #define GTK_TEXT_USE_INTERNAL_UNSUPPORTED_API
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <gtktextchild.h>
 #include <gtktextbtree.h>
 #include <gtktextlayout.h>

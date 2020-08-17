@@ -22,7 +22,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <gtkcontainer.h>
 #include <gtkmisc.h>
 #include <gtkintl.h>

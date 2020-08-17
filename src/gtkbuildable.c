@@ -39,7 +39,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <gtkbuildable.h>
 #include <gtktypeutils.h>
 #include <gtkintl.h>

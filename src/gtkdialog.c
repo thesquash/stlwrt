@@ -31,7 +31,7 @@
 #include <string.h>
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <gtkbutton.h>
 #include <gtkdialog.h>
 #include <gtkhbbox.h>

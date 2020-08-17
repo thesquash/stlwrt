@@ -21,7 +21,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>

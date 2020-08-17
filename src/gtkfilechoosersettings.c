@@ -32,7 +32,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <errno.h>
 #include <string.h>
 #include <glib.h>

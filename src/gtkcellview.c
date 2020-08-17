@@ -20,7 +20,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <string.h>
 #include <gtkcellview.h>
 #include <gtkcelllayout.h>

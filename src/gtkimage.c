@@ -22,7 +22,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <math.h>
 #include <string.h>
 

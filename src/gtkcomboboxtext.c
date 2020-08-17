@@ -21,7 +21,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 
 #include <gtkcomboboxtext.h>
 #include <gtkcombobox.h>

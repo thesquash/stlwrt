@@ -24,7 +24,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <gdk.h>		/* For __gdk_rectangle_intersect() */
 #include <gdkcolor.h>
 #include <gdkwindow.h>

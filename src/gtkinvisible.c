@@ -22,7 +22,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <gdk.h>
 #include <gtkinvisible.h>
 #include <gtkprivate.h>

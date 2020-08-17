@@ -80,7 +80,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <gtktextdisplay.h>
 #include <gtkintl.h>
 

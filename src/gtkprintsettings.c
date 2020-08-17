@@ -21,7 +21,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <string.h>
 #include <stdlib.h>
 #include <glib/gprintf.h>

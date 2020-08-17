@@ -28,7 +28,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 
 #include <gtkscrollbar.h>
 #include <gtkintl.h>

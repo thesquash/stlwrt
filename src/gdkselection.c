@@ -22,7 +22,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <gdkproperty.h>
 #include <gdkdisplay.h>
 #include <gdkselection.h>

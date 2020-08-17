@@ -70,7 +70,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 
 #include <gtkaction.h>
 #include <gtkactiongroup.h>

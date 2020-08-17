@@ -24,7 +24,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <gdkkeysyms.h>
 #include <gtkbindings.h>
 #include <gtkkeyhash.h>

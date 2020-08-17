@@ -31,7 +31,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 
 #include <gtkintl.h>
 #include <gtktoggleaction.h>

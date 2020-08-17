@@ -263,7 +263,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <gtkactivatable.h>
 #include <gtkactiongroup.h>
 #include <gtktypeutils.h>

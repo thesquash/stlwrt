@@ -24,7 +24,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <math.h>
 #include <glib.h>
 #include <gdk.h>		/* __gdk_event_send_client_message() */

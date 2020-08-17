@@ -49,7 +49,7 @@ SOFTWARE.
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <gdkregion.h>
 #include <gdkregion-generic.h>
 #include <gdkpoly-generic.h>

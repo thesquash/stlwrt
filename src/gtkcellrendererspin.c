@@ -23,7 +23,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <gdkkeysyms.h>
 #include <gtkintl.h>
 #include <gtkprivate.h>

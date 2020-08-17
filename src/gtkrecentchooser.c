@@ -22,7 +22,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 
 #include <gtkrecentchooser.h>
 #include <gtkrecentchooserprivate.h>

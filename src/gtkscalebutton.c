@@ -36,7 +36,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 
 #ifndef _WIN32
 #define _GNU_SOURCE

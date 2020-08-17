@@ -21,7 +21,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <string.h>
 #include <gtkpathbar.h>
 #include <gtktogglebutton.h>

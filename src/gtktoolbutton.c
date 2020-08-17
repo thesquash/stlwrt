@@ -23,7 +23,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <gtktoolbutton.h>
 #include <gtkbutton.h>
 #include <gtkhbox.h>

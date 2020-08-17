@@ -27,7 +27,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 
 #ifdef HAVE_SYS_TIME_H
 #include <sys/time.h>

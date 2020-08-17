@@ -24,7 +24,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <gtkprivate.h>
 #include <gtkwindow.h>
 #include <gtkmain.h>

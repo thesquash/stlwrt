@@ -28,7 +28,7 @@
 #define GTK_MENU_INTERNALS
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <string.h>
 #include <gdkkeysyms.h>
 #include <gtkaccellabel.h>

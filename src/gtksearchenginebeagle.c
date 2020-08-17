@@ -23,7 +23,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <gmodule.h>
 #include <gtksearchenginebeagle.h>
 

@@ -19,7 +19,7 @@
  */
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <gtkiconcachevalidator.h>
 
 #include <glib.h>

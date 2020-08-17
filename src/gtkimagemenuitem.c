@@ -27,7 +27,7 @@
 
 #include "config.h"
 
-#include <stlwrtobject.h>
+#include <stlwrt.h>
 #include <gtkimagemenuitem.h>
 #include <gtkaccellabel.h>
 #include <gtkintl.h>

@@ -13,9 +13,21 @@ If anyone who has such a fork happens to be reading this, please drop me
 a line and let me know; I'd be interested in the design decisions you are
 making and have made, and I hope we may be able to collaborate somehow.
 
+## What's new?
+
+I obviously updated this README.
+
+I've also started to get back on development track -- somewhat -- after a 20-day
+hiatus.
+
+I deleted most of the old Autotools build files.
+
 ## My current plans for STLWRT
 
-The conversion to use fat and thin objects is almost done!
+The conversion to use fat and thin objects **was** almost done, but then I
+realized I was going about it wrong.  Gee whiz, I've got to tell you the innards
+of GLib are hard to understand completely, and if you don't understand them
+*completely* then you'll fail.
 
 Some time ago I made much ado about wanting to write STLWRT so that when a
 STLWRT object was created / instantiated, STLWRT would create two copies of the
@@ -66,14 +78,6 @@ work just as well with "thin" objects.
    and private header files right now is the names of some functions, as
    described below.
  
- * `m4`:  Various m4 macros used by the configuration process of STLWRT.  The
-   whole build process of GTK+ 2 was messed up, and I plan on converting to
-   Meson and Ninja instead of GNU Autotools, which I note have been very
-   sluggishly maintained lately.  It seems the whole GNU Project is starting
-   to fall apart and get replaced by independent, (relatively) uncoordinated
-   open-source programmers.  That's not derogatory, that's my unbiased
-   perspective.
- 
  * `modules`:  This holds the code for various STLWRT modules, some of which
    probably don't need to be here.  This includes the Pixbuf-based theme engine
    and several print backends, all copied directly from GTK+ 2.  GAIL is
@@ -86,7 +90,7 @@ work just as well with "thin" objects.
    be a full configuration tool with lots of options, and a few of the old GTK
    messages made no sense as they were, so those need to be fixed too.
  
- * `libgtk`:  This is the code for the wrapper libraries, the libraries
+ * `public-libs`:  This is the code for the wrapper libraries, the libraries
    that actually emulate one version of GTK or another.  These libraries should
    eventually contain code to "wrap around" functions in STLWRT -- with
    functions named after the original GTK functions which call the appropriate
@@ -97,7 +101,7 @@ work just as well with "thin" objects.
    library depending on what version of GTK needs to be emulated.  See the next
    bullet point for more information about this stuff.
  
- * `libstlwrt`:  This is the main STLWRT library itself.  Publicly-accessible
+ * `src`:  This is the main STLWRT library itself.  Publicly-accessible
    functions (functions intended for use by applications) names should take the
    following form:  They should be preceded by version information enclosed in
    underscores.  If the function is to be used no matter what version of GTK is
@@ -137,9 +141,9 @@ work just as well with "thin" objects.
    GTK in some way or another.
  
 Peruse the code for five minutes and you'll see STLWRT has a long, long way to
-go before it's production-ready.  Maybe July 10th isnt realistic, after all...
-I actually had it working somewhat a while ago, but I decided to dive into
-fixing everything all at once, which is why STLWRT is where it is.  But the
-fact is GTK+ 2 was kind of poorly structured; it worked, but if you actually
-want to change any code, that's tough.  STLWRT I hope will be more maintainable
-thanks to its wildly different source code layout.
+go before it's production-ready.  I actually had it working somewhat a while
+ago, but I decided to dive into fixing everything all at once, which is why
+STLWRT is where it is.  But the fact is GTK+ 2 was kind of poorly structured;
+it worked, but if you actually want to change any code, man, that's tough.
+STLWRT I hope will be more maintainable thanks to its much different source
+code layout.

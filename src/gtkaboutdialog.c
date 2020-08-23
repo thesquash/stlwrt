@@ -126,9 +126,6 @@ static GdkColor default_visited_link_color = { 0, 0x5555, 0x1a1a, 0x8b8b };
 
 typedef struct _GtkAboutDialogPrivate GtkAboutDialogPrivate;
 
-#define GTK_ABOUT_DIALOG_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_ABOUT_DIALOG, GtkAboutDialogPrivate))
-
-
 enum
 {
   PROP_0,
@@ -245,7 +242,9 @@ enum {
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-STLWRT_DEFINE_TYPE (GtkAboutDialog, gtk_about_dialog, GTK_TYPE_DIALOG)
+STLWRT_DEFINE_FTYPE (GtkAboutDialog, gtk_about_dialog, GTK_TYPE_DIALOG,
+                     G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkAboutDialog))
 
 static void
 gtk_about_dialog_class_init (GtkAboutDialogClass *klass)
@@ -516,9 +515,6 @@ gtk_about_dialog_class_init (GtkAboutDialogClass *klass)
                                                          P_("Whether to wrap the license text."),
                                                          FALSE,
                                                          GTK_PARAM_READWRITE));
-
-
-  g_type_class_add_private (object_class, sizeof (GtkAboutDialogPrivate));
 }
 
 static gboolean
@@ -540,7 +536,7 @@ gtk_about_dialog_init (GtkAboutDialog *about)
   GtkWidget *vbox, *hbox, *button, *close_button, *image;
 
   /* Data */
-  priv = GTK_ABOUT_DIALOG_GET_PRIVATE (about);
+  priv = gtk_about_dialog_get_private (about);
   about->private_data = priv;
 
   priv->name = NULL;

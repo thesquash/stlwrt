@@ -52,7 +52,9 @@ enum {
   PROP_SCREEN
 };
 
-STLWRT_DEFINE_TYPE (GdkPangoRenderer, gdk_pango_renderer, PANGO_TYPE_RENDERER)
+STLWRT_DEFINE_FTYPE (GdkPangoRenderer, gdk_pango_renderer, PANGO_TYPE_RENDERER,
+                     G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GdkPangoRenderer))
 
 static void
 gdk_pango_renderer_finalize (GObject *object)
@@ -485,9 +487,7 @@ gdk_pango_renderer_get_property (GObject    *object,
 static void
 gdk_pango_renderer_init (GdkPangoRenderer *renderer)
 {
-  renderer->priv = G_TYPE_INSTANCE_GET_PRIVATE (renderer,
-						GDK_TYPE_PANGO_RENDERER,
-						GdkPangoRendererPrivate);
+  renderer->priv = gdk_pango_renderer_get_private (renderer);
 
   renderer->priv->last_part = (PangoRenderPart)-1;
   renderer->priv->gc_changed = TRUE;
@@ -523,8 +523,6 @@ gdk_pango_renderer_class_init (GdkPangoRendererClass *klass)
                                                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY |
 							G_PARAM_STATIC_NAME | G_PARAM_STATIC_NICK | 
 							G_PARAM_STATIC_BLURB));
-
-  g_type_class_add_private (object_class, sizeof (GdkPangoRendererPrivate));  
 }
 
 /**

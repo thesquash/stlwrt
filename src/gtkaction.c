@@ -92,10 +92,6 @@
 #include <gtkactivatable.h>
 
 
-
-#define GTK_ACTION_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_ACTION, GtkActionPrivate))
-
-
 enum 
 {
   ACTIVATE,
@@ -129,9 +125,10 @@ static void gtk_action_buildable_set_name         (GtkBuildable *buildable,
 						   const gchar  *name);
 static const gchar* gtk_action_buildable_get_name (GtkBuildable *buildable);
 
-G_DEFINE_TYPE_WITH_CODE (GtkAction, gtk_action, G_TYPE_OBJECT,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-						gtk_action_buildable_init))
+STLWRT_DEFINE_FTYPE (GtkAction, gtk_action, G_TYPE_OBJECT,  G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
+                                            gtk_action_buildable_init)
+                     G_ADD_PRIVATE (GtkAction))
 
 static void gtk_action_finalize     (GObject *object);
 static void gtk_action_set_property (GObject         *object,
@@ -398,15 +395,13 @@ gtk_action_class_init (GtkActionClass *klass)
 		  G_STRUCT_OFFSET (GtkActionClass, activate),  NULL, NULL,
 		  g_cclosure_marshal_VOID__VOID,
 		  G_TYPE_NONE, 0);
-
-  g_type_class_add_private (gobject_class, sizeof (GtkActionPrivate));
 }
 
 
 static void
 gtk_action_init (GtkAction *action)
 {
-  action->private_data = GTK_ACTION_GET_PRIVATE (action);
+  action->private_data = gtk_action_get_private (action);
 
   action->private_data->name = NULL;
   action->private_data->label = NULL;

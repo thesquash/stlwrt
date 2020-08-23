@@ -48,9 +48,6 @@
 #include <gtkintl.h>
 
 
-#define GTK_ACTION_GROUP_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_ACTION_GROUP, GtkActionGroupPrivate))
-
-
 enum 
 {
   CONNECT_PROXY,
@@ -103,42 +100,11 @@ static void gtk_action_group_buildable_custom_tag_end (GtkBuildable *buildable,
 						       const gchar  *tagname,
 						       gpointer     *user_data);
 
-GType
-gtk_action_group_get_type (void)
-{
-  static GType type = 0;
-
-  if (!type)
-    {
-      const GTypeInfo type_info =
-      {
-        sizeof (GtkActionGroupClass),
-	NULL,           /* base_init */
-        NULL,           /* base_finalize */
-        (GClassInitFunc) gtk_action_group_class_init,
-        NULL,           /* class_finalize */
-        NULL,           /* class_data */
-        sizeof (GtkActionGroup),
-        0, /* n_preallocs */
-        (GInstanceInitFunc) gtk_action_group_init,
-      };
-
-      const GInterfaceInfo buildable_info =
-      {
-	(GInterfaceInitFunc) gtk_action_group_buildable_init,
-	NULL,
-	NULL
-      };
-
-      type = g_type_register_static (G_TYPE_OBJECT, I_("GtkActionGroup"),
-				     &type_info, 0);
-
-      g_type_add_interface_static (type,
-				   GTK_TYPE_BUILDABLE,
-				   &buildable_info);
-    }
-  return type;
-}
+STLWRT_DEFINE_FTYPE (GtkActionGroup, gtk_action_group, G_TYPE_OBJECT,
+                     G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
+                                            gtk_action_group_buildable_init)
+                     G_ADD_PRIVATE (GtkActionGroup))
 
 static GObjectClass *parent_class = NULL;
 static guint         action_group_signals[LAST_SIGNAL] = { 0 };
@@ -270,8 +236,6 @@ gtk_action_group_class_init (GtkActionGroupClass *klass)
 		  NULL,
 		  G_TYPE_NONE, 1, 
 		  GTK_TYPE_ACTION);
-
-  g_type_class_add_private (gobject_class, sizeof (GtkActionGroupPrivate));
 }
 
 

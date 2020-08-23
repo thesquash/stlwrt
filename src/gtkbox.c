@@ -765,9 +765,9 @@ gtk_box_pack (GtkBox      *box,
  * @homogeneous: %TRUE if all children are to be given equal space allocations.
  * @spacing: the number of pixels to place by default between children.
  *
- * Creates a new #GtkHBox.
+ * Creates a new #GtkBox.
  *
- * Return value: a new #GtkHBox.
+ * Return value: a new #GtkBox.
  *
  * Since: 2.16
  **/

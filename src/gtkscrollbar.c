@@ -38,7 +38,13 @@
 static void gtk_scrollbar_style_set (GtkWidget *widget,
                                      GtkStyle  *previous);
 
-G_DEFINE_ABSTRACT_TYPE (GtkScrollbar, gtk_scrollbar, GTK_TYPE_RANGE)
+/*
+ * Interestingly enough, this is one of the few orientable widgets that does
+ * not have to implement GtkOrientable:  GtkScrollbar inherits from GtkRange,
+ * and GtkRange already implements GtkOrientable, so there is no need for
+ * re-implementation.
+ */
+G_DEFINE_TYPE (GtkScrollbar, gtk_scrollbar, GTK_TYPE_RANGE)
 
 static void
 gtk_scrollbar_class_init (GtkScrollbarClass *class)
@@ -128,21 +134,18 @@ gtk_scrollbar_style_set (GtkWidget *widget,
   GTK_WIDGET_CLASS (gtk_scrollbar_parent_class)->style_set (widget, previous);
 }
 
-#if 0
 /**
- * gtk_scrollbar_new:
+ * __gtk_scrollbar_new:
  * @orientation: the scrollbar's orientation.
  * @adjustment: (allow-none): the #GtkAdjustment to use, or %NULL to create a new adjustment.
  *
  * Creates a new scrollbar with the given orientation.
  *
  * Return value:  the new #GtkScrollbar.
- *
- * Since: 2.16
  **/
 GtkWidget *
-gtk_scrollbar_new (GtkOrientation  orientation,
-                   GtkAdjustment  *adjustment)
+__gtk_scrollbar_new (GtkOrientation  orientation,
+                     GtkAdjustment  *adjustment)
 {
   g_return_val_if_fail (adjustment == NULL || GTK_IS_ADJUSTMENT (adjustment),
                         NULL);
@@ -152,7 +155,6 @@ gtk_scrollbar_new (GtkOrientation  orientation,
                        "adjustment",  adjustment,
                        NULL);
 }
-#endif
 
 
 #define __GTK_SCROLLBAR_C__

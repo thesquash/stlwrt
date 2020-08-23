@@ -149,9 +149,8 @@ static void     gtk_paned_grab_notify           (GtkWidget        *widget,
 
 
 
-STLWRT_DEFINE_ABSTRACT_TYPE_WITH_CODE (GtkPaned, gtk_paned, GTK_TYPE_CONTAINER,
-                                  G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE,
-                                                         NULL))
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkPaned, gtk_paned, GTK_TYPE_CONTAINER,
+                              G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE, NULL))
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
@@ -1321,25 +1320,21 @@ gtk_paned_motion (GtkWidget      *widget,
   return FALSE;
 }
 
-#if 0
 /**
- * gtk_paned_new:
+ * __gtk_paned_new:
  * @orientation: the paned's orientation.
  *
  * Creates a new #GtkPaned widget.
  *
  * Return value: a new #GtkPaned.
- *
- * Since: 2.16
  **/
 GtkWidget *
-gtk_paned_new (GtkOrientation orientation)
+__gtk_paned_new (GtkOrientation orientation)
 {
   return g_object_new (GTK_TYPE_PANED,
                        "orientation", orientation,
                        NULL);
 }
-#endif
 
 void
 __gtk_paned_add1 (GtkPaned  *paned,

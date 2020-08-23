@@ -63,9 +63,8 @@ static gboolean   gtk_separator_expose       (GtkWidget      *widget,
                                               GdkEventExpose *event);
 
 
-G_DEFINE_ABSTRACT_TYPE_WITH_CODE (GtkSeparator, gtk_separator, GTK_TYPE_WIDGET,
-                                  G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE,
-                                                         NULL))
+G_DEFINE_TYPE_WITH_CODE (GtkSeparator, gtk_separator, GTK_TYPE_WIDGET,
+                         G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE, NULL))
 
 
 static void
@@ -236,25 +235,21 @@ gtk_separator_expose (GtkWidget      *widget,
   return FALSE;
 }
 
-#if 0
 /**
- * gtk_separator_new:
+ * __gtk_separator_new:
  * @orientation: the separator's orientation.
  *
  * Creates a new #GtkSeparator with the given orientation.
  *
  * Return value: a new #GtkSeparator.
- *
- * Since: 2.16
  **/
 GtkWidget *
-gtk_separator_new (GtkOrientation orientation)
+__gtk_separator_new (GtkOrientation orientation)
 {
   return g_object_new (GTK_TYPE_SEPARATOR,
                        "orientation", orientation,
                        NULL);
 }
-#endif
 
 
 #define __GTK_SEPARATOR_C__

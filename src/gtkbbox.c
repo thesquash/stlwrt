@@ -74,7 +74,13 @@ static void gtk_button_box_get_child_property (GtkContainer      *container,
 #define DEFAULT_CHILD_IPAD_X 4
 #define DEFAULT_CHILD_IPAD_Y 0
 
-STLWRT_DEFINE_ABSTRACT_TYPE (GtkButtonBox, gtk_button_box, GTK_TYPE_BOX)
+/*
+ * Interestingly enough, this is one of the few orientable widgets that does
+ * not have to implement GtkOrientable:  GtkButtonBox inherits from GtkBox,
+ * and GtkBox already implements GtkOrientable, so there is no need for
+ * re-implementation.
+ */
+STLWRT_DEFINE_TYPE_WITH_CODE (GtkButtonBox, gtk_button_box, GTK_TYPE_BOX)
 
 static void
 gtk_button_box_class_init (GtkButtonBoxClass *class)
@@ -820,6 +826,22 @@ gtk_button_box_size_allocate (GtkWidget     *widget,
           __gtk_widget_size_allocate (child->widget, &child_allocation);
         }
     }
+}
+
+/**
+ * __gtk_button_box_new:
+ * @orientation: the button box' orientation.
+ *
+ * Creates a new #GtkButtonBox.
+ *
+ * Return value: a new #GtkButtonBox.
+ **/
+GtkWidget*
+ __gtk_button_box_new (GtkOrientation orientation,
+{
+  return g_object_new (GTK_TYPE_BUTTON_BOX,
+                       "orientation", orientation,
+                       NULL);
 }
 
 #define __GTK_BUTTON_BOX_C__

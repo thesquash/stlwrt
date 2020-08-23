@@ -30,8 +30,8 @@ G_BEGIN_DECLS
 #endif
 
 /**
- * STLWRT_DEFINE_FIXED_SIZE_TYPE:
- * STLWRT_DEFINE_VARIABLE_SIZE_TYPE:
+ * STLWRT_DEFINE_FTYPE:
+ * STLWRT_DEFINE_VTYPE:
  *  @TN:  The name of the type in Camel Case (like GtkVBox)
  *  @t_n: The name of the type in lowercase (like gtk_vbox)
  *  @PT:  The actual type of this type's parent (like GTK_TYPE_BOX)
@@ -43,8 +43,16 @@ G_BEGIN_DECLS
  *        implement an interface, you can use #G_IMPLEMENT_INTERFACE.  If
  *        you want to add private data, you may use #G_ADD_PRIVATE.
  *        If you want neither, insert a single semicolon.
+ *
+ * Defines a new type for a STLWRT object.  The #STLWRT_DEFINE_FTYPE macro
+ * defines a "fixed-size type" -- a type which has the same instance size no
+ * matter what version of GTK STLWRT is trying to emulate; the
+ * #STLWRT_DEFINE_VTYPE macro defines a "variable-size type" -- a type which
+ * has a different instance size when STLWRT is running in GTK+ 2 mode than
+ * when STLWRT is running in GTK+ 3 mode.  GtkTreeView is an Ftype; GtkDialog
+ * is a Vtype.
  */
-#define STLWRT_DEFINE_FIXED_SIZE_TYPE    (TN, t_n, PT, F, C) \
+#define STLWRT_DEFINE_FTYPE    (TN, t_n, PT, F, C) \
   static void     t_n##_init              (TN        *self); \
   static void     t_n##_class_init        (TN##Class *klass); \
   static gpointer t_n##_parent_class  = NULL; \
@@ -86,7 +94,7 @@ G_BEGIN_DECLS
   }
 
 
-#define STLWRT_DEFINE_VARIABLE_SIZE_TYPE (TN, t_n, PT, F, C) \
+#define STLWRT_DEFINE_VTYPE    (TN, t_n, PT, F, C) \
   static void     t_n##_init              (TN        *self); \
   static void     t_n##_class_init        (TN##Class *klass); \
   static gpointer t_n##_parent_class  = NULL; \

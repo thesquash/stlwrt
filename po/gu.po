@@ -880,8 +880,12 @@ msgstr "ફોલ્ડર સમાવિષ્ટો દર્શાવી શ
 #.
 #: ../gtk/gtkfilechooserdefault.c:1582
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s, %2$s પર"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s, %2
+s પર"
 
 #: ../gtk/gtkfilechooserdefault.c:1758
 msgid "Search"
@@ -4429,4 +4433,3 @@ msgstr "'%s' ફાઈલ લાવવામાં નિષ્ફળ: %s"
 #, c-format
 msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr "ચિત્ર %s લાવવામાં નિષ્ફળ, કારણ જાણીતું નથી, સંભવિત રીતે એક બગડેલી ચિત્ર ફાઈલ છે"
-

@@ -1790,8 +1790,12 @@ msgstr "E pamundur shfaqja e pëmbajtjes së kartelës"
 #.
 #: gtk/gtkfilechooserdefault.c:1582
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s mbi %2$s"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s mbi %2
+s"
 
 #: gtk/gtkfilechooserdefault.c:1758
 msgid "Search"
@@ -5451,20 +5455,3 @@ msgstr "Printo në Test Printer"
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr "E pamundur marrja e informacioneve për file '%s': %s"
-
-#~ msgid "(Empty)"
-#~ msgstr "(Bosh)"
-
-#, fuzzy
-#~ msgid "<b>_Search:</b>"
-#~ msgstr "_Kërko:"
-
-#, fuzzy
-#~ msgid "<b>Recently Used</b>"
-#~ msgstr "Përdorur së fundmi"
-
-#~ msgid "directfb arg"
-#~ msgstr "argumenti directfb"
-
-#~ msgid "sdl|system"
-#~ msgstr "sdl|system"

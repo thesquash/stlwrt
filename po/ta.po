@@ -1760,8 +1760,12 @@ msgstr "அடைவின் உள்ளவைகளை காட்ட மு
 #.
 #: gtk/gtkfilechooserdefault.c:1582
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s on %2$s"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s on %2
+s"
 
 #: gtk/gtkfilechooserdefault.c:1758
 msgid "Search"
@@ -5310,6 +5314,3 @@ msgstr "அச்சடிப்பிலிருந்து சோதனை �
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr "'%s' கோப்பின் தகவல் பெற முடியவில்லை: %s"
-
-#~ msgid "(Empty)"
-#~ msgstr "(வெற்று)"

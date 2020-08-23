@@ -7599,12 +7599,3 @@ msgstr "IM Status style"
 #: modules/input/gtkimcontextxim.c:344
 msgid "How to draw the input method statusbar"
 msgstr "How to draw the input method statusbar"
-
-#~ msgid "The orientation of the toolbar"
-#~ msgstr "The orientation of the toolbar"
-
-#~ msgid "Whether stock icons should be shown in buttons"
-#~ msgstr "Whether stock icons should be shown in buttons"
-
-#~ msgid "Whether or not the operation has been successfully cancelled"
-#~ msgstr "Дали операцијата беше успешно откажана"

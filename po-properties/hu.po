@@ -7574,4 +7574,3 @@ msgstr "Az ablak áttetszősége"
 #: ../gtk/gtkwindow.c:802
 msgid "The opacity of the window, from 0 to 1"
 msgstr "Az ablak áttetszősége 0 és 1 között"
-

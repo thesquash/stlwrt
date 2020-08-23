@@ -21,8 +21,6 @@
 #ifndef __GDK_TYPES_H__
 #define __GDK_TYPES_H__
 
-/* GDK uses "glib". (And so does GTK).
- */
 #include <glib.h>
 #include <pango/pango.h>
 #include <glib-object.h>

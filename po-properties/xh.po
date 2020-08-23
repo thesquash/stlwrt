@@ -7993,39 +7993,3 @@ msgstr "Isimbo Sobume be-IM"
 msgid "How to draw the input method statusbar"
 msgstr ""
 "Izotywa njani indlela yokungenisa yomgca obonakalisa ubume bokuqhubekayo"
-
-#~ msgid "The orientation of the toolbar"
-#~ msgstr "Imbonakalo ye-toolbar"
-
-#~ msgid "Whether stock icons should be shown in buttons"
-#~ msgstr ""
-#~ "Nokuba ngaba imifanekiso eyimiqondiso ye-stock imele iboniswe na "
-#~ "kumaqhosha"
-
-#~ msgid ""
-#~ "A number between 0.0 and 1.0 specifying the horizontal alignment of the "
-#~ "text in the progress widget"
-#~ msgstr ""
-#~ "Inani eliphakathi kuka-0.0 kunye no-1.0 elichaza ulungelelaniso lombhalo "
-#~ "oluthe tyaba kwisixhobo esinenkqubela"
-
-#~ msgid ""
-#~ "A number between 0.0 and 1.0 specifying the vertical alignment of the "
-#~ "text in the progress widget"
-#~ msgstr ""
-#~ "Inani eliphakathi kuka-0.0 kunye no-1.0 elichaza ulungelelaniso lombhalo "
-#~ "oluthe nkqo kwisixhobo esinenkqubela"
-
-#, fuzzy
-#~ msgid "The current page in the document."
-#~ msgstr "Ubungakanani bephepha bohlenga-hlengiso"
-
-#~ msgid "Homogenous"
-#~ msgstr "Uhlobo olunye"
-
-#, fuzzy
-#~ msgid "Show Preview"
-#~ msgstr "Bonisa umbhalo"
-
-#~ msgid "Whether this text is hidden. Not implemented in GTK 2.0"
-#~ msgstr "Nokuba ngaba lo mbhalo ufihlakele na. Ayifakelwanga kwi-GTK 2.0"

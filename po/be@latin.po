@@ -1767,8 +1767,12 @@ msgstr "Niemahčyma pakazać źmieściva katalohu"
 #.
 #: gtk/gtkfilechooserdefault.c:1582
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s na %2$s"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s na %2
+s"
 
 #: gtk/gtkfilechooserdefault.c:1758
 msgid "Search"
@@ -5344,20 +5348,3 @@ msgstr "Vydruk na testavaj drukarcy"
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr "Niemahčyma atrymać infarmacyju dla fajłu '%s': %s"
-
-#~ msgid "(Empty)"
-#~ msgstr "(Pusty)"
-
-#, fuzzy
-#~ msgid "<b>_Search:</b>"
-#~ msgstr "Š_ukaj:"
-
-#, fuzzy
-#~ msgid "<b>Recently Used</b>"
-#~ msgstr "Niadaŭna ŭžyvanyja"
-
-#~ msgid "directfb arg"
-#~ msgstr "arhument directfb"
-
-#~ msgid "sdl|system"
-#~ msgstr "systema"

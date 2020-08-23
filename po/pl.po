@@ -876,8 +876,12 @@ msgstr "Nie można wyświetlić zawartości katalogu"
 #.
 #: ../gtk/gtkfilechooserdefault.c:1579
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s na %2$s"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s na %2
+s"
 
 #: ../gtk/gtkfilechooserdefault.c:1728
 msgid "Search"

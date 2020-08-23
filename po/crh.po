@@ -1970,8 +1970,12 @@ msgstr "Fihrist mündericesi kösterilamadı"
 #.
 #: gtk/gtkfilechooserdefault.c:1582
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%2$s üzerindeki %1$s"
+msgid "%1
+s on %2
+s"
+msgstr "%2
+s üzerindeki %1
+s"
 
 #: gtk/gtkfilechooserdefault.c:1758
 msgid "Search"
@@ -4120,7 +4124,9 @@ msgstr "\"%s\" hassası aynı <%s> unsurında eki kere tekrarlanğan"
 #: gtk/gtktextbufferserialize.c:961 gtk/gtktextbufferserialize.c:986
 #, c-format
 msgid "Attribute \"%s\" is invalid on <%s> element in this context"
-msgstr "<%2$s> unsurındaki \"%1$s\" hassası bu bağlamda keçersizdir"
+msgstr "<%2
+s> unsurındaki \"%1
+s\" hassası bu bağlamda keçersizdir"
 
 #: gtk/gtktextbufferserialize.c:1022
 #, c-format
@@ -4157,7 +4163,10 @@ msgstr "\"%s\" keçerli bir hassa adı degildir"
 msgid ""
 "\"%s\" could not be converted to a value of type \"%s\" for attribute \"%s\""
 msgstr ""
-"\"%1$s\", \"%3$s\" hassası içün \"%2$s\" türünden bir qıymetke çevirilamadı"
+"\"%1
+s\", \"%3
+s\" hassası içün \"%2
+s\" türünden bir qıymetke çevirilamadı"
 
 #: gtk/gtktextbufferserialize.c:1202
 #, c-format
@@ -5785,14 +5794,3 @@ msgstr "Bastırıcını Sınamaq içün Bastır"
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr "'%s' dosyesi içün malümat alınamadı: %s"
-
-#~ msgid "(Empty)"
-#~ msgstr "(Boş)"
-
-#, fuzzy
-#~ msgid "<b>_Search:</b>"
-#~ msgstr "_Qıdır:"
-
-#, fuzzy
-#~ msgid "<b>Recently Used</b>"
-#~ msgstr "Demi Qullanılğan"

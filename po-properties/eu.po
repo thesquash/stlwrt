@@ -7644,4 +7644,3 @@ msgstr "IM egoeraren estiloa"
 #: ../modules/input/gtkimcontextxim.c:344
 msgid "How to draw the input method statusbar"
 msgstr "Egoera-barraren sarrera-metodoa nola marraztu"
-

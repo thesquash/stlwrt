@@ -7616,9 +7616,3 @@ msgstr "Estil de l'estat IM"
 #: modules/input/gtkimcontextxim.c:344
 msgid "How to draw the input method statusbar"
 msgstr "Com dibuixar la barra d'estat del mètode d'entrada"
-
-#~ msgid "The orientation of the toolbar"
-#~ msgstr "L'orientació de la barra d'eines"
-
-#~ msgid "Whether stock icons should be shown in buttons"
-#~ msgstr "Si s'ha de mostrar les icones d'estoc en els botons"

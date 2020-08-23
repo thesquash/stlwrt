@@ -1762,8 +1762,12 @@ msgstr "ಕಡತಕೋಶದಲ್ಲಿನ ಅಂಶಗಳನ್ನು ತೋ�
 #.
 #: gtk/gtkfilechooserdefault.c:1582
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%2$s ನಲ್ಲಿ %1$s"
+msgid "%1
+s on %2
+s"
+msgstr "%2
+s ನಲ್ಲಿ %1
+s"
 
 #: gtk/gtkfilechooserdefault.c:1758
 msgid "Search"
@@ -5313,6 +5317,3 @@ msgstr "ಮುದ್ರಕವನ್ನು ಪರೀಕ್ಷಿಸಲು ಮು�
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr "'%s' ಕಡತಕ್ಕೆ ಮಾಹಿತಿಯನ್ನು ಪಡೆಯಲಾಗಿಲ್ಲ: %s"
-
-#~ msgid "(Empty)"
-#~ msgstr "(ಖಾಲಿ)"

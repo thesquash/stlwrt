@@ -1760,8 +1760,12 @@ msgstr "Níorbh fhéidir ábhair an fhillteáin a thaispeáint"
 #.
 #: gtk/gtkfilechooserdefault.c:1582
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s ar %2$s"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s ar %2
+s"
 
 #: gtk/gtkfilechooserdefault.c:1758
 msgid "Search"
@@ -3693,7 +3697,9 @@ msgstr "Aimsíodh an tréith \"%s\" faoi dhó ar an eilimint <%s>"
 #: gtk/gtktextbufferserialize.c:846
 #, c-format
 msgid "<%s> element has invalid id \"%s\""
-msgstr "Tá ca neamhbhailí \"%2$s\" ag eilimint <%1$s>"
+msgstr "Tá ca neamhbhailí \"%2
+s\" ag eilimint <%1
+s>"
 
 #: gtk/gtktextbufferserialize.c:856
 #, c-format
@@ -5314,6 +5320,3 @@ msgstr "Priontáil go Printéir Tástála"
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr "Níorbh fhéidir eolas a fháil don chomhad '%s': %s"
-
-#~ msgid "(Empty)"
-#~ msgstr "(Folamh)"

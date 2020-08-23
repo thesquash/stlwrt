@@ -1758,8 +1758,12 @@ msgstr "ফোল্ডারে বিষয়বস্তু প্রদর্�
 #.
 #: gtk/gtkfilechooserdefault.c:1582
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s, %2$s'র উপর"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s, %2
+s'র উপর"
 
 #: gtk/gtkfilechooserdefault.c:1758
 msgid "Search"

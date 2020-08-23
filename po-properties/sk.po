@@ -7,7 +7,9 @@
 # Marcel Telka <marcel@telka.sk>, 2005.
 # Pavol Šimo <palo.simo@gmail.com>, 2006, 2007, 2008.
 #
-# $Id: sk.po,v 1.38 2006/07/03 06:06:48 matthiasc Exp $
+# 
+Id: sk.po,v 1.38 2006/07/03 06:06:48 matthiasc Exp 
+
 #
 msgid ""
 msgstr ""
@@ -7479,12 +7481,3 @@ msgstr "Štýl stavu IM"
 #: modules/input/gtkimcontextxim.c:344
 msgid "How to draw the input method statusbar"
 msgstr "Ako kresliť stavový riadok metódy vstupu"
-
-#~ msgid "The orientation of the toolbar"
-#~ msgstr "Orientácia panelu nástrojov"
-
-#~ msgid "Whether stock icons should be shown in buttons"
-#~ msgstr "Či sa majú na tlačidlách zobrazovať štandardné ikony"
-
-#~ msgid "Whether or not the operation has been successfully cancelled"
-#~ msgstr "Či bola operácia úspešne zrušená, alebo nie"

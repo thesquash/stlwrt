@@ -7528,25 +7528,3 @@ msgstr ""
 #: modules/input/gtkimcontextxim.c:344
 msgid "How to draw the input method statusbar"
 msgstr ""
-
-#, fuzzy
-#~ msgid "The current page in the document."
-#~ msgstr "نام ویجت"
-
-#~ msgid "Homogenous"
-#~ msgstr "همگن"
-
-#, fuzzy
-#~ msgid "Show Preview"
-#~ msgstr "نمایش متن"
-
-#, fuzzy
-#~ msgid "Width In Chararacters"
-#~ msgstr "عرض برحسب نویسه"
-
-#, fuzzy
-#~ msgid "Row separator column"
-#~ msgstr "جداساز دارد"
-
-#~ msgid "Folder Mode"
-#~ msgstr "حالت پوشه"

@@ -7417,15 +7417,3 @@ msgstr ""
 #: modules/input/gtkimcontextxim.c:344
 msgid "How to draw the input method statusbar"
 msgstr ""
-
-#, fuzzy
-#~ msgid "The current page in the document."
-#~ msgstr "የጽሑፉ መለያ"
-
-#, fuzzy
-#~ msgid "Show Preview"
-#~ msgstr "ጽሑፍ አሳይ"
-
-#, fuzzy
-#~ msgid "Folder Mode"
-#~ msgstr "የዶሴ _ስም"

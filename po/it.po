@@ -897,8 +897,12 @@ msgstr "Il contenuto della cartella non può essere visualizzato"
 #.
 #: ../gtk/gtkfilechooserdefault.c:1595
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s su %2$s"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s su %2
+s"
 
 #: ../gtk/gtkfilechooserdefault.c:1771
 msgid "Search"

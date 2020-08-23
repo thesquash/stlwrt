@@ -865,8 +865,12 @@ msgstr "Mappeinholdet kunne ikke vises"
 #.
 #: ../gtk/gtkfilechooserdefault.c:1580
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s på %2$s"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s på %2
+s"
 
 #: ../gtk/gtkfilechooserdefault.c:1729
 msgid "Search"

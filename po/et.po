@@ -709,8 +709,12 @@ msgstr "Kataloogi sisu pole võimalik kuvada"
 #. * to translate.
 #.
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s hostil %2$s"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s hostil %2
+s"
 
 msgid "Search"
 msgstr "Otsing"
@@ -2272,7 +2276,10 @@ msgstr "\"%s\" pole rekvisiidi väärtuseks lubatud"
 msgid ""
 "\"%s\" could not be converted to a value of type \"%s\" for attribute \"%s\""
 msgstr ""
-"Väärtust \"%1$s\" pole võimalik rekvisiidi \"%3$s\" jaoks \"%2$s\"-"
+"Väärtust \"%1
+s\" pole võimalik rekvisiidi \"%3
+s\" jaoks \"%2
+s\"-"
 "tüübiliseks väärtuseks teisendada"
 
 #, c-format

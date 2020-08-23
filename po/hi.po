@@ -1760,8 +1760,12 @@ msgstr "फ़ोल्डर की सामग्री दिखायी �
 #.
 #: gtk/gtkfilechooserdefault.c:1582
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s %2$s पर"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s %2
+s पर"
 
 #: gtk/gtkfilechooserdefault.c:1758
 msgid "Search"
@@ -5336,6 +5340,3 @@ msgstr "जाँच मुद्रक में छापें"
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr "फ़ाइल '%s' हेतु सूचना नहीं पा सका: %s"
-
-#~ msgid "(Empty)"
-#~ msgstr "(रिक्त)"

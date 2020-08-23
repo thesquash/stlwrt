@@ -8001,21 +8001,3 @@ msgstr "Indica come visualizzare il metodo di input della barra di stato"
 #~ msgstr "Il numero di righe del pixbuf"
 
 #
-# revert a originale per due motivi:
-#   - spaziatura è spacing
-#   - rowstride è altra cosa dalla spaziatura
-#     (cfr ricerca su google)
-#~ msgid "Rowstride"
-#~ msgstr "Rowstride"
-
-#~ msgid ""
-#~ "The number of bytes between the start of a row and the start of the next "
-#~ "row"
-#~ msgstr ""
-#~ "Il numero di byte tra l'inizio di una riga e l'inizio della successiva"
-
-#~ msgid "Pixels"
-#~ msgstr "Pixel"
-
-#~ msgid "A pointer to the pixel data of the pixbuf"
-#~ msgstr "Un puntatore ai dati pixel del pixbuf"

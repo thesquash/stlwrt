@@ -1719,7 +1719,9 @@ msgstr "Jild tarkibini koʻrsatib boʻlmaydi"
 #.
 #: gtk/gtkfilechooserdefault.c:1582
 #, c-format
-msgid "%1$s on %2$s"
+msgid "%1
+s on %2
+s"
 msgstr ""
 
 #: gtk/gtkfilechooserdefault.c:1758
@@ -5302,23 +5304,3 @@ msgstr "Printerni sinash uchun bosib chiqarish"
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr "'%s' fayli uchun maʼlumot toʻplab boʻlmadi: %s"
-
-#~ msgid "(Empty)"
-#~ msgstr "(Boʻsh)"
-
-#, fuzzy
-#~ msgid "<b>_Search:</b>"
-#~ msgstr "_Qidirish:"
-
-#, fuzzy
-#~ msgid "<b>Recently Used</b>"
-#~ msgstr "Yaqinda ishlatilganlar"
-
-#~ msgid "directfb arg"
-#~ msgstr "`directfb arg"
-
-#~ msgid "sdl|system"
-#~ msgstr "tizim"
-
-#~ msgid "You have the Caps Lock key on"
-#~ msgstr "Caps Lock tugmasi bosilgan"

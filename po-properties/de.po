@@ -8466,29 +8466,3 @@ msgstr "Titel des Farbprofils"
 #: ../modules/printbackends/cups/gtkprintercups.c:94
 msgid "The title of the color profile to use"
 msgstr "Der Titel des zu verwendenden Farbprofils"
-
-#~ msgid "menu"
-#~ msgstr "menu"
-
-#~ msgid "Specified type"
-#~ msgstr "Angegebener Typ"
-
-#~ msgid "The type of values after parsing"
-#~ msgstr "Der Typ der Werte nach der Verarbeitung"
-
-#~ msgid "Computed type"
-#~ msgstr "Errechneter Typ"
-
-#~ msgid "The type of values after style lookup"
-#~ msgstr "Der Typ der Werte nach dem Ermitteln des Stils"
-
-#~ msgid "TRUE if page setup combos are embedded in GtkPrintDialog"
-#~ msgstr ""
-#~ "WAHR, falls die Seiteneinrichtung Auswahlfelder im GtkPrintDialog "
-#~ "einbettet"
-
-#~ msgid "Event base"
-#~ msgstr "Ereignisbasiert"
-
-#~ msgid "Event base for XInput events"
-#~ msgstr "Ereignisbasierung für XInput-Ereignisse"

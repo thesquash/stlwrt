@@ -7597,9 +7597,3 @@ msgstr "შეტანის მეთოდის სტატუსის ს
 #: modules/input/gtkimcontextxim.c:344
 msgid "How to draw the input method statusbar"
 msgstr "შეტანის მეთოდის სტატუსის გრაფიკული გამოსახულება"
-
-#~ msgid "The orientation of the toolbar"
-#~ msgstr "ხელსაწყოთა პანელის ორიენტაცია"
-
-#~ msgid "Whether stock icons should be shown in buttons"
-#~ msgstr "ჩაკერებული ნახატების ჩვენება ღილაკებზე"

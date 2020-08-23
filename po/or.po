@@ -2,8 +2,12 @@
 # Oriya translation of gtk+.HEAD.pot.
 # Copyright (C) 2005, 2006, 2008, 2009, 2010, Free Software Foundation, Inc.
 # This file is distributed under the same license as the gtk+ package.
-# $Id: or.po,v 1.18 2006/12/13 09:55:51 sbehera Exp $
-# $Id: or.po,v 1.18 2006/12/13 09:55:51 sbehera Exp $
+# 
+Id: or.po,v 1.18 2006/12/13 09:55:51 sbehera Exp 
+
+# 
+Id: or.po,v 1.18 2006/12/13 09:55:51 sbehera Exp 
+
 #
 # Gora Mohanty <gora_mohanty@yahoo.co.in>, 2005.
 # Subhransu Behera <arya_subhransu@yahoo.co.in>, 2006.
@@ -1759,8 +1763,12 @@ msgstr "ଫୋଲ୍ଡର ସୂଚୀ ଗେଖାଇହେଲା ନାହି
 #.
 #: gtk/gtkfilechooserdefault.c:1582
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s %2$sରେ"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s %2
+sରେ"
 
 #: gtk/gtkfilechooserdefault.c:1758
 msgid "Search"
@@ -3828,7 +3836,10 @@ msgstr "--- କୌଣସି ସୂଚନା ନାହିଁ ---"
 #: gtk/gtkuimanager.c:1505
 #, c-format
 msgid "Unexpected start tag '%s' on line %d char %d"
-msgstr "ଧାଡ଼ି %2$d ଅକ୍ଷର %3$dରେ ଅପ୍ରତ୍ଯାଶିତ ପ୍ରାରମ୍ଭିକ ସୂଚକ '%1$s'"
+msgstr "ଧାଡ଼ି %2
+d ଅକ୍ଷର %3
+dରେ ଅପ୍ରତ୍ଯାଶିତ ପ୍ରାରମ୍ଭିକ ସୂଚକ '%1
+s'"
 
 #: gtk/gtkuimanager.c:1595
 #, c-format

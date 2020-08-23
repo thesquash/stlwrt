@@ -1759,8 +1759,12 @@ msgstr "Obsah priečinka nemohol byť zobrazený"
 #.
 #: gtk/gtkfilechooserdefault.c:1582
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s na %2$s"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s na %2
+s"
 
 #: gtk/gtkfilechooserdefault.c:1758
 msgid "Search"
@@ -5312,109 +5316,3 @@ msgstr "Vytlačiť na skúšobnej tlačiarni"
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr "Nepodarilo sa určiť formát súboru obrázku pre \"%s\": %s"
-
-#~ msgid "(Empty)"
-#~ msgstr "(Prázdne)"
-
-#~ msgid "directfb arg"
-#~ msgstr "directfb arg"
-
-#~ msgid "sdl|system"
-#~ msgstr "sdl|system"
-
-#~ msgid ""
-#~ "You have the Caps Lock key on\n"
-#~ "and an active input method"
-#~ msgstr ""
-#~ "Máte zapnutý Caps Lock\n"
-#~ "a aktívnu metódu vstupu"
-
-#~ msgid "You have the Caps Lock key on"
-#~ msgstr "Máte zapnutý Caps Lock"
-
-#~ msgid "You have an active input method"
-#~ msgstr "Máte aktívnu metódu vstupu"
-
-#~ msgid "Couldn't create pixbuf"
-#~ msgstr "Nepodarilo sa vytvoriť pixbuf"
-
-#~ msgid "%.1f KB"
-#~ msgstr "%.1f KiB"
-
-#~ msgid "%.1f MB"
-#~ msgstr "%.1f MiB"
-
-#~ msgid "%.1f GB"
-#~ msgstr "%.1f GiB"
-
-#~ msgid "URI"
-#~ msgstr "URI"
-
-#~ msgid "The URI bound to this button"
-#~ msgstr "URI zviazaná s týmto tlačidlom"
-
-#~ msgid "Arrow spacing"
-#~ msgstr "Rozostup šípok"
-
-#~ msgid "Scroll arrow spacing"
-#~ msgstr "Rozostup skrolovacích šípok"
-
-#~ msgid "Group"
-#~ msgstr "Skupina"
-
-#~ msgid "The radio tool button whose group this button belongs to."
-#~ msgstr "Prepínacie tlačidlo, do ktorého skupiny toto tlačidlo patrí."
-
-#~ msgid "Invalid filename: %s"
-#~ msgstr "Neplatný názov súboru: %s"
-
-#~ msgid ""
-#~ "Could not add a bookmark for '%s' because it is an invalid path name."
-#~ msgstr ""
-#~ "Nepodarilo sa pridať záložku pre '%s', pretože tvorí neplatnú cestu."
-
-#~ msgid "Could not select file '%s' because it is an invalid path name."
-#~ msgstr "Nepodarilo sa vybrať súbor '%s', pretože je to neplatná cesta."
-
-#~ msgid "%d byte"
-#~ msgid_plural "%d bytes"
-#~ msgstr[0] "%d bajtov"
-#~ msgstr[1] "%d bajt"
-#~ msgstr[2] "%d bajty"
-
-#~ msgid "Could not get a stock icon for %s\n"
-#~ msgstr "Nepodarilo sa získať ikonu zo skladu pre %s\n"
-
-#~ msgid "Error getting information for '%s': %s"
-#~ msgstr "Chyba pri získavaní informácie pre '%s': %s"
-
-#~ msgid "This file system does not support mounting"
-#~ msgstr "Tento systém súborov nepodporuje pripojenie"
-
-#~ msgid ""
-#~ "The name \"%s\" is not valid because it contains the character \"%s\". "
-#~ "Please use a different name."
-#~ msgstr ""
-#~ "Názov \"%s\" nie je platný, pretože obsahuje znak \"%s\". Prosím, použite "
-#~ "iný názov."
-
-#~ msgid "Bookmark saving failed: %s"
-#~ msgstr "Uloženie záložky zlyhalo: %s"
-
-#~ msgid "'%s' already exists in the bookmarks list"
-#~ msgstr "\"%s\" už v zozname záložiek existuje"
-
-#~ msgid "'%s' does not exist in the bookmarks list"
-#~ msgstr "\"%s\" neexistuje v zozname záložiek"
-
-#~ msgid "Path is not a folder: '%s'"
-#~ msgstr "Cesta nie je priečinkom: \"%s\""
-
-#~ msgid "Network Drive (%s)"
-#~ msgstr "Sieťové zariadenie (%s)"
-
-#~ msgid "Unknown attribute '%s' on line %d char %d"
-#~ msgstr "Neznámy atribút \"%s\" na riadku %d znaku %d"
-
-#~ msgid "Today at %H:%M"
-#~ msgstr "Dnes o %H:%M"

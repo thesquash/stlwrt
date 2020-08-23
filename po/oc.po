@@ -2240,8 +2240,12 @@ msgstr "Autre…"
 #.
 #: gtk/gtkfilechooserutils.c:488
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s sus %2$s"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s sus %2
+s"
 
 #: gtk/gtkfilechooserwidget.c:337
 msgid "Type name of new folder"
@@ -6245,18 +6249,3 @@ msgstr "sortida-tèst.%s"
 #: modules/printbackends/test/gtkprintbackendtest.c:465
 msgid "Print to Test Printer"
 msgstr "Imprimir cap a una imprimenta tèst"
-
-#~ msgid "Choose a widget through the inspector"
-#~ msgstr "Causir un component a travèrs de l'inspector"
-
-#~ msgid "Count:"
-#~ msgstr "Nombre :"
-
-#~ msgid "GTK+ Inspector — %s"
-#~ msgstr "Inspector GTK+ — %s"
-
-#~ msgid "Send Widget to Shell"
-#~ msgstr "Mandar lo component al shell"
-
-#~ msgid "Custom CSS"
-#~ msgstr "CSS personalizat"

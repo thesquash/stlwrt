@@ -864,8 +864,12 @@ msgstr "Obsah složky nelze zobrazit"
 #.
 #: ../gtk/gtkfilechooserdefault.c:1595
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s na %2$s"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s na %2
+s"
 
 #: ../gtk/gtkfilechooserdefault.c:1771
 msgid "Search"

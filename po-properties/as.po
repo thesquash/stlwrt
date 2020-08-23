@@ -7469,9 +7469,3 @@ msgstr "IM তৰ অবস্থাসূচক ধৰন"
 #: modules/input/gtkimcontextxim.c:344
 msgid "How to draw the input method statusbar"
 msgstr "যি ভাবে ইনপুট পদ্ধতিৰ স্ট্যাটাসবাৰ"
-
-#~ msgid "The orientation of the toolbar"
-#~ msgstr "টুলবাৰেৰ দিক"
-
-#~ msgid "Whether stock icons should be shown in buttons"
-#~ msgstr "বাটনে স্টক (Stock) আইকন প্ৰদৰ্শন কৰা হ'ব নে নাই"

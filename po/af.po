@@ -1767,8 +1767,12 @@ msgstr "Die gidsinhoud kon nie vertoon word nie"
 #.
 #: gtk/gtkfilechooserdefault.c:1582
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s op %2$s"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s op %2
+s"
 
 #: gtk/gtkfilechooserdefault.c:1758
 msgid "Search"

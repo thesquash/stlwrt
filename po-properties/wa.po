@@ -7402,9 +7402,3 @@ msgstr "Stîle d' estat del metôde d' intrêye"
 #: modules/input/gtkimcontextxim.c:344
 msgid "How to draw the input method statusbar"
 msgstr "Kimint dessiner l' båre d' estat del metôde d' intrêye"
-
-#~ msgid "Whether stock icons should be shown in buttons"
-#~ msgstr "S' i fåt ou nén mostrer les prémetowès imådjes dins les botons"
-
-#~ msgid "Show Preview"
-#~ msgstr "Prévey"

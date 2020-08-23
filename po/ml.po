@@ -1752,8 +1752,12 @@ msgstr "അറയിലുള്ളവ പ്രദര്‍ശിപ്പി�
 #.
 #: gtk/gtkfilechooserdefault.c:1582
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s, %2$s-ല്‍"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s, %2
+s-ല്‍"
 
 #: gtk/gtkfilechooserdefault.c:1758
 msgid "Search"
@@ -5305,6 +5309,3 @@ msgstr "ടെസ്റ്റ് പ്രിന്ററിലേക്ക് �
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr "'%s' എന്ന ഫയലിന് ആവശ്യമുള്ള വിവരം ലഭ്യമായില്ല: %s"
-
-#~ msgid "(Empty)"
-#~ msgstr "(ശൂന്യം)"

@@ -7366,11 +7366,3 @@ msgstr ""
 #: modules/input/gtkimcontextxim.c:344
 msgid "How to draw the input method statusbar"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Show Preview"
-#~ msgstr "Dimension:"
-
-#, fuzzy
-#~ msgid "Folder Mode"
-#~ msgstr "Renominar"

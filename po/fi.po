@@ -1761,8 +1761,12 @@ msgstr "Kansion sisältöä ei voitu näyttää"
 #.
 #: gtk/gtkfilechooserdefault.c:1582
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s - %2$s"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s - %2
+s"
 
 #: gtk/gtkfilechooserdefault.c:1758
 msgid "Search"
@@ -5314,12 +5318,3 @@ msgstr "Tulosta testitulostimelle"
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr "Tiedoston ”%s” tietojen saaminen epäonnistui: %s"
-
-#~ msgid "(Empty)"
-#~ msgstr "(Tyhjä)"
-
-#~ msgid "directfb arg"
-#~ msgstr "directfb arg"
-
-#~ msgid "sdl|system"
-#~ msgstr "järjestelmä"

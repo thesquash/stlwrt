@@ -874,8 +874,12 @@ msgstr "Conținutul dosarului nu a putut fi afișat"
 #.
 #: ../gtk/gtkfilechooserdefault.c:1574
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s pe %2$s"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s pe %2
+s"
 
 #: ../gtk/gtkfilechooserdefault.c:1723
 msgid "Search"

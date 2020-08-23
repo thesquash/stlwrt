@@ -7398,12 +7398,3 @@ msgstr "Įvesties metodo būsenos stilius"
 #: modules/input/gtkimcontextxim.c:344
 msgid "How to draw the input method statusbar"
 msgstr "Kaip rodyti įvedimo metodo būsenos juostą"
-
-#~ msgid "The orientation of the toolbar"
-#~ msgstr "Įrankių juostos padėtis"
-
-#~ msgid "Whether stock icons should be shown in buttons"
-#~ msgstr "Ar standartinės piktogramos turi būti rodomos mygtukuose"
-
-#~ msgid "Whether or not the operation has been successfully cancelled"
-#~ msgstr "Ar operacija buvo sėkmingai atšaukta"

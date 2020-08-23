@@ -869,8 +869,12 @@ msgstr "Le contento de dossier non pote ser monstrate"
 #.
 #: ../gtk/gtkfilechooserdefault.c:1577
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s sur %2$s"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s sur %2
+s"
 
 #: ../gtk/gtkfilechooserdefault.c:1726
 msgid "Search"

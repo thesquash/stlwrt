@@ -878,8 +878,12 @@ msgstr "A mappa tartalma nem jeleníthető meg"
 #.
 #: ../gtk/gtkfilechooserdefault.c:1578
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s ezen: %2$s"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s ezen: %2
+s"
 
 #: ../gtk/gtkfilechooserdefault.c:1727
 msgid "Search"
@@ -4449,12 +4453,3 @@ msgid ""
 msgstr ""
 "Nem sikerült betölteni a(z) „%s” képet: ok ismeretlen, valószínűleg sérült a "
 "képfájl"
-
-#~ msgid "_Add"
-#~ msgstr "Hozzá_adás"
-
-#~ msgid "_Remove"
-#~ msgstr "_Eltávolítás"
-
-#~ msgid "_Browse for other folders"
-#~ msgstr "Egyéb mappák _böngészése"

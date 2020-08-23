@@ -7383,12 +7383,3 @@ msgstr "أسلوب حالة طريقة الإدخال"
 #: modules/input/gtkimcontextxim.c:344
 msgid "How to draw the input method statusbar"
 msgstr "كيفية رسم عمود الحالة لطريقة الإدخال"
-
-#~ msgid "The orientation of the toolbar"
-#~ msgstr "اتجاه شريط ا?دوات"
-
-#~ msgid "Whether stock icons should be shown in buttons"
-#~ msgstr "فيما إذا سيتم عرض أيقونات المخزون في الأزرار"
-
-#~ msgid "Whether or not the operation has been successfully cancelled"
-#~ msgstr "اذا تم إلغاء العملية بنجاح "

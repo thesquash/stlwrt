@@ -858,8 +858,12 @@ msgstr "Не ўдалося паказаць змесціва гэтай пап�
 #.
 #: ../gtk/gtkfilechooserdefault.c:1575
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s на %2$s"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s на %2
+s"
 
 #: ../gtk/gtkfilechooserdefault.c:1724
 msgid "Search"
@@ -2766,7 +2770,9 @@ msgstr "Для элемента <%s> былі знойдзеныя атрыбу�
 #: ../gtk/gtktextbufferserialize.c:806 ../gtk/gtktextbufferserialize.c:832
 #, c-format
 msgid "The attribute \"%s\" was found twice on the <%s> element"
-msgstr "Для элемента <%2$s> атрыбут \"%1$s\" быў знойдзены двойчы"
+msgstr "Для элемента <%2
+s> атрыбут \"%1
+s\" быў знойдзены двойчы"
 
 #: ../gtk/gtktextbufferserialize.c:846
 #, c-format
@@ -2781,7 +2787,9 @@ msgstr "Складнік <%s> не мае ні аднаго з атрыбута�
 #: ../gtk/gtktextbufferserialize.c:943
 #, c-format
 msgid "Attribute \"%s\" repeated twice on the same <%s> element"
-msgstr "Элемент <%2$s> мае прадубляваны атрыбут \"%1$s\""
+msgstr "Элемент <%2
+s> мае прадубляваны атрыбут \"%1
+s\""
 
 #: ../gtk/gtktextbufferserialize.c:961 ../gtk/gtktextbufferserialize.c:986
 #, c-format

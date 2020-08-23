@@ -1718,7 +1718,9 @@ msgstr "Жилд таркибини кўрсатиб бўлмайди"
 #.
 #: gtk/gtkfilechooserdefault.c:1582
 #, c-format
-msgid "%1$s on %2$s"
+msgid "%1
+s on %2
+s"
 msgstr ""
 
 #: gtk/gtkfilechooserdefault.c:1758
@@ -5301,23 +5303,3 @@ msgstr "Принтерни синаш учун босиб чиқариш"
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr "'%s' файли учун маълумот тўплаб бўлмади: %s"
-
-#~ msgid "(Empty)"
-#~ msgstr "(Бўш)"
-
-#, fuzzy
-#~ msgid "<b>_Search:</b>"
-#~ msgstr "_Қидириш:"
-
-#, fuzzy
-#~ msgid "<b>Recently Used</b>"
-#~ msgstr "Яқинда ишлатилганлар"
-
-#~ msgid "directfb arg"
-#~ msgstr "`directfb arg"
-
-#~ msgid "sdl|system"
-#~ msgstr "тизим"
-
-#~ msgid "You have the Caps Lock key on"
-#~ msgstr "Caps Lock тугмаси босилган"

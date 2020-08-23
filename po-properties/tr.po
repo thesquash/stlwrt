@@ -8540,14 +8540,3 @@ msgstr "IM Durum biçemi"
 #: modules/input/gtkimcontextxim.c:344
 msgid "How to draw the input method statusbar"
 msgstr "Girdi yöntemi durum çubuğunun nasıl çizileceği"
-
-# gtk/gtktoolbar.c:224
-#~ msgid "The orientation of the toolbar"
-#~ msgstr "Araç çubuğu yönü"
-
-# gtk/gtknotebook.c:369
-#~ msgid "Whether stock icons should be shown in buttons"
-#~ msgstr "Depo simgelerinin düğmeler için gösterilmesi"
-
-#~ msgid "Whether or not the operation has been successfully cancelled"
-#~ msgstr "İşlemin başarıyla iptal edilip edilmediği"

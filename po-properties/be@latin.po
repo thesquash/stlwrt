@@ -7696,12 +7696,3 @@ msgstr "Styl stanu metadu ŭvodu"
 #: modules/input/gtkimcontextxim.c:344
 msgid "How to draw the input method statusbar"
 msgstr "Sposab rysavańnia paneli stanu metadu ŭvodu"
-
-#~ msgid "The orientation of the toolbar"
-#~ msgstr "Aryjentacyja panelaŭ pryładździa"
-
-#~ msgid "Whether stock icons should be shown in buttons"
-#~ msgstr "Akreślivaje, ci na knopkach pavinny być bačnyja ikony"
-
-#~ msgid "Whether or not the operation has been successfully cancelled"
-#~ msgstr "Akreślivaje, ci aperacyja była paśpiachova anulavanaja"

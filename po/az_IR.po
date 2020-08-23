@@ -1709,7 +1709,9 @@ msgstr ""
 #.
 #: gtk/gtkfilechooserdefault.c:1582
 #, c-format
-msgid "%1$s on %2$s"
+msgid "%1
+s on %2
+s"
 msgstr ""
 
 #: gtk/gtkfilechooserdefault.c:1758
@@ -5237,7 +5239,3 @@ msgstr ""
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr ""
-
-#, fuzzy
-#~ msgid "calendar:week:digits|%d"
-#~ msgstr "calendar:week_start:6"

@@ -1768,8 +1768,12 @@ msgstr "Не вдається відобразити вміст теки"
 #.
 #: gtk/gtkfilechooserdefault.c:1582
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s на %2$s"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s на %2
+s"
 
 #: gtk/gtkfilechooserdefault.c:1758
 msgid "Search"

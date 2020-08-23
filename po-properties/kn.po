@@ -7415,6 +7415,3 @@ msgstr "IM ಸ್ಥಿತಿ ಶೈಲಿ"
 #: modules/input/gtkimcontextxim.c:344
 msgid "How to draw the input method statusbar"
 msgstr "ಪ್ರದಾನ(input) ಕ್ರಮ ಸ್ಥಿತಿ ಪಟ್ಟಿಯನ್ನು ಹೇಗೆ ಎಳೆಯುವುದು"
-
-#~ msgid "Padding that should be put around icons in the tray"
-#~ msgstr "ಟ್ರೇಯಲ್ಲಿನ ಚಿಹ್ನೆಗಳ ಸುತ್ತ ಹಾಕಬೇಕಿರುವ ಪ್ಯಾಡಿಂಗ್"

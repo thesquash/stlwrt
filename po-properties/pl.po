@@ -7646,6 +7646,3 @@ msgstr "Nieprzezroczystość okna"
 #: ../gtk/gtkwindow.c:802
 msgid "The opacity of the window, from 0 to 1"
 msgstr "Nieprzezroczystość okna od 0 do 1"
-
-#~ msgid "The number of decimal places to which the value is rounded"
-#~ msgstr "Liczba cyfr dziesiętnych, do których wartość jest zaokrąglana"

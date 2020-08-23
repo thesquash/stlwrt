@@ -1769,7 +1769,9 @@ msgstr ""
 #.
 #: gtk/gtkfilechooserdefault.c:1582
 #, c-format
-msgid "%1$s on %2$s"
+msgid "%1
+s on %2
+s"
 msgstr ""
 
 #: gtk/gtkfilechooserdefault.c:1758
@@ -5470,91 +5472,3 @@ msgstr "_Çap Et"
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr ""
-
-#~ msgid "(Empty)"
-#~ msgstr "(Puç)"
-
-#, fuzzy
-#~ msgid "Couldn't create pixbuf"
-#~ msgstr "Renk Saýlawy"
-
-#, fuzzy
-#~ msgid "%.1f KB"
-#~ msgstr "%.1f K"
-
-#, fuzzy
-#~ msgid "%.1f MB"
-#~ msgstr "%.1f M"
-
-#, fuzzy
-#~ msgid "%.1f GB"
-#~ msgstr "%.1f G"
-
-#, fuzzy
-#~ msgid "Media|_Next"
-#~ msgstr "_Täze"
-
-#, fuzzy
-#~ msgid "Media|P_ause"
-#~ msgstr "_Ýabşyr"
-
-#, fuzzy
-#~ msgid "Media|_Stop"
-#~ msgstr "_Dur"
-
-#~ msgid "Group"
-#~ msgstr "Topar"
-
-#~ msgid "Invalid filename: %s"
-#~ msgstr "Maýyp faýl ady: %s"
-
-#~ msgid "%d byte"
-#~ msgid_plural "%d bytes"
-#~ msgstr[0] "%d baýt"
-#~ msgstr[1] "%d baýt"
-
-#~ msgid "Default"
-#~ msgstr "Öň bellenen"
-
-#, fuzzy
-#~ msgid "_All"
-#~ msgstr "_Doldur"
-
-#~ msgid "Today"
-#~ msgstr "Bugun"
-
-#, fuzzy
-#~ msgid "Location:"
-#~ msgstr "_Ýer"
-
-#, fuzzy
-#~ msgid "Error getting information for '/': %s"
-#~ msgstr "Faýlyň adyny \"%s\"-den \"%s\"-e ewez etmede bu hata doredi: %s"
-
-#~ msgid "Select All"
-#~ msgstr "Ehlini Saýla"
-
-#, fuzzy
-#~ msgid "shortcut %s already exists"
-#~ msgstr "%s gysga ýoly ýok"
-
-#~ msgid "Folder"
-#~ msgstr "Halta"
-
-#, fuzzy
-#~ msgid "Cannot change folder"
-#~ msgstr "Bu haltaniň içinde bejer:"
-
-#, fuzzy
-#~ msgid "Save in Location"
-#~ msgstr "Ýeri Aç"
-
-#~ msgid "X"
-#~ msgstr "X"
-
-#~ msgid "clear"
-#~ msgstr "durla"
-
-#, fuzzy
-#~ msgid "Writing %s failed: %s"
-#~ msgstr "Resim faýla ýazmakda hata boldy: %s"

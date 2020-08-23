@@ -5163,7 +5163,8 @@ msgstr "Název standardně používaného písma"
 msgid "Icon Sizes"
 msgstr "Velikosti ikon"
 
-# FIXME: s/$/)/
+# FIXME: s/
+/)/
 #: ../gtk/gtksettings.c:371
 msgid "List of icon sizes (gtk-menu=16,16:gtk-button=20,20..."
 msgstr "Seznam velikostí ikon (gtk-menu=16,16;gtk-button=20,20...)"

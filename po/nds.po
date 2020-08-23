@@ -1716,8 +1716,12 @@ msgstr ""
 #.
 #: gtk/gtkfilechooserdefault.c:1582
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s an %2$s"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s an %2
+s"
 
 #: gtk/gtkfilechooserdefault.c:1758
 msgid "Search"
@@ -5244,6 +5248,3 @@ msgstr "Drucke mit Testdrucker"
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr "Kunn keene Informatschoon rutkregen över de Datei '%s': %s"
-
-#~ msgid "(Empty)"
-#~ msgstr "(Leer)"

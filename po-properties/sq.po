@@ -7783,6 +7783,3 @@ msgstr "Gjendja e stilit IM"
 #: modules/input/gtkimcontextxim.c:344
 msgid "How to draw the input method statusbar"
 msgstr "Tregon si duhet shfaqur metod e input e panelit të gjendjes"
-
-#~ msgid "The orientation of the toolbar"
-#~ msgstr "Drejtimi i pllakës së instrumentëve"

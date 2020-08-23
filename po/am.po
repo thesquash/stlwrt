@@ -1761,7 +1761,9 @@ msgstr ""
 #.
 #: gtk/gtkfilechooserdefault.c:1582
 #, c-format
-msgid "%1$s on %2$s"
+msgid "%1
+s on %2
+s"
 msgstr ""
 
 #: gtk/gtkfilechooserdefault.c:1758
@@ -5460,95 +5462,3 @@ msgstr "አትም (_P)"
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Couldn't create pixbuf"
-#~ msgstr "የአሁኑን ቀለም"
-
-#, fuzzy
-#~ msgid "Justify|_Center"
-#~ msgstr "መሀከል (_C)"
-
-#, fuzzy
-#~ msgid "Media|_Next"
-#~ msgstr "አዲስ (_N)"
-
-#, fuzzy
-#~ msgid "Media|P_ause"
-#~ msgstr "ለጥፍ (_P)"
-
-#, fuzzy
-#~ msgid "Media|_Stop"
-#~ msgstr "አቁም (_S)"
-
-#, fuzzy
-#~ msgid "Could not get a stock icon for %s\n"
-#~ msgstr "የአሁኑን ቀለም"
-
-#, fuzzy
-#~ msgid "Default"
-#~ msgstr "የነበረው ስፋት"
-
-#, fuzzy
-#~ msgid "_All"
-#~ msgstr "ተጠቀም (_A)"
-
-#, fuzzy
-#~ msgid "Today"
-#~ msgstr "አዛምድ"
-
-#, fuzzy
-#~ msgid "Location:"
-#~ msgstr "_ምርጫ፦ "
-
-#~ msgid "Thai (Broken)"
-#~ msgstr "ታይኛ (Broken)"
-
-#~ msgid "Select All"
-#~ msgstr "ሁሉንም ምረጡ"
-
-#, fuzzy
-#~ msgid "Could not get information about '%s': %s"
-#~ msgstr "የአሁኑን ቀለም"
-
-#, fuzzy
-#~ msgid "Folder"
-#~ msgstr "ዶሴዎች"
-
-#, fuzzy
-#~ msgid "Cannot change folder"
-#~ msgstr "አዲስ ዶሴ"
-
-#, fuzzy
-#~ msgid "Save in Location"
-#~ msgstr "_ምርጫ፦ "
-
-#~ msgid "X"
-#~ msgstr "X"
-
-#~ msgid "clear"
-#~ msgstr "ሰርዝ"
-
-#, fuzzy
-#~ msgid ""
-#~ "Could not change the current folder to %s:\n"
-#~ "%s"
-#~ msgstr "የአሁኑን ቀለም"
-
-#~ msgid "Input Methods"
-#~ msgstr "ዘገባ የማስትገባት ዘዴዎች"
-
-#, fuzzy
-#~ msgid "Add"
-#~ msgstr "ጨምር (_A)"
-
-#, fuzzy
-#~ msgid "_Filename:"
-#~ msgstr "የፋይል ስም"
-
-#, fuzzy
-#~ msgid "Current folder: %s"
-#~ msgstr "የአሁኑን ቀለም"
-
-#~ msgid "Zoom _100%"
-#~ msgstr "ቅርበትና ርቀት _100%"

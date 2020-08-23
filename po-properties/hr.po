@@ -7759,9 +7759,3 @@ msgstr "Stil stanja IM-a"
 #: modules/input/gtkimcontextxim.c:344
 msgid "How to draw the input method statusbar"
 msgstr "Kako iscrtati statusnu traku načina unosa"
-
-#~ msgid "The orientation of the toolbar"
-#~ msgstr "Promijeni format izabranih ćelija"
-
-#~ msgid "Whether stock icons should be shown in buttons"
-#~ msgstr "Trebaju li se prikazivati sličice u gumbima"

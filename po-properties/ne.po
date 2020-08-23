@@ -7641,35 +7641,3 @@ msgstr "आइएम तह शैली"
 #: modules/input/gtkimcontextxim.c:344
 msgid "How to draw the input method statusbar"
 msgstr "कसरी तहरेखामा प्रवेश प्रकृया रेखाङ्कन गर्ने"
-
-#~ msgid "The orientation of the toolbar"
-#~ msgstr "औजारबारको अभिमुखीकरण"
-
-#~ msgid "Whether stock icons should be shown in buttons"
-#~ msgstr "जहाँ संग्रहित छविचित्रहरु बटनमा देखाउनु पर्छ"
-
-#~ msgid ""
-#~ "A number between 0.0 and 1.0 specifying the horizontal alignment of the "
-#~ "text in the progress widget"
-#~ msgstr ""
-#~ "०.० र १.० का बीचमा प्रगति औजारमा  पाठको समतलीय पंक्तिबद्धताका लागि एउटा संख्या"
-
-#~ msgid ""
-#~ "A number between 0.0 and 1.0 specifying the vertical alignment of the "
-#~ "text in the progress widget"
-#~ msgstr ""
-#~ "०.० र १.० का बीचमा प्रगति औजारमा  पाठको उर्ध्वतलीय पंक्तिबद्धताका लागि एउटा संख्या"
-
-#, fuzzy
-#~ msgid "The current page in the document."
-#~ msgstr "मिलानका लागि पन्नाको आकार"
-
-#~ msgid "Homogenous"
-#~ msgstr "होमोजेनियस"
-
-#, fuzzy
-#~ msgid "Show Preview"
-#~ msgstr "पाठ देखाऊ"
-
-#~ msgid "Whether this text is hidden. Not implemented in GTK 2.0"
-#~ msgstr "यो लुकाइएको हो भने जीटीके २.० मा प्रयोग हुँदैनन्"

@@ -1751,8 +1751,12 @@ msgstr "Neizdevās parādīt mapes saturu"
 #.
 #: gtk/gtkfilechooserdefault.c:1582
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s uz %2$s"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s uz %2
+s"
 
 #: gtk/gtkfilechooserdefault.c:1758
 msgid "Search"
@@ -5298,20 +5302,3 @@ msgstr "Drukāt testa printerī"
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr "Neizdevās iegūt informāciju par failu '%s': %s"
-
-#~ msgid "(Empty)"
-#~ msgstr "(Tukšs)"
-
-#, fuzzy
-#~ msgid "<b>_Search:</b>"
-#~ msgstr "_Meklēt:"
-
-#, fuzzy
-#~ msgid "<b>Recently Used</b>"
-#~ msgstr "Nesen izmantots"
-
-#~ msgid "directfb arg"
-#~ msgstr "directfb arg"
-
-#~ msgid "sdl|system"
-#~ msgstr "sistēma"

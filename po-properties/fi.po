@@ -7392,32 +7392,3 @@ msgstr "Syöttötavan tilan tyyli"
 #: modules/input/gtkimcontextxim.c:344
 msgid "How to draw the input method statusbar"
 msgstr "Miten syöttötapojen tilarivi piirtyy"
-
-#~ msgid "The orientation of the toolbar"
-#~ msgstr "Työkalupalkin asento"
-
-#~ msgid "Whether stock icons should be shown in buttons"
-#~ msgstr "Näytetäänkö vakiokuvakkeet painikkeissa"
-
-#~ msgid "Whether or not the operation has been successfully cancelled"
-#~ msgstr "Peruttiinko toiminto onnistuneesti"
-
-#~ msgid ""
-#~ "A number between 0.0 and 1.0 specifying the horizontal alignment of the "
-#~ "text in the progress widget"
-#~ msgstr ""
-#~ "Numero välillä 0.0 - 1.0, joka määrittää tekstin vaakakohdistuksen "
-#~ "edistymissäätimessä"
-
-#~ msgid ""
-#~ "A number between 0.0 and 1.0 specifying the vertical alignment of the "
-#~ "text in the progress widget"
-#~ msgstr ""
-#~ "Numero väliltä 0.0 - 1.0, joka määrittää tekstin pystykohdistuksen "
-#~ "edistymissäätimessä"
-
-#~ msgid "The current page in the document."
-#~ msgstr "Nykyinen sivu asiakirjassa."
-
-#~ msgid "Homogenous"
-#~ msgstr "Tasakokoisuus"

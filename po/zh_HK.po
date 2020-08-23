@@ -838,8 +838,12 @@ msgstr "無法顯示資料夾內容"
 #.
 #: ../gtk/gtkfilechooserdefault.c:1582
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s 於 %2$s"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s 於 %2
+s"
 
 #: ../gtk/gtkfilechooserdefault.c:1758
 msgid "Search"
@@ -2897,7 +2901,10 @@ msgstr "--- 無提示 ---"
 #: ../gtk/gtkuimanager.c:1505
 #, c-format
 msgid "Unexpected start tag '%s' on line %d char %d"
-msgstr "第 %2$d 行第 %3$d 字有非預設的開始標記‘%1$s’"
+msgstr "第 %2
+d 行第 %3
+d 字有非預設的開始標記‘%1
+s’"
 
 #: ../gtk/gtkuimanager.c:1595
 #, c-format
@@ -3958,7 +3965,9 @@ msgstr "從 %s 取得檔案需要驗證"
 #: ../modules/printbackends/cups/gtkprintbackendcups.c:1042
 #, c-format
 msgid "Authentication is required to print document '%s' on printer %s"
-msgstr "要在打印機 %2$s 打印文件「%1$s」需要驗證"
+msgstr "要在打印機 %2
+s 打印文件「%1
+s」需要驗證"
 
 #: ../modules/printbackends/cups/gtkprintbackendcups.c:856
 #, c-format
@@ -5832,115 +5841,7 @@ msgstr "無法載入圖片檔「%s」：原因不明，可能檔案已經損毀"
 #~ msgstr "網路磁碟 (%s)"
 
 #~ msgid "Unknown attribute '%s' on line %d char %d"
-#~ msgstr "第 %2$d 行第 %3$d 字有未知的屬性‘%1$s’"
-
-#~ msgid "Default"
-#~ msgstr "預設"
-
-#~ msgid "_All"
-#~ msgstr "全部(_A)"
-
-#~ msgid "Today"
-#~ msgstr "今天"
-
-#, fuzzy
-#~ msgid "Location:"
-#~ msgstr "位置(_L)："
-
-#~ msgid "PNM image format is invalid"
-#~ msgstr "PNM 圖片格式不正確"
-
-#~ msgid "Line %d, column %d: missing attribute \"%s\""
-#~ msgstr "行 %d，列 %d：遺漏屬性“%s”"
-
-#~ msgid "Line %d, column %d: unexpected element \"%s\""
-#~ msgstr "行 %d，列 %d：不是預設的元素“%s”"
-
-#~ msgid ""
-#~ "Line %d, column %d: expected end of element \"%s\", but got element for "
-#~ "\"%s\" instead"
-#~ msgstr "行 %d，列 %d：預設結束的元素應為“%s”，但取得“%s”的元素"
-
-#~ msgid ""
-#~ "Line %d, column %d: expected \"%s\" at the toplevel, but found \"%s\" "
-#~ "instead"
-#~ msgstr "行 %d，列 %d：預設應為“%s”在最上層，但找到“%s”"
-
-#~ msgid ""
-#~ "Line %d, column %d: expected \"%s\" or \"%s\", but found \"%s\" instead"
-#~ msgstr "行 %d，列 %d：預設應為“%s”或“%s”，但找到“%s”"
-
-#~ msgid "Error creating directory '%s': %s"
-#~ msgstr "建立資料夾‘%s’時發生錯誤：%s"
-
-#~ msgid "Thai (Broken)"
-#~ msgstr "泰文（斷字）"
-
-#~ msgid ""
-#~ "Error creating folder \"%s\": %s\n"
-#~ "%s"
-#~ msgstr ""
-#~ "建立資料夾“%s”時發生錯誤：%s\n"
-#~ "%s"
-
-#~ msgid "You probably used symbols not allowed in filenames."
-#~ msgstr "您可能使用了檔案名稱中不應出現的符號。"
-
-#~ msgid ""
-#~ "Error deleting file \"%s\": %s\n"
-#~ "%s"
-#~ msgstr ""
-#~ "刪除檔案“%s”時發生錯誤：%s\n"
-#~ "%s"
-
-#~ msgid "It probably contains symbols not allowed in filenames."
-#~ msgstr "它可能含有檔案名稱中不能使用的符號。"
-
-#~ msgid ""
-#~ "The file name \"%s\" contains symbols that are not allowed in filenames"
-#~ msgstr "檔案名稱“%s”含有檔案名稱中不能使用的符號"
-
-#~ msgid "Error getting information for '/': %s"
-#~ msgstr "取得‘/’的資訊時發生錯誤：%s"
-
-#~ msgid "Select All"
-#~ msgstr "選擇全部"
-
-#~ msgid "A <text> element has already been specified"
-#~ msgstr "<text> 元素已被指定"
-
-#~ msgid "shortcut %s already exists"
-#~ msgstr "捷徑 %s 已存在"
-
-#~ msgid "Cannot handle PNM files with maximum color values greater than 255"
-#~ msgstr "無法處理最大顏色數目大於 255 的 PNM 檔"
-
-#~ msgid "Could not get information about '%s': %s"
-#~ msgstr "無法取得關於「%s」的資訊：%s"
-
-#~ msgid "Shortcuts"
-#~ msgstr "捷徑"
-
-#~ msgid "Folder"
-#~ msgstr "資料夾"
-
-#~ msgid "Cannot change folder"
-#~ msgstr "無法切換資料夾"
-
-#~ msgid "The folder you specified is an invalid path."
-#~ msgstr "您指定的資料夾路徑無效。"
-
-#~ msgid "Could not build file name from '%s' and '%s'"
-#~ msgstr "無法從「%s」及「%s」建立檔案名稱"
-
-#~ msgid "Save in Location"
-#~ msgstr "存入位置"
-
-#~ msgid "X"
-#~ msgstr "X"
-
-#~ msgid "clear"
-#~ msgstr "清除"
-
-#~ msgid "Pixmap path element: \"%s\" must be absolute, %s, line %d"
-#~ msgstr "Pixmap 路徑組成部份「%s」必須為絕對路徑，%s，第 %d 行"
+#~ msgstr "第 %2
+d 行第 %3
+d 字有未知的屬性‘%1
+s’"

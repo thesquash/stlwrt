@@ -1751,8 +1751,12 @@ msgstr "Không thể hiển thị nội dung của thư mục đó"
 #.
 #: gtk/gtkfilechooserdefault.c:1582
 #, c-format
-msgid "%1$s on %2$s"
-msgstr "%1$s trên %2$s"
+msgid "%1
+s on %2
+s"
+msgstr "%1
+s trên %2
+s"
 
 #: gtk/gtkfilechooserdefault.c:1758
 msgid "Search"

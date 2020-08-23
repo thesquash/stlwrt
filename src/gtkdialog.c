@@ -115,9 +115,10 @@ enum {
 
 static guint dialog_signals[LAST_SIGNAL];
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkDialog, gtk_dialog, GTK_TYPE_WINDOW,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-						gtk_dialog_buildable_interface_init))
+STLWRT_DEFINE_VTYPE (GtkDialog, gtk_dialog, GTK_TYPE_WINDOW,  G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
+                                            gtk_dialog_buildable_interface_init)
+                     G_ADD_PRIVATE (GtkDialog))
 
 static void
 gtk_dialog_class_init (GtkDialogClass *class)
@@ -136,8 +137,6 @@ gtk_dialog_class_init (GtkDialogClass *class)
   widget_class->style_set = gtk_dialog_style_set;
 
   class->close = gtk_dialog_close;
-  
-  g_type_class_add_private (gobject_class, sizeof (GtkDialogPrivate));
 
   /**
    * GtkDialog:has-separator:

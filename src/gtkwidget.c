@@ -387,12 +387,12 @@ typedef struct _GtkWidgetPrivate GtkWidgetPrivate;
 #define GTK_WIDGET_FLAGS(obj) (GTK_WIDGET_GET_PRIVATE(obj) -> flags)
 
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkWidget, gtk_widget, G_TYPE_OBJECT,
-			 G_IMPLEMENT_INTERFACE (ATK_TYPE_IMPLEMENTOR,
-						gtk_widget_accessible_interface_init)
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-						gtk_widget_buildable_interface_init)
-			 G_ADD_PRIVATE (GtkWidget))
+STLWRT_DEFINE_VTYPE (GtkWidget, gtk_widget, G_TYPE_OBJECT,  G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (ATK_TYPE_IMPLEMENTOR,
+                                            gtk_widget_accessible_interface_init)
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
+                                            gtk_widget_buildable_interface_init)
+                     G_ADD_PRIVATE (GtkWidget))
 
 /* --- functions --- */
 

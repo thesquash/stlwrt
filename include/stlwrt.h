@@ -1,4 +1,3 @@
-
 /*
  * STLWRT - A fork of GTK+ 2 supporting future applications as well
  * Copyright (C) 2020 Gordon N. Squash.
@@ -19,154 +18,160 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __STLWRT_OBJECT_H__
-#define __STLWRT_OBJECT_H__
+#ifndef __STLWRT_H__
+#define __STLWRT_H__
 
 #include <glib.h>
 
-
 G_BEGIN_DECLS
 
+#ifndef G_TYPE_FLAG_NONE
+ #define G_TYPE_FLAG_NONE 0
+#endif
 
-/* Definitions which STLWRT components use. */
-
-#define STLWRT_DEFINE_TYPE(TN, t_n, T_P) \
-         STLWRT_DEFINE_TYPE_EXTENDED (TN, t_n, T_P, 0, {})
-
-
-#define STLWRT_DEFINE_TYPE_WITH_CODE(TN, t_n, T_P, _C_)	\
-         _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN (TN, t_n, T_P, 0) \
-         {_C_;} \
-         _STLWRT_DEFINE_TYPE_EXTENDED_END()
-
-
-#define STLWRT_DEFINE_ABSTRACT_TYPE(TN, t_n, T_P) \
-         STLWRT_DEFINE_TYPE_EXTENDED (TN, t_n, T_P, G_TYPE_FLAG_ABSTRACT, {})
-
-
-#define STLWRT_DEFINE_ABSTRACT_TYPE_WITH_CODE(TN, t_n, T_P, _C_) \
-         _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN (TN, t_n, T_P, G_TYPE_FLAG_ABSTRACT) \
-         {_C_;} \
-         _STLWRT_DEFINE_TYPE_EXTENDED_END()
-
-
-#define STLWRT_DEFINE_INTERFACE(TN, t_n, T_P) \
-         STLWRT_DEFINE_INTERFACE_WITH_CODE(TN, t_n, T_P, ;)
-
-
-#define STLWRT_DEFINE_TYPE_WITH_PRIVATE(TN, t_n, T_P) \
-         STLWRT_DEFINE_TYPE_EXTENDED (TN, t_n, T_P, 0, G_ADD_PRIVATE (TN))
-
-
-/* Definitions only used within this file. */
-
-#define STLWRT_DEFINE_TYPE_EXTENDED(TN, t_n, T_P, _f_, _C_) \
-         _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_PRE(TN, t_n, T_P) \
-         _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_FAT (TN, t_n, T_P, _f_) \
-         _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_THIN (TN, t_n, T_P, _f_) \
-         {_C_;} \
-         _STLWRT_DEFINE_TYPE_EXTENDED_END() \
-         
-
-
-#define _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_FAT(TypeName, type_name, TYPE_PARENT, flags) \
-  _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_FAT_PRE(TypeName, type_name, TYPE_PARENT) \
-  _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_FAT_REGISTER(TypeName, type_name, TYPE_PARENT, flags) \
-  
-#define _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_THIN(TypeName, type_name, TYPE_PARENT, flags) \
-  _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_THIN_PRE(TypeName, type_name, TYPE_PARENT) \
-  _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_THIN_REGISTER(TypeName, type_name, TYPE_PARENT, flags) \
-
-
-
-#define _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_PRE(TypeName, type_name, TYPE_PARENT) \
-\
-static void     type_name##_init              (TypeName        *self); \
-static void     type_name##_class_init        (TypeName##Class *klass); \
-static gpointer type_name##_parent_class = NULL; \
-static gint     TypeName##_private_offset; \
-\
-_STLWRT_DEFINE_TYPE_EXTENDED_CLASS_INIT(TypeName, type_name) \
-\
-G_GNUC_UNUSED \
-static inline gpointer \
-type_name##_get_instance_private (TypeName *self) \
-{ \
-  return (G_STRUCT_MEMBER_P (self, TypeName##_private_offset)) + sizeof(TypeName##Props); \
-} \
+/**
+ * STLWRT_DEFINE_FIXED_SIZE_TYPE:
+ * STLWRT_DEFINE_VARIABLE_SIZE_TYPE:
+ *  @TN:  The name of the type in Camel Case (like GtkVBox)
+ *  @t_n: The name of the type in lowercase (like gtk_vbox)
+ *  @PT:  The actual type of this type's parent (like GTK_TYPE_BOX)
+ *  @F:   Type flags.  If you want to create an abstract type, use
+ *        #G_TYPE_FLAG_ABSTRACT.  If not, pass either 0 or #G_TYPE_FLAG_NONE.
+ *        (Please note that #G_TYPE_FLAG_NONE is defined in this file, not
+ *        GLib.  It may someday become part of GLib, however.)
+ *  @C:   Code to insert into the type definition function.  If you want to
+ *        implement an interface, you can use #G_IMPLEMENT_INTERFACE.  If
+ *        you want to add private data, you may use #G_ADD_PRIVATE.
+ *        If you want neither, insert a single semicolon.
+ */
+#define STLWRT_DEFINE_FIXED_SIZE_TYPE    (TN, t_n, PT, F, C) \
+  static void     t_n##_init              (TN        *self); \
+  static void     t_n##_class_init        (TN##Class *klass); \
+  static gpointer t_n##_parent_class  = NULL; \
+  static gint     TN##_private_offset = 0; \
  \
-G_GNUC_UNUSED \
-static inline gpointer \
-##type_name##_get_instance_props (TypeName *self) \
-{ \
-  if (gtk_major_version <= 2) \
-    return self->parent; \
-  else \
-    return (G_STRUCT_MEMBER_P (self, TypeName##_private_offset)); \
-} \
-
-
-#define _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_FAT_PRE(TypeName, type_name, TYPE_PARENT) \
-GType \
-_T2_##type_name##_get_type (void) \
-{ \
-  static GType g_define_type_id = 0;
-  /* Prelude goes here */
-
-/* Added for _STLWRT_DEFINE_TYPE_EXTENDED_WITH_PRELUDE */
-#define _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_FAT_REGISTER(TypeName, type_name, TYPE_PARENT, flags) \
-  if (g_define_type_id == 0)  \
+  static void     t_n##_class_intern_init (gpointer klass) \
+  { \
+    t_n##_parent_class = g_type_class_peek_parent (klass); \
+    if (TN##_private_offset != 0) \
+      g_type_class_adjust_private_offset (klass, &TN##_private_offset); \
+    t_n##_class_init ((TN##Class*) klass); \
+  } \
+ \
+  G_GNUC_UNUSED \
+  static inline gpointer \
+  t_n##_get_instance_private (TN *self) \
+  { \
+    return (G_STRUCT_MEMBER_P (self, TN##_private_offset)); \
+  } \
+ \
+  GType \
+  __##t_n##_get_type (void) \
+  { \
+    static GType g_define_type_id = 0; \
+    if (g_define_type_id == 0)  \
     { \
-      g_define_type_id = g_type_register_static_simple (TYPE_PARENT, \
-                                     g_intern_static_string (#TypeName), \
-                                     sizeof (TypeName##Class), \
-                                     (GClassInitFunc)(void (*)(void)) type_name##_class_intern_init, \
-                                     sizeof (TypeName##Fat), \
-                                     (GInstanceInitFunc)(void (*)(void)) type_name##_init, \
-                                     (GTypeFlags) flags); \
+      g_define_type_id = g_type_register_static_simple (PT, \
+                                     g_intern_static_string (#TN), \
+                                     sizeof (TN##Class), \
+                                     (GClassInitFunc)(void (*)(void)) t_n##_class_intern_init, \
+                                     sizeof (TN), \
+                                     (GInstanceInitFunc)(void (*)(void)) t_n##_init, \
+                                     (GTypeFlags) F); \
       { \
-        /* custom code follows */
+        C \
+      } \
+    } \
+    return g_define_type_id; \
+  }
 
 
-#define _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_THIN_PRE(TypeName, type_name, TYPE_PARENT) \
-GType \
-_3T_##type_name##_get_type (void) \
-{ \
-  static GType g_define_type_id = 0;
-  /* Prelude goes here */
-
-/* Added for _STLWRT_DEFINE_TYPE_EXTENDED_WITH_PRELUDE */
-#define _STLWRT_DEFINE_TYPE_EXTENDED_BEGIN_THIN_REGISTER(TypeName, type_name, TYPE_PARENT, flags) \
-  if (g_define_type_id == 0)  \
+#define STLWRT_DEFINE_VARIABLE_SIZE_TYPE (TN, t_n, PT, F, C) \
+  static void     t_n##_init              (TN        *self); \
+  static void     t_n##_class_init        (TN##Class *klass); \
+  static gpointer t_n##_parent_class  = NULL; \
+  static gint     TN##_private_offset = 0; \
+  static gint     TN##_props_offset   = 0; \
+ \
+  static void     t_n##_class_intern_init (gpointer klass) \
+  { \
+    gint       props_size = TN##_props_offset; \
+    GTypeQuery parent_type_query; \
+ \
+    t_n##_parent_class = g_type_class_peek_parent (klass); \
+ \
+    TN##_private_offset += props_size; \
+ \
+    if (TN##_private_offset != 0) \
     { \
-      g_define_type_id = g_type_register_static_simple (TYPE_PARENT, \
-                                     g_intern_static_string (#TypeName), \
-                                     sizeof (TypeName##Class), \
-                                     (GClassInitFunc)(void (*)(void)) type_name##_class_intern_init, \
-                                     sizeof (TypeName##Thin), \
-                                     (GInstanceInitFunc)(void (*)(void)) type_name##_init, \
-                                     (GTypeFlags) flags); \
+      g_type_class_adjust_private_offset (klass, &TN##_private_offset); \
+      TN##_props_offset = TN##_private_offset; \
+      TN##_private_offset += TN##_props_size; \
+    } \
+    else \
+    { \
+      g_type_query (PT, &parent_type_query); \
+      TN##_props_offset = parent_type_query.instance_size; \
+    } \
+ \
+    t_n##_class_init ((TN##Class*) klass); \
+  } \
+ \
+  G_GNUC_UNUSED \
+  static inline gpointer \
+  t_n##_get_instance_private (TN *self) \
+  { \
+    return (G_STRUCT_MEMBER_P (self, TN##_private_offset)); \
+  } \
+ \
+  G_GNUC_UNUSED \
+  static inline gpointer \
+  t_n##_get_props (TN *self) \
+  { \
+    return (G_STRUCT_MEMBER_P (self, TN##_props_offset)); \
+  } \
+ \
+  GType \
+  _T2_##t_n##_get_type (void) \
+  { \
+    static GType g_define_type_id = 0; \
+    if (g_define_type_id == 0)  \
+    { \
+      g_define_type_id = g_type_register_static_simple (PT, \
+                                     g_intern_static_string (#TN), \
+                                     sizeof (TN##Class), \
+                                     (GClassInitFunc)(void (*)(void)) t_n##_class_intern_init, \
+                                     sizeof (TN##Fat), \
+                                     (GInstanceInitFunc)(void (*)(void)) t_n##_init, \
+                                     (GTypeFlags) F); \
       { \
-        /* custom code follows */
-
-
-#define _STLWRT_DEFINE_TYPE_EXTENDED_END()	\
-      } /* following custom code */	\
-    }					\
-  return g_define_type_id;	\
-} /* closes __type_name##_get_type() */
-
-
-#define _STLWRT_DEFINE_TYPE_EXTENDED_CLASS_INIT(TypeName, type_name) \
-static void     type_name##_class_intern_init (gpointer klass) \
-{ \
-  type_name##_parent_class = g_type_class_peek_parent (klass); \
-  if (TypeName##_private_offset != 0) \
-    g_type_class_adjust_private_offset (klass, &TypeName##_private_offset); \
-  type_name##_class_init ((TypeName##Class*) klass); \
-}
-
+        C \
+      } \
+    } \
+    return g_define_type_id; \
+  } \
+ \
+  GType \
+  _3T_##t_n##_get_type (void) \
+  { \
+    static GType g_define_type_id = 0; \
+    if (g_define_type_id == 0)  \
+    { \
+      g_define_type_id = g_type_register_static_simple (PT, \
+                                     g_intern_static_string (#TN), \
+                                     sizeof (TN##Class), \
+                                     (GClassInitFunc)(void (*)(void)) t_n##_class_intern_init, \
+                                     sizeof (TN##Thin), \
+                                     (GInstanceInitFunc)(void (*)(void)) t_n##_init, \
+                                     (GTypeFlags) F); \
+      TN##_props_offset = sizeof(TN##Props); \
+      { \
+        C \
+      } \
+    } \
+    return g_define_type_id; \
+  }
 
 G_END_DECLS
 
-#endif  /* __STLWRT_OBJECT_H__ */
+#endif /* __STLWRT_H__ */

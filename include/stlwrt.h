@@ -18,6 +18,14 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/*
+ * A FIRST NOTE ABOUT THIS FILE:
+ *
+ * All I can say is that I hope it's not as much of a preprocessor macro soup
+ * as it used to be.  It's still a little tough to read in places, but the code
+ * is much cleaner than the internals of gtype.h, for instance!
+ */
+
 #ifndef __STLWRT_H__
 #define __STLWRT_H__
 
@@ -25,9 +33,19 @@
 
 G_BEGIN_DECLS
 
-#ifndef G_TYPE_FLAG_NONE
- #define G_TYPE_FLAG_NONE 0
-#endif
+/*
+ * At the moment GLib does not have any macro or anything defined to indicate
+ * a type should be defined with no special flags; the conventional way to
+ * define such a type is with the flags set to 0.  However, I think (for now)
+ * that having a preprocessor macro for this purpose makes it clearer that
+ * we're setting the type flags (and not something else) to zero.  If in the
+ * future GLib implements this as an enum or a preprocessor macro, uncomment
+ * the 'if' and 'endif' lines below and change the phony version number to the
+ * version of GLib when the macro was officially added.
+ */
+//#if GLIB_CHECK_VERSION(2,68,0)
+#define G_TYPE_FLAG_NONE 0
+//#endif
 
 /**
  * STLWRT_DEFINE_FTYPE:

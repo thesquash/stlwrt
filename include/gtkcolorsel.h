@@ -106,53 +106,53 @@ GType      _T2_gtk_color_selection_get_type                (void) G_GNUC_CONST;
 GType      _3T_gtk_color_selection_get_type                (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType      gtk_color_selection_get_type                (void) G_GNUC_CONST;
-GtkWidget *__gtk_color_selection_new                     (void);
-gboolean   __gtk_color_selection_get_has_opacity_control (GtkColorSelection *colorsel);
-void       __gtk_color_selection_set_has_opacity_control (GtkColorSelection *colorsel,
+GtkWidget *SF(gtk_color_selection_new)                     (void);
+gboolean   SF(gtk_color_selection_get_has_opacity_control) (GtkColorSelection *colorsel);
+void       SF(gtk_color_selection_set_has_opacity_control) (GtkColorSelection *colorsel,
 							gboolean           has_opacity);
-gboolean   __gtk_color_selection_get_has_palette         (GtkColorSelection *colorsel);
-void       __gtk_color_selection_set_has_palette         (GtkColorSelection *colorsel,
+gboolean   SF(gtk_color_selection_get_has_palette)         (GtkColorSelection *colorsel);
+void       SF(gtk_color_selection_set_has_palette)         (GtkColorSelection *colorsel,
 							gboolean           has_palette);
 
 
-void     __gtk_color_selection_set_current_color   (GtkColorSelection *colorsel,
+void     SF(gtk_color_selection_set_current_color)   (GtkColorSelection *colorsel,
 						  const GdkColor    *color);
-void     __gtk_color_selection_set_current_alpha   (GtkColorSelection *colorsel,
+void     SF(gtk_color_selection_set_current_alpha)   (GtkColorSelection *colorsel,
 						  guint16            alpha);
-void     __gtk_color_selection_get_current_color   (GtkColorSelection *colorsel,
+void     SF(gtk_color_selection_get_current_color)   (GtkColorSelection *colorsel,
 						  GdkColor          *color);
-guint16  __gtk_color_selection_get_current_alpha   (GtkColorSelection *colorsel);
-void     __gtk_color_selection_set_previous_color  (GtkColorSelection *colorsel,
+guint16  SF(gtk_color_selection_get_current_alpha)   (GtkColorSelection *colorsel);
+void     SF(gtk_color_selection_set_previous_color)  (GtkColorSelection *colorsel,
 						  const GdkColor    *color);
-void     __gtk_color_selection_set_previous_alpha  (GtkColorSelection *colorsel,
+void     SF(gtk_color_selection_set_previous_alpha)  (GtkColorSelection *colorsel,
 						  guint16            alpha);
-void     __gtk_color_selection_get_previous_color  (GtkColorSelection *colorsel,
+void     SF(gtk_color_selection_get_previous_color)  (GtkColorSelection *colorsel,
 						  GdkColor          *color);
-guint16  __gtk_color_selection_get_previous_alpha  (GtkColorSelection *colorsel);
+guint16  SF(gtk_color_selection_get_previous_alpha)  (GtkColorSelection *colorsel);
 
-gboolean __gtk_color_selection_is_adjusting        (GtkColorSelection *colorsel);
+gboolean SF(gtk_color_selection_is_adjusting)        (GtkColorSelection *colorsel);
 
-gboolean __gtk_color_selection_palette_from_string (const gchar       *str,
+gboolean SF(gtk_color_selection_palette_from_string) (const gchar       *str,
                                                   GdkColor         **colors,
                                                   gint              *n_colors);
-gchar*   __gtk_color_selection_palette_to_string   (const GdkColor    *colors,
+gchar*   SF(gtk_color_selection_palette_to_string)   (const GdkColor    *colors,
                                                   gint               n_colors);
 
 #ifndef GTK_DISABLE_DEPRECATED
 #ifndef GDK_MULTIHEAD_SAFE
-GtkColorSelectionChangePaletteFunc           __gtk_color_selection_set_change_palette_hook             (GtkColorSelectionChangePaletteFunc           func);
+GtkColorSelectionChangePaletteFunc           SF(gtk_color_selection_set_change_palette_hook)             (GtkColorSelectionChangePaletteFunc           func);
 #endif
 #endif
 
-GtkColorSelectionChangePaletteWithScreenFunc __gtk_color_selection_set_change_palette_with_screen_hook (GtkColorSelectionChangePaletteWithScreenFunc func);
+GtkColorSelectionChangePaletteWithScreenFunc SF(gtk_color_selection_set_change_palette_with_screen_hook) (GtkColorSelectionChangePaletteWithScreenFunc func);
 
 #ifndef GTK_DISABLE_DEPRECATED
 /* Deprecated calls: */
-void __gtk_color_selection_set_color         (GtkColorSelection *colorsel,
+void SF(gtk_color_selection_set_color)         (GtkColorSelection *colorsel,
 					    gdouble           *color);
-void __gtk_color_selection_get_color         (GtkColorSelection *colorsel,
+void SF(gtk_color_selection_get_color)         (GtkColorSelection *colorsel,
 					    gdouble           *color);
-void __gtk_color_selection_set_update_policy (GtkColorSelection *colorsel,
+void SF(gtk_color_selection_set_update_policy) (GtkColorSelection *colorsel,
 					    GtkUpdateType      policy);
 #endif /* GTK_DISABLE_DEPRECATED */
 

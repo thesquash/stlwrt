@@ -96,18 +96,18 @@ GType	   _3T_gtk_radio_button_get_type	     (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType	   gtk_radio_button_get_type	     (void) G_GNUC_CONST;
 
-GtkWidget* __gtk_radio_button_new                           (GSList         *group);
-GtkWidget* __gtk_radio_button_new_from_widget               (GtkRadioButton *radio_group_member);
-GtkWidget* __gtk_radio_button_new_with_label                (GSList         *group,
+GtkWidget* SF(gtk_radio_button_new)                           (GSList         *group);
+GtkWidget* SF(gtk_radio_button_new_from_widget)               (GtkRadioButton *radio_group_member);
+GtkWidget* SF(gtk_radio_button_new_with_label)                (GSList         *group,
                                                            const gchar    *label);
-GtkWidget* __gtk_radio_button_new_with_label_from_widget    (GtkRadioButton *radio_group_member,
+GtkWidget* SF(gtk_radio_button_new_with_label_from_widget)    (GtkRadioButton *radio_group_member,
                                                            const gchar    *label);
-GtkWidget* __gtk_radio_button_new_with_mnemonic             (GSList         *group,
+GtkWidget* SF(gtk_radio_button_new_with_mnemonic)             (GSList         *group,
                                                            const gchar    *label);
-GtkWidget* __gtk_radio_button_new_with_mnemonic_from_widget (GtkRadioButton *radio_group_member,
+GtkWidget* SF(gtk_radio_button_new_with_mnemonic_from_widget) (GtkRadioButton *radio_group_member,
                                                            const gchar    *label);
-GSList*    __gtk_radio_button_get_group                     (GtkRadioButton *radio_button);
-void       __gtk_radio_button_set_group                     (GtkRadioButton *radio_button,
+GSList*    SF(gtk_radio_button_get_group)                     (GtkRadioButton *radio_button);
+void       SF(gtk_radio_button_set_group)                     (GtkRadioButton *radio_button,
                                                            GSList         *group);
 
 #ifndef GTK_DISABLE_DEPRECATED

@@ -36,37 +36,37 @@ GType _3T_gtk_tooltip_get_type (void);
 /* Supplied in the STLWRT public libraries */
 GType gtk_tooltip_get_type (void);
 
-void __gtk_tooltip_set_markup              (GtkTooltip         *tooltip,
+void SF(gtk_tooltip_set_markup)              (GtkTooltip         *tooltip,
                                           const gchar        *markup);
-void __gtk_tooltip_set_text                (GtkTooltip         *tooltip,
+void SF(gtk_tooltip_set_text)                (GtkTooltip         *tooltip,
                                           const gchar        *text);
-void __gtk_tooltip_set_icon                (GtkTooltip         *tooltip,
+void SF(gtk_tooltip_set_icon)                (GtkTooltip         *tooltip,
                                           GdkPixbuf          *pixbuf);
-void __gtk_tooltip_set_icon_from_stock     (GtkTooltip         *tooltip,
+void SF(gtk_tooltip_set_icon_from_stock)     (GtkTooltip         *tooltip,
                                           const gchar        *stock_id,
                                           GtkIconSize         size);
-void __gtk_tooltip_set_icon_from_icon_name (GtkTooltip         *tooltip,
+void SF(gtk_tooltip_set_icon_from_icon_name) (GtkTooltip         *tooltip,
 				          const gchar        *icon_name,
 				          GtkIconSize         size);
-void __gtk_tooltip_set_icon_from_gicon     (GtkTooltip         *tooltip,
+void SF(gtk_tooltip_set_icon_from_gicon)     (GtkTooltip         *tooltip,
 					  GIcon              *gicon,
 					  GtkIconSize         size);
-void __gtk_tooltip_set_custom	         (GtkTooltip         *tooltip,
+void SF(gtk_tooltip_set_custom)	         (GtkTooltip         *tooltip,
                                           GtkWidget          *custom_widget);
 
-void __gtk_tooltip_set_tip_area            (GtkTooltip         *tooltip,
+void SF(gtk_tooltip_set_tip_area)            (GtkTooltip         *tooltip,
                                           const GdkRectangle *rect);
 
-void __gtk_tooltip_trigger_tooltip_query   (GdkDisplay         *display);
+void SF(gtk_tooltip_trigger_tooltip_query)   (GdkDisplay         *display);
 
 
-void ___gtk_tooltip_focus_in               (GtkWidget          *widget);
-void ___gtk_tooltip_focus_out              (GtkWidget          *widget);
-void ___gtk_tooltip_toggle_keyboard_mode   (GtkWidget          *widget);
-void ___gtk_tooltip_handle_event           (GdkEvent           *event);
-void ___gtk_tooltip_hide                   (GtkWidget          *widget);
+void SF(_gtk_tooltip_focus_in)               (GtkWidget          *widget);
+void SF(_gtk_tooltip_focus_out)              (GtkWidget          *widget);
+void SF(_gtk_tooltip_toggle_keyboard_mode)   (GtkWidget          *widget);
+void SF(_gtk_tooltip_handle_event)           (GdkEvent           *event);
+void SF(_gtk_tooltip_hide)                   (GtkWidget          *widget);
 
-GtkWidget * ___gtk_widget_find_at_coords   (GdkWindow          *window,
+GtkWidget * SF(_gtk_widget_find_at_coords)   (GdkWindow          *window,
                                           gint                window_x,
                                           gint                window_y,
                                           gint               *widget_x,

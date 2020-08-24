@@ -57,7 +57,7 @@ struct _GtkVScrollbarClass
 
 
 GType      gtk_vscrollbar_get_type (void) G_GNUC_CONST;
-GtkWidget* __gtk_vscrollbar_new      (GtkAdjustment *adjustment);
+GtkWidget* SF(gtk_vscrollbar_new)      (GtkAdjustment *adjustment);
 
 
 G_END_DECLS

@@ -90,7 +90,7 @@ GType      _3T_gtk_bin_get_type  (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType      gtk_bin_get_type  (void) G_GNUC_CONST;
 
-GtkWidget *__gtk_bin_get_child (GtkBin *bin);
+GtkWidget *SF(gtk_bin_get_child) (GtkBin *bin);
 
 G_END_DECLS
 

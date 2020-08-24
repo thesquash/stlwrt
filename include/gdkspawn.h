@@ -28,7 +28,7 @@
 G_BEGIN_DECLS
 
 #ifndef GDK_DISABLE_DEPRECATED
-gboolean __gdk_spawn_on_screen              (GdkScreen             *screen,
+gboolean SF(gdk_spawn_on_screen)              (GdkScreen             *screen,
 					   const gchar           *working_directory,
 					   gchar                **argv,
 					   gchar                **envp,
@@ -38,7 +38,7 @@ gboolean __gdk_spawn_on_screen              (GdkScreen             *screen,
 					   gint                  *child_pid,
 					   GError               **error);
 
-gboolean __gdk_spawn_on_screen_with_pipes   (GdkScreen             *screen,
+gboolean SF(gdk_spawn_on_screen_with_pipes)   (GdkScreen             *screen,
 					   const gchar           *working_directory,
 					   gchar                **argv,
 					   gchar                **envp,
@@ -51,7 +51,7 @@ gboolean __gdk_spawn_on_screen_with_pipes   (GdkScreen             *screen,
 					   gint                  *standard_error,
 					   GError               **error);
 
-gboolean __gdk_spawn_command_line_on_screen (GdkScreen             *screen,
+gboolean SF(gdk_spawn_command_line_on_screen) (GdkScreen             *screen,
 					   const gchar           *command_line,
 					   GError               **error);
 #endif

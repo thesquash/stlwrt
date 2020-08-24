@@ -107,14 +107,14 @@ GType _3T_gdk_keymap_get_type (void) G_GNUC_CONST;
 GType gdk_keymap_get_type (void) G_GNUC_CONST;
 
 #ifndef GDK_MULTIHEAD_SAFE
-GdkKeymap* __gdk_keymap_get_default     (void);
+GdkKeymap* SF(gdk_keymap_get_default)     (void);
 #endif
-GdkKeymap* __gdk_keymap_get_for_display (GdkDisplay *display);
+GdkKeymap* SF(gdk_keymap_get_for_display) (GdkDisplay *display);
 
 
-guint          __gdk_keymap_lookup_key               (GdkKeymap           *keymap,
+guint          SF(gdk_keymap_lookup_key)               (GdkKeymap           *keymap,
 						    const GdkKeymapKey  *key);
-gboolean       __gdk_keymap_translate_keyboard_state (GdkKeymap           *keymap,
+gboolean       SF(gdk_keymap_translate_keyboard_state) (GdkKeymap           *keymap,
 						    guint                hardware_keycode,
 						    GdkModifierType      state,
 						    gint                 group,
@@ -122,37 +122,37 @@ gboolean       __gdk_keymap_translate_keyboard_state (GdkKeymap           *keyma
 						    gint                *effective_group,
 						    gint                *level,
 						    GdkModifierType     *consumed_modifiers);
-gboolean       __gdk_keymap_get_entries_for_keyval   (GdkKeymap           *keymap,
+gboolean       SF(gdk_keymap_get_entries_for_keyval)   (GdkKeymap           *keymap,
 						    guint                keyval,
 						    GdkKeymapKey       **keys,
 						    gint                *n_keys);
-gboolean       __gdk_keymap_get_entries_for_keycode  (GdkKeymap           *keymap,
+gboolean       SF(gdk_keymap_get_entries_for_keycode)  (GdkKeymap           *keymap,
 						    guint                hardware_keycode,
 						    GdkKeymapKey       **keys,
 						    guint              **keyvals,
 						    gint                *n_entries);
-PangoDirection __gdk_keymap_get_direction            (GdkKeymap           *keymap);
-gboolean       __gdk_keymap_have_bidi_layouts        (GdkKeymap           *keymap);
-gboolean       __gdk_keymap_get_caps_lock_state      (GdkKeymap           *keymap);
-void           __gdk_keymap_add_virtual_modifiers    (GdkKeymap           *keymap,
+PangoDirection SF(gdk_keymap_get_direction)            (GdkKeymap           *keymap);
+gboolean       SF(gdk_keymap_have_bidi_layouts)        (GdkKeymap           *keymap);
+gboolean       SF(gdk_keymap_get_caps_lock_state)      (GdkKeymap           *keymap);
+void           SF(gdk_keymap_add_virtual_modifiers)    (GdkKeymap           *keymap,
                                                     GdkModifierType     *state);
-gboolean       __gdk_keymap_map_virtual_modifiers    (GdkKeymap           *keymap,
+gboolean       SF(gdk_keymap_map_virtual_modifiers)    (GdkKeymap           *keymap,
                                                     GdkModifierType     *state);
 
 /* Key values
  */
-gchar*   __gdk_keyval_name         (guint        keyval) G_GNUC_CONST;
-guint    __gdk_keyval_from_name    (const gchar *keyval_name);
-void     __gdk_keyval_convert_case (guint        symbol,
+gchar*   SF(gdk_keyval_name)         (guint        keyval) G_GNUC_CONST;
+guint    SF(gdk_keyval_from_name)    (const gchar *keyval_name);
+void     SF(gdk_keyval_convert_case) (guint        symbol,
 				  guint       *lower,
 				  guint       *upper);
-guint    __gdk_keyval_to_upper     (guint        keyval) G_GNUC_CONST;
-guint    __gdk_keyval_to_lower     (guint        keyval) G_GNUC_CONST;
-gboolean __gdk_keyval_is_upper     (guint        keyval) G_GNUC_CONST;
-gboolean __gdk_keyval_is_lower     (guint        keyval) G_GNUC_CONST;
+guint    SF(gdk_keyval_to_upper)     (guint        keyval) G_GNUC_CONST;
+guint    SF(gdk_keyval_to_lower)     (guint        keyval) G_GNUC_CONST;
+gboolean SF(gdk_keyval_is_upper)     (guint        keyval) G_GNUC_CONST;
+gboolean SF(gdk_keyval_is_lower)     (guint        keyval) G_GNUC_CONST;
 
-guint32  __gdk_keyval_to_unicode   (guint        keyval) G_GNUC_CONST;
-guint    __gdk_unicode_to_keyval   (guint32      wc) G_GNUC_CONST;
+guint32  SF(gdk_keyval_to_unicode)   (guint        keyval) G_GNUC_CONST;
+guint    SF(gdk_unicode_to_keyval)   (guint32      wc) G_GNUC_CONST;
 
 
 G_END_DECLS

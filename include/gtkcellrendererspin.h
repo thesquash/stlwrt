@@ -56,7 +56,7 @@ struct _GtkCellRendererSpinClass
 };
 
 GType            gtk_cell_renderer_spin_get_type (void);
-GtkCellRenderer *__gtk_cell_renderer_spin_new      (void);
+GtkCellRenderer *SF(gtk_cell_renderer_spin_new)      (void);
 
 G_END_DECLS
 

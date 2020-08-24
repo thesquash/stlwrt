@@ -65,7 +65,7 @@ typedef gint	(*GtkKeySnoopFunc)	    (GtkWidget	  *grab_widget,
 #endif
 
 
-const gchar* __gtk_check_version (guint	required_major,
+const gchar* SF(gtk_check_version) (guint	required_major,
 			        guint	required_minor,
 			        guint	required_micro);
 
@@ -73,144 +73,144 @@ const gchar* __gtk_check_version (guint	required_major,
 /* Initialization, exit, mainloop and miscellaneous routines
  */
 
-gboolean __gtk_parse_args           (int    *argc,
+gboolean SF(gtk_parse_args)           (int    *argc,
 				   char ***argv);
 
-void     __gtk_init                 (int    *argc,
+void     SF(gtk_init)                 (int    *argc,
                                    char ***argv);
 
-gboolean __gtk_init_check           (int    *argc,
+gboolean SF(gtk_init_check)           (int    *argc,
                                    char ***argv);
   
-gboolean __gtk_init_with_args       (int            *argc,
+gboolean SF(gtk_init_with_args)       (int            *argc,
 				   char         ***argv,
 				   const char     *parameter_string,
 				   GOptionEntry   *entries,
 				   const char     *translation_domain,
 				   GError        **error);
 
-GOptionGroup *__gtk_get_option_group (gboolean open_default_display);
+GOptionGroup *SF(gtk_get_option_group) (gboolean open_default_display);
   
 #ifdef G_PLATFORM_WIN32
 
 /* Variants that are used to check for correct struct packing
  * when building GTK+-using code.
  */
-void	 __gtk_init_abi_check       (int	  *argc,
+void	 SF(gtk_init_abi_check)       (int	  *argc,
 				   char	***argv,
 				   int     num_checks,
 				   size_t  sizeof_GtkWindow,
 				   size_t  sizeof_GtkBox);
-gboolean __gtk_init_check_abi_check (int	  *argc,
+gboolean SF(gtk_init_check_abi_check) (int	  *argc,
 				   char	***argv,
 				   int     num_checks,
 				   size_t  sizeof_GtkWindow,
 				   size_t  sizeof_GtkBox);
 
-#define __gtk_init(argc, argv) __gtk_init_abi_check (argc, argv, 2, sizeof (GtkWindow), sizeof (GtkBox))
-#define __gtk_init_check(argc, argv) __gtk_init_check_abi_check (argc, argv, 2, sizeof (GtkWindow), sizeof (GtkBox))
+#define SF(gtk_init)(argc, argv) SF(gtk_init_abi_check) (argc, argv, 2, sizeof (GtkWindow), sizeof (GtkBox))
+#define SF(gtk_init_check)(argc, argv) SF(gtk_init_check_abi_check) (argc, argv, 2, sizeof (GtkWindow), sizeof (GtkBox))
 
 #endif
 
 #ifndef GTK_DISABLE_DEPRECATED
-void     __gtk_exit                 (gint    error_code);
-gchar *        __gtk_set_locale           (void);
+void     SF(gtk_exit)                 (gint    error_code);
+gchar *        SF(gtk_set_locale)           (void);
 #endif /* GTK_DISABLE_DEPRECATED */
 
-void           __gtk_disable_setlocale    (void);
-PangoLanguage *__gtk_get_default_language (void);
-gboolean       __gtk_events_pending       (void);
+void           SF(gtk_disable_setlocale)    (void);
+PangoLanguage *SF(gtk_get_default_language) (void);
+gboolean       SF(gtk_events_pending)       (void);
 
 /* The following is the event func GTK+ registers with GDK
  * we expose it mainly to allow filtering of events between
  * GDK and GTK+.
  */
-void 	   __gtk_main_do_event	   (GdkEvent           *event);
+void 	   SF(gtk_main_do_event)	   (GdkEvent           *event);
 
-void	   __gtk_main		   (void);
-guint	   __gtk_main_level	   (void);
-void	   __gtk_main_quit	   (void);
-gboolean   __gtk_main_iteration	   (void);
-/* __gtk_main_iteration() calls __gtk_main_iteration_do(TRUE) */
-gboolean   __gtk_main_iteration_do   (gboolean blocking);
+void	   SF(gtk_main)		   (void);
+guint	   SF(gtk_main_level)	   (void);
+void	   SF(gtk_main_quit)	   (void);
+gboolean   SF(gtk_main_iteration)	   (void);
+/* SF(gtk_main_iteration)() calls SF(gtk_main_iteration_do)(TRUE) */
+gboolean   SF(gtk_main_iteration_do)   (gboolean blocking);
 
-gboolean   __gtk_true		   (void) G_GNUC_CONST;
-gboolean   __gtk_false		   (void) G_GNUC_CONST;
+gboolean   SF(gtk_true)		   (void) G_GNUC_CONST;
+gboolean   SF(gtk_false)		   (void) G_GNUC_CONST;
 
-void	   __gtk_grab_add		   (GtkWidget	       *widget);
-GtkWidget* __gtk_grab_get_current	   (void);
-void	   __gtk_grab_remove	   (GtkWidget	       *widget);
+void	   SF(gtk_grab_add)		   (GtkWidget	       *widget);
+GtkWidget* SF(gtk_grab_get_current)	   (void);
+void	   SF(gtk_grab_remove)	   (GtkWidget	       *widget);
 
 #if !defined (GTK_DISABLE_DEPRECATED) || defined (STLWRT_COMPILATION)
-void	   __gtk_init_add		   (GtkFunction	       function,
+void	   SF(gtk_init_add)		   (GtkFunction	       function,
 				    gpointer	       data);
-void	   __gtk_quit_add_destroy	   (guint	       main_level,
+void	   SF(gtk_quit_add_destroy)	   (guint	       main_level,
 				    GObject	      *object);
-guint	   __gtk_quit_add		   (guint	       main_level,
+guint	   SF(gtk_quit_add)		   (guint	       main_level,
 				    GtkFunction	       function,
 				    gpointer	       data);
-guint	   __gtk_quit_add_full	   (guint	       main_level,
+guint	   SF(gtk_quit_add_full)	   (guint	       main_level,
 				    GtkFunction	       function,
 				    GtkCallbackMarshal marshal,
 				    gpointer	       data,
 				    GDestroyNotify     destroy);
-void	   __gtk_quit_remove	   (guint	       quit_handler_id);
-void	   __gtk_quit_remove_by_data (gpointer	       data);
-guint	   __gtk_timeout_add	   (guint32	       interval,
+void	   SF(gtk_quit_remove)	   (guint	       quit_handler_id);
+void	   SF(gtk_quit_remove_by_data) (gpointer	       data);
+guint	   SF(gtk_timeout_add)	   (guint32	       interval,
 				    GtkFunction	       function,
 				    gpointer	       data);
-guint	   __gtk_timeout_add_full	   (guint32	       interval,
+guint	   SF(gtk_timeout_add_full)	   (guint32	       interval,
 				    GtkFunction	       function,
 				    GtkCallbackMarshal marshal,
 				    gpointer	       data,
 				    GDestroyNotify     destroy);
-void	   __gtk_timeout_remove	   (guint	       timeout_handler_id);
+void	   SF(gtk_timeout_remove)	   (guint	       timeout_handler_id);
 
-guint	   __gtk_idle_add		   (GtkFunction	       function,
+guint	   SF(gtk_idle_add)		   (GtkFunction	       function,
 				    gpointer	       data);
-guint	   __gtk_idle_add_priority   (gint	       priority,
+guint	   SF(gtk_idle_add_priority)   (gint	       priority,
 				    GtkFunction	       function,
 				    gpointer	       data);
-guint	   __gtk_idle_add_full	   (gint	       priority,
+guint	   SF(gtk_idle_add_full)	   (gint	       priority,
 				    GtkFunction	       function,
 				    GtkCallbackMarshal marshal,
 				    gpointer	       data,
 				    GDestroyNotify     destroy);
-void	   __gtk_idle_remove	   (guint	       idle_handler_id);
-void	   __gtk_idle_remove_by_data (gpointer	       data);
-guint	   __gtk_input_add_full	   (gint	       source,
+void	   SF(gtk_idle_remove)	   (guint	       idle_handler_id);
+void	   SF(gtk_idle_remove_by_data) (gpointer	       data);
+guint	   SF(gtk_input_add_full)	   (gint	       source,
 				    GdkInputCondition  condition,
 				    GdkInputFunction   function,
 				    GtkCallbackMarshal marshal,
 				    gpointer	       data,
 				    GDestroyNotify     destroy);
-void	   __gtk_input_remove	   (guint	       input_handler_id);
+void	   SF(gtk_input_remove)	   (guint	       input_handler_id);
 #endif /* GTK_DISABLE_DEPRECATED */
 
-guint	   __gtk_key_snooper_install (GtkKeySnoopFunc snooper,
+guint	   SF(gtk_key_snooper_install) (GtkKeySnoopFunc snooper,
 				    gpointer	    func_data);
-void	   __gtk_key_snooper_remove  (guint	    snooper_handler_id);
+void	   SF(gtk_key_snooper_remove)  (guint	    snooper_handler_id);
 
-GdkEvent*       __gtk_get_current_event       (void);
-guint32         __gtk_get_current_event_time  (void);
-gboolean        __gtk_get_current_event_state (GdkModifierType *state);
+GdkEvent*       SF(gtk_get_current_event)       (void);
+guint32         SF(gtk_get_current_event_time)  (void);
+gboolean        SF(gtk_get_current_event_state) (GdkModifierType *state);
 
-GtkWidget* __gtk_get_event_widget	   (GdkEvent	   *event);
+GtkWidget* SF(gtk_get_event_widget)	   (GdkEvent	   *event);
 
 
 /* Private routines internal to GTK+ 
  */
-void       __gtk_propagate_event     (GtkWidget         *widget,
+void       SF(gtk_propagate_event)     (GtkWidget         *widget,
 				    GdkEvent          *event);
 
-gboolean ___gtk_boolean_handled_accumulator (GSignalInvocationHint *ihint,
+gboolean SF(_gtk_boolean_handled_accumulator) (GSignalInvocationHint *ihint,
                                    GValue                *return_accu,
                                    const GValue          *handler_return,
                                    gpointer               dummy);
 
-gchar *___gtk_get_lc_ctype (void);
+gchar *SF(_gtk_get_lc_ctype) (void);
 
-gboolean ___gtk_module_has_mixed_deps (GModule *module);
+gboolean SF(_gtk_module_has_mixed_deps) (GModule *module);
 
 
 G_END_DECLS

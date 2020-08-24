@@ -50,7 +50,7 @@ struct _GtkSeparatorMenuItemClass
 
 
 GType	   gtk_separator_menu_item_get_type	   (void) G_GNUC_CONST;
-GtkWidget* __gtk_separator_menu_item_new	           (void);
+GtkWidget* SF(gtk_separator_menu_item_new)	           (void);
 
 
 G_END_DECLS

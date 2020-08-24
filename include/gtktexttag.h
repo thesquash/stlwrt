@@ -184,11 +184,11 @@ GType        _T2_gtk_text_tag_get_type     (void) G_GNUC_CONST;
 GType        _3T_gtk_text_tag_get_type     (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType        gtk_text_tag_get_type     (void) G_GNUC_CONST;
-GtkTextTag  *__gtk_text_tag_new          (const gchar       *name);
-gint         __gtk_text_tag_get_priority (GtkTextTag        *tag);
-void         __gtk_text_tag_set_priority (GtkTextTag        *tag,
+GtkTextTag  *SF(gtk_text_tag_new)          (const gchar       *name);
+gint         SF(gtk_text_tag_get_priority) (GtkTextTag        *tag);
+void         SF(gtk_text_tag_set_priority) (GtkTextTag        *tag,
                                         gint               priority);
-gboolean     __gtk_text_tag_event        (GtkTextTag        *tag,
+gboolean     SF(gtk_text_tag_event)        (GtkTextTag        *tag,
                                         GObject           *event_object,
                                         GdkEvent          *event,
                                         const GtkTextIter *iter);
@@ -303,12 +303,12 @@ struct _GtkTextAttributes
   guint pad4 : 1;
 };
 
-GtkTextAttributes* __gtk_text_attributes_new         (void);
-GtkTextAttributes* __gtk_text_attributes_copy        (GtkTextAttributes *src);
-void               __gtk_text_attributes_copy_values (GtkTextAttributes *src,
+GtkTextAttributes* SF(gtk_text_attributes_new)         (void);
+GtkTextAttributes* SF(gtk_text_attributes_copy)        (GtkTextAttributes *src);
+void               SF(gtk_text_attributes_copy_values) (GtkTextAttributes *src,
                                                     GtkTextAttributes *dest);
-void               __gtk_text_attributes_unref       (GtkTextAttributes *values);
-GtkTextAttributes *__gtk_text_attributes_ref         (GtkTextAttributes *values);
+void               SF(gtk_text_attributes_unref)       (GtkTextAttributes *values);
+GtkTextAttributes *SF(gtk_text_attributes_ref)         (GtkTextAttributes *values);
 
 GType              _T2_gtk_text_attributes_get_type    (void) G_GNUC_CONST;
 GType              _3T_gtk_text_attributes_get_type    (void) G_GNUC_CONST;

@@ -60,14 +60,14 @@ struct _GtkMountOperationClass
 
 
 GType            gtk_mount_operation_get_type   (void);
-GMountOperation *__gtk_mount_operation_new        (GtkWindow         *parent);
-gboolean         __gtk_mount_operation_is_showing (GtkMountOperation *op);
-void             __gtk_mount_operation_set_parent (GtkMountOperation *op,
+GMountOperation *SF(gtk_mount_operation_new)        (GtkWindow         *parent);
+gboolean         SF(gtk_mount_operation_is_showing) (GtkMountOperation *op);
+void             SF(gtk_mount_operation_set_parent) (GtkMountOperation *op,
                                                  GtkWindow         *parent);
-GtkWindow *      __gtk_mount_operation_get_parent (GtkMountOperation *op);
-void             __gtk_mount_operation_set_screen (GtkMountOperation *op,
+GtkWindow *      SF(gtk_mount_operation_get_parent) (GtkMountOperation *op);
+void             SF(gtk_mount_operation_set_screen) (GtkMountOperation *op,
                                                  GdkScreen         *screen);
-GdkScreen       *__gtk_mount_operation_get_screen (GtkMountOperation *op);
+GdkScreen       *SF(gtk_mount_operation_get_screen) (GtkMountOperation *op);
 
 G_END_DECLS
 

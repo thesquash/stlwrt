@@ -69,11 +69,11 @@ GType      _3T_gtk_recent_chooser_dialog_get_type        (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType      gtk_recent_chooser_dialog_get_type        (void) G_GNUC_CONST;
 
-GtkWidget *__gtk_recent_chooser_dialog_new             (const gchar      *title,
+GtkWidget *SF(gtk_recent_chooser_dialog_new)             (const gchar      *title,
 					              GtkWindow        *parent,
 					              const gchar      *first_button_text,
 					              ...) G_GNUC_NULL_TERMINATED;
-GtkWidget *__gtk_recent_chooser_dialog_new_for_manager (const gchar      *title,
+GtkWidget *SF(gtk_recent_chooser_dialog_new_for_manager) (const gchar      *title,
 						      GtkWindow        *parent,
 						      GtkRecentManager *manager,
 						      const gchar      *first_button_text,

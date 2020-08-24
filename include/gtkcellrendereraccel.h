@@ -116,7 +116,7 @@ GType            _T2_gtk_cell_renderer_accel_get_type        (void) G_GNUC_CONST
 GType            _3T_gtk_cell_renderer_accel_get_type        (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType            gtk_cell_renderer_accel_get_type        (void) G_GNUC_CONST;
-GtkCellRenderer *__gtk_cell_renderer_accel_new             (void);
+GtkCellRenderer *SF(gtk_cell_renderer_accel_new)             (void);
 
 
 G_END_DECLS

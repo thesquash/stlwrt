@@ -103,39 +103,39 @@ struct _GtkEntryBufferClass
 
 GType                     gtk_entry_buffer_get_type               (void) G_GNUC_CONST;
 
-GtkEntryBuffer*           __gtk_entry_buffer_new                    (const gchar     *initial_chars,
+GtkEntryBuffer*           SF(gtk_entry_buffer_new)                    (const gchar     *initial_chars,
                                                                    gint             n_initial_chars);
 
-gsize                     __gtk_entry_buffer_get_bytes              (GtkEntryBuffer  *buffer);
+gsize                     SF(gtk_entry_buffer_get_bytes)              (GtkEntryBuffer  *buffer);
 
-guint                     __gtk_entry_buffer_get_length             (GtkEntryBuffer  *buffer);
+guint                     SF(gtk_entry_buffer_get_length)             (GtkEntryBuffer  *buffer);
 
-const gchar*              __gtk_entry_buffer_get_text               (GtkEntryBuffer  *buffer);
+const gchar*              SF(gtk_entry_buffer_get_text)               (GtkEntryBuffer  *buffer);
 
-void                      __gtk_entry_buffer_set_text               (GtkEntryBuffer  *buffer,
+void                      SF(gtk_entry_buffer_set_text)               (GtkEntryBuffer  *buffer,
                                                                    const gchar     *chars,
                                                                    gint             n_chars);
 
-void                      __gtk_entry_buffer_set_max_length         (GtkEntryBuffer  *buffer,
+void                      SF(gtk_entry_buffer_set_max_length)         (GtkEntryBuffer  *buffer,
                                                                    gint             max_length);
 
-gint                      __gtk_entry_buffer_get_max_length         (GtkEntryBuffer  *buffer);
+gint                      SF(gtk_entry_buffer_get_max_length)         (GtkEntryBuffer  *buffer);
 
-guint                     __gtk_entry_buffer_insert_text            (GtkEntryBuffer  *buffer,
+guint                     SF(gtk_entry_buffer_insert_text)            (GtkEntryBuffer  *buffer,
                                                                    guint            position,
                                                                    const gchar     *chars,
                                                                    gint             n_chars);
 
-guint                     __gtk_entry_buffer_delete_text            (GtkEntryBuffer  *buffer,
+guint                     SF(gtk_entry_buffer_delete_text)            (GtkEntryBuffer  *buffer,
                                                                    guint            position,
                                                                    gint             n_chars);
 
-void                      __gtk_entry_buffer_emit_inserted_text     (GtkEntryBuffer  *buffer,
+void                      SF(gtk_entry_buffer_emit_inserted_text)     (GtkEntryBuffer  *buffer,
                                                                    guint            position,
                                                                    const gchar     *chars,
                                                                    guint            n_chars);
 
-void                      __gtk_entry_buffer_emit_deleted_text      (GtkEntryBuffer  *buffer,
+void                      SF(gtk_entry_buffer_emit_deleted_text)      (GtkEntryBuffer  *buffer,
                                                                    guint            position,
                                                                    guint            n_chars);
 

@@ -90,17 +90,17 @@ GType	   _T2_gtk_accel_label_get_type	     (void) G_GNUC_CONST;
 GType	   _3T_gtk_accel_label_get_type	     (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType	   gtk_accel_label_get_type	     (void) G_GNUC_CONST;
-GtkWidget* __gtk_accel_label_new		     (const gchar   *string);
-GtkWidget* __gtk_accel_label_get_accel_widget  (GtkAccelLabel *accel_label);
-guint	   __gtk_accel_label_get_accel_width   (GtkAccelLabel *accel_label);
-void	   __gtk_accel_label_set_accel_widget  (GtkAccelLabel *accel_label,
+GtkWidget* SF(gtk_accel_label_new)		     (const gchar   *string);
+GtkWidget* SF(gtk_accel_label_get_accel_widget)  (GtkAccelLabel *accel_label);
+guint	   SF(gtk_accel_label_get_accel_width)   (GtkAccelLabel *accel_label);
+void	   SF(gtk_accel_label_set_accel_widget)  (GtkAccelLabel *accel_label,
 					      GtkWidget	    *accel_widget);
-void	   __gtk_accel_label_set_accel_closure (GtkAccelLabel *accel_label,
+void	   SF(gtk_accel_label_set_accel_closure) (GtkAccelLabel *accel_label,
 					      GClosure	    *accel_closure);
-gboolean   __gtk_accel_label_refetch           (GtkAccelLabel *accel_label);
+gboolean   SF(gtk_accel_label_refetch)           (GtkAccelLabel *accel_label);
 
 /* private */
-gchar *    ___gtk_accel_label_class_get_accelerator_label (GtkAccelLabelClass *klass,
+gchar *    SF(_gtk_accel_label_class_get_accelerator_label) (GtkAccelLabelClass *klass,
 							 guint               accelerator_key,
 							 GdkModifierType     accelerator_mods);
 

@@ -50,7 +50,7 @@ struct _GtkHSeparatorClass
 
 
 GType      gtk_hseparator_get_type (void) G_GNUC_CONST;
-GtkWidget* __gtk_hseparator_new      (void);
+GtkWidget* SF(gtk_hseparator_new)      (void);
 
 
 G_END_DECLS

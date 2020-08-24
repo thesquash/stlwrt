@@ -30,14 +30,14 @@ G_BEGIN_DECLS
 
 /* Functions for use within GTK+
  */
-gchar * ___gtk_find_module        (const gchar *name,
+gchar * SF(_gtk_find_module)        (const gchar *name,
 			         const gchar *type);
-gchar **___gtk_get_module_path    (const gchar *type);
+gchar **SF(_gtk_get_module_path)    (const gchar *type);
 
-void    ___gtk_modules_init             (gint         *argc,
+void    SF(_gtk_modules_init)             (gint         *argc,
 				       gchar      ***argv,
 				       const gchar  *gtk_modules_args);
-void    ___gtk_modules_settings_changed (GtkSettings  *settings,
+void    SF(_gtk_modules_settings_changed) (GtkSettings  *settings,
 				       const gchar  *modules);
 
 typedef void	 (*GtkModuleInitFunc)        (gint	  *argc,

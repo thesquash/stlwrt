@@ -116,58 +116,58 @@ GType		_3T_gtk_settings_get_type		     (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType		gtk_settings_get_type		     (void) G_GNUC_CONST;
 #ifndef GDK_MULTIHEAD_SAFE
-GtkSettings*	__gtk_settings_get_default	     (void);
+GtkSettings*	SF(gtk_settings_get_default)	     (void);
 #endif
-GtkSettings*	__gtk_settings_get_for_screen	     (GdkScreen *screen);
+GtkSettings*	SF(gtk_settings_get_for_screen)	     (GdkScreen *screen);
 
-void		__gtk_settings_install_property	     (GParamSpec         *pspec);
-void		__gtk_settings_install_property_parser (GParamSpec         *pspec,
+void		SF(gtk_settings_install_property)	     (GParamSpec         *pspec);
+void		SF(gtk_settings_install_property_parser) (GParamSpec         *pspec,
 						      GtkRcPropertyParser parser);
 
 /* --- precoded parsing functions --- */
-gboolean __gtk_rc_property_parse_color       (const GParamSpec *pspec,
+gboolean SF(gtk_rc_property_parse_color)       (const GParamSpec *pspec,
 					    const GString    *gstring,
 					    GValue           *property_value);
-gboolean __gtk_rc_property_parse_enum        (const GParamSpec *pspec,
+gboolean SF(gtk_rc_property_parse_enum)        (const GParamSpec *pspec,
 					    const GString    *gstring,
 					    GValue           *property_value);
-gboolean __gtk_rc_property_parse_flags       (const GParamSpec *pspec,
+gboolean SF(gtk_rc_property_parse_flags)       (const GParamSpec *pspec,
 					    const GString    *gstring,
 					    GValue           *property_value);
-gboolean __gtk_rc_property_parse_requisition (const GParamSpec *pspec,
+gboolean SF(gtk_rc_property_parse_requisition) (const GParamSpec *pspec,
 					    const GString    *gstring,
 					    GValue           *property_value);
-gboolean __gtk_rc_property_parse_border      (const GParamSpec *pspec,
+gboolean SF(gtk_rc_property_parse_border)      (const GParamSpec *pspec,
 					    const GString    *gstring,
 					    GValue           *property_value);
 
 /*< private >*/
-void		__gtk_settings_set_property_value	 (GtkSettings	*settings,
+void		SF(gtk_settings_set_property_value)	 (GtkSettings	*settings,
 						  const gchar	*name,
 						  const GtkSettingsValue *svalue);
-void		__gtk_settings_set_string_property (GtkSettings	*settings,
+void		SF(gtk_settings_set_string_property) (GtkSettings	*settings,
 						  const gchar	*name,
 						  const gchar	*v_string,
 						  const gchar   *origin);
-void		__gtk_settings_set_long_property	 (GtkSettings	*settings,
+void		SF(gtk_settings_set_long_property)	 (GtkSettings	*settings,
 						  const gchar	*name,
 						  glong		 v_long,
 						  const gchar   *origin);
-void		__gtk_settings_set_double_property (GtkSettings	*settings,
+void		SF(gtk_settings_set_double_property) (GtkSettings	*settings,
 						  const gchar	*name,
 						  gdouble	 v_double,
 						  const gchar   *origin);
 
 
 /* implementation details */
-void ___gtk_settings_set_property_value_from_rc (GtkSettings            *settings,
+void SF(_gtk_settings_set_property_value_from_rc) (GtkSettings            *settings,
 					       const gchar            *name,
 					       const GtkSettingsValue *svalue);
-void ___gtk_settings_reset_rc_values            (GtkSettings            *settings);
+void SF(_gtk_settings_reset_rc_values)            (GtkSettings            *settings);
 
-void                ___gtk_settings_handle_event        (GdkEventSetting    *event);
-GtkRcPropertyParser ___gtk_rc_property_parser_from_type (GType               type);
-gboolean	    ___gtk_settings_parse_convert       (GtkRcPropertyParser parser,
+void                SF(_gtk_settings_handle_event)        (GdkEventSetting    *event);
+GtkRcPropertyParser SF(_gtk_rc_property_parser_from_type) (GType               type);
+gboolean	    SF(_gtk_settings_parse_convert)       (GtkRcPropertyParser parser,
 						       const GValue       *src_value,
 						       GParamSpec         *pspec,
 						       GValue	          *dest_value);

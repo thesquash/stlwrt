@@ -69,88 +69,88 @@ GType         _3T_gtk_clipboard_get_type (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType         gtk_clipboard_get_type (void) G_GNUC_CONST;
 
-GtkClipboard *__gtk_clipboard_get_for_display (GdkDisplay   *display,
+GtkClipboard *SF(gtk_clipboard_get_for_display) (GdkDisplay   *display,
 					     GdkAtom       selection);
 #ifndef GDK_MULTIHEAD_SAFE
-GtkClipboard *__gtk_clipboard_get             (GdkAtom       selection);
+GtkClipboard *SF(gtk_clipboard_get)             (GdkAtom       selection);
 #endif
 
-GdkDisplay   *__gtk_clipboard_get_display     (GtkClipboard *clipboard);
+GdkDisplay   *SF(gtk_clipboard_get_display)     (GtkClipboard *clipboard);
 
 
-gboolean __gtk_clipboard_set_with_data  (GtkClipboard          *clipboard,
+gboolean SF(gtk_clipboard_set_with_data)  (GtkClipboard          *clipboard,
 				       const GtkTargetEntry  *targets,
 				       guint                  n_targets,
 				       GtkClipboardGetFunc    get_func,
 				       GtkClipboardClearFunc  clear_func,
 				       gpointer               user_data);
-gboolean __gtk_clipboard_set_with_owner (GtkClipboard          *clipboard,
+gboolean SF(gtk_clipboard_set_with_owner) (GtkClipboard          *clipboard,
 				       const GtkTargetEntry  *targets,
 				       guint                  n_targets,
 				       GtkClipboardGetFunc    get_func,
 				       GtkClipboardClearFunc  clear_func,
 				       GObject               *owner);
-GObject *__gtk_clipboard_get_owner      (GtkClipboard          *clipboard);
-void     __gtk_clipboard_clear          (GtkClipboard          *clipboard);
-void     __gtk_clipboard_set_text       (GtkClipboard          *clipboard,
+GObject *SF(gtk_clipboard_get_owner)      (GtkClipboard          *clipboard);
+void     SF(gtk_clipboard_clear)          (GtkClipboard          *clipboard);
+void     SF(gtk_clipboard_set_text)       (GtkClipboard          *clipboard,
 				       const gchar           *text,
 				       gint                   len);
-void     __gtk_clipboard_set_image      (GtkClipboard          *clipboard,
+void     SF(gtk_clipboard_set_image)      (GtkClipboard          *clipboard,
 				       GdkPixbuf             *pixbuf);
 
-void __gtk_clipboard_request_contents  (GtkClipboard                     *clipboard,
+void SF(gtk_clipboard_request_contents)  (GtkClipboard                     *clipboard,
                                       GdkAtom                           target,
                                       GtkClipboardReceivedFunc          callback,
                                       gpointer                          user_data);
-void __gtk_clipboard_request_text      (GtkClipboard                     *clipboard,
+void SF(gtk_clipboard_request_text)      (GtkClipboard                     *clipboard,
                                       GtkClipboardTextReceivedFunc      callback,
                                       gpointer                          user_data);
-void __gtk_clipboard_request_rich_text (GtkClipboard                     *clipboard,
+void SF(gtk_clipboard_request_rich_text) (GtkClipboard                     *clipboard,
                                       GtkTextBuffer                    *buffer,
                                       GtkClipboardRichTextReceivedFunc  callback,
                                       gpointer                          user_data);
-void __gtk_clipboard_request_image     (GtkClipboard                     *clipboard,
+void SF(gtk_clipboard_request_image)     (GtkClipboard                     *clipboard,
                                       GtkClipboardImageReceivedFunc     callback,
                                       gpointer                          user_data);
-void __gtk_clipboard_request_uris      (GtkClipboard                     *clipboard,
+void SF(gtk_clipboard_request_uris)      (GtkClipboard                     *clipboard,
                                       GtkClipboardURIReceivedFunc       callback,
                                       gpointer                          user_data);
-void __gtk_clipboard_request_targets   (GtkClipboard                     *clipboard,
+void SF(gtk_clipboard_request_targets)   (GtkClipboard                     *clipboard,
                                       GtkClipboardTargetsReceivedFunc   callback,
                                       gpointer                          user_data);
 
-GtkSelectionData *__gtk_clipboard_wait_for_contents  (GtkClipboard  *clipboard,
+GtkSelectionData *SF(gtk_clipboard_wait_for_contents)  (GtkClipboard  *clipboard,
                                                     GdkAtom        target);
-gchar *           __gtk_clipboard_wait_for_text      (GtkClipboard  *clipboard);
-guint8 *          __gtk_clipboard_wait_for_rich_text (GtkClipboard  *clipboard,
+gchar *           SF(gtk_clipboard_wait_for_text)      (GtkClipboard  *clipboard);
+guint8 *          SF(gtk_clipboard_wait_for_rich_text) (GtkClipboard  *clipboard,
                                                     GtkTextBuffer *buffer,
                                                     GdkAtom       *format,
                                                     gsize         *length);
-GdkPixbuf *       __gtk_clipboard_wait_for_image     (GtkClipboard  *clipboard);
-gchar **          __gtk_clipboard_wait_for_uris      (GtkClipboard  *clipboard);
-gboolean          __gtk_clipboard_wait_for_targets   (GtkClipboard  *clipboard,
+GdkPixbuf *       SF(gtk_clipboard_wait_for_image)     (GtkClipboard  *clipboard);
+gchar **          SF(gtk_clipboard_wait_for_uris)      (GtkClipboard  *clipboard);
+gboolean          SF(gtk_clipboard_wait_for_targets)   (GtkClipboard  *clipboard,
                                                     GdkAtom      **targets,
                                                     gint          *n_targets);
 
-gboolean __gtk_clipboard_wait_is_text_available      (GtkClipboard  *clipboard);
-gboolean __gtk_clipboard_wait_is_rich_text_available (GtkClipboard  *clipboard,
+gboolean SF(gtk_clipboard_wait_is_text_available)      (GtkClipboard  *clipboard);
+gboolean SF(gtk_clipboard_wait_is_rich_text_available) (GtkClipboard  *clipboard,
                                                     GtkTextBuffer *buffer);
-gboolean __gtk_clipboard_wait_is_image_available     (GtkClipboard  *clipboard);
-gboolean __gtk_clipboard_wait_is_uris_available      (GtkClipboard  *clipboard);
-gboolean __gtk_clipboard_wait_is_target_available    (GtkClipboard  *clipboard,
+gboolean SF(gtk_clipboard_wait_is_image_available)     (GtkClipboard  *clipboard);
+gboolean SF(gtk_clipboard_wait_is_uris_available)      (GtkClipboard  *clipboard);
+gboolean SF(gtk_clipboard_wait_is_target_available)    (GtkClipboard  *clipboard,
                                                     GdkAtom        target);
 
 
-void __gtk_clipboard_set_can_store (GtkClipboard         *clipboard,
+void SF(gtk_clipboard_set_can_store) (GtkClipboard         *clipboard,
 				  const GtkTargetEntry *targets,
 				  gint                  n_targets);
 
-void __gtk_clipboard_store         (GtkClipboard   *clipboard);
+void SF(gtk_clipboard_store)         (GtkClipboard   *clipboard);
 
 /* private */
-void     ___gtk_clipboard_handle_event    (GdkEventOwnerChange *event);
+void     SF(_gtk_clipboard_handle_event)    (GdkEventOwnerChange *event);
 
-void     ___gtk_clipboard_store_all       (void);
+void     SF(_gtk_clipboard_store_all)       (void);
 
 G_END_DECLS
 

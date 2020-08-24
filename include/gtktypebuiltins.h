@@ -10,314 +10,314 @@
 G_BEGIN_DECLS
 
 /* enumerations from "gtkaccelgroup.h" */
-GType __gtk_accel_flags_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_ACCEL_FLAGS (__gtk_accel_flags_get_type ())
+GType SF(gtk_accel_flags_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_ACCEL_FLAGS (SF(gtk_accel_flags_get_type) ())
 
 /* enumerations from "gtkassistant.h" */
-GType __gtk_assistant_page_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_ASSISTANT_PAGE_TYPE (__gtk_assistant_page_type_get_type ())
+GType SF(gtk_assistant_page_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_ASSISTANT_PAGE_TYPE (SF(gtk_assistant_page_type_get_type) ())
 
 /* enumerations from "gtkbuilder.h" */
-GType __gtk_builder_error_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_BUILDER_ERROR (__gtk_builder_error_get_type ())
+GType SF(gtk_builder_error_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_BUILDER_ERROR (SF(gtk_builder_error_get_type) ())
 
 /* enumerations from "gtkcalendar.h" */
-GType __gtk_calendar_display_options_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_CALENDAR_DISPLAY_OPTIONS (__gtk_calendar_display_options_get_type ())
+GType SF(gtk_calendar_display_options_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_CALENDAR_DISPLAY_OPTIONS (SF(gtk_calendar_display_options_get_type) ())
 
 /* enumerations from "gtkcellrenderer.h" */
-GType __gtk_cell_renderer_state_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_CELL_RENDERER_STATE (__gtk_cell_renderer_state_get_type ())
-GType __gtk_cell_renderer_mode_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_CELL_RENDERER_MODE (__gtk_cell_renderer_mode_get_type ())
+GType SF(gtk_cell_renderer_state_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_CELL_RENDERER_STATE (SF(gtk_cell_renderer_state_get_type) ())
+GType SF(gtk_cell_renderer_mode_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_CELL_RENDERER_MODE (SF(gtk_cell_renderer_mode_get_type) ())
 
 /* enumerations from "gtkcellrendereraccel.h" */
-GType __gtk_cell_renderer_accel_mode_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_CELL_RENDERER_ACCEL_MODE (__gtk_cell_renderer_accel_mode_get_type ())
+GType SF(gtk_cell_renderer_accel_mode_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_CELL_RENDERER_ACCEL_MODE (SF(gtk_cell_renderer_accel_mode_get_type) ())
 
 /* enumerations from "gtkclist.h" */
-GType __gtk_cell_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_CELL_TYPE (__gtk_cell_type_get_type ())
-GType __gtk_clist_drag_pos_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_CLIST_DRAG_POS (__gtk_clist_drag_pos_get_type ())
-GType __gtk_button_action_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_BUTTON_ACTION (__gtk_button_action_get_type ())
+GType SF(gtk_cell_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_CELL_TYPE (SF(gtk_cell_type_get_type) ())
+GType SF(gtk_clist_drag_pos_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_CLIST_DRAG_POS (SF(gtk_clist_drag_pos_get_type) ())
+GType SF(gtk_button_action_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_BUTTON_ACTION (SF(gtk_button_action_get_type) ())
 
 /* enumerations from "gtkctree.h" */
-GType __gtk_ctree_pos_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_CTREE_POS (__gtk_ctree_pos_get_type ())
-GType __gtk_ctree_line_style_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_CTREE_LINE_STYLE (__gtk_ctree_line_style_get_type ())
-GType __gtk_ctree_expander_style_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_CTREE_EXPANDER_STYLE (__gtk_ctree_expander_style_get_type ())
-GType __gtk_ctree_expansion_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_CTREE_EXPANSION_TYPE (__gtk_ctree_expansion_type_get_type ())
+GType SF(gtk_ctree_pos_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_CTREE_POS (SF(gtk_ctree_pos_get_type) ())
+GType SF(gtk_ctree_line_style_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_CTREE_LINE_STYLE (SF(gtk_ctree_line_style_get_type) ())
+GType SF(gtk_ctree_expander_style_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_CTREE_EXPANDER_STYLE (SF(gtk_ctree_expander_style_get_type) ())
+GType SF(gtk_ctree_expansion_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_CTREE_EXPANSION_TYPE (SF(gtk_ctree_expansion_type_get_type) ())
 
 /* enumerations from "gtkdebug.h" */
-GType __gtk_debug_flag_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_DEBUG_FLAG (__gtk_debug_flag_get_type ())
+GType SF(gtk_debug_flag_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_DEBUG_FLAG (SF(gtk_debug_flag_get_type) ())
 
 /* enumerations from "gtkdialog.h" */
-GType __gtk_dialog_flags_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_DIALOG_FLAGS (__gtk_dialog_flags_get_type ())
-GType __gtk_response_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_RESPONSE_TYPE (__gtk_response_type_get_type ())
+GType SF(gtk_dialog_flags_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_DIALOG_FLAGS (SF(gtk_dialog_flags_get_type) ())
+GType SF(gtk_response_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_RESPONSE_TYPE (SF(gtk_response_type_get_type) ())
 
 /* enumerations from "gtkdnd.h" */
-GType __gtk_dest_defaults_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_DEST_DEFAULTS (__gtk_dest_defaults_get_type ())
-GType __gtk_target_flags_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_TARGET_FLAGS (__gtk_target_flags_get_type ())
+GType SF(gtk_dest_defaults_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_DEST_DEFAULTS (SF(gtk_dest_defaults_get_type) ())
+GType SF(gtk_target_flags_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_TARGET_FLAGS (SF(gtk_target_flags_get_type) ())
 
 /* enumerations from "gtkentry.h" */
-GType __gtk_entry_icon_position_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_ENTRY_ICON_POSITION (__gtk_entry_icon_position_get_type ())
+GType SF(gtk_entry_icon_position_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_ENTRY_ICON_POSITION (SF(gtk_entry_icon_position_get_type) ())
 
 /* enumerations from "gtkenums.h" */
-GType __gtk_anchor_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_ANCHOR_TYPE (__gtk_anchor_type_get_type ())
-GType __gtk_arrow_placement_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_ARROW_PLACEMENT (__gtk_arrow_placement_get_type ())
-GType __gtk_arrow_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_ARROW_TYPE (__gtk_arrow_type_get_type ())
-GType __gtk_attach_options_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_ATTACH_OPTIONS (__gtk_attach_options_get_type ())
-GType __gtk_button_box_style_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_BUTTON_BOX_STYLE (__gtk_button_box_style_get_type ())
-GType __gtk_curve_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_CURVE_TYPE (__gtk_curve_type_get_type ())
-GType __gtk_delete_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_DELETE_TYPE (__gtk_delete_type_get_type ())
-GType __gtk_direction_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_DIRECTION_TYPE (__gtk_direction_type_get_type ())
-GType __gtk_expander_style_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_EXPANDER_STYLE (__gtk_expander_style_get_type ())
-GType __gtk_icon_size_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_ICON_SIZE (__gtk_icon_size_get_type ())
-GType __gtk_sensitivity_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_SENSITIVITY_TYPE (__gtk_sensitivity_type_get_type ())
-GType __gtk_side_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_SIDE_TYPE (__gtk_side_type_get_type ())
-GType __gtk_text_direction_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_TEXT_DIRECTION (__gtk_text_direction_get_type ())
-GType __gtk_justification_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_JUSTIFICATION (__gtk_justification_get_type ())
-GType __gtk_match_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_MATCH_TYPE (__gtk_match_type_get_type ())
-GType __gtk_menu_direction_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_MENU_DIRECTION_TYPE (__gtk_menu_direction_type_get_type ())
-GType __gtk_message_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_MESSAGE_TYPE (__gtk_message_type_get_type ())
-GType __gtk_metric_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_METRIC_TYPE (__gtk_metric_type_get_type ())
-GType __gtk_movement_step_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_MOVEMENT_STEP (__gtk_movement_step_get_type ())
-GType __gtk_scroll_step_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_SCROLL_STEP (__gtk_scroll_step_get_type ())
-GType __gtk_orientation_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_ORIENTATION (__gtk_orientation_get_type ())
-GType __gtk_corner_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_CORNER_TYPE (__gtk_corner_type_get_type ())
-GType __gtk_pack_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_PACK_TYPE (__gtk_pack_type_get_type ())
-GType __gtk_path_priority_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_PATH_PRIORITY_TYPE (__gtk_path_priority_type_get_type ())
-GType __gtk_path_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_PATH_TYPE (__gtk_path_type_get_type ())
-GType __gtk_policy_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_POLICY_TYPE (__gtk_policy_type_get_type ())
-GType __gtk_position_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_POSITION_TYPE (__gtk_position_type_get_type ())
-GType __gtk_preview_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_PREVIEW_TYPE (__gtk_preview_type_get_type ())
-GType __gtk_relief_style_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_RELIEF_STYLE (__gtk_relief_style_get_type ())
-GType __gtk_resize_mode_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_RESIZE_MODE (__gtk_resize_mode_get_type ())
-GType __gtk_signal_run_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_SIGNAL_RUN_TYPE (__gtk_signal_run_type_get_type ())
-GType __gtk_scroll_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_SCROLL_TYPE (__gtk_scroll_type_get_type ())
-GType __gtk_selection_mode_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_SELECTION_MODE (__gtk_selection_mode_get_type ())
-GType __gtk_shadow_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_SHADOW_TYPE (__gtk_shadow_type_get_type ())
-GType __gtk_state_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_STATE_TYPE (__gtk_state_type_get_type ())
-GType __gtk_submenu_direction_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_SUBMENU_DIRECTION (__gtk_submenu_direction_get_type ())
-GType __gtk_submenu_placement_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_SUBMENU_PLACEMENT (__gtk_submenu_placement_get_type ())
-GType __gtk_toolbar_style_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_TOOLBAR_STYLE (__gtk_toolbar_style_get_type ())
-GType __gtk_update_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_UPDATE_TYPE (__gtk_update_type_get_type ())
-GType __gtk_visibility_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_VISIBILITY (__gtk_visibility_get_type ())
-GType __gtk_window_position_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_WINDOW_POSITION (__gtk_window_position_get_type ())
-GType __gtk_window_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_WINDOW_TYPE (__gtk_window_type_get_type ())
-GType __gtk_wrap_mode_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_WRAP_MODE (__gtk_wrap_mode_get_type ())
-GType __gtk_sort_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_SORT_TYPE (__gtk_sort_type_get_type ())
-GType __gtk_im_preedit_style_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_IM_PREEDIT_STYLE (__gtk_im_preedit_style_get_type ())
-GType __gtk_im_status_style_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_IM_STATUS_STYLE (__gtk_im_status_style_get_type ())
-GType __gtk_pack_direction_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_PACK_DIRECTION (__gtk_pack_direction_get_type ())
-GType __gtk_print_pages_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_PRINT_PAGES (__gtk_print_pages_get_type ())
-GType __gtk_page_set_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_PAGE_SET (__gtk_page_set_get_type ())
-GType __gtk_number_up_layout_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_NUMBER_UP_LAYOUT (__gtk_number_up_layout_get_type ())
-GType __gtk_page_orientation_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_PAGE_ORIENTATION (__gtk_page_orientation_get_type ())
-GType __gtk_print_quality_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_PRINT_QUALITY (__gtk_print_quality_get_type ())
-GType __gtk_print_duplex_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_PRINT_DUPLEX (__gtk_print_duplex_get_type ())
-GType __gtk_unit_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_UNIT (__gtk_unit_get_type ())
-GType __gtk_tree_view_grid_lines_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_TREE_VIEW_GRID_LINES (__gtk_tree_view_grid_lines_get_type ())
-GType __gtk_drag_result_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_DRAG_RESULT (__gtk_drag_result_get_type ())
+GType SF(gtk_anchor_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_ANCHOR_TYPE (SF(gtk_anchor_type_get_type) ())
+GType SF(gtk_arrow_placement_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_ARROW_PLACEMENT (SF(gtk_arrow_placement_get_type) ())
+GType SF(gtk_arrow_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_ARROW_TYPE (SF(gtk_arrow_type_get_type) ())
+GType SF(gtk_attach_options_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_ATTACH_OPTIONS (SF(gtk_attach_options_get_type) ())
+GType SF(gtk_button_box_style_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_BUTTON_BOX_STYLE (SF(gtk_button_box_style_get_type) ())
+GType SF(gtk_curve_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_CURVE_TYPE (SF(gtk_curve_type_get_type) ())
+GType SF(gtk_delete_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_DELETE_TYPE (SF(gtk_delete_type_get_type) ())
+GType SF(gtk_direction_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_DIRECTION_TYPE (SF(gtk_direction_type_get_type) ())
+GType SF(gtk_expander_style_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_EXPANDER_STYLE (SF(gtk_expander_style_get_type) ())
+GType SF(gtk_icon_size_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_ICON_SIZE (SF(gtk_icon_size_get_type) ())
+GType SF(gtk_sensitivity_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_SENSITIVITY_TYPE (SF(gtk_sensitivity_type_get_type) ())
+GType SF(gtk_side_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_SIDE_TYPE (SF(gtk_side_type_get_type) ())
+GType SF(gtk_text_direction_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_TEXT_DIRECTION (SF(gtk_text_direction_get_type) ())
+GType SF(gtk_justification_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_JUSTIFICATION (SF(gtk_justification_get_type) ())
+GType SF(gtk_match_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_MATCH_TYPE (SF(gtk_match_type_get_type) ())
+GType SF(gtk_menu_direction_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_MENU_DIRECTION_TYPE (SF(gtk_menu_direction_type_get_type) ())
+GType SF(gtk_message_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_MESSAGE_TYPE (SF(gtk_message_type_get_type) ())
+GType SF(gtk_metric_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_METRIC_TYPE (SF(gtk_metric_type_get_type) ())
+GType SF(gtk_movement_step_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_MOVEMENT_STEP (SF(gtk_movement_step_get_type) ())
+GType SF(gtk_scroll_step_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_SCROLL_STEP (SF(gtk_scroll_step_get_type) ())
+GType SF(gtk_orientation_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_ORIENTATION (SF(gtk_orientation_get_type) ())
+GType SF(gtk_corner_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_CORNER_TYPE (SF(gtk_corner_type_get_type) ())
+GType SF(gtk_pack_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_PACK_TYPE (SF(gtk_pack_type_get_type) ())
+GType SF(gtk_path_priority_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_PATH_PRIORITY_TYPE (SF(gtk_path_priority_type_get_type) ())
+GType SF(gtk_path_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_PATH_TYPE (SF(gtk_path_type_get_type) ())
+GType SF(gtk_policy_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_POLICY_TYPE (SF(gtk_policy_type_get_type) ())
+GType SF(gtk_position_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_POSITION_TYPE (SF(gtk_position_type_get_type) ())
+GType SF(gtk_preview_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_PREVIEW_TYPE (SF(gtk_preview_type_get_type) ())
+GType SF(gtk_relief_style_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_RELIEF_STYLE (SF(gtk_relief_style_get_type) ())
+GType SF(gtk_resize_mode_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_RESIZE_MODE (SF(gtk_resize_mode_get_type) ())
+GType SF(gtk_signal_run_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_SIGNAL_RUN_TYPE (SF(gtk_signal_run_type_get_type) ())
+GType SF(gtk_scroll_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_SCROLL_TYPE (SF(gtk_scroll_type_get_type) ())
+GType SF(gtk_selection_mode_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_SELECTION_MODE (SF(gtk_selection_mode_get_type) ())
+GType SF(gtk_shadow_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_SHADOW_TYPE (SF(gtk_shadow_type_get_type) ())
+GType SF(gtk_state_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_STATE_TYPE (SF(gtk_state_type_get_type) ())
+GType SF(gtk_submenu_direction_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_SUBMENU_DIRECTION (SF(gtk_submenu_direction_get_type) ())
+GType SF(gtk_submenu_placement_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_SUBMENU_PLACEMENT (SF(gtk_submenu_placement_get_type) ())
+GType SF(gtk_toolbar_style_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_TOOLBAR_STYLE (SF(gtk_toolbar_style_get_type) ())
+GType SF(gtk_update_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_UPDATE_TYPE (SF(gtk_update_type_get_type) ())
+GType SF(gtk_visibility_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_VISIBILITY (SF(gtk_visibility_get_type) ())
+GType SF(gtk_window_position_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_WINDOW_POSITION (SF(gtk_window_position_get_type) ())
+GType SF(gtk_window_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_WINDOW_TYPE (SF(gtk_window_type_get_type) ())
+GType SF(gtk_wrap_mode_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_WRAP_MODE (SF(gtk_wrap_mode_get_type) ())
+GType SF(gtk_sort_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_SORT_TYPE (SF(gtk_sort_type_get_type) ())
+GType SF(gtk_im_preedit_style_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_IM_PREEDIT_STYLE (SF(gtk_im_preedit_style_get_type) ())
+GType SF(gtk_im_status_style_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_IM_STATUS_STYLE (SF(gtk_im_status_style_get_type) ())
+GType SF(gtk_pack_direction_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_PACK_DIRECTION (SF(gtk_pack_direction_get_type) ())
+GType SF(gtk_print_pages_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_PRINT_PAGES (SF(gtk_print_pages_get_type) ())
+GType SF(gtk_page_set_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_PAGE_SET (SF(gtk_page_set_get_type) ())
+GType SF(gtk_number_up_layout_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_NUMBER_UP_LAYOUT (SF(gtk_number_up_layout_get_type) ())
+GType SF(gtk_page_orientation_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_PAGE_ORIENTATION (SF(gtk_page_orientation_get_type) ())
+GType SF(gtk_print_quality_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_PRINT_QUALITY (SF(gtk_print_quality_get_type) ())
+GType SF(gtk_print_duplex_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_PRINT_DUPLEX (SF(gtk_print_duplex_get_type) ())
+GType SF(gtk_unit_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_UNIT (SF(gtk_unit_get_type) ())
+GType SF(gtk_tree_view_grid_lines_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_TREE_VIEW_GRID_LINES (SF(gtk_tree_view_grid_lines_get_type) ())
+GType SF(gtk_drag_result_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_DRAG_RESULT (SF(gtk_drag_result_get_type) ())
 
 /* enumerations from "gtkfilechooser.h" */
-GType __gtk_file_chooser_action_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_FILE_CHOOSER_ACTION (__gtk_file_chooser_action_get_type ())
-GType __gtk_file_chooser_confirmation_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_FILE_CHOOSER_CONFIRMATION (__gtk_file_chooser_confirmation_get_type ())
-GType __gtk_file_chooser_error_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_FILE_CHOOSER_ERROR (__gtk_file_chooser_error_get_type ())
+GType SF(gtk_file_chooser_action_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_FILE_CHOOSER_ACTION (SF(gtk_file_chooser_action_get_type) ())
+GType SF(gtk_file_chooser_confirmation_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_FILE_CHOOSER_CONFIRMATION (SF(gtk_file_chooser_confirmation_get_type) ())
+GType SF(gtk_file_chooser_error_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_FILE_CHOOSER_ERROR (SF(gtk_file_chooser_error_get_type) ())
 
 /* enumerations from "gtkfilefilter.h" */
-GType __gtk_file_filter_flags_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_FILE_FILTER_FLAGS (__gtk_file_filter_flags_get_type ())
+GType SF(gtk_file_filter_flags_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_FILE_FILTER_FLAGS (SF(gtk_file_filter_flags_get_type) ())
 
 /* enumerations from "gtkicontheme.h" */
-GType __gtk_icon_lookup_flags_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_ICON_LOOKUP_FLAGS (__gtk_icon_lookup_flags_get_type ())
-GType __gtk_icon_theme_error_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_ICON_THEME_ERROR (__gtk_icon_theme_error_get_type ())
+GType SF(gtk_icon_lookup_flags_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_ICON_LOOKUP_FLAGS (SF(gtk_icon_lookup_flags_get_type) ())
+GType SF(gtk_icon_theme_error_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_ICON_THEME_ERROR (SF(gtk_icon_theme_error_get_type) ())
 
 /* enumerations from "gtkiconview.h" */
-GType __gtk_icon_view_drop_position_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_ICON_VIEW_DROP_POSITION (__gtk_icon_view_drop_position_get_type ())
+GType SF(gtk_icon_view_drop_position_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_ICON_VIEW_DROP_POSITION (SF(gtk_icon_view_drop_position_get_type) ())
 
 /* enumerations from "gtkimage.h" */
-GType __gtk_image_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_IMAGE_TYPE (__gtk_image_type_get_type ())
+GType SF(gtk_image_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_IMAGE_TYPE (SF(gtk_image_type_get_type) ())
 
 /* enumerations from "gtkmessagedialog.h" */
-GType __gtk_buttons_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_BUTTONS_TYPE (__gtk_buttons_type_get_type ())
+GType SF(gtk_buttons_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_BUTTONS_TYPE (SF(gtk_buttons_type_get_type) ())
 
 /* enumerations from "gtknotebook.h" */
-GType __gtk_notebook_tab_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_NOTEBOOK_TAB (__gtk_notebook_tab_get_type ())
+GType SF(gtk_notebook_tab_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_NOTEBOOK_TAB (SF(gtk_notebook_tab_get_type) ())
 
 /* enumerations from "gtkprintoperation.h" */
-GType __gtk_print_status_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_PRINT_STATUS (__gtk_print_status_get_type ())
-GType __gtk_print_operation_result_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_PRINT_OPERATION_RESULT (__gtk_print_operation_result_get_type ())
-GType __gtk_print_operation_action_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_PRINT_OPERATION_ACTION (__gtk_print_operation_action_get_type ())
-GType __gtk_print_error_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_PRINT_ERROR (__gtk_print_error_get_type ())
+GType SF(gtk_print_status_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_PRINT_STATUS (SF(gtk_print_status_get_type) ())
+GType SF(gtk_print_operation_result_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_PRINT_OPERATION_RESULT (SF(gtk_print_operation_result_get_type) ())
+GType SF(gtk_print_operation_action_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_PRINT_OPERATION_ACTION (SF(gtk_print_operation_action_get_type) ())
+GType SF(gtk_print_error_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_PRINT_ERROR (SF(gtk_print_error_get_type) ())
 
 /* enumerations from "gtkprivate.h" */
-GType __gtk_private_flags_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_PRIVATE_FLAGS (__gtk_private_flags_get_type ())
+GType SF(gtk_private_flags_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_PRIVATE_FLAGS (SF(gtk_private_flags_get_type) ())
 
 /* enumerations from "gtkprogressbar.h" */
-GType __gtk_progress_bar_style_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_PROGRESS_BAR_STYLE (__gtk_progress_bar_style_get_type ())
-GType __gtk_progress_bar_orientation_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_PROGRESS_BAR_ORIENTATION (__gtk_progress_bar_orientation_get_type ())
+GType SF(gtk_progress_bar_style_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_PROGRESS_BAR_STYLE (SF(gtk_progress_bar_style_get_type) ())
+GType SF(gtk_progress_bar_orientation_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_PROGRESS_BAR_ORIENTATION (SF(gtk_progress_bar_orientation_get_type) ())
 
 /* enumerations from "gtkrc.h" */
-GType __gtk_rc_flags_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_RC_FLAGS (__gtk_rc_flags_get_type ())
-GType __gtk_rc_token_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_RC_TOKEN_TYPE (__gtk_rc_token_type_get_type ())
+GType SF(gtk_rc_flags_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_RC_FLAGS (SF(gtk_rc_flags_get_type) ())
+GType SF(gtk_rc_token_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_RC_TOKEN_TYPE (SF(gtk_rc_token_type_get_type) ())
 
 /* enumerations from "gtkrecentchooser.h" */
-GType __gtk_recent_sort_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_RECENT_SORT_TYPE (__gtk_recent_sort_type_get_type ())
-GType __gtk_recent_chooser_error_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_RECENT_CHOOSER_ERROR (__gtk_recent_chooser_error_get_type ())
+GType SF(gtk_recent_sort_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_RECENT_SORT_TYPE (SF(gtk_recent_sort_type_get_type) ())
+GType SF(gtk_recent_chooser_error_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_RECENT_CHOOSER_ERROR (SF(gtk_recent_chooser_error_get_type) ())
 
 /* enumerations from "gtkrecentfilter.h" */
-GType __gtk_recent_filter_flags_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_RECENT_FILTER_FLAGS (__gtk_recent_filter_flags_get_type ())
+GType SF(gtk_recent_filter_flags_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_RECENT_FILTER_FLAGS (SF(gtk_recent_filter_flags_get_type) ())
 
 /* enumerations from "gtkrecentmanager.h" */
-GType __gtk_recent_manager_error_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_RECENT_MANAGER_ERROR (__gtk_recent_manager_error_get_type ())
+GType SF(gtk_recent_manager_error_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_RECENT_MANAGER_ERROR (SF(gtk_recent_manager_error_get_type) ())
 
 /* enumerations from "gtksizegroup.h" */
-GType __gtk_size_group_mode_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_SIZE_GROUP_MODE (__gtk_size_group_mode_get_type ())
+GType SF(gtk_size_group_mode_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_SIZE_GROUP_MODE (SF(gtk_size_group_mode_get_type) ())
 
 /* enumerations from "gtkspinbutton.h" */
-GType __gtk_spin_button_update_policy_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_SPIN_BUTTON_UPDATE_POLICY (__gtk_spin_button_update_policy_get_type ())
-GType __gtk_spin_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_SPIN_TYPE (__gtk_spin_type_get_type ())
+GType SF(gtk_spin_button_update_policy_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_SPIN_BUTTON_UPDATE_POLICY (SF(gtk_spin_button_update_policy_get_type) ())
+GType SF(gtk_spin_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_SPIN_TYPE (SF(gtk_spin_type_get_type) ())
 
 /* enumerations from "gtktextbuffer.h" */
-GType __gtk_text_buffer_target_info_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_TEXT_BUFFER_TARGET_INFO (__gtk_text_buffer_target_info_get_type ())
+GType SF(gtk_text_buffer_target_info_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_TEXT_BUFFER_TARGET_INFO (SF(gtk_text_buffer_target_info_get_type) ())
 
 /* enumerations from "gtktextiter.h" */
-GType __gtk_text_search_flags_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_TEXT_SEARCH_FLAGS (__gtk_text_search_flags_get_type ())
+GType SF(gtk_text_search_flags_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_TEXT_SEARCH_FLAGS (SF(gtk_text_search_flags_get_type) ())
 
 /* enumerations from "gtktextview.h" */
-GType __gtk_text_window_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_TEXT_WINDOW_TYPE (__gtk_text_window_type_get_type ())
+GType SF(gtk_text_window_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_TEXT_WINDOW_TYPE (SF(gtk_text_window_type_get_type) ())
 
 /* enumerations from "gtktoolbar.h" */
-GType __gtk_toolbar_child_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_TOOLBAR_CHILD_TYPE (__gtk_toolbar_child_type_get_type ())
-GType __gtk_toolbar_space_style_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_TOOLBAR_SPACE_STYLE (__gtk_toolbar_space_style_get_type ())
+GType SF(gtk_toolbar_child_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_TOOLBAR_CHILD_TYPE (SF(gtk_toolbar_child_type_get_type) ())
+GType SF(gtk_toolbar_space_style_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_TOOLBAR_SPACE_STYLE (SF(gtk_toolbar_space_style_get_type) ())
 
 /* enumerations from "gtktoolpalette.h" */
-GType __gtk_tool_palette_drag_targets_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_TOOL_PALETTE_DRAG_TARGETS (__gtk_tool_palette_drag_targets_get_type ())
+GType SF(gtk_tool_palette_drag_targets_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_TOOL_PALETTE_DRAG_TARGETS (SF(gtk_tool_palette_drag_targets_get_type) ())
 
 /* enumerations from "gtktree.h" */
-GType __gtk_tree_view_mode_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_TREE_VIEW_MODE (__gtk_tree_view_mode_get_type ())
+GType SF(gtk_tree_view_mode_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_TREE_VIEW_MODE (SF(gtk_tree_view_mode_get_type) ())
 
 /* enumerations from "gtktreemodel.h" */
-GType __gtk_tree_model_flags_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_TREE_MODEL_FLAGS (__gtk_tree_model_flags_get_type ())
+GType SF(gtk_tree_model_flags_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_TREE_MODEL_FLAGS (SF(gtk_tree_model_flags_get_type) ())
 
 /* enumerations from "gtktreeview.h" */
-GType __gtk_tree_view_drop_position_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_TREE_VIEW_DROP_POSITION (__gtk_tree_view_drop_position_get_type ())
+GType SF(gtk_tree_view_drop_position_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_TREE_VIEW_DROP_POSITION (SF(gtk_tree_view_drop_position_get_type) ())
 
 /* enumerations from "gtktreeviewcolumn.h" */
-GType __gtk_tree_view_column_sizing_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_TREE_VIEW_COLUMN_SIZING (__gtk_tree_view_column_sizing_get_type ())
+GType SF(gtk_tree_view_column_sizing_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_TREE_VIEW_COLUMN_SIZING (SF(gtk_tree_view_column_sizing_get_type) ())
 
 /* enumerations from "gtkuimanager.h" */
-GType __gtk_ui_manager_item_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_UI_MANAGER_ITEM_TYPE (__gtk_ui_manager_item_type_get_type ())
+GType SF(gtk_ui_manager_item_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_UI_MANAGER_ITEM_TYPE (SF(gtk_ui_manager_item_type_get_type) ())
 
 /* enumerations from "gtkwidget.h" */
-GType __gtk_widget_flags_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_WIDGET_FLAGS (__gtk_widget_flags_get_type ())
-GType __gtk_widget_help_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_WIDGET_HELP_TYPE (__gtk_widget_help_type_get_type ())
+GType SF(gtk_widget_flags_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_WIDGET_FLAGS (SF(gtk_widget_flags_get_type) ())
+GType SF(gtk_widget_help_type_get_type) (void) G_GNUC_CONST;
+#define GTK_TYPE_WIDGET_HELP_TYPE (SF(gtk_widget_help_type_get_type) ())
 G_END_DECLS
 
 #endif /* __GTK_TYPE_BUILTINS_H__ */

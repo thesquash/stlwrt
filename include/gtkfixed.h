@@ -100,19 +100,19 @@ GType      _T2_gtk_fixed_get_type          (void) G_GNUC_CONST;
 GType      _3T_gtk_fixed_get_type          (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType      gtk_fixed_get_type          (void) G_GNUC_CONST;
-GtkWidget* __gtk_fixed_new               (void);
-void       __gtk_fixed_put               (GtkFixed       *fixed,
+GtkWidget* SF(gtk_fixed_new)               (void);
+void       SF(gtk_fixed_put)               (GtkFixed       *fixed,
                                         GtkWidget      *widget,
                                         gint            x,
                                         gint            y);
-void       __gtk_fixed_move              (GtkFixed       *fixed,
+void       SF(gtk_fixed_move)              (GtkFixed       *fixed,
                                         GtkWidget      *widget,
                                         gint            x,
                                         gint            y);
 #ifndef GTK_DISABLE_DEPRECATED
-void       __gtk_fixed_set_has_window    (GtkFixed       *fixed,
+void       SF(gtk_fixed_set_has_window)    (GtkFixed       *fixed,
 					gboolean        has_window);
-gboolean   __gtk_fixed_get_has_window    (GtkFixed       *fixed);
+gboolean   SF(gtk_fixed_get_has_window)    (GtkFixed       *fixed);
 #endif
 
 G_END_DECLS

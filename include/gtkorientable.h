@@ -52,9 +52,9 @@ GType          _3T_gtk_orientable_get_type        (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType          gtk_orientable_get_type        (void) G_GNUC_CONST;
 
-void           __gtk_orientable_set_orientation (GtkOrientable  *orientable,
+void           SF(gtk_orientable_set_orientation) (GtkOrientable  *orientable,
                                                GtkOrientation  orientation);
-GtkOrientation __gtk_orientable_get_orientation (GtkOrientable  *orientable);
+GtkOrientation SF(gtk_orientable_get_orientation) (GtkOrientable  *orientable);
 
 G_END_DECLS
 

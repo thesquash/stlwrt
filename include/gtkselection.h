@@ -79,132 +79,132 @@ struct _GtkTargetPair {
   guint     info;
 };
 
-GtkTargetList *__gtk_target_list_new       (const GtkTargetEntry *targets,
+GtkTargetList *SF(gtk_target_list_new)       (const GtkTargetEntry *targets,
 					  guint                 ntargets);
-GtkTargetList *__gtk_target_list_ref       (GtkTargetList  *list);
-void           __gtk_target_list_unref     (GtkTargetList  *list);
-void           __gtk_target_list_add       (GtkTargetList  *list,
+GtkTargetList *SF(gtk_target_list_ref)       (GtkTargetList  *list);
+void           SF(gtk_target_list_unref)     (GtkTargetList  *list);
+void           SF(gtk_target_list_add)       (GtkTargetList  *list,
 				  	  GdkAtom         target,
 					  guint           flags,
 					  guint           info);
-void           __gtk_target_list_add_text_targets      (GtkTargetList  *list,
+void           SF(gtk_target_list_add_text_targets)      (GtkTargetList  *list,
                                                       guint           info);
-void           __gtk_target_list_add_rich_text_targets (GtkTargetList  *list,
+void           SF(gtk_target_list_add_rich_text_targets) (GtkTargetList  *list,
                                                       guint           info,
                                                       gboolean        deserializable,
                                                       GtkTextBuffer  *buffer);
-void           __gtk_target_list_add_image_targets     (GtkTargetList  *list,
+void           SF(gtk_target_list_add_image_targets)     (GtkTargetList  *list,
                                                       guint           info,
                                                       gboolean        writable);
-void           __gtk_target_list_add_uri_targets       (GtkTargetList  *list,
+void           SF(gtk_target_list_add_uri_targets)       (GtkTargetList  *list,
                                                       guint           info);
-void           __gtk_target_list_add_table (GtkTargetList        *list,
+void           SF(gtk_target_list_add_table) (GtkTargetList        *list,
 					  const GtkTargetEntry *targets,
 					  guint                 ntargets);
-void           __gtk_target_list_remove    (GtkTargetList  *list,
+void           SF(gtk_target_list_remove)    (GtkTargetList  *list,
 					  GdkAtom         target);
-gboolean       __gtk_target_list_find      (GtkTargetList  *list,
+gboolean       SF(gtk_target_list_find)      (GtkTargetList  *list,
 					  GdkAtom         target,
 					  guint          *info);
 
-GtkTargetEntry * __gtk_target_table_new_from_list (GtkTargetList  *list,
+GtkTargetEntry * SF(gtk_target_table_new_from_list) (GtkTargetList  *list,
                                                  gint           *n_targets);
-void             __gtk_target_table_free          (GtkTargetEntry *targets,
+void             SF(gtk_target_table_free)          (GtkTargetEntry *targets,
                                                  gint            n_targets);
 
 /* Public interface */
 
-gboolean __gtk_selection_owner_set             (GtkWidget  *widget,
+gboolean SF(gtk_selection_owner_set)             (GtkWidget  *widget,
 					      GdkAtom     selection,
 					      guint32     time_);
-gboolean __gtk_selection_owner_set_for_display (GdkDisplay *display,
+gboolean SF(gtk_selection_owner_set_for_display) (GdkDisplay *display,
 					      GtkWidget  *widget,
 					      GdkAtom     selection,
 					      guint32     time_);
 
-void     __gtk_selection_add_target    (GtkWidget            *widget,
+void     SF(gtk_selection_add_target)    (GtkWidget            *widget,
 				      GdkAtom               selection,
 				      GdkAtom               target,
 				      guint                 info);
-void     __gtk_selection_add_targets   (GtkWidget            *widget,
+void     SF(gtk_selection_add_targets)   (GtkWidget            *widget,
 				      GdkAtom               selection,
 				      const GtkTargetEntry *targets,
 				      guint                 ntargets);
-void     __gtk_selection_clear_targets (GtkWidget            *widget,
+void     SF(gtk_selection_clear_targets) (GtkWidget            *widget,
 				      GdkAtom               selection);
-gboolean __gtk_selection_convert       (GtkWidget            *widget,
+gboolean SF(gtk_selection_convert)       (GtkWidget            *widget,
 				      GdkAtom               selection,
 				      GdkAtom               target,
 				      guint32               time_);
 
-GdkAtom       __gtk_selection_data_get_selection (GtkSelectionData *selection_data);
-GdkAtom       __gtk_selection_data_get_target    (GtkSelectionData *selection_data);
-GdkAtom       __gtk_selection_data_get_data_type (GtkSelectionData *selection_data);
-gint          __gtk_selection_data_get_format    (GtkSelectionData *selection_data);
-const guchar *__gtk_selection_data_get_data      (GtkSelectionData *selection_data);
-gint          __gtk_selection_data_get_length    (GtkSelectionData *selection_data);
-GdkDisplay   *__gtk_selection_data_get_display   (GtkSelectionData *selection_data);
+GdkAtom       SF(gtk_selection_data_get_selection) (GtkSelectionData *selection_data);
+GdkAtom       SF(gtk_selection_data_get_target)    (GtkSelectionData *selection_data);
+GdkAtom       SF(gtk_selection_data_get_data_type) (GtkSelectionData *selection_data);
+gint          SF(gtk_selection_data_get_format)    (GtkSelectionData *selection_data);
+const guchar *SF(gtk_selection_data_get_data)      (GtkSelectionData *selection_data);
+gint          SF(gtk_selection_data_get_length)    (GtkSelectionData *selection_data);
+GdkDisplay   *SF(gtk_selection_data_get_display)   (GtkSelectionData *selection_data);
 
-void     __gtk_selection_data_set      (GtkSelectionData     *selection_data,
+void     SF(gtk_selection_data_set)      (GtkSelectionData     *selection_data,
 				      GdkAtom               type,
 				      gint                  format,
 				      const guchar         *data,
 				      gint                  length);
-gboolean __gtk_selection_data_set_text (GtkSelectionData     *selection_data,
+gboolean SF(gtk_selection_data_set_text) (GtkSelectionData     *selection_data,
 				      const gchar          *str,
 				      gint                  len);
-guchar * __gtk_selection_data_get_text (GtkSelectionData     *selection_data);
-gboolean __gtk_selection_data_set_pixbuf   (GtkSelectionData  *selection_data,
+guchar * SF(gtk_selection_data_get_text) (GtkSelectionData     *selection_data);
+gboolean SF(gtk_selection_data_set_pixbuf)   (GtkSelectionData  *selection_data,
 				          GdkPixbuf         *pixbuf);
-GdkPixbuf *__gtk_selection_data_get_pixbuf (GtkSelectionData  *selection_data);
-gboolean __gtk_selection_data_set_uris (GtkSelectionData     *selection_data,
+GdkPixbuf *SF(gtk_selection_data_get_pixbuf) (GtkSelectionData  *selection_data);
+gboolean SF(gtk_selection_data_set_uris) (GtkSelectionData     *selection_data,
 				      gchar               **uris);
-gchar  **__gtk_selection_data_get_uris (GtkSelectionData     *selection_data);
+gchar  **SF(gtk_selection_data_get_uris) (GtkSelectionData     *selection_data);
 
-gboolean __gtk_selection_data_get_targets          (GtkSelectionData  *selection_data,
+gboolean SF(gtk_selection_data_get_targets)          (GtkSelectionData  *selection_data,
 						  GdkAtom          **targets,
 						  gint              *n_atoms);
-gboolean __gtk_selection_data_targets_include_text (GtkSelectionData  *selection_data);
-gboolean __gtk_selection_data_targets_include_rich_text (GtkSelectionData *selection_data,
+gboolean SF(gtk_selection_data_targets_include_text) (GtkSelectionData  *selection_data);
+gboolean SF(gtk_selection_data_targets_include_rich_text) (GtkSelectionData *selection_data,
                                                        GtkTextBuffer    *buffer);
-gboolean __gtk_selection_data_targets_include_image (GtkSelectionData  *selection_data,
+gboolean SF(gtk_selection_data_targets_include_image) (GtkSelectionData  *selection_data,
 						   gboolean           writable);
-gboolean __gtk_selection_data_targets_include_uri  (GtkSelectionData  *selection_data);
-gboolean __gtk_targets_include_text                (GdkAtom       *targets,
+gboolean SF(gtk_selection_data_targets_include_uri)  (GtkSelectionData  *selection_data);
+gboolean SF(gtk_targets_include_text)                (GdkAtom       *targets,
 						  gint           n_targets);
-gboolean __gtk_targets_include_rich_text           (GdkAtom       *targets,
+gboolean SF(gtk_targets_include_rich_text)           (GdkAtom       *targets,
 						  gint           n_targets,
                                                   GtkTextBuffer *buffer);
-gboolean __gtk_targets_include_image               (GdkAtom       *targets,
+gboolean SF(gtk_targets_include_image)               (GdkAtom       *targets,
 						  gint           n_targets,
 						  gboolean       writable);
-gboolean __gtk_targets_include_uri                 (GdkAtom       *targets,
+gboolean SF(gtk_targets_include_uri)                 (GdkAtom       *targets,
 						  gint           n_targets);
 
 /* Called when a widget is destroyed */
 
-void __gtk_selection_remove_all      (GtkWidget *widget);
+void SF(gtk_selection_remove_all)      (GtkWidget *widget);
 
 /* Event handlers */
 #if !defined(GTK_DISABLE_DEPRECATED) || defined (STLWRT_COMPILATION)
-gboolean __gtk_selection_clear		  (GtkWidget 	     *widget,
+gboolean SF(gtk_selection_clear)		  (GtkWidget 	     *widget,
 					   GdkEventSelection *event);
 #endif
-gboolean ___gtk_selection_request		  (GtkWidget  	     *widget,
+gboolean SF(_gtk_selection_request)		  (GtkWidget  	     *widget,
 					   GdkEventSelection *event);
-gboolean ___gtk_selection_incr_event	  (GdkWindow         *window,
+gboolean SF(_gtk_selection_incr_event)	  (GdkWindow         *window,
 					   GdkEventProperty  *event);
-gboolean ___gtk_selection_notify		  (GtkWidget         *widget,
+gboolean SF(_gtk_selection_notify)		  (GtkWidget         *widget,
 					   GdkEventSelection *event);
-gboolean ___gtk_selection_property_notify	  (GtkWidget         *widget,
+gboolean SF(_gtk_selection_property_notify)	  (GtkWidget         *widget,
 					   GdkEventProperty  *event);
 
 GType             _T2_gtk_selection_data_get_type (void) G_GNUC_CONST;
 GType             _3T_gtk_selection_data_get_type (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType             gtk_selection_data_get_type (void) G_GNUC_CONST;
-GtkSelectionData *__gtk_selection_data_copy     (GtkSelectionData *data);
-void		  __gtk_selection_data_free     (GtkSelectionData *data);
+GtkSelectionData *SF(gtk_selection_data_copy)     (GtkSelectionData *data);
+void		  SF(gtk_selection_data_free)     (GtkSelectionData *data);
 
 GType             _T2_gtk_target_list_get_type    (void) G_GNUC_CONST;
 GType             _3T_gtk_target_list_get_type    (void) G_GNUC_CONST;

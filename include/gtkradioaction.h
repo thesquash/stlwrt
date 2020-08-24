@@ -74,16 +74,16 @@ struct _GtkRadioActionClass
 
 
 GType           gtk_radio_action_get_type          (void) G_GNUC_CONST;
-GtkRadioAction *__gtk_radio_action_new               (const gchar           *name,
+GtkRadioAction *SF(gtk_radio_action_new)               (const gchar           *name,
                                                     const gchar           *label,
                                                     const gchar           *tooltip,
                                                     const gchar           *stock_id,
                                                     gint                   value);
-GSList         *__gtk_radio_action_get_group         (GtkRadioAction        *action);
-void            __gtk_radio_action_set_group         (GtkRadioAction        *action,
+GSList         *SF(gtk_radio_action_get_group)         (GtkRadioAction        *action);
+void            SF(gtk_radio_action_set_group)         (GtkRadioAction        *action,
                                                     GSList                *group);
-gint            __gtk_radio_action_get_current_value (GtkRadioAction        *action);
-void            __gtk_radio_action_set_current_value (GtkRadioAction        *action,
+gint            SF(gtk_radio_action_get_current_value) (GtkRadioAction        *action);
+void            SF(gtk_radio_action_set_current_value) (GtkRadioAction        *action,
                                                     gint                   current_value);
 
 G_END_DECLS

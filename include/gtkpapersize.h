@@ -45,53 +45,53 @@ GType _3T_gtk_paper_size_get_type (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType gtk_paper_size_get_type (void) G_GNUC_CONST;
 
-GtkPaperSize *__gtk_paper_size_new          (const gchar  *name);
-GtkPaperSize *__gtk_paper_size_new_from_ppd (const gchar  *ppd_name,
+GtkPaperSize *SF(gtk_paper_size_new)          (const gchar  *name);
+GtkPaperSize *SF(gtk_paper_size_new_from_ppd) (const gchar  *ppd_name,
 					   const gchar  *ppd_display_name,
 					   gdouble       width,
 					   gdouble       height);
-GtkPaperSize *__gtk_paper_size_new_custom   (const gchar  *name,
+GtkPaperSize *SF(gtk_paper_size_new_custom)   (const gchar  *name,
 					   const gchar  *display_name,
 					   gdouble       width,
 					   gdouble       height,
 					   GtkUnit       unit);
-GtkPaperSize *__gtk_paper_size_copy         (GtkPaperSize *other);
-void          __gtk_paper_size_free         (GtkPaperSize *size);
-gboolean      __gtk_paper_size_is_equal     (GtkPaperSize *size1,
+GtkPaperSize *SF(gtk_paper_size_copy)         (GtkPaperSize *other);
+void          SF(gtk_paper_size_free)         (GtkPaperSize *size);
+gboolean      SF(gtk_paper_size_is_equal)     (GtkPaperSize *size1,
 					   GtkPaperSize *size2);
 
-GList        *__gtk_paper_size_get_paper_sizes (gboolean include_custom);
+GList        *SF(gtk_paper_size_get_paper_sizes) (gboolean include_custom);
 
 /* The width is always the shortest side, measure in mm */
-const gchar *__gtk_paper_size_get_name         (GtkPaperSize *size);
-const gchar *__gtk_paper_size_get_display_name (GtkPaperSize *size);
-const gchar *__gtk_paper_size_get_ppd_name     (GtkPaperSize *size);
+const gchar *SF(gtk_paper_size_get_name)         (GtkPaperSize *size);
+const gchar *SF(gtk_paper_size_get_display_name) (GtkPaperSize *size);
+const gchar *SF(gtk_paper_size_get_ppd_name)     (GtkPaperSize *size);
 
-gdouble  __gtk_paper_size_get_width        (GtkPaperSize *size, GtkUnit unit);
-gdouble  __gtk_paper_size_get_height       (GtkPaperSize *size, GtkUnit unit);
-gboolean __gtk_paper_size_is_custom        (GtkPaperSize *size);
+gdouble  SF(gtk_paper_size_get_width)        (GtkPaperSize *size, GtkUnit unit);
+gdouble  SF(gtk_paper_size_get_height)       (GtkPaperSize *size, GtkUnit unit);
+gboolean SF(gtk_paper_size_is_custom)        (GtkPaperSize *size);
 
 /* Only for custom sizes: */
-void    __gtk_paper_size_set_size                  (GtkPaperSize *size, 
+void    SF(gtk_paper_size_set_size)                  (GtkPaperSize *size, 
                                                   gdouble       width, 
                                                   gdouble       height, 
                                                   GtkUnit       unit);
 
-gdouble __gtk_paper_size_get_default_top_margin    (GtkPaperSize *size,
+gdouble SF(gtk_paper_size_get_default_top_margin)    (GtkPaperSize *size,
 						  GtkUnit       unit);
-gdouble __gtk_paper_size_get_default_bottom_margin (GtkPaperSize *size,
+gdouble SF(gtk_paper_size_get_default_bottom_margin) (GtkPaperSize *size,
 						  GtkUnit       unit);
-gdouble __gtk_paper_size_get_default_left_margin   (GtkPaperSize *size,
+gdouble SF(gtk_paper_size_get_default_left_margin)   (GtkPaperSize *size,
 						  GtkUnit       unit);
-gdouble __gtk_paper_size_get_default_right_margin  (GtkPaperSize *size,
+gdouble SF(gtk_paper_size_get_default_right_margin)  (GtkPaperSize *size,
 						  GtkUnit       unit);
 
-const gchar *__gtk_paper_size_get_default (void);
+const gchar *SF(gtk_paper_size_get_default) (void);
 
-GtkPaperSize *__gtk_paper_size_new_from_key_file (GKeyFile    *key_file,
+GtkPaperSize *SF(gtk_paper_size_new_from_key_file) (GKeyFile    *key_file,
 					        const gchar *group_name,
 					        GError     **error);
-void     __gtk_paper_size_to_key_file            (GtkPaperSize *size,
+void     SF(gtk_paper_size_to_key_file)            (GtkPaperSize *size,
 					        GKeyFile     *key_file,
 					        const gchar  *group_name);
 

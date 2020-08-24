@@ -94,85 +94,85 @@ struct _GtkStatusIconClass
                                      gboolean        keyboard_mode,
                                      GtkTooltip     *tooltip);
 
-  void (*__gtk_reserved1);
-  void (*__gtk_reserved2);
+  void (*SF(gtk_reserved1));
+  void (*SF(gtk_reserved2));
 };
 
 
 GType                 gtk_status_icon_get_type           (void) G_GNUC_CONST;
 
-GtkStatusIcon        *__gtk_status_icon_new                (void);
-GtkStatusIcon        *__gtk_status_icon_new_from_pixbuf    (GdkPixbuf          *pixbuf);
-GtkStatusIcon        *__gtk_status_icon_new_from_file      (const gchar        *filename);
-GtkStatusIcon        *__gtk_status_icon_new_from_stock     (const gchar        *stock_id);
-GtkStatusIcon        *__gtk_status_icon_new_from_icon_name (const gchar        *icon_name);
-GtkStatusIcon        *__gtk_status_icon_new_from_gicon     (GIcon              *icon);
+GtkStatusIcon        *SF(gtk_status_icon_new)                (void);
+GtkStatusIcon        *SF(gtk_status_icon_new_from_pixbuf)    (GdkPixbuf          *pixbuf);
+GtkStatusIcon        *SF(gtk_status_icon_new_from_file)      (const gchar        *filename);
+GtkStatusIcon        *SF(gtk_status_icon_new_from_stock)     (const gchar        *stock_id);
+GtkStatusIcon        *SF(gtk_status_icon_new_from_icon_name) (const gchar        *icon_name);
+GtkStatusIcon        *SF(gtk_status_icon_new_from_gicon)     (GIcon              *icon);
 
-void                  __gtk_status_icon_set_from_pixbuf    (GtkStatusIcon      *status_icon,
+void                  SF(gtk_status_icon_set_from_pixbuf)    (GtkStatusIcon      *status_icon,
 							  GdkPixbuf          *pixbuf);
-void                  __gtk_status_icon_set_from_file      (GtkStatusIcon      *status_icon,
+void                  SF(gtk_status_icon_set_from_file)      (GtkStatusIcon      *status_icon,
 							  const gchar        *filename);
-void                  __gtk_status_icon_set_from_stock     (GtkStatusIcon      *status_icon,
+void                  SF(gtk_status_icon_set_from_stock)     (GtkStatusIcon      *status_icon,
 							  const gchar        *stock_id);
-void                  __gtk_status_icon_set_from_icon_name (GtkStatusIcon      *status_icon,
+void                  SF(gtk_status_icon_set_from_icon_name) (GtkStatusIcon      *status_icon,
 							  const gchar        *icon_name);
-void                  __gtk_status_icon_set_from_gicon     (GtkStatusIcon      *status_icon,
+void                  SF(gtk_status_icon_set_from_gicon)     (GtkStatusIcon      *status_icon,
                                                           GIcon              *icon);
 
-GtkImageType          __gtk_status_icon_get_storage_type   (GtkStatusIcon      *status_icon);
+GtkImageType          SF(gtk_status_icon_get_storage_type)   (GtkStatusIcon      *status_icon);
 
-GdkPixbuf            *__gtk_status_icon_get_pixbuf         (GtkStatusIcon      *status_icon);
-const gchar *         __gtk_status_icon_get_stock          (GtkStatusIcon      *status_icon);
-const gchar *         __gtk_status_icon_get_icon_name      (GtkStatusIcon      *status_icon);
-GIcon                *__gtk_status_icon_get_gicon          (GtkStatusIcon      *status_icon);
+GdkPixbuf            *SF(gtk_status_icon_get_pixbuf)         (GtkStatusIcon      *status_icon);
+const gchar *         SF(gtk_status_icon_get_stock)          (GtkStatusIcon      *status_icon);
+const gchar *         SF(gtk_status_icon_get_icon_name)      (GtkStatusIcon      *status_icon);
+GIcon                *SF(gtk_status_icon_get_gicon)          (GtkStatusIcon      *status_icon);
 
-gint                  __gtk_status_icon_get_size           (GtkStatusIcon      *status_icon);
+gint                  SF(gtk_status_icon_get_size)           (GtkStatusIcon      *status_icon);
 
-void                  __gtk_status_icon_set_screen         (GtkStatusIcon      *status_icon,
+void                  SF(gtk_status_icon_set_screen)         (GtkStatusIcon      *status_icon,
                                                           GdkScreen          *screen);
-GdkScreen            *__gtk_status_icon_get_screen         (GtkStatusIcon      *status_icon);
+GdkScreen            *SF(gtk_status_icon_get_screen)         (GtkStatusIcon      *status_icon);
 
 #ifndef GTK_DISABLE_DEPRECATED
-void                  __gtk_status_icon_set_tooltip        (GtkStatusIcon      *status_icon,
+void                  SF(gtk_status_icon_set_tooltip)        (GtkStatusIcon      *status_icon,
                                                           const gchar        *tooltip_text);
 #endif
-void                  __gtk_status_icon_set_has_tooltip    (GtkStatusIcon      *status_icon,
+void                  SF(gtk_status_icon_set_has_tooltip)    (GtkStatusIcon      *status_icon,
                                                           gboolean            has_tooltip);
-void                  __gtk_status_icon_set_tooltip_text   (GtkStatusIcon      *status_icon,
+void                  SF(gtk_status_icon_set_tooltip_text)   (GtkStatusIcon      *status_icon,
                                                           const gchar        *text);
-void                  __gtk_status_icon_set_tooltip_markup (GtkStatusIcon      *status_icon,
+void                  SF(gtk_status_icon_set_tooltip_markup) (GtkStatusIcon      *status_icon,
                                                           const gchar        *markup);
-void                  __gtk_status_icon_set_title          (GtkStatusIcon      *status_icon,
+void                  SF(gtk_status_icon_set_title)          (GtkStatusIcon      *status_icon,
                                                           const gchar        *title);
-const gchar *         __gtk_status_icon_get_title          (GtkStatusIcon      *status_icon);
-void                  __gtk_status_icon_set_name           (GtkStatusIcon      *status_icon,
+const gchar *         SF(gtk_status_icon_get_title)          (GtkStatusIcon      *status_icon);
+void                  SF(gtk_status_icon_set_name)           (GtkStatusIcon      *status_icon,
                                                           const gchar        *name);
-void                  __gtk_status_icon_set_visible        (GtkStatusIcon      *status_icon,
+void                  SF(gtk_status_icon_set_visible)        (GtkStatusIcon      *status_icon,
 							  gboolean            visible);
-gboolean              __gtk_status_icon_get_visible        (GtkStatusIcon      *status_icon);
+gboolean              SF(gtk_status_icon_get_visible)        (GtkStatusIcon      *status_icon);
 
 #if !defined (GTK_DISABLE_DEPRECATED) || defined (STLWRT_COMPILATION)
-void                  __gtk_status_icon_set_blinking       (GtkStatusIcon      *status_icon,
+void                  SF(gtk_status_icon_set_blinking)       (GtkStatusIcon      *status_icon,
 							  gboolean            blinking);
-gboolean              __gtk_status_icon_get_blinking       (GtkStatusIcon      *status_icon);
+gboolean              SF(gtk_status_icon_get_blinking)       (GtkStatusIcon      *status_icon);
 #endif
 
-gboolean              __gtk_status_icon_is_embedded        (GtkStatusIcon      *status_icon);
+gboolean              SF(gtk_status_icon_is_embedded)        (GtkStatusIcon      *status_icon);
 
-void                  __gtk_status_icon_position_menu      (GtkMenu            *menu,
+void                  SF(gtk_status_icon_position_menu)      (GtkMenu            *menu,
 							  gint               *x,
 							  gint               *y,
 							  gboolean           *push_in,
 							  gpointer            user_data);
-gboolean              __gtk_status_icon_get_geometry       (GtkStatusIcon      *status_icon,
+gboolean              SF(gtk_status_icon_get_geometry)       (GtkStatusIcon      *status_icon,
 							  GdkScreen         **screen,
 							  GdkRectangle       *area,
 							  GtkOrientation     *orientation);
-gboolean              __gtk_status_icon_get_has_tooltip    (GtkStatusIcon      *status_icon);
-gchar                *__gtk_status_icon_get_tooltip_text   (GtkStatusIcon      *status_icon);
-gchar                *__gtk_status_icon_get_tooltip_markup (GtkStatusIcon      *status_icon);
+gboolean              SF(gtk_status_icon_get_has_tooltip)    (GtkStatusIcon      *status_icon);
+gchar                *SF(gtk_status_icon_get_tooltip_text)   (GtkStatusIcon      *status_icon);
+gchar                *SF(gtk_status_icon_get_tooltip_markup) (GtkStatusIcon      *status_icon);
 
-guint32               __gtk_status_icon_get_x11_window_id  (GtkStatusIcon      *status_icon);
+guint32               SF(gtk_status_icon_get_x11_window_id)  (GtkStatusIcon      *status_icon);
 
 G_END_DECLS
 

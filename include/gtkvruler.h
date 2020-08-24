@@ -54,7 +54,7 @@ struct _GtkVRulerClass
 
 
 GType      gtk_vruler_get_type (void) G_GNUC_CONST;
-GtkWidget* __gtk_vruler_new      (void);
+GtkWidget* SF(gtk_vruler_new)      (void);
 
 
 G_END_DECLS

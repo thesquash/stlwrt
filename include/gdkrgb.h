@@ -44,19 +44,19 @@ struct _GdkRgbCmap {
   GSList *info_list;
 };
 
-void __gdk_rgb_init (void);
+void SF(gdk_rgb_init) (void);
 
-gulong __gdk_rgb_xpixel_from_rgb   (guint32      rgb) G_GNUC_CONST;
-void   __gdk_rgb_gc_set_foreground (GdkGC       *gc,
+gulong SF(gdk_rgb_xpixel_from_rgb)   (guint32      rgb) G_GNUC_CONST;
+void   SF(gdk_rgb_gc_set_foreground) (GdkGC       *gc,
 				  guint32      rgb);
-void   __gdk_rgb_gc_set_background (GdkGC       *gc,
+void   SF(gdk_rgb_gc_set_background) (GdkGC       *gc,
 				  guint32      rgb);
 #define gdk_rgb_get_cmap               gdk_rgb_get_colormap
 
-void   __gdk_rgb_find_color        (GdkColormap *colormap,
+void   SF(gdk_rgb_find_color)        (GdkColormap *colormap,
 				  GdkColor    *color);
 
-void        __gdk_draw_rgb_image              (GdkDrawable  *drawable,
+void        SF(gdk_draw_rgb_image)              (GdkDrawable  *drawable,
 					     GdkGC        *gc,
 					     gint          x,
 					     gint          y,
@@ -65,7 +65,7 @@ void        __gdk_draw_rgb_image              (GdkDrawable  *drawable,
 					     GdkRgbDither  dith,
 					     const guchar *rgb_buf,
 					     gint          rowstride);
-void        __gdk_draw_rgb_image_dithalign    (GdkDrawable  *drawable,
+void        SF(gdk_draw_rgb_image_dithalign)    (GdkDrawable  *drawable,
 					     GdkGC        *gc,
 					     gint          x,
 					     gint          y,
@@ -76,7 +76,7 @@ void        __gdk_draw_rgb_image_dithalign    (GdkDrawable  *drawable,
 					     gint          rowstride,
 					     gint          xdith,
 					     gint          ydith);
-void        __gdk_draw_rgb_32_image           (GdkDrawable  *drawable,
+void        SF(gdk_draw_rgb_32_image)           (GdkDrawable  *drawable,
 					     GdkGC        *gc,
 					     gint          x,
 					     gint          y,
@@ -85,7 +85,7 @@ void        __gdk_draw_rgb_32_image           (GdkDrawable  *drawable,
 					     GdkRgbDither  dith,
 					     const guchar *buf,
 					     gint          rowstride);
-void        __gdk_draw_rgb_32_image_dithalign (GdkDrawable  *drawable,
+void        SF(gdk_draw_rgb_32_image_dithalign) (GdkDrawable  *drawable,
 					     GdkGC        *gc,
 					     gint          x,
 					     gint          y,
@@ -96,7 +96,7 @@ void        __gdk_draw_rgb_32_image_dithalign (GdkDrawable  *drawable,
 					     gint          rowstride,
 					     gint          xdith,
 					     gint          ydith);
-void        __gdk_draw_gray_image             (GdkDrawable  *drawable,
+void        SF(gdk_draw_gray_image)             (GdkDrawable  *drawable,
 					     GdkGC        *gc,
 					     gint          x,
 					     gint          y,
@@ -105,7 +105,7 @@ void        __gdk_draw_gray_image             (GdkDrawable  *drawable,
 					     GdkRgbDither  dith,
 					     const guchar *buf,
 					     gint          rowstride);
-void        __gdk_draw_indexed_image          (GdkDrawable  *drawable,
+void        SF(gdk_draw_indexed_image)          (GdkDrawable  *drawable,
 					     GdkGC        *gc,
 					     gint          x,
 					     gint          y,
@@ -115,21 +115,21 @@ void        __gdk_draw_indexed_image          (GdkDrawable  *drawable,
 					     const guchar *buf,
 					     gint          rowstride,
 					     GdkRgbCmap   *cmap);
-GdkRgbCmap *__gdk_rgb_cmap_new                (guint32      *colors,
+GdkRgbCmap *SF(gdk_rgb_cmap_new)                (guint32      *colors,
 					     gint          n_colors);
-void        __gdk_rgb_cmap_free               (GdkRgbCmap   *cmap);
+void        SF(gdk_rgb_cmap_free)               (GdkRgbCmap   *cmap);
 
-void     __gdk_rgb_set_verbose (gboolean verbose);
+void     SF(gdk_rgb_set_verbose) (gboolean verbose);
 
 /* experimental colormap stuff */
-void __gdk_rgb_set_install    (gboolean install);
-void __gdk_rgb_set_min_colors (gint     min_colors);
+void SF(gdk_rgb_set_install)    (gboolean install);
+void SF(gdk_rgb_set_min_colors) (gint     min_colors);
 
 #ifndef GDK_MULTIHEAD_SAFE
-GdkColormap *__gdk_rgb_get_colormap (void);
-GdkVisual *  __gdk_rgb_get_visual   (void);
-gboolean     __gdk_rgb_ditherable   (void);
-gboolean     __gdk_rgb_colormap_ditherable (GdkColormap *cmap);
+GdkColormap *SF(gdk_rgb_get_colormap) (void);
+GdkVisual *  SF(gdk_rgb_get_visual)   (void);
+gboolean     SF(gdk_rgb_ditherable)   (void);
+gboolean     SF(gdk_rgb_colormap_ditherable) (GdkColormap *cmap);
 #endif
 #endif /* GDK_DISABLE_DEPRECATED */
 

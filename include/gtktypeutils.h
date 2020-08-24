@@ -124,7 +124,7 @@ typedef void (*GtkSignalFunc)       (void);
 
 #if !defined (GTK_DISABLE_DEPRECATED) || defined (STLWRT_COMPILATION)
 
-/* Used by __gtk_container_foreach_unmarshal () */
+/* Used by SF(gtk_container_foreach_unmarshal) () */
 
 /* GtkArg, used to hold differently typed values */
 struct _GtkArg
@@ -225,28 +225,28 @@ struct _GtkTypeInfo
   GtkClassInitFunc	 base_class_init_func;
 };
 
-void            __gtk_type_init   (GTypeDebugFlags    debug_flags);
-GtkType         __gtk_type_unique (GtkType            parent_type,
+void            SF(gtk_type_init)   (GTypeDebugFlags    debug_flags);
+GtkType         SF(gtk_type_unique) (GtkType            parent_type,
                                  const GtkTypeInfo *gtkinfo);
-gpointer        __gtk_type_class  (GtkType            type);
-gpointer        __gtk_type_new    (GtkType            type);
+gpointer        SF(gtk_type_class)  (GtkType            type);
+gpointer        SF(gtk_type_new)    (GtkType            type);
 
 /* --- compatibility defines --- */
-#define	__gtk_type_name(type)		 g_type_name (type)
-#define	__gtk_type_from_name(name)	 g_type_from_name (name)
-#define	__gtk_type_parent(type)		 g_type_parent (type)
-#define	__gtk_type_is_a(type, is_a_type)	 g_type_is_a ((type), (is_a_type))
+#define	SF(gtk_type_name)(type)		 g_type_name (type)
+#define	SF(gtk_type_from_name)(name)	 g_type_from_name (name)
+#define	SF(gtk_type_parent)(type)		 g_type_parent (type)
+#define	SF(gtk_type_is_a)(type, is_a_type)	 g_type_is_a ((type), (is_a_type))
 
 /* enum/flags compatibility functions, we strongly
  * recommend to use the glib enum/flags classes directly
  */
 typedef GEnumValue  GtkEnumValue;
 typedef GFlagsValue GtkFlagValue;
-GtkEnumValue*	__gtk_type_enum_get_values	(GtkType	 enum_type);
-GtkFlagValue*	__gtk_type_flags_get_values	(GtkType	 flags_type);
-GtkEnumValue*	__gtk_type_enum_find_value	(GtkType	 enum_type,
+GtkEnumValue*	SF(gtk_type_enum_get_values)	(GtkType	 enum_type);
+GtkFlagValue*	SF(gtk_type_flags_get_values)	(GtkType	 flags_type);
+GtkEnumValue*	SF(gtk_type_enum_find_value)	(GtkType	 enum_type,
 						 const gchar	*value_name);
-GtkFlagValue*	__gtk_type_flags_find_value	(GtkType	 flags_type,
+GtkFlagValue*	SF(gtk_type_flags_find_value)	(GtkType	 flags_type,
 						 const gchar	*value_name);
 
 #endif /* GTK_DISABLE_DEPRECATED */

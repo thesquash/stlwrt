@@ -102,16 +102,16 @@ struct _GtkIconThemeClass
  *   doesn't support them.
  *   Cannot be used together with %GTK_ICON_LOOKUP_NO_SVG.
  * @GTK_ICON_LOOKUP_USE_BUILTIN: When passed to
- *   __gtk_icon_theme_lookup_icon() includes builtin icons
- *   as well as files. For a builtin icon, __gtk_icon_info_get_filename()
- *   returns %NULL and you need to call __gtk_icon_info_get_builtin_pixbuf().
+ *   SF(gtk_icon_theme_lookup_icon)() includes builtin icons
+ *   as well as files. For a builtin icon, SF(gtk_icon_info_get_filename)()
+ *   returns %NULL and you need to call SF(gtk_icon_info_get_builtin_pixbuf)().
  * @GTK_ICON_LOOKUP_GENERIC_FALLBACK: Try to shorten icon name at '-'
  *   characters before looking at inherited themes. For more general
- *   fallback, see __gtk_icon_theme_choose_icon(). Since 2.12.
+ *   fallback, see SF(gtk_icon_theme_choose_icon)(). Since 2.12.
  * @GTK_ICON_LOOKUP_FORCE_SIZE: Always return the icon scaled to the
  *   requested size. Since 2.14.
  * 
- * Used to specify options for __gtk_icon_theme_lookup_icon()
+ * Used to specify options for SF(gtk_icon_theme_lookup_icon)()
  **/
 typedef enum
 {
@@ -122,7 +122,7 @@ typedef enum
   GTK_ICON_LOOKUP_FORCE_SIZE       = 1 << 4
 } GtkIconLookupFlags;
 
-#define GTK_ICON_THEME_ERROR __gtk_icon_theme_error_quark ()
+#define GTK_ICON_THEME_ERROR SF(gtk_icon_theme_error_quark) ()
 
 /**
  * GtkIconThemeError:
@@ -136,7 +136,7 @@ typedef enum {
   GTK_ICON_THEME_FAILED
 } GtkIconThemeError;
 
-GQuark __gtk_icon_theme_error_quark (void);
+GQuark SF(gtk_icon_theme_error_quark) (void);
 
 #ifdef G_OS_WIN32
 /* Reserve old name for DLL ABI backward compatibility */
@@ -152,57 +152,57 @@ GType         _3T_gtk_icon_theme_get_type              (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType         gtk_icon_theme_get_type              (void) G_GNUC_CONST;
 
-GtkIconTheme *__gtk_icon_theme_new                   (void);
-GtkIconTheme *__gtk_icon_theme_get_default           (void);
-GtkIconTheme *__gtk_icon_theme_get_for_screen        (GdkScreen                   *screen);
-void          __gtk_icon_theme_set_screen            (GtkIconTheme                *icon_theme,
+GtkIconTheme *SF(gtk_icon_theme_new)                   (void);
+GtkIconTheme *SF(gtk_icon_theme_get_default)           (void);
+GtkIconTheme *SF(gtk_icon_theme_get_for_screen)        (GdkScreen                   *screen);
+void          SF(gtk_icon_theme_set_screen)            (GtkIconTheme                *icon_theme,
 						    GdkScreen                   *screen);
 
-void          __gtk_icon_theme_set_search_path       (GtkIconTheme                *icon_theme,
+void          SF(gtk_icon_theme_set_search_path)       (GtkIconTheme                *icon_theme,
 						    const gchar                 *path[],
 						    gint                         n_elements);
-void          __gtk_icon_theme_get_search_path       (GtkIconTheme                *icon_theme,
+void          SF(gtk_icon_theme_get_search_path)       (GtkIconTheme                *icon_theme,
 						    gchar                      **path[],
 						    gint                        *n_elements);
-void          __gtk_icon_theme_append_search_path    (GtkIconTheme                *icon_theme,
+void          SF(gtk_icon_theme_append_search_path)    (GtkIconTheme                *icon_theme,
 						    const gchar                 *path);
-void          __gtk_icon_theme_prepend_search_path   (GtkIconTheme                *icon_theme,
+void          SF(gtk_icon_theme_prepend_search_path)   (GtkIconTheme                *icon_theme,
 						    const gchar                 *path);
 
-void          __gtk_icon_theme_set_custom_theme      (GtkIconTheme                *icon_theme,
+void          SF(gtk_icon_theme_set_custom_theme)      (GtkIconTheme                *icon_theme,
 						    const gchar                 *theme_name);
 
-gboolean      __gtk_icon_theme_has_icon              (GtkIconTheme                *icon_theme,
+gboolean      SF(gtk_icon_theme_has_icon)              (GtkIconTheme                *icon_theme,
 						    const gchar                 *icon_name);
-gint         *__gtk_icon_theme_get_icon_sizes        (GtkIconTheme                *icon_theme,
+gint         *SF(gtk_icon_theme_get_icon_sizes)        (GtkIconTheme                *icon_theme,
 						    const gchar                 *icon_name);
-GtkIconInfo * __gtk_icon_theme_lookup_icon           (GtkIconTheme                *icon_theme,
+GtkIconInfo * SF(gtk_icon_theme_lookup_icon)           (GtkIconTheme                *icon_theme,
 						    const gchar                 *icon_name,
 						    gint                         size,
 						    GtkIconLookupFlags           flags);
-GtkIconInfo * __gtk_icon_theme_choose_icon           (GtkIconTheme                *icon_theme,
+GtkIconInfo * SF(gtk_icon_theme_choose_icon)           (GtkIconTheme                *icon_theme,
 						    const gchar                 *icon_names[],
 						    gint                         size,
 						    GtkIconLookupFlags           flags);
-GdkPixbuf *   __gtk_icon_theme_load_icon             (GtkIconTheme                *icon_theme,
+GdkPixbuf *   SF(gtk_icon_theme_load_icon)             (GtkIconTheme                *icon_theme,
 						    const gchar                 *icon_name,
 						    gint                         size,
 						    GtkIconLookupFlags           flags,
 						    GError                     **error);
 
-GtkIconInfo * __gtk_icon_theme_lookup_by_gicon       (GtkIconTheme                *icon_theme,
+GtkIconInfo * SF(gtk_icon_theme_lookup_by_gicon)       (GtkIconTheme                *icon_theme,
                                                     GIcon                       *icon,
                                                     gint                         size,
                                                     GtkIconLookupFlags           flags);
 
-GList *       __gtk_icon_theme_list_icons            (GtkIconTheme                *icon_theme,
+GList *       SF(gtk_icon_theme_list_icons)            (GtkIconTheme                *icon_theme,
 						    const gchar                 *context);
-GList *       __gtk_icon_theme_list_contexts         (GtkIconTheme                *icon_theme);
-char *        __gtk_icon_theme_get_example_icon_name (GtkIconTheme                *icon_theme);
+GList *       SF(gtk_icon_theme_list_contexts)         (GtkIconTheme                *icon_theme);
+char *        SF(gtk_icon_theme_get_example_icon_name) (GtkIconTheme                *icon_theme);
 
-gboolean      __gtk_icon_theme_rescan_if_needed      (GtkIconTheme                *icon_theme);
+gboolean      SF(gtk_icon_theme_rescan_if_needed)      (GtkIconTheme                *icon_theme);
 
-void          __gtk_icon_theme_add_builtin_icon      (const gchar *icon_name,
+void          SF(gtk_icon_theme_add_builtin_icon)      (const gchar *icon_name,
 					            gint         size,
 					            GdkPixbuf   *pixbuf);
 
@@ -210,30 +210,30 @@ GType                 _T2_gtk_icon_info_get_type           (void) G_GNUC_CONST;
 GType                 _3T_gtk_icon_info_get_type           (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType                 gtk_icon_info_get_type           (void) G_GNUC_CONST;
-GtkIconInfo *         __gtk_icon_info_copy               (GtkIconInfo  *icon_info);
-void                  __gtk_icon_info_free               (GtkIconInfo  *icon_info);
+GtkIconInfo *         SF(gtk_icon_info_copy)               (GtkIconInfo  *icon_info);
+void                  SF(gtk_icon_info_free)               (GtkIconInfo  *icon_info);
 
-GtkIconInfo *         __gtk_icon_info_new_for_pixbuf     (GtkIconTheme  *icon_theme,
+GtkIconInfo *         SF(gtk_icon_info_new_for_pixbuf)     (GtkIconTheme  *icon_theme,
                                                         GdkPixbuf     *pixbuf);
 
-gint                  __gtk_icon_info_get_base_size      (GtkIconInfo   *icon_info);
-const gchar *         __gtk_icon_info_get_filename       (GtkIconInfo   *icon_info);
-GdkPixbuf *           __gtk_icon_info_get_builtin_pixbuf (GtkIconInfo   *icon_info);
-GdkPixbuf *           __gtk_icon_info_load_icon          (GtkIconInfo   *icon_info,
+gint                  SF(gtk_icon_info_get_base_size)      (GtkIconInfo   *icon_info);
+const gchar *         SF(gtk_icon_info_get_filename)       (GtkIconInfo   *icon_info);
+GdkPixbuf *           SF(gtk_icon_info_get_builtin_pixbuf) (GtkIconInfo   *icon_info);
+GdkPixbuf *           SF(gtk_icon_info_load_icon)          (GtkIconInfo   *icon_info,
 							GError       **error);
-void                  __gtk_icon_info_set_raw_coordinates (GtkIconInfo  *icon_info,
+void                  SF(gtk_icon_info_set_raw_coordinates) (GtkIconInfo  *icon_info,
 							 gboolean      raw_coordinates);
 
-gboolean              __gtk_icon_info_get_embedded_rect (GtkIconInfo    *icon_info,
+gboolean              SF(gtk_icon_info_get_embedded_rect) (GtkIconInfo    *icon_info,
 						       GdkRectangle   *rectangle);
-gboolean              __gtk_icon_info_get_attach_points (GtkIconInfo    *icon_info,
+gboolean              SF(gtk_icon_info_get_attach_points) (GtkIconInfo    *icon_info,
 						       GdkPoint      **points,
 						       gint           *n_points);
-const gchar *         __gtk_icon_info_get_display_name  (GtkIconInfo    *icon_info);
+const gchar *         SF(gtk_icon_info_get_display_name)  (GtkIconInfo    *icon_info);
 
 /* Non-public methods */
-void ___gtk_icon_theme_check_reload                     (GdkDisplay *display);
-void ___gtk_icon_theme_ensure_builtin_cache             (void);
+void SF(_gtk_icon_theme_check_reload)                     (GdkDisplay *display);
+void SF(_gtk_icon_theme_ensure_builtin_cache)             (void);
 
 G_END_DECLS
 

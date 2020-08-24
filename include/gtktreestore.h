@@ -107,81 +107,81 @@ GType         _T2_gtk_tree_store_get_type         (void) G_GNUC_CONST;
 GType         _3T_gtk_tree_store_get_type         (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType         gtk_tree_store_get_type         (void) G_GNUC_CONST;
-GtkTreeStore *__gtk_tree_store_new              (gint          n_columns,
+GtkTreeStore *SF(gtk_tree_store_new)              (gint          n_columns,
 					       ...);
-GtkTreeStore *__gtk_tree_store_newv             (gint          n_columns,
+GtkTreeStore *SF(gtk_tree_store_newv)             (gint          n_columns,
 					       GType        *types);
-void          __gtk_tree_store_set_column_types (GtkTreeStore *tree_store,
+void          SF(gtk_tree_store_set_column_types) (GtkTreeStore *tree_store,
 					       gint          n_columns,
 					       GType        *types);
 
 /* NOTE: use gtk_tree_model_get to get values from a GtkTreeStore */
 
-void          __gtk_tree_store_set_value        (GtkTreeStore *tree_store,
+void          SF(gtk_tree_store_set_value)        (GtkTreeStore *tree_store,
 					       GtkTreeIter  *iter,
 					       gint          column,
 					       GValue       *value);
-void          __gtk_tree_store_set              (GtkTreeStore *tree_store,
+void          SF(gtk_tree_store_set)              (GtkTreeStore *tree_store,
 					       GtkTreeIter  *iter,
 					       ...);
-void          __gtk_tree_store_set_valuesv      (GtkTreeStore *tree_store,
+void          SF(gtk_tree_store_set_valuesv)      (GtkTreeStore *tree_store,
 					       GtkTreeIter  *iter,
 					       gint         *columns,
 					       GValue       *values,
 					       gint          n_values);
-void          __gtk_tree_store_set_valist       (GtkTreeStore *tree_store,
+void          SF(gtk_tree_store_set_valist)       (GtkTreeStore *tree_store,
 					       GtkTreeIter  *iter,
 					       va_list       var_args);
-gboolean      __gtk_tree_store_remove           (GtkTreeStore *tree_store,
+gboolean      SF(gtk_tree_store_remove)           (GtkTreeStore *tree_store,
 					       GtkTreeIter  *iter);
-void          __gtk_tree_store_insert           (GtkTreeStore *tree_store,
+void          SF(gtk_tree_store_insert)           (GtkTreeStore *tree_store,
 					       GtkTreeIter  *iter,
 					       GtkTreeIter  *parent,
 					       gint          position);
-void          __gtk_tree_store_insert_before    (GtkTreeStore *tree_store,
+void          SF(gtk_tree_store_insert_before)    (GtkTreeStore *tree_store,
 					       GtkTreeIter  *iter,
 					       GtkTreeIter  *parent,
 					       GtkTreeIter  *sibling);
-void          __gtk_tree_store_insert_after     (GtkTreeStore *tree_store,
+void          SF(gtk_tree_store_insert_after)     (GtkTreeStore *tree_store,
 					       GtkTreeIter  *iter,
 					       GtkTreeIter  *parent,
 					       GtkTreeIter  *sibling);
-void          __gtk_tree_store_insert_with_values (GtkTreeStore *tree_store,
+void          SF(gtk_tree_store_insert_with_values) (GtkTreeStore *tree_store,
 						 GtkTreeIter  *iter,
 						 GtkTreeIter  *parent,
 						 gint          position,
 						 ...);
-void          __gtk_tree_store_insert_with_valuesv (GtkTreeStore *tree_store,
+void          SF(gtk_tree_store_insert_with_valuesv) (GtkTreeStore *tree_store,
 						  GtkTreeIter  *iter,
 						  GtkTreeIter  *parent,
 						  gint          position,
 						  gint         *columns,
 						  GValue       *values,
 						  gint          n_values);
-void          __gtk_tree_store_prepend          (GtkTreeStore *tree_store,
+void          SF(gtk_tree_store_prepend)          (GtkTreeStore *tree_store,
 					       GtkTreeIter  *iter,
 					       GtkTreeIter  *parent);
-void          __gtk_tree_store_append           (GtkTreeStore *tree_store,
+void          SF(gtk_tree_store_append)           (GtkTreeStore *tree_store,
 					       GtkTreeIter  *iter,
 					       GtkTreeIter  *parent);
-gboolean      __gtk_tree_store_is_ancestor      (GtkTreeStore *tree_store,
+gboolean      SF(gtk_tree_store_is_ancestor)      (GtkTreeStore *tree_store,
 					       GtkTreeIter  *iter,
 					       GtkTreeIter  *descendant);
-gint          __gtk_tree_store_iter_depth       (GtkTreeStore *tree_store,
+gint          SF(gtk_tree_store_iter_depth)       (GtkTreeStore *tree_store,
 					       GtkTreeIter  *iter);
-void          __gtk_tree_store_clear            (GtkTreeStore *tree_store);
-gboolean      __gtk_tree_store_iter_is_valid    (GtkTreeStore *tree_store,
+void          SF(gtk_tree_store_clear)            (GtkTreeStore *tree_store);
+gboolean      SF(gtk_tree_store_iter_is_valid)    (GtkTreeStore *tree_store,
                                                GtkTreeIter  *iter);
-void          __gtk_tree_store_reorder          (GtkTreeStore *tree_store,
+void          SF(gtk_tree_store_reorder)          (GtkTreeStore *tree_store,
                                                GtkTreeIter  *parent,
                                                gint         *new_order);
-void          __gtk_tree_store_swap             (GtkTreeStore *tree_store,
+void          SF(gtk_tree_store_swap)             (GtkTreeStore *tree_store,
                                                GtkTreeIter  *a,
                                                GtkTreeIter  *b);
-void          __gtk_tree_store_move_before      (GtkTreeStore *tree_store,
+void          SF(gtk_tree_store_move_before)      (GtkTreeStore *tree_store,
                                                GtkTreeIter  *iter,
                                                GtkTreeIter  *position);
-void          __gtk_tree_store_move_after       (GtkTreeStore *tree_store,
+void          SF(gtk_tree_store_move_after)       (GtkTreeStore *tree_store,
                                                GtkTreeIter  *iter,
                                                GtkTreeIter  *position);
 

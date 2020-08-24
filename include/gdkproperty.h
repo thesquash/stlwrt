@@ -32,12 +32,12 @@ typedef enum
   GDK_PROP_MODE_APPEND
 } GdkPropMode;
 
-GdkAtom __gdk_atom_intern (const gchar *atom_name,
+GdkAtom SF(gdk_atom_intern) (const gchar *atom_name,
 			 gboolean     only_if_exists);
-GdkAtom __gdk_atom_intern_static_string (const gchar *atom_name);
-gchar*  __gdk_atom_name   (GdkAtom      atom);
+GdkAtom SF(gdk_atom_intern_static_string) (const gchar *atom_name);
+gchar*  SF(gdk_atom_name)   (GdkAtom      atom);
 
-gboolean __gdk_property_get    (GdkWindow     *window,
+gboolean SF(gdk_property_get)    (GdkWindow     *window,
 			      GdkAtom        property,
 			      GdkAtom        type,
 			      gulong         offset,
@@ -47,33 +47,33 @@ gboolean __gdk_property_get    (GdkWindow     *window,
 			      gint          *actual_format,
 			      gint          *actual_length,
 			      guchar       **data);
-void     __gdk_property_change (GdkWindow     *window,
+void     SF(gdk_property_change) (GdkWindow     *window,
 			      GdkAtom        property,
 			      GdkAtom        type,
 			      gint           format,
 			      GdkPropMode    mode,
 			      const guchar  *data,
 			      gint           nelements);
-void     __gdk_property_delete (GdkWindow     *window,
+void     SF(gdk_property_delete) (GdkWindow     *window,
 			      GdkAtom        property);
 #ifndef GDK_MULTIHEAD_SAFE
 #ifndef GDK_DISABLE_DEPRECATED
-gint __gdk_text_property_to_text_list (GdkAtom        encoding,
+gint SF(gdk_text_property_to_text_list) (GdkAtom        encoding,
 				     gint           format,
 				     const guchar  *text,
 				     gint           length,
 				     gchar       ***list);
-gboolean __gdk_utf8_to_compound_text (const gchar *str,
+gboolean SF(gdk_utf8_to_compound_text) (const gchar *str,
 				    GdkAtom     *encoding,
 				    gint        *format,
 				    guchar     **ctext,
 				    gint        *length);
-gint __gdk_string_to_compound_text    (const gchar   *str,
+gint SF(gdk_string_to_compound_text)    (const gchar   *str,
 				     GdkAtom       *encoding,
 				     gint          *format,
 				     guchar       **ctext,
 				     gint          *length);
-gint __gdk_text_property_to_utf8_list (GdkAtom        encoding,
+gint SF(gdk_text_property_to_utf8_list) (GdkAtom        encoding,
 				     gint           format,
 				     const guchar  *text,
 				     gint           length,
@@ -81,36 +81,36 @@ gint __gdk_text_property_to_utf8_list (GdkAtom        encoding,
 #endif
 #endif
 
-gint __gdk_text_property_to_utf8_list_for_display (GdkDisplay     *display,
+gint SF(gdk_text_property_to_utf8_list_for_display) (GdkDisplay     *display,
 						 GdkAtom         encoding,
 						 gint            format,
 						 const guchar   *text,
 						 gint            length,
 						 gchar        ***list);
 
-gchar   *__gdk_utf8_to_string_target   (const gchar *str);
+gchar   *SF(gdk_utf8_to_string_target)   (const gchar *str);
 #ifndef GDK_DISABLE_DEPRECATED
-gint __gdk_text_property_to_text_list_for_display (GdkDisplay     *display,
+gint SF(gdk_text_property_to_text_list_for_display) (GdkDisplay     *display,
 						 GdkAtom         encoding,
 						 gint            format,
 						 const guchar   *text,
 						 gint            length,
 						 gchar        ***list);
-gint     __gdk_string_to_compound_text_for_display (GdkDisplay   *display,
+gint     SF(gdk_string_to_compound_text_for_display) (GdkDisplay   *display,
 						  const gchar  *str,
 						  GdkAtom      *encoding,
 						  gint         *format,
 						  guchar      **ctext,
 						  gint         *length);
-gboolean __gdk_utf8_to_compound_text_for_display   (GdkDisplay   *display,
+gboolean SF(gdk_utf8_to_compound_text_for_display)   (GdkDisplay   *display,
 						  const gchar  *str,
 						  GdkAtom      *encoding,
 						  gint         *format,
 						  guchar      **ctext,
 						  gint         *length);
 
-void __gdk_free_text_list             (gchar        **list);
-void __gdk_free_compound_text         (guchar        *ctext);
+void SF(gdk_free_text_list)             (gchar        **list);
+void SF(gdk_free_compound_text)         (guchar        *ctext);
 #endif
 
 G_END_DECLS

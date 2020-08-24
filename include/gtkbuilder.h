@@ -34,7 +34,7 @@ G_BEGIN_DECLS
 #define GTK_IS_BUILDER_CLASS(klass)      (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_BUILDER))
 #define GTK_BUILDER_GET_CLASS(obj)       (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_BUILDER, GtkBuilderClass))
 
-#define GTK_BUILDER_ERROR                (__gtk_builder_error_quark ())
+#define GTK_BUILDER_ERROR                (SF(gtk_builder_error_quark) ())
 
 typedef struct _GtkBuilder        GtkBuilder;
 
@@ -54,7 +54,7 @@ typedef enum
   GTK_BUILDER_ERROR_DUPLICATE_ID
 } GtkBuilderError;
 
-GQuark __gtk_builder_error_quark (void);
+GQuark SF(gtk_builder_error_quark) (void);
 
 
 struct _GtkBuilderPrivate
@@ -101,47 +101,47 @@ typedef void (*GtkBuilderConnectFunc) (GtkBuilder    *builder,
 
 
 GType        gtk_builder_get_type                (void) G_GNUC_CONST;
-GtkBuilder*  __gtk_builder_new                     (void);
+GtkBuilder*  SF(gtk_builder_new)                     (void);
 
-guint        __gtk_builder_add_from_file           (GtkBuilder    *builder,
+guint        SF(gtk_builder_add_from_file)           (GtkBuilder    *builder,
                                                   const gchar   *filename,
                                                   GError       **error);
-guint        __gtk_builder_add_from_string         (GtkBuilder    *builder,
+guint        SF(gtk_builder_add_from_string)         (GtkBuilder    *builder,
                                                   const gchar   *buffer,
                                                   gsize          length,
                                                   GError       **error);
-guint        __gtk_builder_add_objects_from_file   (GtkBuilder    *builder,
+guint        SF(gtk_builder_add_objects_from_file)   (GtkBuilder    *builder,
                                                   const gchar   *filename,
                                                   gchar        **object_ids,
                                                   GError       **error);
-guint        __gtk_builder_add_objects_from_string (GtkBuilder    *builder,
+guint        SF(gtk_builder_add_objects_from_string) (GtkBuilder    *builder,
                                                   const gchar   *buffer,
                                                   gsize          length,
                                                   gchar        **object_ids,
                                                   GError       **error);
-GObject*     __gtk_builder_get_object              (GtkBuilder    *builder,
+GObject*     SF(gtk_builder_get_object)              (GtkBuilder    *builder,
                                                   const gchar   *name);
-GSList*      __gtk_builder_get_objects             (GtkBuilder    *builder);
-void         __gtk_builder_connect_signals         (GtkBuilder    *builder,
+GSList*      SF(gtk_builder_get_objects)             (GtkBuilder    *builder);
+void         SF(gtk_builder_connect_signals)         (GtkBuilder    *builder,
 						  gpointer       user_data);
-void         __gtk_builder_connect_signals_full    (GtkBuilder    *builder,
+void         SF(gtk_builder_connect_signals_full)    (GtkBuilder    *builder,
                                                   GtkBuilderConnectFunc func,
 						  gpointer       user_data);
-void         __gtk_builder_set_translation_domain  (GtkBuilder   	*builder,
+void         SF(gtk_builder_set_translation_domain)  (GtkBuilder   	*builder,
                                                   const gchar  	*domain);
-const gchar* __gtk_builder_get_translation_domain  (GtkBuilder   	*builder);
+const gchar* SF(gtk_builder_get_translation_domain)  (GtkBuilder   	*builder);
 GType        _T2_gtk_builder_get_type_from_name      (GtkBuilder   	*builder,
 GType        _3T_gtk_builder_get_type_from_name      (GtkBuilder   	*builder,
 /* Supplied in the STLWRT public libraries */
 GType        gtk_builder_get_type_from_name      (GtkBuilder   	*builder,
                                                   const char   	*type_name);
 
-gboolean     __gtk_builder_value_from_string       (GtkBuilder    *builder,
+gboolean     SF(gtk_builder_value_from_string)       (GtkBuilder    *builder,
 						  GParamSpec   	*pspec,
                                                   const gchar  	*string,
                                                   GValue       	*value,
 						  GError       **error);
-gboolean     __gtk_builder_value_from_string_type  (GtkBuilder    *builder,
+gboolean     SF(gtk_builder_value_from_string_type)  (GtkBuilder    *builder,
 						  GType        	 type,
                                                   const gchar  	*string,
                                                   GValue       	*value,

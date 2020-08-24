@@ -881,49 +881,49 @@ GType     _3T_gdk_event_get_type            (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType     gdk_event_get_type            (void) G_GNUC_CONST;
 
-gboolean  __gdk_events_pending	 	(void);
-GdkEvent* __gdk_event_get			(void);
+gboolean  SF(gdk_events_pending)	 	(void);
+GdkEvent* SF(gdk_event_get)			(void);
 
-GdkEvent* __gdk_event_peek                (void);
+GdkEvent* SF(gdk_event_peek)                (void);
 #ifndef GDK_DISABLE_DEPRECATED
-GdkEvent* __gdk_event_get_graphics_expose (GdkWindow 	*window);
+GdkEvent* SF(gdk_event_get_graphics_expose) (GdkWindow 	*window);
 #endif
-void      __gdk_event_put	 		(const GdkEvent *event);
+void      SF(gdk_event_put)	 		(const GdkEvent *event);
 
-GdkEvent* __gdk_event_new                 (GdkEventType    type);
-GdkEvent* __gdk_event_copy     		(const GdkEvent *event);
-void	  __gdk_event_free     		(GdkEvent 	*event);
+GdkEvent* SF(gdk_event_new)                 (GdkEventType    type);
+GdkEvent* SF(gdk_event_copy)     		(const GdkEvent *event);
+void	  SF(gdk_event_free)     		(GdkEvent 	*event);
 
-guint32   __gdk_event_get_time            (const GdkEvent  *event);
-gboolean  __gdk_event_get_state           (const GdkEvent  *event,
+guint32   SF(gdk_event_get_time)            (const GdkEvent  *event);
+gboolean  SF(gdk_event_get_state)           (const GdkEvent  *event,
                                          GdkModifierType *state);
-gboolean  __gdk_event_get_coords		(const GdkEvent  *event,
+gboolean  SF(gdk_event_get_coords)		(const GdkEvent  *event,
 					 gdouble	 *x_win,
 					 gdouble	 *y_win);
-gboolean  __gdk_event_get_root_coords	(const GdkEvent  *event,
+gboolean  SF(gdk_event_get_root_coords)	(const GdkEvent  *event,
 					 gdouble	 *x_root,
 					 gdouble	 *y_root);
-gboolean  __gdk_event_get_axis            (const GdkEvent  *event,
+gboolean  SF(gdk_event_get_axis)            (const GdkEvent  *event,
                                          GdkAxisUse       axis_use,
                                          gdouble         *value);
-void      __gdk_event_request_motions     (const GdkEventMotion *event);
-void	  __gdk_event_handler_set 	(GdkEventFunc    func,
+void      SF(gdk_event_request_motions)     (const GdkEventMotion *event);
+void	  SF(gdk_event_handler_set) 	(GdkEventFunc    func,
 					 gpointer        data,
 					 GDestroyNotify  notify);
 
-void       __gdk_event_set_screen         (GdkEvent        *event,
+void       SF(gdk_event_set_screen)         (GdkEvent        *event,
                                          GdkScreen       *screen);
-GdkScreen *__gdk_event_get_screen         (const GdkEvent  *event);
+GdkScreen *SF(gdk_event_get_screen)         (const GdkEvent  *event);
 
-void	  __gdk_set_show_events		(gboolean	 show_events);
-gboolean  __gdk_get_show_events		(void);
+void	  SF(gdk_set_show_events)		(gboolean	 show_events);
+gboolean  SF(gdk_get_show_events)		(void);
 
 #ifndef GDK_MULTIHEAD_SAFE
-void __gdk_add_client_message_filter (GdkAtom       message_type,
+void SF(gdk_add_client_message_filter) (GdkAtom       message_type,
 				    GdkFilterFunc func,
 				    gpointer      data);
 
-gboolean __gdk_setting_get (const gchar *name,
+gboolean SF(gdk_setting_get) (const gchar *name,
 			  GValue      *value); 
 #endif /* GDK_MULTIHEAD_SAFE */
 

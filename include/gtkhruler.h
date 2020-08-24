@@ -54,7 +54,7 @@ struct _GtkHRulerClass
 
 
 GType      gtk_hruler_get_type (void) G_GNUC_CONST;
-GtkWidget* __gtk_hruler_new      (void);
+GtkWidget* SF(gtk_hruler_new)      (void);
 
 
 G_END_DECLS

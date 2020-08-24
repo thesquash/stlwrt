@@ -119,25 +119,25 @@ GType            _3T_gtk_size_group_get_type      (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType            gtk_size_group_get_type      (void) G_GNUC_CONST;
 
-GtkSizeGroup *   __gtk_size_group_new           (GtkSizeGroupMode  mode);
-void             __gtk_size_group_set_mode      (GtkSizeGroup     *size_group,
+GtkSizeGroup *   SF(gtk_size_group_new)           (GtkSizeGroupMode  mode);
+void             SF(gtk_size_group_set_mode)      (GtkSizeGroup     *size_group,
 					       GtkSizeGroupMode  mode);
-GtkSizeGroupMode __gtk_size_group_get_mode      (GtkSizeGroup     *size_group);
-void             __gtk_size_group_set_ignore_hidden (GtkSizeGroup *size_group,
+GtkSizeGroupMode SF(gtk_size_group_get_mode)      (GtkSizeGroup     *size_group);
+void             SF(gtk_size_group_set_ignore_hidden) (GtkSizeGroup *size_group,
 						   gboolean      ignore_hidden);
-gboolean         __gtk_size_group_get_ignore_hidden (GtkSizeGroup *size_group);
-void             __gtk_size_group_add_widget    (GtkSizeGroup     *size_group,
+gboolean         SF(gtk_size_group_get_ignore_hidden) (GtkSizeGroup *size_group);
+void             SF(gtk_size_group_add_widget)    (GtkSizeGroup     *size_group,
 					       GtkWidget        *widget);
-void             __gtk_size_group_remove_widget (GtkSizeGroup     *size_group,
+void             SF(gtk_size_group_remove_widget) (GtkSizeGroup     *size_group,
 					       GtkWidget        *widget);
-GSList *         __gtk_size_group_get_widgets   (GtkSizeGroup     *size_group);
+GSList *         SF(gtk_size_group_get_widgets)   (GtkSizeGroup     *size_group);
 
 
-void ___gtk_size_group_get_child_requisition (GtkWidget      *widget,
+void SF(_gtk_size_group_get_child_requisition) (GtkWidget      *widget,
 					    GtkRequisition *requisition);
-void ___gtk_size_group_compute_requisition   (GtkWidget      *widget,
+void SF(_gtk_size_group_compute_requisition)   (GtkWidget      *widget,
 					    GtkRequisition *requisition);
-void ___gtk_size_group_queue_resize          (GtkWidget      *widget);
+void SF(_gtk_size_group_queue_resize)          (GtkWidget      *widget);
 
 G_END_DECLS
 

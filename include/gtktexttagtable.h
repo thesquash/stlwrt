@@ -99,25 +99,25 @@ GType          _3T_gtk_text_tag_table_get_type (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType          gtk_text_tag_table_get_type (void) G_GNUC_CONST;
 
-GtkTextTagTable *__gtk_text_tag_table_new      (void);
-void             __gtk_text_tag_table_add      (GtkTextTagTable        *table,
+GtkTextTagTable *SF(gtk_text_tag_table_new)      (void);
+void             SF(gtk_text_tag_table_add)      (GtkTextTagTable        *table,
                                               GtkTextTag             *tag);
-void             __gtk_text_tag_table_remove   (GtkTextTagTable        *table,
+void             SF(gtk_text_tag_table_remove)   (GtkTextTagTable        *table,
                                               GtkTextTag             *tag);
-GtkTextTag      *__gtk_text_tag_table_lookup   (GtkTextTagTable        *table,
+GtkTextTag      *SF(gtk_text_tag_table_lookup)   (GtkTextTagTable        *table,
                                               const gchar            *name);
-void             __gtk_text_tag_table_foreach  (GtkTextTagTable        *table,
+void             SF(gtk_text_tag_table_foreach)  (GtkTextTagTable        *table,
                                               GtkTextTagTableForeach  func,
                                               gpointer                data);
-gint             __gtk_text_tag_table_get_size (GtkTextTagTable        *table);
+gint             SF(gtk_text_tag_table_get_size) (GtkTextTagTable        *table);
 
 
 /* INTERNAL private stuff - not even exported from the library on
  * many platforms
  */
-void ___gtk_text_tag_table_add_buffer    (GtkTextTagTable *table,
+void SF(_gtk_text_tag_table_add_buffer)    (GtkTextTagTable *table,
                                         gpointer         buffer);
-void ___gtk_text_tag_table_remove_buffer (GtkTextTagTable *table,
+void SF(_gtk_text_tag_table_remove_buffer) (GtkTextTagTable *table,
                                         gpointer         buffer);
 
 G_END_DECLS

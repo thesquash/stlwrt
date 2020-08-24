@@ -66,8 +66,8 @@ GType      _T2_gtk_recent_chooser_widget_get_type        (void) G_GNUC_CONST;
 GType      _3T_gtk_recent_chooser_widget_get_type        (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType      gtk_recent_chooser_widget_get_type        (void) G_GNUC_CONST;
-GtkWidget *__gtk_recent_chooser_widget_new             (void);
-GtkWidget *__gtk_recent_chooser_widget_new_for_manager (GtkRecentManager *manager);
+GtkWidget *SF(gtk_recent_chooser_widget_new)             (void);
+GtkWidget *SF(gtk_recent_chooser_widget_new_for_manager) (GtkRecentManager *manager);
 
 G_END_DECLS
 

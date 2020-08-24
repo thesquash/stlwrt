@@ -100,47 +100,47 @@ GType            _3T_gdk_drag_context_get_type   (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType            gdk_drag_context_get_type   (void) G_GNUC_CONST;
 #if !defined (GDK_DISABLE_DEPRECATED) || defined (STLWRT_COMPILATION)
-GdkDragContext * __gdk_drag_context_new        (void);
+GdkDragContext * SF(gdk_drag_context_new)        (void);
 #endif
 
-GList           *__gdk_drag_context_list_targets         (GdkDragContext *context);
-GdkDragAction    __gdk_drag_context_get_actions          (GdkDragContext *context);
-GdkDragAction    __gdk_drag_context_get_suggested_action (GdkDragContext *context);
-GdkDragAction    __gdk_drag_context_get_selected_action  (GdkDragContext *context);
+GList           *SF(gdk_drag_context_list_targets)         (GdkDragContext *context);
+GdkDragAction    SF(gdk_drag_context_get_actions)          (GdkDragContext *context);
+GdkDragAction    SF(gdk_drag_context_get_suggested_action) (GdkDragContext *context);
+GdkDragAction    SF(gdk_drag_context_get_selected_action)  (GdkDragContext *context);
 
-GdkWindow       *__gdk_drag_context_get_source_window    (GdkDragContext *context);
-GdkWindow       *__gdk_drag_context_get_dest_window      (GdkDragContext *context);
-GdkDragProtocol  __gdk_drag_context_get_protocol         (GdkDragContext *context);
+GdkWindow       *SF(gdk_drag_context_get_source_window)    (GdkDragContext *context);
+GdkWindow       *SF(gdk_drag_context_get_dest_window)      (GdkDragContext *context);
+GdkDragProtocol  SF(gdk_drag_context_get_protocol)         (GdkDragContext *context);
 
 
 #ifndef GDK_DISABLE_DEPRECATED
-void             __gdk_drag_context_ref        (GdkDragContext *context);
-void             __gdk_drag_context_unref      (GdkDragContext *context);
+void             SF(gdk_drag_context_ref)        (GdkDragContext *context);
+void             SF(gdk_drag_context_unref)      (GdkDragContext *context);
 #endif
 
 /* Destination side */
 
-void             __gdk_drag_status        (GdkDragContext   *context,
+void             SF(gdk_drag_status)        (GdkDragContext   *context,
 				         GdkDragAction     action,
 					 guint32           time_);
-void             __gdk_drop_reply         (GdkDragContext   *context,
+void             SF(gdk_drop_reply)         (GdkDragContext   *context,
 					 gboolean          ok,
 					 guint32           time_);
-void             __gdk_drop_finish        (GdkDragContext   *context,
+void             SF(gdk_drop_finish)        (GdkDragContext   *context,
 					 gboolean          success,
 					 guint32           time_);
-GdkAtom          __gdk_drag_get_selection (GdkDragContext   *context);
+GdkAtom          SF(gdk_drag_get_selection) (GdkDragContext   *context);
 
 /* Source side */
 
-GdkDragContext * __gdk_drag_begin      (GdkWindow      *window,
+GdkDragContext * SF(gdk_drag_begin)      (GdkWindow      *window,
 				      GList          *targets);
 
-GdkNativeWindow __gdk_drag_get_protocol_for_display (GdkDisplay       *display,
+GdkNativeWindow SF(gdk_drag_get_protocol_for_display) (GdkDisplay       *display,
 						   GdkNativeWindow   xid,
 						   GdkDragProtocol  *protocol);
 
-void    __gdk_drag_find_window_for_screen   (GdkDragContext   *context,
+void    SF(gdk_drag_find_window_for_screen)   (GdkDragContext   *context,
 					   GdkWindow        *drag_window,
 					   GdkScreen        *screen,
 					   gint              x_root,
@@ -150,10 +150,10 @@ void    __gdk_drag_find_window_for_screen   (GdkDragContext   *context,
 
 #ifndef GDK_MULTIHEAD_SAFE
 #ifndef GDK_DISABLE_DEPRECATED
-GdkNativeWindow __gdk_drag_get_protocol (GdkNativeWindow   xid,
+GdkNativeWindow SF(gdk_drag_get_protocol) (GdkNativeWindow   xid,
 				       GdkDragProtocol  *protocol);
 
-void    __gdk_drag_find_window  (GdkDragContext   *context,
+void    SF(gdk_drag_find_window)  (GdkDragContext   *context,
 			       GdkWindow        *drag_window,
 			       gint              x_root,
 			       gint              y_root,
@@ -162,7 +162,7 @@ void    __gdk_drag_find_window  (GdkDragContext   *context,
 #endif /* GDK_DISABLE_DEPRECATED */
 #endif /* GDK_MULTIHEAD_SAFE */
 
-gboolean        __gdk_drag_motion      (GdkDragContext *context,
+gboolean        SF(gdk_drag_motion)      (GdkDragContext *context,
 				      GdkWindow      *dest_window,
 				      GdkDragProtocol protocol,
 				      gint            x_root, 
@@ -170,11 +170,11 @@ gboolean        __gdk_drag_motion      (GdkDragContext *context,
 				      GdkDragAction   suggested_action,
 				      GdkDragAction   possible_actions,
 				      guint32         time_);
-void            __gdk_drag_drop        (GdkDragContext *context,
+void            SF(gdk_drag_drop)        (GdkDragContext *context,
 				      guint32         time_);
-void            __gdk_drag_abort       (GdkDragContext *context,
+void            SF(gdk_drag_abort)       (GdkDragContext *context,
 				      guint32         time_);
-gboolean        __gdk_drag_drop_succeeded (GdkDragContext *context);
+gboolean        SF(gdk_drag_drop_succeeded) (GdkDragContext *context);
 
 G_END_DECLS
 

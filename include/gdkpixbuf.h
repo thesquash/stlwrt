@@ -30,7 +30,7 @@ G_BEGIN_DECLS
 
 /* Rendering to a drawable */
 
-void __gdk_pixbuf_render_threshold_alpha   (GdkPixbuf           *pixbuf,
+void SF(gdk_pixbuf_render_threshold_alpha)   (GdkPixbuf           *pixbuf,
 					  GdkBitmap           *bitmap,
 					  int                  src_x,
 					  int                  src_y,
@@ -40,7 +40,7 @@ void __gdk_pixbuf_render_threshold_alpha   (GdkPixbuf           *pixbuf,
 					  int                  height,
 					  int                  alpha_threshold);
 #ifndef GDK_DISABLE_DEPRECATED
-void __gdk_pixbuf_render_to_drawable       (GdkPixbuf           *pixbuf,
+void SF(gdk_pixbuf_render_to_drawable)       (GdkPixbuf           *pixbuf,
 					  GdkDrawable         *drawable,
 					  GdkGC               *gc,
 					  int                  src_x,
@@ -52,7 +52,7 @@ void __gdk_pixbuf_render_to_drawable       (GdkPixbuf           *pixbuf,
 					  GdkRgbDither         dither,
 					  int                  x_dither,
 					  int                  y_dither);
-void __gdk_pixbuf_render_to_drawable_alpha (GdkPixbuf           *pixbuf,
+void SF(gdk_pixbuf_render_to_drawable_alpha) (GdkPixbuf           *pixbuf,
 					  GdkDrawable         *drawable,
 					  int                  src_x,
 					  int                  src_y,
@@ -66,13 +66,13 @@ void __gdk_pixbuf_render_to_drawable_alpha (GdkPixbuf           *pixbuf,
 					  int                  x_dither,
 					  int                  y_dither);
 #endif /* GDK_DISABLE_DEPRECATED */
-void __gdk_pixbuf_render_pixmap_and_mask_for_colormap (GdkPixbuf    *pixbuf,
+void SF(gdk_pixbuf_render_pixmap_and_mask_for_colormap) (GdkPixbuf    *pixbuf,
 						     GdkColormap  *colormap,
 						     GdkPixmap   **pixmap_return,
 						     GdkBitmap   **mask_return,
 						     int           alpha_threshold);
 #ifndef GDK_MULTIHEAD_SAFE
-void __gdk_pixbuf_render_pixmap_and_mask              (GdkPixbuf    *pixbuf,
+void SF(gdk_pixbuf_render_pixmap_and_mask)              (GdkPixbuf    *pixbuf,
 						     GdkPixmap   **pixmap_return,
 						     GdkBitmap   **mask_return,
 						     int           alpha_threshold);
@@ -80,7 +80,7 @@ void __gdk_pixbuf_render_pixmap_and_mask              (GdkPixbuf    *pixbuf,
 
 
 /* Fetching a region from a drawable */
-GdkPixbuf *__gdk_pixbuf_get_from_drawable (GdkPixbuf   *dest,
+GdkPixbuf *SF(gdk_pixbuf_get_from_drawable) (GdkPixbuf   *dest,
 					 GdkDrawable *src,
 					 GdkColormap *cmap,
 					 int          src_x,
@@ -90,7 +90,7 @@ GdkPixbuf *__gdk_pixbuf_get_from_drawable (GdkPixbuf   *dest,
 					 int          width,
 					 int          height);
 
-GdkPixbuf *__gdk_pixbuf_get_from_image    (GdkPixbuf   *dest,
+GdkPixbuf *SF(gdk_pixbuf_get_from_image)    (GdkPixbuf   *dest,
                                          GdkImage    *src,
                                          GdkColormap *cmap,
                                          int          src_x,

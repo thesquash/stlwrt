@@ -121,16 +121,16 @@ GType        _3T_gtk_text_mark_get_type   (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType        gtk_text_mark_get_type   (void) G_GNUC_CONST;
 
-void           __gtk_text_mark_set_visible (GtkTextMark *mark,
+void           SF(gtk_text_mark_set_visible) (GtkTextMark *mark,
                                           gboolean     setting);
-gboolean       __gtk_text_mark_get_visible (GtkTextMark *mark);
+gboolean       SF(gtk_text_mark_get_visible) (GtkTextMark *mark);
 
-GtkTextMark          *__gtk_text_mark_new              (const gchar *name,
+GtkTextMark          *SF(gtk_text_mark_new)              (const gchar *name,
 						      gboolean     left_gravity);
-const gchar *         __gtk_text_mark_get_name         (GtkTextMark *mark);
-gboolean              __gtk_text_mark_get_deleted      (GtkTextMark *mark);
-GtkTextBuffer*        __gtk_text_mark_get_buffer       (GtkTextMark *mark);
-gboolean              __gtk_text_mark_get_left_gravity (GtkTextMark *mark);
+const gchar *         SF(gtk_text_mark_get_name)         (GtkTextMark *mark);
+gboolean              SF(gtk_text_mark_get_deleted)      (GtkTextMark *mark);
+GtkTextBuffer*        SF(gtk_text_mark_get_buffer)       (GtkTextMark *mark);
+gboolean              SF(gtk_text_mark_get_left_gravity) (GtkTextMark *mark);
 
 G_END_DECLS
 

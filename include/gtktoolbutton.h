@@ -82,32 +82,32 @@ struct _GtkToolButtonClass
 
 
 GType        gtk_tool_button_get_type       (void) G_GNUC_CONST;
-GtkToolItem *__gtk_tool_button_new            (GtkWidget   *icon_widget,
+GtkToolItem *SF(gtk_tool_button_new)            (GtkWidget   *icon_widget,
 					     const gchar *label);
-GtkToolItem *__gtk_tool_button_new_from_stock (const gchar *stock_id);
+GtkToolItem *SF(gtk_tool_button_new_from_stock) (const gchar *stock_id);
 
-void                  __gtk_tool_button_set_label         (GtkToolButton *button,
+void                  SF(gtk_tool_button_set_label)         (GtkToolButton *button,
 							 const gchar   *label);
-const gchar *         __gtk_tool_button_get_label         (GtkToolButton *button);
-void                  __gtk_tool_button_set_use_underline (GtkToolButton *button,
+const gchar *         SF(gtk_tool_button_get_label)         (GtkToolButton *button);
+void                  SF(gtk_tool_button_set_use_underline) (GtkToolButton *button,
 							 gboolean       use_underline);
-gboolean              __gtk_tool_button_get_use_underline (GtkToolButton *button);
-void                  __gtk_tool_button_set_stock_id      (GtkToolButton *button,
+gboolean              SF(gtk_tool_button_get_use_underline) (GtkToolButton *button);
+void                  SF(gtk_tool_button_set_stock_id)      (GtkToolButton *button,
 							 const gchar   *stock_id);
-const gchar *         __gtk_tool_button_get_stock_id      (GtkToolButton *button);
-void                  __gtk_tool_button_set_icon_name     (GtkToolButton *button,
+const gchar *         SF(gtk_tool_button_get_stock_id)      (GtkToolButton *button);
+void                  SF(gtk_tool_button_set_icon_name)     (GtkToolButton *button,
 							 const gchar   *icon_name);
-const gchar *         __gtk_tool_button_get_icon_name     (GtkToolButton *button);
-void                  __gtk_tool_button_set_icon_widget   (GtkToolButton *button,
+const gchar *         SF(gtk_tool_button_get_icon_name)     (GtkToolButton *button);
+void                  SF(gtk_tool_button_set_icon_widget)   (GtkToolButton *button,
 							 GtkWidget     *icon_widget);
-GtkWidget *           __gtk_tool_button_get_icon_widget   (GtkToolButton *button);
-void                  __gtk_tool_button_set_label_widget  (GtkToolButton *button,
+GtkWidget *           SF(gtk_tool_button_get_icon_widget)   (GtkToolButton *button);
+void                  SF(gtk_tool_button_set_label_widget)  (GtkToolButton *button,
 							 GtkWidget     *label_widget);
-GtkWidget *           __gtk_tool_button_get_label_widget  (GtkToolButton *button);
+GtkWidget *           SF(gtk_tool_button_get_label_widget)  (GtkToolButton *button);
 
 
 /* internal function */
-GtkWidget *___gtk_tool_button_get_button (GtkToolButton *button);
+GtkWidget *SF(_gtk_tool_button_get_button) (GtkToolButton *button);
 
 G_END_DECLS
 

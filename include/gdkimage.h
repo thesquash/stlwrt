@@ -87,45 +87,45 @@ GType     _3T_gdk_image_get_type   (void) G_GNUC_CONST;
 GType     gdk_image_get_type   (void) G_GNUC_CONST;
 
 #ifndef GDK_DISABLE_DEPRECATED
-GdkImage*  __gdk_image_new       (GdkImageType  type,
+GdkImage*  SF(gdk_image_new)       (GdkImageType  type,
 				GdkVisual    *visual,
 				gint	      width,
 				gint	      height);
 
-GdkImage*  __gdk_image_get       (GdkDrawable  *drawable,
+GdkImage*  SF(gdk_image_get)       (GdkDrawable  *drawable,
 				gint	      x,
 				gint	      y,
 				gint	      width,
 				gint	      height);
 
-GdkImage * __gdk_image_ref       (GdkImage     *image);
-void       __gdk_image_unref     (GdkImage     *image);
+GdkImage * SF(gdk_image_ref)       (GdkImage     *image);
+void       SF(gdk_image_unref)     (GdkImage     *image);
 
-void	   __gdk_image_put_pixel (GdkImage     *image,
+void	   SF(gdk_image_put_pixel) (GdkImage     *image,
 				gint	      x,
 				gint	      y,
 				guint32	      pixel);
-guint32	   __gdk_image_get_pixel (GdkImage     *image,
+guint32	   SF(gdk_image_get_pixel) (GdkImage     *image,
 				gint	      x,
 				gint	      y);
 
-void       __gdk_image_set_colormap (GdkImage    *image,
+void       SF(gdk_image_set_colormap) (GdkImage    *image,
                                    GdkColormap *colormap);
-GdkColormap* __gdk_image_get_colormap (GdkImage    *image);
+GdkColormap* SF(gdk_image_get_colormap) (GdkImage    *image);
 
-GdkImageType  __gdk_image_get_image_type     (GdkImage *image);
-GdkVisual    *__gdk_image_get_visual         (GdkImage *image);
-GdkByteOrder  __gdk_image_get_byte_order     (GdkImage *image);
-gint          __gdk_image_get_width          (GdkImage *image);
-gint          __gdk_image_get_height         (GdkImage *image);
-guint16       __gdk_image_get_depth          (GdkImage *image);
-guint16       __gdk_image_get_bytes_per_pixel(GdkImage *image);
-guint16       __gdk_image_get_bytes_per_line (GdkImage *image);
-guint16       __gdk_image_get_bits_per_pixel (GdkImage *image);
-gpointer      __gdk_image_get_pixels         (GdkImage *image);
+GdkImageType  SF(gdk_image_get_image_type)     (GdkImage *image);
+GdkVisual    *SF(gdk_image_get_visual)         (GdkImage *image);
+GdkByteOrder  SF(gdk_image_get_byte_order)     (GdkImage *image);
+gint          SF(gdk_image_get_width)          (GdkImage *image);
+gint          SF(gdk_image_get_height)         (GdkImage *image);
+guint16       SF(gdk_image_get_depth)          (GdkImage *image);
+guint16       SF(gdk_image_get_bytes_per_pixel)(GdkImage *image);
+guint16       SF(gdk_image_get_bytes_per_line) (GdkImage *image);
+guint16       SF(gdk_image_get_bits_per_pixel) (GdkImage *image);
+gpointer      SF(gdk_image_get_pixels)         (GdkImage *image);
 
 #ifdef GDK_ENABLE_BROKEN
-GdkImage* __gdk_image_new_bitmap (GdkVisual     *visual,
+GdkImage* SF(gdk_image_new_bitmap) (GdkVisual     *visual,
 				gpointer      data,
 				gint          width,
 				gint          height);

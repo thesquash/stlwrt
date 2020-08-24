@@ -76,54 +76,54 @@ struct _GtkEntryCompletionClass
 
 /* core */
 GType               gtk_entry_completion_get_type               (void) G_GNUC_CONST;
-GtkEntryCompletion *__gtk_entry_completion_new                    (void);
+GtkEntryCompletion *SF(gtk_entry_completion_new)                    (void);
 
-GtkWidget          *__gtk_entry_completion_get_entry              (GtkEntryCompletion          *completion);
+GtkWidget          *SF(gtk_entry_completion_get_entry)              (GtkEntryCompletion          *completion);
 
-void                __gtk_entry_completion_set_model              (GtkEntryCompletion          *completion,
+void                SF(gtk_entry_completion_set_model)              (GtkEntryCompletion          *completion,
                                                                  GtkTreeModel                *model);
-GtkTreeModel       *__gtk_entry_completion_get_model              (GtkEntryCompletion          *completion);
+GtkTreeModel       *SF(gtk_entry_completion_get_model)              (GtkEntryCompletion          *completion);
 
-void                __gtk_entry_completion_set_match_func         (GtkEntryCompletion          *completion,
+void                SF(gtk_entry_completion_set_match_func)         (GtkEntryCompletion          *completion,
                                                                  GtkEntryCompletionMatchFunc  func,
                                                                  gpointer                     func_data,
                                                                  GDestroyNotify               func_notify);
-void                __gtk_entry_completion_set_minimum_key_length (GtkEntryCompletion          *completion,
+void                SF(gtk_entry_completion_set_minimum_key_length) (GtkEntryCompletion          *completion,
                                                                  gint                         length);
-gint                __gtk_entry_completion_get_minimum_key_length (GtkEntryCompletion          *completion);
-void                __gtk_entry_completion_complete               (GtkEntryCompletion          *completion);
-void                __gtk_entry_completion_insert_prefix          (GtkEntryCompletion          *completion);
+gint                SF(gtk_entry_completion_get_minimum_key_length) (GtkEntryCompletion          *completion);
+void                SF(gtk_entry_completion_complete)               (GtkEntryCompletion          *completion);
+void                SF(gtk_entry_completion_insert_prefix)          (GtkEntryCompletion          *completion);
 
-void                __gtk_entry_completion_insert_action_text     (GtkEntryCompletion          *completion,
+void                SF(gtk_entry_completion_insert_action_text)     (GtkEntryCompletion          *completion,
                                                                  gint                         index_,
                                                                  const gchar                 *text);
-void                __gtk_entry_completion_insert_action_markup   (GtkEntryCompletion          *completion,
+void                SF(gtk_entry_completion_insert_action_markup)   (GtkEntryCompletion          *completion,
                                                                  gint                         index_,
                                                                  const gchar                 *markup);
-void                __gtk_entry_completion_delete_action          (GtkEntryCompletion          *completion,
+void                SF(gtk_entry_completion_delete_action)          (GtkEntryCompletion          *completion,
                                                                  gint                         index_);
 
-void                __gtk_entry_completion_set_inline_completion  (GtkEntryCompletion          *completion,
+void                SF(gtk_entry_completion_set_inline_completion)  (GtkEntryCompletion          *completion,
                                                                  gboolean                     inline_completion);
-gboolean            __gtk_entry_completion_get_inline_completion  (GtkEntryCompletion          *completion);
-void                __gtk_entry_completion_set_inline_selection  (GtkEntryCompletion          *completion,
+gboolean            SF(gtk_entry_completion_get_inline_completion)  (GtkEntryCompletion          *completion);
+void                SF(gtk_entry_completion_set_inline_selection)  (GtkEntryCompletion          *completion,
                                                                  gboolean                     inline_selection);
-gboolean            __gtk_entry_completion_get_inline_selection  (GtkEntryCompletion          *completion);
-void                __gtk_entry_completion_set_popup_completion   (GtkEntryCompletion          *completion,
+gboolean            SF(gtk_entry_completion_get_inline_selection)  (GtkEntryCompletion          *completion);
+void                SF(gtk_entry_completion_set_popup_completion)   (GtkEntryCompletion          *completion,
                                                                  gboolean                     popup_completion);
-gboolean            __gtk_entry_completion_get_popup_completion   (GtkEntryCompletion          *completion);
-void                __gtk_entry_completion_set_popup_set_width    (GtkEntryCompletion          *completion,
+gboolean            SF(gtk_entry_completion_get_popup_completion)   (GtkEntryCompletion          *completion);
+void                SF(gtk_entry_completion_set_popup_set_width)    (GtkEntryCompletion          *completion,
                                                                  gboolean                     popup_set_width);
-gboolean            __gtk_entry_completion_get_popup_set_width    (GtkEntryCompletion          *completion);
-void                __gtk_entry_completion_set_popup_single_match (GtkEntryCompletion          *completion,
+gboolean            SF(gtk_entry_completion_get_popup_set_width)    (GtkEntryCompletion          *completion);
+void                SF(gtk_entry_completion_set_popup_single_match) (GtkEntryCompletion          *completion,
                                                                  gboolean                     popup_single_match);
-gboolean            __gtk_entry_completion_get_popup_single_match (GtkEntryCompletion          *completion);
+gboolean            SF(gtk_entry_completion_get_popup_single_match) (GtkEntryCompletion          *completion);
 
-const gchar         *__gtk_entry_completion_get_completion_prefix (GtkEntryCompletion *completion);
+const gchar         *SF(gtk_entry_completion_get_completion_prefix) (GtkEntryCompletion *completion);
 /* convenience */
-void                __gtk_entry_completion_set_text_column        (GtkEntryCompletion          *completion,
+void                SF(gtk_entry_completion_set_text_column)        (GtkEntryCompletion          *completion,
                                                                  gint                         column);
-gint                __gtk_entry_completion_get_text_column        (GtkEntryCompletion          *completion);
+gint                SF(gtk_entry_completion_get_text_column)        (GtkEntryCompletion          *completion);
 
 G_END_DECLS
 

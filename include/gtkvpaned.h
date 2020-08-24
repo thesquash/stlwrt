@@ -49,7 +49,7 @@ struct _GtkVPanedClass
 
 
 GType       gtk_vpaned_get_type (void) G_GNUC_CONST;
-GtkWidget * __gtk_vpaned_new      (void);
+GtkWidget * SF(gtk_vpaned_new)      (void);
 
 G_END_DECLS
 

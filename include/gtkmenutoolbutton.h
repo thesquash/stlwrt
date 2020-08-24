@@ -73,24 +73,24 @@ struct _GtkMenuToolButtonClass
 
 
 GType         gtk_menu_tool_button_get_type       (void) G_GNUC_CONST;
-GtkToolItem  *__gtk_menu_tool_button_new            (GtkWidget   *icon_widget,
+GtkToolItem  *SF(gtk_menu_tool_button_new)            (GtkWidget   *icon_widget,
                                                    const gchar *label);
-GtkToolItem  *__gtk_menu_tool_button_new_from_stock (const gchar *stock_id);
+GtkToolItem  *SF(gtk_menu_tool_button_new_from_stock) (const gchar *stock_id);
 
-void          __gtk_menu_tool_button_set_menu       (GtkMenuToolButton *button,
+void          SF(gtk_menu_tool_button_set_menu)       (GtkMenuToolButton *button,
                                                    GtkWidget         *menu);
-GtkWidget    *__gtk_menu_tool_button_get_menu       (GtkMenuToolButton *button);
+GtkWidget    *SF(gtk_menu_tool_button_get_menu)       (GtkMenuToolButton *button);
 
 #ifndef GTK_DISABLE_DEPRECATED
-void          __gtk_menu_tool_button_set_arrow_tooltip (GtkMenuToolButton *button,
+void          SF(gtk_menu_tool_button_set_arrow_tooltip) (GtkMenuToolButton *button,
                                                       GtkTooltips       *tooltips,
                                                       const gchar       *tip_text,
                                                       const gchar       *tip_private);
 #endif /* GTK_DISABLE_DEPRECATED */
 
-void          __gtk_menu_tool_button_set_arrow_tooltip_text   (GtkMenuToolButton *button,
+void          SF(gtk_menu_tool_button_set_arrow_tooltip_text)   (GtkMenuToolButton *button,
 							     const gchar       *text);
-void          __gtk_menu_tool_button_set_arrow_tooltip_markup (GtkMenuToolButton *button,
+void          SF(gtk_menu_tool_button_set_arrow_tooltip_markup) (GtkMenuToolButton *button,
 							     const gchar       *markup);
 
 G_END_DECLS

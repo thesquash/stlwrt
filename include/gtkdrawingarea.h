@@ -93,10 +93,10 @@ GType      _T2_gtk_drawing_area_get_type   (void) G_GNUC_CONST;
 GType      _3T_gtk_drawing_area_get_type   (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType      gtk_drawing_area_get_type   (void) G_GNUC_CONST;
-GtkWidget* __gtk_drawing_area_new        (void);
+GtkWidget* SF(gtk_drawing_area_new)        (void);
 
 #ifndef GTK_DISABLE_DEPRECATED
-void       __gtk_drawing_area_size       (GtkDrawingArea      *darea,
+void       SF(gtk_drawing_area_size)       (GtkDrawingArea      *darea,
 					gint                 width,
 					gint                 height);
 #endif /* GTK_DISABLE_DEPRECATED */

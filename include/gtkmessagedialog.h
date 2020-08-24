@@ -81,7 +81,7 @@ struct _GtkMessageDialogClass
  *
  * Prebuilt sets of buttons for the dialog. If
  * none of these choices are appropriate, simply use %GTK_BUTTONS_NONE
- * then call __gtk_dialog_add_buttons().
+ * then call SF(gtk_dialog_add_buttons)().
  * <note>
  *  Please note that %GTK_BUTTONS_OK, %GTK_BUTTONS_YES_NO
  *  and %GTK_BUTTONS_OK_CANCEL are discouraged by the
@@ -103,37 +103,37 @@ GType      _3T_gtk_message_dialog_get_type (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType      gtk_message_dialog_get_type (void) G_GNUC_CONST;
 
-GtkWidget* __gtk_message_dialog_new      (GtkWindow      *parent,
+GtkWidget* SF(gtk_message_dialog_new)      (GtkWindow      *parent,
                                         GtkDialogFlags  flags,
                                         GtkMessageType  type,
                                         GtkButtonsType  buttons,
                                         const gchar    *message_format,
                                         ...) G_GNUC_PRINTF (5, 6);
 
-GtkWidget* __gtk_message_dialog_new_with_markup   (GtkWindow      *parent,
+GtkWidget* SF(gtk_message_dialog_new_with_markup)   (GtkWindow      *parent,
                                                  GtkDialogFlags  flags,
                                                  GtkMessageType  type,
                                                  GtkButtonsType  buttons,
                                                  const gchar    *message_format,
                                                  ...) G_GNUC_PRINTF (5, 6);
 
-void       __gtk_message_dialog_set_image    (GtkMessageDialog *dialog,
+void       SF(gtk_message_dialog_set_image)    (GtkMessageDialog *dialog,
 					    GtkWidget        *image);
 
-GtkWidget * __gtk_message_dialog_get_image   (GtkMessageDialog *dialog);
+GtkWidget * SF(gtk_message_dialog_get_image)   (GtkMessageDialog *dialog);
 
-void       __gtk_message_dialog_set_markup  (GtkMessageDialog *message_dialog,
+void       SF(gtk_message_dialog_set_markup)  (GtkMessageDialog *message_dialog,
                                            const gchar      *str);
 
-void       __gtk_message_dialog_format_secondary_text (GtkMessageDialog *message_dialog,
+void       SF(gtk_message_dialog_format_secondary_text) (GtkMessageDialog *message_dialog,
                                                      const gchar      *message_format,
                                                      ...) G_GNUC_PRINTF (2, 3);
 
-void       __gtk_message_dialog_format_secondary_markup (GtkMessageDialog *message_dialog,
+void       SF(gtk_message_dialog_format_secondary_markup) (GtkMessageDialog *message_dialog,
                                                        const gchar      *message_format,
                                                        ...) G_GNUC_PRINTF (2, 3);
 
-GtkWidget *__gtk_message_dialog_get_message_area (GtkMessageDialog *message_dialog);
+GtkWidget *SF(gtk_message_dialog_get_message_area) (GtkMessageDialog *message_dialog);
 
 G_END_DECLS
 

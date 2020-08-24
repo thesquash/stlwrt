@@ -57,39 +57,39 @@ typedef GdkAtom GdkSelectionType;
  */
 
 #ifndef GDK_MULTIHEAD_SAFE
-gboolean   __gdk_selection_owner_set (GdkWindow	 *owner,
+gboolean   SF(gdk_selection_owner_set) (GdkWindow	 *owner,
 				    GdkAtom	  selection,
 				    guint32	  time_,
 				    gboolean      send_event);
-GdkWindow* __gdk_selection_owner_get (GdkAtom	  selection);
+GdkWindow* SF(gdk_selection_owner_get) (GdkAtom	  selection);
 #endif/* GDK_MULTIHEAD_SAFE */
 
-gboolean   __gdk_selection_owner_set_for_display (GdkDisplay *display,
+gboolean   SF(gdk_selection_owner_set_for_display) (GdkDisplay *display,
 						GdkWindow  *owner,
 						GdkAtom     selection,
 						guint32     time_,
 						gboolean    send_event);
-GdkWindow *__gdk_selection_owner_get_for_display (GdkDisplay *display,
+GdkWindow *SF(gdk_selection_owner_get_for_display) (GdkDisplay *display,
 						GdkAtom     selection);
 
-void	   __gdk_selection_convert   (GdkWindow	 *requestor,
+void	   SF(gdk_selection_convert)   (GdkWindow	 *requestor,
 				    GdkAtom	  selection,
 				    GdkAtom	  target,
 				    guint32	  time_);
-gint       __gdk_selection_property_get (GdkWindow  *requestor,
+gint       SF(gdk_selection_property_get) (GdkWindow  *requestor,
 				       guchar	 **data,
 				       GdkAtom	  *prop_type,
 				       gint	  *prop_format);
 
 #ifndef GDK_MULTIHEAD_SAFE
-void	   __gdk_selection_send_notify (GdkNativeWindow requestor,
+void	   SF(gdk_selection_send_notify) (GdkNativeWindow requestor,
 				      GdkAtom	      selection,
 				      GdkAtom	      target,
 				      GdkAtom	      property,
 				      guint32	      time_);
 #endif /* GDK_MULTIHEAD_SAFE */
 
-void       __gdk_selection_send_notify_for_display (GdkDisplay      *display,
+void       SF(gdk_selection_send_notify_for_display) (GdkDisplay      *display,
 						  GdkNativeWindow  requestor,
 						  GdkAtom     	   selection,
 						  GdkAtom     	   target,

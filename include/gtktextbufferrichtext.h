@@ -42,45 +42,45 @@ typedef gboolean (* GtkTextBufferDeserializeFunc) (GtkTextBuffer     *register_b
                                                    gpointer           user_data,
                                                    GError           **error);
 
-GdkAtom   __gtk_text_buffer_register_serialize_format   (GtkTextBuffer                *buffer,
+GdkAtom   SF(gtk_text_buffer_register_serialize_format)   (GtkTextBuffer                *buffer,
                                                        const gchar                  *mime_type,
                                                        GtkTextBufferSerializeFunc    function,
                                                        gpointer                      user_data,
                                                        GDestroyNotify                user_data_destroy);
-GdkAtom   __gtk_text_buffer_register_serialize_tagset   (GtkTextBuffer                *buffer,
+GdkAtom   SF(gtk_text_buffer_register_serialize_tagset)   (GtkTextBuffer                *buffer,
                                                        const gchar                  *tagset_name);
 
-GdkAtom   __gtk_text_buffer_register_deserialize_format (GtkTextBuffer                *buffer,
+GdkAtom   SF(gtk_text_buffer_register_deserialize_format) (GtkTextBuffer                *buffer,
                                                        const gchar                  *mime_type,
                                                        GtkTextBufferDeserializeFunc  function,
                                                        gpointer                      user_data,
                                                        GDestroyNotify                user_data_destroy);
-GdkAtom   __gtk_text_buffer_register_deserialize_tagset (GtkTextBuffer                *buffer,
+GdkAtom   SF(gtk_text_buffer_register_deserialize_tagset) (GtkTextBuffer                *buffer,
                                                        const gchar                  *tagset_name);
 
-void    __gtk_text_buffer_unregister_serialize_format   (GtkTextBuffer                *buffer,
+void    SF(gtk_text_buffer_unregister_serialize_format)   (GtkTextBuffer                *buffer,
                                                        GdkAtom                       format);
-void    __gtk_text_buffer_unregister_deserialize_format (GtkTextBuffer                *buffer,
+void    SF(gtk_text_buffer_unregister_deserialize_format) (GtkTextBuffer                *buffer,
                                                        GdkAtom                       format);
 
-void     __gtk_text_buffer_deserialize_set_can_create_tags (GtkTextBuffer             *buffer,
+void     SF(gtk_text_buffer_deserialize_set_can_create_tags) (GtkTextBuffer             *buffer,
                                                           GdkAtom                    format,
                                                           gboolean                   can_create_tags);
-gboolean __gtk_text_buffer_deserialize_get_can_create_tags (GtkTextBuffer             *buffer,
+gboolean SF(gtk_text_buffer_deserialize_get_can_create_tags) (GtkTextBuffer             *buffer,
                                                           GdkAtom                    format);
 
-GdkAtom * __gtk_text_buffer_get_serialize_formats       (GtkTextBuffer                *buffer,
+GdkAtom * SF(gtk_text_buffer_get_serialize_formats)       (GtkTextBuffer                *buffer,
                                                        gint                         *n_formats);
-GdkAtom * __gtk_text_buffer_get_deserialize_formats     (GtkTextBuffer                *buffer,
+GdkAtom * SF(gtk_text_buffer_get_deserialize_formats)     (GtkTextBuffer                *buffer,
                                                        gint                         *n_formats);
 
-guint8  * __gtk_text_buffer_serialize                   (GtkTextBuffer                *register_buffer,
+guint8  * SF(gtk_text_buffer_serialize)                   (GtkTextBuffer                *register_buffer,
                                                        GtkTextBuffer                *content_buffer,
                                                        GdkAtom                       format,
                                                        const GtkTextIter            *start,
                                                        const GtkTextIter            *end,
                                                        gsize                        *length);
-gboolean  __gtk_text_buffer_deserialize                 (GtkTextBuffer                *register_buffer,
+gboolean  SF(gtk_text_buffer_deserialize)                 (GtkTextBuffer                *register_buffer,
                                                        GtkTextBuffer                *content_buffer,
                                                        GdkAtom                       format,
                                                        GtkTextIter                  *iter,

@@ -79,23 +79,23 @@ GType    _3T_gtk_tree_sortable_get_type              (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType    gtk_tree_sortable_get_type              (void) G_GNUC_CONST;
 
-void     __gtk_tree_sortable_sort_column_changed   (GtkTreeSortable        *sortable);
-gboolean __gtk_tree_sortable_get_sort_column_id    (GtkTreeSortable        *sortable,
+void     SF(gtk_tree_sortable_sort_column_changed)   (GtkTreeSortable        *sortable);
+gboolean SF(gtk_tree_sortable_get_sort_column_id)    (GtkTreeSortable        *sortable,
 						  gint                   *sort_column_id,
 						  GtkSortType            *order);
-void     __gtk_tree_sortable_set_sort_column_id    (GtkTreeSortable        *sortable,
+void     SF(gtk_tree_sortable_set_sort_column_id)    (GtkTreeSortable        *sortable,
 						  gint                    sort_column_id,
 						  GtkSortType             order);
-void     __gtk_tree_sortable_set_sort_func         (GtkTreeSortable        *sortable,
+void     SF(gtk_tree_sortable_set_sort_func)         (GtkTreeSortable        *sortable,
 						  gint                    sort_column_id,
 						  GtkTreeIterCompareFunc  sort_func,
 						  gpointer                user_data,
 						  GDestroyNotify          destroy);
-void     __gtk_tree_sortable_set_default_sort_func (GtkTreeSortable        *sortable,
+void     SF(gtk_tree_sortable_set_default_sort_func) (GtkTreeSortable        *sortable,
 						  GtkTreeIterCompareFunc  sort_func,
 						  gpointer                user_data,
 						  GDestroyNotify          destroy);
-gboolean __gtk_tree_sortable_has_default_sort_func (GtkTreeSortable        *sortable);
+gboolean SF(gtk_tree_sortable_has_default_sort_func) (GtkTreeSortable        *sortable);
 
 G_END_DECLS
 

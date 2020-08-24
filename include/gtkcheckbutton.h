@@ -64,11 +64,11 @@ struct _GtkCheckButtonClass
 
 
 GType      gtk_check_button_get_type       (void) G_GNUC_CONST;
-GtkWidget* __gtk_check_button_new               (void);
-GtkWidget* __gtk_check_button_new_with_label    (const gchar *label);
-GtkWidget* __gtk_check_button_new_with_mnemonic (const gchar *label);
+GtkWidget* SF(gtk_check_button_new)               (void);
+GtkWidget* SF(gtk_check_button_new_with_label)    (const gchar *label);
+GtkWidget* SF(gtk_check_button_new_with_mnemonic) (const gchar *label);
 
-void ___gtk_check_button_get_props (GtkCheckButton *check_button,
+void SF(_gtk_check_button_get_props) (GtkCheckButton *check_button,
 				  gint           *indicator_size,
 				  gint           *indicator_spacing);
 

@@ -123,7 +123,7 @@ struct _GtkPrintOperationClass
   void (*_gtk_reserved6) (void);
 };
 
-#define GTK_PRINT_ERROR __gtk_print_error_quark ()
+#define GTK_PRINT_ERROR SF(gtk_print_error_quark) ()
 
 typedef enum
 {
@@ -133,68 +133,68 @@ typedef enum
   GTK_PRINT_ERROR_INVALID_FILE
 } GtkPrintError;
 
-GQuark __gtk_print_error_quark (void);
+GQuark SF(gtk_print_error_quark) (void);
 
 
 GType                   gtk_print_operation_get_type               (void) G_GNUC_CONST;
-GtkPrintOperation *     __gtk_print_operation_new                    (void);
-void                    __gtk_print_operation_set_default_page_setup (GtkPrintOperation  *op,
+GtkPrintOperation *     SF(gtk_print_operation_new)                    (void);
+void                    SF(gtk_print_operation_set_default_page_setup) (GtkPrintOperation  *op,
 								    GtkPageSetup       *default_page_setup);
-GtkPageSetup *          __gtk_print_operation_get_default_page_setup (GtkPrintOperation  *op);
-void                    __gtk_print_operation_set_print_settings     (GtkPrintOperation  *op,
+GtkPageSetup *          SF(gtk_print_operation_get_default_page_setup) (GtkPrintOperation  *op);
+void                    SF(gtk_print_operation_set_print_settings)     (GtkPrintOperation  *op,
 								    GtkPrintSettings   *print_settings);
-GtkPrintSettings *      __gtk_print_operation_get_print_settings     (GtkPrintOperation  *op);
-void                    __gtk_print_operation_set_job_name           (GtkPrintOperation  *op,
+GtkPrintSettings *      SF(gtk_print_operation_get_print_settings)     (GtkPrintOperation  *op);
+void                    SF(gtk_print_operation_set_job_name)           (GtkPrintOperation  *op,
 								    const gchar        *job_name);
-void                    __gtk_print_operation_set_n_pages            (GtkPrintOperation  *op,
+void                    SF(gtk_print_operation_set_n_pages)            (GtkPrintOperation  *op,
 								    gint                n_pages);
-void                    __gtk_print_operation_set_current_page       (GtkPrintOperation  *op,
+void                    SF(gtk_print_operation_set_current_page)       (GtkPrintOperation  *op,
 								    gint                current_page);
-void                    __gtk_print_operation_set_use_full_page      (GtkPrintOperation  *op,
+void                    SF(gtk_print_operation_set_use_full_page)      (GtkPrintOperation  *op,
 								    gboolean            full_page);
-void                    __gtk_print_operation_set_unit               (GtkPrintOperation  *op,
+void                    SF(gtk_print_operation_set_unit)               (GtkPrintOperation  *op,
 								    GtkUnit             unit);
-void                    __gtk_print_operation_set_export_filename    (GtkPrintOperation  *op,
+void                    SF(gtk_print_operation_set_export_filename)    (GtkPrintOperation  *op,
 								    const gchar        *filename);
-void                    __gtk_print_operation_set_track_print_status (GtkPrintOperation  *op,
+void                    SF(gtk_print_operation_set_track_print_status) (GtkPrintOperation  *op,
 								    gboolean            track_status);
-void                    __gtk_print_operation_set_show_progress      (GtkPrintOperation  *op,
+void                    SF(gtk_print_operation_set_show_progress)      (GtkPrintOperation  *op,
 								    gboolean            show_progress);
-void                    __gtk_print_operation_set_allow_async        (GtkPrintOperation  *op,
+void                    SF(gtk_print_operation_set_allow_async)        (GtkPrintOperation  *op,
 								    gboolean            allow_async);
-void                    __gtk_print_operation_set_custom_tab_label   (GtkPrintOperation  *op,
+void                    SF(gtk_print_operation_set_custom_tab_label)   (GtkPrintOperation  *op,
 								    const gchar        *label);
-GtkPrintOperationResult __gtk_print_operation_run                    (GtkPrintOperation  *op,
+GtkPrintOperationResult SF(gtk_print_operation_run)                    (GtkPrintOperation  *op,
 								    GtkPrintOperationAction action,
 								    GtkWindow          *parent,
 								    GError            **error);
-void                    __gtk_print_operation_get_error              (GtkPrintOperation  *op,
+void                    SF(gtk_print_operation_get_error)              (GtkPrintOperation  *op,
 								    GError            **error);
-GtkPrintStatus          __gtk_print_operation_get_status             (GtkPrintOperation  *op);
-const gchar *           __gtk_print_operation_get_status_string      (GtkPrintOperation  *op);
-gboolean                __gtk_print_operation_is_finished            (GtkPrintOperation  *op);
-void                    __gtk_print_operation_cancel                 (GtkPrintOperation  *op);
-void                    __gtk_print_operation_draw_page_finish       (GtkPrintOperation  *op);
-void                    __gtk_print_operation_set_defer_drawing      (GtkPrintOperation  *op);
-void                    __gtk_print_operation_set_support_selection  (GtkPrintOperation  *op,
+GtkPrintStatus          SF(gtk_print_operation_get_status)             (GtkPrintOperation  *op);
+const gchar *           SF(gtk_print_operation_get_status_string)      (GtkPrintOperation  *op);
+gboolean                SF(gtk_print_operation_is_finished)            (GtkPrintOperation  *op);
+void                    SF(gtk_print_operation_cancel)                 (GtkPrintOperation  *op);
+void                    SF(gtk_print_operation_draw_page_finish)       (GtkPrintOperation  *op);
+void                    SF(gtk_print_operation_set_defer_drawing)      (GtkPrintOperation  *op);
+void                    SF(gtk_print_operation_set_support_selection)  (GtkPrintOperation  *op,
                                                                     gboolean            support_selection);
-gboolean                __gtk_print_operation_get_support_selection  (GtkPrintOperation  *op);
-void                    __gtk_print_operation_set_has_selection      (GtkPrintOperation  *op,
+gboolean                SF(gtk_print_operation_get_support_selection)  (GtkPrintOperation  *op);
+void                    SF(gtk_print_operation_set_has_selection)      (GtkPrintOperation  *op,
                                                                     gboolean            has_selection);
-gboolean                __gtk_print_operation_get_has_selection      (GtkPrintOperation  *op);
-void                    __gtk_print_operation_set_embed_page_setup   (GtkPrintOperation  *op,
+gboolean                SF(gtk_print_operation_get_has_selection)      (GtkPrintOperation  *op);
+void                    SF(gtk_print_operation_set_embed_page_setup)   (GtkPrintOperation  *op,
  								    gboolean            embed);
-gboolean                __gtk_print_operation_get_embed_page_setup   (GtkPrintOperation  *op);
-gint                    __gtk_print_operation_get_n_pages_to_print   (GtkPrintOperation  *op);
+gboolean                SF(gtk_print_operation_get_embed_page_setup)   (GtkPrintOperation  *op);
+gint                    SF(gtk_print_operation_get_n_pages_to_print)   (GtkPrintOperation  *op);
 
-GtkPageSetup           *__gtk_print_run_page_setup_dialog            (GtkWindow          *parent,
+GtkPageSetup           *SF(gtk_print_run_page_setup_dialog)            (GtkWindow          *parent,
 								    GtkPageSetup       *page_setup,
 								    GtkPrintSettings   *settings);
 
 typedef void  (* GtkPageSetupDoneFunc) (GtkPageSetup *page_setup,
 					gpointer      data);
 
-void                    __gtk_print_run_page_setup_dialog_async      (GtkWindow            *parent,
+void                    SF(gtk_print_run_page_setup_dialog_async)      (GtkWindow            *parent,
 								    GtkPageSetup         *page_setup,
 								    GtkPrintSettings     *settings,
                                                                     GtkPageSetupDoneFunc  done_cb,

@@ -54,10 +54,10 @@ GType _3T_gtk_cell_editable_get_type      (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType gtk_cell_editable_get_type      (void) G_GNUC_CONST;
 
-void  __gtk_cell_editable_start_editing (GtkCellEditable *cell_editable,
+void  SF(gtk_cell_editable_start_editing) (GtkCellEditable *cell_editable,
 				       GdkEvent        *event);
-void  __gtk_cell_editable_editing_done  (GtkCellEditable *cell_editable);
-void  __gtk_cell_editable_remove_widget (GtkCellEditable *cell_editable);
+void  SF(gtk_cell_editable_editing_done)  (GtkCellEditable *cell_editable);
+void  SF(gtk_cell_editable_remove_widget) (GtkCellEditable *cell_editable);
 
 
 G_END_DECLS

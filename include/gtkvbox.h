@@ -50,7 +50,7 @@ struct _GtkVBoxClass
 
 
 GType       gtk_vbox_get_type (void) G_GNUC_CONST;
-GtkWidget * __gtk_vbox_new      (gboolean homogeneous,
+GtkWidget * SF(gtk_vbox_new)      (gboolean homogeneous,
                                gint     spacing);
 
 G_END_DECLS

@@ -95,24 +95,24 @@ GType      _T2_gtk_frame_get_type         (void) G_GNUC_CONST;
 GType      _3T_gtk_frame_get_type         (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType      gtk_frame_get_type         (void) G_GNUC_CONST;
-GtkWidget* __gtk_frame_new              (const gchar   *label);
+GtkWidget* SF(gtk_frame_new)              (const gchar   *label);
 
-void                  __gtk_frame_set_label (GtkFrame    *frame,
+void                  SF(gtk_frame_set_label) (GtkFrame    *frame,
 					   const gchar *label);
-const gchar *__gtk_frame_get_label      (GtkFrame    *frame);
+const gchar *SF(gtk_frame_get_label)      (GtkFrame    *frame);
 
-void       __gtk_frame_set_label_widget (GtkFrame      *frame,
+void       SF(gtk_frame_set_label_widget) (GtkFrame      *frame,
 				       GtkWidget     *label_widget);
-GtkWidget *__gtk_frame_get_label_widget (GtkFrame      *frame);
-void       __gtk_frame_set_label_align  (GtkFrame      *frame,
+GtkWidget *SF(gtk_frame_get_label_widget) (GtkFrame      *frame);
+void       SF(gtk_frame_set_label_align)  (GtkFrame      *frame,
 				       gfloat         xalign,
 				       gfloat         yalign);
-void       __gtk_frame_get_label_align  (GtkFrame      *frame,
+void       SF(gtk_frame_get_label_align)  (GtkFrame      *frame,
 				       gfloat        *xalign,
 				       gfloat        *yalign);
-void       __gtk_frame_set_shadow_type  (GtkFrame      *frame,
+void       SF(gtk_frame_set_shadow_type)  (GtkFrame      *frame,
 				       GtkShadowType  type);
-GtkShadowType __gtk_frame_get_shadow_type (GtkFrame    *frame);
+GtkShadowType SF(gtk_frame_get_shadow_type) (GtkFrame    *frame);
 
 
 G_END_DECLS

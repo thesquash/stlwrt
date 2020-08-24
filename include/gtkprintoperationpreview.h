@@ -69,10 +69,10 @@ GType   _3T_gtk_print_operation_preview_get_type       (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType   gtk_print_operation_preview_get_type       (void) G_GNUC_CONST;
 
-void     __gtk_print_operation_preview_render_page (GtkPrintOperationPreview *preview,
+void     SF(gtk_print_operation_preview_render_page) (GtkPrintOperationPreview *preview,
 						  gint                      page_nr);
-void     __gtk_print_operation_preview_end_preview (GtkPrintOperationPreview *preview);
-gboolean __gtk_print_operation_preview_is_selected (GtkPrintOperationPreview *preview,
+void     SF(gtk_print_operation_preview_end_preview) (GtkPrintOperationPreview *preview);
+gboolean SF(gtk_print_operation_preview_is_selected) (GtkPrintOperationPreview *preview,
 						  gint                      page_nr);
 
 G_END_DECLS

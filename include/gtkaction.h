@@ -117,93 +117,93 @@ struct _GtkActionClass
 
 
 GType        gtk_action_get_type               (void) G_GNUC_CONST;
-GtkAction   *__gtk_action_new                    (const gchar *name,
+GtkAction   *SF(gtk_action_new)                    (const gchar *name,
 						const gchar *label,
 						const gchar *tooltip,
 						const gchar *stock_id);
-const gchar* __gtk_action_get_name               (GtkAction     *action);
-gboolean     __gtk_action_is_sensitive           (GtkAction     *action);
-gboolean     __gtk_action_get_sensitive          (GtkAction     *action);
-void         __gtk_action_set_sensitive          (GtkAction     *action,
+const gchar* SF(gtk_action_get_name)               (GtkAction     *action);
+gboolean     SF(gtk_action_is_sensitive)           (GtkAction     *action);
+gboolean     SF(gtk_action_get_sensitive)          (GtkAction     *action);
+void         SF(gtk_action_set_sensitive)          (GtkAction     *action,
 						gboolean       sensitive);
-gboolean     __gtk_action_is_visible             (GtkAction     *action);
-gboolean     __gtk_action_get_visible            (GtkAction     *action);
-void         __gtk_action_set_visible            (GtkAction     *action,
+gboolean     SF(gtk_action_is_visible)             (GtkAction     *action);
+gboolean     SF(gtk_action_get_visible)            (GtkAction     *action);
+void         SF(gtk_action_set_visible)            (GtkAction     *action,
 						gboolean       visible);
-void         __gtk_action_activate               (GtkAction     *action);
-GtkWidget *  __gtk_action_create_icon            (GtkAction     *action,
+void         SF(gtk_action_activate)               (GtkAction     *action);
+GtkWidget *  SF(gtk_action_create_icon)            (GtkAction     *action,
 						GtkIconSize    icon_size);
-GtkWidget *  __gtk_action_create_menu_item       (GtkAction     *action);
-GtkWidget *  __gtk_action_create_tool_item       (GtkAction     *action);
-GtkWidget *  __gtk_action_create_menu            (GtkAction     *action);
-GSList *     __gtk_action_get_proxies            (GtkAction     *action);
-void         __gtk_action_connect_accelerator    (GtkAction     *action);
-void         __gtk_action_disconnect_accelerator (GtkAction     *action);
-const gchar *__gtk_action_get_accel_path         (GtkAction     *action);
-GClosure    *__gtk_action_get_accel_closure      (GtkAction     *action);
+GtkWidget *  SF(gtk_action_create_menu_item)       (GtkAction     *action);
+GtkWidget *  SF(gtk_action_create_tool_item)       (GtkAction     *action);
+GtkWidget *  SF(gtk_action_create_menu)            (GtkAction     *action);
+GSList *     SF(gtk_action_get_proxies)            (GtkAction     *action);
+void         SF(gtk_action_connect_accelerator)    (GtkAction     *action);
+void         SF(gtk_action_disconnect_accelerator) (GtkAction     *action);
+const gchar *SF(gtk_action_get_accel_path)         (GtkAction     *action);
+GClosure    *SF(gtk_action_get_accel_closure)      (GtkAction     *action);
 
 #ifndef GTK_DISABLE_DEPRECATED
-GtkAction   *__gtk_widget_get_action             (GtkWidget     *widget);
-void         __gtk_action_connect_proxy          (GtkAction     *action,
+GtkAction   *SF(gtk_widget_get_action)             (GtkWidget     *widget);
+void         SF(gtk_action_connect_proxy)          (GtkAction     *action,
 						GtkWidget     *proxy);
-void         __gtk_action_disconnect_proxy       (GtkAction     *action,
+void         SF(gtk_action_disconnect_proxy)       (GtkAction     *action,
 						GtkWidget     *proxy);
-void         __gtk_action_block_activate_from    (GtkAction     *action,
+void         SF(gtk_action_block_activate_from)    (GtkAction     *action,
 						GtkWidget     *proxy);
-void         __gtk_action_unblock_activate_from  (GtkAction     *action,
+void         SF(gtk_action_unblock_activate_from)  (GtkAction     *action,
 						GtkWidget     *proxy);
 #endif /* GTK_DISABLE_DEPRECATED */
-void         __gtk_action_block_activate         (GtkAction     *action);
-void         __gtk_action_unblock_activate       (GtkAction     *action);
+void         SF(gtk_action_block_activate)         (GtkAction     *action);
+void         SF(gtk_action_unblock_activate)       (GtkAction     *action);
 
 
-void         ___gtk_action_add_to_proxy_list     (GtkAction     *action,
+void         SF(_gtk_action_add_to_proxy_list)     (GtkAction     *action,
 						GtkWidget     *proxy);
-void         ___gtk_action_remove_from_proxy_list(GtkAction     *action,
+void         SF(_gtk_action_remove_from_proxy_list)(GtkAction     *action,
 						GtkWidget     *proxy);
 
 /* protected ... for use by child actions */
-void         ___gtk_action_emit_activate         (GtkAction     *action);
+void         SF(_gtk_action_emit_activate)         (GtkAction     *action);
 
 /* protected ... for use by action groups */
-void         __gtk_action_set_accel_path         (GtkAction     *action,
+void         SF(gtk_action_set_accel_path)         (GtkAction     *action,
 						const gchar   *accel_path);
-void         __gtk_action_set_accel_group        (GtkAction     *action,
+void         SF(gtk_action_set_accel_group)        (GtkAction     *action,
 						GtkAccelGroup *accel_group);
-void         ___gtk_action_sync_menu_visible     (GtkAction     *action,
+void         SF(_gtk_action_sync_menu_visible)     (GtkAction     *action,
 						GtkWidget     *proxy,
 						gboolean       empty);
 
-void                  __gtk_action_set_label              (GtkAction   *action,
+void                  SF(gtk_action_set_label)              (GtkAction   *action,
                                                          const gchar *label);
-const gchar *         __gtk_action_get_label              (GtkAction   *action);
-void                  __gtk_action_set_short_label        (GtkAction   *action,
+const gchar *         SF(gtk_action_get_label)              (GtkAction   *action);
+void                  SF(gtk_action_set_short_label)        (GtkAction   *action,
                                                          const gchar *short_label);
-const gchar *         __gtk_action_get_short_label        (GtkAction   *action);
-void                  __gtk_action_set_tooltip            (GtkAction   *action,
+const gchar *         SF(gtk_action_get_short_label)        (GtkAction   *action);
+void                  SF(gtk_action_set_tooltip)            (GtkAction   *action,
                                                          const gchar *tooltip);
-const gchar *         __gtk_action_get_tooltip            (GtkAction   *action);
-void                  __gtk_action_set_stock_id           (GtkAction   *action,
+const gchar *         SF(gtk_action_get_tooltip)            (GtkAction   *action);
+void                  SF(gtk_action_set_stock_id)           (GtkAction   *action,
                                                          const gchar *stock_id);
-const gchar *         __gtk_action_get_stock_id           (GtkAction   *action);
-void                  __gtk_action_set_gicon              (GtkAction   *action,
+const gchar *         SF(gtk_action_get_stock_id)           (GtkAction   *action);
+void                  SF(gtk_action_set_gicon)              (GtkAction   *action,
                                                          GIcon       *icon);
-GIcon                *__gtk_action_get_gicon              (GtkAction   *action);
-void                  __gtk_action_set_icon_name          (GtkAction   *action,
+GIcon                *SF(gtk_action_get_gicon)              (GtkAction   *action);
+void                  SF(gtk_action_set_icon_name)          (GtkAction   *action,
                                                          const gchar *icon_name);
-const gchar *         __gtk_action_get_icon_name          (GtkAction   *action);
-void                  __gtk_action_set_visible_horizontal (GtkAction   *action,
+const gchar *         SF(gtk_action_get_icon_name)          (GtkAction   *action);
+void                  SF(gtk_action_set_visible_horizontal) (GtkAction   *action,
                                                          gboolean     visible_horizontal);
-gboolean              __gtk_action_get_visible_horizontal (GtkAction   *action);
-void                  __gtk_action_set_visible_vertical   (GtkAction   *action,
+gboolean              SF(gtk_action_get_visible_horizontal) (GtkAction   *action);
+void                  SF(gtk_action_set_visible_vertical)   (GtkAction   *action,
                                                          gboolean     visible_vertical);
-gboolean              __gtk_action_get_visible_vertical   (GtkAction   *action);
-void                  __gtk_action_set_is_important       (GtkAction   *action,
+gboolean              SF(gtk_action_get_visible_vertical)   (GtkAction   *action);
+void                  SF(gtk_action_set_is_important)       (GtkAction   *action,
                                                          gboolean     is_important);
-gboolean              __gtk_action_get_is_important       (GtkAction   *action);
-void                  __gtk_action_set_always_show_image  (GtkAction   *action,
+gboolean              SF(gtk_action_get_is_important)       (GtkAction   *action);
+void                  SF(gtk_action_set_always_show_image)  (GtkAction   *action,
                                                          gboolean     always_show);
-gboolean              __gtk_action_get_always_show_image  (GtkAction   *action);
+gboolean              SF(gtk_action_get_always_show_image)  (GtkAction   *action);
 
 
 G_END_DECLS

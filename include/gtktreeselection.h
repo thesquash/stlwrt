@@ -106,47 +106,47 @@ GType            _3T_gtk_tree_selection_get_type            (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType            gtk_tree_selection_get_type            (void) G_GNUC_CONST;
 
-void             __gtk_tree_selection_set_mode            (GtkTreeSelection            *selection,
+void             SF(gtk_tree_selection_set_mode)            (GtkTreeSelection            *selection,
 							 GtkSelectionMode             type);
-GtkSelectionMode __gtk_tree_selection_get_mode        (GtkTreeSelection            *selection);
-void             __gtk_tree_selection_set_select_function (GtkTreeSelection            *selection,
+GtkSelectionMode SF(gtk_tree_selection_get_mode)        (GtkTreeSelection            *selection);
+void             SF(gtk_tree_selection_set_select_function) (GtkTreeSelection            *selection,
 							 GtkTreeSelectionFunc         func,
 							 gpointer                     data,
 							 GDestroyNotify               destroy);
-gpointer         __gtk_tree_selection_get_user_data       (GtkTreeSelection            *selection);
-GtkTreeView*     __gtk_tree_selection_get_tree_view       (GtkTreeSelection            *selection);
+gpointer         SF(gtk_tree_selection_get_user_data)       (GtkTreeSelection            *selection);
+GtkTreeView*     SF(gtk_tree_selection_get_tree_view)       (GtkTreeSelection            *selection);
 
-GtkTreeSelectionFunc __gtk_tree_selection_get_select_function (GtkTreeSelection        *selection);
+GtkTreeSelectionFunc SF(gtk_tree_selection_get_select_function) (GtkTreeSelection        *selection);
 
 /* Only meaningful if GTK_SELECTION_SINGLE or GTK_SELECTION_BROWSE is set */
 /* Use selected_foreach or get_selected_rows for GTK_SELECTION_MULTIPLE */
-gboolean         __gtk_tree_selection_get_selected        (GtkTreeSelection            *selection,
+gboolean         SF(gtk_tree_selection_get_selected)        (GtkTreeSelection            *selection,
 							 GtkTreeModel               **model,
 							 GtkTreeIter                 *iter);
-GList *          __gtk_tree_selection_get_selected_rows   (GtkTreeSelection            *selection,
+GList *          SF(gtk_tree_selection_get_selected_rows)   (GtkTreeSelection            *selection,
                                                          GtkTreeModel               **model);
-gint             __gtk_tree_selection_count_selected_rows (GtkTreeSelection            *selection);
-void             __gtk_tree_selection_selected_foreach    (GtkTreeSelection            *selection,
+gint             SF(gtk_tree_selection_count_selected_rows) (GtkTreeSelection            *selection);
+void             SF(gtk_tree_selection_selected_foreach)    (GtkTreeSelection            *selection,
 							 GtkTreeSelectionForeachFunc  func,
 							 gpointer                     data);
-void             __gtk_tree_selection_select_path         (GtkTreeSelection            *selection,
+void             SF(gtk_tree_selection_select_path)         (GtkTreeSelection            *selection,
 							 GtkTreePath                 *path);
-void             __gtk_tree_selection_unselect_path       (GtkTreeSelection            *selection,
+void             SF(gtk_tree_selection_unselect_path)       (GtkTreeSelection            *selection,
 							 GtkTreePath                 *path);
-void             __gtk_tree_selection_select_iter         (GtkTreeSelection            *selection,
+void             SF(gtk_tree_selection_select_iter)         (GtkTreeSelection            *selection,
 							 GtkTreeIter                 *iter);
-void             __gtk_tree_selection_unselect_iter       (GtkTreeSelection            *selection,
+void             SF(gtk_tree_selection_unselect_iter)       (GtkTreeSelection            *selection,
 							 GtkTreeIter                 *iter);
-gboolean         __gtk_tree_selection_path_is_selected    (GtkTreeSelection            *selection,
+gboolean         SF(gtk_tree_selection_path_is_selected)    (GtkTreeSelection            *selection,
 							 GtkTreePath                 *path);
-gboolean         __gtk_tree_selection_iter_is_selected    (GtkTreeSelection            *selection,
+gboolean         SF(gtk_tree_selection_iter_is_selected)    (GtkTreeSelection            *selection,
 							 GtkTreeIter                 *iter);
-void             __gtk_tree_selection_select_all          (GtkTreeSelection            *selection);
-void             __gtk_tree_selection_unselect_all        (GtkTreeSelection            *selection);
-void             __gtk_tree_selection_select_range        (GtkTreeSelection            *selection,
+void             SF(gtk_tree_selection_select_all)          (GtkTreeSelection            *selection);
+void             SF(gtk_tree_selection_unselect_all)        (GtkTreeSelection            *selection);
+void             SF(gtk_tree_selection_select_range)        (GtkTreeSelection            *selection,
 							 GtkTreePath                 *start_path,
 							 GtkTreePath                 *end_path);
-void             __gtk_tree_selection_unselect_range      (GtkTreeSelection            *selection,
+void             SF(gtk_tree_selection_unselect_range)      (GtkTreeSelection            *selection,
                                                          GtkTreePath                 *start_path,
 							 GtkTreePath                 *end_path);
 

@@ -99,8 +99,8 @@ GType      _T2_gtk_color_selection_dialog_get_type            (void) G_GNUC_CONS
 GType      _3T_gtk_color_selection_dialog_get_type            (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType      gtk_color_selection_dialog_get_type            (void) G_GNUC_CONST;
-GtkWidget* __gtk_color_selection_dialog_new                 (const gchar *title);
-GtkWidget* __gtk_color_selection_dialog_get_color_selection (GtkColorSelectionDialog *colorsel);
+GtkWidget* SF(gtk_color_selection_dialog_new)                 (const gchar *title);
+GtkWidget* SF(gtk_color_selection_dialog_get_color_selection) (GtkColorSelectionDialog *colorsel);
 
 
 G_END_DECLS

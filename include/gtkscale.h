@@ -112,40 +112,40 @@ GType             _3T_gtk_scale_get_type           (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType             gtk_scale_get_type           (void) G_GNUC_CONST;
 
-GtkWidget*        __gtk_scale_new                (GtkOrientation orientation,
+GtkWidget*        SF(gtk_scale_new)                (GtkOrientation orientation,
                                                 GtkAdjustment *adjustment);
-GtkWidget* 	  __gtk_scale_new_with_range     (GtkOrientation orientation,
+GtkWidget* 	  SF(gtk_scale_new_with_range)     (GtkOrientation orientation,
                                                 gdouble        min,
                                                 gdouble        max,
                                                 gdouble        step);
 
-void              __gtk_scale_set_digits         (GtkScale        *scale,
+void              SF(gtk_scale_set_digits)         (GtkScale        *scale,
                                                 gint             digits);
-gint              __gtk_scale_get_digits         (GtkScale        *scale);
-void              __gtk_scale_set_draw_value     (GtkScale        *scale,
+gint              SF(gtk_scale_get_digits)         (GtkScale        *scale);
+void              SF(gtk_scale_set_draw_value)     (GtkScale        *scale,
                                                 gboolean         draw_value);
-gboolean          __gtk_scale_get_draw_value     (GtkScale        *scale);
-void              __gtk_scale_set_value_pos      (GtkScale        *scale,
+gboolean          SF(gtk_scale_get_draw_value)     (GtkScale        *scale);
+void              SF(gtk_scale_set_value_pos)      (GtkScale        *scale,
                                                 GtkPositionType  pos);
-GtkPositionType   __gtk_scale_get_value_pos      (GtkScale        *scale);
+GtkPositionType   SF(gtk_scale_get_value_pos)      (GtkScale        *scale);
 
-PangoLayout     * __gtk_scale_get_layout         (GtkScale        *scale);
-void              __gtk_scale_get_layout_offsets (GtkScale        *scale,
+PangoLayout     * SF(gtk_scale_get_layout)         (GtkScale        *scale);
+void              SF(gtk_scale_get_layout_offsets) (GtkScale        *scale,
                                                 gint            *x,
                                                 gint            *y);
 
-void              __gtk_scale_add_mark           (GtkScale        *scale,
+void              SF(gtk_scale_add_mark)           (GtkScale        *scale,
                                                 gdouble          value,
                                                 GtkPositionType  position,
                                                 const gchar     *markup);
-void              __gtk_scale_clear_marks        (GtkScale        *scale);
+void              SF(gtk_scale_clear_marks)        (GtkScale        *scale);
 
 /* internal API */
-void              ___gtk_scale_clear_layout      (GtkScale        *scale);
-void              ___gtk_scale_get_value_size    (GtkScale        *scale,
+void              SF(_gtk_scale_clear_layout)      (GtkScale        *scale);
+void              SF(_gtk_scale_get_value_size)    (GtkScale        *scale,
                                                 gint            *width,
                                                 gint            *height);
-gchar           * ___gtk_scale_format_value      (GtkScale        *scale,
+gchar           * SF(_gtk_scale_format_value)      (GtkScale        *scale,
                                                 gdouble          value);
 
 G_END_DECLS

@@ -223,168 +223,168 @@ GType      _T2_gtk_entry_get_type       		(void) G_GNUC_CONST;
 GType      _3T_gtk_entry_get_type       		(void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType      gtk_entry_get_type       		(void) G_GNUC_CONST;
-GtkWidget* __gtk_entry_new            		(void);
-GtkWidget* __gtk_entry_new_with_buffer            (GtkEntryBuffer *buffer);
+GtkWidget* SF(gtk_entry_new)            		(void);
+GtkWidget* SF(gtk_entry_new_with_buffer)            (GtkEntryBuffer *buffer);
 
-GtkEntryBuffer* __gtk_entry_get_buffer            (GtkEntry       *entry);
-void       __gtk_entry_set_buffer                 (GtkEntry       *entry,
+GtkEntryBuffer* SF(gtk_entry_get_buffer)            (GtkEntry       *entry);
+void       SF(gtk_entry_set_buffer)                 (GtkEntry       *entry,
                                                  GtkEntryBuffer *buffer);
 
-GdkWindow *__gtk_entry_get_text_window            (GtkEntry      *entry);
+GdkWindow *SF(gtk_entry_get_text_window)            (GtkEntry      *entry);
 
-void       __gtk_entry_set_visibility 		(GtkEntry      *entry,
+void       SF(gtk_entry_set_visibility) 		(GtkEntry      *entry,
 						 gboolean       visible);
-gboolean   __gtk_entry_get_visibility             (GtkEntry      *entry);
+gboolean   SF(gtk_entry_get_visibility)             (GtkEntry      *entry);
 
-void       __gtk_entry_set_invisible_char         (GtkEntry      *entry,
+void       SF(gtk_entry_set_invisible_char)         (GtkEntry      *entry,
                                                  gunichar       ch);
-gunichar   __gtk_entry_get_invisible_char         (GtkEntry      *entry);
-void       __gtk_entry_unset_invisible_char       (GtkEntry      *entry);
+gunichar   SF(gtk_entry_get_invisible_char)         (GtkEntry      *entry);
+void       SF(gtk_entry_unset_invisible_char)       (GtkEntry      *entry);
 
-void       __gtk_entry_set_has_frame              (GtkEntry      *entry,
+void       SF(gtk_entry_set_has_frame)              (GtkEntry      *entry,
                                                  gboolean       setting);
-gboolean   __gtk_entry_get_has_frame              (GtkEntry      *entry);
+gboolean   SF(gtk_entry_get_has_frame)              (GtkEntry      *entry);
 
-void       __gtk_entry_set_inner_border                (GtkEntry        *entry,
+void       SF(gtk_entry_set_inner_border)                (GtkEntry        *entry,
                                                       const GtkBorder *border);
-const GtkBorder* __gtk_entry_get_inner_border          (GtkEntry        *entry);
+const GtkBorder* SF(gtk_entry_get_inner_border)          (GtkEntry        *entry);
 
-void       __gtk_entry_set_overwrite_mode         (GtkEntry      *entry,
+void       SF(gtk_entry_set_overwrite_mode)         (GtkEntry      *entry,
                                                  gboolean       overwrite);
-gboolean   __gtk_entry_get_overwrite_mode         (GtkEntry      *entry);
+gboolean   SF(gtk_entry_get_overwrite_mode)         (GtkEntry      *entry);
 
 /* text is truncated if needed */
-void       __gtk_entry_set_max_length 		(GtkEntry      *entry,
+void       SF(gtk_entry_set_max_length) 		(GtkEntry      *entry,
 						 gint           max);
-gint       __gtk_entry_get_max_length             (GtkEntry      *entry);
-guint16    __gtk_entry_get_text_length            (GtkEntry      *entry);
+gint       SF(gtk_entry_get_max_length)             (GtkEntry      *entry);
+guint16    SF(gtk_entry_get_text_length)            (GtkEntry      *entry);
 
-void       __gtk_entry_set_activates_default      (GtkEntry      *entry,
+void       SF(gtk_entry_set_activates_default)      (GtkEntry      *entry,
                                                  gboolean       setting);
-gboolean   __gtk_entry_get_activates_default      (GtkEntry      *entry);
+gboolean   SF(gtk_entry_get_activates_default)      (GtkEntry      *entry);
 
-void       __gtk_entry_set_width_chars            (GtkEntry      *entry,
+void       SF(gtk_entry_set_width_chars)            (GtkEntry      *entry,
                                                  gint           n_chars);
-gint       __gtk_entry_get_width_chars            (GtkEntry      *entry);
+gint       SF(gtk_entry_get_width_chars)            (GtkEntry      *entry);
 
 /* Somewhat more convenient than the GtkEditable generic functions
  */
-void       __gtk_entry_set_text                   (GtkEntry      *entry,
+void       SF(gtk_entry_set_text)                   (GtkEntry      *entry,
                                                  const gchar   *text);
 /* returns a reference to the text */
-const gchar* __gtk_entry_get_text                 (GtkEntry      *entry);
+const gchar* SF(gtk_entry_get_text)                 (GtkEntry      *entry);
 
-PangoLayout* __gtk_entry_get_layout               (GtkEntry      *entry);
-void         __gtk_entry_get_layout_offsets       (GtkEntry      *entry,
+PangoLayout* SF(gtk_entry_get_layout)               (GtkEntry      *entry);
+void         SF(gtk_entry_get_layout_offsets)       (GtkEntry      *entry,
                                                  gint          *x,
                                                  gint          *y);
-void       __gtk_entry_set_alignment              (GtkEntry      *entry,
+void       SF(gtk_entry_set_alignment)              (GtkEntry      *entry,
                                                  gfloat         xalign);
-gfloat     __gtk_entry_get_alignment              (GtkEntry      *entry);
+gfloat     SF(gtk_entry_get_alignment)              (GtkEntry      *entry);
 
-void                __gtk_entry_set_completion (GtkEntry           *entry,
+void                SF(gtk_entry_set_completion) (GtkEntry           *entry,
                                               GtkEntryCompletion *completion);
-GtkEntryCompletion *__gtk_entry_get_completion (GtkEntry           *entry);
+GtkEntryCompletion *SF(gtk_entry_get_completion) (GtkEntry           *entry);
 
-gint       __gtk_entry_layout_index_to_text_index (GtkEntry      *entry,
+gint       SF(gtk_entry_layout_index_to_text_index) (GtkEntry      *entry,
                                                  gint           layout_index);
-gint       __gtk_entry_text_index_to_layout_index (GtkEntry      *entry,
+gint       SF(gtk_entry_text_index_to_layout_index) (GtkEntry      *entry,
                                                  gint           text_index);
 
 /* For scrolling cursor appropriately
  */
-void           __gtk_entry_set_cursor_hadjustment (GtkEntry      *entry,
+void           SF(gtk_entry_set_cursor_hadjustment) (GtkEntry      *entry,
                                                  GtkAdjustment *adjustment);
-GtkAdjustment* __gtk_entry_get_cursor_hadjustment (GtkEntry      *entry);
+GtkAdjustment* SF(gtk_entry_get_cursor_hadjustment) (GtkEntry      *entry);
 
 /* Progress API
  */
-void           __gtk_entry_set_progress_fraction   (GtkEntry     *entry,
+void           SF(gtk_entry_set_progress_fraction)   (GtkEntry     *entry,
                                                   gdouble       fraction);
-gdouble        __gtk_entry_get_progress_fraction   (GtkEntry     *entry);
+gdouble        SF(gtk_entry_get_progress_fraction)   (GtkEntry     *entry);
 
-void           __gtk_entry_set_progress_pulse_step (GtkEntry     *entry,
+void           SF(gtk_entry_set_progress_pulse_step) (GtkEntry     *entry,
                                                   gdouble       fraction);
-gdouble        __gtk_entry_get_progress_pulse_step (GtkEntry     *entry);
+gdouble        SF(gtk_entry_get_progress_pulse_step) (GtkEntry     *entry);
 
-void           __gtk_entry_progress_pulse          (GtkEntry     *entry);
+void           SF(gtk_entry_progress_pulse)          (GtkEntry     *entry);
 
 /* Setting and managing icons
  */
-void           __gtk_entry_set_icon_from_pixbuf            (GtkEntry             *entry,
+void           SF(gtk_entry_set_icon_from_pixbuf)            (GtkEntry             *entry,
 							  GtkEntryIconPosition  icon_pos,
 							  GdkPixbuf            *pixbuf);
-void           __gtk_entry_set_icon_from_stock             (GtkEntry             *entry,
+void           SF(gtk_entry_set_icon_from_stock)             (GtkEntry             *entry,
 							  GtkEntryIconPosition  icon_pos,
 							  const gchar          *stock_id);
-void           __gtk_entry_set_icon_from_icon_name         (GtkEntry             *entry,
+void           SF(gtk_entry_set_icon_from_icon_name)         (GtkEntry             *entry,
 							  GtkEntryIconPosition  icon_pos,
 							  const gchar          *icon_name);
-void           __gtk_entry_set_icon_from_gicon             (GtkEntry             *entry,
+void           SF(gtk_entry_set_icon_from_gicon)             (GtkEntry             *entry,
 							  GtkEntryIconPosition  icon_pos,
 							  GIcon                *icon);
-GtkImageType __gtk_entry_get_icon_storage_type             (GtkEntry             *entry,
+GtkImageType SF(gtk_entry_get_icon_storage_type)             (GtkEntry             *entry,
 							  GtkEntryIconPosition  icon_pos);
-GdkPixbuf*   __gtk_entry_get_icon_pixbuf                   (GtkEntry             *entry,
+GdkPixbuf*   SF(gtk_entry_get_icon_pixbuf)                   (GtkEntry             *entry,
 							  GtkEntryIconPosition  icon_pos);
-const gchar* __gtk_entry_get_icon_stock                    (GtkEntry             *entry,
+const gchar* SF(gtk_entry_get_icon_stock)                    (GtkEntry             *entry,
 							  GtkEntryIconPosition  icon_pos);
-const gchar* __gtk_entry_get_icon_name                     (GtkEntry             *entry,
+const gchar* SF(gtk_entry_get_icon_name)                     (GtkEntry             *entry,
 							  GtkEntryIconPosition  icon_pos);
-GIcon*       __gtk_entry_get_icon_gicon                    (GtkEntry             *entry,
+GIcon*       SF(gtk_entry_get_icon_gicon)                    (GtkEntry             *entry,
 							  GtkEntryIconPosition  icon_pos);
-void         __gtk_entry_set_icon_activatable              (GtkEntry             *entry,
+void         SF(gtk_entry_set_icon_activatable)              (GtkEntry             *entry,
 							  GtkEntryIconPosition  icon_pos,
 							  gboolean              activatable);
-gboolean     __gtk_entry_get_icon_activatable              (GtkEntry             *entry,
+gboolean     SF(gtk_entry_get_icon_activatable)              (GtkEntry             *entry,
 							  GtkEntryIconPosition  icon_pos);
-void         __gtk_entry_set_icon_sensitive                (GtkEntry             *entry,
+void         SF(gtk_entry_set_icon_sensitive)                (GtkEntry             *entry,
 							  GtkEntryIconPosition  icon_pos,
 							  gboolean              sensitive);
-gboolean     __gtk_entry_get_icon_sensitive                (GtkEntry             *entry,
+gboolean     SF(gtk_entry_get_icon_sensitive)                (GtkEntry             *entry,
 							  GtkEntryIconPosition  icon_pos);
-gint         __gtk_entry_get_icon_at_pos                   (GtkEntry             *entry,
+gint         SF(gtk_entry_get_icon_at_pos)                   (GtkEntry             *entry,
 							  gint                  x,
 							  gint                  y);
-void         __gtk_entry_set_icon_tooltip_text             (GtkEntry             *entry,
+void         SF(gtk_entry_set_icon_tooltip_text)             (GtkEntry             *entry,
 							  GtkEntryIconPosition  icon_pos,
 							  const gchar          *tooltip);
-gchar *      __gtk_entry_get_icon_tooltip_text             (GtkEntry             *entry,
+gchar *      SF(gtk_entry_get_icon_tooltip_text)             (GtkEntry             *entry,
                                                           GtkEntryIconPosition  icon_pos);
-void         __gtk_entry_set_icon_tooltip_markup           (GtkEntry             *entry,
+void         SF(gtk_entry_set_icon_tooltip_markup)           (GtkEntry             *entry,
 							  GtkEntryIconPosition  icon_pos,
 							  const gchar          *tooltip);
-gchar *      __gtk_entry_get_icon_tooltip_markup           (GtkEntry             *entry,
+gchar *      SF(gtk_entry_get_icon_tooltip_markup)           (GtkEntry             *entry,
                                                           GtkEntryIconPosition  icon_pos);
-void         __gtk_entry_set_icon_drag_source              (GtkEntry             *entry,
+void         SF(gtk_entry_set_icon_drag_source)              (GtkEntry             *entry,
 							  GtkEntryIconPosition  icon_pos,
 							  GtkTargetList        *target_list,
 							  GdkDragAction         actions);
-gint         __gtk_entry_get_current_icon_drag_source      (GtkEntry             *entry);
+gint         SF(gtk_entry_get_current_icon_drag_source)      (GtkEntry             *entry);
 
-GdkWindow  * __gtk_entry_get_icon_window                   (GtkEntry             *entry,
+GdkWindow  * SF(gtk_entry_get_icon_window)                   (GtkEntry             *entry,
                                                           GtkEntryIconPosition  icon_pos);
 
-gboolean    __gtk_entry_im_context_filter_keypress         (GtkEntry             *entry,
+gboolean    SF(gtk_entry_im_context_filter_keypress)         (GtkEntry             *entry,
                                                           GdkEventKey          *event);
-void        __gtk_entry_reset_im_context                   (GtkEntry             *entry);
+void        SF(gtk_entry_reset_im_context)                   (GtkEntry             *entry);
 
 
 /* Deprecated compatibility functions
  */
 
 #ifndef GTK_DISABLE_DEPRECATED
-GtkWidget* __gtk_entry_new_with_max_length	(gint           max);
-void       __gtk_entry_append_text    		(GtkEntry      *entry,
+GtkWidget* SF(gtk_entry_new_with_max_length)	(gint           max);
+void       SF(gtk_entry_append_text)    		(GtkEntry      *entry,
 						 const gchar   *text);
-void       __gtk_entry_prepend_text   		(GtkEntry      *entry,
+void       SF(gtk_entry_prepend_text)   		(GtkEntry      *entry,
 						 const gchar   *text);
-void       __gtk_entry_set_position   		(GtkEntry      *entry,
+void       SF(gtk_entry_set_position)   		(GtkEntry      *entry,
 						 gint           position);
-void       __gtk_entry_select_region  		(GtkEntry      *entry,
+void       SF(gtk_entry_select_region)  		(GtkEntry      *entry,
 						 gint           start,
 						 gint           end);
-void       __gtk_entry_set_editable   		(GtkEntry      *entry,
+void       SF(gtk_entry_set_editable)   		(GtkEntry      *entry,
 						 gboolean       editable);
 #endif /* GTK_DISABLE_DEPRECATED */
 

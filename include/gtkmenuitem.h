@@ -125,47 +125,47 @@ GType	   _T2_gtk_menu_item_get_type	      (void) G_GNUC_CONST;
 GType	   _3T_gtk_menu_item_get_type	      (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType	   gtk_menu_item_get_type	      (void) G_GNUC_CONST;
-GtkWidget* __gtk_menu_item_new                  (void);
-GtkWidget* __gtk_menu_item_new_with_label       (const gchar         *label);
-GtkWidget* __gtk_menu_item_new_with_mnemonic    (const gchar         *label);
-void       __gtk_menu_item_set_submenu          (GtkMenuItem         *menu_item,
+GtkWidget* SF(gtk_menu_item_new)                  (void);
+GtkWidget* SF(gtk_menu_item_new_with_label)       (const gchar         *label);
+GtkWidget* SF(gtk_menu_item_new_with_mnemonic)    (const gchar         *label);
+void       SF(gtk_menu_item_set_submenu)          (GtkMenuItem         *menu_item,
 					       GtkWidget           *submenu);
-GtkWidget* __gtk_menu_item_get_submenu          (GtkMenuItem         *menu_item);
-void       __gtk_menu_item_select               (GtkMenuItem         *menu_item);
-void       __gtk_menu_item_deselect             (GtkMenuItem         *menu_item);
-void       __gtk_menu_item_activate             (GtkMenuItem         *menu_item);
-void       __gtk_menu_item_toggle_size_request  (GtkMenuItem         *menu_item,
+GtkWidget* SF(gtk_menu_item_get_submenu)          (GtkMenuItem         *menu_item);
+void       SF(gtk_menu_item_select)               (GtkMenuItem         *menu_item);
+void       SF(gtk_menu_item_deselect)             (GtkMenuItem         *menu_item);
+void       SF(gtk_menu_item_activate)             (GtkMenuItem         *menu_item);
+void       SF(gtk_menu_item_toggle_size_request)  (GtkMenuItem         *menu_item,
 					       gint                *requisition);
-void       __gtk_menu_item_toggle_size_allocate (GtkMenuItem         *menu_item,
+void       SF(gtk_menu_item_toggle_size_allocate) (GtkMenuItem         *menu_item,
 					       gint                 allocation);
-void       __gtk_menu_item_set_right_justified  (GtkMenuItem         *menu_item,
+void       SF(gtk_menu_item_set_right_justified)  (GtkMenuItem         *menu_item,
 					       gboolean             right_justified);
-gboolean   __gtk_menu_item_get_right_justified  (GtkMenuItem         *menu_item);
-void	   __gtk_menu_item_set_accel_path	      (GtkMenuItem	   *menu_item,
+gboolean   SF(gtk_menu_item_get_right_justified)  (GtkMenuItem         *menu_item);
+void	   SF(gtk_menu_item_set_accel_path)	      (GtkMenuItem	   *menu_item,
 					       const gchar	   *accel_path);
-const gchar* __gtk_menu_item_get_accel_path     (GtkMenuItem    *menu_item);
+const gchar* SF(gtk_menu_item_get_accel_path)     (GtkMenuItem    *menu_item);
 
-void       __gtk_menu_item_set_label            (GtkMenuItem         *menu_item,
+void       SF(gtk_menu_item_set_label)            (GtkMenuItem         *menu_item,
  					       const gchar         *label);
-const gchar *__gtk_menu_item_get_label          (GtkMenuItem         *menu_item);
+const gchar *SF(gtk_menu_item_get_label)          (GtkMenuItem         *menu_item);
 
-void       __gtk_menu_item_set_use_underline    (GtkMenuItem         *menu_item,
+void       SF(gtk_menu_item_set_use_underline)    (GtkMenuItem         *menu_item,
  					       gboolean             setting);
-gboolean   __gtk_menu_item_get_use_underline    (GtkMenuItem         *menu_item);
+gboolean   SF(gtk_menu_item_get_use_underline)    (GtkMenuItem         *menu_item);
 
 /* private */
-void	  ___gtk_menu_item_refresh_accel_path   (GtkMenuItem	   *menu_item,
+void	  SF(_gtk_menu_item_refresh_accel_path)   (GtkMenuItem	   *menu_item,
 					       const gchar	   *prefix,
 					       GtkAccelGroup	   *accel_group,
 					       gboolean		    group_changed);
-gboolean  ___gtk_menu_item_is_selectable        (GtkWidget           *menu_item);
-void      ___gtk_menu_item_popup_submenu        (GtkWidget           *menu_item,
+gboolean  SF(_gtk_menu_item_is_selectable)        (GtkWidget           *menu_item);
+void      SF(_gtk_menu_item_popup_submenu)        (GtkWidget           *menu_item,
                                                gboolean             with_delay);
-void      ___gtk_menu_item_popdown_submenu      (GtkWidget           *menu_item);
+void      SF(_gtk_menu_item_popdown_submenu)      (GtkWidget           *menu_item);
 
 #ifndef GTK_DISABLE_DEPRECATED
-void       __gtk_menu_item_remove_submenu       (GtkMenuItem         *menu_item);
-#define __gtk_menu_item_right_justify(menu_item) __gtk_menu_item_set_right_justified ((menu_item), TRUE)
+void       SF(gtk_menu_item_remove_submenu)       (GtkMenuItem         *menu_item);
+#define SF(gtk_menu_item_right_justify)(menu_item) SF(gtk_menu_item_set_right_justified) ((menu_item), TRUE)
 #endif /* GTK_DISABLE_DEPRECATED */
 
 G_END_DECLS

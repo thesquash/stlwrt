@@ -45,12 +45,12 @@ typedef struct _GdkPangoRendererPrivate GdkPangoRendererPrivate;
  *
  * #GdkPangoRenderer is a subclass of #PangoRenderer used for rendering
  * Pango objects into GDK drawables. The default renderer for a particular
- * screen is obtained with __gdk_pango_renderer_get_default(); Pango
+ * screen is obtained with SF(gdk_pango_renderer_get_default)(); Pango
  * functions like pango_renderer_draw_layout() and
  * pango_renderer_draw_layout_line() are then used to draw objects with
  * the renderer.
  *
- * In most simple cases, applications can just use __gdk_draw_layout(), and
+ * In most simple cases, applications can just use SF(gdk_draw_layout)(), and
  * don't need to directly use #GdkPangoRenderer at all. Using the
  * #GdkPangoRenderer directly is most useful when working with a
  * transformation such as a rotation, because the Pango drawing functions
@@ -113,28 +113,28 @@ GType _3T_gdk_pango_renderer_get_type (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType gdk_pango_renderer_get_type (void) G_GNUC_CONST;
 
-PangoRenderer *__gdk_pango_renderer_new         (GdkScreen *screen);
-PangoRenderer *__gdk_pango_renderer_get_default (GdkScreen *screen);
+PangoRenderer *SF(gdk_pango_renderer_new)         (GdkScreen *screen);
+PangoRenderer *SF(gdk_pango_renderer_get_default) (GdkScreen *screen);
 
-void __gdk_pango_renderer_set_drawable       (GdkPangoRenderer *gdk_renderer,
+void SF(gdk_pango_renderer_set_drawable)       (GdkPangoRenderer *gdk_renderer,
 					    GdkDrawable      *drawable);
-void __gdk_pango_renderer_set_gc             (GdkPangoRenderer *gdk_renderer,
+void SF(gdk_pango_renderer_set_gc)             (GdkPangoRenderer *gdk_renderer,
 					    GdkGC            *gc);
-void __gdk_pango_renderer_set_stipple        (GdkPangoRenderer *gdk_renderer,
+void SF(gdk_pango_renderer_set_stipple)        (GdkPangoRenderer *gdk_renderer,
 					    PangoRenderPart   part,
 					    GdkBitmap        *stipple);
-void __gdk_pango_renderer_set_override_color (GdkPangoRenderer *gdk_renderer,
+void SF(gdk_pango_renderer_set_override_color) (GdkPangoRenderer *gdk_renderer,
 					    PangoRenderPart   part,
 					    const GdkColor   *color);
 
 /************************************************************************/
 
-PangoContext *__gdk_pango_context_get_for_screen (GdkScreen    *screen);
+PangoContext *SF(gdk_pango_context_get_for_screen) (GdkScreen    *screen);
 #ifndef GDK_MULTIHEAD_SAFE
-PangoContext *__gdk_pango_context_get            (void);
+PangoContext *SF(gdk_pango_context_get)            (void);
 #endif
 #ifndef GDK_DISABLE_DEPRECATED
-void          __gdk_pango_context_set_colormap   (PangoContext *context,
+void          SF(gdk_pango_context_set_colormap)   (PangoContext *context,
                                                 GdkColormap  *colormap);
 #endif 
 
@@ -145,12 +145,12 @@ void          __gdk_pango_context_set_colormap   (PangoContext *context,
  * draw with the region as clip, only the given ranges are drawn.
  */
 
-GdkRegion    *__gdk_pango_layout_line_get_clip_region (PangoLayoutLine *line,
+GdkRegion    *SF(gdk_pango_layout_line_get_clip_region) (PangoLayoutLine *line,
                                                      gint             x_origin,
                                                      gint             y_origin,
                                                      const gint      *index_ranges,
                                                      gint             n_ranges);
-GdkRegion    *__gdk_pango_layout_get_clip_region      (PangoLayout     *layout,
+GdkRegion    *SF(gdk_pango_layout_get_clip_region)      (PangoLayout     *layout,
                                                      gint             x_origin,
                                                      gint             y_origin,
                                                      const gint      *index_ranges,
@@ -182,9 +182,9 @@ struct _GdkPangoAttrEmbossColor
   PangoColor color;
 };
 
-PangoAttribute *__gdk_pango_attr_stipple_new  (GdkBitmap *stipple);
-PangoAttribute *__gdk_pango_attr_embossed_new (gboolean embossed);
-PangoAttribute *__gdk_pango_attr_emboss_color_new (const GdkColor *color);
+PangoAttribute *SF(gdk_pango_attr_stipple_new)  (GdkBitmap *stipple);
+PangoAttribute *SF(gdk_pango_attr_embossed_new) (gboolean embossed);
+PangoAttribute *SF(gdk_pango_attr_emboss_color_new) (const GdkColor *color);
 
 G_END_DECLS
 

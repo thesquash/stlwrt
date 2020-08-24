@@ -51,14 +51,14 @@ GType _3T_gdk_display_manager_get_type (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType gdk_display_manager_get_type (void) G_GNUC_CONST;
 
-GdkDisplayManager *__gdk_display_manager_get                 (void);
-GdkDisplay *       __gdk_display_manager_get_default_display (GdkDisplayManager *display_manager);
-void               __gdk_display_manager_set_default_display (GdkDisplayManager *display_manager,
+GdkDisplayManager *SF(gdk_display_manager_get)                 (void);
+GdkDisplay *       SF(gdk_display_manager_get_default_display) (GdkDisplayManager *display_manager);
+void               SF(gdk_display_manager_set_default_display) (GdkDisplayManager *display_manager,
 							    GdkDisplay        *display);
-GSList     *       __gdk_display_manager_list_displays       (GdkDisplayManager *display_manager);
+GSList     *       SF(gdk_display_manager_list_displays)       (GdkDisplayManager *display_manager);
 
 
-void __gdk_set_allowed_backends (const gchar *backends);
+void SF(gdk_set_allowed_backends) (const gchar *backends);
 
 G_END_DECLS
 

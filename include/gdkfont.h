@@ -83,55 +83,55 @@ GType    _3T_gdk_font_get_type  (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType    gdk_font_get_type  (void) G_GNUC_CONST;
 
-GdkFont* __gdk_font_ref	    (GdkFont        *font);
-void	 __gdk_font_unref	    (GdkFont        *font);
-gint	 __gdk_font_id	    (const GdkFont  *font);
-gboolean __gdk_font_equal	    (const GdkFont  *fonta,
+GdkFont* SF(gdk_font_ref)	    (GdkFont        *font);
+void	 SF(gdk_font_unref)	    (GdkFont        *font);
+gint	 SF(gdk_font_id)	    (const GdkFont  *font);
+gboolean SF(gdk_font_equal)	    (const GdkFont  *fonta,
 			     const GdkFont  *fontb);
 
-GdkFont *__gdk_font_load_for_display             (GdkDisplay           *display,
+GdkFont *SF(gdk_font_load_for_display)             (GdkDisplay           *display,
 						const gchar          *font_name);
-GdkFont *__gdk_fontset_load_for_display          (GdkDisplay           *display,
+GdkFont *SF(gdk_fontset_load_for_display)          (GdkDisplay           *display,
 						const gchar          *fontset_name);
-GdkFont *__gdk_font_from_description_for_display (GdkDisplay           *display,
+GdkFont *SF(gdk_font_from_description_for_display) (GdkDisplay           *display,
 						PangoFontDescription *font_desc);
 
 #ifndef GDK_DISABLE_DEPRECATED
 
 #ifndef GDK_MULTIHEAD_SAFE
-GdkFont* __gdk_font_load             (const gchar          *font_name);
-GdkFont* __gdk_fontset_load          (const gchar          *fontset_name);
-GdkFont* __gdk_font_from_description (PangoFontDescription *font_desc);
+GdkFont* SF(gdk_font_load)             (const gchar          *font_name);
+GdkFont* SF(gdk_fontset_load)          (const gchar          *fontset_name);
+GdkFont* SF(gdk_font_from_description) (PangoFontDescription *font_desc);
 #endif
 
-gint	 __gdk_string_width   (GdkFont        *font,
+gint	 SF(gdk_string_width)   (GdkFont        *font,
 			     const gchar    *string);
-gint	 __gdk_text_width	    (GdkFont        *font,
+gint	 SF(gdk_text_width)	    (GdkFont        *font,
 			     const gchar    *text,
 			     gint            text_length);
-gint	 __gdk_text_width_wc  (GdkFont        *font,
+gint	 SF(gdk_text_width_wc)  (GdkFont        *font,
 			     const GdkWChar *text,
 			     gint            text_length);
-gint	 __gdk_char_width	    (GdkFont        *font,
+gint	 SF(gdk_char_width)	    (GdkFont        *font,
 			     gchar           character);
-gint	 __gdk_char_width_wc  (GdkFont        *font,
+gint	 SF(gdk_char_width_wc)  (GdkFont        *font,
 			     GdkWChar        character);
-gint	 __gdk_string_measure (GdkFont        *font,
+gint	 SF(gdk_string_measure) (GdkFont        *font,
 			     const gchar    *string);
-gint	 __gdk_text_measure   (GdkFont        *font,
+gint	 SF(gdk_text_measure)   (GdkFont        *font,
 			     const gchar    *text,
 			     gint            text_length);
-gint	 __gdk_char_measure   (GdkFont        *font,
+gint	 SF(gdk_char_measure)   (GdkFont        *font,
 			     gchar           character);
-gint	 __gdk_string_height  (GdkFont        *font,
+gint	 SF(gdk_string_height)  (GdkFont        *font,
 			     const gchar    *string);
-gint	 __gdk_text_height    (GdkFont        *font,
+gint	 SF(gdk_text_height)    (GdkFont        *font,
 			     const gchar    *text,
 			     gint            text_length);
-gint	 __gdk_char_height    (GdkFont        *font,
+gint	 SF(gdk_char_height)    (GdkFont        *font,
 			     gchar           character);
 
-void     __gdk_text_extents   (GdkFont     *font,
+void     SF(gdk_text_extents)   (GdkFont     *font,
 			     const gchar *text,
 			     gint         text_length,
 			     gint        *lbearing,
@@ -139,7 +139,7 @@ void     __gdk_text_extents   (GdkFont     *font,
 			     gint        *width,
 			     gint        *ascent,
 			     gint        *descent);
-void    __gdk_text_extents_wc (GdkFont        *font,
+void    SF(gdk_text_extents_wc) (GdkFont        *font,
 			     const GdkWChar *text,
 			     gint            text_length,
 			     gint           *lbearing,
@@ -147,7 +147,7 @@ void    __gdk_text_extents_wc (GdkFont        *font,
 			     gint           *width,
 			     gint           *ascent,
 			     gint           *descent);
-void     __gdk_string_extents (GdkFont     *font,
+void     SF(gdk_string_extents) (GdkFont     *font,
 			     const gchar *string,
 			     gint        *lbearing,
 			     gint        *rbearing,
@@ -155,7 +155,7 @@ void     __gdk_string_extents (GdkFont     *font,
 			     gint        *ascent,
 			     gint        *descent);
 
-GdkDisplay * __gdk_font_get_display (GdkFont *font);
+GdkDisplay * SF(gdk_font_get_display) (GdkFont *font);
 
 #endif /* GDK_DISABLE_DEPRECATED */
 

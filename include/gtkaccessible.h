@@ -70,10 +70,10 @@ GType _3T_gtk_accessible_get_type (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType gtk_accessible_get_type (void) G_GNUC_CONST;
 
-void        __gtk_accessible_set_widget                  (GtkAccessible     *accessible,
+void        SF(gtk_accessible_set_widget)                  (GtkAccessible     *accessible,
                                                         GtkWidget         *widget);
-GtkWidget*  __gtk_accessible_get_widget                  (GtkAccessible     *accessible);
-void        __gtk_accessible_connect_widget_destroyed    (GtkAccessible     *accessible);
+GtkWidget*  SF(gtk_accessible_get_widget)                  (GtkAccessible     *accessible);
+void        SF(gtk_accessible_connect_widget_destroyed)    (GtkAccessible     *accessible);
 
 G_END_DECLS
 

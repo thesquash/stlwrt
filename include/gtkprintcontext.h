@@ -42,26 +42,26 @@ GType          gtk_print_context_get_type (void) G_GNUC_CONST;
 
 
 /* Rendering */
-cairo_t      *__gtk_print_context_get_cairo_context    (GtkPrintContext *context);
+cairo_t      *SF(gtk_print_context_get_cairo_context)    (GtkPrintContext *context);
 
-GtkPageSetup *__gtk_print_context_get_page_setup       (GtkPrintContext *context);
-gdouble       __gtk_print_context_get_width            (GtkPrintContext *context);
-gdouble       __gtk_print_context_get_height           (GtkPrintContext *context);
-gdouble       __gtk_print_context_get_dpi_x            (GtkPrintContext *context);
-gdouble       __gtk_print_context_get_dpi_y            (GtkPrintContext *context);
-gboolean      __gtk_print_context_get_hard_margins     (GtkPrintContext *context,
+GtkPageSetup *SF(gtk_print_context_get_page_setup)       (GtkPrintContext *context);
+gdouble       SF(gtk_print_context_get_width)            (GtkPrintContext *context);
+gdouble       SF(gtk_print_context_get_height)           (GtkPrintContext *context);
+gdouble       SF(gtk_print_context_get_dpi_x)            (GtkPrintContext *context);
+gdouble       SF(gtk_print_context_get_dpi_y)            (GtkPrintContext *context);
+gboolean      SF(gtk_print_context_get_hard_margins)     (GtkPrintContext *context,
 						      gdouble         *top,
 						      gdouble         *bottom,
 						      gdouble         *left,
 						      gdouble         *right);
 
 /* Fonts */
-PangoFontMap *__gtk_print_context_get_pango_fontmap    (GtkPrintContext *context);
-PangoContext *__gtk_print_context_create_pango_context (GtkPrintContext *context);
-PangoLayout  *__gtk_print_context_create_pango_layout  (GtkPrintContext *context);
+PangoFontMap *SF(gtk_print_context_get_pango_fontmap)    (GtkPrintContext *context);
+PangoContext *SF(gtk_print_context_create_pango_context) (GtkPrintContext *context);
+PangoLayout  *SF(gtk_print_context_create_pango_layout)  (GtkPrintContext *context);
 
 /* Needed for preview implementations */
-void         __gtk_print_context_set_cairo_context     (GtkPrintContext *context,
+void         SF(gtk_print_context_set_cairo_context)     (GtkPrintContext *context,
 						      cairo_t         *cr,
 						      double           dpi_x,
 						      double           dpi_y);

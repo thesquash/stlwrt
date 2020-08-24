@@ -53,14 +53,14 @@ struct _GtkFileChooserDialogClass
 
 
 GType      gtk_file_chooser_dialog_get_type         (void) G_GNUC_CONST;
-GtkWidget *__gtk_file_chooser_dialog_new              (const gchar          *title,
+GtkWidget *SF(gtk_file_chooser_dialog_new)              (const gchar          *title,
 						     GtkWindow            *parent,
 						     GtkFileChooserAction  action,
 						     const gchar          *first_button_text,
 						     ...) G_GNUC_NULL_TERMINATED;
 
 #ifndef GTK_DISABLE_DEPRECATED
-GtkWidget *__gtk_file_chooser_dialog_new_with_backend (const gchar          *title,
+GtkWidget *SF(gtk_file_chooser_dialog_new_with_backend) (const gchar          *title,
 						     GtkWindow            *parent,
 						     GtkFileChooserAction  action,
 						     const gchar          *backend,

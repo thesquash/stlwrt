@@ -113,30 +113,30 @@ GType      _T2_gtk_statusbar_get_type     	(void) G_GNUC_CONST;
 GType      _3T_gtk_statusbar_get_type     	(void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType      gtk_statusbar_get_type     	(void) G_GNUC_CONST;
-GtkWidget* __gtk_statusbar_new          	(void);
+GtkWidget* SF(gtk_statusbar_new)          	(void);
 /* If you don't want to use contexts, 0 is a predefined global
  * context_id you can pass to push/pop/remove
  */
-guint	   __gtk_statusbar_get_context_id	(GtkStatusbar *statusbar,
+guint	   SF(gtk_statusbar_get_context_id)	(GtkStatusbar *statusbar,
 					 const gchar  *context_description);
 /* Returns message_id used for gtk_statusbar_remove */
-guint      __gtk_statusbar_push          	(GtkStatusbar *statusbar,
+guint      SF(gtk_statusbar_push)          	(GtkStatusbar *statusbar,
 					 guint	       context_id,
 					 const gchar  *text);
-void       __gtk_statusbar_pop          	(GtkStatusbar *statusbar,
+void       SF(gtk_statusbar_pop)          	(GtkStatusbar *statusbar,
 					 guint	       context_id);
-void       __gtk_statusbar_remove        	(GtkStatusbar *statusbar,
+void       SF(gtk_statusbar_remove)        	(GtkStatusbar *statusbar,
 					 guint	       context_id,
 					 guint         message_id);
-void       __gtk_statusbar_remove_all    	(GtkStatusbar *statusbar,
+void       SF(gtk_statusbar_remove_all)    	(GtkStatusbar *statusbar,
 					 guint	       context_id);
 					 
 
-void     __gtk_statusbar_set_has_resize_grip (GtkStatusbar *statusbar,
+void     SF(gtk_statusbar_set_has_resize_grip) (GtkStatusbar *statusbar,
 					    gboolean      setting);
-gboolean __gtk_statusbar_get_has_resize_grip (GtkStatusbar *statusbar);
+gboolean SF(gtk_statusbar_get_has_resize_grip) (GtkStatusbar *statusbar);
 
-GtkWidget* __gtk_statusbar_get_message_area  (GtkStatusbar *statusbar);
+GtkWidget* SF(gtk_statusbar_get_message_area)  (GtkStatusbar *statusbar);
 
 G_END_DECLS
 

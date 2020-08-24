@@ -88,46 +88,46 @@ struct _GtkBindingSignal
 
 /* Application-level methods */
 
-GtkBindingSet*	__gtk_binding_set_new	(const gchar	*set_name);
-GtkBindingSet*	__gtk_binding_set_by_class(gpointer	 object_class);
-GtkBindingSet*	__gtk_binding_set_find	(const gchar	*set_name);
-gboolean __gtk_bindings_activate		(GObject	*object,
+GtkBindingSet*	SF(gtk_binding_set_new)	(const gchar	*set_name);
+GtkBindingSet*	SF(gtk_binding_set_by_class)(gpointer	 object_class);
+GtkBindingSet*	SF(gtk_binding_set_find)	(const gchar	*set_name);
+gboolean SF(gtk_bindings_activate)		(GObject	*object,
 					 guint		 keyval,
 					 GdkModifierType modifiers);
-gboolean __gtk_bindings_activate_event    (GObject      *object,
+gboolean SF(gtk_bindings_activate_event)    (GObject      *object,
 					 GdkEventKey    *event);
-gboolean __gtk_binding_set_activate	(GtkBindingSet	*binding_set,
+gboolean SF(gtk_binding_set_activate)	(GtkBindingSet	*binding_set,
 					 guint		 keyval,
 					 GdkModifierType modifiers,
 					 GObject	*object);
 
 #ifndef GTK_DISABLE_DEPRECATED
 #define	 gtk_binding_entry_add		gtk_binding_entry_clear
-void	 __gtk_binding_entry_clear	(GtkBindingSet	*binding_set,
+void	 SF(gtk_binding_entry_clear)	(GtkBindingSet	*binding_set,
 					 guint		 keyval,
 					 GdkModifierType modifiers);
-guint	 __gtk_binding_parse_binding      (GScanner       *scanner);
+guint	 SF(gtk_binding_parse_binding)      (GScanner       *scanner);
 #endif /* GTK_DISABLE_DEPRECATED */
 
-void	 __gtk_binding_entry_skip         (GtkBindingSet  *binding_set,
+void	 SF(gtk_binding_entry_skip)         (GtkBindingSet  *binding_set,
                                          guint           keyval,
                                          GdkModifierType modifiers);
-void	 __gtk_binding_entry_add_signal   (GtkBindingSet  *binding_set,
+void	 SF(gtk_binding_entry_add_signal)   (GtkBindingSet  *binding_set,
                                          guint           keyval,
                                          GdkModifierType modifiers,
                                          const gchar    *signal_name,
                                          guint           n_args,
                                          ...);
-void	 __gtk_binding_entry_add_signall	(GtkBindingSet	*binding_set,
+void	 SF(gtk_binding_entry_add_signall)	(GtkBindingSet	*binding_set,
 					 guint		 keyval,
 					 GdkModifierType modifiers,
 					 const gchar	*signal_name,
 					 GSList		*binding_args);
-void	 __gtk_binding_entry_remove	(GtkBindingSet	*binding_set,
+void	 SF(gtk_binding_entry_remove)	(GtkBindingSet	*binding_set,
 					 guint		 keyval,
 					 GdkModifierType modifiers);
 
-void	 __gtk_binding_set_add_path	(GtkBindingSet	*binding_set,
+void	 SF(gtk_binding_set_add_path)	(GtkBindingSet	*binding_set,
 					 GtkPathType	 path_type,
 					 const gchar	*path_pattern,
 					 GtkPathPriorityType priority);
@@ -135,9 +135,9 @@ void	 __gtk_binding_set_add_path	(GtkBindingSet	*binding_set,
 
 /* Non-public methods */
 
-guint	 ___gtk_binding_parse_binding     (GScanner       *scanner);
-void     ___gtk_binding_reset_parsed      (void);
-void	 ___gtk_binding_entry_add_signall (GtkBindingSet  *binding_set,
+guint	 SF(_gtk_binding_parse_binding)     (GScanner       *scanner);
+void     SF(_gtk_binding_reset_parsed)      (void);
+void	 SF(_gtk_binding_entry_add_signall) (GtkBindingSet  *binding_set,
 					 guint		 keyval,
 					 GdkModifierType modifiers,
 					 const gchar	*signal_name,

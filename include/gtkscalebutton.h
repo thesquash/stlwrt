@@ -99,27 +99,27 @@ GType            _T2_gtk_scale_button_get_type         (void) G_GNUC_CONST;
 GType            _3T_gtk_scale_button_get_type         (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType            gtk_scale_button_get_type         (void) G_GNUC_CONST;
-GtkWidget *      __gtk_scale_button_new              (GtkIconSize      size,
+GtkWidget *      SF(gtk_scale_button_new)              (GtkIconSize      size,
                                                     gdouble          min,
                                                     gdouble          max,
                                                     gdouble          step,
                                                     const gchar    **icons);
-void             __gtk_scale_button_set_icons        (GtkScaleButton  *button,
+void             SF(gtk_scale_button_set_icons)        (GtkScaleButton  *button,
                                                     const gchar    **icons);
-gdouble          __gtk_scale_button_get_value        (GtkScaleButton  *button);
-void             __gtk_scale_button_set_value        (GtkScaleButton  *button,
+gdouble          SF(gtk_scale_button_get_value)        (GtkScaleButton  *button);
+void             SF(gtk_scale_button_set_value)        (GtkScaleButton  *button,
                                                     gdouble          value);
-GtkAdjustment *  __gtk_scale_button_get_adjustment   (GtkScaleButton  *button);
-void             __gtk_scale_button_set_adjustment   (GtkScaleButton  *button,
+GtkAdjustment *  SF(gtk_scale_button_get_adjustment)   (GtkScaleButton  *button);
+void             SF(gtk_scale_button_set_adjustment)   (GtkScaleButton  *button,
                                                     GtkAdjustment   *adjustment);
-GtkWidget *      __gtk_scale_button_get_plus_button  (GtkScaleButton  *button);
-GtkWidget *      __gtk_scale_button_get_minus_button (GtkScaleButton  *button);
-GtkWidget *      __gtk_scale_button_get_popup        (GtkScaleButton  *button);
+GtkWidget *      SF(gtk_scale_button_get_plus_button)  (GtkScaleButton  *button);
+GtkWidget *      SF(gtk_scale_button_get_minus_button) (GtkScaleButton  *button);
+GtkWidget *      SF(gtk_scale_button_get_popup)        (GtkScaleButton  *button);
 
 #ifndef GTK_DISABLE_DEPRECATED
 
-GtkOrientation   __gtk_scale_button_get_orientation  (GtkScaleButton  *button);
-void             __gtk_scale_button_set_orientation  (GtkScaleButton  *button,
+GtkOrientation   SF(gtk_scale_button_get_orientation)  (GtkScaleButton  *button);
+void             SF(gtk_scale_button_set_orientation)  (GtkScaleButton  *button,
                                                     GtkOrientation   orientation);
 
 #endif /* GTK_DISABLE_DEPRECATED */

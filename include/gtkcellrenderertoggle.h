@@ -108,18 +108,18 @@ GType            _T2_gtk_cell_renderer_toggle_get_type       (void) G_GNUC_CONST
 GType            _3T_gtk_cell_renderer_toggle_get_type       (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType            gtk_cell_renderer_toggle_get_type       (void) G_GNUC_CONST;
-GtkCellRenderer *__gtk_cell_renderer_toggle_new            (void);
+GtkCellRenderer *SF(gtk_cell_renderer_toggle_new)            (void);
 
-gboolean         __gtk_cell_renderer_toggle_get_radio      (GtkCellRendererToggle *toggle);
-void             __gtk_cell_renderer_toggle_set_radio      (GtkCellRendererToggle *toggle,
+gboolean         SF(gtk_cell_renderer_toggle_get_radio)      (GtkCellRendererToggle *toggle);
+void             SF(gtk_cell_renderer_toggle_set_radio)      (GtkCellRendererToggle *toggle,
                                                           gboolean               radio);
 
-gboolean        __gtk_cell_renderer_toggle_get_active      (GtkCellRendererToggle *toggle);
-void            __gtk_cell_renderer_toggle_set_active      (GtkCellRendererToggle *toggle,
+gboolean        SF(gtk_cell_renderer_toggle_get_active)      (GtkCellRendererToggle *toggle);
+void            SF(gtk_cell_renderer_toggle_set_active)      (GtkCellRendererToggle *toggle,
                                                           gboolean               setting);
 
-gboolean        __gtk_cell_renderer_toggle_get_activatable (GtkCellRendererToggle *toggle);
-void            __gtk_cell_renderer_toggle_set_activatable (GtkCellRendererToggle *toggle,
+gboolean        SF(gtk_cell_renderer_toggle_get_activatable) (GtkCellRendererToggle *toggle);
+void            SF(gtk_cell_renderer_toggle_set_activatable) (GtkCellRendererToggle *toggle,
                                                           gboolean               setting);
 
 

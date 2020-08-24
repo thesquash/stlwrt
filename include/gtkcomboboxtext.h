@@ -60,18 +60,18 @@ GType         _T2_gtk_combo_box_text_get_type        (void) G_GNUC_CONST;
 GType         _3T_gtk_combo_box_text_get_type        (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType         gtk_combo_box_text_get_type        (void) G_GNUC_CONST;
-GtkWidget*    __gtk_combo_box_text_new             (void);
-GtkWidget*    __gtk_combo_box_text_new_with_entry  (void);
-void          __gtk_combo_box_text_append_text     (GtkComboBoxText     *combo_box,
+GtkWidget*    SF(gtk_combo_box_text_new)             (void);
+GtkWidget*    SF(gtk_combo_box_text_new_with_entry)  (void);
+void          SF(gtk_combo_box_text_append_text)     (GtkComboBoxText     *combo_box,
                                                   const gchar         *text);
-void          __gtk_combo_box_text_insert_text     (GtkComboBoxText     *combo_box,
+void          SF(gtk_combo_box_text_insert_text)     (GtkComboBoxText     *combo_box,
                                                   gint                 position,
                                                   const gchar         *text);
-void          __gtk_combo_box_text_prepend_text    (GtkComboBoxText     *combo_box,
+void          SF(gtk_combo_box_text_prepend_text)    (GtkComboBoxText     *combo_box,
                                                   const gchar         *text);
-void          __gtk_combo_box_text_remove          (GtkComboBoxText     *combo_box,
+void          SF(gtk_combo_box_text_remove)          (GtkComboBoxText     *combo_box,
                                                   gint                 position);
-gchar        *__gtk_combo_box_text_get_active_text (GtkComboBoxText     *combo_box);
+gchar        *SF(gtk_combo_box_text_get_active_text) (GtkComboBoxText     *combo_box);
 
 
 G_END_DECLS

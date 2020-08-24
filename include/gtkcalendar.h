@@ -54,7 +54,7 @@ typedef struct _GtkCalendarPrivate     GtkCalendarPrivate;
  * @GTK_CALENDAR_WEEK_START_MONDAY: Since GTK+ 2.4, this option is deprecated and ignored by GTK+.
  * The information on which day the calendar week starts is derived from the locale.
  * @GTK_CALENDAR_SHOW_DETAILS: Just show an indicator, not the full details
- * text when details are provided. See __gtk_calendar_set_detail_func().
+ * text when details are provided. See SF(gtk_calendar_set_detail_func)().
  *
  * These options can be used to influence the display and behaviour of a #GtkCalendar.
  */
@@ -74,7 +74,7 @@ typedef enum
  * @year: the year for which details are needed.
  * @month: the month for which details are needed.
  * @day: the day of @month for which details are needed.
- * @user_data: the data passed with __gtk_calendar_set_detail_func().
+ * @user_data: the data passed with SF(gtk_calendar_set_detail_func)().
  *
  * This kind of functions provide Pango markup with detail information for the
  * specified day. Examples for such details are holidays or appointments. The
@@ -205,51 +205,51 @@ GType	   _T2_gtk_calendar_get_type	(void) G_GNUC_CONST;
 GType	   _3T_gtk_calendar_get_type	(void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType	   gtk_calendar_get_type	(void) G_GNUC_CONST;
-GtkWidget* __gtk_calendar_new		(void);
+GtkWidget* SF(gtk_calendar_new)		(void);
 
-gboolean   __gtk_calendar_select_month	(GtkCalendar *calendar,
+gboolean   SF(gtk_calendar_select_month)	(GtkCalendar *calendar,
 					 guint	      month,
 					 guint	      year);
-void	   __gtk_calendar_select_day	(GtkCalendar *calendar,
+void	   SF(gtk_calendar_select_day)	(GtkCalendar *calendar,
 					 guint	      day);
 
-gboolean   __gtk_calendar_mark_day	(GtkCalendar *calendar,
+gboolean   SF(gtk_calendar_mark_day)	(GtkCalendar *calendar,
 					 guint	      day);
-gboolean   __gtk_calendar_unmark_day	(GtkCalendar *calendar,
+gboolean   SF(gtk_calendar_unmark_day)	(GtkCalendar *calendar,
 					 guint	      day);
-void	   __gtk_calendar_clear_marks	(GtkCalendar *calendar);
+void	   SF(gtk_calendar_clear_marks)	(GtkCalendar *calendar);
 
 
-void	   __gtk_calendar_set_display_options (GtkCalendar    	      *calendar,
+void	   SF(gtk_calendar_set_display_options) (GtkCalendar    	      *calendar,
 					     GtkCalendarDisplayOptions flags);
 GtkCalendarDisplayOptions
-           __gtk_calendar_get_display_options (GtkCalendar   	      *calendar);
+           SF(gtk_calendar_get_display_options) (GtkCalendar   	      *calendar);
 #ifndef GTK_DISABLE_DEPRECATED
-void	   __gtk_calendar_display_options (GtkCalendar		  *calendar,
+void	   SF(gtk_calendar_display_options) (GtkCalendar		  *calendar,
 					 GtkCalendarDisplayOptions flags);
 #endif
 
-void	   __gtk_calendar_get_date	(GtkCalendar *calendar, 
+void	   SF(gtk_calendar_get_date)	(GtkCalendar *calendar, 
 					 guint	     *year,
 					 guint	     *month,
 					 guint	     *day);
 
-void       __gtk_calendar_set_detail_func (GtkCalendar           *calendar,
+void       SF(gtk_calendar_set_detail_func) (GtkCalendar           *calendar,
                                          GtkCalendarDetailFunc  func,
                                          gpointer               data,
                                          GDestroyNotify         destroy);
 
-void       __gtk_calendar_set_detail_width_chars (GtkCalendar    *calendar,
+void       SF(gtk_calendar_set_detail_width_chars) (GtkCalendar    *calendar,
                                                 gint            chars);
-void       __gtk_calendar_set_detail_height_rows (GtkCalendar    *calendar,
+void       SF(gtk_calendar_set_detail_height_rows) (GtkCalendar    *calendar,
                                                 gint            rows);
 
-gint       __gtk_calendar_get_detail_width_chars (GtkCalendar    *calendar);
-gint       __gtk_calendar_get_detail_height_rows (GtkCalendar    *calendar);
+gint       SF(gtk_calendar_get_detail_width_chars) (GtkCalendar    *calendar);
+gint       SF(gtk_calendar_get_detail_height_rows) (GtkCalendar    *calendar);
 
 #ifndef GTK_DISABLE_DEPRECATED
-void	   __gtk_calendar_freeze		(GtkCalendar *calendar);
-void	   __gtk_calendar_thaw		(GtkCalendar *calendar);
+void	   SF(gtk_calendar_freeze)		(GtkCalendar *calendar);
+void	   SF(gtk_calendar_thaw)		(GtkCalendar *calendar);
 #endif
 
 G_END_DECLS

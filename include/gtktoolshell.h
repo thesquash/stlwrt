@@ -41,15 +41,15 @@ typedef struct _GtkToolShellIface      GtkToolShellIface;
 
 /**
  * GtkToolShellIface:
- * @get_icon_size:        mandatory implementation of __gtk_tool_shell_get_icon_size().
- * @get_orientation:      mandatory implementation of __gtk_tool_shell_get_orientation().
- * @get_style:            mandatory implementation of __gtk_tool_shell_get_style().
- * @get_relief_style:     optional implementation of __gtk_tool_shell_get_relief_style().
- * @rebuild_menu:         optional implementation of __gtk_tool_shell_rebuild_menu().
- * @get_text_orientation: optional implementation of __gtk_tool_shell_get_text_orientation().
- * @get_text_alignment:   optional implementation of __gtk_tool_shell_get_text_alignment().
- * @get_ellipsize_mode:   optional implementation of __gtk_tool_shell_get_ellipsize_mode().
- * @get_text_size_group:  optional implementation of __gtk_tool_shell_get_text_size_group().
+ * @get_icon_size:        mandatory implementation of SF(gtk_tool_shell_get_icon_size)().
+ * @get_orientation:      mandatory implementation of SF(gtk_tool_shell_get_orientation)().
+ * @get_style:            mandatory implementation of SF(gtk_tool_shell_get_style)().
+ * @get_relief_style:     optional implementation of SF(gtk_tool_shell_get_relief_style)().
+ * @rebuild_menu:         optional implementation of SF(gtk_tool_shell_rebuild_menu)().
+ * @get_text_orientation: optional implementation of SF(gtk_tool_shell_get_text_orientation)().
+ * @get_text_alignment:   optional implementation of SF(gtk_tool_shell_get_text_alignment)().
+ * @get_ellipsize_mode:   optional implementation of SF(gtk_tool_shell_get_ellipsize_mode)().
+ * @get_text_size_group:  optional implementation of SF(gtk_tool_shell_get_text_size_group)().
  *
  * Virtual function table for the #GtkToolShell interface.
  */
@@ -75,15 +75,15 @@ GType              _3T_gtk_tool_shell_get_type             (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType              gtk_tool_shell_get_type             (void) G_GNUC_CONST;
 
-GtkIconSize        __gtk_tool_shell_get_icon_size        (GtkToolShell *shell);
-GtkOrientation     __gtk_tool_shell_get_orientation      (GtkToolShell *shell);
-GtkToolbarStyle    __gtk_tool_shell_get_style            (GtkToolShell *shell);
-GtkReliefStyle     __gtk_tool_shell_get_relief_style     (GtkToolShell *shell);
-void               __gtk_tool_shell_rebuild_menu         (GtkToolShell *shell);
-GtkOrientation     __gtk_tool_shell_get_text_orientation (GtkToolShell *shell);
-gfloat             __gtk_tool_shell_get_text_alignment   (GtkToolShell *shell);
-PangoEllipsizeMode __gtk_tool_shell_get_ellipsize_mode   (GtkToolShell *shell);
-GtkSizeGroup *     __gtk_tool_shell_get_text_size_group  (GtkToolShell *shell);
+GtkIconSize        SF(gtk_tool_shell_get_icon_size)        (GtkToolShell *shell);
+GtkOrientation     SF(gtk_tool_shell_get_orientation)      (GtkToolShell *shell);
+GtkToolbarStyle    SF(gtk_tool_shell_get_style)            (GtkToolShell *shell);
+GtkReliefStyle     SF(gtk_tool_shell_get_relief_style)     (GtkToolShell *shell);
+void               SF(gtk_tool_shell_rebuild_menu)         (GtkToolShell *shell);
+GtkOrientation     SF(gtk_tool_shell_get_text_orientation) (GtkToolShell *shell);
+gfloat             SF(gtk_tool_shell_get_text_alignment)   (GtkToolShell *shell);
+PangoEllipsizeMode SF(gtk_tool_shell_get_ellipsize_mode)   (GtkToolShell *shell);
+GtkSizeGroup *     SF(gtk_tool_shell_get_text_size_group)  (GtkToolShell *shell);
 
 G_END_DECLS
 

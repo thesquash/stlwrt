@@ -26,7 +26,7 @@
 
 G_BEGIN_DECLS
 
-gboolean __gtk_show_uri  (GdkScreen   *screen,
+gboolean SF(gtk_show_uri)  (GdkScreen   *screen,
                         const gchar *uri,
                         guint32      timestamp,
                         GError     **error);

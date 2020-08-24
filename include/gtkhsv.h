@@ -105,31 +105,31 @@ GType      _T2_gtk_hsv_get_type     (void) G_GNUC_CONST;
 GType      _3T_gtk_hsv_get_type     (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType      gtk_hsv_get_type     (void) G_GNUC_CONST;
-GtkWidget* __gtk_hsv_new          (void);
-void       __gtk_hsv_set_color    (GtkHSV    *hsv,
+GtkWidget* SF(gtk_hsv_new)          (void);
+void       SF(gtk_hsv_set_color)    (GtkHSV    *hsv,
 				 double     h,
 				 double     s,
 				 double     v);
-void       __gtk_hsv_get_color    (GtkHSV    *hsv,
+void       SF(gtk_hsv_get_color)    (GtkHSV    *hsv,
 				 gdouble   *h,
 				 gdouble   *s,
 				 gdouble   *v);
-void       __gtk_hsv_set_metrics  (GtkHSV    *hsv,
+void       SF(gtk_hsv_set_metrics)  (GtkHSV    *hsv,
 				 gint       size,
 				 gint       ring_width);
-void       __gtk_hsv_get_metrics  (GtkHSV    *hsv,
+void       SF(gtk_hsv_get_metrics)  (GtkHSV    *hsv,
 				 gint      *size,
 				 gint      *ring_width);
-gboolean   __gtk_hsv_is_adjusting (GtkHSV    *hsv);
+gboolean   SF(gtk_hsv_is_adjusting) (GtkHSV    *hsv);
 
 /* Convert colors between the RGB and HSV color spaces */
-void       __gtk_hsv_to_rgb       (gdouble    h,
+void       SF(gtk_hsv_to_rgb)       (gdouble    h,
 				 gdouble    s,
 				 gdouble    v,
 				 gdouble   *r,
 				 gdouble   *g,
 				 gdouble   *b);
-void       __gtk_rgb_to_hsv       (gdouble    r,
+void       SF(gtk_rgb_to_hsv)       (gdouble    r,
 				 gdouble    g,
 				 gdouble    b,
 				 gdouble   *h,

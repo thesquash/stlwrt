@@ -82,17 +82,17 @@ struct _GtkRecentActionClass
 
 
 GType      gtk_recent_action_get_type         (void) G_GNUC_CONST;
-GtkAction *__gtk_recent_action_new              (const gchar      *name,
+GtkAction *SF(gtk_recent_action_new)              (const gchar      *name,
                                                const gchar      *label,
                                                const gchar      *tooltip,
                                                const gchar      *stock_id);
-GtkAction *__gtk_recent_action_new_for_manager  (const gchar      *name,
+GtkAction *SF(gtk_recent_action_new_for_manager)  (const gchar      *name,
                                                const gchar      *label,
                                                const gchar      *tooltip,
                                                const gchar      *stock_id,
                                                GtkRecentManager *manager);
-gboolean   __gtk_recent_action_get_show_numbers (GtkRecentAction  *action);
-void       __gtk_recent_action_set_show_numbers (GtkRecentAction  *action,
+gboolean   SF(gtk_recent_action_get_show_numbers) (GtkRecentAction  *action);
+void       SF(gtk_recent_action_set_show_numbers) (GtkRecentAction  *action,
                                                gboolean          show_numbers);
 
 G_END_DECLS

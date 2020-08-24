@@ -106,23 +106,23 @@ GType	   _3T_gtk_check_menu_item_get_type	         (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType	   gtk_check_menu_item_get_type	         (void) G_GNUC_CONST;
 
-GtkWidget* __gtk_check_menu_item_new               (void);
-GtkWidget* __gtk_check_menu_item_new_with_label    (const gchar      *label);
-GtkWidget* __gtk_check_menu_item_new_with_mnemonic (const gchar      *label);
-void       __gtk_check_menu_item_set_active        (GtkCheckMenuItem *check_menu_item,
+GtkWidget* SF(gtk_check_menu_item_new)               (void);
+GtkWidget* SF(gtk_check_menu_item_new_with_label)    (const gchar      *label);
+GtkWidget* SF(gtk_check_menu_item_new_with_mnemonic) (const gchar      *label);
+void       SF(gtk_check_menu_item_set_active)        (GtkCheckMenuItem *check_menu_item,
 						  gboolean          is_active);
-gboolean   __gtk_check_menu_item_get_active        (GtkCheckMenuItem *check_menu_item);
-void       __gtk_check_menu_item_toggled           (GtkCheckMenuItem *check_menu_item);
-void       __gtk_check_menu_item_set_inconsistent  (GtkCheckMenuItem *check_menu_item,
+gboolean   SF(gtk_check_menu_item_get_active)        (GtkCheckMenuItem *check_menu_item);
+void       SF(gtk_check_menu_item_toggled)           (GtkCheckMenuItem *check_menu_item);
+void       SF(gtk_check_menu_item_set_inconsistent)  (GtkCheckMenuItem *check_menu_item,
 						  gboolean          setting);
-gboolean   __gtk_check_menu_item_get_inconsistent  (GtkCheckMenuItem *check_menu_item);
-void       __gtk_check_menu_item_set_draw_as_radio (GtkCheckMenuItem *check_menu_item,
+gboolean   SF(gtk_check_menu_item_get_inconsistent)  (GtkCheckMenuItem *check_menu_item);
+void       SF(gtk_check_menu_item_set_draw_as_radio) (GtkCheckMenuItem *check_menu_item,
 						  gboolean          draw_as_radio);
-gboolean   __gtk_check_menu_item_get_draw_as_radio (GtkCheckMenuItem *check_menu_item);
+gboolean   SF(gtk_check_menu_item_get_draw_as_radio) (GtkCheckMenuItem *check_menu_item);
 
 
 #ifndef GTK_DISABLE_DEPRECATED
-void	   __gtk_check_menu_item_set_show_toggle (GtkCheckMenuItem *menu_item,
+void	   SF(gtk_check_menu_item_set_show_toggle) (GtkCheckMenuItem *menu_item,
 						gboolean	  always);
 #define	gtk_check_menu_item_set_state		gtk_check_menu_item_set_active
 #endif

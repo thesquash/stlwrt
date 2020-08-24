@@ -88,21 +88,21 @@ GType	   _T2_gtk_image_menu_item_get_type          (void) G_GNUC_CONST;
 GType	   _3T_gtk_image_menu_item_get_type          (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType	   gtk_image_menu_item_get_type          (void) G_GNUC_CONST;
-GtkWidget* __gtk_image_menu_item_new               (void);
-GtkWidget* __gtk_image_menu_item_new_with_label    (const gchar      *label);
-GtkWidget* __gtk_image_menu_item_new_with_mnemonic (const gchar      *label);
-GtkWidget* __gtk_image_menu_item_new_from_stock    (const gchar      *stock_id,
+GtkWidget* SF(gtk_image_menu_item_new)               (void);
+GtkWidget* SF(gtk_image_menu_item_new_with_label)    (const gchar      *label);
+GtkWidget* SF(gtk_image_menu_item_new_with_mnemonic) (const gchar      *label);
+GtkWidget* SF(gtk_image_menu_item_new_from_stock)    (const gchar      *stock_id,
                                                   GtkAccelGroup    *accel_group);
-void       __gtk_image_menu_item_set_always_show_image (GtkImageMenuItem *image_menu_item,
+void       SF(gtk_image_menu_item_set_always_show_image) (GtkImageMenuItem *image_menu_item,
                                                       gboolean          always_show);
-gboolean   __gtk_image_menu_item_get_always_show_image (GtkImageMenuItem *image_menu_item);
-void       __gtk_image_menu_item_set_image         (GtkImageMenuItem *image_menu_item,
+gboolean   SF(gtk_image_menu_item_get_always_show_image) (GtkImageMenuItem *image_menu_item);
+void       SF(gtk_image_menu_item_set_image)         (GtkImageMenuItem *image_menu_item,
                                                   GtkWidget        *image);
-GtkWidget* __gtk_image_menu_item_get_image         (GtkImageMenuItem *image_menu_item);
-void       __gtk_image_menu_item_set_use_stock     (GtkImageMenuItem *image_menu_item,
+GtkWidget* SF(gtk_image_menu_item_get_image)         (GtkImageMenuItem *image_menu_item);
+void       SF(gtk_image_menu_item_set_use_stock)     (GtkImageMenuItem *image_menu_item,
 						  gboolean          use_stock);
-gboolean   __gtk_image_menu_item_get_use_stock     (GtkImageMenuItem *image_menu_item);
-void       __gtk_image_menu_item_set_accel_group   (GtkImageMenuItem *image_menu_item, 
+gboolean   SF(gtk_image_menu_item_get_use_stock)     (GtkImageMenuItem *image_menu_item);
+void       SF(gtk_image_menu_item_set_accel_group)   (GtkImageMenuItem *image_menu_item, 
 						  GtkAccelGroup    *accel_group);
 
 G_END_DECLS

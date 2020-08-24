@@ -132,99 +132,99 @@ GType                 _T2_gtk_label_get_type          (void) G_GNUC_CONST;
 GType                 _3T_gtk_label_get_type          (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType                 gtk_label_get_type          (void) G_GNUC_CONST;
-GtkWidget*            __gtk_label_new               (const gchar   *str);
-GtkWidget*            __gtk_label_new_with_mnemonic (const gchar   *str);
-void                  __gtk_label_set_text          (GtkLabel      *label,
+GtkWidget*            SF(gtk_label_new)               (const gchar   *str);
+GtkWidget*            SF(gtk_label_new_with_mnemonic) (const gchar   *str);
+void                  SF(gtk_label_set_text)          (GtkLabel      *label,
 						   const gchar   *str);
-const gchar *         __gtk_label_get_text          (GtkLabel      *label);
-void                  __gtk_label_set_attributes    (GtkLabel      *label,
+const gchar *         SF(gtk_label_get_text)          (GtkLabel      *label);
+void                  SF(gtk_label_set_attributes)    (GtkLabel      *label,
 						   PangoAttrList *attrs);
-PangoAttrList        *__gtk_label_get_attributes    (GtkLabel      *label);
-void                  __gtk_label_set_label         (GtkLabel      *label,
+PangoAttrList        *SF(gtk_label_get_attributes)    (GtkLabel      *label);
+void                  SF(gtk_label_set_label)         (GtkLabel      *label,
 						   const gchar   *str);
-const gchar *         __gtk_label_get_label         (GtkLabel      *label);
-void                  __gtk_label_set_markup        (GtkLabel      *label,
+const gchar *         SF(gtk_label_get_label)         (GtkLabel      *label);
+void                  SF(gtk_label_set_markup)        (GtkLabel      *label,
 						   const gchar   *str);
-void                  __gtk_label_set_use_markup    (GtkLabel      *label,
+void                  SF(gtk_label_set_use_markup)    (GtkLabel      *label,
 						   gboolean       setting);
-gboolean              __gtk_label_get_use_markup    (GtkLabel      *label);
-void                  __gtk_label_set_use_underline (GtkLabel      *label,
+gboolean              SF(gtk_label_get_use_markup)    (GtkLabel      *label);
+void                  SF(gtk_label_set_use_underline) (GtkLabel      *label,
 						   gboolean       setting);
-gboolean              __gtk_label_get_use_underline (GtkLabel      *label);
+gboolean              SF(gtk_label_get_use_underline) (GtkLabel      *label);
 
-void     __gtk_label_set_markup_with_mnemonic       (GtkLabel         *label,
+void     SF(gtk_label_set_markup_with_mnemonic)       (GtkLabel         *label,
 						   const gchar      *str);
-guint    __gtk_label_get_mnemonic_keyval            (GtkLabel         *label);
-void     __gtk_label_set_mnemonic_widget            (GtkLabel         *label,
+guint    SF(gtk_label_get_mnemonic_keyval)            (GtkLabel         *label);
+void     SF(gtk_label_set_mnemonic_widget)            (GtkLabel         *label,
 						   GtkWidget        *widget);
-GtkWidget *__gtk_label_get_mnemonic_widget          (GtkLabel         *label);
-void     __gtk_label_set_text_with_mnemonic         (GtkLabel         *label,
+GtkWidget *SF(gtk_label_get_mnemonic_widget)          (GtkLabel         *label);
+void     SF(gtk_label_set_text_with_mnemonic)         (GtkLabel         *label,
 						   const gchar      *str);
-void     __gtk_label_set_justify                    (GtkLabel         *label,
+void     SF(gtk_label_set_justify)                    (GtkLabel         *label,
 						   GtkJustification  jtype);
-GtkJustification __gtk_label_get_justify            (GtkLabel         *label);
-void     __gtk_label_set_ellipsize		  (GtkLabel         *label,
+GtkJustification SF(gtk_label_get_justify)            (GtkLabel         *label);
+void     SF(gtk_label_set_ellipsize)		  (GtkLabel         *label,
 						   PangoEllipsizeMode mode);
-PangoEllipsizeMode __gtk_label_get_ellipsize        (GtkLabel         *label);
-void     __gtk_label_set_width_chars		  (GtkLabel         *label,
+PangoEllipsizeMode SF(gtk_label_get_ellipsize)        (GtkLabel         *label);
+void     SF(gtk_label_set_width_chars)		  (GtkLabel         *label,
 						   gint              n_chars);
-gint     __gtk_label_get_width_chars                (GtkLabel         *label);
-void     __gtk_label_set_max_width_chars    	  (GtkLabel         *label,
+gint     SF(gtk_label_get_width_chars)                (GtkLabel         *label);
+void     SF(gtk_label_set_max_width_chars)    	  (GtkLabel         *label,
 					  	   gint              n_chars);
-gint     __gtk_label_get_max_width_chars  	  (GtkLabel         *label);
-void     __gtk_label_set_pattern                    (GtkLabel         *label,
+gint     SF(gtk_label_get_max_width_chars)  	  (GtkLabel         *label);
+void     SF(gtk_label_set_pattern)                    (GtkLabel         *label,
 						   const gchar      *pattern);
-void     __gtk_label_set_line_wrap                  (GtkLabel         *label,
+void     SF(gtk_label_set_line_wrap)                  (GtkLabel         *label,
 						   gboolean          wrap);
-gboolean __gtk_label_get_line_wrap                  (GtkLabel         *label);
-void     __gtk_label_set_line_wrap_mode             (GtkLabel         *label,
+gboolean SF(gtk_label_get_line_wrap)                  (GtkLabel         *label);
+void     SF(gtk_label_set_line_wrap_mode)             (GtkLabel         *label,
 						   PangoWrapMode     wrap_mode);
-PangoWrapMode __gtk_label_get_line_wrap_mode        (GtkLabel         *label);
-void     __gtk_label_set_selectable                 (GtkLabel         *label,
+PangoWrapMode SF(gtk_label_get_line_wrap_mode)        (GtkLabel         *label);
+void     SF(gtk_label_set_selectable)                 (GtkLabel         *label,
 						   gboolean          setting);
-gboolean __gtk_label_get_selectable                 (GtkLabel         *label);
-void     __gtk_label_set_angle                      (GtkLabel         *label,
+gboolean SF(gtk_label_get_selectable)                 (GtkLabel         *label);
+void     SF(gtk_label_set_angle)                      (GtkLabel         *label,
 						   gdouble           angle);
-gdouble  __gtk_label_get_angle                      (GtkLabel         *label);
-void     __gtk_label_select_region                  (GtkLabel         *label,
+gdouble  SF(gtk_label_get_angle)                      (GtkLabel         *label);
+void     SF(gtk_label_select_region)                  (GtkLabel         *label,
 						   gint              start_offset,
 						   gint              end_offset);
-gboolean __gtk_label_get_selection_bounds           (GtkLabel         *label,
+gboolean SF(gtk_label_get_selection_bounds)           (GtkLabel         *label,
                                                    gint             *start,
                                                    gint             *end);
 
-PangoLayout *__gtk_label_get_layout         (GtkLabel *label);
-void         __gtk_label_get_layout_offsets (GtkLabel *label,
+PangoLayout *SF(gtk_label_get_layout)         (GtkLabel *label);
+void         SF(gtk_label_get_layout_offsets) (GtkLabel *label,
                                            gint     *x,
                                            gint     *y);
 
-void         __gtk_label_set_single_line_mode  (GtkLabel *label,
+void         SF(gtk_label_set_single_line_mode)  (GtkLabel *label,
                                               gboolean single_line_mode);
-gboolean     __gtk_label_get_single_line_mode  (GtkLabel *label);
+gboolean     SF(gtk_label_get_single_line_mode)  (GtkLabel *label);
 
-const gchar *__gtk_label_get_current_uri          (GtkLabel *label);
-void         __gtk_label_set_track_visited_links  (GtkLabel *label,
+const gchar *SF(gtk_label_get_current_uri)          (GtkLabel *label);
+void         SF(gtk_label_set_track_visited_links)  (GtkLabel *label,
                                                  gboolean  track_links);
-gboolean     __gtk_label_get_track_visited_links  (GtkLabel *label);
+gboolean     SF(gtk_label_get_track_visited_links)  (GtkLabel *label);
 
 #ifndef GTK_DISABLE_DEPRECATED
 
 #define  gtk_label_set           gtk_label_set_text
-void       __gtk_label_get           (GtkLabel          *label,
+void       SF(gtk_label_get)           (GtkLabel          *label,
                                     gchar            **str);
 
 /* Convenience function to set the name and pattern by parsing
  * a string with embedded underscores, and return the appropriate
  * key symbol for the accelerator.
  */
-guint __gtk_label_parse_uline            (GtkLabel    *label,
+guint SF(gtk_label_parse_uline)            (GtkLabel    *label,
 					const gchar *string);
 
 #endif /* GTK_DISABLE_DEPRECATED */
 
 /* private */
 
-void ___gtk_label_mnemonics_visible_apply_recursively (GtkWidget *widget,
+void SF(_gtk_label_mnemonics_visible_apply_recursively) (GtkWidget *widget,
                                                      gboolean   mnemonics_visible);
 
 G_END_DECLS

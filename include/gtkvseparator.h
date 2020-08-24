@@ -57,7 +57,7 @@ struct _GtkVSeparatorClass
 
 
 GType      gtk_vseparator_get_type (void) G_GNUC_CONST;
-GtkWidget* __gtk_vseparator_new      (void);
+GtkWidget* SF(gtk_vseparator_new)      (void);
 
 
 G_END_DECLS

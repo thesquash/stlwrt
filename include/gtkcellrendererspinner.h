@@ -67,7 +67,7 @@ struct _GtkCellRendererSpinnerClass
 };
 
 GType            gtk_cell_renderer_spinner_get_type (void) G_GNUC_CONST;
-GtkCellRenderer *__gtk_cell_renderer_spinner_new      (void);
+GtkCellRenderer *SF(gtk_cell_renderer_spinner_new)      (void);
 
 G_END_DECLS
 

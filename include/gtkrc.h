@@ -127,41 +127,41 @@ struct _GtkRcStyleClass
 #define gtk_rc_parse gtk_rc_parse_utf8
 #endif
 
-void	  ___gtk_rc_init			 (void);
-GSList*   ___gtk_rc_parse_widget_class_path (const gchar *pattern);
-void      ___gtk_rc_free_widget_class_path (GSList       *list);
-gboolean  ___gtk_rc_match_widget_class     (GSList       *list,
+void	  SF(_gtk_rc_init)			 (void);
+GSList*   SF(_gtk_rc_parse_widget_class_path) (const gchar *pattern);
+void      SF(_gtk_rc_free_widget_class_path) (GSList       *list);
+gboolean  SF(_gtk_rc_match_widget_class)     (GSList       *list,
                                           gint          length,
                                           gchar        *path,
                                           gchar        *path_reversed);
 
-void      __gtk_rc_add_default_file	(const gchar *filename);
-void      __gtk_rc_set_default_files      (gchar **filenames);
-gchar**   __gtk_rc_get_default_files      (void);
-GtkStyle* __gtk_rc_get_style		(GtkWidget   *widget);
-GtkStyle* __gtk_rc_get_style_by_paths     (GtkSettings *settings,
+void      SF(gtk_rc_add_default_file)	(const gchar *filename);
+void      SF(gtk_rc_set_default_files)      (gchar **filenames);
+gchar**   SF(gtk_rc_get_default_files)      (void);
+GtkStyle* SF(gtk_rc_get_style)		(GtkWidget   *widget);
+GtkStyle* SF(gtk_rc_get_style_by_paths)     (GtkSettings *settings,
 					 const char  *widget_path,
 					 const char  *class_path,
 					 GType        type);
 
-gboolean __gtk_rc_reparse_all_for_settings (GtkSettings *settings,
+gboolean SF(gtk_rc_reparse_all_for_settings) (GtkSettings *settings,
 					  gboolean     force_load);
-void     __gtk_rc_reset_styles             (GtkSettings *settings);
+void     SF(gtk_rc_reset_styles)             (GtkSettings *settings);
 
-gchar*   __gtk_rc_find_pixmap_in_path (GtkSettings  *settings,
+gchar*   SF(gtk_rc_find_pixmap_in_path) (GtkSettings  *settings,
 				     GScanner     *scanner,
 				     const gchar  *pixmap_file);
 
-void	  __gtk_rc_parse			(const gchar *filename);
-void	  __gtk_rc_parse_string		(const gchar *rc_string);
-gboolean  __gtk_rc_reparse_all		(void);
+void	  SF(gtk_rc_parse)			(const gchar *filename);
+void	  SF(gtk_rc_parse_string)		(const gchar *rc_string);
+gboolean  SF(gtk_rc_reparse_all)		(void);
 
 #ifndef GTK_DISABLE_DEPRECATED
-void	  __gtk_rc_add_widget_name_style	(GtkRcStyle   *rc_style,
+void	  SF(gtk_rc_add_widget_name_style)	(GtkRcStyle   *rc_style,
 					 const gchar  *pattern);
-void	  __gtk_rc_add_widget_class_style (GtkRcStyle   *rc_style,
+void	  SF(gtk_rc_add_widget_class_style) (GtkRcStyle   *rc_style,
 					 const gchar  *pattern);
-void	  __gtk_rc_add_class_style	(GtkRcStyle   *rc_style,
+void	  SF(gtk_rc_add_class_style)	(GtkRcStyle   *rc_style,
 					 const gchar  *pattern);
 #endif /* GTK_DISABLE_DEPRECATED */
 
@@ -170,19 +170,19 @@ GType       _T2_gtk_rc_style_get_type   (void) G_GNUC_CONST;
 GType       _3T_gtk_rc_style_get_type   (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType       gtk_rc_style_get_type   (void) G_GNUC_CONST;
-GtkRcStyle* __gtk_rc_style_new        (void);
-GtkRcStyle* __gtk_rc_style_copy       (GtkRcStyle *orig);
+GtkRcStyle* SF(gtk_rc_style_new)        (void);
+GtkRcStyle* SF(gtk_rc_style_copy)       (GtkRcStyle *orig);
 
 #ifndef GTK_DISABLE_DEPRECATED
-void        __gtk_rc_style_ref        (GtkRcStyle *rc_style);
-void        __gtk_rc_style_unref      (GtkRcStyle *rc_style);
+void        SF(gtk_rc_style_ref)        (GtkRcStyle *rc_style);
+void        SF(gtk_rc_style_unref)      (GtkRcStyle *rc_style);
 #endif
 
-gchar*		__gtk_rc_find_module_in_path	(const gchar 	*module_file);
-gchar*		__gtk_rc_get_theme_dir		(void);
-gchar*		__gtk_rc_get_module_dir		(void);
-gchar*		__gtk_rc_get_im_module_path	(void);
-gchar*		__gtk_rc_get_im_module_file	(void);
+gchar*		SF(gtk_rc_find_module_in_path)	(const gchar 	*module_file);
+gchar*		SF(gtk_rc_get_theme_dir)		(void);
+gchar*		SF(gtk_rc_get_module_dir)		(void);
+gchar*		SF(gtk_rc_get_im_module_path)	(void);
+gchar*		SF(gtk_rc_get_im_module_file)	(void);
 
 /* private functions/definitions */
 typedef enum {
@@ -228,15 +228,15 @@ typedef enum {
   GTK_RC_TOKEN_LAST
 } GtkRcTokenType;
 
-GScanner* __gtk_rc_scanner_new	(void);
-guint	  __gtk_rc_parse_color	(GScanner	     *scanner,
+GScanner* SF(gtk_rc_scanner_new)	(void);
+guint	  SF(gtk_rc_parse_color)	(GScanner	     *scanner,
 				 GdkColor	     *color);
-guint	  __gtk_rc_parse_color_full (GScanner	     *scanner,
+guint	  SF(gtk_rc_parse_color_full) (GScanner	     *scanner,
                                    GtkRcStyle        *style,
 				   GdkColor	     *color);
-guint	  __gtk_rc_parse_state	(GScanner	     *scanner,
+guint	  SF(gtk_rc_parse_state)	(GScanner	     *scanner,
 				 GtkStateType	     *state);
-guint	  __gtk_rc_parse_priority	(GScanner	     *scanner,
+guint	  SF(gtk_rc_parse_priority)	(GScanner	     *scanner,
 				 GtkPathPriorityType *priority);
 
 /* rc properties
@@ -252,19 +252,19 @@ struct _GtkRcProperty
   gchar *origin;
   GValue value;
 };
-const GtkRcProperty* ___gtk_rc_style_lookup_rc_property (GtkRcStyle *rc_style,
+const GtkRcProperty* SF(_gtk_rc_style_lookup_rc_property) (GtkRcStyle *rc_style,
 						       GQuark      type_name,
 						       GQuark      property_name);
-void	      ___gtk_rc_style_set_rc_property	      (GtkRcStyle *rc_style,
+void	      SF(_gtk_rc_style_set_rc_property)	      (GtkRcStyle *rc_style,
 						       GtkRcProperty *property);
-void	      ___gtk_rc_style_unset_rc_property	      (GtkRcStyle *rc_style,
+void	      SF(_gtk_rc_style_unset_rc_property)	      (GtkRcStyle *rc_style,
 						       GQuark      type_name,
 						       GQuark      property_name);
 
-GSList     * ___gtk_rc_style_get_color_hashes        (GtkRcStyle *rc_style);
+GSList     * SF(_gtk_rc_style_get_color_hashes)        (GtkRcStyle *rc_style);
 
-const gchar* ___gtk_rc_context_get_default_font_name (GtkSettings *settings);
-void         ___gtk_rc_context_destroy               (GtkSettings *settings);
+const gchar* SF(_gtk_rc_context_get_default_font_name) (GtkSettings *settings);
+void         SF(_gtk_rc_context_destroy)               (GtkSettings *settings);
 
 G_END_DECLS
 

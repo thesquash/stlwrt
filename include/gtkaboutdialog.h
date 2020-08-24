@@ -109,59 +109,59 @@ GType                  _T2_gtk_about_dialog_get_type               (void) G_GNUC
 GType                  _3T_gtk_about_dialog_get_type               (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType                  gtk_about_dialog_get_type               (void) G_GNUC_CONST;
-GtkWidget             *__gtk_about_dialog_new                    (void);
-void                   __gtk_show_about_dialog                   (GtkWindow       *parent,
+GtkWidget             *SF(gtk_about_dialog_new)                    (void);
+void                   SF(gtk_show_about_dialog)                   (GtkWindow       *parent,
 								const gchar     *first_property_name,
 								...) G_GNUC_NULL_TERMINATED;
 
 #ifndef GTK_DISABLE_DEPRECATED
-const gchar *          __gtk_about_dialog_get_name               (GtkAboutDialog  *about);
-void                   __gtk_about_dialog_set_name               (GtkAboutDialog  *about,
+const gchar *          SF(gtk_about_dialog_get_name)               (GtkAboutDialog  *about);
+void                   SF(gtk_about_dialog_set_name)               (GtkAboutDialog  *about,
 								const gchar     *name);
 #endif /* GTK_DISABLE_DEPRECATED */
-const gchar *          __gtk_about_dialog_get_program_name       (GtkAboutDialog  *about);
-void                   __gtk_about_dialog_set_program_name       (GtkAboutDialog  *about,
+const gchar *          SF(gtk_about_dialog_get_program_name)       (GtkAboutDialog  *about);
+void                   SF(gtk_about_dialog_set_program_name)       (GtkAboutDialog  *about,
 								const gchar     *name);
-const gchar *          __gtk_about_dialog_get_version            (GtkAboutDialog  *about);
-void                   __gtk_about_dialog_set_version            (GtkAboutDialog  *about,
+const gchar *          SF(gtk_about_dialog_get_version)            (GtkAboutDialog  *about);
+void                   SF(gtk_about_dialog_set_version)            (GtkAboutDialog  *about,
 								const gchar     *version);
-const gchar *          __gtk_about_dialog_get_copyright          (GtkAboutDialog  *about);
-void                   __gtk_about_dialog_set_copyright          (GtkAboutDialog  *about,
+const gchar *          SF(gtk_about_dialog_get_copyright)          (GtkAboutDialog  *about);
+void                   SF(gtk_about_dialog_set_copyright)          (GtkAboutDialog  *about,
 								const gchar     *copyright);
-const gchar *          __gtk_about_dialog_get_comments           (GtkAboutDialog  *about);
-void                   __gtk_about_dialog_set_comments           (GtkAboutDialog  *about,
+const gchar *          SF(gtk_about_dialog_get_comments)           (GtkAboutDialog  *about);
+void                   SF(gtk_about_dialog_set_comments)           (GtkAboutDialog  *about,
 								const gchar     *comments);
-const gchar *          __gtk_about_dialog_get_license            (GtkAboutDialog  *about);
-void                   __gtk_about_dialog_set_license            (GtkAboutDialog  *about,
+const gchar *          SF(gtk_about_dialog_get_license)            (GtkAboutDialog  *about);
+void                   SF(gtk_about_dialog_set_license)            (GtkAboutDialog  *about,
 								const gchar     *license);
 
-gboolean               __gtk_about_dialog_get_wrap_license       (GtkAboutDialog  *about);
-void                   __gtk_about_dialog_set_wrap_license       (GtkAboutDialog  *about,
+gboolean               SF(gtk_about_dialog_get_wrap_license)       (GtkAboutDialog  *about);
+void                   SF(gtk_about_dialog_set_wrap_license)       (GtkAboutDialog  *about,
                                                                 gboolean         wrap_license);
 
-const gchar *          __gtk_about_dialog_get_website            (GtkAboutDialog  *about);
-void                   __gtk_about_dialog_set_website            (GtkAboutDialog  *about,
+const gchar *          SF(gtk_about_dialog_get_website)            (GtkAboutDialog  *about);
+void                   SF(gtk_about_dialog_set_website)            (GtkAboutDialog  *about,
 								const gchar     *website);
-const gchar *          __gtk_about_dialog_get_website_label      (GtkAboutDialog  *about);
-void                   __gtk_about_dialog_set_website_label      (GtkAboutDialog  *about,
+const gchar *          SF(gtk_about_dialog_get_website_label)      (GtkAboutDialog  *about);
+void                   SF(gtk_about_dialog_set_website_label)      (GtkAboutDialog  *about,
 								const gchar     *website_label);
-const gchar* const *   __gtk_about_dialog_get_authors            (GtkAboutDialog  *about);
-void                   __gtk_about_dialog_set_authors            (GtkAboutDialog  *about,
+const gchar* const *   SF(gtk_about_dialog_get_authors)            (GtkAboutDialog  *about);
+void                   SF(gtk_about_dialog_set_authors)            (GtkAboutDialog  *about,
 								const gchar    **authors);
-const gchar* const *   __gtk_about_dialog_get_documenters        (GtkAboutDialog  *about);
-void                   __gtk_about_dialog_set_documenters        (GtkAboutDialog  *about,
+const gchar* const *   SF(gtk_about_dialog_get_documenters)        (GtkAboutDialog  *about);
+void                   SF(gtk_about_dialog_set_documenters)        (GtkAboutDialog  *about,
 								const gchar    **documenters);
-const gchar* const *   __gtk_about_dialog_get_artists            (GtkAboutDialog  *about);
-void                   __gtk_about_dialog_set_artists            (GtkAboutDialog  *about,
+const gchar* const *   SF(gtk_about_dialog_get_artists)            (GtkAboutDialog  *about);
+void                   SF(gtk_about_dialog_set_artists)            (GtkAboutDialog  *about,
 								const gchar    **artists);
-const gchar *          __gtk_about_dialog_get_translator_credits (GtkAboutDialog  *about);
-void                   __gtk_about_dialog_set_translator_credits (GtkAboutDialog  *about,
+const gchar *          SF(gtk_about_dialog_get_translator_credits) (GtkAboutDialog  *about);
+void                   SF(gtk_about_dialog_set_translator_credits) (GtkAboutDialog  *about,
 								const gchar     *translator_credits);
-GdkPixbuf             *__gtk_about_dialog_get_logo               (GtkAboutDialog  *about);
-void                   __gtk_about_dialog_set_logo               (GtkAboutDialog  *about,
+GdkPixbuf             *SF(gtk_about_dialog_get_logo)               (GtkAboutDialog  *about);
+void                   SF(gtk_about_dialog_set_logo)               (GtkAboutDialog  *about,
 								GdkPixbuf       *logo);
-const gchar *          __gtk_about_dialog_get_logo_icon_name     (GtkAboutDialog  *about);
-void                   __gtk_about_dialog_set_logo_icon_name     (GtkAboutDialog  *about,
+const gchar *          SF(gtk_about_dialog_get_logo_icon_name)     (GtkAboutDialog  *about);
+void                   SF(gtk_about_dialog_set_logo_icon_name)     (GtkAboutDialog  *about,
 								const gchar     *icon_name);
 
 /**
@@ -169,8 +169,8 @@ void                   __gtk_about_dialog_set_logo_icon_name     (GtkAboutDialog
  * @about: the #GtkAboutDialog in which the link was activated
  * @link_: the URL or email address to which the activated link points
  * @data: user data that was passed when the function was registered
- *  with __gtk_about_dialog_set_email_hook() or
- *  __gtk_about_dialog_set_url_hook()
+ *  with SF(gtk_about_dialog_set_email_hook)() or
+ *  SF(gtk_about_dialog_set_url_hook)()
  *
  * The type of a function which is called when a URL or email
  * link is activated.
@@ -180,10 +180,10 @@ typedef void (* GtkAboutDialogActivateLinkFunc) (GtkAboutDialog *about,
 						 gpointer        data);
 
 #ifndef GTK_DISABLE_DEPRECATED
-GtkAboutDialogActivateLinkFunc __gtk_about_dialog_set_email_hook (GtkAboutDialogActivateLinkFunc func,
+GtkAboutDialogActivateLinkFunc SF(gtk_about_dialog_set_email_hook) (GtkAboutDialogActivateLinkFunc func,
 								gpointer                       data,
 								GDestroyNotify                 destroy);
-GtkAboutDialogActivateLinkFunc __gtk_about_dialog_set_url_hook   (GtkAboutDialogActivateLinkFunc func,
+GtkAboutDialogActivateLinkFunc SF(gtk_about_dialog_set_url_hook)   (GtkAboutDialogActivateLinkFunc func,
 								gpointer                       data,
 								GDestroyNotify                 destroy);
 #endif

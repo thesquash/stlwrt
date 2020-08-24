@@ -116,40 +116,40 @@ struct _GtkTreeModelIface
 
 
 /* GtkTreePath operations */
-GtkTreePath *__gtk_tree_path_new              (void);
-GtkTreePath *__gtk_tree_path_new_from_string  (const gchar       *path);
-GtkTreePath *__gtk_tree_path_new_from_indices (gint               first_index,
+GtkTreePath *SF(gtk_tree_path_new)              (void);
+GtkTreePath *SF(gtk_tree_path_new_from_string)  (const gchar       *path);
+GtkTreePath *SF(gtk_tree_path_new_from_indices) (gint               first_index,
 					     ...);
-gchar       *__gtk_tree_path_to_string        (GtkTreePath       *path);
-GtkTreePath *__gtk_tree_path_new_first        (void);
-void         __gtk_tree_path_append_index     (GtkTreePath       *path,
+gchar       *SF(gtk_tree_path_to_string)        (GtkTreePath       *path);
+GtkTreePath *SF(gtk_tree_path_new_first)        (void);
+void         SF(gtk_tree_path_append_index)     (GtkTreePath       *path,
 					     gint               index_);
-void         __gtk_tree_path_prepend_index    (GtkTreePath       *path,
+void         SF(gtk_tree_path_prepend_index)    (GtkTreePath       *path,
 					     gint               index_);
-gint         __gtk_tree_path_get_depth        (GtkTreePath       *path);
-gint        *__gtk_tree_path_get_indices      (GtkTreePath       *path);
-gint        *__gtk_tree_path_get_indices_with_depth (GtkTreePath *path,
+gint         SF(gtk_tree_path_get_depth)        (GtkTreePath       *path);
+gint        *SF(gtk_tree_path_get_indices)      (GtkTreePath       *path);
+gint        *SF(gtk_tree_path_get_indices_with_depth) (GtkTreePath *path,
                                                    gint        *depth);
-void         __gtk_tree_path_free             (GtkTreePath       *path);
-GtkTreePath *__gtk_tree_path_copy             (const GtkTreePath *path);
+void         SF(gtk_tree_path_free)             (GtkTreePath       *path);
+GtkTreePath *SF(gtk_tree_path_copy)             (const GtkTreePath *path);
 GType        _T2_gtk_tree_path_get_type         (void) G_GNUC_CONST;
 GType        _3T_gtk_tree_path_get_type         (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType        gtk_tree_path_get_type         (void) G_GNUC_CONST;
-gint         __gtk_tree_path_compare          (const GtkTreePath *a,
+gint         SF(gtk_tree_path_compare)          (const GtkTreePath *a,
 					     const GtkTreePath *b);
-void         __gtk_tree_path_next             (GtkTreePath       *path);
-gboolean     __gtk_tree_path_prev             (GtkTreePath       *path);
-gboolean     __gtk_tree_path_up               (GtkTreePath       *path);
-void         __gtk_tree_path_down             (GtkTreePath       *path);
+void         SF(gtk_tree_path_next)             (GtkTreePath       *path);
+gboolean     SF(gtk_tree_path_prev)             (GtkTreePath       *path);
+gboolean     SF(gtk_tree_path_up)               (GtkTreePath       *path);
+void         SF(gtk_tree_path_down)             (GtkTreePath       *path);
 
-gboolean     __gtk_tree_path_is_ancestor      (GtkTreePath       *path,
+gboolean     SF(gtk_tree_path_is_ancestor)      (GtkTreePath       *path,
                                              GtkTreePath       *descendant);
-gboolean     __gtk_tree_path_is_descendant    (GtkTreePath       *path,
+gboolean     SF(gtk_tree_path_is_descendant)    (GtkTreePath       *path,
                                              GtkTreePath       *ancestor);
 
 #ifndef GTK_DISABLE_DEPRECATED
-#define __gtk_tree_path_new_root() __gtk_tree_path_new_first()
+#define SF(gtk_tree_path_new_root)() SF(gtk_tree_path_new_first)()
 #endif /* !GTK_DISABLE_DEPRECATED */
 
 /* Row reference (an object that tracks model changes so it refers to the same
@@ -161,30 +161,30 @@ GType                _T2_gtk_tree_row_reference_get_type (void) G_GNUC_CONST;
 GType                _3T_gtk_tree_row_reference_get_type (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType                gtk_tree_row_reference_get_type (void) G_GNUC_CONST;
-GtkTreeRowReference *__gtk_tree_row_reference_new       (GtkTreeModel        *model,
+GtkTreeRowReference *SF(gtk_tree_row_reference_new)       (GtkTreeModel        *model,
 						       GtkTreePath         *path);
-GtkTreeRowReference *__gtk_tree_row_reference_new_proxy (GObject             *proxy,
+GtkTreeRowReference *SF(gtk_tree_row_reference_new_proxy) (GObject             *proxy,
 						       GtkTreeModel        *model,
 						       GtkTreePath         *path);
-GtkTreePath         *__gtk_tree_row_reference_get_path  (GtkTreeRowReference *reference);
-GtkTreeModel        *__gtk_tree_row_reference_get_model (GtkTreeRowReference *reference);
-gboolean             __gtk_tree_row_reference_valid     (GtkTreeRowReference *reference);
-GtkTreeRowReference *__gtk_tree_row_reference_copy      (GtkTreeRowReference *reference);
-void                 __gtk_tree_row_reference_free      (GtkTreeRowReference *reference);
+GtkTreePath         *SF(gtk_tree_row_reference_get_path)  (GtkTreeRowReference *reference);
+GtkTreeModel        *SF(gtk_tree_row_reference_get_model) (GtkTreeRowReference *reference);
+gboolean             SF(gtk_tree_row_reference_valid)     (GtkTreeRowReference *reference);
+GtkTreeRowReference *SF(gtk_tree_row_reference_copy)      (GtkTreeRowReference *reference);
+void                 SF(gtk_tree_row_reference_free)      (GtkTreeRowReference *reference);
 /* These two functions are only needed if you created the row reference with a
  * proxy object */
-void                 __gtk_tree_row_reference_inserted  (GObject     *proxy,
+void                 SF(gtk_tree_row_reference_inserted)  (GObject     *proxy,
 						       GtkTreePath *path);
-void                 __gtk_tree_row_reference_deleted   (GObject     *proxy,
+void                 SF(gtk_tree_row_reference_deleted)   (GObject     *proxy,
 						       GtkTreePath *path);
-void                 __gtk_tree_row_reference_reordered (GObject     *proxy,
+void                 SF(gtk_tree_row_reference_reordered) (GObject     *proxy,
 						       GtkTreePath *path,
 						       GtkTreeIter *iter,
 						       gint        *new_order);
 
 /* GtkTreeIter operations */
-GtkTreeIter *     __gtk_tree_iter_copy             (GtkTreeIter  *iter);
-void              __gtk_tree_iter_free             (GtkTreeIter  *iter);
+GtkTreeIter *     SF(gtk_tree_iter_copy)             (GtkTreeIter  *iter);
+void              SF(gtk_tree_iter_free)             (GtkTreeIter  *iter);
 GType             _T2_gtk_tree_iter_get_type         (void) G_GNUC_CONST;
 GType             _3T_gtk_tree_iter_get_type         (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
@@ -194,79 +194,79 @@ GType             _T2_gtk_tree_model_get_type        (void) G_GNUC_CONST;
 GType             _3T_gtk_tree_model_get_type        (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType             gtk_tree_model_get_type        (void) G_GNUC_CONST;
-GtkTreeModelFlags __gtk_tree_model_get_flags       (GtkTreeModel *tree_model);
-gint              __gtk_tree_model_get_n_columns   (GtkTreeModel *tree_model);
-GType             __gtk_tree_model_get_column_type (GtkTreeModel *tree_model,
+GtkTreeModelFlags SF(gtk_tree_model_get_flags)       (GtkTreeModel *tree_model);
+gint              SF(gtk_tree_model_get_n_columns)   (GtkTreeModel *tree_model);
+GType             SF(gtk_tree_model_get_column_type) (GtkTreeModel *tree_model,
 						  gint          index_);
 
 
 /* Iterator movement */
-gboolean          __gtk_tree_model_get_iter        (GtkTreeModel *tree_model,
+gboolean          SF(gtk_tree_model_get_iter)        (GtkTreeModel *tree_model,
 						  GtkTreeIter  *iter,
 						  GtkTreePath  *path);
-gboolean          __gtk_tree_model_get_iter_from_string (GtkTreeModel *tree_model,
+gboolean          SF(gtk_tree_model_get_iter_from_string) (GtkTreeModel *tree_model,
 						       GtkTreeIter  *iter,
 						       const gchar  *path_string);
-gchar *           __gtk_tree_model_get_string_from_iter (GtkTreeModel *tree_model,
+gchar *           SF(gtk_tree_model_get_string_from_iter) (GtkTreeModel *tree_model,
                                                        GtkTreeIter  *iter);
-gboolean          __gtk_tree_model_get_iter_first  (GtkTreeModel *tree_model,
+gboolean          SF(gtk_tree_model_get_iter_first)  (GtkTreeModel *tree_model,
 						  GtkTreeIter  *iter);
-GtkTreePath *     __gtk_tree_model_get_path        (GtkTreeModel *tree_model,
+GtkTreePath *     SF(gtk_tree_model_get_path)        (GtkTreeModel *tree_model,
 						  GtkTreeIter  *iter);
-void              __gtk_tree_model_get_value       (GtkTreeModel *tree_model,
+void              SF(gtk_tree_model_get_value)       (GtkTreeModel *tree_model,
 						  GtkTreeIter  *iter,
 						  gint          column,
 						  GValue       *value);
-gboolean          __gtk_tree_model_iter_next       (GtkTreeModel *tree_model,
+gboolean          SF(gtk_tree_model_iter_next)       (GtkTreeModel *tree_model,
 						  GtkTreeIter  *iter);
-gboolean          __gtk_tree_model_iter_children   (GtkTreeModel *tree_model,
+gboolean          SF(gtk_tree_model_iter_children)   (GtkTreeModel *tree_model,
 						  GtkTreeIter  *iter,
 						  GtkTreeIter  *parent);
-gboolean          __gtk_tree_model_iter_has_child  (GtkTreeModel *tree_model,
+gboolean          SF(gtk_tree_model_iter_has_child)  (GtkTreeModel *tree_model,
 						  GtkTreeIter  *iter);
-gint              __gtk_tree_model_iter_n_children (GtkTreeModel *tree_model,
+gint              SF(gtk_tree_model_iter_n_children) (GtkTreeModel *tree_model,
 						  GtkTreeIter  *iter);
-gboolean          __gtk_tree_model_iter_nth_child  (GtkTreeModel *tree_model,
+gboolean          SF(gtk_tree_model_iter_nth_child)  (GtkTreeModel *tree_model,
 						  GtkTreeIter  *iter,
 						  GtkTreeIter  *parent,
 						  gint          n);
-gboolean          __gtk_tree_model_iter_parent     (GtkTreeModel *tree_model,
+gboolean          SF(gtk_tree_model_iter_parent)     (GtkTreeModel *tree_model,
 						  GtkTreeIter  *iter,
 						  GtkTreeIter  *child);
-void              __gtk_tree_model_ref_node        (GtkTreeModel *tree_model,
+void              SF(gtk_tree_model_ref_node)        (GtkTreeModel *tree_model,
 						  GtkTreeIter  *iter);
-void              __gtk_tree_model_unref_node      (GtkTreeModel *tree_model,
+void              SF(gtk_tree_model_unref_node)      (GtkTreeModel *tree_model,
 						  GtkTreeIter  *iter);
-void              __gtk_tree_model_get             (GtkTreeModel *tree_model,
+void              SF(gtk_tree_model_get)             (GtkTreeModel *tree_model,
 						  GtkTreeIter  *iter,
 						  ...);
-void              __gtk_tree_model_get_valist      (GtkTreeModel *tree_model,
+void              SF(gtk_tree_model_get_valist)      (GtkTreeModel *tree_model,
 						  GtkTreeIter  *iter,
 						  va_list       var_args);
 
 
-void              __gtk_tree_model_foreach         (GtkTreeModel            *model,
+void              SF(gtk_tree_model_foreach)         (GtkTreeModel            *model,
 						  GtkTreeModelForeachFunc  func,
 						  gpointer                 user_data);
 
 
 #ifndef GTK_DISABLE_DEPRECATED
-#define __gtk_tree_model_get_iter_root(tree_model, iter) __gtk_tree_model_get_iter_first(tree_model, iter)
+#define SF(gtk_tree_model_get_iter_root)(tree_model, iter) SF(gtk_tree_model_get_iter_first)(tree_model, iter)
 #endif /* !GTK_DISABLE_DEPRECATED */
 
 /* Signals */
-void __gtk_tree_model_row_changed           (GtkTreeModel *tree_model,
+void SF(gtk_tree_model_row_changed)           (GtkTreeModel *tree_model,
 					   GtkTreePath  *path,
 					   GtkTreeIter  *iter);
-void __gtk_tree_model_row_inserted          (GtkTreeModel *tree_model,
+void SF(gtk_tree_model_row_inserted)          (GtkTreeModel *tree_model,
 					   GtkTreePath  *path,
 					   GtkTreeIter  *iter);
-void __gtk_tree_model_row_has_child_toggled (GtkTreeModel *tree_model,
+void SF(gtk_tree_model_row_has_child_toggled) (GtkTreeModel *tree_model,
 					   GtkTreePath  *path,
 					   GtkTreeIter  *iter);
-void __gtk_tree_model_row_deleted           (GtkTreeModel *tree_model,
+void SF(gtk_tree_model_row_deleted)           (GtkTreeModel *tree_model,
 					   GtkTreePath  *path);
-void __gtk_tree_model_rows_reordered        (GtkTreeModel *tree_model,
+void SF(gtk_tree_model_rows_reordered)        (GtkTreeModel *tree_model,
 					   GtkTreePath  *path,
 					   GtkTreeIter  *iter,
 					   gint         *new_order);

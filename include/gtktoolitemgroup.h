@@ -83,38 +83,38 @@ struct _GtkToolItemGroupClass
 
 
 GType                 gtk_tool_item_group_get_type          (void) G_GNUC_CONST;
-GtkWidget*            __gtk_tool_item_group_new               (const gchar        *label);
+GtkWidget*            SF(gtk_tool_item_group_new)               (const gchar        *label);
 
-void                  __gtk_tool_item_group_set_label         (GtkToolItemGroup   *group,
+void                  SF(gtk_tool_item_group_set_label)         (GtkToolItemGroup   *group,
                                                              const gchar        *label);
-void                  __gtk_tool_item_group_set_label_widget  (GtkToolItemGroup   *group,
+void                  SF(gtk_tool_item_group_set_label_widget)  (GtkToolItemGroup   *group,
                                                              GtkWidget          *label_widget);
-void                  __gtk_tool_item_group_set_collapsed      (GtkToolItemGroup  *group,
+void                  SF(gtk_tool_item_group_set_collapsed)      (GtkToolItemGroup  *group,
                                                              gboolean            collapsed);
-void                  __gtk_tool_item_group_set_ellipsize     (GtkToolItemGroup   *group,
+void                  SF(gtk_tool_item_group_set_ellipsize)     (GtkToolItemGroup   *group,
                                                              PangoEllipsizeMode  ellipsize);
-void                  __gtk_tool_item_group_set_header_relief (GtkToolItemGroup   *group,
+void                  SF(gtk_tool_item_group_set_header_relief) (GtkToolItemGroup   *group,
                                                              GtkReliefStyle      style);
 
-const gchar *         __gtk_tool_item_group_get_label         (GtkToolItemGroup   *group);
-GtkWidget            *__gtk_tool_item_group_get_label_widget  (GtkToolItemGroup   *group);
-gboolean              __gtk_tool_item_group_get_collapsed     (GtkToolItemGroup   *group);
-PangoEllipsizeMode    __gtk_tool_item_group_get_ellipsize     (GtkToolItemGroup   *group);
-GtkReliefStyle        __gtk_tool_item_group_get_header_relief (GtkToolItemGroup   *group);
+const gchar *         SF(gtk_tool_item_group_get_label)         (GtkToolItemGroup   *group);
+GtkWidget            *SF(gtk_tool_item_group_get_label_widget)  (GtkToolItemGroup   *group);
+gboolean              SF(gtk_tool_item_group_get_collapsed)     (GtkToolItemGroup   *group);
+PangoEllipsizeMode    SF(gtk_tool_item_group_get_ellipsize)     (GtkToolItemGroup   *group);
+GtkReliefStyle        SF(gtk_tool_item_group_get_header_relief) (GtkToolItemGroup   *group);
 
-void                  __gtk_tool_item_group_insert            (GtkToolItemGroup   *group,
+void                  SF(gtk_tool_item_group_insert)            (GtkToolItemGroup   *group,
                                                              GtkToolItem        *item,
                                                              gint                position);
-void                  __gtk_tool_item_group_set_item_position (GtkToolItemGroup   *group,
+void                  SF(gtk_tool_item_group_set_item_position) (GtkToolItemGroup   *group,
                                                              GtkToolItem        *item,
                                                              gint                position);
-gint                  __gtk_tool_item_group_get_item_position (GtkToolItemGroup   *group,
+gint                  SF(gtk_tool_item_group_get_item_position) (GtkToolItemGroup   *group,
                                                              GtkToolItem        *item);
 
-guint                 __gtk_tool_item_group_get_n_items       (GtkToolItemGroup   *group);
-GtkToolItem*          __gtk_tool_item_group_get_nth_item      (GtkToolItemGroup   *group,
+guint                 SF(gtk_tool_item_group_get_n_items)       (GtkToolItemGroup   *group);
+GtkToolItem*          SF(gtk_tool_item_group_get_nth_item)      (GtkToolItemGroup   *group,
                                                              guint               index);
-GtkToolItem*          __gtk_tool_item_group_get_drop_item     (GtkToolItemGroup   *group,
+GtkToolItem*          SF(gtk_tool_item_group_get_drop_item)     (GtkToolItemGroup   *group,
                                                              gint                x,
                                                              gint                y);
 

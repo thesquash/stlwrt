@@ -109,57 +109,57 @@ struct _GtkToolPaletteClass
 
 
 GType                          gtk_tool_palette_get_type              (void) G_GNUC_CONST;
-GtkWidget*                     __gtk_tool_palette_new                   (void);
+GtkWidget*                     SF(gtk_tool_palette_new)                   (void);
 
-void                           __gtk_tool_palette_set_group_position    (GtkToolPalette            *palette,
+void                           SF(gtk_tool_palette_set_group_position)    (GtkToolPalette            *palette,
                                                                        GtkToolItemGroup          *group,
                                                                        gint                       position);
-void                           __gtk_tool_palette_set_exclusive         (GtkToolPalette            *palette,
+void                           SF(gtk_tool_palette_set_exclusive)         (GtkToolPalette            *palette,
                                                                        GtkToolItemGroup          *group,
                                                                        gboolean                   exclusive);
-void                           __gtk_tool_palette_set_expand            (GtkToolPalette            *palette,
+void                           SF(gtk_tool_palette_set_expand)            (GtkToolPalette            *palette,
                                                                        GtkToolItemGroup          *group,
                                                                        gboolean                   expand);
 
-gint                           __gtk_tool_palette_get_group_position    (GtkToolPalette            *palette,
+gint                           SF(gtk_tool_palette_get_group_position)    (GtkToolPalette            *palette,
                                                                        GtkToolItemGroup          *group);
-gboolean                       __gtk_tool_palette_get_exclusive         (GtkToolPalette            *palette,
+gboolean                       SF(gtk_tool_palette_get_exclusive)         (GtkToolPalette            *palette,
                                                                        GtkToolItemGroup          *group);
-gboolean                       __gtk_tool_palette_get_expand            (GtkToolPalette            *palette,
+gboolean                       SF(gtk_tool_palette_get_expand)            (GtkToolPalette            *palette,
                                                                        GtkToolItemGroup          *group);
 
-void                           __gtk_tool_palette_set_icon_size         (GtkToolPalette            *palette,
+void                           SF(gtk_tool_palette_set_icon_size)         (GtkToolPalette            *palette,
                                                                        GtkIconSize                icon_size);
-void                           __gtk_tool_palette_unset_icon_size       (GtkToolPalette            *palette);
-void                           __gtk_tool_palette_set_style             (GtkToolPalette            *palette,
+void                           SF(gtk_tool_palette_unset_icon_size)       (GtkToolPalette            *palette);
+void                           SF(gtk_tool_palette_set_style)             (GtkToolPalette            *palette,
                                                                        GtkToolbarStyle            style);
-void                           __gtk_tool_palette_unset_style           (GtkToolPalette            *palette);
+void                           SF(gtk_tool_palette_unset_style)           (GtkToolPalette            *palette);
 
-GtkIconSize                    __gtk_tool_palette_get_icon_size         (GtkToolPalette            *palette);
-GtkToolbarStyle                __gtk_tool_palette_get_style             (GtkToolPalette            *palette);
+GtkIconSize                    SF(gtk_tool_palette_get_icon_size)         (GtkToolPalette            *palette);
+GtkToolbarStyle                SF(gtk_tool_palette_get_style)             (GtkToolPalette            *palette);
 
-GtkToolItem*                   __gtk_tool_palette_get_drop_item         (GtkToolPalette            *palette,
+GtkToolItem*                   SF(gtk_tool_palette_get_drop_item)         (GtkToolPalette            *palette,
                                                                        gint                       x,
                                                                        gint                       y);
-GtkToolItemGroup*              __gtk_tool_palette_get_drop_group        (GtkToolPalette            *palette,
+GtkToolItemGroup*              SF(gtk_tool_palette_get_drop_group)        (GtkToolPalette            *palette,
                                                                        gint                       x,
                                                                        gint                       y);
-GtkWidget*                     __gtk_tool_palette_get_drag_item         (GtkToolPalette            *palette,
+GtkWidget*                     SF(gtk_tool_palette_get_drag_item)         (GtkToolPalette            *palette,
                                                                        const GtkSelectionData    *selection);
 
-void                           __gtk_tool_palette_set_drag_source       (GtkToolPalette            *palette,
+void                           SF(gtk_tool_palette_set_drag_source)       (GtkToolPalette            *palette,
                                                                        GtkToolPaletteDragTargets  targets);
-void                           __gtk_tool_palette_add_drag_dest         (GtkToolPalette            *palette,
+void                           SF(gtk_tool_palette_add_drag_dest)         (GtkToolPalette            *palette,
                                                                        GtkWidget                 *widget,
                                                                        GtkDestDefaults            flags,
                                                                        GtkToolPaletteDragTargets  targets,
                                                                        GdkDragAction              actions);
 
-GtkAdjustment*                 __gtk_tool_palette_get_hadjustment       (GtkToolPalette            *palette);
-GtkAdjustment*                 __gtk_tool_palette_get_vadjustment       (GtkToolPalette            *palette);
+GtkAdjustment*                 SF(gtk_tool_palette_get_hadjustment)       (GtkToolPalette            *palette);
+GtkAdjustment*                 SF(gtk_tool_palette_get_vadjustment)       (GtkToolPalette            *palette);
 
-const GtkTargetEntry *         __gtk_tool_palette_get_drag_target_item  (void) G_GNUC_CONST;
-const GtkTargetEntry *         __gtk_tool_palette_get_drag_target_group (void) G_GNUC_CONST;
+const GtkTargetEntry *         SF(gtk_tool_palette_get_drag_target_item)  (void) G_GNUC_CONST;
+const GtkTargetEntry *         SF(gtk_tool_palette_get_drag_target_group) (void) G_GNUC_CONST;
 
 
 G_END_DECLS

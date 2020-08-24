@@ -124,33 +124,30 @@ struct _GdkCursor
 /* Cursors
  */
 
-GType      _T2_gdk_cursor_get_type           (void) G_GNUC_CONST;
-GType      _3T_gdk_cursor_get_type           (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      gdk_cursor_get_type           (void) G_GNUC_CONST;
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS (gdk_cursor)
 
-GdkCursor* __gdk_cursor_new_for_display	 (GdkDisplay      *display,
+GdkCursor* SF(gdk_cursor_new_for_display)	 (GdkDisplay      *display,
 					  GdkCursorType    cursor_type);
 #ifndef GDK_MULTIHEAD_SAFE
-GdkCursor* __gdk_cursor_new		 (GdkCursorType	   cursor_type);
+GdkCursor* SF(gdk_cursor_new)		 (GdkCursorType	   cursor_type);
 #endif
-GdkCursor* __gdk_cursor_new_from_pixmap	 (GdkPixmap	  *source,
+GdkCursor* SF(gdk_cursor_new_from_pixmap)	 (GdkPixmap	  *source,
 					  GdkPixmap	  *mask,
 					  const GdkColor  *fg,
 					  const GdkColor  *bg,
 					  gint		   x,
 					  gint		   y);
-GdkCursor* __gdk_cursor_new_from_pixbuf	 (GdkDisplay      *display,
+GdkCursor* SF(gdk_cursor_new_from_pixbuf)	 (GdkDisplay      *display,
 					  GdkPixbuf       *pixbuf,
 					  gint             x,
 					  gint             y);
-GdkDisplay* __gdk_cursor_get_display	 (GdkCursor	  *cursor);
-GdkCursor*  __gdk_cursor_ref               (GdkCursor       *cursor);
-void        __gdk_cursor_unref             (GdkCursor       *cursor);
-GdkCursor*  __gdk_cursor_new_from_name	 (GdkDisplay      *display,
+GdkDisplay* SF(gdk_cursor_get_display)	 (GdkCursor	  *cursor);
+GdkCursor*  SF(gdk_cursor_ref)               (GdkCursor       *cursor);
+void        SF(gdk_cursor_unref)             (GdkCursor       *cursor);
+GdkCursor*  SF(gdk_cursor_new_from_name)	 (GdkDisplay      *display,
 					  const gchar     *name);
-GdkPixbuf*  __gdk_cursor_get_image         (GdkCursor       *cursor);
-GdkCursorType __gdk_cursor_get_cursor_type (GdkCursor       *cursor);
+GdkPixbuf*  SF(gdk_cursor_get_image)         (GdkCursor       *cursor);
+GdkCursorType SF(gdk_cursor_get_cursor_type) (GdkCursor       *cursor);
 
 #ifndef GDK_DISABLE_DEPRECATED
 #define gdk_cursor_destroy             gdk_cursor_unref

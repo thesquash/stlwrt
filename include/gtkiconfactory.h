@@ -97,18 +97,18 @@ GType           _T2_gtk_icon_factory_get_type (void) G_GNUC_CONST;
 GType           _3T_gtk_icon_factory_get_type (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType           gtk_icon_factory_get_type (void) G_GNUC_CONST;
-GtkIconFactory* __gtk_icon_factory_new      (void);
-void            __gtk_icon_factory_add      (GtkIconFactory *factory,
+GtkIconFactory* SF(gtk_icon_factory_new)      (void);
+void            SF(gtk_icon_factory_add)      (GtkIconFactory *factory,
                                            const gchar    *stock_id,
                                            GtkIconSet     *icon_set);
-GtkIconSet*     __gtk_icon_factory_lookup   (GtkIconFactory *factory,
+GtkIconSet*     SF(gtk_icon_factory_lookup)   (GtkIconFactory *factory,
                                            const gchar    *stock_id);
 
 /* Manage the default icon factory stack */
 
-void        __gtk_icon_factory_add_default     (GtkIconFactory  *factory);
-void        __gtk_icon_factory_remove_default  (GtkIconFactory  *factory);
-GtkIconSet* __gtk_icon_factory_lookup_default  (const gchar     *stock_id);
+void        SF(gtk_icon_factory_add_default)     (GtkIconFactory  *factory);
+void        SF(gtk_icon_factory_remove_default)  (GtkIconFactory  *factory);
+GtkIconSet* SF(gtk_icon_factory_lookup_default)  (const gchar     *stock_id);
 
 /* Get preferred real size from registered semantic size.  Note that
  * themes SHOULD use this size, but they aren't required to; for size
@@ -122,22 +122,22 @@ GtkIconSet* __gtk_icon_factory_lookup_default  (const gchar     *stock_id);
  */
 
 #ifndef GDK_MULTIHEAD_SAFE
-gboolean __gtk_icon_size_lookup              (GtkIconSize  size,
+gboolean SF(gtk_icon_size_lookup)              (GtkIconSize  size,
 					    gint        *width,
 					    gint        *height);
 #endif /* GDK_MULTIHEAD_SAFE */
-gboolean __gtk_icon_size_lookup_for_settings (GtkSettings *settings,
+gboolean SF(gtk_icon_size_lookup_for_settings) (GtkSettings *settings,
 					    GtkIconSize  size,
 					    gint        *width,
 					    gint        *height);
 
-GtkIconSize           __gtk_icon_size_register       (const gchar *name,
+GtkIconSize           SF(gtk_icon_size_register)       (const gchar *name,
                                                     gint         width,
                                                     gint         height);
-void                  __gtk_icon_size_register_alias (const gchar *alias,
+void                  SF(gtk_icon_size_register_alias) (const gchar *alias,
                                                     GtkIconSize  target);
-GtkIconSize           __gtk_icon_size_from_name      (const gchar *name);
-const gchar *         __gtk_icon_size_get_name       (GtkIconSize  size);
+GtkIconSize           SF(gtk_icon_size_from_name)      (const gchar *name);
+const gchar *         SF(gtk_icon_size_get_name)       (GtkIconSize  size);
 
 /* Icon sets */
 
@@ -145,17 +145,17 @@ GType       _T2_gtk_icon_set_get_type        (void) G_GNUC_CONST;
 GType       _3T_gtk_icon_set_get_type        (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType       gtk_icon_set_get_type        (void) G_GNUC_CONST;
-GtkIconSet* __gtk_icon_set_new             (void);
-GtkIconSet* __gtk_icon_set_new_from_pixbuf (GdkPixbuf       *pixbuf);
+GtkIconSet* SF(gtk_icon_set_new)             (void);
+GtkIconSet* SF(gtk_icon_set_new_from_pixbuf) (GdkPixbuf       *pixbuf);
 
-GtkIconSet* __gtk_icon_set_ref             (GtkIconSet      *icon_set);
-void        __gtk_icon_set_unref           (GtkIconSet      *icon_set);
-GtkIconSet* __gtk_icon_set_copy            (GtkIconSet      *icon_set);
+GtkIconSet* SF(gtk_icon_set_ref)             (GtkIconSet      *icon_set);
+void        SF(gtk_icon_set_unref)           (GtkIconSet      *icon_set);
+GtkIconSet* SF(gtk_icon_set_copy)            (GtkIconSet      *icon_set);
 
 /* Get one of the icon variants in the set, creating the variant if
  * necessary.
  */
-GdkPixbuf*  __gtk_icon_set_render_icon     (GtkIconSet      *icon_set,
+GdkPixbuf*  SF(gtk_icon_set_render_icon)     (GtkIconSet      *icon_set,
                                           GtkStyle        *style,
                                           GtkTextDirection direction,
                                           GtkStateType     state,
@@ -164,10 +164,10 @@ GdkPixbuf*  __gtk_icon_set_render_icon     (GtkIconSet      *icon_set,
                                           const char      *detail);
 
 
-void           __gtk_icon_set_add_source   (GtkIconSet          *icon_set,
+void           SF(gtk_icon_set_add_source)   (GtkIconSet          *icon_set,
                                           const GtkIconSource *source);
 
-void           __gtk_icon_set_get_sizes    (GtkIconSet          *icon_set,
+void           SF(gtk_icon_set_get_sizes)    (GtkIconSet          *icon_set,
                                           GtkIconSize        **sizes,
                                           gint                *n_sizes);
 
@@ -175,45 +175,45 @@ GType          _T2_gtk_icon_source_get_type                 (void) G_GNUC_CONST;
 GType          _3T_gtk_icon_source_get_type                 (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType          gtk_icon_source_get_type                 (void) G_GNUC_CONST;
-GtkIconSource* __gtk_icon_source_new                      (void);
-GtkIconSource* __gtk_icon_source_copy                     (const GtkIconSource *source);
-void           __gtk_icon_source_free                     (GtkIconSource       *source);
+GtkIconSource* SF(gtk_icon_source_new)                      (void);
+GtkIconSource* SF(gtk_icon_source_copy)                     (const GtkIconSource *source);
+void           SF(gtk_icon_source_free)                     (GtkIconSource       *source);
 
-void           __gtk_icon_source_set_filename             (GtkIconSource       *source,
+void           SF(gtk_icon_source_set_filename)             (GtkIconSource       *source,
                                                          const gchar         *filename);
-void           __gtk_icon_source_set_icon_name            (GtkIconSource       *source,
+void           SF(gtk_icon_source_set_icon_name)            (GtkIconSource       *source,
                                                          const gchar         *icon_name);
-void           __gtk_icon_source_set_pixbuf               (GtkIconSource       *source,
+void           SF(gtk_icon_source_set_pixbuf)               (GtkIconSource       *source,
                                                          GdkPixbuf           *pixbuf);
 
-const gchar* __gtk_icon_source_get_filename  (const GtkIconSource *source);
-const gchar* __gtk_icon_source_get_icon_name (const GtkIconSource *source);
-GdkPixbuf*            __gtk_icon_source_get_pixbuf    (const GtkIconSource *source);
+const gchar* SF(gtk_icon_source_get_filename)  (const GtkIconSource *source);
+const gchar* SF(gtk_icon_source_get_icon_name) (const GtkIconSource *source);
+GdkPixbuf*            SF(gtk_icon_source_get_pixbuf)    (const GtkIconSource *source);
 
-void             __gtk_icon_source_set_direction_wildcarded (GtkIconSource       *source,
+void             SF(gtk_icon_source_set_direction_wildcarded) (GtkIconSource       *source,
                                                            gboolean             setting);
-void             __gtk_icon_source_set_state_wildcarded     (GtkIconSource       *source,
+void             SF(gtk_icon_source_set_state_wildcarded)     (GtkIconSource       *source,
                                                            gboolean             setting);
-void             __gtk_icon_source_set_size_wildcarded      (GtkIconSource       *source,
+void             SF(gtk_icon_source_set_size_wildcarded)      (GtkIconSource       *source,
                                                            gboolean             setting);
-gboolean         __gtk_icon_source_get_size_wildcarded      (const GtkIconSource *source);
-gboolean         __gtk_icon_source_get_state_wildcarded     (const GtkIconSource *source);
-gboolean         __gtk_icon_source_get_direction_wildcarded (const GtkIconSource *source);
-void             __gtk_icon_source_set_direction            (GtkIconSource       *source,
+gboolean         SF(gtk_icon_source_get_size_wildcarded)      (const GtkIconSource *source);
+gboolean         SF(gtk_icon_source_get_state_wildcarded)     (const GtkIconSource *source);
+gboolean         SF(gtk_icon_source_get_direction_wildcarded) (const GtkIconSource *source);
+void             SF(gtk_icon_source_set_direction)            (GtkIconSource       *source,
                                                            GtkTextDirection     direction);
-void             __gtk_icon_source_set_state                (GtkIconSource       *source,
+void             SF(gtk_icon_source_set_state)                (GtkIconSource       *source,
                                                            GtkStateType         state);
-void             __gtk_icon_source_set_size                 (GtkIconSource       *source,
+void             SF(gtk_icon_source_set_size)                 (GtkIconSource       *source,
                                                            GtkIconSize          size);
-GtkTextDirection __gtk_icon_source_get_direction            (const GtkIconSource *source);
-GtkStateType     __gtk_icon_source_get_state                (const GtkIconSource *source);
-GtkIconSize      __gtk_icon_source_get_size                 (const GtkIconSource *source);
+GtkTextDirection SF(gtk_icon_source_get_direction)            (const GtkIconSource *source);
+GtkStateType     SF(gtk_icon_source_get_state)                (const GtkIconSource *source);
+GtkIconSize      SF(gtk_icon_source_get_size)                 (const GtkIconSource *source);
 
 
 /* ignore this */
-void ___gtk_icon_set_invalidate_caches (void);
-GList* ___gtk_icon_factory_list_ids (void);
-void ___gtk_icon_factory_ensure_default_icons (void);
+void SF(_gtk_icon_set_invalidate_caches) (void);
+GList* SF(_gtk_icon_factory_list_ids) (void);
+void SF(_gtk_icon_factory_ensure_default_icons) (void);
 
 G_END_DECLS
 

@@ -103,26 +103,26 @@ GType      _3T_gtk_plug_get_type  (void) G_GNUC_CONST;
 GType      gtk_plug_get_type  (void) G_GNUC_CONST;
 
 #ifndef GDK_MULTIHEAD_SAFE
-void       __gtk_plug_construct (GtkPlug         *plug,
+void       SF(gtk_plug_construct) (GtkPlug         *plug,
 			       GdkNativeWindow  socket_id);
-GtkWidget* __gtk_plug_new       (GdkNativeWindow  socket_id);
+GtkWidget* SF(gtk_plug_new)       (GdkNativeWindow  socket_id);
 #endif
 
-void       __gtk_plug_construct_for_display (GtkPlug         *plug,
+void       SF(gtk_plug_construct_for_display) (GtkPlug         *plug,
 					   GdkDisplay      *display,
 					   GdkNativeWindow  socket_id);
-GtkWidget* __gtk_plug_new_for_display       (GdkDisplay      *display,
+GtkWidget* SF(gtk_plug_new_for_display)       (GdkDisplay      *display,
 					   GdkNativeWindow  socket_id);
 
-GdkNativeWindow __gtk_plug_get_id (GtkPlug         *plug);
+GdkNativeWindow SF(gtk_plug_get_id) (GtkPlug         *plug);
 
-gboolean  __gtk_plug_get_embedded (GtkPlug         *plug);
+gboolean  SF(gtk_plug_get_embedded) (GtkPlug         *plug);
 
-GdkWindow *__gtk_plug_get_socket_window (GtkPlug   *plug);
+GdkWindow *SF(gtk_plug_get_socket_window) (GtkPlug   *plug);
 
-void ___gtk_plug_add_to_socket      (GtkPlug   *plug,
+void SF(_gtk_plug_add_to_socket)      (GtkPlug   *plug,
 				   GtkSocket *socket_);
-void ___gtk_plug_remove_from_socket (GtkPlug   *plug,
+void SF(_gtk_plug_remove_from_socket) (GtkPlug   *plug,
 				   GtkSocket *socket_);
 
 G_END_DECLS

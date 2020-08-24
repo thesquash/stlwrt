@@ -80,36 +80,36 @@ struct _GtkExpanderClass
 
 GType                 gtk_expander_get_type          (void) G_GNUC_CONST;
 
-GtkWidget            *__gtk_expander_new               (const gchar *label);
-GtkWidget            *__gtk_expander_new_with_mnemonic (const gchar *label);
+GtkWidget            *SF(gtk_expander_new)               (const gchar *label);
+GtkWidget            *SF(gtk_expander_new_with_mnemonic) (const gchar *label);
 
-void                  __gtk_expander_set_expanded      (GtkExpander *expander,
+void                  SF(gtk_expander_set_expanded)      (GtkExpander *expander,
 						      gboolean     expanded);
-gboolean              __gtk_expander_get_expanded      (GtkExpander *expander);
+gboolean              SF(gtk_expander_get_expanded)      (GtkExpander *expander);
 
 /* Spacing between the expander/label and the child */
-void                  __gtk_expander_set_spacing       (GtkExpander *expander,
+void                  SF(gtk_expander_set_spacing)       (GtkExpander *expander,
 						      gint         spacing);
-gint                  __gtk_expander_get_spacing       (GtkExpander *expander);
+gint                  SF(gtk_expander_get_spacing)       (GtkExpander *expander);
 
-void                  __gtk_expander_set_label         (GtkExpander *expander,
+void                  SF(gtk_expander_set_label)         (GtkExpander *expander,
 						      const gchar *label);
-const gchar *         __gtk_expander_get_label         (GtkExpander *expander);
+const gchar *         SF(gtk_expander_get_label)         (GtkExpander *expander);
 
-void                  __gtk_expander_set_use_underline (GtkExpander *expander,
+void                  SF(gtk_expander_set_use_underline) (GtkExpander *expander,
 						      gboolean     use_underline);
-gboolean              __gtk_expander_get_use_underline (GtkExpander *expander);
+gboolean              SF(gtk_expander_get_use_underline) (GtkExpander *expander);
 
-void                  __gtk_expander_set_use_markup    (GtkExpander *expander,
+void                  SF(gtk_expander_set_use_markup)    (GtkExpander *expander,
 						      gboolean    use_markup);
-gboolean              __gtk_expander_get_use_markup    (GtkExpander *expander);
+gboolean              SF(gtk_expander_get_use_markup)    (GtkExpander *expander);
 
-void                  __gtk_expander_set_label_widget  (GtkExpander *expander,
+void                  SF(gtk_expander_set_label_widget)  (GtkExpander *expander,
 						      GtkWidget   *label_widget);
-GtkWidget            *__gtk_expander_get_label_widget  (GtkExpander *expander);
-void                  __gtk_expander_set_label_fill    (GtkExpander *expander,
+GtkWidget            *SF(gtk_expander_get_label_widget)  (GtkExpander *expander);
+void                  SF(gtk_expander_set_label_fill)    (GtkExpander *expander,
 						      gboolean     label_fill);
-gboolean              __gtk_expander_get_label_fill    (GtkExpander *expander);
+gboolean              SF(gtk_expander_get_label_fill)    (GtkExpander *expander);
 
 G_END_DECLS
 

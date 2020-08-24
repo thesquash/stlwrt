@@ -93,11 +93,11 @@ GType _3T_gtk_invisible_get_type (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType gtk_invisible_get_type (void) G_GNUC_CONST;
 
-GtkWidget* __gtk_invisible_new            (void);
-GtkWidget* __gtk_invisible_new_for_screen (GdkScreen    *screen);
-void	   __gtk_invisible_set_screen	(GtkInvisible *invisible,
+GtkWidget* SF(gtk_invisible_new)            (void);
+GtkWidget* SF(gtk_invisible_new_for_screen) (GdkScreen    *screen);
+void	   SF(gtk_invisible_set_screen)	(GtkInvisible *invisible,
 					 GdkScreen    *screen);
-GdkScreen* __gtk_invisible_get_screen	(GtkInvisible *invisible);
+GdkScreen* SF(gtk_invisible_get_screen)	(GtkInvisible *invisible);
 
 G_END_DECLS
 

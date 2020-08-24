@@ -108,68 +108,68 @@ GType         _T2_gtk_list_store_get_type         (void) G_GNUC_CONST;
 GType         _3T_gtk_list_store_get_type         (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType         gtk_list_store_get_type         (void) G_GNUC_CONST;
-GtkListStore *__gtk_list_store_new              (gint          n_columns,
+GtkListStore *SF(gtk_list_store_new)              (gint          n_columns,
 					       ...);
-GtkListStore *__gtk_list_store_newv             (gint          n_columns,
+GtkListStore *SF(gtk_list_store_newv)             (gint          n_columns,
 					       GType        *types);
-void          __gtk_list_store_set_column_types (GtkListStore *list_store,
+void          SF(gtk_list_store_set_column_types) (GtkListStore *list_store,
 					       gint          n_columns,
 					       GType        *types);
 
 /* NOTE: use gtk_tree_model_get to get values from a GtkListStore */
 
-void          __gtk_list_store_set_value        (GtkListStore *list_store,
+void          SF(gtk_list_store_set_value)        (GtkListStore *list_store,
 					       GtkTreeIter  *iter,
 					       gint          column,
 					       GValue       *value);
-void          __gtk_list_store_set              (GtkListStore *list_store,
+void          SF(gtk_list_store_set)              (GtkListStore *list_store,
 					       GtkTreeIter  *iter,
 					       ...);
-void          __gtk_list_store_set_valuesv      (GtkListStore *list_store,
+void          SF(gtk_list_store_set_valuesv)      (GtkListStore *list_store,
 					       GtkTreeIter  *iter,
 					       gint         *columns,
 					       GValue       *values,
 					       gint          n_values);
-void          __gtk_list_store_set_valist       (GtkListStore *list_store,
+void          SF(gtk_list_store_set_valist)       (GtkListStore *list_store,
 					       GtkTreeIter  *iter,
 					       va_list       var_args);
-gboolean      __gtk_list_store_remove           (GtkListStore *list_store,
+gboolean      SF(gtk_list_store_remove)           (GtkListStore *list_store,
 					       GtkTreeIter  *iter);
-void          __gtk_list_store_insert           (GtkListStore *list_store,
+void          SF(gtk_list_store_insert)           (GtkListStore *list_store,
 					       GtkTreeIter  *iter,
 					       gint          position);
-void          __gtk_list_store_insert_before    (GtkListStore *list_store,
+void          SF(gtk_list_store_insert_before)    (GtkListStore *list_store,
 					       GtkTreeIter  *iter,
 					       GtkTreeIter  *sibling);
-void          __gtk_list_store_insert_after     (GtkListStore *list_store,
+void          SF(gtk_list_store_insert_after)     (GtkListStore *list_store,
 					       GtkTreeIter  *iter,
 					       GtkTreeIter  *sibling);
-void          __gtk_list_store_insert_with_values  (GtkListStore *list_store,
+void          SF(gtk_list_store_insert_with_values)  (GtkListStore *list_store,
 						  GtkTreeIter  *iter,
 						  gint          position,
 						  ...);
-void          __gtk_list_store_insert_with_valuesv (GtkListStore *list_store,
+void          SF(gtk_list_store_insert_with_valuesv) (GtkListStore *list_store,
 						  GtkTreeIter  *iter,
 						  gint          position,
 						  gint         *columns,
 						  GValue       *values,
 						  gint          n_values);
-void          __gtk_list_store_prepend          (GtkListStore *list_store,
+void          SF(gtk_list_store_prepend)          (GtkListStore *list_store,
 					       GtkTreeIter  *iter);
-void          __gtk_list_store_append           (GtkListStore *list_store,
+void          SF(gtk_list_store_append)           (GtkListStore *list_store,
 					       GtkTreeIter  *iter);
-void          __gtk_list_store_clear            (GtkListStore *list_store);
-gboolean      __gtk_list_store_iter_is_valid    (GtkListStore *list_store,
+void          SF(gtk_list_store_clear)            (GtkListStore *list_store);
+gboolean      SF(gtk_list_store_iter_is_valid)    (GtkListStore *list_store,
                                                GtkTreeIter  *iter);
-void          __gtk_list_store_reorder          (GtkListStore *store,
+void          SF(gtk_list_store_reorder)          (GtkListStore *store,
                                                gint         *new_order);
-void          __gtk_list_store_swap             (GtkListStore *store,
+void          SF(gtk_list_store_swap)             (GtkListStore *store,
                                                GtkTreeIter  *a,
                                                GtkTreeIter  *b);
-void          __gtk_list_store_move_after       (GtkListStore *store,
+void          SF(gtk_list_store_move_after)       (GtkListStore *store,
                                                GtkTreeIter  *iter,
                                                GtkTreeIter  *position);
-void          __gtk_list_store_move_before      (GtkListStore *store,
+void          SF(gtk_list_store_move_before)      (GtkListStore *store,
                                                GtkTreeIter  *iter,
                                                GtkTreeIter  *position);
 

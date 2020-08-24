@@ -65,9 +65,9 @@ struct _GtkSpinnerClass
 
 
 GType      gtk_spinner_get_type  (void) G_GNUC_CONST;
-GtkWidget *__gtk_spinner_new (void);
-void       __gtk_spinner_start      (GtkSpinner *spinner);
-void       __gtk_spinner_stop       (GtkSpinner *spinner);
+GtkWidget *SF(gtk_spinner_new) (void);
+void       SF(gtk_spinner_start)      (GtkSpinner *spinner);
+void       SF(gtk_spinner_stop)       (GtkSpinner *spinner);
 
 G_END_DECLS
 

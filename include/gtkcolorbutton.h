@@ -78,21 +78,21 @@ GType      _T2_gtk_color_button_get_type       (void) G_GNUC_CONST;
 GType      _3T_gtk_color_button_get_type       (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType      gtk_color_button_get_type       (void) G_GNUC_CONST;
-GtkWidget *__gtk_color_button_new            (void);
-GtkWidget *__gtk_color_button_new_with_color (const GdkColor *color);
-void       __gtk_color_button_set_color      (GtkColorButton *color_button,
+GtkWidget *SF(gtk_color_button_new)            (void);
+GtkWidget *SF(gtk_color_button_new_with_color) (const GdkColor *color);
+void       SF(gtk_color_button_set_color)      (GtkColorButton *color_button,
 					    const GdkColor *color);
-void       __gtk_color_button_set_alpha      (GtkColorButton *color_button,
+void       SF(gtk_color_button_set_alpha)      (GtkColorButton *color_button,
 					    guint16         alpha);
-void       __gtk_color_button_get_color      (GtkColorButton *color_button,
+void       SF(gtk_color_button_get_color)      (GtkColorButton *color_button,
 					    GdkColor       *color);
-guint16    __gtk_color_button_get_alpha      (GtkColorButton *color_button);
-void       __gtk_color_button_set_use_alpha  (GtkColorButton *color_button,
+guint16    SF(gtk_color_button_get_alpha)      (GtkColorButton *color_button);
+void       SF(gtk_color_button_set_use_alpha)  (GtkColorButton *color_button,
 					    gboolean        use_alpha);
-gboolean   __gtk_color_button_get_use_alpha  (GtkColorButton *color_button);
-void       __gtk_color_button_set_title      (GtkColorButton *color_button,
+gboolean   SF(gtk_color_button_get_use_alpha)  (GtkColorButton *color_button);
+void       SF(gtk_color_button_set_title)      (GtkColorButton *color_button,
 					    const gchar    *title);
-const gchar *__gtk_color_button_get_title (GtkColorButton *color_button);
+const gchar *SF(gtk_color_button_get_title) (GtkColorButton *color_button);
 
 
 G_END_DECLS

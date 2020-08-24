@@ -147,69 +147,69 @@ GType		_3T_gtk_spin_button_get_type	   (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType		gtk_spin_button_get_type	   (void) G_GNUC_CONST;
 
-void		__gtk_spin_button_configure	   (GtkSpinButton  *spin_button,
+void		SF(gtk_spin_button_configure)	   (GtkSpinButton  *spin_button,
 						    GtkAdjustment  *adjustment,
 						    gdouble	    climb_rate,
 						    guint	    digits);
 
-GtkWidget*	__gtk_spin_button_new		   (GtkAdjustment  *adjustment,
+GtkWidget*	SF(gtk_spin_button_new)		   (GtkAdjustment  *adjustment,
 						    gdouble	    climb_rate,
 						    guint	    digits);
 
-GtkWidget*	__gtk_spin_button_new_with_range	   (gdouble  min,
+GtkWidget*	SF(gtk_spin_button_new_with_range)	   (gdouble  min,
 						    gdouble  max,
 						    gdouble  step);
 
-void		__gtk_spin_button_set_adjustment	   (GtkSpinButton  *spin_button,
+void		SF(gtk_spin_button_set_adjustment)	   (GtkSpinButton  *spin_button,
 						    GtkAdjustment  *adjustment);
 
-GtkAdjustment*	__gtk_spin_button_get_adjustment	   (GtkSpinButton  *spin_button);
+GtkAdjustment*	SF(gtk_spin_button_get_adjustment)	   (GtkSpinButton  *spin_button);
 
-void		__gtk_spin_button_set_digits	   (GtkSpinButton  *spin_button,
+void		SF(gtk_spin_button_set_digits)	   (GtkSpinButton  *spin_button,
 						    guint	    digits);
-guint           __gtk_spin_button_get_digits         (GtkSpinButton  *spin_button);
+guint           SF(gtk_spin_button_get_digits)         (GtkSpinButton  *spin_button);
 
-void		__gtk_spin_button_set_increments	   (GtkSpinButton  *spin_button,
+void		SF(gtk_spin_button_set_increments)	   (GtkSpinButton  *spin_button,
 						    gdouble         step,
 						    gdouble         page);
-void            __gtk_spin_button_get_increments     (GtkSpinButton  *spin_button,
+void            SF(gtk_spin_button_get_increments)     (GtkSpinButton  *spin_button,
 						    gdouble        *step,
 						    gdouble        *page);
 
-void		__gtk_spin_button_set_range	   (GtkSpinButton  *spin_button,
+void		SF(gtk_spin_button_set_range)	   (GtkSpinButton  *spin_button,
 						    gdouble         min,
 						    gdouble         max);
-void            __gtk_spin_button_get_range          (GtkSpinButton  *spin_button,
+void            SF(gtk_spin_button_get_range)          (GtkSpinButton  *spin_button,
 						    gdouble        *min,
 						    gdouble        *max);
 
-gdouble		__gtk_spin_button_get_value          (GtkSpinButton  *spin_button);
+gdouble		SF(gtk_spin_button_get_value)          (GtkSpinButton  *spin_button);
 
-gint		__gtk_spin_button_get_value_as_int   (GtkSpinButton  *spin_button);
+gint		SF(gtk_spin_button_get_value_as_int)   (GtkSpinButton  *spin_button);
 
-void		__gtk_spin_button_set_value	   (GtkSpinButton  *spin_button,
+void		SF(gtk_spin_button_set_value)	   (GtkSpinButton  *spin_button,
 						    gdouble	    value);
 
-void		__gtk_spin_button_set_update_policy  (GtkSpinButton  *spin_button,
+void		SF(gtk_spin_button_set_update_policy)  (GtkSpinButton  *spin_button,
 						    GtkSpinButtonUpdatePolicy  policy);
-GtkSpinButtonUpdatePolicy __gtk_spin_button_get_update_policy (GtkSpinButton *spin_button);
+GtkSpinButtonUpdatePolicy SF(gtk_spin_button_get_update_policy) (GtkSpinButton *spin_button);
 
-void		__gtk_spin_button_set_numeric	   (GtkSpinButton  *spin_button,
+void		SF(gtk_spin_button_set_numeric)	   (GtkSpinButton  *spin_button,
 						    gboolean	    numeric);
-gboolean        __gtk_spin_button_get_numeric        (GtkSpinButton  *spin_button);
+gboolean        SF(gtk_spin_button_get_numeric)        (GtkSpinButton  *spin_button);
 
-void		__gtk_spin_button_spin		   (GtkSpinButton  *spin_button,
+void		SF(gtk_spin_button_spin)		   (GtkSpinButton  *spin_button,
 						    GtkSpinType     direction,
 						    gdouble	    increment);
 
-void		__gtk_spin_button_set_wrap	   (GtkSpinButton  *spin_button,
+void		SF(gtk_spin_button_set_wrap)	   (GtkSpinButton  *spin_button,
 						    gboolean	    wrap);
-gboolean        __gtk_spin_button_get_wrap           (GtkSpinButton  *spin_button);
+gboolean        SF(gtk_spin_button_get_wrap)           (GtkSpinButton  *spin_button);
 
-void		__gtk_spin_button_set_snap_to_ticks  (GtkSpinButton  *spin_button,
+void		SF(gtk_spin_button_set_snap_to_ticks)  (GtkSpinButton  *spin_button,
 						    gboolean	    snap_to_ticks);
-gboolean        __gtk_spin_button_get_snap_to_ticks  (GtkSpinButton  *spin_button);
-void            __gtk_spin_button_update             (GtkSpinButton  *spin_button);
+gboolean        SF(gtk_spin_button_get_snap_to_ticks)  (GtkSpinButton  *spin_button);
+void            SF(gtk_spin_button_update)             (GtkSpinButton  *spin_button);
 
 
 #ifndef GTK_DISABLE_DEPRECATED

@@ -49,12 +49,12 @@ struct _GtkEventBoxClass
 
 
 GType	   gtk_event_box_get_type           (void) G_GNUC_CONST;
-GtkWidget* __gtk_event_box_new                (void);
-gboolean   __gtk_event_box_get_visible_window (GtkEventBox *event_box);
-void       __gtk_event_box_set_visible_window (GtkEventBox *event_box,
+GtkWidget* SF(gtk_event_box_new)                (void);
+gboolean   SF(gtk_event_box_get_visible_window) (GtkEventBox *event_box);
+void       SF(gtk_event_box_set_visible_window) (GtkEventBox *event_box,
 					     gboolean     visible_window);
-gboolean   __gtk_event_box_get_above_child    (GtkEventBox *event_box);
-void       __gtk_event_box_set_above_child    (GtkEventBox *event_box,
+gboolean   SF(gtk_event_box_get_above_child)    (GtkEventBox *event_box);
+void       SF(gtk_event_box_set_above_child)    (GtkEventBox *event_box,
 					     gboolean     above_child);
 
 G_END_DECLS

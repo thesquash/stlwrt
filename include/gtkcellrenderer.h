@@ -165,28 +165,28 @@ GType            _3T_gtk_cell_renderer_get_type       (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType            gtk_cell_renderer_get_type       (void) G_GNUC_CONST;
 
-void             __gtk_cell_renderer_get_size       (GtkCellRenderer      *cell,
+void             SF(gtk_cell_renderer_get_size)       (GtkCellRenderer      *cell,
 						   GtkWidget            *widget,
 						   const GdkRectangle   *cell_area,
 						   gint                 *x_offset,
 						   gint                 *y_offset,
 						   gint                 *width,
 						   gint                 *height);
-void             __gtk_cell_renderer_render         (GtkCellRenderer      *cell,
+void             SF(gtk_cell_renderer_render)         (GtkCellRenderer      *cell,
 						   GdkWindow            *window,
 						   GtkWidget            *widget,
 						   const GdkRectangle   *background_area,
 						   const GdkRectangle   *cell_area,
 						   const GdkRectangle   *expose_area,
 						   GtkCellRendererState  flags);
-gboolean         __gtk_cell_renderer_activate       (GtkCellRenderer      *cell,
+gboolean         SF(gtk_cell_renderer_activate)       (GtkCellRenderer      *cell,
 						   GdkEvent             *event,
 						   GtkWidget            *widget,
 						   const gchar          *path,
 						   const GdkRectangle   *background_area,
 						   const GdkRectangle   *cell_area,
 						   GtkCellRendererState  flags);
-GtkCellEditable *__gtk_cell_renderer_start_editing  (GtkCellRenderer      *cell,
+GtkCellEditable *SF(gtk_cell_renderer_start_editing)  (GtkCellRenderer      *cell,
 						   GdkEvent             *event,
 						   GtkWidget            *widget,
 						   const gchar          *path,
@@ -194,40 +194,40 @@ GtkCellEditable *__gtk_cell_renderer_start_editing  (GtkCellRenderer      *cell,
 						   const GdkRectangle   *cell_area,
 						   GtkCellRendererState  flags);
 
-void             __gtk_cell_renderer_set_fixed_size (GtkCellRenderer      *cell,
+void             SF(gtk_cell_renderer_set_fixed_size) (GtkCellRenderer      *cell,
 						   gint                  width,
 						   gint                  height);
-void             __gtk_cell_renderer_get_fixed_size (GtkCellRenderer      *cell,
+void             SF(gtk_cell_renderer_get_fixed_size) (GtkCellRenderer      *cell,
 						   gint                 *width,
 						   gint                 *height);
 
-void             __gtk_cell_renderer_set_alignment  (GtkCellRenderer      *cell,
+void             SF(gtk_cell_renderer_set_alignment)  (GtkCellRenderer      *cell,
                                                    gfloat                xalign,
                                                    gfloat                yalign);
-void             __gtk_cell_renderer_get_alignment  (GtkCellRenderer      *cell,
+void             SF(gtk_cell_renderer_get_alignment)  (GtkCellRenderer      *cell,
                                                    gfloat               *xalign,
                                                    gfloat               *yalign);
 
-void             __gtk_cell_renderer_set_padding    (GtkCellRenderer      *cell,
+void             SF(gtk_cell_renderer_set_padding)    (GtkCellRenderer      *cell,
                                                    gint                  xpad,
                                                    gint                  ypad);
-void             __gtk_cell_renderer_get_padding    (GtkCellRenderer      *cell,
+void             SF(gtk_cell_renderer_get_padding)    (GtkCellRenderer      *cell,
                                                    gint                 *xpad,
                                                    gint                 *ypad);
 
-void             __gtk_cell_renderer_set_visible    (GtkCellRenderer      *cell,
+void             SF(gtk_cell_renderer_set_visible)    (GtkCellRenderer      *cell,
                                                    gboolean              visible);
-gboolean         __gtk_cell_renderer_get_visible    (GtkCellRenderer      *cell);
+gboolean         SF(gtk_cell_renderer_get_visible)    (GtkCellRenderer      *cell);
 
-void             __gtk_cell_renderer_set_sensitive  (GtkCellRenderer      *cell,
+void             SF(gtk_cell_renderer_set_sensitive)  (GtkCellRenderer      *cell,
                                                    gboolean              sensitive);
-gboolean         __gtk_cell_renderer_get_sensitive  (GtkCellRenderer      *cell);
+gboolean         SF(gtk_cell_renderer_get_sensitive)  (GtkCellRenderer      *cell);
 
 /* For use by cell renderer implementations only */
 #ifndef GTK_DISABLE_DEPRECATED
-void __gtk_cell_renderer_editing_canceled (GtkCellRenderer *cell);
+void SF(gtk_cell_renderer_editing_canceled) (GtkCellRenderer *cell);
 #endif
-void __gtk_cell_renderer_stop_editing     (GtkCellRenderer *cell,
+void SF(gtk_cell_renderer_stop_editing)     (GtkCellRenderer *cell,
 				         gboolean         canceled);
 
 

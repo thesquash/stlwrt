@@ -68,16 +68,16 @@ struct _GtkComboBoxEntryClass
 
 
 GType       gtk_combo_box_entry_get_type        (void) G_GNUC_CONST;
-GtkWidget  *__gtk_combo_box_entry_new             (void);
-GtkWidget  *__gtk_combo_box_entry_new_with_model  (GtkTreeModel     *model,
+GtkWidget  *SF(gtk_combo_box_entry_new)             (void);
+GtkWidget  *SF(gtk_combo_box_entry_new_with_model)  (GtkTreeModel     *model,
                                                  gint              text_column);
 
-void        __gtk_combo_box_entry_set_text_column (GtkComboBoxEntry *entry_box,
+void        SF(gtk_combo_box_entry_set_text_column) (GtkComboBoxEntry *entry_box,
                                                  gint              text_column);
-gint        __gtk_combo_box_entry_get_text_column (GtkComboBoxEntry *entry_box);
+gint        SF(gtk_combo_box_entry_get_text_column) (GtkComboBoxEntry *entry_box);
 
 /* convenience -- text */
-GtkWidget  *__gtk_combo_box_entry_new_text        (void);
+GtkWidget  *SF(gtk_combo_box_entry_new_text)        (void);
 
 #endif
 

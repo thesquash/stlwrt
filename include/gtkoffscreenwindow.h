@@ -50,9 +50,9 @@ struct _GtkOffscreenWindowClass
 
 GType      gtk_offscreen_window_get_type   (void) G_GNUC_CONST;
 
-GtkWidget *__gtk_offscreen_window_new        (void);
-GdkPixmap *__gtk_offscreen_window_get_pixmap (GtkOffscreenWindow *offscreen);
-GdkPixbuf *__gtk_offscreen_window_get_pixbuf (GtkOffscreenWindow *offscreen);
+GtkWidget *SF(gtk_offscreen_window_new)        (void);
+GdkPixmap *SF(gtk_offscreen_window_get_pixmap) (GtkOffscreenWindow *offscreen);
+GdkPixbuf *SF(gtk_offscreen_window_get_pixbuf) (GtkOffscreenWindow *offscreen);
 
 G_END_DECLS
 

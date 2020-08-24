@@ -115,11 +115,11 @@ struct _GtkBoxClass
  * The #GtkBoxChild holds a child widget of #GtkBox and describes how the child
  * is to be packed into the #GtkBox. All fields of this #GtkBoxChild should be
  * considered read-only and they should never be set directly by an application.
- * Use __gtk_box_query_child_packing() and __gtk_box_set_child_packing() to query
+ * Use SF(gtk_box_query_child_packing)() and SF(gtk_box_set_child_packing)() to query
  * and set the #GtkBoxChild.padding, #GtkBoxChild.expand, #GtkBoxChild.fill and
  * #GtkBoxChild.pack fields.
  *
- * Deprecated: 2.22: Use __gtk_container_get_children() instead.
+ * Deprecated: 2.22: Use SF(gtk_container_get_children)() instead.
  */
 #if !defined (GTK_DISABLE_DEPRECATED) || defined (STLWRT_COMPILATION)
 typedef struct _GtkBoxChild   GtkBoxChild;
@@ -138,46 +138,46 @@ GType       _T2_gtk_box_get_type            (void) G_GNUC_CONST;
 GType       _3T_gtk_box_get_type            (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType       gtk_box_get_type            (void) G_GNUC_CONST;
-GtkWidget*  __gtk_box_new                 (GtkOrientation  orientation,
+GtkWidget*  SF(gtk_box_new)                 (GtkOrientation  orientation,
                                          gboolean        homogeneous,
                                          gint            spacing);
 
-void        __gtk_box_pack_start          (GtkBox         *box,
+void        SF(gtk_box_pack_start)          (GtkBox         *box,
                                          GtkWidget      *child,
                                          gboolean        expand,
                                          gboolean        fill,
                                          guint           padding);
-void        __gtk_box_pack_end            (GtkBox         *box,
+void        SF(gtk_box_pack_end)            (GtkBox         *box,
                                          GtkWidget      *child,
                                          gboolean        expand,
                                          gboolean        fill,
                                          guint           padding);
 
 #ifndef GTK_DISABLE_DEPRECATED
-void        __gtk_box_pack_start_defaults (GtkBox         *box,
+void        SF(gtk_box_pack_start_defaults) (GtkBox         *box,
                                          GtkWidget      *widget);
-void        __gtk_box_pack_end_defaults   (GtkBox         *box,
+void        SF(gtk_box_pack_end_defaults)   (GtkBox         *box,
                                          GtkWidget      *widget);
 #endif
 
-void        __gtk_box_set_homogeneous     (GtkBox         *box,
+void        SF(gtk_box_set_homogeneous)     (GtkBox         *box,
                                          gboolean        homogeneous);
-gboolean    __gtk_box_get_homogeneous     (GtkBox         *box);
-void        __gtk_box_set_spacing         (GtkBox         *box,
+gboolean    SF(gtk_box_get_homogeneous)     (GtkBox         *box);
+void        SF(gtk_box_set_spacing)         (GtkBox         *box,
                                          gint            spacing);
-gint        __gtk_box_get_spacing         (GtkBox         *box);
+gint        SF(gtk_box_get_spacing)         (GtkBox         *box);
 
-void        __gtk_box_reorder_child       (GtkBox         *box,
+void        SF(gtk_box_reorder_child)       (GtkBox         *box,
                                          GtkWidget      *child,
                                          gint            position);
 
-void        __gtk_box_query_child_packing (GtkBox         *box,
+void        SF(gtk_box_query_child_packing) (GtkBox         *box,
                                          GtkWidget      *child,
                                          gboolean       *expand,
                                          gboolean       *fill,
                                          guint          *padding,
                                          GtkPackType    *pack_type);
-void        __gtk_box_set_child_packing   (GtkBox         *box,
+void        SF(gtk_box_set_child_packing)   (GtkBox         *box,
                                          GtkWidget      *child,
                                          gboolean        expand,
                                          gboolean        fill,
@@ -185,9 +185,9 @@ void        __gtk_box_set_child_packing   (GtkBox         *box,
                                          GtkPackType     pack_type);
 
 /* internal API */
-void        ___gtk_box_set_old_defaults   (GtkBox         *box);
-gboolean    ___gtk_box_get_spacing_set    (GtkBox         *box);
-void        ___gtk_box_set_spacing_set    (GtkBox         *box,
+void        SF(_gtk_box_set_old_defaults)   (GtkBox         *box);
+gboolean    SF(_gtk_box_get_spacing_set)    (GtkBox         *box);
+void        SF(_gtk_box_set_spacing_set)    (GtkBox         *box,
                                          gboolean        spacing_set);
 
 G_END_DECLS

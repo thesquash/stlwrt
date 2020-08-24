@@ -60,94 +60,94 @@ G_BEGIN_DECLS
 /* Initialization, exit and events
  */
 #define	  GDK_PRIORITY_EVENTS		(G_PRIORITY_DEFAULT)
-void 	  __gdk_parse_args	   	(gint	   	*argc,
+void 	  SF(gdk_parse_args)	   	(gint	   	*argc,
 					 gchar        ***argv);
-void 	  __gdk_init		   	(gint	   	*argc,
+void 	  SF(gdk_init)		   	(gint	   	*argc,
 					 gchar        ***argv);
-gboolean  __gdk_init_check   	        (gint	   	*argc,
+gboolean  SF(gdk_init_check)   	        (gint	   	*argc,
 					 gchar        ***argv);
-void __gdk_add_option_entries_libgtk_only (GOptionGroup *group);
-void __gdk_pre_parse_libgtk_only          (void);
+void SF(gdk_add_option_entries_libgtk_only) (GOptionGroup *group);
+void SF(gdk_pre_parse_libgtk_only)          (void);
 
 #ifndef GDK_DISABLE_DEPRECATED
-void  	  __gdk_exit		   	(gint	    	 error_code);
-gchar*	  __gdk_set_locale	   	(void);
+void  	  SF(gdk_exit)		   	(gint	    	 error_code);
+gchar*	  SF(gdk_set_locale)	   	(void);
 #endif /* GDK_DISABLE_DEPRECATED */
 
 char *gdk_progclass;
 
-const char *         __gdk_get_program_class (void);
-void                 __gdk_set_program_class (const char *program_class);
+const char *         SF(gdk_get_program_class) (void);
+void                 SF(gdk_set_program_class) (const char *program_class);
 
 /* Push and pop error handlers for X errors
  */
-void      __gdk_error_trap_push           (void);
-gint      __gdk_error_trap_pop            (void);
+void      SF(gdk_error_trap_push)           (void);
+gint      SF(gdk_error_trap_pop)            (void);
 
 #ifndef GDK_DISABLE_DEPRECATED
-void	  __gdk_set_use_xshm		(gboolean	 use_xshm);
-gboolean  __gdk_get_use_xshm		(void);
+void	  SF(gdk_set_use_xshm)		(gboolean	 use_xshm);
+gboolean  SF(gdk_get_use_xshm)		(void);
 #endif /* GDK_DISABLE_DEPRECATED */
 
-gchar*	                  __gdk_get_display		(void);
-const gchar*	          __gdk_get_display_arg_name	(void);
+gchar*	                  SF(gdk_get_display)		(void);
+const gchar*	          SF(gdk_get_display_arg_name)	(void);
 
 #ifndef GDK_DISABLE_DEPRECATED
-gint __gdk_input_add_full	  (gint		     source,
+gint SF(gdk_input_add_full)	  (gint		     source,
 			   GdkInputCondition condition,
 			   GdkInputFunction  function,
 			   gpointer	     data,
 			   GDestroyNotify    destroy);
-gint __gdk_input_add	  (gint		     source,
+gint SF(gdk_input_add)	  (gint		     source,
 			   GdkInputCondition condition,
 			   GdkInputFunction  function,
 			   gpointer	     data);
-void __gdk_input_remove	  (gint		     tag);
+void SF(gdk_input_remove)	  (gint		     tag);
 #endif /* GDK_DISABLE_DEPRECATED */
 
-GdkGrabStatus __gdk_pointer_grab       (GdkWindow    *window,
+GdkGrabStatus SF(gdk_pointer_grab)       (GdkWindow    *window,
 				      gboolean      owner_events,
 				      GdkEventMask  event_mask,
 				      GdkWindow    *confine_to,
 				      GdkCursor    *cursor,
 				      guint32       time_);
-GdkGrabStatus __gdk_keyboard_grab      (GdkWindow    *window,
+GdkGrabStatus SF(gdk_keyboard_grab)      (GdkWindow    *window,
 				      gboolean      owner_events,
 				      guint32       time_);
 
-gboolean __gdk_pointer_grab_info_libgtk_only (GdkDisplay *display,
+gboolean SF(gdk_pointer_grab_info_libgtk_only) (GdkDisplay *display,
 					    GdkWindow **grab_window,
 					    gboolean   *owner_events);
-gboolean __gdk_keyboard_grab_info_libgtk_only (GdkDisplay *display,
+gboolean SF(gdk_keyboard_grab_info_libgtk_only) (GdkDisplay *display,
 					     GdkWindow **grab_window,
 					     gboolean   *owner_events);
 
 #ifndef GDK_MULTIHEAD_SAFE
-void          __gdk_pointer_ungrab     (guint32       time_);
-void          __gdk_keyboard_ungrab    (guint32       time_);
-gboolean      __gdk_pointer_is_grabbed (void);
+void          SF(gdk_pointer_ungrab)     (guint32       time_);
+void          SF(gdk_keyboard_ungrab)    (guint32       time_);
+gboolean      SF(gdk_pointer_is_grabbed) (void);
 
-gint __gdk_screen_width  (void) G_GNUC_CONST;
-gint __gdk_screen_height (void) G_GNUC_CONST;
+gint SF(gdk_screen_width)  (void) G_GNUC_CONST;
+gint SF(gdk_screen_height) (void) G_GNUC_CONST;
 
-gint __gdk_screen_width_mm  (void) G_GNUC_CONST;
-gint __gdk_screen_height_mm (void) G_GNUC_CONST;
+gint SF(gdk_screen_width_mm)  (void) G_GNUC_CONST;
+gint SF(gdk_screen_height_mm) (void) G_GNUC_CONST;
 
-void __gdk_beep (void);
+void SF(gdk_beep) (void);
 #endif /* GDK_MULTIHEAD_SAFE */
 
-void __gdk_flush (void);
+void SF(gdk_flush) (void);
 
 #ifndef GDK_MULTIHEAD_SAFE
-void __gdk_set_double_click_time             (guint       msec);
+void SF(gdk_set_double_click_time)             (guint       msec);
 #endif
 
 /* Rectangle utilities
  */
-gboolean __gdk_rectangle_intersect (const GdkRectangle *src1,
+gboolean SF(gdk_rectangle_intersect) (const GdkRectangle *src1,
 				  const GdkRectangle *src2,
 				  GdkRectangle       *dest);
-void     __gdk_rectangle_union     (const GdkRectangle *src1,
+void     SF(gdk_rectangle_union)     (const GdkRectangle *src1,
 				  const GdkRectangle *src2,
 				  GdkRectangle       *dest);
 
@@ -160,17 +160,17 @@ GType gdk_rectangle_get_type (void) G_GNUC_CONST;
 
 /* Miscellaneous */
 #ifndef GDK_MULTIHEAD_SAFE
-gboolean __gdk_event_send_client_message      (GdkEvent       *event,
+gboolean SF(gdk_event_send_client_message)      (GdkEvent       *event,
 					     GdkNativeWindow winid);
-void     __gdk_event_send_clientmessage_toall (GdkEvent  *event);
+void     SF(gdk_event_send_clientmessage_toall) (GdkEvent  *event);
 #endif
-gboolean __gdk_event_send_client_message_for_display (GdkDisplay *display,
+gboolean SF(gdk_event_send_client_message_for_display) (GdkDisplay *display,
 						    GdkEvent       *event,
 						    GdkNativeWindow winid);
 
-void __gdk_notify_startup_complete (void);
+void SF(gdk_notify_startup_complete) (void);
 
-void __gdk_notify_startup_complete_with_id (const gchar* startup_id);
+void SF(gdk_notify_startup_complete_with_id) (const gchar* startup_id);
 
 /* Threading
  */
@@ -182,32 +182,32 @@ GDKVAR GMutex  gdk_threads_mutex; /* private */
 GDKVAR GCallback gdk_threads_lock;
 GDKVAR GCallback gdk_threads_unlock;
 
-void     __gdk_threads_enter                    (void);
-void     __gdk_threads_leave                    (void);
-void     __gdk_threads_init                     (void);
-void     __gdk_threads_set_lock_functions       (GCallback enter_fn,
+void     SF(gdk_threads_enter)                    (void);
+void     SF(gdk_threads_leave)                    (void);
+void     SF(gdk_threads_init)                     (void);
+void     SF(gdk_threads_set_lock_functions)       (GCallback enter_fn,
 					       GCallback leave_fn);
 
-guint    __gdk_threads_add_idle_full            (gint           priority,
+guint    SF(gdk_threads_add_idle_full)            (gint           priority,
 		                               GSourceFunc    function,
 		                               gpointer       data,
 		                               GDestroyNotify notify);
-guint    __gdk_threads_add_idle                 (GSourceFunc    function,
+guint    SF(gdk_threads_add_idle)                 (GSourceFunc    function,
 		                               gpointer       data);
-guint    __gdk_threads_add_timeout_full         (gint           priority,
+guint    SF(gdk_threads_add_timeout_full)         (gint           priority,
                                                guint          interval,
                                                GSourceFunc    function,
                                                gpointer       data,
                                                GDestroyNotify notify);
-guint    __gdk_threads_add_timeout              (guint          interval,
+guint    SF(gdk_threads_add_timeout)              (guint          interval,
                                                GSourceFunc    function,
                                                gpointer       data);
-guint    __gdk_threads_add_timeout_seconds_full (gint           priority,
+guint    SF(gdk_threads_add_timeout_seconds_full) (gint           priority,
                                                guint          interval,
                                                GSourceFunc    function,
                                                gpointer       data,
                                                GDestroyNotify notify);
-guint    __gdk_threads_add_timeout_seconds      (guint          interval,
+guint    SF(gdk_threads_add_timeout_seconds)      (guint          interval,
                                                GSourceFunc    function,
                                                gpointer       data);
 

@@ -26,11 +26,11 @@
 
 G_BEGIN_DECLS
 
-GdkGC* __gtk_gc_get     (gint             depth,
+GdkGC* SF(gtk_gc_get)     (gint             depth,
 		       GdkColormap     *colormap,
 		       GdkGCValues     *values,
 		       GdkGCValuesMask  values_mask);
-void   __gtk_gc_release (GdkGC           *gc);
+void   SF(gtk_gc_release) (GdkGC           *gc);
 
 
 G_END_DECLS

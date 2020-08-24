@@ -136,39 +136,39 @@ GType     _3T_gtk_buildable_get_type               (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType     gtk_buildable_get_type               (void) G_GNUC_CONST;
 
-void      __gtk_buildable_set_name               (GtkBuildable        *buildable,
+void      SF(gtk_buildable_set_name)               (GtkBuildable        *buildable,
 						const gchar         *name);
-const gchar * __gtk_buildable_get_name           (GtkBuildable        *buildable);
-void      __gtk_buildable_add_child              (GtkBuildable        *buildable,
+const gchar * SF(gtk_buildable_get_name)           (GtkBuildable        *buildable);
+void      SF(gtk_buildable_add_child)              (GtkBuildable        *buildable,
 						GtkBuilder          *builder,
 						GObject             *child,
 						const gchar         *type);
-void      __gtk_buildable_set_buildable_property (GtkBuildable        *buildable,
+void      SF(gtk_buildable_set_buildable_property) (GtkBuildable        *buildable,
 						GtkBuilder          *builder,
 						const gchar         *name,
 						const GValue        *value);
-GObject * __gtk_buildable_construct_child        (GtkBuildable        *buildable,
+GObject * SF(gtk_buildable_construct_child)        (GtkBuildable        *buildable,
 						GtkBuilder          *builder,
 						const gchar         *name);
-gboolean  __gtk_buildable_custom_tag_start       (GtkBuildable        *buildable,
+gboolean  SF(gtk_buildable_custom_tag_start)       (GtkBuildable        *buildable,
 						GtkBuilder          *builder,
 						GObject             *child,
 						const gchar         *tagname,
 						GMarkupParser       *parser,
 						gpointer            *data);
-void      __gtk_buildable_custom_tag_end         (GtkBuildable        *buildable,
+void      SF(gtk_buildable_custom_tag_end)         (GtkBuildable        *buildable,
 						GtkBuilder          *builder,
 						GObject             *child,
 						const gchar         *tagname,
 						gpointer            *data);
-void      __gtk_buildable_custom_finished        (GtkBuildable        *buildable,
+void      SF(gtk_buildable_custom_finished)        (GtkBuildable        *buildable,
 						GtkBuilder          *builder,
 						GObject             *child,
 						const gchar         *tagname,
 						gpointer             data);
-void      __gtk_buildable_parser_finished        (GtkBuildable        *buildable,
+void      SF(gtk_buildable_parser_finished)        (GtkBuildable        *buildable,
 						GtkBuilder          *builder);
-GObject * __gtk_buildable_get_internal_child     (GtkBuildable        *buildable,
+GObject * SF(gtk_buildable_get_internal_child)     (GtkBuildable        *buildable,
 						GtkBuilder          *builder,
 						const gchar         *childname);
 

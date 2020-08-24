@@ -161,76 +161,76 @@ GType              _3T_gtk_range_get_type                      (void) G_GNUC_CON
 GType              gtk_range_get_type                      (void) G_GNUC_CONST;
 
 #ifndef GTK_DISABLE_DEPRECATED
-void               __gtk_range_set_update_policy             (GtkRange      *range,
+void               SF(gtk_range_set_update_policy)             (GtkRange      *range,
                                                             GtkUpdateType  policy);
-GtkUpdateType      __gtk_range_get_update_policy             (GtkRange      *range);
+GtkUpdateType      SF(gtk_range_get_update_policy)             (GtkRange      *range);
 #endif /* GTK_DISABLE_DEPRECATED */
 
-void               __gtk_range_set_adjustment                (GtkRange      *range,
+void               SF(gtk_range_set_adjustment)                (GtkRange      *range,
                                                             GtkAdjustment *adjustment);
-GtkAdjustment*     __gtk_range_get_adjustment                (GtkRange      *range);
+GtkAdjustment*     SF(gtk_range_get_adjustment)                (GtkRange      *range);
 
-void               __gtk_range_set_inverted                  (GtkRange      *range,
+void               SF(gtk_range_set_inverted)                  (GtkRange      *range,
                                                             gboolean       setting);
-gboolean           __gtk_range_get_inverted                  (GtkRange      *range);
+gboolean           SF(gtk_range_get_inverted)                  (GtkRange      *range);
 
-void               __gtk_range_set_flippable                 (GtkRange      *range,
+void               SF(gtk_range_set_flippable)                 (GtkRange      *range,
                                                             gboolean       flippable);
-gboolean           __gtk_range_get_flippable                 (GtkRange      *range);
+gboolean           SF(gtk_range_get_flippable)                 (GtkRange      *range);
 
-void               __gtk_range_set_slider_size_fixed         (GtkRange      *range,
+void               SF(gtk_range_set_slider_size_fixed)         (GtkRange      *range,
                                                             gboolean       size_fixed);
-gboolean           __gtk_range_get_slider_size_fixed         (GtkRange      *range);
+gboolean           SF(gtk_range_get_slider_size_fixed)         (GtkRange      *range);
 
-void               __gtk_range_set_min_slider_size           (GtkRange      *range,
+void               SF(gtk_range_set_min_slider_size)           (GtkRange      *range,
                                                             gboolean       min_size);
-gint               __gtk_range_get_min_slider_size           (GtkRange      *range);
+gint               SF(gtk_range_get_min_slider_size)           (GtkRange      *range);
 
-void               __gtk_range_get_range_rect                (GtkRange      *range,
+void               SF(gtk_range_get_range_rect)                (GtkRange      *range,
                                                             GdkRectangle  *range_rect);
-void               __gtk_range_get_slider_range              (GtkRange      *range,
+void               SF(gtk_range_get_slider_range)              (GtkRange      *range,
                                                             gint          *slider_start,
                                                             gint          *slider_end);
 
-void               __gtk_range_set_lower_stepper_sensitivity (GtkRange      *range,
+void               SF(gtk_range_set_lower_stepper_sensitivity) (GtkRange      *range,
                                                             GtkSensitivityType sensitivity);
-GtkSensitivityType __gtk_range_get_lower_stepper_sensitivity (GtkRange      *range);
-void               __gtk_range_set_upper_stepper_sensitivity (GtkRange      *range,
+GtkSensitivityType SF(gtk_range_get_lower_stepper_sensitivity) (GtkRange      *range);
+void               SF(gtk_range_set_upper_stepper_sensitivity) (GtkRange      *range,
                                                             GtkSensitivityType sensitivity);
-GtkSensitivityType __gtk_range_get_upper_stepper_sensitivity (GtkRange      *range);
+GtkSensitivityType SF(gtk_range_get_upper_stepper_sensitivity) (GtkRange      *range);
 
-void               __gtk_range_set_increments                (GtkRange      *range,
+void               SF(gtk_range_set_increments)                (GtkRange      *range,
                                                             gdouble        step,
                                                             gdouble        page);
-void               __gtk_range_set_range                     (GtkRange      *range,
+void               SF(gtk_range_set_range)                     (GtkRange      *range,
                                                             gdouble        min,
                                                             gdouble        max);
-void               __gtk_range_set_value                     (GtkRange      *range,
+void               SF(gtk_range_set_value)                     (GtkRange      *range,
                                                             gdouble        value);
-gdouble            __gtk_range_get_value                     (GtkRange      *range);
+gdouble            SF(gtk_range_get_value)                     (GtkRange      *range);
 
-void               __gtk_range_set_show_fill_level           (GtkRange      *range,
+void               SF(gtk_range_set_show_fill_level)           (GtkRange      *range,
                                                             gboolean       show_fill_level);
-gboolean           __gtk_range_get_show_fill_level           (GtkRange      *range);
-void               __gtk_range_set_restrict_to_fill_level    (GtkRange      *range,
+gboolean           SF(gtk_range_get_show_fill_level)           (GtkRange      *range);
+void               SF(gtk_range_set_restrict_to_fill_level)    (GtkRange      *range,
                                                             gboolean       restrict_to_fill_level);
-gboolean           __gtk_range_get_restrict_to_fill_level    (GtkRange      *range);
-void               __gtk_range_set_fill_level                (GtkRange      *range,
+gboolean           SF(gtk_range_get_restrict_to_fill_level)    (GtkRange      *range);
+void               SF(gtk_range_set_fill_level)                (GtkRange      *range,
                                                             gdouble        fill_level);
-gdouble            __gtk_range_get_fill_level                (GtkRange      *range);
-void               __gtk_range_set_round_digits              (GtkRange      *range,
+gdouble            SF(gtk_range_get_fill_level)                (GtkRange      *range);
+void               SF(gtk_range_set_round_digits)              (GtkRange      *range,
                                                             gint           round_digits);
-gint                __gtk_range_get_round_digits             (GtkRange      *range);
+gint                SF(gtk_range_get_round_digits)             (GtkRange      *range);
 
 
 /* internal API */
-gdouble            ___gtk_range_get_wheel_delta              (GtkRange      *range,
+gdouble            SF(_gtk_range_get_wheel_delta)              (GtkRange      *range,
                                                             GdkScrollDirection direction);
 
-void               ___gtk_range_set_stop_values              (GtkRange      *range,
+void               SF(_gtk_range_set_stop_values)              (GtkRange      *range,
                                                             gdouble       *values,
                                                             gint           n_values);
-gint               ___gtk_range_get_stop_positions           (GtkRange      *range,
+gint               SF(_gtk_range_get_stop_positions)           (GtkRange      *range,
                                                             gint         **values);          
 
 

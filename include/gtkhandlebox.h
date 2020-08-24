@@ -129,17 +129,17 @@ GType         _T2_gtk_handle_box_get_type             (void) G_GNUC_CONST;
 GType         _3T_gtk_handle_box_get_type             (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType         gtk_handle_box_get_type             (void) G_GNUC_CONST;
-GtkWidget*    __gtk_handle_box_new                  (void);
-void          __gtk_handle_box_set_shadow_type      (GtkHandleBox    *handle_box,
+GtkWidget*    SF(gtk_handle_box_new)                  (void);
+void          SF(gtk_handle_box_set_shadow_type)      (GtkHandleBox    *handle_box,
                                                    GtkShadowType    type);
-GtkShadowType __gtk_handle_box_get_shadow_type      (GtkHandleBox    *handle_box);
-void          __gtk_handle_box_set_handle_position  (GtkHandleBox    *handle_box,
+GtkShadowType SF(gtk_handle_box_get_shadow_type)      (GtkHandleBox    *handle_box);
+void          SF(gtk_handle_box_set_handle_position)  (GtkHandleBox    *handle_box,
 					           GtkPositionType  position);
-GtkPositionType __gtk_handle_box_get_handle_position(GtkHandleBox    *handle_box);
-void          __gtk_handle_box_set_snap_edge        (GtkHandleBox    *handle_box,
+GtkPositionType SF(gtk_handle_box_get_handle_position)(GtkHandleBox    *handle_box);
+void          SF(gtk_handle_box_set_snap_edge)        (GtkHandleBox    *handle_box,
 						   GtkPositionType  edge);
-GtkPositionType __gtk_handle_box_get_snap_edge      (GtkHandleBox    *handle_box);
-gboolean      __gtk_handle_box_get_child_detached   (GtkHandleBox    *handle_box);
+GtkPositionType SF(gtk_handle_box_get_snap_edge)      (GtkHandleBox    *handle_box);
+gboolean      SF(gtk_handle_box_get_child_detached)   (GtkHandleBox    *handle_box);
 
 G_END_DECLS
 

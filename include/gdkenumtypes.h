@@ -11,122 +11,122 @@
 G_BEGIN_DECLS
 
 /* enumerations from "gdkcursor.h" */
-GType __gdk_cursor_type_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_CURSOR_TYPE (__gdk_cursor_type_get_type ())
+GType SF(gdk_cursor_type_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_CURSOR_TYPE (SF(gdk_cursor_type_get_type) ())
 
 /* enumerations from "gdkdnd.h" */
-GType __gdk_drag_action_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_DRAG_ACTION (__gdk_drag_action_get_type ())
-GType __gdk_drag_protocol_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_DRAG_PROTOCOL (__gdk_drag_protocol_get_type ())
+GType SF(gdk_drag_action_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_DRAG_ACTION (SF(gdk_drag_action_get_type) ())
+GType SF(gdk_drag_protocol_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_DRAG_PROTOCOL (SF(gdk_drag_protocol_get_type) ())
 
 /* enumerations from "gdkevents.h" */
-GType __gdk_filter_return_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_FILTER_RETURN (__gdk_filter_return_get_type ())
-GType __gdk_event_type_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_EVENT_TYPE (__gdk_event_type_get_type ())
-GType __gdk_event_mask_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_EVENT_MASK (__gdk_event_mask_get_type ())
-GType __gdk_visibility_state_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_VISIBILITY_STATE (__gdk_visibility_state_get_type ())
-GType __gdk_scroll_direction_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_SCROLL_DIRECTION (__gdk_scroll_direction_get_type ())
-GType __gdk_notify_type_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_NOTIFY_TYPE (__gdk_notify_type_get_type ())
-GType __gdk_crossing_mode_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_CROSSING_MODE (__gdk_crossing_mode_get_type ())
-GType __gdk_property_state_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_PROPERTY_STATE (__gdk_property_state_get_type ())
-GType __gdk_window_state_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_WINDOW_STATE (__gdk_window_state_get_type ())
-GType __gdk_setting_action_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_SETTING_ACTION (__gdk_setting_action_get_type ())
-GType __gdk_owner_change_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_OWNER_CHANGE (__gdk_owner_change_get_type ())
+GType SF(gdk_filter_return_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_FILTER_RETURN (SF(gdk_filter_return_get_type) ())
+GType SF(gdk_event_type_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_EVENT_TYPE (SF(gdk_event_type_get_type) ())
+GType SF(gdk_event_mask_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_EVENT_MASK (SF(gdk_event_mask_get_type) ())
+GType SF(gdk_visibility_state_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_VISIBILITY_STATE (SF(gdk_visibility_state_get_type) ())
+GType SF(gdk_scroll_direction_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_SCROLL_DIRECTION (SF(gdk_scroll_direction_get_type) ())
+GType SF(gdk_notify_type_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_NOTIFY_TYPE (SF(gdk_notify_type_get_type) ())
+GType SF(gdk_crossing_mode_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_CROSSING_MODE (SF(gdk_crossing_mode_get_type) ())
+GType SF(gdk_property_state_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_PROPERTY_STATE (SF(gdk_property_state_get_type) ())
+GType SF(gdk_window_state_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_WINDOW_STATE (SF(gdk_window_state_get_type) ())
+GType SF(gdk_setting_action_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_SETTING_ACTION (SF(gdk_setting_action_get_type) ())
+GType SF(gdk_owner_change_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_OWNER_CHANGE (SF(gdk_owner_change_get_type) ())
 
 /* enumerations from "gdkfont.h" */
-GType __gdk_font_type_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_FONT_TYPE (__gdk_font_type_get_type ())
+GType SF(gdk_font_type_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_FONT_TYPE (SF(gdk_font_type_get_type) ())
 
 /* enumerations from "gdkgc.h" */
-GType __gdk_cap_style_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_CAP_STYLE (__gdk_cap_style_get_type ())
-GType __gdk_fill_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_FILL (__gdk_fill_get_type ())
-GType __gdk_function_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_FUNCTION (__gdk_function_get_type ())
-GType __gdk_join_style_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_JOIN_STYLE (__gdk_join_style_get_type ())
-GType __gdk_line_style_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_LINE_STYLE (__gdk_line_style_get_type ())
-GType __gdk_subwindow_mode_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_SUBWINDOW_MODE (__gdk_subwindow_mode_get_type ())
-GType __gdk_gc_values_mask_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_GC_VALUES_MASK (__gdk_gc_values_mask_get_type ())
+GType SF(gdk_cap_style_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_CAP_STYLE (SF(gdk_cap_style_get_type) ())
+GType SF(gdk_fill_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_FILL (SF(gdk_fill_get_type) ())
+GType SF(gdk_function_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_FUNCTION (SF(gdk_function_get_type) ())
+GType SF(gdk_join_style_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_JOIN_STYLE (SF(gdk_join_style_get_type) ())
+GType SF(gdk_line_style_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_LINE_STYLE (SF(gdk_line_style_get_type) ())
+GType SF(gdk_subwindow_mode_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_SUBWINDOW_MODE (SF(gdk_subwindow_mode_get_type) ())
+GType SF(gdk_gc_values_mask_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_GC_VALUES_MASK (SF(gdk_gc_values_mask_get_type) ())
 
 /* enumerations from "gdkimage.h" */
-GType __gdk_image_type_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_IMAGE_TYPE (__gdk_image_type_get_type ())
+GType SF(gdk_image_type_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_IMAGE_TYPE (SF(gdk_image_type_get_type) ())
 
 /* enumerations from "gdkinput.h" */
-GType __gdk_extension_mode_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_EXTENSION_MODE (__gdk_extension_mode_get_type ())
-GType __gdk_input_source_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_INPUT_SOURCE (__gdk_input_source_get_type ())
-GType __gdk_input_mode_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_INPUT_MODE (__gdk_input_mode_get_type ())
-GType __gdk_axis_use_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_AXIS_USE (__gdk_axis_use_get_type ())
+GType SF(gdk_extension_mode_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_EXTENSION_MODE (SF(gdk_extension_mode_get_type) ())
+GType SF(gdk_input_source_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_INPUT_SOURCE (SF(gdk_input_source_get_type) ())
+GType SF(gdk_input_mode_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_INPUT_MODE (SF(gdk_input_mode_get_type) ())
+GType SF(gdk_axis_use_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_AXIS_USE (SF(gdk_axis_use_get_type) ())
 
 /* enumerations from "gdkproperty.h" */
-GType __gdk_prop_mode_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_PROP_MODE (__gdk_prop_mode_get_type ())
+GType SF(gdk_prop_mode_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_PROP_MODE (SF(gdk_prop_mode_get_type) ())
 
 /* enumerations from "gdkregion.h" */
-GType __gdk_fill_rule_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_FILL_RULE (__gdk_fill_rule_get_type ())
-GType __gdk_overlap_type_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_OVERLAP_TYPE (__gdk_overlap_type_get_type ())
+GType SF(gdk_fill_rule_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_FILL_RULE (SF(gdk_fill_rule_get_type) ())
+GType SF(gdk_overlap_type_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_OVERLAP_TYPE (SF(gdk_overlap_type_get_type) ())
 
 /* enumerations from "gdkrgb.h" */
-GType __gdk_rgb_dither_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_RGB_DITHER (__gdk_rgb_dither_get_type ())
+GType SF(gdk_rgb_dither_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_RGB_DITHER (SF(gdk_rgb_dither_get_type) ())
 
 /* enumerations from "gdktypes.h" */
-GType __gdk_byte_order_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_BYTE_ORDER (__gdk_byte_order_get_type ())
-GType __gdk_modifier_type_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_MODIFIER_TYPE (__gdk_modifier_type_get_type ())
-GType __gdk_input_condition_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_INPUT_CONDITION (__gdk_input_condition_get_type ())
-GType __gdk_status_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_STATUS (__gdk_status_get_type ())
-GType __gdk_grab_status_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_GRAB_STATUS (__gdk_grab_status_get_type ())
+GType SF(gdk_byte_order_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_BYTE_ORDER (SF(gdk_byte_order_get_type) ())
+GType SF(gdk_modifier_type_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_MODIFIER_TYPE (SF(gdk_modifier_type_get_type) ())
+GType SF(gdk_input_condition_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_INPUT_CONDITION (SF(gdk_input_condition_get_type) ())
+GType SF(gdk_status_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_STATUS (SF(gdk_status_get_type) ())
+GType SF(gdk_grab_status_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_GRAB_STATUS (SF(gdk_grab_status_get_type) ())
 
 /* enumerations from "gdkvisual.h" */
-GType __gdk_visual_type_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_VISUAL_TYPE (__gdk_visual_type_get_type ())
+GType SF(gdk_visual_type_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_VISUAL_TYPE (SF(gdk_visual_type_get_type) ())
 
 /* enumerations from "gdkwindow.h" */
-GType __gdk_window_class_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_WINDOW_CLASS (__gdk_window_class_get_type ())
-GType __gdk_window_type_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_WINDOW_TYPE (__gdk_window_type_get_type ())
-GType __gdk_window_attributes_type_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_WINDOW_ATTRIBUTES_TYPE (__gdk_window_attributes_type_get_type ())
-GType __gdk_window_hints_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_WINDOW_HINTS (__gdk_window_hints_get_type ())
-GType __gdk_window_type_hint_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_WINDOW_TYPE_HINT (__gdk_window_type_hint_get_type ())
-GType __gdk_wm_decoration_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_WM_DECORATION (__gdk_wm_decoration_get_type ())
-GType __gdk_wm_function_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_WM_FUNCTION (__gdk_wm_function_get_type ())
-GType __gdk_gravity_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_GRAVITY (__gdk_gravity_get_type ())
-GType __gdk_window_edge_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_WINDOW_EDGE (__gdk_window_edge_get_type ())
+GType SF(gdk_window_class_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_WINDOW_CLASS (SF(gdk_window_class_get_type) ())
+GType SF(gdk_window_type_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_WINDOW_TYPE (SF(gdk_window_type_get_type) ())
+GType SF(gdk_window_attributes_type_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_WINDOW_ATTRIBUTES_TYPE (SF(gdk_window_attributes_type_get_type) ())
+GType SF(gdk_window_hints_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_WINDOW_HINTS (SF(gdk_window_hints_get_type) ())
+GType SF(gdk_window_type_hint_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_WINDOW_TYPE_HINT (SF(gdk_window_type_hint_get_type) ())
+GType SF(gdk_wm_decoration_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_WM_DECORATION (SF(gdk_wm_decoration_get_type) ())
+GType SF(gdk_wm_function_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_WM_FUNCTION (SF(gdk_wm_function_get_type) ())
+GType SF(gdk_gravity_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_GRAVITY (SF(gdk_gravity_get_type) ())
+GType SF(gdk_window_edge_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_WINDOW_EDGE (SF(gdk_window_edge_get_type) ())
 G_END_DECLS
 
 #endif /* __GDK_ENUM_TYPES_H__ */

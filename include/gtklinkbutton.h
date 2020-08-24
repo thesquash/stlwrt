@@ -76,22 +76,22 @@ struct _GtkLinkButtonClass
 
 GType                 gtk_link_button_get_type          (void) G_GNUC_CONST;
 
-GtkWidget *           __gtk_link_button_new               (const gchar   *uri);
-GtkWidget *           __gtk_link_button_new_with_label    (const gchar   *uri,
+GtkWidget *           SF(gtk_link_button_new)               (const gchar   *uri);
+GtkWidget *           SF(gtk_link_button_new_with_label)    (const gchar   *uri,
 						         const gchar   *label);
 
-const gchar *         __gtk_link_button_get_uri           (GtkLinkButton *link_button);
-void                  __gtk_link_button_set_uri           (GtkLinkButton *link_button,
+const gchar *         SF(gtk_link_button_get_uri)           (GtkLinkButton *link_button);
+void                  SF(gtk_link_button_set_uri)           (GtkLinkButton *link_button,
 						         const gchar   *uri);
 
 #ifndef GTK_DISABLE_DEPRECATED
-GtkLinkButtonUriFunc  __gtk_link_button_set_uri_hook      (GtkLinkButtonUriFunc func,
+GtkLinkButtonUriFunc  SF(gtk_link_button_set_uri_hook)      (GtkLinkButtonUriFunc func,
 							 gpointer             data,
 							 GDestroyNotify       destroy);
 #endif
 
-gboolean              __gtk_link_button_get_visited       (GtkLinkButton *link_button);
-void                  __gtk_link_button_set_visited       (GtkLinkButton *link_button,
+gboolean              SF(gtk_link_button_get_visited)       (GtkLinkButton *link_button);
+void                  SF(gtk_link_button_set_visited)       (GtkLinkButton *link_button,
                                                          gboolean       visited);
 
 

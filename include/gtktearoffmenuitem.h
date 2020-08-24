@@ -93,7 +93,7 @@ GType	   _T2_gtk_tearoff_menu_item_get_type     (void) G_GNUC_CONST;
 GType	   _3T_gtk_tearoff_menu_item_get_type     (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType	   gtk_tearoff_menu_item_get_type     (void) G_GNUC_CONST;
-GtkWidget* __gtk_tearoff_menu_item_new	      (void);
+GtkWidget* SF(gtk_tearoff_menu_item_new)	      (void);
 
 G_END_DECLS
 

@@ -77,32 +77,32 @@ GType    _T2_gtk_editable_get_type             (void) G_GNUC_CONST;
 GType    _3T_gtk_editable_get_type             (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType    gtk_editable_get_type             (void) G_GNUC_CONST;
-void     __gtk_editable_select_region        (GtkEditable *editable,
+void     SF(gtk_editable_select_region)        (GtkEditable *editable,
 					    gint         start_pos,
 					    gint         end_pos);
-gboolean __gtk_editable_get_selection_bounds (GtkEditable *editable,
+gboolean SF(gtk_editable_get_selection_bounds) (GtkEditable *editable,
 					    gint        *start_pos,
 					    gint        *end_pos);
-void     __gtk_editable_insert_text          (GtkEditable *editable,
+void     SF(gtk_editable_insert_text)          (GtkEditable *editable,
 					    const gchar *new_text,
 					    gint         new_text_length,
 					    gint        *position);
-void     __gtk_editable_delete_text          (GtkEditable *editable,
+void     SF(gtk_editable_delete_text)          (GtkEditable *editable,
 					    gint         start_pos,
 					    gint         end_pos);
-gchar*   __gtk_editable_get_chars            (GtkEditable *editable,
+gchar*   SF(gtk_editable_get_chars)            (GtkEditable *editable,
 					    gint         start_pos,
 					    gint         end_pos);
-void     __gtk_editable_cut_clipboard        (GtkEditable *editable);
-void     __gtk_editable_copy_clipboard       (GtkEditable *editable);
-void     __gtk_editable_paste_clipboard      (GtkEditable *editable);
-void     __gtk_editable_delete_selection     (GtkEditable *editable);
-void     __gtk_editable_set_position         (GtkEditable *editable,
+void     SF(gtk_editable_cut_clipboard)        (GtkEditable *editable);
+void     SF(gtk_editable_copy_clipboard)       (GtkEditable *editable);
+void     SF(gtk_editable_paste_clipboard)      (GtkEditable *editable);
+void     SF(gtk_editable_delete_selection)     (GtkEditable *editable);
+void     SF(gtk_editable_set_position)         (GtkEditable *editable,
 					    gint         position);
-gint     __gtk_editable_get_position         (GtkEditable *editable);
-void     __gtk_editable_set_editable         (GtkEditable *editable,
+gint     SF(gtk_editable_get_position)         (GtkEditable *editable);
+void     SF(gtk_editable_set_editable)         (GtkEditable *editable,
 					    gboolean     is_editable);
-gboolean __gtk_editable_get_editable         (GtkEditable *editable);
+gboolean SF(gtk_editable_get_editable)         (GtkEditable *editable);
 
 G_END_DECLS
 

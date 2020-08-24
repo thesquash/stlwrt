@@ -153,10 +153,10 @@ GType	   _T2_gtk_menu_get_type		  (void) G_GNUC_CONST;
 GType	   _3T_gtk_menu_get_type		  (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType	   gtk_menu_get_type		  (void) G_GNUC_CONST;
-GtkWidget* __gtk_menu_new			  (void);
+GtkWidget* SF(gtk_menu_new)			  (void);
 
 /* Display the menu onscreen */
-void	   __gtk_menu_popup		  (GtkMenu	       *menu,
+void	   SF(gtk_menu_popup)		  (GtkMenu	       *menu,
 					   GtkWidget	       *parent_menu_shell,
 					   GtkWidget	       *parent_menu_item,
 					   GtkMenuPositionFunc	func,
@@ -167,81 +167,81 @@ void	   __gtk_menu_popup		  (GtkMenu	       *menu,
 /* Position the menu according to its position function. Called
  * from gtkmenuitem.c when a menu-item changes its allocation
  */
-void	   __gtk_menu_reposition		  (GtkMenu	       *menu);
+void	   SF(gtk_menu_reposition)		  (GtkMenu	       *menu);
 
-void	   __gtk_menu_popdown		  (GtkMenu	       *menu);
+void	   SF(gtk_menu_popdown)		  (GtkMenu	       *menu);
 
 /* Keep track of the last menu item selected. (For the purposes
  * of the option menu
  */
-GtkWidget* __gtk_menu_get_active		  (GtkMenu	       *menu);
-void	   __gtk_menu_set_active		  (GtkMenu	       *menu,
+GtkWidget* SF(gtk_menu_get_active)		  (GtkMenu	       *menu);
+void	   SF(gtk_menu_set_active)		  (GtkMenu	       *menu,
 					   guint		index_);
 
 /* set/get the accelerator group that holds global accelerators (should
- * be added to the corresponding toplevel with __gtk_window_add_accel_group().
+ * be added to the corresponding toplevel with SF(gtk_window_add_accel_group)().
  */
-void	       __gtk_menu_set_accel_group	  (GtkMenu	       *menu,
+void	       SF(gtk_menu_set_accel_group)	  (GtkMenu	       *menu,
 					   GtkAccelGroup       *accel_group);
-GtkAccelGroup* __gtk_menu_get_accel_group	  (GtkMenu	       *menu);
-void           __gtk_menu_set_accel_path    (GtkMenu             *menu,
+GtkAccelGroup* SF(gtk_menu_get_accel_group)	  (GtkMenu	       *menu);
+void           SF(gtk_menu_set_accel_path)    (GtkMenu             *menu,
 					   const gchar         *accel_path);
-const gchar*   __gtk_menu_get_accel_path    (GtkMenu             *menu);
+const gchar*   SF(gtk_menu_get_accel_path)    (GtkMenu             *menu);
 
 /* A reference count is kept for a widget when it is attached to
  * a particular widget. This is typically a menu item; it may also
  * be a widget with a popup menu - for instance, the Notebook widget.
  */
-void	   __gtk_menu_attach_to_widget	  (GtkMenu	       *menu,
+void	   SF(gtk_menu_attach_to_widget)	  (GtkMenu	       *menu,
 					   GtkWidget	       *attach_widget,
 					   GtkMenuDetachFunc	detacher);
-void	   __gtk_menu_detach		  (GtkMenu	       *menu);
+void	   SF(gtk_menu_detach)		  (GtkMenu	       *menu);
 
 /* This should be dumped in favor of data set when the menu is popped
  * up - that is currently in the ItemFactory code, but should be
  * in the Menu code.
  */
-GtkWidget* __gtk_menu_get_attach_widget	  (GtkMenu	       *menu);
+GtkWidget* SF(gtk_menu_get_attach_widget)	  (GtkMenu	       *menu);
 
-void       __gtk_menu_set_tearoff_state     (GtkMenu             *menu,
+void       SF(gtk_menu_set_tearoff_state)     (GtkMenu             *menu,
 					   gboolean             torn_off);
-gboolean   __gtk_menu_get_tearoff_state     (GtkMenu             *menu);
+gboolean   SF(gtk_menu_get_tearoff_state)     (GtkMenu             *menu);
 
 /* This sets the window manager title for the window that
  * appears when a menu is torn off
  */
-void       __gtk_menu_set_title             (GtkMenu             *menu,
+void       SF(gtk_menu_set_title)             (GtkMenu             *menu,
 					   const gchar         *title);
-const gchar *__gtk_menu_get_title           (GtkMenu             *menu);
+const gchar *SF(gtk_menu_get_title)           (GtkMenu             *menu);
 
-void       __gtk_menu_reorder_child         (GtkMenu             *menu,
+void       SF(gtk_menu_reorder_child)         (GtkMenu             *menu,
                                            GtkWidget           *child,
                                            gint                position);
 
-void	   __gtk_menu_set_screen		  (GtkMenu	       *menu,
+void	   SF(gtk_menu_set_screen)		  (GtkMenu	       *menu,
 					   GdkScreen	       *screen);
 
-void       __gtk_menu_attach                (GtkMenu             *menu,
+void       SF(gtk_menu_attach)                (GtkMenu             *menu,
                                            GtkWidget           *child,
                                            guint                left_attach,
                                            guint                right_attach,
                                            guint                top_attach,
                                            guint                bottom_attach);
 
-void       __gtk_menu_set_monitor           (GtkMenu             *menu,
+void       SF(gtk_menu_set_monitor)           (GtkMenu             *menu,
                                            gint                 monitor_num);
-gint       __gtk_menu_get_monitor           (GtkMenu             *menu);
-GList*     __gtk_menu_get_for_attach_widget (GtkWidget           *widget); 
+gint       SF(gtk_menu_get_monitor)           (GtkMenu             *menu);
+GList*     SF(gtk_menu_get_for_attach_widget) (GtkWidget           *widget); 
 
 #ifndef GTK_DISABLE_DEPRECATED
-#define __gtk_menu_append(menu,child)	__gtk_menu_shell_append  ((GtkMenuShell *)(menu),(child))
-#define __gtk_menu_prepend(menu,child)    __gtk_menu_shell_prepend ((GtkMenuShell *)(menu),(child))
-#define __gtk_menu_insert(menu,child,pos)	__gtk_menu_shell_insert ((GtkMenuShell *)(menu),(child),(pos))
+#define SF(gtk_menu_append)(menu,child)	SF(gtk_menu_shell_append)  ((GtkMenuShell *)(menu),(child))
+#define SF(gtk_menu_prepend)(menu,child)    SF(gtk_menu_shell_prepend) ((GtkMenuShell *)(menu),(child))
+#define SF(gtk_menu_insert)(menu,child,pos)	SF(gtk_menu_shell_insert) ((GtkMenuShell *)(menu),(child),(pos))
 #endif /* GTK_DISABLE_DEPRECATED */
 
-void     __gtk_menu_set_reserve_toggle_size (GtkMenu  *menu,
+void     SF(gtk_menu_set_reserve_toggle_size) (GtkMenu  *menu,
                                           gboolean   reserve_toggle_size);
-gboolean __gtk_menu_get_reserve_toggle_size (GtkMenu  *menu);
+gboolean SF(gtk_menu_get_reserve_toggle_size) (GtkMenu  *menu);
 
 
 G_END_DECLS

@@ -86,31 +86,31 @@ GType          _T2_gtk_layout_get_type        (void) G_GNUC_CONST;
 GType          _3T_gtk_layout_get_type        (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType          gtk_layout_get_type        (void) G_GNUC_CONST;
-GtkWidget*     __gtk_layout_new             (GtkAdjustment *hadjustment,
+GtkWidget*     SF(gtk_layout_new)             (GtkAdjustment *hadjustment,
 				           GtkAdjustment *vadjustment);
-GdkWindow*     __gtk_layout_get_bin_window  (GtkLayout     *layout);
-void           __gtk_layout_put             (GtkLayout     *layout,
+GdkWindow*     SF(gtk_layout_get_bin_window)  (GtkLayout     *layout);
+void           SF(gtk_layout_put)             (GtkLayout     *layout,
 		                           GtkWidget     *child_widget,
 		                           gint           x,
 		                           gint           y);
 
-void           __gtk_layout_move            (GtkLayout     *layout,
+void           SF(gtk_layout_move)            (GtkLayout     *layout,
 		                           GtkWidget     *child_widget,
 		                           gint           x,
 		                           gint           y);
 
-void           __gtk_layout_set_size        (GtkLayout     *layout,
+void           SF(gtk_layout_set_size)        (GtkLayout     *layout,
 			                   guint          width,
 			                   guint          height);
-void           __gtk_layout_get_size        (GtkLayout     *layout,
+void           SF(gtk_layout_get_size)        (GtkLayout     *layout,
 					   guint         *width,
 					   guint         *height);
 
-GtkAdjustment* __gtk_layout_get_hadjustment (GtkLayout     *layout);
-GtkAdjustment* __gtk_layout_get_vadjustment (GtkLayout     *layout);
-void           __gtk_layout_set_hadjustment (GtkLayout     *layout,
+GtkAdjustment* SF(gtk_layout_get_hadjustment) (GtkLayout     *layout);
+GtkAdjustment* SF(gtk_layout_get_vadjustment) (GtkLayout     *layout);
+void           SF(gtk_layout_set_hadjustment) (GtkLayout     *layout,
 					   GtkAdjustment *adjustment);
-void           __gtk_layout_set_vadjustment (GtkLayout     *layout,
+void           SF(gtk_layout_set_vadjustment) (GtkLayout     *layout,
 					   GtkAdjustment *adjustment);
 
 
@@ -123,8 +123,8 @@ void           __gtk_layout_set_vadjustment (GtkLayout     *layout,
  * - I don't understand these are supposed to work, so I suspect
  * - they don't now.                    OWT 1/20/98
  */
-void           __gtk_layout_freeze          (GtkLayout     *layout);
-void           __gtk_layout_thaw            (GtkLayout     *layout);
+void           SF(gtk_layout_freeze)          (GtkLayout     *layout);
+void           SF(gtk_layout_thaw)            (GtkLayout     *layout);
 #endif /* GTK_DISABLE_DEPRECATED */
 
 G_END_DECLS

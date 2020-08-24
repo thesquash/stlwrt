@@ -97,19 +97,19 @@ GType      _3T_gtk_toggle_button_get_type          (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType      gtk_toggle_button_get_type          (void) G_GNUC_CONST;
 
-GtkWidget* __gtk_toggle_button_new               (void);
-GtkWidget* __gtk_toggle_button_new_with_label    (const gchar     *label);
-GtkWidget* __gtk_toggle_button_new_with_mnemonic (const gchar     *label);
-void       __gtk_toggle_button_set_mode          (GtkToggleButton *toggle_button,
+GtkWidget* SF(gtk_toggle_button_new)               (void);
+GtkWidget* SF(gtk_toggle_button_new_with_label)    (const gchar     *label);
+GtkWidget* SF(gtk_toggle_button_new_with_mnemonic) (const gchar     *label);
+void       SF(gtk_toggle_button_set_mode)          (GtkToggleButton *toggle_button,
                                                 gboolean         draw_indicator);
-gboolean   __gtk_toggle_button_get_mode          (GtkToggleButton *toggle_button);
-void       __gtk_toggle_button_set_active        (GtkToggleButton *toggle_button,
+gboolean   SF(gtk_toggle_button_get_mode)          (GtkToggleButton *toggle_button);
+void       SF(gtk_toggle_button_set_active)        (GtkToggleButton *toggle_button,
                                                 gboolean         is_active);
-gboolean   __gtk_toggle_button_get_active        (GtkToggleButton *toggle_button);
-void       __gtk_toggle_button_toggled           (GtkToggleButton *toggle_button);
-void       __gtk_toggle_button_set_inconsistent  (GtkToggleButton *toggle_button,
+gboolean   SF(gtk_toggle_button_get_active)        (GtkToggleButton *toggle_button);
+void       SF(gtk_toggle_button_toggled)           (GtkToggleButton *toggle_button);
+void       SF(gtk_toggle_button_set_inconsistent)  (GtkToggleButton *toggle_button,
                                                 gboolean         setting);
-gboolean   __gtk_toggle_button_get_inconsistent  (GtkToggleButton *toggle_button);
+gboolean   SF(gtk_toggle_button_get_inconsistent)  (GtkToggleButton *toggle_button);
 
 
 #ifndef GTK_DISABLE_DEPRECATED

@@ -95,35 +95,35 @@ GType _3T_gtk_button_box_get_type (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType gtk_button_box_get_type (void) G_GNUC_CONST;
 
-GtkButtonBoxStyle __gtk_button_box_get_layout          (GtkButtonBox      *widget);
-void              __gtk_button_box_set_layout          (GtkButtonBox      *widget,
+GtkButtonBoxStyle SF(gtk_button_box_get_layout)          (GtkButtonBox      *widget);
+void              SF(gtk_button_box_set_layout)          (GtkButtonBox      *widget,
 						      GtkButtonBoxStyle  layout_style);
-gboolean          __gtk_button_box_get_child_secondary (GtkButtonBox      *widget,
+gboolean          SF(gtk_button_box_get_child_secondary) (GtkButtonBox      *widget,
 						      GtkWidget         *child);
-void              __gtk_button_box_set_child_secondary (GtkButtonBox      *widget,
+void              SF(gtk_button_box_set_child_secondary) (GtkButtonBox      *widget,
 						      GtkWidget         *child,
 						      gboolean           is_secondary);
 
 #ifndef GTK_DISABLE_DEPRECATED
-#define __gtk_button_box_set_spacing(b,s) __gtk_box_set_spacing (GTK_BOX (b), s)
-#define __gtk_button_box_get_spacing(b)   __gtk_box_get_spacing (GTK_BOX (b))
+#define SF(gtk_button_box_set_spacing)(b,s) SF(gtk_box_set_spacing) (GTK_BOX (b), s)
+#define SF(gtk_button_box_get_spacing)(b)   SF(gtk_box_get_spacing) (GTK_BOX (b))
 
-void __gtk_button_box_set_child_size     (GtkButtonBox *widget,
+void SF(gtk_button_box_set_child_size)     (GtkButtonBox *widget,
 					gint          min_width,
 					gint          min_height);
-void __gtk_button_box_set_child_ipadding (GtkButtonBox *widget,
+void SF(gtk_button_box_set_child_ipadding) (GtkButtonBox *widget,
 					gint          ipad_x,
 					gint          ipad_y);
-void __gtk_button_box_get_child_size     (GtkButtonBox *widget,
+void SF(gtk_button_box_get_child_size)     (GtkButtonBox *widget,
 					gint         *min_width,
 					gint         *min_height);
-void __gtk_button_box_get_child_ipadding (GtkButtonBox *widget,
+void SF(gtk_button_box_get_child_ipadding) (GtkButtonBox *widget,
 					gint         *ipad_x,
 					gint         *ipad_y);
 #endif
 
 /* Internal method - do not use. */
-void ___gtk_button_box_child_requisition (GtkWidget *widget,
+void SF(_gtk_button_box_child_requisition) (GtkWidget *widget,
 					int       *nvis_children,
 					int       *nvis_secondaries,
 					int       *width,

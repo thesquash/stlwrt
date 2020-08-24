@@ -136,22 +136,22 @@ GType           _T2_gtk_ruler_get_type   (void) G_GNUC_CONST;
 GType           _3T_gtk_ruler_get_type   (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType           gtk_ruler_get_type   (void) G_GNUC_CONST;
-void            __gtk_ruler_set_metric (GtkRuler       *ruler,
+void            SF(gtk_ruler_set_metric) (GtkRuler       *ruler,
                                       GtkMetricType   metric);
-GtkMetricType   __gtk_ruler_get_metric (GtkRuler       *ruler);
-void            __gtk_ruler_set_range  (GtkRuler       *ruler,
+GtkMetricType   SF(gtk_ruler_get_metric) (GtkRuler       *ruler);
+void            SF(gtk_ruler_set_range)  (GtkRuler       *ruler,
                                       gdouble         lower,
                                       gdouble         upper,
                                       gdouble         position,
                                       gdouble         max_size);
-void            __gtk_ruler_get_range  (GtkRuler       *ruler,
+void            SF(gtk_ruler_get_range)  (GtkRuler       *ruler,
                                       gdouble        *lower,
                                       gdouble        *upper,
                                       gdouble        *position,
                                       gdouble        *max_size);
 
-void            __gtk_ruler_draw_ticks (GtkRuler       *ruler);
-void            __gtk_ruler_draw_pos   (GtkRuler       *ruler);
+void            SF(gtk_ruler_draw_ticks) (GtkRuler       *ruler);
+void            SF(gtk_ruler_draw_pos)   (GtkRuler       *ruler);
 
 G_END_DECLS
 

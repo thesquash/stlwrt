@@ -93,7 +93,7 @@ GType gtk_file_chooser_get_type (void) G_GNUC_CONST;
  *
  * Used to get the #GError quark for #GtkFileChooser errors.
  */
-#define GTK_FILE_CHOOSER_ERROR (__gtk_file_chooser_error_quark ())
+#define GTK_FILE_CHOOSER_ERROR (SF(gtk_file_chooser_error_quark) ())
 
 /**
  * GtkFileChooserError:
@@ -113,34 +113,34 @@ typedef enum {
   GTK_FILE_CHOOSER_ERROR_INCOMPLETE_HOSTNAME
 } GtkFileChooserError;
 
-GQuark __gtk_file_chooser_error_quark (void);
+GQuark SF(gtk_file_chooser_error_quark) (void);
 
 /* Configuration
  */
-void                 __gtk_file_chooser_set_action          (GtkFileChooser       *chooser,
+void                 SF(gtk_file_chooser_set_action)          (GtkFileChooser       *chooser,
 							   GtkFileChooserAction  action);
-GtkFileChooserAction __gtk_file_chooser_get_action          (GtkFileChooser       *chooser);
-void                 __gtk_file_chooser_set_local_only      (GtkFileChooser       *chooser,
+GtkFileChooserAction SF(gtk_file_chooser_get_action)          (GtkFileChooser       *chooser);
+void                 SF(gtk_file_chooser_set_local_only)      (GtkFileChooser       *chooser,
 							   gboolean              local_only);
-gboolean             __gtk_file_chooser_get_local_only      (GtkFileChooser       *chooser);
-void                 __gtk_file_chooser_set_select_multiple (GtkFileChooser       *chooser,
+gboolean             SF(gtk_file_chooser_get_local_only)      (GtkFileChooser       *chooser);
+void                 SF(gtk_file_chooser_set_select_multiple) (GtkFileChooser       *chooser,
 							   gboolean              select_multiple);
-gboolean             __gtk_file_chooser_get_select_multiple (GtkFileChooser       *chooser);
-void                 __gtk_file_chooser_set_show_hidden     (GtkFileChooser       *chooser,
+gboolean             SF(gtk_file_chooser_get_select_multiple) (GtkFileChooser       *chooser);
+void                 SF(gtk_file_chooser_set_show_hidden)     (GtkFileChooser       *chooser,
 							   gboolean              show_hidden);
-gboolean             __gtk_file_chooser_get_show_hidden     (GtkFileChooser       *chooser);
+gboolean             SF(gtk_file_chooser_get_show_hidden)     (GtkFileChooser       *chooser);
 
-void                 __gtk_file_chooser_set_do_overwrite_confirmation (GtkFileChooser *chooser,
+void                 SF(gtk_file_chooser_set_do_overwrite_confirmation) (GtkFileChooser *chooser,
 								     gboolean        do_overwrite_confirmation);
-gboolean             __gtk_file_chooser_get_do_overwrite_confirmation (GtkFileChooser *chooser);
+gboolean             SF(gtk_file_chooser_get_do_overwrite_confirmation) (GtkFileChooser *chooser);
 
-void                 __gtk_file_chooser_set_create_folders  (GtkFileChooser       *chooser,
+void                 SF(gtk_file_chooser_set_create_folders)  (GtkFileChooser       *chooser,
 							  gboolean               create_folders);
-gboolean             __gtk_file_chooser_get_create_folders (GtkFileChooser *chooser);
+gboolean             SF(gtk_file_chooser_get_create_folders) (GtkFileChooser *chooser);
 
 /* Suggested name for the Save-type actions
  */
-void     __gtk_file_chooser_set_current_name   (GtkFileChooser *chooser,
+void     SF(gtk_file_chooser_set_current_name)   (GtkFileChooser *chooser,
 					      const gchar    *name);
 
 /* Filename manipulation
@@ -160,104 +160,104 @@ void     __gtk_file_chooser_set_current_name   (GtkFileChooser *chooser,
 #define gtk_file_chooser_list_shortcut_folders gtk_file_chooser_list_shortcut_folders_utf8
 #endif
 
-gchar *  __gtk_file_chooser_get_filename       (GtkFileChooser *chooser);
-gboolean __gtk_file_chooser_set_filename       (GtkFileChooser *chooser,
+gchar *  SF(gtk_file_chooser_get_filename)       (GtkFileChooser *chooser);
+gboolean SF(gtk_file_chooser_set_filename)       (GtkFileChooser *chooser,
 					      const char     *filename);
-gboolean __gtk_file_chooser_select_filename    (GtkFileChooser *chooser,
+gboolean SF(gtk_file_chooser_select_filename)    (GtkFileChooser *chooser,
 					      const char     *filename);
-void     __gtk_file_chooser_unselect_filename  (GtkFileChooser *chooser,
+void     SF(gtk_file_chooser_unselect_filename)  (GtkFileChooser *chooser,
 					      const char     *filename);
-void     __gtk_file_chooser_select_all         (GtkFileChooser *chooser);
-void     __gtk_file_chooser_unselect_all       (GtkFileChooser *chooser);
-GSList * __gtk_file_chooser_get_filenames      (GtkFileChooser *chooser);
-gboolean __gtk_file_chooser_set_current_folder (GtkFileChooser *chooser,
+void     SF(gtk_file_chooser_select_all)         (GtkFileChooser *chooser);
+void     SF(gtk_file_chooser_unselect_all)       (GtkFileChooser *chooser);
+GSList * SF(gtk_file_chooser_get_filenames)      (GtkFileChooser *chooser);
+gboolean SF(gtk_file_chooser_set_current_folder) (GtkFileChooser *chooser,
 					      const gchar    *filename);
-gchar *  __gtk_file_chooser_get_current_folder (GtkFileChooser *chooser);
+gchar *  SF(gtk_file_chooser_get_current_folder) (GtkFileChooser *chooser);
 
 
 /* URI manipulation
  */
-gchar *  __gtk_file_chooser_get_uri                (GtkFileChooser *chooser);
-gboolean __gtk_file_chooser_set_uri                (GtkFileChooser *chooser,
+gchar *  SF(gtk_file_chooser_get_uri)                (GtkFileChooser *chooser);
+gboolean SF(gtk_file_chooser_set_uri)                (GtkFileChooser *chooser,
 						  const char     *uri);
-gboolean __gtk_file_chooser_select_uri             (GtkFileChooser *chooser,
+gboolean SF(gtk_file_chooser_select_uri)             (GtkFileChooser *chooser,
 						  const char     *uri);
-void     __gtk_file_chooser_unselect_uri           (GtkFileChooser *chooser,
+void     SF(gtk_file_chooser_unselect_uri)           (GtkFileChooser *chooser,
 						  const char     *uri);
-GSList * __gtk_file_chooser_get_uris               (GtkFileChooser *chooser);
-gboolean __gtk_file_chooser_set_current_folder_uri (GtkFileChooser *chooser,
+GSList * SF(gtk_file_chooser_get_uris)               (GtkFileChooser *chooser);
+gboolean SF(gtk_file_chooser_set_current_folder_uri) (GtkFileChooser *chooser,
 						  const gchar    *uri);
-gchar *  __gtk_file_chooser_get_current_folder_uri (GtkFileChooser *chooser);
+gchar *  SF(gtk_file_chooser_get_current_folder_uri) (GtkFileChooser *chooser);
 
 /* GFile manipulation */
-GFile *  __gtk_file_chooser_get_file                (GtkFileChooser  *chooser);
-gboolean __gtk_file_chooser_set_file                (GtkFileChooser  *chooser,
+GFile *  SF(gtk_file_chooser_get_file)                (GtkFileChooser  *chooser);
+gboolean SF(gtk_file_chooser_set_file)                (GtkFileChooser  *chooser,
                                                    GFile           *file,
                                                    GError         **error);
-gboolean __gtk_file_chooser_select_file             (GtkFileChooser  *chooser,
+gboolean SF(gtk_file_chooser_select_file)             (GtkFileChooser  *chooser,
                                                    GFile           *file,
                                                    GError         **error);
-void     __gtk_file_chooser_unselect_file           (GtkFileChooser  *chooser,
+void     SF(gtk_file_chooser_unselect_file)           (GtkFileChooser  *chooser,
                                                    GFile           *file);
-GSList * __gtk_file_chooser_get_files               (GtkFileChooser  *chooser);
-gboolean __gtk_file_chooser_set_current_folder_file (GtkFileChooser  *chooser,
+GSList * SF(gtk_file_chooser_get_files)               (GtkFileChooser  *chooser);
+gboolean SF(gtk_file_chooser_set_current_folder_file) (GtkFileChooser  *chooser,
                                                    GFile           *file,
                                                    GError         **error);
-GFile *  __gtk_file_chooser_get_current_folder_file (GtkFileChooser  *chooser);
+GFile *  SF(gtk_file_chooser_get_current_folder_file) (GtkFileChooser  *chooser);
 
 /* Preview widget
  */
-void       __gtk_file_chooser_set_preview_widget        (GtkFileChooser *chooser,
+void       SF(gtk_file_chooser_set_preview_widget)        (GtkFileChooser *chooser,
 						       GtkWidget      *preview_widget);
-GtkWidget *__gtk_file_chooser_get_preview_widget        (GtkFileChooser *chooser);
-void       __gtk_file_chooser_set_preview_widget_active (GtkFileChooser *chooser,
+GtkWidget *SF(gtk_file_chooser_get_preview_widget)        (GtkFileChooser *chooser);
+void       SF(gtk_file_chooser_set_preview_widget_active) (GtkFileChooser *chooser,
 						       gboolean        active);
-gboolean   __gtk_file_chooser_get_preview_widget_active (GtkFileChooser *chooser);
-void       __gtk_file_chooser_set_use_preview_label     (GtkFileChooser *chooser,
+gboolean   SF(gtk_file_chooser_get_preview_widget_active) (GtkFileChooser *chooser);
+void       SF(gtk_file_chooser_set_use_preview_label)     (GtkFileChooser *chooser,
 						       gboolean        use_label);
-gboolean   __gtk_file_chooser_get_use_preview_label     (GtkFileChooser *chooser);
+gboolean   SF(gtk_file_chooser_get_use_preview_label)     (GtkFileChooser *chooser);
 
-char  *__gtk_file_chooser_get_preview_filename (GtkFileChooser *chooser);
-char  *__gtk_file_chooser_get_preview_uri      (GtkFileChooser *chooser);
-GFile *__gtk_file_chooser_get_preview_file     (GtkFileChooser *chooser);
+char  *SF(gtk_file_chooser_get_preview_filename) (GtkFileChooser *chooser);
+char  *SF(gtk_file_chooser_get_preview_uri)      (GtkFileChooser *chooser);
+GFile *SF(gtk_file_chooser_get_preview_file)     (GtkFileChooser *chooser);
 
 /* Extra widget
  */
-void       __gtk_file_chooser_set_extra_widget (GtkFileChooser *chooser,
+void       SF(gtk_file_chooser_set_extra_widget) (GtkFileChooser *chooser,
 					      GtkWidget      *extra_widget);
-GtkWidget *__gtk_file_chooser_get_extra_widget (GtkFileChooser *chooser);
+GtkWidget *SF(gtk_file_chooser_get_extra_widget) (GtkFileChooser *chooser);
 
 /* List of user selectable filters
  */
-void    __gtk_file_chooser_add_filter    (GtkFileChooser *chooser,
+void    SF(gtk_file_chooser_add_filter)    (GtkFileChooser *chooser,
 					GtkFileFilter  *filter);
-void    __gtk_file_chooser_remove_filter (GtkFileChooser *chooser,
+void    SF(gtk_file_chooser_remove_filter) (GtkFileChooser *chooser,
 					GtkFileFilter  *filter);
-GSList *__gtk_file_chooser_list_filters  (GtkFileChooser *chooser);
+GSList *SF(gtk_file_chooser_list_filters)  (GtkFileChooser *chooser);
 
 /* Current filter
  */
-void           __gtk_file_chooser_set_filter (GtkFileChooser *chooser,
+void           SF(gtk_file_chooser_set_filter) (GtkFileChooser *chooser,
 					   GtkFileFilter  *filter);
-GtkFileFilter *__gtk_file_chooser_get_filter (GtkFileChooser *chooser);
+GtkFileFilter *SF(gtk_file_chooser_get_filter) (GtkFileChooser *chooser);
 
 /* Per-application shortcut folders */
 
-gboolean __gtk_file_chooser_add_shortcut_folder    (GtkFileChooser *chooser,
+gboolean SF(gtk_file_chooser_add_shortcut_folder)    (GtkFileChooser *chooser,
 						  const char     *folder,
 						  GError        **error);
-gboolean __gtk_file_chooser_remove_shortcut_folder (GtkFileChooser *chooser,
+gboolean SF(gtk_file_chooser_remove_shortcut_folder) (GtkFileChooser *chooser,
 						  const char     *folder,
 						  GError        **error);
-GSList *__gtk_file_chooser_list_shortcut_folders   (GtkFileChooser *chooser);
+GSList *SF(gtk_file_chooser_list_shortcut_folders)   (GtkFileChooser *chooser);
 
-gboolean __gtk_file_chooser_add_shortcut_folder_uri    (GtkFileChooser *chooser,
+gboolean SF(gtk_file_chooser_add_shortcut_folder_uri)    (GtkFileChooser *chooser,
 						      const char     *uri,
 						      GError        **error);
-gboolean __gtk_file_chooser_remove_shortcut_folder_uri (GtkFileChooser *chooser,
+gboolean SF(gtk_file_chooser_remove_shortcut_folder_uri) (GtkFileChooser *chooser,
 						      const char     *uri,
 						      GError        **error);
-GSList *__gtk_file_chooser_list_shortcut_folder_uris   (GtkFileChooser *chooser);
+GSList *SF(gtk_file_chooser_list_shortcut_folder_uris)   (GtkFileChooser *chooser);
 
 G_END_DECLS
 

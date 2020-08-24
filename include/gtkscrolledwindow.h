@@ -125,34 +125,34 @@ GType          _T2_gtk_scrolled_window_get_type          (void) G_GNUC_CONST;
 GType          _3T_gtk_scrolled_window_get_type          (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType          gtk_scrolled_window_get_type          (void) G_GNUC_CONST;
-GtkWidget*     __gtk_scrolled_window_new               (GtkAdjustment     *hadjustment,
+GtkWidget*     SF(gtk_scrolled_window_new)               (GtkAdjustment     *hadjustment,
 						      GtkAdjustment     *vadjustment);
-void           __gtk_scrolled_window_set_hadjustment   (GtkScrolledWindow *scrolled_window,
+void           SF(gtk_scrolled_window_set_hadjustment)   (GtkScrolledWindow *scrolled_window,
 						      GtkAdjustment     *hadjustment);
-void           __gtk_scrolled_window_set_vadjustment   (GtkScrolledWindow *scrolled_window,
+void           SF(gtk_scrolled_window_set_vadjustment)   (GtkScrolledWindow *scrolled_window,
 						      GtkAdjustment     *vadjustment);
-GtkAdjustment* __gtk_scrolled_window_get_hadjustment   (GtkScrolledWindow *scrolled_window);
-GtkAdjustment* __gtk_scrolled_window_get_vadjustment   (GtkScrolledWindow *scrolled_window);
-GtkWidget*     __gtk_scrolled_window_get_hscrollbar    (GtkScrolledWindow *scrolled_window);
-GtkWidget*     __gtk_scrolled_window_get_vscrollbar    (GtkScrolledWindow *scrolled_window);
-void           __gtk_scrolled_window_set_policy        (GtkScrolledWindow *scrolled_window,
+GtkAdjustment* SF(gtk_scrolled_window_get_hadjustment)   (GtkScrolledWindow *scrolled_window);
+GtkAdjustment* SF(gtk_scrolled_window_get_vadjustment)   (GtkScrolledWindow *scrolled_window);
+GtkWidget*     SF(gtk_scrolled_window_get_hscrollbar)    (GtkScrolledWindow *scrolled_window);
+GtkWidget*     SF(gtk_scrolled_window_get_vscrollbar)    (GtkScrolledWindow *scrolled_window);
+void           SF(gtk_scrolled_window_set_policy)        (GtkScrolledWindow *scrolled_window,
 						      GtkPolicyType      hscrollbar_policy,
 						      GtkPolicyType      vscrollbar_policy);
-void           __gtk_scrolled_window_get_policy        (GtkScrolledWindow *scrolled_window,
+void           SF(gtk_scrolled_window_get_policy)        (GtkScrolledWindow *scrolled_window,
 						      GtkPolicyType     *hscrollbar_policy,
 						      GtkPolicyType     *vscrollbar_policy);
-void           __gtk_scrolled_window_set_placement     (GtkScrolledWindow *scrolled_window,
+void           SF(gtk_scrolled_window_set_placement)     (GtkScrolledWindow *scrolled_window,
 						      GtkCornerType      window_placement);
-void           __gtk_scrolled_window_unset_placement   (GtkScrolledWindow *scrolled_window);
+void           SF(gtk_scrolled_window_unset_placement)   (GtkScrolledWindow *scrolled_window);
 
-GtkCornerType  __gtk_scrolled_window_get_placement     (GtkScrolledWindow *scrolled_window);
-void           __gtk_scrolled_window_set_shadow_type   (GtkScrolledWindow *scrolled_window,
+GtkCornerType  SF(gtk_scrolled_window_get_placement)     (GtkScrolledWindow *scrolled_window);
+void           SF(gtk_scrolled_window_set_shadow_type)   (GtkScrolledWindow *scrolled_window,
 						      GtkShadowType      type);
-GtkShadowType  __gtk_scrolled_window_get_shadow_type   (GtkScrolledWindow *scrolled_window);
-void	       __gtk_scrolled_window_add_with_viewport (GtkScrolledWindow *scrolled_window,
+GtkShadowType  SF(gtk_scrolled_window_get_shadow_type)   (GtkScrolledWindow *scrolled_window);
+void	       SF(gtk_scrolled_window_add_with_viewport) (GtkScrolledWindow *scrolled_window,
 						      GtkWidget		*child);
 
-gint ___gtk_scrolled_window_get_scrollbar_spacing (GtkScrolledWindow *scrolled_window);
+gint SF(_gtk_scrolled_window_get_scrollbar_spacing) (GtkScrolledWindow *scrolled_window);
 
 
 G_END_DECLS

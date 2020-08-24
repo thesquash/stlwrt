@@ -111,15 +111,15 @@ GType          _T2_gtk_socket_get_type (void) G_GNUC_CONST;
 GType          _3T_gtk_socket_get_type (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType          gtk_socket_get_type (void) G_GNUC_CONST;
-GtkWidget*     __gtk_socket_new      (void);
+GtkWidget*     SF(gtk_socket_new)      (void);
 
-void            __gtk_socket_add_id (GtkSocket       *socket_,
+void            SF(gtk_socket_add_id) (GtkSocket       *socket_,
 				   GdkNativeWindow  window_id);
-GdkNativeWindow __gtk_socket_get_id (GtkSocket       *socket_);
-GdkWindow*      __gtk_socket_get_plug_window (GtkSocket       *socket_);
+GdkNativeWindow SF(gtk_socket_get_id) (GtkSocket       *socket_);
+GdkWindow*      SF(gtk_socket_get_plug_window) (GtkSocket       *socket_);
 
 #ifndef GTK_DISABLE_DEPRECATED
-void           __gtk_socket_steal    (GtkSocket      *socket_,
+void           SF(gtk_socket_steal)    (GtkSocket      *socket_,
 				    GdkNativeWindow wid);
 #endif /* GTK_DISABLE_DEPRECATED */
 

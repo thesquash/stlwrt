@@ -182,64 +182,64 @@ GType          gdk_device_get_type      (void) G_GNUC_CONST;
 
 #ifndef GDK_MULTIHEAD_SAFE
 /* Returns a list of GdkDevice * */	  
-GList *        __gdk_devices_list              (void);
+GList *        SF(gdk_devices_list)              (void);
 #endif /* GDK_MULTIHEAD_SAFE */
 
-const gchar *         __gdk_device_get_name       (GdkDevice *device);
-GdkInputSource        __gdk_device_get_source     (GdkDevice *device);
-GdkInputMode          __gdk_device_get_mode       (GdkDevice *device);
-gboolean              __gdk_device_get_has_cursor (GdkDevice *device);
+const gchar *         SF(gdk_device_get_name)       (GdkDevice *device);
+GdkInputSource        SF(gdk_device_get_source)     (GdkDevice *device);
+GdkInputMode          SF(gdk_device_get_mode)       (GdkDevice *device);
+gboolean              SF(gdk_device_get_has_cursor) (GdkDevice *device);
 
-void                  __gdk_device_get_key        (GdkDevice       *device,
+void                  SF(gdk_device_get_key)        (GdkDevice       *device,
                                                  guint            index,
                                                  guint           *keyval,
                                                  GdkModifierType *modifiers);
-GdkAxisUse            __gdk_device_get_axis_use   (GdkDevice       *device,
+GdkAxisUse            SF(gdk_device_get_axis_use)   (GdkDevice       *device,
                                                  guint            index);
-gint                  __gdk_device_get_n_keys     (GdkDevice       *device);
-gint                  __gdk_device_get_n_axes     (GdkDevice       *device);
+gint                  SF(gdk_device_get_n_keys)     (GdkDevice       *device);
+gint                  SF(gdk_device_get_n_axes)     (GdkDevice       *device);
 
 /* Functions to configure a device */
-void           __gdk_device_set_source    (GdkDevice      *device,
+void           SF(gdk_device_set_source)    (GdkDevice      *device,
 					 GdkInputSource  source);
 	  
-gboolean       __gdk_device_set_mode      (GdkDevice      *device,
+gboolean       SF(gdk_device_set_mode)      (GdkDevice      *device,
 					 GdkInputMode    mode);
 
-void           __gdk_device_set_key       (GdkDevice      *device,
+void           SF(gdk_device_set_key)       (GdkDevice      *device,
 					 guint           index_,
 					 guint           keyval,
 					 GdkModifierType modifiers);
 
-void     __gdk_device_set_axis_use (GdkDevice         *device,
+void     SF(gdk_device_set_axis_use) (GdkDevice         *device,
 				  guint              index_,
 				  GdkAxisUse         use);
 
-void     __gdk_device_get_state    (GdkDevice         *device,
+void     SF(gdk_device_get_state)    (GdkDevice         *device,
 				  GdkWindow         *window,
 				  gdouble           *axes,
 				  GdkModifierType   *mask);
 
-gboolean __gdk_device_get_history  (GdkDevice         *device,
+gboolean SF(gdk_device_get_history)  (GdkDevice         *device,
 				  GdkWindow         *window,
 				  guint32            start,
 				  guint32            stop,
 				  GdkTimeCoord    ***events,
 				  gint              *n_events);
 
-void     __gdk_device_free_history (GdkTimeCoord     **events,
+void     SF(gdk_device_free_history) (GdkTimeCoord     **events,
 				  gint               n_events);
-gboolean __gdk_device_get_axis     (GdkDevice         *device,
+gboolean SF(gdk_device_get_axis)     (GdkDevice         *device,
 				  gdouble           *axes,
 				  GdkAxisUse         use,
 				  gdouble           *value);
 
-void __gdk_input_set_extension_events (GdkWindow        *window,
+void SF(gdk_input_set_extension_events) (GdkWindow        *window,
 				     gint              mask,
 				     GdkExtensionMode  mode);
 
 #ifndef GDK_MULTIHEAD_SAFE
-GdkDevice *__gdk_device_get_core_pointer (void);
+GdkDevice *SF(gdk_device_get_core_pointer) (void);
 #endif
  
 G_END_DECLS

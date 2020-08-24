@@ -94,12 +94,12 @@ GType      _T2_gtk_aspect_frame_get_type   (void) G_GNUC_CONST;
 GType      _3T_gtk_aspect_frame_get_type   (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType      gtk_aspect_frame_get_type   (void) G_GNUC_CONST;
-GtkWidget* __gtk_aspect_frame_new        (const gchar     *label,
+GtkWidget* SF(gtk_aspect_frame_new)        (const gchar     *label,
 					gfloat           xalign,
 					gfloat           yalign,
 					gfloat           ratio,
 					gboolean         obey_child);
-void       __gtk_aspect_frame_set        (GtkAspectFrame  *aspect_frame,
+void       SF(gtk_aspect_frame_set)        (GtkAspectFrame  *aspect_frame,
 					gfloat           xalign,
 					gfloat           yalign,
 					gfloat           ratio,

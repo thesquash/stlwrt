@@ -36,37 +36,32 @@ G_BEGIN_DECLS
 #define GDK_IS_APP_LAUNCH_CONTEXT_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), GDK_TYPE_APP_LAUNCH_CONTEXT))
 #define GDK_APP_LAUNCH_CONTEXT_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GDK_TYPE_APP_LAUNCH_CONTEXT, GdkAppLaunchContextClass))
 
-typedef struct GdkAppLaunchContext	      GdkAppLaunchContext;
-
 typedef struct GdkAppLaunchContextClass       GdkAppLaunchContextClass;
 typedef struct GdkAppLaunchContextPrivate     GdkAppLaunchContextPrivate;
 
-struct GdkAppLaunchContext
-{
-  GAppLaunchContext parent_instance;
+STLWRT_DECLARE_FTYPE_FPARENT (GdkAppLaunchContext, gdk_app_launch_context, GAppLaunchContext,
 
   GdkAppLaunchContextPrivate *priv;
-};
+
+)
 
 struct GdkAppLaunchContextClass
 {
   GAppLaunchContextClass parent_class;
 };
 
-GType                gdk_app_launch_context_get_type      (void);
-
-GdkAppLaunchContext *__gdk_app_launch_context_new           (void);
-void                 __gdk_app_launch_context_set_display   (GdkAppLaunchContext *context,
+GdkAppLaunchContext *SF(gdk_app_launch_context_new)           (void);
+void                 SF(gdk_app_launch_context_set_display)   (GdkAppLaunchContext *context,
 							   GdkDisplay          *display);
-void                 __gdk_app_launch_context_set_screen    (GdkAppLaunchContext *context,
+void                 SF(gdk_app_launch_context_set_screen)    (GdkAppLaunchContext *context,
 							   GdkScreen           *screen);
-void                 __gdk_app_launch_context_set_desktop   (GdkAppLaunchContext *context,
+void                 SF(gdk_app_launch_context_set_desktop)   (GdkAppLaunchContext *context,
 							   gint                 desktop);
-void                 __gdk_app_launch_context_set_timestamp (GdkAppLaunchContext *context,
+void                 SF(gdk_app_launch_context_set_timestamp) (GdkAppLaunchContext *context,
 							   guint32              timestamp);
-void                 __gdk_app_launch_context_set_icon      (GdkAppLaunchContext *context,
+void                 SF(gdk_app_launch_context_set_icon)      (GdkAppLaunchContext *context,
 							   GIcon               *icon);
-void                 __gdk_app_launch_context_set_icon_name (GdkAppLaunchContext *context,
+void                 SF(gdk_app_launch_context_set_icon_name) (GdkAppLaunchContext *context,
 							   const char          *icon_name);
 
 G_END_DECLS

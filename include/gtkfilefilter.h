@@ -90,24 +90,24 @@ GType _3T_gtk_file_filter_get_type (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType gtk_file_filter_get_type (void) G_GNUC_CONST;
 
-GtkFileFilter *       __gtk_file_filter_new      (void);
-void                  __gtk_file_filter_set_name (GtkFileFilter *filter,
+GtkFileFilter *       SF(gtk_file_filter_new)      (void);
+void                  SF(gtk_file_filter_set_name) (GtkFileFilter *filter,
 						const gchar   *name);
-const gchar *         __gtk_file_filter_get_name (GtkFileFilter *filter);
+const gchar *         SF(gtk_file_filter_get_name) (GtkFileFilter *filter);
 
-void __gtk_file_filter_add_mime_type      (GtkFileFilter      *filter,
+void SF(gtk_file_filter_add_mime_type)      (GtkFileFilter      *filter,
 					 const gchar        *mime_type);
-void __gtk_file_filter_add_pattern        (GtkFileFilter      *filter,
+void SF(gtk_file_filter_add_pattern)        (GtkFileFilter      *filter,
 					 const gchar        *pattern);
-void __gtk_file_filter_add_pixbuf_formats (GtkFileFilter      *filter);
-void __gtk_file_filter_add_custom         (GtkFileFilter      *filter,
+void SF(gtk_file_filter_add_pixbuf_formats) (GtkFileFilter      *filter);
+void SF(gtk_file_filter_add_custom)         (GtkFileFilter      *filter,
 					 GtkFileFilterFlags  needed,
 					 GtkFileFilterFunc   func,
 					 gpointer            data,
 					 GDestroyNotify      notify);
 
-GtkFileFilterFlags __gtk_file_filter_get_needed (GtkFileFilter           *filter);
-gboolean           __gtk_file_filter_filter     (GtkFileFilter           *filter,
+GtkFileFilterFlags SF(gtk_file_filter_get_needed) (GtkFileFilter           *filter);
+gboolean           SF(gtk_file_filter_filter)     (GtkFileFilter           *filter,
 					       const GtkFileFilterInfo *filter_info);
 
 G_END_DECLS

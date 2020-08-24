@@ -69,19 +69,19 @@ GType      _3T_gtk_activatable_get_type                   (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType      gtk_activatable_get_type                   (void) G_GNUC_CONST;
 
-void       __gtk_activatable_sync_action_properties     (GtkActivatable *activatable,
+void       SF(gtk_activatable_sync_action_properties)     (GtkActivatable *activatable,
 						       GtkAction      *action);
 
-void       __gtk_activatable_set_related_action         (GtkActivatable *activatable,
+void       SF(gtk_activatable_set_related_action)         (GtkActivatable *activatable,
 						       GtkAction      *action);
-GtkAction *__gtk_activatable_get_related_action         (GtkActivatable *activatable);
+GtkAction *SF(gtk_activatable_get_related_action)         (GtkActivatable *activatable);
 
-void       __gtk_activatable_set_use_action_appearance  (GtkActivatable *activatable,
+void       SF(gtk_activatable_set_use_action_appearance)  (GtkActivatable *activatable,
 						       gboolean        use_appearance);
-gboolean   __gtk_activatable_get_use_action_appearance  (GtkActivatable *activatable);
+gboolean   SF(gtk_activatable_get_use_action_appearance)  (GtkActivatable *activatable);
 
 /* For use in activatable implementations */
-void       __gtk_activatable_do_set_related_action      (GtkActivatable *activatable,
+void       SF(gtk_activatable_do_set_related_action)      (GtkActivatable *activatable,
 						       GtkAction      *action);
 
 G_END_DECLS

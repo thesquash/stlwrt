@@ -55,29 +55,29 @@ typedef void (*GtkAccelMapForeach)		(gpointer	 data,
 #define gtk_accel_map_save gtk_accel_map_save_utf8
 #endif
 
-void	   __gtk_accel_map_add_entry	(const gchar		*accel_path,
+void	   SF(gtk_accel_map_add_entry)	(const gchar		*accel_path,
 					 guint			 accel_key,
 					 GdkModifierType         accel_mods);
-gboolean   __gtk_accel_map_lookup_entry	(const gchar		*accel_path,
+gboolean   SF(gtk_accel_map_lookup_entry)	(const gchar		*accel_path,
 					 GtkAccelKey		*key);
-gboolean   __gtk_accel_map_change_entry	(const gchar		*accel_path,
+gboolean   SF(gtk_accel_map_change_entry)	(const gchar		*accel_path,
 					 guint			 accel_key,
 					 GdkModifierType	 accel_mods,
 					 gboolean		 replace);
-void	   __gtk_accel_map_load		(const gchar		*file_name);
-void	   __gtk_accel_map_save		(const gchar		*file_name);
-void	   __gtk_accel_map_foreach	(gpointer		 data,
+void	   SF(gtk_accel_map_load)		(const gchar		*file_name);
+void	   SF(gtk_accel_map_save)		(const gchar		*file_name);
+void	   SF(gtk_accel_map_foreach)	(gpointer		 data,
 					 GtkAccelMapForeach	 foreach_func);
-void	   __gtk_accel_map_load_fd	(gint			 fd);
-void	   __gtk_accel_map_load_scanner	(GScanner		*scanner);
-void	   __gtk_accel_map_save_fd	(gint			 fd);
+void	   SF(gtk_accel_map_load_fd)	(gint			 fd);
+void	   SF(gtk_accel_map_load_scanner)	(GScanner		*scanner);
+void	   SF(gtk_accel_map_save_fd)	(gint			 fd);
 
-void       __gtk_accel_map_lock_path      (const gchar            *accel_path);
-void       __gtk_accel_map_unlock_path    (const gchar            *accel_path);
+void       SF(gtk_accel_map_lock_path)      (const gchar            *accel_path);
+void       SF(gtk_accel_map_unlock_path)    (const gchar            *accel_path);
 
 /* --- filter functions --- */
-void	__gtk_accel_map_add_filter	 (const gchar		*filter_pattern);
-void	__gtk_accel_map_foreach_unfiltered (gpointer		 data,
+void	SF(gtk_accel_map_add_filter)	 (const gchar		*filter_pattern);
+void	SF(gtk_accel_map_foreach_unfiltered) (gpointer		 data,
 					  GtkAccelMapForeach	 foreach_func);
 
 /* --- notification --- */
@@ -85,17 +85,17 @@ GType        _T2_gtk_accel_map_get_type (void) G_GNUC_CONST;
 GType        _3T_gtk_accel_map_get_type (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType        gtk_accel_map_get_type (void) G_GNUC_CONST;
-GtkAccelMap *__gtk_accel_map_get      (void);
+GtkAccelMap *SF(gtk_accel_map_get)      (void);
 
 
 /* --- internal API --- */
-void		___gtk_accel_map_init		(void);
+void		SF(_gtk_accel_map_init)		(void);
 
-void            ___gtk_accel_map_add_group	 (const gchar   *accel_path,
+void            SF(_gtk_accel_map_add_group)	 (const gchar   *accel_path,
 						  GtkAccelGroup *accel_group);
-void            ___gtk_accel_map_remove_group 	 (const gchar   *accel_path,
+void            SF(_gtk_accel_map_remove_group) 	 (const gchar   *accel_path,
 						  GtkAccelGroup *accel_group);
-gboolean	___gtk_accel_path_is_valid	 (const gchar	*accel_path);
+gboolean	SF(_gtk_accel_path_is_valid)	 (const gchar	*accel_path);
 
 
 G_END_DECLS

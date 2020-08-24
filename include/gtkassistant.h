@@ -133,7 +133,7 @@ struct _GtkAssistantClass
  * @current_page: The page number used to calculate the next page.
  * @data: user data.
  *
- * A function used by __gtk_assistant_set_forward_page_func() to know which
+ * A function used by SF(gtk_assistant_set_forward_page_func)() to know which
  * is the next page given a current one. It's called both for computing the
  * next page when the user presses the "forward" button and for handling
  * the behavior of the "last" button.
@@ -146,56 +146,56 @@ GType                 _T2_gtk_assistant_get_type              (void) G_GNUC_CONS
 GType                 _3T_gtk_assistant_get_type              (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType                 gtk_assistant_get_type              (void) G_GNUC_CONST;
-GtkWidget            *__gtk_assistant_new                   (void);
-gint                  __gtk_assistant_get_current_page      (GtkAssistant         *assistant);
-void                  __gtk_assistant_set_current_page      (GtkAssistant         *assistant,
+GtkWidget            *SF(gtk_assistant_new)                   (void);
+gint                  SF(gtk_assistant_get_current_page)      (GtkAssistant         *assistant);
+void                  SF(gtk_assistant_set_current_page)      (GtkAssistant         *assistant,
 							   gint                  page_num);
-gint                  __gtk_assistant_get_n_pages           (GtkAssistant         *assistant);
-GtkWidget            *__gtk_assistant_get_nth_page          (GtkAssistant         *assistant,
+gint                  SF(gtk_assistant_get_n_pages)           (GtkAssistant         *assistant);
+GtkWidget            *SF(gtk_assistant_get_nth_page)          (GtkAssistant         *assistant,
 							   gint                  page_num);
-gint                  __gtk_assistant_prepend_page          (GtkAssistant         *assistant,
+gint                  SF(gtk_assistant_prepend_page)          (GtkAssistant         *assistant,
 							   GtkWidget            *page);
-gint                  __gtk_assistant_append_page           (GtkAssistant         *assistant,
+gint                  SF(gtk_assistant_append_page)           (GtkAssistant         *assistant,
 							   GtkWidget            *page);
-gint                  __gtk_assistant_insert_page           (GtkAssistant         *assistant,
+gint                  SF(gtk_assistant_insert_page)           (GtkAssistant         *assistant,
 							   GtkWidget            *page,
 							   gint                  position);
-void                  __gtk_assistant_set_forward_page_func (GtkAssistant         *assistant,
+void                  SF(gtk_assistant_set_forward_page_func) (GtkAssistant         *assistant,
 							   GtkAssistantPageFunc  page_func,
 							   gpointer              data,
 							   GDestroyNotify        destroy);
-void                  __gtk_assistant_set_page_type         (GtkAssistant         *assistant,
+void                  SF(gtk_assistant_set_page_type)         (GtkAssistant         *assistant,
 							   GtkWidget            *page,
 							   GtkAssistantPageType  type);
-GtkAssistantPageType  __gtk_assistant_get_page_type         (GtkAssistant         *assistant,
+GtkAssistantPageType  SF(gtk_assistant_get_page_type)         (GtkAssistant         *assistant,
 							   GtkWidget            *page);
-void                  __gtk_assistant_set_page_title        (GtkAssistant         *assistant,
+void                  SF(gtk_assistant_set_page_title)        (GtkAssistant         *assistant,
 							   GtkWidget            *page,
 							   const gchar          *title);
-const gchar *         __gtk_assistant_get_page_title        (GtkAssistant         *assistant,
+const gchar *         SF(gtk_assistant_get_page_title)        (GtkAssistant         *assistant,
 							   GtkWidget            *page);
-void                  __gtk_assistant_set_page_header_image (GtkAssistant         *assistant,
+void                  SF(gtk_assistant_set_page_header_image) (GtkAssistant         *assistant,
 							   GtkWidget            *page,
 							   GdkPixbuf            *pixbuf);
-GdkPixbuf            *__gtk_assistant_get_page_header_image (GtkAssistant         *assistant,
+GdkPixbuf            *SF(gtk_assistant_get_page_header_image) (GtkAssistant         *assistant,
 							   GtkWidget            *page);
-void                  __gtk_assistant_set_page_side_image   (GtkAssistant         *assistant,
+void                  SF(gtk_assistant_set_page_side_image)   (GtkAssistant         *assistant,
 							   GtkWidget            *page,
 							   GdkPixbuf            *pixbuf);
-GdkPixbuf            *__gtk_assistant_get_page_side_image   (GtkAssistant         *assistant,
+GdkPixbuf            *SF(gtk_assistant_get_page_side_image)   (GtkAssistant         *assistant,
 							   GtkWidget            *page);
-void                  __gtk_assistant_set_page_complete     (GtkAssistant         *assistant,
+void                  SF(gtk_assistant_set_page_complete)     (GtkAssistant         *assistant,
 							   GtkWidget            *page,
 							   gboolean              complete);
-gboolean              __gtk_assistant_get_page_complete     (GtkAssistant         *assistant,
+gboolean              SF(gtk_assistant_get_page_complete)     (GtkAssistant         *assistant,
 							   GtkWidget            *page);
-void                  __gtk_assistant_add_action_widget     (GtkAssistant         *assistant,
+void                  SF(gtk_assistant_add_action_widget)     (GtkAssistant         *assistant,
 							   GtkWidget            *child);
-void                  __gtk_assistant_remove_action_widget  (GtkAssistant         *assistant,
+void                  SF(gtk_assistant_remove_action_widget)  (GtkAssistant         *assistant,
 							   GtkWidget            *child);
 
-void                  __gtk_assistant_update_buttons_state  (GtkAssistant *assistant);
-void                  __gtk_assistant_commit                (GtkAssistant *assistant);
+void                  SF(gtk_assistant_update_buttons_state)  (GtkAssistant *assistant);
+void                  SF(gtk_assistant_commit)                (GtkAssistant *assistant);
 
 G_END_DECLS
 

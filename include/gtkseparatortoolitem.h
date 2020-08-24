@@ -66,10 +66,10 @@ struct _GtkSeparatorToolItemClass
 
 
 GType        gtk_separator_tool_item_get_type (void) G_GNUC_CONST;
-GtkToolItem *__gtk_separator_tool_item_new      (void);
+GtkToolItem *SF(gtk_separator_tool_item_new)      (void);
 
-gboolean     __gtk_separator_tool_item_get_draw (GtkSeparatorToolItem *item);
-void         __gtk_separator_tool_item_set_draw (GtkSeparatorToolItem *item,
+gboolean     SF(gtk_separator_tool_item_get_draw) (GtkSeparatorToolItem *item);
+void         SF(gtk_separator_tool_item_set_draw) (GtkSeparatorToolItem *item,
 					       gboolean              draw);
 
 G_END_DECLS

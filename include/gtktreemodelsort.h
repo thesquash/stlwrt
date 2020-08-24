@@ -115,22 +115,22 @@ GType         _T2_gtk_tree_model_sort_get_type                   (void) G_GNUC_C
 GType         _3T_gtk_tree_model_sort_get_type                   (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType         gtk_tree_model_sort_get_type                   (void) G_GNUC_CONST;
-GtkTreeModel *__gtk_tree_model_sort_new_with_model             (GtkTreeModel     *child_model);
+GtkTreeModel *SF(gtk_tree_model_sort_new_with_model)             (GtkTreeModel     *child_model);
 
-GtkTreeModel *__gtk_tree_model_sort_get_model                  (GtkTreeModelSort *tree_model);
-GtkTreePath  *__gtk_tree_model_sort_convert_child_path_to_path (GtkTreeModelSort *tree_model_sort,
+GtkTreeModel *SF(gtk_tree_model_sort_get_model)                  (GtkTreeModelSort *tree_model);
+GtkTreePath  *SF(gtk_tree_model_sort_convert_child_path_to_path) (GtkTreeModelSort *tree_model_sort,
 							      GtkTreePath      *child_path);
-gboolean      __gtk_tree_model_sort_convert_child_iter_to_iter (GtkTreeModelSort *tree_model_sort,
+gboolean      SF(gtk_tree_model_sort_convert_child_iter_to_iter) (GtkTreeModelSort *tree_model_sort,
 							      GtkTreeIter      *sort_iter,
 							      GtkTreeIter      *child_iter);
-GtkTreePath  *__gtk_tree_model_sort_convert_path_to_child_path (GtkTreeModelSort *tree_model_sort,
+GtkTreePath  *SF(gtk_tree_model_sort_convert_path_to_child_path) (GtkTreeModelSort *tree_model_sort,
 							      GtkTreePath      *sorted_path);
-void          __gtk_tree_model_sort_convert_iter_to_child_iter (GtkTreeModelSort *tree_model_sort,
+void          SF(gtk_tree_model_sort_convert_iter_to_child_iter) (GtkTreeModelSort *tree_model_sort,
 							      GtkTreeIter      *child_iter,
 							      GtkTreeIter      *sorted_iter);
-void          __gtk_tree_model_sort_reset_default_sort_func    (GtkTreeModelSort *tree_model_sort);
-void          __gtk_tree_model_sort_clear_cache                (GtkTreeModelSort *tree_model_sort);
-gboolean      __gtk_tree_model_sort_iter_is_valid              (GtkTreeModelSort *tree_model_sort,
+void          SF(gtk_tree_model_sort_reset_default_sort_func)    (GtkTreeModelSort *tree_model_sort);
+void          SF(gtk_tree_model_sort_clear_cache)                (GtkTreeModelSort *tree_model_sort);
+gboolean      SF(gtk_tree_model_sort_iter_is_valid)              (GtkTreeModelSort *tree_model_sort,
                                                               GtkTreeIter      *iter);
 
 

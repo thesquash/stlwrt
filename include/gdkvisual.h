@@ -124,46 +124,46 @@ GType         _3T_gdk_visual_get_type            (void) G_GNUC_CONST;
 GType         gdk_visual_get_type            (void) G_GNUC_CONST;
 
 #ifndef GDK_MULTIHEAD_SAFE
-gint	      __gdk_visual_get_best_depth	     (void);
-GdkVisualType __gdk_visual_get_best_type	     (void);
-GdkVisual*    __gdk_visual_get_system	     (void);
-GdkVisual*    __gdk_visual_get_best	     (void);
-GdkVisual*    __gdk_visual_get_best_with_depth (gint	     depth);
-GdkVisual*    __gdk_visual_get_best_with_type  (GdkVisualType  visual_type);
-GdkVisual*    __gdk_visual_get_best_with_both  (gint	     depth,
+gint	      SF(gdk_visual_get_best_depth)	     (void);
+GdkVisualType SF(gdk_visual_get_best_type)	     (void);
+GdkVisual*    SF(gdk_visual_get_system)	     (void);
+GdkVisual*    SF(gdk_visual_get_best)	     (void);
+GdkVisual*    SF(gdk_visual_get_best_with_depth) (gint	     depth);
+GdkVisual*    SF(gdk_visual_get_best_with_type)  (GdkVisualType  visual_type);
+GdkVisual*    SF(gdk_visual_get_best_with_both)  (gint	     depth,
 					      GdkVisualType  visual_type);
 
-void __gdk_query_depths	    (gint	    **depths,
+void SF(gdk_query_depths)	    (gint	    **depths,
 			     gint	     *count);
-void __gdk_query_visual_types (GdkVisualType  **visual_types,
+void SF(gdk_query_visual_types) (GdkVisualType  **visual_types,
 			     gint	     *count);
 
-GList* __gdk_list_visuals (void);
+GList* SF(gdk_list_visuals) (void);
 #endif
 
-GdkScreen *__gdk_visual_get_screen (GdkVisual *visual);
+GdkScreen *SF(gdk_visual_get_screen) (GdkVisual *visual);
 
-GdkVisualType __gdk_visual_get_visual_type         (GdkVisual *visual);
-gint          __gdk_visual_get_depth               (GdkVisual *visual);
-GdkByteOrder  __gdk_visual_get_byte_order          (GdkVisual *visual);
-gint          __gdk_visual_get_colormap_size       (GdkVisual *visual);
-gint          __gdk_visual_get_bits_per_rgb        (GdkVisual *visual);
-void          __gdk_visual_get_red_pixel_details   (GdkVisual *visual,
+GdkVisualType SF(gdk_visual_get_visual_type)         (GdkVisual *visual);
+gint          SF(gdk_visual_get_depth)               (GdkVisual *visual);
+GdkByteOrder  SF(gdk_visual_get_byte_order)          (GdkVisual *visual);
+gint          SF(gdk_visual_get_colormap_size)       (GdkVisual *visual);
+gint          SF(gdk_visual_get_bits_per_rgb)        (GdkVisual *visual);
+void          SF(gdk_visual_get_red_pixel_details)   (GdkVisual *visual,
                                                   guint32   *mask,
                                                   gint      *shift,
                                                   gint      *precision);
-void          __gdk_visual_get_green_pixel_details (GdkVisual *visual,
+void          SF(gdk_visual_get_green_pixel_details) (GdkVisual *visual,
                                                   guint32   *mask,
                                                   gint      *shift,
                                                   gint      *precision);
-void          __gdk_visual_get_blue_pixel_details  (GdkVisual *visual,
+void          SF(gdk_visual_get_blue_pixel_details)  (GdkVisual *visual,
                                                   guint32   *mask,
                                                   gint      *shift,
                                                   gint      *precision);
 
 #ifndef GDK_DISABLE_DEPRECATED
-#define __gdk_visual_ref(v) g_object_ref(v)
-#define __gdk_visual_unref(v) g_object_unref(v)
+#define SF(gdk_visual_ref)(v) g_object_ref(v)
+#define SF(gdk_visual_unref)(v) g_object_unref(v)
 #endif
 
 G_END_DECLS

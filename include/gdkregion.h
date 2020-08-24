@@ -54,56 +54,56 @@ typedef void (* GdkSpanFunc) (GdkSpan *span,
                               gpointer data);
 #endif
 
-GdkRegion    * __gdk_region_new             (void);
+GdkRegion    * SF(gdk_region_new)             (void);
 #ifndef GDK_DISABLE_DEPRECATED
-GdkRegion    * __gdk_region_polygon         (const GdkPoint     *points,
+GdkRegion    * SF(gdk_region_polygon)         (const GdkPoint     *points,
                                            gint                n_points,
                                            GdkFillRule         fill_rule);
 #endif
-GdkRegion    * __gdk_region_copy            (const GdkRegion    *region);
-GdkRegion    * __gdk_region_rectangle       (const GdkRectangle *rectangle);
-void           __gdk_region_destroy         (GdkRegion          *region);
+GdkRegion    * SF(gdk_region_copy)            (const GdkRegion    *region);
+GdkRegion    * SF(gdk_region_rectangle)       (const GdkRectangle *rectangle);
+void           SF(gdk_region_destroy)         (GdkRegion          *region);
 
-void	       __gdk_region_get_clipbox     (const GdkRegion    *region,
+void	       SF(gdk_region_get_clipbox)     (const GdkRegion    *region,
                                            GdkRectangle       *rectangle);
-void           __gdk_region_get_rectangles  (const GdkRegion    *region,
+void           SF(gdk_region_get_rectangles)  (const GdkRegion    *region,
                                            GdkRectangle      **rectangles,
                                            gint               *n_rectangles);
 
-gboolean       __gdk_region_empty           (const GdkRegion    *region);
-gboolean       __gdk_region_equal           (const GdkRegion    *region1,
+gboolean       SF(gdk_region_empty)           (const GdkRegion    *region);
+gboolean       SF(gdk_region_equal)           (const GdkRegion    *region1,
                                            const GdkRegion    *region2);
 #ifndef GDK_DISABLE_DEPRECATED
-gboolean       __gdk_region_rect_equal      (const GdkRegion    *region,
+gboolean       SF(gdk_region_rect_equal)      (const GdkRegion    *region,
                                            const GdkRectangle *rectangle);
 #endif
-gboolean       __gdk_region_point_in        (const GdkRegion    *region,
+gboolean       SF(gdk_region_point_in)        (const GdkRegion    *region,
                                            int                 x,
                                            int                 y);
-GdkOverlapType __gdk_region_rect_in         (const GdkRegion    *region,
+GdkOverlapType SF(gdk_region_rect_in)         (const GdkRegion    *region,
                                            const GdkRectangle *rectangle);
 
-void           __gdk_region_offset          (GdkRegion          *region,
+void           SF(gdk_region_offset)          (GdkRegion          *region,
                                            gint                dx,
                                            gint                dy);
 #ifndef GDK_DISABLE_DEPRECATED
-void           __gdk_region_shrink          (GdkRegion          *region,
+void           SF(gdk_region_shrink)          (GdkRegion          *region,
                                            gint                dx,
                                            gint                dy);
 #endif
-void           __gdk_region_union_with_rect (GdkRegion          *region,
+void           SF(gdk_region_union_with_rect) (GdkRegion          *region,
                                            const GdkRectangle *rect);
-void           __gdk_region_intersect       (GdkRegion          *source1,
+void           SF(gdk_region_intersect)       (GdkRegion          *source1,
                                            const GdkRegion    *source2);
-void           __gdk_region_union           (GdkRegion          *source1,
+void           SF(gdk_region_union)           (GdkRegion          *source1,
                                            const GdkRegion    *source2);
-void           __gdk_region_subtract        (GdkRegion          *source1,
+void           SF(gdk_region_subtract)        (GdkRegion          *source1,
                                            const GdkRegion    *source2);
-void           __gdk_region_xor             (GdkRegion          *source1,
+void           SF(gdk_region_xor)             (GdkRegion          *source1,
                                            const GdkRegion    *source2);
 
 #ifndef GDK_DISABLE_DEPRECATED
-void   __gdk_region_spans_intersect_foreach (GdkRegion          *region,
+void   SF(gdk_region_spans_intersect_foreach) (GdkRegion          *region,
                                            const GdkSpan      *spans,
                                            int                 n_spans,
                                            gboolean            sorted,

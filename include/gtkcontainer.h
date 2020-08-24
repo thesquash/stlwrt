@@ -128,99 +128,99 @@ GType   _T2_gtk_container_get_type		 (void) G_GNUC_CONST;
 GType   _3T_gtk_container_get_type		 (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType   gtk_container_get_type		 (void) G_GNUC_CONST;
-void    __gtk_container_set_border_width	 (GtkContainer	   *container,
+void    SF(gtk_container_set_border_width)	 (GtkContainer	   *container,
 					  guint		    border_width);
-guint   __gtk_container_get_border_width   (GtkContainer     *container);
-void    __gtk_container_add		 (GtkContainer	   *container,
+guint   SF(gtk_container_get_border_width)   (GtkContainer     *container);
+void    SF(gtk_container_add)		 (GtkContainer	   *container,
 					  GtkWidget	   *widget);
-void    __gtk_container_remove		 (GtkContainer	   *container,
+void    SF(gtk_container_remove)		 (GtkContainer	   *container,
 					  GtkWidget	   *widget);
 
-void    __gtk_container_set_resize_mode    (GtkContainer     *container,
+void    SF(gtk_container_set_resize_mode)    (GtkContainer     *container,
 					  GtkResizeMode     resize_mode);
-GtkResizeMode __gtk_container_get_resize_mode (GtkContainer     *container);
+GtkResizeMode SF(gtk_container_get_resize_mode) (GtkContainer     *container);
 
-void    __gtk_container_check_resize       (GtkContainer     *container);
+void    SF(gtk_container_check_resize)       (GtkContainer     *container);
 
-void     __gtk_container_foreach      (GtkContainer       *container,
+void     SF(gtk_container_foreach)      (GtkContainer       *container,
 				     GtkCallback         callback,
 				     gpointer            callback_data);
 #ifndef GTK_DISABLE_DEPRECATED
-void     __gtk_container_foreach_full (GtkContainer       *container,
+void     SF(gtk_container_foreach_full) (GtkContainer       *container,
 				     GtkCallback         callback,
 				     GtkCallbackMarshal  marshal,
 				     gpointer            callback_data,
 				     GDestroyNotify      notify);
 #endif
 
-GList*   __gtk_container_get_children     (GtkContainer       *container);
+GList*   SF(gtk_container_get_children)     (GtkContainer       *container);
 
 #ifndef GTK_DISABLE_DEPRECATED
 #define gtk_container_children gtk_container_get_children
 #endif
 
-void     __gtk_container_propagate_expose (GtkContainer   *container,
+void     SF(gtk_container_propagate_expose) (GtkContainer   *container,
 					 GtkWidget      *child,
 					 GdkEventExpose *event);
 
-void     __gtk_container_set_focus_chain  (GtkContainer   *container,
+void     SF(gtk_container_set_focus_chain)  (GtkContainer   *container,
                                          GList          *focusable_widgets);
-gboolean __gtk_container_get_focus_chain  (GtkContainer   *container,
+gboolean SF(gtk_container_get_focus_chain)  (GtkContainer   *container,
 					 GList         **focusable_widgets);
-void     __gtk_container_unset_focus_chain (GtkContainer  *container);
+void     SF(gtk_container_unset_focus_chain) (GtkContainer  *container);
 
 /* Widget-level methods */
 
-void   __gtk_container_set_reallocate_redraws (GtkContainer    *container,
+void   SF(gtk_container_set_reallocate_redraws) (GtkContainer    *container,
 					     gboolean         needs_redraws);
-void   __gtk_container_set_focus_child	   (GtkContainer     *container,
+void   SF(gtk_container_set_focus_child)	   (GtkContainer     *container,
 					    GtkWidget	     *child);
 GtkWidget *
-       __gtk_container_get_focus_child	   (GtkContainer     *container);
-void   __gtk_container_set_focus_vadjustment (GtkContainer     *container,
+       SF(gtk_container_get_focus_child)	   (GtkContainer     *container);
+void   SF(gtk_container_set_focus_vadjustment) (GtkContainer     *container,
 					    GtkAdjustment    *adjustment);
-GtkAdjustment *__gtk_container_get_focus_vadjustment (GtkContainer *container);
-void   __gtk_container_set_focus_hadjustment (GtkContainer     *container,
+GtkAdjustment *SF(gtk_container_get_focus_vadjustment) (GtkContainer *container);
+void   SF(gtk_container_set_focus_hadjustment) (GtkContainer     *container,
 					    GtkAdjustment    *adjustment);
-GtkAdjustment *__gtk_container_get_focus_hadjustment (GtkContainer *container);
+GtkAdjustment *SF(gtk_container_get_focus_hadjustment) (GtkContainer *container);
 
-void    __gtk_container_resize_children      (GtkContainer     *container);
+void    SF(gtk_container_resize_children)      (GtkContainer     *container);
 
-GType   __gtk_container_child_type	   (GtkContainer     *container);
+GType   SF(gtk_container_child_type)	   (GtkContainer     *container);
 
 
-void         __gtk_container_class_install_child_property (GtkContainerClass *cclass,
+void         SF(gtk_container_class_install_child_property) (GtkContainerClass *cclass,
 							 guint		    property_id,
 							 GParamSpec	   *pspec);
-GParamSpec*  __gtk_container_class_find_child_property	(GObjectClass	   *cclass,
+GParamSpec*  SF(gtk_container_class_find_child_property)	(GObjectClass	   *cclass,
 							 const gchar	   *property_name);
-GParamSpec** __gtk_container_class_list_child_properties	(GObjectClass	   *cclass,
+GParamSpec** SF(gtk_container_class_list_child_properties)	(GObjectClass	   *cclass,
 							 guint		   *n_properties);
-void         __gtk_container_add_with_properties		(GtkContainer	   *container,
+void         SF(gtk_container_add_with_properties)		(GtkContainer	   *container,
 							 GtkWidget	   *widget,
 							 const gchar	   *first_prop_name,
 							 ...) G_GNUC_NULL_TERMINATED;
-void         __gtk_container_child_set			(GtkContainer	   *container,
+void         SF(gtk_container_child_set)			(GtkContainer	   *container,
 							 GtkWidget	   *child,
 							 const gchar	   *first_prop_name,
 							 ...) G_GNUC_NULL_TERMINATED;
-void         __gtk_container_child_get			(GtkContainer	   *container,
+void         SF(gtk_container_child_get)			(GtkContainer	   *container,
 							 GtkWidget	   *child,
 							 const gchar	   *first_prop_name,
 							 ...) G_GNUC_NULL_TERMINATED;
-void         __gtk_container_child_set_valist		(GtkContainer	   *container,
+void         SF(gtk_container_child_set_valist)		(GtkContainer	   *container,
 							 GtkWidget	   *child,
 							 const gchar	   *first_property_name,
 							 va_list	    var_args);
-void         __gtk_container_child_get_valist		(GtkContainer	   *container,
+void         SF(gtk_container_child_get_valist)		(GtkContainer	   *container,
 							 GtkWidget	   *child,
 							 const gchar	   *first_property_name,
 							 va_list	    var_args);
-void	     __gtk_container_child_set_property		(GtkContainer	   *container,
+void	     SF(gtk_container_child_set_property)		(GtkContainer	   *container,
 							 GtkWidget	   *child,
 							 const gchar	   *property_name,
 							 const GValue	   *value);
-void	     __gtk_container_child_get_property		(GtkContainer	   *container,
+void	     SF(gtk_container_child_get_property)		(GtkContainer	   *container,
 							 GtkWidget	   *child,
 							 const gchar	   *property_name,
 							 GValue		   *value);
@@ -229,17 +229,17 @@ void	     __gtk_container_child_get_property		(GtkContainer	   *container,
     G_OBJECT_WARN_INVALID_PSPEC ((object), "child property id", (property_id), (pspec))
 
 
-void    __gtk_container_forall		     (GtkContainer *container,
+void    SF(gtk_container_forall)		     (GtkContainer *container,
 					      GtkCallback   callback,
 					      gpointer	    callback_data);
 
 /* Non-public methods */
-void	___gtk_container_queue_resize	     (GtkContainer *container);
-void    ___gtk_container_clear_resize_widgets   (GtkContainer *container);
-gchar*	___gtk_container_child_composite_name   (GtkContainer *container,
+void	SF(_gtk_container_queue_resize)	     (GtkContainer *container);
+void    SF(_gtk_container_clear_resize_widgets)   (GtkContainer *container);
+gchar*	SF(_gtk_container_child_composite_name)   (GtkContainer *container,
 					      GtkWidget	   *child);
-void   ___gtk_container_dequeue_resize_handler (GtkContainer *container);
-GList *___gtk_container_focus_sort             (GtkContainer     *container,
+void   SF(_gtk_container_dequeue_resize_handler) (GtkContainer *container);
+GList *SF(_gtk_container_focus_sort)             (GtkContainer     *container,
 					      GList            *children,
 					      GtkDirectionType  direction,
 					      GtkWidget        *old_focus);

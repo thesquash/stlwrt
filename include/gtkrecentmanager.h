@@ -62,7 +62,7 @@ typedef struct _GtkRecentManagerPrivate GtkRecentManagerPrivate;
  * @is_private: whether this resource should be displayed only by the
  *   applications that have registered it or not.
  *
- * Meta-data to be passed to __gtk_recent_manager_add_full() when
+ * Meta-data to be passed to SF(gtk_recent_manager_add_full)() when
  * registering a recently used resource.
  **/
 struct _GtkRecentData
@@ -148,8 +148,8 @@ typedef enum
   GTK_RECENT_MANAGER_ERROR_UNKNOWN
 } GtkRecentManagerError;
 
-#define GTK_RECENT_MANAGER_ERROR	(__gtk_recent_manager_error_quark ())
-GQuark 	__gtk_recent_manager_error_quark (void);
+#define GTK_RECENT_MANAGER_ERROR	(SF(gtk_recent_manager_error_quark) ())
+GQuark 	SF(gtk_recent_manager_error_quark) (void);
 
 
 GType 		  _T2_gtk_recent_manager_get_type       (void) G_GNUC_CONST;
@@ -157,37 +157,37 @@ GType 		  _3T_gtk_recent_manager_get_type       (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType 		  gtk_recent_manager_get_type       (void) G_GNUC_CONST;
 
-GtkRecentManager *__gtk_recent_manager_new            (void);
-GtkRecentManager *__gtk_recent_manager_get_default    (void);
+GtkRecentManager *SF(gtk_recent_manager_new)            (void);
+GtkRecentManager *SF(gtk_recent_manager_get_default)    (void);
 
 #ifndef GTK_DISABLE_DEPRECATED
-GtkRecentManager *__gtk_recent_manager_get_for_screen (GdkScreen            *screen);
-void              __gtk_recent_manager_set_screen     (GtkRecentManager     *manager,
+GtkRecentManager *SF(gtk_recent_manager_get_for_screen) (GdkScreen            *screen);
+void              SF(gtk_recent_manager_set_screen)     (GtkRecentManager     *manager,
 						     GdkScreen            *screen);
 #endif
 
-gboolean          __gtk_recent_manager_add_item       (GtkRecentManager     *manager,
+gboolean          SF(gtk_recent_manager_add_item)       (GtkRecentManager     *manager,
 						     const gchar          *uri);
-gboolean          __gtk_recent_manager_add_full       (GtkRecentManager     *manager,
+gboolean          SF(gtk_recent_manager_add_full)       (GtkRecentManager     *manager,
 						     const gchar          *uri,
 						     const GtkRecentData  *recent_data);
-gboolean          __gtk_recent_manager_remove_item    (GtkRecentManager     *manager,
+gboolean          SF(gtk_recent_manager_remove_item)    (GtkRecentManager     *manager,
 						     const gchar          *uri,
 						     GError              **error);
-GtkRecentInfo *   __gtk_recent_manager_lookup_item    (GtkRecentManager     *manager,
+GtkRecentInfo *   SF(gtk_recent_manager_lookup_item)    (GtkRecentManager     *manager,
 						     const gchar          *uri,
 						     GError              **error);
-gboolean          __gtk_recent_manager_has_item       (GtkRecentManager     *manager,
+gboolean          SF(gtk_recent_manager_has_item)       (GtkRecentManager     *manager,
 						     const gchar          *uri);
-gboolean          __gtk_recent_manager_move_item      (GtkRecentManager     *manager,
+gboolean          SF(gtk_recent_manager_move_item)      (GtkRecentManager     *manager,
 						     const gchar          *uri,
 						     const gchar          *new_uri,
 						     GError              **error);
-void              __gtk_recent_manager_set_limit      (GtkRecentManager     *manager,
+void              SF(gtk_recent_manager_set_limit)      (GtkRecentManager     *manager,
 						     gint                  limit);
-gint              __gtk_recent_manager_get_limit      (GtkRecentManager     *manager);
-GList *           __gtk_recent_manager_get_items      (GtkRecentManager     *manager);
-gint              __gtk_recent_manager_purge_items    (GtkRecentManager     *manager,
+gint              SF(gtk_recent_manager_get_limit)      (GtkRecentManager     *manager);
+GList *           SF(gtk_recent_manager_get_items)      (GtkRecentManager     *manager);
+gint              SF(gtk_recent_manager_purge_items)    (GtkRecentManager     *manager,
 						     GError              **error);
 
 
@@ -196,43 +196,43 @@ GType	              _3T_gtk_recent_info_get_type             (void) G_GNUC_CONST
 /* Supplied in the STLWRT public libraries */
 GType	              gtk_recent_info_get_type             (void) G_GNUC_CONST;
 
-GtkRecentInfo *       __gtk_recent_info_ref                  (GtkRecentInfo  *info);
-void                  __gtk_recent_info_unref                (GtkRecentInfo  *info);
+GtkRecentInfo *       SF(gtk_recent_info_ref)                  (GtkRecentInfo  *info);
+void                  SF(gtk_recent_info_unref)                (GtkRecentInfo  *info);
 
-const gchar *         __gtk_recent_info_get_uri              (GtkRecentInfo  *info);
-const gchar *         __gtk_recent_info_get_display_name     (GtkRecentInfo  *info);
-const gchar *         __gtk_recent_info_get_description      (GtkRecentInfo  *info);
-const gchar *         __gtk_recent_info_get_mime_type        (GtkRecentInfo  *info);
-time_t                __gtk_recent_info_get_added            (GtkRecentInfo  *info);
-time_t                __gtk_recent_info_get_modified         (GtkRecentInfo  *info);
-time_t                __gtk_recent_info_get_visited          (GtkRecentInfo  *info);
-gboolean              __gtk_recent_info_get_private_hint     (GtkRecentInfo  *info);
-gboolean              __gtk_recent_info_get_application_info (GtkRecentInfo  *info,
+const gchar *         SF(gtk_recent_info_get_uri)              (GtkRecentInfo  *info);
+const gchar *         SF(gtk_recent_info_get_display_name)     (GtkRecentInfo  *info);
+const gchar *         SF(gtk_recent_info_get_description)      (GtkRecentInfo  *info);
+const gchar *         SF(gtk_recent_info_get_mime_type)        (GtkRecentInfo  *info);
+time_t                SF(gtk_recent_info_get_added)            (GtkRecentInfo  *info);
+time_t                SF(gtk_recent_info_get_modified)         (GtkRecentInfo  *info);
+time_t                SF(gtk_recent_info_get_visited)          (GtkRecentInfo  *info);
+gboolean              SF(gtk_recent_info_get_private_hint)     (GtkRecentInfo  *info);
+gboolean              SF(gtk_recent_info_get_application_info) (GtkRecentInfo  *info,
 							    const gchar    *app_name,
 							    const gchar   **app_exec,
 							    guint          *count,
 							    time_t         *time_);
-gchar **              __gtk_recent_info_get_applications     (GtkRecentInfo  *info,
+gchar **              SF(gtk_recent_info_get_applications)     (GtkRecentInfo  *info,
 							    gsize          *length) G_GNUC_MALLOC;
-gchar *               __gtk_recent_info_last_application     (GtkRecentInfo  *info) G_GNUC_MALLOC;
-gboolean              __gtk_recent_info_has_application      (GtkRecentInfo  *info,
+gchar *               SF(gtk_recent_info_last_application)     (GtkRecentInfo  *info) G_GNUC_MALLOC;
+gboolean              SF(gtk_recent_info_has_application)      (GtkRecentInfo  *info,
 							    const gchar    *app_name);
-gchar **              __gtk_recent_info_get_groups           (GtkRecentInfo  *info,
+gchar **              SF(gtk_recent_info_get_groups)           (GtkRecentInfo  *info,
 							    gsize          *length) G_GNUC_MALLOC;
-gboolean              __gtk_recent_info_has_group            (GtkRecentInfo  *info,
+gboolean              SF(gtk_recent_info_has_group)            (GtkRecentInfo  *info,
 							    const gchar    *group_name);
-GdkPixbuf *           __gtk_recent_info_get_icon             (GtkRecentInfo  *info,
+GdkPixbuf *           SF(gtk_recent_info_get_icon)             (GtkRecentInfo  *info,
 							    gint            size);
-gchar *               __gtk_recent_info_get_short_name       (GtkRecentInfo  *info) G_GNUC_MALLOC;
-gchar *               __gtk_recent_info_get_uri_display      (GtkRecentInfo  *info) G_GNUC_MALLOC;
-gint                  __gtk_recent_info_get_age              (GtkRecentInfo  *info);
-gboolean              __gtk_recent_info_is_local             (GtkRecentInfo  *info);
-gboolean              __gtk_recent_info_exists               (GtkRecentInfo  *info);
-gboolean              __gtk_recent_info_match                (GtkRecentInfo  *info_a,
+gchar *               SF(gtk_recent_info_get_short_name)       (GtkRecentInfo  *info) G_GNUC_MALLOC;
+gchar *               SF(gtk_recent_info_get_uri_display)      (GtkRecentInfo  *info) G_GNUC_MALLOC;
+gint                  SF(gtk_recent_info_get_age)              (GtkRecentInfo  *info);
+gboolean              SF(gtk_recent_info_is_local)             (GtkRecentInfo  *info);
+gboolean              SF(gtk_recent_info_exists)               (GtkRecentInfo  *info);
+gboolean              SF(gtk_recent_info_match)                (GtkRecentInfo  *info_a,
 							    GtkRecentInfo  *info_b);
 
 /* private */
-void ___gtk_recent_manager_sync (void);
+void SF(_gtk_recent_manager_sync) (void);
 
 G_END_DECLS
 

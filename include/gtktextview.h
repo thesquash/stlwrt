@@ -219,115 +219,115 @@ GType          _T2_gtk_text_view_get_type              (void) G_GNUC_CONST;
 GType          _3T_gtk_text_view_get_type              (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType          gtk_text_view_get_type              (void) G_GNUC_CONST;
-GtkWidget *    __gtk_text_view_new                   (void);
-GtkWidget *    __gtk_text_view_new_with_buffer       (GtkTextBuffer *buffer);
-void           __gtk_text_view_set_buffer            (GtkTextView   *text_view,
+GtkWidget *    SF(gtk_text_view_new)                   (void);
+GtkWidget *    SF(gtk_text_view_new_with_buffer)       (GtkTextBuffer *buffer);
+void           SF(gtk_text_view_set_buffer)            (GtkTextView   *text_view,
                                                     GtkTextBuffer *buffer);
-GtkTextBuffer *__gtk_text_view_get_buffer            (GtkTextView   *text_view);
-gboolean       __gtk_text_view_scroll_to_iter        (GtkTextView   *text_view,
+GtkTextBuffer *SF(gtk_text_view_get_buffer)            (GtkTextView   *text_view);
+gboolean       SF(gtk_text_view_scroll_to_iter)        (GtkTextView   *text_view,
                                                     GtkTextIter   *iter,
                                                     gdouble        within_margin,
                                                     gboolean       use_align,
                                                     gdouble        xalign,
                                                     gdouble        yalign);
-void           __gtk_text_view_scroll_to_mark        (GtkTextView   *text_view,
+void           SF(gtk_text_view_scroll_to_mark)        (GtkTextView   *text_view,
                                                     GtkTextMark   *mark,
                                                     gdouble        within_margin,
                                                     gboolean       use_align,
                                                     gdouble        xalign,
                                                     gdouble        yalign);
-void           __gtk_text_view_scroll_mark_onscreen  (GtkTextView   *text_view,
+void           SF(gtk_text_view_scroll_mark_onscreen)  (GtkTextView   *text_view,
                                                     GtkTextMark   *mark);
-gboolean       __gtk_text_view_move_mark_onscreen    (GtkTextView   *text_view,
+gboolean       SF(gtk_text_view_move_mark_onscreen)    (GtkTextView   *text_view,
                                                     GtkTextMark   *mark);
-gboolean       __gtk_text_view_place_cursor_onscreen (GtkTextView   *text_view);
+gboolean       SF(gtk_text_view_place_cursor_onscreen) (GtkTextView   *text_view);
 
-void           __gtk_text_view_get_visible_rect      (GtkTextView   *text_view,
+void           SF(gtk_text_view_get_visible_rect)      (GtkTextView   *text_view,
                                                     GdkRectangle  *visible_rect);
-void           __gtk_text_view_set_cursor_visible    (GtkTextView   *text_view,
+void           SF(gtk_text_view_set_cursor_visible)    (GtkTextView   *text_view,
                                                     gboolean       setting);
-gboolean       __gtk_text_view_get_cursor_visible    (GtkTextView   *text_view);
+gboolean       SF(gtk_text_view_get_cursor_visible)    (GtkTextView   *text_view);
 
-void           __gtk_text_view_get_iter_location     (GtkTextView   *text_view,
+void           SF(gtk_text_view_get_iter_location)     (GtkTextView   *text_view,
                                                     const GtkTextIter *iter,
                                                     GdkRectangle  *location);
-void           __gtk_text_view_get_iter_at_location  (GtkTextView   *text_view,
+void           SF(gtk_text_view_get_iter_at_location)  (GtkTextView   *text_view,
                                                     GtkTextIter   *iter,
                                                     gint           x,
                                                     gint           y);
-void           __gtk_text_view_get_iter_at_position  (GtkTextView   *text_view,
+void           SF(gtk_text_view_get_iter_at_position)  (GtkTextView   *text_view,
                                                     GtkTextIter   *iter,
 						    gint          *trailing,
                                                     gint           x,
                                                     gint           y);
-void           __gtk_text_view_get_line_yrange       (GtkTextView       *text_view,
+void           SF(gtk_text_view_get_line_yrange)       (GtkTextView       *text_view,
                                                     const GtkTextIter *iter,
                                                     gint              *y,
                                                     gint              *height);
 
-void           __gtk_text_view_get_line_at_y         (GtkTextView       *text_view,
+void           SF(gtk_text_view_get_line_at_y)         (GtkTextView       *text_view,
                                                     GtkTextIter       *target_iter,
                                                     gint               y,
                                                     gint              *line_top);
 
-void __gtk_text_view_buffer_to_window_coords (GtkTextView       *text_view,
+void SF(gtk_text_view_buffer_to_window_coords) (GtkTextView       *text_view,
                                             GtkTextWindowType  win,
                                             gint               buffer_x,
                                             gint               buffer_y,
                                             gint              *window_x,
                                             gint              *window_y);
-void __gtk_text_view_window_to_buffer_coords (GtkTextView       *text_view,
+void SF(gtk_text_view_window_to_buffer_coords) (GtkTextView       *text_view,
                                             GtkTextWindowType  win,
                                             gint               window_x,
                                             gint               window_y,
                                             gint              *buffer_x,
                                             gint              *buffer_y);
 
-GtkAdjustment* __gtk_text_view_get_hadjustment (GtkTextView *text_view);
-GtkAdjustment* __gtk_text_view_get_vadjustment (GtkTextView *text_view);
+GtkAdjustment* SF(gtk_text_view_get_hadjustment) (GtkTextView *text_view);
+GtkAdjustment* SF(gtk_text_view_get_vadjustment) (GtkTextView *text_view);
 
-GdkWindow*        __gtk_text_view_get_window      (GtkTextView       *text_view,
+GdkWindow*        SF(gtk_text_view_get_window)      (GtkTextView       *text_view,
                                                  GtkTextWindowType  win);
-GtkTextWindowType __gtk_text_view_get_window_type (GtkTextView       *text_view,
+GtkTextWindowType SF(gtk_text_view_get_window_type) (GtkTextView       *text_view,
                                                  GdkWindow         *window);
 
-void __gtk_text_view_set_border_window_size (GtkTextView       *text_view,
+void SF(gtk_text_view_set_border_window_size) (GtkTextView       *text_view,
                                            GtkTextWindowType  type,
                                            gint               size);
-gint __gtk_text_view_get_border_window_size (GtkTextView       *text_view,
+gint SF(gtk_text_view_get_border_window_size) (GtkTextView       *text_view,
 					   GtkTextWindowType  type);
 
-gboolean __gtk_text_view_forward_display_line           (GtkTextView       *text_view,
+gboolean SF(gtk_text_view_forward_display_line)           (GtkTextView       *text_view,
                                                        GtkTextIter       *iter);
-gboolean __gtk_text_view_backward_display_line          (GtkTextView       *text_view,
+gboolean SF(gtk_text_view_backward_display_line)          (GtkTextView       *text_view,
                                                        GtkTextIter       *iter);
-gboolean __gtk_text_view_forward_display_line_end       (GtkTextView       *text_view,
+gboolean SF(gtk_text_view_forward_display_line_end)       (GtkTextView       *text_view,
                                                        GtkTextIter       *iter);
-gboolean __gtk_text_view_backward_display_line_start    (GtkTextView       *text_view,
+gboolean SF(gtk_text_view_backward_display_line_start)    (GtkTextView       *text_view,
                                                        GtkTextIter       *iter);
-gboolean __gtk_text_view_starts_display_line            (GtkTextView       *text_view,
+gboolean SF(gtk_text_view_starts_display_line)            (GtkTextView       *text_view,
                                                        const GtkTextIter *iter);
-gboolean __gtk_text_view_move_visually                  (GtkTextView       *text_view,
+gboolean SF(gtk_text_view_move_visually)                  (GtkTextView       *text_view,
                                                        GtkTextIter       *iter,
                                                        gint               count);
 
-gboolean        __gtk_text_view_im_context_filter_keypress        (GtkTextView       *text_view,
+gboolean        SF(gtk_text_view_im_context_filter_keypress)        (GtkTextView       *text_view,
                                                                  GdkEventKey       *event);
-void            __gtk_text_view_reset_im_context                  (GtkTextView       *text_view);
+void            SF(gtk_text_view_reset_im_context)                  (GtkTextView       *text_view);
 
 /* Adding child widgets */
-void __gtk_text_view_add_child_at_anchor (GtkTextView          *text_view,
+void SF(gtk_text_view_add_child_at_anchor) (GtkTextView          *text_view,
                                         GtkWidget            *child,
                                         GtkTextChildAnchor   *anchor);
 
-void __gtk_text_view_add_child_in_window (GtkTextView          *text_view,
+void SF(gtk_text_view_add_child_in_window) (GtkTextView          *text_view,
                                         GtkWidget            *child,
                                         GtkTextWindowType     which_window,
                                         /* window coordinates */
                                         gint                  xpos,
                                         gint                  ypos);
 
-void __gtk_text_view_move_child          (GtkTextView          *text_view,
+void SF(gtk_text_view_move_child)          (GtkTextView          *text_view,
                                         GtkWidget            *child,
                                         /* window coordinates */
                                         gint                  xpos,
@@ -335,45 +335,45 @@ void __gtk_text_view_move_child          (GtkTextView          *text_view,
 
 /* Default style settings (fallbacks if no tag affects the property) */
 
-void             __gtk_text_view_set_wrap_mode          (GtkTextView      *text_view,
+void             SF(gtk_text_view_set_wrap_mode)          (GtkTextView      *text_view,
                                                        GtkWrapMode       wrap_mode);
-GtkWrapMode      __gtk_text_view_get_wrap_mode          (GtkTextView      *text_view);
-void             __gtk_text_view_set_editable           (GtkTextView      *text_view,
+GtkWrapMode      SF(gtk_text_view_get_wrap_mode)          (GtkTextView      *text_view);
+void             SF(gtk_text_view_set_editable)           (GtkTextView      *text_view,
                                                        gboolean          setting);
-gboolean         __gtk_text_view_get_editable           (GtkTextView      *text_view);
-void             __gtk_text_view_set_overwrite          (GtkTextView      *text_view,
+gboolean         SF(gtk_text_view_get_editable)           (GtkTextView      *text_view);
+void             SF(gtk_text_view_set_overwrite)          (GtkTextView      *text_view,
 						       gboolean          overwrite);
-gboolean         __gtk_text_view_get_overwrite          (GtkTextView      *text_view);
-void		 __gtk_text_view_set_accepts_tab        (GtkTextView	*text_view,
+gboolean         SF(gtk_text_view_get_overwrite)          (GtkTextView      *text_view);
+void		 SF(gtk_text_view_set_accepts_tab)        (GtkTextView	*text_view,
 						       gboolean		 accepts_tab);
-gboolean	 __gtk_text_view_get_accepts_tab        (GtkTextView	*text_view);
-void             __gtk_text_view_set_pixels_above_lines (GtkTextView      *text_view,
+gboolean	 SF(gtk_text_view_get_accepts_tab)        (GtkTextView	*text_view);
+void             SF(gtk_text_view_set_pixels_above_lines) (GtkTextView      *text_view,
                                                        gint              pixels_above_lines);
-gint             __gtk_text_view_get_pixels_above_lines (GtkTextView      *text_view);
-void             __gtk_text_view_set_pixels_below_lines (GtkTextView      *text_view,
+gint             SF(gtk_text_view_get_pixels_above_lines) (GtkTextView      *text_view);
+void             SF(gtk_text_view_set_pixels_below_lines) (GtkTextView      *text_view,
                                                        gint              pixels_below_lines);
-gint             __gtk_text_view_get_pixels_below_lines (GtkTextView      *text_view);
-void             __gtk_text_view_set_pixels_inside_wrap (GtkTextView      *text_view,
+gint             SF(gtk_text_view_get_pixels_below_lines) (GtkTextView      *text_view);
+void             SF(gtk_text_view_set_pixels_inside_wrap) (GtkTextView      *text_view,
                                                        gint              pixels_inside_wrap);
-gint             __gtk_text_view_get_pixels_inside_wrap (GtkTextView      *text_view);
-void             __gtk_text_view_set_justification      (GtkTextView      *text_view,
+gint             SF(gtk_text_view_get_pixels_inside_wrap) (GtkTextView      *text_view);
+void             SF(gtk_text_view_set_justification)      (GtkTextView      *text_view,
                                                        GtkJustification  justification);
-GtkJustification __gtk_text_view_get_justification      (GtkTextView      *text_view);
-void             __gtk_text_view_set_left_margin        (GtkTextView      *text_view,
+GtkJustification SF(gtk_text_view_get_justification)      (GtkTextView      *text_view);
+void             SF(gtk_text_view_set_left_margin)        (GtkTextView      *text_view,
                                                        gint              left_margin);
-gint             __gtk_text_view_get_left_margin        (GtkTextView      *text_view);
-void             __gtk_text_view_set_right_margin       (GtkTextView      *text_view,
+gint             SF(gtk_text_view_get_left_margin)        (GtkTextView      *text_view);
+void             SF(gtk_text_view_set_right_margin)       (GtkTextView      *text_view,
                                                        gint              right_margin);
-gint             __gtk_text_view_get_right_margin       (GtkTextView      *text_view);
-void             __gtk_text_view_set_indent             (GtkTextView      *text_view,
+gint             SF(gtk_text_view_get_right_margin)       (GtkTextView      *text_view);
+void             SF(gtk_text_view_set_indent)             (GtkTextView      *text_view,
                                                        gint              indent);
-gint             __gtk_text_view_get_indent             (GtkTextView      *text_view);
-void             __gtk_text_view_set_tabs               (GtkTextView      *text_view,
+gint             SF(gtk_text_view_get_indent)             (GtkTextView      *text_view);
+void             SF(gtk_text_view_set_tabs)               (GtkTextView      *text_view,
                                                        PangoTabArray    *tabs);
-PangoTabArray*   __gtk_text_view_get_tabs               (GtkTextView      *text_view);
+PangoTabArray*   SF(gtk_text_view_get_tabs)               (GtkTextView      *text_view);
 
 /* note that the return value of this changes with the theme */
-GtkTextAttributes* __gtk_text_view_get_default_attributes (GtkTextView    *text_view);
+GtkTextAttributes* SF(gtk_text_view_get_default_attributes) (GtkTextView    *text_view);
 
 G_END_DECLS
 

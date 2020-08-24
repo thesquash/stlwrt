@@ -65,9 +65,9 @@ GType         _T2_gtk_im_context_simple_get_type  (void) G_GNUC_CONST;
 GType         _3T_gtk_im_context_simple_get_type  (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType         gtk_im_context_simple_get_type  (void) G_GNUC_CONST;
-GtkIMContext *__gtk_im_context_simple_new       (void);
+GtkIMContext *SF(gtk_im_context_simple_new)       (void);
 
-void          __gtk_im_context_simple_add_table (GtkIMContextSimple *context_simple,
+void          SF(gtk_im_context_simple_add_table) (GtkIMContextSimple *context_simple,
 					       guint16            *data,
 					       gint                max_seq_len,
 					       gint                n_seqs);

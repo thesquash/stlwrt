@@ -139,42 +139,42 @@ GType _T2_gtk_menu_shell_get_type          (void) G_GNUC_CONST;
 GType _3T_gtk_menu_shell_get_type          (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType gtk_menu_shell_get_type          (void) G_GNUC_CONST;
-void  __gtk_menu_shell_append            (GtkMenuShell *menu_shell,
+void  SF(gtk_menu_shell_append)            (GtkMenuShell *menu_shell,
 					GtkWidget    *child);
-void  __gtk_menu_shell_prepend           (GtkMenuShell *menu_shell,
+void  SF(gtk_menu_shell_prepend)           (GtkMenuShell *menu_shell,
 					GtkWidget    *child);
-void  __gtk_menu_shell_insert            (GtkMenuShell *menu_shell,
+void  SF(gtk_menu_shell_insert)            (GtkMenuShell *menu_shell,
 					GtkWidget    *child,
 					gint          position);
-void  __gtk_menu_shell_deactivate        (GtkMenuShell *menu_shell);
-void  __gtk_menu_shell_select_item       (GtkMenuShell *menu_shell,
+void  SF(gtk_menu_shell_deactivate)        (GtkMenuShell *menu_shell);
+void  SF(gtk_menu_shell_select_item)       (GtkMenuShell *menu_shell,
 					GtkWidget    *menu_item);
-void  __gtk_menu_shell_deselect          (GtkMenuShell *menu_shell);
-void  __gtk_menu_shell_activate_item     (GtkMenuShell *menu_shell,
+void  SF(gtk_menu_shell_deselect)          (GtkMenuShell *menu_shell);
+void  SF(gtk_menu_shell_activate_item)     (GtkMenuShell *menu_shell,
 					GtkWidget    *menu_item,
 					gboolean      force_deactivate);
-void  __gtk_menu_shell_select_first      (GtkMenuShell *menu_shell,
+void  SF(gtk_menu_shell_select_first)      (GtkMenuShell *menu_shell,
 					gboolean      search_sensitive);
-void ___gtk_menu_shell_select_last       (GtkMenuShell *menu_shell,
+void SF(_gtk_menu_shell_select_last)       (GtkMenuShell *menu_shell,
 					gboolean      search_sensitive);
-gint  ___gtk_menu_shell_get_popup_delay  (GtkMenuShell *menu_shell);
-void  __gtk_menu_shell_cancel            (GtkMenuShell *menu_shell);
+gint  SF(_gtk_menu_shell_get_popup_delay)  (GtkMenuShell *menu_shell);
+void  SF(gtk_menu_shell_cancel)            (GtkMenuShell *menu_shell);
 
-void  ___gtk_menu_shell_add_mnemonic     (GtkMenuShell *menu_shell,
+void  SF(_gtk_menu_shell_add_mnemonic)     (GtkMenuShell *menu_shell,
                                         guint         keyval,
                                         GtkWidget    *target);
-void  ___gtk_menu_shell_remove_mnemonic  (GtkMenuShell *menu_shell,
+void  SF(_gtk_menu_shell_remove_mnemonic)  (GtkMenuShell *menu_shell,
                                         guint         keyval,
                                         GtkWidget    *target);
 
-gboolean __gtk_menu_shell_get_take_focus (GtkMenuShell *menu_shell);
-void     __gtk_menu_shell_set_take_focus (GtkMenuShell *menu_shell,
+gboolean SF(gtk_menu_shell_get_take_focus) (GtkMenuShell *menu_shell);
+void     SF(gtk_menu_shell_set_take_focus) (GtkMenuShell *menu_shell,
                                         gboolean      take_focus);
 
-void     ___gtk_menu_shell_update_mnemonics  (GtkMenuShell *menu_shell);
-void     ___gtk_menu_shell_set_keyboard_mode (GtkMenuShell *menu_shell,
+void     SF(_gtk_menu_shell_update_mnemonics)  (GtkMenuShell *menu_shell);
+void     SF(_gtk_menu_shell_set_keyboard_mode) (GtkMenuShell *menu_shell,
                                             gboolean      keyboard_mode);
-gboolean ___gtk_menu_shell_get_keyboard_mode (GtkMenuShell *menu_shell);
+gboolean SF(_gtk_menu_shell_get_keyboard_mode) (GtkMenuShell *menu_shell);
 
 G_END_DECLS
 

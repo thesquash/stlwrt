@@ -50,12 +50,12 @@ struct _GtkTrayIconClass
 {
   GtkPlugClass parent_class;
 
-  void (*__gtk_reserved1);
-  void (*__gtk_reserved2);
-  void (*__gtk_reserved3);
-  void (*__gtk_reserved4);
-  void (*__gtk_reserved5);
-  void (*__gtk_reserved6);
+  void (*SF(gtk_reserved1));
+  void (*SF(gtk_reserved2));
+  void (*SF(gtk_reserved3));
+  void (*SF(gtk_reserved4));
+  void (*SF(gtk_reserved5));
+  void (*SF(gtk_reserved6));
 };
 
 

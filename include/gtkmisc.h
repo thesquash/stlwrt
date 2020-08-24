@@ -91,16 +91,16 @@ GType   _T2_gtk_misc_get_type      (void) G_GNUC_CONST;
 GType   _3T_gtk_misc_get_type      (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType   gtk_misc_get_type      (void) G_GNUC_CONST;
-void	__gtk_misc_set_alignment (GtkMisc *misc,
+void	SF(gtk_misc_set_alignment) (GtkMisc *misc,
 				gfloat	 xalign,
 				gfloat	 yalign);
-void    __gtk_misc_get_alignment (GtkMisc *misc,
+void    SF(gtk_misc_get_alignment) (GtkMisc *misc,
 				gfloat  *xalign,
 				gfloat  *yalign);
-void	__gtk_misc_set_padding   (GtkMisc *misc,
+void	SF(gtk_misc_set_padding)   (GtkMisc *misc,
 				gint	 xpad,
 				gint	 ypad);
-void    __gtk_misc_get_padding   (GtkMisc *misc,
+void    SF(gtk_misc_get_padding)   (GtkMisc *misc,
 				gint    *xpad,
 				gint    *ypad);
 

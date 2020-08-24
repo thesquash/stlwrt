@@ -125,13 +125,13 @@ GType	   _T2_gtk_table_get_type	      (void) G_GNUC_CONST;
 GType	   _3T_gtk_table_get_type	      (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType	   gtk_table_get_type	      (void) G_GNUC_CONST;
-GtkWidget* __gtk_table_new	      (guint		rows,
+GtkWidget* SF(gtk_table_new)	      (guint		rows,
 				       guint		columns,
 				       gboolean		homogeneous);
-void	   __gtk_table_resize	      (GtkTable	       *table,
+void	   SF(gtk_table_resize)	      (GtkTable	       *table,
 				       guint            rows,
 				       guint            columns);
-void	   __gtk_table_attach	      (GtkTable	       *table,
+void	   SF(gtk_table_attach)	      (GtkTable	       *table,
 				       GtkWidget       *child,
 				       guint		left_attach,
 				       guint		right_attach,
@@ -141,32 +141,32 @@ void	   __gtk_table_attach	      (GtkTable	       *table,
 				       GtkAttachOptions yoptions,
 				       guint		xpadding,
 				       guint		ypadding);
-void	   __gtk_table_attach_defaults  (GtkTable	       *table,
+void	   SF(gtk_table_attach_defaults)  (GtkTable	       *table,
 				       GtkWidget       *widget,
 				       guint		left_attach,
 				       guint		right_attach,
 				       guint		top_attach,
 				       guint		bottom_attach);
-void	   __gtk_table_set_row_spacing  (GtkTable	       *table,
+void	   SF(gtk_table_set_row_spacing)  (GtkTable	       *table,
 				       guint		row,
 				       guint		spacing);
-guint      __gtk_table_get_row_spacing  (GtkTable        *table,
+guint      SF(gtk_table_get_row_spacing)  (GtkTable        *table,
 				       guint            row);
-void	   __gtk_table_set_col_spacing  (GtkTable	       *table,
+void	   SF(gtk_table_set_col_spacing)  (GtkTable	       *table,
 				       guint		column,
 				       guint		spacing);
-guint      __gtk_table_get_col_spacing  (GtkTable        *table,
+guint      SF(gtk_table_get_col_spacing)  (GtkTable        *table,
 				       guint            column);
-void	   __gtk_table_set_row_spacings (GtkTable	       *table,
+void	   SF(gtk_table_set_row_spacings) (GtkTable	       *table,
 				       guint		spacing);
-guint      __gtk_table_get_default_row_spacing (GtkTable        *table);
-void	   __gtk_table_set_col_spacings (GtkTable	       *table,
+guint      SF(gtk_table_get_default_row_spacing) (GtkTable        *table);
+void	   SF(gtk_table_set_col_spacings) (GtkTable	       *table,
 				       guint		spacing);
-guint      __gtk_table_get_default_col_spacing (GtkTable        *table);
-void	   __gtk_table_set_homogeneous  (GtkTable	       *table,
+guint      SF(gtk_table_get_default_col_spacing) (GtkTable        *table);
+void	   SF(gtk_table_set_homogeneous)  (GtkTable	       *table,
 				       gboolean		homogeneous);
-gboolean   __gtk_table_get_homogeneous  (GtkTable        *table);
-void       __gtk_table_get_size         (GtkTable        *table,
+gboolean   SF(gtk_table_get_homogeneous)  (GtkTable        *table);
+void       SF(gtk_table_get_size)         (GtkTable        *table,
                                        guint           *rows,
                                        guint           *columns);
 

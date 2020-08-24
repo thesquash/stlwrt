@@ -43,7 +43,7 @@ G_BEGIN_DECLS
  * @GTK_RECENT_SORT_LRU: Sort the returned list with the least recently used
  *   items first.
  * @GTK_RECENT_SORT_CUSTOM: Sort the returned list using a custom sorting
- *   function passed using __gtk_recent_manager_set_sort_func().
+ *   function passed using SF(gtk_recent_manager_set_sort_func)().
  *
  * Used to specify the sorting method to be applyed to the recently
  * used resource list.
@@ -64,7 +64,7 @@ typedef gint (*GtkRecentSortFunc) (GtkRecentInfo *a,
 typedef struct _GtkRecentChooser      GtkRecentChooser; /* dummy */
 typedef struct _GtkRecentChooserIface GtkRecentChooserIface;
 
-#define GTK_RECENT_CHOOSER_ERROR	(__gtk_recent_chooser_error_quark ())
+#define GTK_RECENT_CHOOSER_ERROR	(SF(gtk_recent_chooser_error_quark) ())
 
 typedef enum
 {
@@ -72,7 +72,7 @@ typedef enum
   GTK_RECENT_CHOOSER_ERROR_INVALID_URI
 } GtkRecentChooserError;
 
-GQuark  __gtk_recent_chooser_error_quark (void);
+GQuark  SF(gtk_recent_chooser_error_quark) (void);
 
 
 struct _GtkRecentChooserIface
@@ -120,36 +120,36 @@ GType   gtk_recent_chooser_get_type    (void) G_GNUC_CONST;
 /*
  * Configuration
  */
-void              __gtk_recent_chooser_set_show_private    (GtkRecentChooser  *chooser,
+void              SF(gtk_recent_chooser_set_show_private)    (GtkRecentChooser  *chooser,
 							  gboolean           show_private);
-gboolean          __gtk_recent_chooser_get_show_private    (GtkRecentChooser  *chooser);
-void              __gtk_recent_chooser_set_show_not_found  (GtkRecentChooser  *chooser,
+gboolean          SF(gtk_recent_chooser_get_show_private)    (GtkRecentChooser  *chooser);
+void              SF(gtk_recent_chooser_set_show_not_found)  (GtkRecentChooser  *chooser,
 							  gboolean           show_not_found);
-gboolean          __gtk_recent_chooser_get_show_not_found  (GtkRecentChooser  *chooser);
-void              __gtk_recent_chooser_set_select_multiple (GtkRecentChooser  *chooser,
+gboolean          SF(gtk_recent_chooser_get_show_not_found)  (GtkRecentChooser  *chooser);
+void              SF(gtk_recent_chooser_set_select_multiple) (GtkRecentChooser  *chooser,
 							  gboolean           select_multiple);
-gboolean          __gtk_recent_chooser_get_select_multiple (GtkRecentChooser  *chooser);
-void              __gtk_recent_chooser_set_limit           (GtkRecentChooser  *chooser,
+gboolean          SF(gtk_recent_chooser_get_select_multiple) (GtkRecentChooser  *chooser);
+void              SF(gtk_recent_chooser_set_limit)           (GtkRecentChooser  *chooser,
 							  gint               limit);
-gint              __gtk_recent_chooser_get_limit           (GtkRecentChooser  *chooser);
-void              __gtk_recent_chooser_set_local_only      (GtkRecentChooser  *chooser,
+gint              SF(gtk_recent_chooser_get_limit)           (GtkRecentChooser  *chooser);
+void              SF(gtk_recent_chooser_set_local_only)      (GtkRecentChooser  *chooser,
 							  gboolean           local_only);
-gboolean          __gtk_recent_chooser_get_local_only      (GtkRecentChooser  *chooser);
-void              __gtk_recent_chooser_set_show_tips       (GtkRecentChooser  *chooser,
+gboolean          SF(gtk_recent_chooser_get_local_only)      (GtkRecentChooser  *chooser);
+void              SF(gtk_recent_chooser_set_show_tips)       (GtkRecentChooser  *chooser,
 							  gboolean           show_tips);
-gboolean          __gtk_recent_chooser_get_show_tips       (GtkRecentChooser  *chooser);
+gboolean          SF(gtk_recent_chooser_get_show_tips)       (GtkRecentChooser  *chooser);
 #ifndef GTK_DISABLE_DEPRECATED
-void              __gtk_recent_chooser_set_show_numbers    (GtkRecentChooser  *chooser,
+void              SF(gtk_recent_chooser_set_show_numbers)    (GtkRecentChooser  *chooser,
 							  gboolean           show_numbers);
-gboolean          __gtk_recent_chooser_get_show_numbers    (GtkRecentChooser  *chooser);
+gboolean          SF(gtk_recent_chooser_get_show_numbers)    (GtkRecentChooser  *chooser);
 #endif /* GTK_DISABLE_DEPRECATED */
-void              __gtk_recent_chooser_set_show_icons      (GtkRecentChooser  *chooser,
+void              SF(gtk_recent_chooser_set_show_icons)      (GtkRecentChooser  *chooser,
 							  gboolean           show_icons);
-gboolean          __gtk_recent_chooser_get_show_icons      (GtkRecentChooser  *chooser);
-void              __gtk_recent_chooser_set_sort_type       (GtkRecentChooser  *chooser,
+gboolean          SF(gtk_recent_chooser_get_show_icons)      (GtkRecentChooser  *chooser);
+void              SF(gtk_recent_chooser_set_sort_type)       (GtkRecentChooser  *chooser,
 							  GtkRecentSortType  sort_type);
-GtkRecentSortType __gtk_recent_chooser_get_sort_type       (GtkRecentChooser  *chooser);
-void              __gtk_recent_chooser_set_sort_func       (GtkRecentChooser  *chooser,
+GtkRecentSortType SF(gtk_recent_chooser_get_sort_type)       (GtkRecentChooser  *chooser);
+void              SF(gtk_recent_chooser_set_sort_func)       (GtkRecentChooser  *chooser,
 							  GtkRecentSortFunc  sort_func,
 							  gpointer           sort_data,
 							  GDestroyNotify     data_destroy);
@@ -157,33 +157,33 @@ void              __gtk_recent_chooser_set_sort_func       (GtkRecentChooser  *c
 /*
  * Items handling
  */
-gboolean       __gtk_recent_chooser_set_current_uri  (GtkRecentChooser  *chooser,
+gboolean       SF(gtk_recent_chooser_set_current_uri)  (GtkRecentChooser  *chooser,
 						    const gchar       *uri,
 						    GError           **error);
-gchar *        __gtk_recent_chooser_get_current_uri  (GtkRecentChooser  *chooser);
-GtkRecentInfo *__gtk_recent_chooser_get_current_item (GtkRecentChooser  *chooser);
-gboolean       __gtk_recent_chooser_select_uri       (GtkRecentChooser  *chooser,
+gchar *        SF(gtk_recent_chooser_get_current_uri)  (GtkRecentChooser  *chooser);
+GtkRecentInfo *SF(gtk_recent_chooser_get_current_item) (GtkRecentChooser  *chooser);
+gboolean       SF(gtk_recent_chooser_select_uri)       (GtkRecentChooser  *chooser,
 						    const gchar       *uri,
 						    GError           **error);
-void           __gtk_recent_chooser_unselect_uri     (GtkRecentChooser  *chooser,
+void           SF(gtk_recent_chooser_unselect_uri)     (GtkRecentChooser  *chooser,
 					            const gchar       *uri);
-void           __gtk_recent_chooser_select_all       (GtkRecentChooser  *chooser);
-void           __gtk_recent_chooser_unselect_all     (GtkRecentChooser  *chooser);
-GList *        __gtk_recent_chooser_get_items        (GtkRecentChooser  *chooser);
-gchar **       __gtk_recent_chooser_get_uris         (GtkRecentChooser  *chooser,
+void           SF(gtk_recent_chooser_select_all)       (GtkRecentChooser  *chooser);
+void           SF(gtk_recent_chooser_unselect_all)     (GtkRecentChooser  *chooser);
+GList *        SF(gtk_recent_chooser_get_items)        (GtkRecentChooser  *chooser);
+gchar **       SF(gtk_recent_chooser_get_uris)         (GtkRecentChooser  *chooser,
 						    gsize             *length);
 
 /*
  * Filters
  */
-void 		 __gtk_recent_chooser_add_filter    (GtkRecentChooser *chooser,
+void 		 SF(gtk_recent_chooser_add_filter)    (GtkRecentChooser *chooser,
 			 			   GtkRecentFilter  *filter);
-void 		 __gtk_recent_chooser_remove_filter (GtkRecentChooser *chooser,
+void 		 SF(gtk_recent_chooser_remove_filter) (GtkRecentChooser *chooser,
 						   GtkRecentFilter  *filter);
-GSList * 	 __gtk_recent_chooser_list_filters  (GtkRecentChooser *chooser);
-void 		 __gtk_recent_chooser_set_filter    (GtkRecentChooser *chooser,
+GSList * 	 SF(gtk_recent_chooser_list_filters)  (GtkRecentChooser *chooser);
+void 		 SF(gtk_recent_chooser_set_filter)    (GtkRecentChooser *chooser,
 						   GtkRecentFilter  *filter);
-GtkRecentFilter *__gtk_recent_chooser_get_filter    (GtkRecentChooser *chooser);
+GtkRecentFilter *SF(gtk_recent_chooser_get_filter)    (GtkRecentChooser *chooser);
 
 
 G_END_DECLS

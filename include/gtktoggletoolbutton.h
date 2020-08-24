@@ -70,12 +70,12 @@ struct _GtkToggleToolButtonClass
 
 
 GType        gtk_toggle_tool_button_get_type       (void) G_GNUC_CONST;
-GtkToolItem *__gtk_toggle_tool_button_new            (void);
-GtkToolItem *__gtk_toggle_tool_button_new_from_stock (const gchar *stock_id);
+GtkToolItem *SF(gtk_toggle_tool_button_new)            (void);
+GtkToolItem *SF(gtk_toggle_tool_button_new_from_stock) (const gchar *stock_id);
 
-void         __gtk_toggle_tool_button_set_active     (GtkToggleToolButton *button,
+void         SF(gtk_toggle_tool_button_set_active)     (GtkToggleToolButton *button,
 						    gboolean             is_active);
-gboolean     __gtk_toggle_tool_button_get_active     (GtkToggleToolButton *button);
+gboolean     SF(gtk_toggle_tool_button_get_active)     (GtkToggleToolButton *button);
 
 G_END_DECLS
 

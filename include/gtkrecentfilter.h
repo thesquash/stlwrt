@@ -95,30 +95,30 @@ GType                 _3T_gtk_recent_filter_get_type (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType                 gtk_recent_filter_get_type (void) G_GNUC_CONST;
 
-GtkRecentFilter *     __gtk_recent_filter_new      (void);
-void                  __gtk_recent_filter_set_name (GtkRecentFilter *filter,
+GtkRecentFilter *     SF(gtk_recent_filter_new)      (void);
+void                  SF(gtk_recent_filter_set_name) (GtkRecentFilter *filter,
 						  const gchar     *name);
-const gchar *         __gtk_recent_filter_get_name (GtkRecentFilter *filter);
+const gchar *         SF(gtk_recent_filter_get_name) (GtkRecentFilter *filter);
 
-void __gtk_recent_filter_add_mime_type      (GtkRecentFilter      *filter,
+void SF(gtk_recent_filter_add_mime_type)      (GtkRecentFilter      *filter,
 					   const gchar          *mime_type);
-void __gtk_recent_filter_add_pattern        (GtkRecentFilter      *filter,
+void SF(gtk_recent_filter_add_pattern)        (GtkRecentFilter      *filter,
 					   const gchar          *pattern);
-void __gtk_recent_filter_add_pixbuf_formats (GtkRecentFilter      *filter);
-void __gtk_recent_filter_add_application    (GtkRecentFilter      *filter,
+void SF(gtk_recent_filter_add_pixbuf_formats) (GtkRecentFilter      *filter);
+void SF(gtk_recent_filter_add_application)    (GtkRecentFilter      *filter,
 					   const gchar          *application);
-void __gtk_recent_filter_add_group          (GtkRecentFilter      *filter,
+void SF(gtk_recent_filter_add_group)          (GtkRecentFilter      *filter,
 					   const gchar          *group);
-void __gtk_recent_filter_add_age            (GtkRecentFilter      *filter,
+void SF(gtk_recent_filter_add_age)            (GtkRecentFilter      *filter,
 					   gint                  days);
-void __gtk_recent_filter_add_custom         (GtkRecentFilter      *filter,
+void SF(gtk_recent_filter_add_custom)         (GtkRecentFilter      *filter,
 					   GtkRecentFilterFlags  needed,
 					   GtkRecentFilterFunc   func,
 					   gpointer              data,
 					   GDestroyNotify        data_destroy);
 
-GtkRecentFilterFlags __gtk_recent_filter_get_needed (GtkRecentFilter           *filter);
-gboolean             __gtk_recent_filter_filter     (GtkRecentFilter           *filter,
+GtkRecentFilterFlags SF(gtk_recent_filter_get_needed) (GtkRecentFilter           *filter);
+gboolean             SF(gtk_recent_filter_filter)     (GtkRecentFilter           *filter,
 						   const GtkRecentFilterInfo *filter_info);
 
 G_END_DECLS

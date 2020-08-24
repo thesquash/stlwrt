@@ -29,8 +29,8 @@ G_BEGIN_DECLS
 /* Parameters for dialog construction */
 typedef enum
 {
-  GTK_DIALOG_MODAL               = 1 << 0, /* call __gtk_window_set_modal (win, TRUE) */
-  GTK_DIALOG_DESTROY_WITH_PARENT = 1 << 1, /* call __gtk_window_set_destroy_with_parent () */
+  GTK_DIALOG_MODAL               = 1 << 0, /* call SF(gtk_window_set_modal) (win, TRUE) */
+  GTK_DIALOG_DESTROY_WITH_PARENT = 1 << 1, /* call SF(gtk_window_set_destroy_with_parent) () */
   GTK_DIALOG_NO_SEPARATOR        = 1 << 2  /* no separator bar above buttons */
 } GtkDialogFlags;
 
@@ -39,7 +39,7 @@ typedef enum
  * GTK_RESPONSE_NONE if no response_id is available.
  *
  *  Typical usage is:
- *     if (__gtk_dialog_run(dialog) == GTK_RESPONSE_ACCEPT)
+ *     if (SF(gtk_dialog_run)(dialog) == GTK_RESPONSE_ACCEPT)
  *       blah();
  */
 typedef enum
@@ -150,60 +150,60 @@ GType      _T2_gtk_dialog_get_type (void) G_GNUC_CONST;
 GType      _3T_gtk_dialog_get_type (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType      gtk_dialog_get_type (void) G_GNUC_CONST;
-GtkWidget* __gtk_dialog_new      (void);
+GtkWidget* SF(gtk_dialog_new)      (void);
 
-GtkWidget* __gtk_dialog_new_with_buttons (const gchar     *title,
+GtkWidget* SF(gtk_dialog_new_with_buttons) (const gchar     *title,
                                         GtkWindow       *parent,
                                         GtkDialogFlags   flags,
                                         const gchar     *first_button_text,
                                         ...);
 
-void       __gtk_dialog_add_action_widget (GtkDialog   *dialog,
+void       SF(gtk_dialog_add_action_widget) (GtkDialog   *dialog,
                                          GtkWidget   *child,
                                          gint         response_id);
-GtkWidget* __gtk_dialog_add_button        (GtkDialog   *dialog,
+GtkWidget* SF(gtk_dialog_add_button)        (GtkDialog   *dialog,
                                          const gchar *button_text,
                                          gint         response_id);
-void       __gtk_dialog_add_buttons       (GtkDialog   *dialog,
+void       SF(gtk_dialog_add_buttons)       (GtkDialog   *dialog,
                                          const gchar *first_button_text,
                                          ...) G_GNUC_NULL_TERMINATED;
 
-void __gtk_dialog_set_response_sensitive (GtkDialog *dialog,
+void SF(gtk_dialog_set_response_sensitive) (GtkDialog *dialog,
                                         gint       response_id,
                                         gboolean   setting);
-void __gtk_dialog_set_default_response   (GtkDialog *dialog,
+void SF(gtk_dialog_set_default_response)   (GtkDialog *dialog,
                                         gint       response_id);
-GtkWidget* __gtk_dialog_get_widget_for_response (GtkDialog *dialog,
+GtkWidget* SF(gtk_dialog_get_widget_for_response) (GtkDialog *dialog,
                                                gint       response_id);
-gint __gtk_dialog_get_response_for_widget (GtkDialog *dialog,
+gint SF(gtk_dialog_get_response_for_widget) (GtkDialog *dialog,
 					 GtkWidget *widget);
 
 #if !defined (GTK_DISABLE_DEPRECATED) || defined (STLWRT_COMPILATION)
-void     __gtk_dialog_set_has_separator (GtkDialog *dialog,
+void     SF(gtk_dialog_set_has_separator) (GtkDialog *dialog,
                                        gboolean   setting);
-gboolean __gtk_dialog_get_has_separator (GtkDialog *dialog);
+gboolean SF(gtk_dialog_get_has_separator) (GtkDialog *dialog);
 #endif
 
-gboolean __gtk_alternative_dialog_button_order (GdkScreen *screen);
-void     __gtk_dialog_set_alternative_button_order (GtkDialog *dialog,
+gboolean SF(gtk_alternative_dialog_button_order) (GdkScreen *screen);
+void     SF(gtk_dialog_set_alternative_button_order) (GtkDialog *dialog,
 						  gint       first_response_id,
 						  ...);
-void     __gtk_dialog_set_alternative_button_order_from_array (GtkDialog *dialog,
+void     SF(gtk_dialog_set_alternative_button_order_from_array) (GtkDialog *dialog,
                                                              gint       n_params,
                                                              gint      *new_order);
 
 /* Emit response signal */
-void __gtk_dialog_response           (GtkDialog *dialog,
+void SF(gtk_dialog_response)           (GtkDialog *dialog,
                                     gint       response_id);
 
 /* Returns response_id */
-gint __gtk_dialog_run                (GtkDialog *dialog);
+gint SF(gtk_dialog_run)                (GtkDialog *dialog);
 
-GtkWidget * __gtk_dialog_get_action_area  (GtkDialog *dialog);
-GtkWidget * __gtk_dialog_get_content_area (GtkDialog *dialog);
+GtkWidget * SF(gtk_dialog_get_action_area)  (GtkDialog *dialog);
+GtkWidget * SF(gtk_dialog_get_content_area) (GtkDialog *dialog);
 
 /* For private use only */
-void ___gtk_dialog_set_ignore_separator (GtkDialog *dialog,
+void SF(_gtk_dialog_set_ignore_separator) (GtkDialog *dialog,
 				       gboolean   ignore_separator);
 
 G_END_DECLS

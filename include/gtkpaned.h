@@ -111,36 +111,36 @@ GType       _T2_gtk_paned_get_type     (void) G_GNUC_CONST;
 GType       _3T_gtk_paned_get_type     (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType       gtk_paned_get_type     (void) G_GNUC_CONST;
-void        __gtk_paned_add1         (GtkPaned       *paned,
+void        SF(gtk_paned_add1)         (GtkPaned       *paned,
                                     GtkWidget      *child);
-void        __gtk_paned_add2         (GtkPaned       *paned,
+void        SF(gtk_paned_add2)         (GtkPaned       *paned,
                                     GtkWidget      *child);
-void        __gtk_paned_pack1        (GtkPaned       *paned,
+void        SF(gtk_paned_pack1)        (GtkPaned       *paned,
                                     GtkWidget      *child,
                                     gboolean        resize,
                                     gboolean        shrink);
-void        __gtk_paned_pack2        (GtkPaned       *paned,
+void        SF(gtk_paned_pack2)        (GtkPaned       *paned,
                                     GtkWidget      *child,
                                     gboolean        resize,
                                     gboolean        shrink);
 
-gint        __gtk_paned_get_position (GtkPaned       *paned);
-void        __gtk_paned_set_position (GtkPaned       *paned,
+gint        SF(gtk_paned_get_position) (GtkPaned       *paned);
+void        SF(gtk_paned_set_position) (GtkPaned       *paned,
                                     gint            position);
 
-GtkWidget * __gtk_paned_get_child1   (GtkPaned       *paned);
-GtkWidget * __gtk_paned_get_child2   (GtkPaned       *paned);
+GtkWidget * SF(gtk_paned_get_child1)   (GtkPaned       *paned);
+GtkWidget * SF(gtk_paned_get_child2)   (GtkPaned       *paned);
 
-GdkWindow * __gtk_paned_get_handle_window (GtkPaned  *paned);
+GdkWindow * SF(gtk_paned_get_handle_window) (GtkPaned  *paned);
 
 #ifndef GTK_DISABLE_DEPRECATED
 /* Internal function */
-void    __gtk_paned_compute_position (GtkPaned  *paned,
+void    SF(gtk_paned_compute_position) (GtkPaned  *paned,
                                     gint       allocation,
                                     gint       child1_req,
                                     gint       child2_req);
-#define	__gtk_paned_gutter_size(p,s)		(void) 0
-#define	__gtk_paned_set_gutter_size(p,s)		(void) 0
+#define	SF(gtk_paned_gutter_size)(p,s)		(void) 0
+#define	SF(gtk_paned_set_gutter_size)(p,s)		(void) 0
 #endif /* GTK_DISABLE_DEPRECATED */
 
 G_END_DECLS

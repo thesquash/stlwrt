@@ -90,16 +90,16 @@ GType      gdk_pixmap_get_type          (void) G_GNUC_CONST;
 
 /* Pixmaps
  */
-GdkPixmap* __gdk_pixmap_new		(GdkDrawable *drawable,
+GdkPixmap* SF(gdk_pixmap_new)		(GdkDrawable *drawable,
 					 gint	      width,
 					 gint	      height,
 					 gint	      depth);
 #ifndef GDK_DISABLE_DEPRECATED
-GdkBitmap* __gdk_bitmap_create_from_data	(GdkDrawable *drawable,
+GdkBitmap* SF(gdk_bitmap_create_from_data)	(GdkDrawable *drawable,
 					 const gchar *data,
 					 gint	      width,
 					 gint	      height);
-GdkPixmap* __gdk_pixmap_create_from_data	(GdkDrawable    *drawable,
+GdkPixmap* SF(gdk_pixmap_create_from_data)	(GdkDrawable    *drawable,
 					 const gchar 	*data,
 					 gint	     	 width,
 					 gint	     	 height,
@@ -107,42 +107,42 @@ GdkPixmap* __gdk_pixmap_create_from_data	(GdkDrawable    *drawable,
 					 const GdkColor *fg,
 					 const GdkColor *bg);
 
-GdkPixmap* __gdk_pixmap_create_from_xpm            (GdkDrawable    *drawable,
+GdkPixmap* SF(gdk_pixmap_create_from_xpm)            (GdkDrawable    *drawable,
 						  GdkBitmap     **mask,
 						  const GdkColor *transparent_color,
 						  const gchar    *filename);
-GdkPixmap* __gdk_pixmap_colormap_create_from_xpm   (GdkDrawable    *drawable,
+GdkPixmap* SF(gdk_pixmap_colormap_create_from_xpm)   (GdkDrawable    *drawable,
 						  GdkColormap    *colormap,
 						  GdkBitmap     **mask,
 						  const GdkColor *transparent_color,
 						  const gchar    *filename);
-GdkPixmap* __gdk_pixmap_create_from_xpm_d          (GdkDrawable    *drawable,
+GdkPixmap* SF(gdk_pixmap_create_from_xpm_d)          (GdkDrawable    *drawable,
 						  GdkBitmap     **mask,
 						  const GdkColor *transparent_color,
 						  gchar         **data);
-GdkPixmap* __gdk_pixmap_colormap_create_from_xpm_d (GdkDrawable    *drawable,
+GdkPixmap* SF(gdk_pixmap_colormap_create_from_xpm_d) (GdkDrawable    *drawable,
 						  GdkColormap    *colormap,
 						  GdkBitmap     **mask,
 						  const GdkColor *transparent_color,
 						  gchar         **data);
 #endif
 
-void          __gdk_pixmap_get_size                (GdkPixmap      *pixmap,
+void          SF(gdk_pixmap_get_size)                (GdkPixmap      *pixmap,
                                                   gint	         *width,
                                                   gint  	 *height);
 
 /* Functions to create/lookup pixmaps from their native equivalents
  */
 #ifndef GDK_MULTIHEAD_SAFE
-GdkPixmap*    __gdk_pixmap_foreign_new (GdkNativeWindow anid);
-GdkPixmap*    __gdk_pixmap_lookup      (GdkNativeWindow anid);
+GdkPixmap*    SF(gdk_pixmap_foreign_new) (GdkNativeWindow anid);
+GdkPixmap*    SF(gdk_pixmap_lookup)      (GdkNativeWindow anid);
 #endif /* GDK_MULTIHEAD_SAFE */
 
-GdkPixmap*    __gdk_pixmap_foreign_new_for_display (GdkDisplay      *display,
+GdkPixmap*    SF(gdk_pixmap_foreign_new_for_display) (GdkDisplay      *display,
 						  GdkNativeWindow  anid);
-GdkPixmap*    __gdk_pixmap_lookup_for_display      (GdkDisplay      *display,
+GdkPixmap*    SF(gdk_pixmap_lookup_for_display)      (GdkDisplay      *display,
 						  GdkNativeWindow  anid);
-GdkPixmap*    __gdk_pixmap_foreign_new_for_screen  (GdkScreen       *screen,
+GdkPixmap*    SF(gdk_pixmap_foreign_new_for_screen)  (GdkScreen       *screen,
 						  GdkNativeWindow  anid,
 						  gint             width,
                                                   gint             height,

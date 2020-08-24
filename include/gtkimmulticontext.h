@@ -78,13 +78,13 @@ GType         _T2_gtk_im_multicontext_get_type (void) G_GNUC_CONST;
 GType         _3T_gtk_im_multicontext_get_type (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType         gtk_im_multicontext_get_type (void) G_GNUC_CONST;
-GtkIMContext *__gtk_im_multicontext_new      (void);
+GtkIMContext *SF(gtk_im_multicontext_new)      (void);
 
-void          __gtk_im_multicontext_append_menuitems (GtkIMMulticontext *context,
+void          SF(gtk_im_multicontext_append_menuitems) (GtkIMMulticontext *context,
 						    GtkMenuShell      *menushell);
-const char  * __gtk_im_multicontext_get_context_id   (GtkIMMulticontext *context);
+const char  * SF(gtk_im_multicontext_get_context_id)   (GtkIMMulticontext *context);
 
-void          __gtk_im_multicontext_set_context_id   (GtkIMMulticontext *context,
+void          SF(gtk_im_multicontext_set_context_id)   (GtkIMMulticontext *context,
                                                     const char        *context_id);
  
 G_END_DECLS

@@ -97,19 +97,19 @@ GType          _T2_gtk_viewport_get_type        (void) G_GNUC_CONST;
 GType          _3T_gtk_viewport_get_type        (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType          gtk_viewport_get_type        (void) G_GNUC_CONST;
-GtkWidget*     __gtk_viewport_new             (GtkAdjustment *hadjustment,
+GtkWidget*     SF(gtk_viewport_new)             (GtkAdjustment *hadjustment,
 					     GtkAdjustment *vadjustment);
-GtkAdjustment* __gtk_viewport_get_hadjustment (GtkViewport   *viewport);
-GtkAdjustment* __gtk_viewport_get_vadjustment (GtkViewport   *viewport);
-void           __gtk_viewport_set_hadjustment (GtkViewport   *viewport,
+GtkAdjustment* SF(gtk_viewport_get_hadjustment) (GtkViewport   *viewport);
+GtkAdjustment* SF(gtk_viewport_get_vadjustment) (GtkViewport   *viewport);
+void           SF(gtk_viewport_set_hadjustment) (GtkViewport   *viewport,
 					     GtkAdjustment *adjustment);
-void           __gtk_viewport_set_vadjustment (GtkViewport   *viewport,
+void           SF(gtk_viewport_set_vadjustment) (GtkViewport   *viewport,
 					     GtkAdjustment *adjustment);
-void           __gtk_viewport_set_shadow_type (GtkViewport   *viewport,
+void           SF(gtk_viewport_set_shadow_type) (GtkViewport   *viewport,
 					     GtkShadowType  type);
-GtkShadowType  __gtk_viewport_get_shadow_type (GtkViewport   *viewport);
-GdkWindow*     __gtk_viewport_get_bin_window  (GtkViewport   *viewport);
-GdkWindow*     __gtk_viewport_get_view_window (GtkViewport   *viewport);
+GtkShadowType  SF(gtk_viewport_get_shadow_type) (GtkViewport   *viewport);
+GdkWindow*     SF(gtk_viewport_get_bin_window)  (GtkViewport   *viewport);
+GdkWindow*     SF(gtk_viewport_get_view_window) (GtkViewport   *viewport);
 
 
 G_END_DECLS

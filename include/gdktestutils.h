@@ -27,14 +27,14 @@
 G_BEGIN_DECLS
 
 /* --- Gdk Test Utility API --- */
-void            __gdk_test_render_sync            (GdkWindow      *window);
-gboolean        __gdk_test_simulate_key           (GdkWindow      *window,
+void            SF(gdk_test_render_sync)            (GdkWindow      *window);
+gboolean        SF(gdk_test_simulate_key)           (GdkWindow      *window,
                                                  gint            x,
                                                  gint            y,
                                                  guint           keyval,
                                                  GdkModifierType modifiers,
                                                  GdkEventType    key_pressrelease);
-gboolean        __gdk_test_simulate_button        (GdkWindow      *window,
+gboolean        SF(gdk_test_simulate_button)        (GdkWindow      *window,
                                                  gint            x,
                                                  gint            y,
                                                  guint           button, /*1..3*/

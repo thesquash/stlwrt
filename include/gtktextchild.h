@@ -98,10 +98,10 @@ GType _3T_gtk_text_child_anchor_get_type (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType gtk_text_child_anchor_get_type (void) G_GNUC_CONST;
 
-GtkTextChildAnchor* __gtk_text_child_anchor_new (void);
+GtkTextChildAnchor* SF(gtk_text_child_anchor_new) (void);
 
-GList*   __gtk_text_child_anchor_get_widgets (GtkTextChildAnchor *anchor);
-gboolean __gtk_text_child_anchor_get_deleted (GtkTextChildAnchor *anchor);
+GList*   SF(gtk_text_child_anchor_get_widgets) (GtkTextChildAnchor *anchor);
+gboolean SF(gtk_text_child_anchor_get_deleted) (GtkTextChildAnchor *anchor);
 
 G_END_DECLS
 

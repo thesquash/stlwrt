@@ -38,68 +38,68 @@ GType              _T2_gtk_page_setup_get_type          (void) G_GNUC_CONST;
 GType              _3T_gtk_page_setup_get_type          (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
 GType              gtk_page_setup_get_type          (void) G_GNUC_CONST;
-GtkPageSetup *     __gtk_page_setup_new               (void);
-GtkPageSetup *     __gtk_page_setup_copy              (GtkPageSetup       *other);
-GtkPageOrientation __gtk_page_setup_get_orientation   (GtkPageSetup       *setup);
-void               __gtk_page_setup_set_orientation   (GtkPageSetup       *setup,
+GtkPageSetup *     SF(gtk_page_setup_new)               (void);
+GtkPageSetup *     SF(gtk_page_setup_copy)              (GtkPageSetup       *other);
+GtkPageOrientation SF(gtk_page_setup_get_orientation)   (GtkPageSetup       *setup);
+void               SF(gtk_page_setup_set_orientation)   (GtkPageSetup       *setup,
 						     GtkPageOrientation  orientation);
-GtkPaperSize *     __gtk_page_setup_get_paper_size    (GtkPageSetup       *setup);
-void               __gtk_page_setup_set_paper_size    (GtkPageSetup       *setup,
+GtkPaperSize *     SF(gtk_page_setup_get_paper_size)    (GtkPageSetup       *setup);
+void               SF(gtk_page_setup_set_paper_size)    (GtkPageSetup       *setup,
 						     GtkPaperSize       *size);
-gdouble            __gtk_page_setup_get_top_margin    (GtkPageSetup       *setup,
+gdouble            SF(gtk_page_setup_get_top_margin)    (GtkPageSetup       *setup,
 						     GtkUnit             unit);
-void               __gtk_page_setup_set_top_margin    (GtkPageSetup       *setup,
+void               SF(gtk_page_setup_set_top_margin)    (GtkPageSetup       *setup,
 						     gdouble             margin,
 						     GtkUnit             unit);
-gdouble            __gtk_page_setup_get_bottom_margin (GtkPageSetup       *setup,
+gdouble            SF(gtk_page_setup_get_bottom_margin) (GtkPageSetup       *setup,
 						     GtkUnit             unit);
-void               __gtk_page_setup_set_bottom_margin (GtkPageSetup       *setup,
+void               SF(gtk_page_setup_set_bottom_margin) (GtkPageSetup       *setup,
 						     gdouble             margin,
 						     GtkUnit             unit);
-gdouble            __gtk_page_setup_get_left_margin   (GtkPageSetup       *setup,
+gdouble            SF(gtk_page_setup_get_left_margin)   (GtkPageSetup       *setup,
 						     GtkUnit             unit);
-void               __gtk_page_setup_set_left_margin   (GtkPageSetup       *setup,
+void               SF(gtk_page_setup_set_left_margin)   (GtkPageSetup       *setup,
 						     gdouble             margin,
 						     GtkUnit             unit);
-gdouble            __gtk_page_setup_get_right_margin  (GtkPageSetup       *setup,
+gdouble            SF(gtk_page_setup_get_right_margin)  (GtkPageSetup       *setup,
 						     GtkUnit             unit);
-void               __gtk_page_setup_set_right_margin  (GtkPageSetup       *setup,
+void               SF(gtk_page_setup_set_right_margin)  (GtkPageSetup       *setup,
 						     gdouble             margin,
 						     GtkUnit             unit);
 
-void __gtk_page_setup_set_paper_size_and_default_margins (GtkPageSetup    *setup,
+void SF(gtk_page_setup_set_paper_size_and_default_margins) (GtkPageSetup    *setup,
 							GtkPaperSize    *size);
 
 /* These take orientation, but not margins into consideration */
-gdouble            __gtk_page_setup_get_paper_width   (GtkPageSetup       *setup,
+gdouble            SF(gtk_page_setup_get_paper_width)   (GtkPageSetup       *setup,
 						     GtkUnit             unit);
-gdouble            __gtk_page_setup_get_paper_height  (GtkPageSetup       *setup,
+gdouble            SF(gtk_page_setup_get_paper_height)  (GtkPageSetup       *setup,
 						     GtkUnit             unit);
 
 
 /* These take orientation, and margins into consideration */
-gdouble            __gtk_page_setup_get_page_width    (GtkPageSetup       *setup,
+gdouble            SF(gtk_page_setup_get_page_width)    (GtkPageSetup       *setup,
 						     GtkUnit             unit);
-gdouble            __gtk_page_setup_get_page_height   (GtkPageSetup       *setup,
+gdouble            SF(gtk_page_setup_get_page_height)   (GtkPageSetup       *setup,
 						     GtkUnit             unit);
 
 /* Saving and restoring page setup */
-GtkPageSetup	  *__gtk_page_setup_new_from_file	    (const gchar         *file_name,
+GtkPageSetup	  *SF(gtk_page_setup_new_from_file)	    (const gchar         *file_name,
 						     GError              **error);
-gboolean	   __gtk_page_setup_load_file	    (GtkPageSetup        *setup,
+gboolean	   SF(gtk_page_setup_load_file)	    (GtkPageSetup        *setup,
 						     const char          *file_name,
 						     GError             **error);
-gboolean	   __gtk_page_setup_to_file	    (GtkPageSetup        *setup,
+gboolean	   SF(gtk_page_setup_to_file)	    (GtkPageSetup        *setup,
 						     const char          *file_name,
 						     GError             **error);
-GtkPageSetup	  *__gtk_page_setup_new_from_key_file (GKeyFile            *key_file,
+GtkPageSetup	  *SF(gtk_page_setup_new_from_key_file) (GKeyFile            *key_file,
 						     const gchar         *group_name,
 						     GError             **error);
-gboolean           __gtk_page_setup_load_key_file     (GtkPageSetup        *setup,
+gboolean           SF(gtk_page_setup_load_key_file)     (GtkPageSetup        *setup,
 				                     GKeyFile            *key_file,
 				                     const gchar         *group_name,
 				                     GError             **error);
-void		   __gtk_page_setup_to_key_file	    (GtkPageSetup        *setup,
+void		   SF(gtk_page_setup_to_key_file)	    (GtkPageSetup        *setup,
 						     GKeyFile            *key_file,
 						     const gchar         *group_name);
 

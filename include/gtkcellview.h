@@ -66,25 +66,25 @@ struct _GtkCellViewClass
 
 
 GType             gtk_cell_view_get_type               (void) G_GNUC_CONST;
-GtkWidget        *__gtk_cell_view_new                    (void);
-GtkWidget        *__gtk_cell_view_new_with_text          (const gchar     *text);
-GtkWidget        *__gtk_cell_view_new_with_markup        (const gchar     *markup);
-GtkWidget        *__gtk_cell_view_new_with_pixbuf        (GdkPixbuf       *pixbuf);
+GtkWidget        *SF(gtk_cell_view_new)                    (void);
+GtkWidget        *SF(gtk_cell_view_new_with_text)          (const gchar     *text);
+GtkWidget        *SF(gtk_cell_view_new_with_markup)        (const gchar     *markup);
+GtkWidget        *SF(gtk_cell_view_new_with_pixbuf)        (GdkPixbuf       *pixbuf);
 
-void              __gtk_cell_view_set_model               (GtkCellView     *cell_view,
+void              SF(gtk_cell_view_set_model)               (GtkCellView     *cell_view,
                                                          GtkTreeModel    *model);
-GtkTreeModel     *__gtk_cell_view_get_model               (GtkCellView     *cell_view);
-void              __gtk_cell_view_set_displayed_row       (GtkCellView     *cell_view,
+GtkTreeModel     *SF(gtk_cell_view_get_model)               (GtkCellView     *cell_view);
+void              SF(gtk_cell_view_set_displayed_row)       (GtkCellView     *cell_view,
                                                          GtkTreePath     *path);
-GtkTreePath      *__gtk_cell_view_get_displayed_row       (GtkCellView     *cell_view);
-gboolean          __gtk_cell_view_get_size_of_row         (GtkCellView     *cell_view,
+GtkTreePath      *SF(gtk_cell_view_get_displayed_row)       (GtkCellView     *cell_view);
+gboolean          SF(gtk_cell_view_get_size_of_row)         (GtkCellView     *cell_view,
                                                          GtkTreePath     *path,
                                                          GtkRequisition  *requisition);
 
-void              __gtk_cell_view_set_background_color    (GtkCellView     *cell_view,
+void              SF(gtk_cell_view_set_background_color)    (GtkCellView     *cell_view,
                                                          const GdkColor  *color);
 #ifndef GTK_DISABLE_DEPRECATED
-GList            *__gtk_cell_view_get_cell_renderers      (GtkCellView     *cell_view);
+GList            *SF(gtk_cell_view_get_cell_renderers)      (GtkCellView     *cell_view);
 #endif
 
 G_END_DECLS

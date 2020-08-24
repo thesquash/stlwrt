@@ -83,6 +83,23 @@ G_BEGIN_DECLS
 /****************************************************************************/
 /* The following stuff deals with _defining_ types, in C source files. */
 
+#define STLWRT_DEFINE_BOXED_TYPE(TN, t_n, copy_func, free_func, C) \
+  GType \
+  t_n##_get_type (void) \
+  { \
+    static GType g_define_type_id = 0; \
+    if (g_define_type_id == 0)  \
+    { \
+      g_define_type_id = g_boxed_type_register_static (g_intern_static_string (#TN), \
+                                                       (GBoxedCopyFunc) copy_func, \
+                                                       (GBoxedFreeFunc) free_func); \
+      { \
+        C \
+      } \
+    } \
+    return g_define_type_id; \
+  }
+
 /**
  * STLWRT_DEFINE_FTYPE:
  * STLWRT_DEFINE_VTYPE:

@@ -148,6 +148,69 @@ G_BEGIN_DECLS
   }
 
 
+#define STLWRT_DEFINE_FTYPE_VPARENT(TN, t_n, PT, F, C) \
+  static void     t_n##_init              (TN        *self); \
+  static void     t_n##_class_init        (TN##Class *klass); \
+  static gpointer t_n##_parent_class  = NULL; \
+  static gint     TN##_private_offset = 0; \
+ \
+  static void     t_n##_class_intern_init (gpointer klass) \
+  { \
+    t_n##_parent_class = g_type_class_peek_parent (klass); \
+ \
+    g_type_class_adjust_private_offset (klass, &TN##_private_offset); \
+ \
+    t_n##_class_init ((TN##Class*) klass); \
+  } \
+ \
+  G_GNUC_UNUSED \
+  gpointer \
+  t_n##_get_instance_private (TN *self) \
+  { \
+    return (G_STRUCT_MEMBER_P (self, TN##_private_offset)); \
+  } \
+ \
+  GType \
+  _T2_##t_n##_get_type (void) \
+  { \
+    static GType g_define_type_id = 0; \
+    if (g_define_type_id == 0)  \
+    { \
+      g_define_type_id = g_type_register_static_simple (PT, \
+                                     g_intern_static_string (#TN), \
+                                     sizeof (TN##Class), \
+                                     (GClassInitFunc)(void (*)(void)) t_n##_class_intern_init, \
+                                     sizeof (TN##Fat), \
+                                     (GInstanceInitFunc)(void (*)(void)) t_n##_init, \
+                                     (GTypeFlags) F); \
+      { \
+        C \
+      } \
+    } \
+    return g_define_type_id; \
+  } \
+ \
+  GType \
+  _3T_##t_n##_get_type (void) \
+  { \
+    static GType g_define_type_id = 0; \
+    if (g_define_type_id == 0)  \
+    { \
+      g_define_type_id = g_type_register_static_simple (PT, \
+                                     g_intern_static_string (#TN), \
+                                     sizeof (TN##Class), \
+                                     (GClassInitFunc)(void (*)(void)) t_n##_class_intern_init, \
+                                     sizeof (TN##Thin), \
+                                     (GInstanceInitFunc)(void (*)(void)) t_n##_init, \
+                                     (GTypeFlags) F); \
+      { \
+        C \
+      } \
+    } \
+    return g_define_type_id; \
+  }
+
+
 #define STLWRT_DEFINE_VTYPE(TN, t_n, PT, F, C) \
   static void     t_n##_init              (TN        *self); \
   static void     t_n##_class_init        (TN##Class *klass); \
@@ -180,7 +243,7 @@ G_BEGIN_DECLS
   } \
  \
   G_GNUC_UNUSED \
-  static inline gpointer \
+  gpointer \
   t_n##_get_instance_private (TN *self) \
   { \
     return (G_STRUCT_MEMBER_P (self, TN##_private_offset)); \
@@ -297,6 +360,8 @@ G_BEGIN_DECLS
      gpointer reserved; \
    }; \
   \
+   gpointer t_n##_get_props (TN * instance); \
+  \
    STLWRT_DECLARE_GET_VTYPE_FUNCTIONS(t_n)
 
  #define STLWRT_DECLARE_VTYPE_VPARENT(TN, t_n, PTN, Properties) \
@@ -323,6 +388,8 @@ G_BEGIN_DECLS
   \
      gpointer reserved; \
    }; \
+  \
+   gpointer t_n##_get_props (TN * instance); \
   \
    STLWRT_DECLARE_GET_VTYPE_FUNCTIONS(t_n)
 

@@ -44,8 +44,39 @@ G_BEGIN_DECLS
  * version of GLib when the macro was officially added.
  */
 //#if GLIB_CHECK_VERSION(2,68,0)
-#define G_TYPE_FLAG_NONE 0
+ #define G_TYPE_FLAG_NONE 0
 //#endif
+
+/****************************************************************************/
+/* The following macros are for declaring functions in header files. */
+
+#ifdef STLWRT_COMPILATION
+
+ #define STLWRT_PUBLIC_FUNCTION(function_name)  __##function_name
+
+ #define STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(type_name) \
+   GType __##type_name##_get_type (void) G_GNUC_CONST; \
+   GType     type_name##_get_type (void) G_GNUC_CONST;
+
+ #define STLWRT_DECLARE_GET_VTYPE_FUNCTIONS(type_name) \
+   GType _T2_##type_name##_get_type (void) G_GNUC_CONST; \
+   GType _3T_##type_name##_get_type (void) G_GNUC_CONST; \
+   GType       type_name##_get_type (void) G_GNUC_CONST;
+
+#else
+
+ #define STLWRT_PUBLIC_FUNCTION(function_name)      function_name
+
+ #define STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(type_name) \
+   GType     type_name##_get_type (void) G_GNUC_CONST;
+
+ #define STLWRT_DECLARE_GET_VTYPE_FUNCTIONS(type_name) \
+   GType     type_name##_get_type (void) G_GNUC_CONST;
+
+#endif
+
+/****************************************************************************/
+/* The following stuff deals with _defining_ types, in C source files. */
 
 /**
  * STLWRT_DEFINE_FTYPE:
@@ -70,7 +101,7 @@ G_BEGIN_DECLS
  * when STLWRT is running in GTK+ 3 mode.  GtkTreeView is an Ftype; GtkDialog
  * is a Vtype.
  */
-#define STLWRT_DEFINE_FTYPE    (TN, t_n, PT, F, C) \
+#define STLWRT_DEFINE_FTYPE(TN, t_n, PT, F, C) \
   static void     t_n##_init              (TN        *self); \
   static void     t_n##_class_init        (TN##Class *klass); \
   static gpointer t_n##_parent_class  = NULL; \
@@ -112,7 +143,7 @@ G_BEGIN_DECLS
   }
 
 
-#define STLWRT_DEFINE_VTYPE    (TN, t_n, PT, F, C) \
+#define STLWRT_DEFINE_VTYPE(TN, t_n, PT, F, C) \
   static void     t_n##_init              (TN        *self); \
   static void     t_n##_class_init        (TN##Class *klass); \
   static gpointer t_n##_parent_class  = NULL; \
@@ -197,6 +228,176 @@ G_BEGIN_DECLS
     } \
     return g_define_type_id; \
   }
+
+/****************************************************************************/
+/* The following stuff deals with _declaring_ types, in C header files. */
+
+#define STLWRT_DECLARE_FTYPE_FPARENT(TN, t_n, PTN, Properties) \
+  typedef struct _##TN TN; \
+ \
+  struct _##TN \
+  { \
+    PTN parent; \
+ \
+    Properties \
+  }; \
+ \
+  STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(t_n)
+
+#ifdef STLWRT_COMPILATION
+
+ #define STLWRT_DECLARE_FTYPE_VPARENT(TN, t_n, PTN, Properties) \
+   typedef struct _##TN##Fat   TN##Fat; \
+   typedef struct _##TN##Thin  TN##Thin; \
+   typedef union  _##TN        TN; \
+  \
+   struct _##TN##Fat \
+   { \
+     PTN##Fat parent; \
+  \
+     Properties \
+   }; \
+  \
+   struct _##TN##Thin \
+   { \
+     PTN##Thin parent; \
+  \
+     Properties \
+   }; \
+  \
+   STLWRT_DECLARE_GET_VTYPE_FUNCTIONS(t_n)
+
+ #define STLWRT_DECLARE_VTYPE_FPARENT(TN, t_n, PTN, Properties) \
+   typedef struct _##TN##Props TN##Props; \
+   typedef struct _##TN##Fat   TN##Fat; \
+   typedef struct _##TN##Thin  TN##Thin; \
+   typedef union  _##TN        TN; \
+  \
+   struct _##TN##Props \
+   { \
+     Properties \
+   }; \
+  \
+   struct _##TN##Fat \
+   { \
+     PTN parent; \
+  \
+     Properties \
+   }; \
+  \
+   struct _##TN##Thin \
+   { \
+     PTN parent; \
+  \
+     gpointer reserved; \
+   }; \
+  \
+   STLWRT_DECLARE_GET_VTYPE_FUNCTIONS(t_n)
+
+ #define STLWRT_DECLARE_VTYPE_VPARENT(TN, t_n, PTN, Properties) \
+   typedef struct _##TN##Props TN##Props; \
+   typedef struct _##TN##Fat   TN##Fat; \
+   typedef struct _##TN##Thin  TN##Thin; \
+   typedef union  _##TN        TN; \
+  \
+   struct _##TN##Props \
+   { \
+     Properties \
+   }; \
+  \
+   struct _##TN##Fat \
+   { \
+     PTN##Fat parent; \
+  \
+     Properties \
+   }; \
+  \
+   struct _##TN##Thin \
+   { \
+     PTN##Thin parent; \
+  \
+     gpointer reserved; \
+   }; \
+  \
+   STLWRT_DECLARE_GET_VTYPE_FUNCTIONS(t_n)
+
+#elif STLWRT_GTK_VERSION <= 2
+
+ #define STLWRT_DECLARE_FTYPE_VPARENT(TN, t_n, PTN, Properties) \
+   typedef struct _##TN   TN; \
+  \
+   struct _##TN \
+   { \
+     PTN parent; \
+  \
+     Properties \
+   }; \
+  \
+   STLWRT_DECLARE_GET_VTYPE_FUNCTIONS(t_n)
+
+ #define STLWRT_DECLARE_VTYPE_FPARENT(TN, t_n, PTN, Properties) \
+   typedef struct _##TN   TN; \
+  \
+   struct _##TN \
+   { \
+     PTN parent; \
+  \
+     Properties \
+   }; \
+  \
+   STLWRT_DECLARE_GET_VTYPE_FUNCTIONS(t_n)
+
+ #define STLWRT_DECLARE_VTYPE_VPARENT(TN, t_n, PTN, Properties) \
+   typedef struct _##TN   TN; \
+  \
+   struct _##TN \
+   { \
+     PTN parent; \
+  \
+     Properties \
+   }; \
+  \
+   STLWRT_DECLARE_GET_VTYPE_FUNCTIONS(t_n)
+
+#elif STLWRT_GTK_VERSION >= 3
+
+ #define STLWRT_DECLARE_FTYPE_VPARENT(TN, t_n, PTN, Properties) \
+   typedef struct _##TN  TN; \
+  \
+   struct _##TN \
+   { \
+     PTN parent; \
+  \
+     Properties \
+   }; \
+  \
+   STLWRT_DECLARE_GET_VTYPE_FUNCTIONS(t_n)
+
+ #define STLWRT_DECLARE_VTYPE_FPARENT(TN, t_n, PTN, Properties) \
+   typedef struct _##TN  TN; \
+  \
+   struct _##TN \
+   { \
+     PTN parent; \
+  \
+     gpointer reserved; \
+   }; \
+  \
+   STLWRT_DECLARE_GET_VTYPE_FUNCTIONS(t_n)
+
+ #define STLWRT_DECLARE_VTYPE_VPARENT(TN, t_n, PTN, Properties) \
+   typedef struct _##TN  TN; \
+  \
+   struct _##TN \
+   { \
+     PTN parent; \
+  \
+     gpointer reserved; \
+   }; \
+  \
+   STLWRT_DECLARE_GET_VTYPE_FUNCTIONS(t_n)
+
+#endif
 
 G_END_DECLS
 

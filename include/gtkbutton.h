@@ -1,6 +1,5 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
- * Copyright (C) 1995-1997 Peter Mattis, Spencer Kimball and Josh MacDonald
+ * Copyright (C) 2020 Gordon N. Squash.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -35,16 +34,9 @@ G_BEGIN_DECLS
 #define GTK_IS_BUTTON_CLASS(klass)      (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_BUTTON))
 #define GTK_BUTTON_GET_CLASS(obj)       (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_BUTTON, GtkButtonClass))
 
-typedef struct _GtkButton        GtkButtonFat;
-typedef struct _GtkButton        GtkButtonThin;
-
 typedef struct _GtkButtonClass   GtkButtonClass;
 
-
-/********************************************************************/
-struct _GtkButtonProps
-{
-
+STLWRT_DECLARE_VTYPE_VPARENT (GtkButton, gtk_button, GtkBin,
 
   GdkWindow * (event_window);
 
@@ -61,7 +53,8 @@ struct _GtkButtonProps
   guint  (depressed) : 1;
   guint  (depress_on_activate) : 1;
   guint  (focus_on_click) : 1;
-};
+)
+
 
 struct _GtkButtonPrivate
 {
@@ -78,35 +71,6 @@ struct _GtkButtonPrivate
   GtkPositionType image_position;
   GtkAction      *action;
 };
-
-struct _GtkButtonFat
-{
-  GtkBinFat   bin;
-
-  struct _GtkButtonProps instance_properties;
-};
-
-struct _GtkButtonThin
-{
-  GtkBinThin  bin;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkButtonFat   fat_instance;
-  struct _GtkButtonThin  thin_instance;
-}   GtkButton;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkButtonFat GtkButton;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkButtonThin GtkButton;
-#endif
-/********************************************************************/
-
 
 
 struct _GtkButtonClass
@@ -128,62 +92,58 @@ struct _GtkButtonClass
 };
 
 
-GType          _T2_gtk_button_get_type          (void) G_GNUC_CONST;
-GType          _3T_gtk_button_get_type          (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType          gtk_button_get_type          (void) G_GNUC_CONST;
-GtkWidget*     __gtk_button_new               (void);
-GtkWidget*     __gtk_button_new_with_label    (const gchar    *label);
-GtkWidget*     __gtk_button_new_from_stock    (const gchar    *stock_id);
-GtkWidget*     __gtk_button_new_with_mnemonic (const gchar    *label);
+GtkWidget*     SF(gtk_button_new)               (void);
+GtkWidget*     SF(gtk_button_new_with_label)    (const gchar    *label);
+GtkWidget*     SF(gtk_button_new_from_stock)    (const gchar    *stock_id);
+GtkWidget*     SF(gtk_button_new_with_mnemonic) (const gchar    *label);
 #ifndef GTK_DISABLE_DEPRECATED
-void           __gtk_button_pressed           (GtkButton      *button);
-void           __gtk_button_released          (GtkButton      *button);
+void           SF(gtk_button_pressed)           (GtkButton      *button);
+void           SF(gtk_button_released)          (GtkButton      *button);
 #endif
-void           __gtk_button_clicked           (GtkButton      *button);
+void           SF(gtk_button_clicked)           (GtkButton      *button);
 #ifndef GTK_DISABLE_DEPRECATED
-void           __gtk_button_enter             (GtkButton      *button);
-void           __gtk_button_leave             (GtkButton      *button);
+void           SF(gtk_button_enter)             (GtkButton      *button);
+void           SF(gtk_button_leave)             (GtkButton      *button);
 #endif
 
-void                  __gtk_button_set_relief         (GtkButton      *button,
-						     GtkReliefStyle  newstyle);
-GtkReliefStyle        __gtk_button_get_relief         (GtkButton      *button);
-void                  __gtk_button_set_label          (GtkButton      *button,
-						     const gchar    *label);
-const gchar *         __gtk_button_get_label          (GtkButton      *button);
-void                  __gtk_button_set_use_underline  (GtkButton      *button,
-						     gboolean        use_underline);
-gboolean              __gtk_button_get_use_underline  (GtkButton      *button);
-void                  __gtk_button_set_use_stock      (GtkButton      *button,
-						     gboolean        use_stock);
-gboolean              __gtk_button_get_use_stock      (GtkButton      *button);
-void                  __gtk_button_set_focus_on_click (GtkButton      *button,
-						     gboolean        focus_on_click);
-gboolean              __gtk_button_get_focus_on_click (GtkButton      *button);
-void                  __gtk_button_set_alignment      (GtkButton      *button,
-						     gfloat          xalign,
-						     gfloat          yalign);
-void                  __gtk_button_get_alignment      (GtkButton      *button,
-						     gfloat         *xalign,
-						     gfloat         *yalign);
-void                  __gtk_button_set_image          (GtkButton      *button,
-					             GtkWidget      *image);
-GtkWidget*            __gtk_button_get_image          (GtkButton      *button);
-void                  __gtk_button_set_image_position (GtkButton      *button,
-						     GtkPositionType position);
-GtkPositionType       __gtk_button_get_image_position (GtkButton      *button);
+void                  SF(gtk_button_set_relief)         (GtkButton      *button,
+                                                         GtkReliefStyle  newstyle);
+GtkReliefStyle        SF(gtk_button_get_relief)         (GtkButton      *button);
+void                  SF(gtk_button_set_label)          (GtkButton      *button,
+                                                         const gchar    *label);
+const gchar *         SF(gtk_button_get_label)          (GtkButton      *button);
+void                  SF(gtk_button_set_use_underline)  (GtkButton      *button,
+                                                         gboolean        use_underline);
+gboolean              SF(gtk_button_get_use_underline)  (GtkButton      *button);
+void                  SF(gtk_button_set_use_stock)      (GtkButton      *button,
+                                                         gboolean        use_stock);
+gboolean              SF(gtk_button_get_use_stock)      (GtkButton      *button);
+void                  SF(gtk_button_set_focus_on_click) (GtkButton      *button,
+                                                         gboolean        focus_on_click);
+gboolean              SF(gtk_button_get_focus_on_click) (GtkButton      *button);
+void                  SF(gtk_button_set_alignment)      (GtkButton      *button,
+                                                         gfloat          xalign,
+                                                         gfloat          yalign);
+void                  SF(gtk_button_get_alignment)      (GtkButton      *button,
+                                                         gfloat         *xalign,
+                                                         gfloat         *yalign);
+void                  SF(gtk_button_set_image)          (GtkButton      *button,
+                                                         GtkWidget      *image);
+GtkWidget*            SF(gtk_button_get_image)          (GtkButton      *button);
+void                  SF(gtk_button_set_image_position) (GtkButton      *button,
+                                                         GtkPositionType position);
+GtkPositionType       SF(gtk_button_get_image_position) (GtkButton      *button);
 
-GdkWindow*            __gtk_button_get_event_window   (GtkButton      *button);
+GdkWindow*            SF(gtk_button_get_event_window)   (GtkButton      *button);
 
-void ___gtk_button_set_depressed             (GtkButton          *button,
-					    gboolean            depressed);
-void ___gtk_button_paint                     (GtkButton          *button,
-					    const GdkRectangle *area,
-					    GtkStateType        state_type,
-					    GtkShadowType       shadow_type,
-					    const gchar        *main_detail,
-					    const gchar        *default_detail);
+void SF(_gtk_button_set_depressed)             (GtkButton          *button,
+                                                gboolean            depressed);
+void SF(_gtk_button_paint)                     (GtkButton          *button,
+                                                const GdkRectangle *area,
+                                                GtkStateType        state_type,
+                                                GtkShadowType       shadow_type,
+                                                const gchar        *main_detail,
+                                                const gchar        *default_detail);
 
 G_END_DECLS
 

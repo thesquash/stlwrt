@@ -54,6 +54,9 @@ G_BEGIN_DECLS
 
  #define STLWRT_PUBLIC_FUNCTION(function_name)  __##function_name
 
+ #define STLWRT_VERSIONED_PUBLIC_FUNCTION(function_name, version)  \
+   _##version##_##function_name
+
  #define STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(type_name) \
    GType __##type_name##_get_type (void) G_GNUC_CONST; \
    GType     type_name##_get_type (void) G_GNUC_CONST;
@@ -66,6 +69,8 @@ G_BEGIN_DECLS
 #else
 
  #define STLWRT_PUBLIC_FUNCTION(function_name)      function_name
+
+ #define STLWRT_VERSIONED_PUBLIC_FUNCTION(function_name, version)  function_name
 
  #define STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(type_name) \
    GType     type_name##_get_type (void) G_GNUC_CONST;

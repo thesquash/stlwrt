@@ -314,6 +314,29 @@ G_BEGIN_DECLS
     return g_define_type_id; \
   }
 
+#define STLWRT_DEFINE_INTERFACE(TypeName, type_name, TYPE_PREREQ, init_func, C) \
+  GType \
+  type_name##_get_type (void) \
+  { \
+    static GType g_define_type_id = 0; \
+    if (g_define_type_id == 0) \
+    { \
+      g_type_register_static_simple (G_TYPE_INTERFACE, \
+                                     g_intern_static_string (#TypeName), \
+                                     sizeof (TypeName##Interface), \
+                                     (GClassInitFunc)(void (*)(void)) init_func, \
+                                     0, \
+                                     (GInstanceInitFunc)NULL, \
+                                     (GTypeFlags) 0); \
+      if (TYPE_PREREQ != G_TYPE_INVALID) \
+        g_type_interface_add_prerequisite (g_define_type_id, TYPE_PREREQ); \
+      { \
+        C \
+      }						\
+    }						\
+  return g_define_type_id;			\
+}
+
 /****************************************************************************/
 /* The following stuff deals with _declaring_ types, in C header files. */
 

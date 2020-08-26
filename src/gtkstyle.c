@@ -4869,6 +4869,33 @@ gtk_default_draw_slider (GtkStyle      *style,
                          x + width - style->xthickness - 1, y + height / 2);
       }
     }
+  else
+    {
+      if (orientation == GTK_ORIENTATION_HORIZONTAL)
+      {
+        gtk_paint_vline (style, window, state_type, area, widget, detail, 
+                         y + style->ythickness, 
+                         y + height - style->ythickness - 2, x + width / 2 - 5);
+        gtk_paint_vline (style, window, state_type, area, widget, detail, 
+                         y + style->ythickness, 
+                         y + height - style->ythickness - 2, x + width / 2 - 1);
+        gtk_paint_vline (style, window, state_type, area, widget, detail, 
+                         y + style->ythickness, 
+                         y + height - style->ythickness - 2, x + width / 2 + 3);
+      }
+      else
+      {
+        gtk_paint_hline (style, window, state_type, area, widget, detail, 
+                         x + style->xthickness, 
+                         x + width - style->xthickness - 2, y + height / 2 - 5);
+        gtk_paint_hline (style, window, state_type, area, widget, detail, 
+                         x + style->xthickness, 
+                         x + width - style->xthickness - 2, y + height / 2 - 1);
+        gtk_paint_hline (style, window, state_type, area, widget, detail, 
+                         x + style->xthickness, 
+                         x + width - style->xthickness - 2, y + height / 2 + 3);
+      }
+    }
 }
 
 static void

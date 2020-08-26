@@ -273,23 +273,7 @@
 
 static void gtk_activatable_class_init (gpointer g_iface);
 
-GType
-gtk_activatable_get_type (void)
-{
-  static GType activatable_type = 0;
-
-  if (!activatable_type) {
-    activatable_type =
-      g_type_register_static_simple (G_TYPE_INTERFACE, I_("GtkActivatable"),
-				     sizeof (GtkActivatableIface),
-				     (GClassInitFunc) gtk_activatable_class_init,
-				     0, NULL, 0);
-
-    g_type_interface_add_prerequisite (activatable_type, G_TYPE_OBJECT);
-  }
-
-  return activatable_type;
-}
+STLWRT_DEFINE_INTERFACE (GtkActivatable, gtk_activatable, G_TYPE_OBJECT, gtk_activatable_class_init, ;)
 
 static void
 gtk_activatable_class_init (gpointer g_iface)

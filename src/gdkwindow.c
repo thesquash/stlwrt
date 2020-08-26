@@ -364,46 +364,9 @@ new_region_tag (void)
   return ++tag;
 }
 
-GType
-gdk_window_object_get_type (void)
-{
-  static GType object_type = 0;
+STLWRT_DEFINE_VTYPE_FPARENT (GdkWindow, gdk_window, GDK_TYPE_DRAWABLE, ;)
 
-  if (!object_type)
-    object_type = g_type_register_static_simple (GDK_TYPE_DRAWABLE,
-						 "GdkWindow",
-						 sizeof (GdkWindowObjectClass),
-						 (GClassInitFunc) gdk_window_class_init,
-						 sizeof (GdkWindowObject),
-						 (GInstanceInitFunc) gdk_window_init,
-						 0);
-
-  return object_type;
-}
-
-GType
-_gdk_paintable_get_type (void)
-{
-  static GType paintable_type = 0;
-
-  if (!paintable_type)
-    {
-      const GTypeInfo paintable_info =
-      {
-	sizeof (GdkPaintableIface),  /* class_size */
-	NULL,                        /* base_init */
-	NULL,                        /* base_finalize */
-      };
-
-      paintable_type = g_type_register_static (G_TYPE_INTERFACE,
-					       g_intern_static_string ("GdkPaintable"),
-					       &paintable_info, 0);
-
-      g_type_interface_add_prerequisite (paintable_type, G_TYPE_OBJECT);
-    }
-
-  return paintable_type;
-}
+STLWRT_DEFINE_INTERFACE (GdkPaintable, _gdk_paintable, G_TYPE_OBJECT, NULL, ;)
 
 static void
 gdk_window_init (GdkWindowObject *window)

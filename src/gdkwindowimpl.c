@@ -23,21 +23,6 @@
 #include <gdkwindowimpl.h>
 #include <gdkinternals.h>
 
-GType
-gdk_window_impl_get_type (void)
-{
-  static GType gtype = 0;
-
-  if (G_UNLIKELY (!gtype))
-    {
-      gtype = g_type_register_static_simple (G_TYPE_INTERFACE,
-                                             "GdkWindowImpl",
-                                             sizeof (GdkWindowImplIface),
-                                             NULL, 0, NULL, 0);
-      g_type_interface_add_prerequisite (gtype, G_TYPE_OBJECT);
-    }
-
-  return gtype;
-}
+STLWRT_DEFINE_INTERFACE (GdkWindowImpl, gdk_window_impl, G_TYPE_OBJECT, NULL, ;)
 
 #define __GDK_WINDOW_IMPL_C__

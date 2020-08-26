@@ -768,8 +768,7 @@ get_name_for_window_with_pid (GtkMountOperationLookupContext *context,
     {
       gchar *windowid_value;
 
-      /* check for 
-WINDOWID (set by terminals) and see if we can get the title that way */
+      /* check for $WINDOWID (set by terminals) and see if we can get the title that way */
       windowid_value = pid_get_env (pid, "WINDOWID");
       if (windowid_value != NULL)
         {

@@ -2364,8 +2364,7 @@ gdk_window_set_geometry_hints (GdkWindow         *window,
       size_hints.flags |= PPosition;
       /* We need to initialize the following obsolete fields because KWM 
        * apparently uses these fields if they are non-zero.
-       * #@#!#!
-!.
+       * #@#!#!$!.
        */
       size_hints.x = 0;
       size_hints.y = 0;

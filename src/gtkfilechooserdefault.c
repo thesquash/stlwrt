@@ -1578,9 +1578,7 @@ _gtk_file_chooser_label_for_file (GFile *file)
        * is a hostname. Nautilus and the panel contain the same string 
        * to translate. 
        */
-      label = g_strdup_printf (_("%1
-s on %2
-s"), path, host);
+      label = g_strdup_printf (_("%1$s on %2$s"), path, host);
   
       g_free (host);
     }
@@ -1763,10 +1761,8 @@ shortcuts_append_recent (GtkFileChooserDefault *impl)
     g_object_unref (pixbuf);
 }
 
-/* Appends the current working directory to the shortuts panel, but only if it is not equal to 
-HOME.
- * This is so that the user can actually use the 
-CWD, for example, if running an application
+/* Appends the current working directory to the shortuts panel, but only if it is not equal to $HOME.
+ * This is so that the user can actually use the $CWD, for example, if running an application
  * from the shell.
  */
 static void
@@ -6002,8 +5998,7 @@ gtk_file_chooser_default_realize (GtkWidget *widget)
   emit_default_size_changed (impl);
 }
 
-/* Changes the current folder to 
-CWD */
+/* Changes the current folder to $CWD */
 static void
 switch_to_cwd (GtkFileChooserDefault *impl)
 {
@@ -6014,8 +6009,7 @@ switch_to_cwd (GtkFileChooserDefault *impl)
   g_free (current_working_dir);
 }
 
-/* Sets the file chooser to showing Recent Files or 
-CWD, depending on the
+/* Sets the file chooser to showing Recent Files or $CWD, depending on the
  * user's settings.
  */
 static void
@@ -7494,8 +7488,7 @@ gtk_file_chooser_default_unselect_all (GtkFileChooser *chooser)
  * is_empty_ret - whether the file entry is totally empty
  *
  * is_file_part_empty_ret - whether the file part is empty (will be if user types "foobar/", and
- *                          the path will be "
-cwd/foobar")
+ *                          the path will be "$cwd/foobar")
  */
 static void
 check_save_entry (GtkFileChooserDefault *impl,

@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtkprintbackend.h: Abstract printer backend interfaces
  * Copyright (C) 2003, Red Hat, Inc.

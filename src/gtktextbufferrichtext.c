@@ -1,4 +1,3 @@
-
 /* gtkrichtext.c
  *
  * Copyright (C) 2006 Imendio AB

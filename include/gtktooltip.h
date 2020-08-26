@@ -1,4 +1,3 @@
-
 /* gtktooltip.h
  *
  * Copyright (C) 2006-2007 Imendio AB

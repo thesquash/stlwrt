@@ -1,4 +1,3 @@
-
 /* gtktextbufferserialize.c
  *
  * Copyright (C) 2001 Havoc Pennington

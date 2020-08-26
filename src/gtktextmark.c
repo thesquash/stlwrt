@@ -1,4 +1,3 @@
-
 /* gtktextmark.c - mark segments
  *
  * Copyright (c) 1994 The Regents of the University of California.

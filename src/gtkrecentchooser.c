@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtkrecentchooser.c - Abstract interface for recent file selectors GUIs
  *

@@ -1,4 +1,3 @@
-
 /* gtkiconview.c
  * Copyright (C) 2002, 2004  Anders Carlsson <andersca@gnu.org>
  *

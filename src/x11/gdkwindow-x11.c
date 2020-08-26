@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * Copyright (C) 1995-2007 Peter Mattis, Spencer Kimball,
  * Josh MacDonald, Ryan Lortie
@@ -2365,7 +2364,8 @@ gdk_window_set_geometry_hints (GdkWindow         *window,
       size_hints.flags |= PPosition;
       /* We need to initialize the following obsolete fields because KWM 
        * apparently uses these fields if they are non-zero.
-       * #@#!#!$!.
+       * #@#!#!
+!.
        */
       size_hints.x = 0;
       size_hints.y = 0;

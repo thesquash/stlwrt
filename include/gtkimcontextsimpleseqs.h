@@ -1,4 +1,3 @@
-
 /* GTK - The GIMP Tool Kit
  * Copyright (C) 2007, 2008 GNOME Foundation
  *

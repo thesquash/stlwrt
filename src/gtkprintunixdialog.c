@@ -1,4 +1,3 @@
-
 /* GtkPrintUnixDialog
  * Copyright (C) 2006 John (J5) Palmieri  <johnp@redhat.com>
  * Copyright (C) 2006 Alexander Larsson <alexl@redhat.com>

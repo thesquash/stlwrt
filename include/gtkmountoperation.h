@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * Copyright (C) Christian Kellner <gicmo@gnome.org>
  *

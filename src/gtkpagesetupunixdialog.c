@@ -1,4 +1,3 @@
-
 /* GtkPageSetupUnixDialog 
  * Copyright (C) 2006 Alexander Larsson <alexl@redhat.com>
  * Copyright © 2006, 2007, 2008 Christian Persch

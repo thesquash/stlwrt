@@ -1,4 +1,3 @@
-
 /* GdkPixbuf RGBA C-Source image dump */
 
 #ifdef __SUNPRO_C

@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtkprintsettings.c: Print Settings
  * Copyright (C) 2006, Red Hat, Inc.

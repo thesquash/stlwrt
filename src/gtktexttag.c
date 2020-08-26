@@ -1,4 +1,3 @@
-
 /* gtktexttag.c - text tag object
  *
  * Copyright (c) 1992-1994 The Regents of the University of California.

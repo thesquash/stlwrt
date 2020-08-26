@@ -1,4 +1,3 @@
-
 /* gdkapplaunchcontext.c - Gtk+ implementation for GAppLaunchContext
 
    Copyright (C) 2007 Red Hat, Inc.

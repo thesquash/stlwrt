@@ -1,7 +1,8 @@
-
 /**
  *
- * $Id$
+ * 
+Id
+
  *
  * Copyright (C) 1995 Free Software Foundation, Inc.
  *

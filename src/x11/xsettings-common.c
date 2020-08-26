@@ -1,4 +1,3 @@
-
 /*
  * Copyright © 2001 Red Hat, Inc.
  *

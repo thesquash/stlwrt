@@ -1,4 +1,3 @@
-
 /* GTK+: gtkfilechooserbutton.h
  *
  * Copyright (c) 2004 James M. Cape <jcape@ignore-your.tv>

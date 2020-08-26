@@ -1,4 +1,3 @@
-
 /* gtkentrybuffer.h
  * Copyright (C) 2009  Stefan Walter <stef@memberwebs.com>
  *

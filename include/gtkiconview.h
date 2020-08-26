@@ -1,4 +1,3 @@
-
 /* gtkiconview.h
  * Copyright (C) 2002, 2004  Anders Carlsson <andersca@gnome.org>
  *

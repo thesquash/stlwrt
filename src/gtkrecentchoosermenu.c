@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtkrecentchoosermenu.c - Recently used items menu widget
  * Copyright (C) 2005, Emmanuele Bassi

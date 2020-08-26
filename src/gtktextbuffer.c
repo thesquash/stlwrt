@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtktextbuffer.c Copyright (C) 2000 Red Hat, Inc.
  *                 Copyright (C) 2004 Nokia Corporation

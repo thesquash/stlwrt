@@ -1,4 +1,3 @@
-
 /*
  * gtkinfobar.c
  * This file is part of GTK+

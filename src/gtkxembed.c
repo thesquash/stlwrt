@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtkxembed.c: Utilities for the XEMBED protocol
  * Copyright (C) 2001, 2003, Red Hat, Inc.

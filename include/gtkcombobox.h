@@ -1,4 +1,3 @@
-
 /* gtkcombobox.h
  * Copyright (C) 2002, 2003  Kristian Rietveld <kris@gtk.org>
  *

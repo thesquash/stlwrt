@@ -1,4 +1,3 @@
-
 /* gtktoolbutton.c
  *
  * Copyright (C) 2002 Anders Carlsson <andersca@gnome.org>

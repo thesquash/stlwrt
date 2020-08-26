@@ -1,4 +1,3 @@
-
 /* -*- Mode: C; c-file-style: "gnu"; tab-width: 8 -*- */
 
 /* GTK+: gtkfilechooserbutton.c

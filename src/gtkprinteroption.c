@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtkprinteroption.c: Handling possible settings for a specific printer setting
  * Copyright (C) 2006, Red Hat, Inc.

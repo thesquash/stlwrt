@@ -1,4 +1,3 @@
-
 /* gtkmnemonichash.c: Sets of mnemonics with cycling
  *
  * STLWRT - A fork of GTK+ 2 supporting future applications as well

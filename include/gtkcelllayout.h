@@ -1,4 +1,3 @@
-
 /* gtkcelllayout.h
  * Copyright (C) 2003  Kristian Rietveld  <kris@gtk.org>
  *

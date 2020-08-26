@@ -1,4 +1,3 @@
-
 /* gtkactivatable.c
  * Copyright (C) 2008 Tristan Van Berkom <tristan.van.berkom@gmail.com>
  *

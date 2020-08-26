@@ -1,4 +1,3 @@
-
 #ifndef __GTKINTL_H__
 #define __GTKINTL_H__
 

@@ -1,4 +1,3 @@
-
 /* gtktoolshell.c
  * Copyright (C) 2007  Openismus GmbH
  *

@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtkrecentchooserdefault.c
  * Copyright (C) 2005-2006, Emmanuele Bassi

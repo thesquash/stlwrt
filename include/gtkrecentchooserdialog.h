@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtkrecentchooserdialog.h: Recent files selector dialog
  * Copyright (C) 2006 Emmanuele Bassi

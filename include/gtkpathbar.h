@@ -1,4 +1,3 @@
-
 /* gtkpathbar.h
  * Copyright (C) 2004  Red Hat, Inc.,  Jonathan Blandford <jrb@gnome.org>
  *

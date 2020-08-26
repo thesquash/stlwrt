@@ -1,4 +1,3 @@
-
 /* GtkIconTheme - a loader for icon themes
  * gtk-icon-theme.c Copyright (C) 2002, 2003 Red Hat, Inc.
  *

@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtkfilechoosersettings.c: Internal settings for the GtkFileChooser widget
  * Copyright (C) 2006, Novell, Inc.

@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2009-2011 Nokia <ivan.frade@nokia.com>
  *

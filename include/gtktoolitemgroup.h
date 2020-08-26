@@ -1,4 +1,3 @@
-
 /* GtkToolPalette -- A tool palette with categories and DnD support
  * Copyright (C) 2008  Openismus GmbH
  *

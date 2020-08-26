@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtkfilechooserutils.c: Private utility functions useful for
  *                        implementing a GtkFileChooser interface

@@ -1,4 +1,3 @@
-
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * Copyright (C) Christian Kellner <gicmo@gnome.org>

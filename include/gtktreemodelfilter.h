@@ -1,4 +1,3 @@
-
 /* gtktreemodelfilter.h
  * Copyright (C) 2000,2001  Red Hat, Inc., Jonathan Blandford <jrb@redhat.com>
  * Copyright (C) 2001-2003  Kristian Rietveld <kris@gtk.org>

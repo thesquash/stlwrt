@@ -1,4 +1,3 @@
-
 /* gtkrecentprivatechooser.h - Interface definitions for recent selectors UI
  *
  * Copyright (C) 2006 Emmanuele Bassi

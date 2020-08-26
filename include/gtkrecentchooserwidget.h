@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtkrecentchooserwidget.h: embeddable recently used resources chooser widget
  * Copyright (C) 2006 Emmanuele Bassi

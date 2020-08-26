@@ -1,4 +1,3 @@
-
 /* GdkPixbuf library - Rendering functions
  *
  * Copyright (C) 1999 The Free Software Foundation

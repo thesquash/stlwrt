@@ -1,4 +1,3 @@
-
 /* gtktextdisplay.c - display layed-out text
  *
  * Copyright (c) 2010 Red Hat, Inc.

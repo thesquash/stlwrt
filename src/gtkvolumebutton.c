@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * Copyright (C) 2007 Red Hat, Inc.
  *

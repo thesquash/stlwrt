@@ -1,4 +1,3 @@
-
 /*
  * gtktextsegment.c --
  *

@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtkfilesystem.c: Filesystem abstraction functions.
  * Copyright (C) 2003, Red Hat, Inc.

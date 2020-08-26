@@ -1,4 +1,3 @@
-
 /* Gtk+ testing utilities
  * Copyright (C) 2007 Imendio AB
  * Authors: Tim Janik

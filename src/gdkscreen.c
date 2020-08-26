@@ -1,4 +1,3 @@
-
 /*
  * gdkscreen.c
  * 

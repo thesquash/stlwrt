@@ -1,4 +1,3 @@
-
 /* GtkCellRendererCombo
  * Copyright (C) 2004 Lorenzo Gil Sanchez
  *

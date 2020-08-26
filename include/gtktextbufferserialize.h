@@ -1,4 +1,3 @@
-
 /* gtktextbufferserialize.h
  *
  * Copyright (C) 2004 Nokia Corporation.

@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtkfilechooserwidget.c: Embeddable file selector widget
  * Copyright (C) 2003, Red Hat, Inc.

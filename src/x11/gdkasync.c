@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gdkasync.c: Utility functions using the Xlib asynchronous interfaces
  * Copyright (C) 2003, Red Hat, Inc.

@@ -1,4 +1,3 @@
-
 /* XEMBED messages */
 typedef enum {
   XEMBED_EMBEDDED_NOTIFY        = 0,

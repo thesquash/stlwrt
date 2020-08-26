@@ -1,4 +1,3 @@
-
 /* gtktextchild.c - child pixmaps and widgets
  *
  * Copyright (c) 1994 The Regents of the University of California.

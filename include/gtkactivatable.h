@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * Copyright (C) 2008 Tristan Van Berkom <tristan.van.berkom@gmail.com>
  *

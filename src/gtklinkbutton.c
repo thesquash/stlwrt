@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtklinkbutton.c - an hyperlink-enabled button
  * 

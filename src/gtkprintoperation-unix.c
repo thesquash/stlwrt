@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtkprintoperation-unix.c: Print Operation Details for Unix 
  *                           and Unix-like platforms

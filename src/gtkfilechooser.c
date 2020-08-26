@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtkfilechooser.c: Abstract interface for file selector GUIs
  * Copyright (C) 2003, Red Hat, Inc.
@@ -538,7 +537,8 @@
  * In GTK+ 2.x, the file chooser saves its state and configuration options in a
  * <filename>gtk-2.0/gtkfilechooser.ini</filename> file under the directory that
  * g_get_user_config_dir() returns.  (On Unix, this usually resolves to
- * <filename>$HOME/username/.config/gtk-2.0/gtkfilechooser.ini</filename>.)  While some of
+ * <filename>
+HOME/username/.config/gtk-2.0/gtkfilechooser.ini</filename>.)  While some of
  * the available options can be changed directly through the file chooser's user
  * interface, a couple are only editable by hand or by third-party tools (such
  * as <ulink

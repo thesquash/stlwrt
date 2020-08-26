@@ -1,4 +1,3 @@
-
 /*
  * gdkdisplay.h
  * 

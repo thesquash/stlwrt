@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtkpagesetup.c: Page Setup
  * Copyright (C) 2006, Red Hat, Inc.

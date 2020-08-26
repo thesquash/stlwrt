@@ -1,4 +1,3 @@
-
 /* gtktreemodel.c
  * Copyright (C) 2000  Red Hat, Inc.,  Jonathan Blandford <jrb@redhat.com>
  *

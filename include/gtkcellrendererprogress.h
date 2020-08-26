@@ -1,4 +1,3 @@
-
 /* gtkcellrendererprogress.h
  * Copyright (C) 2002 Naba Kumar <kh_naba@users.sourceforge.net>
  * modified by Jörgen Scheibengruber <mfcn@gmx.de>

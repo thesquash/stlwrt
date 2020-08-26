@@ -1,4 +1,3 @@
-
 /* gtkbuildable.c
  * Copyright (C) 2006-2007 Async Open Source,
  *                         Johan Dahlin <jdahlin@async.com.br>

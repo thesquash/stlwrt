@@ -1,4 +1,3 @@
-
 /* gtkrecentchooserutils.h - Private utility functions for implementing a
  *                           GtkRecentChooser interface
  *

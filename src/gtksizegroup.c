@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtksizegroup.c: 
  * Copyright (C) 2001 Red Hat Software

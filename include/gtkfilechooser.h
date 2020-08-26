@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtkfilechooser.h: Abstract interface for file selector GUIs
  * Copyright (C) 2003, Red Hat, Inc.

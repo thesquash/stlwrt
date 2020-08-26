@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtkfilechooserentry.c: Entry with filename completion
  * Copyright (C) 2003, Red Hat, Inc.

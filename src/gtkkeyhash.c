@@ -1,4 +1,3 @@
-
 /* gtkkeyhash.c: Keymap aware matching of key bindings
  *
  * STLWRT - A fork of GTK+ 2 supporting future applications as well

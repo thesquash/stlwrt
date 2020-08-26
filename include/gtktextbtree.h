@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtktextbtree.h Copyright (C) 2000 Red Hat, Inc.
  *

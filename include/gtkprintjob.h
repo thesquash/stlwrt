@@ -1,4 +1,3 @@
-
 /* GtkPrintJob
  * Copyright (C) 2006 Red Hat,Inc.
  *

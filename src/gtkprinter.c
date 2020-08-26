@@ -1,4 +1,3 @@
-
 /* GtkPrinter
  * Copyright (C) 2006 John (J5) Palmieri  <johnp@redhat.com>
  *

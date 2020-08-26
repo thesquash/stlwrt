@@ -1,4 +1,3 @@
-
 /* gtkiconcache.h
  * Copyright (C) 2004  Anders Carlsson <andersca@gnome.org>
  *

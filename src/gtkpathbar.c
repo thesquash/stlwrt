@@ -1,4 +1,3 @@
-
 /* -*- Mode: C; c-file-style: "gnu"; tab-width: 8 -*- */
 /* gtkpathbar.c
  * Copyright (C) 2004  Red Hat, Inc.,  Jonathan Blandford <jrb@gnome.org>

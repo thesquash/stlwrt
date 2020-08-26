@@ -1,4 +1,3 @@
-
 /*
  * gdkscreen-x11.h
  * 

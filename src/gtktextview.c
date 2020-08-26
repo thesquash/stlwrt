@@ -1,4 +1,3 @@
-
 /* -*- Mode: C; c-file-style: "gnu"; tab-width: 8 -*- */
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtktextview.c Copyright (C) 2000 Red Hat, Inc.

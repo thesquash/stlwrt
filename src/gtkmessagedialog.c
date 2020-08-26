@@ -1,4 +1,3 @@
-
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 2 -*- */
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * Copyright (C) 2000 Red Hat, Inc.

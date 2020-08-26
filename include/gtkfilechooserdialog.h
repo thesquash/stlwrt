@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtkfilechooserdialog.h: File selector dialog
  * Copyright (C) 2003, Red Hat, Inc.

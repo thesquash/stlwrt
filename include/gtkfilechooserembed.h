@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * gtkfilechooserembed.h: Abstract sizing interface for file selector implementations
  * Copyright (C) 2004, Red Hat, Inc.

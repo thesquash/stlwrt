@@ -1,4 +1,3 @@
-
 /* gtkstatusicon.c:
  *
  * Copyright (C) 2003 Sun Microsystems, Inc.

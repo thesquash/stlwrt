@@ -1,4 +1,3 @@
-
 /* gtkiconcachevalidator.c
  * Copyright (C) 2007 Red Hat, Inc
  *

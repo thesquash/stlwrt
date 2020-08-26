@@ -1,4 +1,3 @@
-
 /* HSV color selector for GTK+
  *
  * Copyright (C) 1999 The Free Software Foundation

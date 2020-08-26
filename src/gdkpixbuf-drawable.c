@@ -1,4 +1,3 @@
-
 /* GdkPixbuf library - convert X drawable information to RGB
  *
  * Copyright (C) 1999 Michael Zucchi

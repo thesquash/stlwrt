@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2005 Mr Jamie McCracken
  *

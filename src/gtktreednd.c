@@ -1,4 +1,3 @@
-
 /* gtktreednd.c
  * Copyright (C) 2001  Red Hat, Inc.
  *

@@ -1,11 +1,3 @@
-As the author and maintainer of STLWRT, I'd like to thank all of those who have
-contributed to GTK in the past, particularly GTK+ 2 because STLWRT was forked
-from GTK+ 2 originally.  This file only contains those people who I know have
-contributed to STLWRT itself.  If you have contributed and yet you are not
-listed here, please start an issue about it.
-
-As for right now, there is only one person on this list -- yours truly:
-
 Gordon N. Squash
-  Original pioneer of STLWRT; current project leader.
 
+...plus all others who contributed to GTK+ in the past

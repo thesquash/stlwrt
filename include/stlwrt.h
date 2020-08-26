@@ -316,7 +316,7 @@ G_BEGIN_DECLS
 
 #define STLWRT_DEFINE_INTERFACE(TypeName, type_name, TYPE_PREREQ, init_func, C) \
   GType \
-  type_name##_get_type (void) \
+  __##type_name##_get_type (void) \
   { \
     static GType g_define_type_id = 0; \
     if (g_define_type_id == 0) \

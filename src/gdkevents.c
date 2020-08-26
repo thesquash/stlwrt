@@ -18,8 +18,6 @@
  * Boston, MA 02111-1307, USA.
  */
 
-
-
 #include "config.h"
 
 #include <stlwrt.h>
@@ -1344,17 +1342,7 @@ __gdk_display_set_double_click_distance (GdkDisplay *display,
   display->double_click_distance = distance;
 }
 
-GType
-gdk_event_get_type (void)
-{
-  static GType our_type = 0;
-  
-  if (our_type == 0)
-    our_type = g_boxed_type_register_static (g_intern_static_string ("GdkEvent"),
-					     (GBoxedCopyFunc)__gdk_event_copy,
-					     (GBoxedFreeFunc)__gdk_event_free);
-  return our_type;
-}
+STLWRT_DEFINE_BOXED_TYPE (GdkEvent, gdk_event, __gdk_event_copy, __gdk_event_free)
 
 /**
  * __gdk_setting_get:

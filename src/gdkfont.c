@@ -1,4 +1,3 @@
-
 /* STLWRT - A fork of GTK+ 2 supporting future applications as well
  * Copyright (C) 1995-1997 Peter Mattis, Spencer Kimball and Josh MacDonald
  *
@@ -18,8 +17,6 @@
  * Boston, MA 02111-1307, USA.
  */
 
-
-
 #undef GDK_DISABLE_DEPRECATED
 
 #include "config.h"
@@ -29,18 +26,7 @@
 #include <gdkfont.h>
 #include <gdkinternals.h>
 
-
-GType
-gdk_font_get_type (void)
-{
-  static GType our_type = 0;
-  
-  if (our_type == 0)
-    our_type = g_boxed_type_register_static (g_intern_static_string ("GdkFont"),
-					     (GBoxedCopyFunc)__gdk_font_ref,
-					     (GBoxedFreeFunc)__gdk_font_unref);
-  return our_type;
-}
+STLWRT_DEFINE_BOXED_TYPE (GdkFont, gdk_font, __gdk_font_ref, __gdk_font_unref)
 
 /**
  * __gdk_font_ref:

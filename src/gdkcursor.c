@@ -18,8 +18,6 @@
  * Boston, MA 02111-1307, USA.
  */
 
-
-
 #include "config.h"
 
 #include <stlwrt.h>
@@ -27,18 +25,7 @@
 #include <gdkdisplay.h>
 #include <gdkinternals.h>
 
-
-GType
-gdk_cursor_get_type (void)
-{
-  static GType our_type = 0;
-  
-  if (our_type == 0)
-    our_type = g_boxed_type_register_static (g_intern_static_string ("GdkCursor"),
-					     (GBoxedCopyFunc)__gdk_cursor_ref,
-					     (GBoxedFreeFunc)__gdk_cursor_unref);
-  return our_type;
-}
+STLWRT_DEFINE_BOXED_TYPE (GdkCursor, gdk_cursor, __gdk_cursor_ref, __gdk_cursor_unref)
 
 /**
  * __gdk_cursor_ref:

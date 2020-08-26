@@ -18,8 +18,6 @@
  * Boston, MA 02111-1307, USA.
  */
 
-
-
 #include "config.h"
 
 #include <stlwrt.h>
@@ -27,7 +25,6 @@
 #include <gdkinternals.h>
 #include <gdkpixbuf.h>
 #include <gdkscreen.h>
-
 
 static GdkGC *gdk_pixmap_create_gc      (GdkDrawable     *drawable,
                                          GdkGCValues     *values,
@@ -161,22 +158,9 @@ static void gdk_pixmap_finalize   (GObject              *object);
 
 static gpointer parent_class = NULL;
 
-GType
-gdk_pixmap_get_type (void)
-{
-  static GType object_type = 0;
-
-  if (!object_type)
-    object_type = g_type_register_static_simple (GDK_TYPE_DRAWABLE,
-						 "GdkPixmap",
-						 sizeof (GdkPixmapObjectClass),
-						 (GClassInitFunc) gdk_pixmap_class_init,
-						 sizeof (GdkPixmapObject),
-						 (GInstanceInitFunc) gdk_pixmap_init,
-						 0);
-  
-  return object_type;
-}
+STLWRT_DEFINE_VTYPE (GdkPixmap, gdk_pixmap, GDK_TYPE_DRAWABLE,
+                     G_TYPE_FLAG_NONE,
+                     ;)
 
 static void
 gdk_pixmap_init (GdkPixmapObject *pixmap)

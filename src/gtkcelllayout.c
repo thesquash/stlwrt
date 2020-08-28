@@ -27,35 +27,7 @@
 #include <gtkintl.h>
 
 
-GType
-gtk_cell_layout_get_type (void)
-{
-  static GType cell_layout_type = 0;
-
-  if (! cell_layout_type)
-    {
-      const GTypeInfo cell_layout_info =
-      {
-        sizeof (GtkCellLayoutIface),
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        0,
-        0,
-        NULL
-      };
-
-      cell_layout_type =
-        g_type_register_static (G_TYPE_INTERFACE, I_("GtkCellLayout"),
-                                &cell_layout_info, 0);
-
-      g_type_interface_add_prerequisite (cell_layout_type, G_TYPE_OBJECT);
-    }
-
-  return cell_layout_type;
-}
+STLWRT_DEFINE_INTERFACE (GtkCellLayout, gtk_cell_layout, G_TYPE_OBJECT, NULL, ;)
 
 /**
  * __gtk_cell_layout_pack_start:

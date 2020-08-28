@@ -43,41 +43,12 @@ typedef enum {
   GDK_COLOR_WRITEABLE = 1 << 0
 } GdkColorInfoFlags;
 
-/********************************************************************/
-struct _GdkColorInfoProps
+struct _GdkColorInfo
 {
+  GdkColorInfoFlags   flags;
 
   guint ref_count;
 };
-
-struct _GdkColorInfoFat
-{
-  GdkColorInfoFlagsFat   flags;
-
-  struct _GdkColorInfoProps instance_properties;
-};
-
-struct _GdkColorInfoThin
-{
-  GdkColorInfoFlagsThin  flags;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GdkColorInfoFat   fat_instance;
-  struct _GdkColorInfoThin  thin_instance;
-}   GdkColorInfo;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GdkColorInfoFat GdkColorInfo;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GdkColorInfoThin GdkColorInfo;
-#endif
-/********************************************************************/
-
 
 
 typedef enum {

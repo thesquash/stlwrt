@@ -1,0 +1,12 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+targets=@stlwrt_target@
+
+Name: STLWRT
+Description: STLWRT, GTK+ 3 emulation mode (drawing and windowing component)
+Version: @GDK3_VERSION@
+Requires: @STLWRT_PACKAGES@
+Libs: -L${libdir} -lgdk-3 @STLWRT_EXTRA_LIBS@
+Cflags: -I${includedir}/stlwrt @STLWRT_EXTRA_CFLAGS@ -DSTLWRT_GTK_COMPAT=3

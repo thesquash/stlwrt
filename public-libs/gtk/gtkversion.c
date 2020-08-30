@@ -17,27 +17,10 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#if defined(GTK_DISABLE_SINGLE_INCLUDES) && !defined (__GTK_H_INSIDE__) && !defined (GTK_COMPILATION)
-#error "Only <gtk/gtk.h> can be included directly."
-#endif
+#include "gtkversion.h"
 
-#ifndef __GTK_VERSION_H__
-#define __GTK_VERSION_H__
-
-
-/* check whether a Gtk+ version equal to or greater than
- * major.minor.micro is present.
- */
-#define	GTK_CHECK_VERSION(major,minor,micro)	\
-    (gtk_major_version > (major) || \
-     (gtk_major_version == (major) && gtk_minor_version > (minor)) || \
-     (gtk_major_version == (major) && gtk_minor_version == (minor) && \
-      gtk_micro_version >= (micro)))
-
-extern const int gtk_major_version;
-extern const int gtk_minor_version;
-extern const int gtk_micro_version;
-extern const int gtk_binary_age;
-extern const int gtk_interface_age;
-
-#endif /* __GTK_VERSION_H__ */
+const int gtk_major_version	= GTK_MAJOR_VERSION;
+const int gtk_minor_version	= GTK_MINOR_VERSION;
+const int gtk_micro_version	= GTK_MICRO_VERSION;
+const int gtk_binary_age	= GTK_BINARY_AGE;
+const int gtk_interface_age	= GTK_INTERFACE_AGE;

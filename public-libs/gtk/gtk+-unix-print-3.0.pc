@@ -2,7 +2,7 @@ prefix=@prefix@
 exec_prefix=@exec_prefix@
 libdir=@libdir@
 includedir=@includedir@
-targets=@stlwrx_target@
+targets=@stlwrt_target@
 
 gtk_binary_version=@GTK3_BINARY_VERSION@
 gtk_host=@host@

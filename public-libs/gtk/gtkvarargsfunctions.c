@@ -24,15 +24,6 @@
  * which accept variable numbers of arguments here.
  */
 
-/*
- * The include files below are NOT supposed to be the public include files;
- * they are supposed to be the private ones, since the private ones declare the
- * low-level STLWRT functions like '__gtk_widget_get_style' and we need those
- * function declarations.  In fact, we don't need the public headers in this
- * source file at all; here we are _defining_ the functions which are
- * _declared_ in the public header files.
- */
-
 #include <gtk.h>
 #include <stdarg.h>
 

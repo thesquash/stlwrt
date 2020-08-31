@@ -31,18 +31,13 @@ G_BEGIN_DECLS
 #define GTK_IS_CUSTOM_PAPER_UNIX_DIALOG_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_CUSTOM_PAPER_UNIX_DIALOG))
 #define GTK_CUSTOM_PAPER_UNIX_DIALOG_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_CUSTOM_PAPER_UNIX_DIALOG, GtkCustomPaperUnixDialogClass))
 
-
-typedef struct _GtkCustomPaperUnixDialog         GtkCustomPaperUnixDialog;
-
 typedef struct _GtkCustomPaperUnixDialogClass    GtkCustomPaperUnixDialogClass;
 typedef struct GtkCustomPaperUnixDialogPrivate   GtkCustomPaperUnixDialogPrivate;
 
-struct _GtkCustomPaperUnixDialog
-{
-  GtkDialog parent_instance;
 
+STLWRT_DECLARE_FTYPE_VPARENT(GtkCustomPaperUnixDialog, gtk_custom_paper_unix_dialog, GtkDialog,
   GtkCustomPaperUnixDialogPrivate * (priv);
-};
+)
 
 struct _GtkCustomPaperUnixDialogClass
 {
@@ -59,7 +54,6 @@ struct _GtkCustomPaperUnixDialogClass
 };
 
 
-GType             SF(gtk_custom_paper_unix_dialog_get_type)           (void) G_GNUC_CONST;
 GtkWidget *       _gtk_custom_paper_unix_dialog_new                (GtkWindow   *parent,
 								   const gchar *title);
 GtkUnit           _gtk_print_get_default_user_units                (void);

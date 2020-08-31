@@ -33,8 +33,6 @@ G_BEGIN_DECLS
 #define GTK_IS_CELL_VIEW_CLASS(vtable)    (G_TYPE_CHECK_CLASS_TYPE ((vtable), GTK_TYPE_CELL_VIEW))
 #define GTK_CELL_VIEW_GET_CLASS(inst)     (G_TYPE_INSTANCE_GET_CLASS ((inst), GTK_TYPE_CELL_VIEW, GtkCellViewClass))
 
-typedef struct _GtkCellView             GtkCellView;
-
 typedef struct _GtkCellViewClass        GtkCellViewClass;
 typedef struct _GtkCellViewPrivate      GtkCellViewPrivate;
 
@@ -50,13 +48,10 @@ struct _GtkCellViewPrivate
   gboolean background_set;
 };
 
-struct _GtkCellView
-{
-  GtkWidget parent_instance;
-
+STLWRT_DECLARE_FTYPE_VPARENT(GtkCellView, gtk_cell_view, GtkWidget,
   /*< private >*/
   GtkCellViewPrivate * (priv);
-};
+)
 
 struct _GtkCellViewClass
 {
@@ -64,7 +59,6 @@ struct _GtkCellViewClass
 };
 
 
-GType             SF(gtk_cell_view_get_type)               (void) G_GNUC_CONST;
 GtkWidget        *SF(gtk_cell_view_new)                    (void);
 GtkWidget        *SF(gtk_cell_view_new_with_text)          (const gchar     *text);
 GtkWidget        *SF(gtk_cell_view_new_with_markup)        (const gchar     *markup);

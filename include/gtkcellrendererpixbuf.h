@@ -33,27 +33,17 @@ G_BEGIN_DECLS
 #define GTK_IS_CELL_RENDERER_PIXBUF_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_CELL_RENDERER_PIXBUF))
 #define GTK_CELL_RENDERER_PIXBUF_GET_CLASS(obj)         (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_CELL_RENDERER_PIXBUF, GtkCellRendererPixbufClass))
 
-typedef struct _GtkCellRendererPixbuf GtkCellRendererPixbufFat;
-typedef struct _GtkCellRendererPixbuf GtkCellRendererPixbufThin;
-
 typedef struct _GtkCellRendererPixbufClass GtkCellRendererPixbufClass;
 
-
-/********************************************************************/
-struct _GtkCellRendererPixbufProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkCellRendererPixbuf, gtk_cell_renderer_pixbuf, GtkCellRenderer,
   /*< private >*/
   GdkPixbuf * (pixbuf);
   GdkPixbuf * (pixbuf_expander_open);
   GdkPixbuf * (pixbuf_expander_closed);
-};
+)
 
 struct _GtkCellRendererPixbufPrivate
 {
-
-  
   gchar *stock_id;
   GtkIconSize stock_size;
   gchar *stock_detail;
@@ -61,36 +51,6 @@ struct _GtkCellRendererPixbufPrivate
   gchar *icon_name;
   GIcon *gicon;
 };
-
-struct _GtkCellRendererPixbufFat
-{
-  GtkCellRendererFat   parent;
-
-  struct _GtkCellRendererPixbufProps instance_properties;
-};
-
-struct _GtkCellRendererPixbufThin
-{
-  GtkCellRendererThin  parent;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkCellRendererPixbufFat   fat_instance;
-  struct _GtkCellRendererPixbufThin  thin_instance;
-}   GtkCellRendererPixbuf;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkCellRendererPixbufFat GtkCellRendererPixbuf;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkCellRendererPixbufThin GtkCellRendererPixbuf;
-#endif
-/********************************************************************/
-
-
 
 struct _GtkCellRendererPixbufClass
 {
@@ -103,10 +63,7 @@ struct _GtkCellRendererPixbufClass
   void (*_gtk_reserved4) (void);
 };
 
-GType            SF(_T2_gtk_cell_renderer_pixbuf_get_type) (void) G_GNUC_CONST;
-GType            SF(_3T_gtk_cell_renderer_pixbuf_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType            SF(gtk_cell_renderer_pixbuf_get_type) (void) G_GNUC_CONST;
+
 GtkCellRenderer *SF(gtk_cell_renderer_pixbuf_new)      (void);
 
 

@@ -78,54 +78,17 @@ typedef enum
 #define GTK_IS_DIALOG_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_DIALOG))
 #define GTK_DIALOG_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_DIALOG, GtkDialogClass))
 
-
-typedef struct _GtkDialog        GtkDialogFat;
-typedef struct _GtkDialog        GtkDialogThin;
-
 typedef struct _GtkDialogClass   GtkDialogClass;
 
-/********************************************************************/
-struct _GtkDialogProps
-{
 
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkDialog, gtk_dialog, GtkWindow,
   /*< public >*/
   GtkWidget * (vbox);
   GtkWidget * (action_area);
 
   /*< private >*/
   GtkWidget * (separator);
-};
-
-struct _GtkDialogFat
-{
-  GtkWindowFat   window;
-
-  struct _GtkDialogProps instance_properties;
-};
-
-struct _GtkDialogThin
-{
-  GtkWindowThin  window;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkDialogFat   fat_instance;
-  struct _GtkDialogThin  thin_instance;
-}   GtkDialog;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkDialogFat GtkDialog;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkDialogThin GtkDialog;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkDialogClass
 {
@@ -145,10 +108,6 @@ struct _GtkDialogClass
 };
 
 
-GType      SF(_T2_gtk_dialog_get_type) (void) G_GNUC_CONST;
-GType      SF(_3T_gtk_dialog_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      SF(gtk_dialog_get_type) (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_dialog_new)      (void);
 
 GtkWidget* SF(gtk_dialog_new_with_buttons) (const gchar     *title,

@@ -33,10 +33,6 @@ G_BEGIN_DECLS
 #define GTK_IS_COLOR_SELECTION_CLASS(klass)		(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_COLOR_SELECTION))
 #define GTK_COLOR_SELECTION_GET_CLASS(obj)              (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_COLOR_SELECTION, GtkColorSelectionClass))
 
-
-typedef struct _GtkColorSelection       GtkColorSelectionFat;
-typedef struct _GtkColorSelection       GtkColorSelectionThin;
-
 typedef struct _GtkColorSelectionClass  GtkColorSelectionClass;
 
 
@@ -46,44 +42,10 @@ typedef void (* GtkColorSelectionChangePaletteWithScreenFunc) (GdkScreen        
 							       const GdkColor    *colors,
 							       gint               n_colors);
 
-/********************************************************************/
-struct _GtkColorSelectionProps
-{
-
-
+STLWRT_DECLARE_FTYPE_VPARENT(GtkColorSelection, gtk_color_selection, GtkVBox,
   /* < private_data > */
   gpointer  (private_data);
 };
-
-struct _GtkColorSelectionFat
-{
-  GtkVBoxFat   parent_instance;
-
-  struct _GtkColorSelectionProps instance_properties;
-};
-
-struct _GtkColorSelectionThin
-{
-  GtkVBoxThin  parent_instance;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkColorSelectionFat   fat_instance;
-  struct _GtkColorSelectionThin  thin_instance;
-}   GtkColorSelection;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkColorSelectionFat GtkColorSelection;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkColorSelectionThin GtkColorSelection;
-#endif
-/********************************************************************/
-
-
 
 struct _GtkColorSelectionClass
 {
@@ -100,11 +62,6 @@ struct _GtkColorSelectionClass
 
 
 /* ColorSelection */
-
-GType      SF(_T2_gtk_color_selection_get_type)                (void) G_GNUC_CONST;
-GType      SF(_3T_gtk_color_selection_get_type)                (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      SF(gtk_color_selection_get_type)                (void) G_GNUC_CONST;
 GtkWidget *SF(gtk_color_selection_new)                     (void);
 gboolean   SF(gtk_color_selection_get_has_opacity_control) (GtkColorSelection *colorsel);
 void       SF(gtk_color_selection_set_has_opacity_control) (GtkColorSelection *colorsel,

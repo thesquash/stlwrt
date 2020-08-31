@@ -33,8 +33,6 @@ G_BEGIN_DECLS
 #define GTK_IS_COMBO_BOX_CLASS(vtable) (G_TYPE_CHECK_CLASS_TYPE ((vtable), GTK_TYPE_COMBO_BOX))
 #define GTK_COMBO_BOX_GET_CLASS(inst)  (G_TYPE_INSTANCE_GET_CLASS ((inst), GTK_TYPE_COMBO_BOX, GtkComboBoxClass))
 
-typedef struct _GtkComboBox        GtkComboBox;
-
 typedef struct _GtkComboBoxClass   GtkComboBoxClass;
 typedef struct _GtkComboBoxPrivate GtkComboBoxPrivate;
 
@@ -105,13 +103,10 @@ struct _GtkComboBoxPrivate
   gchar *tearoff_title;
 };
 
-struct _GtkComboBox
-{
-  GtkBin parent_instance;
-
+STLWRT_DECLARE_FTYPE_VPARENT(GtkComboBox, gtk_combo_box, GtkBin,
   /*< private >*/
   GtkComboBoxPrivate * (priv);
-};
+)
 
 struct _GtkComboBoxClass
 {
@@ -131,7 +126,6 @@ struct _GtkComboBoxClass
 
 
 /* construction */
-GType         SF(gtk_combo_box_get_type)                 (void) G_GNUC_CONST;
 GtkWidget    *SF(gtk_combo_box_new)                      (void);
 GtkWidget    *SF(gtk_combo_box_new_with_entry)           (void);
 GtkWidget    *SF(gtk_combo_box_new_with_model)           (GtkTreeModel *model);

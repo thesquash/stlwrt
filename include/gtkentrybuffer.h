@@ -34,8 +34,6 @@ G_BEGIN_DECLS
 #define GTK_IS_ENTRY_BUFFER_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_ENTRY_BUFFER))
 #define GTK_ENTRY_BUFFER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ENTRY_BUFFER, GtkEntryBufferClass))
 
-typedef struct _GtkEntryBuffer            GtkEntryBuffer;
-
 typedef struct _GtkEntryBufferClass       GtkEntryBufferClass;
 typedef struct _GtkEntryBufferPrivate     GtkEntryBufferPrivate;
 
@@ -51,13 +49,10 @@ struct _GtkEntryBufferPrivate
   guint  normal_text_chars;
 };
 
-struct _GtkEntryBuffer
-{
-  GObject parent_instance;
-
+STLWRT_DECLARE_FTYPE_FPARENT(GtkEntryBuffer, gtk_entry_buffer, GObject,
   /*< private >*/
   GtkEntryBufferPrivate *priv;
-};
+)
 
 struct _GtkEntryBufferClass
 {
@@ -99,8 +94,6 @@ struct _GtkEntryBufferClass
   void (*_gtk_reserved5) (void);
 };
 
-
-GType                     SF(gtk_entry_buffer_get_type)               (void) G_GNUC_CONST;
 
 GtkEntryBuffer*           SF(gtk_entry_buffer_new)                    (const gchar     *initial_chars,
                                                                    gint             n_initial_chars);

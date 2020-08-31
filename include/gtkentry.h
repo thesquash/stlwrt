@@ -48,17 +48,9 @@ typedef enum
   GTK_ENTRY_ICON_SECONDARY
 } GtkEntryIconPosition;
 
-typedef struct _GtkEntry       GtkEntryFat;
-typedef struct _GtkEntry       GtkEntryThin;
-
 typedef struct _GtkEntryClass  GtkEntryClass;
 
-
-/********************************************************************/
-struct _GtkEntryProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkEntry, gtk_entry, GtkWidget,
   gchar       * (text);                        /* COMPAT: Deprecated, not used. Remove in GTK+ 3.x */
 
   guint         (editable) : 1;
@@ -115,12 +107,10 @@ struct _GtkEntryProps
   gunichar       (invisible_char);
 
   gint           (width_chars);
-};
+)
 
 struct _GtkEntryPrivate 
 {
-
-  
   GtkEntryBuffer* buffer;
 
   gfloat xalign;
@@ -149,36 +139,6 @@ struct _GtkEntryPrivate
 
   gchar *im_module;
 };
-
-struct _GtkEntryFat
-{
-  GtkWidgetFat    widget;
-
-  struct _GtkEntryProps instance_properties;
-};
-
-struct _GtkEntryThin
-{
-  GtkWidgetThin   widget;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkEntryFat   fat_instance;
-  struct _GtkEntryThin  thin_instance;
-}   GtkEntry;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkEntryFat GtkEntry;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkEntryThin GtkEntry;
-#endif
-/********************************************************************/
-
-
 
 struct _GtkEntryClass
 {
@@ -218,10 +178,7 @@ struct _GtkEntryClass
   void (*_gtk_reserved2)      (void);
 };
 
-GType      SF(_T2_gtk_entry_get_type)       		(void) G_GNUC_CONST;
-GType      SF(_3T_gtk_entry_get_type)       		(void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      SF(gtk_entry_get_type)       		(void) G_GNUC_CONST;
+
 GtkWidget* SF(gtk_entry_new)            		(void);
 GtkWidget* SF(gtk_entry_new_with_buffer)            (GtkEntryBuffer *buffer);
 

@@ -33,53 +33,14 @@ G_BEGIN_DECLS
 #define GTK_IS_COLOR_SELECTION_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_COLOR_SELECTION_DIALOG))
 #define GTK_COLOR_SELECTION_DIALOG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_COLOR_SELECTION_DIALOG, GtkColorSelectionDialogClass))
 
-
-typedef struct _GtkColorSelectionDialog       GtkColorSelectionDialogFat;
-typedef struct _GtkColorSelectionDialog       GtkColorSelectionDialogThin;
-
 typedef struct _GtkColorSelectionDialogClass  GtkColorSelectionDialogClass;
 
-
-/********************************************************************/
-struct _GtkColorSelectionDialogProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkColorSelectionDialog, gtk_color_selection_dialog, GtkDialog,
   GtkWidget * (colorsel);
   GtkWidget * (ok_button);
   GtkWidget * (cancel_button);
   GtkWidget * (help_button);
-};
-
-struct _GtkColorSelectionDialogFat
-{
-  GtkDialogFat   parent_instance;
-
-  struct _GtkColorSelectionDialogProps instance_properties;
-};
-
-struct _GtkColorSelectionDialogThin
-{
-  GtkDialogThin  parent_instance;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkColorSelectionDialogFat   fat_instance;
-  struct _GtkColorSelectionDialogThin  thin_instance;
-}   GtkColorSelectionDialog;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkColorSelectionDialogFat GtkColorSelectionDialog;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkColorSelectionDialogThin GtkColorSelectionDialog;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkColorSelectionDialogClass
 {
@@ -94,10 +55,6 @@ struct _GtkColorSelectionDialogClass
 
 
 /* ColorSelectionDialog */
-GType      SF(_T2_gtk_color_selection_dialog_get_type)            (void) G_GNUC_CONST;
-GType      SF(_3T_gtk_color_selection_dialog_get_type)            (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      SF(gtk_color_selection_dialog_get_type)            (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_color_selection_dialog_new)                 (const gchar *title);
 GtkWidget* SF(gtk_color_selection_dialog_get_color_selection) (GtkColorSelectionDialog *colorsel);
 

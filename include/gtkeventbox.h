@@ -32,14 +32,9 @@ G_BEGIN_DECLS
 #define GTK_IS_EVENT_BOX_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_EVENT_BOX))
 #define GTK_EVENT_BOX_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_EVENT_BOX, GtkEventBoxClass))
 
-typedef struct _GtkEventBox	  GtkEventBox;
-
 typedef struct _GtkEventBoxClass  GtkEventBoxClass;
 
-struct _GtkEventBox
-{
-  GtkBin bin;
-};
+STLWRT_DECLARE_FTYPE_VPARENT(GtkEventBox, gtk_event_box, GtkBin, ;)
 
 struct _GtkEventBoxClass
 {
@@ -47,7 +42,6 @@ struct _GtkEventBoxClass
 };
 
 
-GType	   SF(gtk_event_box_get_type)           (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_event_box_new)                (void);
 gboolean   SF(gtk_event_box_get_visible_window) (GtkEventBox *event_box);
 void       SF(gtk_event_box_set_visible_window) (GtkEventBox *event_box,

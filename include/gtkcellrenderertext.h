@@ -33,17 +33,9 @@ G_BEGIN_DECLS
 #define GTK_IS_CELL_RENDERER_TEXT_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_CELL_RENDERER_TEXT))
 #define GTK_CELL_RENDERER_TEXT_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_CELL_RENDERER_TEXT, GtkCellRendererTextClass))
 
-typedef struct _GtkCellRendererText      GtkCellRendererTextFat;
-typedef struct _GtkCellRendererText      GtkCellRendererTextThin;
-
 typedef struct _GtkCellRendererTextClass GtkCellRendererTextClass;
 
-
-/********************************************************************/
-struct _GtkCellRendererTextProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkCellRendererText, gtk_cell_renderer_text, GtkCellRenderer,
   /*< private >*/
   gchar * (text);
   PangoFontDescription * (font);
@@ -75,12 +67,10 @@ struct _GtkCellRendererTextProps
 
   guint  (editable_set) : 1;
   guint  (calc_fixed_height) : 1;
-};
+)
 
 struct _GtkCellRendererTextPrivate
 {
-
-  
   guint single_paragraph : 1;
   guint language_set : 1;
   guint markup_set : 1;
@@ -103,36 +93,6 @@ struct _GtkCellRendererTextPrivate
   GtkWidget *entry;
 };
 
-struct _GtkCellRendererTextFat
-{
-  GtkCellRendererFat   parent;
-
-  struct _GtkCellRendererTextProps instance_properties;
-};
-
-struct _GtkCellRendererTextThin
-{
-  GtkCellRendererThin  parent;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkCellRendererTextFat   fat_instance;
-  struct _GtkCellRendererTextThin  thin_instance;
-}   GtkCellRendererText;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkCellRendererTextFat GtkCellRendererText;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkCellRendererTextThin GtkCellRendererText;
-#endif
-/********************************************************************/
-
-
-
 struct _GtkCellRendererTextClass
 {
   GtkCellRendererClass parent_class;
@@ -148,10 +108,7 @@ struct _GtkCellRendererTextClass
   void (*_gtk_reserved4) (void);
 };
 
-GType            SF(_T2_gtk_cell_renderer_text_get_type) (void) G_GNUC_CONST;
-GType            SF(_3T_gtk_cell_renderer_text_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType            SF(gtk_cell_renderer_text_get_type) (void) G_GNUC_CONST;
+
 GtkCellRenderer *SF(gtk_cell_renderer_text_new)      (void);
 
 void             SF(gtk_cell_renderer_text_set_fixed_height_from_font) (GtkCellRendererText *renderer,

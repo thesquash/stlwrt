@@ -32,71 +32,28 @@ G_BEGIN_DECLS
 #define GTK_IS_CELL_RENDERER_COMBO_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_CELL_RENDERER_COMBO))
 #define GTK_CELL_RENDERER_COMBO_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_CELL_RENDERER_COMBO, GtkCellRendererTextClass))
 
-typedef struct _GtkCellRendererCombo      GtkCellRendererComboFat;
-typedef struct _GtkCellRendererCombo      GtkCellRendererComboThin;
-
 typedef struct _GtkCellRendererComboClass GtkCellRendererComboClass;
 
-
-/********************************************************************/
-struct _GtkCellRendererComboProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkCellRendererCombo, gtk_cell_renderer_combo, GtkCellRendererText,
   GtkTreeModel * (model);
   gint           (text_column);
   gboolean       (has_entry);
 
   /*< private >*/
   guint          (focus_out_id);
-};
+)
 
 struct _GtkCellRendererComboPrivate
 {
-
-  
   GtkWidget *combo;
 };
-
-struct _GtkCellRendererComboFat
-{
-  GtkCellRendererTextFat   parent;
-
-  struct _GtkCellRendererComboProps instance_properties;
-};
-
-struct _GtkCellRendererComboThin
-{
-  GtkCellRendererTextThin  parent;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkCellRendererComboFat   fat_instance;
-  struct _GtkCellRendererComboThin  thin_instance;
-}   GtkCellRendererCombo;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkCellRendererComboFat GtkCellRendererCombo;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkCellRendererComboThin GtkCellRendererCombo;
-#endif
-/********************************************************************/
-
-
 
 struct _GtkCellRendererComboClass
 {
   GtkCellRendererTextClass parent;
 };
 
-GType            SF(_T2_gtk_cell_renderer_combo_get_type) (void) G_GNUC_CONST;
-GType            SF(_3T_gtk_cell_renderer_combo_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType            SF(gtk_cell_renderer_combo_get_type) (void) G_GNUC_CONST;
+
 GtkCellRenderer *SF(gtk_cell_renderer_combo_new)      (void);
 
 G_END_DECLS

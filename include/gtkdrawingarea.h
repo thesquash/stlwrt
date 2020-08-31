@@ -32,49 +32,12 @@ G_BEGIN_DECLS
 #define GTK_IS_DRAWING_AREA_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_DRAWING_AREA))
 #define GTK_DRAWING_AREA_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_DRAWING_AREA, GtkDrawingAreaClass))
 
-
-typedef struct _GtkDrawingArea       GtkDrawingAreaFat;
-typedef struct _GtkDrawingArea       GtkDrawingAreaThin;
-
 typedef struct _GtkDrawingAreaClass  GtkDrawingAreaClass;
 
-/********************************************************************/
-struct _GtkDrawingAreaProps
-{
 
-
+STLWRT_DECLARE_FTYPE_VPARENT(GtkDrawingArea, gtk_drawing_area, GtkWidget,
   gpointer  (draw_data);
-};
-
-struct _GtkDrawingAreaFat
-{
-  GtkWidgetFat   widget;
-
-  struct _GtkDrawingAreaProps instance_properties;
-};
-
-struct _GtkDrawingAreaThin
-{
-  GtkWidgetThin  widget;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkDrawingAreaFat   fat_instance;
-  struct _GtkDrawingAreaThin  thin_instance;
-}   GtkDrawingArea;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkDrawingAreaFat GtkDrawingArea;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkDrawingAreaThin GtkDrawingArea;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkDrawingAreaClass
 {
@@ -88,10 +51,6 @@ struct _GtkDrawingAreaClass
 };
 
 
-GType      SF(_T2_gtk_drawing_area_get_type)   (void) G_GNUC_CONST;
-GType      SF(_3T_gtk_drawing_area_get_type)   (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      SF(gtk_drawing_area_get_type)   (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_drawing_area_new)        (void);
 
 #ifndef GTK_DISABLE_DEPRECATED

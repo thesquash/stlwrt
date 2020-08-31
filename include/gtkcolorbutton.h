@@ -46,19 +46,15 @@ G_BEGIN_DECLS
 #define GTK_IS_COLOR_BUTTON_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_COLOR_BUTTON))
 #define GTK_COLOR_BUTTON_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_COLOR_BUTTON, GtkColorButtonClass))
 
-typedef struct _GtkColorButton          GtkColorButtonFat;
-typedef struct _GtkColorButton          GtkColorButtonThin;
-
 typedef struct _GtkColorButtonClass     GtkColorButtonClass;
 typedef struct _GtkColorButtonPrivate   GtkColorButtonPrivate;
 
-struct _GtkColorButton {
-  GtkButton button;
 
+STLWRT_DECLARE_FTYPE_VPARENT(GtkColorButton, gtk_color_button, GtkButton,
   /*< private >*/
 
   GtkColorButtonPrivate * (priv);
-};
+)
 
 struct _GtkColorButtonClass {
   GtkButtonClass parent_class;
@@ -73,10 +69,6 @@ struct _GtkColorButtonClass {
 };
 
 
-GType      SF(_T2_gtk_color_button_get_type)       (void) G_GNUC_CONST;
-GType      SF(_3T_gtk_color_button_get_type)       (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      SF(gtk_color_button_get_type)       (void) G_GNUC_CONST;
 GtkWidget *SF(gtk_color_button_new)            (void);
 GtkWidget *SF(gtk_color_button_new_with_color) (const GdkColor *color);
 void       SF(gtk_color_button_set_color)      (GtkColorButton *color_button,

@@ -34,8 +34,6 @@ G_BEGIN_DECLS
 #define GTK_IS_ENTRY_COMPLETION_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_ENTRY_COMPLETION))
 #define GTK_ENTRY_COMPLETION_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ENTRY_COMPLETION, GtkEntryCompletionClass))
 
-typedef struct _GtkEntryCompletion            GtkEntryCompletion;
-
 typedef struct _GtkEntryCompletionClass       GtkEntryCompletionClass;
 typedef struct _GtkEntryCompletionPrivate     GtkEntryCompletionPrivate;
 
@@ -45,13 +43,10 @@ typedef gboolean (* GtkEntryCompletionMatchFunc) (GtkEntryCompletion *completion
                                                   gpointer            user_data);
 
 
-struct _GtkEntryCompletion
-{
-  GObject parent_instance;
-
+STLWRT_DECLARE_FTYPE_FPARENT(GtkEntryCompletion, gtk_entry_completion, GObject,
   /*< private >*/
   GtkEntryCompletionPrivate * (priv);
-};
+)
 
 struct _GtkEntryCompletionClass
 {
@@ -74,7 +69,6 @@ struct _GtkEntryCompletionClass
 };
 
 /* core */
-GType               SF(gtk_entry_completion_get_type)               (void) G_GNUC_CONST;
 GtkEntryCompletion *SF(gtk_entry_completion_new)                    (void);
 
 GtkWidget          *SF(gtk_entry_completion_get_entry)              (GtkEntryCompletion          *completion);

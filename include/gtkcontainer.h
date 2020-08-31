@@ -35,15 +35,10 @@ G_BEGIN_DECLS
 
 #define GTK_IS_RESIZE_CONTAINER(widget) (GTK_IS_CONTAINER (widget) && ((GtkContainer*) (widget))->resize_mode != GTK_RESIZE_PARENT)
 
-
-typedef struct _GtkContainer	   GtkContainer;
 typedef struct _GtkContainerClass  GtkContainerClass;
 
-/********************************************************************/
-struct _GtkContainerProps
-{
 
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkContainer, gtk_container, GtkWidget,
   GtkWidget * (focus_child);
 
   guint  (border_width) : 16;
@@ -53,37 +48,7 @@ struct _GtkContainerProps
   guint  (resize_mode) : 2;
   guint  (reallocate_redraws) : 1;
   guint  (has_focus_chain) : 1;
-};
-
-struct _GtkContainerFat
-{
-  GtkWidgetFat   widget;
-
-  struct _GtkContainerProps instance_properties;
-};
-
-struct _GtkContainerThin
-{
-  GtkWidgetThin  widget;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkContainerFat   fat_instance;
-  struct _GtkContainerThin  thin_instance;
-}   GtkContainer;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkContainerFat GtkContainer;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkContainerThin GtkContainer;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkContainerClass
 {
@@ -123,10 +88,6 @@ struct _GtkContainerClass
 
 /* Application-level methods */
 
-GType   SF(_T2_gtk_container_get_type)		 (void) G_GNUC_CONST;
-GType   SF(_3T_gtk_container_get_type)		 (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType   SF(gtk_container_get_type)		 (void) G_GNUC_CONST;
 void    SF(gtk_container_set_border_width)	 (GtkContainer	   *container,
 					  guint		    border_width);
 guint   SF(gtk_container_get_border_width)   (GtkContainer     *container);

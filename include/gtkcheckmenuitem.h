@@ -37,52 +37,14 @@ G_BEGIN_DECLS
 #define GTK_IS_CHECK_MENU_ITEM_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_CHECK_MENU_ITEM))
 #define GTK_CHECK_MENU_ITEM_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_CHECK_MENU_ITEM, GtkCheckMenuItemClass))
 
-
-typedef struct _GtkCheckMenuItem       GtkCheckMenuItemFat;
-typedef struct _GtkCheckMenuItem       GtkCheckMenuItemThin;
-
 typedef struct _GtkCheckMenuItemClass  GtkCheckMenuItemClass;
 
-/********************************************************************/
-struct _GtkCheckMenuItemProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkCheckMenuItem, gtk_check_menu_item, GtkMenuItem,
   guint  (active) : 1;
   guint  (always_show_toggle) : 1;
   guint  (inconsistent) : 1;
   guint  (draw_as_radio) : 1;
-};
-
-struct _GtkCheckMenuItemFat
-{
-  GtkMenuItemFat   menu_item;
-
-  struct _GtkCheckMenuItemProps instance_properties;
-};
-
-struct _GtkCheckMenuItemThin
-{
-  GtkMenuItemThin  menu_item;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkCheckMenuItemFat   fat_instance;
-  struct _GtkCheckMenuItemThin  thin_instance;
-}   GtkCheckMenuItem;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkCheckMenuItemFat GtkCheckMenuItem;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkCheckMenuItemThin GtkCheckMenuItem;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkCheckMenuItemClass
 {
@@ -99,11 +61,6 @@ struct _GtkCheckMenuItemClass
   void (*_gtk_reserved4) (void);
 };
 
-
-GType	   SF(_T2_gtk_check_menu_item_get_type)	         (void) G_GNUC_CONST;
-GType	   SF(_3T_gtk_check_menu_item_get_type)	         (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType	   SF(gtk_check_menu_item_get_type)	         (void) G_GNUC_CONST;
 
 GtkWidget* SF(gtk_check_menu_item_new)               (void);
 GtkWidget* SF(gtk_check_menu_item_new_with_label)    (const gchar      *label);

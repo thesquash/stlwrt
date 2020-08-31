@@ -33,17 +33,9 @@ G_BEGIN_DECLS
 #define GTK_IS_CELL_RENDERER_TOGGLE_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_CELL_RENDERER_TOGGLE))
 #define GTK_CELL_RENDERER_TOGGLE_GET_CLASS(obj)         (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_CELL_RENDERER_TOGGLE, GtkCellRendererToggleClass))
 
-typedef struct _GtkCellRendererToggle GtkCellRendererToggleFat;
-typedef struct _GtkCellRendererToggle GtkCellRendererToggleThin;
-
 typedef struct _GtkCellRendererToggleClass GtkCellRendererToggleClass;
 
-
-/********************************************************************/
-struct _GtkCellRendererToggleProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkCellRendererToggle, gtk_cell_renderer_toggle, GtkCellRenderer,
   /*< private >*/
   guint  (active) : 1;
   guint  (activatable) : 1;
@@ -52,42 +44,10 @@ struct _GtkCellRendererToggleProps
 
 struct _GtkCellRendererTogglePrivate
 {
-
-  
   gint indicator_size;
 
   guint inconsistent : 1;
 };
-
-struct _GtkCellRendererToggleFat
-{
-  GtkCellRendererFat   parent;
-
-  struct _GtkCellRendererToggleProps instance_properties;
-};
-
-struct _GtkCellRendererToggleThin
-{
-  GtkCellRendererThin  parent;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkCellRendererToggleFat   fat_instance;
-  struct _GtkCellRendererToggleThin  thin_instance;
-}   GtkCellRendererToggle;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkCellRendererToggleFat GtkCellRendererToggle;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkCellRendererToggleThin GtkCellRendererToggle;
-#endif
-/********************************************************************/
-
-
 
 struct _GtkCellRendererToggleClass
 {
@@ -103,10 +63,7 @@ struct _GtkCellRendererToggleClass
   void (*_gtk_reserved4) (void);
 };
 
-GType            SF(_T2_gtk_cell_renderer_toggle_get_type)       (void) G_GNUC_CONST;
-GType            SF(_3T_gtk_cell_renderer_toggle_get_type)       (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType            SF(gtk_cell_renderer_toggle_get_type)       (void) G_GNUC_CONST;
+
 GtkCellRenderer *SF(gtk_cell_renderer_toggle_new)            (void);
 
 gboolean         SF(gtk_cell_renderer_toggle_get_radio)      (GtkCellRendererToggle *toggle);

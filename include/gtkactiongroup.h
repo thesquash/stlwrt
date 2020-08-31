@@ -39,7 +39,6 @@ G_BEGIN_DECLS
 #define GTK_IS_ACTION_GROUP_CLASS(vtable)  (G_TYPE_CHECK_CLASS_TYPE ((vtable), GTK_TYPE_ACTION_GROUP))
 #define GTK_ACTION_GROUP_GET_CLASS(inst)   (G_TYPE_INSTANCE_GET_CLASS ((inst), GTK_TYPE_ACTION_GROUP, GtkActionGroupClass))
 
-typedef struct _GtkActionGroup        GtkActionGroup;
 typedef struct _GtkActionGroupPrivate GtkActionGroupPrivate;
 typedef struct _GtkActionGroupClass   GtkActionGroupClass;
 typedef struct _GtkActionEntry        GtkActionEntry;
@@ -59,14 +58,11 @@ struct _GtkActionGroupPrivate
   GDestroyNotify   translate_notify;
 };
 
-struct _GtkActionGroup
-{
-  GObject parent;
-
+STLWRT_DECLARE_FTYPE_FPARENT(GtkActionGroup, gtk_action_group, GObject,
   /*< private >*/
 
   GtkActionGroupPrivate * (private_data);
-};
+)
 
 struct _GtkActionGroupClass
 {
@@ -114,7 +110,6 @@ struct _GtkRadioActionEntry
 };
 
 
-GType           SF(gtk_action_group_get_type)                (void) G_GNUC_CONST;
 GtkActionGroup *SF(gtk_action_group_new)                     (const gchar                *name);
 const gchar *SF(gtk_action_group_get_name)          (GtkActionGroup             *action_group);
 gboolean        SF(gtk_action_group_get_sensitive)           (GtkActionGroup             *action_group);

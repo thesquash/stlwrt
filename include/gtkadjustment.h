@@ -32,54 +32,16 @@ G_BEGIN_DECLS
 #define GTK_IS_ADJUSTMENT_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_ADJUSTMENT))
 #define GTK_ADJUSTMENT_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ADJUSTMENT, GtkAdjustmentClass))
 
-
-typedef struct _GtkAdjustment	    GtkAdjustmentFat;
-typedef struct _GtkAdjustment	    GtkAdjustmentThin;
-
 typedef struct _GtkAdjustmentClass  GtkAdjustmentClass;
 
-/********************************************************************/
-struct _GtkAdjustmentProps
-{
-
-
+STLWRT_DECLARE_VTYPE_FPARENT(GtkAdjustment, gtk_adjustment, GObject,
   gdouble  (lower);
   gdouble  (upper);
   gdouble  (value);
   gdouble  (step_increment);
   gdouble  (page_increment);
   gdouble  (page_size);
-};
-
-struct _GtkAdjustmentFat
-{
-  GObject   parent_instance;
-
-  struct _GtkAdjustmentProps instance_properties;
-};
-
-struct _GtkAdjustmentThin
-{
-  GObject  parent_instance;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkAdjustmentFat   fat_instance;
-  struct _GtkAdjustmentThin  thin_instance;
-}   GtkAdjustment;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkAdjustmentFat GtkAdjustment;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkAdjustmentThin GtkAdjustment;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkAdjustmentClass
 {
@@ -96,10 +58,6 @@ struct _GtkAdjustmentClass
 };
 
 
-GType	   SF(_T2_gtk_adjustment_get_type)		(void) G_GNUC_CONST;
-GType	   SF(_3T_gtk_adjustment_get_type)		(void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType	   SF(gtk_adjustment_get_type)		(void) G_GNUC_CONST;
 GObject* SF(gtk_adjustment_new)			(gdouble	  value,
 						 gdouble	  lower,
 						 gdouble	  upper,

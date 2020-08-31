@@ -35,50 +35,12 @@ G_BEGIN_DECLS
 #define GTK_IS_ARROW_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_ARROW))
 #define GTK_ARROW_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ARROW, GtkArrowClass))
 
-
-typedef struct _GtkArrow       GtkArrowFat;
-typedef struct _GtkArrow       GtkArrowThin;
-
 typedef struct _GtkArrowClass  GtkArrowClass;
 
-/********************************************************************/
-struct _GtkArrowProps
-{
-
-
+STLWRT_DEFINE_VTYPE_VPARENT(GtkArrow, gtk_arrow, GtkMisc,
   gint16  (arrow_type);
   gint16  (shadow_type);
-};
-
-struct _GtkArrowFat
-{
-  GtkMiscFat   misc;
-
-  struct _GtkArrowProps instance_properties;
-};
-
-struct _GtkArrowThin
-{
-  GtkMiscThin  misc;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkArrowFat   fat_instance;
-  struct _GtkArrowThin  thin_instance;
-}   GtkArrow;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkArrowFat GtkArrow;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkArrowThin GtkArrow;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkArrowClass
 {
@@ -86,10 +48,6 @@ struct _GtkArrowClass
 };
 
 
-GType      SF(_T2_gtk_arrow_get_type)   (void) G_GNUC_CONST;
-GType      SF(_3T_gtk_arrow_get_type)   (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      SF(gtk_arrow_get_type)   (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_arrow_new)        (GtkArrowType   arrow_type,
 				 GtkShadowType  shadow_type);
 void       SF(gtk_arrow_set)        (GtkArrow      *arrow,

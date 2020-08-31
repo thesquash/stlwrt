@@ -35,12 +35,7 @@ G_BEGIN_DECLS
 #define GTK_IS_CALENDAR_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_CALENDAR))
 #define GTK_CALENDAR_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_CALENDAR, GtkCalendarClass))
 
-
-typedef struct _GtkCalendar	       GtkCalendarFat;
-typedef struct _GtkCalendar	       GtkCalendarThin;
-
 typedef struct _GtkCalendarClass       GtkCalendarClass;
-
 typedef struct _GtkCalendarPrivate     GtkCalendarPrivate;
 
 /**
@@ -146,10 +141,7 @@ struct _GtkCalendarPrivate
   gint detail_overflow[6];
 };
 
-struct _GtkCalendar
-{
-  GtkWidget widget;
-  
+STLWRT_DECLARE_VTYPE_VPARENT(GtkCalendar, gtk_calendar, GtkWidget,
   GtkStyle  * (header_style);
   GtkStyle  * (label_style);
   
@@ -182,7 +174,7 @@ struct _GtkCalendar
   void (*_gtk_reserved2) (void);
   void (*_gtk_reserved3) (void);
   void (*_gtk_reserved4) (void);
-};
+)
 
 struct _GtkCalendarClass
 {
@@ -200,10 +192,6 @@ struct _GtkCalendarClass
 };
 
 
-GType	   SF(_T2_gtk_calendar_get_type)	(void) G_GNUC_CONST;
-GType	   SF(_3T_gtk_calendar_get_type)	(void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType	   SF(gtk_calendar_get_type)	(void) G_GNUC_CONST;
 GtkWidget* SF(gtk_calendar_new)		(void);
 
 gboolean   SF(gtk_calendar_select_month)	(GtkCalendar *calendar,

@@ -33,8 +33,6 @@ G_BEGIN_DECLS
 #define GTK_BUILDABLE_GET_IFACE(obj)  (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GTK_TYPE_BUILDABLE, GtkBuildableIface))
 
 
-typedef struct _GtkBuildable      GtkBuildableFat;
-typedef struct _GtkBuildable      GtkBuildableThin; /* Dummy typedef */
 typedef struct _GtkBuildableIface GtkBuildableIface;
 
 /**
@@ -130,10 +128,7 @@ struct _GtkBuildableIface
 };
 
 
-GType     SF(_T2_gtk_buildable_get_type)               (void) G_GNUC_CONST;
-GType     SF(_3T_gtk_buildable_get_type)               (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType     SF(gtk_buildable_get_type)               (void) G_GNUC_CONST;
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_buildable)
 
 void      SF(gtk_buildable_set_name)               (GtkBuildable        *buildable,
 						const gchar         *name);

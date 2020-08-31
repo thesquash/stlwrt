@@ -32,24 +32,18 @@ G_BEGIN_DECLS
 #define GTK_IS_ACCESSIBLE_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_ACCESSIBLE))
 #define GTK_ACCESSIBLE_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ACCESSIBLE, GtkAccessibleClass))
 
-typedef struct _GtkAccessible                GtkAccessibleFat;
-typedef struct _GtkAccessible                GtkAccessibleThin;
-
 typedef struct _GtkAccessibleClass           GtkAccessibleClass;
 
   /*
    * This object is a thin wrapper, in the GTK+ namespace, for AtkObject
    */
-struct _GtkAccessible
-{
-  AtkObject parent;
-
+STLWRT_DECLARE_FTYPE_FPARENT(GtkAccessible, gtk_accessible, AtkObject,
   /*
    * The GtkWidget whose properties and features are exported via this 
    * accessible instance.
    */
   GtkWidget * (widget);
-};
+)
 
 struct _GtkAccessibleClass
 {
@@ -63,11 +57,6 @@ struct _GtkAccessibleClass
   void (*_gtk_reserved3) (void);
   void (*_gtk_reserved4) (void);
 };
-
-GType SF(_T2_gtk_accessible_get_type) (void) G_GNUC_CONST;
-GType SF(_3T_gtk_accessible_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType SF(gtk_accessible_get_type) (void) G_GNUC_CONST;
 
 void        SF(gtk_accessible_set_widget)                  (GtkAccessible     *accessible,
                                                         GtkWidget         *widget);

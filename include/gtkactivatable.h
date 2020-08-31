@@ -33,7 +33,6 @@ G_BEGIN_DECLS
 #define GTK_ACTIVATABLE_GET_IFACE(obj)  (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GTK_TYPE_ACTIVATABLE, GtkActivatableIface))
 
 
-typedef struct _GtkActivatable      GtkActivatable; /* Dummy typedef */
 typedef struct _GtkActivatableIface GtkActivatableIface;
 
 
@@ -63,10 +62,7 @@ struct _GtkActivatableIface
 };
 
 
-GType      SF(_T2_gtk_activatable_get_type)                   (void) G_GNUC_CONST;
-GType      SF(_3T_gtk_activatable_get_type)                   (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      SF(gtk_activatable_get_type)                   (void) G_GNUC_CONST;
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_activatable)
 
 void       SF(gtk_activatable_sync_action_properties)     (GtkActivatable *activatable,
 						       GtkAction      *action);

@@ -34,62 +34,21 @@ G_BEGIN_DECLS
 #define GTK_IS_BOX_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_BOX))
 #define GTK_BOX_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_BOX, GtkBoxClass))
 
-
-typedef struct _GtkBox	      GtkBoxFat;
-typedef struct _GtkBox	      GtkBoxThin;
-
 typedef struct _GtkBoxClass   GtkBoxClass;
 
-
-/********************************************************************/
-struct _GtkBoxProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkBox, gtk_box, GtkContainer,
   /*< public >*/
   GList * (children);
   gint16  (spacing);
   guint  (homogeneous) : 1;
-};
+)
 
 struct _GtkBoxPrivate
 {
-
-  
   GtkOrientation orientation;
   guint          default_expand : 1;
   guint          spacing_set    : 1;
 };
-
-struct _GtkBoxFat
-{
-  GtkContainerFat   container;
-
-  struct _GtkBoxProps instance_properties;
-};
-
-struct _GtkBoxThin
-{
-  GtkContainerThin  container;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkBoxFat   fat_instance;
-  struct _GtkBoxThin  thin_instance;
-}   GtkBox;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkBoxFat GtkBox;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkBoxThin GtkBox;
-#endif
-/********************************************************************/
-
-
 
 struct _GtkBoxClass
 {
@@ -133,10 +92,7 @@ struct _GtkBoxChild
 };
 #endif
 
-GType       SF(_T2_gtk_box_get_type)            (void) G_GNUC_CONST;
-GType       SF(_3T_gtk_box_get_type)            (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType       SF(gtk_box_get_type)            (void) G_GNUC_CONST;
+
 GtkWidget*  SF(gtk_box_new)                 (GtkOrientation  orientation,
                                          gboolean        homogeneous,
                                          gint            spacing);

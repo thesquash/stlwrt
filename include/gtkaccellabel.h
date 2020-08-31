@@ -48,10 +48,7 @@ typedef struct _GtkAccelLabelClass  GtkAccelLabelClass;
  * The #GtkAccelLabel-struct struct contains private data only, and
  * should be accessed using the functions below.
  */
-struct _GtkAccelLabel
-{
-  GtkLabel label;
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkAccelLabel, gtk_accel_label, GtkLabel,
   guint           (gtk_reserved);
   guint           (accel_padding);      /* should be style property? */
   GtkWidget     * (accel_widget);       /* done*/
@@ -59,7 +56,7 @@ struct _GtkAccelLabel
   GtkAccelGroup * (accel_group);        /* set by set_accel_closure() */
   gchar         * (accel_string);       /* has set function */
   guint16         (accel_string_width); /* seems to be private */
-};
+)
 
 struct _GtkAccelLabelClass
 {
@@ -85,10 +82,6 @@ struct _GtkAccelLabelClass
 #define	gtk_accel_label_accelerator_width	gtk_accel_label_get_accel_width
 #endif /* GTK_DISABLE_DEPRECATED */
 
-GType	   SF(_T2_gtk_accel_label_get_type)	     (void) G_GNUC_CONST;
-GType	   SF(_3T_gtk_accel_label_get_type)	     (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType	   SF(gtk_accel_label_get_type)	     (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_accel_label_new)		     (const gchar   *string);
 GtkWidget* SF(gtk_accel_label_get_accel_widget)  (GtkAccelLabel *accel_label);
 guint	   SF(gtk_accel_label_get_accel_width)   (GtkAccelLabel *accel_label);

@@ -37,7 +37,6 @@ G_BEGIN_DECLS
 typedef struct _GtkButtonClass   GtkButtonClass;
 
 STLWRT_DECLARE_VTYPE_VPARENT (GtkButton, gtk_button, GtkBin,
-
   GdkWindow * (event_window);
 
   gchar * (label_text);
@@ -58,8 +57,6 @@ STLWRT_DECLARE_VTYPE_VPARENT (GtkButton, gtk_button, GtkBin,
 
 struct _GtkButtonPrivate
 {
-
-  
   gfloat          xalign;
   gfloat          yalign;
   GtkWidget      *image;

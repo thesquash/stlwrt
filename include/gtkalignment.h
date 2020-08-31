@@ -33,74 +33,29 @@ G_BEGIN_DECLS
 #define GTK_IS_ALIGNMENT_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_ALIGNMENT))
 #define GTK_ALIGNMENT_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ALIGNMENT, GtkAlignmentClass))
 
-
-typedef struct _GtkAlignment       GtkAlignmentFat;
-typedef struct _GtkAlignment       GtkAlignmentThin;
-
 typedef struct _GtkAlignmentClass  GtkAlignmentClass;
 typedef struct _GtkAlignmentPrivate GtkAlignmentPrivate;
 
-/********************************************************************/
-struct _GtkAlignmentProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPRIVATE(GtkAlignment, gtk_alignment, GtkBin,
   gfloat  (xalign);
   gfloat  (yalign);
   gfloat  (xscale);
   gfloat  (yscale);
-};
+)
 
 struct _GtkAlignmentPrivate
 {
-
-  
   guint padding_top;
   guint padding_bottom;
   guint padding_left;
   guint padding_right;
 };
 
-struct _GtkAlignmentFat
-{
-  GtkBinFat   bin;
-
-  struct _GtkAlignmentProps instance_properties;
-};
-
-struct _GtkAlignmentThin
-{
-  GtkBinThin  bin;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkAlignmentFat   fat_instance;
-  struct _GtkAlignmentThin  thin_instance;
-}   GtkAlignment;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkAlignmentFat GtkAlignment;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkAlignmentThin GtkAlignment;
-#endif
-/********************************************************************/
-
-
-
 struct _GtkAlignmentClass
 {
   GtkBinClass parent_class;
 };
 
-
-GType      SF(_T2_gtk_alignment_get_type)   (void) G_GNUC_CONST;
-GType      SF(_3T_gtk_alignment_get_type)   (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      SF(gtk_alignment_get_type)   (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_alignment_new)        (gfloat             xalign,
 				     gfloat             yalign,
 				     gfloat             xscale,

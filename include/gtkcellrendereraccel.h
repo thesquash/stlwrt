@@ -31,9 +31,6 @@ G_BEGIN_DECLS
 #define GTK_IS_CELL_RENDERER_ACCEL_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_CELL_RENDERER_ACCEL))
 #define GTK_CELL_RENDERER_ACCEL_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_CELL_RENDERER_ACCEL, GtkCellRendererAccelClass))
 
-typedef struct _GtkCellRendererAccel      GtkCellRendererAccelFat;
-typedef struct _GtkCellRendererAccel      GtkCellRendererAccelThin;
-
 typedef struct _GtkCellRendererAccelClass GtkCellRendererAccelClass;
 
 
@@ -44,11 +41,7 @@ typedef enum
 } GtkCellRendererAccelMode;
 
 
-/********************************************************************/
-struct _GtkCellRendererAccelProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkCellRendererAccel, gtk_cell_renderer_accel, GtkCellRendererText,
   /*< private >*/
   guint  (accel_key);
   GdkModifierType  (accel_mods);
@@ -58,37 +51,7 @@ struct _GtkCellRendererAccelProps
   GtkWidget * (edit_widget);
   GtkWidget * (grab_widget);
   GtkWidget * (sizing_label);
-};
-
-struct _GtkCellRendererAccelFat
-{
-  GtkCellRendererTextFat   parent;
-
-  struct _GtkCellRendererAccelProps instance_properties;
-};
-
-struct _GtkCellRendererAccelThin
-{
-  GtkCellRendererTextThin  parent;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkCellRendererAccelFat   fat_instance;
-  struct _GtkCellRendererAccelThin  thin_instance;
-}   GtkCellRendererAccel;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkCellRendererAccelFat GtkCellRendererAccel;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkCellRendererAccelThin GtkCellRendererAccel;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkCellRendererAccelClass
 {
@@ -111,10 +74,6 @@ struct _GtkCellRendererAccelClass
   void (*_gtk_reserved4) (void);
 };
 
-GType            SF(_T2_gtk_cell_renderer_accel_get_type)        (void) G_GNUC_CONST;
-GType            SF(_3T_gtk_cell_renderer_accel_get_type)        (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType            SF(gtk_cell_renderer_accel_get_type)        (void) G_GNUC_CONST;
 GtkCellRenderer *SF(gtk_cell_renderer_accel_new)             (void);
 
 

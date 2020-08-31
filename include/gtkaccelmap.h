@@ -33,9 +33,6 @@ G_BEGIN_DECLS
 #define GTK_IS_ACCEL_MAP_CLASS(klass)	  (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_ACCEL_MAP))
 #define GTK_ACCEL_MAP_GET_CLASS(obj)      (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ACCEL_MAP, GtkAccelMapClass))
 
-typedef struct _GtkAccelMap      GtkAccelMapFat;
-typedef struct _GtkAccelMap      GtkAccelMapThin;
-
 typedef struct _GtkAccelMapClass GtkAccelMapClass;
 
 /* --- notifier --- */
@@ -80,10 +77,8 @@ void	SF(gtk_accel_map_foreach_unfiltered) (gpointer		 data,
 					  GtkAccelMapForeach	 foreach_func);
 
 /* --- notification --- */
-GType        SF(_T2_gtk_accel_map_get_type) (void) G_GNUC_CONST;
-GType        SF(_3T_gtk_accel_map_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType        SF(gtk_accel_map_get_type) (void) G_GNUC_CONST;
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_accel_map)
+
 GtkAccelMap *SF(gtk_accel_map_get)      (void);
 
 

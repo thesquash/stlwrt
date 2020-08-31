@@ -32,7 +32,6 @@ G_BEGIN_DECLS
 #define GTK_IS_CELL_LAYOUT(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_CELL_LAYOUT))
 #define GTK_CELL_LAYOUT_GET_IFACE(obj)  (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GTK_TYPE_CELL_LAYOUT, GtkCellLayoutIface))
 
-typedef struct _GtkCellLayout           GtkCellLayout; /* dummy typedef */
 typedef struct _GtkCellLayoutIface      GtkCellLayoutIface;
 
 /* keep in sync with GtkTreeCellDataFunc */
@@ -71,10 +70,8 @@ struct _GtkCellLayoutIface
   GList* (* get_cells)        (GtkCellLayout         *cell_layout);
 };
 
-GType SF(_T2_gtk_cell_layout_get_type)           (void) G_GNUC_CONST;
-GType SF(_3T_gtk_cell_layout_get_type)           (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType SF(gtk_cell_layout_get_type)           (void) G_GNUC_CONST;
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_cell_layout)
+
 void  SF(gtk_cell_layout_pack_start)         (GtkCellLayout         *cell_layout,
                                           GtkCellRenderer       *cell,
                                           gboolean               expand);

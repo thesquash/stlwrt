@@ -34,60 +34,17 @@ G_BEGIN_DECLS
 #define GTK_IS_BIN_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_BIN))
 #define GTK_BIN_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_BIN, GtkBinClass))
 
-
-typedef struct _GtkBin       GtkBinFat;
-typedef struct _GtkBin       GtkBinThin;
-
 typedef struct _GtkBinClass  GtkBinClass;
 
-/********************************************************************/
-struct _GtkBinProps
-{
-
-
+STLWRT_DEFINE_FTYPE_VPARENT(GtkBin, gtk_bin, GtkContainer,
   GtkWidget * (child);
-};
-
-struct _GtkBinFat
-{
-  GtkContainerFat   container;
-
-  struct _GtkBinProps instance_properties;
-};
-
-struct _GtkBinThin
-{
-  GtkContainerThin  container;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkBinFat   fat_instance;
-  struct _GtkBinThin  thin_instance;
-}   GtkBin;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkBinFat GtkBin;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkBinThin GtkBin;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkBinClass
 {
   GtkContainerClass parent_class;
 };
 
-
-GType      SF(_T2_gtk_bin_get_type)  (void) G_GNUC_CONST;
-GType      SF(_3T_gtk_bin_get_type)  (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      SF(gtk_bin_get_type)  (void) G_GNUC_CONST;
 
 GtkWidget *SF(gtk_bin_get_child) (GtkBin *bin);
 

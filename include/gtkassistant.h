@@ -66,10 +66,8 @@ typedef enum
   GTK_ASSISTANT_PAGE_PROGRESS
 } GtkAssistantPageType;
 
-typedef struct _GtkAssistant        GtkAssistantFat;
-typedef struct _GtkAssistant        GtkAssistantThin;
-typedef struct _GtkAssistantPrivate GtkAssistantPrivate;
 
+typedef struct _GtkAssistantPrivate GtkAssistantPrivate;
 typedef struct _GtkAssistantClass   GtkAssistantClass;
 
 
@@ -95,10 +93,7 @@ struct _GtkAssistantPrivate
   guint committed : 1;
 };
 
-struct _GtkAssistant
-{
-  GtkWindow  parent;
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkAssistant, gtk_assistant, GtkWindow,
   GtkWidget * (cancel);
   GtkWidget * (forward);
   GtkWidget * (back);
@@ -108,7 +103,7 @@ struct _GtkAssistant
 
   /*< private >*/
   GtkAssistantPrivate * (priv);
-};
+)
 
 struct _GtkAssistantClass
 {
@@ -141,10 +136,6 @@ struct _GtkAssistantClass
  */
 typedef gint (*GtkAssistantPageFunc) (gint current_page, gpointer data);
 
-GType                 SF(_T2_gtk_assistant_get_type)              (void) G_GNUC_CONST;
-GType                 SF(_3T_gtk_assistant_get_type)              (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType                 SF(gtk_assistant_get_type)              (void) G_GNUC_CONST;
 GtkWidget            *SF(gtk_assistant_new)                   (void);
 gint                  SF(gtk_assistant_get_current_page)      (GtkAssistant         *assistant);
 void                  SF(gtk_assistant_set_current_page)      (GtkAssistant         *assistant,

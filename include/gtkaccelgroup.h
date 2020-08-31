@@ -46,9 +46,6 @@ typedef enum
 
 
 /* --- typedefs & structures --- */
-typedef struct _GtkAccelGroup	   GtkAccelGroupFat;
-typedef struct _GtkAccelGroup	   GtkAccelGroupThin;
-
 typedef struct _GtkAccelGroupClass GtkAccelGroupClass;
 typedef struct _GtkAccelKey        GtkAccelKey;
 typedef struct _GtkAccelGroupEntry GtkAccelGroupEntry;
@@ -74,47 +71,14 @@ typedef gboolean (*GtkAccelGroupFindFunc) (GtkAccelKey    *key,
  * 
  * An object representing and maintaining a group of accelerators.
  */
-/********************************************************************/
-struct _GtkAccelGroupProps
-{
 
-
+STLWRT_DECLARE_VTYPE_FPARENT(GtkAccelGroup, gtk_accel_group, GObject,
   guint                (lock_count);
   GdkModifierType      (modifier_mask);
   GSList             * (acceleratables);
   guint	               (n_accels);
   GtkAccelGroupEntry * (priv_accels);
-};
-
-struct _GtkAccelGroupFat
-{
-  GObject               parent;
-
-  struct _GtkAccelGroupProps instance_properties;
-};
-
-struct _GtkAccelGroupThin
-{
-  GObject              parent;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkAccelGroupFat   fat_instance;
-  struct _GtkAccelGroupThin  thin_instance;
-}   GtkAccelGroup;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkAccelGroupFat GtkAccelGroup;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkAccelGroupThin GtkAccelGroup;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkAccelGroupClass
 {
@@ -141,10 +105,6 @@ struct _GtkAccelKey
 
 
 /* -- Accelerator Groups --- */
-GType          SF(_T2_gtk_accel_group_get_type)           (void) G_GNUC_CONST;
-GType          SF(_3T_gtk_accel_group_get_type)           (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType          SF(gtk_accel_group_get_type)           (void) G_GNUC_CONST;
 GtkAccelGroup* SF(gtk_accel_group_new)	      	  (void);
 gboolean       SF(gtk_accel_group_get_is_locked)      (GtkAccelGroup  *accel_group);
 GdkModifierType 

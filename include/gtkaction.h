@@ -38,8 +38,6 @@ G_BEGIN_DECLS
 #define GTK_IS_ACTION_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_ACTION))
 #define GTK_ACTION_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), GTK_TYPE_ACTION, GtkActionClass))
 
-typedef struct _GtkAction      GtkAction;
-
 typedef struct _GtkActionClass GtkActionClass;
 typedef struct _GtkActionPrivate GtkActionPrivate;
 
@@ -79,14 +77,11 @@ struct _GtkActionPrivate
   GSList *proxies;
 };
 
-struct _GtkAction
-{
-  GObject object;
-
+STLWRT_DECLARE_FTYPE_FPARENT(GtkAction, gtk_action, GObject,
   /*< private >*/
 
   GtkActionPrivate * (private_data);
-};
+)
 
 struct _GtkActionClass
 {
@@ -114,8 +109,6 @@ struct _GtkActionClass
   void (*_gtk_reserved4) (void);
 };
 
-
-GType        SF(gtk_action_get_type)               (void) G_GNUC_CONST;
 GtkAction   *SF(gtk_action_new)                    (const gchar *name,
 						const gchar *label,
 						const gchar *tooltip,

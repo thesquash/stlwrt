@@ -35,8 +35,6 @@ G_BEGIN_DECLS
 
 #define GTK_BUILDER_ERROR                (SF(gtk_builder_error_quark) ())
 
-typedef struct _GtkBuilder        GtkBuilder;
-
 typedef struct _GtkBuilderClass   GtkBuilderClass;
 typedef struct _GtkBuilderPrivate GtkBuilderPrivate;
 
@@ -65,12 +63,9 @@ struct _GtkBuilderPrivate
   gchar *filename;
 };
 
-struct _GtkBuilder
-{
-  GObject parent_instance;
-
+STLWRT_DECLARE_FTYPE_FPARENT(GtkBuilder, gtk_builder, GObject,
   GtkBuilderPrivate * (priv);
-};
+)
 
 struct _GtkBuilderClass
 {
@@ -99,7 +94,6 @@ typedef void (*GtkBuilderConnectFunc) (GtkBuilder    *builder,
 				       gpointer       user_data);
 
 
-GType        SF(gtk_builder_get_type)                (void) G_GNUC_CONST;
 GtkBuilder*  SF(gtk_builder_new)                     (void);
 
 guint        SF(gtk_builder_add_from_file)           (GtkBuilder    *builder,
@@ -129,10 +123,7 @@ void         SF(gtk_builder_connect_signals_full)    (GtkBuilder    *builder,
 void         SF(gtk_builder_set_translation_domain)  (GtkBuilder   	*builder,
                                                   const gchar  	*domain);
 const gchar* SF(gtk_builder_get_translation_domain)  (GtkBuilder   	*builder);
-GType        SF(_T2_gtk_builder_get_type)_from_name      (GtkBuilder   	*builder,
-GType        SF(_3T_gtk_builder_get_type)_from_name      (GtkBuilder   	*builder,
-/* Supplied in the STLWRT public libraries */
-GType        SF(gtk_builder_get_type)_from_name      (GtkBuilder   	*builder,
+GType        SF(gtk_builder_get_type_from_name)      (GtkBuilder   	*builder,
                                                   const char   	*type_name);
 
 gboolean     SF(gtk_builder_value_from_string)       (GtkBuilder    *builder,

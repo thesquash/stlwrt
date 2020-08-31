@@ -31,7 +31,6 @@ G_BEGIN_DECLS
 #define GTK_IS_CELL_EDITABLE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_CELL_EDITABLE))
 #define GTK_CELL_EDITABLE_GET_IFACE(obj)  (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GTK_TYPE_CELL_EDITABLE, GtkCellEditableIface))
 
-typedef struct _GtkCellEditable      GtkCellEditable; /* Dummy typedef */
 typedef struct _GtkCellEditableIface GtkCellEditableIface;
 
 struct _GtkCellEditableIface
@@ -48,10 +47,7 @@ struct _GtkCellEditableIface
 };
 
 
-GType SF(_T2_gtk_cell_editable_get_type)      (void) G_GNUC_CONST;
-GType SF(_3T_gtk_cell_editable_get_type)      (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType SF(gtk_cell_editable_get_type)      (void) G_GNUC_CONST;
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_cell_editable)
 
 void  SF(gtk_cell_editable_start_editing) (GtkCellEditable *cell_editable,
 				       GdkEvent        *event);

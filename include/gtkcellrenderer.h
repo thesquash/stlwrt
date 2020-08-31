@@ -48,17 +48,9 @@ typedef enum
 #define GTK_IS_CELL_RENDERER_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_CELL_RENDERER))
 #define GTK_CELL_RENDERER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_CELL_RENDERER, GtkCellRendererClass))
 
-typedef struct _GtkCellRenderer GtkCellRendererFat;
-typedef struct _GtkCellRenderer GtkCellRendererThin;
-
 typedef struct _GtkCellRendererClass GtkCellRendererClass;
 
-
-/********************************************************************/
-struct _GtkCellRendererProps
-{
-
-
+STLWRT_DECLARE_VTYPE_FPARENT(GtkCellRenderer, gtk_cell_renderer, GObject,
   gfloat  (xalign);
   gfloat  (yalign);
 
@@ -75,44 +67,12 @@ struct _GtkCellRendererProps
   guint  (cell_background_set) : 1;
   guint  (sensitive) : 1;
   guint  (editing) : 1;
-};
+)
 
 struct _GtkCellRendererPrivate
 {
-
-  
   GdkColor cell_background;
 };
-
-struct _GtkCellRendererFat
-{
-  GObject   parent;
-
-  struct _GtkCellRendererProps instance_properties;
-};
-
-struct _GtkCellRendererThin
-{
-  GObject  parent;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkCellRendererFat   fat_instance;
-  struct _GtkCellRendererThin  thin_instance;
-}   GtkCellRenderer;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkCellRendererFat GtkCellRenderer;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkCellRendererThin GtkCellRenderer;
-#endif
-/********************************************************************/
-
-
 
 struct _GtkCellRendererClass
 {
@@ -158,11 +118,6 @@ struct _GtkCellRendererClass
   void (*_gtk_reserved1) (void);
   void (*_gtk_reserved2) (void);
 };
-
-GType            SF(_T2_gtk_cell_renderer_get_type)       (void) G_GNUC_CONST;
-GType            SF(_3T_gtk_cell_renderer_get_type)       (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType            SF(gtk_cell_renderer_get_type)       (void) G_GNUC_CONST;
 
 void             SF(gtk_cell_renderer_get_size)       (GtkCellRenderer      *cell,
 						   GtkWidget            *widget,

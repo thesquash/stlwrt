@@ -36,63 +36,22 @@ G_BEGIN_DECLS
   
 
 #define GTK_BUTTONBOX_DEFAULT -1
- 
-typedef struct _GtkButtonBox       GtkButtonBoxFat;
-typedef struct _GtkButtonBox       GtkButtonBoxThin;
 
 typedef struct _GtkButtonBoxClass  GtkButtonBoxClass;
 
-/********************************************************************/
-struct _GtkButtonBoxProps
-{
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkButtonBox, gtk_button_box, GtkBox,
   gint  (child_min_width);
   gint  (child_min_height);
   gint  (child_ipad_x);
   gint  (child_ipad_y);
   GtkButtonBoxStyle  (layout_style);
-};
-
-struct _GtkButtonBoxFat
-{
-  GtkBoxFat   box;
-
-  struct _GtkButtonBoxProps instance_properties;
-};
-
-struct _GtkButtonBoxThin
-{
-  GtkBoxThin  box;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkButtonBoxFat   fat_instance;
-  struct _GtkButtonBoxThin  thin_instance;
-}   GtkButtonBox;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkButtonBoxFat GtkButtonBox;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkButtonBoxThin GtkButtonBox;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkButtonBoxClass
 {
   GtkBoxClass parent_class;
 };
 
-
-GType SF(_T2_gtk_button_box_get_type) (void) G_GNUC_CONST;
-GType SF(_3T_gtk_button_box_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType SF(gtk_button_box_get_type) (void) G_GNUC_CONST;
 
 GtkButtonBoxStyle SF(gtk_button_box_get_layout)          (GtkButtonBox      *widget);
 void              SF(gtk_button_box_set_layout)          (GtkButtonBox      *widget,

@@ -26,7 +26,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_RECENT_CHOOSER_MENU		(gtk_recent_chooser_menu_get_type ())
+#define GTK_TYPE_RECENT_CHOOSER_MENU		(SF(gtk_recent_chooser_menu_get_type) ())
 #define GTK_RECENT_CHOOSER_MENU(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_RECENT_CHOOSER_MENU, GtkRecentChooserMenu))
 #define GTK_IS_RECENT_CHOOSER_MENU(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_RECENT_CHOOSER_MENU))
 #define GTK_RECENT_CHOOSER_MENU_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_RECENT_CHOOSER_MENU, GtkRecentChooserMenuClass))
@@ -97,10 +97,10 @@ struct _GtkRecentChooserMenuClass
   void (* gtk_recent4) (void);
 };
 
-GType      _T2_gtk_recent_chooser_menu_get_type         (void) G_GNUC_CONST;
-GType      _3T_gtk_recent_chooser_menu_get_type         (void) G_GNUC_CONST;
+GType      SF(_T2_gtk_recent_chooser_menu_get_type)         (void) G_GNUC_CONST;
+GType      SF(_3T_gtk_recent_chooser_menu_get_type)         (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType      gtk_recent_chooser_menu_get_type         (void) G_GNUC_CONST;
+GType      SF(gtk_recent_chooser_menu_get_type)         (void) G_GNUC_CONST;
 
 GtkWidget *SF(gtk_recent_chooser_menu_new)              (void);
 GtkWidget *SF(gtk_recent_chooser_menu_new_for_manager)  (GtkRecentManager     *manager);

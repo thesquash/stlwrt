@@ -25,7 +25,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_VBOX		 (gtk_vbox_get_type ())
+#define GTK_TYPE_VBOX		 (SF(gtk_vbox_get_type) ())
 #define GTK_VBOX(obj)		 (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_VBOX, GtkVBox))
 #define GTK_VBOX_CLASS(klass)	 (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_VBOX, GtkVBoxClass))
 #define GTK_IS_VBOX(obj)	 (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_VBOX))
@@ -48,7 +48,7 @@ struct _GtkVBoxClass
 };
 
 
-GType       gtk_vbox_get_type (void) G_GNUC_CONST;
+GType       SF(gtk_vbox_get_type) (void) G_GNUC_CONST;
 GtkWidget * SF(gtk_vbox_new)      (gboolean homogeneous,
                                gint     spacing);
 

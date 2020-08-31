@@ -29,7 +29,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_LINK_BUTTON		(gtk_link_button_get_type ())
+#define GTK_TYPE_LINK_BUTTON		(SF(gtk_link_button_get_type) ())
 #define GTK_LINK_BUTTON(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_LINK_BUTTON, GtkLinkButton))
 #define GTK_IS_LINK_BUTTON(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_LINK_BUTTON))
 #define GTK_LINK_BUTTON_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_LINK_BUTTON, GtkLinkButtonClass))
@@ -73,7 +73,7 @@ struct _GtkLinkButtonClass
 };
 
 
-GType                 gtk_link_button_get_type          (void) G_GNUC_CONST;
+GType                 SF(gtk_link_button_get_type)          (void) G_GNUC_CONST;
 
 GtkWidget *           SF(gtk_link_button_new)               (const gchar   *uri);
 GtkWidget *           SF(gtk_link_button_new_with_label)    (const gchar   *uri,

@@ -24,7 +24,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_TRAY_ICON		(gtk_tray_icon_get_type ())
+#define GTK_TYPE_TRAY_ICON		(SF(gtk_tray_icon_get_type) ())
 #define GTK_TRAY_ICON(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_TRAY_ICON, GtkTrayIcon))
 #define GTK_TRAY_ICON_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_TRAY_ICON, GtkTrayIconClass))
 #define GTK_IS_TRAY_ICON(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TRAY_ICON))
@@ -58,7 +58,7 @@ struct _GtkTrayIconClass
 };
 
 
-GType          gtk_tray_icon_get_type         (void) G_GNUC_CONST;
+GType          SF(gtk_tray_icon_get_type)         (void) G_GNUC_CONST;
 
 GtkTrayIcon   *_gtk_tray_icon_new_for_screen  (GdkScreen   *screen,
 					       const gchar *name);

@@ -29,7 +29,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_STATUS_ICON         (gtk_status_icon_get_type ())
+#define GTK_TYPE_STATUS_ICON         (SF(gtk_status_icon_get_type) ())
 #define GTK_STATUS_ICON(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GTK_TYPE_STATUS_ICON, GtkStatusIcon))
 #define GTK_STATUS_ICON_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST ((k), GTK_TYPE_STATUS_ICON, GtkStatusIconClass))
 #define GTK_IS_STATUS_ICON(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GTK_TYPE_STATUS_ICON))
@@ -98,7 +98,7 @@ struct _GtkStatusIconClass
 };
 
 
-GType                 gtk_status_icon_get_type           (void) G_GNUC_CONST;
+GType                 SF(gtk_status_icon_get_type)           (void) G_GNUC_CONST;
 
 GtkStatusIcon        *SF(gtk_status_icon_new)                (void);
 GtkStatusIcon        *SF(gtk_status_icon_new_from_pixbuf)    (GdkPixbuf          *pixbuf);

@@ -26,7 +26,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_FILE_CHOOSER_BUTTON            (gtk_file_chooser_button_get_type ())
+#define GTK_TYPE_FILE_CHOOSER_BUTTON            (SF(gtk_file_chooser_button_get_type) ())
 #define GTK_FILE_CHOOSER_BUTTON(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_FILE_CHOOSER_BUTTON, GtkFileChooserButton))
 #define GTK_FILE_CHOOSER_BUTTON_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_FILE_CHOOSER_BUTTON, GtkFileChooserButtonClass))
 #define GTK_IS_FILE_CHOOSER_BUTTON(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FILE_CHOOSER_BUTTON))
@@ -110,10 +110,10 @@ struct _GtkFileChooserButtonClass
 };
 
 
-GType                 _T2_gtk_file_chooser_button_get_type         (void) G_GNUC_CONST;
-GType                 _3T_gtk_file_chooser_button_get_type         (void) G_GNUC_CONST;
+GType                 SF(_T2_gtk_file_chooser_button_get_type)         (void) G_GNUC_CONST;
+GType                 SF(_3T_gtk_file_chooser_button_get_type)         (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType                 gtk_file_chooser_button_get_type         (void) G_GNUC_CONST;
+GType                 SF(gtk_file_chooser_button_get_type)         (void) G_GNUC_CONST;
 GtkWidget *           SF(gtk_file_chooser_button_new)              (const gchar          *title,
 								GtkFileChooserAction  action);
 

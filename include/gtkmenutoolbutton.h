@@ -27,7 +27,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_MENU_TOOL_BUTTON         (gtk_menu_tool_button_get_type ())
+#define GTK_TYPE_MENU_TOOL_BUTTON         (SF(gtk_menu_tool_button_get_type) ())
 #define GTK_MENU_TOOL_BUTTON(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GTK_TYPE_MENU_TOOL_BUTTON, GtkMenuToolButton))
 #define GTK_MENU_TOOL_BUTTON_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), GTK_TYPE_MENU_TOOL_BUTTON, GtkMenuToolButtonClass))
 #define GTK_IS_MENU_TOOL_BUTTON(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GTK_TYPE_MENU_TOOL_BUTTON))
@@ -71,7 +71,7 @@ struct _GtkMenuToolButtonClass
 };
 
 
-GType         gtk_menu_tool_button_get_type       (void) G_GNUC_CONST;
+GType         SF(gtk_menu_tool_button_get_type)       (void) G_GNUC_CONST;
 GtkToolItem  *SF(gtk_menu_tool_button_new)            (GtkWidget   *icon_widget,
                                                    const gchar *label);
 GtkToolItem  *SF(gtk_menu_tool_button_new_from_stock) (const gchar *stock_id);

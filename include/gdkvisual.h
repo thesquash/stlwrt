@@ -24,7 +24,7 @@
 
 G_BEGIN_DECLS
 
-#define GDK_TYPE_VISUAL              (gdk_visual_get_type ())
+#define GDK_TYPE_VISUAL              (SF(gdk_visual_get_type) ())
 #define GDK_VISUAL(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_VISUAL, GdkVisual))
 #define GDK_VISUAL_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_VISUAL, GdkVisualClass))
 #define GDK_IS_VISUAL(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_VISUAL))
@@ -117,10 +117,10 @@ typedef struct _GdkVisualThin GdkVisual;
 
 
 
-GType         _T2_gdk_visual_get_type            (void) G_GNUC_CONST;
-GType         _3T_gdk_visual_get_type            (void) G_GNUC_CONST;
+GType         SF(_T2_gdk_visual_get_type)            (void) G_GNUC_CONST;
+GType         SF(_3T_gdk_visual_get_type)            (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType         gdk_visual_get_type            (void) G_GNUC_CONST;
+GType         SF(gdk_visual_get_type)            (void) G_GNUC_CONST;
 
 #ifndef GDK_MULTIHEAD_SAFE
 gint	      SF(gdk_visual_get_best_depth)	     (void);

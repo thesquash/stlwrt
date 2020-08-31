@@ -26,7 +26,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_FILE_CHOOSER_DIALOG             (gtk_file_chooser_dialog_get_type ())
+#define GTK_TYPE_FILE_CHOOSER_DIALOG             (SF(gtk_file_chooser_dialog_get_type) ())
 #define GTK_FILE_CHOOSER_DIALOG(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_FILE_CHOOSER_DIALOG, GtkFileChooserDialog))
 #define GTK_FILE_CHOOSER_DIALOG_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_FILE_CHOOSER_DIALOG, GtkFileChooserDialogClass))
 #define GTK_IS_FILE_CHOOSER_DIALOG(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FILE_CHOOSER_DIALOG))
@@ -51,7 +51,7 @@ struct _GtkFileChooserDialogClass
 };
 
 
-GType      gtk_file_chooser_dialog_get_type         (void) G_GNUC_CONST;
+GType      SF(gtk_file_chooser_dialog_get_type)         (void) G_GNUC_CONST;
 GtkWidget *SF(gtk_file_chooser_dialog_new)              (const gchar          *title,
 						     GtkWindow            *parent,
 						     GtkFileChooserAction  action,

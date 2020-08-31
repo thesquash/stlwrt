@@ -31,7 +31,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_ASSISTANT         (gtk_assistant_get_type ())
+#define GTK_TYPE_ASSISTANT         (SF(gtk_assistant_get_type) ())
 #define GTK_ASSISTANT(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GTK_TYPE_ASSISTANT, GtkAssistant))
 #define GTK_ASSISTANT_CLASS(c)     (G_TYPE_CHECK_CLASS_CAST    ((c), GTK_TYPE_ASSISTANT, GtkAssistantClass))
 #define GTK_IS_ASSISTANT(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GTK_TYPE_ASSISTANT))
@@ -141,10 +141,10 @@ struct _GtkAssistantClass
  */
 typedef gint (*GtkAssistantPageFunc) (gint current_page, gpointer data);
 
-GType                 _T2_gtk_assistant_get_type              (void) G_GNUC_CONST;
-GType                 _3T_gtk_assistant_get_type              (void) G_GNUC_CONST;
+GType                 SF(_T2_gtk_assistant_get_type)              (void) G_GNUC_CONST;
+GType                 SF(_3T_gtk_assistant_get_type)              (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType                 gtk_assistant_get_type              (void) G_GNUC_CONST;
+GType                 SF(gtk_assistant_get_type)              (void) G_GNUC_CONST;
 GtkWidget            *SF(gtk_assistant_new)                   (void);
 gint                  SF(gtk_assistant_get_current_page)      (GtkAssistant         *assistant);
 void                  SF(gtk_assistant_set_current_page)      (GtkAssistant         *assistant,

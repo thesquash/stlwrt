@@ -29,7 +29,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_SPINNER           (gtk_spinner_get_type ())
+#define GTK_TYPE_SPINNER           (SF(gtk_spinner_get_type) ())
 #define GTK_SPINNER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_SPINNER, GtkSpinner))
 #define GTK_SPINNER_CLASS(obj)     (G_TYPE_CHECK_CLASS_CAST ((obj), GTK_SPINNER,  GtkSpinnerClass))
 #define GTK_IS_SPINNER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_SPINNER))
@@ -63,7 +63,7 @@ struct _GtkSpinnerClass
 };
 
 
-GType      gtk_spinner_get_type  (void) G_GNUC_CONST;
+GType      SF(gtk_spinner_get_type)  (void) G_GNUC_CONST;
 GtkWidget *SF(gtk_spinner_new) (void);
 void       SF(gtk_spinner_start)      (GtkSpinner *spinner);
 void       SF(gtk_spinner_stop)       (GtkSpinner *spinner);

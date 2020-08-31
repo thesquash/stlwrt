@@ -28,7 +28,7 @@
 G_BEGIN_DECLS
 
 
-#define GTK_TYPE_SCROLLED_WINDOW            (gtk_scrolled_window_get_type ())
+#define GTK_TYPE_SCROLLED_WINDOW            (SF(gtk_scrolled_window_get_type) ())
 #define GTK_SCROLLED_WINDOW(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_SCROLLED_WINDOW, GtkScrolledWindow))
 #define GTK_SCROLLED_WINDOW_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_SCROLLED_WINDOW, GtkScrolledWindowClass))
 #define GTK_IS_SCROLLED_WINDOW(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_SCROLLED_WINDOW))
@@ -120,10 +120,10 @@ struct _GtkScrolledWindowClass
 };
 
 
-GType          _T2_gtk_scrolled_window_get_type          (void) G_GNUC_CONST;
-GType          _3T_gtk_scrolled_window_get_type          (void) G_GNUC_CONST;
+GType          SF(_T2_gtk_scrolled_window_get_type)          (void) G_GNUC_CONST;
+GType          SF(_3T_gtk_scrolled_window_get_type)          (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType          gtk_scrolled_window_get_type          (void) G_GNUC_CONST;
+GType          SF(gtk_scrolled_window_get_type)          (void) G_GNUC_CONST;
 GtkWidget*     SF(gtk_scrolled_window_new)               (GtkAdjustment     *hadjustment,
 						      GtkAdjustment     *vadjustment);
 void           SF(gtk_scrolled_window_set_hadjustment)   (GtkScrolledWindow *scrolled_window,

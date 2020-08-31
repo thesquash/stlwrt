@@ -27,7 +27,7 @@ G_BEGIN_DECLS
 /* Maximum size of text buffer, in bytes */
 #define GTK_ENTRY_BUFFER_MAX_SIZE        G_MAXUSHORT
 
-#define GTK_TYPE_ENTRY_BUFFER            (gtk_entry_buffer_get_type ())
+#define GTK_TYPE_ENTRY_BUFFER            (SF(gtk_entry_buffer_get_type) ())
 #define GTK_ENTRY_BUFFER(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_ENTRY_BUFFER, GtkEntryBuffer))
 #define GTK_ENTRY_BUFFER_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_ENTRY_BUFFER, GtkEntryBufferClass))
 #define GTK_IS_ENTRY_BUFFER(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_ENTRY_BUFFER))
@@ -100,7 +100,7 @@ struct _GtkEntryBufferClass
 };
 
 
-GType                     gtk_entry_buffer_get_type               (void) G_GNUC_CONST;
+GType                     SF(gtk_entry_buffer_get_type)               (void) G_GNUC_CONST;
 
 GtkEntryBuffer*           SF(gtk_entry_buffer_new)                    (const gchar     *initial_chars,
                                                                    gint             n_initial_chars);

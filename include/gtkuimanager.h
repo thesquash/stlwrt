@@ -33,7 +33,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_UI_MANAGER            (gtk_ui_manager_get_type ())
+#define GTK_TYPE_UI_MANAGER            (SF(gtk_ui_manager_get_type) ())
 #define GTK_UI_MANAGER(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_UI_MANAGER, GtkUIManager))
 #define GTK_UI_MANAGER_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_UI_MANAGER, GtkUIManagerClass))
 #define GTK_IS_UI_MANAGER(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_UI_MANAGER))
@@ -103,10 +103,10 @@ typedef enum {
 #define gtk_ui_manager_add_ui_from_file gtk_ui_manager_add_ui_from_file_utf8
 #endif
 
-GType          _T2_gtk_ui_manager_get_type            (void) G_GNUC_CONST;
-GType          _3T_gtk_ui_manager_get_type            (void) G_GNUC_CONST;
+GType          SF(_T2_gtk_ui_manager_get_type)            (void) G_GNUC_CONST;
+GType          SF(_3T_gtk_ui_manager_get_type)            (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType          gtk_ui_manager_get_type            (void) G_GNUC_CONST;
+GType          SF(gtk_ui_manager_get_type)            (void) G_GNUC_CONST;
 GtkUIManager  *SF(gtk_ui_manager_new)                 (void);
 void           SF(gtk_ui_manager_set_add_tearoffs)    (GtkUIManager          *self,
 						   gboolean               add_tearoffs);

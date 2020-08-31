@@ -25,7 +25,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_IM_CONTEXT              (gtk_im_context_get_type ())
+#define GTK_TYPE_IM_CONTEXT              (SF(gtk_im_context_get_type) ())
 #define GTK_IM_CONTEXT(obj)              (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_IM_CONTEXT, GtkIMContext))
 #define GTK_IM_CONTEXT_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_IM_CONTEXT, GtkIMContextClass))
 #define GTK_IS_IM_CONTEXT(obj)           (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_IM_CONTEXT))
@@ -92,7 +92,7 @@ struct _GtkIMContextClass
 };
 
 
-GType    gtk_im_context_get_type            (void) G_GNUC_CONST;
+GType    SF(gtk_im_context_get_type)            (void) G_GNUC_CONST;
 
 void     SF(gtk_im_context_set_client_window)   (GtkIMContext       *context,
 					     GdkWindow          *window);

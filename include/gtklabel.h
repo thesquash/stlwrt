@@ -26,7 +26,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_LABEL		  (gtk_label_get_type ())
+#define GTK_TYPE_LABEL		  (SF(gtk_label_get_type) ())
 #define GTK_LABEL(obj)		  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_LABEL, GtkLabel))
 #define GTK_LABEL_CLASS(klass)	  (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_LABEL, GtkLabelClass))
 #define GTK_IS_LABEL(obj)	  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_LABEL))
@@ -127,10 +127,10 @@ struct _GtkLabelClass
   void (*_gtk_reserved3) (void);
 };
 
-GType                 _T2_gtk_label_get_type          (void) G_GNUC_CONST;
-GType                 _3T_gtk_label_get_type          (void) G_GNUC_CONST;
+GType                 SF(_T2_gtk_label_get_type)          (void) G_GNUC_CONST;
+GType                 SF(_3T_gtk_label_get_type)          (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType                 gtk_label_get_type          (void) G_GNUC_CONST;
+GType                 SF(gtk_label_get_type)          (void) G_GNUC_CONST;
 GtkWidget*            SF(gtk_label_new)               (const gchar   *str);
 GtkWidget*            SF(gtk_label_new_with_mnemonic) (const gchar   *str);
 void                  SF(gtk_label_set_text)          (GtkLabel      *label,

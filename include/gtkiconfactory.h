@@ -28,14 +28,14 @@ G_BEGIN_DECLS
 
 typedef struct _GtkIconFactoryClass GtkIconFactoryClass;
 
-#define GTK_TYPE_ICON_FACTORY              (gtk_icon_factory_get_type ())
+#define GTK_TYPE_ICON_FACTORY              (SF(gtk_icon_factory_get_type) ())
 #define GTK_ICON_FACTORY(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GTK_TYPE_ICON_FACTORY, GtkIconFactory))
 #define GTK_ICON_FACTORY_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_ICON_FACTORY, GtkIconFactoryClass))
 #define GTK_IS_ICON_FACTORY(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GTK_TYPE_ICON_FACTORY))
 #define GTK_IS_ICON_FACTORY_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_ICON_FACTORY))
 #define GTK_ICON_FACTORY_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ICON_FACTORY, GtkIconFactoryClass))
-#define GTK_TYPE_ICON_SET                  (gtk_icon_set_get_type ())
-#define GTK_TYPE_ICON_SOURCE               (gtk_icon_source_get_type ())
+#define GTK_TYPE_ICON_SET                  (SF(gtk_icon_set_get_type) ())
+#define GTK_TYPE_ICON_SOURCE               (SF(gtk_icon_source_get_type) ())
 
 /********************************************************************/
 struct _GtkIconFactoryProps
@@ -92,10 +92,10 @@ struct _GtkIconFactoryClass
 #define gtk_icon_source_get_filename gtk_icon_source_get_filename_utf8
 #endif
 
-GType           _T2_gtk_icon_factory_get_type (void) G_GNUC_CONST;
-GType           _3T_gtk_icon_factory_get_type (void) G_GNUC_CONST;
+GType           SF(_T2_gtk_icon_factory_get_type) (void) G_GNUC_CONST;
+GType           SF(_3T_gtk_icon_factory_get_type) (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType           gtk_icon_factory_get_type (void) G_GNUC_CONST;
+GType           SF(gtk_icon_factory_get_type) (void) G_GNUC_CONST;
 GtkIconFactory* SF(gtk_icon_factory_new)      (void);
 void            SF(gtk_icon_factory_add)      (GtkIconFactory *factory,
                                            const gchar    *stock_id,
@@ -140,10 +140,10 @@ const gchar *         SF(gtk_icon_size_get_name)       (GtkIconSize  size);
 
 /* Icon sets */
 
-GType       _T2_gtk_icon_set_get_type        (void) G_GNUC_CONST;
-GType       _3T_gtk_icon_set_get_type        (void) G_GNUC_CONST;
+GType       SF(_T2_gtk_icon_set_get_type)        (void) G_GNUC_CONST;
+GType       SF(_3T_gtk_icon_set_get_type)        (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType       gtk_icon_set_get_type        (void) G_GNUC_CONST;
+GType       SF(gtk_icon_set_get_type)        (void) G_GNUC_CONST;
 GtkIconSet* SF(gtk_icon_set_new)             (void);
 GtkIconSet* SF(gtk_icon_set_new_from_pixbuf) (GdkPixbuf       *pixbuf);
 
@@ -170,10 +170,10 @@ void           SF(gtk_icon_set_get_sizes)    (GtkIconSet          *icon_set,
                                           GtkIconSize        **sizes,
                                           gint                *n_sizes);
 
-GType          _T2_gtk_icon_source_get_type                 (void) G_GNUC_CONST;
-GType          _3T_gtk_icon_source_get_type                 (void) G_GNUC_CONST;
+GType          SF(_T2_gtk_icon_source_get_type)                 (void) G_GNUC_CONST;
+GType          SF(_3T_gtk_icon_source_get_type)                 (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType          gtk_icon_source_get_type                 (void) G_GNUC_CONST;
+GType          SF(gtk_icon_source_get_type)                 (void) G_GNUC_CONST;
 GtkIconSource* SF(gtk_icon_source_new)                      (void);
 GtkIconSource* SF(gtk_icon_source_copy)                     (const GtkIconSource *source);
 void           SF(gtk_icon_source_free)                     (GtkIconSource       *source);

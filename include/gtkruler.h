@@ -28,7 +28,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_RULER            (gtk_ruler_get_type ())
+#define GTK_TYPE_RULER            (SF(gtk_ruler_get_type) ())
 #define GTK_RULER(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_RULER, GtkRuler))
 #define GTK_RULER_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_RULER, GtkRulerClass))
 #define GTK_IS_RULER(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_RULER))
@@ -131,10 +131,10 @@ struct _GtkRulerMetric
 };
 
 
-GType           _T2_gtk_ruler_get_type   (void) G_GNUC_CONST;
-GType           _3T_gtk_ruler_get_type   (void) G_GNUC_CONST;
+GType           SF(_T2_gtk_ruler_get_type)   (void) G_GNUC_CONST;
+GType           SF(_3T_gtk_ruler_get_type)   (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType           gtk_ruler_get_type   (void) G_GNUC_CONST;
+GType           SF(gtk_ruler_get_type)   (void) G_GNUC_CONST;
 void            SF(gtk_ruler_set_metric) (GtkRuler       *ruler,
                                       GtkMetricType   metric);
 GtkMetricType   SF(gtk_ruler_get_metric) (GtkRuler       *ruler);

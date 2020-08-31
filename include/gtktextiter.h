@@ -40,7 +40,7 @@ typedef enum {
 typedef struct _GtkTextBuffer GtkTextBufferFat;
 typedef struct _GtkTextBuffer GtkTextBufferThin;
 
-#define GTK_TYPE_TEXT_ITER     (gtk_text_iter_get_type ())
+#define GTK_TYPE_TEXT_ITER     (SF(gtk_text_iter_get_type) ())
 
 struct _GtkTextIter {
   /* GtkTextIter is an opaque datatype; ignore all these fields.
@@ -77,10 +77,10 @@ GtkTextBuffer *SF(gtk_text_iter_get_buffer) (const GtkTextIter *iter);
 GtkTextIter *SF(gtk_text_iter_copy)     (const GtkTextIter *iter);
 void         SF(gtk_text_iter_free)     (GtkTextIter       *iter);
 
-GType        _T2_gtk_text_iter_get_type (void) G_GNUC_CONST;
-GType        _3T_gtk_text_iter_get_type (void) G_GNUC_CONST;
+GType        SF(_T2_gtk_text_iter_get_type) (void) G_GNUC_CONST;
+GType        SF(_3T_gtk_text_iter_get_type) (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType        gtk_text_iter_get_type (void) G_GNUC_CONST;
+GType        SF(gtk_text_iter_get_type) (void) G_GNUC_CONST;
 
 /*
  * Convert to different kinds of index

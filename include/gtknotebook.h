@@ -26,7 +26,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_NOTEBOOK                  (gtk_notebook_get_type ())
+#define GTK_TYPE_NOTEBOOK                  (SF(gtk_notebook_get_type) ())
 #define GTK_NOTEBOOK(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_NOTEBOOK, GtkNotebook))
 #define GTK_NOTEBOOK_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_NOTEBOOK, GtkNotebookClass))
 #define GTK_IS_NOTEBOOK(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_NOTEBOOK))
@@ -171,10 +171,10 @@ typedef GtkNotebook* (*GtkNotebookWindowCreationFunc) (GtkNotebook *source,
  *           Creation, insertion, deletion                 *
  ***********************************************************/
 
-GType   _T2_gtk_notebook_get_type       (void) G_GNUC_CONST;
-GType   _3T_gtk_notebook_get_type       (void) G_GNUC_CONST;
+GType   SF(_T2_gtk_notebook_get_type)       (void) G_GNUC_CONST;
+GType   SF(_3T_gtk_notebook_get_type)       (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType   gtk_notebook_get_type       (void) G_GNUC_CONST;
+GType   SF(gtk_notebook_get_type)       (void) G_GNUC_CONST;
 GtkWidget * SF(gtk_notebook_new)        (void);
 gint SF(gtk_notebook_append_page)       (GtkNotebook *notebook,
 				     GtkWidget   *child,

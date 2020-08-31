@@ -31,7 +31,7 @@ typedef struct _GtkPathBar      GtkPathBarThin;
 typedef struct _GtkPathBarClass GtkPathBarClass;
 
 
-#define GTK_TYPE_PATH_BAR                 (gtk_path_bar_get_type ())
+#define GTK_TYPE_PATH_BAR                 (SF(gtk_path_bar_get_type) ())
 #define GTK_PATH_BAR(obj)                 (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PATH_BAR, GtkPathBar))
 #define GTK_PATH_BAR_CLASS(klass)         (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_PATH_BAR, GtkPathBarClass))
 #define GTK_IS_PATH_BAR(obj)              (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_PATH_BAR))
@@ -114,10 +114,10 @@ struct _GtkPathBarClass
 			 gboolean     child_is_hidden);
 };
 
-GType    _T2_gtk_path_bar_get_type (void) G_GNUC_CONST;
-GType    _3T_gtk_path_bar_get_type (void) G_GNUC_CONST;
+GType    SF(_T2_gtk_path_bar_get_type) (void) G_GNUC_CONST;
+GType    SF(_3T_gtk_path_bar_get_type) (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType    gtk_path_bar_get_type (void) G_GNUC_CONST;
+GType    SF(gtk_path_bar_get_type) (void) G_GNUC_CONST;
 void     _gtk_path_bar_set_file_system (GtkPathBar         *path_bar,
 					GtkFileSystem      *file_system);
 gboolean _gtk_path_bar_set_file        (GtkPathBar         *path_bar,

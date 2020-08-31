@@ -25,7 +25,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_IM_MULTICONTEXT              (gtk_im_multicontext_get_type ())
+#define GTK_TYPE_IM_MULTICONTEXT              (SF(gtk_im_multicontext_get_type) ())
 #define GTK_IM_MULTICONTEXT(obj)              (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_IM_MULTICONTEXT, GtkIMMulticontext))
 #define GTK_IM_MULTICONTEXT_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_IM_MULTICONTEXT, GtkIMMulticontextClass))
 #define GTK_IS_IM_MULTICONTEXT(obj)           (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_IM_MULTICONTEXT))
@@ -73,10 +73,10 @@ struct _GtkIMMulticontextClass
   void (*_gtk_reserved4) (void);
 };
 
-GType         _T2_gtk_im_multicontext_get_type (void) G_GNUC_CONST;
-GType         _3T_gtk_im_multicontext_get_type (void) G_GNUC_CONST;
+GType         SF(_T2_gtk_im_multicontext_get_type) (void) G_GNUC_CONST;
+GType         SF(_3T_gtk_im_multicontext_get_type) (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType         gtk_im_multicontext_get_type (void) G_GNUC_CONST;
+GType         SF(gtk_im_multicontext_get_type) (void) G_GNUC_CONST;
 GtkIMContext *SF(gtk_im_multicontext_new)      (void);
 
 void          SF(gtk_im_multicontext_append_menuitems) (GtkIMMulticontext *context,

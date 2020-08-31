@@ -32,7 +32,7 @@ typedef struct _GtkRcContext    GtkRcContext;
 
 typedef struct _GtkRcStyleClass GtkRcStyleClass;
 
-#define GTK_TYPE_RC_STYLE              (gtk_rc_style_get_type ())
+#define GTK_TYPE_RC_STYLE              (SF(gtk_rc_style_get_type) ())
 #define GTK_RC_STYLE(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GTK_TYPE_RC_STYLE, GtkRcStyle))
 #define GTK_RC_STYLE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_RC_STYLE, GtkRcStyleClass))
 #define GTK_IS_RC_STYLE(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GTK_TYPE_RC_STYLE))
@@ -165,10 +165,10 @@ void	  SF(gtk_rc_add_class_style)	(GtkRcStyle   *rc_style,
 #endif /* GTK_DISABLE_DEPRECATED */
 
 
-GType       _T2_gtk_rc_style_get_type   (void) G_GNUC_CONST;
-GType       _3T_gtk_rc_style_get_type   (void) G_GNUC_CONST;
+GType       SF(_T2_gtk_rc_style_get_type)   (void) G_GNUC_CONST;
+GType       SF(_3T_gtk_rc_style_get_type)   (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType       gtk_rc_style_get_type   (void) G_GNUC_CONST;
+GType       SF(gtk_rc_style_get_type)   (void) G_GNUC_CONST;
 GtkRcStyle* SF(gtk_rc_style_new)        (void);
 GtkRcStyle* SF(gtk_rc_style_copy)       (GtkRcStyle *orig);
 

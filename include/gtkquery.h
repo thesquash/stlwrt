@@ -27,7 +27,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_QUERY		(_gtk_query_get_type ())
+#define GTK_TYPE_QUERY		(SF(_gtk_query_get_type) ())
 #define GTK_QUERY(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_QUERY, GtkQuery))
 #define GTK_QUERY_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_QUERY, GtkQueryClass))
 #define GTK_IS_QUERY(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_QUERY))
@@ -60,7 +60,7 @@ struct _GtkQueryClass
   GObjectClass parent_class;
 };
 
-GType     _gtk_query_get_type       (void);
+GType     SF(_gtk_query_get_type)       (void);
 gboolean  _gtk_query_enabled        (void);
 
 GtkQuery* _gtk_query_new            (void);

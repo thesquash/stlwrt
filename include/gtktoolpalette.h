@@ -28,7 +28,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_TOOL_PALETTE           (gtk_tool_palette_get_type ())
+#define GTK_TYPE_TOOL_PALETTE           (SF(gtk_tool_palette_get_type) ())
 #define GTK_TOOL_PALETTE(obj)           (G_TYPE_CHECK_INSTANCE_CAST (obj, GTK_TYPE_TOOL_PALETTE, GtkToolPalette))
 #define GTK_TOOL_PALETTE_CLASS(cls)     (G_TYPE_CHECK_CLASS_CAST (cls, GTK_TYPE_TOOL_PALETTE, GtkToolPaletteClass))
 #define GTK_IS_TOOL_PALETTE(obj)        (G_TYPE_CHECK_INSTANCE_TYPE (obj, GTK_TYPE_TOOL_PALETTE))
@@ -107,7 +107,7 @@ struct _GtkToolPaletteClass
 };
 
 
-GType                          gtk_tool_palette_get_type              (void) G_GNUC_CONST;
+GType                          SF(gtk_tool_palette_get_type)              (void) G_GNUC_CONST;
 GtkWidget*                     SF(gtk_tool_palette_new)                   (void);
 
 void                           SF(gtk_tool_palette_set_group_position)    (GtkToolPalette            *palette,

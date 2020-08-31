@@ -26,7 +26,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_COLOR_SELECTION_DIALOG            (gtk_color_selection_dialog_get_type ())
+#define GTK_TYPE_COLOR_SELECTION_DIALOG            (SF(gtk_color_selection_dialog_get_type) ())
 #define GTK_COLOR_SELECTION_DIALOG(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_COLOR_SELECTION_DIALOG, GtkColorSelectionDialog))
 #define GTK_COLOR_SELECTION_DIALOG_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_COLOR_SELECTION_DIALOG, GtkColorSelectionDialogClass))
 #define GTK_IS_COLOR_SELECTION_DIALOG(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_COLOR_SELECTION_DIALOG))
@@ -94,10 +94,10 @@ struct _GtkColorSelectionDialogClass
 
 
 /* ColorSelectionDialog */
-GType      _T2_gtk_color_selection_dialog_get_type            (void) G_GNUC_CONST;
-GType      _3T_gtk_color_selection_dialog_get_type            (void) G_GNUC_CONST;
+GType      SF(_T2_gtk_color_selection_dialog_get_type)            (void) G_GNUC_CONST;
+GType      SF(_3T_gtk_color_selection_dialog_get_type)            (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType      gtk_color_selection_dialog_get_type            (void) G_GNUC_CONST;
+GType      SF(gtk_color_selection_dialog_get_type)            (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_color_selection_dialog_new)                 (const gchar *title);
 GtkWidget* SF(gtk_color_selection_dialog_get_color_selection) (GtkColorSelectionDialog *colorsel);
 

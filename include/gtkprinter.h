@@ -25,7 +25,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_PRINT_CAPABILITIES (gtk_print_capabilities_get_type ())
+#define GTK_TYPE_PRINT_CAPABILITIES (SF(gtk_print_capabilities_get_type) ())
 
 /* Note, this type is manually registered with GObject in gtkprinter.c
  * If you add any flags, update the registration as well!
@@ -44,12 +44,12 @@ typedef enum
   GTK_PRINT_CAPABILITY_NUMBER_UP_LAYOUT = 1 << 9
 } GtkPrintCapabilities;
 
-GType _T2_gtk_print_capabilities_get_type (void) G_GNUC_CONST;
-GType _3T_gtk_print_capabilities_get_type (void) G_GNUC_CONST;
+GType SF(_T2_gtk_print_capabilities_get_type) (void) G_GNUC_CONST;
+GType SF(_3T_gtk_print_capabilities_get_type) (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType gtk_print_capabilities_get_type (void) G_GNUC_CONST;
+GType SF(gtk_print_capabilities_get_type) (void) G_GNUC_CONST;
 
-#define GTK_TYPE_PRINTER                  (gtk_printer_get_type ())
+#define GTK_TYPE_PRINTER                  (SF(gtk_printer_get_type) ())
 #define GTK_PRINTER(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PRINTER, GtkPrinter))
 #define GTK_PRINTER_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_PRINTER, GtkPrinterClass))
 #define GTK_IS_PRINTER(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_PRINTER))
@@ -114,7 +114,7 @@ struct _GtkPrinterClass
 };
 
 
-GType                    gtk_printer_get_type              (void) G_GNUC_CONST;
+GType                    SF(gtk_printer_get_type)              (void) G_GNUC_CONST;
 GtkPrinter              *gtk_printer_new                   (const gchar     *name,
 							    GtkPrintBackend *backend,
 							    gboolean         virtual_);

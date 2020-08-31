@@ -33,7 +33,7 @@ G_BEGIN_DECLS
 
 typedef struct _GdkScreenClass GdkScreenClass;
 
-#define GDK_TYPE_SCREEN            (gdk_screen_get_type ())
+#define GDK_TYPE_SCREEN            (SF(gdk_screen_get_type) ())
 #define GDK_SCREEN(object)         (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_SCREEN, GdkScreen))
 #define GDK_SCREEN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_SCREEN, GdkScreenClass))
 #define GDK_IS_SCREEN(object)      (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_SCREEN))
@@ -63,10 +63,10 @@ struct _GdkScreenClass
   void (*monitors_changed) (GdkScreen *screen);
 };
 
-GType        _T2_gdk_screen_get_type              (void) G_GNUC_CONST;
-GType        _3T_gdk_screen_get_type              (void) G_GNUC_CONST;
+GType        SF(_T2_gdk_screen_get_type)              (void) G_GNUC_CONST;
+GType        SF(_3T_gdk_screen_get_type)              (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType        gdk_screen_get_type              (void) G_GNUC_CONST;
+GType        SF(gdk_screen_get_type)              (void) G_GNUC_CONST;
 GdkColormap *SF(gdk_screen_get_default_colormap)  (GdkScreen   *screen);
 void         SF(gdk_screen_set_default_colormap)  (GdkScreen   *screen,
 					       GdkColormap *colormap);

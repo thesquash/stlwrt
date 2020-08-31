@@ -27,7 +27,7 @@
 
 G_BEGIN_DECLS  
 
-#define GTK_TYPE_BUTTON_BOX             (gtk_button_box_get_type ())
+#define GTK_TYPE_BUTTON_BOX             (SF(gtk_button_box_get_type) ())
 #define GTK_BUTTON_BOX(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_BUTTON_BOX, GtkButtonBox))
 #define GTK_BUTTON_BOX_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_BUTTON_BOX, GtkButtonBoxClass))
 #define GTK_IS_BUTTON_BOX(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_BUTTON_BOX))
@@ -89,10 +89,10 @@ struct _GtkButtonBoxClass
 };
 
 
-GType _T2_gtk_button_box_get_type (void) G_GNUC_CONST;
-GType _3T_gtk_button_box_get_type (void) G_GNUC_CONST;
+GType SF(_T2_gtk_button_box_get_type) (void) G_GNUC_CONST;
+GType SF(_3T_gtk_button_box_get_type) (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType gtk_button_box_get_type (void) G_GNUC_CONST;
+GType SF(gtk_button_box_get_type) (void) G_GNUC_CONST;
 
 GtkButtonBoxStyle SF(gtk_button_box_get_layout)          (GtkButtonBox      *widget);
 void              SF(gtk_button_box_set_layout)          (GtkButtonBox      *widget,

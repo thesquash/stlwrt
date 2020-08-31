@@ -24,7 +24,7 @@
 
 G_BEGIN_DECLS
 
-#define GDK_TYPE_WINDOW_IMPL           (gdk_window_impl_get_type ())
+#define GDK_TYPE_WINDOW_IMPL           (SF(gdk_window_impl_get_type) ())
 #define GDK_WINDOW_IMPL(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), GDK_TYPE_WINDOW_IMPL, GdkWindowImpl))
 #define GDK_IS_WINDOW_IMPL(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GDK_TYPE_WINDOW_IMPL))
 #define GDK_WINDOW_IMPL_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GDK_TYPE_WINDOW_IMPL, GdkWindowImplIface))
@@ -143,10 +143,10 @@ struct _GdkWindowImplIface
 };
 
 /* Interface Functions */
-GType _T2_gdk_window_impl_get_type (void) G_GNUC_CONST;
-GType _3T_gdk_window_impl_get_type (void) G_GNUC_CONST;
+GType SF(_T2_gdk_window_impl_get_type) (void) G_GNUC_CONST;
+GType SF(_3T_gdk_window_impl_get_type) (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType gdk_window_impl_get_type (void) G_GNUC_CONST;
+GType SF(gdk_window_impl_get_type) (void) G_GNUC_CONST;
 
 /* private definitions from gdkwindow.h */
 

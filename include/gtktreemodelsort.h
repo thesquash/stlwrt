@@ -26,7 +26,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_TREE_MODEL_SORT			(gtk_tree_model_sort_get_type ())
+#define GTK_TYPE_TREE_MODEL_SORT			(SF(gtk_tree_model_sort_get_type) ())
 #define GTK_TREE_MODEL_SORT(obj)			(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_TREE_MODEL_SORT, GtkTreeModelSort))
 #define GTK_TREE_MODEL_SORT_CLASS(klass)		(G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_TREE_MODEL_SORT, GtkTreeModelSortClass))
 #define GTK_IS_TREE_MODEL_SORT(obj)			(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TREE_MODEL_SORT))
@@ -110,10 +110,10 @@ struct _GtkTreeModelSortClass
 };
 
 
-GType         _T2_gtk_tree_model_sort_get_type                   (void) G_GNUC_CONST;
-GType         _3T_gtk_tree_model_sort_get_type                   (void) G_GNUC_CONST;
+GType         SF(_T2_gtk_tree_model_sort_get_type)                   (void) G_GNUC_CONST;
+GType         SF(_3T_gtk_tree_model_sort_get_type)                   (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType         gtk_tree_model_sort_get_type                   (void) G_GNUC_CONST;
+GType         SF(gtk_tree_model_sort_get_type)                   (void) G_GNUC_CONST;
 GtkTreeModel *SF(gtk_tree_model_sort_new_with_model)             (GtkTreeModel     *child_model);
 
 GtkTreeModel *SF(gtk_tree_model_sort_get_model)                  (GtkTreeModelSort *tree_model);

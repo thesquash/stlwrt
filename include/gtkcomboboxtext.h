@@ -23,7 +23,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_COMBO_BOX_TEXT                 (gtk_combo_box_text_get_type ())
+#define GTK_TYPE_COMBO_BOX_TEXT                 (SF(gtk_combo_box_text_get_type) ())
 #define GTK_COMBO_BOX_TEXT(obj)                 (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_COMBO_BOX_TEXT, GtkComboBoxText))
 #define GTK_COMBO_BOX_TEXT_CLASS(klass)         (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_COMBO_BOX_TEXT, GtkComboBoxTextClass))
 #define GTK_IS_COMBO_BOX_TEXT(obj)              (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_COMBO_BOX_TEXT))
@@ -55,10 +55,10 @@ struct _GtkComboBoxTextClass
   void (*_gtk_reserved4) (void);
 };
 
-GType         _T2_gtk_combo_box_text_get_type        (void) G_GNUC_CONST;
-GType         _3T_gtk_combo_box_text_get_type        (void) G_GNUC_CONST;
+GType         SF(_T2_gtk_combo_box_text_get_type)        (void) G_GNUC_CONST;
+GType         SF(_3T_gtk_combo_box_text_get_type)        (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType         gtk_combo_box_text_get_type        (void) G_GNUC_CONST;
+GType         SF(gtk_combo_box_text_get_type)        (void) G_GNUC_CONST;
 GtkWidget*    SF(gtk_combo_box_text_new)             (void);
 GtkWidget*    SF(gtk_combo_box_text_new_with_entry)  (void);
 void          SF(gtk_combo_box_text_append_text)     (GtkComboBoxText     *combo_box,

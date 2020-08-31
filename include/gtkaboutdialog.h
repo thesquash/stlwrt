@@ -29,7 +29,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_ABOUT_DIALOG            (gtk_about_dialog_get_type ())
+#define GTK_TYPE_ABOUT_DIALOG            (SF(gtk_about_dialog_get_type) ())
 #define GTK_ABOUT_DIALOG(object)         (G_TYPE_CHECK_INSTANCE_CAST ((object), GTK_TYPE_ABOUT_DIALOG, GtkAboutDialog))
 #define GTK_ABOUT_DIALOG_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_ABOUT_DIALOG, GtkAboutDialogClass))
 #define GTK_IS_ABOUT_DIALOG(object)      (G_TYPE_CHECK_INSTANCE_TYPE ((object), GTK_TYPE_ABOUT_DIALOG))
@@ -83,13 +83,10 @@ struct _GtkAboutDialogPrivate
   guint wrap_license : 1;
 };
 
-struct _GtkAboutDialog 
-{
-  GtkDialog parent_instance;
-
+STLWRT_DECLARE_FTYPE_VPARENT(GtkAboutDialog, gtk_about_dialog, GtkDialog,
   /*< private >*/
   gpointer  (private_data);
-};
+)
 
 struct _GtkAboutDialogClass 
 {
@@ -104,10 +101,7 @@ struct _GtkAboutDialogClass
   void (*_gtk_reserved3) (void);
 };
 
-GType                  _T2_gtk_about_dialog_get_type               (void) G_GNUC_CONST;
-GType                  _3T_gtk_about_dialog_get_type               (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType                  gtk_about_dialog_get_type               (void) G_GNUC_CONST;
+
 GtkWidget             *SF(gtk_about_dialog_new)                    (void);
 void                   SF(gtk_show_about_dialog)                   (GtkWindow       *parent,
 								const gchar     *first_property_name,

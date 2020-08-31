@@ -25,7 +25,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_FILE_FILTER              (gtk_file_filter_get_type ())
+#define GTK_TYPE_FILE_FILTER              (SF(gtk_file_filter_get_type) ())
 #define GTK_FILE_FILTER(obj)              (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_FILE_FILTER, GtkFileFilter))
 #define GTK_IS_FILE_FILTER(obj)           (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FILE_FILTER))
 
@@ -84,10 +84,10 @@ typedef struct _GtkFileFilterInfoThin GtkFileFilterInfo;
 
 
 
-GType _T2_gtk_file_filter_get_type (void) G_GNUC_CONST;
-GType _3T_gtk_file_filter_get_type (void) G_GNUC_CONST;
+GType SF(_T2_gtk_file_filter_get_type) (void) G_GNUC_CONST;
+GType SF(_3T_gtk_file_filter_get_type) (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType gtk_file_filter_get_type (void) G_GNUC_CONST;
+GType SF(gtk_file_filter_get_type) (void) G_GNUC_CONST;
 
 GtkFileFilter *       SF(gtk_file_filter_new)      (void);
 void                  SF(gtk_file_filter_set_name) (GtkFileFilter *filter,

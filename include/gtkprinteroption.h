@@ -30,7 +30,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_PRINTER_OPTION             (gtk_printer_option_get_type ())
+#define GTK_TYPE_PRINTER_OPTION             (SF(gtk_printer_option_get_type) ())
 #define GTK_PRINTER_OPTION(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PRINTER_OPTION, GtkPrinterOption))
 #define GTK_IS_PRINTER_OPTION(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_PRINTER_OPTION))
 
@@ -122,10 +122,10 @@ struct _GtkPrinterOptionClass
   void (*_gtk_reserved7) (void);
 };
 
-GType   _T2_gtk_printer_option_get_type       (void) G_GNUC_CONST;
-GType   _3T_gtk_printer_option_get_type       (void) G_GNUC_CONST;
+GType   SF(_T2_gtk_printer_option_get_type)       (void) G_GNUC_CONST;
+GType   SF(_3T_gtk_printer_option_get_type)       (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType   gtk_printer_option_get_type       (void) G_GNUC_CONST;
+GType   SF(gtk_printer_option_get_type)       (void) G_GNUC_CONST;
 
 GtkPrinterOption *gtk_printer_option_new                    (const char           *name,
 							     const char           *display_text,

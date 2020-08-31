@@ -99,7 +99,7 @@ G_BEGIN_DECLS
 typedef struct _GtkTextLine     GtkTextLine;
 typedef struct _GtkTextLineData GtkTextLineData;
 
-#define GTK_TYPE_TEXT_LAYOUT             (gtk_text_layout_get_type ())
+#define GTK_TYPE_TEXT_LAYOUT             (SF(gtk_text_layout_get_type) ())
 #define GTK_TEXT_LAYOUT(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_TEXT_LAYOUT, GtkTextLayout))
 #define GTK_TEXT_LAYOUT_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_TEXT_LAYOUT, GtkTextLayoutClass))
 #define GTK_IS_TEXT_LAYOUT(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TEXT_LAYOUT))
@@ -310,10 +310,10 @@ struct _GtkTextLineDisplay
 extern PangoAttrType gtk_text_attr_appearance_type;
 
 
-GType        _T2_gtk_text_layout_get_type    (void) G_GNUC_CONST;
-GType        _3T_gtk_text_layout_get_type    (void) G_GNUC_CONST;
+GType        SF(_T2_gtk_text_layout_get_type)    (void) G_GNUC_CONST;
+GType        SF(_3T_gtk_text_layout_get_type)    (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType         gtk_text_layout_get_type    (void) G_GNUC_CONST;
+GType         SF(gtk_text_layout_get_type)    (void) G_GNUC_CONST;
 
 GtkTextLayout*     gtk_text_layout_new                   (void);
 void               gtk_text_layout_set_buffer            (GtkTextLayout     *layout,

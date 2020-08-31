@@ -26,7 +26,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_CONTAINER              (gtk_container_get_type ())
+#define GTK_TYPE_CONTAINER              (SF(gtk_container_get_type) ())
 #define GTK_CONTAINER(obj)              (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_CONTAINER, GtkContainer))
 #define GTK_CONTAINER_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_CONTAINER, GtkContainerClass))
 #define GTK_IS_CONTAINER(obj)           (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_CONTAINER))
@@ -123,10 +123,10 @@ struct _GtkContainerClass
 
 /* Application-level methods */
 
-GType   _T2_gtk_container_get_type		 (void) G_GNUC_CONST;
-GType   _3T_gtk_container_get_type		 (void) G_GNUC_CONST;
+GType   SF(_T2_gtk_container_get_type)		 (void) G_GNUC_CONST;
+GType   SF(_3T_gtk_container_get_type)		 (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType   gtk_container_get_type		 (void) G_GNUC_CONST;
+GType   SF(gtk_container_get_type)		 (void) G_GNUC_CONST;
 void    SF(gtk_container_set_border_width)	 (GtkContainer	   *container,
 					  guint		    border_width);
 guint   SF(gtk_container_get_border_width)   (GtkContainer     *container);

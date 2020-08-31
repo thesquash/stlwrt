@@ -28,7 +28,7 @@ G_BEGIN_DECLS
 
 typedef struct _GtkPaperSize GtkPaperSize;
 
-#define GTK_TYPE_PAPER_SIZE    (gtk_paper_size_get_type ())
+#define GTK_TYPE_PAPER_SIZE    (SF(gtk_paper_size_get_type) ())
 
 /* Common names, from PWG 5101.1-2002 PWG: Standard for Media Standardized Names */
 #define GTK_PAPER_NAME_A3 "iso_a3"
@@ -39,10 +39,10 @@ typedef struct _GtkPaperSize GtkPaperSize;
 #define GTK_PAPER_NAME_EXECUTIVE "na_executive"
 #define GTK_PAPER_NAME_LEGAL "na_legal"
 
-GType _T2_gtk_paper_size_get_type (void) G_GNUC_CONST;
-GType _3T_gtk_paper_size_get_type (void) G_GNUC_CONST;
+GType SF(_T2_gtk_paper_size_get_type) (void) G_GNUC_CONST;
+GType SF(_3T_gtk_paper_size_get_type) (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType gtk_paper_size_get_type (void) G_GNUC_CONST;
+GType SF(gtk_paper_size_get_type) (void) G_GNUC_CONST;
 
 GtkPaperSize *SF(gtk_paper_size_new)          (const gchar  *name);
 GtkPaperSize *SF(gtk_paper_size_new_from_ppd) (const gchar  *ppd_name,

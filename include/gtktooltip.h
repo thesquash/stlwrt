@@ -26,14 +26,14 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_TOOLTIP                 (gtk_tooltip_get_type ())
+#define GTK_TYPE_TOOLTIP                 (SF(gtk_tooltip_get_type) ())
 #define GTK_TOOLTIP(obj)                 (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_TOOLTIP, GtkTooltip))
 #define GTK_IS_TOOLTIP(obj)              (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TOOLTIP))
 
-GType _T2_gtk_tooltip_get_type (void);
-GType _3T_gtk_tooltip_get_type (void);
+GType SF(_T2_gtk_tooltip_get_type) (void);
+GType SF(_3T_gtk_tooltip_get_type) (void);
 /* Supplied in the STLWRT public libraries */
-GType gtk_tooltip_get_type (void);
+GType SF(gtk_tooltip_get_type) (void);
 
 void SF(gtk_tooltip_set_markup)              (GtkTooltip         *tooltip,
                                           const gchar        *markup);

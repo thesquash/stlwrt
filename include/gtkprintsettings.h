@@ -28,7 +28,7 @@ G_BEGIN_DECLS
 typedef struct _GtkPrintSettings GtkPrintSettingsFat;
 typedef struct _GtkPrintSettings GtkPrintSettingsThin;
 
-#define GTK_TYPE_PRINT_SETTINGS    (gtk_print_settings_get_type ())
+#define GTK_TYPE_PRINT_SETTINGS    (SF(gtk_print_settings_get_type) ())
 #define GTK_PRINT_SETTINGS(obj)    (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PRINT_SETTINGS, GtkPrintSettings))
 #define GTK_IS_PRINT_SETTINGS(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_PRINT_SETTINGS))
 
@@ -43,10 +43,10 @@ struct _GtkPageRange
   gint end;
 };
 
-GType             _T2_gtk_print_settings_get_type                (void) G_GNUC_CONST;
-GType             _3T_gtk_print_settings_get_type                (void) G_GNUC_CONST;
+GType             SF(_T2_gtk_print_settings_get_type)                (void) G_GNUC_CONST;
+GType             SF(_3T_gtk_print_settings_get_type)                (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType             gtk_print_settings_get_type                (void) G_GNUC_CONST;
+GType             SF(gtk_print_settings_get_type)                (void) G_GNUC_CONST;
 GtkPrintSettings *SF(gtk_print_settings_new)                     (void);
 
 GtkPrintSettings *SF(gtk_print_settings_copy)                    (GtkPrintSettings     *other);

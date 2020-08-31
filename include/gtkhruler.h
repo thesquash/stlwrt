@@ -29,7 +29,7 @@
 G_BEGIN_DECLS
 
 
-#define GTK_TYPE_HRULER	           (gtk_hruler_get_type ())
+#define GTK_TYPE_HRULER	           (SF(gtk_hruler_get_type) ())
 #define GTK_HRULER(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_HRULER, GtkHRuler))
 #define GTK_HRULER_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_HRULER, GtkHRulerClass))
 #define GTK_IS_HRULER(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_HRULER))
@@ -52,7 +52,7 @@ struct _GtkHRulerClass
 };
 
 
-GType      gtk_hruler_get_type (void) G_GNUC_CONST;
+GType      SF(gtk_hruler_get_type) (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_hruler_new)      (void);
 
 

@@ -141,22 +141,6 @@ void SF(gdk_flush) (void);
 void SF(gdk_set_double_click_time)             (guint       msec);
 #endif
 
-/* Rectangle utilities
- */
-gboolean SF(gdk_rectangle_intersect) (const GdkRectangle *src1,
-				  const GdkRectangle *src2,
-				  GdkRectangle       *dest);
-void     SF(gdk_rectangle_union)     (const GdkRectangle *src1,
-				  const GdkRectangle *src2,
-				  GdkRectangle       *dest);
-
-GType _T2_gdk_rectangle_get_type (void) G_GNUC_CONST;
-GType _3T_gdk_rectangle_get_type (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType gdk_rectangle_get_type (void) G_GNUC_CONST;
-
-#define GDK_TYPE_RECTANGLE (gdk_rectangle_get_type ())
-
 /* Miscellaneous */
 #ifndef GDK_MULTIHEAD_SAFE
 gboolean SF(gdk_event_send_client_message)      (GdkEvent       *event,

@@ -25,7 +25,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_RECENT_FILTER		(gtk_recent_filter_get_type ())
+#define GTK_TYPE_RECENT_FILTER		(SF(gtk_recent_filter_get_type) ())
 #define GTK_RECENT_FILTER(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_RECENT_FILTER, GtkRecentFilter))
 #define GTK_IS_RECENT_FILTER(obj)	(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_RECENT_FILTER))
 
@@ -89,10 +89,10 @@ typedef struct _GtkRecentFilterInfoThin GtkRecentFilterInfo;
 
 
 
-GType                 _T2_gtk_recent_filter_get_type (void) G_GNUC_CONST;
-GType                 _3T_gtk_recent_filter_get_type (void) G_GNUC_CONST;
+GType                 SF(_T2_gtk_recent_filter_get_type) (void) G_GNUC_CONST;
+GType                 SF(_3T_gtk_recent_filter_get_type) (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType                 gtk_recent_filter_get_type (void) G_GNUC_CONST;
+GType                 SF(gtk_recent_filter_get_type) (void) G_GNUC_CONST;
 
 GtkRecentFilter *     SF(gtk_recent_filter_new)      (void);
 void                  SF(gtk_recent_filter_set_name) (GtkRecentFilter *filter,

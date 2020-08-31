@@ -24,7 +24,7 @@
 
 G_BEGIN_DECLS
 
-#define GDK_TYPE_DEVICE              (gdk_device_get_type ())
+#define GDK_TYPE_DEVICE              (SF(gdk_device_get_type) ())
 #define GDK_DEVICE(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_DEVICE, GdkDevice))
 #define GDK_DEVICE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_DEVICE, GdkDeviceClass))
 #define GDK_IS_DEVICE(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_DEVICE))
@@ -174,10 +174,10 @@ struct _GdkTimeCoord
   gdouble axes[GDK_MAX_TIMECOORD_AXES];
 };
 
-GType          _T2_gdk_device_get_type      (void) G_GNUC_CONST;
-GType          _3T_gdk_device_get_type      (void) G_GNUC_CONST;
+GType          SF(_T2_gdk_device_get_type)      (void) G_GNUC_CONST;
+GType          SF(_3T_gdk_device_get_type)      (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType          gdk_device_get_type      (void) G_GNUC_CONST;
+GType          SF(gdk_device_get_type)      (void) G_GNUC_CONST;
 
 #ifndef GDK_MULTIHEAD_SAFE
 /* Returns a list of GdkDevice * */	  

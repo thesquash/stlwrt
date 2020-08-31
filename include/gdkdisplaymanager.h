@@ -30,7 +30,7 @@ typedef struct _GdkDisplayManager      GdkDisplayManagerThin;
 
 typedef struct _GdkDisplayManagerClass GdkDisplayManagerClass;
 
-#define GDK_TYPE_DISPLAY_MANAGER              (gdk_display_manager_get_type ())
+#define GDK_TYPE_DISPLAY_MANAGER              (SF(gdk_display_manager_get_type) ())
 #define GDK_DISPLAY_MANAGER(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_DISPLAY_MANAGER, GdkDisplayManager))
 #define GDK_DISPLAY_MANAGER_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_DISPLAY_MANAGER, GdkDisplayManagerClass))
 #define GDK_IS_DISPLAY_MANAGER(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_DISPLAY_MANAGER))
@@ -45,10 +45,10 @@ struct _GdkDisplayManagerClass
 			  GdkDisplay *display);
 };
 
-GType _T2_gdk_display_manager_get_type (void) G_GNUC_CONST;
-GType _3T_gdk_display_manager_get_type (void) G_GNUC_CONST;
+GType SF(_T2_gdk_display_manager_get_type) (void) G_GNUC_CONST;
+GType SF(_3T_gdk_display_manager_get_type) (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType gdk_display_manager_get_type (void) G_GNUC_CONST;
+GType SF(gdk_display_manager_get_type) (void) G_GNUC_CONST;
 
 GdkDisplayManager *SF(gdk_display_manager_get)                 (void);
 GdkDisplay *       SF(gdk_display_manager_get_default_display) (GdkDisplayManager *display_manager);

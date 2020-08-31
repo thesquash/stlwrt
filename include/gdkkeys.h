@@ -47,7 +47,7 @@ typedef struct _GdkKeymap      GdkKeymapThin;
 
 typedef struct _GdkKeymapClass GdkKeymapClass;
 
-#define GDK_TYPE_KEYMAP              (gdk_keymap_get_type ())
+#define GDK_TYPE_KEYMAP              (SF(gdk_keymap_get_type) ())
 #define GDK_KEYMAP(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_KEYMAP, GdkKeymap))
 #define GDK_KEYMAP_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_KEYMAP, GdkKeymapClass))
 #define GDK_IS_KEYMAP(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_KEYMAP))
@@ -100,10 +100,10 @@ struct _GdkKeymapClass
   void (*state_changed)     (GdkKeymap *keymap);
 };
 
-GType _T2_gdk_keymap_get_type (void) G_GNUC_CONST;
-GType _3T_gdk_keymap_get_type (void) G_GNUC_CONST;
+GType SF(_T2_gdk_keymap_get_type) (void) G_GNUC_CONST;
+GType SF(_3T_gdk_keymap_get_type) (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType gdk_keymap_get_type (void) G_GNUC_CONST;
+GType SF(gdk_keymap_get_type) (void) G_GNUC_CONST;
 
 #ifndef GDK_MULTIHEAD_SAFE
 GdkKeymap* SF(gdk_keymap_get_default)     (void);

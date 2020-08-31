@@ -26,14 +26,14 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_STYLE              (gtk_style_get_type ())
+#define GTK_TYPE_STYLE              (SF(gtk_style_get_type) ())
 #define GTK_STYLE(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GTK_TYPE_STYLE, GtkStyle))
 #define GTK_STYLE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_STYLE, GtkStyleClass))
 #define GTK_IS_STYLE(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GTK_TYPE_STYLE))
 #define GTK_IS_STYLE_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_STYLE))
 #define GTK_STYLE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_STYLE, GtkStyleClass))
 
-#define GTK_TYPE_BORDER             (gtk_border_get_type ())
+#define GTK_TYPE_BORDER             (SF(gtk_border_get_type) ())
 
 /* Some forward declarations needed to rationalize the header
  * files.
@@ -430,10 +430,10 @@ struct _GtkBorder
   gint bottom;
 };
 
-GType     _T2_gtk_style_get_type                 (void) G_GNUC_CONST;
-GType     _3T_gtk_style_get_type                 (void) G_GNUC_CONST;
+GType     SF(_T2_gtk_style_get_type)                 (void) G_GNUC_CONST;
+GType     SF(_3T_gtk_style_get_type)                 (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType     gtk_style_get_type                 (void) G_GNUC_CONST;
+GType     SF(gtk_style_get_type)                 (void) G_GNUC_CONST;
 GtkStyle* SF(gtk_style_new)			     (void);
 GtkStyle* SF(gtk_style_copy)		     (GtkStyle	   *style);
 GtkStyle* SF(gtk_style_attach)		     (GtkStyle	   *style,
@@ -874,10 +874,10 @@ void SF(gtk_paint_spinner)     (GtkStyle           *style,
 			    gint                width,
 			    gint                height);
 
-GType      _T2_gtk_border_get_type (void) G_GNUC_CONST;
-GType      _3T_gtk_border_get_type (void) G_GNUC_CONST;
+GType      SF(_T2_gtk_border_get_type) (void) G_GNUC_CONST;
+GType      SF(_3T_gtk_border_get_type) (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType      gtk_border_get_type (void) G_GNUC_CONST;
+GType      SF(gtk_border_get_type) (void) G_GNUC_CONST;
 GtkBorder *SF(gtk_border_new)      (void) G_GNUC_MALLOC;
 GtkBorder *SF(gtk_border_copy)     (const GtkBorder *border_);
 void       SF(gtk_border_free)     (GtkBorder       *border_);

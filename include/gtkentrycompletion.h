@@ -27,7 +27,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_ENTRY_COMPLETION            (gtk_entry_completion_get_type ())
+#define GTK_TYPE_ENTRY_COMPLETION            (SF(gtk_entry_completion_get_type) ())
 #define GTK_ENTRY_COMPLETION(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_ENTRY_COMPLETION, GtkEntryCompletion))
 #define GTK_ENTRY_COMPLETION_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_ENTRY_COMPLETION, GtkEntryCompletionClass))
 #define GTK_IS_ENTRY_COMPLETION(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_ENTRY_COMPLETION))
@@ -74,7 +74,7 @@ struct _GtkEntryCompletionClass
 };
 
 /* core */
-GType               gtk_entry_completion_get_type               (void) G_GNUC_CONST;
+GType               SF(gtk_entry_completion_get_type)               (void) G_GNUC_CONST;
 GtkEntryCompletion *SF(gtk_entry_completion_new)                    (void);
 
 GtkWidget          *SF(gtk_entry_completion_get_entry)              (GtkEntryCompletion          *completion);

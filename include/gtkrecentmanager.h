@@ -27,9 +27,9 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_RECENT_INFO			(gtk_recent_info_get_type ())
+#define GTK_TYPE_RECENT_INFO			(SF(gtk_recent_info_get_type) ())
 
-#define GTK_TYPE_RECENT_MANAGER			(gtk_recent_manager_get_type ())
+#define GTK_TYPE_RECENT_MANAGER			(SF(gtk_recent_manager_get_type) ())
 #define GTK_RECENT_MANAGER(obj)			(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_RECENT_MANAGER, GtkRecentManager))
 #define GTK_IS_RECENT_MANAGER(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_RECENT_MANAGER))
 #define GTK_RECENT_MANAGER_CLASS(klass) 	(G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_RECENT_MANAGER, GtkRecentManagerClass))
@@ -151,10 +151,10 @@ typedef enum
 GQuark 	SF(gtk_recent_manager_error_quark) (void);
 
 
-GType 		  _T2_gtk_recent_manager_get_type       (void) G_GNUC_CONST;
-GType 		  _3T_gtk_recent_manager_get_type       (void) G_GNUC_CONST;
+GType 		  SF(_T2_gtk_recent_manager_get_type)       (void) G_GNUC_CONST;
+GType 		  SF(_3T_gtk_recent_manager_get_type)       (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType 		  gtk_recent_manager_get_type       (void) G_GNUC_CONST;
+GType 		  SF(gtk_recent_manager_get_type)       (void) G_GNUC_CONST;
 
 GtkRecentManager *SF(gtk_recent_manager_new)            (void);
 GtkRecentManager *SF(gtk_recent_manager_get_default)    (void);
@@ -190,10 +190,10 @@ gint              SF(gtk_recent_manager_purge_items)    (GtkRecentManager     *m
 						     GError              **error);
 
 
-GType	              _T2_gtk_recent_info_get_type             (void) G_GNUC_CONST;
-GType	              _3T_gtk_recent_info_get_type             (void) G_GNUC_CONST;
+GType	              SF(_T2_gtk_recent_info_get_type)             (void) G_GNUC_CONST;
+GType	              SF(_3T_gtk_recent_info_get_type)             (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType	              gtk_recent_info_get_type             (void) G_GNUC_CONST;
+GType	              SF(gtk_recent_info_get_type)             (void) G_GNUC_CONST;
 
 GtkRecentInfo *       SF(gtk_recent_info_ref)                  (GtkRecentInfo  *info);
 void                  SF(gtk_recent_info_unref)                (GtkRecentInfo  *info);

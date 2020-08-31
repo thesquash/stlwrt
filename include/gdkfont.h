@@ -27,7 +27,7 @@
 
 G_BEGIN_DECLS
 
-#define GDK_TYPE_FONT gdk_font_get_type ()
+#define GDK_TYPE_FONT SF(gdk_font_get_type) ()
 
 /* Types of font.
  *   GDK_FONT_FONT: the font is an XFontStruct.
@@ -77,10 +77,10 @@ typedef struct _GdkFontThin GdkFont;
 
 
 
-GType    _T2_gdk_font_get_type  (void) G_GNUC_CONST;
-GType    _3T_gdk_font_get_type  (void) G_GNUC_CONST;
+GType    SF(_T2_gdk_font_get_type)  (void) G_GNUC_CONST;
+GType    SF(_3T_gdk_font_get_type)  (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType    gdk_font_get_type  (void) G_GNUC_CONST;
+GType    SF(gdk_font_get_type)  (void) G_GNUC_CONST;
 
 GdkFont* SF(gdk_font_ref)	    (GdkFont        *font);
 void	 SF(gdk_font_unref)	    (GdkFont        *font);

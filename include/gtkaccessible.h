@@ -25,7 +25,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_ACCESSIBLE                  (gtk_accessible_get_type ())
+#define GTK_TYPE_ACCESSIBLE                  (SF(gtk_accessible_get_type) ())
 #define GTK_ACCESSIBLE(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_ACCESSIBLE, GtkAccessible))
 #define GTK_ACCESSIBLE_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_ACCESSIBLE, GtkAccessibleClass))
 #define GTK_IS_ACCESSIBLE(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_ACCESSIBLE))
@@ -64,10 +64,10 @@ struct _GtkAccessibleClass
   void (*_gtk_reserved4) (void);
 };
 
-GType _T2_gtk_accessible_get_type (void) G_GNUC_CONST;
-GType _3T_gtk_accessible_get_type (void) G_GNUC_CONST;
+GType SF(_T2_gtk_accessible_get_type) (void) G_GNUC_CONST;
+GType SF(_3T_gtk_accessible_get_type) (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType gtk_accessible_get_type (void) G_GNUC_CONST;
+GType SF(gtk_accessible_get_type) (void) G_GNUC_CONST;
 
 void        SF(gtk_accessible_set_widget)                  (GtkAccessible     *accessible,
                                                         GtkWidget         *widget);

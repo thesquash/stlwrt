@@ -26,7 +26,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_IMAGE                  (gtk_image_get_type ())
+#define GTK_TYPE_IMAGE                  (SF(gtk_image_get_type) ())
 #define GTK_IMAGE(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_IMAGE, GtkImage))
 #define GTK_IMAGE_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_IMAGE, GtkImageClass))
 #define GTK_IS_IMAGE(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_IMAGE))
@@ -187,10 +187,10 @@ struct _GtkImageClass
 #define gtk_image_set_from_file gtk_image_set_from_file_utf8
 #endif
 
-GType      _T2_gtk_image_get_type (void) G_GNUC_CONST;
-GType      _3T_gtk_image_get_type (void) G_GNUC_CONST;
+GType      SF(_T2_gtk_image_get_type) (void) G_GNUC_CONST;
+GType      SF(_3T_gtk_image_get_type) (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType      gtk_image_get_type (void) G_GNUC_CONST;
+GType      SF(gtk_image_get_type) (void) G_GNUC_CONST;
 
 GtkWidget* SF(gtk_image_new)                (void);
 GtkWidget* SF(gtk_image_new_from_pixmap)    (GdkPixmap       *pixmap,

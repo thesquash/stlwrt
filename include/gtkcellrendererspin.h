@@ -24,7 +24,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_CELL_RENDERER_SPIN		(gtk_cell_renderer_spin_get_type ())
+#define GTK_TYPE_CELL_RENDERER_SPIN		(SF(gtk_cell_renderer_spin_get_type) ())
 #define GTK_CELL_RENDERER_SPIN(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_CELL_RENDERER_SPIN, GtkCellRendererSpin))
 #define GTK_CELL_RENDERER_SPIN_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_CELL_RENDERER_SPIN, GtkCellRendererSpinClass))
 #define GTK_IS_CELL_RENDERER_SPIN(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_CELL_RENDERER_SPIN))
@@ -54,7 +54,7 @@ struct _GtkCellRendererSpinClass
   GtkCellRendererTextClass parent;
 };
 
-GType            gtk_cell_renderer_spin_get_type (void);
+GType            SF(gtk_cell_renderer_spin_get_type) (void);
 GtkCellRenderer *SF(gtk_cell_renderer_spin_new)      (void);
 
 G_END_DECLS

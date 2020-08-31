@@ -51,7 +51,7 @@ typedef struct _GtkTextBTree GtkTextBTree;
 
 typedef struct _GtkTextLogAttrCache GtkTextLogAttrCache;
 
-#define GTK_TYPE_TEXT_BUFFER            (gtk_text_buffer_get_type ())
+#define GTK_TYPE_TEXT_BUFFER            (SF(gtk_text_buffer_get_type) ())
 #define GTK_TEXT_BUFFER(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_TEXT_BUFFER, GtkTextBuffer))
 #define GTK_TEXT_BUFFER_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_TEXT_BUFFER, GtkTextBufferClass))
 #define GTK_IS_TEXT_BUFFER(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TEXT_BUFFER))
@@ -188,10 +188,10 @@ struct _GtkTextBufferClass
   void (*_gtk_reserved5) (void);
 };
 
-GType        _T2_gtk_text_buffer_get_type       (void) G_GNUC_CONST;
-GType        _3T_gtk_text_buffer_get_type       (void) G_GNUC_CONST;
+GType        SF(_T2_gtk_text_buffer_get_type)       (void) G_GNUC_CONST;
+GType        SF(_3T_gtk_text_buffer_get_type)       (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType        gtk_text_buffer_get_type       (void) G_GNUC_CONST;
+GType        SF(gtk_text_buffer_get_type)       (void) G_GNUC_CONST;
 
 
 

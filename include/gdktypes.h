@@ -49,6 +49,7 @@
 
 G_BEGIN_DECLS
 
+#define GDK_TYPE_RECTANGLE (SF(gdk_rectangle_get_type) ())
 
 /* Type definitions for the basic structures.
  */
@@ -83,30 +84,6 @@ typedef gpointer GdkNativeWindow;
 #else
 typedef guint32 GdkNativeWindow;
 #endif
- 
-/* Forward declarations of commonly used types
- */
-typedef struct _GdkColor	      GdkColor;
-typedef struct _GdkColormap	      GdkColormapFat;
-typedef struct _GdkColormap	      GdkColormapThin;
-typedef struct _GdkCursor	      GdkCursor;
-typedef struct _GdkFont		      GdkFont;
-typedef struct _GdkGC                 GdkGCFat;
-typedef struct _GdkGC                 GdkGCThin;
-typedef struct _GdkImage              GdkImageFat;
-typedef struct _GdkImage              GdkImageThin;
-typedef struct _GdkRegion             GdkRegion;
-typedef struct _GdkVisual             GdkVisual;
-
-typedef struct _GdkDrawable           GdkDrawableFat;
-typedef struct _GdkDrawable           GdkDrawableThin;
-typedef struct _GdkDrawable           GdkBitmap;
-typedef struct _GdkDrawable           GdkPixmap;
-typedef struct _GdkDrawable           GdkWindow;
-typedef struct _GdkDisplay	      GdkDisplayFat;
-typedef struct _GdkDisplay	      GdkDisplayThin;
-typedef struct _GdkScreen	      GdkScreenFat;
-typedef struct _GdkScreen	      GdkScreenThin;
 
 typedef enum
 {
@@ -212,6 +189,19 @@ struct _GdkSpan
   gint y;
   gint width;
 };
+
+
+/* Rectangle utilities
+ */
+
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS (gdk_rectangle_get_type)
+
+gboolean SF(gdk_rectangle_intersect) (const GdkRectangle *src1,
+				  const GdkRectangle *src2,
+				  GdkRectangle       *dest);
+void     SF(gdk_rectangle_union)     (const GdkRectangle *src1,
+				  const GdkRectangle *src2,
+				  GdkRectangle       *dest);
 
 G_END_DECLS
 

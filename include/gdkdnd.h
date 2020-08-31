@@ -56,7 +56,7 @@ typedef enum
 
 typedef struct _GdkDragContextClass GdkDragContextClass;
 
-#define GDK_TYPE_DRAG_CONTEXT              (gdk_drag_context_get_type ())
+#define GDK_TYPE_DRAG_CONTEXT              (SF(gdk_drag_context_get_type) ())
 #define GDK_DRAG_CONTEXT(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_DRAG_CONTEXT, GdkDragContext))
 #define GDK_DRAG_CONTEXT_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_DRAG_CONTEXT, GdkDragContextClass))
 #define GDK_IS_DRAG_CONTEXT(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_DRAG_CONTEXT))
@@ -94,10 +94,10 @@ struct _GdkDragContextClass {
 
 /* Drag and Drop */
 
-GType            _T2_gdk_drag_context_get_type   (void) G_GNUC_CONST;
-GType            _3T_gdk_drag_context_get_type   (void) G_GNUC_CONST;
+GType            SF(_T2_gdk_drag_context_get_type)   (void) G_GNUC_CONST;
+GType            SF(_3T_gdk_drag_context_get_type)   (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType            gdk_drag_context_get_type   (void) G_GNUC_CONST;
+GType            SF(gdk_drag_context_get_type)   (void) G_GNUC_CONST;
 #if !defined (GDK_DISABLE_DEPRECATED) || defined (STLWRT_COMPILATION)
 GdkDragContext * SF(gdk_drag_context_new)        (void);
 #endif

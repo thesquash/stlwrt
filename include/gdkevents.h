@@ -28,7 +28,7 @@
 
 G_BEGIN_DECLS
 
-#define GDK_TYPE_EVENT          (gdk_event_get_type ())
+#define GDK_TYPE_EVENT          (SF(gdk_event_get_type) ())
 
 #define GDK_PRIORITY_EVENTS	(G_PRIORITY_DEFAULT)
 #define GDK_PRIORITY_REDRAW     (G_PRIORITY_HIGH_IDLE + 20)
@@ -875,10 +875,10 @@ union _GdkEvent
   GdkEventGrabBroken        grab_broken;
 };
 
-GType     _T2_gdk_event_get_type            (void) G_GNUC_CONST;
-GType     _3T_gdk_event_get_type            (void) G_GNUC_CONST;
+GType     SF(_T2_gdk_event_get_type)            (void) G_GNUC_CONST;
+GType     SF(_3T_gdk_event_get_type)            (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType     gdk_event_get_type            (void) G_GNUC_CONST;
+GType     SF(gdk_event_get_type)            (void) G_GNUC_CONST;
 
 gboolean  SF(gdk_events_pending)	 	(void);
 GdkEvent* SF(gdk_event_get)			(void);

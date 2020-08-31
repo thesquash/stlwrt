@@ -71,7 +71,7 @@ typedef enum
 } GtkResponseType;
 
 
-#define GTK_TYPE_DIALOG                  (gtk_dialog_get_type ())
+#define GTK_TYPE_DIALOG                  (SF(gtk_dialog_get_type) ())
 #define GTK_DIALOG(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_DIALOG, GtkDialog))
 #define GTK_DIALOG_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_DIALOG, GtkDialogClass))
 #define GTK_IS_DIALOG(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_DIALOG))
@@ -145,10 +145,10 @@ struct _GtkDialogClass
 };
 
 
-GType      _T2_gtk_dialog_get_type (void) G_GNUC_CONST;
-GType      _3T_gtk_dialog_get_type (void) G_GNUC_CONST;
+GType      SF(_T2_gtk_dialog_get_type) (void) G_GNUC_CONST;
+GType      SF(_3T_gtk_dialog_get_type) (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType      gtk_dialog_get_type (void) G_GNUC_CONST;
+GType      SF(gtk_dialog_get_type) (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_dialog_new)      (void);
 
 GtkWidget* SF(gtk_dialog_new_with_buttons) (const gchar     *title,

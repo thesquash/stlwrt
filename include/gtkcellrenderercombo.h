@@ -25,7 +25,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_CELL_RENDERER_COMBO		(gtk_cell_renderer_combo_get_type ())
+#define GTK_TYPE_CELL_RENDERER_COMBO		(SF(gtk_cell_renderer_combo_get_type) ())
 #define GTK_CELL_RENDERER_COMBO(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_CELL_RENDERER_COMBO, GtkCellRendererCombo))
 #define GTK_CELL_RENDERER_COMBO_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_CELL_RENDERER_COMBO, GtkCellRendererComboClass))
 #define GTK_IS_CELL_RENDERER_COMBO(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_CELL_RENDERER_COMBO))
@@ -93,10 +93,10 @@ struct _GtkCellRendererComboClass
   GtkCellRendererTextClass parent;
 };
 
-GType            _T2_gtk_cell_renderer_combo_get_type (void) G_GNUC_CONST;
-GType            _3T_gtk_cell_renderer_combo_get_type (void) G_GNUC_CONST;
+GType            SF(_T2_gtk_cell_renderer_combo_get_type) (void) G_GNUC_CONST;
+GType            SF(_3T_gtk_cell_renderer_combo_get_type) (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType            gtk_cell_renderer_combo_get_type (void) G_GNUC_CONST;
+GType            SF(gtk_cell_renderer_combo_get_type) (void) G_GNUC_CONST;
 GtkCellRenderer *SF(gtk_cell_renderer_combo_new)      (void);
 
 G_END_DECLS

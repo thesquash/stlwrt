@@ -200,7 +200,7 @@ typedef struct _GdkGCValuesThin GdkGCValues;
 
 
 
-#define GDK_TYPE_GC              (gdk_gc_get_type ())
+#define GDK_TYPE_GC              (SF(gdk_gc_get_type) ())
 #define GDK_GC(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_GC, GdkGC))
 #define GDK_GC_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_GC, GdkGCClass))
 #define GDK_IS_GC(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_GC))
@@ -300,10 +300,10 @@ struct _GdkGCClass
 
 
 #ifndef GDK_DISABLE_DEPRECATED
-GType  _T2_gdk_gc_get_type            (void) G_GNUC_CONST;
-GType  _3T_gdk_gc_get_type            (void) G_GNUC_CONST;
+GType  SF(_T2_gdk_gc_get_type)            (void) G_GNUC_CONST;
+GType  SF(_3T_gdk_gc_get_type)            (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType  gdk_gc_get_type            (void) G_GNUC_CONST;
+GType  SF(gdk_gc_get_type)            (void) G_GNUC_CONST;
 GdkGC *SF(gdk_gc_new)		  (GdkDrawable	    *drawable);
 GdkGC *SF(gdk_gc_new_with_values)	  (GdkDrawable	    *drawable,
 				   GdkGCValues	    *values,

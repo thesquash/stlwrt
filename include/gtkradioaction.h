@@ -30,7 +30,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_RADIO_ACTION            (gtk_radio_action_get_type ())
+#define GTK_TYPE_RADIO_ACTION            (SF(gtk_radio_action_get_type) ())
 #define GTK_RADIO_ACTION(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_RADIO_ACTION, GtkRadioAction))
 #define GTK_RADIO_ACTION_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_RADIO_ACTION, GtkRadioActionClass))
 #define GTK_IS_RADIO_ACTION(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_RADIO_ACTION))
@@ -72,7 +72,7 @@ struct _GtkRadioActionClass
 };
 
 
-GType           gtk_radio_action_get_type          (void) G_GNUC_CONST;
+GType           SF(gtk_radio_action_get_type)          (void) G_GNUC_CONST;
 GtkRadioAction *SF(gtk_radio_action_new)               (const gchar           *name,
                                                     const gchar           *label,
                                                     const gchar           *tooltip,

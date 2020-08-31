@@ -28,7 +28,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_CALENDAR                  (gtk_calendar_get_type ())
+#define GTK_TYPE_CALENDAR                  (SF(gtk_calendar_get_type) ())
 #define GTK_CALENDAR(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_CALENDAR, GtkCalendar))
 #define GTK_CALENDAR_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_CALENDAR, GtkCalendarClass))
 #define GTK_IS_CALENDAR(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_CALENDAR))
@@ -200,10 +200,10 @@ struct _GtkCalendarClass
 };
 
 
-GType	   _T2_gtk_calendar_get_type	(void) G_GNUC_CONST;
-GType	   _3T_gtk_calendar_get_type	(void) G_GNUC_CONST;
+GType	   SF(_T2_gtk_calendar_get_type)	(void) G_GNUC_CONST;
+GType	   SF(_3T_gtk_calendar_get_type)	(void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType	   gtk_calendar_get_type	(void) G_GNUC_CONST;
+GType	   SF(gtk_calendar_get_type)	(void) G_GNUC_CONST;
 GtkWidget* SF(gtk_calendar_new)		(void);
 
 gboolean   SF(gtk_calendar_select_month)	(GtkCalendar *calendar,

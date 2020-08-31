@@ -26,14 +26,14 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_FILE_SYSTEM         (_gtk_file_system_get_type ())
+#define GTK_TYPE_FILE_SYSTEM         (SF(_gtk_file_system_get_type) ())
 #define GTK_FILE_SYSTEM(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GTK_TYPE_FILE_SYSTEM, GtkFileSystem))
 #define GTK_FILE_SYSTEM_CLASS(c)     (G_TYPE_CHECK_CLASS_CAST    ((c), GTK_TYPE_FILE_SYSTEM, GtkFileSystemClass))
 #define GTK_IS_FILE_SYSTEM(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GTK_TYPE_FILE_SYSTEM))
 #define GTK_IS_FILE_SYSTEM_CLASS(c)  (G_TYPE_CHECK_CLASS_TYPE    ((c), GTK_TYPE_FILE_SYSTEM))
 #define GTK_FILE_SYSTEM_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS  ((o), GTK_TYPE_FILE_SYSTEM, GtkFileSystemClass))
 
-#define GTK_TYPE_FOLDER         (_gtk_folder_get_type ())
+#define GTK_TYPE_FOLDER         (SF(_gtk_folder_get_type) ())
 #define GTK_FOLDER(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GTK_TYPE_FOLDER, GtkFolder))
 #define GTK_FOLDER_CLASS(c)     (G_TYPE_CHECK_CLASS_CAST    ((c), GTK_TYPE_FOLDER, GtkFolderClass))
 #define GTK_IS_FOLDER(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GTK_TYPE_FOLDER))
@@ -108,7 +108,7 @@ typedef void (* GtkFileSystemVolumeMountCallback)  (GCancellable        *cancell
 						    gpointer             data);
 
 /* GtkFileSystem methods */
-GType           _gtk_file_system_get_type     (void) G_GNUC_CONST;
+GType           SF(_gtk_file_system_get_type)     (void) G_GNUC_CONST;
 
 GtkFileSystem * _gtk_file_system_new          (void);
 

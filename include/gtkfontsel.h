@@ -30,7 +30,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_FONT_SELECTION              (gtk_font_selection_get_type ())
+#define GTK_TYPE_FONT_SELECTION              (SF(gtk_font_selection_get_type) ())
 #define GTK_FONT_SELECTION(obj)              (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_FONT_SELECTION, GtkFontSelection))
 #define GTK_FONT_SELECTION_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_FONT_SELECTION, GtkFontSelectionClass))
 #define GTK_IS_FONT_SELECTION(obj)           (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FONT_SELECTION))
@@ -38,7 +38,7 @@ G_BEGIN_DECLS
 #define GTK_FONT_SELECTION_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_FONT_SELECTION, GtkFontSelectionClass))
 
 
-#define GTK_TYPE_FONT_SELECTION_DIALOG              (gtk_font_selection_dialog_get_type ())
+#define GTK_TYPE_FONT_SELECTION_DIALOG              (SF(gtk_font_selection_dialog_get_type) ())
 #define GTK_FONT_SELECTION_DIALOG(obj)              (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_FONT_SELECTION_DIALOG, GtkFontSelectionDialog))
 #define GTK_FONT_SELECTION_DIALOG_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_FONT_SELECTION_DIALOG, GtkFontSelectionDialogClass))
 #define GTK_IS_FONT_SELECTION_DIALOG(obj)           (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FONT_SELECTION_DIALOG))
@@ -165,10 +165,10 @@ struct _GtkFontSelectionDialogClass
  *   see the comments in the GtkFontSelectionDialog functions.
  *****************************************************************************/
 
-GType	     _T2_gtk_font_selection_get_type	  (void) G_GNUC_CONST;
-GType	     _3T_gtk_font_selection_get_type	  (void) G_GNUC_CONST;
+GType	     SF(_T2_gtk_font_selection_get_type)	  (void) G_GNUC_CONST;
+GType	     SF(_3T_gtk_font_selection_get_type)	  (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType	     gtk_font_selection_get_type	  (void) G_GNUC_CONST;
+GType	     SF(gtk_font_selection_get_type)	  (void) G_GNUC_CONST;
 GtkWidget *  SF(gtk_font_selection_new)               (void);
 GtkWidget *  SF(gtk_font_selection_get_family_list)   (GtkFontSelection *fontsel);
 GtkWidget *  SF(gtk_font_selection_get_face_list)     (GtkFontSelection *fontsel);
@@ -198,10 +198,10 @@ void         SF(gtk_font_selection_set_preview_text)  (GtkFontSelection *fontsel
  *   GtkFontSelection.
  *****************************************************************************/
 
-GType	   _T2_gtk_font_selection_dialog_get_type	       (void) G_GNUC_CONST;
-GType	   _3T_gtk_font_selection_dialog_get_type	       (void) G_GNUC_CONST;
+GType	   SF(_T2_gtk_font_selection_dialog_get_type)	       (void) G_GNUC_CONST;
+GType	   SF(_3T_gtk_font_selection_dialog_get_type)	       (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType	   gtk_font_selection_dialog_get_type	       (void) G_GNUC_CONST;
+GType	   SF(gtk_font_selection_dialog_get_type)	       (void) G_GNUC_CONST;
 GtkWidget *SF(gtk_font_selection_dialog_new)	       (const gchar            *title);
 
 GtkWidget *SF(gtk_font_selection_dialog_get_ok_button)     (GtkFontSelectionDialog *fsd);

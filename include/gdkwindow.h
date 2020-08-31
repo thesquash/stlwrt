@@ -241,7 +241,7 @@ struct _GdkPointerHooks
 typedef struct _GdkWindowObject GdkWindowObject;
 typedef struct _GdkWindowObjectClass GdkWindowObjectClass;
 
-#define GDK_TYPE_WINDOW              (gdk_window_object_get_type ())
+#define GDK_TYPE_WINDOW              (SF(gdk_window_object_get_type) ())
 #define GDK_WINDOW(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_WINDOW, GdkWindow))
 #define GDK_WINDOW_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_WINDOW, GdkWindowObjectClass))
 #define GDK_IS_WINDOW(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_WINDOW))
@@ -348,10 +348,10 @@ struct _GdkWindowObjectClass
 
 /* Windows
  */
-GType         _T2_gdk_window_object_get_type       (void) G_GNUC_CONST;
-GType         _3T_gdk_window_object_get_type       (void) G_GNUC_CONST;
+GType         SF(_T2_gdk_window_object_get_type)       (void) G_GNUC_CONST;
+GType         SF(_3T_gdk_window_object_get_type)       (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType         gdk_window_object_get_type       (void) G_GNUC_CONST;
+GType         SF(gdk_window_object_get_type)       (void) G_GNUC_CONST;
 GdkWindow*    SF(gdk_window_new)                   (GdkWindow     *parent,
                                                 GdkWindowAttr *attributes,
                                                 gint           attributes_mask);
@@ -525,7 +525,7 @@ void	      SF(gdk_window_set_hints)	 (GdkWindow	  *window,
 #endif
 void              SF(gdk_window_set_type_hint) (GdkWindow        *window,
                                             GdkWindowTypeHint hint);
-GdkWindowTypeHint gdk_window_get_type_hint (GdkWindow        *window);
+GdkWindowTypeHint SF(gdk_window_get_type)_hint (GdkWindow        *window);
 
 gboolean      SF(gdk_window_get_modal_hint)   (GdkWindow       *window);
 void          SF(gdk_window_set_modal_hint)   (GdkWindow       *window,
@@ -751,7 +751,7 @@ GdkPointerHooks *SF(gdk_set_pointer_hooks) (const GdkPointerHooks *new_hooks);
 
 #define GDK_ROOT_PARENT()             (SF(gdk_get_default_root_window) ())
 #define gdk_window_get_size            gdk_drawable_get_size
-#define gdk_window_get_type            gdk_window_get_window_type
+#define SF(gdk_window_get_type)            gdk_window_get_window_type
 #define gdk_window_get_colormap        gdk_drawable_get_colormap
 #define gdk_window_set_colormap        gdk_drawable_set_colormap
 #define gdk_window_ref                 g_object_ref

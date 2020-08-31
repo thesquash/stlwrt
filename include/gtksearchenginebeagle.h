@@ -27,7 +27,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_SEARCH_ENGINE_BEAGLE		(_gtk_search_engine_beagle_get_type ())
+#define GTK_TYPE_SEARCH_ENGINE_BEAGLE		(SF(_gtk_search_engine_beagle_get_type) ())
 #define GTK_SEARCH_ENGINE_BEAGLE(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_SEARCH_ENGINE_BEAGLE, GtkSearchEngineBeagle))
 #define GTK_SEARCH_ENGINE_BEAGLE_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_SEARCH_ENGINE_BEAGLE, GtkSearchEngineBeagleClass))
 #define GTK_IS_SEARCH_ENGINE_BEAGLE(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_SEARCH_ENGINE_BEAGLE))
@@ -63,7 +63,7 @@ struct _GtkSearchEngineBeagleClass
   GtkSearchEngineClass parent_class;
 };
 
-GType            _gtk_search_engine_beagle_get_type (void);
+GType            SF(_gtk_search_engine_beagle_get_type) (void);
 
 GtkSearchEngine* _gtk_search_engine_beagle_new      (void);
 

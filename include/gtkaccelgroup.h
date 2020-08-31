@@ -28,7 +28,7 @@ G_BEGIN_DECLS
 
 
 /* --- type macros --- */
-#define GTK_TYPE_ACCEL_GROUP              (gtk_accel_group_get_type ())
+#define GTK_TYPE_ACCEL_GROUP              (SF(gtk_accel_group_get_type) ())
 #define GTK_ACCEL_GROUP(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GTK_TYPE_ACCEL_GROUP, GtkAccelGroup))
 #define GTK_ACCEL_GROUP_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_ACCEL_GROUP, GtkAccelGroupClass))
 #define GTK_IS_ACCEL_GROUP(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GTK_TYPE_ACCEL_GROUP))
@@ -141,10 +141,10 @@ struct _GtkAccelKey
 
 
 /* -- Accelerator Groups --- */
-GType          _T2_gtk_accel_group_get_type           (void) G_GNUC_CONST;
-GType          _3T_gtk_accel_group_get_type           (void) G_GNUC_CONST;
+GType          SF(_T2_gtk_accel_group_get_type)           (void) G_GNUC_CONST;
+GType          SF(_3T_gtk_accel_group_get_type)           (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType          gtk_accel_group_get_type           (void) G_GNUC_CONST;
+GType          SF(gtk_accel_group_get_type)           (void) G_GNUC_CONST;
 GtkAccelGroup* SF(gtk_accel_group_new)	      	  (void);
 gboolean       SF(gtk_accel_group_get_is_locked)      (GtkAccelGroup  *accel_group);
 GdkModifierType 

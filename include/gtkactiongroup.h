@@ -32,7 +32,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_ACTION_GROUP              (gtk_action_group_get_type ())
+#define GTK_TYPE_ACTION_GROUP              (SF(gtk_action_group_get_type) ())
 #define GTK_ACTION_GROUP(obj)              (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_ACTION_GROUP, GtkActionGroup))
 #define GTK_ACTION_GROUP_CLASS(vtable)     (G_TYPE_CHECK_CLASS_CAST ((vtable), GTK_TYPE_ACTION_GROUP, GtkActionGroupClass))
 #define GTK_IS_ACTION_GROUP(obj)           (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_ACTION_GROUP))
@@ -114,7 +114,7 @@ struct _GtkRadioActionEntry
 };
 
 
-GType           gtk_action_group_get_type                (void) G_GNUC_CONST;
+GType           SF(gtk_action_group_get_type)                (void) G_GNUC_CONST;
 GtkActionGroup *SF(gtk_action_group_new)                     (const gchar                *name);
 const gchar *SF(gtk_action_group_get_name)          (GtkActionGroup             *action_group);
 gboolean        SF(gtk_action_group_get_sensitive)           (GtkActionGroup             *action_group);

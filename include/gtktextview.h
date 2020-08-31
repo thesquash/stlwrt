@@ -27,7 +27,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_TEXT_VIEW             (gtk_text_view_get_type ())
+#define GTK_TYPE_TEXT_VIEW             (SF(gtk_text_view_get_type) ())
 #define GTK_TEXT_VIEW(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_TEXT_VIEW, GtkTextView))
 #define GTK_TEXT_VIEW_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_TEXT_VIEW, GtkTextViewClass))
 #define GTK_IS_TEXT_VIEW(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TEXT_VIEW))
@@ -214,10 +214,10 @@ struct _GtkTextViewClass
   void (*_gtk_reserved7) (void);
 };
 
-GType          _T2_gtk_text_view_get_type              (void) G_GNUC_CONST;
-GType          _3T_gtk_text_view_get_type              (void) G_GNUC_CONST;
+GType          SF(_T2_gtk_text_view_get_type)              (void) G_GNUC_CONST;
+GType          SF(_3T_gtk_text_view_get_type)              (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType          gtk_text_view_get_type              (void) G_GNUC_CONST;
+GType          SF(gtk_text_view_get_type)              (void) G_GNUC_CONST;
 GtkWidget *    SF(gtk_text_view_new)                   (void);
 GtkWidget *    SF(gtk_text_view_new_with_buffer)       (GtkTextBuffer *buffer);
 void           SF(gtk_text_view_set_buffer)            (GtkTextView   *text_view,

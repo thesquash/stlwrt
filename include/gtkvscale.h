@@ -26,7 +26,7 @@
 G_BEGIN_DECLS
 
 
-#define GTK_TYPE_VSCALE            (gtk_vscale_get_type ())
+#define GTK_TYPE_VSCALE            (SF(gtk_vscale_get_type) ())
 #define GTK_VSCALE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_VSCALE, GtkVScale))
 #define GTK_VSCALE_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_VSCALE, GtkVScaleClass))
 #define GTK_IS_VSCALE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_VSCALE))
@@ -55,7 +55,7 @@ struct _GtkVScaleClass
 };
 
 
-GType      gtk_vscale_get_type       (void) G_GNUC_CONST;
+GType      SF(gtk_vscale_get_type)       (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_vscale_new)            (GtkAdjustment *adjustment);
 GtkWidget* SF(gtk_vscale_new_with_range) (gdouble        min,
                                       gdouble        max,

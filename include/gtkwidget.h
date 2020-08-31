@@ -118,7 +118,7 @@ typedef enum
 /* Macro for casting a pointer to a GtkWidget or GtkWidgetClass pointer.
  * Macros for testing whether `widget' or `klass' are of type GTK_TYPE_WIDGET.
  */
-#define GTK_TYPE_WIDGET			  (gtk_widget_get_type ())
+#define GTK_TYPE_WIDGET			  (SF(gtk_widget_get_type) ())
 #define GTK_WIDGET(widget)		  (G_TYPE_CHECK_INSTANCE_CAST ((widget), GTK_TYPE_WIDGET, GtkWidget))
 #define GTK_WIDGET_CLASS(klass)		  (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_WIDGET, GtkWidgetClass))
 #define GTK_IS_WIDGET(widget)		  (G_TYPE_CHECK_INSTANCE_TYPE ((widget), GTK_TYPE_WIDGET))
@@ -126,7 +126,7 @@ typedef enum
 #define GTK_WIDGET_GET_CLASS(obj)         (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_WIDGET, GtkWidgetClass))
 
 
-#define GTK_TYPE_REQUISITION              (gtk_requisition_get_type ())
+#define GTK_TYPE_REQUISITION              (SF(gtk_requisition_get_type) ())
 
 /* forward declaration to avoid excessive includes (and concurrent includes)
  */
@@ -536,10 +536,10 @@ struct _GtkWidgetShapeInfo
   GdkBitmap *shape_mask;
 };
 
-GType	   _T2_gtk_widget_get_type		  (void) G_GNUC_CONST;
-GType	   _3T_gtk_widget_get_type		  (void) G_GNUC_CONST;
+GType	   SF(_T2_gtk_widget_get_type)		  (void) G_GNUC_CONST;
+GType	   SF(_3T_gtk_widget_get_type)		  (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType	   gtk_widget_get_type		  (void) G_GNUC_CONST;
+GType	   SF(gtk_widget_get_type)		  (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_widget_new)		  (GType		type,
 					   const gchar	       *first_property_name,
 					   ...);
@@ -929,10 +929,10 @@ void       SF(gtk_widget_set_has_tooltip)       (GtkWidget   *widget,
 					     gboolean     has_tooltip);
 gboolean   SF(gtk_widget_get_has_tooltip)       (GtkWidget   *widget);
 
-GType           _T2_gtk_requisition_get_type (void) G_GNUC_CONST;
-GType           _3T_gtk_requisition_get_type (void) G_GNUC_CONST;
+GType           SF(_T2_gtk_requisition_get_type) (void) G_GNUC_CONST;
+GType           SF(_3T_gtk_requisition_get_type) (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType           gtk_requisition_get_type (void) G_GNUC_CONST;
+GType           SF(gtk_requisition_get_type) (void) G_GNUC_CONST;
 GtkRequisition *SF(gtk_requisition_copy)     (const GtkRequisition *requisition);
 void            SF(gtk_requisition_free)     (GtkRequisition       *requisition);
 

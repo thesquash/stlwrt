@@ -26,7 +26,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_CLIPBOARD            (gtk_clipboard_get_type ())
+#define GTK_TYPE_CLIPBOARD            (SF(gtk_clipboard_get_type) ())
 #define GTK_CLIPBOARD(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_CLIPBOARD, GtkClipboard))
 #define GTK_IS_CLIPBOARD(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_CLIPBOARD))
 
@@ -63,10 +63,10 @@ typedef void (* GtkClipboardGetFunc)          (GtkClipboard     *clipboard,
 typedef void (* GtkClipboardClearFunc)        (GtkClipboard     *clipboard,
 					       gpointer          user_data_or_owner);
 
-GType         _T2_gtk_clipboard_get_type (void) G_GNUC_CONST;
-GType         _3T_gtk_clipboard_get_type (void) G_GNUC_CONST;
+GType         SF(_T2_gtk_clipboard_get_type) (void) G_GNUC_CONST;
+GType         SF(_3T_gtk_clipboard_get_type) (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */
-GType         gtk_clipboard_get_type (void) G_GNUC_CONST;
+GType         SF(gtk_clipboard_get_type) (void) G_GNUC_CONST;
 
 GtkClipboard *SF(gtk_clipboard_get_for_display) (GdkDisplay   *display,
 					     GdkAtom       selection);

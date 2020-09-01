@@ -36,18 +36,13 @@ G_BEGIN_DECLS
 #define GTK_IS_FONT_BUTTON_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_FONT_BUTTON))
 #define GTK_FONT_BUTTON_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_FONT_BUTTON, GtkFontButtonClass))
 
-typedef struct _GtkFontButton        GtkFontButtonFat;
-typedef struct _GtkFontButton        GtkFontButtonThin;
-
 typedef struct _GtkFontButtonClass   GtkFontButtonClass;
 typedef struct _GtkFontButtonPrivate GtkFontButtonPrivate;
 
-struct _GtkFontButton {
-  GtkButton button;
-
+STLWRT_DECLARE_FTYPE_VPARENT(GtkFontButton, gtk_font_button, GtkButton,
   /*< private >*/
   GtkFontButtonPrivate * (priv);
-};
+)
 
 struct _GtkFontButtonClass {
   GtkButtonClass parent_class;
@@ -63,10 +58,6 @@ struct _GtkFontButtonClass {
 };
 
 
-GType                 SF(_T2_gtk_font_button_get_type)       (void) G_GNUC_CONST;
-GType                 SF(_3T_gtk_font_button_get_type)       (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType                 SF(gtk_font_button_get_type)       (void) G_GNUC_CONST;
 GtkWidget            *SF(gtk_font_button_new)            (void);
 GtkWidget            *SF(gtk_font_button_new_with_font)  (const gchar   *fontname);
 

@@ -32,14 +32,9 @@ G_BEGIN_DECLS
 #define GTK_HPANED_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_HPANED, GtkHPanedClass))
 
 
-typedef struct _GtkHPaned      GtkHPaned;
-
 typedef struct _GtkHPanedClass GtkHPanedClass;
 
-struct _GtkHPaned
-{
-  GtkPaned paned;
-};
+STLWRT_DECLARE_FTYPE_VPARENT(GtkHPaned, gtk_hpaned, GtkPaned, ;)
 
 struct _GtkHPanedClass
 {
@@ -47,7 +42,6 @@ struct _GtkHPanedClass
 };
 
 
-GType       SF(gtk_hpaned_get_type) (void) G_GNUC_CONST;
 GtkWidget * SF(gtk_hpaned_new)      (void);
 
 G_END_DECLS

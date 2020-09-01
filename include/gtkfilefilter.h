@@ -29,8 +29,6 @@ G_BEGIN_DECLS
 #define GTK_FILE_FILTER(obj)              (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_FILE_FILTER, GtkFileFilter))
 #define GTK_IS_FILE_FILTER(obj)           (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FILE_FILTER))
 
-typedef struct _GtkFileFilter     GtkFileFilterFat;
-typedef struct _GtkFileFilter     GtkFileFilterThin;
 typedef struct _GtkFileFilterInfo GtkFileFilterInfo;
 
 typedef enum {
@@ -43,10 +41,9 @@ typedef enum {
 typedef gboolean (*GtkFileFilterFunc) (const GtkFileFilterInfo *filter_info,
 				       gpointer                 data);
 
-/********************************************************************/
-struct _GtkFileFilterInfoProps
+struct _GtkFileFilterInfo
 {
-
+  GtkFileFilterFlagsFat   contains;
 
   const gchar *filename;
   const gchar *uri;
@@ -54,40 +51,8 @@ struct _GtkFileFilterInfoProps
   const gchar *mime_type;
 };
 
-struct _GtkFileFilterInfoFat
-{
-  GtkFileFilterFlagsFat   contains;
 
-  struct _GtkFileFilterInfoProps instance_properties;
-};
-
-struct _GtkFileFilterInfoThin
-{
-  GtkFileFilterFlagsThin  contains;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkFileFilterInfoFat   fat_instance;
-  struct _GtkFileFilterInfoThin  thin_instance;
-}   GtkFileFilterInfo;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkFileFilterInfoFat GtkFileFilterInfo;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkFileFilterInfoThin GtkFileFilterInfo;
-#endif
-/********************************************************************/
-
-
-
-GType SF(_T2_gtk_file_filter_get_type) (void) G_GNUC_CONST;
-GType SF(_3T_gtk_file_filter_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType SF(gtk_file_filter_get_type) (void) G_GNUC_CONST;
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_file_filter)
 
 GtkFileFilter *       SF(gtk_file_filter_new)      (void);
 void                  SF(gtk_file_filter_set_name) (GtkFileFilter *filter,

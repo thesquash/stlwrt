@@ -32,15 +32,9 @@ G_BEGIN_DECLS
 #define GTK_IS_HSEPARATOR_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_HSEPARATOR))
 #define GTK_HSEPARATOR_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_HSEPARATOR, GtkHSeparatorClass))
 
-
-typedef struct _GtkHSeparator       GtkHSeparator;
-
 typedef struct _GtkHSeparatorClass  GtkHSeparatorClass;
 
-struct _GtkHSeparator
-{
-  GtkSeparator separator;
-};
+STLWRT_DECLARE_FTYPE_VPARENT(GtkHSeparator, gtk_hseparator, GtkSeparator, ;)
 
 struct _GtkHSeparatorClass
 {
@@ -48,7 +42,6 @@ struct _GtkHSeparatorClass
 };
 
 
-GType      SF(gtk_hseparator_get_type) (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_hseparator_new)      (void);
 
 

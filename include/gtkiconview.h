@@ -35,8 +35,6 @@ G_BEGIN_DECLS
 #define GTK_IS_ICON_VIEW_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_ICON_VIEW))
 #define GTK_ICON_VIEW_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ICON_VIEW, GtkIconViewClass))
 
-typedef struct _GtkIconView           GtkIconView;
-
 typedef struct _GtkIconViewClass      GtkIconViewClass;
 typedef struct _GtkIconViewPrivate    GtkIconViewPrivate;
 
@@ -142,12 +140,9 @@ struct _GtkIconViewPrivate
   guint draw_focus : 1;
 };
 
-struct _GtkIconView
-{
-  GtkContainer parent;
-
+STLWRT_DECLARE_FTYPE_VPARENT(GtkIconView, gtk_icon_view, GtkContainer,
   GtkIconViewPrivate * (priv);
-};
+)
 
 struct _GtkIconViewClass
 {
@@ -173,7 +168,6 @@ struct _GtkIconViewClass
 };
 
 
-GType          SF(gtk_icon_view_get_type)          (void) G_GNUC_CONST;
 GtkWidget *    SF(gtk_icon_view_new)               (void);
 GtkWidget *    SF(gtk_icon_view_new_with_model)    (GtkTreeModel   *model);
 

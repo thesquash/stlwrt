@@ -33,10 +33,6 @@ G_BEGIN_DECLS
 #define GTK_IS_IMAGE_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_IMAGE))
 #define GTK_IMAGE_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_IMAGE, GtkImageClass))
 
-
-typedef struct _GtkImage       GtkImageFat;
-typedef struct _GtkImage       GtkImageThin;
-
 typedef struct _GtkImageClass  GtkImageClass;
 
 typedef struct _GtkImagePixmapData  GtkImagePixmapData;
@@ -145,12 +141,9 @@ struct _GtkImagePrivate
   guint need_calc_size : 1;
 };
 
-struct _GtkImage
-{
-  GtkMisc misc;
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkImage, gtk_image, GtkMisc,
   GtkImageType  (storage_type);
-  
+
   union
   {
     GtkImagePixmapData pixmap;
@@ -168,7 +161,7 @@ struct _GtkImage
 
   /* Only used with GTK_IMAGE_STOCK, GTK_IMAGE_ICON_SET, GTK_IMAGE_ICON_NAME */
   GtkIconSize  (icon_size);
-};
+)
 
 struct _GtkImageClass
 {
@@ -187,10 +180,6 @@ struct _GtkImageClass
 #define gtk_image_set_from_file gtk_image_set_from_file_utf8
 #endif
 
-GType      SF(_T2_gtk_image_get_type) (void) G_GNUC_CONST;
-GType      SF(_3T_gtk_image_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      SF(gtk_image_get_type) (void) G_GNUC_CONST;
 
 GtkWidget* SF(gtk_image_new)                (void);
 GtkWidget* SF(gtk_image_new_from_pixmap)    (GdkPixmap       *pixmap,

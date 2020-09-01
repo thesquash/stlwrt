@@ -146,10 +146,7 @@ typedef enum {
   STARTUP_MODE_CWD
 } StartupMode;
 
-struct _GtkFileChooserDefault
-{
-  GtkVBox parent_instance;
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkFileChooserDefault, _gtk_file_chooser_default, GtkVBox,
   GtkFileChooserAction action;
 
   GtkFileSystem *file_system;
@@ -302,7 +299,7 @@ struct _GtkFileChooserDefault
 #if 0
   guint shortcuts_drag_outside : 1;
 #endif
-};
+)
 
 
 G_END_DECLS

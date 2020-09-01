@@ -37,50 +37,12 @@ G_BEGIN_DECLS
 #define GTK_IS_FIXED_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_FIXED))
 #define GTK_FIXED_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_FIXED, GtkFixedClass))
 
-
-typedef struct _GtkFixed        GtkFixedFat;
-typedef struct _GtkFixed        GtkFixedThin;
-
 typedef struct _GtkFixedClass   GtkFixedClass;
 typedef struct _GtkFixedChild   GtkFixedChild;
 
-/********************************************************************/
-struct _GtkFixedProps
-{
-
-
+STLWRT_DECLARE_FTYPE_VPARENT(GtkFixed, gtk_fixed, GtkContainer,
   GList * (children);
-};
-
-struct _GtkFixedFat
-{
-  GtkContainerFat   container;
-
-  struct _GtkFixedProps instance_properties;
-};
-
-struct _GtkFixedThin
-{
-  GtkContainerThin  container;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkFixedFat   fat_instance;
-  struct _GtkFixedThin  thin_instance;
-}   GtkFixed;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkFixedFat GtkFixed;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkFixedThin GtkFixed;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkFixedClass
 {
@@ -95,10 +57,6 @@ struct _GtkFixedChild
 };
 
 
-GType      SF(_T2_gtk_fixed_get_type)          (void) G_GNUC_CONST;
-GType      SF(_3T_gtk_fixed_get_type)          (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      SF(gtk_fixed_get_type)          (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_fixed_new)               (void);
 void       SF(gtk_fixed_put)               (GtkFixed       *fixed,
                                         GtkWidget      *widget,

@@ -36,15 +36,9 @@ G_BEGIN_DECLS
 #define GTK_IS_HRULER_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_HRULER))
 #define GTK_HRULER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_HRULER, GtkHRulerClass))
 
-
-typedef struct _GtkHRuler       GtkHRuler;
-
 typedef struct _GtkHRulerClass  GtkHRulerClass;
 
-struct _GtkHRuler
-{
-  GtkRuler ruler;
-};
+STLWRT_DECLARE_FTYPE_VPARENT(GtkHRuler, gtk_hruler, GtkRuler, ;)
 
 struct _GtkHRulerClass
 {
@@ -52,7 +46,6 @@ struct _GtkHRulerClass
 };
 
 
-GType      SF(gtk_hruler_get_type) (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_hruler_new)      (void);
 
 

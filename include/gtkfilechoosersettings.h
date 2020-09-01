@@ -37,16 +37,9 @@ enum {
   FILE_LIST_COL_NUM_COLUMNS
 };
 
-typedef struct _GtkFileChooserSettings GtkFileChooserSettingsFat;
-typedef struct _GtkFileChooserSettings GtkFileChooserSettingsThin;
-
 typedef struct _GtkFileChooserSettingsClass GtkFileChooserSettingsClass;
 
-/********************************************************************/
-struct _GtkFileChooserSettingsProps
-{
-
-
+STLWRT_DECLARE_FTYPE_FPARENT(GtkFileChooserSettings, _gtk_file_chooser_settings, GObject,
   LocationMode location_mode;
 
   GtkSortType sort_order;
@@ -61,44 +54,13 @@ struct _GtkFileChooserSettingsProps
   guint settings_read    : 1;
   guint show_hidden      : 1;
   guint show_size_column : 1;
-};
-
-struct _GtkFileChooserSettingsFat
-{
-  GObject   object;
-
-  struct _GtkFileChooserSettingsProps instance_properties;
-};
-
-struct _GtkFileChooserSettingsThin
-{
-  GObject  object;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkFileChooserSettingsFat   fat_instance;
-  struct _GtkFileChooserSettingsThin  thin_instance;
-}   GtkFileChooserSettings;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkFileChooserSettingsFat GtkFileChooserSettings;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkFileChooserSettingsThin GtkFileChooserSettings;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkFileChooserSettingsClass
 {
   GObjectClass parent_class;
 };
 
-GType SF(_gtk_file_chooser_settings_get_type) (void) G_GNUC_CONST;
 
 GtkFileChooserSettings *_gtk_file_chooser_settings_new (void);
 

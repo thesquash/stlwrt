@@ -30,10 +30,7 @@ G_BEGIN_DECLS
 #define GTK_FILE_CHOOSER_DEFAULT(obj)    (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_FILE_CHOOSER_DEFAULT, GtkFileChooserDefault))
 #define GTK_IS_FILE_CHOOSER_DEFAULT(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FILE_CHOOSER_DEFAULT))
 
-typedef struct _GtkFileChooserDefault      GtkFileChooserDefaultFat;
-typedef struct _GtkFileChooserDefault      GtkFileChooserDefaultThin;
-
-GType      SF(_gtk_file_chooser_default_get_type) (void) G_GNUC_CONST;
+STLWRT_DECLARE_GET_VTYPE_FUNCTIONS(_gtk_file_chooser_default)
 GtkWidget *_gtk_file_chooser_default_new      (void);
 
 G_END_DECLS

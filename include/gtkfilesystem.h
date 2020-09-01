@@ -42,10 +42,7 @@ G_BEGIN_DECLS
 
 
 typedef struct GtkFileSystemClass GtkFileSystemClass;
-typedef struct GtkFileSystem GtkFileSystem;
-
 typedef struct GtkFolderClass GtkFolderClass;
-typedef struct GtkFolder GtkFolder;
 typedef struct GtkFileSystemVolume GtkFileSystemVolume; /* opaque struct */
 typedef struct GtkFileSystemBookmark GtkFileSystemBookmark; /* opaque struct */
 
@@ -57,10 +54,7 @@ struct GtkFileSystemClass
   void (*volumes_changed)   (GtkFileSystem *file_system);
 };
 
-struct GtkFileSystem
-{
-  GObject parent_object;
-};
+STLWRT_DECLARE_FTYPE_FPARENT(GtkFileSystem, _gtk_file_system, GObject, ;)
 
 struct GtkFolderClass
 {
@@ -89,10 +83,7 @@ struct GtkFolderPrivate
   guint finished_loading : 1;
 };
 
-struct GtkFolder
-{
-  GObject parent_object;
-};
+STLWRT_DECLARE_FTYPE_FPARENT(GtkFolder, _gtk_folder, GObject, ;)
 
 typedef void (* GtkFileSystemGetFolderCallback)    (GCancellable        *cancellable,
 						    GtkFolder           *folder,
@@ -107,8 +98,6 @@ typedef void (* GtkFileSystemVolumeMountCallback)  (GCancellable        *cancell
 						    const GError        *error,
 						    gpointer             data);
 
-/* GtkFileSystem methods */
-GType           SF(_gtk_file_system_get_type)     (void) G_GNUC_CONST;
 
 GtkFileSystem * _gtk_file_system_new          (void);
 

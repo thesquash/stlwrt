@@ -32,15 +32,9 @@ G_BEGIN_DECLS
 #define GTK_IS_HBUTTON_BOX_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_HBUTTON_BOX))
 #define GTK_HBUTTON_BOX_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_HBUTTON_BOX, GtkHButtonBoxClass))
 
-
-typedef struct _GtkHButtonBox       GtkHButtonBox;
-
 typedef struct _GtkHButtonBoxClass  GtkHButtonBoxClass;
 
-struct _GtkHButtonBox
-{
-  GtkButtonBox button_box;
-};
+STLWRT_DECLARE_FTYPE_VPARENT(GtkHButtonBox, gtk_hbutton_box, GtkButtonBox, ;)
 
 struct _GtkHButtonBoxClass
 {
@@ -48,7 +42,6 @@ struct _GtkHButtonBoxClass
 };
 
 
-GType      SF(gtk_hbutton_box_get_type) (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_hbutton_box_new)      (void);
 
 /* buttons can be added by SF(gtk_container_add)() */

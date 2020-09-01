@@ -33,54 +33,16 @@ G_BEGIN_DECLS
 #define GTK_IS_FRAME_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_FRAME))
 #define GTK_FRAME_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_FRAME, GtkFrameClass))
 
-
-typedef struct _GtkFrame       GtkFrameFat;
-typedef struct _GtkFrame       GtkFrameThin;
-
 typedef struct _GtkFrameClass  GtkFrameClass;
 
-/********************************************************************/
-struct _GtkFrameProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkFrame, gtk_frame, GtkBin,
   GtkWidget * (label_widget);
   gint16  (shadow_type);
   gfloat  (label_xalign);
   gfloat  (label_yalign);
 
   GtkAllocation  (child_allocation);
-};
-
-struct _GtkFrameFat
-{
-  GtkBinFat   bin;
-
-  struct _GtkFrameProps instance_properties;
-};
-
-struct _GtkFrameThin
-{
-  GtkBinThin  bin;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkFrameFat   fat_instance;
-  struct _GtkFrameThin  thin_instance;
-}   GtkFrame;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkFrameFat GtkFrame;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkFrameThin GtkFrame;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkFrameClass
 {
@@ -90,10 +52,6 @@ struct _GtkFrameClass
 };
 
 
-GType      SF(_T2_gtk_frame_get_type)         (void) G_GNUC_CONST;
-GType      SF(_3T_gtk_frame_get_type)         (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      SF(gtk_frame_get_type)         (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_frame_new)              (const gchar   *label);
 
 void                  SF(gtk_frame_set_label) (GtkFrame    *frame,

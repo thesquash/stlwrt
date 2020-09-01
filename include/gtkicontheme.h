@@ -35,9 +35,6 @@ G_BEGIN_DECLS
 #define GTK_ICON_THEME_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ICON_THEME, GtkIconThemeClass))
 
 typedef struct _GtkIconInfo         GtkIconInfo;
-typedef struct _GtkIconTheme        GtkIconThemeFat;
-typedef struct _GtkIconTheme        GtkIconThemeThin;
-
 typedef struct _GtkIconThemeClass   GtkIconThemeClass;
 typedef struct _GtkIconThemePrivate GtkIconThemePrivate;
 
@@ -78,13 +75,9 @@ struct _GtkIconThemePrivate
   gulong reset_styles_idle;
 };
 
-struct _GtkIconTheme
-{
-  /*< private >*/
-  GObject parent_instance;
-
+STLWRT_DECLARE_FTYPE_FPARENT(GtkIconTheme, gtk_icon_theme, GObject,
   GtkIconThemePrivate * (priv);
-};
+)
 
 struct _GtkIconThemeClass
 {
@@ -146,11 +139,6 @@ GQuark SF(gtk_icon_theme_error_quark) (void);
 #define gtk_icon_info_get_filename gtk_icon_info_get_filename_utf8
 #endif
 
-GType         SF(_T2_gtk_icon_theme_get_type)              (void) G_GNUC_CONST;
-GType         SF(_3T_gtk_icon_theme_get_type)              (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType         SF(gtk_icon_theme_get_type)              (void) G_GNUC_CONST;
-
 GtkIconTheme *SF(gtk_icon_theme_new)                   (void);
 GtkIconTheme *SF(gtk_icon_theme_get_default)           (void);
 GtkIconTheme *SF(gtk_icon_theme_get_for_screen)        (GdkScreen                   *screen);
@@ -205,10 +193,7 @@ void          SF(gtk_icon_theme_add_builtin_icon)      (const gchar *icon_name,
 					            gint         size,
 					            GdkPixbuf   *pixbuf);
 
-GType                 SF(_T2_gtk_icon_info_get_type)           (void) G_GNUC_CONST;
-GType                 SF(_3T_gtk_icon_info_get_type)           (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType                 SF(gtk_icon_info_get_type)           (void) G_GNUC_CONST;
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_icon_info)
 GtkIconInfo *         SF(gtk_icon_info_copy)               (GtkIconInfo  *icon_info);
 void                  SF(gtk_icon_info_free)               (GtkIconInfo  *icon_info);
 

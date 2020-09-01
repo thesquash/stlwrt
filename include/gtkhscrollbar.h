@@ -33,15 +33,9 @@ G_BEGIN_DECLS
 #define GTK_IS_HSCROLLBAR_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_HSCROLLBAR))
 #define GTK_HSCROLLBAR_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_HSCROLLBAR, GtkHScrollbarClass))
 
-
-typedef struct _GtkHScrollbar       GtkHScrollbar;
-
 typedef struct _GtkHScrollbarClass  GtkHScrollbarClass;
 
-struct _GtkHScrollbar
-{
-  GtkScrollbar scrollbar;
-};
+STLWRT_DECLARE_FTYPE_VPARENT(GtkHScrollbar, gtk_hscrollbar, GtkScrollbar, ;)
 
 struct _GtkHScrollbarClass
 {
@@ -49,7 +43,6 @@ struct _GtkHScrollbarClass
 };
 
 
-GType      SF(gtk_hscrollbar_get_type) (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_hscrollbar_new)      (GtkAdjustment *adjustment);
 
 

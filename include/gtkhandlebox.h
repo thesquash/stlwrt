@@ -37,18 +37,9 @@ G_BEGIN_DECLS
 #define GTK_IS_HANDLE_BOX_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_HANDLE_BOX))
 #define GTK_HANDLE_BOX_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_HANDLE_BOX, GtkHandleBoxClass))
 
-
-typedef struct _GtkHandleBox       GtkHandleBoxFat;
-typedef struct _GtkHandleBox       GtkHandleBoxThin;
-
 typedef struct _GtkHandleBoxClass  GtkHandleBoxClass;
 
-
-/********************************************************************/
-struct _GtkHandleBoxProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkHandleBox, gtk_handle_box, GtkBin,
   GdkWindow      * (bin_window);	/* parent window for children */
   GdkWindow      * (float_window);
   GtkShadowType    (shadow_type);
@@ -67,45 +58,13 @@ struct _GtkHandleBoxProps
 
   GtkAllocation    (attach_allocation);
   GtkAllocation    (float_allocation);
-};
+)
 
 struct _GtkHandleBoxPrivate
 {
-
-  
   gint orig_x;
   gint orig_y;
 };
-
-struct _GtkHandleBoxFat
-{
-  GtkBinFat   bin;
-
-  struct _GtkHandleBoxProps instance_properties;
-};
-
-struct _GtkHandleBoxThin
-{
-  GtkBinThin  bin;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkHandleBoxFat   fat_instance;
-  struct _GtkHandleBoxThin  thin_instance;
-}   GtkHandleBox;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkHandleBoxFat GtkHandleBox;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkHandleBoxThin GtkHandleBox;
-#endif
-/********************************************************************/
-
-
 
 struct _GtkHandleBoxClass
 {
@@ -124,10 +83,6 @@ struct _GtkHandleBoxClass
 };
 
 
-GType         SF(_T2_gtk_handle_box_get_type)             (void) G_GNUC_CONST;
-GType         SF(_3T_gtk_handle_box_get_type)             (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType         SF(gtk_handle_box_get_type)             (void) G_GNUC_CONST;
 GtkWidget*    SF(gtk_handle_box_new)                  (void);
 void          SF(gtk_handle_box_set_shadow_type)      (GtkHandleBox    *handle_box,
                                                    GtkShadowType    type);

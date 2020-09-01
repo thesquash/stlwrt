@@ -46,20 +46,10 @@ G_BEGIN_DECLS
 #define GTK_FONT_SELECTION_DIALOG_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_FONT_SELECTION_DIALOG, GtkFontSelectionDialogClass))
 
 
-typedef struct _GtkFontSelection	     GtkFontSelectionFat;
-typedef struct _GtkFontSelection	     GtkFontSelectionThin;
-
 typedef struct _GtkFontSelectionClass	     GtkFontSelectionClass;
-
-typedef struct _GtkFontSelectionDialog	     GtkFontSelectionDialogFat;
-typedef struct _GtkFontSelectionDialog	     GtkFontSelectionDialogThin;
-
 typedef struct _GtkFontSelectionDialogClass  GtkFontSelectionDialogClass;
 
-struct _GtkFontSelection
-{
-  GtkVBox parent_instance;
-  
+STLWRT_DECLARE_VTYPE_VPARENT(GtkFontSelection, gtk_font_selection, GtkVBox,
   GtkWidget * (font_entry);        /* Used _get_family_entry() for consistency, -mr */
   GtkWidget * (family_list);
   GtkWidget * (font_style_entry);  /* Used _get_face_entry() for consistency, -mr */
@@ -79,7 +69,7 @@ struct _GtkFontSelection
   GdkFont * (font);		/* Cache for gdk_font_selection_get_font, so we can preserve
                                          * refcounting behavior
                                          */
-};
+)
 
 struct _GtkFontSelectionClass
 {
@@ -92,11 +82,7 @@ struct _GtkFontSelectionClass
   void (*_gtk_reserved4) (void);
 };
 
-/********************************************************************/
-struct _GtkFontSelectionDialogProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkFontSelectionDialog, gtk_font_selection_dialog, GtkDialog,
   /*< private >*/
   GtkWidget * (fontsel);
 
@@ -115,37 +101,7 @@ struct _GtkFontSelectionDialogProps
    */
   gint  (dialog_width);
   gboolean  (auto_resize);
-};
-
-struct _GtkFontSelectionDialogFat
-{
-  GtkDialogFat   parent_instance;
-
-  struct _GtkFontSelectionDialogProps instance_properties;
-};
-
-struct _GtkFontSelectionDialogThin
-{
-  GtkDialogThin  parent_instance;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkFontSelectionDialogFat   fat_instance;
-  struct _GtkFontSelectionDialogThin  thin_instance;
-}   GtkFontSelectionDialog;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkFontSelectionDialogFat GtkFontSelectionDialog;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkFontSelectionDialogThin GtkFontSelectionDialog;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkFontSelectionDialogClass
 {
@@ -159,16 +115,11 @@ struct _GtkFontSelectionDialogClass
 };
 
 
-
 /*****************************************************************************
  * GtkFontSelection functions.
  *   see the comments in the GtkFontSelectionDialog functions.
  *****************************************************************************/
 
-GType	     SF(_T2_gtk_font_selection_get_type)	  (void) G_GNUC_CONST;
-GType	     SF(_3T_gtk_font_selection_get_type)	  (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType	     SF(gtk_font_selection_get_type)	  (void) G_GNUC_CONST;
 GtkWidget *  SF(gtk_font_selection_new)               (void);
 GtkWidget *  SF(gtk_font_selection_get_family_list)   (GtkFontSelection *fontsel);
 GtkWidget *  SF(gtk_font_selection_get_face_list)     (GtkFontSelection *fontsel);
@@ -197,11 +148,6 @@ void         SF(gtk_font_selection_set_preview_text)  (GtkFontSelection *fontsel
  *   most of these functions simply call the corresponding function in the
  *   GtkFontSelection.
  *****************************************************************************/
-
-GType	   SF(_T2_gtk_font_selection_dialog_get_type)	       (void) G_GNUC_CONST;
-GType	   SF(_3T_gtk_font_selection_dialog_get_type)	       (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType	   SF(gtk_font_selection_dialog_get_type)	       (void) G_GNUC_CONST;
 GtkWidget *SF(gtk_font_selection_dialog_new)	       (const gchar            *title);
 
 GtkWidget *SF(gtk_font_selection_dialog_get_ok_button)     (GtkFontSelectionDialog *fsd);

@@ -33,15 +33,9 @@ G_BEGIN_DECLS
 #define GTK_IS_HSCALE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_HSCALE))
 #define GTK_HSCALE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_HSCALE, GtkHScaleClass))
 
-
-typedef struct _GtkHScale       GtkHScale;
-
 typedef struct _GtkHScaleClass  GtkHScaleClass;
 
-struct _GtkHScale
-{
-  GtkScale scale;
-};
+STLWRT_DECLARE_FTYPE_VPARENT(GtkHScale, gtk_hscale, GtkScale, ;)
 
 struct _GtkHScaleClass
 {
@@ -49,7 +43,6 @@ struct _GtkHScaleClass
 };
 
 
-GType      SF(gtk_hscale_get_type)       (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_hscale_new)            (GtkAdjustment *adjustment);
 GtkWidget* SF(gtk_hscale_new_with_range) (gdouble        min,
                                       gdouble        max,

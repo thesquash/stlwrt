@@ -31,10 +31,7 @@ G_BEGIN_DECLS
 #define GTK_FILE_SYSTEM_MODEL(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_FILE_SYSTEM_MODEL, GtkFileSystemModel))
 #define GTK_IS_FILE_SYSTEM_MODEL(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FILE_SYSTEM_MODEL))
 
-typedef struct _GtkFileSystemModel      GtkFileSystemModelFat;
-typedef struct _GtkFileSystemModel      GtkFileSystemModelThin;
-
-GType SF(_gtk_file_system_model_get_type) (void) G_GNUC_CONST;
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(_gtk_file_system_model)
 
 typedef gboolean (*GtkFileSystemModelGetValue)   (GtkFileSystemModel *model,
                                                   GFile              *file,

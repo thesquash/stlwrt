@@ -32,15 +32,9 @@ G_BEGIN_DECLS
 #define GTK_IS_HBOX_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_HBOX))
 #define GTK_HBOX_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_HBOX, GtkHBoxClass))
 
-
-typedef struct _GtkHBox	      GtkHBox;
-
 typedef struct _GtkHBoxClass  GtkHBoxClass;
 
-struct _GtkHBox
-{
-  GtkBox box;
-};
+STLWRT_DECLARE_FTYPE_VPARENT(GtkHBox, gtk_hbox, GtkBox, ;)
 
 struct _GtkHBoxClass
 {
@@ -48,7 +42,6 @@ struct _GtkHBoxClass
 };
 
 
-GType       SF(gtk_hbox_get_type) (void) G_GNUC_CONST;
 GtkWidget * SF(gtk_hbox_new)      (gboolean homogeneous,
                                gint     spacing);
 

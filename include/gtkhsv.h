@@ -1,4 +1,4 @@
-/* HSV color selector for GTK+
+/* HSV color selector for GTK+ -- now for STLWRT
  *
  * Copyright (C) 1999 The Free Software Foundation
  *
@@ -36,50 +36,12 @@ G_BEGIN_DECLS
 #define GTK_IS_HSV_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_HSV))
 #define GTK_HSV_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_HSV, GtkHSVClass))
 
-
-typedef struct _GtkHSV      GtkHSVFat;
-typedef struct _GtkHSV      GtkHSVThin;
-
 typedef struct _GtkHSVClass GtkHSVClass;
 
-/********************************************************************/
-struct _GtkHSVProps
-{
-
-
+STLWRT_DECLARE_FTYPE_VPARENT(GtkHSV, gtk_hsv, GtkWidget,
   /* Private data */
   gpointer  (priv);
-};
-
-struct _GtkHSVFat
-{
-  GtkWidgetFat   parent_instance;
-
-  struct _GtkHSVProps instance_properties;
-};
-
-struct _GtkHSVThin
-{
-  GtkWidgetThin  parent_instance;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkHSVFat   fat_instance;
-  struct _GtkHSVThin  thin_instance;
-}   GtkHSV;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkHSVFat GtkHSV;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkHSVThin GtkHSV;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkHSVClass
 {
@@ -100,10 +62,6 @@ struct _GtkHSVClass
 };
 
 
-GType      SF(_T2_gtk_hsv_get_type)     (void) G_GNUC_CONST;
-GType      SF(_3T_gtk_hsv_get_type)     (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      SF(gtk_hsv_get_type)     (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_hsv_new)          (void);
 void       SF(gtk_hsv_set_color)    (GtkHSV    *hsv,
 				 double     h,

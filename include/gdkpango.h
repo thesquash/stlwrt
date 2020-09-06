@@ -32,7 +32,7 @@ typedef struct _GdkPangoRenderer        GdkPangoRendererThin;
 typedef struct _GdkPangoRendererClass   GdkPangoRendererClass;
 typedef struct _GdkPangoRendererPrivate GdkPangoRendererPrivate;
 
-#define GDK_TYPE_PANGO_RENDERER            (SF(gdk_pango_renderer_get_type)())
+#define GDK_TYPE_PANGO_RENDERER            (gdk_pango_renderer_get_type())
 #define GDK_PANGO_RENDERER(object)         (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_PANGO_RENDERER, GdkPangoRenderer))
 #define GDK_IS_PANGO_RENDERER(object)      (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_PANGO_RENDERER))
 #define GDK_PANGO_RENDERER_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_PANGO_RENDERER, GdkPangoRendererClass))

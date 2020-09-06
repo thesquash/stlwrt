@@ -29,7 +29,7 @@
 G_BEGIN_DECLS
 
 
-#define GTK_TYPE_TREE_STORE			(SF(gtk_tree_store_get_type) ())
+#define GTK_TYPE_TREE_STORE			(gtk_tree_store_get_type ())
 #define GTK_TREE_STORE(obj)			(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_TREE_STORE, GtkTreeStore))
 #define GTK_TREE_STORE_CLASS(klass)		(G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_TREE_STORE, GtkTreeStoreClass))
 #define GTK_IS_TREE_STORE(obj)			(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TREE_STORE))

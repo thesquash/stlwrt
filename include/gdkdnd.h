@@ -56,7 +56,7 @@ typedef enum
 
 typedef struct _GdkDragContextClass GdkDragContextClass;
 
-#define GDK_TYPE_DRAG_CONTEXT              (SF(gdk_drag_context_get_type) ())
+#define GDK_TYPE_DRAG_CONTEXT              (gdk_drag_context_get_type ())
 #define GDK_DRAG_CONTEXT(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_DRAG_CONTEXT, GdkDragContext))
 #define GDK_DRAG_CONTEXT_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_DRAG_CONTEXT, GdkDragContextClass))
 #define GDK_IS_DRAG_CONTEXT(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_DRAG_CONTEXT))

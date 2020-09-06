@@ -40,7 +40,7 @@ typedef enum {
 typedef struct _GtkTextBuffer GtkTextBufferFat;
 typedef struct _GtkTextBuffer GtkTextBufferThin;
 
-#define GTK_TYPE_TEXT_ITER     (SF(gtk_text_iter_get_type) ())
+#define GTK_TYPE_TEXT_ITER     (gtk_text_iter_get_type ())
 
 struct _GtkTextIter {
   /* GtkTextIter is an opaque datatype; ignore all these fields.

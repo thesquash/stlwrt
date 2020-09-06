@@ -59,7 +59,7 @@ typedef struct _GtkTextMark      GtkTextMarkThin;
 
 typedef struct _GtkTextMarkClass GtkTextMarkClass;
 
-#define GTK_TYPE_TEXT_MARK              (SF(gtk_text_mark_get_type) ())
+#define GTK_TYPE_TEXT_MARK              (gtk_text_mark_get_type ())
 #define GTK_TEXT_MARK(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GTK_TYPE_TEXT_MARK, GtkTextMark))
 #define GTK_TEXT_MARK_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_TEXT_MARK, GtkTextMarkClass))
 #define GTK_IS_TEXT_MARK(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GTK_TYPE_TEXT_MARK))

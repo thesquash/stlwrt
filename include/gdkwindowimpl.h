@@ -24,7 +24,7 @@
 
 G_BEGIN_DECLS
 
-#define GDK_TYPE_WINDOW_IMPL           (SF(gdk_window_impl_get_type) ())
+#define GDK_TYPE_WINDOW_IMPL           (gdk_window_impl_get_type ())
 #define GDK_WINDOW_IMPL(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), GDK_TYPE_WINDOW_IMPL, GdkWindowImpl))
 #define GDK_IS_WINDOW_IMPL(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GDK_TYPE_WINDOW_IMPL))
 #define GDK_WINDOW_IMPL_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GDK_TYPE_WINDOW_IMPL, GdkWindowImplIface))

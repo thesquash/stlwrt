@@ -29,7 +29,7 @@ G_BEGIN_DECLS
 /* GtkFontButton is a button widget that allow user to select a font.
  */
 
-#define GTK_TYPE_FONT_BUTTON             (SF(gtk_font_button_get_type) ())
+#define GTK_TYPE_FONT_BUTTON             (gtk_font_button_get_type ())
 #define GTK_FONT_BUTTON(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_FONT_BUTTON, GtkFontButton))
 #define GTK_FONT_BUTTON_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_FONT_BUTTON, GtkFontButtonClass))
 #define GTK_IS_FONT_BUTTON(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FONT_BUTTON))

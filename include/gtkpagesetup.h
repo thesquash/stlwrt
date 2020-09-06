@@ -29,7 +29,7 @@ G_BEGIN_DECLS
 typedef struct _GtkPageSetup GtkPageSetupFat;
 typedef struct _GtkPageSetup GtkPageSetupThin;
 
-#define GTK_TYPE_PAGE_SETUP    (SF(gtk_page_setup_get_type) ())
+#define GTK_TYPE_PAGE_SETUP    (gtk_page_setup_get_type ())
 #define GTK_PAGE_SETUP(obj)    (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PAGE_SETUP, GtkPageSetup))
 #define GTK_IS_PAGE_SETUP(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_PAGE_SETUP))
 

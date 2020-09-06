@@ -27,7 +27,7 @@ G_BEGIN_DECLS
 
 #ifndef GTK_DISABLE_DEPRECATED
 
-#define GTK_TYPE_COMBO_BOX_ENTRY             (SF(gtk_combo_box_entry_get_type) ())
+#define GTK_TYPE_COMBO_BOX_ENTRY             (gtk_combo_box_entry_get_type ())
 #define GTK_COMBO_BOX_ENTRY(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_COMBO_BOX_ENTRY, GtkComboBoxEntry))
 #define GTK_COMBO_BOX_ENTRY_CLASS(vtable)    (G_TYPE_CHECK_CLASS_CAST ((vtable), GTK_TYPE_COMBO_BOX_ENTRY, GtkComboBoxEntryClass))
 #define GTK_IS_COMBO_BOX_ENTRY(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_COMBO_BOX_ENTRY))

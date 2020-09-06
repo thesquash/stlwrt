@@ -27,7 +27,7 @@
 G_BEGIN_DECLS
 
 /* urg */
-#define GTK_TYPE_IDENTIFIER (SF(gtk_identifier_get_type) ())
+#define GTK_TYPE_IDENTIFIER (gtk_identifier_get_type ())
 GType SF(_T2_gtk_identifier_get_type) (void) G_GNUC_CONST;
 GType SF(_3T_gtk_identifier_get_type) (void) G_GNUC_CONST;
 /* Supplied in the STLWRT public libraries */

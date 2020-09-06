@@ -24,7 +24,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_PRINTER_OPTION_WIDGET                  (SF(gtk_printer_option_widget_get_type) ())
+#define GTK_TYPE_PRINTER_OPTION_WIDGET                  (gtk_printer_option_widget_get_type ())
 #define GTK_PRINTER_OPTION_WIDGET(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PRINTER_OPTION_WIDGET, GtkPrinterOptionWidget))
 #define GTK_PRINTER_OPTION_WIDGET_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_PRINTER_OPTION_WIDGET, GtkPrinterOptionWidgetClass))
 #define GTK_IS_PRINTER_OPTION_WIDGET(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_PRINTER_OPTION_WIDGET))

@@ -41,7 +41,7 @@ typedef enum
   GTK_TREE_VIEW_DROP_INTO_OR_AFTER
 } GtkTreeViewDropPosition;
 
-#define GTK_TYPE_TREE_VIEW		(SF(gtk_tree_view_get_type) ())
+#define GTK_TYPE_TREE_VIEW		(gtk_tree_view_get_type ())
 #define GTK_TREE_VIEW(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_TREE_VIEW, GtkTreeView))
 #define GTK_TREE_VIEW_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_TREE_VIEW, GtkTreeViewClass))
 #define GTK_IS_TREE_VIEW(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TREE_VIEW))

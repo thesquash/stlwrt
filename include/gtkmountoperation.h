@@ -22,7 +22,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_MOUNT_OPERATION         (SF(gtk_mount_operation_get_type) ())
+#define GTK_TYPE_MOUNT_OPERATION         (gtk_mount_operation_get_type ())
 #define GTK_MOUNT_OPERATION(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GTK_TYPE_MOUNT_OPERATION, GtkMountOperation))
 #define GTK_MOUNT_OPERATION_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), GTK_TYPE_MOUNT_OPERATION, GtkMountOperationClass))
 #define GTK_IS_MOUNT_OPERATION(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GTK_TYPE_MOUNT_OPERATION))

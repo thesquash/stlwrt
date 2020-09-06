@@ -25,7 +25,7 @@
 
 G_BEGIN_DECLS
 
-#define	GTK_TYPE_MENU_SHELL		(SF(gtk_menu_shell_get_type) ())
+#define	GTK_TYPE_MENU_SHELL		(gtk_menu_shell_get_type ())
 #define GTK_MENU_SHELL(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_MENU_SHELL, GtkMenuShell))
 #define GTK_MENU_SHELL_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_MENU_SHELL, GtkMenuShellClass))
 #define GTK_IS_MENU_SHELL(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_MENU_SHELL))

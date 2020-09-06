@@ -26,7 +26,7 @@
 G_BEGIN_DECLS
 
 
-#define	GTK_TYPE_MENU_BAR               (SF(gtk_menu_bar_get_type) ())
+#define	GTK_TYPE_MENU_BAR               (gtk_menu_bar_get_type ())
 #define GTK_MENU_BAR(obj)               (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_MENU_BAR, GtkMenuBar))
 #define GTK_MENU_BAR_CLASS(klass)       (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_MENU_BAR, GtkMenuBarClass))
 #define GTK_IS_MENU_BAR(obj)            (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_MENU_BAR))

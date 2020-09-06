@@ -28,7 +28,7 @@
 G_BEGIN_DECLS
 
 
-#define GTK_TYPE_ARROW                  (SF(gtk_arrow_get_type) ())
+#define GTK_TYPE_ARROW                  (gtk_arrow_get_type ())
 #define GTK_ARROW(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_ARROW, GtkArrow))
 #define GTK_ARROW_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_ARROW, GtkArrowClass))
 #define GTK_IS_ARROW(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_ARROW))

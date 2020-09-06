@@ -26,7 +26,7 @@
 G_BEGIN_DECLS
 
 
-#define GTK_TYPE_FRAME                  (SF(gtk_frame_get_type) ())
+#define GTK_TYPE_FRAME                  (gtk_frame_get_type ())
 #define GTK_FRAME(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_FRAME, GtkFrame))
 #define GTK_FRAME_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_FRAME, GtkFrameClass))
 #define GTK_IS_FRAME(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FRAME))

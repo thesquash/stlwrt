@@ -25,7 +25,7 @@
 G_BEGIN_DECLS
 
 
-#define GTK_TYPE_TREE_SELECTION			(SF(gtk_tree_selection_get_type) ())
+#define GTK_TYPE_TREE_SELECTION			(gtk_tree_selection_get_type ())
 #define GTK_TREE_SELECTION(obj)			(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_TREE_SELECTION, GtkTreeSelection))
 #define GTK_TREE_SELECTION_CLASS(klass)		(G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_TREE_SELECTION, GtkTreeSelectionClass))
 #define GTK_IS_TREE_SELECTION(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TREE_SELECTION))

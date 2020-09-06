@@ -28,7 +28,7 @@ G_BEGIN_DECLS
 typedef struct _GdkPixmapObject GdkPixmapObject;
 typedef struct _GdkPixmapObjectClass GdkPixmapObjectClass;
 
-#define GDK_TYPE_PIXMAP              (SF(gdk_pixmap_get_type) ())
+#define GDK_TYPE_PIXMAP              (gdk_pixmap_get_type ())
 #define GDK_PIXMAP(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_PIXMAP, GdkPixmap))
 #define GDK_PIXMAP_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_PIXMAP, GdkPixmapObjectClass))
 #define GDK_IS_PIXMAP(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_PIXMAP))

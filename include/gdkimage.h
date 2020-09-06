@@ -45,7 +45,7 @@ typedef enum
 
 typedef struct _GdkImageClass GdkImageClass;
 
-#define GDK_TYPE_IMAGE              (SF(gdk_image_get_type) ())
+#define GDK_TYPE_IMAGE              (gdk_image_get_type ())
 #define GDK_IMAGE(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_IMAGE, GdkImage))
 #define GDK_IMAGE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_IMAGE, GdkImageClass))
 #define GDK_IS_IMAGE(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_IMAGE))

@@ -25,7 +25,7 @@
 
 G_BEGIN_DECLS
 
-#define GDK_TYPE_CURSOR (SF(gdk_cursor_get_type) ())
+#define GDK_TYPE_CURSOR (gdk_cursor_get_type ())
 
 /* Cursor types.
  */

@@ -24,7 +24,7 @@
 
 G_BEGIN_DECLS
 
-#define GDK_TYPE_VISUAL              (SF(gdk_visual_get_type) ())
+#define GDK_TYPE_VISUAL              (gdk_visual_get_type ())
 #define GDK_VISUAL(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_VISUAL, GdkVisual))
 #define GDK_VISUAL_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_VISUAL, GdkVisualClass))
 #define GDK_IS_VISUAL(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_VISUAL))

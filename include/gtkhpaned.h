@@ -24,7 +24,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_HPANED		   (SF(gtk_hpaned_get_type) ())
+#define GTK_TYPE_HPANED		   (gtk_hpaned_get_type ())
 #define GTK_HPANED(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_HPANED, GtkHPaned))
 #define GTK_HPANED_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_HPANED, GtkHPanedClass))
 #define GTK_IS_HPANED(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_HPANED))

@@ -49,7 +49,7 @@
 
 G_BEGIN_DECLS
 
-#define GDK_TYPE_RECTANGLE (SF(gdk_rectangle_get_type) ())
+#define GDK_TYPE_RECTANGLE (gdk_rectangle_get_type ())
 
 /* Type definitions for the basic structures.
  */

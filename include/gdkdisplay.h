@@ -33,7 +33,7 @@ G_BEGIN_DECLS
 typedef struct _GdkDisplayClass GdkDisplayClass;
 typedef struct _GdkDisplayPointerHooks GdkDisplayPointerHooks;
 
-#define GDK_TYPE_DISPLAY              (SF(gdk_display_get_type) ())
+#define GDK_TYPE_DISPLAY              (gdk_display_get_type ())
 #define GDK_DISPLAY_OBJECT(object)    (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_DISPLAY, GdkDisplay))
 #define GDK_DISPLAY_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_DISPLAY, GdkDisplayClass))
 #define GDK_IS_DISPLAY(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_DISPLAY))

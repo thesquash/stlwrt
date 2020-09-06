@@ -29,8 +29,8 @@ G_BEGIN_DECLS
 typedef struct _GtkTargetList    GtkTargetList;
 typedef struct _GtkTargetEntry   GtkTargetEntry;
 
-#define GTK_TYPE_SELECTION_DATA (SF(gtk_selection_data_get_type) ())
-#define GTK_TYPE_TARGET_LIST    (SF(gtk_target_list_get_type) ())
+#define GTK_TYPE_SELECTION_DATA (gtk_selection_data_get_type ())
+#define GTK_TYPE_TARGET_LIST    (gtk_target_list_get_type ())
 
 /* The contents of a selection are returned in a GtkSelectionData
  * structure. selection/target identify the request.  type specifies

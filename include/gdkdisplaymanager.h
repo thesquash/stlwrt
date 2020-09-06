@@ -30,7 +30,7 @@ typedef struct _GdkDisplayManager      GdkDisplayManagerThin;
 
 typedef struct _GdkDisplayManagerClass GdkDisplayManagerClass;
 
-#define GDK_TYPE_DISPLAY_MANAGER              (SF(gdk_display_manager_get_type) ())
+#define GDK_TYPE_DISPLAY_MANAGER              (gdk_display_manager_get_type ())
 #define GDK_DISPLAY_MANAGER(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_DISPLAY_MANAGER, GdkDisplayManager))
 #define GDK_DISPLAY_MANAGER_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_DISPLAY_MANAGER, GdkDisplayManagerClass))
 #define GDK_IS_DISPLAY_MANAGER(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_DISPLAY_MANAGER))

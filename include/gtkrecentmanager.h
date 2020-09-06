@@ -27,9 +27,9 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_RECENT_INFO			(SF(gtk_recent_info_get_type) ())
+#define GTK_TYPE_RECENT_INFO			(gtk_recent_info_get_type ())
 
-#define GTK_TYPE_RECENT_MANAGER			(SF(gtk_recent_manager_get_type) ())
+#define GTK_TYPE_RECENT_MANAGER			(gtk_recent_manager_get_type ())
 #define GTK_RECENT_MANAGER(obj)			(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_RECENT_MANAGER, GtkRecentManager))
 #define GTK_IS_RECENT_MANAGER(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_RECENT_MANAGER))
 #define GTK_RECENT_MANAGER_CLASS(klass) 	(G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_RECENT_MANAGER, GtkRecentManagerClass))

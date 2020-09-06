@@ -46,7 +46,7 @@ typedef enum
 
 GQuark     gtk_print_backend_error_quark      (void);
 
-#define GTK_TYPE_PRINT_BACKEND                  (SF(gtk_print_backend_get_type) ())
+#define GTK_TYPE_PRINT_BACKEND                  (gtk_print_backend_get_type ())
 #define GTK_PRINT_BACKEND(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PRINT_BACKEND, GtkPrintBackend))
 #define GTK_PRINT_BACKEND_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_PRINT_BACKEND, GtkPrintBackendClass))
 #define GTK_IS_PRINT_BACKEND(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_PRINT_BACKEND))

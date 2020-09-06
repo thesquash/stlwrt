@@ -41,7 +41,7 @@ typedef enum
   GTK_CELL_RENDERER_MODE_EDITABLE
 } GtkCellRendererMode;
 
-#define GTK_TYPE_CELL_RENDERER		  (SF(gtk_cell_renderer_get_type) ())
+#define GTK_TYPE_CELL_RENDERER		  (gtk_cell_renderer_get_type ())
 #define GTK_CELL_RENDERER(obj)		  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_CELL_RENDERER, GtkCellRenderer))
 #define GTK_CELL_RENDERER_CLASS(klass)	  (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_CELL_RENDERER, GtkCellRendererClass))
 #define GTK_IS_CELL_RENDERER(obj)	  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_CELL_RENDERER))

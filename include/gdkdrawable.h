@@ -33,7 +33,7 @@ G_BEGIN_DECLS
 typedef struct _GdkDrawableClass GdkDrawableClass;
 typedef struct _GdkTrapezoid     GdkTrapezoid;
 
-#define GDK_TYPE_DRAWABLE              (SF(gdk_drawable_get_type) ())
+#define GDK_TYPE_DRAWABLE              (gdk_drawable_get_type ())
 #define GDK_DRAWABLE(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_DRAWABLE, GdkDrawable))
 #define GDK_DRAWABLE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_DRAWABLE, GdkDrawableClass))
 #define GDK_IS_DRAWABLE(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_DRAWABLE))

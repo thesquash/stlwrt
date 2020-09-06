@@ -241,7 +241,7 @@ struct _GdkPointerHooks
 typedef struct _GdkWindowObject GdkWindowObject;
 typedef struct _GdkWindowObjectClass GdkWindowObjectClass;
 
-#define GDK_TYPE_WINDOW              (SF(gdk_window_object_get_type) ())
+#define GDK_TYPE_WINDOW              (gdk_window_object_get_type ())
 #define GDK_WINDOW(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_WINDOW, GdkWindow))
 #define GDK_WINDOW_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_WINDOW, GdkWindowObjectClass))
 #define GDK_IS_WINDOW(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_WINDOW))

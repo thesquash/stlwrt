@@ -33,7 +33,7 @@ G_BEGIN_DECLS
 
 typedef struct _GdkScreenClass GdkScreenClass;
 
-#define GDK_TYPE_SCREEN            (SF(gdk_screen_get_type) ())
+#define GDK_TYPE_SCREEN            (gdk_screen_get_type ())
 #define GDK_SCREEN(object)         (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_SCREEN, GdkScreen))
 #define GDK_SCREEN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_SCREEN, GdkScreenClass))
 #define GDK_IS_SCREEN(object)      (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_SCREEN))

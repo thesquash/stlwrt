@@ -24,7 +24,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_CUSTOM_PAPER_UNIX_DIALOG                  (SF(gtk_custom_paper_unix_dialog_get_type) ())
+#define GTK_TYPE_CUSTOM_PAPER_UNIX_DIALOG                  (gtk_custom_paper_unix_dialog_get_type ())
 #define GTK_CUSTOM_PAPER_UNIX_DIALOG(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_CUSTOM_PAPER_UNIX_DIALOG, GtkCustomPaperUnixDialog))
 #define GTK_CUSTOM_PAPER_UNIX_DIALOG_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_CUSTOM_PAPER_UNIX_DIALOG, GtkCustomPaperUnixDialogClass))
 #define GTK_IS_CUSTOM_PAPER_UNIX_DIALOG(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_CUSTOM_PAPER_UNIX_DIALOG))

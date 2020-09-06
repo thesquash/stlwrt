@@ -39,7 +39,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_TOOLBAR            (SF(gtk_toolbar_get_type) ())
+#define GTK_TYPE_TOOLBAR            (gtk_toolbar_get_type ())
 #define GTK_TOOLBAR(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_TOOLBAR, GtkToolbar))
 #define GTK_TOOLBAR_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_TOOLBAR, GtkToolbarClass))
 #define GTK_IS_TOOLBAR(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TOOLBAR))

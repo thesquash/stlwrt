@@ -32,7 +32,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_PRINT_OPERATION		(SF(gtk_print_operation_get_type) ())
+#define GTK_TYPE_PRINT_OPERATION		(gtk_print_operation_get_type ())
 #define GTK_PRINT_OPERATION(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PRINT_OPERATION, GtkPrintOperation))
 #define GTK_PRINT_OPERATION_CLASS(klass)    	(G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_PRINT_OPERATION, GtkPrintOperationClass))
 #define GTK_IS_PRINT_OPERATION(obj) 		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_PRINT_OPERATION))

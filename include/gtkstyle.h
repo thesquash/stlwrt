@@ -26,14 +26,14 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_STYLE              (SF(gtk_style_get_type) ())
+#define GTK_TYPE_STYLE              (gtk_style_get_type ())
 #define GTK_STYLE(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GTK_TYPE_STYLE, GtkStyle))
 #define GTK_STYLE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_STYLE, GtkStyleClass))
 #define GTK_IS_STYLE(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GTK_TYPE_STYLE))
 #define GTK_IS_STYLE_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_STYLE))
 #define GTK_STYLE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_STYLE, GtkStyleClass))
 
-#define GTK_TYPE_BORDER             (SF(gtk_border_get_type) ())
+#define GTK_TYPE_BORDER             (gtk_border_get_type ())
 
 /* Some forward declarations needed to rationalize the header
  * files.

@@ -25,7 +25,7 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_TREE_DRAG_SOURCE            (SF(gtk_tree_drag_source_get_type) ())
+#define GTK_TYPE_TREE_DRAG_SOURCE            (gtk_tree_drag_source_get_type ())
 #define GTK_TREE_DRAG_SOURCE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_TREE_DRAG_SOURCE, GtkTreeDragSource))
 #define GTK_IS_TREE_DRAG_SOURCE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TREE_DRAG_SOURCE))
 #define GTK_TREE_DRAG_SOURCE_GET_IFACE(obj)  (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GTK_TYPE_TREE_DRAG_SOURCE, GtkTreeDragSourceIface))
@@ -70,7 +70,7 @@ gboolean SF(gtk_tree_drag_source_drag_data_get)    (GtkTreeDragSource *drag_sour
                                                 GtkTreePath       *path,
                                                 GtkSelectionData  *selection_data);
 
-#define GTK_TYPE_TREE_DRAG_DEST            (SF(gtk_tree_drag_dest_get_type) ())
+#define GTK_TYPE_TREE_DRAG_DEST            (gtk_tree_drag_dest_get_type ())
 #define GTK_TREE_DRAG_DEST(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_TREE_DRAG_DEST, GtkTreeDragDest))
 #define GTK_IS_TREE_DRAG_DEST(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TREE_DRAG_DEST))
 #define GTK_TREE_DRAG_DEST_GET_IFACE(obj)  (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GTK_TYPE_TREE_DRAG_DEST, GtkTreeDragDestIface))

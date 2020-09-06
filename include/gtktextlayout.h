@@ -99,7 +99,7 @@ G_BEGIN_DECLS
 typedef struct _GtkTextLine     GtkTextLine;
 typedef struct _GtkTextLineData GtkTextLineData;
 
-#define GTK_TYPE_TEXT_LAYOUT             (SF(gtk_text_layout_get_type) ())
+#define GTK_TYPE_TEXT_LAYOUT             (gtk_text_layout_get_type ())
 #define GTK_TEXT_LAYOUT(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_TEXT_LAYOUT, GtkTextLayout))
 #define GTK_TEXT_LAYOUT_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_TEXT_LAYOUT, GtkTextLayoutClass))
 #define GTK_IS_TEXT_LAYOUT(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TEXT_LAYOUT))

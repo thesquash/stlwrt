@@ -71,7 +71,7 @@ typedef enum
 } GtkResponseType;
 
 
-#define GTK_TYPE_DIALOG                  (SF(gtk_dialog_get_type) ())
+#define GTK_TYPE_DIALOG                  (gtk_dialog_get_type ())
 #define GTK_DIALOG(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_DIALOG, GtkDialog))
 #define GTK_DIALOG_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_DIALOG, GtkDialogClass))
 #define GTK_IS_DIALOG(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_DIALOG))

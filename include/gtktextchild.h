@@ -36,7 +36,7 @@ typedef struct _GtkTextChildAnchor      GtkTextChildAnchorThin;
 
 typedef struct _GtkTextChildAnchorClass GtkTextChildAnchorClass;
 
-#define GTK_TYPE_TEXT_CHILD_ANCHOR              (SF(gtk_text_child_anchor_get_type) ())
+#define GTK_TYPE_TEXT_CHILD_ANCHOR              (gtk_text_child_anchor_get_type ())
 #define GTK_TEXT_CHILD_ANCHOR(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GTK_TYPE_TEXT_CHILD_ANCHOR, GtkTextChildAnchor))
 #define GTK_TEXT_CHILD_ANCHOR_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_TEXT_CHILD_ANCHOR, GtkTextChildAnchorClass))
 #define GTK_IS_TEXT_CHILD_ANCHOR(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GTK_TYPE_TEXT_CHILD_ANCHOR))

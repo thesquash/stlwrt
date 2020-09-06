@@ -31,7 +31,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTK_TYPE_INFO_BAR              (SF(gtk_info_bar_get_type)())
+#define GTK_TYPE_INFO_BAR              (gtk_info_bar_get_type())
 #define GTK_INFO_BAR(obj)              (G_TYPE_CHECK_INSTANCE_CAST((obj), GTK_TYPE_INFO_BAR, GtkInfoBar))
 #define GTK_INFO_BAR_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST((klass), GTK_TYPE_INFO_BAR, GtkInfoBarClass))
 #define GTK_IS_INFO_BAR(obj)           (G_TYPE_CHECK_INSTANCE_TYPE((obj), GTK_TYPE_INFO_BAR))

@@ -28,7 +28,7 @@ G_BEGIN_DECLS
 
 typedef struct _GtkPaperSize GtkPaperSize;
 
-#define GTK_TYPE_PAPER_SIZE    (SF(gtk_paper_size_get_type) ())
+#define GTK_TYPE_PAPER_SIZE    (gtk_paper_size_get_type ())
 
 /* Common names, from PWG 5101.1-2002 PWG: Standard for Media Standardized Names */
 #define GTK_PAPER_NAME_A3 "iso_a3"

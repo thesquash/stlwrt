@@ -200,7 +200,7 @@ typedef struct _GdkGCValuesThin GdkGCValues;
 
 
 
-#define GDK_TYPE_GC              (SF(gdk_gc_get_type) ())
+#define GDK_TYPE_GC              (gdk_gc_get_type ())
 #define GDK_GC(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_GC, GdkGC))
 #define GDK_GC_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_GC, GdkGCClass))
 #define GDK_IS_GC(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_GC))

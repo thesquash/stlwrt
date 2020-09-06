@@ -29,7 +29,7 @@
 G_BEGIN_DECLS
 
 
-#define GTK_TYPE_VRULER            (SF(gtk_vruler_get_type) ())
+#define GTK_TYPE_VRULER            (gtk_vruler_get_type ())
 #define GTK_VRULER(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_VRULER, GtkVRuler))
 #define GTK_VRULER_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_VRULER, GtkVRulerClass))
 #define GTK_IS_VRULER(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_VRULER))

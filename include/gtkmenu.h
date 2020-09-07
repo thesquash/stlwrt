@@ -33,10 +33,6 @@ G_BEGIN_DECLS
 #define GTK_IS_MENU_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_MENU))
 #define GTK_MENU_GET_CLASS(obj)         (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_MENU, GtkMenuClass))
 
-
-typedef struct _GtkMenu	      GtkMenuFat;
-typedef struct _GtkMenu	      GtkMenuThin;
-
 typedef struct _GtkMenuClass  GtkMenuClass;
 
 typedef void (*GtkMenuPositionFunc) (GtkMenu   *menu,
@@ -47,8 +43,7 @@ typedef void (*GtkMenuPositionFunc) (GtkMenu   *menu,
 typedef void (*GtkMenuDetachFunc)   (GtkWidget *attach_widget,
 				     GtkMenu   *menu);
 
-
-struct _GtkMenuPrivate 
+struct _GtkMenuPrivate
 {
   gint x;
   gint y;
@@ -83,10 +78,7 @@ struct _GtkMenuPrivate
   guint no_toggle_size        : 1;
 };
 
-struct _GtkMenu
-{
-  GtkMenuShell  (menu_shell);
-  
+STLWRT_DECLARE_VTYPE_VPARENT(GtkMenu, gtk_menu, GtkMenuShell,
   GtkWidget * (parent_menu_item);
   GtkWidget * (old_active_menu_item);
 
@@ -134,7 +126,7 @@ struct _GtkMenu
   guint  (lower_arrow_visible) : 1;
   guint  (upper_arrow_prelight) : 1;
   guint  (lower_arrow_prelight) : 1;
-};
+)
 
 struct _GtkMenuClass
 {
@@ -148,10 +140,6 @@ struct _GtkMenuClass
 };
 
 
-GType	   SF(_T2_gtk_menu_get_type)		  (void) G_GNUC_CONST;
-GType	   SF(_3T_gtk_menu_get_type)		  (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType	   SF(gtk_menu_get_type)		  (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_menu_new)			  (void);
 
 /* Display the menu onscreen */

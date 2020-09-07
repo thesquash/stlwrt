@@ -33,18 +33,11 @@ G_BEGIN_DECLS
 #define GTK_IS_IM_CONTEXT_SIMPLE_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_IM_CONTEXT_SIMPLE))
 #define GTK_IM_CONTEXT_SIMPLE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_IM_CONTEXT_SIMPLE, GtkIMContextSimpleClass))
 
-
-typedef struct _GtkIMContextSimple       GtkIMContextSimpleFat;
-typedef struct _GtkIMContextSimple       GtkIMContextSimpleThin;
-
 typedef struct _GtkIMContextSimpleClass  GtkIMContextSimpleClass;
 
 #define GTK_MAX_COMPOSE_LEN 7
 
-struct _GtkIMContextSimple
-{
-  GtkIMContext object;
-
+STLWRT_DECLARE_VTYPE_FPARENT(GtkIMContextSimple, gtk_im_context_simple, GtkIMContext,
   GSList * (tables);
 
   guint  (compose_buffer[GTK_MAX_COMPOSE_LEN + 1]);
@@ -53,17 +46,14 @@ struct _GtkIMContextSimple
 
   guint  (in_hex_sequence) : 1;
   guint  (modifiers_dropped) : 1;
-};
+)
 
 struct _GtkIMContextSimpleClass
 {
   GtkIMContextClass parent_class;
 };
 
-GType         SF(_T2_gtk_im_context_simple_get_type)  (void) G_GNUC_CONST;
-GType         SF(_3T_gtk_im_context_simple_get_type)  (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType         SF(gtk_im_context_simple_get_type)  (void) G_GNUC_CONST;
+
 GtkIMContext *SF(gtk_im_context_simple_new)       (void);
 
 void          SF(gtk_im_context_simple_add_table) (GtkIMContextSimple *context_simple,

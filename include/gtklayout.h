@@ -37,16 +37,9 @@ G_BEGIN_DECLS
 #define GTK_IS_LAYOUT_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_LAYOUT))
 #define GTK_LAYOUT_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_LAYOUT, GtkLayoutClass))
 
-
-typedef struct _GtkLayout        GtkLayoutFat;
-typedef struct _GtkLayout        GtkLayoutThin;
-
 typedef struct _GtkLayoutClass   GtkLayoutClass;
 
-struct _GtkLayout
-{
-  GtkContainer  (container);
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkLayout, gtk_layout, GtkContainer,
   GList * (children);
 
   guint  (width);
@@ -64,7 +57,7 @@ struct _GtkLayout
   gint  (scroll_y);
 
   guint  (freeze_count);
-};
+)
 
 struct _GtkLayoutClass
 {
@@ -81,10 +74,7 @@ struct _GtkLayoutClass
   void (*_gtk_reserved4) (void);
 };
 
-GType          SF(_T2_gtk_layout_get_type)        (void) G_GNUC_CONST;
-GType          SF(_3T_gtk_layout_get_type)        (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType          SF(gtk_layout_get_type)        (void) G_GNUC_CONST;
+
 GtkWidget*     SF(gtk_layout_new)             (GtkAdjustment *hadjustment,
 				           GtkAdjustment *vadjustment);
 GdkWindow*     SF(gtk_layout_get_bin_window)  (GtkLayout     *layout);

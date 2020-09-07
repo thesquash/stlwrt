@@ -33,10 +33,7 @@ G_BEGIN_DECLS
 #define GTK_IS_MENU_BAR_CLASS(klass)    (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_MENU_BAR))
 #define GTK_MENU_BAR_GET_CLASS(obj)     (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_MENU_BAR, GtkMenuBarClass))
 
-typedef struct _GtkMenuBar       GtkMenuBar;
-
 typedef struct _GtkMenuBarClass  GtkMenuBarClass;
-
 
 struct _GtkMenuBarPrivate
 {
@@ -44,10 +41,7 @@ struct _GtkMenuBarPrivate
   GtkPackDirection child_pack_direction;
 };
 
-struct _GtkMenuBar
-{
-  GtkMenuShell menu_shell;
-};
+STLWRT_DECLARE_FTYPE_VPARENT(GtkMenuBar, gtk_menu_bar, GtkMenuShell, ;)
 
 struct _GtkMenuBarClass
 {
@@ -61,7 +55,6 @@ struct _GtkMenuBarClass
 };
 
 
-GType      SF(gtk_menu_bar_get_type)        (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_menu_bar_new)             (void);
 
 GtkPackDirection SF(gtk_menu_bar_get_pack_direction) (GtkMenuBar       *menubar);

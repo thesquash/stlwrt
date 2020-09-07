@@ -31,50 +31,12 @@ G_BEGIN_DECLS
 #define GTK_IS_INVISIBLE_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_INVISIBLE))
 #define GTK_INVISIBLE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_INVISIBLE, GtkInvisibleClass))
 
-
-typedef struct _GtkInvisible	   GtkInvisibleFat;
-typedef struct _GtkInvisible	   GtkInvisibleThin;
-
 typedef struct _GtkInvisibleClass  GtkInvisibleClass;
 
-/********************************************************************/
-struct _GtkInvisibleProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkInvisible, gtk_invisible, GtkWidget,
   gboolean    (has_user_ref_count);
   GdkScreen * (screen);
-};
-
-struct _GtkInvisibleFat
-{
-  GtkWidgetFat   widget;
-
-  struct _GtkInvisibleProps instance_properties;
-};
-
-struct _GtkInvisibleThin
-{
-  GtkWidgetThin  widget;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkInvisibleFat   fat_instance;
-  struct _GtkInvisibleThin  thin_instance;
-}   GtkInvisible;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkInvisibleFat GtkInvisible;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkInvisibleThin GtkInvisible;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkInvisibleClass
 {
@@ -87,10 +49,6 @@ struct _GtkInvisibleClass
   void (*_gtk_reserved4) (void);
 };
 
-GType SF(_T2_gtk_invisible_get_type) (void) G_GNUC_CONST;
-GType SF(_3T_gtk_invisible_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType SF(gtk_invisible_get_type) (void) G_GNUC_CONST;
 
 GtkWidget* SF(gtk_invisible_new)            (void);
 GtkWidget* SF(gtk_invisible_new_for_screen) (GdkScreen    *screen);

@@ -33,19 +33,11 @@ G_BEGIN_DECLS
 #define GTK_IS_LABEL_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_LABEL))
 #define GTK_LABEL_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_LABEL, GtkLabelClass))
 
-
-typedef struct _GtkLabel       GtkLabelFat;
-typedef struct _GtkLabel       GtkLabelThin;
-
 typedef struct _GtkLabelClass  GtkLabelClass;
 
 typedef struct _GtkLabelSelectionInfo GtkLabelSelectionInfo;
 
-/********************************************************************/
-struct _GtkLabelProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkLabel, gtk_label, GtkMisc,
   /*< private >*/
   gchar  * (label);
   guint    (jtype)            : 2;
@@ -72,37 +64,7 @@ struct _GtkLabelProps
   GtkWindow * (mnemonic_window);
 
   GtkLabelSelectionInfo * (select_info);
-};
-
-struct _GtkLabelFat
-{
-  GtkMiscFat   misc;
-
-  struct _GtkLabelProps instance_properties;
-};
-
-struct _GtkLabelThin
-{
-  GtkMiscThin  misc;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkLabelFat   fat_instance;
-  struct _GtkLabelThin  thin_instance;
-}   GtkLabel;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkLabelFat GtkLabel;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkLabelThin GtkLabel;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkLabelClass
 {
@@ -127,10 +89,7 @@ struct _GtkLabelClass
   void (*_gtk_reserved3) (void);
 };
 
-GType                 SF(_T2_gtk_label_get_type)          (void) G_GNUC_CONST;
-GType                 SF(_3T_gtk_label_get_type)          (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType                 SF(gtk_label_get_type)          (void) G_GNUC_CONST;
+
 GtkWidget*            SF(gtk_label_new)               (const gchar   *str);
 GtkWidget*            SF(gtk_label_new_with_mnemonic) (const gchar   *str);
 void                  SF(gtk_label_set_text)          (GtkLabel      *label,

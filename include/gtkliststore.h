@@ -35,16 +35,9 @@ G_BEGIN_DECLS
 #define GTK_IS_LIST_STORE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_LIST_STORE))
 #define GTK_LIST_STORE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_LIST_STORE, GtkListStoreClass))
 
-typedef struct _GtkListStore       GtkListStoreFat;
-typedef struct _GtkListStore       GtkListStoreThin;
-
 typedef struct _GtkListStoreClass  GtkListStoreClass;
 
-/********************************************************************/
-struct _GtkListStoreProps
-{
-
-
+STLWRT_DECLARE_VTYPE_FPARENT(GtkListStore, gtk_list_store, GObject,
   /*< private >*/
   gint  (stamp);
   gpointer  (seq);		/* head of the list */
@@ -59,37 +52,7 @@ struct _GtkListStoreProps
   gpointer  (default_sort_data);
   GDestroyNotify  (default_sort_destroy);
   guint  (columns_dirty) : 1;
-};
-
-struct _GtkListStoreFat
-{
-  GObject   parent;
-
-  struct _GtkListStoreProps instance_properties;
-};
-
-struct _GtkListStoreThin
-{
-  GObject  parent;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkListStoreFat   fat_instance;
-  struct _GtkListStoreThin  thin_instance;
-}   GtkListStore;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkListStoreFat GtkListStore;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkListStoreThin GtkListStore;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkListStoreClass
 {
@@ -103,10 +66,6 @@ struct _GtkListStoreClass
 };
 
 
-GType         SF(_T2_gtk_list_store_get_type)         (void) G_GNUC_CONST;
-GType         SF(_3T_gtk_list_store_get_type)         (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType         SF(gtk_list_store_get_type)         (void) G_GNUC_CONST;
 GtkListStore *SF(gtk_list_store_new)              (gint          n_columns,
 					       ...);
 GtkListStore *SF(gtk_list_store_newv)             (gint          n_columns,

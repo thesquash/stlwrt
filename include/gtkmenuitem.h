@@ -32,17 +32,9 @@ G_BEGIN_DECLS
 #define GTK_IS_MENU_ITEM_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_MENU_ITEM))
 #define GTK_MENU_ITEM_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_MENU_ITEM, GtkMenuItemClass))
 
-
-typedef struct _GtkMenuItem	  GtkMenuItemFat;
-typedef struct _GtkMenuItem	  GtkMenuItemThin;
-
 typedef struct _GtkMenuItemClass  GtkMenuItemClass;
 
-/********************************************************************/
-struct _GtkMenuItemProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkMenuItem, gtk_menu_item, GtkBin,
   GtkWidget * (submenu);
   GdkWindow * (event_window);
 
@@ -57,37 +49,7 @@ struct _GtkMenuItemProps
   guint  (timer_from_keypress) : 1;
   guint  (from_menubar) : 1;
   guint  (timer);
-};
-
-struct _GtkMenuItemFat
-{
-  GtkBinFat   bin;
-
-  struct _GtkMenuItemProps instance_properties;
-};
-
-struct _GtkMenuItemThin
-{
-  GtkBinThin  bin;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkMenuItemFat   fat_instance;
-  struct _GtkMenuItemThin  thin_instance;
-}   GtkMenuItem;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkMenuItemFat GtkMenuItem;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkMenuItemThin GtkMenuItem;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkMenuItemClass
 {
@@ -120,10 +82,6 @@ struct _GtkMenuItemClass
 };
 
 
-GType	   SF(_T2_gtk_menu_item_get_type)	      (void) G_GNUC_CONST;
-GType	   SF(_3T_gtk_menu_item_get_type)	      (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType	   SF(gtk_menu_item_get_type)	      (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_menu_item_new)                  (void);
 GtkWidget* SF(gtk_menu_item_new_with_label)       (const gchar         *label);
 GtkWidget* SF(gtk_menu_item_new_with_mnemonic)    (const gchar         *label);

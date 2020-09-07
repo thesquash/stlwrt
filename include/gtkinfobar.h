@@ -38,13 +38,8 @@ G_BEGIN_DECLS
 #define GTK_IS_INFO_BAR_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_INFO_BAR))
 #define GTK_INFO_BAR_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj), GTK_TYPE_INFO_BAR, GtkInfoBarClass))
 
-
 typedef struct _GtkInfoBarPrivate GtkInfoBarPrivate;
-
 typedef struct _GtkInfoBarClass GtkInfoBarClass;
-typedef struct _GtkInfoBar GtkInfoBar;
-
-
 
 struct _GtkInfoBarPrivate
 {
@@ -54,14 +49,10 @@ struct _GtkInfoBarPrivate
   GtkMessageType message_type;
 };
 
-struct _GtkInfoBar
-{
-  GtkHBox parent;
-
+STLWRT_DECLARE_FTYPE_VPARENT(GtkInfoBar, gtk_info_bar, GtkHBox,
   /*< private > */
   GtkInfoBarPrivate *priv;
-};
-
+)
 
 struct _GtkInfoBarClass
 {
@@ -83,7 +74,6 @@ struct _GtkInfoBarClass
 };
 
 
-GType          SF(gtk_info_bar_get_type)               (void) G_GNUC_CONST;
 GtkWidget     *SF(gtk_info_bar_new)                    (void);
 
 GtkWidget     *SF(gtk_info_bar_new_with_buttons)       (const gchar    *first_button_text,

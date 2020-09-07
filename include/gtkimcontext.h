@@ -32,15 +32,9 @@ G_BEGIN_DECLS
 #define GTK_IS_IM_CONTEXT_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_IM_CONTEXT))
 #define GTK_IM_CONTEXT_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_IM_CONTEXT, GtkIMContextClass))
 
-
-typedef struct _GtkIMContext       GtkIMContext;
-
 typedef struct _GtkIMContextClass  GtkIMContextClass;
 
-struct _GtkIMContext
-{
-  GObject parent_instance;
-};
+STLWRT_DECLARE_FTYPE_FPARENT(GtkIMContext, gtk_im_context, GObject, ;)
 
 struct _GtkIMContextClass
 {
@@ -91,8 +85,6 @@ struct _GtkIMContextClass
   void (*_gtk_reserved6) (void);
 };
 
-
-GType    SF(gtk_im_context_get_type)            (void) G_GNUC_CONST;
 
 void     SF(gtk_im_context_set_client_window)   (GtkIMContext       *context,
 					     GdkWindow          *window);

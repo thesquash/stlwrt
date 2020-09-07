@@ -36,15 +36,12 @@ G_BEGIN_DECLS
 #define GTK_IS_LINK_BUTTON_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_LINK_BUTTON))
 #define GTK_LINK_BUTTON_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_LINK_BUTTON, GtkLinkButtonClass))
 
-typedef struct _GtkLinkButton		GtkLinkButton;
-
 typedef struct _GtkLinkButtonClass	GtkLinkButtonClass;
 typedef struct _GtkLinkButtonPrivate	GtkLinkButtonPrivate;
 
 typedef void (*GtkLinkButtonUriFunc) (GtkLinkButton *button,
 				      const gchar   *link_,
 				      gpointer       user_data);
-
 
 struct _GtkLinkButtonPrivate
 {
@@ -55,12 +52,9 @@ struct _GtkLinkButtonPrivate
   GtkWidget *popup_menu;
 };
 
-struct _GtkLinkButton
-{
-  GtkButton parent_instance;
-
+STLWRT_DECLARE_FTYPE_VPARENT(GtkLinkButton, gtk_link_button, GtkButton,
   GtkLinkButtonPrivate * (priv);
-};
+)
 
 struct _GtkLinkButtonClass
 {
@@ -72,8 +66,6 @@ struct _GtkLinkButtonClass
   void (*_gtk_padding4) (void);
 };
 
-
-GType                 SF(gtk_link_button_get_type)          (void) G_GNUC_CONST;
 
 GtkWidget *           SF(gtk_link_button_new)               (const gchar   *uri);
 GtkWidget *           SF(gtk_link_button_new_with_label)    (const gchar   *uri,

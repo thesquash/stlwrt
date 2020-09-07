@@ -34,11 +34,8 @@ G_BEGIN_DECLS
 #define GTK_IS_MENU_TOOL_BUTTON_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), GTK_TYPE_MENU_TOOL_BUTTON))
 #define GTK_MENU_TOOL_BUTTON_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GTK_TYPE_MENU_TOOL_BUTTON, GtkMenuToolButtonClass))
 
-
 typedef struct _GtkMenuToolButtonClass   GtkMenuToolButtonClass;
-typedef struct _GtkMenuToolButton        GtkMenuToolButton;
 typedef struct _GtkMenuToolButtonPrivate GtkMenuToolButtonPrivate;
-
 
 struct _GtkMenuToolButtonPrivate
 {
@@ -49,13 +46,10 @@ struct _GtkMenuToolButtonPrivate
   GtkMenu   *menu;
 };
 
-struct _GtkMenuToolButton
-{
-  GtkToolButton parent;
-
+STLWRT_DECLARE_FTYPE_VPARENT(GtkMenuToolButton, gtk_menu_tool_button, GtkToolButton,
   /*< private >*/
   GtkMenuToolButtonPrivate * (priv);
-};
+)
 
 struct _GtkMenuToolButtonClass
 {
@@ -71,7 +65,6 @@ struct _GtkMenuToolButtonClass
 };
 
 
-GType         SF(gtk_menu_tool_button_get_type)       (void) G_GNUC_CONST;
 GtkToolItem  *SF(gtk_menu_tool_button_new)            (GtkWidget   *icon_widget,
                                                    const gchar *label);
 GtkToolItem  *SF(gtk_menu_tool_button_new_from_stock) (const gchar *stock_id);

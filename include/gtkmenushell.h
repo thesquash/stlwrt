@@ -32,18 +32,9 @@ G_BEGIN_DECLS
 #define GTK_IS_MENU_SHELL_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_MENU_SHELL))
 #define GTK_MENU_SHELL_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_MENU_SHELL, GtkMenuShellClass))
 
-
-typedef struct _GtkMenuShell	   GtkMenuShellFat;
-typedef struct _GtkMenuShell	   GtkMenuShellThin;
-
 typedef struct _GtkMenuShellClass  GtkMenuShellClass;
 
-
-/********************************************************************/
-struct _GtkMenuShellProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkMenuShell, gtk_menu_shell, GtkContainer,
   GList * (children);
   GtkWidget * (active_menu_item);
   GtkWidget * (parent_menu_shell);
@@ -58,12 +49,10 @@ struct _GtkMenuShellProps
   guint  (menu_flag) : 1;    /* unused */
   guint  (ignore_enter) : 1;
   guint  (keyboard_mode) : 1;
-};
+)
 
 struct _GtkMenuShellPrivate
 {
-
-  
   GtkMnemonicHash *mnemonic_hash;
   GtkKeyHash *key_hash;
 
@@ -74,36 +63,6 @@ struct _GtkMenuShellPrivate
    */
   guint in_unselectable_item : 1;
 };
-
-struct _GtkMenuShellFat
-{
-  GtkContainerFat   container;
-
-  struct _GtkMenuShellProps instance_properties;
-};
-
-struct _GtkMenuShellThin
-{
-  GtkContainerThin  container;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkMenuShellFat   fat_instance;
-  struct _GtkMenuShellThin  thin_instance;
-}   GtkMenuShell;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkMenuShellFat GtkMenuShell;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkMenuShellThin GtkMenuShell;
-#endif
-/********************************************************************/
-
-
 
 struct _GtkMenuShellClass
 {
@@ -134,10 +93,6 @@ struct _GtkMenuShellClass
 };
 
 
-GType SF(_T2_gtk_menu_shell_get_type)          (void) G_GNUC_CONST;
-GType SF(_3T_gtk_menu_shell_get_type)          (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType SF(gtk_menu_shell_get_type)          (void) G_GNUC_CONST;
 void  SF(gtk_menu_shell_append)            (GtkMenuShell *menu_shell,
 					GtkWidget    *child);
 void  SF(gtk_menu_shell_prepend)           (GtkMenuShell *menu_shell,

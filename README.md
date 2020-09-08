@@ -15,14 +15,47 @@ making and have made, and I hope we may be able to collaborate somehow.
 
 ## What's new?
 
-To write new code, you first need to clean up the old code -- and then you can
-write new code.  That's a standard programmer's lemma.  And it really does
-apply here, where some of the code is from before 2002 and hasn't seen many
-updates and changes.
+For the last few weeks I've been working on cleaning up the STLWRT code,
+since the GTK+ 2 code it was based on was haphazardly written over a
+period of over 20 years.  My latest achievement was STLWRT-izing all header
+files (adding fat and thin versions of objects).  While I converted the
+header files, I would notice a boatload of "forward declarations" --
+instances of code duplication in which certain type declarations had to be
+present before the header file in question could declare any new types,
+but the prerequisite type declarations were in another header file which
+depended upon the header file in question, creating a circular dependency.
+To mitigate this spaghetti code, I plan on setting up all header files to
+have distinct sections for each of preprocessor macros, type declatations,
+structure declarations, and function declarations.  Each of these sections
+will be surrounded by special preprocessor conditionals, so that a header
+file can include *just the type declarations* and *nothing else*, for
+instance.
 
-This is why I'm prioritizing cleaning up the code above everything else right
-now.  Now, type definition macros will be applied everywhere.  Now, brand new
-type _declaration_ macros will be applied to all header files where types were
-formerly declared by hand.  Now, private data shall not be added using any one
-of three different methods; private data shall be added in only one way, and
-that is when defining the type itself.
+An example:  Suppose the `gtkwidget.h` header requires only the type
+declarations from `gtkwindow.h`, and wants nothing else from the header
+file yet.  (This is a practical example, actually.  The `gtkwidget.h`
+header includes several functions which accept parameters of type
+`GtkWindow`, so currently a forward declaration is used.)  `gtkwidget.h`
+can eliminate the forward declarations and instead use:
+
+        /* A whole bunch of other stuff goes here, specifically GtkWidget
+         * type definitions -- GtkWindow inherits from GtkWidget, so we
+         * must declare GtkWidget before we import declarations and
+         * definitions of GtkWindow. */
+        
+        #define __GTK_WINDOW_H_IMPORT_TYPES_ONLY__
+        #include <gtkwindow.h>
+        #undef  __GTK_WINDOW_H_IMPORT_TYPES_ONLY__
+        
+        /* Now comes the functions, some of which rely on GtkWindow */
+
+Much easier to read and more portable to boot, since type declarations
+only need to be defined once now.
+
+And after we're done with that, it'll be time to convert the source code
+to use special functions and macros to *define* the object types and to
+read the object instance properties.
+
+But after that's done, it'll be time to run a build of the whole thing
+and see how many megabytes of warnings and errors we get.  The last time
+I ran a build, I got over 100 MB of errors and warnings!

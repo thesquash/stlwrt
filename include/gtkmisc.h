@@ -32,53 +32,15 @@ G_BEGIN_DECLS
 #define GTK_IS_MISC_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_MISC))
 #define GTK_MISC_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_MISC, GtkMiscClass))
 
-
-typedef struct _GtkMisc	      GtkMiscFat;
-typedef struct _GtkMisc	      GtkMiscThin;
-
 typedef struct _GtkMiscClass  GtkMiscClass;
 
-/********************************************************************/
-struct _GtkMiscProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkMisc, gtk_misc, GtkWidget,
   gfloat  (xalign);
   gfloat  (yalign);
 
   guint16  (xpad);
   guint16  (ypad);
-};
-
-struct _GtkMiscFat
-{
-  GtkWidgetFat   widget;
-
-  struct _GtkMiscProps instance_properties;
-};
-
-struct _GtkMiscThin
-{
-  GtkWidgetThin  widget;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkMiscFat   fat_instance;
-  struct _GtkMiscThin  thin_instance;
-}   GtkMisc;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkMiscFat GtkMisc;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkMiscThin GtkMisc;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkMiscClass
 {
@@ -86,10 +48,6 @@ struct _GtkMiscClass
 };
 
 
-GType   SF(_T2_gtk_misc_get_type)      (void) G_GNUC_CONST;
-GType   SF(_3T_gtk_misc_get_type)      (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType   SF(gtk_misc_get_type)      (void) G_GNUC_CONST;
 void	SF(gtk_misc_set_alignment) (GtkMisc *misc,
 				gfloat	 xalign,
 				gfloat	 yalign);

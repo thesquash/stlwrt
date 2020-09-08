@@ -41,53 +41,18 @@ typedef struct    _GtkSettingsPropertyValue GtkSettingsPropertyValue; /* Interna
 
 
 /* --- structures --- */
-/********************************************************************/
-struct _GtkSettingsProps
-{
-
-
+STLWRT_DECLARE_VTYPE_FPARENT(GtkSettings, gtk_settings, GObject,
   GData  * (queued_settings);	/* of type GtkSettingsValue* */
   GtkSettingsPropertyValue * (property_values);
 
   GtkRcContext * (rc_context);
   GdkScreen    * (screen);
-};
-
-struct _GtkSettingsFat
-{
-  GObject   parent_instance;
-
-  struct _GtkSettingsProps instance_properties;
-};
-
-struct _GtkSettingsThin
-{
-  GObject  parent_instance;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkSettingsFat   fat_instance;
-  struct _GtkSettingsThin  thin_instance;
-}   GtkSettings;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkSettingsFat GtkSettings;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkSettingsThin GtkSettings;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkSettingsClass
 {
   GObjectClass parent_class;
 };
-
 
 struct _GtkSettingsValuePrivate
 {
@@ -110,10 +75,6 @@ struct _GtkSettingsValue
 
 
 /* --- functions --- */
-GType		SF(_T2_gtk_settings_get_type)		     (void) G_GNUC_CONST;
-GType		SF(_3T_gtk_settings_get_type)		     (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType		SF(gtk_settings_get_type)		     (void) G_GNUC_CONST;
 #ifndef GDK_MULTIHEAD_SAFE
 GtkSettings*	SF(gtk_settings_get_default)	     (void);
 #endif

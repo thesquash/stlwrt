@@ -32,15 +32,9 @@ G_BEGIN_DECLS
 #define GTK_IS_SEPARATOR_MENU_ITEM_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_SEPARATOR_MENU_ITEM))
 #define GTK_SEPARATOR_MENU_ITEM_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_SEPARATOR_MENU_ITEM, GtkSeparatorMenuItemClass))
 
-
-typedef struct _GtkSeparatorMenuItem       GtkSeparatorMenuItem;
-
 typedef struct _GtkSeparatorMenuItemClass  GtkSeparatorMenuItemClass;
 
-struct _GtkSeparatorMenuItem
-{
-  GtkMenuItem menu_item;
-};
+STLWRT_DECLARE_FTYPE_VPARENT(GtkSeparatorMenuItem, gtk_separator_menu_item, GtkMenuItem, ;)
 
 struct _GtkSeparatorMenuItemClass
 {
@@ -48,7 +42,6 @@ struct _GtkSeparatorMenuItemClass
 };
 
 
-GType	   SF(gtk_separator_menu_item_get_type)	   (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_separator_menu_item_new)	           (void);
 
 

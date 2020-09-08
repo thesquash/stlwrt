@@ -44,10 +44,7 @@ typedef enum
   GTK_PRINT_CAPABILITY_NUMBER_UP_LAYOUT = 1 << 9
 } GtkPrintCapabilities;
 
-GType SF(_T2_gtk_print_capabilities_get_type) (void) G_GNUC_CONST;
-GType SF(_3T_gtk_print_capabilities_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType SF(gtk_print_capabilities_get_type) (void) G_GNUC_CONST;
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_printer)
 
 #define GTK_TYPE_PRINTER                  (gtk_printer_get_type ())
 #define GTK_PRINTER(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PRINTER, GtkPrinter))
@@ -60,11 +57,8 @@ typedef struct _GtkPrinter          GtkPrinter;
 
 typedef struct _GtkPrinterClass     GtkPrinterClass;
 typedef struct _GtkPrinterPrivate   GtkPrinterPrivate;
-typedef struct _GtkPrintBackend     GtkPrintBackendFat;
-typedef struct _GtkPrintBackend     GtkPrintBackendThin;
 
-struct _GtkPrintBackend;
-
+typedef struct _GtkPrintBackend     GtkPrintBackend;
 
 struct _GtkPrinterPrivate
 {
@@ -114,7 +108,6 @@ struct _GtkPrinterClass
 };
 
 
-GType                    SF(gtk_printer_get_type)              (void) G_GNUC_CONST;
 GtkPrinter              *gtk_printer_new                   (const gchar     *name,
 							    GtkPrintBackend *backend,
 							    gboolean         virtual_);

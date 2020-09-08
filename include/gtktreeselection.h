@@ -42,11 +42,7 @@ typedef void (* GtkTreeSelectionForeachFunc) (GtkTreeModel      *model,
 					      GtkTreeIter       *iter,
 					      gpointer           data);
 
-/********************************************************************/
-struct _GtkTreeSelectionProps
-{
-
-
+STLWRT_DECLARE_VTYPE_FPARENT(GtkTreeSelection, gtk_tree_selection, GObject,
   /*< private >*/
 
   GtkTreeView * (tree_view);
@@ -54,37 +50,7 @@ struct _GtkTreeSelectionProps
   GtkTreeSelectionFunc  (user_func);
   gpointer  (user_data);
   GDestroyNotify  (destroy);
-};
-
-struct _GtkTreeSelectionFat
-{
-  GObject   parent;
-
-  struct _GtkTreeSelectionProps instance_properties;
-};
-
-struct _GtkTreeSelectionThin
-{
-  GObject  parent;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkTreeSelectionFat   fat_instance;
-  struct _GtkTreeSelectionThin  thin_instance;
-}   GtkTreeSelection;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkTreeSelectionFat GtkTreeSelection;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkTreeSelectionThin GtkTreeSelection;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkTreeSelectionClass
 {
@@ -99,11 +65,6 @@ struct _GtkTreeSelectionClass
   void (*_gtk_reserved4) (void);
 };
 
-
-GType            SF(_T2_gtk_tree_selection_get_type)            (void) G_GNUC_CONST;
-GType            SF(_3T_gtk_tree_selection_get_type)            (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType            SF(gtk_tree_selection_get_type)            (void) G_GNUC_CONST;
 
 void             SF(gtk_tree_selection_set_mode)            (GtkTreeSelection            *selection,
 							 GtkSelectionMode             type);

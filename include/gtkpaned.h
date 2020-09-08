@@ -31,10 +31,6 @@ G_BEGIN_DECLS
 #define GTK_IS_PANED_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_PANED))
 #define GTK_PANED_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_PANED, GtkPanedClass))
 
-
-typedef struct _GtkPaned        GtkPanedFat;
-typedef struct _GtkPaned        GtkPanedThin;
-
 typedef struct _GtkPanedClass   GtkPanedClass;
 typedef struct _GtkPanedPrivate GtkPanedPrivate;
 
@@ -47,10 +43,7 @@ struct _GtkPanedPrivate
   guint32         grab_time;
 };
 
-struct _GtkPaned
-{
-  GtkContainer container;
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkPaned, gtk_paned, GtkContainer,
   GtkWidget * (child1);
   GtkWidget * (child2);
 
@@ -82,7 +75,7 @@ struct _GtkPaned
 
   gint  (drag_pos);
   gint  (original_position);
-};
+)
 
 struct _GtkPanedClass
 {
@@ -106,10 +99,6 @@ struct _GtkPanedClass
 };
 
 
-GType       SF(_T2_gtk_paned_get_type)     (void) G_GNUC_CONST;
-GType       SF(_3T_gtk_paned_get_type)     (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType       SF(gtk_paned_get_type)     (void) G_GNUC_CONST;
 void        SF(gtk_paned_add1)         (GtkPaned       *paned,
                                     GtkWidget      *child);
 void        SF(gtk_paned_add2)         (GtkPaned       *paned,

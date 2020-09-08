@@ -36,11 +36,8 @@ G_BEGIN_DECLS
 #define GTK_IS_SPINNER_CLASS(obj)  (G_TYPE_CHECK_CLASS_TYPE ((obj), GTK_TYPE_SPINNER))
 #define GTK_SPINNER_GET_CLASS      (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_SPINNER, GtkSpinnerClass))
 
-typedef struct _GtkSpinner      GtkSpinner;
-
 typedef struct _GtkSpinnerClass GtkSpinnerClass;
 typedef struct _GtkSpinnerPrivate  GtkSpinnerPrivate;
-
 
 struct _GtkSpinnerPrivate
 {
@@ -51,11 +48,9 @@ struct _GtkSpinnerPrivate
   guint timeout;
 };
 
-struct _GtkSpinner
-{
-  GtkDrawingArea parent;
+STLWRT_DECLARE_FTYPE_VPARENT(GtkSpinner, gtk_spinner, GtkDrawingArea,
   GtkSpinnerPrivate *priv;
-};
+)
 
 struct _GtkSpinnerClass
 {
@@ -63,7 +58,6 @@ struct _GtkSpinnerClass
 };
 
 
-GType      SF(gtk_spinner_get_type)  (void) G_GNUC_CONST;
 GtkWidget *SF(gtk_spinner_new) (void);
 void       SF(gtk_spinner_start)      (GtkSpinner *spinner);
 void       SF(gtk_spinner_stop)       (GtkSpinner *spinner);

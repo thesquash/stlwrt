@@ -22,7 +22,6 @@
 
 #include <gtkbox.h>
 
-
 G_BEGIN_DECLS
 
 #define GTK_TYPE_VBOX		 (gtk_vbox_get_type ())
@@ -32,15 +31,9 @@ G_BEGIN_DECLS
 #define GTK_IS_VBOX_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_VBOX))
 #define GTK_VBOX_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_VBOX, GtkVBoxClass))
 
-
-typedef struct _GtkVBox	      GtkVBox;
-
 typedef struct _GtkVBoxClass  GtkVBoxClass;
 
-struct _GtkVBox
-{
-  GtkBox box;
-};
+STLWRT_DECLARE_FTYPE_VPARENT(GtkVBox, gtk_vbox, GtkBox, ;)
 
 struct _GtkVBoxClass
 {
@@ -48,7 +41,6 @@ struct _GtkVBoxClass
 };
 
 
-GType       SF(gtk_vbox_get_type) (void) G_GNUC_CONST;
 GtkWidget * SF(gtk_vbox_new)      (gboolean homogeneous,
                                gint     spacing);
 

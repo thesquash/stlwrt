@@ -35,50 +35,13 @@ G_BEGIN_DECLS
 #define GTK_PRINTER_OPTION_SET(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PRINTER_OPTION_SET, GtkPrinterOptionSet))
 #define GTK_IS_PRINTER_OPTION_SET(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_PRINTER_OPTION_SET))
 
-typedef struct _GtkPrinterOptionSet       GtkPrinterOptionSetFat;
-typedef struct _GtkPrinterOptionSet       GtkPrinterOptionSetThin;
-
 typedef struct _GtkPrinterOptionSetClass  GtkPrinterOptionSetClass;
 
-/********************************************************************/
-struct _GtkPrinterOptionSetProps
-{
-
-
+STLWRT_DECLARE_VTYPE_FPARENT(GtkPrinterOptionSet, gtk_printer_option_set, GObject,
   /*< private >*/
   GPtrArray *array;
   GHashTable *hash;
-};
-
-struct _GtkPrinterOptionSetFat
-{
-  GObject   parent_instance;
-
-  struct _GtkPrinterOptionSetProps instance_properties;
-};
-
-struct _GtkPrinterOptionSetThin
-{
-  GObject  parent_instance;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkPrinterOptionSetFat   fat_instance;
-  struct _GtkPrinterOptionSetThin  thin_instance;
-}   GtkPrinterOptionSet;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkPrinterOptionSetFat GtkPrinterOptionSet;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkPrinterOptionSetThin GtkPrinterOptionSet;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkPrinterOptionSetClass
 {
@@ -100,11 +63,6 @@ struct _GtkPrinterOptionSetClass
 typedef void (*GtkPrinterOptionSetFunc) (GtkPrinterOption  *option,
 					 gpointer           user_data);
 
-
-GType   SF(_T2_gtk_printer_option_set_get_type)       (void) G_GNUC_CONST;
-GType   SF(_3T_gtk_printer_option_set_get_type)       (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType   SF(gtk_printer_option_set_get_type)       (void) G_GNUC_CONST;
 
 GtkPrinterOptionSet *gtk_printer_option_set_new              (void);
 void                 gtk_printer_option_set_add              (GtkPrinterOptionSet     *set,

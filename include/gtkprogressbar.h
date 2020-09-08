@@ -32,10 +32,6 @@ G_BEGIN_DECLS
 #define GTK_IS_PROGRESS_BAR_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_PROGRESS_BAR))
 #define GTK_PROGRESS_BAR_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_PROGRESS_BAR, GtkProgressBarClass))
 
-
-typedef struct _GtkProgressBar       GtkProgressBarFat;
-typedef struct _GtkProgressBar       GtkProgressBarThin;
-
 typedef struct _GtkProgressBarClass  GtkProgressBarClass;
 
 typedef enum
@@ -52,11 +48,7 @@ typedef enum
   GTK_PROGRESS_TOP_TO_BOTTOM
 } GtkProgressBarOrientation;
 
-/********************************************************************/
-struct _GtkProgressBarProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkProgressBar, gtk_progress_bar, GtkWidget,
   GtkProgressBarStyle        (bar_style);
   GtkProgressBarOrientation  (orientation);
 
@@ -72,37 +64,7 @@ struct _GtkProgressBarProps
   guint  (activity_dir) : 1;
   guint  (ellipsize) : 3;
   guint  (dirty) : 1;
-};
-
-struct _GtkProgressBarFat
-{
-  GtkProgressFat   progress;
-
-  struct _GtkProgressBarProps instance_properties;
-};
-
-struct _GtkProgressBarThin
-{
-  GtkProgressThin  progress;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkProgressBarFat   fat_instance;
-  struct _GtkProgressBarThin  thin_instance;
-}   GtkProgressBar;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkProgressBarFat GtkProgressBar;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkProgressBarThin GtkProgressBar;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkProgressBarClass
 {
@@ -116,38 +78,13 @@ struct _GtkProgressBarClass
 };
 
 
-GType      SF(_T2_gtk_progress_bar_get_type)             (void) G_GNUC_CONST;
-GType      SF(_3T_gtk_progress_bar_get_type)             (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      SF(gtk_progress_bar_get_type)             (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_progress_bar_new)                  (void);
 
 /*
- * GtkProgress/GtkProgressBar had serious problems in GTK 1.2.
- *
- *  - Only 3 or 4 functions are really needed for 95% of progress
- *    interfaces; GtkProgress[Bar] had about 25 functions, and
- *    didn't even include these 3 or 4.
- *  - In activity mode, the API involves setting the adjustment
- *    to any random value, just to have the side effect of
- *    calling the progress bar update function - the adjustment
- *    is totally ignored in activity mode
- *  - You set the activity step as a pixel value, which means to
- *    set the activity step you basically need to connect to
- *    size_allocate
- *  - There are ctree_set_expander_style()-functions, to randomly
- *    change look-and-feel for no good reason
- *  - The split between GtkProgress and GtkProgressBar makes no sense
- *    to me whatsoever.
- *
- * This was a big wart on GTK and made people waste lots of time,
- * both learning and using the interface.
- *
- * So, I have added what I feel is the correct API, and marked all the
- * rest deprecated. However, the changes are 100% backward-compatible and
- * should break no existing code.
- *
- * The following 9 functions are the new programming interface.
+ * Long story short, GTK+ 2 still contained deprecated functions for
+ * manipulating progress bars, and I finally removed the old, unuseful
+ * functions from STLWRT.  All that remains is the "new" GTK+ 2 and
+ * later interface for progress bars.
  */
 void       SF(gtk_progress_bar_pulse)                (GtkProgressBar *pbar);
 void       SF(gtk_progress_bar_set_text)             (GtkProgressBar *pbar,
@@ -168,28 +105,6 @@ GtkProgressBarOrientation SF(gtk_progress_bar_get_orientation) (GtkProgressBar *
 void               SF(gtk_progress_bar_set_ellipsize) (GtkProgressBar     *pbar,
 						   PangoEllipsizeMode  mode);
 PangoEllipsizeMode SF(gtk_progress_bar_get_ellipsize) (GtkProgressBar     *pbar);
-
-
-#ifndef GTK_DISABLE_DEPRECATED
-
-/* Everything below here is deprecated */
-GtkWidget* SF(gtk_progress_bar_new_with_adjustment)  (GtkAdjustment  *adjustment);
-void       SF(gtk_progress_bar_set_bar_style)        (GtkProgressBar *pbar,
-						  GtkProgressBarStyle style);
-void       SF(gtk_progress_bar_set_discrete_blocks)  (GtkProgressBar *pbar,
-						  guint           blocks);
-/* set_activity_step() is not only deprecated, it doesn't even work.
- * (Of course, it wasn't usable anyway, you had to set it from a size_allocate
- * handler or something)
- */
-void       SF(gtk_progress_bar_set_activity_step)    (GtkProgressBar *pbar,
-                                                  guint           step);
-void       SF(gtk_progress_bar_set_activity_blocks)  (GtkProgressBar *pbar,
-						  guint           blocks);
-void       SF(gtk_progress_bar_update)               (GtkProgressBar *pbar,
-						  gdouble         percentage);
-
-#endif /* GTK_DISABLE_DEPRECATED */
 
 G_END_DECLS
 

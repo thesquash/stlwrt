@@ -31,9 +31,6 @@ G_BEGIN_DECLS
  * views.
  */
 
-typedef struct _GtkTextChildAnchor      GtkTextChildAnchorFat;
-typedef struct _GtkTextChildAnchor      GtkTextChildAnchorThin;
-
 typedef struct _GtkTextChildAnchorClass GtkTextChildAnchorClass;
 
 #define GTK_TYPE_TEXT_CHILD_ANCHOR              (gtk_text_child_anchor_get_type ())
@@ -43,43 +40,9 @@ typedef struct _GtkTextChildAnchorClass GtkTextChildAnchorClass;
 #define GTK_IS_TEXT_CHILD_ANCHOR_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TEXT_CHILD_ANCHOR))
 #define GTK_TEXT_CHILD_ANCHOR_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TEXT_CHILD_ANCHOR, GtkTextChildAnchorClass))
 
-/********************************************************************/
-struct _GtkTextChildAnchorProps
-{
-
-
+STLWRT_DECLARE_FTYPE_FPARENT(GtkTextChildAnchor, gtk_text_child_anchor, GObject,
   gpointer  (segment);
-};
-
-struct _GtkTextChildAnchorFat
-{
-  GObject   parent_instance;
-
-  struct _GtkTextChildAnchorProps instance_properties;
-};
-
-struct _GtkTextChildAnchorThin
-{
-  GObject  parent_instance;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkTextChildAnchorFat   fat_instance;
-  struct _GtkTextChildAnchorThin  thin_instance;
-}   GtkTextChildAnchor;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkTextChildAnchorFat GtkTextChildAnchor;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkTextChildAnchorThin GtkTextChildAnchor;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkTextChildAnchorClass
 {
@@ -91,11 +54,6 @@ struct _GtkTextChildAnchorClass
   void (*_gtk_reserved3) (void);
   void (*_gtk_reserved4) (void);
 };
-
-GType SF(_T2_gtk_text_child_anchor_get_type) (void) G_GNUC_CONST;
-GType SF(_3T_gtk_text_child_anchor_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType SF(gtk_text_child_anchor_get_type) (void) G_GNUC_CONST;
 
 GtkTextChildAnchor* SF(gtk_text_child_anchor_new) (void);
 

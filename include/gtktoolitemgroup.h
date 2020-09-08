@@ -34,8 +34,6 @@ G_BEGIN_DECLS
 #define GTK_IS_TOOL_ITEM_GROUP_CLASS(obj)  (G_TYPE_CHECK_CLASS_TYPE (obj, GTK_TYPE_TOOL_ITEM_GROUP))
 #define GTK_TOOL_ITEM_GROUP_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TOOL_ITEM_GROUP, GtkToolItemGroupClass))
 
-typedef struct _GtkToolItemGroup        GtkToolItemGroup;
-
 typedef struct _GtkToolItemGroupClass   GtkToolItemGroupClass;
 typedef struct _GtkToolItemGroupPrivate GtkToolItemGroupPrivate;
 
@@ -69,11 +67,9 @@ struct _GtkToolItemGroupPrivate
   guint              collapsed : 1;
 };
 
-struct _GtkToolItemGroup
-{
-  GtkContainer parent_instance;
+STLWRT_DECLARE_FTYPE_VPARENT(GtkToolItemGroup, gtk_tool_item_group, GtkContainer,
   GtkToolItemGroupPrivate *priv;
-};
+)
 
 struct _GtkToolItemGroupClass
 {
@@ -81,7 +77,6 @@ struct _GtkToolItemGroupClass
 };
 
 
-GType                 SF(gtk_tool_item_group_get_type)          (void) G_GNUC_CONST;
 GtkWidget*            SF(gtk_tool_item_group_new)               (const gchar        *label);
 
 void                  SF(gtk_tool_item_group_set_label)         (GtkToolItemGroup   *group,

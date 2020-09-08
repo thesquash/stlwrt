@@ -30,7 +30,6 @@ G_BEGIN_DECLS
 #define GTK_IS_TREE_DRAG_SOURCE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TREE_DRAG_SOURCE))
 #define GTK_TREE_DRAG_SOURCE_GET_IFACE(obj)  (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GTK_TYPE_TREE_DRAG_SOURCE, GtkTreeDragSourceIface))
 
-typedef struct _GtkTreeDragSource      GtkTreeDragSource; /* Dummy typedef */
 typedef struct _GtkTreeDragSourceIface GtkTreeDragSourceIface;
 
 struct _GtkTreeDragSourceIface
@@ -50,10 +49,7 @@ struct _GtkTreeDragSourceIface
                                          GtkTreePath       *path);
 };
 
-GType           SF(_T2_gtk_tree_drag_source_get_type)   (void) G_GNUC_CONST;
-GType           SF(_3T_gtk_tree_drag_source_get_type)   (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType           SF(gtk_tree_drag_source_get_type)   (void) G_GNUC_CONST;
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_tree_drag_source)
 
 /* Returns whether the given row can be dragged */
 gboolean SF(gtk_tree_drag_source_row_draggable)    (GtkTreeDragSource *drag_source,
@@ -75,7 +71,6 @@ gboolean SF(gtk_tree_drag_source_drag_data_get)    (GtkTreeDragSource *drag_sour
 #define GTK_IS_TREE_DRAG_DEST(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TREE_DRAG_DEST))
 #define GTK_TREE_DRAG_DEST_GET_IFACE(obj)  (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GTK_TYPE_TREE_DRAG_DEST, GtkTreeDragDestIface))
 
-typedef struct _GtkTreeDragDest      GtkTreeDragDest; /* Dummy typedef */
 typedef struct _GtkTreeDragDestIface GtkTreeDragDestIface;
 
 struct _GtkTreeDragDestIface
@@ -93,10 +88,7 @@ struct _GtkTreeDragDestIface
 				       GtkSelectionData  *selection_data);
 };
 
-GType           SF(_T2_gtk_tree_drag_dest_get_type)   (void) G_GNUC_CONST;
-GType           SF(_3T_gtk_tree_drag_dest_get_type)   (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType           SF(gtk_tree_drag_dest_get_type)   (void) G_GNUC_CONST;
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_tree_drag_dest)
 
 /* Inserts a row before dest which contains data in selection_data,
  * or returns FALSE if it can't

@@ -42,7 +42,6 @@ G_BEGIN_DECLS
 
 typedef struct _GtkPrintOperationClass   GtkPrintOperationClass;
 typedef struct _GtkPrintOperationPrivate GtkPrintOperationPrivate;
-typedef struct _GtkPrintOperation        GtkPrintOperation;
 
 typedef enum {
   GTK_PRINT_STATUS_INITIAL,
@@ -71,12 +70,9 @@ typedef enum {
 } GtkPrintOperationAction;
 
 
-struct _GtkPrintOperation
-{
-  GObject parent_instance;
-
+STLWRT_DECLARE_FTYPE_FPARENT(GtkPrintOperation, gtk_print_operation, GObject,
   GtkPrintOperationPrivate * (priv);
-};
+)
 
 struct _GtkPrintOperationClass
 {
@@ -135,7 +131,6 @@ typedef enum
 GQuark SF(gtk_print_error_quark) (void);
 
 
-GType                   SF(gtk_print_operation_get_type)               (void) G_GNUC_CONST;
 GtkPrintOperation *     SF(gtk_print_operation_new)                    (void);
 void                    SF(gtk_print_operation_set_default_page_setup) (GtkPrintOperation  *op,
 								    GtkPageSetup       *default_page_setup);

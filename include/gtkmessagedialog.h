@@ -33,11 +33,7 @@ G_BEGIN_DECLS
 #define GTK_IS_MESSAGE_DIALOG_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_MESSAGE_DIALOG))
 #define GTK_MESSAGE_DIALOG_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_MESSAGE_DIALOG, GtkMessageDialogClass))
 
-typedef struct _GtkMessageDialog        GtkMessageDialogFat;
-typedef struct _GtkMessageDialog        GtkMessageDialogThin;
-
 typedef struct _GtkMessageDialogClass   GtkMessageDialogClass;
-
 
 struct _GtkMessageDialogPrivate
 {
@@ -48,15 +44,10 @@ struct _GtkMessageDialogPrivate
   guint has_secondary_text : 1;
 };
 
-struct _GtkMessageDialog
-{
-  /*< private >*/
-  
-  GtkDialog parent_instance;
-  
+STLWRT_DECLARE_VTYPE_VPARENT(GtkMessageDialog, gtk_message_dialog, GtkDialog,
   GtkWidget * (image);
   GtkWidget * (label);
-};
+)
 
 struct _GtkMessageDialogClass
 {
@@ -97,10 +88,6 @@ typedef enum
   GTK_BUTTONS_OK_CANCEL
 } GtkButtonsType;
 
-GType      SF(_T2_gtk_message_dialog_get_type) (void) G_GNUC_CONST;
-GType      SF(_3T_gtk_message_dialog_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      SF(gtk_message_dialog_get_type) (void) G_GNUC_CONST;
 
 GtkWidget* SF(gtk_message_dialog_new)      (GtkWindow      *parent,
                                         GtkDialogFlags  flags,

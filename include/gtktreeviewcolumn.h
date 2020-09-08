@@ -42,9 +42,6 @@ typedef enum
   GTK_TREE_VIEW_COLUMN_FIXED
 } GtkTreeViewColumnSizing;
 
-typedef struct _GtkTreeViewColumn      GtkTreeViewColumnFat;
-typedef struct _GtkTreeViewColumn      GtkTreeViewColumnThin;
-
 typedef struct _GtkTreeViewColumnClass GtkTreeViewColumnClass;
 
 typedef void (* GtkTreeCellDataFunc) (GtkTreeViewColumn *tree_column,
@@ -54,11 +51,7 @@ typedef void (* GtkTreeCellDataFunc) (GtkTreeViewColumn *tree_column,
 				      gpointer           data);
 
 
-/********************************************************************/
-struct _GtkTreeViewColumnProps
-{
-
-
+STLWRT_DECLARE_VTYPE_FPARENT(GtkTreeViewColumn, gtk_tree_view_column, GObject,
   GtkWidget * (tree_view);
   GtkWidget * (button);
   GtkWidget * (child);
@@ -104,37 +97,7 @@ struct _GtkTreeViewColumnProps
   guint  (reorderable)         : 1;
   guint  (use_resized_width)   : 1;
   guint  (expand)              : 1;
-};
-
-struct _GtkTreeViewColumnFat
-{
-  GObject   parent;
-
-  struct _GtkTreeViewColumnProps instance_properties;
-};
-
-struct _GtkTreeViewColumnThin
-{
-  GObject  parent;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkTreeViewColumnFat   fat_instance;
-  struct _GtkTreeViewColumnThin  thin_instance;
-}   GtkTreeViewColumn;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkTreeViewColumnFat GtkTreeViewColumn;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkTreeViewColumnThin GtkTreeViewColumn;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkTreeViewColumnClass
 {
@@ -149,10 +112,7 @@ struct _GtkTreeViewColumnClass
   void (*_gtk_reserved4) (void);
 };
 
-GType                   SF(_T2_gtk_tree_view_column_get_type)            (void) G_GNUC_CONST;
-GType                   SF(_3T_gtk_tree_view_column_get_type)            (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType                   SF(gtk_tree_view_column_get_type)            (void) G_GNUC_CONST;
+
 GtkTreeViewColumn      *SF(gtk_tree_view_column_new)                 (void);
 GtkTreeViewColumn      *SF(gtk_tree_view_column_new_with_attributes) (const gchar             *title,
 								  GtkCellRenderer         *cell,

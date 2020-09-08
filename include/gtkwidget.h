@@ -187,11 +187,7 @@ struct _GtkRequisition
  *  which actual widgets must adhere to.
  */
 
-/********************************************************************/
-struct _GtkWidgetProps
-{
-
-  
+STLWRT_DECLARE_VTYPE_FPARENT(GtkWidget, gtk_widget, GObject,
   /* 16 bits of internally used private flags.
    * this will be packed into the same 4 byte alignment frame that
    * state and saved_state go. we therefore don't waste any new
@@ -248,56 +244,12 @@ struct _GtkWidgetProps
   /* The widget's parent.
    */
   GtkWidget * (parent);
-};
+)
 
 struct _GtkWidgetPrivate
 {
-
-  
   guint32  widget_flags;
 };
-
-struct _GtkWidgetFat
-{
-  /* The object structure needs to be the first
-   *  element in the widget structure in order for
-   *  the object mechanism to work correctly. This
-   *  allows a GtkWidget pointer to be cast to a
-   *  GObject pointer.
-   */
-  GObject   object;
-
-  struct _GtkWidgetProps instance_properties;
-};
-
-struct _GtkWidgetThin
-{
-  /* The object structure needs to be the first
-   *  element in the widget structure in order for
-   *  the object mechanism to work correctly. This
-   *  allows a GtkWidget pointer to be cast to a
-   *  GObject pointer.
-   */
-  GObject  object;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkWidgetFat   fat_instance;
-  struct _GtkWidgetThin  thin_instance;
-}   GtkWidget;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkWidgetFat GtkWidget;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkWidgetThin GtkWidget;
-#endif
-/********************************************************************/
-
-
 
 /**
  * GtkWidgetClass:
@@ -536,10 +488,7 @@ struct _GtkWidgetShapeInfo
   GdkBitmap *shape_mask;
 };
 
-GType	   SF(_T2_gtk_widget_get_type)		  (void) G_GNUC_CONST;
-GType	   SF(_3T_gtk_widget_get_type)		  (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType	   SF(gtk_widget_get_type)		  (void) G_GNUC_CONST;
+
 GtkWidget* SF(gtk_widget_new)		  (GType		type,
 					   const gchar	       *first_property_name,
 					   ...);
@@ -929,10 +878,8 @@ void       SF(gtk_widget_set_has_tooltip)       (GtkWidget   *widget,
 					     gboolean     has_tooltip);
 gboolean   SF(gtk_widget_get_has_tooltip)       (GtkWidget   *widget);
 
-GType           SF(_T2_gtk_requisition_get_type) (void) G_GNUC_CONST;
-GType           SF(_3T_gtk_requisition_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType           SF(gtk_requisition_get_type) (void) G_GNUC_CONST;
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_requisition)
+
 GtkRequisition *SF(gtk_requisition_copy)     (const GtkRequisition *requisition);
 void            SF(gtk_requisition_free)     (GtkRequisition       *requisition);
 

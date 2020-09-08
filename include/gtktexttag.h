@@ -57,9 +57,6 @@
 G_BEGIN_DECLS
 
 typedef struct _GtkTextIter GtkTextIter;
-typedef struct _GtkTextTagTable GtkTextTagTableFat;
-typedef struct _GtkTextTagTable GtkTextTagTableThin;
-
 typedef struct _GtkTextAttributes GtkTextAttributes;
 
 #define GTK_TYPE_TEXT_TAG            (gtk_text_tag_get_type ())
@@ -71,16 +68,9 @@ typedef struct _GtkTextAttributes GtkTextAttributes;
 
 #define GTK_TYPE_TEXT_ATTRIBUTES     (gtk_text_attributes_get_type ())
 
-typedef struct _GtkTextTag GtkTextTagFat;
-typedef struct _GtkTextTag GtkTextTagThin;
-
 typedef struct _GtkTextTagClass GtkTextTagClass;
 
-/********************************************************************/
-struct _GtkTextTagProps
-{
-
-
+STLWRT_DECLARE_VTYPE_FPARENT(GtkTextTag, gtk_text_tag, GObject,
   GtkTextTagTable * (table);
 
   char * (name);           /* Name of this tag.  This field is actually
@@ -131,37 +121,7 @@ struct _GtkTextTagProps
   guint  (accumulative_margin) : 1;
 
   guint  (pad1) : 1;
-};
-
-struct _GtkTextTagFat
-{
-  GObject   parent_instance;
-
-  struct _GtkTextTagProps instance_properties;
-};
-
-struct _GtkTextTagThin
-{
-  GObject  parent_instance;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkTextTagFat   fat_instance;
-  struct _GtkTextTagThin  thin_instance;
-}   GtkTextTag;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkTextTagFat GtkTextTag;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkTextTagThin GtkTextTag;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkTextTagClass
 {
@@ -179,10 +139,7 @@ struct _GtkTextTagClass
   void (*_gtk_reserved4) (void);
 };
 
-GType        SF(_T2_gtk_text_tag_get_type)     (void) G_GNUC_CONST;
-GType        SF(_3T_gtk_text_tag_get_type)     (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType        SF(gtk_text_tag_get_type)     (void) G_GNUC_CONST;
+
 GtkTextTag  *SF(gtk_text_tag_new)          (const gchar       *name);
 gint         SF(gtk_text_tag_get_priority) (GtkTextTag        *tag);
 void         SF(gtk_text_tag_set_priority) (GtkTextTag        *tag,
@@ -309,11 +266,7 @@ void               SF(gtk_text_attributes_copy_values) (GtkTextAttributes *src,
 void               SF(gtk_text_attributes_unref)       (GtkTextAttributes *values);
 GtkTextAttributes *SF(gtk_text_attributes_ref)         (GtkTextAttributes *values);
 
-GType              SF(_T2_gtk_text_attributes_get_type)    (void) G_GNUC_CONST;
-GType              SF(_3T_gtk_text_attributes_get_type)    (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType              SF(gtk_text_attributes_get_type)    (void) G_GNUC_CONST;
-
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_text_attributes)
 
 G_END_DECLS
 

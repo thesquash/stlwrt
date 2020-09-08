@@ -33,13 +33,8 @@ G_BEGIN_DECLS
 #define GTK_IS_RECENT_CHOOSER_WIDGET_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_RECENT_CHOOSER_WIDGET))
 #define GTK_RECENT_CHOOSER_WIDGET_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_RECENT_CHOOSER_WIDGET, GtkRecentChooserWidgetClass))
 
-typedef struct _GtkRecentChooserWidget        GtkRecentChooserWidgetFat;
-typedef struct _GtkRecentChooserWidget        GtkRecentChooserWidgetThin;
-
 typedef struct _GtkRecentChooserWidgetClass   GtkRecentChooserWidgetClass;
-
 typedef struct _GtkRecentChooserWidgetPrivate GtkRecentChooserWidgetPrivate;
-
 
 struct _GtkRecentChooserWidgetPrivate
 {
@@ -48,23 +43,16 @@ struct _GtkRecentChooserWidgetPrivate
   GtkWidget *chooser;
 };
 
-struct _GtkRecentChooserWidget
-{
-  /*< private >*/
-  GtkVBox parent_instance;
-
+STLWRT_DECLARE_FTYPE_VPARENT(GtkRecentChooserWidget, gtk_recent_chooser_widget, GtkVBox,
   GtkRecentChooserWidgetPrivate * (priv);
-};
+)
 
 struct _GtkRecentChooserWidgetClass
 {
   GtkVBoxClass parent_class;
 };
 
-GType      SF(_T2_gtk_recent_chooser_widget_get_type)        (void) G_GNUC_CONST;
-GType      SF(_3T_gtk_recent_chooser_widget_get_type)        (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      SF(gtk_recent_chooser_widget_get_type)        (void) G_GNUC_CONST;
+
 GtkWidget *SF(gtk_recent_chooser_widget_new)             (void);
 GtkWidget *SF(gtk_recent_chooser_widget_new_for_manager) (GtkRecentManager *manager);
 

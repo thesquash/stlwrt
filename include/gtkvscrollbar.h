@@ -22,9 +22,7 @@
 
 #include <gtkscrollbar.h>
 
-
 G_BEGIN_DECLS
-
 
 #define GTK_TYPE_VSCROLLBAR            (gtk_vscrollbar_get_type ())
 #define GTK_VSCROLLBAR(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_VSCROLLBAR, GtkVScrollbar))
@@ -32,9 +30,6 @@ G_BEGIN_DECLS
 #define GTK_IS_VSCROLLBAR(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_VSCROLLBAR))
 #define GTK_IS_VSCROLLBAR_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_VSCROLLBAR))
 #define GTK_VSCROLLBAR_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_VSCROLLBAR, GtkVScrollbarClass))
-
-
-typedef struct _GtkVScrollbar       GtkVScrollbar;
 
 typedef struct _GtkVScrollbarClass  GtkVScrollbarClass;
 
@@ -44,10 +39,7 @@ typedef struct _GtkVScrollbarClass  GtkVScrollbarClass;
  * The #GtkVScrollbar struct contains private data and should be accessed
  * using the functions below.
  */
-struct _GtkVScrollbar
-{
-  GtkScrollbar scrollbar;
-};
+STLWRT_DECLARE_FTYPE_VPARENT(GtkVScrollbar, gtk_vscrollbar, GtkScrollbar, ;)
 
 struct _GtkVScrollbarClass
 {
@@ -55,11 +47,8 @@ struct _GtkVScrollbarClass
 };
 
 
-GType      SF(gtk_vscrollbar_get_type) (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_vscrollbar_new)      (GtkAdjustment *adjustment);
 
-
 G_END_DECLS
-
 
 #endif /* __GTK_VSCROLLBAR_H__ */

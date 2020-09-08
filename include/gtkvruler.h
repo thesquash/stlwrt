@@ -22,12 +22,9 @@
 #ifndef __GTK_VRULER_H__
 #define __GTK_VRULER_H__
 
-
 #include <gtkruler.h>
 
-
 G_BEGIN_DECLS
-
 
 #define GTK_TYPE_VRULER            (gtk_vruler_get_type ())
 #define GTK_VRULER(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_VRULER, GtkVRuler))
@@ -36,15 +33,9 @@ G_BEGIN_DECLS
 #define GTK_IS_VRULER_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_VRULER))
 #define GTK_VRULER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_VRULER, GtkVRulerClass))
 
-
-typedef struct _GtkVRuler       GtkVRuler;
-
 typedef struct _GtkVRulerClass  GtkVRulerClass;
 
-struct _GtkVRuler
-{
-  GtkRuler ruler;
-};
+STLWRT_DECLARE_FTYPE_VPARENT(GtkVRuler, gtk_vruler, GtkRuler, ;)
 
 struct _GtkVRulerClass
 {
@@ -52,12 +43,9 @@ struct _GtkVRulerClass
 };
 
 
-GType      SF(gtk_vruler_get_type) (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_vruler_new)      (void);
 
-
 G_END_DECLS
-
 
 #endif /* __GTK_VRULER_H__ */
 

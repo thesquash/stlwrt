@@ -71,12 +71,9 @@ struct _GtkPrintBackendPrivate
   char **auth_info;
 };
 
-struct _GtkPrintBackend
-{
-  GObject parent_instance;
-
+STLWRT_DECLARE_FTYPE_FPARENT(GtkPrintBackend, gtk_print_backend, GObject,
   GtkPrintBackendPrivate *priv;
-};
+)
 
 struct _GtkPrintBackendClass
 {
@@ -148,8 +145,6 @@ struct _GtkPrintBackendClass
   void (*_gtk_reserved4) (void);
 };
 
-
-GType   SF(gtk_print_backend_get_type)       (void) G_GNUC_CONST;
 
 GList      *gtk_print_backend_get_printer_list     (GtkPrintBackend         *print_backend);
 gboolean    gtk_print_backend_printer_list_is_done (GtkPrintBackend         *print_backend);

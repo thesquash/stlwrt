@@ -34,9 +34,6 @@ G_BEGIN_DECLS
 #define GTK_IS_QUERY_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_QUERY))
 #define GTK_QUERY_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_QUERY, GtkQueryClass))
 
-typedef struct _GtkQuery GtkQueryFat;
-typedef struct _GtkQuery GtkQueryThin;
-
 typedef struct _GtkQueryClass GtkQueryClass;
 typedef struct _GtkQueryPrivate GtkQueryPrivate;
 
@@ -48,19 +45,16 @@ struct _GtkQueryPrivate
   GList *mime_types;
 };
 
-struct _GtkQuery 
-{
-  GObject parent;
-
+STLWRT_DECLARE_FTYPE_FPARENT(GtkQuery, _gtk_query, GObject,
   GtkQueryPrivate *priv;
-};
+)
 
 struct _GtkQueryClass
 {
   GObjectClass parent_class;
 };
 
-GType     SF(_gtk_query_get_type)       (void);
+
 gboolean  _gtk_query_enabled        (void);
 
 GtkQuery* _gtk_query_new            (void);

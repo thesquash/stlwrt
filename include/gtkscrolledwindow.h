@@ -35,18 +35,9 @@ G_BEGIN_DECLS
 #define GTK_IS_SCROLLED_WINDOW_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_SCROLLED_WINDOW))
 #define GTK_SCROLLED_WINDOW_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_SCROLLED_WINDOW, GtkScrolledWindowClass))
 
-
-
-typedef struct _GtkScrolledWindow       GtkScrolledWindowFat;
-typedef struct _GtkScrolledWindow       GtkScrolledWindowThin;
-
 typedef struct _GtkScrolledWindowClass  GtkScrolledWindowClass;
 
-/********************************************************************/
-struct _GtkScrolledWindowProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkScrolledWindow, gtk_scrolled_window, GtkBin,
   /*< public >*/
   GtkWidget * (hscrollbar);
   GtkWidget * (vscrollbar);
@@ -60,37 +51,7 @@ struct _GtkScrolledWindowProps
   guint  (focus_out)              : 1;	/* Flag used by ::move-focus-out implementation */
 
   guint16  (shadow_type);
-};
-
-struct _GtkScrolledWindowFat
-{
-  GtkBinFat   container;
-
-  struct _GtkScrolledWindowProps instance_properties;
-};
-
-struct _GtkScrolledWindowThin
-{
-  GtkBinThin  container;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkScrolledWindowFat   fat_instance;
-  struct _GtkScrolledWindowThin  thin_instance;
-}   GtkScrolledWindow;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkScrolledWindowFat GtkScrolledWindow;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkScrolledWindowThin GtkScrolledWindow;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkScrolledWindowClass
 {
@@ -120,10 +81,6 @@ struct _GtkScrolledWindowClass
 };
 
 
-GType          SF(_T2_gtk_scrolled_window_get_type)          (void) G_GNUC_CONST;
-GType          SF(_3T_gtk_scrolled_window_get_type)          (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType          SF(gtk_scrolled_window_get_type)          (void) G_GNUC_CONST;
 GtkWidget*     SF(gtk_scrolled_window_new)               (GtkAdjustment     *hadjustment,
 						      GtkAdjustment     *vadjustment);
 void           SF(gtk_scrolled_window_set_hadjustment)   (GtkScrolledWindow *scrolled_window,

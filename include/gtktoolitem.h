@@ -37,11 +37,8 @@ G_BEGIN_DECLS
 #define GTK_IS_TOOL_ITEM_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TOOL_ITEM))
 #define GTK_TOOL_ITEM_GET_CLASS(o)    (G_TYPE_INSTANCE_GET_CLASS((o), GTK_TYPE_TOOL_ITEM, GtkToolItemClass))
 
-typedef struct _GtkToolItem        GtkToolItem;
-
 typedef struct _GtkToolItemClass   GtkToolItemClass;
 typedef struct _GtkToolItemPrivate GtkToolItemPrivate;
-
 
 struct _GtkToolItemPrivate
 {
@@ -64,13 +61,10 @@ struct _GtkToolItemPrivate
   gboolean   use_action_appearance;
 };
 
-struct _GtkToolItem
-{
-  GtkBin parent;
-
+STLWRT_DECLARE_FTYPE_VPARENT(GtkToolItem, gtk_tool_item, GtkBin,
   /*< private >*/
   GtkToolItemPrivate * (priv);
-};
+)
 
 struct _GtkToolItemClass
 {
@@ -96,7 +90,6 @@ struct _GtkToolItemClass
 };
 
 
-GType        SF(gtk_tool_item_get_type) (void) G_GNUC_CONST;
 GtkToolItem *SF(gtk_tool_item_new)      (void);
 
 void            SF(gtk_tool_item_set_homogeneous)          (GtkToolItem *tool_item,
@@ -107,12 +100,6 @@ void            SF(gtk_tool_item_set_expand)               (GtkToolItem *tool_it
 							gboolean     expand);
 gboolean        SF(gtk_tool_item_get_expand)               (GtkToolItem *tool_item);
 
-#ifndef GTK_DISABLE_DEPRECATED
-void            SF(gtk_tool_item_set_tooltip)              (GtkToolItem *tool_item,
-							GtkTooltips *tooltips,
-							const gchar *tip_text,
-							const gchar *tip_private);
-#endif /* GTK_DISABLE_DEPRECATED */
 void            SF(gtk_tool_item_set_tooltip_text)         (GtkToolItem *tool_item,
 							const gchar *text);
 void            SF(gtk_tool_item_set_tooltip_markup)       (GtkToolItem *tool_item,

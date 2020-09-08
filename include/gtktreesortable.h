@@ -37,7 +37,6 @@ enum {
   GTK_TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID = -2
 };
 
-typedef struct _GtkTreeSortable      GtkTreeSortable; /* Dummy typedef */
 typedef struct _GtkTreeSortableIface GtkTreeSortableIface;
 
 typedef gint (* GtkTreeIterCompareFunc) (GtkTreeModel *model,
@@ -72,11 +71,7 @@ struct _GtkTreeSortableIface
   gboolean (* has_default_sort_func) (GtkTreeSortable        *sortable);
 };
 
-
-GType    SF(_T2_gtk_tree_sortable_get_type)              (void) G_GNUC_CONST;
-GType    SF(_3T_gtk_tree_sortable_get_type)              (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType    SF(gtk_tree_sortable_get_type)              (void) G_GNUC_CONST;
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_tree_sortable)
 
 void     SF(gtk_tree_sortable_sort_column_changed)   (GtkTreeSortable        *sortable);
 gboolean SF(gtk_tree_sortable_get_sort_column_id)    (GtkTreeSortable        *sortable,

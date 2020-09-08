@@ -32,55 +32,16 @@ G_BEGIN_DECLS
 #define GTK_IS_PLUG_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_PLUG))
 #define GTK_PLUG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_PLUG, GtkPlugClass))
 
-
-typedef struct _GtkPlug        GtkPlugFat;
-typedef struct _GtkPlug        GtkPlugThin;
-
 typedef struct _GtkPlugClass   GtkPlugClass;
 
-
-/********************************************************************/
-struct _GtkPlugProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkPlug, gtk_plug, GtkWindow,
   GdkWindow * (socket_window);
   GtkWidget * (modality_window);
   GtkWindowGroup * (modality_group);
   GHashTable * (grabbed_keys);
 
   guint  (same_app) : 1;
-};
-
-struct _GtkPlugFat
-{
-  GtkWindowFat   window;
-
-  struct _GtkPlugProps instance_properties;
-};
-
-struct _GtkPlugThin
-{
-  GtkWindowThin  window;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkPlugFat   fat_instance;
-  struct _GtkPlugThin  thin_instance;
-}   GtkPlug;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkPlugFat GtkPlug;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkPlugThin GtkPlug;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkPlugClass
 {
@@ -95,11 +56,6 @@ struct _GtkPlugClass
   void (*_gtk_reserved4) (void);
 };
 
-
-GType      SF(_T2_gtk_plug_get_type)  (void) G_GNUC_CONST;
-GType      SF(_3T_gtk_plug_get_type)  (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      SF(gtk_plug_get_type)  (void) G_GNUC_CONST;
 
 #ifndef GDK_MULTIHEAD_SAFE
 void       SF(gtk_plug_construct) (GtkPlug         *plug,

@@ -34,10 +34,8 @@ G_BEGIN_DECLS
 #define GTK_IS_TOOL_BUTTON_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TOOL_BUTTON))
 #define GTK_TOOL_BUTTON_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), GTK_TYPE_TOOL_BUTTON, GtkToolButtonClass))
 
-typedef struct _GtkToolButton        GtkToolButton;
 typedef struct _GtkToolButtonClass   GtkToolButtonClass;
 typedef struct _GtkToolButtonPrivate GtkToolButtonPrivate;
-
 
 struct _GtkToolButtonPrivate
 {
@@ -55,13 +53,10 @@ struct _GtkToolButtonPrivate
   guint contents_invalid : 1;
 };
 
-struct _GtkToolButton
-{
-  GtkToolItem parent;
-
+STLWRT_DECLARE_FTYPE_VPARENT(GtkToolButton, gtk_tool_button, GtkToolItem,
   /*< private >*/
   GtkToolButtonPrivate * (priv);
-};
+)
 
 struct _GtkToolButtonClass
 {
@@ -80,7 +75,6 @@ struct _GtkToolButtonClass
 };
 
 
-GType        SF(gtk_tool_button_get_type)       (void) G_GNUC_CONST;
 GtkToolItem *SF(gtk_tool_button_new)            (GtkWidget   *icon_widget,
 					     const gchar *label);
 GtkToolItem *SF(gtk_tool_button_new_from_stock) (const gchar *stock_id);

@@ -35,8 +35,6 @@ G_BEGIN_DECLS
 #define GTK_IS_TOOL_PALETTE_CLASS(obj)  (G_TYPE_CHECK_CLASS_TYPE (obj, GTK_TYPE_TOOL_PALETTE))
 #define GTK_TOOL_PALETTE_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TOOL_PALETTE, GtkToolPaletteClass))
 
-typedef struct _GtkToolPalette           GtkToolPalette;
-
 typedef struct _GtkToolPaletteClass      GtkToolPaletteClass;
 typedef struct _GtkToolPalettePrivate    GtkToolPalettePrivate;
 
@@ -83,11 +81,9 @@ struct _GtkToolPalettePrivate
   guint                 drag_source : 2;
 };
 
-struct _GtkToolPalette
-{
-  GtkContainer parent_instance;
+STLWRT_DECLARE_FTYPE_VPARENT(GtkToolPalette, gtk_tool_palette, GtkContainer,
   GtkToolPalettePrivate *priv;
-};
+)
 
 struct _GtkToolPaletteClass
 {
@@ -107,7 +103,6 @@ struct _GtkToolPaletteClass
 };
 
 
-GType                          SF(gtk_tool_palette_get_type)              (void) G_GNUC_CONST;
 GtkWidget*                     SF(gtk_tool_palette_new)                   (void);
 
 void                           SF(gtk_tool_palette_set_group_position)    (GtkToolPalette            *palette,

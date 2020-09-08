@@ -59,8 +59,6 @@ typedef gint (*GtkRecentSortFunc) (GtkRecentInfo *a,
 				   GtkRecentInfo *b,
 				   gpointer       user_data);
 
-
-typedef struct _GtkRecentChooser      GtkRecentChooser; /* dummy */
 typedef struct _GtkRecentChooserIface GtkRecentChooserIface;
 
 #define GTK_RECENT_CHOOSER_ERROR	(SF(gtk_recent_chooser_error_quark) ())
@@ -111,10 +109,7 @@ struct _GtkRecentChooserIface
   void		    (* selection_changed)  (GtkRecentChooser  *chooser);
 };
 
-GType   SF(_T2_gtk_recent_chooser_get_type)    (void) G_GNUC_CONST;
-GType   SF(_3T_gtk_recent_chooser_get_type)    (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType   SF(gtk_recent_chooser_get_type)    (void) G_GNUC_CONST;
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_recent_chooser)
 
 /*
  * Configuration

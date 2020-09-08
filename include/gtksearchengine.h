@@ -34,18 +34,12 @@ G_BEGIN_DECLS
 #define GTK_IS_SEARCH_ENGINE_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_SEARCH_ENGINE))
 #define GTK_SEARCH_ENGINE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_SEARCH_ENGINE, GtkSearchEngineClass))
 
-typedef struct _GtkSearchEngine GtkSearchEngineFat;
-typedef struct _GtkSearchEngine GtkSearchEngineThin;
-
 typedef struct _GtkSearchEngineClass GtkSearchEngineClass;
 typedef struct _GtkSearchEnginePrivate GtkSearchEnginePrivate;
 
-struct _GtkSearchEngine 
-{
-  GObject parent;
-
+STLWRT_DECLARE_FTYPE_FPARENT(GtkSearchEngine, _gtk_search_engine, GObject,
   GtkSearchEnginePrivate *priv;
-};
+)
 
 struct _GtkSearchEngineClass 
 {
@@ -68,7 +62,7 @@ struct _GtkSearchEngineClass
 			       const gchar     *error_message);
 };
 
-GType            SF(_gtk_search_engine_get_type)        (void);
+
 gboolean         _gtk_search_engine_enabled         (void);
 
 GtkSearchEngine* _gtk_search_engine_new             (void);

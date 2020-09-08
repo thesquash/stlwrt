@@ -37,19 +37,14 @@ G_BEGIN_DECLS
 #define GTK_IS_TOGGLE_ACTION_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TOGGLE_ACTION))
 #define GTK_TOGGLE_ACTION_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), GTK_TYPE_TOGGLE_ACTION, GtkToggleActionClass))
 
-typedef struct _GtkToggleAction        GtkToggleAction;
 typedef struct _GtkToggleActionPrivate GtkToggleActionPrivate;
-
 typedef struct _GtkToggleActionClass   GtkToggleActionClass;
 
-struct _GtkToggleAction
-{
-  GtkAction parent;
-
+STLWRT_DECLARE_FTYPE_FPARENT(GtkToggleAction, gtk_toggle_action, GtkAction,
   /*< private >*/
 
   GtkToggleActionPrivate * (private_data);
-};
+)
 
 struct _GtkToggleActionClass
 {
@@ -65,7 +60,6 @@ struct _GtkToggleActionClass
 };
 
 
-GType            SF(gtk_toggle_action_get_type)          (void) G_GNUC_CONST;
 GtkToggleAction *SF(gtk_toggle_action_new)               (const gchar     *name,
                                                       const gchar     *label,
                                                       const gchar     *tooltip,

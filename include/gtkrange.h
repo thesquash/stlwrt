@@ -34,20 +34,9 @@ G_BEGIN_DECLS
 #define GTK_IS_RANGE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_RANGE))
 #define GTK_RANGE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_RANGE, GtkRangeClass))
 
-/* These two are private/opaque types, ignore */
-typedef struct _GtkRangeLayout    GtkRangeLayout;
-typedef struct _GtkRangeStepTimer GtkRangeStepTimer;
-
-typedef struct _GtkRange        GtkRangeFat;
-typedef struct _GtkRange        GtkRangeThin;
-
 typedef struct _GtkRangeClass   GtkRangeClass;
 
-/********************************************************************/
-struct _GtkRangeProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkRange, gtk_range, GtkWidget,
   GtkAdjustment * (adjustment);
   GtkUpdateType  (update_policy);
   guint  (inverted) : 1;
@@ -91,37 +80,7 @@ struct _GtkRangeProps
   gint  (slide_initial_coordinate);
   guint  (update_timeout_id);
   GdkWindow * (event_window);
-};
-
-struct _GtkRangeFat
-{
-  GtkWidgetFat   widget;
-
-  struct _GtkRangeProps instance_properties;
-};
-
-struct _GtkRangeThin
-{
-  GtkWidgetThin  widget;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkRangeFat   fat_instance;
-  struct _GtkRangeThin  thin_instance;
-}   GtkRange;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkRangeFat GtkRange;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkRangeThin GtkRange;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkRangeClass
 {
@@ -153,11 +112,6 @@ struct _GtkRangeClass
   void (*_gtk_reserved3) (void);
 };
 
-
-GType              SF(_T2_gtk_range_get_type)                      (void) G_GNUC_CONST;
-GType              SF(_3T_gtk_range_get_type)                      (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType              SF(gtk_range_get_type)                      (void) G_GNUC_CONST;
 
 #ifndef GTK_DISABLE_DEPRECATED
 void               SF(gtk_range_set_update_policy)             (GtkRange      *range,

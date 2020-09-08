@@ -29,8 +29,6 @@ G_BEGIN_DECLS
 #define GTK_IS_MOUNT_OPERATION_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), GTK_TYPE_MOUNT_OPERATION))
 #define GTK_MOUNT_OPERATION_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GTK_TYPE_MOUNT_OPERATION, GtkMountOperationClass))
 
-typedef struct _GtkMountOperation         GtkMountOperation;
-
 typedef struct _GtkMountOperationClass    GtkMountOperationClass;
 typedef struct _GtkMountOperationPrivate  GtkMountOperationPrivate;
 
@@ -39,12 +37,9 @@ typedef struct _GtkMountOperationPrivate  GtkMountOperationPrivate;
  *
  * This should not be accessed directly. Use the accessor functions below.
  */
-struct _GtkMountOperation
-{
-  GMountOperation parent_instance;
-
+STLWRT_DECLARE_FTYPE_FPARENT(GtkMountOperation, gtk_mount_operation, GMountOperation,
   GtkMountOperationPrivate *priv;
-};
+)
 
 struct _GtkMountOperationClass
 {
@@ -58,7 +53,6 @@ struct _GtkMountOperationClass
 };
 
 
-GType            SF(gtk_mount_operation_get_type)   (void);
 GMountOperation *SF(gtk_mount_operation_new)        (GtkWindow         *parent);
 gboolean         SF(gtk_mount_operation_is_showing) (GtkMountOperation *op);
 void             SF(gtk_mount_operation_set_parent) (GtkMountOperation *op,

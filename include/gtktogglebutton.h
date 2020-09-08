@@ -31,51 +31,13 @@ G_BEGIN_DECLS
 #define GTK_IS_TOGGLE_BUTTON_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TOGGLE_BUTTON))
 #define GTK_TOGGLE_BUTTON_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TOGGLE_BUTTON, GtkToggleButtonClass))
 
-
-typedef struct _GtkToggleButton       GtkToggleButtonFat;
-typedef struct _GtkToggleButton       GtkToggleButtonThin;
-
 typedef struct _GtkToggleButtonClass  GtkToggleButtonClass;
 
-/********************************************************************/
-struct _GtkToggleButtonProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkToggleButton, gtk_toggle_button, GtkButton,
   guint  (active) : 1;
   guint  (draw_indicator) : 1;
   guint  (inconsistent) : 1;
-};
-
-struct _GtkToggleButtonFat
-{
-  GtkButtonFat   button;
-
-  struct _GtkToggleButtonProps instance_properties;
-};
-
-struct _GtkToggleButtonThin
-{
-  GtkButtonThin  button;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkToggleButtonFat   fat_instance;
-  struct _GtkToggleButtonThin  thin_instance;
-}   GtkToggleButton;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkToggleButtonFat GtkToggleButton;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkToggleButtonThin GtkToggleButton;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkToggleButtonClass
 {
@@ -90,11 +52,6 @@ struct _GtkToggleButtonClass
   void (*_gtk_reserved4) (void);
 };
 
-
-GType      SF(_T2_gtk_toggle_button_get_type)          (void) G_GNUC_CONST;
-GType      SF(_3T_gtk_toggle_button_get_type)          (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      SF(gtk_toggle_button_get_type)          (void) G_GNUC_CONST;
 
 GtkWidget* SF(gtk_toggle_button_new)               (void);
 GtkWidget* SF(gtk_toggle_button_new_with_label)    (const gchar     *label);

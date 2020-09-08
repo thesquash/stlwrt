@@ -55,18 +55,10 @@ typedef enum
   GTK_SPIN_USER_DEFINED
 } GtkSpinType;
 
-
-typedef struct _GtkSpinButton	    GtkSpinButtonFat;
-typedef struct _GtkSpinButton	    GtkSpinButtonThin;
-
 typedef struct _GtkSpinButtonClass  GtkSpinButtonClass;
 
 
-/********************************************************************/
-struct _GtkSpinButtonProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkSpinButton, gtk_spin_button, GtkEntry,
   GtkAdjustment * (adjustment);
 
   GdkWindow * (panel);
@@ -87,37 +79,7 @@ struct _GtkSpinButtonProps
   guint  (numeric) : 1;
   guint  (wrap) : 1;
   guint  (snap_to_ticks) : 1;
-};
-
-struct _GtkSpinButtonFat
-{
-  GtkEntryFat   entry;
-
-  struct _GtkSpinButtonProps instance_properties;
-};
-
-struct _GtkSpinButtonThin
-{
-  GtkEntryThin  entry;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkSpinButtonFat   fat_instance;
-  struct _GtkSpinButtonThin  thin_instance;
-}   GtkSpinButton;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkSpinButtonFat GtkSpinButton;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkSpinButtonThin GtkSpinButton;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkSpinButtonClass
 {
@@ -140,11 +102,6 @@ struct _GtkSpinButtonClass
   void (*_gtk_reserved3) (void);
 };
 
-
-GType		SF(_T2_gtk_spin_button_get_type)	   (void) G_GNUC_CONST;
-GType		SF(_3T_gtk_spin_button_get_type)	   (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType		SF(gtk_spin_button_get_type)	   (void) G_GNUC_CONST;
 
 void		SF(gtk_spin_button_configure)	   (GtkSpinButton  *spin_button,
 						    GtkAdjustment  *adjustment,

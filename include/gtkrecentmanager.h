@@ -38,8 +38,6 @@ G_BEGIN_DECLS
 
 typedef struct _GtkRecentInfo		GtkRecentInfo;
 typedef struct _GtkRecentData		GtkRecentData;
-typedef struct _GtkRecentManager	GtkRecentManagerFat;
-typedef struct _GtkRecentManager	GtkRecentManagerThin;
 
 typedef struct _GtkRecentManagerClass	GtkRecentManagerClass;
 typedef struct _GtkRecentManagerPrivate GtkRecentManagerPrivate;
@@ -97,13 +95,9 @@ struct _GtkRecentManagerPrivate
   guint changed_age;
 };
 
-struct _GtkRecentManager
-{
-  /*< private >*/
-  GObject parent_instance;
-
+STLWRT_DECLARE_FTYPE_FPARENT(GtkRecentManager, gtk_recent_manager, GObject,
   GtkRecentManagerPrivate * (priv);
-};
+)
 
 struct _GtkRecentManagerClass
 {
@@ -147,14 +141,9 @@ typedef enum
   GTK_RECENT_MANAGER_ERROR_UNKNOWN
 } GtkRecentManagerError;
 
+
 #define GTK_RECENT_MANAGER_ERROR	(SF(gtk_recent_manager_error_quark) ())
 GQuark 	SF(gtk_recent_manager_error_quark) (void);
-
-
-GType 		  SF(_T2_gtk_recent_manager_get_type)       (void) G_GNUC_CONST;
-GType 		  SF(_3T_gtk_recent_manager_get_type)       (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType 		  SF(gtk_recent_manager_get_type)       (void) G_GNUC_CONST;
 
 GtkRecentManager *SF(gtk_recent_manager_new)            (void);
 GtkRecentManager *SF(gtk_recent_manager_get_default)    (void);
@@ -189,11 +178,7 @@ GList *           SF(gtk_recent_manager_get_items)      (GtkRecentManager     *m
 gint              SF(gtk_recent_manager_purge_items)    (GtkRecentManager     *manager,
 						     GError              **error);
 
-
-GType	              SF(_T2_gtk_recent_info_get_type)             (void) G_GNUC_CONST;
-GType	              SF(_3T_gtk_recent_info_get_type)             (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType	              SF(gtk_recent_info_get_type)             (void) G_GNUC_CONST;
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_recent_info)
 
 GtkRecentInfo *       SF(gtk_recent_info_ref)                  (GtkRecentInfo  *info);
 void                  SF(gtk_recent_info_unref)                (GtkRecentInfo  *info);

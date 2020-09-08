@@ -32,49 +32,11 @@ G_BEGIN_DECLS
 #define GTK_IS_RADIO_BUTTON_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_RADIO_BUTTON))
 #define GTK_RADIO_BUTTON_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_RADIO_BUTTON, GtkRadioButtonClass))
 
-
-typedef struct _GtkRadioButton	     GtkRadioButtonFat;
-typedef struct _GtkRadioButton	     GtkRadioButtonThin;
-
 typedef struct _GtkRadioButtonClass  GtkRadioButtonClass;
 
-/********************************************************************/
-struct _GtkRadioButtonProps
-{
-
-
+STLWRT_DECLARE_FTYPE_VPARENT(GtkRadioButton, gtk_radio_button, GtkCheckButton,
   GSList * (group);
-};
-
-struct _GtkRadioButtonFat
-{
-  GtkCheckButtonFat   check_button;
-
-  struct _GtkRadioButtonProps instance_properties;
-};
-
-struct _GtkRadioButtonThin
-{
-  GtkCheckButtonThin  check_button;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkRadioButtonFat   fat_instance;
-  struct _GtkRadioButtonThin  thin_instance;
-}   GtkRadioButton;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkRadioButtonFat GtkRadioButton;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkRadioButtonThin GtkRadioButton;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkRadioButtonClass
 {
@@ -89,11 +51,6 @@ struct _GtkRadioButtonClass
   void (*_gtk_reserved4) (void);
 };
 
-
-GType	   SF(_T2_gtk_radio_button_get_type)	     (void) G_GNUC_CONST;
-GType	   SF(_3T_gtk_radio_button_get_type)	     (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType	   SF(gtk_radio_button_get_type)	     (void) G_GNUC_CONST;
 
 GtkWidget* SF(gtk_radio_button_new)                           (GSList         *group);
 GtkWidget* SF(gtk_radio_button_new_from_widget)               (GtkRadioButton *radio_group_member);

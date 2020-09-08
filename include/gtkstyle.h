@@ -63,10 +63,12 @@ typedef struct _GtkWidget      GtkWidgetThin;
 
 #define GTK_STYLE_ATTACHED(style)	(GTK_STYLE (style)->attach_count > 0)
 
-struct _GtkStyle
-{
-  GObject parent_instance;
 
+/*
+ * GtkStyle should not be used in GTK+ 3 and later applications, so we can
+ * make it an Ftype in STLWRT.
+ */
+STLWRT_DECLARE_FTYPE_FPARENT(GtkStyle, gtk_style, GObject,
   /*< public >*/
 
   GdkColor fg[5];
@@ -113,7 +115,7 @@ struct _GtkStyle
   GSList	 *styles;	  /* of type GtkStyle* */
   GArray	 *property_cache;
   GSList         *icon_factories; /* of type GtkIconFactory* */
-};
+)
 
 struct _GtkStyleClass
 {
@@ -430,10 +432,7 @@ struct _GtkBorder
   gint bottom;
 };
 
-GType     SF(_T2_gtk_style_get_type)                 (void) G_GNUC_CONST;
-GType     SF(_3T_gtk_style_get_type)                 (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType     SF(gtk_style_get_type)                 (void) G_GNUC_CONST;
+
 GtkStyle* SF(gtk_style_new)			     (void);
 GtkStyle* SF(gtk_style_copy)		     (GtkStyle	   *style);
 GtkStyle* SF(gtk_style_attach)		     (GtkStyle	   *style,
@@ -874,10 +873,8 @@ void SF(gtk_paint_spinner)     (GtkStyle           *style,
 			    gint                width,
 			    gint                height);
 
-GType      SF(_T2_gtk_border_get_type) (void) G_GNUC_CONST;
-GType      SF(_3T_gtk_border_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      SF(gtk_border_get_type) (void) G_GNUC_CONST;
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_border);
+
 GtkBorder *SF(gtk_border_new)      (void) G_GNUC_MALLOC;
 GtkBorder *SF(gtk_border_copy)     (const GtkBorder *border_);
 void       SF(gtk_border_free)     (GtkBorder       *border_);

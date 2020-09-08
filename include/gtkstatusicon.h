@@ -36,11 +36,8 @@ G_BEGIN_DECLS
 #define GTK_IS_STATUS_ICON_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), GTK_TYPE_STATUS_ICON))
 #define GTK_STATUS_ICON_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GTK_TYPE_STATUS_ICON, GtkStatusIconClass))
 
-typedef struct _GtkStatusIcon	     GtkStatusIcon;
-
 typedef struct _GtkStatusIconClass   GtkStatusIconClass;
 typedef struct _GtkStatusIconPrivate GtkStatusIconPrivate;
-
 
 struct _GtkStatusIconPrivate
 {
@@ -64,12 +61,9 @@ struct _GtkStatusIconPrivate
       GIcon     *gicon;
     }
 
-struct _GtkStatusIcon
-{
-  GObject               parent_instance;
-
+STLWRT_DECLARE_FTYPE_FPARENT(GtkStatusIcon, gtk_status_icon, GObject,
   GtkStatusIconPrivate * (priv);
-};
+)
 
 struct _GtkStatusIconClass
 {
@@ -97,8 +91,6 @@ struct _GtkStatusIconClass
   void (*SF(gtk_reserved2));
 };
 
-
-GType                 SF(gtk_status_icon_get_type)           (void) G_GNUC_CONST;
 
 GtkStatusIcon        *SF(gtk_status_icon_new)                (void);
 GtkStatusIcon        *SF(gtk_status_icon_new_from_pixbuf)    (GdkPixbuf          *pixbuf);

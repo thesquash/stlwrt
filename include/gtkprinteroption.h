@@ -34,9 +34,6 @@ G_BEGIN_DECLS
 #define GTK_PRINTER_OPTION(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PRINTER_OPTION, GtkPrinterOption))
 #define GTK_IS_PRINTER_OPTION(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_PRINTER_OPTION))
 
-typedef struct _GtkPrinterOption       GtkPrinterOptionFat;
-typedef struct _GtkPrinterOption       GtkPrinterOptionThin;
-
 typedef struct _GtkPrinterOptionClass  GtkPrinterOptionClass;
 
 #define GTK_PRINTER_OPTION_GROUP_IMAGE_QUALITY "ImageQuality"
@@ -55,11 +52,7 @@ typedef enum {
   GTK_PRINTER_OPTION_TYPE_FILESAVE
 } GtkPrinterOptionType;
 
-/********************************************************************/
-struct _GtkPrinterOptionProps
-{
-
-
+STLWRT_DECLARE_VTYPE_FPARENT(GtkPrinterOption, gtk_printer_option, GObject,
   char *name;
   char *display_text;
   GtkPrinterOptionType type;
@@ -74,37 +67,7 @@ struct _GtkPrinterOptionProps
 
   gboolean has_conflict;
   char *group;
-};
-
-struct _GtkPrinterOptionFat
-{
-  GObject   parent_instance;
-
-  struct _GtkPrinterOptionProps instance_properties;
-};
-
-struct _GtkPrinterOptionThin
-{
-  GObject  parent_instance;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkPrinterOptionFat   fat_instance;
-  struct _GtkPrinterOptionThin  thin_instance;
-}   GtkPrinterOption;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkPrinterOptionFat GtkPrinterOption;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkPrinterOptionThin GtkPrinterOption;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkPrinterOptionClass
 {
@@ -122,10 +85,6 @@ struct _GtkPrinterOptionClass
   void (*_gtk_reserved7) (void);
 };
 
-GType   SF(_T2_gtk_printer_option_get_type)       (void) G_GNUC_CONST;
-GType   SF(_3T_gtk_printer_option_get_type)       (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType   SF(gtk_printer_option_get_type)       (void) G_GNUC_CONST;
 
 GtkPrinterOption *gtk_printer_option_new                    (const char           *name,
 							     const char           *display_text,

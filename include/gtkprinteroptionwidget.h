@@ -31,18 +31,12 @@ G_BEGIN_DECLS
 #define GTK_IS_PRINTER_OPTION_WIDGET_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_PRINTER_OPTION_WIDGET))
 #define GTK_PRINTER_OPTION_WIDGET_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_PRINTER_OPTION_WIDGET, GtkPrinterOptionWidgetClass))
 
-
-typedef struct _GtkPrinterOptionWidget         GtkPrinterOptionWidget;
-
 typedef struct _GtkPrinterOptionWidgetClass    GtkPrinterOptionWidgetClass;
 typedef struct GtkPrinterOptionWidgetPrivate   GtkPrinterOptionWidgetPrivate;
 
-struct _GtkPrinterOptionWidget
-{
-  GtkHBox parent_instance;
-
+STLWRT_DECLARE_FTYPE_VPARENT(GtkPrinterOptionWidget, gtk_printer_option_widget, GtkHBox,
   GtkPrinterOptionWidgetPrivate *priv;
-};
+)
 
 struct _GtkPrinterOptionWidgetClass
 {
@@ -51,8 +45,6 @@ struct _GtkPrinterOptionWidgetClass
   void (*changed) (GtkPrinterOptionWidget *widget);
 };
 
-
-GType	     SF(gtk_printer_option_widget_get_type)           (void) G_GNUC_CONST;
 
 GtkWidget   *gtk_printer_option_widget_new                (GtkPrinterOption       *source);
 void         gtk_printer_option_widget_set_source         (GtkPrinterOptionWidget *setting,

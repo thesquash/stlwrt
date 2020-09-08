@@ -36,16 +36,9 @@ G_BEGIN_DECLS
 #define GTK_IS_TREE_STORE_CLASS(klass)		(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TREE_STORE))
 #define GTK_TREE_STORE_GET_CLASS(obj)		(G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TREE_STORE, GtkTreeStoreClass))
 
-typedef struct _GtkTreeStore       GtkTreeStoreFat;
-typedef struct _GtkTreeStore       GtkTreeStoreThin;
-
 typedef struct _GtkTreeStoreClass  GtkTreeStoreClass;
 
-/********************************************************************/
-struct _GtkTreeStoreProps
-{
-
-
+STLWRT_DECLARE_VTYPE_FPARENT(GtkTreeStore, gtk_tree_store, GObject,
   gint  (stamp);
   gpointer  (root);
   gpointer  (last);
@@ -58,37 +51,7 @@ struct _GtkTreeStoreProps
   gpointer  (default_sort_data);
   GDestroyNotify  (default_sort_destroy);
   guint  (columns_dirty) : 1;
-};
-
-struct _GtkTreeStoreFat
-{
-  GObject   parent;
-
-  struct _GtkTreeStoreProps instance_properties;
-};
-
-struct _GtkTreeStoreThin
-{
-  GObject  parent;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkTreeStoreFat   fat_instance;
-  struct _GtkTreeStoreThin  thin_instance;
-}   GtkTreeStore;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkTreeStoreFat GtkTreeStore;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkTreeStoreThin GtkTreeStore;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkTreeStoreClass
 {
@@ -102,10 +65,6 @@ struct _GtkTreeStoreClass
 };
 
 
-GType         SF(_T2_gtk_tree_store_get_type)         (void) G_GNUC_CONST;
-GType         SF(_3T_gtk_tree_store_get_type)         (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType         SF(gtk_tree_store_get_type)         (void) G_GNUC_CONST;
 GtkTreeStore *SF(gtk_tree_store_new)              (gint          n_columns,
 					       ...);
 GtkTreeStore *SF(gtk_tree_store_newv)             (gint          n_columns,

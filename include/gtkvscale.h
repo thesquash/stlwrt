@@ -22,9 +22,7 @@
 
 #include <gtkscale.h>
 
-
 G_BEGIN_DECLS
-
 
 #define GTK_TYPE_VSCALE            (gtk_vscale_get_type ())
 #define GTK_VSCALE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_VSCALE, GtkVScale))
@@ -32,9 +30,6 @@ G_BEGIN_DECLS
 #define GTK_IS_VSCALE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_VSCALE))
 #define GTK_IS_VSCALE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_VSCALE))
 #define GTK_VSCALE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_VSCALE, GtkVScaleClass))
-
-
-typedef struct _GtkVScale       GtkVScale;
 
 typedef struct _GtkVScaleClass  GtkVScaleClass;
 
@@ -44,10 +39,7 @@ typedef struct _GtkVScaleClass  GtkVScaleClass;
  * The #GtkVScale struct contains private data only, and
  * should be accessed using the functions below.
  */
-struct _GtkVScale
-{
-  GtkScale scale;
-};
+STLWRT_DECLARE_FTYPE_VPARENT(GtkVScale, gtk_vscale, GtkScale, ;)
 
 struct _GtkVScaleClass
 {
@@ -55,14 +47,11 @@ struct _GtkVScaleClass
 };
 
 
-GType      SF(gtk_vscale_get_type)       (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_vscale_new)            (GtkAdjustment *adjustment);
 GtkWidget* SF(gtk_vscale_new_with_range) (gdouble        min,
                                       gdouble        max,
                                       gdouble        step);
 
-
 G_END_DECLS
-
 
 #endif /* __GTK_VSCALE_H__ */

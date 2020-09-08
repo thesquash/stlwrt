@@ -33,11 +33,7 @@ G_BEGIN_DECLS
 #define GTK_IS_RECENT_CHOOSER_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_RECENT_CHOOSER_DIALOG))
 #define GTK_RECENT_CHOOSER_DIALOG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_RECENT_CHOOSER_DIALOG, GtkRecentChooserDialogClass))
 
-typedef struct _GtkRecentChooserDialog        GtkRecentChooserDialogFat;
-typedef struct _GtkRecentChooserDialog        GtkRecentChooserDialogThin;
-
 typedef struct _GtkRecentChooserDialogClass   GtkRecentChooserDialogClass;
-
 typedef struct _GtkRecentChooserDialogPrivate GtkRecentChooserDialogPrivate;
 
 
@@ -49,24 +45,15 @@ struct _GtkRecentChooserDialogPrivate
   GtkWidget *chooser;
 };
 
-struct _GtkRecentChooserDialog
-{
-  /*< private >*/
-  GtkDialog parent_instance;
-
+STLWRT_DECLARE_FTYPE_VPARENT(GtkRecentChooserDialog, gtk_recent_chooser_dialog, GtkDialog,
   GtkRecentChooserDialogPrivate * (priv);
-};
+)
 
 struct _GtkRecentChooserDialogClass
 {
   GtkDialogClass parent_class;
 };
 
-
-GType      SF(_T2_gtk_recent_chooser_dialog_get_type)        (void) G_GNUC_CONST;
-GType      SF(_3T_gtk_recent_chooser_dialog_get_type)        (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      SF(gtk_recent_chooser_dialog_get_type)        (void) G_GNUC_CONST;
 
 GtkWidget *SF(gtk_recent_chooser_dialog_new)             (const gchar      *title,
 					              GtkWindow        *parent,

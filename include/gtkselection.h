@@ -198,17 +198,12 @@ gboolean SF(_gtk_selection_notify)		  (GtkWidget         *widget,
 gboolean SF(_gtk_selection_property_notify)	  (GtkWidget         *widget,
 					   GdkEventProperty  *event);
 
-GType             SF(_T2_gtk_selection_data_get_type) (void) G_GNUC_CONST;
-GType             SF(_3T_gtk_selection_data_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType             SF(gtk_selection_data_get_type) (void) G_GNUC_CONST;
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_selection_data)
+
 GtkSelectionData *SF(gtk_selection_data_copy)     (GtkSelectionData *data);
 void		  SF(gtk_selection_data_free)     (GtkSelectionData *data);
 
-GType             SF(_T2_gtk_target_list_get_type)    (void) G_GNUC_CONST;
-GType             SF(_3T_gtk_target_list_get_type)    (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType             SF(gtk_target_list_get_type)    (void) G_GNUC_CONST;
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_target_list)
 
 G_END_DECLS
 

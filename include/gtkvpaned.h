@@ -31,15 +31,9 @@ G_BEGIN_DECLS
 #define GTK_IS_VPANED_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_VPANED))
 #define GTK_VPANED_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_VPANED, GtkVPanedClass))
 
-
-typedef struct _GtkVPaned      GtkVPaned;
-
 typedef struct _GtkVPanedClass GtkVPanedClass;
 
-struct _GtkVPaned
-{
-  GtkPaned paned;
-};
+STLWRT_DECLARE_FTYPE_VPARENT(GtkVPaned, gtk_vpaned, GtkPaned, ;)
 
 struct _GtkVPanedClass
 {
@@ -47,7 +41,6 @@ struct _GtkVPanedClass
 };
 
 
-GType       SF(gtk_vpaned_get_type) (void) G_GNUC_CONST;
 GtkWidget * SF(gtk_vpaned_new)      (void);
 
 G_END_DECLS

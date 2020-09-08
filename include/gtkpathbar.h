@@ -25,11 +25,7 @@
 
 G_BEGIN_DECLS
 
-typedef struct _GtkPathBar      GtkPathBarFat;
-typedef struct _GtkPathBar      GtkPathBarThin;
-
 typedef struct _GtkPathBarClass GtkPathBarClass;
-
 
 #define GTK_TYPE_PATH_BAR                 (gtk_path_bar_get_type ())
 #define GTK_PATH_BAR(obj)                 (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PATH_BAR, GtkPathBar))
@@ -38,11 +34,7 @@ typedef struct _GtkPathBarClass GtkPathBarClass;
 #define GTK_IS_PATH_BAR_CLASS(klass)      (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_PATH_BAR))
 #define GTK_PATH_BAR_GET_CLASS(obj)       (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_PATH_BAR, GtkPathBarClass))
 
-/********************************************************************/
-struct _GtkPathBarProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkPathBar, gtk_path_bar, GtkContainer,
   GtkFileSystem *file_system;
   GFile *root_file;
   GFile *home_file;
@@ -72,37 +64,7 @@ struct _GtkPathBarProps
   guint ignore_click   : 1;
   guint scrolling_up   : 1;
   guint scrolling_down : 1;
-};
-
-struct _GtkPathBarFat
-{
-  GtkContainerFat   parent;
-
-  struct _GtkPathBarProps instance_properties;
-};
-
-struct _GtkPathBarThin
-{
-  GtkContainerThin  parent;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkPathBarFat   fat_instance;
-  struct _GtkPathBarThin  thin_instance;
-}   GtkPathBar;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkPathBarFat GtkPathBar;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkPathBarThin GtkPathBar;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkPathBarClass
 {
@@ -114,10 +76,7 @@ struct _GtkPathBarClass
 			 gboolean     child_is_hidden);
 };
 
-GType    SF(_T2_gtk_path_bar_get_type) (void) G_GNUC_CONST;
-GType    SF(_3T_gtk_path_bar_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType    SF(gtk_path_bar_get_type) (void) G_GNUC_CONST;
+
 void     _gtk_path_bar_set_file_system (GtkPathBar         *path_bar,
 					GtkFileSystem      *file_system);
 gboolean _gtk_path_bar_set_file        (GtkPathBar         *path_bar,

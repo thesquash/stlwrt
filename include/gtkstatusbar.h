@@ -32,17 +32,9 @@ G_BEGIN_DECLS
 #define GTK_IS_STATUSBAR_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_STATUSBAR))
 #define GTK_STATUSBAR_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_STATUSBAR, GtkStatusbarClass))
 
-
-typedef struct _GtkStatusbar      GtkStatusbarFat;
-typedef struct _GtkStatusbar      GtkStatusbarThin;
-
 typedef struct _GtkStatusbarClass GtkStatusbarClass;
 
-/********************************************************************/
-struct _GtkStatusbarProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkStatusBar, gtk_status_bar, GtkHBox,
   GtkWidget * (frame);
   GtkWidget * (label);
 
@@ -55,37 +47,7 @@ struct _GtkStatusbarProps
   GdkWindow * (grip_window);
 
   guint  (has_resize_grip) : 1;
-};
-
-struct _GtkStatusbarFat
-{
-  GtkHBoxFat   parent_widget;
-
-  struct _GtkStatusbarProps instance_properties;
-};
-
-struct _GtkStatusbarThin
-{
-  GtkHBoxThin  parent_widget;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkStatusbarFat   fat_instance;
-  struct _GtkStatusbarThin  thin_instance;
-}   GtkStatusbar;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkStatusbarFat GtkStatusbar;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkStatusbarThin GtkStatusbar;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkStatusbarClass
 {
@@ -108,10 +70,6 @@ struct _GtkStatusbarClass
 };
 
 
-GType      SF(_T2_gtk_statusbar_get_type)     	(void) G_GNUC_CONST;
-GType      SF(_3T_gtk_statusbar_get_type)     	(void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      SF(gtk_statusbar_get_type)     	(void) G_GNUC_CONST;
 GtkWidget* SF(gtk_statusbar_new)          	(void);
 /* If you don't want to use contexts, 0 is a predefined global
  * context_id you can pass to push/pop/remove
@@ -129,7 +87,6 @@ void       SF(gtk_statusbar_remove)        	(GtkStatusbar *statusbar,
 					 guint         message_id);
 void       SF(gtk_statusbar_remove_all)    	(GtkStatusbar *statusbar,
 					 guint	       context_id);
-					 
 
 void     SF(gtk_statusbar_set_has_resize_grip) (GtkStatusbar *statusbar,
 					    gboolean      setting);

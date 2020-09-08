@@ -32,15 +32,9 @@ G_BEGIN_DECLS
 #define GTK_IS_SCROLLBAR_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_SCROLLBAR))
 #define GTK_SCROLLBAR_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_SCROLLBAR, GtkScrollbarClass))
 
-
-typedef struct _GtkScrollbar        GtkScrollbar;
-
 typedef struct _GtkScrollbarClass   GtkScrollbarClass;
 
-struct _GtkScrollbar
-{
-  GtkRange range;
-};
+STLWRT_DECLARE_FTYPE_VPARENT(GtkScrollbar, gtk_scrollbar, GtkRange, ;)
 
 struct _GtkScrollbarClass
 {
@@ -52,9 +46,6 @@ struct _GtkScrollbarClass
   void (*_gtk_reserved3) (void);
   void (*_gtk_reserved4) (void);
 };
-
-
-GType       SF(gtk_scrollbar_get_type) (void) G_GNUC_CONST;
 
 G_END_DECLS
 

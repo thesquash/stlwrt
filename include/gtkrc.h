@@ -53,10 +53,13 @@ struct _GtkRcStylePrivate
   GSList *color_hashes;
 };
 
-struct _GtkRcStyle
-{
-  GObject parent_instance;
-
+/*
+ * This is a rare corner case in STLWRT where we can get away with not
+ * bothering with fat and thin versions of this type.  In GTK+ 3 and later,
+ * GtkRcStyle is not even supposed to be used.  Therefore we can make
+ * this an Ftype instead of a Vtype.
+ */
+STLWRT_DECLARE_FTYPE_FPARENT(GtkRcStyle, gtk_rc_style, GObject,
   /*< public >*/
 
   gchar *name;
@@ -81,7 +84,7 @@ struct _GtkRcStyle
   GSList *icon_factories;
 
   guint engine_specified : 1;	/* The RC file specified the engine */
-};
+)
 
 struct _GtkRcStyleClass
 {
@@ -165,10 +168,6 @@ void	  SF(gtk_rc_add_class_style)	(GtkRcStyle   *rc_style,
 #endif /* GTK_DISABLE_DEPRECATED */
 
 
-GType       SF(_T2_gtk_rc_style_get_type)   (void) G_GNUC_CONST;
-GType       SF(_3T_gtk_rc_style_get_type)   (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType       SF(gtk_rc_style_get_type)   (void) G_GNUC_CONST;
 GtkRcStyle* SF(gtk_rc_style_new)        (void);
 GtkRcStyle* SF(gtk_rc_style_copy)       (GtkRcStyle *orig);
 

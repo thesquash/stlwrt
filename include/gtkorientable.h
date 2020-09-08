@@ -35,9 +35,6 @@ G_BEGIN_DECLS
 #define GTK_IS_ORIENTABLE_CLASS(vtable) (G_TYPE_CHECK_CLASS_TYPE ((vtable), GTK_TYPE_ORIENTABLE))
 #define GTK_ORIENTABLE_GET_IFACE(inst)  (G_TYPE_INSTANCE_GET_INTERFACE ((inst), GTK_TYPE_ORIENTABLE, GtkOrientableIface))
 
-
-typedef struct _GtkOrientable       GtkOrientableFat;
-typedef struct _GtkOrientable       GtkOrientableThin;         /* Dummy typedef */
 typedef struct _GtkOrientableIface  GtkOrientableIface;
 
 struct _GtkOrientableIface
@@ -46,11 +43,7 @@ struct _GtkOrientableIface
 };
 
 
-GType          SF(_T2_gtk_orientable_get_type)        (void) G_GNUC_CONST;
-GType          SF(_3T_gtk_orientable_get_type)        (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType          SF(gtk_orientable_get_type)        (void) G_GNUC_CONST;
-
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_orientable)
 void           SF(gtk_orientable_set_orientation) (GtkOrientable  *orientable,
                                                GtkOrientation  orientation);
 GtkOrientation SF(gtk_orientable_get_orientation) (GtkOrientable  *orientable);

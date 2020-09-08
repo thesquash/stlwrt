@@ -33,50 +33,15 @@ typedef void (* GtkTextTagTableForeach) (GtkTextTag *tag, gpointer data);
 #define GTK_IS_TEXT_TAG_TABLE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TEXT_TAG_TABLE))
 #define GTK_TEXT_TAG_TABLE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TEXT_TAG_TABLE, GtkTextTagTableClass))
 
-
 typedef struct _GtkTextTagTableClass GtkTextTagTableClass;
 
-/********************************************************************/
-struct _GtkTextTagTableProps
-{
-
-
+STLWRT_DECLARE_VTYPE_FPARENT(GtkTextTagTable, gtk_text_tag_table, GObject,
   GHashTable * (hash);
   GSList * (anonymous);
   gint  (anon_count);
 
   GSList * (buffers);
-};
-
-struct _GtkTextTagTableFat
-{
-  GObject   parent_instance;
-
-  struct _GtkTextTagTableProps instance_properties;
-};
-
-struct _GtkTextTagTableThin
-{
-  GObject  parent_instance;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkTextTagTableFat   fat_instance;
-  struct _GtkTextTagTableThin  thin_instance;
-}   GtkTextTagTable;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkTextTagTableFat GtkTextTagTable;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkTextTagTableThin GtkTextTagTable;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkTextTagTableClass
 {
@@ -93,10 +58,6 @@ struct _GtkTextTagTableClass
   void (*_gtk_reserved4) (void);
 };
 
-GType          SF(_T2_gtk_text_tag_table_get_type) (void) G_GNUC_CONST;
-GType          SF(_3T_gtk_text_tag_table_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType          SF(gtk_text_tag_table_get_type) (void) G_GNUC_CONST;
 
 GtkTextTagTable *SF(gtk_text_tag_table_new)      (void);
 void             SF(gtk_text_tag_table_add)      (GtkTextTagTable        *table,

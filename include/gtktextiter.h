@@ -77,10 +77,7 @@ GtkTextBuffer *SF(gtk_text_iter_get_buffer) (const GtkTextIter *iter);
 GtkTextIter *SF(gtk_text_iter_copy)     (const GtkTextIter *iter);
 void         SF(gtk_text_iter_free)     (GtkTextIter       *iter);
 
-GType        SF(_T2_gtk_text_iter_get_type) (void) G_GNUC_CONST;
-GType        SF(_3T_gtk_text_iter_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType        SF(gtk_text_iter_get_type) (void) G_GNUC_CONST;
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_text_iter)
 
 /*
  * Convert to different kinds of index

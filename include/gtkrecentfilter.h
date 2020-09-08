@@ -29,8 +29,7 @@ G_BEGIN_DECLS
 #define GTK_RECENT_FILTER(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_RECENT_FILTER, GtkRecentFilter))
 #define GTK_IS_RECENT_FILTER(obj)	(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_RECENT_FILTER))
 
-typedef struct _GtkRecentFilter		GtkRecentFilterFat;
-typedef struct _GtkRecentFilter		GtkRecentFilterThin;
+typedef struct _GtkRecentFilter         GtkRecentFilter;
 typedef struct _GtkRecentFilterInfo	GtkRecentFilterInfo;
 
 typedef enum {
@@ -45,10 +44,9 @@ typedef enum {
 typedef gboolean (*GtkRecentFilterFunc) (const GtkRecentFilterInfo *filter_info,
 					 gpointer                   user_data);
 
-/********************************************************************/
-struct _GtkRecentFilterInfoProps
+struct _GtkRecentFilterInfo
 {
-
+  GtkRecentFilterFlagsFat   contains;
 
   const gchar *uri;
   const gchar *display_name;
@@ -59,40 +57,8 @@ struct _GtkRecentFilterInfoProps
   gint age;
 };
 
-struct _GtkRecentFilterInfoFat
-{
-  GtkRecentFilterFlagsFat   contains;
 
-  struct _GtkRecentFilterInfoProps instance_properties;
-};
-
-struct _GtkRecentFilterInfoThin
-{
-  GtkRecentFilterFlagsThin  contains;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkRecentFilterInfoFat   fat_instance;
-  struct _GtkRecentFilterInfoThin  thin_instance;
-}   GtkRecentFilterInfo;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkRecentFilterInfoFat GtkRecentFilterInfo;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkRecentFilterInfoThin GtkRecentFilterInfo;
-#endif
-/********************************************************************/
-
-
-
-GType                 SF(_T2_gtk_recent_filter_get_type) (void) G_GNUC_CONST;
-GType                 SF(_3T_gtk_recent_filter_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType                 SF(gtk_recent_filter_get_type) (void) G_GNUC_CONST;
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_recent_filter)
 
 GtkRecentFilter *     SF(gtk_recent_filter_new)      (void);
 void                  SF(gtk_recent_filter_set_name) (GtkRecentFilter *filter,

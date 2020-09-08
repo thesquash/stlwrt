@@ -40,9 +40,6 @@ typedef enum
   GTK_NOTEBOOK_TAB_LAST
 } GtkNotebookTab;
 
-typedef struct _GtkNotebook       GtkNotebookFat;
-typedef struct _GtkNotebook       GtkNotebookThin;
-
 typedef struct _GtkNotebookClass  GtkNotebookClass;
 #if !defined (GTK_DISABLE_DEPRECATED) || defined (STLWRT_COMPILATION)
 typedef struct _GtkNotebookPage   GtkNotebookPage;
@@ -81,10 +78,7 @@ struct _GtkNotebookPrivate
   guint has_scrolled   : 1;
 };
 
-struct _GtkNotebook
-{
-  GtkContainer container;
-  
+STLWRT_DECLARE_VTYPE_VPARENT(GtkNotebook, gtk_notebook, GtkContainer,
 #if !defined (GTK_DISABLE_DEPRECATED) || defined (STLWRT_COMPILATION)
   GtkNotebookPage * (cur_page);
 #else
@@ -119,7 +113,7 @@ struct _GtkNotebook
   guint  (has_before_next)     : 1;
   guint  (has_after_previous)  : 1;
   guint  (has_after_next)      : 1;
-};
+)
 
 struct _GtkNotebookClass
 {
@@ -171,10 +165,6 @@ typedef GtkNotebook* (*GtkNotebookWindowCreationFunc) (GtkNotebook *source,
  *           Creation, insertion, deletion                 *
  ***********************************************************/
 
-GType   SF(_T2_gtk_notebook_get_type)       (void) G_GNUC_CONST;
-GType   SF(_3T_gtk_notebook_get_type)       (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType   SF(gtk_notebook_get_type)       (void) G_GNUC_CONST;
 GtkWidget * SF(gtk_notebook_new)        (void);
 gint SF(gtk_notebook_append_page)       (GtkNotebook *notebook,
 				     GtkWidget   *child,

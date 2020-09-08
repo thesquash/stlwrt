@@ -42,8 +42,6 @@ typedef void (* GtkTreeModelFilterModifyFunc) (GtkTreeModel *model,
                                                gint          column,
                                                gpointer      data);
 
-typedef struct _GtkTreeModelFilter          GtkTreeModelFilter;
-
 typedef struct _GtkTreeModelFilterClass     GtkTreeModelFilterClass;
 typedef struct _GtkTreeModelFilterPrivate   GtkTreeModelFilterPrivate;
 
@@ -84,13 +82,10 @@ struct _GtkTreeModelFilterPrivate
   guint reordered_id;
 };
 
-struct _GtkTreeModelFilter
-{
-  GObject parent;
-
+STLWRT_DECLARE_FTYPE_FPARENT(GtkTreeModelFilter, gtk_tree_model_filter, GObject,
   /*< private >*/
   GtkTreeModelFilterPrivate * (priv);
-};
+)
 
 struct _GtkTreeModelFilterClass
 {
@@ -104,7 +99,6 @@ struct _GtkTreeModelFilterClass
 };
 
 /* base */
-GType         SF(gtk_tree_model_filter_get_type)                   (void) G_GNUC_CONST;
 GtkTreeModel *SF(gtk_tree_model_filter_new)                        (GtkTreeModel                 *child_model,
                                                                 GtkTreePath                  *root);
 void          SF(gtk_tree_model_filter_set_visible_func)           (GtkTreeModelFilter           *filter,

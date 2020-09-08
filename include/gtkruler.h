@@ -35,10 +35,6 @@ G_BEGIN_DECLS
 #define GTK_IS_RULER_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_RULER))
 #define GTK_RULER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_RULER, GtkRulerClass))
 
-
-typedef struct _GtkRuler        GtkRulerFat;
-typedef struct _GtkRuler        GtkRulerThin;
-
 typedef struct _GtkRulerClass   GtkRulerClass;
 typedef struct _GtkRulerMetric  GtkRulerMetric;
 
@@ -46,11 +42,7 @@ typedef struct _GtkRulerMetric  GtkRulerMetric;
  * Adobe that's a point, but points are really 1/72.27 in.)
  */
 
-/********************************************************************/
-struct _GtkRulerProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkRuler, gtk_ruler, GtkWidget,
   GdkPixmap * (backing_store);
   GdkGC * (non_gr_exp_gc);		/* unused */
   GtkRulerMetric * (metric);
@@ -66,44 +58,12 @@ struct _GtkRulerProps
   gdouble  (position);
   /* The maximum size of the ruler */
   gdouble  (max_size);
-};
+)
 
 struct _GtkRulerPrivate
 {
-
-  
   GtkOrientation orientation;
 };
-
-struct _GtkRulerFat
-{
-  GtkWidgetFat   widget;
-
-  struct _GtkRulerProps instance_properties;
-};
-
-struct _GtkRulerThin
-{
-  GtkWidgetThin  widget;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkRulerFat   fat_instance;
-  struct _GtkRulerThin  thin_instance;
-}   GtkRuler;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkRulerFat GtkRuler;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkRulerThin GtkRuler;
-#endif
-/********************************************************************/
-
-
 
 struct _GtkRulerClass
 {
@@ -131,10 +91,6 @@ struct _GtkRulerMetric
 };
 
 
-GType           SF(_T2_gtk_ruler_get_type)   (void) G_GNUC_CONST;
-GType           SF(_3T_gtk_ruler_get_type)   (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType           SF(gtk_ruler_get_type)   (void) G_GNUC_CONST;
 void            SF(gtk_ruler_set_metric) (GtkRuler       *ruler,
                                       GtkMetricType   metric);
 GtkMetricType   SF(gtk_ruler_get_metric) (GtkRuler       *ruler);

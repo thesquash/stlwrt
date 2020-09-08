@@ -34,9 +34,6 @@ G_BEGIN_DECLS
 #define GTK_IS_SEARCH_ENGINE_SIMPLE_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_SEARCH_ENGINE_SIMPLE))
 #define GTK_SEARCH_ENGINE_SIMPLE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_SEARCH_ENGINE_SIMPLE, GtkSearchEngineSimpleClass))
 
-typedef struct _GtkSearchEngineSimple GtkSearchEngineSimpleFat;
-typedef struct _GtkSearchEngineSimple GtkSearchEngineSimpleThin;
-
 typedef struct _GtkSearchEngineSimpleClass GtkSearchEngineSimpleClass;
 typedef struct _GtkSearchEngineSimplePrivate GtkSearchEngineSimplePrivate;
 
@@ -50,19 +47,14 @@ struct _GtkSearchEngineSimplePrivate
   gboolean query_finished;
 };
 
-struct _GtkSearchEngineSimple 
-{
-  GtkSearchEngine parent;
-
+STLWRT_DECLARE_FTYPE_FPARENT(GtkSearchEngineSimple, _gtk_search_engine_simple, GtkSearchEngine,
   GtkSearchEngineSimplePrivate *priv;
-};
+)
 
 struct _GtkSearchEngineSimpleClass
 {
   GtkSearchEngineClass parent_class;
 };
-
-GType            SF(_gtk_search_engine_simple_get_type) (void);
 
 GtkSearchEngine* _gtk_search_engine_simple_new      (void);
 

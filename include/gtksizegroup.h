@@ -32,17 +32,9 @@ G_BEGIN_DECLS
 #define GTK_IS_SIZE_GROUP_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_SIZE_GROUP))
 #define GTK_SIZE_GROUP_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_SIZE_GROUP, GtkSizeGroupClass))
 
-
-typedef struct _GtkSizeGroup       GtkSizeGroupFat;
-typedef struct _GtkSizeGroup       GtkSizeGroupThin;
-
 typedef struct _GtkSizeGroupClass  GtkSizeGroupClass;
 
-/********************************************************************/
-struct _GtkSizeGroupProps
-{
-
-
+STLWRT_DECLARE_VTYPE_FPARENT(GtkSizeGroup, gtk_size_group, GObject,
   /* <private> */
   GSList * (widgets);
 
@@ -53,37 +45,7 @@ struct _GtkSizeGroupProps
   guint  (ignore_hidden) : 1;
 
   GtkRequisition  (requisition);
-};
-
-struct _GtkSizeGroupFat
-{
-  GObject   parent_instance;
-
-  struct _GtkSizeGroupProps instance_properties;
-};
-
-struct _GtkSizeGroupThin
-{
-  GObject  parent_instance;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkSizeGroupFat   fat_instance;
-  struct _GtkSizeGroupThin  thin_instance;
-}   GtkSizeGroup;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkSizeGroupFat GtkSizeGroup;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkSizeGroupThin GtkSizeGroup;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkSizeGroupClass
 {
@@ -113,10 +75,6 @@ typedef enum {
   GTK_SIZE_GROUP_BOTH
 } GtkSizeGroupMode;
 
-GType            SF(_T2_gtk_size_group_get_type)      (void) G_GNUC_CONST;
-GType            SF(_3T_gtk_size_group_get_type)      (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType            SF(gtk_size_group_get_type)      (void) G_GNUC_CONST;
 
 GtkSizeGroup *   SF(gtk_size_group_new)           (GtkSizeGroupMode  mode);
 void             SF(gtk_size_group_set_mode)      (GtkSizeGroup     *size_group,

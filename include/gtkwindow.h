@@ -23,7 +23,6 @@
 #include <gtkaccelgroup.h>
 #include <gtkbin.h>
 
-
 G_BEGIN_DECLS
 
 #define GTK_TYPE_WINDOW			(gtk_window_get_type ())
@@ -33,19 +32,13 @@ G_BEGIN_DECLS
 #define GTK_IS_WINDOW_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_WINDOW))
 #define GTK_WINDOW_GET_CLASS(obj)       (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_WINDOW, GtkWindowClass))
 
-
-
 typedef struct _GtkWindowClass        GtkWindowClass;
 typedef struct _GtkWindowGeometryInfo GtkWindowGeometryInfo;
 typedef struct _GtkWindowGroup        GtkWindowGroup;
 typedef struct _GtkWindowGroupClass   GtkWindowGroupClass;
 
 
-/********************************************************************/
-struct _GtkWindowProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkWindow, gtk_window, GtkBin,
   gchar * (title);
   gchar * (wmclass_name);
   gchar * (wmclass_class);
@@ -103,12 +96,10 @@ struct _GtkWindowProps
   
   GdkModifierType  (mnemonic_modifier);
   GdkScreen      * (screen);
-};
+)
 
 struct _GtkWindowPrivate
 {
-
-  
   GtkMnemonicHash *mnemonic_hash;
   
   guint above_initially : 1;
@@ -135,36 +126,6 @@ struct _GtkWindowPrivate
 
   gchar *startup_id;
 };
-
-struct _GtkWindowFat
-{
-  GtkBinFat   bin;
-
-  struct _GtkWindowProps instance_properties;
-};
-
-struct _GtkWindowThin
-{
-  GtkBinThin  bin;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkWindowFat   fat_instance;
-  struct _GtkWindowThin  thin_instance;
-}   GtkWindow;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkWindowFat GtkWindow;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkWindowThin GtkWindow;
-#endif
-/********************************************************************/
-
-
 
 struct _GtkWindowClass
 {
@@ -203,43 +164,9 @@ struct _GtkWindowClass
 #define GTK_IS_WINDOW_GROUP_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_WINDOW_GROUP))
 #define GTK_WINDOW_GROUP_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_WINDOW_GROUP, GtkWindowGroupClass))
 
-/********************************************************************/
-struct _GtkWindowGroupProps
-{
-
-
+STLWRT_DECLARE_FTYPE_FPARENT(GtkWindowGroup, gtk_window_group, GObject,
   GSList * (grabs);
-};
-
-struct _GtkWindowGroupFat
-{
-  GObject   parent_instance;
-
-  struct _GtkWindowGroupProps instance_properties;
-};
-
-struct _GtkWindowGroupThin
-{
-  GObject  parent_instance;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkWindowGroupFat   fat_instance;
-  struct _GtkWindowGroupThin  thin_instance;
-}   GtkWindowGroup;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkWindowGroupFat GtkWindowGroup;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkWindowGroupThin GtkWindowGroup;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkWindowGroupClass
 {
@@ -258,10 +185,7 @@ struct _GtkWindowGroupClass
 #define gtk_window_set_default_icon_from_file gtk_window_set_default_icon_from_file_utf8
 #endif
 
-GType      SF(_T2_gtk_window_get_type)                 (void) G_GNUC_CONST;
-GType      SF(_3T_gtk_window_get_type)                 (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      SF(gtk_window_get_type)                 (void) G_GNUC_CONST;
+
 GtkWidget* SF(gtk_window_new)                      (GtkWindowType        type);
 void       SF(gtk_window_set_title)                (GtkWindow           *window,
 						const gchar         *title);
@@ -341,23 +265,6 @@ GdkScreen* SF(gtk_window_get_screen)	       (GtkWindow	    *window);
 gboolean   SF(gtk_window_is_active)                (GtkWindow           *window);
 gboolean   SF(gtk_window_has_toplevel_focus)       (GtkWindow           *window);
 
-
-#ifndef GTK_DISABLE_DEPRECATED
-/* SF(gtk_window_set_has_frame) () must be called before realizing the window_*/
-void       SF(gtk_window_set_has_frame)            (GtkWindow *window, 
-						gboolean   setting);
-gboolean   SF(gtk_window_get_has_frame)            (GtkWindow *window);
-void       SF(gtk_window_set_frame_dimensions)     (GtkWindow *window, 
-						gint       left,
-						gint       top,
-						gint       right,
-						gint       bottom);
-void       SF(gtk_window_get_frame_dimensions)     (GtkWindow *window, 
-						gint      *left,
-						gint      *top,
-						gint      *right,
-						gint      *bottom);
-#endif
 void       SF(gtk_window_set_decorated)            (GtkWindow *window,
                                                 gboolean   setting);
 gboolean   SF(gtk_window_get_decorated)            (GtkWindow *window);
@@ -480,11 +387,6 @@ GtkWindowType SF(gtk_window_get_window_type)     (GtkWindow     *window);
 
 /* Window groups
  */
-GType            SF(_T2_gtk_window_group_get_type)      (void) G_GNUC_CONST;
-GType            SF(_3T_gtk_window_group_get_type)      (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType            SF(gtk_window_group_get_type)      (void) G_GNUC_CONST;
-
 GtkWindowGroup * SF(gtk_window_group_new)           (void);
 void             SF(gtk_window_group_add_window)    (GtkWindowGroup     *window_group,
 						 GtkWindow          *window);

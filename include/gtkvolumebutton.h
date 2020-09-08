@@ -34,14 +34,9 @@ G_BEGIN_DECLS
 #define GTK_IS_VOLUME_BUTTON_CLASS(klass)      (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_VOLUME_BUTTON))
 #define GTK_VOLUME_BUTTON_GET_CLASS(obj)       (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_VOLUME_BUTTON, GtkVolumeButtonClass))
 
-typedef struct _GtkVolumeButton       GtkVolumeButton;
-
 typedef struct _GtkVolumeButtonClass  GtkVolumeButtonClass;
 
-struct _GtkVolumeButton
-{
-  GtkScaleButton  parent;
-};
+STLWRT_DECLARE_FTYPE_VPARENT(GtkVolumeButton, gtk_volume_button, GtkScaleButton, ;)
 
 struct _GtkVolumeButtonClass
 {
@@ -55,7 +50,6 @@ struct _GtkVolumeButtonClass
 };
 
 
-GType		SF(gtk_volume_button_get_type)	(void) G_GNUC_CONST;
 GtkWidget*	SF(gtk_volume_button_new)		(void);
 
 G_END_DECLS

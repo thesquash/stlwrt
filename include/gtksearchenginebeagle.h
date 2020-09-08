@@ -34,12 +34,8 @@ G_BEGIN_DECLS
 #define GTK_IS_SEARCH_ENGINE_BEAGLE_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_SEARCH_ENGINE_BEAGLE))
 #define GTK_SEARCH_ENGINE_BEAGLE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_SEARCH_ENGINE_BEAGLE, GtkSearchEngineBeagleClass))
 
-typedef struct _GtkSearchEngineBeagle GtkSearchEngineBeagleFat;
-typedef struct _GtkSearchEngineBeagle GtkSearchEngineBeagleThin;
-
 typedef struct _GtkSearchEngineBeagleClass GtkSearchEngineBeagleClass;
 typedef struct _GtkSearchEngineBeaglePrivate GtkSearchEngineBeaglePrivate;
-
 
 struct _GtkSearchEngineBeaglePrivate 
 {
@@ -51,19 +47,14 @@ struct _GtkSearchEngineBeaglePrivate
   gboolean query_finished;
 };
 
-struct _GtkSearchEngineBeagle 
-{
-  GtkSearchEngine parent;
-
+STLWRT_DECLARE_FTYPE_FPARENT(GtkSearchEngineBeagle, _gtk_search_engine_beagle, GtkSearchEngine,
   GtkSearchEngineBeaglePrivate *priv;
-};
+)
 
 struct _GtkSearchEngineBeagleClass 
 {
   GtkSearchEngineClass parent_class;
 };
-
-GType            SF(_gtk_search_engine_beagle_get_type) (void);
 
 GtkSearchEngine* _gtk_search_engine_beagle_new      (void);
 

@@ -31,18 +31,12 @@ G_BEGIN_DECLS
 #define GTK_IS_PAGE_SETUP_UNIX_DIALOG_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_PAGE_SETUP_UNIX_DIALOG))
 #define GTK_PAGE_SETUP_UNIX_DIALOG_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_PAGE_SETUP_UNIX_DIALOG, GtkPageSetupUnixDialogClass))
 
-
-typedef struct _GtkPageSetupUnixDialog         GtkPageSetupUnixDialog;
-
 typedef struct _GtkPageSetupUnixDialogClass    GtkPageSetupUnixDialogClass;
 typedef struct GtkPageSetupUnixDialogPrivate   GtkPageSetupUnixDialogPrivate;
 
-struct _GtkPageSetupUnixDialog
-{
-  GtkDialog parent_instance;
-
+STLWRT_DECLARE_FTYPE_VPARENT(GtkPageSetupUnixDialog, gtk_page_setup_unix_dialog, GtkDialog,
   GtkPageSetupUnixDialogPrivate * (priv);
-};
+)
 
 struct _GtkPageSetupUnixDialogClass
 {
@@ -59,7 +53,6 @@ struct _GtkPageSetupUnixDialogClass
 };
 
 
-GType 		  SF(gtk_page_setup_unix_dialog_get_type)	        (void) G_GNUC_CONST;
 GtkWidget *       gtk_page_setup_unix_dialog_new                (const gchar            *title,
 								 GtkWindow              *parent);
 void              gtk_page_setup_unix_dialog_set_page_setup     (GtkPageSetupUnixDialog *dialog,

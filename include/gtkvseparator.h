@@ -22,9 +22,7 @@
 
 #include <gtkseparator.h>
 
-
 G_BEGIN_DECLS
-
 
 #define GTK_TYPE_VSEPARATOR                  (gtk_vseparator_get_type ())
 #define GTK_VSEPARATOR(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_VSEPARATOR, GtkVSeparator))
@@ -32,9 +30,6 @@ G_BEGIN_DECLS
 #define GTK_IS_VSEPARATOR(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_VSEPARATOR))
 #define GTK_IS_VSEPARATOR_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_VSEPARATOR))
 #define GTK_VSEPARATOR_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_VSEPARATOR, GtkVSeparatorClass))
-
-
-typedef struct _GtkVSeparator       GtkVSeparator;
 
 typedef struct _GtkVSeparatorClass  GtkVSeparatorClass;
 
@@ -44,10 +39,7 @@ typedef struct _GtkVSeparatorClass  GtkVSeparatorClass;
  * The #GtkVSeparator struct contains private data only, and
  * should be accessed using the functions below.
  */
-struct _GtkVSeparator
-{
-  GtkSeparator separator;
-};
+STLWRT_DECLARE_FTYPE_VPARENT(GtkVSeparator, gtk_vseparator, GtkSeparator, ;)
 
 struct _GtkVSeparatorClass
 {
@@ -55,11 +47,8 @@ struct _GtkVSeparatorClass
 };
 
 
-GType      SF(gtk_vseparator_get_type) (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_vseparator_new)      (void);
 
-
 G_END_DECLS
-
 
 #endif /* __GTK_SEPARATOR_H__ */

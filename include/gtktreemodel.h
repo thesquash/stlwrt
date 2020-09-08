@@ -36,7 +36,6 @@ G_BEGIN_DECLS
 typedef struct _GtkTreeIter         GtkTreeIter;
 typedef struct _GtkTreePath         GtkTreePath;
 typedef struct _GtkTreeRowReference GtkTreeRowReference;
-typedef struct _GtkTreeModel        GtkTreeModel; /* Dummy typedef */
 typedef struct _GtkTreeModelIface   GtkTreeModelIface;
 typedef gboolean (* GtkTreeModelForeachFunc) (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data);
 
@@ -131,10 +130,9 @@ gint        *SF(gtk_tree_path_get_indices_with_depth) (GtkTreePath *path,
                                                    gint        *depth);
 void         SF(gtk_tree_path_free)             (GtkTreePath       *path);
 GtkTreePath *SF(gtk_tree_path_copy)             (const GtkTreePath *path);
-GType        SF(_T2_gtk_tree_path_get_type)         (void) G_GNUC_CONST;
-GType        SF(_3T_gtk_tree_path_get_type)         (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType        SF(gtk_tree_path_get_type)         (void) G_GNUC_CONST;
+
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_tree_path)
+
 gint         SF(gtk_tree_path_compare)          (const GtkTreePath *a,
 					     const GtkTreePath *b);
 void         SF(gtk_tree_path_next)             (GtkTreePath       *path);
@@ -156,10 +154,8 @@ gboolean     SF(gtk_tree_path_is_descendant)    (GtkTreePath       *path,
  * want to call gtk_tree_row_reference_new.
  */
 
-GType                SF(_T2_gtk_tree_row_reference_get_type) (void) G_GNUC_CONST;
-GType                SF(_3T_gtk_tree_row_reference_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType                SF(gtk_tree_row_reference_get_type) (void) G_GNUC_CONST;
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_tree_row_reference)
+
 GtkTreeRowReference *SF(gtk_tree_row_reference_new)       (GtkTreeModel        *model,
 						       GtkTreePath         *path);
 GtkTreeRowReference *SF(gtk_tree_row_reference_new_proxy) (GObject             *proxy,
@@ -184,15 +180,11 @@ void                 SF(gtk_tree_row_reference_reordered) (GObject     *proxy,
 /* GtkTreeIter operations */
 GtkTreeIter *     SF(gtk_tree_iter_copy)             (GtkTreeIter  *iter);
 void              SF(gtk_tree_iter_free)             (GtkTreeIter  *iter);
-GType             SF(_T2_gtk_tree_iter_get_type)         (void) G_GNUC_CONST;
-GType             SF(_3T_gtk_tree_iter_get_type)         (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType             SF(gtk_tree_iter_get_type)         (void) G_GNUC_CONST;
 
-GType             SF(_T2_gtk_tree_model_get_type)        (void) G_GNUC_CONST;
-GType             SF(_3T_gtk_tree_model_get_type)        (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType             SF(gtk_tree_model_get_type)        (void) G_GNUC_CONST;
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_tree_iter)
+
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_tree_model)
+
 GtkTreeModelFlags SF(gtk_tree_model_get_flags)       (GtkTreeModel *tree_model);
 gint              SF(gtk_tree_model_get_n_columns)   (GtkTreeModel *tree_model);
 GType             SF(gtk_tree_model_get_column_type) (GtkTreeModel *tree_model,

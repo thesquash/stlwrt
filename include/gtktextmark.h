@@ -54,9 +54,6 @@ G_BEGIN_DECLS
 
 /* The GtkTextMark data type */
 
-typedef struct _GtkTextMark      GtkTextMarkFat;
-typedef struct _GtkTextMark      GtkTextMarkThin;
-
 typedef struct _GtkTextMarkClass GtkTextMarkClass;
 
 #define GTK_TYPE_TEXT_MARK              (gtk_text_mark_get_type ())
@@ -66,43 +63,9 @@ typedef struct _GtkTextMarkClass GtkTextMarkClass;
 #define GTK_IS_TEXT_MARK_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TEXT_MARK))
 #define GTK_TEXT_MARK_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TEXT_MARK, GtkTextMarkClass))
 
-/********************************************************************/
-struct _GtkTextMarkProps
-{
-
-
+STLWRT_DECLARE_FTYPE_FPARENT(GtkTextMark, gtk_text_mark, GObject,
   gpointer  (segment);
-};
-
-struct _GtkTextMarkFat
-{
-  GObject   parent_instance;
-
-  struct _GtkTextMarkProps instance_properties;
-};
-
-struct _GtkTextMarkThin
-{
-  GObject  parent_instance;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkTextMarkFat   fat_instance;
-  struct _GtkTextMarkThin  thin_instance;
-}   GtkTextMark;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkTextMarkFat GtkTextMark;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkTextMarkThin GtkTextMark;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkTextMarkClass
 {
@@ -115,10 +78,6 @@ struct _GtkTextMarkClass
   void (*_gtk_reserved4) (void);
 };
 
-GType        SF(_T2_gtk_text_mark_get_type)   (void) G_GNUC_CONST;
-GType        SF(_3T_gtk_text_mark_get_type)   (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType        SF(gtk_text_mark_get_type)   (void) G_GNUC_CONST;
 
 void           SF(gtk_text_mark_set_visible) (GtkTextMark *mark,
                                           gboolean     setting);

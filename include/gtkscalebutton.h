@@ -40,12 +40,8 @@ G_BEGIN_DECLS
 #define GTK_IS_SCALE_BUTTON_CLASS(klass)      (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_SCALE_BUTTON))
 #define GTK_SCALE_BUTTON_GET_CLASS(obj)       (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_SCALE_BUTTON, GtkScaleButtonClass))
 
-typedef struct _GtkScaleButton        GtkScaleButtonFat;
-typedef struct _GtkScaleButton        GtkScaleButtonThin;
-
 typedef struct _GtkScaleButtonClass   GtkScaleButtonClass;
 typedef struct _GtkScaleButtonPrivate GtkScaleButtonPrivate;
-
 
 struct _GtkScaleButtonPrivate
 {
@@ -68,16 +64,13 @@ struct _GtkScaleButtonPrivate
   GtkAdjustment *adjustment; /* needed because it must be settable in init() */
 };
 
-struct _GtkScaleButton
-{
-  GtkButton parent;
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkScaleButton, gtk_scale_button, GtkButton,
   GtkWidget * (plus_button);
   GtkWidget * (minus_button);
 
   /*< private >*/
   GtkScaleButtonPrivate * (priv);
-};
+)
 
 struct _GtkScaleButtonClass
 {
@@ -94,10 +87,7 @@ struct _GtkScaleButtonClass
   void (*_gtk_reserved4) (void);
 };
 
-GType            SF(_T2_gtk_scale_button_get_type)         (void) G_GNUC_CONST;
-GType            SF(_3T_gtk_scale_button_get_type)         (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType            SF(gtk_scale_button_get_type)         (void) G_GNUC_CONST;
+
 GtkWidget *      SF(gtk_scale_button_new)              (GtkIconSize      size,
                                                     gdouble          min,
                                                     gdouble          max,

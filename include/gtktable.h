@@ -32,19 +32,11 @@ G_BEGIN_DECLS
 #define GTK_IS_TABLE_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TABLE))
 #define GTK_TABLE_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TABLE, GtkTableClass))
 
-
-typedef struct _GtkTable	GtkTableFat;
-typedef struct _GtkTable	GtkTableThin;
-
 typedef struct _GtkTableClass	GtkTableClass;
 typedef struct _GtkTableChild	GtkTableChild;
 typedef struct _GtkTableRowCol	GtkTableRowCol;
 
-/********************************************************************/
-struct _GtkTableProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkTable, gtk_table, GtkContainer,
   GList * (children);
   GtkTableRowCol * (rows);
   GtkTableRowCol * (cols);
@@ -53,37 +45,7 @@ struct _GtkTableProps
   guint16  (column_spacing);
   guint16  (row_spacing);
   guint  (homogeneous) : 1;
-};
-
-struct _GtkTableFat
-{
-  GtkContainerFat   container;
-
-  struct _GtkTableProps instance_properties;
-};
-
-struct _GtkTableThin
-{
-  GtkContainerThin  container;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkTableFat   fat_instance;
-  struct _GtkTableThin  thin_instance;
-}   GtkTable;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkTableFat GtkTable;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkTableThin GtkTable;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkTableClass
 {
@@ -120,10 +82,6 @@ struct _GtkTableRowCol
 };
 
 
-GType	   SF(_T2_gtk_table_get_type)	      (void) G_GNUC_CONST;
-GType	   SF(_3T_gtk_table_get_type)	      (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType	   SF(gtk_table_get_type)	      (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_table_new)	      (guint		rows,
 				       guint		columns,
 				       gboolean		homogeneous);

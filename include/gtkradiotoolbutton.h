@@ -34,14 +34,9 @@ G_BEGIN_DECLS
 #define GTK_IS_RADIO_TOOL_BUTTON_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_RADIO_TOOL_BUTTON))
 #define GTK_RADIO_TOOL_BUTTON_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), GTK_TYPE_RADIO_TOOL_BUTTON, GtkRadioToolButtonClass))
 
-typedef struct _GtkRadioToolButton      GtkRadioToolButton;
-
 typedef struct _GtkRadioToolButtonClass GtkRadioToolButtonClass;
 
-struct _GtkRadioToolButton
-{
-  GtkToggleToolButton parent;
-};
+STLWRT_DECLARE_FTYPE_VPARENT(GtkRadioToolButton, gtk_radio_tool_button, GtkToggleToolButton, ;)
 
 struct _GtkRadioToolButtonClass
 {
@@ -54,8 +49,6 @@ struct _GtkRadioToolButtonClass
   void (* _gtk_reserved4) (void);
 };
 
-
-GType        SF(gtk_radio_tool_button_get_type)       (void) G_GNUC_CONST;
 
 GtkToolItem *SF(gtk_radio_tool_button_new)                        (GSList             *group);
 GtkToolItem *SF(gtk_radio_tool_button_new_from_stock)             (GSList             *group,

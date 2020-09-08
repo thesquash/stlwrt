@@ -46,71 +46,14 @@ G_BEGIN_DECLS
 #define GTK_IS_TOOLBAR_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TOOLBAR))
 #define GTK_TOOLBAR_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TOOLBAR, GtkToolbarClass))
 
-#ifndef GTK_DISABLE_DEPRECATED
-typedef enum
-{
-  GTK_TOOLBAR_CHILD_SPACE,
-  GTK_TOOLBAR_CHILD_BUTTON,
-  GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-  GTK_TOOLBAR_CHILD_RADIOBUTTON,
-  GTK_TOOLBAR_CHILD_WIDGET
-} GtkToolbarChildType;
-
-typedef struct _GtkToolbarChild	     GtkToolbarChild;
-
-/********************************************************************/
-struct _GtkToolbarChildProps
-{
-
-  GtkWidget *widget;
-  GtkWidget *icon;
-  GtkWidget *label;
-};
-
-struct _GtkToolbarChildFat
-{
-  GtkToolbarChildTypeFat   type;
-
-  struct _GtkToolbarChildProps instance_properties;
-};
-
-struct _GtkToolbarChildThin
-{
-  GtkToolbarChildTypeThin  type;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkToolbarChildFat   fat_instance;
-  struct _GtkToolbarChildThin  thin_instance;
-}   GtkToolbarChild;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkToolbarChildFat GtkToolbarChild;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkToolbarChildThin GtkToolbarChild;
-#endif
-/********************************************************************/
-
-
-
-#endif /* GTK_DISABLE_DEPRECATED */
-
 typedef enum
 {
   GTK_TOOLBAR_SPACE_EMPTY,
   GTK_TOOLBAR_SPACE_LINE
 } GtkToolbarSpaceStyle;
 
-typedef struct _GtkToolbar           GtkToolbarFat;
-typedef struct _GtkToolbar           GtkToolbarThin;
-
 typedef struct _GtkToolbarClass      GtkToolbarClass;
 typedef struct _GtkToolbarPrivate    GtkToolbarPrivate;
-
 
 struct _GtkToolbarPrivate
 {
@@ -138,10 +81,7 @@ struct _GtkToolbarPrivate
   guint         animation : 1;
 };
 
-struct _GtkToolbar
-{
-  GtkContainer container;
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkToolbar, gtk_toolbar, gtk_container,
   /*< public >*/
   gint              (num_children);
   GList           * (children);
@@ -149,11 +89,7 @@ struct _GtkToolbar
   GtkToolbarStyle   (style);
   GtkIconSize       (icon_size);
 
-#ifndef GTK_DISABLE_DEPRECATED
-  GtkTooltips     * (tooltips);
-#else
   gpointer          (_tooltips);
-#endif
 
   /*< private >*/
   gint              (button_maxw);		/* maximum width of homogeneous children */
@@ -164,7 +100,7 @@ struct _GtkToolbar
 
   guint             (style_set) : 1;
   guint             (icon_size_set) : 1;
-};
+)
 
 struct _GtkToolbarClass
 {
@@ -186,10 +122,7 @@ struct _GtkToolbarClass
   void (*_gtk_reserved3) (void);
 };
 
-GType           SF(_T2_gtk_toolbar_get_type)                (void) G_GNUC_CONST;
-GType           SF(_3T_gtk_toolbar_get_type)                (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType           SF(gtk_toolbar_get_type)                (void) G_GNUC_CONST;
+
 GtkWidget *     SF(gtk_toolbar_new)                     (void);
 
 void            SF(gtk_toolbar_insert)                  (GtkToolbar      *toolbar,
@@ -232,106 +165,6 @@ void            SF(_gtk_toolbar_paint_space_line)       (GtkWidget           *wi
 						     const GdkRectangle  *area,
 						     const GtkAllocation *allocation);
 gint            SF(_gtk_toolbar_get_default_space_size) (void);
-
-
-
-#ifndef GTK_DISABLE_DEPRECATED
-
-GtkOrientation  SF(gtk_toolbar_get_orientation)         (GtkToolbar      *toolbar);
-void            SF(gtk_toolbar_set_orientation)         (GtkToolbar      *toolbar,
-						     GtkOrientation   orientation);
-gboolean        SF(gtk_toolbar_get_tooltips)            (GtkToolbar      *toolbar);
-void            SF(gtk_toolbar_set_tooltips)            (GtkToolbar      *toolbar,
-						     gboolean         enable);
-
-/* Simple button items */
-GtkWidget* SF(gtk_toolbar_append_item)   (GtkToolbar      *toolbar,
-				      const char      *text,
-				      const char      *tooltip_text,
-				      const char      *tooltip_private_text,
-				      GtkWidget       *icon,
-				      GCallback        callback,
-				      gpointer         user_data);
-GtkWidget* SF(gtk_toolbar_prepend_item)  (GtkToolbar      *toolbar,
-				      const char      *text,
-				      const char      *tooltip_text,
-				      const char      *tooltip_private_text,
-				      GtkWidget       *icon,
-				      GCallback        callback,
-				      gpointer         user_data);
-GtkWidget* SF(gtk_toolbar_insert_item)   (GtkToolbar      *toolbar,
-				      const char      *text,
-				      const char      *tooltip_text,
-				      const char      *tooltip_private_text,
-				      GtkWidget       *icon,
-				      GCallback        callback,
-				      gpointer         user_data,
-				      gint             position);
-
-/* Stock Items */
-GtkWidget* SF(gtk_toolbar_insert_stock)    (GtkToolbar      *toolbar,
-					const gchar     *stock_id,
-					const char      *tooltip_text,
-					const char      *tooltip_private_text,
-					GCallback        callback,
-					gpointer         user_data,
-					gint             position);
-
-/* Space Items */
-void       SF(gtk_toolbar_append_space)    (GtkToolbar      *toolbar);
-void       SF(gtk_toolbar_prepend_space)   (GtkToolbar      *toolbar);
-void       SF(gtk_toolbar_insert_space)    (GtkToolbar      *toolbar,
-					gint             position);
-void       SF(gtk_toolbar_remove_space)    (GtkToolbar      *toolbar,
-                                        gint             position);
-/* Any element type */
-GtkWidget* SF(gtk_toolbar_append_element)  (GtkToolbar      *toolbar,
-					GtkToolbarChildType type,
-					GtkWidget       *widget,
-					const char      *text,
-					const char      *tooltip_text,
-					const char      *tooltip_private_text,
-					GtkWidget       *icon,
-					GCallback        callback,
-					gpointer         user_data);
-
-GtkWidget* SF(gtk_toolbar_prepend_element) (GtkToolbar      *toolbar,
-					GtkToolbarChildType type,
-					GtkWidget       *widget,
-					const char      *text,
-					const char      *tooltip_text,
-					const char      *tooltip_private_text,
-					GtkWidget       *icon,
-					GCallback        callback,
-					gpointer         user_data);
-
-GtkWidget* SF(gtk_toolbar_insert_element)  (GtkToolbar      *toolbar,
-					GtkToolbarChildType type,
-					GtkWidget       *widget,
-					const char      *text,
-					const char      *tooltip_text,
-					const char      *tooltip_private_text,
-					GtkWidget       *icon,
-					GCallback        callback,
-					gpointer         user_data,
-					gint             position);
-
-/* Generic Widgets */
-void       SF(gtk_toolbar_append_widget)   (GtkToolbar      *toolbar,
-					GtkWidget       *widget,
-					const char      *tooltip_text,
-					const char      *tooltip_private_text);
-void       SF(gtk_toolbar_prepend_widget)  (GtkToolbar      *toolbar,
-					GtkWidget       *widget,
-					const char      *tooltip_text,
-					const char	*tooltip_private_text);
-void       SF(gtk_toolbar_insert_widget)   (GtkToolbar      *toolbar,
-					GtkWidget       *widget,
-					const char      *tooltip_text,
-					const char      *tooltip_private_text,
-					gint             position);
-
-#endif /* GTK_DISABLE_DEPRECATED */
 
 
 G_END_DECLS

@@ -32,49 +32,11 @@ G_BEGIN_DECLS
 #define GTK_IS_TEAROFF_MENU_ITEM_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TEAROFF_MENU_ITEM))
 #define GTK_TEAROFF_MENU_ITEM_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TEAROFF_MENU_ITEM, GtkTearoffMenuItemClass))
 
-
-typedef struct _GtkTearoffMenuItem       GtkTearoffMenuItemFat;
-typedef struct _GtkTearoffMenuItem       GtkTearoffMenuItemThin;
-
 typedef struct _GtkTearoffMenuItemClass  GtkTearoffMenuItemClass;
 
-/********************************************************************/
-struct _GtkTearoffMenuItemProps
-{
-
-
+STLWRT_DECLARE_FTYPE_VPARENT(GtkTearoffMenuItem, gtk_tearoff_menu_item, GtkMenuItem,
   guint  (torn_off) : 1;
-};
-
-struct _GtkTearoffMenuItemFat
-{
-  GtkMenuItemFat   menu_item;
-
-  struct _GtkTearoffMenuItemProps instance_properties;
-};
-
-struct _GtkTearoffMenuItemThin
-{
-  GtkMenuItemThin  menu_item;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkTearoffMenuItemFat   fat_instance;
-  struct _GtkTearoffMenuItemThin  thin_instance;
-}   GtkTearoffMenuItem;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkTearoffMenuItemFat GtkTearoffMenuItem;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkTearoffMenuItemThin GtkTearoffMenuItem;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkTearoffMenuItemClass
 {
@@ -88,10 +50,6 @@ struct _GtkTearoffMenuItemClass
 };
 
 
-GType	   SF(_T2_gtk_tearoff_menu_item_get_type)     (void) G_GNUC_CONST;
-GType	   SF(_3T_gtk_tearoff_menu_item_get_type)     (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType	   SF(gtk_tearoff_menu_item_get_type)     (void) G_GNUC_CONST;
 GtkWidget* SF(gtk_tearoff_menu_item_new)	      (void);
 
 G_END_DECLS

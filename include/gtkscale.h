@@ -32,60 +32,19 @@ G_BEGIN_DECLS
 #define GTK_IS_SCALE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_SCALE))
 #define GTK_SCALE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_SCALE, GtkScaleClass))
 
-
-typedef struct _GtkScale        GtkScaleFat;
-typedef struct _GtkScale        GtkScaleThin;
-
 typedef struct _GtkScaleClass   GtkScaleClass;
 
-
-/********************************************************************/
-struct _GtkScaleProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkScale, gtk_scale, GtkRange,
   gint   (digits);
   guint  (draw_value) : 1;
   guint  (value_pos) : 2;
-};
+)
 
 struct _GtkScalePrivate
 {
-
-  
   PangoLayout *layout;
   GSList      *marks;
 };
-
-struct _GtkScaleFat
-{
-  GtkRangeFat   range;
-
-  struct _GtkScaleProps instance_properties;
-};
-
-struct _GtkScaleThin
-{
-  GtkRangeThin  range;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkScaleFat   fat_instance;
-  struct _GtkScaleThin  thin_instance;
-}   GtkScale;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkScaleFat GtkScale;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkScaleThin GtkScale;
-#endif
-/********************************************************************/
-
-
 
 struct _GtkScaleClass
 {
@@ -106,10 +65,6 @@ struct _GtkScaleClass
   void (*_gtk_reserved3) (void);
 };
 
-GType             SF(_T2_gtk_scale_get_type)           (void) G_GNUC_CONST;
-GType             SF(_3T_gtk_scale_get_type)           (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType             SF(gtk_scale_get_type)           (void) G_GNUC_CONST;
 
 GtkWidget*        SF(gtk_scale_new)                (GtkOrientation orientation,
                                                 GtkAdjustment *adjustment);

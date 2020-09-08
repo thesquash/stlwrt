@@ -30,17 +30,9 @@ G_BEGIN_DECLS
 #define GTK_IS_SOCKET_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_SOCKET))
 #define GTK_SOCKET_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_SOCKET, GtkSocketClass))
 
-
-typedef struct _GtkSocket        GtkSocketFat;
-typedef struct _GtkSocket        GtkSocketThin;
-
 typedef struct _GtkSocketClass   GtkSocketClass;
 
-/********************************************************************/
-struct _GtkSocketProps
-{
-
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkSocket, gtk_socket, GtkContainer,
   guint16  (request_width);
   guint16  (request_height);
   guint16  (current_width);
@@ -59,37 +51,7 @@ struct _GtkSocketProps
 
   GtkAccelGroup * (accel_group);
   GtkWidget * (toplevel);
-};
-
-struct _GtkSocketFat
-{
-  GtkContainerFat   container;
-
-  struct _GtkSocketProps instance_properties;
-};
-
-struct _GtkSocketThin
-{
-  GtkContainerThin  container;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkSocketFat   fat_instance;
-  struct _GtkSocketThin  thin_instance;
-}   GtkSocket;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkSocketFat GtkSocket;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkSocketThin GtkSocket;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkSocketClass
 {
@@ -106,10 +68,6 @@ struct _GtkSocketClass
 };
 
 
-GType          SF(_T2_gtk_socket_get_type) (void) G_GNUC_CONST;
-GType          SF(_3T_gtk_socket_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType          SF(gtk_socket_get_type) (void) G_GNUC_CONST;
 GtkWidget*     SF(gtk_socket_new)      (void);
 
 void            SF(gtk_socket_add_id) (GtkSocket       *socket_,

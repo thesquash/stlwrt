@@ -40,20 +40,14 @@ G_BEGIN_DECLS
 #define GTK_IS_UI_MANAGER_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_UI_MANAGER))
 #define GTK_UI_MANAGER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), GTK_TYPE_UI_MANAGER, GtkUIManagerClass))
 
-typedef struct _GtkUIManager      GtkUIManagerFat;
-typedef struct _GtkUIManager      GtkUIManagerThin;
-
 typedef struct _GtkUIManagerClass GtkUIManagerClass;
 typedef struct _GtkUIManagerPrivate GtkUIManagerPrivate;
 
-
-struct _GtkUIManager {
-  GObject parent;
-
+STLWRT_DECLARE_FTYPE_FPARENT(GtkUIManager, gtk_ui_manager, GObject,
   /*< private >*/
 
   GtkUIManagerPrivate * (private_data);
-};
+)
 
 struct _GtkUIManagerClass {
   GObjectClass parent_class;
@@ -103,10 +97,7 @@ typedef enum {
 #define gtk_ui_manager_add_ui_from_file gtk_ui_manager_add_ui_from_file_utf8
 #endif
 
-GType          SF(_T2_gtk_ui_manager_get_type)            (void) G_GNUC_CONST;
-GType          SF(_3T_gtk_ui_manager_get_type)            (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType          SF(gtk_ui_manager_get_type)            (void) G_GNUC_CONST;
+
 GtkUIManager  *SF(gtk_ui_manager_new)                 (void);
 void           SF(gtk_ui_manager_set_add_tearoffs)    (GtkUIManager          *self,
 						   gboolean               add_tearoffs);

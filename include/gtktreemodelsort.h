@@ -33,16 +33,9 @@ G_BEGIN_DECLS
 #define GTK_IS_TREE_MODEL_SORT_CLASS(klass)		(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TREE_MODEL_SORT))
 #define GTK_TREE_MODEL_SORT_GET_CLASS(obj)		(G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TREE_MODEL_SORT, GtkTreeModelSortClass))
 
-typedef struct _GtkTreeModelSort       GtkTreeModelSortFat;
-typedef struct _GtkTreeModelSort       GtkTreeModelSortThin;
-
 typedef struct _GtkTreeModelSortClass  GtkTreeModelSortClass;
 
-/********************************************************************/
-struct _GtkTreeModelSortProps
-{
-
-
+STLWRT_DECLARE_VTYPE_FPARENT(GtkTreeModelSort, gtk_tree_model_sort, GObject,
   /* < private > */
   gpointer  (root);
   gint  (stamp);
@@ -66,37 +59,7 @@ struct _GtkTreeModelSortProps
   guint  (has_child_toggled_id);
   guint  (deleted_id);
   guint  (reordered_id);
-};
-
-struct _GtkTreeModelSortFat
-{
-  GObject   parent;
-
-  struct _GtkTreeModelSortProps instance_properties;
-};
-
-struct _GtkTreeModelSortThin
-{
-  GObject  parent;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkTreeModelSortFat   fat_instance;
-  struct _GtkTreeModelSortThin  thin_instance;
-}   GtkTreeModelSort;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkTreeModelSortFat GtkTreeModelSort;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkTreeModelSortThin GtkTreeModelSort;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkTreeModelSortClass
 {
@@ -110,10 +73,6 @@ struct _GtkTreeModelSortClass
 };
 
 
-GType         SF(_T2_gtk_tree_model_sort_get_type)                   (void) G_GNUC_CONST;
-GType         SF(_3T_gtk_tree_model_sort_get_type)                   (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType         SF(gtk_tree_model_sort_get_type)                   (void) G_GNUC_CONST;
 GtkTreeModel *SF(gtk_tree_model_sort_new_with_model)             (GtkTreeModel     *child_model);
 
 GtkTreeModel *SF(gtk_tree_model_sort_get_model)                  (GtkTreeModelSort *tree_model);

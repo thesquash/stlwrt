@@ -32,29 +32,19 @@ G_BEGIN_DECLS
 #define GTK_IS_SEPARATOR_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_SEPARATOR))
 #define GTK_SEPARATOR_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_SEPARATOR, GtkSeparatorClass))
 
-
-typedef struct _GtkSeparator       GtkSeparator;
-
 typedef struct _GtkSeparatorClass  GtkSeparatorClass;
-
 
 struct _GtkSeparatorPrivate
 {
   GtkOrientation orientation;
 };
 
-struct _GtkSeparator
-{
-  GtkWidget widget;
-};
+STLWRT_DECLARE_FTYPE_VPARENT(GtkSeparator, gtk_separator, GtkWidget, ;)
 
 struct _GtkSeparatorClass
 {
   GtkWidgetClass parent_class;
 };
-
-
-GType       SF(gtk_separator_get_type) (void) G_GNUC_CONST;
 
 G_END_DECLS
 

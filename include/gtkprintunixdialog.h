@@ -33,18 +33,12 @@ G_BEGIN_DECLS
 #define GTK_IS_PRINT_UNIX_DIALOG_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_PRINT_UNIX_DIALOG))
 #define GTK_PRINT_UNIX_DIALOG_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_PRINT_UNIX_DIALOG, GtkPrintUnixDialogClass))
 
-
-typedef struct _GtkPrintUnixDialog         GtkPrintUnixDialog;
-
 typedef struct _GtkPrintUnixDialogClass    GtkPrintUnixDialogClass;
 typedef struct GtkPrintUnixDialogPrivate   GtkPrintUnixDialogPrivate;
 
-struct _GtkPrintUnixDialog
-{
-  GtkDialog parent_instance;
-
+STLWRT_DECLARE_FTYPE_VPARENT(GtkPrintUnixDialog, gtk_print_unix_dialog, GtkDialog,
   GtkPrintUnixDialogPrivate * (priv);
-};
+)
 
 struct _GtkPrintUnixDialogClass
 {
@@ -62,7 +56,6 @@ struct _GtkPrintUnixDialogClass
 };
 
 
-GType                SF(gtk_print_unix_dialog_get_type)                (void) G_GNUC_CONST;
 GtkWidget *          gtk_print_unix_dialog_new                     (const gchar *title,
                                                                     GtkWindow   *parent);
 

@@ -47,9 +47,6 @@ typedef enum
 
 #define GTK_TEXT_VIEW_PRIORITY_VALIDATE (GDK_PRIORITY_REDRAW + 5)
 
-typedef struct _GtkTextView GtkTextViewFat;
-typedef struct _GtkTextView GtkTextViewThin;
-
 typedef struct _GtkTextViewClass GtkTextViewClass;
 
 /* Internal private types. */
@@ -65,10 +62,7 @@ struct _GtkTextViewPrivate
   guint scroll_after_paste : 1;
 };
 
-struct _GtkTextView
-{
-  GtkContainer parent_instance;
-
+STLWRT_DECLARE_VTYPE_VPARENT(GtkTextView, gtk_text_view, GtkContainer,
   struct _GtkTextLayout * (layout);
   GtkTextBuffer * (buffer);
 
@@ -150,7 +144,7 @@ struct _GtkTextView
   GtkTextPendingScroll * (pending_scroll);
 
   gint  (pending_place_cursor_button);
-};
+)
 
 struct _GtkTextViewClass
 {
@@ -214,10 +208,7 @@ struct _GtkTextViewClass
   void (*_gtk_reserved7) (void);
 };
 
-GType          SF(_T2_gtk_text_view_get_type)              (void) G_GNUC_CONST;
-GType          SF(_3T_gtk_text_view_get_type)              (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType          SF(gtk_text_view_get_type)              (void) G_GNUC_CONST;
+
 GtkWidget *    SF(gtk_text_view_new)                   (void);
 GtkWidget *    SF(gtk_text_view_new_with_buffer)       (GtkTextBuffer *buffer);
 void           SF(gtk_text_view_set_buffer)            (GtkTextView   *text_view,

@@ -58,14 +58,9 @@ typedef struct _GtkTextLogAttrCache GtkTextLogAttrCache;
 #define GTK_IS_TEXT_BUFFER_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TEXT_BUFFER))
 #define GTK_TEXT_BUFFER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TEXT_BUFFER, GtkTextBufferClass))
 
-
 typedef struct _GtkTextBufferClass GtkTextBufferClass;
 
-/********************************************************************/
-struct _GtkTextBufferProps
-{
-
-
+STLWRT_DECLARE_VTYPE_FPARENT(GtkTextBuffer, gtk_text_buffer, GObject,
   GtkTextTagTable * (tag_table);
   GtkTextBTree * (btree);
 
@@ -80,12 +75,10 @@ struct _GtkTextBufferProps
   guint  (modified) : 1;
 
   guint  (has_selection) : 1;
-};
+)
 
 struct _GtkTextBufferPrivate
 {
-
-  
   GtkTargetList  *copy_target_list;
   GtkTargetEntry *copy_target_entries;
   gint            n_copy_target_entries;
@@ -94,36 +87,6 @@ struct _GtkTextBufferPrivate
   GtkTargetEntry *paste_target_entries;
   gint            n_paste_target_entries;
 };
-
-struct _GtkTextBufferFat
-{
-  GObject   parent_instance;
-
-  struct _GtkTextBufferProps instance_properties;
-};
-
-struct _GtkTextBufferThin
-{
-  GObject  parent_instance;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkTextBufferFat   fat_instance;
-  struct _GtkTextBufferThin  thin_instance;
-}   GtkTextBuffer;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkTextBufferFat GtkTextBuffer;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkTextBufferThin GtkTextBuffer;
-#endif
-/********************************************************************/
-
-
 
 struct _GtkTextBufferClass
 {
@@ -187,12 +150,6 @@ struct _GtkTextBufferClass
   void (*_gtk_reserved4) (void);
   void (*_gtk_reserved5) (void);
 };
-
-GType        SF(_T2_gtk_text_buffer_get_type)       (void) G_GNUC_CONST;
-GType        SF(_3T_gtk_text_buffer_get_type)       (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType        SF(gtk_text_buffer_get_type)       (void) G_GNUC_CONST;
-
 
 
 /* table is NULL to create a new one */

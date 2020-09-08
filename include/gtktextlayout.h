@@ -106,18 +106,13 @@ typedef struct _GtkTextLineData GtkTextLineData;
 #define GTK_IS_TEXT_LAYOUT_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TEXT_LAYOUT))
 #define GTK_TEXT_LAYOUT_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TEXT_LAYOUT, GtkTextLayoutClass))
 
-typedef struct _GtkTextLayout         GtkTextLayout;
 typedef struct _GtkTextLayoutClass    GtkTextLayoutClass;
 typedef struct _GtkTextLineDisplay    GtkTextLineDisplay;
 typedef struct _GtkTextCursorDisplay  GtkTextCursorDisplay;
 typedef struct _GtkTextAttrAppearance GtkTextAttrAppearance;
 
 
-/********************************************************************/
-struct _GtkTextLayoutProps
-{
-
-
+STLWRT_DECLARE_VTYPE_FPARENT(GtkTextLayout, gtk_text_layout, GObject,
   /* width of the display area on-screen,
    * i.e. pixels we should wrap to fit inside. */
   gint screen_width;
@@ -177,47 +172,7 @@ struct _GtkTextLayoutProps
   gint preedit_cursor;
 
   guint overwrite_mode : 1;
-};
-
-struct _GtkTextLayoutPrivate
-{
-
-  
-  /* Cache the line that the cursor is positioned on, as the keyboard
-     direction only influences the direction of the cursor line.
-  */
-  GtkTextLine *cursor_line;
-};
-
-struct _GtkTextLayoutFat
-{
-  GObject   parent_instance;
-
-  struct _GtkTextLayoutProps instance_properties;
-};
-
-struct _GtkTextLayoutThin
-{
-  GObject  parent_instance;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkTextLayoutFat   fat_instance;
-  struct _GtkTextLayoutThin  thin_instance;
-}   GtkTextLayout;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkTextLayoutFat GtkTextLayout;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkTextLayoutThin GtkTextLayout;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkTextLayoutClass
 {
@@ -309,11 +264,6 @@ struct _GtkTextLineDisplay
 
 extern PangoAttrType gtk_text_attr_appearance_type;
 
-
-GType        SF(_T2_gtk_text_layout_get_type)    (void) G_GNUC_CONST;
-GType        SF(_3T_gtk_text_layout_get_type)    (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType         SF(gtk_text_layout_get_type)    (void) G_GNUC_CONST;
 
 GtkTextLayout*     gtk_text_layout_new                   (void);
 void               gtk_text_layout_set_buffer            (GtkTextLayout     *layout,

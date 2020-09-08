@@ -32,49 +32,11 @@ G_BEGIN_DECLS
 #define GTK_IS_RADIO_MENU_ITEM_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_RADIO_MENU_ITEM))
 #define GTK_RADIO_MENU_ITEM_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_RADIO_MENU_ITEM, GtkRadioMenuItemClass))
 
-
-typedef struct _GtkRadioMenuItem       GtkRadioMenuItemFat;
-typedef struct _GtkRadioMenuItem       GtkRadioMenuItemThin;
-
 typedef struct _GtkRadioMenuItemClass  GtkRadioMenuItemClass;
 
-/********************************************************************/
-struct _GtkRadioMenuItemProps
-{
-
-
+STLWRT_DECLARE_FTYPE_VPARENT(GtkRadioMenuItem, gtk_radio_menu_item, GtkCheckMenuItem,
   GSList * (group);
-};
-
-struct _GtkRadioMenuItemFat
-{
-  GtkCheckMenuItemFat   check_menu_item;
-
-  struct _GtkRadioMenuItemProps instance_properties;
-};
-
-struct _GtkRadioMenuItemThin
-{
-  GtkCheckMenuItemThin  check_menu_item;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkRadioMenuItemFat   fat_instance;
-  struct _GtkRadioMenuItemThin  thin_instance;
-}   GtkRadioMenuItem;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkRadioMenuItemFat GtkRadioMenuItem;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkRadioMenuItemThin GtkRadioMenuItem;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GtkRadioMenuItemClass
 {
@@ -89,11 +51,6 @@ struct _GtkRadioMenuItemClass
   void (*_gtk_reserved4) (void);
 };
 
-
-GType      SF(_T2_gtk_radio_menu_item_get_type)	         (void) G_GNUC_CONST;
-GType      SF(_3T_gtk_radio_menu_item_get_type)	         (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      SF(gtk_radio_menu_item_get_type)	         (void) G_GNUC_CONST;
 
 GtkWidget* SF(gtk_radio_menu_item_new)                           (GSList           *group);
 GtkWidget* SF(gtk_radio_menu_item_new_with_label)                (GSList           *group,

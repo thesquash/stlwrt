@@ -19,13 +19,13 @@ For the last few weeks I've been working on cleaning up the STLWRT code,
 since the GTK+ 2 code it was based on was haphazardly written over a
 period of over 20 years.  My latest achievement was STLWRT-izing all header
 files (adding fat and thin versions of objects).  While I converted the
-header files, I would notice a boatload of "forward declarations" --
+header files, I noticed a boatload of "forward declarations" --
 instances of code duplication in which certain type declarations had to be
 present before the header file in question could declare any new types,
 but the prerequisite type declarations were in another header file which
 depended upon the header file in question, creating a circular dependency.
 To mitigate this spaghetti code, I plan on setting up all header files to
-have distinct sections for each of preprocessor macros, type declatations,
+have distinct sections for each of preprocessor macros, type declarations,
 structure declarations, and function declarations.  Each of these sections
 will be surrounded by special preprocessor conditionals, so that a header
 file can include *just the type declarations* and *nothing else*, for

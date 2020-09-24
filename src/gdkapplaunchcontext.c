@@ -37,10 +37,8 @@ static gchar * gdk_app_launch_context_get_display (GAppLaunchContext *context,
                                                    GList             *files);
 
 
-STLWRT_DEFINE_FIXED_SIZE_TYPE_WITH_CODE (GdkAppLaunchContext,
-                                         gdk_app_launch_context,
-                                         G_TYPE_APP_LAUNCH_CONTEXT,
-                                       STLWRT_ADD_PRIVATE (GdkAppLaunchContext))
+STLWRT_DEFINE_FTYPE (GdkAppLaunchContext, gdk_app_launch_context, G_TYPE_APP_LAUNCH_CONTEXT, 0,
+                     STLWRT_ADD_PRIVATE (GdkAppLaunchContext))
 
 static void
 gdk_app_launch_context_class_init (GdkAppLaunchContextClass *klass)

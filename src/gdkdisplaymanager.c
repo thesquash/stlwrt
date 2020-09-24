@@ -64,7 +64,7 @@ static guint signals[LAST_SIGNAL] = { 0 };
 
 static GdkDisplay *default_display = NULL;
 
-STLWRT_DEFINE_TYPE (GdkDisplayManager, gdk_display_manager, G_TYPE_OBJECT)
+STLWRT_DEFINE_FTYPE (GdkDisplayManager, gdk_display_manager, G_TYPE_OBJECT, 0, ;)
 
 static void
 gdk_display_manager_class_init (GdkDisplayManagerClass *klass)

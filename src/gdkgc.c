@@ -36,8 +36,7 @@ static void gdk_gc_finalize   (GObject      *object);
 
 typedef struct _GdkGCPrivate GdkGCPrivate;
 
-STLWRT_DEFINE_VTYPE (GdkGC, gdk_gc, G_TYPE_OBJECT,  G_TYPE_FLAG_NONE,
-                     G_ADD_PRIVATE (GdkGC))
+STLWRT_DEFINE_VTYPE (GdkGC, gdk_gc, G_TYPE_OBJECT, 0, G_ADD_PRIVATE (GdkGC))
 
 static void
 gdk_gc_class_init (GdkGCClass *class)

@@ -36,7 +36,7 @@ enum {
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-STLWRT_DEFINE_TYPE (GdkKeymap, gdk_keymap, G_TYPE_OBJECT)
+STLWRT_DEFINE_FTYPE (GdkKeymap, gdk_keymap, G_TYPE_OBJECT, 0, ;)
 
 static void
 gdk_keymap_class_init (GdkKeymapClass *klass)

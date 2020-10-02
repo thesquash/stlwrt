@@ -24,7 +24,11 @@
 #ifndef __GTK_FONTSEL_H__
 #define __GTK_FONTSEL_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkdialog.h>
+
 #include <gtkvbox.h>
 
 

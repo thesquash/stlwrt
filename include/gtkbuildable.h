@@ -21,7 +21,11 @@
 #ifndef __GTK_BUILDABLE_H__
 #define __GTK_BUILDABLE_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkbuilder.h>
+
 #include <gtktypeutils.h>
 
 G_BEGIN_DECLS
@@ -32,8 +36,6 @@ G_BEGIN_DECLS
 #define GTK_IS_BUILDABLE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_BUILDABLE))
 #define GTK_BUILDABLE_GET_IFACE(obj)  (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GTK_TYPE_BUILDABLE, GtkBuildableIface))
 
-
-typedef struct _GtkBuildableIface GtkBuildableIface;
 
 /**
  * GtkBuildableIface:
@@ -84,10 +86,7 @@ typedef struct _GtkBuildableIface GtkBuildableIface;
  * necessary to allow #GtkBuilder to construct an object from
  * a GtkBuilder UI definition.
  */
-struct _GtkBuildableIface
-{
-  GTypeInterface g_iface;
-
+STLWRT_DECLARE_INTERFACE(GtkBuildable, gtk_buildable,
   /* virtual table */
   void          (* set_name)               (GtkBuildable  *buildable,
                                             const gchar   *name);
@@ -125,10 +124,8 @@ struct _GtkBuildableIface
   GObject *     (* get_internal_child)     (GtkBuildable  *buildable,
 					    GtkBuilder    *builder,
 					    const gchar   *childname);
-};
+)
 
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_buildable)
 
 void      SF(gtk_buildable_set_name)               (GtkBuildable        *buildable,
 						const gchar         *name);

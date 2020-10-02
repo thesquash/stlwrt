@@ -21,6 +21,9 @@
 #ifndef __GTK_PRINT_OPERATION_PRIVATE_H__
 #define __GTK_PRINT_OPERATION_PRIVATE_H__
 
+#include <stlwrt.h>
+
+
 #include "gtkprintoperation.h"
 
 G_BEGIN_DECLS

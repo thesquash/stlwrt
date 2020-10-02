@@ -21,6 +21,9 @@
 #ifndef __GDK_TEST_UTILS_H__
 #define __GDK_TEST_UTILS_H__
 
+#include <stlwrt.h>
+
+
 #include <gdkwindow.h>
 
 G_BEGIN_DECLS

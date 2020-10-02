@@ -20,6 +20,9 @@
 #ifndef __GTK_HBOX_H__
 #define __GTK_HBOX_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkbox.h>
 
 

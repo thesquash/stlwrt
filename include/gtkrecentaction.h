@@ -22,7 +22,11 @@
 #ifndef __GTK_RECENT_ACTION_H__
 #define __GTK_RECENT_ACTION_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkaction.h>
+
 #include <gtkrecentmanager.h>
 
 G_BEGIN_DECLS

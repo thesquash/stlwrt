@@ -21,8 +21,12 @@
 #ifndef __GTK_XEMBED_H__
 #define __GTK_XEMBED_H__
 
+#include <stlwrt.h>
+
+
 #include "xembed.h"
-#include "x11/gdkx.h"
+
+#include "gdkx.h"
 
 G_BEGIN_DECLS
 

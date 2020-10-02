@@ -23,6 +23,8 @@
 #ifndef __GTK_SHOW_H__
 #define __GTK_SHOW_H__
 
+#include <stlwrt.h>
+
 G_BEGIN_DECLS
 
 gboolean SF(gtk_show_uri)  (GdkScreen   *screen,

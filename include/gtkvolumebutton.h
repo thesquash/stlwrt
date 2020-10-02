@@ -23,6 +23,9 @@
 #ifndef __GTK_VOLUME_BUTTON_H__
 #define __GTK_VOLUME_BUTTON_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkscalebutton.h>
 
 G_BEGIN_DECLS

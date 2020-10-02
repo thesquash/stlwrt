@@ -22,6 +22,9 @@
 #ifndef __GTK_SEPARATOR_TOOL_ITEM_H__
 #define __GTK_SEPARATOR_TOOL_ITEM_H__
 
+#include <stlwrt.h>
+
+
 #include <gtktoolitem.h>
 
 G_BEGIN_DECLS

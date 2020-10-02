@@ -20,6 +20,9 @@
 #ifndef __GTK_ENUMS_H__
 #define __GTK_ENUMS_H__
 
+#include <stlwrt.h>
+
+
 #include <glib-object.h>
 
 G_BEGIN_DECLS

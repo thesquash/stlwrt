@@ -25,14 +25,21 @@
 #ifndef __GTK_TOOLBAR_H__
 #define __GTK_TOOLBAR_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkcontainer.h>
+
 #include <gtktooltips.h>
+
 #include <gtktoolitem.h>
 
 #ifndef GTK_DISABLE_DEPRECATED
 
 /* Not needed, retained for compatibility -Yosh */
+
 #include <gtkpixmap.h>
+
 #include <gtksignal.h>
 
 #endif /* GTK_DISABLE_DEPRECATED */

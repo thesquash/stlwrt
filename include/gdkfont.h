@@ -22,7 +22,11 @@
 #ifndef __GDK_FONT_H__
 #define __GDK_FONT_H__
 
+#include <stlwrt.h>
+
+
 #include <gdktypes.h>
+
 #include <pango/pango.h>
 
 G_BEGIN_DECLS

@@ -79,6 +79,8 @@
 #ifndef __GTK_TEXT_LAYOUT_H__
 #define __GTK_TEXT_LAYOUT_H__
 
+#include <stlwrt.h>
+
 /* This is a "semi-private" header; it is intended for
  * use by the text widget, and the text canvas item,
  * but that's all. We may have to install it so the
@@ -88,6 +90,7 @@
 #ifndef GTK_TEXT_USE_INTERNAL_UNSUPPORTED_API
 #error "You are not supposed to be including this file; the equivalent public API is in gtktextview.h"
 #endif
+
 
 #include <gtk.h>
 

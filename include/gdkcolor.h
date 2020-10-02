@@ -20,7 +20,13 @@
 #ifndef __GDK_COLOR_H__
 #define __GDK_COLOR_H__
 
+#include <stlwrt.h>
+
+
 #include <cairo.h>
+
+#include <gdkvisual.h>
+
 #include <gdktypes.h>
 
 G_BEGIN_DECLS
@@ -32,13 +38,12 @@ G_BEGIN_DECLS
  *    be used to draw into. Therefore, sharing colors between
  *    colormaps is a bad idea.
  */
-struct _GdkColor
-{
+STLWRT_DECLARE_BOXED_TYPE(GdkColor, gdk_color,
   guint32 pixel;
   guint16 red;
   guint16 green;
   guint16 blue;
-};
+)
 
 /* The colormap type.
  */
@@ -126,8 +131,6 @@ guint     SF(gdk_color_hash)      (const GdkColor *colora);
 gboolean  SF(gdk_color_equal)     (const GdkColor *colora,
 			       const GdkColor *colorb);
 gchar *   SF(gdk_color_to_string) (const GdkColor *color);
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS (gdk_color)
 
 /* The following functions are deprecated */
 #ifndef GDK_DISABLE_DEPRECATED

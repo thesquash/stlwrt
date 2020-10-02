@@ -20,6 +20,9 @@
 #ifndef __GTK_IM_CONTEXT_SIMPLE_H__
 #define __GTK_IM_CONTEXT_SIMPLE_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkimcontext.h>
 
 

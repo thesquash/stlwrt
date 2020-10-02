@@ -20,6 +20,9 @@
 #ifndef __GTK_VSEPARATOR_H__
 #define __GTK_VSEPARATOR_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkseparator.h>
 
 G_BEGIN_DECLS

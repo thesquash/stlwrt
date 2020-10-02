@@ -20,6 +20,9 @@
 #ifndef __GTK_DEBUG_H__
 #define __GTK_DEBUG_H__
 
+#include <stlwrt.h>
+
+
 #include <glib.h>
 
 G_BEGIN_DECLS

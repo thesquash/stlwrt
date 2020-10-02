@@ -21,7 +21,11 @@
 #ifndef __GTK_RECENT_CHOOSER_MENU_H__
 #define __GTK_RECENT_CHOOSER_MENU_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkmenu.h>
+
 #include <gtkrecentchooser.h>
 
 G_BEGIN_DECLS

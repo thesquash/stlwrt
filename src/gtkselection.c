@@ -60,7 +60,7 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 #ifdef GDK_WINDOWING_X11
-#include "x11/gdkx.h"
+#include "gdkx.h"
 #endif
 
 #ifdef GDK_WINDOWING_WIN32

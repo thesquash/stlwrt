@@ -22,6 +22,9 @@
 #ifndef __GTK_HRULER_H__
 #define __GTK_HRULER_H__
 
+#include <stlwrt.h>
+
+
 
 #include <gtkruler.h>
 

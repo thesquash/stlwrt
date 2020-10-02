@@ -44,6 +44,8 @@ SOFTWARE.
 #ifndef __GDK_REGION_GENERIC_H__
 #define __GDK_REGION_GENERIC_H__
 
+#include <stlwrt.h>
+
 typedef GdkSegment GdkRegionBox;
 
 /* 

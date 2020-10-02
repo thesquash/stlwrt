@@ -20,12 +20,17 @@
 #ifndef __GTK_TREE_PRIVATE_H__
 #define __GTK_TREE_PRIVATE_H__
 
+#include <stlwrt.h>
+
 
 G_BEGIN_DECLS
 
 
+
 #include <gtktreeview.h>
+
 #include <gtktreeselection.h>
+
 #include <gtkrbtree.h>
 
 #define TREE_VIEW_DRAG_WIDTH 6

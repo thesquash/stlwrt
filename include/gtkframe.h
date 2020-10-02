@@ -20,6 +20,9 @@
 #ifndef __GTK_FRAME_H__
 #define __GTK_FRAME_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkbin.h>
 
 

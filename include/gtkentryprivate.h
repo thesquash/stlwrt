@@ -20,10 +20,17 @@
 #ifndef __GTK_ENTRY_PRIVATE_H__
 #define __GTK_ENTRY_PRIVATE_H__
 
+#include <stlwrt.h>
+
+
 #include <gtktreeviewcolumn.h>
+
 #include <gtktreemodelfilter.h>
+
 #include <gtkliststore.h>
+
 #include <gtkentrycompletion.h>
+
 #include <gtkentry.h>
 
 G_BEGIN_DECLS

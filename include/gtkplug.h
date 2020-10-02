@@ -19,7 +19,11 @@
 #ifndef __GTK_PLUG_H__
 #define __GTK_PLUG_H__
 
+#include <stlwrt.h>
+
+
 #include <gtksocket.h>
+
 #include <gtkwindow.h>
 
 

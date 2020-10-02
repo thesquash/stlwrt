@@ -21,15 +21,18 @@
 #ifndef __GTK_PRINT_SETTINGS_H__
 #define __GTK_PRINT_SETTINGS_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkpapersize.h>
 
 G_BEGIN_DECLS
 
-typedef struct _GtkPrintSettings GtkPrintSettings;
-
 #define GTK_TYPE_PRINT_SETTINGS    (gtk_print_settings_get_type ())
 #define GTK_PRINT_SETTINGS(obj)    (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PRINT_SETTINGS, GtkPrintSettings))
 #define GTK_IS_PRINT_SETTINGS(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_PRINT_SETTINGS))
+
+STLWRT_DECLARE_OPAQUE_TYPE(GtkPrintSettings, gtk_print_settings)
 
 typedef void  (*GtkPrintSettingsFunc)  (const gchar *key,
 					const gchar *value,
@@ -41,8 +44,6 @@ struct _GtkPageRange
   gint start;
   gint end;
 };
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_print_settings)
 
 GtkPrintSettings *SF(gtk_print_settings_new)                     (void);
 

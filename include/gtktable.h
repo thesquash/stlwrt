@@ -20,6 +20,9 @@
 #ifndef __GTK_TABLE_H__
 #define __GTK_TABLE_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkcontainer.h>
 
 

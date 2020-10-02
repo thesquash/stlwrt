@@ -21,6 +21,9 @@
 #ifndef __GTK_NOTEBOOK_H__
 #define __GTK_NOTEBOOK_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkcontainer.h>
 
 

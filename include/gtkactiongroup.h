@@ -26,8 +26,12 @@
 #ifndef __GTK_ACTION_GROUP_H__
 #define __GTK_ACTION_GROUP_H__
 
+#include <stlwrt.h>
+
+
 
 #include <gtkaction.h>
+
 #include <gtktypeutils.h> /* for GtkTranslateFunc */
 
 G_BEGIN_DECLS

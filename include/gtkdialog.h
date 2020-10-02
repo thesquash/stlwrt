@@ -20,6 +20,9 @@
 #ifndef __GTK_DIALOG_H__
 #define __GTK_DIALOG_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkwindow.h>
 
 

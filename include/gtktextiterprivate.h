@@ -20,11 +20,16 @@
 #ifndef __GTK_TEXT_ITER_PRIVATE_H__
 #define __GTK_TEXT_ITER_PRIVATE_H__
 
+#include <stlwrt.h>
+
+
 #include <gtktextiter.h>
 
 G_BEGIN_DECLS
 
+
 #include <gtktextiter.h>
+
 #include <gtktextbtree.h>
 
 GtkTextLineSegment *_gtk_text_iter_get_indexable_segment      (const GtkTextIter *iter);

@@ -22,7 +22,11 @@
 #ifndef __GTK_MENU_TOOL_BUTTON_H__
 #define __GTK_MENU_TOOL_BUTTON_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkmenu.h>
+
 #include <gtktoolbutton.h>
 
 G_BEGIN_DECLS

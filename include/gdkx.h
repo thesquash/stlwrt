@@ -20,9 +20,14 @@
 #ifndef __GDK_X_H__
 #define __GDK_X_H__
 
+#include <stlwrt.h>
+
+
 #include <gdkprivate.h>
 
+
 #include <X11/Xlib.h>
+
 #include <X11/Xutil.h>
 
 G_BEGIN_DECLS
@@ -74,7 +79,9 @@ gint     SF(gdk_x11_get_default_screen)       (void);
 
 #ifdef STLWRT_COMPILATION
 
+
 #include "gdkprivate-x11.h"
+
 #include "gdkscreen-x11.h"
 
 #define GDK_DISPLAY_XDISPLAY(display) (GDK_DISPLAY_X11(display)->xdisplay)
@@ -197,7 +204,7 @@ void        SF(gdk_x11_register_standard_event_type) (GdkDisplay *display,
 gpointer             SF(gdk_x11_font_get_xfont)    (GdkFont *font);
 #define GDK_FONT_XFONT(font)          (SF(gdk_x11_font_get_xfont) (font))
 
-#define SF(gdk_font_lookup_for_display)(display, xid) ((GdkFont*) SF(gdk_xid_table_lookup_for_display) (display, ((xid)|XID_FONT_BIT)))
+#define gdk_font_lookup_for_display(display, xid) ((GdkFont*) gdk_xid_table_lookup_for_display (display, ((xid)|XID_FONT_BIT)))
 
 #endif /* !GDK_DISABLE_DEPRECATED || STLWRT_COMPILATION */
 
@@ -210,7 +217,7 @@ const char *         SF(gdk_x11_font_get_name)     (GdkFont *font);
 
 #ifndef GDK_MULTIHEAD_SAFE
 
-#define SF(gdk_font_lookup)(xid)	   ((GdkFont*) SF(gdk_xid_table_lookup) (xid))
+#define gdk_font_lookup(xid)	   ((GdkFont*) gdk_xid_table_lookup (xid))
 
 #endif /* GDK_MULTIHEAD_SAFE */
 #endif /* GDK_DISABLE_DEPRECATED */

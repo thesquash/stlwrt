@@ -21,6 +21,9 @@
 #ifndef __GTK_OFFSCREEN_WINDOW_H__
 #define __GTK_OFFSCREEN_WINDOW_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkwindow.h>
 
 G_BEGIN_DECLS

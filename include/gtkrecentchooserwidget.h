@@ -21,7 +21,11 @@
 #ifndef __GTK_RECENT_CHOOSER_WIDGET_H__
 #define __GTK_RECENT_CHOOSER_WIDGET_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkrecentchooser.h>
+
 #include <gtkvbox.h>
 
 G_BEGIN_DECLS

@@ -20,6 +20,9 @@
 #ifndef __GTK_MISC_H__
 #define __GTK_MISC_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkwidget.h>
 
 

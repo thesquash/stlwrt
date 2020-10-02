@@ -20,7 +20,11 @@
 #ifndef __GTK_RANGE_H__
 #define __GTK_RANGE_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkadjustment.h>
+
 #include <gtkwidget.h>
 
 

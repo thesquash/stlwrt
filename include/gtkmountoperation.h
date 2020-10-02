@@ -20,6 +20,8 @@
 #ifndef __GTK_MOUNT_OPERATION_H__
 #define __GTK_MOUNT_OPERATION_H__
 
+#include <stlwrt.h>
+
 G_BEGIN_DECLS
 
 #define GTK_TYPE_MOUNT_OPERATION         (gtk_mount_operation_get_type ())

@@ -50,6 +50,8 @@
 #ifndef __GTK_TEXT_MARK_H__
 #define __GTK_TEXT_MARK_H__
 
+#include <stlwrt.h>
+
 G_BEGIN_DECLS
 
 /* The GtkTextMark data type */

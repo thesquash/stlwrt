@@ -21,7 +21,11 @@
 #ifndef __GTK_COLOR_SELECTION_H__
 #define __GTK_COLOR_SELECTION_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkdialog.h>
+
 #include <gtkvbox.h>
 
 G_BEGIN_DECLS

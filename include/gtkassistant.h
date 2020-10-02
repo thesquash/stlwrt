@@ -26,6 +26,9 @@
 #ifndef __GTK_ASSISTANT_H__
 #define __GTK_ASSISTANT_H__
 
+#include <stlwrt.h>
+
+
 
 #include <gtkwindow.h>
 

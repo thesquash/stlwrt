@@ -26,7 +26,7 @@
 #include <gtkprivate.h>
 #include <gtkplugprivate.h>
 
-#include "x11/gdkx.h"
+#include "gdkx.h"
 
 #include <gtkxembed.h>
 

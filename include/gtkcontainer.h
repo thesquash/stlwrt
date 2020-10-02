@@ -20,7 +20,11 @@
 #ifndef __GTK_CONTAINER_H__
 #define __GTK_CONTAINER_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkwidget.h>
+
 #include <gtkadjustment.h>
 
 

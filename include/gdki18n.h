@@ -20,14 +20,19 @@
 #ifndef __GDK_I18N_H__
 #define __GDK_I18N_H__
 
+#include <stlwrt.h>
+
 #ifndef GDK_DISABLE_DEPRECATED
 
 /* GDK uses "glib". (And so does GTK).
  */
+
 #include <glib.h>
+
 #include <gdkconfig.h>
 
 /* international string support */
+
 
 #include <stdlib.h>
 

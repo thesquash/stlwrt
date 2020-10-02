@@ -25,6 +25,9 @@
 #ifndef __GTK_SPINNER_H__
 #define __GTK_SPINNER_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkdrawingarea.h>
 
 G_BEGIN_DECLS

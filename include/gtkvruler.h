@@ -22,6 +22,9 @@
 #ifndef __GTK_VRULER_H__
 #define __GTK_VRULER_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkruler.h>
 
 G_BEGIN_DECLS

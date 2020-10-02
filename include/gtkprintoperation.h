@@ -21,12 +21,21 @@
 #ifndef __GTK_PRINT_OPERATION_H__
 #define __GTK_PRINT_OPERATION_H__
 
+#include <stlwrt.h>
+
+
 #include <cairo.h>
+
 #include <gtkmain.h>
+
 #include <gtkwindow.h>
+
 #include <gtkpagesetup.h>
+
 #include <gtkprintsettings.h>
+
 #include <gtkprintcontext.h>
+
 #include <gtkprintoperationpreview.h>
 
 

@@ -20,7 +20,11 @@
 #ifndef __GTK_TEXT_TYPES_H__
 #define __GTK_TEXT_TYPES_H__
 
+#include <stlwrt.h>
+
+
 #include <gtk.h>
+
 #include <gtktexttagprivate.h>
 
 G_BEGIN_DECLS

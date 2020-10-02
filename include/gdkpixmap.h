@@ -20,7 +20,11 @@
 #ifndef __GDK_PIXMAP_H__
 #define __GDK_PIXMAP_H__
 
+#include <stlwrt.h>
+
+
 #include <gdktypes.h>
+
 #include <gdkdrawable.h>
 
 G_BEGIN_DECLS

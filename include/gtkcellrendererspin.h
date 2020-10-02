@@ -20,6 +20,9 @@
 #ifndef __GTK_CELL_RENDERER_SPIN_H__
 #define __GTK_CELL_RENDERER_SPIN_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkcellrenderertext.h>
 
 G_BEGIN_DECLS

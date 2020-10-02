@@ -20,6 +20,9 @@
 #ifndef __GTK_DRAWING_AREA_H__
 #define __GTK_DRAWING_AREA_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkwidget.h>
 
 

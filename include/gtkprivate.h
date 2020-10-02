@@ -20,6 +20,9 @@
 #ifndef __GTK_PRIVATE_H__
 #define __GTK_PRIVATE_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkwidget.h>
 
 G_BEGIN_DECLS

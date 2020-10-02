@@ -20,9 +20,15 @@
 #ifndef __GDK_PIXBUF_H__
 #define __GDK_PIXBUF_H__
 
+#include <stlwrt.h>
+
+
 #include <cairo.h>
+
 #include <gdktypes.h>
+
 #include <gdkrgb.h>
+
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 G_BEGIN_DECLS

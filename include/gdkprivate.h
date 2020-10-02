@@ -20,6 +20,9 @@
 #ifndef __GDK_PRIVATE_H__
 #define __GDK_PRIVATE_H__
 
+#include <stlwrt.h>
+
+
 #include <gdk.h>
 
 G_BEGIN_DECLS

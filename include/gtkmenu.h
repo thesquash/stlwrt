@@ -20,7 +20,11 @@
 #ifndef __GTK_MENU_H__
 #define __GTK_MENU_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkaccelgroup.h>
+
 #include <gtkmenushell.h>
 
 
@@ -221,9 +225,9 @@ gint       SF(gtk_menu_get_monitor)           (GtkMenu             *menu);
 GList*     SF(gtk_menu_get_for_attach_widget) (GtkWidget           *widget); 
 
 #ifndef GTK_DISABLE_DEPRECATED
-#define SF(gtk_menu_append)(menu,child)	SF(gtk_menu_shell_append)  ((GtkMenuShell *)(menu),(child))
-#define SF(gtk_menu_prepend)(menu,child)    SF(gtk_menu_shell_prepend) ((GtkMenuShell *)(menu),(child))
-#define SF(gtk_menu_insert)(menu,child,pos)	SF(gtk_menu_shell_insert) ((GtkMenuShell *)(menu),(child),(pos))
+#define gtk_menu_append(menu,child)	gtk_menu_shell_append  ((GtkMenuShell *)(menu),(child))
+#define gtk_menu_prepend(menu,child)    gtk_menu_shell_prepend ((GtkMenuShell *)(menu),(child))
+#define gtk_menu_insert(menu,child,pos)	gtk_menu_shell_insert  ((GtkMenuShell *)(menu),(child),(pos))
 #endif /* GTK_DISABLE_DEPRECATED */
 
 void     SF(gtk_menu_set_reserve_toggle_size) (GtkMenu  *menu,

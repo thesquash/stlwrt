@@ -20,7 +20,11 @@
 #ifndef __GDK_GC_H__
 #define __GDK_GC_H__
 
+#include <stlwrt.h>
+
+
 #include <gdkcolor.h>
+
 #include <gdktypes.h>
 
 G_BEGIN_DECLS
@@ -208,23 +212,17 @@ typedef struct _GdkGCValuesThin GdkGCValues;
 #define GDK_GC_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GDK_TYPE_GC, GdkGCClass))
 
 
-/********************************************************************/
-struct _GdkGCProps
-{
-
-
+STLWRT_DECLARE_FTYPE_FPARENT(GdkGC, gdk_gc, GObject,
   gint  (clip_x_origin);
   gint  (clip_y_origin);
   gint  (ts_x_origin);
   gint  (ts_y_origin);
 
   GdkColormap * (colormap);
-};
+)
 
 struct _GdkGCPrivate
 {
-
-  
   GdkRegion *clip_region;
 
   guint32 region_tag_applied;
@@ -246,35 +244,6 @@ struct _GdkGCPrivate
   guint fill : 2;
   guint exposures : 2;
 };
-
-struct _GdkGCFat
-{
-  GObject   parent_instance;
-
-  struct _GdkGCProps instance_properties;
-};
-
-struct _GdkGCThin
-{
-  GObject  parent_instance;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GdkGCFat   fat_instance;
-  struct _GdkGCThin  thin_instance;
-}   GdkGC;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GdkGCFat GdkGC;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GdkGCThin GdkGC;
-#endif
-/********************************************************************/
-
 
 
 struct _GdkGCClass 
@@ -300,10 +269,6 @@ struct _GdkGCClass
 
 
 #ifndef GDK_DISABLE_DEPRECATED
-GType  SF(_T2_gdk_gc_get_type)            (void) G_GNUC_CONST;
-GType  SF(_3T_gdk_gc_get_type)            (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType  SF(gdk_gc_get_type)            (void) G_GNUC_CONST;
 GdkGC *SF(gdk_gc_new)		  (GdkDrawable	    *drawable);
 GdkGC *SF(gdk_gc_new_with_values)	  (GdkDrawable	    *drawable,
 				   GdkGCValues	    *values,

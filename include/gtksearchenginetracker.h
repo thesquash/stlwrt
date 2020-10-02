@@ -23,6 +23,9 @@
 #ifndef __GTK_SEARCH_ENGINE_TRACKER_H__
 #define __GTK_SEARCH_ENGINE_TRACKER_H__
 
+#include <stlwrt.h>
+
+
 #include "gtksearchengine.h"
 
 G_BEGIN_DECLS

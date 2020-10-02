@@ -21,7 +21,11 @@
 #ifndef __GTK_FILE_SYSTEM_H__
 #define __GTK_FILE_SYSTEM_H__
 
+#include <stlwrt.h>
+
+
 #include <gio/gio.h>
+
 #include <gtkwidget.h>	/* For icon handling */
 
 G_BEGIN_DECLS

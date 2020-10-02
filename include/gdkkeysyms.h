@@ -30,8 +30,11 @@
 #ifndef __GDK_KEYSYMS_H__
 #define __GDK_KEYSYMS_H__
 
+#include <stlwrt.h>
+
 /* For GTK 2, we include compatibility defines by default. */
 #ifndef __G_IR_SCANNER__
+
 #include <gdkkeysyms-compat.h> 
 #endif
 

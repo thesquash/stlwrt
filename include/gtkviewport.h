@@ -20,7 +20,11 @@
 #ifndef __GTK_VIEWPORT_H__
 #define __GTK_VIEWPORT_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkadjustment.h>
+
 #include <gtkbin.h>
 
 G_BEGIN_DECLS

@@ -22,6 +22,9 @@
 #ifndef __GTK_CALENDAR_H__
 #define __GTK_CALENDAR_H__
 
+#include <stlwrt.h>
+
+
 
 #include <gtkwidget.h>
 

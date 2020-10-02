@@ -20,8 +20,13 @@
 #ifndef __GDK_TYPES_H__
 #define __GDK_TYPES_H__
 
+#include <stlwrt.h>
+
+
 #include <glib.h>
+
 #include <pango/pango.h>
+
 #include <glib-object.h>
 
 #ifdef G_OS_WIN32
@@ -39,6 +44,7 @@
  * itself, but also occasionally when compiling programs that use GDK
  * (or GTK). One such setting is what windowing API backend is in use.
  */
+
 #include <gdkconfig.h>
 
 /* some common magic values */
@@ -167,13 +173,12 @@ struct _GdkPoint
   gint y;
 };
 
-struct _GdkRectangle
-{
+STLWRT_DECLARE_BOXED_TYPE(GdkRectangle, gdk_rectangle,
   gint x;
   gint y;
   gint width;
   gint height;
-};
+)
 
 struct _GdkSegment
 {
@@ -193,8 +198,6 @@ struct _GdkSpan
 
 /* Rectangle utilities
  */
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS (gdk_rectangle_get_type)
 
 gboolean SF(gdk_rectangle_intersect) (const GdkRectangle *src1,
 				  const GdkRectangle *src2,

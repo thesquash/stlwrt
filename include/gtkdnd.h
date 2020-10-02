@@ -21,7 +21,11 @@
 #ifndef __GTK_DND_H__
 #define __GTK_DND_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkwidget.h>
+
 #include <gtkselection.h>
 
 

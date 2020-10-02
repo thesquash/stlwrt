@@ -21,6 +21,9 @@
 #ifndef __GTK_STATUSBAR_H__
 #define __GTK_STATUSBAR_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkhbox.h>
 
 G_BEGIN_DECLS

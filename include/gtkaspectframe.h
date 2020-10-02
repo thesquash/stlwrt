@@ -21,6 +21,9 @@
 #ifndef __GTK_ASPECT_FRAME_H__
 #define __GTK_ASPECT_FRAME_H__
 
+#include <stlwrt.h>
+
+
 
 #include <gtkframe.h>
 

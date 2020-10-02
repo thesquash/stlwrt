@@ -20,6 +20,9 @@
 #ifndef __GTK_PANGO_H__
 #define __GTK_PANGO_H__
 
+#include <stlwrt.h>
+
+
 #include <pango/pangocairo.h>
 
 

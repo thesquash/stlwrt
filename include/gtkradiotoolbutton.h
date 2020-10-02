@@ -23,6 +23,9 @@
 #ifndef __GTK_RADIO_TOOL_BUTTON_H__
 #define __GTK_RADIO_TOOL_BUTTON_H__
 
+#include <stlwrt.h>
+
+
 #include <gtktoggletoolbutton.h>
 
 G_BEGIN_DECLS

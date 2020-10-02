@@ -20,6 +20,9 @@
 #ifndef __GDK_VISUAL_H__
 #define __GDK_VISUAL_H__
 
+#include <stlwrt.h>
+
+
 #include <gdktypes.h>
 
 G_BEGIN_DECLS
@@ -63,11 +66,8 @@ typedef enum
  *   to be in position (according to the "mask"). "prec" refers to how
  *   much precision the pixel value contains for a particular primary.
  */
-/********************************************************************/
-struct _GdkVisualProps
-{
 
-  
+STLWRT_DECLARE_FTYPE_FPARENT (GdkVisual, gdk_visual, GObject,
   GdkVisualType  (type);
   gint  (depth);
   GdkByteOrder  (byte_order);
@@ -85,42 +85,8 @@ struct _GdkVisualProps
   guint32  (blue_mask);
   gint  (blue_shift);
   gint  (blue_prec);
-};
+)
 
-struct _GdkVisualFat
-{
-  GObject   parent_instance;
-
-  struct _GdkVisualProps instance_properties;
-};
-
-struct _GdkVisualThin
-{
-  GObject  parent_instance;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GdkVisualFat   fat_instance;
-  struct _GdkVisualThin  thin_instance;
-}   GdkVisual;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GdkVisualFat GdkVisual;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GdkVisualThin GdkVisual;
-#endif
-/********************************************************************/
-
-
-
-GType         SF(_T2_gdk_visual_get_type)            (void) G_GNUC_CONST;
-GType         SF(_3T_gdk_visual_get_type)            (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType         SF(gdk_visual_get_type)            (void) G_GNUC_CONST;
 
 #ifndef GDK_MULTIHEAD_SAFE
 gint	      SF(gdk_visual_get_best_depth)	     (void);
@@ -139,6 +105,9 @@ void SF(gdk_query_visual_types) (GdkVisualType  **visual_types,
 
 GList* SF(gdk_list_visuals) (void);
 #endif
+
+
+#include <gdkscreen.h>
 
 GdkScreen *SF(gdk_visual_get_screen) (GdkVisual *visual);
 
@@ -161,8 +130,8 @@ void          SF(gdk_visual_get_blue_pixel_details)  (GdkVisual *visual,
                                                   gint      *precision);
 
 #ifndef GDK_DISABLE_DEPRECATED
-#define SF(gdk_visual_ref)(v) g_object_ref(v)
-#define SF(gdk_visual_unref)(v) g_object_unref(v)
+#define gdk_visual_ref(v)   g_object_ref(v)
+#define gdk_visual_unref(v) g_object_unref(v)
 #endif
 
 G_END_DECLS

@@ -20,6 +20,9 @@
 #ifndef __GTK_MENU_ITEM_H__
 #define __GTK_MENU_ITEM_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkbin.h>
 
 
@@ -122,7 +125,7 @@ void      SF(_gtk_menu_item_popdown_submenu)      (GtkWidget           *menu_ite
 
 #ifndef GTK_DISABLE_DEPRECATED
 void       SF(gtk_menu_item_remove_submenu)       (GtkMenuItem         *menu_item);
-#define SF(gtk_menu_item_right_justify)(menu_item) SF(gtk_menu_item_set_right_justified) ((menu_item), TRUE)
+#define gtk_menu_item_right_justify(menu_item) gtk_menu_item_set_right_justified ((menu_item), TRUE)
 #endif /* GTK_DISABLE_DEPRECATED */
 
 G_END_DECLS

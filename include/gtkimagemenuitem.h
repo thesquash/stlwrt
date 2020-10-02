@@ -20,6 +20,9 @@
 #ifndef __GTK_IMAGE_MENU_ITEM_H__
 #define __GTK_IMAGE_MENU_ITEM_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkmenuitem.h>
 
 

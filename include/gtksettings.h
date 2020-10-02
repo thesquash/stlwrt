@@ -19,6 +19,9 @@
 #ifndef __GTK_SETTINGS_H__
 #define __GTK_SETTINGS_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkrc.h>
 
 G_BEGIN_DECLS

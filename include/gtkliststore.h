@@ -20,8 +20,13 @@
 #ifndef __GTK_LIST_STORE_H__
 #define __GTK_LIST_STORE_H__
 
+#include <stlwrt.h>
+
+
 #include <gdkconfig.h>
+
 #include <gtktreemodel.h>
+
 #include <gtktreesortable.h>
 
 

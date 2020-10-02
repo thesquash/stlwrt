@@ -21,7 +21,11 @@
 #ifndef __GTK_FILE_CHOOSER_H__
 #define __GTK_FILE_CHOOSER_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkfilefilter.h>
+
 #include <gtkwidget.h>
 
 G_BEGIN_DECLS
@@ -30,6 +34,7 @@ G_BEGIN_DECLS
 #define GTK_FILE_CHOOSER(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_FILE_CHOOSER, GtkFileChooser))
 #define GTK_IS_FILE_CHOOSER(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FILE_CHOOSER))
 
+STLWRT_DECLARE_OPAQUE_TYPE(GtkFileChooser, gtk_file_chooser)
 
 /**
  * GtkFileChooserAction:
@@ -79,8 +84,6 @@ typedef enum
   GTK_FILE_CHOOSER_CONFIRMATION_ACCEPT_FILENAME,
   GTK_FILE_CHOOSER_CONFIRMATION_SELECT_AGAIN
 } GtkFileChooserConfirmation;
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_file_chooser)
 
 /* GError enumeration for GtkFileChooser */
 /**

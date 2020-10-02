@@ -21,11 +21,13 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __GDK_SCREEN_H__
-#define __GDK_SCREEN_H__
 
 #include <cairo.h>
+
+#include <gdkgc.h>
+
 #include "gdktypes.h"
+
 #include "gdkdisplay.h"
 
 G_BEGIN_DECLS
@@ -40,10 +42,7 @@ typedef struct _GdkScreenClass GdkScreenClass;
 #define GDK_IS_SCREEN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GDK_TYPE_SCREEN))
 #define GDK_SCREEN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GDK_TYPE_SCREEN, GdkScreenClass))
 
-struct _GdkScreen
-{
-  GObject parent_instance;
-
+STLWRT_DECLARE_VTYPE_FPARENT(GdkScreen, gdk_screen, GObject,
   guint  (closed) : 1;
 
   GdkGC * (normal_gcs[32]);
@@ -52,7 +51,7 @@ struct _GdkScreen
 
   cairo_font_options_t * (font_options);
   double  (resolution);	/* pixels/points scale factor for fonts */
-};
+)
 
 struct _GdkScreenClass
 {
@@ -63,10 +62,9 @@ struct _GdkScreenClass
   void (*monitors_changed) (GdkScreen *screen);
 };
 
-GType        SF(_T2_gdk_screen_get_type)              (void) G_GNUC_CONST;
-GType        SF(_3T_gdk_screen_get_type)              (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType        SF(gdk_screen_get_type)              (void) G_GNUC_CONST;
+
+#include <gdkvisual.h>
+
 GdkColormap *SF(gdk_screen_get_default_colormap)  (GdkScreen   *screen);
 void         SF(gdk_screen_set_default_colormap)  (GdkScreen   *screen,
 					       GdkColormap *colormap);
@@ -128,5 +126,3 @@ GdkWindow *SF(gdk_screen_get_active_window) (GdkScreen *screen);
 GList     *SF(gdk_screen_get_window_stack)  (GdkScreen *screen);
 
 G_END_DECLS
-
-#endif				/* __GDK_SCREEN_H__ */

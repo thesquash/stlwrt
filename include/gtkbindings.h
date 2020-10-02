@@ -24,6 +24,9 @@
 #ifndef __GTK_BINDINGS_H__
 #define __GTK_BINDINGS_H__
 
+#include <stlwrt.h>
+
+
 
 #include <gdk.h>
 

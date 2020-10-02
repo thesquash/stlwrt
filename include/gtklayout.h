@@ -24,7 +24,11 @@
 #ifndef __GTK_LAYOUT_H__
 #define __GTK_LAYOUT_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkcontainer.h>
+
 #include <gtkadjustment.h>
 
 

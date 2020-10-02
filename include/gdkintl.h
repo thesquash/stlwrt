@@ -20,7 +20,9 @@
 #ifndef __GDKINTL_H__
 #define __GDKINTL_H__
 
+
 #include "config.h"
+
 #include <glib/gi18n-lib.h>
 
 #ifdef ENABLE_NLS

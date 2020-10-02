@@ -20,9 +20,15 @@
 #ifndef __GTK_CELL_LAYOUT_H__
 #define __GTK_CELL_LAYOUT_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkcellrenderer.h>
+
 #include <gtktreeviewcolumn.h>
+
 #include <gtkbuildable.h>
+
 #include <gtkbuilder.h>
 
 G_BEGIN_DECLS
@@ -32,7 +38,6 @@ G_BEGIN_DECLS
 #define GTK_IS_CELL_LAYOUT(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_CELL_LAYOUT))
 #define GTK_CELL_LAYOUT_GET_IFACE(obj)  (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GTK_TYPE_CELL_LAYOUT, GtkCellLayoutIface))
 
-typedef struct _GtkCellLayoutIface      GtkCellLayoutIface;
 
 /* keep in sync with GtkTreeCellDataFunc */
 typedef void (* GtkCellLayoutDataFunc) (GtkCellLayout   *cell_layout,
@@ -41,10 +46,7 @@ typedef void (* GtkCellLayoutDataFunc) (GtkCellLayout   *cell_layout,
                                         GtkTreeIter     *iter,
                                         gpointer         data);
 
-struct _GtkCellLayoutIface
-{
-  GTypeInterface g_iface;
-
+STLWRT_DECLARE_INTERFACE(GtkCellLayout, gtk_cell_layout,
   /* Virtual Table */
   void (* pack_start)         (GtkCellLayout         *cell_layout,
                                GtkCellRenderer       *cell,
@@ -68,9 +70,8 @@ struct _GtkCellLayoutIface
                                GtkCellRenderer       *cell,
                                gint                   position);
   GList* (* get_cells)        (GtkCellLayout         *cell_layout);
-};
+)
 
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_cell_layout)
 
 void  SF(gtk_cell_layout_pack_start)         (GtkCellLayout         *cell_layout,
                                           GtkCellRenderer       *cell,

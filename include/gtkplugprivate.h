@@ -19,6 +19,8 @@
 #ifndef __GTK_PLUG_PRIVATE_H__
 #define __GTK_PLUG_PRIVATE_H__
 
+#include <stlwrt.h>
+
 /* In gtkplug.c: */
 void _gtk_plug_send_delete_event      (GtkWidget        *widget);
 void _gtk_plug_add_all_grabbed_keys   (GtkPlug          *plug);

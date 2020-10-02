@@ -20,8 +20,12 @@
 #ifndef __GTK_ACCEL_GROUP_H__
 #define __GTK_ACCEL_GROUP_H__
 
+#include <stlwrt.h>
+
+
 
 #include <gdk.h>
+
 #include <gtkenums.h>
 
 G_BEGIN_DECLS

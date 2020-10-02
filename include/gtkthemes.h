@@ -21,8 +21,12 @@
 #ifndef __GTK_THEMES_H__
 #define __GTK_THEMES_H__
 
+#include <stlwrt.h>
+
+
 
 #include <gtkstyle.h>
+
 #include <gtkwidget.h>
 
 
@@ -32,7 +36,7 @@ G_BEGIN_DECLS
 #define GTK_THEME_ENGINE(theme_engine)    (G_TYPE_CHECK_INSTANCE_CAST ((theme_engine), GTK_TYPE_THEME_ENGINE, GtkThemeEngine))
 #define GTK_IS_THEME_ENGINE(theme_engine) (G_TYPE_CHECK_INSTANCE_TYPE ((theme_engine), GTK_TYPE_THEME_ENGINE))
 
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_theme_engine)
+STLWRT_DECLARE_OPAQUE_TYPE(GtkThemeEngine, gtk_theme_engine)
 
 GtkThemeEngine *gtk_theme_engine_get             (const gchar     *name);
 GtkRcStyle     *gtk_theme_engine_create_rc_style (GtkThemeEngine  *engine);

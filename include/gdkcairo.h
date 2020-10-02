@@ -20,8 +20,13 @@
 #ifndef __GDK_CAIRO_H__
 #define __GDK_CAIRO_H__
 
+#include <stlwrt.h>
+
+
 #include <gdkcolor.h>
+
 #include <gdkpixbuf.h>
+
 #include <pango/pangocairo.h>
 
 G_BEGIN_DECLS

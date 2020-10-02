@@ -20,6 +20,9 @@
 #ifndef __GTK_CUSTOM_PAPER_UNIX_DIALOG_H__
 #define __GTK_CUSTOM_PAPER_UNIX_DIALOG_H__
 
+#include <stlwrt.h>
+
+
 #include <gtk.h>
 
 G_BEGIN_DECLS

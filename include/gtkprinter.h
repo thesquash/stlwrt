@@ -20,7 +20,11 @@
 #ifndef __GTK_PRINTER_H__
 #define __GTK_PRINTER_H__
 
+#include <stlwrt.h>
+
+
 #include <cairo.h>
+
 #include <gtk.h>
 
 G_BEGIN_DECLS
@@ -44,16 +48,12 @@ typedef enum
   GTK_PRINT_CAPABILITY_NUMBER_UP_LAYOUT = 1 << 9
 } GtkPrintCapabilities;
 
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_printer)
-
 #define GTK_TYPE_PRINTER                  (gtk_printer_get_type ())
 #define GTK_PRINTER(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PRINTER, GtkPrinter))
 #define GTK_PRINTER_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_PRINTER, GtkPrinterClass))
 #define GTK_IS_PRINTER(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_PRINTER))
 #define GTK_IS_PRINTER_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_PRINTER))
 #define GTK_PRINTER_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_PRINTER, GtkPrinterClass))
-
-typedef struct _GtkPrinter          GtkPrinter;
 
 typedef struct _GtkPrinterClass     GtkPrinterClass;
 typedef struct _GtkPrinterPrivate   GtkPrinterPrivate;
@@ -83,12 +83,9 @@ struct _GtkPrinterPrivate
   GtkPrintBackend *backend;
 };
 
-struct _GtkPrinter
-{
-  GObject parent_instance;
-
+STLWRT_DECLARE_FTYPE_FPARENT(GtkPrinter, gtk_printer, GObject,
   GtkPrinterPrivate * (priv);
-};
+)
 
 struct _GtkPrinterClass
 {

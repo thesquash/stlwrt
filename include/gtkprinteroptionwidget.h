@@ -19,7 +19,11 @@
 #ifndef __GTK_PRINTER_OPTION_WIDGET_H__
 #define __GTK_PRINTER_OPTION_WIDGET_H__
 
+#include <stlwrt.h>
+
+
 #include "gtkprinteroption.h"
+
 #include "gtkhbox.h"
 
 G_BEGIN_DECLS

@@ -26,6 +26,9 @@
 #ifndef __GTK_TOGGLE_ACTION_H__
 #define __GTK_TOGGLE_ACTION_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkaction.h>
 
 G_BEGIN_DECLS

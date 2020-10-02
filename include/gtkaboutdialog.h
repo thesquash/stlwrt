@@ -25,6 +25,9 @@
 #ifndef __GTK_ABOUT_DIALOG_H__
 #define __GTK_ABOUT_DIALOG_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkdialog.h>
 
 G_BEGIN_DECLS

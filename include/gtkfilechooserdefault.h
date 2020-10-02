@@ -21,7 +21,11 @@
 #ifndef __GTK_FILE_CHOOSER_DEFAULT_H__
 #define __GTK_FILE_CHOOSER_DEFAULT_H__
 
+#include <stlwrt.h>
+
+
 #include "gtkfilesystem.h"
+
 #include <gtkwidget.h>
 
 G_BEGIN_DECLS

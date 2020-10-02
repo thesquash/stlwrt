@@ -21,9 +21,15 @@
 #ifndef __GDK_EVENTS_H__
 #define __GDK_EVENTS_H__
 
+#include <stlwrt.h>
+
+
 #include <gdkcolor.h>
+
 #include <gdktypes.h>
+
 #include <gdkdnd.h>
+
 #include <gdkinput.h>
 
 G_BEGIN_DECLS

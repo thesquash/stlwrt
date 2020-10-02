@@ -22,6 +22,9 @@
 #ifndef __GTK_KEY_HASH_H__
 #define __GTK_KEY_HASH_H__
 
+#include <stlwrt.h>
+
+
 #include <gdk.h>
 
 G_BEGIN_DECLS

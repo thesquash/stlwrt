@@ -21,6 +21,9 @@
 #ifndef __GTK_TEXT_BUFFER_SERIALIZE_H__
 #define __GTK_TEXT_BUFFER_SERIALIZE_H__
 
+#include <stlwrt.h>
+
+
 #include <gtktextbuffer.h>
 
 guint8 * _gtk_text_buffer_serialize_rich_text   (GtkTextBuffer     *register_buffer,

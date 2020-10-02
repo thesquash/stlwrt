@@ -21,14 +21,17 @@
 #ifndef __GTK_PAPER_SIZE_H__
 #define __GTK_PAPER_SIZE_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkenums.h>
 
 
 G_BEGIN_DECLS
 
-typedef struct _GtkPaperSize GtkPaperSize;
-
 #define GTK_TYPE_PAPER_SIZE    (gtk_paper_size_get_type ())
+
+STLWRT_DECLARE_OPAQUE_TYPE(GtkPaperSize, gtk_paper_size)
 
 /* Common names, from PWG 5101.1-2002 PWG: Standard for Media Standardized Names */
 #define GTK_PAPER_NAME_A3 "iso_a3"
@@ -38,8 +41,6 @@ typedef struct _GtkPaperSize GtkPaperSize;
 #define GTK_PAPER_NAME_LETTER "na_letter"
 #define GTK_PAPER_NAME_EXECUTIVE "na_executive"
 #define GTK_PAPER_NAME_LEGAL "na_legal"
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_paper_size)
 
 GtkPaperSize *SF(gtk_paper_size_new)          (const gchar  *name);
 GtkPaperSize *SF(gtk_paper_size_new_from_ppd) (const gchar  *ppd_name,

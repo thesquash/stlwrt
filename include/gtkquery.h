@@ -23,6 +23,9 @@
 #ifndef __GTK_QUERY_H__
 #define __GTK_QUERY_H__
 
+#include <stlwrt.h>
+
+
 #include <glib-object.h>
 
 G_BEGIN_DECLS

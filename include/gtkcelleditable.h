@@ -20,6 +20,9 @@
 #ifndef __GTK_CELL_EDITABLE_H__
 #define __GTK_CELL_EDITABLE_H__
 
+#include <stlwrt.h>
+
+
 
 #include <gtkwidget.h>
 
@@ -31,12 +34,8 @@ G_BEGIN_DECLS
 #define GTK_IS_CELL_EDITABLE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_CELL_EDITABLE))
 #define GTK_CELL_EDITABLE_GET_IFACE(obj)  (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GTK_TYPE_CELL_EDITABLE, GtkCellEditableIface))
 
-typedef struct _GtkCellEditableIface GtkCellEditableIface;
 
-struct _GtkCellEditableIface
-{
-  GTypeInterface g_iface;
-
+STLWRT_DECLARE_INTERFACE(GtkCellEditable, gtk_cell_editable,
   /* signals */
   void (* editing_done)  (GtkCellEditable *cell_editable);
   void (* remove_widget) (GtkCellEditable *cell_editable);
@@ -44,10 +43,8 @@ struct _GtkCellEditableIface
   /* virtual table */
   void (* start_editing) (GtkCellEditable *cell_editable,
 			  GdkEvent        *event);
-};
+)
 
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_cell_editable)
 
 void  SF(gtk_cell_editable_start_editing) (GtkCellEditable *cell_editable,
 				       GdkEvent        *event);

@@ -20,7 +20,11 @@
 #ifndef __GTK_MESSAGE_DIALOG_H__
 #define __GTK_MESSAGE_DIALOG_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkdialog.h>
+
 #include <gtkenums.h>
 
 G_BEGIN_DECLS

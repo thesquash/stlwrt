@@ -20,9 +20,15 @@
 #ifndef __GTK_TEXT_VIEW_H__
 #define __GTK_TEXT_VIEW_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkcontainer.h>
+
 #include <gtkimcontext.h>
+
 #include <gtktextbuffer.h>
+
 #include <gtkmenu.h>
 
 G_BEGIN_DECLS

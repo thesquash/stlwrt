@@ -21,6 +21,9 @@
 #ifndef __GTK_FILE_FILTER_H__
 #define __GTK_FILE_FILTER_H__
 
+#include <stlwrt.h>
+
+
 #include <glib-object.h>
 
 G_BEGIN_DECLS
@@ -29,6 +32,7 @@ G_BEGIN_DECLS
 #define GTK_FILE_FILTER(obj)              (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_FILE_FILTER, GtkFileFilter))
 #define GTK_IS_FILE_FILTER(obj)           (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FILE_FILTER))
 
+STLWRT_DECLARE_OPAQUE_TYPE(GtkFileFilter, gtk_file_filter)
 typedef struct _GtkFileFilterInfo GtkFileFilterInfo;
 
 typedef enum {
@@ -43,7 +47,7 @@ typedef gboolean (*GtkFileFilterFunc) (const GtkFileFilterInfo *filter_info,
 
 struct _GtkFileFilterInfo
 {
-  GtkFileFilterFlagsFat   contains;
+  GtkFileFilterFlags   contains;
 
   const gchar *filename;
   const gchar *uri;
@@ -51,8 +55,6 @@ struct _GtkFileFilterInfo
   const gchar *mime_type;
 };
 
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_file_filter)
 
 GtkFileFilter *       SF(gtk_file_filter_new)      (void);
 void                  SF(gtk_file_filter_set_name) (GtkFileFilter *filter,

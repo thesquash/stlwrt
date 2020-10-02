@@ -20,6 +20,9 @@
 #ifndef __GTK_BOX_H__
 #define __GTK_BOX_H__
 
+#include <stlwrt.h>
+
+
 
 #include <gtkcontainer.h>
 

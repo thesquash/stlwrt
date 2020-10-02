@@ -21,8 +21,13 @@
 #ifndef __GTK_PRINTER_PRIVATE_H__
 #define __GTK_PRINTER_PRIVATE_H__
 
+#include <stlwrt.h>
+
+
 #include <gtk.h>
+
 #include <gtkunixprint.h>
+
 #include "gtkprinteroptionset.h"
 
 G_BEGIN_DECLS

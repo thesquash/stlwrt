@@ -23,6 +23,9 @@
 #ifndef __GTK_ACCEL_LABEL_H__
 #define __GTK_ACCEL_LABEL_H__
 
+#include <stlwrt.h>
+
+
 
 #include <gtklabel.h>
 

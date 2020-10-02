@@ -20,6 +20,9 @@
 #ifndef __GTK_TREE_DATA_LIST_H__
 #define __GTK_TREE_DATA_LIST_H__
 
+#include <stlwrt.h>
+
+
 #include <gtk.h>
 
 typedef struct _GtkTreeDataList GtkTreeDataList;

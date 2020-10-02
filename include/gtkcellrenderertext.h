@@ -20,6 +20,9 @@
 #ifndef __GTK_CELL_RENDERER_TEXT_H__
 #define __GTK_CELL_RENDERER_TEXT_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkcellrenderer.h>
 
 

@@ -23,7 +23,11 @@
 #ifndef __GTK_INFO_BAR_H__
 #define __GTK_INFO_BAR_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkhbox.h>
+
 #include <gtkenums.h>
 
 G_BEGIN_DECLS

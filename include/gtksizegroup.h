@@ -21,6 +21,9 @@
 #ifndef __GTK_SIZE_GROUP_H__
 #define __GTK_SIZE_GROUP_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkwidget.h>
 
 G_BEGIN_DECLS

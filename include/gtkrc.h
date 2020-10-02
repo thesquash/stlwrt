@@ -20,6 +20,9 @@
 #ifndef __GTK_RC_H__
 #define __GTK_RC_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkstyle.h>
 
 G_BEGIN_DECLS

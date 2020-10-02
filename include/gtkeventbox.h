@@ -20,6 +20,9 @@
 #ifndef __GTK_EVENT_BOX_H__
 #define __GTK_EVENT_BOX_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkbin.h>
 
 

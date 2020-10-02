@@ -20,6 +20,9 @@
 #ifndef __GDK_REGION_H__
 #define __GDK_REGION_H__
 
+#include <stlwrt.h>
+
+
 #include <gdktypes.h>
 
 G_BEGIN_DECLS

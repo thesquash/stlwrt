@@ -22,6 +22,9 @@
 #ifndef __GTK_CLIPBOARD_H__
 #define __GTK_CLIPBOARD_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkselection.h>
 
 G_BEGIN_DECLS
@@ -29,6 +32,8 @@ G_BEGIN_DECLS
 #define GTK_TYPE_CLIPBOARD            (gtk_clipboard_get_type ())
 #define GTK_CLIPBOARD(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_CLIPBOARD, GtkClipboard))
 #define GTK_IS_CLIPBOARD(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_CLIPBOARD))
+
+STLWRT_DECLARE_OPAQUE_TYPE(GtkClipboard, gtk_clipboard)
 
 typedef void (* GtkClipboardReceivedFunc)         (GtkClipboard     *clipboard,
 					           GtkSelectionData *selection_data,
@@ -63,8 +68,6 @@ typedef void (* GtkClipboardGetFunc)          (GtkClipboard     *clipboard,
 typedef void (* GtkClipboardClearFunc)        (GtkClipboard     *clipboard,
 					       gpointer          user_data_or_owner);
 
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_clipboard)
 
 GtkClipboard *SF(gtk_clipboard_get_for_display) (GdkDisplay   *display,
 					     GdkAtom       selection);

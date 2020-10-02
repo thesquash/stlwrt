@@ -20,7 +20,11 @@
 #ifndef __GDK_DISPLAY_MANAGER_H__
 #define __GDK_DISPLAY_MANAGER_H__
 
+#include <stlwrt.h>
+
+
 #include <gdktypes.h>
+
 #include <gdkdisplay.h>
 
 G_BEGIN_DECLS

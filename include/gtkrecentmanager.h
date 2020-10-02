@@ -21,8 +21,13 @@
 #ifndef __GTK_RECENT_MANAGER_H__
 #define __GTK_RECENT_MANAGER_H__
 
+#include <stlwrt.h>
+
+
 #include <gdk-pixbuf/gdk-pixbuf.h>
+
 #include <gdk.h>
+
 #include <time.h>
 
 G_BEGIN_DECLS
@@ -36,7 +41,8 @@ G_BEGIN_DECLS
 #define GTK_IS_RECENT_MANAGER_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_RECENT_MANAGER))
 #define GTK_RECENT_MANAGER_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_RECENT_MANAGER, GtkRecentManagerClass))
 
-typedef struct _GtkRecentInfo		GtkRecentInfo;
+STLWRT_DECLARE_OPAQUE_TYPE(GtkRecentInfo, gtk_recent_info)
+
 typedef struct _GtkRecentData		GtkRecentData;
 
 typedef struct _GtkRecentManagerClass	GtkRecentManagerClass;
@@ -177,8 +183,6 @@ gint              SF(gtk_recent_manager_get_limit)      (GtkRecentManager     *m
 GList *           SF(gtk_recent_manager_get_items)      (GtkRecentManager     *manager);
 gint              SF(gtk_recent_manager_purge_items)    (GtkRecentManager     *manager,
 						     GError              **error);
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_recent_info)
 
 GtkRecentInfo *       SF(gtk_recent_info_ref)                  (GtkRecentInfo  *info);
 void                  SF(gtk_recent_info_unref)                (GtkRecentInfo  *info);

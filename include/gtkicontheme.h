@@ -20,7 +20,11 @@
 #ifndef __GTK_ICON_THEME_H__
 #define __GTK_ICON_THEME_H__
 
+#include <stlwrt.h>
+
+
 #include <gdk-pixbuf/gdk-pixbuf.h>
+
 #include <gdk.h>
 
 G_BEGIN_DECLS
@@ -34,7 +38,7 @@ G_BEGIN_DECLS
 #define GTK_IS_ICON_THEME_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_ICON_THEME))
 #define GTK_ICON_THEME_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ICON_THEME, GtkIconThemeClass))
 
-typedef struct _GtkIconInfo         GtkIconInfo;
+STLWRT_DECLARE_OPAQUE_TYPE(GtkIconInfo, gtk_icon_info)
 typedef struct _GtkIconThemeClass   GtkIconThemeClass;
 typedef struct _GtkIconThemePrivate GtkIconThemePrivate;
 
@@ -193,7 +197,6 @@ void          SF(gtk_icon_theme_add_builtin_icon)      (const gchar *icon_name,
 					            gint         size,
 					            GdkPixbuf   *pixbuf);
 
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_icon_info)
 GtkIconInfo *         SF(gtk_icon_info_copy)               (GtkIconInfo  *icon_info);
 void                  SF(gtk_icon_info_free)               (GtkIconInfo  *icon_info);
 

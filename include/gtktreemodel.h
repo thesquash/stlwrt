@@ -20,6 +20,9 @@
 #ifndef __GTK_TREE_MODEL_H__
 #define __GTK_TREE_MODEL_H__
 
+#include <stlwrt.h>
+
+
 #include <glib-object.h>
 
 G_BEGIN_DECLS
@@ -33,10 +36,6 @@ G_BEGIN_DECLS
 #define GTK_TYPE_TREE_PATH             (gtk_tree_path_get_type ())
 #define GTK_TYPE_TREE_ROW_REFERENCE    (gtk_tree_row_reference_get_type ())
 
-typedef struct _GtkTreeIter         GtkTreeIter;
-typedef struct _GtkTreePath         GtkTreePath;
-typedef struct _GtkTreeRowReference GtkTreeRowReference;
-typedef struct _GtkTreeModelIface   GtkTreeModelIface;
 typedef gboolean (* GtkTreeModelForeachFunc) (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data);
 
 
@@ -46,18 +45,14 @@ typedef enum
   GTK_TREE_MODEL_LIST_ONLY = 1 << 1
 } GtkTreeModelFlags;
 
-struct _GtkTreeIter
-{
+STLWRT_DECLARE_BOXED_TYPE(GtkTreeIter, gtk_tree_iter,
   gint stamp;
   gpointer user_data;
   gpointer user_data2;
   gpointer user_data3;
-};
+)
 
-struct _GtkTreeModelIface
-{
-  GTypeInterface g_iface;
-
+STLWRT_DECLARE_INTERFACE(GtkTreeModel, gtk_tree_model,
   /* Signals */
   void         (* row_changed)           (GtkTreeModel *tree_model,
 					  GtkTreePath  *path,
@@ -110,7 +105,10 @@ struct _GtkTreeModelIface
 				    GtkTreeIter  *iter);
   void         (* unref_node)      (GtkTreeModel *tree_model,
 				    GtkTreeIter  *iter);
-};
+)
+
+STLWRT_DECLARE_OPAQUE_TYPE(GtkTreeRowReference, gtk_tree_row_reference)
+STLWRT_DECLARE_OPAQUE_TYPE(GtkTreePath, gtk_tree_path)
 
 
 /* GtkTreePath operations */
@@ -131,8 +129,6 @@ gint        *SF(gtk_tree_path_get_indices_with_depth) (GtkTreePath *path,
 void         SF(gtk_tree_path_free)             (GtkTreePath       *path);
 GtkTreePath *SF(gtk_tree_path_copy)             (const GtkTreePath *path);
 
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_tree_path)
-
 gint         SF(gtk_tree_path_compare)          (const GtkTreePath *a,
 					     const GtkTreePath *b);
 void         SF(gtk_tree_path_next)             (GtkTreePath       *path);
@@ -146,15 +142,13 @@ gboolean     SF(gtk_tree_path_is_descendant)    (GtkTreePath       *path,
                                              GtkTreePath       *ancestor);
 
 #ifndef GTK_DISABLE_DEPRECATED
-#define SF(gtk_tree_path_new_root)() SF(gtk_tree_path_new_first)()
+#define gtk_tree_path_new_root() gtk_tree_path_new_first()
 #endif /* !GTK_DISABLE_DEPRECATED */
 
 /* Row reference (an object that tracks model changes so it refers to the same
  * row always; a path refers to a position, not a fixed row).  You almost always
  * want to call gtk_tree_row_reference_new.
  */
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_tree_row_reference)
 
 GtkTreeRowReference *SF(gtk_tree_row_reference_new)       (GtkTreeModel        *model,
 						       GtkTreePath         *path);
@@ -180,10 +174,6 @@ void                 SF(gtk_tree_row_reference_reordered) (GObject     *proxy,
 /* GtkTreeIter operations */
 GtkTreeIter *     SF(gtk_tree_iter_copy)             (GtkTreeIter  *iter);
 void              SF(gtk_tree_iter_free)             (GtkTreeIter  *iter);
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_tree_iter)
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_tree_model)
 
 GtkTreeModelFlags SF(gtk_tree_model_get_flags)       (GtkTreeModel *tree_model);
 gint              SF(gtk_tree_model_get_n_columns)   (GtkTreeModel *tree_model);
@@ -242,7 +232,7 @@ void              SF(gtk_tree_model_foreach)         (GtkTreeModel            *m
 
 
 #ifndef GTK_DISABLE_DEPRECATED
-#define SF(gtk_tree_model_get_iter_root)(tree_model, iter) SF(gtk_tree_model_get_iter_first)(tree_model, iter)
+#define gtk_tree_model_get_iter_root(tree_model, iter) gtk_tree_model_get_iter_first(tree_model, iter)
 #endif /* !GTK_DISABLE_DEPRECATED */
 
 /* Signals */

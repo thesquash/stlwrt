@@ -23,7 +23,11 @@
 #ifndef __GDK_APP_LAUNCH_CONTEXT_H__
 #define __GDK_APP_LAUNCH_CONTEXT_H__
 
+#include <stlwrt.h>
+
+
 #include <gio/gio.h>
+
 #include <gdkscreen.h>
 
 G_BEGIN_DECLS

@@ -20,10 +20,16 @@
 #ifndef __GTK_MAIN_H__
 #define __GTK_MAIN_H__
 
+#include <stlwrt.h>
+
+
 #include <gdk.h>
+
 #include <gtkwidget.h>
 #ifdef G_PLATFORM_WIN32
+
 #include <gtkbox.h>
+
 #include <gtkwindow.h>
 #endif
 
@@ -106,8 +112,8 @@ gboolean SF(gtk_init_check_abi_check) (int	  *argc,
 				   size_t  sizeof_GtkWindow,
 				   size_t  sizeof_GtkBox);
 
-#define SF(gtk_init)(argc, argv) SF(gtk_init_abi_check) (argc, argv, 2, sizeof (GtkWindow), sizeof (GtkBox))
-#define SF(gtk_init_check)(argc, argv) SF(gtk_init_check_abi_check) (argc, argv, 2, sizeof (GtkWindow), sizeof (GtkBox))
+#define gtk_init(argc, argv) gtk_init_abi_check (argc, argv, 2, sizeof (GtkWindow), sizeof (GtkBox))
+#define gtk_init_check(argc, argv) gtk_init_check_abi_check (argc, argv, 2, sizeof (GtkWindow), sizeof (GtkBox))
 
 #endif
 

@@ -20,7 +20,11 @@
 #ifndef __GTK_STOCK_H__
 #define __GTK_STOCK_H__
 
+#include <stlwrt.h>
+
+
 #include <gdk.h>
+
 #include <gtktypeutils.h> /* for GtkTranslateFunc */
 
 G_BEGIN_DECLS

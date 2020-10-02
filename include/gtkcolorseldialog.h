@@ -20,8 +20,13 @@
 #ifndef __GTK_COLOR_SELECTION_DIALOG_H__
 #define __GTK_COLOR_SELECTION_DIALOG_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkdialog.h>
+
 #include <gtkcolorsel.h>
+
 #include <gtkvbox.h>
 
 G_BEGIN_DECLS

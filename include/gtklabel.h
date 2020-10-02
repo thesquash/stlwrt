@@ -19,8 +19,13 @@
 #ifndef __GTK_LABEL_H__
 #define __GTK_LABEL_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkmisc.h>
+
 #include <gtkwindow.h>
+
 #include <gtkmenu.h>
 
 

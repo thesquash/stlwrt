@@ -21,6 +21,9 @@
 #ifndef __GTK_ARROW_H__
 #define __GTK_ARROW_H__
 
+#include <stlwrt.h>
+
+
 
 #include <gtkmisc.h>
 

@@ -21,6 +21,9 @@
 #ifndef __GTK_FONT_BUTTON_H__
 #define __GTK_FONT_BUTTON_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkbutton.h>
 
 

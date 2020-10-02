@@ -19,6 +19,9 @@
 #ifndef __GTK_SOCKET_H__
 #define __GTK_SOCKET_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkcontainer.h>
 
 G_BEGIN_DECLS

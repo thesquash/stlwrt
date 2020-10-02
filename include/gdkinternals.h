@@ -22,9 +22,15 @@
 #ifndef __GDK_INTERNALS_H__
 #define __GDK_INTERNALS_H__
 
+#include <stlwrt.h>
+
+
 #include <gio/gio.h>
+
 #include <gdktypes.h>
+
 #include <gdkwindow.h>
+
 #include <gdkprivate.h>
 
 G_BEGIN_DECLS

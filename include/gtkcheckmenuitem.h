@@ -20,10 +20,13 @@
 #ifndef __GTK_CHECK_MENU_ITEM_H__
 #define __GTK_CHECK_MENU_ITEM_H__
 
+#include <stlwrt.h>
+
 
 #if defined(GTK_DISABLE_SINGLE_INCLUDES) && !defined (__GTK_H_INSIDE__) && !defined (STLWRT_COMPILATION)
 #error "Only <gtk.h> can be included directly."
 #endif
+
 
 #include <gtkmenuitem.h>
 

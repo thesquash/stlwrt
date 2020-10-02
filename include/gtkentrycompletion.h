@@ -20,9 +20,15 @@
 #ifndef __GTK_ENTRY_COMPLETION_H__
 #define __GTK_ENTRY_COMPLETION_H__
 
+#include <stlwrt.h>
+
+
 #include <gtktreemodel.h>
+
 #include <gtkliststore.h>
+
 #include <gtktreeviewcolumn.h>
+
 #include <gtktreemodelfilter.h>
 
 G_BEGIN_DECLS

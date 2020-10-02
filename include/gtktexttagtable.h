@@ -20,6 +20,9 @@
 #ifndef __GTK_TEXT_TAG_TABLE_H__
 #define __GTK_TEXT_TAG_TABLE_H__
 
+#include <stlwrt.h>
+
+
 #include <gtktexttag.h>
 
 G_BEGIN_DECLS

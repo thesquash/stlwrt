@@ -20,6 +20,9 @@
 #ifndef __GDK_KEYS_H__
 #define __GDK_KEYS_H__
 
+#include <stlwrt.h>
+
+
 #include <gdktypes.h>
 
 G_BEGIN_DECLS

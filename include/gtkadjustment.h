@@ -20,6 +20,9 @@
 #ifndef __GTK_ADJUSTMENT_H__
 #define __GTK_ADJUSTMENT_H__
 
+#include <stlwrt.h>
+
+
 
 #include <gdk.h>
 

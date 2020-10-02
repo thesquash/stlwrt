@@ -21,6 +21,9 @@
 #ifndef __GTK_RECENT_CHOOSER_DEFAULT_H__
 #define __GTK_RECENT_CHOOSER_DEFAULT_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkwidget.h>
 
 G_BEGIN_DECLS
@@ -30,10 +33,7 @@ G_BEGIN_DECLS
 #define GTK_RECENT_CHOOSER_DEFAULT(obj)    (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_RECENT_CHOOSER_DEFAULT, GtkRecentChooserDefault))
 #define GTK_IS_RECENT_CHOOSER_DEFAULT(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_RECENT_CHOOSER_DEFAULT))
 
-
-typedef struct _GtkRecentChooserDefault GtkRecentChooserDefault;
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_recent_chooser_default)
+STLWRT_DECLARE_OPAQUE_TYPE(GtkRecentChooserDefault, _gtk_recent_chooser_default)
 
 GtkWidget *_gtk_recent_chooser_default_new      (GtkRecentManager *recent_manager);
 

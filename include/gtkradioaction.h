@@ -26,6 +26,9 @@
 #ifndef __GTK_RADIO_ACTION_H__
 #define __GTK_RADIO_ACTION_H__
 
+#include <stlwrt.h>
+
+
 #include <gtktoggleaction.h>
 
 G_BEGIN_DECLS

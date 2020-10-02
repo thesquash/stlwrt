@@ -25,6 +25,9 @@
 #ifndef __GTK_LINK_BUTTON_H__
 #define __GTK_LINK_BUTTON_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkbutton.h>
 
 G_BEGIN_DECLS

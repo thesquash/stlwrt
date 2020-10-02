@@ -19,11 +19,19 @@
 #ifndef __GTK_UNIX_PRINT_H__
 #define __GTK_UNIX_PRINT_H__
 
+#include <stlwrt.h>
+
 #define __GTK_UNIX_PRINT_H_INSIDE__
 
+#include <stlwrt.h>
+
+
 #include <gtkpagesetupunixdialog.h>
+
 #include <gtkprinter.h>
+
 #include <gtkprintjob.h>
+
 #include <gtkprintunixdialog.h>
 
 #undef __GTK_UNIX_PRINT_H_INSIDE__

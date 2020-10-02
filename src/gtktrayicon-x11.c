@@ -33,7 +33,7 @@
 
 
 
-#include "x11/gdkx.h"
+#include "gdkx.h"
 #include <X11/Xatom.h>
 
 #define SYSTEM_TRAY_REQUEST_DOCK    0

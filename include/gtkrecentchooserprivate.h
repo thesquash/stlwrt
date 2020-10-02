@@ -23,8 +23,13 @@
 #ifndef __GTK_RECENT_CHOOSER_PRIVATE_H__
 #define __GTK_RECENT_CHOOSER_PRIVATE_H__
 
+#include <stlwrt.h>
+
+
 #include "gtkrecentmanager.h"
+
 #include "gtkrecentchooser.h"
+
 #include "gtkactivatable.h"
 
 G_BEGIN_DECLS

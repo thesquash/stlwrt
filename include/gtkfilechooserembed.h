@@ -21,6 +21,9 @@
 #ifndef __GTK_FILE_CHOOSER_EMBED_H__
 #define __GTK_FILE_CHOOSER_EMBED_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkwidget.h>
 
 G_BEGIN_DECLS
@@ -30,13 +33,7 @@ G_BEGIN_DECLS
 #define GTK_IS_FILE_CHOOSER_EMBED(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FILE_CHOOSER_EMBED))
 #define GTK_FILE_CHOOSER_EMBED_GET_IFACE(obj)   (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GTK_TYPE_FILE_CHOOSER_EMBED, GtkFileChooserEmbedIface))
 
-typedef struct _GtkFileChooserEmbedIface GtkFileChooserEmbedIface;
-
-
-struct _GtkFileChooserEmbedIface
-{
-  GTypeInterface base_iface;
-
+STLWRT_DECLARE_INTERFACE(GtkFileChooserEmbed, _gtk_file_chooser_embed)
   /* Methods
    */
   void (*get_default_size)        (GtkFileChooserEmbed *chooser_embed,
@@ -52,7 +49,6 @@ struct _GtkFileChooserEmbedIface
   void (*response_requested)      (GtkFileChooserEmbed *chooser_embed);
 };
 
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(_gtk_file_chooser_embed)
 
 void  _gtk_file_chooser_embed_get_default_size    (GtkFileChooserEmbed *chooser_embed,
 						   gint                *default_width,

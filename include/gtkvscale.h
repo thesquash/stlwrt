@@ -20,6 +20,9 @@
 #ifndef __GTK_VSCALE_H__
 #define __GTK_VSCALE_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkscale.h>
 
 G_BEGIN_DECLS

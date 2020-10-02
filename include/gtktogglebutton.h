@@ -19,6 +19,9 @@
 #ifndef __GTK_TOGGLE_BUTTON_H__
 #define __GTK_TOGGLE_BUTTON_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkbutton.h>
 
 

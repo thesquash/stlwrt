@@ -21,7 +21,11 @@
 #ifndef __GTK_PRINT_OPERATION_PREVIEW_H__
 #define __GTK_PRINT_OPERATION_PREVIEW_H__
 
+#include <stlwrt.h>
+
+
 #include <cairo.h>
+
 #include <gtkprintcontext.h>
 
 G_BEGIN_DECLS
@@ -31,13 +35,7 @@ G_BEGIN_DECLS
 #define GTK_IS_PRINT_OPERATION_PREVIEW(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_PRINT_OPERATION_PREVIEW))
 #define GTK_PRINT_OPERATION_PREVIEW_GET_IFACE(obj)        (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GTK_TYPE_PRINT_OPERATION_PREVIEW, GtkPrintOperationPreviewIface))
 
-typedef struct _GtkPrintOperationPreviewIface GtkPrintOperationPreviewIface;
-
-
-struct _GtkPrintOperationPreviewIface
-{
-  GTypeInterface g_iface;
-
+STLWRT_DECLARE_INTERFACE(GtkPrintOperationPreview, gtk_print_operation_preview,
   /* signals */
   void              (*ready)          (GtkPrintOperationPreview *preview,
 				       GtkPrintContext          *context);
@@ -60,9 +58,7 @@ struct _GtkPrintOperationPreviewIface
   void (*_gtk_reserved5) (void);
   void (*_gtk_reserved6) (void);
   void (*_gtk_reserved7) (void);
-};
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_print_operation_preview)
+)
 
 void     SF(gtk_print_operation_preview_render_page) (GtkPrintOperationPreview *preview,
 						  gint                      page_nr);

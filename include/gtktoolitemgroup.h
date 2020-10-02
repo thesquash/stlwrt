@@ -22,7 +22,11 @@
 #ifndef __GTK_TOOL_ITEM_GROUP_H__
 #define __GTK_TOOL_ITEM_GROUP_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkcontainer.h>
+
 #include <gtktoolitem.h>
 
 G_BEGIN_DECLS

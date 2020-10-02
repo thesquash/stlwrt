@@ -33,7 +33,7 @@
 
 
 #ifdef GDK_WINDOWING_X11
-#include "x11/gdkx.h"
+#include "gdkx.h"
 #include <pango/pangofc-fontmap.h>
 #endif
 

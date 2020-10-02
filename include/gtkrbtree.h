@@ -22,6 +22,9 @@
 #ifndef __GTK_RBTREE_H__
 #define __GTK_RBTREE_H__
 
+#include <stlwrt.h>
+
+
 #include <glib.h>
 
 

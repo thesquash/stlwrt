@@ -20,7 +20,11 @@
 #ifndef __GTK_COMBO_BOX_ENTRY_H__
 #define __GTK_COMBO_BOX_ENTRY_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkcombobox.h>
+
 #include <gtktreemodel.h>
 
 G_BEGIN_DECLS

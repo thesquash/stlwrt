@@ -22,6 +22,9 @@
 #ifndef __GDK_SPAWN_H__
 #define __GDK_SPAWN_H__
 
+#include <stlwrt.h>
+
+
 #include <gdkscreen.h>
 
 G_BEGIN_DECLS

@@ -19,7 +19,11 @@
 #ifndef __GTK_ICON_CACHE_H__
 #define __GTK_ICON_CACHE_H__
 
+#include <stlwrt.h>
+
+
 #include <gdk-pixbuf/gdk-pixbuf.h>
+
 #include <gdk.h>
 
 typedef struct _GtkIconCache GtkIconCache;

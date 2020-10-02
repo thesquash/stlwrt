@@ -24,6 +24,9 @@
 #ifndef __GTK_ORIENTABLE_H__
 #define __GTK_ORIENTABLE_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkwidget.h>
 
 G_BEGIN_DECLS
@@ -35,15 +38,8 @@ G_BEGIN_DECLS
 #define GTK_IS_ORIENTABLE_CLASS(vtable) (G_TYPE_CHECK_CLASS_TYPE ((vtable), GTK_TYPE_ORIENTABLE))
 #define GTK_ORIENTABLE_GET_IFACE(inst)  (G_TYPE_INSTANCE_GET_INTERFACE ((inst), GTK_TYPE_ORIENTABLE, GtkOrientableIface))
 
-typedef struct _GtkOrientableIface  GtkOrientableIface;
+STLWRT_DECLARE_INTERFACE(GtkOrientable, gtk_orientable, ;)
 
-struct _GtkOrientableIface
-{
-  GTypeInterface base_iface;
-};
-
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_orientable)
 void           SF(gtk_orientable_set_orientation) (GtkOrientable  *orientable,
                                                GtkOrientation  orientation);
 GtkOrientation SF(gtk_orientable_get_orientation) (GtkOrientable  *orientable);

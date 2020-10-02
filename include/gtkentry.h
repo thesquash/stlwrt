@@ -24,12 +24,21 @@
 #ifndef __GTK_ENTRY_H__
 #define __GTK_ENTRY_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkeditable.h>
+
 #include <gtkimcontext.h>
+
 #include <gtkmenu.h>
+
 #include <gtkentrybuffer.h>
+
 #include <gtkentrycompletion.h>
+
 #include <gtkimage.h>
+
 #include <gtkselection.h>
 
 

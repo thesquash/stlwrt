@@ -20,11 +20,19 @@
 #ifndef __GTK_TEXT_BUFFER_H__
 #define __GTK_TEXT_BUFFER_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkwidget.h>
+
 #include <gtkclipboard.h>
+
 #include <gtktexttagtable.h>
+
 #include <gtktextiter.h>
+
 #include <gtktextmark.h>
+
 #include <gtktextchild.h>
 
 G_BEGIN_DECLS

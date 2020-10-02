@@ -20,8 +20,13 @@
 #ifndef __GTK_CELL_VIEW_H__
 #define __GTK_CELL_VIEW_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkwidget.h>
+
 #include <gtkcellrenderer.h>
+
 #include <gtktreemodel.h>
 
 G_BEGIN_DECLS

@@ -24,6 +24,9 @@
 #ifndef __GTK_EXPANDER_H__
 #define __GTK_EXPANDER_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkbin.h>
 
 G_BEGIN_DECLS

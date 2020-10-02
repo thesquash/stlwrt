@@ -20,7 +20,11 @@
 #ifndef __GTK_IMAGE_H__
 #define __GTK_IMAGE_H__
 
+#include <stlwrt.h>
+
+
 #include <gio/gio.h>
+
 #include <gtkmisc.h>
 
 

@@ -15,47 +15,68 @@ making and have made, and I hope we may be able to collaborate somehow.
 
 ## What's new?
 
-For the last few weeks I've been working on cleaning up the STLWRT code,
-since the GTK+ 2 code it was based on was haphazardly written over a
-period of over 20 years.  My latest achievement was STLWRT-izing all header
-files (adding fat and thin versions of objects).  While I converted the
-header files, I noticed a boatload of "forward declarations" --
-instances of code duplication in which certain type declarations had to be
-present before the header file in question could declare any new types,
-but the prerequisite type declarations were in another header file which
-depended upon the header file in question, creating a circular dependency.
-To mitigate this spaghetti code, I plan on setting up all header files to
-have distinct sections for each of preprocessor macros, type declarations,
-structure declarations, and function declarations.  Each of these sections
-will be surrounded by special preprocessor conditionals, so that a header
-file can include *just the type declarations* and *nothing else*, for
-instance.
+Well, it's been a long time since I tried to compile STLWRT, so I tried to
+compile it again.  The last time I tried to compile it, I got over 100 MB
+of warnings dumped into my error log file.  I try-compile it using the
+command:
 
-An example:  Suppose the `gtkwidget.h` header requires only the type
-declarations from `gtkwindow.h`, and wants nothing else from the header
-file yet.  (This is a practical example, actually.  The `gtkwidget.h`
-header includes several functions which accept parameters of type
-`GtkWindow`, so currently a forward declaration is used.)  `gtkwidget.h`
-can eliminate the forward declarations and instead use:
+        gcc -pipe -o libstlwrt.so -fPIC -shared -I include \
+         -DSTLWRT_COMPILATION `pkg-config --cflags --libs \
+         glib-2.0 pango cairo atk gdk-pixbuf-2.0` src/*.c \
+         2>error_dump.log
 
-        /* A whole bunch of other stuff goes here, specifically GtkWidget
-         * type definitions -- GtkWindow inherits from GtkWidget, so we
-         * must declare GtkWidget before we import declarations and
-         * definitions of GtkWindow. */
-        
-        #define __GTK_WINDOW_H_IMPORT_TYPES_ONLY__
-        #include <gtkwindow.h>
-        #undef  __GTK_WINDOW_H_IMPORT_TYPES_ONLY__
-        
-        /* Now comes the functions, some of which rely on GtkWindow */
+(Note:  To do this yourself, you need to create the files "gdkconfig.h" and
+"config.h" in the `include` directory in the source.  I just make them
+empty files for now; I have too much to worry about right now to bother
+making a real configuration file for either.)  This time when I try-compiled
+STLWRT, after making assorted modifications, the error log is down around
+57 MB!  *I'm* certainly optimistic about the figure.
 
-Much easier to read and more portable to boot, since type declarations
-only need to be defined once now.
+If that figure still sounds daunting to you, consider that it's pretty much
+the same old error messages repeated over and over again.  (They mostly crop
+up in the header files, which get used thousands of times.)  Not to mention
+that modern versions of GCC produce very informative, but very verbose error
+messages, as opposed to the single-line or double-line error messages of the
+past.  Here is a sample error message actually extracted from my error dump
+which, though apparently multiple errors, is actually just one:
 
-And after we're done with that, it'll be time to convert the source code
-to use special functions and macros to *define* the object types and to
-read the object instance properties.
+        In file included from src/gdkapplaunchcontext.c:25:
+        include/stlwrt.h:400:11: error: redefinition of 'struct _GdkScreenProps'
+          400 |    struct _##TN##Props \
+              |           ^
+        include/gdkscreen.h:45:1: note: in expansion of macro 'STLWRT_DECLARE_VTYPE_FPARENT'
+           45 | STLWRT_DECLARE_VTYPE_FPARENT(GdkScreen, gdk_screen, GObject,
+              | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        include/stlwrt.h:400:11: note: originally defined here
+          400 |    struct _##TN##Props \
+              |           ^
+        include/gdkscreen.h:45:1: note: in expansion of macro 'STLWRT_DECLARE_VTYPE_FPARENT'
+           45 | STLWRT_DECLARE_VTYPE_FPARENT(GdkScreen, gdk_screen, GObject,
+              | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-But after that's done, it'll be time to run a build of the whole thing
-and see how many megabytes of warnings and errors we get.  The last time
-I ran a build, I got over 100 MB of errors and warnings!
+That one error takes up 651 bytes.  *If* all of the errors were that size
+(which they are not -- some are slightly larger, most are smaller), then
+there would be very roughly 87,000 errors in STLWRT that the compiler
+detected.  Still not peaches and cream, but not 57 million errors, certainly.
+Furthermore, the same header files keep getting included over and over again,
+and some of the header files contain multiple errors which keep showing up.
+An example:
+
+        include/gdkwindow.h:737:53: error: unknown type name 'GdkWindow'; did you mean 'GdkWindowEdge'?
+          737 | void       SF(gdk_offscreen_window_set_embedder)   (GdkWindow     *window,
+              |                                                     ^~~~~~~~~
+              |                                                     GdkWindowEdge
+
+This error appears literally a few hundred times in a row -- *each time*
+`gdkwindow.h` is included!  The following command limits the message content
+to only the kinds of messages that, say, GCC 4 would have produced:
+
+        sort -u error_dump.log | grep -E '^[A-Za-z_/]' | grep -E '(warning|error):' | wc -l
+
+This somewhat more accurate appraisal removes duplicate error reports and
+returns 8,307 errors and warnings.  Again, it's a rough approximation.
+Again, 8,307 errors and warnings is not going to be a picnic!  But did
+anybody expect it would be?
+
+Either way, I'm still optimistic.  My apologies to those who were worried
+about my long absence.

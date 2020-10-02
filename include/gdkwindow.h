@@ -20,8 +20,13 @@
 #ifndef __GDK_WINDOW_H__
 #define __GDK_WINDOW_H__
 
+#include <stlwrt.h>
+
+
 #include <gdkdrawable.h>
+
 #include <gdktypes.h>
+
 #include <gdkevents.h>
 
 G_BEGIN_DECLS
@@ -749,16 +754,16 @@ void       SF(gdk_window_remove_redirection)     (GdkWindow     *window);
 GdkPointerHooks *SF(gdk_set_pointer_hooks) (const GdkPointerHooks *new_hooks);   
 #endif /* GDK_MULTIHEAD_SAFE */
 
-#define GDK_ROOT_PARENT()             (SF(gdk_get_default_root_window) ())
+#define GDK_ROOT_PARENT()             (gdk_get_default_root_window ())
 #define gdk_window_get_size            gdk_drawable_get_size
-#define SF(gdk_window_get_type)            gdk_window_get_window_type
+#define gdk_window_get_type            gdk_window_get_window_type
 #define gdk_window_get_colormap        gdk_drawable_get_colormap
 #define gdk_window_set_colormap        gdk_drawable_set_colormap
 #define gdk_window_ref                 g_object_ref
 #define gdk_window_unref               g_object_unref
 
-#define SF(gdk_window_copy_area)(drawable,gc,x,y,source_drawable,source_x,source_y,width,height) \
-   SF(gdk_draw_pixmap)(drawable,gc,source_drawable,source_x,source_y,x,y,width,height)
+#define gdk_window_copy_area(drawable,gc,x,y,source_drawable,source_x,source_y,width,height) \
+   gdk_draw_pixmap(drawable,gc,source_drawable,source_x,source_y,x,y,width,height)
 #endif /* GDK_DISABLE_DEPRECATED */
 
 G_END_DECLS

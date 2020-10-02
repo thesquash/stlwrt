@@ -20,10 +20,17 @@
 #ifndef __GTK_TEXT_SEGMENT_H__
 #define __GTK_TEXT_SEGMENT_H__
 
+#include <stlwrt.h>
+
+
 #include <gtktexttag.h>
+
 #include <gtktextiter.h>
+
 #include <gtktextmarkprivate.h>
+
 #include <gtktextchild.h>
+
 #include <gtktextchildprivate.h>
 
 G_BEGIN_DECLS

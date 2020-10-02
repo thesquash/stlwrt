@@ -26,9 +26,15 @@
 #ifndef __GTK_UI_MANAGER_H__
 #define __GTK_UI_MANAGER_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkaccelgroup.h>
+
 #include <gtkwidget.h>
+
 #include <gtkaction.h>
+
 #include <gtkactiongroup.h>
 
 G_BEGIN_DECLS

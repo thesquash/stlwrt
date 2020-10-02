@@ -21,7 +21,11 @@
 #ifndef __GTK_FILE_CHOOSER_ENTRY_H__
 #define __GTK_FILE_CHOOSER_ENTRY_H__
 
+#include <stlwrt.h>
+
+
 #include "gtkfilesystem.h"
+
 #include "gtkfilechooser.h"
 
 G_BEGIN_DECLS
@@ -30,7 +34,8 @@ G_BEGIN_DECLS
 #define GTK_FILE_CHOOSER_ENTRY(obj)    (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_FILE_CHOOSER_ENTRY, GtkFileChooserEntry))
 #define GTK_IS_FILE_CHOOSER_ENTRY(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FILE_CHOOSER_ENTRY))
 
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(_gtk_file_chooser_entry)
+STLWRT_DECLARE_OPAQUE_TYPE(GtkFileChooserEntry, gtk_file_chooser_entry)
+
 GtkWidget *        _gtk_file_chooser_entry_new                (gboolean             eat_tab);
 void               _gtk_file_chooser_entry_set_action         (GtkFileChooserEntry *chooser_entry,
 							       GtkFileChooserAction action);

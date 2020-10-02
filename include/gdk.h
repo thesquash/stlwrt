@@ -20,35 +20,67 @@
 #ifndef __GDK_H__
 #define __GDK_H__
 
+#include <stlwrt.h>
+
 #define __GDK_H_INSIDE__
 
+#include <stlwrt.h>
+
+
 #include <gdkapplaunchcontext.h>
+
 #include <gdkcairo.h>
+
 #include <gdkcolor.h>
+
 #include <gdkcursor.h>
+
 #include <gdkdisplay.h>
+
 #include <gdkdisplaymanager.h>
+
 #include <gdkdnd.h>
+
 #include <gdkdrawable.h>
+
 #include <gdkenumtypes.h>
+
 #include <gdkevents.h>
+
 #include <gdkfont.h>
+
 #include <gdkgc.h>
+
 #include <gdkimage.h>
+
 #include <gdkinput.h>
+
 #include <gdkkeys.h>
+
 #include <gdkpango.h>
+
 #include <gdkpixbuf.h>
+
 #include <gdkpixmap.h>
+
 #include <gdkproperty.h>
+
 #include <gdkregion.h>
+
 #include <gdkrgb.h>
+
 #include <gdkscreen.h>
+
 #include <gdkselection.h>
+
 #include <gdkspawn.h>
+
 #include <gdktestutils.h>
+
 #include <gdktypes.h>
+
 #include <gdkvisual.h>
+
 #include <gdkwindow.h>
 
 #undef __GDK_H_INSIDE__

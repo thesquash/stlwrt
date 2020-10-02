@@ -20,7 +20,11 @@
 #ifndef __GTK_TEXT_ITER_H__
 #define __GTK_TEXT_ITER_H__
 
+#include <stlwrt.h>
+
+
 #include <gtktexttag.h>
+
 #include <gtktextchild.h>
 
 G_BEGIN_DECLS
@@ -37,12 +41,9 @@ typedef enum {
  * are changed.
  */
 
-typedef struct _GtkTextBuffer GtkTextBufferFat;
-typedef struct _GtkTextBuffer GtkTextBufferThin;
-
 #define GTK_TYPE_TEXT_ITER     (gtk_text_iter_get_type ())
 
-struct _GtkTextIter {
+STLWRT_DECLARE_BOXED_TYPE(GtkTextIter, gtk_text_iter,
   /* GtkTextIter is an opaque datatype; ignore all these fields.
    * Initialize the iter with gtk_text_buffer_get_iter_*
    * functions
@@ -63,7 +64,7 @@ struct _GtkTextIter {
   /* padding */
   gint dummy13;
   gpointer dummy14;
-};
+)
 
 
 /* This is primarily intended for language bindings that want to avoid
@@ -76,8 +77,6 @@ GtkTextBuffer *SF(gtk_text_iter_get_buffer) (const GtkTextIter *iter);
 
 GtkTextIter *SF(gtk_text_iter_copy)     (const GtkTextIter *iter);
 void         SF(gtk_text_iter_free)     (GtkTextIter       *iter);
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_text_iter)
 
 /*
  * Convert to different kinds of index

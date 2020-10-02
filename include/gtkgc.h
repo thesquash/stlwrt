@@ -20,6 +20,9 @@
 #ifndef __GTK_GC_H__
 #define __GTK_GC_H__
 
+#include <stlwrt.h>
+
+
 #include <gdk.h>
 
 

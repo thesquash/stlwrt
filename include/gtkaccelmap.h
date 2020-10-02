@@ -20,6 +20,9 @@
 #ifndef __GTK_ACCEL_MAP_H__
 #define __GTK_ACCEL_MAP_H__
 
+#include <stlwrt.h>
+
+
 
 #include <gtkaccelgroup.h>
 
@@ -33,6 +36,7 @@ G_BEGIN_DECLS
 #define GTK_IS_ACCEL_MAP_CLASS(klass)	  (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_ACCEL_MAP))
 #define GTK_ACCEL_MAP_GET_CLASS(obj)      (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ACCEL_MAP, GtkAccelMapClass))
 
+STLWRT_DECLARE_OPAQUE_TYPE(GtkAccelMap, gtk_accel_map)
 typedef struct _GtkAccelMapClass GtkAccelMapClass;
 
 /* --- notifier --- */
@@ -77,8 +81,6 @@ void	SF(gtk_accel_map_foreach_unfiltered) (gpointer		 data,
 					  GtkAccelMapForeach	 foreach_func);
 
 /* --- notification --- */
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_accel_map)
-
 GtkAccelMap *SF(gtk_accel_map_get)      (void);
 
 

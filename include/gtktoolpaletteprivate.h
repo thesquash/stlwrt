@@ -22,6 +22,9 @@
 #ifndef __GTK_TOOL_PALETTE_PRIVATE_H__
 #define __GTK_TOOL_PALETTE_PRIVATE_H__
 
+#include <stlwrt.h>
+
+
 #include <gtk.h>
 
 void _gtk_tool_palette_get_item_size           (GtkToolPalette   *palette,

@@ -20,11 +20,19 @@
 #ifndef __GTK_WIDGET_H__
 #define __GTK_WIDGET_H__
 
+#include <stlwrt.h>
+
+
 #include <gdk.h>
+
 #include <gtkaccelgroup.h>
+
 #include <gtkadjustment.h>
+
 #include <gtkstyle.h>
+
 #include <gtksettings.h>
+
 #include <atk/atk.h>
 
 G_BEGIN_DECLS
@@ -175,11 +183,10 @@ typedef void    (*GtkCallback)     (GtkWidget        *widget,
  * A <structname>GtkRequisition</structname> represents the desired size of a widget. See
  * <xref linkend="size-requisition"/> for more information.
  */
-struct _GtkRequisition
-{
+STLWRT_DECLARE_BOXED_TYPE(GtkRequisition, gtk_requisition,
   gint width;
   gint height;
-};
+)
 
 /* The widget is the base of the tree for displayable objects.
  *  (A displayable object is one which takes up some amount
@@ -877,8 +884,6 @@ gchar *    SF(gtk_widget_get_tooltip_markup)    (GtkWidget   *widget);
 void       SF(gtk_widget_set_has_tooltip)       (GtkWidget   *widget,
 					     gboolean     has_tooltip);
 gboolean   SF(gtk_widget_get_has_tooltip)       (GtkWidget   *widget);
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_requisition)
 
 GtkRequisition *SF(gtk_requisition_copy)     (const GtkRequisition *requisition);
 void            SF(gtk_requisition_free)     (GtkRequisition       *requisition);

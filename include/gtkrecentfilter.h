@@ -21,6 +21,9 @@
 #ifndef __GTK_RECENT_FILTER_H__
 #define __GTK_RECENT_FILTER_H__
 
+#include <stlwrt.h>
+
+
 #include <glib-object.h>
 
 G_BEGIN_DECLS
@@ -29,7 +32,6 @@ G_BEGIN_DECLS
 #define GTK_RECENT_FILTER(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_RECENT_FILTER, GtkRecentFilter))
 #define GTK_IS_RECENT_FILTER(obj)	(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_RECENT_FILTER))
 
-typedef struct _GtkRecentFilter         GtkRecentFilter;
 typedef struct _GtkRecentFilterInfo	GtkRecentFilterInfo;
 
 typedef enum {
@@ -46,7 +48,7 @@ typedef gboolean (*GtkRecentFilterFunc) (const GtkRecentFilterInfo *filter_info,
 
 struct _GtkRecentFilterInfo
 {
-  GtkRecentFilterFlagsFat   contains;
+  GtkRecentFilterFlags   contains;
 
   const gchar *uri;
   const gchar *display_name;
@@ -57,8 +59,7 @@ struct _GtkRecentFilterInfo
   gint age;
 };
 
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_recent_filter)
+STLWRT_DECLARE_OPAQUE_TYPE(GtkRecentFilter, gtk_recent_filter)
 
 GtkRecentFilter *     SF(gtk_recent_filter_new)      (void);
 void                  SF(gtk_recent_filter_set_name) (GtkRecentFilter *filter,

@@ -22,6 +22,9 @@
 #ifndef __GTK_RULER_H__
 #define __GTK_RULER_H__
 
+#include <stlwrt.h>
+
+
 
 #include <gtkwidget.h>
 

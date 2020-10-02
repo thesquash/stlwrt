@@ -20,8 +20,13 @@
 #ifndef __GTK_SCROLLED_WINDOW_H__
 #define __GTK_SCROLLED_WINDOW_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkhscrollbar.h>
+
 #include <gtkvscrollbar.h>
+
 #include <gtkviewport.h>
 
 

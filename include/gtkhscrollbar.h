@@ -20,6 +20,9 @@
 #ifndef __GTK_HSCROLLBAR_H__
 #define __GTK_HSCROLLBAR_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkscrollbar.h>
 
 

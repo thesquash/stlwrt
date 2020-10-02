@@ -20,7 +20,11 @@
 #ifndef __GTK_TREE_DND_H__
 #define __GTK_TREE_DND_H__
 
+#include <stlwrt.h>
+
+
 #include <gtktreemodel.h>
+
 #include <gtkdnd.h>
 
 G_BEGIN_DECLS
@@ -30,12 +34,7 @@ G_BEGIN_DECLS
 #define GTK_IS_TREE_DRAG_SOURCE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TREE_DRAG_SOURCE))
 #define GTK_TREE_DRAG_SOURCE_GET_IFACE(obj)  (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GTK_TYPE_TREE_DRAG_SOURCE, GtkTreeDragSourceIface))
 
-typedef struct _GtkTreeDragSourceIface GtkTreeDragSourceIface;
-
-struct _GtkTreeDragSourceIface
-{
-  GTypeInterface g_iface;
-
+STLWRT_DECLARE_INTERFACE(GtkTreeDragSource, gtk_tree_drag_source,
   /* VTable - not signals */
 
   gboolean     (* row_draggable)        (GtkTreeDragSource   *drag_source,
@@ -47,9 +46,7 @@ struct _GtkTreeDragSourceIface
 
   gboolean     (* drag_data_delete)     (GtkTreeDragSource *drag_source,
                                          GtkTreePath       *path);
-};
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_tree_drag_source)
+)
 
 /* Returns whether the given row can be dragged */
 gboolean SF(gtk_tree_drag_source_row_draggable)    (GtkTreeDragSource *drag_source,
@@ -71,12 +68,7 @@ gboolean SF(gtk_tree_drag_source_drag_data_get)    (GtkTreeDragSource *drag_sour
 #define GTK_IS_TREE_DRAG_DEST(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TREE_DRAG_DEST))
 #define GTK_TREE_DRAG_DEST_GET_IFACE(obj)  (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GTK_TYPE_TREE_DRAG_DEST, GtkTreeDragDestIface))
 
-typedef struct _GtkTreeDragDestIface GtkTreeDragDestIface;
-
-struct _GtkTreeDragDestIface
-{
-  GTypeInterface g_iface;
-
+STLWRT_DECLARE_INTERFACE(GtkTreeDragDest, gtk_tree_drag_dest,
   /* VTable - not signals */
 
   gboolean     (* drag_data_received) (GtkTreeDragDest   *drag_dest,
@@ -86,9 +78,7 @@ struct _GtkTreeDragDestIface
   gboolean     (* row_drop_possible)  (GtkTreeDragDest   *drag_dest,
                                        GtkTreePath       *dest_path,
 				       GtkSelectionData  *selection_data);
-};
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_tree_drag_dest)
+)
 
 /* Inserts a row before dest which contains data in selection_data,
  * or returns FALSE if it can't

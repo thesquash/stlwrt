@@ -20,6 +20,9 @@
 #ifndef __GTK_PANED_H__
 #define __GTK_PANED_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkcontainer.h>
 
 G_BEGIN_DECLS
@@ -127,8 +130,8 @@ void    SF(gtk_paned_compute_position) (GtkPaned  *paned,
                                     gint       allocation,
                                     gint       child1_req,
                                     gint       child2_req);
-#define	SF(gtk_paned_gutter_size)(p,s)		(void) 0
-#define	SF(gtk_paned_set_gutter_size)(p,s)		(void) 0
+#define	gtk_paned_gutter_size(p,s)		(void) 0
+#define	gtk_paned_set_gutter_size(p,s)		(void) 0
 #endif /* GTK_DISABLE_DEPRECATED */
 
 G_END_DECLS

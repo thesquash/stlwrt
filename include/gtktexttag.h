@@ -50,7 +50,11 @@
 #ifndef __GTK_TEXT_TAG_H__
 #define __GTK_TEXT_TAG_H__
 
+#include <stlwrt.h>
+
+
 #include <gdk.h>
+
 #include <gtkenums.h>
 
 
@@ -197,8 +201,7 @@ struct _GtkTextAppearance
   guint pad4 : 1;
 };
 
-struct _GtkTextAttributes
-{
+STLWRT_DECLARE_BOXED_TYPE(GtkTextTag, gtk_text_tag,
   /*< private >*/
   guint refcount;
 
@@ -257,7 +260,7 @@ struct _GtkTextAttributes
   guint pad2 : 1;
   guint pad3 : 1;
   guint pad4 : 1;
-};
+)
 
 GtkTextAttributes* SF(gtk_text_attributes_new)         (void);
 GtkTextAttributes* SF(gtk_text_attributes_copy)        (GtkTextAttributes *src);
@@ -265,8 +268,6 @@ void               SF(gtk_text_attributes_copy_values) (GtkTextAttributes *src,
                                                     GtkTextAttributes *dest);
 void               SF(gtk_text_attributes_unref)       (GtkTextAttributes *values);
 GtkTextAttributes *SF(gtk_text_attributes_ref)         (GtkTextAttributes *values);
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_text_attributes)
 
 G_END_DECLS
 

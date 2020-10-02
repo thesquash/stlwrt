@@ -21,7 +21,11 @@
 #ifndef __GTK_FILE_CHOOSER_BUTTON_H__
 #define __GTK_FILE_CHOOSER_BUTTON_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkhbox.h>
+
 #include <gtkfilechooser.h>
 
 G_BEGIN_DECLS

@@ -24,7 +24,11 @@
 #ifndef __GDK_DISPLAY_H__
 #define __GDK_DISPLAY_H__
 
+#include <stlwrt.h>
+
+
 #include <gdktypes.h>
+
 #include <gdkevents.h>
 
 G_BEGIN_DECLS

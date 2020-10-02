@@ -21,7 +21,11 @@
 #ifndef __GTK_FILE_CHOOSER_DIALOG_H__
 #define __GTK_FILE_CHOOSER_DIALOG_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkdialog.h>
+
 #include <gtkfilechooser.h>
 
 G_BEGIN_DECLS

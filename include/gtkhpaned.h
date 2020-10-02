@@ -20,6 +20,9 @@
 #ifndef __GTK_HPANED_H__
 #define __GTK_HPANED_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkpaned.h>
 
 G_BEGIN_DECLS

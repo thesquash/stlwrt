@@ -35,7 +35,7 @@
 #include <gtksocketprivate.h>
 #include <gtkdnd.h>
 
-#include "x11/gdkx.h"
+#include "gdkx.h"
 
 #ifdef HAVE_XFIXES
 #include <X11/extensions/Xfixes.h>

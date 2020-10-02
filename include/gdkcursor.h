@@ -20,7 +20,11 @@
 #ifndef __GDK_CURSOR_H__
 #define __GDK_CURSOR_H__
 
+#include <stlwrt.h>
+
+
 #include <gdktypes.h>
+
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 G_BEGIN_DECLS
@@ -113,17 +117,14 @@ typedef enum
   GDK_CURSOR_IS_PIXMAP 	  = -1
 } GdkCursorType;
 
-struct _GdkCursor
-{
+STLWRT_DECLARE_BOXED_TYPE(GdkCursor, gdk_cursor,
   GdkCursorType  (type);
   /*< private >*/
   guint  (ref_count);
-};
+)
 
 /* Cursors
  */
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS (gdk_cursor)
 
 GdkCursor* SF(gdk_cursor_new_for_display)	 (GdkDisplay      *display,
 					  GdkCursorType    cursor_type);

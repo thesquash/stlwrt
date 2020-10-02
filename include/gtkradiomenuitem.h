@@ -20,6 +20,9 @@
 #ifndef __GTK_RADIO_MENU_ITEM_H__
 #define __GTK_RADIO_MENU_ITEM_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkcheckmenuitem.h>
 
 

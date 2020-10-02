@@ -20,6 +20,9 @@
 #ifndef __GTK_VSCROLLBAR_H__
 #define __GTK_VSCROLLBAR_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkscrollbar.h>
 
 G_BEGIN_DECLS

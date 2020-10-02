@@ -34,6 +34,8 @@
 #ifndef __GTK_IM_CONTEXT_SIMPLE_SEQS_H__
 #define __GTK_IM_CONTEXT_SIMPLE_SEQS_H__
 
+#include <stlwrt.h>
+
 /* === These are the original comments of the file; we keep for historical purposes ===
  *
  * The following table was generated from the X compose tables include with

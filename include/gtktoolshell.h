@@ -23,8 +23,13 @@
 #ifndef __GTK_TOOL_SHELL_H__
 #define __GTK_TOOL_SHELL_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkenums.h>
+
 #include <pango/pango.h>
+
 #include <gtksizegroup.h>
 
 
@@ -34,8 +39,6 @@ G_BEGIN_DECLS
 #define GTK_TOOL_SHELL(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_TOOL_SHELL, GtkToolShell))
 #define GTK_IS_TOOL_SHELL(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TOOL_SHELL))
 #define GTK_TOOL_SHELL_GET_IFACE(obj)  (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GTK_TYPE_TOOL_SHELL, GtkToolShellIface))
-
-typedef struct _GtkToolShellIface      GtkToolShellIface;
 
 /**
  * GtkToolShellIface:
@@ -51,8 +54,7 @@ typedef struct _GtkToolShellIface      GtkToolShellIface;
  *
  * Virtual function table for the #GtkToolShell interface.
  */
-struct _GtkToolShellIface
-{
+STLWRT_DECLARE_INTERFACE(GtkToolShell, gtk_tool_shell,
   /*< private >*/
   GTypeInterface g_iface;
 
@@ -66,9 +68,7 @@ struct _GtkToolShellIface
   gfloat             (*get_text_alignment)   (GtkToolShell *shell);
   PangoEllipsizeMode (*get_ellipsize_mode)   (GtkToolShell *shell);
   GtkSizeGroup *     (*get_text_size_group)  (GtkToolShell *shell);
-};
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_tool_shell)
+)
 
 GtkIconSize        SF(gtk_tool_shell_get_icon_size)        (GtkToolShell *shell);
 GtkOrientation     SF(gtk_tool_shell_get_orientation)      (GtkToolShell *shell);

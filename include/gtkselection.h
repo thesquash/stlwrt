@@ -20,13 +20,16 @@
 #ifndef __GTK_SELECTION_H__
 #define __GTK_SELECTION_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkwidget.h>
+
 #include <gtktextiter.h>
 
 
 G_BEGIN_DECLS
 
-typedef struct _GtkTargetList    GtkTargetList;
 typedef struct _GtkTargetEntry   GtkTargetEntry;
 
 #define GTK_TYPE_SELECTION_DATA (gtk_selection_data_get_type ())
@@ -43,8 +46,7 @@ typedef struct _GtkTargetEntry   GtkTargetEntry;
  * sent.
  */
 
-struct _GtkSelectionData
-{
+STLWRT_DECLARE_BOXED_TYPE(GtkSelectionData, gtk_selection_data,
   GdkAtom        (selection);
   GdkAtom        (target);
   GdkAtom        (type);
@@ -52,7 +54,7 @@ struct _GtkSelectionData
   guchar       * (data);
   gint           (length);
   GdkDisplay   * (display);
-};
+)
 
 struct _GtkTargetEntry {
   gchar *target;
@@ -67,10 +69,10 @@ struct _GtkTargetEntry {
 typedef struct _GtkTargetPair GtkTargetPair;
 
 /* This structure is a list of destinations, and associated guint id's */
-struct _GtkTargetList {
+STLWRT_DECLARE_BOXED_TYPE(GtkTargetList, gtk_target_list,
   GList *list;
   guint ref_count;
-};
+)
 
 struct _GtkTargetPair {
   GdkAtom   target;
@@ -198,12 +200,8 @@ gboolean SF(_gtk_selection_notify)		  (GtkWidget         *widget,
 gboolean SF(_gtk_selection_property_notify)	  (GtkWidget         *widget,
 					   GdkEventProperty  *event);
 
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_selection_data)
-
 GtkSelectionData *SF(gtk_selection_data_copy)     (GtkSelectionData *data);
 void		  SF(gtk_selection_data_free)     (GtkSelectionData *data);
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_target_list)
 
 G_END_DECLS
 

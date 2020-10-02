@@ -20,11 +20,17 @@
 #ifndef __GTK_ICON_FACTORY_H__
 #define __GTK_ICON_FACTORY_H__
 
+#include <stlwrt.h>
+
+
 #include <gdk.h>
+
 #include <gtkrc.h>
 
 G_BEGIN_DECLS
 
+STLWRT_DECLARE_OPAQUE_TYPE(GtkIconSet, gtk_icon_set)
+STLWRT_DECLARE_OPAQUE_TYPE(GtkIconSource, gtk_icon_source)
 
 typedef struct _GtkIconFactoryClass GtkIconFactoryClass;
 
@@ -103,7 +109,6 @@ const gchar *         SF(gtk_icon_size_get_name)       (GtkIconSize  size);
 
 /* Icon sets */
 
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_icon_set)
 GtkIconSet* SF(gtk_icon_set_new)             (void);
 GtkIconSet* SF(gtk_icon_set_new_from_pixbuf) (GdkPixbuf       *pixbuf);
 
@@ -130,7 +135,6 @@ void           SF(gtk_icon_set_get_sizes)    (GtkIconSet          *icon_set,
                                           GtkIconSize        **sizes,
                                           gint                *n_sizes);
 
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_icon_source)
 GtkIconSource* SF(gtk_icon_source_new)                      (void);
 GtkIconSource* SF(gtk_icon_source_copy)                     (const GtkIconSource *source);
 void           SF(gtk_icon_source_free)                     (GtkIconSource       *source);

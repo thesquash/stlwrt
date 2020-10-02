@@ -20,8 +20,13 @@
 #ifndef __GTK_PRINT_UNIX_DIALOG_H__
 #define __GTK_PRINT_UNIX_DIALOG_H__
 
+#include <stlwrt.h>
+
+
 #include <gtk.h>
+
 #include <gtkprinter.h>
+
 #include <gtkprintjob.h>
 
 G_BEGIN_DECLS

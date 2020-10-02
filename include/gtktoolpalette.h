@@ -22,8 +22,13 @@
 #ifndef __GTK_TOOL_PALETTE_H__
 #define __GTK_TOOL_PALETTE_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkcontainer.h>
+
 #include <gtkdnd.h>
+
 #include <gtktoolitem.h>
 
 G_BEGIN_DECLS

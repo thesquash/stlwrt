@@ -24,7 +24,11 @@
 #ifndef __GTK_STATUS_ICON_H__
 #define __GTK_STATUS_ICON_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkimage.h>
+
 #include <gtkmenu.h>
 
 G_BEGIN_DECLS

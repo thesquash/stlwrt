@@ -20,6 +20,9 @@
 #ifndef __GTK_EDITABLE_H__
 #define __GTK_EDITABLE_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkwidget.h>
 
 
@@ -32,12 +35,7 @@ G_BEGIN_DECLS
 #define GTK_IS_EDITABLE_CLASS(vtable) (G_TYPE_CHECK_CLASS_TYPE ((vtable), GTK_TYPE_EDITABLE))
 #define GTK_EDITABLE_GET_CLASS(inst)  (G_TYPE_INSTANCE_GET_INTERFACE ((inst), GTK_TYPE_EDITABLE, GtkEditableClass))
 
-typedef struct _GtkEditableClass  GtkEditableClass;
-
-struct _GtkEditableClass
-{
-  GTypeInterface		   base_iface;
-
+STLWRT_DECLARE_INTERFACE(GtkEditable, gtk_editable,
   /* signals */
   void (* insert_text)              (GtkEditable    *editable,
 				     const gchar    *text,
@@ -69,10 +67,9 @@ struct _GtkEditableClass
   void (* set_position)             (GtkEditable    *editable,
 				     gint            position);
   gint (* get_position)             (GtkEditable    *editable);
-};
+)
 
 
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_editable)
 void     SF(gtk_editable_select_region)        (GtkEditable *editable,
 					    gint         start_pos,
 					    gint         end_pos);

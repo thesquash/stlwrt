@@ -20,8 +20,13 @@
 #ifndef __GTK_TREE_VIEW_COLUMN_H__
 #define __GTK_TREE_VIEW_COLUMN_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkcellrenderer.h>
+
 #include <gtktreemodel.h>
+
 #include <gtktreesortable.h>
 
 

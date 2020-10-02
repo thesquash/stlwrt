@@ -19,6 +19,9 @@
 #ifndef __GTK_ICON_CACHE_VALIDATOR_H__
 #define __GTK_ICON_CACHE_VALIDATOR_H__
 
+#include <stlwrt.h>
+
+
 
 #include <glib.h>
 

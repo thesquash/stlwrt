@@ -21,6 +21,9 @@
 #ifndef __GTK_PAGE_SETUP_H__
 #define __GTK_PAGE_SETUP_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkpapersize.h>
 
 
@@ -30,7 +33,7 @@ G_BEGIN_DECLS
 #define GTK_PAGE_SETUP(obj)    (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PAGE_SETUP, GtkPageSetup))
 #define GTK_IS_PAGE_SETUP(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_PAGE_SETUP))
 
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_page_setup)
+STLWRT_DECLARE_OPAQUE_TYPE(GtkPageSetup, gtk_page_setup)
 
 GtkPageSetup *     SF(gtk_page_setup_new)               (void);
 GtkPageSetup *     SF(gtk_page_setup_copy)              (GtkPageSetup       *other);

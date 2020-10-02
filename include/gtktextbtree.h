@@ -20,6 +20,8 @@
 #ifndef __GTK_TEXT_BTREE_H__
 #define __GTK_TEXT_BTREE_H__
 
+#include <stlwrt.h>
+
 #if 0
 #define DEBUG_VALIDATION_AND_SCROLLING
 #endif
@@ -30,11 +32,17 @@
 #define DV(x)
 #endif
 
+
 #include <gtktextbuffer.h>
+
 #include <gtktexttag.h>
+
 #include <gtktextmark.h>
+
 #include <gtktextchild.h>
+
 #include <gtktextsegment.h>
+
 #include <gtktextiter.h>
 
 G_BEGIN_DECLS

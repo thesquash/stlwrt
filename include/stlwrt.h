@@ -29,6 +29,7 @@
 #ifndef __STLWRT_H__
 #define __STLWRT_H__
 
+
 #include <glib.h>
 
 G_BEGIN_DECLS
@@ -340,6 +341,21 @@ G_BEGIN_DECLS
 /****************************************************************************/
 /* The following stuff deals with _declaring_ types, in C header files. */
 
+#define STLWRT_DECLARE_OPAQUE_TYPE(TN, t_n) \
+  typedef struct __##TN TN; \
+ \
+  STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(t_n)
+
+#define STLWRT_DECLARE_BOXED_TYPE(TN, t_n, Properties) \
+  typedef struct _##TN TN; \
+ \
+  struct _##TN \
+  { \
+    Properties \
+  }; \
+ \
+  STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(t_n)
+
 #define STLWRT_DECLARE_FTYPE_FPARENT(TN, t_n, PTN, Properties) \
   typedef struct _##TN TN; \
  \
@@ -510,6 +526,19 @@ G_BEGIN_DECLS
    STLWRT_DECLARE_GET_VTYPE_FUNCTIONS(t_n)
 
 #endif
+
+#define STLWRT_DECLARE_INTERFACE(TN, t_n, Properties) \
+  STLWRT_DECLARE_OPAQUE_TYPE(TN, t_n) \
+  typedef struct _##TN##Iface TN##Iface; \
+ \
+  struct _##TN##Iface \
+  { \
+    GTypeInterface g_iface; \
+ \
+    Properties \
+  }; \
+ \
+  STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(t_n)
 
 G_END_DECLS
 

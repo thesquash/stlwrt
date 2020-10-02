@@ -20,6 +20,9 @@
 #ifndef __GTK_MENU_SHELL_H__
 #define __GTK_MENU_SHELL_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkcontainer.h>
 
 

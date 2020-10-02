@@ -20,7 +20,11 @@
 #ifndef __GTK_TREE_SORTABLE_H__
 #define __GTK_TREE_SORTABLE_H__
 
+#include <stlwrt.h>
+
+
 #include <gtktreemodel.h>
+
 #include <gtktypeutils.h>
 
 
@@ -44,11 +48,7 @@ typedef gint (* GtkTreeIterCompareFunc) (GtkTreeModel *model,
 					 GtkTreeIter  *b,
 					 gpointer      user_data);
 
-
-struct _GtkTreeSortableIface
-{
-  GTypeInterface g_iface;
-
+STLWRT_DECLARE_INTERFACE(GtkTreeSortable, gtk_tree_sortable,
   /* signals */
   void     (* sort_column_changed)   (GtkTreeSortable        *sortable);
 
@@ -69,9 +69,7 @@ struct _GtkTreeSortableIface
 				      gpointer                data,
 				      GDestroyNotify          destroy);
   gboolean (* has_default_sort_func) (GtkTreeSortable        *sortable);
-};
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_tree_sortable)
+)
 
 void     SF(gtk_tree_sortable_sort_column_changed)   (GtkTreeSortable        *sortable);
 gboolean SF(gtk_tree_sortable_get_sort_column_id)    (GtkTreeSortable        *sortable,

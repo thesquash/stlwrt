@@ -20,7 +20,11 @@
 #ifndef __GTK_IM_MULTICONTEXT_H__
 #define __GTK_IM_MULTICONTEXT_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkimcontext.h>
+
 #include <gtkmenushell.h>
 
 G_BEGIN_DECLS

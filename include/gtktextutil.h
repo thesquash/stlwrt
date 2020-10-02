@@ -20,6 +20,8 @@
 #ifndef __GTK_TEXT_UTIL_H__
 #define __GTK_TEXT_UTIL_H__
 
+#include <stlwrt.h>
+
 G_BEGIN_DECLS
 
 /* This is a private uninstalled header shared between

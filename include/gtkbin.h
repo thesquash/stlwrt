@@ -21,6 +21,9 @@
 #ifndef __GTK_BIN_H__
 #define __GTK_BIN_H__
 
+#include <stlwrt.h>
+
+
 
 #include <gtkcontainer.h>
 

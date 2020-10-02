@@ -20,6 +20,9 @@
 #ifndef __GTK_HSCALE_H__
 #define __GTK_HSCALE_H__
 
+#include <stlwrt.h>
+
+
 
 #include <gtkscale.h>
 

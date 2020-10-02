@@ -21,6 +21,9 @@
 #ifndef __GTK_BUTTON_BOX_H__
 #define __GTK_BUTTON_BOX_H__
 
+#include <stlwrt.h>
+
+
 
 #include <gtkbox.h>
 
@@ -63,8 +66,8 @@ void              SF(gtk_button_box_set_child_secondary) (GtkButtonBox      *wid
 						      gboolean           is_secondary);
 
 #ifndef GTK_DISABLE_DEPRECATED
-#define SF(gtk_button_box_set_spacing)(b,s) SF(gtk_box_set_spacing) (GTK_BOX (b), s)
-#define SF(gtk_button_box_get_spacing)(b)   SF(gtk_box_get_spacing) (GTK_BOX (b))
+#define gtk_button_box_set_spacing(b,s) gtk_box_set_spacing (GTK_BOX (b), s)
+#define gtk_button_box_get_spacing(b)   gtk_box_get_spacing (GTK_BOX (b))
 
 void SF(gtk_button_box_set_child_size)     (GtkButtonBox *widget,
 					gint          min_width,

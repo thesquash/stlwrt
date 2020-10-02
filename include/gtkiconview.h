@@ -20,10 +20,17 @@
 #ifndef __GTK_ICON_VIEW_H__
 #define __GTK_ICON_VIEW_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkcontainer.h>
+
 #include <gtktreemodel.h>
+
 #include <gtkcellrenderer.h>
+
 #include <gtkselection.h>
+
 #include <gtktooltip.h>
 
 G_BEGIN_DECLS

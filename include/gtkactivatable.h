@@ -20,8 +20,12 @@
 #ifndef __GTK_ACTIVATABLE_H__
 #define __GTK_ACTIVATABLE_H__
 
+#include <stlwrt.h>
+
+
 
 #include <gtkaction.h>
+
 #include <gtktypeutils.h>
 
 G_BEGIN_DECLS
@@ -31,9 +35,6 @@ G_BEGIN_DECLS
 #define GTK_ACTIVATABLE_CLASS(obj)      (G_TYPE_CHECK_CLASS_CAST ((obj), GTK_TYPE_ACTIVATABLE, GtkActivatableIface))
 #define GTK_IS_ACTIVATABLE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_ACTIVATABLE))
 #define GTK_ACTIVATABLE_GET_IFACE(obj)  (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GTK_TYPE_ACTIVATABLE, GtkActivatableIface))
-
-
-typedef struct _GtkActivatableIface GtkActivatableIface;
 
 
 /**
@@ -49,20 +50,14 @@ typedef struct _GtkActivatableIface GtkActivatableIface;
  * Since: 2.16
  */
 
-struct _GtkActivatableIface
-{
-  GTypeInterface g_iface;
-
+STLWRT_DECLARE_INTERFACE(GtkActivatable, gtk_activatable,
   /* virtual table */
   void   (* update)                   (GtkActivatable *activatable,
 		                       GtkAction      *action,
 		                       const gchar    *property_name);
   void   (* sync_action_properties)   (GtkActivatable *activatable,
 		                       GtkAction      *action);
-};
-
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_activatable)
+)
 
 void       SF(gtk_activatable_sync_action_properties)     (GtkActivatable *activatable,
 						       GtkAction      *action);

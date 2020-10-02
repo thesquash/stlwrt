@@ -20,7 +20,11 @@
 #ifndef __GTK_STYLE_H__
 #define __GTK_STYLE_H__
 
+#include <stlwrt.h>
+
+
 #include <gdk.h>
+
 #include <gtkenums.h>
 
 
@@ -38,19 +42,7 @@ G_BEGIN_DECLS
 /* Some forward declarations needed to rationalize the header
  * files.
  */
-typedef struct _GtkBorder      GtkBorder;
-typedef struct _GtkStyle       GtkStyleFat;
-typedef struct _GtkStyle       GtkStyleThin;
 
-typedef struct _GtkStyleClass  GtkStyleClass;
-typedef struct _GtkThemeEngine GtkThemeEngine;
-typedef struct _GtkRcStyle     GtkRcStyleFat;
-typedef struct _GtkRcStyle     GtkRcStyleThin;
-typedef struct _GtkIconSet     GtkIconSet;
-typedef struct _GtkIconSource  GtkIconSource;
-typedef struct _GtkRcProperty  GtkRcProperty;
-typedef struct _GtkSettings    GtkSettingsFat;
-typedef struct _GtkSettings    GtkSettingsThin;
 typedef gboolean (*GtkRcPropertyParser) (const GParamSpec *pspec,
 					 const GString    *rc_string,
 					 GValue           *property_value);
@@ -58,8 +50,6 @@ typedef gboolean (*GtkRcPropertyParser) (const GParamSpec *pspec,
 /* We make this forward declaration here, since we pass
  * GtkWidget's to the draw functions.
  */
-typedef struct _GtkWidget      GtkWidgetFat;
-typedef struct _GtkWidget      GtkWidgetThin;
 
 #define GTK_STYLE_ATTACHED(style)	(GTK_STYLE (style)->attach_count > 0)
 
@@ -424,13 +414,12 @@ struct _GtkStyleClass
   void (*_gtk_reserved11) (void);
 };
 
-struct _GtkBorder
-{
+STLWRT_DECLARE_BOXED_TYPE(GtkBorder, gtk_border,
   gint left;
   gint right;
   gint top;
   gint bottom;
-};
+)
 
 
 GtkStyle* SF(gtk_style_new)			     (void);
@@ -873,8 +862,6 @@ void SF(gtk_paint_spinner)     (GtkStyle           *style,
 			    gint                width,
 			    gint                height);
 
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_border);
-
 GtkBorder *SF(gtk_border_new)      (void) G_GNUC_MALLOC;
 GtkBorder *SF(gtk_border_copy)     (const GtkBorder *border_);
 void       SF(gtk_border_free)     (GtkBorder       *border_);
@@ -907,7 +894,7 @@ void          SF(_gtk_style_shade)               (const GdkColor     *a,
 
 /* deprecated */
 #ifndef GTK_DISABLE_DEPRECATED
-#define SF(gtk_style_apply_default_pixmap)(s,gw,st,a,x,y,w,h) SF(gtk_style_apply_default_background) (s,gw,1,st,a,x,y,w,h)
+#define gtk_style_apply_default_pixmap(s,gw,st,a,x,y,w,h) gtk_style_apply_default_background (s,gw,1,st,a,x,y,w,h)
 void SF(gtk_draw_string)      (GtkStyle           *style,
 			   GdkWindow          *window,
                            GtkStateType        state_type,

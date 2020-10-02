@@ -42,7 +42,7 @@
 #undef DEBUG_WINDOW_PRINTING
 
 #ifdef GDK_WINDOWING_X11
-#include "x11/gdkx.h"           /* For workaround */
+#include "gdkx.h"           /* For workaround */
 #endif
 
 #include "math.h"

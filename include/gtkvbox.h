@@ -20,6 +20,9 @@
 #ifndef __GTK_VBOX_H__
 #define __GTK_VBOX_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkbox.h>
 
 G_BEGIN_DECLS

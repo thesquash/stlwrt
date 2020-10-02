@@ -27,6 +27,9 @@
 #ifndef __GTK_RECENT_CHOOSER_UTILS_H__
 #define __GTK_RECENT_CHOOSER_UTILS_H__
 
+#include <stlwrt.h>
+
+
 #include "gtkrecentchooserprivate.h"
 
 G_BEGIN_DECLS

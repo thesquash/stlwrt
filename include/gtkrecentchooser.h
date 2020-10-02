@@ -22,8 +22,13 @@
 #ifndef __GTK_RECENT_CHOOSER_H__
 #define __GTK_RECENT_CHOOSER_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkwidget.h>
+
 #include <gtkrecentmanager.h>
+
 #include <gtkrecentfilter.h>
 
 G_BEGIN_DECLS
@@ -59,8 +64,6 @@ typedef gint (*GtkRecentSortFunc) (GtkRecentInfo *a,
 				   GtkRecentInfo *b,
 				   gpointer       user_data);
 
-typedef struct _GtkRecentChooserIface GtkRecentChooserIface;
-
 #define GTK_RECENT_CHOOSER_ERROR	(SF(gtk_recent_chooser_error_quark) ())
 
 typedef enum
@@ -72,10 +75,7 @@ typedef enum
 GQuark  SF(gtk_recent_chooser_error_quark) (void);
 
 
-struct _GtkRecentChooserIface
-{
-  GTypeInterface base_iface;
-
+STLWRT_DECLARE_INTERFACE(GtkRecentChooser, gtk_recent_chooser)
   /*
    * Methods
    */
@@ -107,9 +107,8 @@ struct _GtkRecentChooserIface
    */
   void		    (* item_activated)     (GtkRecentChooser  *chooser);
   void		    (* selection_changed)  (GtkRecentChooser  *chooser);
-};
+)
 
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_recent_chooser)
 
 /*
  * Configuration

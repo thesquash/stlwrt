@@ -22,7 +22,11 @@
 #ifndef __GTK_MNEMONIC_HASH_H__
 #define __GTK_MNEMONIC_HASH_H__
 
+#include <stlwrt.h>
+
+
 #include <gdk.h>
+
 #include <gtkwidget.h>
 
 G_BEGIN_DECLS

@@ -20,7 +20,11 @@
 #ifndef __GTK_CELL_RENDERER_COMBO_H__
 #define __GTK_CELL_RENDERER_COMBO_H__
 
+#include <stlwrt.h>
+
+
 #include <gtktreemodel.h>
+
 #include <gtkcellrenderertext.h>
 
 G_BEGIN_DECLS

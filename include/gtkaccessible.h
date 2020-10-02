@@ -20,7 +20,11 @@
 #ifndef __GTK_ACCESSIBLE_H__
 #define __GTK_ACCESSIBLE_H__
 
+#include <stlwrt.h>
+
+
 #include <atk/atk.h>
+
 #include <gtkwidget.h>
 
 G_BEGIN_DECLS

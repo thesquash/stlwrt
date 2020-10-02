@@ -21,10 +21,13 @@
 #ifndef __GTK_PRINTER_OPTION_H__
 #define __GTK_PRINTER_OPTION_H__
 
+#include <stlwrt.h>
+
 /* This is a "semi-private" header; it is meant only for
  * alternate GtkPrintDialog backend modules; no stability guarantees 
  * are made at this point
  */
+
 
 #include <glib-object.h>
 

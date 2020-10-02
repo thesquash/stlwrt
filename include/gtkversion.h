@@ -20,6 +20,8 @@
 #ifndef __GTK_VERSION_H__
 #define __GTK_VERSION_H__
 
+#include <stlwrt.h>
+
 
 #define	GTK_CHECK_VERSION(major,minor,micro)	\
     (gtk_major_version > (major) || \

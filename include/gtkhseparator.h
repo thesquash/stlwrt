@@ -20,6 +20,9 @@
 #ifndef __GTK_HSEPARATOR_H__
 #define __GTK_HSEPARATOR_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkseparator.h>
 
 

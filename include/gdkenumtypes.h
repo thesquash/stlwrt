@@ -5,6 +5,9 @@
 #ifndef __GDK_ENUM_TYPES_H__
 #define __GDK_ENUM_TYPES_H__
 
+#include <stlwrt.h>
+
+
 #include <glib-object.h>
 
 G_BEGIN_DECLS

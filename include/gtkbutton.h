@@ -20,8 +20,12 @@
 #ifndef __GTK_BUTTON_H__
 #define __GTK_BUTTON_H__
 
+#include <stlwrt.h>
+
+
 
 #include <gtkbin.h>
+
 #include <gtkimage.h>
 
 

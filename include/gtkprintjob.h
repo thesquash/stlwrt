@@ -20,9 +20,14 @@
 #ifndef __GTK_PRINT_JOB_H__
 #define __GTK_PRINT_JOB_H__
 
+#include <stlwrt.h>
+
+
 #include <cairo.h>
 
+
 #include <gtk.h>
+
 #include <gtkprinter.h>
 
 G_BEGIN_DECLS

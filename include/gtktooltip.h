@@ -22,6 +22,9 @@
 #ifndef __GTK_TOOLTIP_H__
 #define __GTK_TOOLTIP_H__
 
+#include <stlwrt.h>
+
+
 #include <gtkwindow.h>
 
 G_BEGIN_DECLS
@@ -30,7 +33,7 @@ G_BEGIN_DECLS
 #define GTK_TOOLTIP(obj)                 (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_TOOLTIP, GtkTooltip))
 #define GTK_IS_TOOLTIP(obj)              (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_TOOLTIP))
 
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gtk_tooltip)
+STLWRT_DECLARE_OPAQUE_TYPE(GtkTooltip, gtk_tooltip)
 
 void SF(gtk_tooltip_set_markup)              (GtkTooltip         *tooltip,
                                           const gchar        *markup);

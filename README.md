@@ -80,3 +80,7 @@ anybody expect it would be?
 
 Either way, I'm still optimistic.  My apologies to those who were worried
 about my long absence.
+
+**UPDATE:**  A case in point:  Take the time to look at the commit history.
+I just made minor modifications to three files and reduced the log file
+size to 48.6 MB!

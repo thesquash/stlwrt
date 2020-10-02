@@ -71,8 +71,7 @@ typedef struct
   gulong motion_hint_serial; /* 0 == didn't deliver hinted motion event */
 } GdkPointerWindowInfo;
 
-struct _GdkDisplayProps
-{
+STLWRT_DECLARE_FTYPE_FPARENT(GdkDisplay, gdk_display, GObject,
   /*< private >*/
   GList * (queued_events);
   GList * (queued_tail);
@@ -102,27 +101,7 @@ struct _GdkDisplayProps
 
   /* Last reported event time from server */
   guint32  (last_event_time);
-};
-
-struct _GdkDisplayFat
-{
-  GObject parent_instance;
-
-  struct _GdkDisplayProps instance_properties;
-};
-
-struct _GdkDisplayThin
-{
-  GObject parent_instance;
-
-  gpointer reserved;
-};
-
-typedef union
-{
-  struct _GdkDisplayFat  fat_instance;
-  struct _GdkDisplayThin thin_instance;
-};
+)
 
 
 struct _GdkDisplayClass
@@ -158,10 +137,7 @@ struct _GdkDisplayPointerHooks
 				    gint            *win_y);
 };
 
-GType       SF(_T2_gdk_display_get_type) (void) G_GNUC_CONST;
-GType       SF(_3T_gdk_display_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType       SF(gdk_display_get_type) (void) G_GNUC_CONST;
+
 GdkDisplay *SF(gdk_display_open)                (const gchar *display_name);
 
 const gchar * SF(gdk_display_get_name)         (GdkDisplay *display);

@@ -28,6 +28,7 @@
 
 #include <gio/gio.h>
 
+#include <gdkdisplay.h>
 #include <gdkscreen.h>
 
 G_BEGIN_DECLS

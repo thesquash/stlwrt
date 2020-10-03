@@ -21,6 +21,7 @@
 #define __GTK_STYLE_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gdk.h>

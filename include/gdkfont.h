@@ -23,6 +23,7 @@
 #define __GDK_FONT_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gdktypes.h>
@@ -43,48 +44,11 @@ typedef enum
   GDK_FONT_FONTSET
 } GdkFontType;
 
-/********************************************************************/
-struct _GdkFontProps
-{
-
+STLWRT_DECLARE_BOXED_TYPE(GdkFont, gdk_font,
+  GdkFontType   type;
   gint ascent;
   gint descent;
-};
-
-struct _GdkFontFat
-{
-  GdkFontTypeFat   type;
-
-  struct _GdkFontProps instance_properties;
-};
-
-struct _GdkFontThin
-{
-  GdkFontTypeThin  type;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GdkFontFat   fat_instance;
-  struct _GdkFontThin  thin_instance;
-}   GdkFont;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GdkFontFat GdkFont;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GdkFontThin GdkFont;
-#endif
-/********************************************************************/
-
-
-
-GType    SF(_T2_gdk_font_get_type)  (void) G_GNUC_CONST;
-GType    SF(_3T_gdk_font_get_type)  (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType    SF(gdk_font_get_type)  (void) G_GNUC_CONST;
+)
 
 GdkFont* SF(gdk_font_ref)	    (GdkFont        *font);
 void	 SF(gdk_font_unref)	    (GdkFont        *font);

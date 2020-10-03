@@ -22,6 +22,7 @@
 #define __GTK_PAGE_SETUP_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkpapersize.h>

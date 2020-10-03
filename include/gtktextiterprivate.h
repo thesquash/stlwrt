@@ -21,6 +21,7 @@
 #define __GTK_TEXT_ITER_PRIVATE_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtktextiter.h>

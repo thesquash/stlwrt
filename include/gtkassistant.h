@@ -27,6 +27,7 @@
 #define __GTK_ASSISTANT_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 

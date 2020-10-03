@@ -21,6 +21,7 @@
 #define __GTK_FRAME_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkbin.h>

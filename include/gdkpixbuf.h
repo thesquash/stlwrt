@@ -21,6 +21,7 @@
 #define __GDK_PIXBUF_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <cairo.h>

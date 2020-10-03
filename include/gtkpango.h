@@ -21,6 +21,7 @@
 #define __GTK_PANGO_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <pango/pangocairo.h>

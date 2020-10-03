@@ -22,6 +22,7 @@
 #define __GTK_PRINT_SETTINGS_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkpapersize.h>

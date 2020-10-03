@@ -21,6 +21,7 @@
 #define __GTK_ENTRY_COMPLETION_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtktreemodel.h>

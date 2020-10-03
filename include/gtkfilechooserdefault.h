@@ -22,6 +22,7 @@
 #define __GTK_FILE_CHOOSER_DEFAULT_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include "gtkfilesystem.h"
@@ -34,7 +35,7 @@ G_BEGIN_DECLS
 #define GTK_FILE_CHOOSER_DEFAULT(obj)    (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_FILE_CHOOSER_DEFAULT, GtkFileChooserDefault))
 #define GTK_IS_FILE_CHOOSER_DEFAULT(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FILE_CHOOSER_DEFAULT))
 
-STLWRT_DECLARE_GET_VTYPE_FUNCTIONS(_gtk_file_chooser_default)
+STLWRT_DECLARE_OPAQUE_TYPE(GtkFileChooserDefault, _gtk_file_chooser_default)
 GtkWidget *_gtk_file_chooser_default_new      (void);
 
 G_END_DECLS

@@ -21,6 +21,7 @@
 #define __GTK_ADJUSTMENT_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 

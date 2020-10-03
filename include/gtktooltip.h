@@ -23,6 +23,7 @@
 #define __GTK_TOOLTIP_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkwindow.h>

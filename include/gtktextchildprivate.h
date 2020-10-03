@@ -51,6 +51,7 @@
 #define __GTK_TEXT_CHILD_PRIVATE_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtktexttypes.h>

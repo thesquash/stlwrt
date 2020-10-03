@@ -24,6 +24,7 @@
 #define __GTK_QUERY_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <glib-object.h>

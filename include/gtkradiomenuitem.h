@@ -21,6 +21,7 @@
 #define __GTK_RADIO_MENU_ITEM_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkcheckmenuitem.h>

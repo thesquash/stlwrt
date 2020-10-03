@@ -22,6 +22,7 @@
 #define __GTK_PRINT_BACKEND_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 /* This is a "semi-private" header; it is meant only for
  * alternate GtkPrintDialog backend modules; no stability guarantees

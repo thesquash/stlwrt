@@ -26,12 +26,12 @@
 #ifndef __GDK_PRIVATE_X11_H__
 #define __GDK_PRIVATE_X11_H__
 
-#include <gdk/gdkcursor.h>
-#include <gdk/gdkprivate.h>
-#include <gdk/x11/gdkwindow-x11.h>
-#include <gdk/x11/gdkpixmap-x11.h>
-#include <gdk/x11/gdkdisplay-x11.h>
-#include <gdk/gdkinternals.h>
+#include <gdkcursor.h>
+#include <gdkprivate.h>
+#include <gdkwindow-x11.h>
+#include <gdkpixmap-x11.h>
+#include <gdkdisplay-x11.h>
+#include <gdkinternals.h>
 
 #define GDK_TYPE_GC_X11              (_gdk_gc_x11_get_type ())
 #define GDK_GC_X11(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_GC_X11, GdkGCX11))

@@ -6,6 +6,7 @@
 #define __GDK_ENUM_TYPES_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <glib-object.h>

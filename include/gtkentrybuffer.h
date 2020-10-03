@@ -21,6 +21,7 @@
 #define __GTK_ENTRY_BUFFER_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <glib-object.h>

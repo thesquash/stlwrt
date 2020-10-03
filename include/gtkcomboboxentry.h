@@ -21,6 +21,7 @@
 #define __GTK_COMBO_BOX_ENTRY_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkcombobox.h>

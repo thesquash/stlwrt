@@ -23,6 +23,7 @@
 #define __GTK_TEXT_BUFFER_RICH_TEXT_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtktextbuffer.h>

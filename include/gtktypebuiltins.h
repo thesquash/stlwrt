@@ -4,6 +4,7 @@
 #define __GTK_TYPE_BUILTINS_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <glib-object.h>

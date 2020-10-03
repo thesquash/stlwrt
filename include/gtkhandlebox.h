@@ -26,6 +26,7 @@
 #define __GTK_HANDLE_BOX_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkbin.h>

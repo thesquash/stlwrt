@@ -21,6 +21,7 @@
 #define __GTK_ICON_FACTORY_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gdk.h>

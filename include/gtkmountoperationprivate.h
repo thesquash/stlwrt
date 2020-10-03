@@ -22,6 +22,7 @@
 #define __GTK_MOUNT_OPERATION_PRIVATE_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gio/gio.h>

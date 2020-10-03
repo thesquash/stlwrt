@@ -21,6 +21,7 @@
 #define __GTK_SCROLLBAR_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkrange.h>

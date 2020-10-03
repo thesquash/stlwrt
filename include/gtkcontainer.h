@@ -21,6 +21,7 @@
 #define __GTK_CONTAINER_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkwidget.h>

@@ -21,6 +21,7 @@
 #define __GTK_TEXT_CHILD_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gdkconfig.h>

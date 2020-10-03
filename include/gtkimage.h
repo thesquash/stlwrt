@@ -21,6 +21,7 @@
 #define __GTK_IMAGE_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gio/gio.h>

@@ -20,6 +20,7 @@
 #define __GTK_PLUG_PRIVATE_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 /* In gtkplug.c: */
 void _gtk_plug_send_delete_event      (GtkWidget        *widget);

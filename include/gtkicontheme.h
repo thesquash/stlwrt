@@ -21,6 +21,7 @@
 #define __GTK_ICON_THEME_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gdk-pixbuf/gdk-pixbuf.h>

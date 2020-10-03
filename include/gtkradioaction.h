@@ -27,6 +27,7 @@
 #define __GTK_RADIO_ACTION_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtktoggleaction.h>

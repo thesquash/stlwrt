@@ -21,6 +21,7 @@
 #define __GTK_TREE_PRIVATE_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 G_BEGIN_DECLS

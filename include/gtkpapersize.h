@@ -22,6 +22,7 @@
 #define __GTK_PAPER_SIZE_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkenums.h>

@@ -23,6 +23,7 @@
 #define __GTK_RBTREE_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <glib.h>

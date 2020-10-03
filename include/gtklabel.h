@@ -20,6 +20,7 @@
 #define __GTK_LABEL_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkmisc.h>

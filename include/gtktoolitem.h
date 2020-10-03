@@ -24,6 +24,7 @@
 #define __GTK_TOOL_ITEM_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkbin.h>

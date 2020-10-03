@@ -21,6 +21,7 @@
 #define __GTK_ACCEL_MAP_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 

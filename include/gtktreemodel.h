@@ -21,6 +21,7 @@
 #define __GTK_TREE_MODEL_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <glib-object.h>

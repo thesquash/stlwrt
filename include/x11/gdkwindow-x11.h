@@ -22,7 +22,7 @@
 #ifndef __GDK_WINDOW_X11_H__
 #define __GDK_WINDOW_X11_H__
 
-#include <gdk/x11/gdkdrawable-x11.h>
+#include <gdkdrawable-x11.h>
 
 #ifdef HAVE_XDAMAGE
 #include <X11/extensions/Xdamage.h>

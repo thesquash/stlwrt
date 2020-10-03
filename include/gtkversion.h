@@ -21,6 +21,7 @@
 #define __GTK_VERSION_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #define	GTK_CHECK_VERSION(major,minor,micro)	\

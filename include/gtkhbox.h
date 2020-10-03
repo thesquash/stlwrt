@@ -21,6 +21,7 @@
 #define __GTK_HBOX_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkbox.h>

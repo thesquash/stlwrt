@@ -21,6 +21,7 @@
 #define __GTK_ENUMS_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <glib-object.h>

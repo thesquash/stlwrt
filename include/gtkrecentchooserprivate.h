@@ -24,6 +24,7 @@
 #define __GTK_RECENT_CHOOSER_PRIVATE_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include "gtkrecentmanager.h"

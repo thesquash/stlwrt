@@ -28,6 +28,7 @@
 #define __GTK_RECENT_CHOOSER_UTILS_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include "gtkrecentchooserprivate.h"

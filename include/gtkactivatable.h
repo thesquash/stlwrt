@@ -21,6 +21,7 @@
 #define __GTK_ACTIVATABLE_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 

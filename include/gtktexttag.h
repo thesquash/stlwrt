@@ -51,6 +51,7 @@
 #define __GTK_TEXT_TAG_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gdk.h>

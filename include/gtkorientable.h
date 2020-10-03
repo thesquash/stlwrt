@@ -25,6 +25,7 @@
 #define __GTK_ORIENTABLE_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkwidget.h>

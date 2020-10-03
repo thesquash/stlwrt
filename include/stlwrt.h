@@ -31,6 +31,7 @@
 
 
 #include <glib.h>
+#include <glib-object.h>
 
 G_BEGIN_DECLS
 
@@ -342,12 +343,12 @@ G_BEGIN_DECLS
 /* The following stuff deals with _declaring_ types, in C header files. */
 
 #define STLWRT_DECLARE_OPAQUE_TYPE(TN, t_n) \
-  typedef struct __##TN TN; \
+  /*typedef struct __##TN TN;*/ \
  \
   STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(t_n)
 
 #define STLWRT_DECLARE_BOXED_TYPE(TN, t_n, Properties) \
-  typedef struct _##TN TN; \
+  /*typedef struct _##TN TN;*/ \
  \
   struct _##TN \
   { \
@@ -357,7 +358,7 @@ G_BEGIN_DECLS
   STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(t_n)
 
 #define STLWRT_DECLARE_FTYPE_FPARENT(TN, t_n, PTN, Properties) \
-  typedef struct _##TN TN; \
+  /*typedef struct _##TN TN;*/ \
  \
   struct _##TN \
   { \
@@ -371,9 +372,9 @@ G_BEGIN_DECLS
 #ifdef STLWRT_COMPILATION
 
  #define STLWRT_DECLARE_FTYPE_VPARENT(TN, t_n, PTN, Properties) \
-   typedef struct _##TN##Fat   TN##Fat; \
-   typedef struct _##TN##Thin  TN##Thin; \
-   typedef union  _##TN        TN; \
+   /*typedef struct _##TN##Fat   TN##Fat;*/ \
+   /*typedef struct _##TN##Thin  TN##Thin;*/ \
+   /*typedef union  _##TN        TN;*/ \
   \
    struct _##TN##Fat \
    { \
@@ -393,9 +394,9 @@ G_BEGIN_DECLS
 
  #define STLWRT_DECLARE_VTYPE_FPARENT(TN, t_n, PTN, Properties) \
    typedef struct _##TN##Props TN##Props; \
-   typedef struct _##TN##Fat   TN##Fat; \
-   typedef struct _##TN##Thin  TN##Thin; \
-   typedef union  _##TN        TN; \
+   /*typedef struct _##TN##Fat   TN##Fat;*/ \
+   /*typedef struct _##TN##Thin  TN##Thin;*/ \
+   /*typedef union  _##TN        TN;*/ \
   \
    struct _##TN##Props \
    { \
@@ -422,9 +423,9 @@ G_BEGIN_DECLS
 
  #define STLWRT_DECLARE_VTYPE_VPARENT(TN, t_n, PTN, Properties) \
    typedef struct _##TN##Props TN##Props; \
-   typedef struct _##TN##Fat   TN##Fat; \
-   typedef struct _##TN##Thin  TN##Thin; \
-   typedef union  _##TN        TN; \
+   /*typedef struct _##TN##Fat   TN##Fat;*/ \
+   /*typedef struct _##TN##Thin  TN##Thin;*/ \
+   /*typedef union  _##TN        TN;*/ \
   \
    struct _##TN##Props \
    { \

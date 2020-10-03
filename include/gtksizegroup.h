@@ -22,6 +22,7 @@
 #define __GTK_SIZE_GROUP_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkwidget.h>

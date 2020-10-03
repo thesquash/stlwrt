@@ -21,6 +21,7 @@
 #define __GDK_CURSOR_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gdktypes.h>

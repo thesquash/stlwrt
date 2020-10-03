@@ -24,6 +24,7 @@
 #define __GTK_ACCEL_LABEL_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 

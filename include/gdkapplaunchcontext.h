@@ -24,6 +24,7 @@
 #define __GDK_APP_LAUNCH_CONTEXT_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gio/gio.h>

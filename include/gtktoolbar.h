@@ -26,6 +26,7 @@
 #define __GTK_TOOLBAR_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkcontainer.h>

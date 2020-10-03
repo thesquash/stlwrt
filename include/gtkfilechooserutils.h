@@ -23,6 +23,7 @@
 #define __GTK_FILE_CHOOSER_UTILS_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include "gtkfilechooserprivate.h"

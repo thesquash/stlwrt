@@ -21,6 +21,7 @@
 #define __GTK_HSCALE_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 

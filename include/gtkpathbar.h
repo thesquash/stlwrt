@@ -21,6 +21,7 @@
 #define __GTK_PATH_BAR_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include "gtkcontainer.h"

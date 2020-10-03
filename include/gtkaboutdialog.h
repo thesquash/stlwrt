@@ -26,6 +26,7 @@
 #define __GTK_ABOUT_DIALOG_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkdialog.h>

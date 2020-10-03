@@ -23,6 +23,7 @@
 #define __GDK_SPAWN_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gdkscreen.h>

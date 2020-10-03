@@ -22,6 +22,7 @@
 #define __GTK_FILE_FILTER_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <glib-object.h>

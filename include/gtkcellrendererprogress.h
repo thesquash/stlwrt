@@ -22,6 +22,7 @@
 #define __GTK_CELL_RENDERER_PROGRESS_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkcellrenderer.h>

@@ -24,6 +24,7 @@
 #define __GTK_VOLUME_BUTTON_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkscalebutton.h>

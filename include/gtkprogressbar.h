@@ -21,6 +21,7 @@
 #define __GTK_PROGRESS_BAR_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkprogress.h>

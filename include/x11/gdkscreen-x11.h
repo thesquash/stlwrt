@@ -26,8 +26,8 @@
 
 #include "gdkprivate-x11.h"
 #include "xsettings-client.h"
-#include <gdk/gdkscreen.h>
-#include <gdk/gdkvisual.h>
+#include <gdkscreen.h>
+#include <gdkvisual.h>
 #include <X11/X.h>
 #include <X11/Xlib.h>
 

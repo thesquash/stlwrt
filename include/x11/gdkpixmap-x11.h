@@ -22,8 +22,8 @@
 #ifndef __GDK_PIXMAP_X11_H__
 #define __GDK_PIXMAP_X11_H__
 
-#include <gdk/x11/gdkdrawable-x11.h>
-#include <gdk/gdkpixmap.h>
+#include <gdkdrawable-x11.h>
+#include <gdkpixmap.h>
 
 G_BEGIN_DECLS
 

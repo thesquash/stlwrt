@@ -23,6 +23,7 @@
 #define __GTK_KEY_HASH_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gdk.h>

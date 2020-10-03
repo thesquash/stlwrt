@@ -22,6 +22,7 @@
 #define __GTK_OFFSCREEN_WINDOW_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkwindow.h>

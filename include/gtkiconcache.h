@@ -20,6 +20,7 @@
 #define __GTK_ICON_CACHE_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gdk-pixbuf/gdk-pixbuf.h>

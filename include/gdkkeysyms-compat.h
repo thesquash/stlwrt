@@ -30,6 +30,7 @@
 #define __GDK_KEYSYMS_COMPAT_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 #define GDK_VoidSymbol 0xffffff
 #define GDK_BackSpace 0xff08

@@ -20,6 +20,7 @@
 #define __GTK_COMBO_BOX_TEXT_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkcombobox.h>

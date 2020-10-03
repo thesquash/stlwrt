@@ -22,6 +22,7 @@
 #define __GTK_DND_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkwidget.h>

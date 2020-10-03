@@ -21,6 +21,7 @@
 #define __GTK_MENU_SHELL_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkcontainer.h>

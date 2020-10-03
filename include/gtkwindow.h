@@ -21,6 +21,7 @@
 #define __GTK_WINDOW_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkaccelgroup.h>

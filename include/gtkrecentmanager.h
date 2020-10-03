@@ -22,6 +22,7 @@
 #define __GTK_RECENT_MANAGER_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gdk-pixbuf/gdk-pixbuf.h>

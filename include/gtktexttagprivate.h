@@ -21,6 +21,7 @@
 #define __GTK_TEXT_TAG_PRIVATE_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtk.h>

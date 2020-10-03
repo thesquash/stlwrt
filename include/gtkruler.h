@@ -23,6 +23,7 @@
 #define __GTK_RULER_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 

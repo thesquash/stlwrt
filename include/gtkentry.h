@@ -25,6 +25,7 @@
 #define __GTK_ENTRY_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkeditable.h>

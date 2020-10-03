@@ -21,6 +21,7 @@
 #define __GTK_TEXT_UTIL_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 G_BEGIN_DECLS
 

@@ -51,6 +51,7 @@
 #define __GTK_TEXT_MARK_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 G_BEGIN_DECLS
 

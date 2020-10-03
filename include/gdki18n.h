@@ -21,6 +21,7 @@
 #define __GDK_I18N_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 #ifndef GDK_DISABLE_DEPRECATED
 

@@ -21,6 +21,7 @@
 #define __GTK_IM_MODULE_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtk.h>

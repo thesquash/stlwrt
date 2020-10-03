@@ -22,6 +22,7 @@
 #define __GTK_COLOR_SELECTION_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkdialog.h>

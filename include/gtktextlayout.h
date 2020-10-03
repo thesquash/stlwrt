@@ -80,6 +80,7 @@
 #define __GTK_TEXT_LAYOUT_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 /* This is a "semi-private" header; it is intended for
  * use by the text widget, and the text canvas item,

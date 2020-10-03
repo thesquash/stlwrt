@@ -21,6 +21,7 @@
 #define __GDK_DISPLAY_MANAGER_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gdktypes.h>

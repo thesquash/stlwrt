@@ -21,6 +21,7 @@
 #define __GTK_CUSTOM_PAPER_UNIX_DIALOG_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtk.h>

@@ -27,6 +27,7 @@
 #define __GTK_TOGGLE_ACTION_PRIVATE_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #define GTK_TOGGLE_ACTION_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_TOGGLE_ACTION, GtkToggleActionPrivate))

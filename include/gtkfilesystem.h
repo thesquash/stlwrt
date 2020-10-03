@@ -22,6 +22,7 @@
 #define __GTK_FILE_SYSTEM_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gio/gio.h>

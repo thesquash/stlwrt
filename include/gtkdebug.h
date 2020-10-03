@@ -21,6 +21,7 @@
 #define __GTK_DEBUG_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <glib.h>

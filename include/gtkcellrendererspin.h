@@ -21,6 +21,7 @@
 #define __GTK_CELL_RENDERER_SPIN_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkcellrenderertext.h>

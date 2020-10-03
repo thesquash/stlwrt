@@ -21,6 +21,7 @@
 #define __GTK_TRAY_ICON_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include "gtkplug.h"

@@ -20,6 +20,7 @@
 #define __GTK_ICON_CACHE_VALIDATOR_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 

@@ -21,6 +21,7 @@
 #define __GTK_MISC_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkwidget.h>

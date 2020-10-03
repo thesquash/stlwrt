@@ -21,10 +21,11 @@
 #define __GDK_GC_H__
 
 #include <stlwrt.h>
-
+#include <stlwrt-typedefs.h>
 
 #include <gdkcolor.h>
-
+#include <gdkfont.h>
+#include <gdkpixmap.h>
 #include <gdktypes.h>
 
 G_BEGIN_DECLS
@@ -151,10 +152,9 @@ typedef enum
   GDK_GC_JOIN_STYLE    = 1 << 17
 } GdkGCValuesMask;
 
-/********************************************************************/
-struct _GdkGCValuesProps
+struct _GdkGCValues
 {
-
+  GdkColor  	    foreground;
   GdkColor	    background;
   GdkFont	   *font;
   GdkFunction	    function;
@@ -173,36 +173,6 @@ struct _GdkGCValuesProps
   GdkCapStyle	    cap_style;
   GdkJoinStyle	    join_style;
 };
-
-struct _GdkGCValuesFat
-{
-  GdkColorFat  	    foreground;
-
-  struct _GdkGCValuesProps instance_properties;
-};
-
-struct _GdkGCValuesThin
-{
-  GdkColorThin 	    foreground;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GdkGCValuesFat   fat_instance;
-  struct _GdkGCValuesThin  thin_instance;
-}   GdkGCValues;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GdkGCValuesFat GdkGCValues;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GdkGCValuesThin GdkGCValues;
-#endif
-/********************************************************************/
-
-
 
 #define GDK_TYPE_GC              (gdk_gc_get_type ())
 #define GDK_GC(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_GC, GdkGC))

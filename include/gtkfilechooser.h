@@ -22,6 +22,7 @@
 #define __GTK_FILE_CHOOSER_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkfilefilter.h>

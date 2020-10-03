@@ -21,6 +21,7 @@
 #define __GTK_IM_MULTICONTEXT_H__
 
 #include <stlwrt.h>
+#include <stlwrt-typedefs.h>
 
 
 #include <gtkimcontext.h>

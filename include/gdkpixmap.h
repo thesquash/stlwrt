@@ -30,67 +30,26 @@
 
 G_BEGIN_DECLS
 
-typedef struct _GdkPixmapObject GdkPixmapObject;
 typedef struct _GdkPixmapObjectClass GdkPixmapObjectClass;
 
 #define GDK_TYPE_PIXMAP              (gdk_pixmap_get_type ())
 #define GDK_PIXMAP(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_PIXMAP, GdkPixmap))
-#define GDK_PIXMAP_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_PIXMAP, GdkPixmapObjectClass))
+#define GDK_PIXMAP_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_PIXMAP, GdkPixmapClass))
 #define GDK_IS_PIXMAP(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_PIXMAP))
 #define GDK_IS_PIXMAP_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GDK_TYPE_PIXMAP))
-#define GDK_PIXMAP_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GDK_TYPE_PIXMAP, GdkPixmapObjectClass))
-#define GDK_PIXMAP_OBJECT(object)    ((GdkPixmapObject *) GDK_PIXMAP (object))
+#define GDK_PIXMAP_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GDK_TYPE_PIXMAP, GdkPixmapClass))
+#define GDK_PIXMAP_OBJECT(object)    ((GdkPixmap *) GDK_PIXMAP (object))
 
-/********************************************************************/
-struct _GdkPixmapObjectProps
-{
-
-  
+STLWRT_DECLARE_FTYPE_FPARENT(GdkPixmap, gdk_pixmap, GdkDrawable,
   GdkDrawable * (impl);  /* window-system-specific delegate object */
-
   gint  (depth);
-};
+)
 
-struct _GdkPixmapObjectFat
-{
-  GdkDrawableFat   parent_instance;
-
-  struct _GdkPixmapObjectProps instance_properties;
-};
-
-struct _GdkPixmapObjectThin
-{
-  GdkDrawableThin  parent_instance;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GdkPixmapObjectFat   fat_instance;
-  struct _GdkPixmapObjectThin  thin_instance;
-}   GdkPixmapObject;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GdkPixmapObjectFat GdkPixmapObject;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GdkPixmapObjectThin GdkPixmapObject;
-#endif
-/********************************************************************/
-
-
-
-struct _GdkPixmapObjectClass
+struct _GdkPixmapClass
 {
   GdkDrawableClass parent_class;
-
 };
 
-GType      SF(_T2_gdk_pixmap_get_type)          (void) G_GNUC_CONST;
-GType      SF(_3T_gdk_pixmap_get_type)          (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType      SF(gdk_pixmap_get_type)          (void) G_GNUC_CONST;
 
 /* Pixmaps
  */

@@ -26,8 +26,6 @@
 
 #include <string.h>
 
-#undef GTK_DISABLE_DEPRECATED /* GtkTooltips */
-
 #include <gtktoolitem.h>
 
 #include <gtktoolshell.h>
@@ -95,7 +93,7 @@ enum {
   PROP_ACTIVATABLE_USE_ACTION_APPEARANCE
 };
 
-#define GTK_TOOL_ITEM_GET_PRIVATE(o)  (G_TYPE_INSTANCE_GET_PRIVATE ((o), GTK_TYPE_TOOL_ITEM, GtkToolItemPrivate))
+
 
   
 static void gtk_tool_item_finalize     (GObject         *object);
@@ -120,10 +118,6 @@ static void gtk_tool_item_size_request  (GtkWidget      *widget,
 					 GtkRequisition *requisition);
 static void gtk_tool_item_size_allocate (GtkWidget      *widget,
 					 GtkAllocation  *allocation);
-static gboolean gtk_tool_item_real_set_tooltip (GtkToolItem *tool_item,
-						GtkTooltips *tooltips,
-						const gchar *tip_text,
-						const gchar *tip_private);
 
 static void gtk_tool_item_activatable_interface_init (GtkActivatableIface  *iface);
 static void gtk_tool_item_update                     (GtkActivatable       *activatable,
@@ -256,33 +250,6 @@ gtk_tool_item_class_init (GtkToolItemClass *klass)
 		  NULL, NULL,
 		  NULL,
 		  G_TYPE_NONE, 0);
-/**
- * GtkToolItem::set-tooltip:
- * @tool_item: the object the signal was emitted on
- * @tooltips: the #GtkTooltips
- * @tip_text: the tooltip text
- * @tip_private: the tooltip private text
- *
- * This signal is emitted when the toolitem's tooltip changes.
- * Application developers can use __gtk_tool_item_set_tooltip() to
- * set the item's tooltip.
- *
- * Return value: %TRUE if the signal was handled, %FALSE if not
- *
- * Deprecated: 2.12: With the new tooltip API, there is no
- *   need to use this signal anymore.
- **/
-  toolitem_signals[SET_TOOLTIP] =
-    g_signal_new (I_("set-tooltip"),
-		  G_OBJECT_CLASS_TYPE (klass),
-		  G_SIGNAL_RUN_LAST,
-		  G_STRUCT_OFFSET (GtkToolItemClass, set_tooltip),
-		  ___gtk_boolean_handled_accumulator, NULL,
-		  NULL,
-		  G_TYPE_BOOLEAN, 3,
-		  GTK_TYPE_TOOLTIPS,
-		  G_TYPE_STRING,
-		  G_TYPE_STRING);		  
 
   g_type_class_add_private (object_class, sizeof (GtkToolItemPrivate));
 }
@@ -1058,51 +1025,6 @@ __gtk_tool_item_set_is_important (GtkToolItem *tool_item, gboolean is_important)
 
       g_object_notify (G_OBJECT (tool_item), "is-important");
     }
-}
-
-static gboolean
-gtk_tool_item_real_set_tooltip (GtkToolItem *tool_item,
-				GtkTooltips *tooltips,
-				const gchar *tip_text,
-				const gchar *tip_private)
-{
-  GtkWidget *child = GTK_BIN (tool_item)->child;
-
-  if (!child)
-    return FALSE;
-
-  __gtk_widget_set_tooltip_text (child, tip_text);
-
-  return TRUE;
-}
-
-/**
- * __gtk_tool_item_set_tooltip:
- * @tool_item: a #GtkToolItem
- * @tooltips: The #GtkTooltips object to be used
- * @tip_text: (allow-none): text to be used as tooltip text for @tool_item
- * @tip_private: (allow-none): text to be used as private tooltip text
- *
- * Sets the #GtkTooltips object to be used for @tool_item, the
- * text to be displayed as tooltip on the item and the private text
- * to be used. See gtk_tooltips_set_tip().
- * 
- * Since: 2.4
- *
- * Deprecated: 2.12: Use __gtk_tool_item_set_tooltip_text() instead.
- **/
-void
-__gtk_tool_item_set_tooltip (GtkToolItem *tool_item,
-			   GtkTooltips *tooltips,
-			   const gchar *tip_text,
-			   const gchar *tip_private)
-{
-  gboolean retval;
-  
-  g_return_if_fail (GTK_IS_TOOL_ITEM (tool_item));
-
-  g_signal_emit (tool_item, toolitem_signals[SET_TOOLTIP], 0,
-		 tooltips, tip_text, tip_private, &retval);
 }
 
 /**

@@ -38,7 +38,7 @@ G_BEGIN_DECLS
 
 typedef struct _GtkStatusbarClass GtkStatusbarClass;
 
-STLWRT_DECLARE_VTYPE_VPARENT(GtkStatusBar, gtk_status_bar, GtkHBox,
+STLWRT_DECLARE_VTYPE_VPARENT(GtkStatusbar, gtk_status_bar, GtkHBox,
   GtkWidget * (frame);
   GtkWidget * (label);
 

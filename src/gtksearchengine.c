@@ -27,7 +27,6 @@
 #include <gtksearchenginebeagle.h>
 #include <gtksearchenginesimple.h>
 #include <gtksearchenginetracker.h>
-#include <gtksearchenginequartz.h>
 
 #include <gdkconfig.h> /* for GDK_WINDOWING_QUARTZ */
 

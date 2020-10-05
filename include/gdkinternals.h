@@ -688,15 +688,10 @@ GdkRegion  *_gdk_region_new_from_yxbanded_rects (GdkRectangle *rects, int n_rect
 /*****************************
  * offscreen window routines *
  *****************************/
-typedef struct _GdkOffscreenWindow      GdkOffscreenWindowFat;
-typedef struct _GdkOffscreenWindow      GdkOffscreenWindowThin;
+typedef struct _GdkOffscreenWindow      GdkOffscreenWindow;
 #define GDK_TYPE_OFFSCREEN_WINDOW            (gdk_offscreen_window_get_type())
 #define GDK_OFFSCREEN_WINDOW(object)         (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_OFFSCREEN_WINDOW, GdkOffscreenWindow))
 #define GDK_IS_OFFSCREEN_WINDOW(object)      (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_OFFSCREEN_WINDOW))
-GType SF(_T2_gdk_offscreen_window_get_type) (void);
-GType SF(_3T_gdk_offscreen_window_get_type) (void);
-/* Supplied in the STLWRT public libraries */
-GType SF(gdk_offscreen_window_get_type) (void);
 GdkDrawable * _gdk_offscreen_window_get_real_drawable (GdkOffscreenWindow *window);
 void       _gdk_offscreen_window_new                 (GdkWindow     *window,
 						      GdkScreen     *screen,

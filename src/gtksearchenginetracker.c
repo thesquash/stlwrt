@@ -30,7 +30,7 @@
 #include <gio/gio.h>
 #include <gmodule.h>
 #include <gdk.h>
-#include <gtk/gtk.h>
+#include <gtk.h>
 
 #include <gtksearchenginetracker.h>
 

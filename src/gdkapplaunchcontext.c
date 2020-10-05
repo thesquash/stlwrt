@@ -38,7 +38,7 @@ static gchar * gdk_app_launch_context_get_display (GAppLaunchContext *context,
 
 
 STLWRT_DEFINE_FTYPE (GdkAppLaunchContext, gdk_app_launch_context, G_TYPE_APP_LAUNCH_CONTEXT, 0,
-                     STLWRT_ADD_PRIVATE (GdkAppLaunchContext))
+                     G_ADD_PRIVATE (GdkAppLaunchContext))
 
 static void
 gdk_app_launch_context_class_init (GdkAppLaunchContextClass *klass)

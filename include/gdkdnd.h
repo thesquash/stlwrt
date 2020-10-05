@@ -67,9 +67,11 @@ typedef struct _GdkDragContextClass GdkDragContextClass;
 #define GDK_IS_DRAG_CONTEXT_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GDK_TYPE_DRAG_CONTEXT))
 #define GDK_DRAG_CONTEXT_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GDK_TYPE_DRAG_CONTEXT, GdkDragContextClass))
 
-struct _GdkDragContext {
-  GObject parent_instance;
-
+/*
+ * Even privately, GTK+ 3 still uses the fat type of drag context, so make
+ * this a fixed type.
+ */
+STLWRT_DECLARE_FTYPE_FPARENT(GdkDragContext, gdk_drag_context, GObject,
   /*< public >*/
   
   GdkDragProtocol  (protocol);
@@ -89,7 +91,7 @@ struct _GdkDragContext {
   /*< private >*/
   
   gpointer  (windowing_data);
-};
+)
 
 struct _GdkDragContextClass {
   GObjectClass parent_class;
@@ -98,10 +100,6 @@ struct _GdkDragContextClass {
 
 /* Drag and Drop */
 
-GType            SF(_T2_gdk_drag_context_get_type)   (void) G_GNUC_CONST;
-GType            SF(_3T_gdk_drag_context_get_type)   (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType            SF(gdk_drag_context_get_type)   (void) G_GNUC_CONST;
 #if !defined (GDK_DISABLE_DEPRECATED) || defined (STLWRT_COMPILATION)
 GdkDragContext * SF(gdk_drag_context_new)        (void);
 #endif

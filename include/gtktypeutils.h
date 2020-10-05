@@ -49,10 +49,6 @@ typedef struct _GtkArg	       	     GtkArg;
 typedef struct _GObject   	     GObject; /* object forward declaration */
 #if !defined (GTK_DISABLE_DEPRECATED) || defined (STLWRT_COMPILATION)
 typedef gboolean (*GtkFunction)	    (gpointer      data);
-typedef void (*GtkCallbackMarshal)  (GObject    *object,
-				     gpointer      data,
-				     guint         n_args,
-				     GtkArg       *args);
 #endif
 
 /* This used to be defined in gtkitemfactory.h, but moved over here after

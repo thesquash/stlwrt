@@ -90,7 +90,7 @@ struct _GtkRecentInfo
   gint ref_count;
 };
 
-#define GTK_RECENT_MANAGER_GET_PRIVATE(obj)     (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_RECENT_MANAGER, GtkRecentManagerPrivate))
+
 
 
 enum

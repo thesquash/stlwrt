@@ -102,7 +102,7 @@ struct _ComboCellInfo
   guint pack : 1;
 };
 
-#define GTK_COMBO_BOX_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_COMBO_BOX, GtkComboBoxPrivate))
+
 
 
 /* While debugging this evil code, I have learned that

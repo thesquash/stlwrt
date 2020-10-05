@@ -41,7 +41,7 @@ G_BEGIN_DECLS
 typedef struct _GtkAspectFrameClass  GtkAspectFrameClass;
 
 /********************************************************************/
-STLWRT_DEFINE_VTYPE_VPARENT(GtkAspectFrame, gtk_aspect_frame, GtkFrame,
+STLWRT_DECLARE_VTYPE_VPARENT(GtkAspectFrame, gtk_aspect_frame, GtkFrame,
   gfloat    (xalign);
   gfloat    (yalign);
   gfloat    (ratio);

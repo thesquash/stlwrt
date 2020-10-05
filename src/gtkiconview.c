@@ -49,7 +49,7 @@
 
 #define SCROLL_EDGE_SIZE 15
 
-#define GTK_ICON_VIEW_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_ICON_VIEW, GtkIconViewPrivate))
+
 
 typedef struct _GtkIconViewItem GtkIconViewItem;
 struct _GtkIconViewItem

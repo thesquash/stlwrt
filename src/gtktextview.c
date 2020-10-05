@@ -30,7 +30,6 @@
 #include <stlwrt.h>
 #include <string.h>
 
-#define GTK_TEXT_USE_INTERNAL_UNSUPPORTED_API
 #include <gtkbindings.h>
 #include <gtkdnd.h>
 #include <gtkimagemenuitem.h>
@@ -43,7 +42,6 @@
 #include <gtksettings.h>
 #include <gtkstock.h>
 #include <gtktextbufferrichtext.h>
-#include <gtktextdisplay.h>
 #include <gtktextview.h>
 #include <gtkimmulticontext.h>
 #include <gdkkeysyms.h>
@@ -104,7 +102,7 @@
 
 typedef struct _GtkTextViewPrivate GtkTextViewPrivate;
 
-#define GTK_TEXT_VIEW_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_TEXT_VIEW, GtkTextViewPrivate))
+
 
 
 

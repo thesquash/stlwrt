@@ -30,8 +30,6 @@
 
 G_BEGIN_DECLS
 
-typedef struct _GdkGCValues	      GdkGCValues;
-
 typedef struct _GdkGCClass	      GdkGCClass;
 
 /* GC cap styles
@@ -130,7 +128,7 @@ typedef enum
   GDK_INCLUDE_INFERIORS = 1
 } GdkSubwindowMode;
 
-typedef enum
+enum _GdkGCValuesMask
 {
   GDK_GC_FOREGROUND    = 1 << 0,
   GDK_GC_BACKGROUND    = 1 << 1,
@@ -150,7 +148,7 @@ typedef enum
   GDK_GC_LINE_STYLE    = 1 << 15,
   GDK_GC_CAP_STYLE     = 1 << 16,
   GDK_GC_JOIN_STYLE    = 1 << 17
-} GdkGCValuesMask;
+};
 
 struct _GdkGCValues
 {

@@ -41,7 +41,7 @@ G_BEGIN_DECLS
 
 typedef struct _GtkArrowClass  GtkArrowClass;
 
-STLWRT_DEFINE_VTYPE_VPARENT(GtkArrow, gtk_arrow, GtkMisc,
+STLWRT_DECLARE_VTYPE_VPARENT(GtkArrow, gtk_arrow, GtkMisc,
   gint16  (arrow_type);
   gint16  (shadow_type);
 )

@@ -35,7 +35,7 @@
 #include <gtkbuildable.h>
 
 
-#define GTK_COMBO_BOX_ENTRY_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_COMBO_BOX_ENTRY, GtkComboBoxEntryPrivate))
+
 
 
 static void gtk_combo_box_entry_set_property     (GObject               *object,

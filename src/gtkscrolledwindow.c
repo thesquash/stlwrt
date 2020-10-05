@@ -80,7 +80,7 @@ typedef struct {
 	GtkCornerType real_window_placement;
 } GtkScrolledWindowPrivate;
 
-#define GTK_SCROLLED_WINDOW_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_SCROLLED_WINDOW, GtkScrolledWindowPrivate))
+
 
 enum {
   PROP_0,

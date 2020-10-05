@@ -44,28 +44,6 @@ G_BEGIN_DECLS
 typedef struct _GtkStatusIconClass   GtkStatusIconClass;
 typedef struct _GtkStatusIconPrivate GtkStatusIconPrivate;
 
-struct _GtkStatusIconPrivate
-{
-#ifdef GDK_WINDOWING_X11
-  GtkWidget    *tray_icon;
-  GtkWidget    *image;
-#endif
-
-  gint          size;
-
-  gint          image_width;
-  gint          image_height;
-
-  GtkImageType  storage_type;
-
-  union
-    {
-      GdkPixbuf *pixbuf;
-      gchar     *stock_id;
-      gchar     *icon_name;
-      GIcon     *gicon;
-    }
-
 STLWRT_DECLARE_FTYPE_FPARENT(GtkStatusIcon, gtk_status_icon, GObject,
   GtkStatusIconPrivate * (priv);
 )

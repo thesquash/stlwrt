@@ -51,7 +51,7 @@
 				 *    unrelated code portions otherwise
 				 */
 
-#define GTK_SCALE_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_SCALE, GtkScalePrivate))
+
 
 typedef struct _GtkScalePrivate GtkScalePrivate;
 

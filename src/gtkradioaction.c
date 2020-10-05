@@ -40,7 +40,7 @@
 #include <gtkprivate.h>
 
 
-#define GTK_RADIO_ACTION_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_RADIO_ACTION, GtkRadioActionPrivate))
+
 
 
 enum 

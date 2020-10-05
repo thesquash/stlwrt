@@ -247,17 +247,12 @@ struct _GdkPointerHooks
 typedef struct _GdkWindowObject GdkWindowObject;
 typedef struct _GdkWindowObjectClass GdkWindowObjectClass;
 
-#define GDK_TYPE_WINDOW              (gdk_window_object_get_type ())
+#define GDK_TYPE_WINDOW              (gdk_window_get_type ())
 #define GDK_WINDOW(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_WINDOW, GdkWindow))
 #define GDK_WINDOW_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_WINDOW, GdkWindowObjectClass))
 #define GDK_IS_WINDOW(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_WINDOW))
 #define GDK_IS_WINDOW_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GDK_TYPE_WINDOW))
 #define GDK_WINDOW_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GDK_TYPE_WINDOW, GdkWindowObjectClass))
-
-#ifndef GDK_DISABLE_DEPRECATED
-#define GDK_WINDOW_OBJECT(object)    ((GdkWindowObject *) GDK_WINDOW (object))
-
-#ifndef STLWRT_COMPILATION
 
 /* We used to export all of GdkWindowObject, but we don't want to keep doing so.
    However, there are various parts of it accessed by macros and other code,
@@ -265,10 +260,7 @@ typedef struct _GdkWindowObjectClass GdkWindowObjectClass;
 
 /**** DON'T CHANGE THIS STRUCT, the real version is in gdkinternals.h ****/
 /********************************************************************/
-struct _GdkWindowObjectProps
-{
-
-
+STLWRT_DECLARE_VTYPE_FPARENT(GdkWindow, gdk_window, GdkDrawable,
   GdkDrawable * (impl); /* window-system-specific delegate object */
   
   GdkWindowObject * (parent);
@@ -313,51 +305,15 @@ struct _GdkWindowObjectProps
   guint  (update_and_descendants_freeze_count);
 
   GdkWindowRedirect * (redirect);
-};
+)
 
-struct _GdkWindowObjectFat
-{
-  GdkDrawableFat   parent_instance;
-
-  struct _GdkWindowObjectProps instance_properties;
-};
-
-struct _GdkWindowObjectThin
-{
-  GdkDrawableThin  parent_instance;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GdkWindowObjectFat   fat_instance;
-  struct _GdkWindowObjectThin  thin_instance;
-}   GdkWindowObject;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GdkWindowObjectFat GdkWindowObject;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GdkWindowObjectThin GdkWindowObject;
-#endif
-/********************************************************************/
-
-
-#endif
-#endif
-
-struct _GdkWindowObjectClass
+struct _GdkWindowClass
 {
   GdkDrawableClass parent_class;
 };
 
 /* Windows
  */
-GType         SF(_T2_gdk_window_object_get_type)       (void) G_GNUC_CONST;
-GType         SF(_3T_gdk_window_object_get_type)       (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType         SF(gdk_window_object_get_type)       (void) G_GNUC_CONST;
 GdkWindow*    SF(gdk_window_new)                   (GdkWindow     *parent,
                                                 GdkWindowAttr *attributes,
                                                 gint           attributes_mask);
@@ -531,7 +487,7 @@ void	      SF(gdk_window_set_hints)	 (GdkWindow	  *window,
 #endif
 void              SF(gdk_window_set_type_hint) (GdkWindow        *window,
                                             GdkWindowTypeHint hint);
-GdkWindowTypeHint SF(gdk_window_get_type)_hint (GdkWindow        *window);
+GdkWindowTypeHint SF(gdk_window_get_type_hint) (GdkWindow        *window);
 
 gboolean      SF(gdk_window_get_modal_hint)   (GdkWindow       *window);
 void          SF(gdk_window_set_modal_hint)   (GdkWindow       *window,
@@ -749,23 +705,6 @@ void       SF(gdk_window_redirect_to_drawable)   (GdkWindow     *window,
                                               gint           width,
                                               gint           height);
 void       SF(gdk_window_remove_redirection)     (GdkWindow     *window);
-
-#ifndef GDK_DISABLE_DEPRECATED
-#ifndef GDK_MULTIHEAD_SAFE
-GdkPointerHooks *SF(gdk_set_pointer_hooks) (const GdkPointerHooks *new_hooks);   
-#endif /* GDK_MULTIHEAD_SAFE */
-
-#define GDK_ROOT_PARENT()             (gdk_get_default_root_window ())
-#define gdk_window_get_size            gdk_drawable_get_size
-#define gdk_window_get_type            gdk_window_get_window_type
-#define gdk_window_get_colormap        gdk_drawable_get_colormap
-#define gdk_window_set_colormap        gdk_drawable_set_colormap
-#define gdk_window_ref                 g_object_ref
-#define gdk_window_unref               g_object_unref
-
-#define gdk_window_copy_area(drawable,gc,x,y,source_drawable,source_x,source_y,width,height) \
-   gdk_draw_pixmap(drawable,gc,source_drawable,source_x,source_y,x,y,width,height)
-#endif /* GDK_DISABLE_DEPRECATED */
 
 G_END_DECLS
 

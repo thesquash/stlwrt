@@ -38,7 +38,7 @@
 
 
 
-#define GTK_MENU_TOOL_BUTTON_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GTK_TYPE_MENU_TOOL_BUTTON, GtkMenuToolButtonPrivate))
+
 
 
 static int  menu_deactivate_cb              (GtkMenuShell           *menu_shell,

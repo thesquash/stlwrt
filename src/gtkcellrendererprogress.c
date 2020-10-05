@@ -31,7 +31,7 @@
 #include <gtkintl.h>
 
 
-#define GTK_CELL_RENDERER_PROGRESS_GET_PRIVATE(object) (G_TYPE_INSTANCE_GET_PRIVATE ((object),                        \
+
                                                                                      GTK_TYPE_CELL_RENDERER_PROGRESS, \
                                                                                      GtkCellRendererProgressPrivate))
 

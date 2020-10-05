@@ -382,7 +382,7 @@ GObjectNotifyContext   *_gtk_widget_child_property_notify_context = NULL;
 
 typedef struct _GtkWidgetPrivate GtkWidgetPrivate;
 
-#define GTK_WIDGET_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_WIDGET, GtkWidgetPrivate))
+
 #define GTK_WIDGET_FLAGS(obj) (GTK_WIDGET_GET_PRIVATE(obj) -> flags)
 
 

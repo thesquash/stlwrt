@@ -118,11 +118,6 @@ gboolean SF(gtk_init_check_abi_check) (int	  *argc,
 
 #endif
 
-#ifndef GTK_DISABLE_DEPRECATED
-void     SF(gtk_exit)                 (gint    error_code);
-gchar *        SF(gtk_set_locale)           (void);
-#endif /* GTK_DISABLE_DEPRECATED */
-
 void           SF(gtk_disable_setlocale)    (void);
 PangoLanguage *SF(gtk_get_default_language) (void);
 gboolean       SF(gtk_events_pending)       (void);
@@ -146,52 +141,6 @@ gboolean   SF(gtk_false)		   (void) G_GNUC_CONST;
 void	   SF(gtk_grab_add)		   (GtkWidget	       *widget);
 GtkWidget* SF(gtk_grab_get_current)	   (void);
 void	   SF(gtk_grab_remove)	   (GtkWidget	       *widget);
-
-#if !defined (GTK_DISABLE_DEPRECATED) || defined (STLWRT_COMPILATION)
-void	   SF(gtk_init_add)		   (GtkFunction	       function,
-				    gpointer	       data);
-void	   SF(gtk_quit_add_destroy)	   (guint	       main_level,
-				    GObject	      *object);
-guint	   SF(gtk_quit_add)		   (guint	       main_level,
-				    GtkFunction	       function,
-				    gpointer	       data);
-guint	   SF(gtk_quit_add_full)	   (guint	       main_level,
-				    GtkFunction	       function,
-				    GtkCallbackMarshal marshal,
-				    gpointer	       data,
-				    GDestroyNotify     destroy);
-void	   SF(gtk_quit_remove)	   (guint	       quit_handler_id);
-void	   SF(gtk_quit_remove_by_data) (gpointer	       data);
-guint	   SF(gtk_timeout_add)	   (guint32	       interval,
-				    GtkFunction	       function,
-				    gpointer	       data);
-guint	   SF(gtk_timeout_add_full)	   (guint32	       interval,
-				    GtkFunction	       function,
-				    GtkCallbackMarshal marshal,
-				    gpointer	       data,
-				    GDestroyNotify     destroy);
-void	   SF(gtk_timeout_remove)	   (guint	       timeout_handler_id);
-
-guint	   SF(gtk_idle_add)		   (GtkFunction	       function,
-				    gpointer	       data);
-guint	   SF(gtk_idle_add_priority)   (gint	       priority,
-				    GtkFunction	       function,
-				    gpointer	       data);
-guint	   SF(gtk_idle_add_full)	   (gint	       priority,
-				    GtkFunction	       function,
-				    GtkCallbackMarshal marshal,
-				    gpointer	       data,
-				    GDestroyNotify     destroy);
-void	   SF(gtk_idle_remove)	   (guint	       idle_handler_id);
-void	   SF(gtk_idle_remove_by_data) (gpointer	       data);
-guint	   SF(gtk_input_add_full)	   (gint	       source,
-				    GdkInputCondition  condition,
-				    GdkInputFunction   function,
-				    GtkCallbackMarshal marshal,
-				    gpointer	       data,
-				    GDestroyNotify     destroy);
-void	   SF(gtk_input_remove)	   (guint	       input_handler_id);
-#endif /* GTK_DISABLE_DEPRECATED */
 
 guint	   SF(gtk_key_snooper_install) (GtkKeySnoopFunc snooper,
 				    gpointer	    func_data);

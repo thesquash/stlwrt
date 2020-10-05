@@ -124,7 +124,7 @@ enum {
  *     Cancels the current selection
  */
 
-#define GTK_MENU_SHELL_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_MENU_SHELL, GtkMenuShellPrivate))
+
 
 typedef struct _GtkMenuShellPrivate GtkMenuShellPrivate;
 

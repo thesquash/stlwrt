@@ -46,7 +46,7 @@
 #include <gtkbuildable.h>
 
 
-#define GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_DIALOG, GtkDialogPrivate))
+
 
 typedef struct {
   guint ignore_separator : 1;

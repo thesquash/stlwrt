@@ -90,7 +90,7 @@ struct _Node {
   guint always_show_image     : 1; /* used for menu items */
 };
 
-#define GTK_UI_MANAGER_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_UI_MANAGER, GtkUIManagerPrivate))
+
 
 
 #define NODE_INFO(node) ((Node *)node->data)

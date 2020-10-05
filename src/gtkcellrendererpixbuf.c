@@ -69,7 +69,7 @@ enum {
 };
 
 
-#define GTK_CELL_RENDERER_PIXBUF_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_CELL_RENDERER_PIXBUF, GtkCellRendererPixbufPrivate))
+
 
 typedef struct _GtkCellRendererPixbufPrivate GtkCellRendererPixbufPrivate;
 

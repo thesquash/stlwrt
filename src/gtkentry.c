@@ -90,7 +90,7 @@ static GQuark          quark_capslock_feedback = 0;
 
 typedef struct _GtkEntryPrivate GtkEntryPrivate;
 
-#define GTK_ENTRY_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_ENTRY, GtkEntryPrivate))
+
 
 typedef struct
 {

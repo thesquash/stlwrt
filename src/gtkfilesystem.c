@@ -42,8 +42,8 @@
 #define DEBUG(x)
 #endif
 
-#define GTK_FILE_SYSTEM_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GTK_TYPE_FILE_SYSTEM, GtkFileSystemPrivate))
-#define GTK_FOLDER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GTK_TYPE_FOLDER, GtkFolderPrivate))
+
+
 #define FILES_PER_QUERY 100
 
 /* The pointers we return for a GtkFileSystemVolume are opaque tokens; they are

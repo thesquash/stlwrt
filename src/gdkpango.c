@@ -51,6 +51,28 @@ enum {
   PROP_SCREEN
 };
 
+struct _GdkPangoRendererPrivate
+{
+  GdkScreen *screen;
+
+  /* GdkPangoRenderer specific state */
+  PangoColor override_color[MAX_RENDER_PART + 1];
+  gboolean override_color_set[MAX_RENDER_PART + 1];
+  
+  GdkBitmap *stipple[MAX_RENDER_PART + 1];
+  PangoColor emboss_color;
+  gboolean embossed;
+
+  cairo_t *cr;
+  PangoRenderPart last_part;
+
+  /* Current target */
+  GdkDrawable *drawable;
+  GdkGC *base_gc;
+
+  gboolean gc_changed;
+};
+
 STLWRT_DEFINE_FTYPE (GdkPangoRenderer, gdk_pango_renderer, PANGO_TYPE_RENDERER,
                      G_TYPE_FLAG_NONE,
                      G_ADD_PRIVATE (GdkPangoRenderer))

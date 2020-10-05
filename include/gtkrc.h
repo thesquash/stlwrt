@@ -242,7 +242,6 @@ guint	  SF(gtk_rc_parse_priority)	(GScanner	     *scanner,
 				 GtkPathPriorityType *priority);
 
 /* rc properties
- * (structure forward declared in gtkstyle.h)
  */
 struct _GtkRcProperty
 {

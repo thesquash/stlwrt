@@ -21,6 +21,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
+#ifndef __GDK_SCREEN_H__
+#define __GDK_SCREEN_H__
 
 #include <cairo.h>
 
@@ -42,7 +44,7 @@ typedef struct _GdkScreenClass GdkScreenClass;
 #define GDK_IS_SCREEN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GDK_TYPE_SCREEN))
 #define GDK_SCREEN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GDK_TYPE_SCREEN, GdkScreenClass))
 
-STLWRT_DECLARE_VTYPE_FPARENT(GdkScreen, gdk_screen, GObject,
+STLWRT_DECLARE_FTYPE_FPARENT(GdkScreen, gdk_screen, GObject,
   guint  (closed) : 1;
 
   GdkGC * (normal_gcs[32]);
@@ -62,8 +64,6 @@ struct _GdkScreenClass
   void (*monitors_changed) (GdkScreen *screen);
 };
 
-
-#include <gdkvisual.h>
 
 GdkColormap *SF(gdk_screen_get_default_colormap)  (GdkScreen   *screen);
 void         SF(gdk_screen_set_default_colormap)  (GdkScreen   *screen,
@@ -126,3 +126,5 @@ GdkWindow *SF(gdk_screen_get_active_window) (GdkScreen *screen);
 GList     *SF(gdk_screen_get_window_stack)  (GdkScreen *screen);
 
 G_END_DECLS
+
+#endif /* __GDK_SCREEN_H__ */

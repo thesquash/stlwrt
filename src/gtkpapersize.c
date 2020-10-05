@@ -34,9 +34,6 @@
 #include <gtkprintoperation.h>  /* for GtkPrintError */
 #include <gtkintl.h>
 
-
-#include "paper_names_offsets.c"
-
 struct _GtkPaperSize
 {
   const PaperInfo *info;

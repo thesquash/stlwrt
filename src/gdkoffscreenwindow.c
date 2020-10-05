@@ -75,11 +75,10 @@ struct _GdkOffscreenWindowClass
 static void       gdk_offscreen_window_impl_iface_init    (GdkWindowImplIface         *iface);
 static void       gdk_offscreen_window_hide               (GdkWindow                  *window);
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GdkOffscreenWindow,
-			 gdk_offscreen_window,
-			 GDK_TYPE_DRAWABLE,
-			 G_IMPLEMENT_INTERFACE (GDK_TYPE_WINDOW_IMPL,
-						gdk_offscreen_window_impl_iface_init));
+STLWRT_DEFINE_FTYPE (GdkOffscreenWindow, gdk_offscreen_window, GDK_TYPE_DRAWABLE,
+                     G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GDK_TYPE_WINDOW_IMPL,
+                                            gdk_offscreen_window_impl_iface_init));
 
 
 static void

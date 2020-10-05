@@ -44,7 +44,7 @@ enum {
 typedef struct _GtkSeparatorPrivate GtkSeparatorPrivate;
 
 
-#define GTK_SEPARATOR_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_SEPARATOR, GtkSeparatorPrivate))
+
 
 
 static void       gtk_separator_set_property (GObject        *object,

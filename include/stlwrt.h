@@ -47,6 +47,7 @@ G_BEGIN_DECLS
  */
 //#if GLIB_CHECK_VERSION(2,68,0)
  #define G_TYPE_FLAG_NONE 0
+ #define STLWRT_CODE_NONE {}
 //#endif
 
 /****************************************************************************/
@@ -362,7 +363,7 @@ G_BEGIN_DECLS
  \
   struct _##TN \
   { \
-    PTN parent; \
+    PTN _parent; \
  \
     Properties \
   }; \
@@ -378,14 +379,14 @@ G_BEGIN_DECLS
   \
    struct _##TN##Fat \
    { \
-     PTN##Fat parent; \
+     PTN##Fat _parent; \
   \
      Properties \
    }; \
   \
    struct _##TN##Thin \
    { \
-     PTN##Thin parent; \
+     PTN##Thin _parent; \
   \
      Properties \
    }; \
@@ -405,14 +406,14 @@ G_BEGIN_DECLS
   \
    struct _##TN##Fat \
    { \
-     PTN parent; \
+     PTN _parent; \
   \
      Properties \
    }; \
   \
    struct _##TN##Thin \
    { \
-     PTN parent; \
+     PTN _parent; \
   \
      gpointer reserved; \
    }; \
@@ -434,14 +435,14 @@ G_BEGIN_DECLS
   \
    struct _##TN##Fat \
    { \
-     PTN##Fat parent; \
+     PTN##Fat _parent; \
   \
      Properties \
    }; \
   \
    struct _##TN##Thin \
    { \
-     PTN##Thin parent; \
+     PTN##Thin _parent; \
   \
      gpointer reserved; \
    }; \
@@ -457,7 +458,7 @@ G_BEGIN_DECLS
   \
    struct _##TN \
    { \
-     PTN parent; \
+     PTN _parent; \
   \
      Properties \
    }; \
@@ -469,7 +470,7 @@ G_BEGIN_DECLS
   \
    struct _##TN \
    { \
-     PTN parent; \
+     PTN _parent; \
   \
      Properties \
    }; \
@@ -481,7 +482,7 @@ G_BEGIN_DECLS
   \
    struct _##TN \
    { \
-     PTN parent; \
+     PTN _parent; \
   \
      Properties \
    }; \
@@ -495,7 +496,7 @@ G_BEGIN_DECLS
   \
    struct _##TN \
    { \
-     PTN parent; \
+     PTN _parent; \
   \
      Properties \
    }; \
@@ -507,7 +508,7 @@ G_BEGIN_DECLS
   \
    struct _##TN \
    { \
-     PTN parent; \
+     PTN _parent; \
   \
      gpointer reserved; \
    }; \
@@ -519,7 +520,7 @@ G_BEGIN_DECLS
   \
    struct _##TN \
    { \
-     PTN parent; \
+     PTN _parent; \
   \
      gpointer reserved; \
    }; \

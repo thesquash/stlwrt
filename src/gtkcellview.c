@@ -114,7 +114,7 @@ static void       gtk_cell_view_buildable_custom_tag_end       (GtkBuildable  	 
 
 static GtkBuildableIface *parent_buildable_iface;
 
-#define GTK_CELL_VIEW_GET_PRIVATE(obj)    (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_CELL_VIEW, GtkCellViewPrivate))
+
 
 enum
 {

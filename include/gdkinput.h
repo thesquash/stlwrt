@@ -37,7 +37,6 @@ G_BEGIN_DECLS
 
 typedef struct _GdkDeviceKey	    GdkDeviceKey;
 typedef struct _GdkDeviceAxis	    GdkDeviceAxis;
-typedef struct _GdkDevice	    GdkDevice;
 typedef struct _GdkDeviceClass	    GdkDeviceClass;
 typedef struct _GdkTimeCoord	    GdkTimeCoord;
 
@@ -81,48 +80,15 @@ struct _GdkDeviceKey
   GdkModifierType modifiers;
 };
 
-/********************************************************************/
-struct _GdkDeviceAxisProps
+struct _GdkDeviceAxis
 {
+  GdkAxisUse use;
 
   gdouble    min;
   gdouble    max;
 };
 
-struct _GdkDeviceAxisFat
-{
-  GdkAxisUseFat   use;
-
-  struct _GdkDeviceAxisProps instance_properties;
-};
-
-struct _GdkDeviceAxisThin
-{
-  GdkAxisUseThin  use;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GdkDeviceAxisFat   fat_instance;
-  struct _GdkDeviceAxisThin  thin_instance;
-}   GdkDeviceAxis;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GdkDeviceAxisFat GdkDeviceAxis;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GdkDeviceAxisThin GdkDeviceAxis;
-#endif
-/********************************************************************/
-
-
-
-/********************************************************************/
-struct _GdkDeviceProps
-{
-
+STLWRT_DECLARE_FTYPE_FPARENT(GdkDevice, gdk_device, GObject,
   /* All fields are read-only */
 	  
   gchar * (name);
@@ -135,37 +101,7 @@ struct _GdkDeviceProps
 	  
   gint  (num_keys);
   GdkDeviceKey * (keys);
-};
-
-struct _GdkDeviceFat
-{
-  GObject   parent_instance;
-
-  struct _GdkDeviceProps instance_properties;
-};
-
-struct _GdkDeviceThin
-{
-  GObject  parent_instance;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GdkDeviceFat   fat_instance;
-  struct _GdkDeviceThin  thin_instance;
-}   GdkDevice;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GdkDeviceFat GdkDevice;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GdkDeviceThin GdkDevice;
-#endif
-/********************************************************************/
-
-
+)
 
 /* We don't allocate each coordinate this big, but we use it to
  * be ANSI compliant and avoid accessing past the defined limits.
@@ -177,11 +113,6 @@ struct _GdkTimeCoord
   guint32 time;
   gdouble axes[GDK_MAX_TIMECOORD_AXES];
 };
-
-GType          SF(_T2_gdk_device_get_type)      (void) G_GNUC_CONST;
-GType          SF(_3T_gdk_device_get_type)      (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType          SF(gdk_device_get_type)      (void) G_GNUC_CONST;
 
 #ifndef GDK_MULTIHEAD_SAFE
 /* Returns a list of GdkDevice * */	  

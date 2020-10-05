@@ -85,7 +85,7 @@ enum
   PROP_ICONS
 };
 
-#define GET_PRIVATE(obj)        (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_SCALE_BUTTON, GtkScaleButtonPrivate))
+
 
 
 static GObject* gtk_scale_button_constructor    (GType                  type,

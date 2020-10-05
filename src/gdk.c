@@ -288,7 +288,6 @@ gdk_threads_impl_unlock (void)
  * 
  * Initializes GDK so that it can be used from multiple threads
  * in conjunction with __gdk_threads_enter() and __gdk_threads_leave().
- * g_thread_init() must be called previous to this function.
  *
  * This call must be made before any use of the main loop from
  * GTK+; to be safe, call it before __gtk_init().
@@ -296,8 +295,6 @@ gdk_threads_impl_unlock (void)
 void
 __gdk_threads_init (void)
 {
-  if (!g_thread_supported ())
-    g_error ("g_thread_init() must be called before __gdk_threads_init()");
 
   g_mutex_init (&gdk_threads_mutex);
   

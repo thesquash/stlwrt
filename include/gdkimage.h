@@ -56,10 +56,11 @@ typedef struct _GdkImageClass GdkImageClass;
 #define GDK_IS_IMAGE_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GDK_TYPE_IMAGE))
 #define GDK_IMAGE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GDK_TYPE_IMAGE, GdkImageClass))
 
-struct _GdkImage
-{
-  GObject parent_instance;
-
+/*
+ * GTK+ 3 doesn't even have GdkImage anymore, so why should we make this
+ * a variable-size type?  No real GTK+ 3 application can use this anyway.
+ */
+STLWRT_DECLARE_FTYPE_FPARENT(GdkImage, gdk_image, GObject,
   /*< public >*/
   
   GdkImageType	 (type); /* read only. */
@@ -77,17 +78,13 @@ struct _GdkImage
 
   /*< private >*/
   gpointer  (windowing_data); /* read only. */
-};
+)
 
 struct _GdkImageClass
 {
   GObjectClass parent_class;
 };
 
-GType     SF(_T2_gdk_image_get_type)   (void) G_GNUC_CONST;
-GType     SF(_3T_gdk_image_get_type)   (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType     SF(gdk_image_get_type)   (void) G_GNUC_CONST;
 
 #ifndef GDK_DISABLE_DEPRECATED
 GdkImage*  SF(gdk_image_new)       (GdkImageType  type,

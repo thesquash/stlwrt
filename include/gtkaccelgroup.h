@@ -174,62 +174,12 @@ GtkAccelGroupEntry*	SF(gtk_accel_group_query)	(GtkAccelGroup	*accel_group,
 void		     SF(_gtk_accel_group_reconnect) (GtkAccelGroup *accel_group,
 						 GQuark         accel_path_quark);
 
-/********************************************************************/
-struct _GtkAccelGroupEntryProps
+struct _GtkAccelGroupEntry
 {
-
+  GtkAccelKey  key;
   GClosure    *closure;
   GQuark       accel_path_quark;
 };
-
-struct _GtkAccelGroupEntryFat
-{
-  GtkAccelKeyFat    key;
-
-  struct _GtkAccelGroupEntryProps instance_properties;
-};
-
-struct _GtkAccelGroupEntryThin
-{
-  GtkAccelKeyThin   key;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GtkAccelGroupEntryFat   fat_instance;
-  struct _GtkAccelGroupEntryThin  thin_instance;
-}   GtkAccelGroupEntry;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GtkAccelGroupEntryFat GtkAccelGroupEntry;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GtkAccelGroupEntryThin GtkAccelGroupEntry;
-#endif
-/********************************************************************/
-
-
-
-
-#ifndef GTK_DISABLE_DEPRECATED
-/**
- * gtk_accel_group_ref:
- * 
- * Deprecated equivalent of g_object_ref().
- * 
- * Returns: the accel group that was passed in
- */
-#define	gtk_accel_group_ref	g_object_ref
-
-/**
- * gtk_accel_group_unref:
- * 
- * Deprecated equivalent of g_object_unref().
- */
-#define	gtk_accel_group_unref	g_object_unref
-#endif /* GTK_DISABLE_DEPRECATED */
 
 G_END_DECLS
 

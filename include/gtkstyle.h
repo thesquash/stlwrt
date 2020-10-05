@@ -40,6 +40,8 @@ G_BEGIN_DECLS
 
 #define GTK_TYPE_BORDER             (gtk_border_get_type ())
 
+typedef struct _GtkStyleClass GtkStyleClass;
+
 /* Some forward declarations needed to rationalize the header
  * files.
  */

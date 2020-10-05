@@ -54,7 +54,7 @@
 #include <gtkprivate.h>
 
 
-#define GTK_LABEL_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_LABEL, GtkLabelPrivate))
+
 
 typedef struct
 {

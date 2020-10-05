@@ -49,6 +49,12 @@
 
 typedef struct _GtkSettingsValuePrivate GtkSettingsValuePrivate;
 
+struct _GtkSettingsValuePrivate
+{
+  GtkSettingsValue public;
+  GtkSettingsSource source;
+};
+
 typedef enum
 {
   GTK_SETTINGS_SOURCE_DEFAULT,

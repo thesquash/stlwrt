@@ -28,22 +28,8 @@
 #include <stlwrt.h>
 #include <stlwrt-typedefs.h>
 
-
 #include <gtkcontainer.h>
-
-#include <gtktooltips.h>
-
 #include <gtktoolitem.h>
-
-#ifndef GTK_DISABLE_DEPRECATED
-
-/* Not needed, retained for compatibility -Yosh */
-
-#include <gtkpixmap.h>
-
-#include <gtksignal.h>
-
-#endif /* GTK_DISABLE_DEPRECATED */
 
 G_BEGIN_DECLS
 

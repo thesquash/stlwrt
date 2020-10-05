@@ -128,7 +128,7 @@ struct _GtkRcContext
   guint reloading : 1;
 };
 
-#define GTK_RC_STYLE_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_RC_STYLE, GtkRcStylePrivate))
+
 
 typedef struct _GtkRcStylePrivate GtkRcStylePrivate;
 

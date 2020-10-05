@@ -110,19 +110,8 @@ void    SF(gtk_container_check_resize)       (GtkContainer     *container);
 void     SF(gtk_container_foreach)      (GtkContainer       *container,
 				     GtkCallback         callback,
 				     gpointer            callback_data);
-#ifndef GTK_DISABLE_DEPRECATED
-void     SF(gtk_container_foreach_full) (GtkContainer       *container,
-				     GtkCallback         callback,
-				     GtkCallbackMarshal  marshal,
-				     gpointer            callback_data,
-				     GDestroyNotify      notify);
-#endif
 
 GList*   SF(gtk_container_get_children)     (GtkContainer       *container);
-
-#ifndef GTK_DISABLE_DEPRECATED
-#define gtk_container_children gtk_container_get_children
-#endif
 
 void     SF(gtk_container_propagate_expose) (GtkContainer   *container,
 					 GtkWidget      *child,

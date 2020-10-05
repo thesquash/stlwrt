@@ -79,7 +79,7 @@ struct _FilterLevel
   FilterLevel *parent_level;
 };
 
-#define GTK_TREE_MODEL_FILTER_GET_PRIVATE(obj)  (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_TREE_MODEL_FILTER, GtkTreeModelFilterPrivate))
+
 
 
 /* properties */

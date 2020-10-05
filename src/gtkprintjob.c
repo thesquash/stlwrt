@@ -46,10 +46,6 @@
 #endif
 
 
-
-#define GTK_PRINT_JOB_GET_PRIVATE(o)  \
-   (G_TYPE_INSTANCE_GET_PRIVATE ((o), GTK_TYPE_PRINT_JOB, GtkPrintJobPrivate))
-
 static void     gtk_print_job_finalize     (GObject               *object);
 static void     gtk_print_job_set_property (GObject               *object,
 					    guint                  prop_id,

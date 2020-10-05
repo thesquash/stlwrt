@@ -83,7 +83,7 @@ typedef enum {
   STEPPER_D
 } Stepper;
 
-#define GTK_RANGE_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_RANGE, GtkRangeLayout))
+
 
 struct _GtkRangeLayout
 {

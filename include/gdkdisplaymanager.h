@@ -30,9 +30,6 @@
 
 G_BEGIN_DECLS
 
-typedef struct _GdkDisplayManager      GdkDisplayManagerFat;
-typedef struct _GdkDisplayManager      GdkDisplayManagerThin;
-
 typedef struct _GdkDisplayManagerClass GdkDisplayManagerClass;
 
 #define GDK_TYPE_DISPLAY_MANAGER              (gdk_display_manager_get_type ())
@@ -49,11 +46,6 @@ struct _GdkDisplayManagerClass
   void (*display_opened) (GdkDisplayManager *display_manager,
 			  GdkDisplay *display);
 };
-
-GType SF(_T2_gdk_display_manager_get_type) (void) G_GNUC_CONST;
-GType SF(_3T_gdk_display_manager_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType SF(gdk_display_manager_get_type) (void) G_GNUC_CONST;
 
 GdkDisplayManager *SF(gdk_display_manager_get)                 (void);
 GdkDisplay *       SF(gdk_display_manager_get_default_display) (GdkDisplayManager *display_manager);

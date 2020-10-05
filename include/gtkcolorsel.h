@@ -50,7 +50,7 @@ typedef void (* GtkColorSelectionChangePaletteWithScreenFunc) (GdkScreen        
 STLWRT_DECLARE_FTYPE_VPARENT(GtkColorSelection, gtk_color_selection, GtkVBox,
   /* < private_data > */
   gpointer  (private_data);
-};
+)
 
 struct _GtkColorSelectionClass
 {

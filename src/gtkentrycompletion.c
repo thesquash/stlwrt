@@ -66,7 +66,7 @@ enum
   PROP_INLINE_SELECTION
 };
 
-#define GTK_ENTRY_COMPLETION_GET_PRIVATE(obj)(G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_ENTRY_COMPLETION, GtkEntryCompletionPrivate))
+
 
 static void                                                             gtk_entry_completion_cell_layout_init    (GtkCellLayoutIface      *iface);
 static void     gtk_entry_completion_set_property        (GObject      *object,

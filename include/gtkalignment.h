@@ -40,7 +40,7 @@ G_BEGIN_DECLS
 typedef struct _GtkAlignmentClass  GtkAlignmentClass;
 typedef struct _GtkAlignmentPrivate GtkAlignmentPrivate;
 
-STLWRT_DECLARE_VTYPE_VPRIVATE(GtkAlignment, gtk_alignment, GtkBin,
+STLWRT_DECLARE_VTYPE_VPARENT(GtkAlignment, gtk_alignment, GtkBin,
   gfloat  (xalign);
   gfloat  (yalign);
   gfloat  (xscale);

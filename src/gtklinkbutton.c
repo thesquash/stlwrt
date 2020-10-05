@@ -53,7 +53,7 @@ enum
   PROP_VISITED
 };
 
-#define GTK_LINK_BUTTON_GET_PRIVATE(obj)	(G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_LINK_BUTTON, GtkLinkButtonPrivate))
+
 
 static void     gtk_link_button_finalize     (GObject          *object);
 static void     gtk_link_button_get_property (GObject          *object,

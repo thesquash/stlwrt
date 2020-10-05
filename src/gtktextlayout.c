@@ -91,7 +91,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define GTK_TEXT_LAYOUT_GET_PRIVATE(o)  (G_TYPE_INSTANCE_GET_PRIVATE ((o), GTK_TYPE_TEXT_LAYOUT, GtkTextLayoutPrivate))
+
 
 typedef struct _GtkTextLayoutPrivate GtkTextLayoutPrivate;
 

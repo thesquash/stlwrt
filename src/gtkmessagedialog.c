@@ -93,7 +93,7 @@
  * </refsect2>
  */
 
-#define GTK_MESSAGE_DIALOG_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_MESSAGE_DIALOG, GtkMessageDialogPrivate))
+
 
 typedef struct _GtkMessageDialogPrivate GtkMessageDialogPrivate;
 

@@ -3,12 +3,16 @@
 
 typedef struct _GdkAppLaunchContext GdkAppLaunchContext;
 typedef struct _GdkColor GdkColor;
+typedef struct _GdkColormap GdkColormap;
 typedef struct _GdkCursor GdkCursor;
+typedef struct _GdkDevice GdkDevice;
 typedef struct _GdkDisplay GdkDisplay;
 typedef struct _GdkDrawable GdkDrawable;
 typedef struct _GdkFont GdkFont;
 typedef struct _GdkGC GdkGC;
+typedef struct _GdkGCValues GdkGCValues;
 typedef struct _GdkRectangle GdkRectangle;
+typedef struct _GdkScreen GdkScreen;
 typedef struct _GdkVisual GdkVisual;
 typedef struct _GtkAccelMap GtkAccelMap;
 typedef struct _GtkAccessible GtkAccessible;
@@ -48,6 +52,7 @@ typedef struct _GtkPrintOperation GtkPrintOperation;
 typedef struct _GtkPrintOperationPreview GtkPrintOperationPreview;
 typedef struct _GtkPrintSettings GtkPrintSettings;
 typedef struct _GtkQuery GtkQuery;
+typedef struct _GtkRcProperty GtkRcProperty;
 typedef struct _GtkRcStyle GtkRcStyle;
 typedef struct _GtkRecentAction GtkRecentAction;
 typedef struct _GtkRecentChooserDefault GtkRecentChooserDefault;
@@ -86,14 +91,6 @@ typedef struct _GtkWindowGroup GtkWindowGroup;
 
 #ifdef STLWRT_COMPILATION
 
-typedef struct _GdkColormapFat GdkColormapFat;
-typedef struct _GdkColormapThin GdkColormapThin;
-typedef union _GdkColormap GdkColormap;
-
-typedef struct _GdkScreenFat GdkScreenFat;
-typedef struct _GdkScreenThin GdkScreenThin;
-typedef union _GdkScreen GdkScreen;
-
 typedef struct _GtkAboutDialogFat GtkAboutDialogFat;
 typedef struct _GtkAboutDialogThin GtkAboutDialogThin;
 typedef union _GtkAboutDialog GtkAboutDialog;
@@ -110,9 +107,17 @@ typedef struct _GtkAdjustmentFat GtkAdjustmentFat;
 typedef struct _GtkAdjustmentThin GtkAdjustmentThin;
 typedef union _GtkAdjustment GtkAdjustment;
 
+typedef struct _GtkAlignmentFat GtkAlignmentFat;
+typedef struct _GtkAlignmentThin GtkAlignmentThin;
+typedef union _GtkAlignment GtkAlignment;
+
 typedef struct _GtkAssistantFat GtkAssistantFat;
 typedef struct _GtkAssistantThin GtkAssistantThin;
 typedef union _GtkAssistant GtkAssistant;
+
+typedef struct _GtkBinFat GtkBinFat;
+typedef struct _GtkBinThin GtkBinThin;
+typedef union _GtkBin GtkBin;
 
 typedef struct _GtkButtonBoxFat GtkButtonBoxFat;
 typedef struct _GtkButtonBoxThin GtkButtonBoxThin;
@@ -506,9 +511,9 @@ typedef struct _GtkSpinnerFat GtkSpinnerFat;
 typedef struct _GtkSpinnerThin GtkSpinnerThin;
 typedef union _GtkSpinner GtkSpinner;
 
-typedef struct _GtkStatusBarFat GtkStatusBarFat;
-typedef struct _GtkStatusBarThin GtkStatusBarThin;
-typedef union _GtkStatusBar GtkStatusBar;
+typedef struct _GtkStatusbarFat GtkStatusbarFat;
+typedef struct _GtkStatusbarThin GtkStatusbarThin;
+typedef union _GtkStatusbar GtkStatusbar;
 
 typedef struct _GtkTableFat GtkTableFat;
 typedef struct _GtkTableThin GtkTableThin;
@@ -636,13 +641,13 @@ typedef union _GtkWindow GtkWindow;
 
 #else
 
-typedef struct _GdkColormap GdkColormap;
-typedef struct _GdkScreen GdkScreen;
 typedef struct _GtkAboutDialog GtkAboutDialog;
 typedef struct _GtkAccelGroup GtkAccelGroup;
 typedef struct _GtkAccelLabel GtkAccelLabel;
 typedef struct _GtkAdjustment GtkAdjustment;
+typedef struct _GtkAlignment GtkAlignment;
 typedef struct _GtkAssistant GtkAssistant;
+typedef struct _GtkBin GtkBin;
 typedef struct _GtkButtonBox GtkButtonBox;
 typedef struct _GtkBox GtkBox;
 typedef struct _GtkButton GtkButton;
@@ -741,7 +746,7 @@ typedef struct _GtkSizeGroup GtkSizeGroup;
 typedef struct _GtkSocket GtkSocket;
 typedef struct _GtkSpinButton GtkSpinButton;
 typedef struct _GtkSpinner GtkSpinner;
-typedef struct _GtkStatusBar GtkStatusBar;
+typedef struct _GtkStatusbar GtkStatusbar;
 typedef struct _GtkTable GtkTable;
 typedef struct _GtkTearoffMenuItem GtkTearoffMenuItem;
 typedef struct _GtkTextBuffer GtkTextBuffer;
@@ -800,5 +805,14 @@ typedef union  _GdkEvent	    GdkEvent;
 
 
 typedef struct _GdkWindowObject GdkWindow;
+typedef struct _GdkRegion GdkRegion;
+typedef struct _GdkImage GdkImage;
+typedef struct _GdkDragContext GdkDragContext;
+typedef struct _GdkPixmap GdkPixmap;
+typedef struct _GdkDrawable GdkBitmap;
+typedef struct _GdkDisplayManager GdkDisplayManager;
+typedef struct _GdkPangoRenderer GdkPangoRenderer;
+
+typedef enum _GdkGCValuesMask GdkGCValuesMask;
 
 #endif /* __STLWRT_TYPEDEFS_H__ */

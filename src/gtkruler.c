@@ -61,7 +61,7 @@ enum {
 typedef struct _GtkRulerPrivate GtkRulerPrivate;
 
 
-#define GTK_RULER_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_RULER, GtkRulerPrivate))
+
 
 
 static void     gtk_ruler_set_property    (GObject        *object,

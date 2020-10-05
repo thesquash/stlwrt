@@ -45,7 +45,7 @@
 
 
 
-#define GTK_TEXT_BUFFER_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_TEXT_BUFFER, GtkTextBufferPrivate))
+
 
 typedef struct _GtkTextBufferPrivate GtkTextBufferPrivate;
 

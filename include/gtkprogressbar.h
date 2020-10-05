@@ -23,10 +23,6 @@
 #include <stlwrt.h>
 #include <stlwrt-typedefs.h>
 
-
-#include <gtkprogress.h>
-
-
 G_BEGIN_DECLS
 
 #define GTK_TYPE_PROGRESS_BAR            (gtk_progress_bar_get_type ())
@@ -53,6 +49,18 @@ typedef enum
 } GtkProgressBarOrientation;
 
 STLWRT_DECLARE_VTYPE_VPARENT(GtkProgressBar, gtk_progress_bar, GtkWidget,
+  /* From gtkprogress.h */
+  GtkAdjustment *adjustment;
+  GdkPixmap     *offscreen_pixmap;
+  gchar         *format;
+  gfloat         x_align;
+  gfloat         y_align;
+
+  guint          show_text : 1;
+  guint          activity_mode : 1;
+  guint          use_text_format : 1;
+
+  /* From gtkprogressbar.h */
   GtkProgressBarStyle        (bar_style);
   GtkProgressBarOrientation  (orientation);
 
@@ -72,13 +80,23 @@ STLWRT_DECLARE_VTYPE_VPARENT(GtkProgressBar, gtk_progress_bar, GtkWidget,
 
 struct _GtkProgressBarClass
 {
-  GtkProgressClass parent_class;
+  GtkWidgetClass parent_class;
+
+  void (* paint)            (GtkProgressBar *progress);
+  void (* update)           (GtkProgressBar *progress);
+  void (* act_mode_enter)   (GtkProgressBar *progress);
 
   /* Padding for future expansion */
   void (*_gtk_reserved1) (void);
   void (*_gtk_reserved2) (void);
   void (*_gtk_reserved3) (void);
   void (*_gtk_reserved4) (void);
+
+  /*
+   * I don't think any GTK+ program that anybody still wants to run subclassed
+   * GtkProgress or GtkProgressBar -- for the time being, delete the extra
+   * padding from GtkProgressBar.
+   */
 };
 
 

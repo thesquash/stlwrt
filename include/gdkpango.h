@@ -30,9 +30,6 @@ G_BEGIN_DECLS
 
 /* Pango interaction */
 
-typedef struct _GdkPangoRenderer        GdkPangoRendererFat;
-typedef struct _GdkPangoRenderer        GdkPangoRendererThin;
-
 typedef struct _GdkPangoRendererClass   GdkPangoRendererClass;
 typedef struct _GdkPangoRendererPrivate GdkPangoRendererPrivate;
 
@@ -68,35 +65,9 @@ typedef struct _GdkPangoRendererPrivate GdkPangoRendererPrivate;
  * Since: 2.6
  **/
 
-struct _GdkPangoRendererPrivate
-{
-  GdkScreen *screen;
-
-  /* GdkPangoRenderer specific state */
-  PangoColor override_color[MAX_RENDER_PART + 1];
-  gboolean override_color_set[MAX_RENDER_PART + 1];
-  
-  GdkBitmap *stipple[MAX_RENDER_PART + 1];
-  PangoColor emboss_color;
-  gboolean embossed;
-
-  cairo_t *cr;
-  PangoRenderPart last_part;
-
-  /* Current target */
-  GdkDrawable *drawable;
-  GdkGC *base_gc;
-
-  gboolean gc_changed;
-};
-
-struct _GdkPangoRenderer
-{
-  /*< private >*/
-  PangoRenderer parent_instance;
-
+STLWRT_DECLARE_FTYPE_FPARENT(GdkPangoRenderer, gdk_pango_renderer, PangoRenderer,
   GdkPangoRendererPrivate *priv;
-};
+)
 
 /**
  * GdkPangoRendererClass:
@@ -111,10 +82,6 @@ struct _GdkPangoRendererClass
   PangoRendererClass parent_class;
 };
 
-GType SF(_T2_gdk_pango_renderer_get_type) (void) G_GNUC_CONST;
-GType SF(_3T_gdk_pango_renderer_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType SF(gdk_pango_renderer_get_type) (void) G_GNUC_CONST;
 
 PangoRenderer *SF(gdk_pango_renderer_new)         (GdkScreen *screen);
 PangoRenderer *SF(gdk_pango_renderer_get_default) (GdkScreen *screen);
@@ -129,8 +96,6 @@ void SF(gdk_pango_renderer_set_stipple)        (GdkPangoRenderer *gdk_renderer,
 void SF(gdk_pango_renderer_set_override_color) (GdkPangoRenderer *gdk_renderer,
 					    PangoRenderPart   part,
 					    const GdkColor   *color);
-
-/************************************************************************/
 
 PangoContext *SF(gdk_pango_context_get_for_screen) (GdkScreen    *screen);
 #ifndef GDK_MULTIHEAD_SAFE

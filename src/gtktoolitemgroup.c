@@ -26,7 +26,7 @@
 
 #include <gtktoolpaletteprivate.h>
 
-#include <gtk/gtk.h>
+#include <gtk.h>
 #include <math.h>
 #include <string.h>
 #include <gtkprivate.h>

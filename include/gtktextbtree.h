@@ -235,6 +235,8 @@ struct _GtkTextLineData {
  * You can consider this line a "paragraph" also
  */
 
+typedef struct _GtkTextLine GtkTextLine;
+
 struct _GtkTextLine {
   GtkTextBTreeNode *parent;             /* Pointer to parent node containing
                                          * line. */

@@ -54,7 +54,7 @@ enum {
 typedef struct _GtkBoxPrivate GtkBoxPrivate;
 
 
-#define GTK_BOX_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_BOX, GtkBoxPrivate))
+
 
 
 static void gtk_box_set_property       (GObject        *object,

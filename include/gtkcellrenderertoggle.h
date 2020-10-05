@@ -44,7 +44,7 @@ STLWRT_DECLARE_VTYPE_VPARENT(GtkCellRendererToggle, gtk_cell_renderer_toggle, Gt
   guint  (active) : 1;
   guint  (activatable) : 1;
   guint  (radio) : 1;
-};
+)
 
 struct _GtkCellRendererTogglePrivate
 {

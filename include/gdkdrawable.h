@@ -23,15 +23,10 @@
 #include <stlwrt.h>
 #include <stlwrt-typedefs.h>
 
-
 #include <gdktypes.h>
-
 #include <gdkgc.h>
-
 #include <gdkrgb.h>
-
 #include <gdk-pixbuf/gdk-pixbuf.h>
-
 
 #include <cairo.h>
 

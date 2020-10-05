@@ -30,7 +30,7 @@
 #include <gtkcellrendererspin.h>
 
 
-#define GTK_CELL_RENDERER_SPIN_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_CELL_RENDERER_SPIN, GtkCellRendererSpinPrivate))
+
 
 
 static void gtk_cell_renderer_spin_finalize   (GObject                  *object);

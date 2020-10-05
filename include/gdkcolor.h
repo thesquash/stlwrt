@@ -25,8 +25,6 @@
 
 #include <cairo.h>
 #include <gdktypes.h>
-#include <gdkscreen.h>
-#include <gdkvisual.h>
 
 G_BEGIN_DECLS
 
@@ -44,6 +42,9 @@ STLWRT_DECLARE_BOXED_TYPE(GdkColor, gdk_color,
   guint16 blue;
 )
 
+#include <gdkscreen.h>
+#include <gdkvisual.h>
+
 /* The colormap type.
  */
 
@@ -59,7 +60,7 @@ typedef struct _GdkColormapClass GdkColormapClass;
 
 #define GDK_TYPE_COLOR                 (gdk_color_get_type ())
 
-STLWRT_DECLARE_VTYPE_FPARENT (GdkColormap, gdk_colormap, GObject,
+STLWRT_DECLARE_FTYPE_FPARENT (GdkColormap, gdk_colormap, GObject,
 
   /*< public >*/
   gint       (size);

@@ -129,7 +129,7 @@
 typedef struct _GtkImagePrivate GtkImagePrivate;
 
 
-#define GTK_IMAGE_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_IMAGE, GtkImagePrivate))
+
 
 
 #define DEFAULT_ICON_SIZE GTK_ICON_SIZE_BUTTON

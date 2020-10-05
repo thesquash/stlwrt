@@ -58,12 +58,6 @@ struct _GtkSettingsClass
   GObjectClass parent_class;
 };
 
-struct _GtkSettingsValuePrivate
-{
-  GtkSettingsValue public;
-  GtkSettingsSource source;
-};
-
 struct _GtkSettingsValue
 {
   /* origin should be something like "filename:linenumber" for rc files,

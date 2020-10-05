@@ -39,7 +39,7 @@ static void set_cell_bg_color               (GtkCellRenderer      *cell,
 					     GdkColor             *color);
 
 
-#define GTK_CELL_RENDERER_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_CELL_RENDERER, GtkCellRendererPrivate))
+
 
 typedef struct _GtkCellRendererPrivate GtkCellRendererPrivate;
 

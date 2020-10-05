@@ -37,7 +37,7 @@
 
 #define SHOW_PROGRESS_TIME 1200
 
-#define GTK_PRINT_OPERATION_GET_PRIVATE(obj)(G_TYPE_INSTANCE_GET_PRIVATE ((obj), GTK_TYPE_PRINT_OPERATION, GtkPrintOperationPrivate))
+
 
 enum 
 {

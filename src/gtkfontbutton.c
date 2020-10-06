@@ -96,7 +96,7 @@ static void gtk_font_button_update_font_info        (GtkFontButton     *gfs);
 
 static guint font_button_signals[LAST_SIGNAL] = { 0 };
 
-STLWRT_DEFINE_TYPE (GtkFontButton, gtk_font_button, GTK_TYPE_BUTTON)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkFontButton, gtk_font_button, GTK_TYPE_BUTTON, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_font_button_class_init (GtkFontButtonClass *klass)

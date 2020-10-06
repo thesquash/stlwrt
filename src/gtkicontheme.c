@@ -222,7 +222,7 @@ static GHashTable *icon_theme_builtin_icons;
 GtkIconCache *_builtin_cache = NULL;
 static GList *builtin_dirs = NULL;
 
-STLWRT_DEFINE_TYPE (GtkIconTheme, gtk_icon_theme, G_TYPE_OBJECT)
+STLWRT_DEFINE_FTYPE (GtkIconTheme, gtk_icon_theme, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 /**
  * __gtk_icon_theme_new:
@@ -2580,19 +2580,8 @@ icon_data_free (GtkIconData *icon_data)
 /*
  * GtkIconInfo
  */
-GType
-gtk_icon_info_get_type (void)
-{
-  static GType our_type = 0;
-  
-  if (our_type == 0)
-    our_type = g_boxed_type_register_static (I_("GtkIconInfo"),
-					     (GBoxedCopyFunc) __gtk_icon_info_copy,
-					     (GBoxedFreeFunc) __gtk_icon_info_free);
 
-
-  return our_type;
-}
+STLWRT_DEFINE_BOXED_TYPE (GtkIconInfo, gtk_icon_info, __gtk_icon_info_copy, __gtk_icon_info_free)
 
 static GtkIconInfo *
 icon_info_new (void)

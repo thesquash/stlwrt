@@ -101,7 +101,8 @@ static void     gtk_im_context_simple_get_preedit_string (GtkIMContext          
 							  PangoAttrList           **attrs,
 							  gint                     *cursor_pos);
 
-STLWRT_DEFINE_TYPE (GtkIMContextSimple, gtk_im_context_simple, GTK_TYPE_IM_CONTEXT)
+STLWRT_DEFINE_VTYPE (GtkIMContextSimple, gtk_im_context_simple, GTK_TYPE_IM_CONTEXT,
+                     G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_im_context_simple_class_init (GtkIMContextSimpleClass *class)

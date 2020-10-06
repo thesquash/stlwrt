@@ -34,7 +34,7 @@
 #include <gtkintl.h>
 
 
-G_DEFINE_TYPE (GtkHScrollbar, gtk_hscrollbar, GTK_TYPE_SCROLLBAR)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkHScrollbar, gtk_hscrollbar, GTK_TYPE_SCROLLBAR, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_hscrollbar_class_init (GtkHScrollbarClass *class)

@@ -179,7 +179,7 @@ enum
   PROP_GICON
 };
 
-STLWRT_DEFINE_TYPE (GtkImage, gtk_image, GTK_TYPE_MISC)
+STLWRT_DEFINE_VTYPE (GtkImage, gtk_image, GTK_TYPE_MISC, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_image_class_init (GtkImageClass *class)

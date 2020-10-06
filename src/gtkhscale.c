@@ -36,7 +36,7 @@
 
 
 
-G_DEFINE_TYPE (GtkHScale, gtk_hscale, GTK_TYPE_SCALE)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkHScale, gtk_hscale, GTK_TYPE_SCALE, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_hscale_class_init (GtkHScaleClass *class)

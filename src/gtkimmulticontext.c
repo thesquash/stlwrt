@@ -82,7 +82,8 @@ static gboolean gtk_im_multicontext_delete_surrounding_cb   (GtkIMContext      *
 
 static const gchar *global_context_id = NULL;
 
-STLWRT_DEFINE_TYPE (GtkIMMulticontext, gtk_im_multicontext, GTK_TYPE_IM_CONTEXT)
+STLWRT_DEFINE_VTYPE (GtkIMMulticontext, gtk_im_multicontext, GTK_TYPE_IM_CONTEXT,
+                     G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_im_multicontext_class_init (GtkIMMulticontextClass *class)

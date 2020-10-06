@@ -128,7 +128,7 @@ static void     gtk_im_context_real_set_surrounding    (GtkIMContext   *context,
 							gint            len,
 							gint            cursor_index);
 
-G_DEFINE_ABSTRACT_TYPE (GtkIMContext, gtk_im_context, G_TYPE_OBJECT)
+STLWRT_DEFINE_FTYPE (GtkIMContext, gtk_im_context, G_TYPE_OBJECT, G_TYPE_FLAG_ABSTRACT, ;)
 
 /**
  * GtkIMContextClass:

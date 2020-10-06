@@ -157,11 +157,11 @@ static guint menu_item_signals[LAST_SIGNAL] = { 0 };
 
 static GtkBuildableIface *parent_buildable_iface;
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkMenuItem, gtk_menu_item, GTK_TYPE_BIN,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-						gtk_menu_item_buildable_interface_init)
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_ACTIVATABLE,
-						gtk_menu_item_activatable_interface_init))
+STLWRT_DEFINE_VTYPE (GtkMenuItem, gtk_menu_item, GTK_TYPE_BIN, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
+                                            gtk_menu_item_buildable_interface_init)
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_ACTIVATABLE,
+                                            gtk_menu_item_activatable_interface_init))
 
 #define GET_PRIVATE(object)  \
   (G_TYPE_INSTANCE_GET_PRIVATE ((object), GTK_TYPE_MENU_ITEM, GtkMenuItemPrivate))

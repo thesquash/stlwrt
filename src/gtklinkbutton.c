@@ -104,7 +104,7 @@ static GtkLinkButtonUriFunc uri_func = NULL;
 static gpointer uri_func_data = NULL;
 static GDestroyNotify uri_func_destroy = NULL;
 
-G_DEFINE_TYPE (GtkLinkButton, gtk_link_button, GTK_TYPE_BUTTON)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkLinkButton, gtk_link_button, GTK_TYPE_BUTTON, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_link_button_class_init (GtkLinkButtonClass *klass)

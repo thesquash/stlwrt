@@ -48,7 +48,7 @@ static void gtk_misc_get_property (GObject         *object,
 				   GParamSpec      *pspec);
 
 
-STLWRT_DEFINE_ABSTRACT_TYPE (GtkMisc, gtk_misc, GTK_TYPE_WIDGET)
+STLWRT_DEFINE_VTYPE (GtkMisc, gtk_misc, GTK_TYPE_WIDGET, G_TYPE_FLAG_ABSTRACT, ;)
 
 static void
 gtk_misc_class_init (GtkMiscClass *class)

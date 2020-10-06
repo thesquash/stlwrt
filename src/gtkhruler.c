@@ -34,7 +34,7 @@
 #include <gtkorientable.h>
 
 
-G_DEFINE_TYPE (GtkHRuler, gtk_hruler, GTK_TYPE_RULER)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkHRuler, gtk_hruler, GTK_TYPE_RULER, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_hruler_class_init (GtkHRulerClass *klass)

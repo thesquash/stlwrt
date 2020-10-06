@@ -23,8 +23,6 @@
 
 #include <stlwrt.h>
 
-#undef GTK_DISABLE_DEPRECATED /* GtkTooltips */
-
 #include <gtkmenutoolbutton.h>
 #include <gtktogglebutton.h>
 #include <gtkarrow.h>
@@ -66,9 +64,10 @@ static gint signals[LAST_SIGNAL];
 
 static GtkBuildableIface *parent_buildable_iface;
 
-G_DEFINE_TYPE_WITH_CODE (GtkMenuToolButton, gtk_menu_tool_button, GTK_TYPE_TOOL_BUTTON,
-                         G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-                                                gtk_menu_tool_button_buildable_interface_init))
+STLWRT_DEFINE_FTYPE_VPARENT (GtkMenuToolButton, gtk_menu_tool_button, GTK_TYPE_TOOL_BUTTON,
+                             G_TYPE_FLAG_NONE,
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
+                                                    gtk_menu_tool_button_buildable_interface_init))
 
 static void
 gtk_menu_tool_button_construct_contents (GtkMenuToolButton *button)

@@ -113,9 +113,8 @@ static GtkIconSize icon_size_register_intern (const gchar *name,
    0, 0, 0,								\
    any_direction, any_state, any_size }
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkIconFactory, gtk_icon_factory, G_TYPE_OBJECT,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-						gtk_icon_factory_buildable_init))
+STLWRT_DEFINE_FTYPE (GtkIconFactory, gtk_icon_factory, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE, gtk_icon_factory_buildable_init))
 
 static void
 gtk_icon_factory_init (GtkIconFactory *factory)

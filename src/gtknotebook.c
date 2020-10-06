@@ -421,9 +421,8 @@ static GDestroyNotify window_creation_hook_destroy = NULL;
 
 static guint notebook_signals[LAST_SIGNAL] = { 0 };
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkNotebook, gtk_notebook, GTK_TYPE_CONTAINER,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-						gtk_notebook_buildable_init))
+STLWRT_DEFINE_VTYPE (GtkNotebook, gtk_notebook, GTK_TYPE_CONTAINER, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE, gtk_notebook_buildable_init))
 
 static void
 add_tab_bindings (GtkBindingSet    *binding_set,

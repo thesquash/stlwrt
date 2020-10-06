@@ -203,7 +203,7 @@ static gboolean gtk_menu_shell_real_move_selected (GtkMenuShell  *menu_shell,
 
 static guint menu_shell_signals[LAST_SIGNAL] = { 0 };
 
-STLWRT_DEFINE_ABSTRACT_TYPE (GtkMenuShell, gtk_menu_shell, GTK_TYPE_CONTAINER)
+STLWRT_DEFINE_VTYPE (GtkMenuShell, gtk_menu_shell, GTK_TYPE_CONTAINER, G_TYPE_FLAG_ABSTRACT, ;)
 
 static void
 gtk_menu_shell_class_init (GtkMenuShellClass *klass)

@@ -134,17 +134,13 @@ static void     gtk_list_store_buildable_custom_tag_end (GtkBuildable *buildable
 							 const gchar  *tagname,
 							 gpointer     *data);
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkListStore, gtk_list_store, G_TYPE_OBJECT,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_MODEL,
-						gtk_list_store_tree_model_init)
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_DRAG_SOURCE,
-						gtk_list_store_drag_source_init)
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_DRAG_DEST,
-						gtk_list_store_drag_dest_init)
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_SORTABLE,
-						gtk_list_store_sortable_init)
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-						gtk_list_store_buildable_init))
+STLWRT_DEFINE_VTYPE (GtkListStore, gtk_list_store, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_MODEL, gtk_list_store_tree_model_init)
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_DRAG_SOURCE,
+                                            gtk_list_store_drag_source_init)
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_DRAG_DEST, gtk_list_store_drag_dest_init)
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_SORTABLE, gtk_list_store_sortable_init)
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE, gtk_list_store_buildable_init))
 
 
 static void

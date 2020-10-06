@@ -32,7 +32,7 @@
 #include <gtkorientable.h>
 
 
-G_DEFINE_TYPE (GtkHPaned, gtk_hpaned, GTK_TYPE_PANED)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkHPaned, gtk_hpaned, GTK_TYPE_PANED, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_hpaned_class_init (GtkHPanedClass *class)

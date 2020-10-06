@@ -129,9 +129,9 @@ enum {
   PROP_MESSAGE_AREA
 };
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkMessageDialog, gtk_message_dialog, GTK_TYPE_DIALOG,
-                         G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-                                                gtk_message_dialog_buildable_interface_init))
+STLWRT_DEFINE_VTYPE (GtkMessageDialog, gtk_message_dialog, GTK_TYPE_DIALOG, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
+                                            gtk_message_dialog_buildable_interface_init))
 
 static GtkBuildableIface *parent_buildable_iface;
 

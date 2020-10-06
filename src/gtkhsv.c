@@ -114,7 +114,7 @@ static void     gtk_hsv_move           (GtkHSV           *hsv,
 
 static guint hsv_signals[LAST_SIGNAL];
 
-STLWRT_DEFINE_TYPE (GtkHSV, gtk_hsv, GTK_TYPE_WIDGET)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkHSV, gtk_hsv, GTK_TYPE_WIDGET, G_TYPE_FLAG_NONE, ;)
 
 /* Class initialization function for the HSV color selector */
 static void

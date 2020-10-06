@@ -228,7 +228,7 @@ gtk_menu_get_private (GtkMenu *menu)
   return G_TYPE_INSTANCE_GET_PRIVATE (menu, GTK_TYPE_MENU, GtkMenuPrivate);
 }
 
-STLWRT_DEFINE_TYPE (GtkMenu, gtk_menu, GTK_TYPE_MENU_SHELL)
+STLWRT_DEFINE_VTYPE (GtkMenu, gtk_menu, GTK_TYPE_MENU_SHELL, G_TYPE_FLAG_NONE, ;)
 
 static void
 menu_queue_resize (GtkMenu *menu)

@@ -307,9 +307,8 @@ static GQuark quark_angle = 0;
 
 static GtkBuildableIface *buildable_parent_iface = NULL;
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkLabel, gtk_label, GTK_TYPE_MISC,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-						gtk_label_buildable_interface_init));
+STLWRT_DEFINE_VTYPE (GtkLabel, gtk_label, GTK_TYPE_MISC, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE, gtk_label_buildable_interface_init))
 
 static void
 add_move_binding (GtkBindingSet  *binding_set,

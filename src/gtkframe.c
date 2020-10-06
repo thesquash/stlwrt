@@ -78,9 +78,8 @@ static void gtk_frame_buildable_add_child           (GtkBuildable *buildable,
 						     GObject      *child,
 						     const gchar  *type);
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkFrame, gtk_frame, GTK_TYPE_BIN,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-						gtk_frame_buildable_init))
+STLWRT_DEFINE_VTYPE_VPARENT (GtkFrame, gtk_frame, GTK_TYPE_BIN, G_TYPE_FLAG_NONE,
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE, gtk_frame_buildable_init))
 
 static void
 gtk_frame_class_init (GtkFrameClass *class)

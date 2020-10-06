@@ -32,7 +32,7 @@
 #include <gtkorientable.h>
 
 
-G_DEFINE_TYPE (GtkHSeparator, gtk_hseparator, GTK_TYPE_SEPARATOR)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkHSeparator, gtk_hseparator, GTK_TYPE_SEPARATOR, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_hseparator_class_init (GtkHSeparatorClass *class)

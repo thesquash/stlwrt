@@ -180,9 +180,9 @@ static void      gtk_info_bar_buildable_custom_finished    (GtkBuildable  *build
                                                             gpointer       user_data);
 
 
-G_DEFINE_TYPE_WITH_CODE (GtkInfoBar, gtk_info_bar, GTK_TYPE_HBOX,
-                         G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-                                                gtk_info_bar_buildable_interface_init))
+STLWRT_DEFINE_FTYPE_VPARENT (GtkInfoBar, gtk_info_bar, GTK_TYPE_HBOX, G_TYPE_FLAG_NONE,
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
+                                                    gtk_info_bar_buildable_interface_init))
 
 static void
 gtk_info_bar_set_property (GObject      *object,

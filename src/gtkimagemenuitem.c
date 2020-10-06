@@ -96,9 +96,10 @@ enum {
 static GtkActivatableIface *parent_activatable_iface;
 
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkImageMenuItem, gtk_image_menu_item, GTK_TYPE_MENU_ITEM,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_ACTIVATABLE,
-						gtk_image_menu_item_activatable_interface_init))
+STLWRT_DEFINE_FTYPE_VPARENT (GtkImageMenuItem, gtk_image_menu_item, GTK_TYPE_MENU_ITEM,
+                             G_TYPE_FLAG_NONE,
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_ACTIVATABLE,
+                                                    gtk_image_menu_item_activatable_interface_init))
 
 #define GET_PRIVATE(object)  \
   (G_TYPE_INSTANCE_GET_PRIVATE ((object), GTK_TYPE_IMAGE_MENU_ITEM, GtkImageMenuItemPrivate))

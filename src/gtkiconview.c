@@ -471,11 +471,11 @@ static void     gtk_icon_view_buildable_custom_tag_end   (GtkBuildable  *buildab
 
 static guint icon_view_signals[LAST_SIGNAL] = { 0 };
 
-G_DEFINE_TYPE_WITH_CODE (GtkIconView, gtk_icon_view, GTK_TYPE_CONTAINER,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_CELL_LAYOUT,
-						gtk_icon_view_cell_layout_init)
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-						gtk_icon_view_buildable_init))
+STLWRT_DEFINE_FTYPE_VPARENT (GtkIconView, gtk_icon_view, GTK_TYPE_CONTAINER, G_TYPE_FLAG_NONE,
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_CELL_LAYOUT,
+                                                    gtk_icon_view_cell_layout_init)
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
+                                                    gtk_icon_view_buildable_init))
 
 static void
 gtk_icon_view_class_init (GtkIconViewClass *klass)

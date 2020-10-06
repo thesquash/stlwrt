@@ -109,7 +109,7 @@ static void gtk_layout_set_adjustment_upper (GtkAdjustment *adj,
 					     gdouble        upper,
 					     gboolean       always_emit_changed);
 
-STLWRT_DEFINE_TYPE (GtkLayout, gtk_layout, GTK_TYPE_CONTAINER)
+STLWRT_DEFINE_VTYPE (GtkLayout, gtk_layout, GTK_TYPE_CONTAINER, G_TYPE_FLAG_NONE, ;)
 
 /* Public interface
  */

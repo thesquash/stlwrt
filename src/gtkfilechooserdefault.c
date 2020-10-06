@@ -445,11 +445,10 @@ typedef struct {
 
 static void shortcuts_pane_model_filter_drag_source_iface_init (GtkTreeDragSourceIface *iface);
 
-STLWRT_DEFINE_TYPE_WITH_CODE (ShortcutsPaneModelFilter,
-			 _shortcuts_pane_model_filter,
-			 GTK_TYPE_TREE_MODEL_FILTER,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_DRAG_SOURCE,
-						shortcuts_pane_model_filter_drag_source_iface_init))
+STLWRT_DEFINE_FTYPE (ShortcutsPaneModelFilter, _shortcuts_pane_model_filter,
+                     GTK_TYPE_TREE_MODEL_FILTER, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_DRAG_SOURCE,
+                                            shortcuts_pane_model_filter_drag_source_iface_init))
 
 static GtkTreeModel *shortcuts_pane_model_filter_new (GtkFileChooserDefault *impl,
 						      GtkTreeModel          *child_model,
@@ -457,11 +456,12 @@ static GtkTreeModel *shortcuts_pane_model_filter_new (GtkFileChooserDefault *imp
 
 
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkFileChooserDefault, _gtk_file_chooser_default, GTK_TYPE_VBOX,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_FILE_CHOOSER,
-						gtk_file_chooser_default_iface_init)
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_FILE_CHOOSER_EMBED,
-						gtk_file_chooser_embed_default_iface_init));						
+STLWRT_DEFINE_FTYPE_VPARENT (GtkFileChooserDefault, _gtk_file_chooser_default, GTK_TYPE_VBOX,
+                             G_TYPE_FLAG_NONE,
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_FILE_CHOOSER,
+                                                    gtk_file_chooser_default_iface_init)
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_FILE_CHOOSER_EMBED,
+                                                    gtk_file_chooser_embed_default_iface_init));
 
 
 static void

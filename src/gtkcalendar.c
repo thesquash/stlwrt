@@ -323,7 +323,7 @@ static gint calendar_get_ysep          (GtkCalendar *calendar);
 static char    *default_abbreviated_dayname[7];
 static char    *default_monthname[12];
 
-STLWRT_DEFINE_TYPE (GtkCalendar, gtk_calendar, GTK_TYPE_WIDGET)
+STLWRT_DEFINE_VTYPE (GtkCalendar, gtk_calendar, GTK_TYPE_WIDGET, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_calendar_class_init (GtkCalendarClass *class)

@@ -79,7 +79,7 @@ static void gtk_button_box_get_child_property (GtkContainer      *container,
  * and GtkBox already implements GtkOrientable, so there is no need for
  * re-implementation.
  */
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkButtonBox, gtk_button_box, GTK_TYPE_BOX)
+STLWRT_DEFINE_VTYPE (GtkButtonBox, gtk_button_box, GTK_TYPE_BOX, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_button_box_class_init (GtkButtonBoxClass *class)

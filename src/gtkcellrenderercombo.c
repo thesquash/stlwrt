@@ -76,7 +76,8 @@ static guint cell_renderer_combo_signals[LAST_SIGNAL] = { 0, };
 
 #define GTK_CELL_RENDERER_COMBO_PATH "gtk-cell-renderer-combo-path"
 
-STLWRT_DEFINE_TYPE (GtkCellRendererCombo, gtk_cell_renderer_combo, GTK_TYPE_CELL_RENDERER_TEXT)
+STLWRT_DEFINE_VTYPE (GtkCellRendererCombo, gtk_cell_renderer_combo, GTK_TYPE_CELL_RENDERER_TEXT,
+                     G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_cell_renderer_combo_class_init (GtkCellRendererComboClass *klass)

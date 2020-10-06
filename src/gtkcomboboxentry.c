@@ -73,9 +73,10 @@ enum
   PROP_TEXT_COLUMN
 };
 
-G_DEFINE_TYPE_WITH_CODE (GtkComboBoxEntry, gtk_combo_box_entry, GTK_TYPE_COMBO_BOX,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-						gtk_combo_box_entry_buildable_interface_init))
+STLWRT_DEFINE_FTYPE_VPARENT (GtkComboBoxEntry, gtk_combo_box_entry, GTK_TYPE_COMBO_BOX,
+                             G_TYPE_FLAG_NONE,
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
+                                                    gtk_combo_box_entry_buildable_interface_init))
 
 static void
 gtk_combo_box_entry_class_init (GtkComboBoxEntryClass *klass)

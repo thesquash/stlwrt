@@ -60,7 +60,8 @@ enum {
 
 #define GTK_CELL_RENDERER_SPIN_PATH "gtk-cell-renderer-spin-path"
 
-G_DEFINE_TYPE (GtkCellRendererSpin, gtk_cell_renderer_spin, GTK_TYPE_CELL_RENDERER_TEXT)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkCellRendererSpin, gtk_cell_renderer_spin, GTK_TYPE_CELL_RENDERER_TEXT,
+                             G_TYPE_FLAG_NONE, ;)
 
 
 static void

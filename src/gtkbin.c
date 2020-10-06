@@ -50,7 +50,7 @@ static void gtk_bin_forall      (GtkContainer   *container,
 static GType gtk_bin_child_type (GtkContainer   *container);
 
 
-STLWRT_DEFINE_ABSTRACT_TYPE (GtkBin, gtk_bin, GTK_TYPE_CONTAINER)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkBin, gtk_bin, GTK_TYPE_CONTAINER, G_TYPE_FLAG_ABSTRACT, ;)
 
 static void
 gtk_bin_class_init (GtkBinClass *class)

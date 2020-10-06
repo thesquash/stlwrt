@@ -63,7 +63,7 @@ static guint adjustment_signals[LAST_SIGNAL] = { 0 };
 
 static guint64 adjustment_changed_stamp = 0; /* protected by global gdk lock */
 
-STLWRT_DEFINE_TYPE (GtkAdjustment, gtk_adjustment, G_TYPE_OBJECT)
+STLWRT_DEFINE_VTYPE (GtkAdjustment, gtk_adjustment, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_adjustment_class_init (GtkAdjustmentClass *class)

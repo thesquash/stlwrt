@@ -166,9 +166,9 @@ enum
 static guint signals [LAST_SIGNAL] = { 0 };
 
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkAssistant, gtk_assistant, GTK_TYPE_WINDOW,
-                         G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-                                                gtk_assistant_buildable_interface_init))
+STLWRT_DEFINE_VTYPE (GtkAssistant, gtk_assistant, GTK_TYPE_WINDOW, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
+                                            gtk_assistant_buildable_interface_init))
 
 
 static void

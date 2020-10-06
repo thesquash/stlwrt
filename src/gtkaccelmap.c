@@ -940,7 +940,7 @@ __gtk_accel_map_unlock_path (const gchar *accel_path)
   entry->lock_count -= 1;  
 }
 
-STLWRT_DEFINE_TYPE (GtkAccelMap, gtk_accel_map, G_TYPE_OBJECT)
+STLWRT_DEFINE_FTYPE (GtkAccelMap, gtk_accel_map, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_accel_map_class_init (GtkAccelMapClass *accel_map_class)

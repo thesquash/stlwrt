@@ -33,26 +33,7 @@
 static void gtk_editable_base_init (gpointer g_class);
 
 
-GType
-gtk_editable_get_type (void)
-{
-  static GType editable_type = 0;
-
-  if (!editable_type)
-    {
-      const GTypeInfo editable_info =
-      {
-	sizeof (GtkEditableClass),  /* class_size */
-	gtk_editable_base_init,	    /* base_init */
-	NULL,			    /* base_finalize */
-      };
-
-      editable_type = g_type_register_static (G_TYPE_INTERFACE, I_("GtkEditable"),
-					      &editable_info, 0);
-    }
-
-  return editable_type;
-}
+STLWRT_DEFINE_INTERFACE (GtkEditable, gtk_editable, G_TYPE_INVALID, gtk_editable_base_init, ;)
 
 static void
 gtk_editable_base_init (gpointer g_class)

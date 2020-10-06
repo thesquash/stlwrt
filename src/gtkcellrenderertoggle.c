@@ -82,7 +82,8 @@ static guint toggle_cell_signals[LAST_SIGNAL] = { 0 };
 typedef struct _GtkCellRendererTogglePrivate GtkCellRendererTogglePrivate;
 
 
-STLWRT_DEFINE_TYPE (GtkCellRendererToggle, gtk_cell_renderer_toggle, GTK_TYPE_CELL_RENDERER)
+STLWRT_DEFINE_VTYPE (GtkCellRendererToggle, gtk_cell_renderer_toggle, GTK_TYPE_CELL_RENDERER,
+                     G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_cell_renderer_toggle_init (GtkCellRendererToggle *celltoggle)

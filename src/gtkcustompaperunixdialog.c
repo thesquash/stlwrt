@@ -59,7 +59,8 @@ enum {
   PRINTER_LIST_N_COLS
 };
 
-G_DEFINE_TYPE (GtkCustomPaperUnixDialog, gtk_custom_paper_unix_dialog, GTK_TYPE_DIALOG)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkCustomPaperUnixDialog, gtk_custom_paper_unix_dialog,
+                             GTK_TYPE_DIALOG, G_TYPE_FLAG_NONE, ;)
 
 #define GTK_CUSTOM_PAPER_UNIX_DIALOG_GET_PRIVATE(o)  \
    (G_TYPE_INSTANCE_GET_PRIVATE ((o), GTK_TYPE_CUSTOM_PAPER_UNIX_DIALOG, GtkCustomPaperUnixDialogPrivate))

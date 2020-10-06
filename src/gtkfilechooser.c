@@ -628,24 +628,8 @@
 
 static void gtk_file_chooser_class_init (gpointer g_iface);
 
-GType
-gtk_file_chooser_get_type (void)
-{
-  static GType file_chooser_type = 0;
-
-  if (!file_chooser_type)
-    {
-      file_chooser_type = g_type_register_static_simple (G_TYPE_INTERFACE,
-							 I_("GtkFileChooser"),
-							 sizeof (GtkFileChooserIface),
-							 (GClassInitFunc) gtk_file_chooser_class_init,
-							 0, NULL, 0);
-      
-      g_type_interface_add_prerequisite (file_chooser_type, GTK_TYPE_WIDGET);
-    }
-
-  return file_chooser_type;
-}
+STLWRT_DEFINE_INTERFACE (GtkFileChooser, gtk_file_chooser, GTK_TYPE_WIDGET,
+                         gtk_file_chooser_class_init, ;)
 
 static gboolean
 confirm_overwrite_accumulator (GSignalInvocationHint *ihint,

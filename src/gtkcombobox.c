@@ -457,13 +457,13 @@ static void gtk_combo_box_start_editing (GtkCellEditable *cell_editable,
 					 GdkEvent        *event);
 
 
-G_DEFINE_TYPE_WITH_CODE (GtkComboBox, gtk_combo_box, GTK_TYPE_BIN,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_CELL_LAYOUT,
-						gtk_combo_box_cell_layout_init)
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_CELL_EDITABLE,
-						gtk_combo_box_cell_editable_init)
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-						gtk_combo_box_buildable_init))
+STLWRT_DEFINE_FTYPE_VPARENT (GtkComboBox, gtk_combo_box, GTK_TYPE_BIN, G_TYPE_FLAG_NONE,
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_CELL_LAYOUT,
+                                                    gtk_combo_box_cell_layout_init)
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_CELL_EDITABLE,
+                                                    gtk_combo_box_cell_editable_init)
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
+                                                    gtk_combo_box_buildable_init))
 
 
 /* common */

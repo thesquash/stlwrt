@@ -111,7 +111,8 @@ static void finished_loading_cb (GtkFileSystemModel  *model,
                                  GError              *error,
 		                 GtkFileChooserEntry *chooser_entry);
 
-STLWRT_DEFINE_TYPE (GtkFileChooserEntry, _gtk_file_chooser_entry, GTK_TYPE_ENTRY)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkFileChooserEntry, _gtk_file_chooser_entry, GTK_TYPE_ENTRY,
+                             G_TYPE_FLAG_NONE, ;)
 
 static char *
 gtk_file_chooser_entry_get_completion_text (GtkFileChooserEntry *chooser_entry)

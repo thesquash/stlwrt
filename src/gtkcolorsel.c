@@ -215,7 +215,8 @@ static const guchar dropper_mask[] = {
   0x1e, 0x00, 0x00, 0x00,  0x0d, 0x00, 0x00, 0x00,
   0x02, 0x00, 0x00, 0x00 };
 
-STLWRT_DEFINE_TYPE (GtkColorSelection, gtk_color_selection, GTK_TYPE_VBOX)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkColorSelection, gtk_color_selection, GTK_TYPE_VBOX,
+                             G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_color_selection_class_init (GtkColorSelectionClass *klass)

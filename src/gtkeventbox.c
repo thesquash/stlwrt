@@ -68,7 +68,7 @@ static void     gtk_event_box_get_property  (GObject          *object,
                                              GValue           *value,
                                              GParamSpec       *pspec);
 
-G_DEFINE_TYPE (GtkEventBox, gtk_event_box, GTK_TYPE_BIN)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkEventBox, gtk_event_box, GTK_TYPE_BIN, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_event_box_class_init (GtkEventBoxClass *class)

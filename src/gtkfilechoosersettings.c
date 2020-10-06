@@ -22,11 +22,7 @@
 
 /* TODO:
  *
- * - Persist these:
- *   - hpaned position
- *   - browse_for_other_folders?
- *
- * - Do we want lockdown?
+ * Convert this into something GSettings-based -- INI files are so old :-)
  */
 
 #include "config.h"
@@ -247,7 +243,8 @@ ensure_settings_read (GtkFileChooserSettings *settings)
   settings->settings_read = TRUE;
 }
 
-STLWRT_DEFINE_TYPE (GtkFileChooserSettings, _gtk_file_chooser_settings, G_TYPE_OBJECT)
+STLWRT_DEFINE_FTYPE (GtkFileChooserSettings, _gtk_file_chooser_settings, G_TYPE_OBJECT,
+                     G_TYPE_FLAG_NONE, ;)
 
 static void
 _gtk_file_chooser_settings_class_init (GtkFileChooserSettingsClass *class)

@@ -68,7 +68,7 @@ static void gtk_aspect_frame_compute_child_allocation (GtkFrame            *fram
 #define MAX_RATIO 10000.0
 #define MIN_RATIO 0.0001
 
-STLWRT_DEFINE_TYPE (GtkAspectFrame, gtk_aspect_frame, GTK_TYPE_FRAME)
+STLWRT_DEFINE_VTYPE (GtkAspectFrame, gtk_aspect_frame, GTK_TYPE_FRAME, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_aspect_frame_class_init (GtkAspectFrameClass *class)

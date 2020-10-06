@@ -112,7 +112,8 @@ static gboolean     gtk_accel_label_expose_event (GtkWidget          *widget,
 static const gchar *gtk_accel_label_get_string   (GtkAccelLabel      *accel_label);
 
 
-STLWRT_DEFINE_TYPE (GtkAccelLabel, gtk_accel_label, GTK_TYPE_LABEL)
+STLWRT_DEFINE_VTYPE (GtkAccelLabel, gtk_accel_label, GTK_TYPE_LABEL,
+                     G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_accel_label_class_init (GtkAccelLabelClass *class)

@@ -76,7 +76,8 @@ enum {
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-STLWRT_DEFINE_TYPE (GtkCellRendererAccel, gtk_cell_renderer_accel, GTK_TYPE_CELL_RENDERER_TEXT)
+STLWRT_DEFINE_VTYPE (GtkCellRendererAccel, gtk_cell_renderer_accel, GTK_TYPE_CELL_RENDERER_TEXT,
+                     G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_cell_renderer_accel_init (GtkCellRendererAccel *cell_accel)
@@ -527,18 +528,17 @@ _gtk_cell_editable_event_box_cell_editable_init (GtkCellEditableIface *iface)
   iface->start_editing = _gtk_cell_editable_event_box_start_editing;
 }
 
-typedef struct _GtkCellEditableEventBox GtkCellEditableEventBox;
 typedef         GtkEventBoxClass        GtkCellEditableEventBoxClass;
 
-struct _GtkCellEditableEventBox
-{
-  GtkEventBox box;
+STLWRT_DECLARE_FTYPE_VPARENT(GtkCellEditableEventBox, _gtk_cell_editable_event_box, GtkEventBox,
   gboolean editing_canceled;
-};
+)
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkCellEditableEventBox, _gtk_cell_editable_event_box, GTK_TYPE_EVENT_BOX, { \
-    G_IMPLEMENT_INTERFACE (GTK_TYPE_CELL_EDITABLE, _gtk_cell_editable_event_box_cell_editable_init)   \
-      })
+STLWRT_DEFINE_FTYPE_VPARENT (GtkCellEditableEventBox, _gtk_cell_editable_event_box,
+                             GTK_TYPE_EVENT_BOX,  G_TYPE_FLAG_NONE,
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_CELL_EDITABLE,
+                                                    _gtk_cell_editable_event_box_cell_editable_init)
+)
 
 enum {
   PROP_ZERO,

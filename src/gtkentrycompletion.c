@@ -154,11 +154,11 @@ static guint entry_completion_signals[LAST_SIGNAL] = { 0 };
 /* GtkBuildable */
 static void     gtk_entry_completion_buildable_init      (GtkBuildableIface  *iface);
 
-G_DEFINE_TYPE_WITH_CODE (GtkEntryCompletion, gtk_entry_completion, G_TYPE_OBJECT,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_CELL_LAYOUT,
-						gtk_entry_completion_cell_layout_init)
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-						gtk_entry_completion_buildable_init))
+STLWRT_DEFINE_FTYPE (GtkEntryCompletion, gtk_entry_completion, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_CELL_LAYOUT,
+                                            gtk_entry_completion_cell_layout_init)
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
+                                            gtk_entry_completion_buildable_init))
 
 
 static void

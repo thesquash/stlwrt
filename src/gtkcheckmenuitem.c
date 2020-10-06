@@ -71,9 +71,9 @@ static void gtk_check_menu_item_sync_action_properties     (GtkActivatable      
 static GtkActivatableIface *parent_activatable_iface;
 static guint                check_menu_item_signals[LAST_SIGNAL] = { 0 };
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkCheckMenuItem, gtk_check_menu_item, GTK_TYPE_MENU_ITEM,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_ACTIVATABLE,
-						gtk_check_menu_item_activatable_interface_init))
+STLWRT_DEFINE_VTYPE (GtkCheckMenuItem, gtk_check_menu_item, GTK_TYPE_MENU_ITEM, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_ACTIVATABLE,
+                                            gtk_check_menu_item_activatable_interface_init))
 
 static void
 gtk_check_menu_item_class_init (GtkCheckMenuItemClass *klass)

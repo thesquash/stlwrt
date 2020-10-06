@@ -72,7 +72,7 @@ enum {
 
 static guint cell_renderer_signals[LAST_SIGNAL] = { 0 };
 
-STLWRT_DEFINE_ABSTRACT_TYPE (GtkCellRenderer, gtk_cell_renderer, G_TYPE_OBJECT)
+STLWRT_DEFINE_VTYPE (GtkCellRenderer, gtk_cell_renderer, G_TYPE_OBJECT, G_TYPE_FLAG_ABSTRACT, ;)
 
 static void
 gtk_cell_renderer_init (GtkCellRenderer *cell)

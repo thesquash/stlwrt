@@ -92,9 +92,10 @@ static void     gtk_combo_box_text_buildable_custom_finished    (GtkBuildable   
 
 static GtkBuildableIface *buildable_parent_iface = NULL;
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkComboBoxText, gtk_combo_box_text, GTK_TYPE_COMBO_BOX,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-						gtk_combo_box_text_buildable_interface_init));
+STLWRT_DEFINE_FTYPE_VPARENT (GtkComboBoxText, gtk_combo_box_text, GTK_TYPE_COMBO_BOX,
+                             G_TYPE_FLAG_NONE,
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
+                                                    gtk_combo_box_text_buildable_interface_init));
 
 static GObject *
 gtk_combo_box_text_constructor (GType                  type,

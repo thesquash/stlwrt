@@ -59,7 +59,7 @@ enum {
 };
 
 
-G_DEFINE_TYPE (GtkBuilder, gtk_builder, G_TYPE_OBJECT)
+STLWRT_DEFINE_FTYPE (GtkBuilder, gtk_builder, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_builder_class_init (GtkBuilderClass *klass)

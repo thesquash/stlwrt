@@ -102,9 +102,9 @@ struct GtkFileSystemBookmark
   gchar *label;
 };
 
-G_DEFINE_TYPE (GtkFileSystem, _gtk_file_system, G_TYPE_OBJECT)
+G_DEFINE_FTYPE (GtkFileSystem, _gtk_file_system, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
-G_DEFINE_TYPE (GtkFolder, _gtk_folder, G_TYPE_OBJECT)
+G_DEFINE_FTYPE (GtkFolder, _gtk_folder, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 
 static void gtk_folder_set_finished_loading (GtkFolder *folder,

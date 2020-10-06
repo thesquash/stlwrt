@@ -73,7 +73,8 @@ enum {
 
 typedef struct _GtkCellRendererPixbufPrivate GtkCellRendererPixbufPrivate;
 
-STLWRT_DEFINE_TYPE (GtkCellRendererPixbuf, gtk_cell_renderer_pixbuf, GTK_TYPE_CELL_RENDERER)
+STLWRT_DEFINE_VTYPE (GtkCellRendererPixbuf, gtk_cell_renderer_pixbuf, GTK_TYPE_CELL_RENDERER,
+                     G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_cell_renderer_pixbuf_init (GtkCellRendererPixbuf *cellpixbuf)

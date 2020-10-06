@@ -270,9 +270,11 @@ static guint file_chooser_button_signals[LAST_SIGNAL] = { 0 };
  *  GType Declaration  *
  * ******************* */
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkFileChooserButton, gtk_file_chooser_button, GTK_TYPE_HBOX, { \
-    G_IMPLEMENT_INTERFACE (GTK_TYPE_FILE_CHOOSER, gtk_file_chooser_button_file_chooser_iface_init) \
-})
+STLWRT_DEFINE_FTYPE_VPARENT (GtkFileChooserButton, gtk_file_chooser_button, GTK_TYPE_HBOX, 
+                             G_TYPE_FLAG_NONE,
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_FILE_CHOOSER,
+                                                    gtk_file_chooser_button_file_chooser_iface_init)
+)
 
 
 /* ***************** *

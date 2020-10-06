@@ -83,7 +83,8 @@ static void gtk_cell_renderer_progress_render       (GtkCellRenderer         *ce
 						     guint                    flags);
 
      
-G_DEFINE_TYPE (GtkCellRendererProgress, gtk_cell_renderer_progress, GTK_TYPE_CELL_RENDERER)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkCellRendererProgress, gtk_cell_renderer_progress, GTK_TYPE_CELL_RENDERER,
+                             G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_cell_renderer_progress_class_init (GtkCellRendererProgressClass *klass)

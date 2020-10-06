@@ -1015,13 +1015,11 @@ static guint file_system_model_signals[LAST_SIGNAL] = { 0 };
 
 
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkFileSystemModel, _gtk_file_system_model, G_TYPE_OBJECT,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_MODEL,
-						gtk_file_system_model_iface_init)
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_SORTABLE,
-						gtk_file_system_model_sortable_init)
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_DRAG_SOURCE,
-						drag_source_iface_init))
+STLWRT_DEFINE_FTYPE (GtkFileSystemModel, _gtk_file_system_model, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_MODEL, gtk_file_system_model_iface_init)
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_SORTABLE,
+                                            gtk_file_system_model_sortable_init)
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_DRAG_SOURCE, drag_source_iface_init))
 
 static void
 gtk_file_system_model_dispose (GObject *object)

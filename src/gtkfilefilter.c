@@ -78,7 +78,7 @@ struct _FilterRule
 static void gtk_file_filter_finalize   (GObject            *object);
 
 
-STLWRT_DEFINE_TYPE (GtkFileFilter, gtk_file_filter, G_TYPE_OBJECT)
+STLWRT_DEFINE_FTYPE (GtkFileFilter, gtk_file_filter, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_file_filter_init (GtkFileFilter *object)

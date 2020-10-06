@@ -56,9 +56,10 @@ static void     gtk_file_chooser_dialog_map          (GtkWidget             *wid
 static void response_cb (GtkDialog *dialog,
 			 gint       response_id);
 
-G_DEFINE_TYPE_WITH_CODE (GtkFileChooserDialog, gtk_file_chooser_dialog, GTK_TYPE_DIALOG,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_FILE_CHOOSER,
-						_gtk_file_chooser_delegate_iface_init))
+STLWRT_DEFINE_FTYPE_VPARENT (GtkFileChooserDialog, gtk_file_chooser_dialog, GTK_TYPE_DIALOG,
+                             G_TYPE_FLAG_NONE,
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_FILE_CHOOSER,
+                                                    _gtk_file_chooser_delegate_iface_init))
 
 static void
 gtk_file_chooser_dialog_class_init (GtkFileChooserDialogClass *class)

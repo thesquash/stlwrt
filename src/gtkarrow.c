@@ -74,7 +74,7 @@ static gboolean gtk_arrow_expose       (GtkWidget      *widget,
                                         GdkEventExpose *event);
 
 
-STLWRT_DEFINE_TYPE (GtkArrow, gtk_arrow, GTK_TYPE_MISC)
+STLWRT_DEFINE_VTYPE (GtkArrow, gtk_arrow, GTK_TYPE_MISC, G_TYPE_FLAG_NONE, ;)
 
 
 static void

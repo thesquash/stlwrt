@@ -129,7 +129,8 @@ static guint text_cell_renderer_signals [LAST_SIGNAL];
 
 typedef struct _GtkCellRendererTextPrivate GtkCellRendererTextPrivate;
 
-STLWRT_DEFINE_TYPE (GtkCellRendererText, gtk_cell_renderer_text, GTK_TYPE_CELL_RENDERER)
+STLWRT_DEFINE_VTYPE (GtkCellRendererText, gtk_cell_renderer_text, GTK_TYPE_CELL_RENDERER,
+                     G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_cell_renderer_text_init (GtkCellRendererText *celltext)

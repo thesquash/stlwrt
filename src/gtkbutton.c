@@ -144,9 +144,9 @@ static void gtk_button_set_use_action_appearance (GtkButton            *button,
 
 static guint button_signals[LAST_SIGNAL] = { 0 };
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkButton, gtk_button, GTK_TYPE_BIN,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_ACTIVATABLE,
-						gtk_button_activatable_interface_init))
+STLWRT_DEFINE_VTYPE (GtkButton, gtk_button, GTK_TYPE_BIN, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_ACTIVATABLE,
+                                            gtk_button_activatable_interface_init))
 
 static void
 gtk_button_class_init (GtkButtonClass *klass)

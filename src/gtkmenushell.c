@@ -128,6 +128,19 @@ enum {
 
 typedef struct _GtkMenuShellPrivate GtkMenuShellPrivate;
 
+struct _GtkMenuShellPrivate
+{
+  GtkMnemonicHash *mnemonic_hash;
+  GtkKeyHash *key_hash;
+
+  guint take_focus : 1;
+  guint activated_submenu : 1;
+  /* This flag is a crutch to keep mnemonics in the same menu
+   * if the user moves the mouse over an unselectable menuitem.
+   */
+  guint in_unselectable_item : 1;
+};
+
 
 static void gtk_menu_shell_set_property      (GObject           *object,
                                               guint              prop_id,

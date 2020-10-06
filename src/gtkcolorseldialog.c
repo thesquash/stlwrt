@@ -50,10 +50,10 @@ static GObject * gtk_color_selection_dialog_buildable_get_internal_child (GtkBui
 									  GtkBuilder   *builder,
 									  const gchar  *childname);
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkColorSelectionDialog, gtk_color_selection_dialog,
-           GTK_TYPE_DIALOG,
-           G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-                      gtk_color_selection_dialog_buildable_interface_init))
+STLWRT_DEFINE_VTYPE (GtkColorSelectionDialog, gtk_color_selection_dialog, GTK_TYPE_DIALOG,
+                     G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
+                                            gtk_color_selection_dialog_buildable_interface_init))
 
 static GtkBuildableIface *parent_buildable_iface;
 

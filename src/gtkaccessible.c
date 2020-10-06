@@ -36,7 +36,7 @@
 
 static void gtk_accessible_real_connect_widget_destroyed (GtkAccessible *accessible);
 
-STLWRT_DEFINE_TYPE (GtkAccessible, gtk_accessible, ATK_TYPE_OBJECT)
+STLWRT_DEFINE_FTYPE (GtkAccessible, gtk_accessible, ATK_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_accessible_init (GtkAccessible *object)

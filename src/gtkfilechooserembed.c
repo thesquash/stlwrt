@@ -124,30 +124,8 @@ delegate_response_requested (GtkFileChooserEmbed *chooser_embed,
 
 /* publicly callable functions */
 
-GType
-_gtk_file_chooser_embed_get_type (void)
-{
-  static GType file_chooser_embed_type = 0;
-
-  if (!file_chooser_embed_type)
-    {
-      const GTypeInfo file_chooser_embed_info =
-      {
-	sizeof (GtkFileChooserEmbedIface),  /* class_size */
-	NULL,                          /* base_init */
-	NULL,			       /* base_finalize */
-	(GClassInitFunc)gtk_file_chooser_embed_class_init, /* class_init */
-      };
-
-      file_chooser_embed_type = g_type_register_static (G_TYPE_INTERFACE,
-							I_("GtkFileChooserEmbed"),
-							&file_chooser_embed_info, 0);
-
-      g_type_interface_add_prerequisite (file_chooser_embed_type, GTK_TYPE_WIDGET);
-    }
-
-  return file_chooser_embed_type;
-}
+STLWRT_DEFINE_INTERFACE (GtkFileChooserEmbed, _gtk_file_chooser_embed, GTK_TYPE_WIDGET,
+                         gtk_file_chooser_embed_class_init, ;)
 
 static void
 gtk_file_chooser_embed_class_init (gpointer g_iface)

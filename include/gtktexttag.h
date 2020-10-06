@@ -202,7 +202,7 @@ struct _GtkTextAppearance
   guint pad4 : 1;
 };
 
-STLWRT_DECLARE_BOXED_TYPE(GtkTextTag, gtk_text_tag,
+STLWRT_DECLARE_BOXED_TYPE(GtkTextAttributes, gtk_text_attributes,
   /*< private >*/
   guint refcount;
 

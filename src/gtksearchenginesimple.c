@@ -61,7 +61,8 @@ typedef struct
 
 
 
-STLWRT_DEFINE_TYPE (GtkSearchEngineSimple, _gtk_search_engine_simple, GTK_TYPE_SEARCH_ENGINE);
+STLWRT_DEFINE_FTYPE (GtkSearchEngineSimple, _gtk_search_engine_simple, GTK_TYPE_SEARCH_ENGINE,
+                     G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_search_engine_simple_dispose (GObject *object)

@@ -159,7 +159,7 @@ static void     gtk_status_icon_disable_blinking (GtkStatusIcon  *status_icon);
 static void     gtk_status_icon_reset_image_data (GtkStatusIcon  *status_icon);
 static void     gtk_status_icon_update_image    (GtkStatusIcon *status_icon);
 
-G_DEFINE_TYPE (GtkStatusIcon, gtk_status_icon, G_TYPE_OBJECT)
+STLWRT_DEFINE_FTYPE (GtkStatusIcon, gtk_status_icon, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_status_icon_class_init (GtkStatusIconClass *class)

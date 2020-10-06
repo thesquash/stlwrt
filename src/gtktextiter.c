@@ -434,18 +434,7 @@ __gtk_text_iter_free (GtkTextIter *iter)
   g_slice_free (GtkTextIter, iter);
 }
 
-GType
-gtk_text_iter_get_type (void)
-{
-  static GType our_type = 0;
-  
-  if (our_type == 0)
-    our_type = g_boxed_type_register_static (I_("GtkTextIter"),
-					     (GBoxedCopyFunc) __gtk_text_iter_copy,
-					     (GBoxedFreeFunc) __gtk_text_iter_free);
-
-  return our_type;
-}
+STLWRT_DEFINE_BOXED_TYPE (GtkTextIter, gtk_text_iter, __gtk_text_iter_copy, __gtk_text_iter_free)
 
 GtkTextLineSegment*
 _gtk_text_iter_get_indexable_segment (const GtkTextIter *iter)

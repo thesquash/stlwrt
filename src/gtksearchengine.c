@@ -50,7 +50,7 @@ enum
 
 static guint signals[LAST_SIGNAL];
 
-STLWRT_DEFINE_ABSTRACT_TYPE (GtkSearchEngine, _gtk_search_engine, G_TYPE_OBJECT);
+STLWRT_DEFINE_FTYPE (GtkSearchEngine, _gtk_search_engine, G_TYPE_OBJECT, G_TYPE_FLAG_ABSTRACT, ;)
 
 static void
 finalize (GObject *object)

@@ -38,7 +38,7 @@ enum {
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-STLWRT_DEFINE_TYPE (GtkPrinterOption, gtk_printer_option, G_TYPE_OBJECT)
+STLWRT_DEFINE_VTYPE (GtkPrinterOption, gtk_printer_option, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_printer_option_finalize (GObject *object)

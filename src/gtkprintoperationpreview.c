@@ -30,35 +30,8 @@
 
 static void gtk_print_operation_preview_base_init (gpointer g_iface);
 
-GType
-gtk_print_operation_preview_get_type (void)
-{
-  static GType print_operation_preview_type = 0;
-
-  if (!print_operation_preview_type)
-    {
-      const GTypeInfo print_operation_preview_info =
-      {
-        sizeof (GtkPrintOperationPreviewIface), /* class_size */
-	gtk_print_operation_preview_base_init,   /* base_init */
-	NULL,		/* base_finalize */
-	NULL,
-	NULL,		/* class_finalize */
-	NULL,		/* class_data */
-	0,
-	0,              /* n_preallocs */
-	NULL
-      };
-
-      print_operation_preview_type =
-	g_type_register_static (G_TYPE_INTERFACE, I_("GtkPrintOperationPreview"),
-				&print_operation_preview_info, 0);
-
-      g_type_interface_add_prerequisite (print_operation_preview_type, G_TYPE_OBJECT);
-    }
-
-  return print_operation_preview_type;
-}
+STLWRT_DEFINE_INTERFACE (GtkPrintOperationPreview, gtk_print_operation_preview, G_TYPE_OBJECT,
+                         gtk_print_operation_preview_base_init)
 
 static void
 gtk_print_operation_preview_base_init (gpointer g_iface)

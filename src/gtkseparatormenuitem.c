@@ -30,7 +30,8 @@
 #include <gtkseparatormenuitem.h>
 
 
-G_DEFINE_TYPE (GtkSeparatorMenuItem, gtk_separator_menu_item, GTK_TYPE_MENU_ITEM)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkSeparatorMenuItem, gtk_separator_menu_item, GTK_TYPE_MENU_ITEM,
+                             G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_separator_menu_item_class_init (GtkSeparatorMenuItemClass *class)

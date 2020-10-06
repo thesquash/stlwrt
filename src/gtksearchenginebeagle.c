@@ -156,7 +156,8 @@ open_libbeagle (void)
 
 
 
-STLWRT_DEFINE_TYPE (GtkSearchEngineBeagle, _gtk_search_engine_beagle, GTK_TYPE_SEARCH_ENGINE);
+STLWRT_DEFINE_FTYPE (GtkSearchEngineBeagle, _gtk_search_engine_beagle, GTK_TYPE_SEARCH_ENGINE,
+                     G_TYPE_FLAG_NONE, ;)
 
 static void
 finalize (GObject *object)

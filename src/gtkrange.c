@@ -228,9 +228,8 @@ static gboolean      gtk_range_key_press                (GtkWidget     *range,
 							 GdkEventKey   *event);
 
 
-STLWRT_DEFINE_ABSTRACT_TYPE_WITH_CODE (GtkRange, gtk_range, GTK_TYPE_WIDGET,
-                                  G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE,
-                                                         NULL))
+STLWRT_DEFINE_VTYPE (GtkRange, gtk_range, GTK_TYPE_WIDGET, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE, NULL))
 
 static guint signals[LAST_SIGNAL];
 

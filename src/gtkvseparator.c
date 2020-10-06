@@ -43,7 +43,7 @@
  * make it appear sunken into the interface.
  */
 
-G_DEFINE_TYPE (GtkVSeparator, gtk_vseparator, GTK_TYPE_SEPARATOR)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkVSeparator, gtk_vseparator, GTK_TYPE_SEPARATOR, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_vseparator_class_init (GtkVSeparatorClass *klass)

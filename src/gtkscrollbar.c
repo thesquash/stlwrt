@@ -43,7 +43,7 @@ static void gtk_scrollbar_style_set (GtkWidget *widget,
  * and GtkRange already implements GtkOrientable, so there is no need for
  * re-implementation.
  */
-G_DEFINE_TYPE (GtkScrollbar, gtk_scrollbar, GTK_TYPE_RANGE)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkScrollbar, gtk_scrollbar, GTK_TYPE_RANGE, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_scrollbar_class_init (GtkScrollbarClass *class)

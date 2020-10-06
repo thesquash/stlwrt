@@ -91,9 +91,8 @@ static void          prepare_data            (PrintPagesData *data);
 static void          clamp_page_ranges       (PrintPagesData *data);
 
 
-G_DEFINE_TYPE_WITH_CODE (GtkPrintOperation, gtk_print_operation, G_TYPE_OBJECT,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_PRINT_OPERATION_PREVIEW,
-						preview_iface_init))
+STLWRT_DEFINE_FTYPE (GtkPrintOperation, gtk_print_operation, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_PRINT_OPERATION_PREVIEW, preview_iface_init))
 
 /**
  * __gtk_print_error_quark:

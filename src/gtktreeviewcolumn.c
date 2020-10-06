@@ -159,12 +159,11 @@ static void gtk_tree_view_column_buildable_init                 (GtkBuildableIfa
 
 static guint tree_column_signals[LAST_SIGNAL] = { 0 };
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkTreeViewColumn, gtk_tree_view_column, G_TYPE_OBJECT,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_CELL_LAYOUT,
-						gtk_tree_view_column_cell_layout_init)
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-						gtk_tree_view_column_buildable_init))
-
+STLWRT_DEFINE_VTYPE (GtkTreeViewColumn, gtk_tree_view_column, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_CELL_LAYOUT,
+                                            gtk_tree_view_column_cell_layout_init)
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
+                                            gtk_tree_view_column_buildable_init))
 
 static void
 gtk_tree_view_column_class_init (GtkTreeViewColumnClass *class)

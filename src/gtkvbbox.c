@@ -60,7 +60,8 @@
 static gint default_spacing = 10;
 static GtkButtonBoxStyle default_layout_style = GTK_BUTTONBOX_EDGE;
 
-G_DEFINE_TYPE (GtkVButtonBox, gtk_vbutton_box, GTK_TYPE_BUTTON_BOX)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkVButtonBox, gtk_vbutton_box, GTK_TYPE_BUTTON_BOX,
+                             G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_vbutton_box_class_init (GtkVButtonBoxClass *class)

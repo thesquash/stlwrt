@@ -42,7 +42,7 @@ static guint signals[LAST_SIGNAL] = { 0 };
 /* ugly side-effect of aliasing */
 #undef gtk_printer_option_set
 
-STLWRT_DEFINE_TYPE (GtkPrinterOptionSet, gtk_printer_option_set, G_TYPE_OBJECT)
+STLWRT_DEFINE_VTYPE (GtkPrinterOptionSet, gtk_printer_option_set, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_printer_option_set_finalize (GObject *object)

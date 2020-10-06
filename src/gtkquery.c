@@ -28,7 +28,7 @@
 #include <gtkquery.h>
 
 
-STLWRT_DEFINE_TYPE (GtkQuery, _gtk_query, G_TYPE_OBJECT);
+STLWRT_DEFINE_FTYPE (GtkQuery, _gtk_query, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;);
 
 static void
 finalize (GObject *object)

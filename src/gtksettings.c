@@ -188,7 +188,7 @@ static GSList           *object_list = NULL;
 static guint		 class_n_properties = 0;
 
 
-STLWRT_DEFINE_TYPE (GtkSettings, gtk_settings, G_TYPE_OBJECT)
+STLWRT_DEFINE_VTYPE (GtkSettings, gtk_settings, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 /* --- functions --- */
 static void

@@ -95,10 +95,8 @@ static const GtkRulerMetric ruler_metrics[] =
 };
 
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkRuler, gtk_ruler, GTK_TYPE_WIDGET,
-                         G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE,
-                                                NULL))
-
+STLWRT_DEFINE_VTYPE (GtkRuler, gtk_ruler, GTK_TYPE_WIDGET, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE, NULL))
 
 static void
 gtk_ruler_class_init (GtkRulerClass *class)

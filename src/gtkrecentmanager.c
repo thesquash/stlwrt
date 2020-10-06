@@ -144,7 +144,7 @@ static guint signal_changed = 0;
 
 static GtkRecentManager *recent_manager_singleton = NULL;
 
-STLWRT_DEFINE_TYPE (GtkRecentManager, gtk_recent_manager, G_TYPE_OBJECT)
+STLWRT_DEFINE_FTYPE (GtkRecentManager, gtk_recent_manager, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 static void
 filename_warning (const gchar *format, 
@@ -1612,18 +1612,9 @@ gtk_recent_manager_clamp_to_size (GtkRecentManager *manager,
 /*****************
  * GtkRecentInfo *
  *****************/
- 
-GType
-gtk_recent_info_get_type (void)
-{
-  static GType info_type = 0;
-  
-  if (!info_type)
-    info_type = g_boxed_type_register_static (I_("GtkRecentInfo"),
-    					      (GBoxedCopyFunc) __gtk_recent_info_ref,
-    					      (GBoxedFreeFunc) __gtk_recent_info_unref);
-  return info_type;
-}
+
+STLWRT_DEFINE_BOXED_TYPE (GtkRecentInfo, gtk_recent_info, __gtk_recent_info_ref,
+                          __gtk_recent_info_unref)
 
 static GtkRecentInfo *
 gtk_recent_info_new (const gchar *uri)

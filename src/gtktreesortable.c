@@ -28,35 +28,8 @@
 
 static void gtk_tree_sortable_base_init (gpointer g_class);
 
-GType
-gtk_tree_sortable_get_type (void)
-{
-  static GType tree_sortable_type = 0;
-
-  if (! tree_sortable_type)
-    {
-      const GTypeInfo tree_sortable_info =
-      {
-	sizeof (GtkTreeSortableIface), /* class_size */
-	gtk_tree_sortable_base_init,   /* base_init */
-	NULL,		/* base_finalize */
-	NULL,
-	NULL,		/* class_finalize */
-	NULL,		/* class_data */
-	0,
-	0,
-	NULL
-      };
-
-      tree_sortable_type =
-	g_type_register_static (G_TYPE_INTERFACE, I_("GtkTreeSortable"),
-				&tree_sortable_info, 0);
-
-      g_type_interface_add_prerequisite (tree_sortable_type, GTK_TYPE_TREE_MODEL);
-    }
-
-  return tree_sortable_type;
-}
+STLWRT_DEFINE_INTERFACE (GtkTreeSortable, gtk_tree_sortable, GTK_TYPE_TREE_MODEL,
+                         gtk_tree_sortable_base_init, ;)
 
 static void
 gtk_tree_sortable_base_init (gpointer g_class)

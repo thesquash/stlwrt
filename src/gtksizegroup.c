@@ -343,9 +343,8 @@ gtk_size_group_buildable_init (GtkBuildableIface *iface)
   iface->custom_finished = gtk_size_group_buildable_custom_finished;
 }
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkSizeGroup, gtk_size_group, G_TYPE_OBJECT,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-						gtk_size_group_buildable_init))
+STLWRT_DEFINE_VTYPE (GtkSizeGroup, gtk_size_group, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE, gtk_size_group_buildable_init))
 
 static void
 gtk_size_group_set_property (GObject      *object,

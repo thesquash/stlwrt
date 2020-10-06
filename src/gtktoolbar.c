@@ -292,11 +292,9 @@ static void            toolbar_rebuild_menu                 (GtkToolShell       
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), GTK_TYPE_TOOLBAR, GtkToolbarPrivate))
 
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkToolbar, gtk_toolbar, GTK_TYPE_CONTAINER,
-                         G_IMPLEMENT_INTERFACE (GTK_TYPE_TOOL_SHELL,
-                                                toolbar_tool_shell_iface_init)
-                         G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE,
-                                                NULL))
+STLWRT_DEFINE_VTYPE (GtkToolbar, gtk_toolbar, GTK_TYPE_CONTAINER, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_TOOL_SHELL, toolbar_tool_shell_iface_init)
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE, NULL))
 
 static guint toolbar_signals[LAST_SIGNAL] = { 0 };
 

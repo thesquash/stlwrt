@@ -1123,7 +1123,7 @@ __gtk_rc_parse (const gchar *filename)
 
 /* Handling of RC styles */
 
-STLWRT_DEFINE_TYPE (GtkRcStyle, gtk_rc_style, G_TYPE_OBJECT)
+STLWRT_DEFINE_FTYPE (GtkRcStyle, gtk_rc_style, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_rc_style_init (GtkRcStyle *style)

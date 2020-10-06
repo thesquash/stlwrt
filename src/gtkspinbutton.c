@@ -147,9 +147,8 @@ static guint spinbutton_signals[LAST_SIGNAL] = {0};
 
 #define NO_ARROW 2
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkSpinButton, gtk_spin_button, GTK_TYPE_ENTRY,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_EDITABLE,
-						gtk_spin_button_editable_init))
+STLWRT_DEFINE_VTYPE (GtkSpinButton, gtk_spin_button, GTK_TYPE_ENTRY, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_EDITABLE, gtk_spin_button_editable_init))
 
 #define add_spin_binding(binding_set, keyval, mask, scroll)            \
   __gtk_binding_entry_add_signal (binding_set, keyval, mask,             \

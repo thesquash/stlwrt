@@ -58,7 +58,7 @@
 
 
 
-G_DEFINE_TYPE (GtkSpinner, gtk_spinner, GTK_TYPE_DRAWING_AREA);
+STLWRT_DEFINE_FTYPE_VPARENT (GtkSpinner, gtk_spinner, GTK_TYPE_DRAWING_AREA, G_TYPE_FLAG_NONE, ;)
 
 enum {
   PROP_0,

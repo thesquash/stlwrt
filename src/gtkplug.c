@@ -99,7 +99,7 @@ enum {
 
 static guint plug_signals[LAST_SIGNAL] = { 0 };
 
-STLWRT_DEFINE_TYPE (GtkPlug, gtk_plug, GTK_TYPE_WINDOW)
+STLWRT_DEFINE_VTYPE (GtkPlug, gtk_plug, GTK_TYPE_WINDOW, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_plug_get_property (GObject    *object,

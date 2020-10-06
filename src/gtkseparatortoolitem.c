@@ -58,7 +58,8 @@ static gint     get_space_size                            (GtkToolItem          
 
 
 
-G_DEFINE_TYPE (GtkSeparatorToolItem, gtk_separator_tool_item, GTK_TYPE_TOOL_ITEM)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkSeparatorToolItem, gtk_separator_tool_item, GTK_TYPE_TOOL_ITEM,
+                             G_TYPE_FLAG_NONE, ;)
 
 static gint
 get_space_size (GtkToolItem *tool_item)

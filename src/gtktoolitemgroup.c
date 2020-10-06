@@ -90,8 +90,10 @@ struct _GtkToolItemGroupChild
 
 static void gtk_tool_item_group_tool_shell_init (GtkToolShellIface *iface);
 
-G_DEFINE_TYPE_WITH_CODE (GtkToolItemGroup, gtk_tool_item_group, GTK_TYPE_CONTAINER,
-G_IMPLEMENT_INTERFACE (GTK_TYPE_TOOL_SHELL, gtk_tool_item_group_tool_shell_init));
+STLWRT_DEFINE_FTYPE_VPARENT (GtkToolItemGroup, gtk_tool_item_group, GTK_TYPE_CONTAINER,
+                             G_TYPE_FLAG_NONE,
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_TOOL_SHELL,
+                                                    gtk_tool_item_group_tool_shell_init))
 
 static GtkWidget*
 gtk_tool_item_group_get_alignment (GtkToolItemGroup *group)

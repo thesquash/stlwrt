@@ -49,7 +49,8 @@ static void gtk_radio_menu_item_get_property   (GObject               *object,
 
 static guint group_changed_signal = 0;
 
-STLWRT_DEFINE_TYPE (GtkRadioMenuItem, gtk_radio_menu_item, GTK_TYPE_CHECK_MENU_ITEM)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkRadioMenuItem, gtk_radio_menu_item, GTK_TYPE_CHECK_MENU_ITEM,
+                             G_TYPE_FLAG_NONE, ;)
 
 GtkWidget*
 __gtk_radio_menu_item_new (GSList *group)

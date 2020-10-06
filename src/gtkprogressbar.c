@@ -25,9 +25,6 @@
 
 #include <string.h>
 
-#undef GTK_DISABLE_DEPRECATED
-#define __GTK_PROGRESS_BAR_C__
-
 #include <gtkprogressbar.h>
 #include <gtkprivate.h>
 #include <gtkintl.h>
@@ -85,7 +82,7 @@ static void __gtk_progress_bar_set_activity_blocks_internal (GtkProgressBar *pba
 							   guint           blocks);
 
 
-STLWRT_DEFINE_TYPE (GtkProgressBar, gtk_progress_bar, GTK_TYPE_PROGRESS)
+STLWRT_DEFINE_VTYPE (GtkProgressBar, gtk_progress_bar, GTK_TYPE_WIDGET, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_progress_bar_class_init (GtkProgressBarClass *class)

@@ -97,35 +97,7 @@ static void      gtk_tree_row_ref_reordered (RowRefList        *refs,
                                              GtkTreeIter       *iter,
                                              gint              *new_order);
 
-GType
-gtk_tree_model_get_type (void)
-{
-  static GType tree_model_type = 0;
-
-  if (! tree_model_type)
-    {
-      const GTypeInfo tree_model_info =
-      {
-        sizeof (GtkTreeModelIface), /* class_size */
-	gtk_tree_model_base_init,   /* base_init */
-	NULL,		/* base_finalize */
-	NULL,
-	NULL,		/* class_finalize */
-	NULL,		/* class_data */
-	0,
-	0,              /* n_preallocs */
-	NULL
-      };
-
-      tree_model_type =
-	g_type_register_static (G_TYPE_INTERFACE, I_("GtkTreeModel"),
-				&tree_model_info, 0);
-
-      g_type_interface_add_prerequisite (tree_model_type, G_TYPE_OBJECT);
-    }
-
-  return tree_model_type;
-}
+STLWRT_DEFINE_INTERFACE (GtkTreeModel, gtk_tree_model, G_TYPE_OBJECT, gtk_tree_model_base_init, ;)
 
 static void
 gtk_tree_model_base_init (gpointer g_class)
@@ -684,18 +656,7 @@ __gtk_tree_path_copy (const GtkTreePath *path)
   return retval;
 }
 
-GType
-gtk_tree_path_get_type (void)
-{
-  static GType our_type = 0;
-  
-  if (our_type == 0)
-    our_type = g_boxed_type_register_static (I_("GtkTreePath"),
-					     (GBoxedCopyFunc) __gtk_tree_path_copy,
-					     (GBoxedFreeFunc) __gtk_tree_path_free);
-
-  return our_type;
-}
+STLWRT_DEFINE_BOXED_TYPE (GtkTreePath, gtk_tree_path, __gtk_tree_path_copy, __gtk_tree_path_free)
 
 /**
  * __gtk_tree_path_compare:
@@ -913,18 +874,7 @@ __gtk_tree_iter_free (GtkTreeIter *iter)
   g_slice_free (GtkTreeIter, iter);
 }
 
-GType
-gtk_tree_iter_get_type (void)
-{
-  static GType our_type = 0;
-  
-  if (our_type == 0)
-    our_type = g_boxed_type_register_static (I_("GtkTreeIter"),
-					     (GBoxedCopyFunc) __gtk_tree_iter_copy,
-					     (GBoxedFreeFunc) __gtk_tree_iter_free);
-
-  return our_type;
-}
+STLWRT_DEFINE_BOXED_TYPE (GtkTreeIter, gtk_tree_iter, __gtk_tree_iter_copy, __gtk_tree_iter_free)
 
 /**
  * __gtk_tree_model_get_flags:
@@ -1665,20 +1615,8 @@ static void gtk_tree_row_reference_unref_path (GtkTreePath  *path,
 					       GtkTreeModel *model,
 					       gint          depth);
 
-
-GType
-gtk_tree_row_reference_get_type (void)
-{
-  static GType our_type = 0;
-  
-  if (our_type == 0)
-    our_type = g_boxed_type_register_static (I_("GtkTreeRowReference"),
-					     (GBoxedCopyFunc) __gtk_tree_row_reference_copy,
-					     (GBoxedFreeFunc) __gtk_tree_row_reference_free);
-
-  return our_type;
-}
-
+STLWRT_DEFINE_BOXED_TYPE (GtkTreeRowReference, gtk_tree_row_reference,
+                          __gtk_tree_row_reference_copy, __gtk_tree_row_reference_free)
 
 struct _GtkTreeRowReference
 {

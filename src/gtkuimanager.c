@@ -181,9 +181,8 @@ enum
 
 static guint ui_manager_signals[LAST_SIGNAL] = { 0 };
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkUIManager, gtk_ui_manager, G_TYPE_OBJECT,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-						gtk_ui_manager_buildable_init))
+STLWRT_DEFINE_FTYPE (GtkUIManager, gtk_ui_manager, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE, gtk_ui_manager_buildable_init))
 
 static void
 gtk_ui_manager_class_init (GtkUIManagerClass *klass)

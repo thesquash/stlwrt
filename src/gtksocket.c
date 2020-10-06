@@ -166,7 +166,7 @@ _gtk_socket_get_private (GtkSocket *socket)
   return G_TYPE_INSTANCE_GET_PRIVATE (socket, GTK_TYPE_SOCKET, GtkSocketPrivate);
 }
 
-STLWRT_DEFINE_TYPE (GtkSocket, gtk_socket, GTK_TYPE_CONTAINER)
+STLWRT_DEFINE_VTYPE (GtkSocket, gtk_socket, GTK_TYPE_CONTAINER, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_socket_finalize (GObject *object)

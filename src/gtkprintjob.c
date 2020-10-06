@@ -75,7 +75,7 @@ enum {
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-STLWRT_DEFINE_TYPE (GtkPrintJob, gtk_print_job, G_TYPE_OBJECT)
+STLWRT_DEFINE_VTYPE (GtkPrintJob, gtk_print_job, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_print_job_class_init (GtkPrintJobClass *class)

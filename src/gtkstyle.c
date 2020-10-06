@@ -364,7 +364,7 @@ static const GdkColor gtk_default_active_base =    { 0, GTK_VERY_DARK_GRAY };
 static guint realize_signal = 0;
 static guint unrealize_signal = 0;
 
-STLWRT_DEFINE_TYPE (GtkStyle, gtk_style, G_TYPE_OBJECT)
+STLWRT_DEFINE_FTYPE (GtkStyle, gtk_style, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 /* --- functions --- */
 
@@ -6855,18 +6855,7 @@ __gtk_border_free (GtkBorder *border)
   g_slice_free (GtkBorder, border);
 }
 
-GType
-gtk_border_get_type (void)
-{
-  static GType our_type = 0;
-  
-  if (our_type == 0)
-    our_type = g_boxed_type_register_static (I_("GtkBorder"),
-					     (GBoxedCopyFunc) __gtk_border_copy,
-					     (GBoxedFreeFunc) __gtk_border_free);
-
-  return our_type;
-}
+STLWRT_DEFINE_BOXED_TYPE (GtkBorder, gtk_border, __gtk_border_copy, __gtk_border_free)
 
 static GdkFont *
 __gtk_style_get_font_internal (GtkStyle *style)

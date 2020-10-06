@@ -54,24 +54,8 @@ static const gchar gtk_use_action_appearance_key[]        = "gtk-use-action-appe
 
 static guint chooser_signals[LAST_SIGNAL] = { 0, };
 
-GType
-gtk_recent_chooser_get_type (void)
-{
-  static GType chooser_type = 0;
-  
-  if (!chooser_type)
-    {
-      chooser_type = g_type_register_static_simple (G_TYPE_INTERFACE,
-						    I_("GtkRecentChooser"),
-						    sizeof (GtkRecentChooserIface),
-						    (GClassInitFunc) gtk_recent_chooser_class_init,
-						    0, NULL, 0);
-      
-      g_type_interface_add_prerequisite (chooser_type, G_TYPE_OBJECT);
-    }
-  
-  return chooser_type;
-}
+STLWRT_DEFINE_INTERFACE (GtkRecentChooser, gtk_recent_chooser, G_TYPE_OBJECT,
+                         gtk_recent_chooser_class_init)
 
 static void
 gtk_recent_chooser_class_init (gpointer g_iface)

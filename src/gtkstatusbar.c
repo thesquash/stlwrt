@@ -102,9 +102,9 @@ static void     label_selectable_changed        (GtkWidget         *label,
 
 static guint              statusbar_signals[SIGNAL_LAST] = { 0 };
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkStatusbar, gtk_statusbar, GTK_TYPE_HBOX,
-                         G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-                                                gtk_statusbar_buildable_interface_init));
+STLWRT_DEFINE_VTYPE (GtkStatusbar, gtk_statusbar, GTK_TYPE_HBOX, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
+                                            gtk_statusbar_buildable_interface_init))
 
 static void
 gtk_statusbar_class_init (GtkStatusbarClass *class)

@@ -243,13 +243,13 @@ static GtkTreePath *gtk_real_tree_model_sort_convert_child_path_to_path (GtkTree
 									 gboolean          build_levels);
 
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkTreeModelSort, gtk_tree_model_sort, G_TYPE_OBJECT,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_MODEL,
-						gtk_tree_model_sort_tree_model_init)
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_SORTABLE,
-						gtk_tree_model_sort_tree_sortable_init)
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_DRAG_SOURCE,
-						gtk_tree_model_sort_drag_source_init))
+STLWRT_DEFINE_VTYPE (GtkTreeModelSort, gtk_tree_model_sort, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_MODEL,
+                                            gtk_tree_model_sort_tree_model_init)
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_SORTABLE,
+                                            gtk_tree_model_sort_tree_sortable_init)
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_DRAG_SOURCE,
+                                            gtk_tree_model_sort_drag_source_init))
 
 static void
 gtk_tree_model_sort_init (GtkTreeModelSort *tree_model_sort)

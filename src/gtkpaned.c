@@ -148,8 +148,8 @@ static void     gtk_paned_grab_notify           (GtkWidget        *widget,
 
 
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkPaned, gtk_paned, GTK_TYPE_CONTAINER,
-                              G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE, NULL))
+STLWRT_DEFINE_VTYPE (GtkPaned, gtk_paned, GTK_TYPE_CONTAINER, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE, NULL))
 
 static guint signals[LAST_SIGNAL] = { 0 };
 

@@ -132,13 +132,12 @@ static void gtk_recent_chooser_update                 (GtkActivatable       *act
 static void gtk_recent_chooser_sync_action_properties (GtkActivatable       *activatable,
 						       GtkAction            *action);
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkRecentChooserMenu,
-			 gtk_recent_chooser_menu,
-			 GTK_TYPE_MENU,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_RECENT_CHOOSER,
-				 		gtk_recent_chooser_iface_init)
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_ACTIVATABLE,
-				 		gtk_recent_chooser_activatable_iface_init))
+STLWRT_DEFINE_FTYPE_VPARENT (GtkRecentChooserMenu, gtk_recent_chooser_menu, GTK_TYPE_MENU,
+                             G_TYPE_FLAG_NONE,
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_RECENT_CHOOSER,
+                                                    gtk_recent_chooser_iface_init)
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_ACTIVATABLE,
+                                                    gtk_recent_chooser_activatable_iface_init))
 
 
 static void

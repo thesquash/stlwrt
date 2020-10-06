@@ -45,11 +45,10 @@ static void     gtk_recent_chooser_widget_get_property (GObject               *o
 static void     gtk_recent_chooser_widget_finalize     (GObject               *object);
 
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkRecentChooserWidget,
-		         gtk_recent_chooser_widget,
-			 GTK_TYPE_VBOX,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_RECENT_CHOOSER,
-						_gtk_recent_chooser_delegate_iface_init))
+STLWRT_DEFINE_FTYPE_VPARENT (GtkRecentChooserWidget, gtk_recent_chooser_widget, GTK_TYPE_VBOX,
+                             G_TYPE_FLAG_NONE,
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_RECENT_CHOOSER,
+                                                    _gtk_recent_chooser_delegate_iface_init))
 
 static void
 gtk_recent_chooser_widget_class_init (GtkRecentChooserWidgetClass *klass)

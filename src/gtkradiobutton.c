@@ -50,7 +50,8 @@ static void     gtk_radio_button_get_property   (GObject             *object,
 						 GValue              *value,
 						 GParamSpec          *pspec);
 
-STLWRT_DEFINE_TYPE (GtkRadioButton, gtk_radio_button, GTK_TYPE_CHECK_BUTTON)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkRadioButton, gtk_radio_button, GTK_TYPE_CHECK_BUTTON,
+                             G_TYPE_FLAG_NONE, ;)
 
 static guint group_changed_signal = 0;
 

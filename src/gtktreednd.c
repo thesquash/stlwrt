@@ -25,60 +25,9 @@
 #include <gtkintl.h>
 
 
-GType
-gtk_tree_drag_source_get_type (void)
-{
-  static GType our_type = 0;
+STLWRT_DEFINE_INTERFACE (GtkTreeDragSource, gtk_tree_drag_source, G_TYPE_INVALID, NULL, ;)
 
-  if (!our_type)
-    {
-      const GTypeInfo our_info =
-      {
-        sizeof (GtkTreeDragSourceIface), /* class_size */
-	NULL,		/* base_init */
-	NULL,		/* base_finalize */
-	NULL,
-	NULL,		/* class_finalize */
-	NULL,		/* class_data */
-	0,
-	0,              /* n_preallocs */
-	NULL
-      };
-
-      our_type = g_type_register_static (G_TYPE_INTERFACE, 
-					 I_("GtkTreeDragSource"),
-					 &our_info, 0);
-    }
-  
-  return our_type;
-}
-
-
-GType
-gtk_tree_drag_dest_get_type (void)
-{
-  static GType our_type = 0;
-
-  if (!our_type)
-    {
-      const GTypeInfo our_info =
-      {
-        sizeof (GtkTreeDragDestIface), /* class_size */
-	NULL,		/* base_init */
-	NULL,		/* base_finalize */
-	NULL,
-	NULL,		/* class_finalize */
-	NULL,		/* class_data */
-	0,
-	0,              /* n_preallocs */
-	NULL
-      };
-
-      our_type = g_type_register_static (G_TYPE_INTERFACE, I_("GtkTreeDragDest"), &our_info, 0);
-    }
-  
-  return our_type;
-}
+STLWRT_DEFINE_INTERFACE (GtkTreeDragDest, gtk_tree_drag_dest, G_TYPE_INVALID, NULL, ;)
 
 /**
  * __gtk_tree_drag_source_row_draggable:

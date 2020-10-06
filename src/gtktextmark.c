@@ -68,7 +68,7 @@ static void gtk_text_mark_finalize     (GObject         *object);
 
 static GtkTextLineSegment *gtk_mark_segment_new (GtkTextMark *mark_obj);
 
-STLWRT_DEFINE_TYPE (GtkTextMark, gtk_text_mark, G_TYPE_OBJECT)
+STLWRT_DEFINE_FTYPE (GtkTextMark, gtk_text_mark, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 enum {
   PROP_0,

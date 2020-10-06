@@ -89,9 +89,9 @@ static void gtk_text_tag_table_buildable_add_child      (GtkBuildable        *bu
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkTextTagTable, gtk_text_tag_table, G_TYPE_OBJECT,
-                         G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-                                                gtk_text_tag_table_buildable_interface_init))
+STLWRT_DEFINE_VTYPE (GtkTextTagTable, gtk_text_tag_table, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
+                                            gtk_text_tag_table_buildable_interface_init))
 
 static void
 gtk_text_tag_table_class_init (GtkTextTagTableClass *klass)

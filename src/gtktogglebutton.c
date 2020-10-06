@@ -77,9 +77,9 @@ static void gtk_toggle_button_sync_action_properties (GtkActivatable       *acti
 static GtkActivatableIface *parent_activatable_iface;
 static guint                toggle_button_signals[LAST_SIGNAL] = { 0 };
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkToggleButton, gtk_toggle_button, GTK_TYPE_BUTTON,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_ACTIVATABLE,
-						gtk_toggle_button_activatable_interface_init))
+STLWRT_DEFINE_VTYPE (GtkToggleButton, gtk_toggle_button, GTK_TYPE_BUTTON, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_ACTIVATABLE,
+                                            gtk_toggle_button_activatable_interface_init))
 
 static void
 gtk_toggle_button_class_init (GtkToggleButtonClass *class)

@@ -156,7 +156,7 @@ static void gtk_text_tag_get_property (GObject         *object,
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-STLWRT_DEFINE_TYPE (GtkTextTag, gtk_text_tag, G_TYPE_OBJECT)
+STLWRT_DEFINE_VTYPE (GtkTextTag, gtk_text_tag, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_text_tag_class_init (GtkTextTagClass *klass)
@@ -1999,18 +1999,8 @@ __gtk_text_attributes_copy (GtkTextAttributes *src)
   return dest;
 }
 
-GType
-gtk_text_attributes_get_type (void)
-{
-  static GType our_type = 0;
-  
-  if (our_type == 0)
-    our_type = g_boxed_type_register_static (I_("GtkTextAttributes"),
-					     (GBoxedCopyFunc) __gtk_text_attributes_ref,
-					     (GBoxedFreeFunc) __gtk_text_attributes_unref);
-
-  return our_type;
-}
+STLWRT_DEFINE_BOXED_TYPE (GtkTextAttributes, gtk_text_attributes, __gtk_text_attributes_ref,
+                          __gtk_text_attributes_unref)
 
 /**
  * __gtk_text_attributes_copy_values:

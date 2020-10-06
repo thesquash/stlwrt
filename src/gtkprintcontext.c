@@ -60,7 +60,7 @@ struct _GtkPrintContextClass
   GObjectClass parent_class;
 };
 
-STLWRT_DEFINE_TYPE (GtkPrintContext, gtk_print_context, G_TYPE_OBJECT)
+STLWRT_DEFINE_FTYPE (GtkPrintContext, gtk_print_context, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_print_context_finalize (GObject *object)

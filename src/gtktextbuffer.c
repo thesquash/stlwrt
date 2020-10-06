@@ -144,7 +144,7 @@ static void gtk_text_buffer_get_property (GObject         *object,
 static void gtk_text_buffer_notify       (GObject         *object,
                                           GParamSpec      *pspec);
 
-STLWRT_DEFINE_TYPE (GtkTextBuffer, gtk_text_buffer, G_TYPE_OBJECT)
+STLWRT_DEFINE_VTYPE (GtkTextBuffer, gtk_text_buffer, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_text_buffer_class_init (GtkTextBufferClass *klass)

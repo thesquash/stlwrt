@@ -140,9 +140,8 @@ static void gtk_scale_button_scale_value_changed(GtkRange            *range);
 /* see below for scale definitions */
 static GtkWidget *gtk_scale_button_scale_new    (GtkScaleButton      *button);
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkScaleButton, gtk_scale_button, GTK_TYPE_BUTTON,
-                         G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE,
-                                                NULL))
+STLWRT_DEFINE_VTYPE (GtkScaleButton, gtk_scale_button, GTK_TYPE_BUTTON, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE, NULL))
 
 static guint signals[LAST_SIGNAL] = { 0, };
 
@@ -1370,7 +1369,7 @@ static gboolean	gtk_scale_button_scale_press   (GtkWidget      *widget,
 static gboolean gtk_scale_button_scale_release (GtkWidget      *widget,
                                                 GdkEventButton *event);
 
-STLWRT_DEFINE_TYPE (GtkScaleButtonScale, _gtk_scale_button_scale, GTK_TYPE_SCALE)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkScaleButtonScale, _gtk_scale_button_scale, GTK_TYPE_SCALE)
 
 static void
 _gtk_scale_button_scale_class_init (GtkScaleButtonScaleClass *klass)

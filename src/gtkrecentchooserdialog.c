@@ -54,11 +54,10 @@ static void gtk_recent_chooser_dialog_get_property (GObject      *object,
 static void gtk_recent_chooser_dialog_map       (GtkWidget *widget);
 static void gtk_recent_chooser_dialog_unmap     (GtkWidget *widget);
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkRecentChooserDialog,
-			 gtk_recent_chooser_dialog,
-			 GTK_TYPE_DIALOG,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_RECENT_CHOOSER,
-		       				_gtk_recent_chooser_delegate_iface_init))
+STLWRT_DEFINE_FTYPE_VPARENT (GtkRecentChooserDialog, gtk_recent_chooser_dialog, GTK_TYPE_DIALOG,
+                             G_TYPE_FLAG_NONE,
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_RECENT_CHOOSER,
+                                                    _gtk_recent_chooser_delegate_iface_init))
 
 static void
 gtk_recent_chooser_dialog_class_init (GtkRecentChooserDialogClass *klass)

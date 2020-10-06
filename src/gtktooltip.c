@@ -102,7 +102,7 @@ static void       gtk_tooltip_set_last_window      (GtkTooltip      *tooltip,
 static void       update_shape                     (GtkTooltip      *tooltip);
 
 
-STLWRT_DEFINE_TYPE (GtkTooltip, gtk_tooltip, G_TYPE_OBJECT);
+STLWRT_DEFINE_FTYPE (GtkTooltip, gtk_tooltip, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_tooltip_class_init (GtkTooltipClass *klass)

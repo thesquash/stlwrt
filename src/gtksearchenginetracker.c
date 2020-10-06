@@ -59,7 +59,8 @@
  * GtkSearchEngineTracker object
  */
 
-STLWRT_DEFINE_TYPE (GtkSearchEngineTracker, _gtk_search_engine_tracker, GTK_TYPE_SEARCH_ENGINE);
+STLWRT_DEFINE_FTYPE (GtkSearchEngineTracker, _gtk_search_engine_tracker, GTK_TYPE_SEARCH_ENGINE,
+                     G_TYPE_FLAG_NONE, ;)
 
 static void
 finalize (GObject *object)

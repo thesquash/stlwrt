@@ -39,7 +39,8 @@ static void gtk_radio_tool_button_set_property (GObject         *object,
 						const GValue    *value,
 						GParamSpec      *pspec);
 
-G_DEFINE_TYPE (GtkRadioToolButton, gtk_radio_tool_button, GTK_TYPE_TOGGLE_TOOL_BUTTON)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkRadioToolButton, gtk_radio_tool_button, GTK_TYPE_TOGGLE_TOOL_BUTTON,
+                             G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_radio_tool_button_class_init (GtkRadioToolButtonClass *klass)

@@ -52,7 +52,7 @@ struct _GtkPageSetupClass
   GObjectClass parent_class;
 };
 
-STLWRT_DEFINE_TYPE (GtkPageSetup, gtk_page_setup, G_TYPE_OBJECT)
+STLWRT_DEFINE_FTYPE (GtkPageSetup, gtk_page_setup, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_page_setup_finalize (GObject *object)

@@ -53,7 +53,7 @@ enum {
   PROP_ACTIVE
 };
 
-G_DEFINE_TYPE (GtkToggleAction, gtk_toggle_action, GTK_TYPE_ACTION)
+STLWRT_DEFINE_FTYPE (GtkToggleAction, gtk_toggle_action, GTK_TYPE_ACTION, G_TYPE_FLAG_NONE, ;)
 
 static void gtk_toggle_action_activate     (GtkAction       *action);
 static void set_property                   (GObject         *object,

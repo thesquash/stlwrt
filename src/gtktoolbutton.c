@@ -95,34 +95,9 @@ static GtkActivatableIface *parent_activatable_iface;
 static guint                toolbutton_signals[LAST_SIGNAL] = { 0 };
 
 
-
-GType
-gtk_tool_button_get_type (void)
-{
-  static GType type = 0;
-  
-  if (!type)
-    {
-      const GInterfaceInfo activatable_info =
-      {
-        (GInterfaceInitFunc) gtk_tool_button_activatable_interface_init,
-        (GInterfaceFinalizeFunc) NULL,
-        NULL
-      };
-
-      type = g_type_register_static_simple (GTK_TYPE_TOOL_ITEM,
-					    I_("GtkToolButton"),
-					    sizeof (GtkToolButtonClass),
-					    (GClassInitFunc) gtk_tool_button_class_init,
-					    sizeof (GtkToolButton),
-					    (GInstanceInitFunc) gtk_tool_button_init,
-					    0);
-
-      g_type_add_interface_static (type, GTK_TYPE_ACTIVATABLE,
-                                   &activatable_info);
-    }
-  return type;
-}
+STLWRT_DEFINE_FTYPE_VPARENT (GtkToolButton, gtk_tool_button, GTK_TYPE_TOOL_ITEM, G_TYPE_FLAG_NONE,
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_ACTIVATABLE,
+                                                    gtk_tool_button_activatable_interface_init))
 
 static void
 gtk_tool_button_class_init (GtkToolButtonClass *klass)

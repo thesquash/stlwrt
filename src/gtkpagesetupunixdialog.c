@@ -72,7 +72,8 @@ enum {
   PAGE_SETUP_LIST_N_COLS
 };
 
-G_DEFINE_TYPE (GtkPageSetupUnixDialog, gtk_page_setup_unix_dialog, GTK_TYPE_DIALOG)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkPageSetupUnixDialog, gtk_page_setup_unix_dialog, GTK_TYPE_DIALOG,
+                             G_TYPE_FLAG_NONE, ;)
 
 static void gtk_page_setup_unix_dialog_finalize  (GObject                *object);
 static void populate_dialog                      (GtkPageSetupUnixDialog *dialog);

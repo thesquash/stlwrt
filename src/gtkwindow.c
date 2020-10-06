@@ -346,9 +346,9 @@ static void gtk_window_buildable_custom_finished (GtkBuildable  *buildable,
 						      gpointer       user_data);
 
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkWindow, gtk_window, GTK_TYPE_BIN,
-                         G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-						gtk_window_buildable_interface_init))
+STLWRT_DEFINE_VTYPE (GtkWindow, gtk_window, GTK_TYPE_BIN, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
+                                            gtk_window_buildable_interface_init))
 
 static void
 add_tab_bindings (GtkBindingSet    *binding_set,
@@ -7537,32 +7537,12 @@ gtk_window_group_class_init (GtkWindowGroupClass *klass)
 {
 }
 
-GType
-gtk_window_group_get_type (void)
+static void
+gtk_window_group_init (GtkWindowGroup *window_group)
 {
-  static GType window_group_type = 0;
-
-  if (!window_group_type)
-    {
-      const GTypeInfo window_group_info =
-      {
-	sizeof (GtkWindowGroupClass),
-	NULL,		/* base_init */
-	NULL,		/* base_finalize */
-	(GClassInitFunc) gtk_window_group_class_init,
-	NULL,		/* class_finalize */
-	NULL,		/* class_data */
-	sizeof (GtkWindowGroup),
-	0,		/* n_preallocs */
-	(GInstanceInitFunc) NULL,
-      };
-
-      window_group_type = g_type_register_static (G_TYPE_OBJECT, I_("GtkWindowGroup"), 
-						  &window_group_info, 0);
-    }
-
-  return window_group_type;
 }
+
+STLWRT_DEFINE_FTYPE (GtkWindowGroup, gtk_window_group, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 /**
  * __gtk_window_group_new:

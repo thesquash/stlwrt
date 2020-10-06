@@ -123,9 +123,8 @@ static void     gtk_scale_buildable_custom_finished  (GtkBuildable  *buildable,
                                                       gpointer       user_data);
 
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkScale, gtk_scale, GTK_TYPE_RANGE,
-                         G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-                                                gtk_scale_buildable_interface_init))
+STLWRT_DEFINE_VTYPE (GtkScale, gtk_scale, GTK_TYPE_RANGE, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE, gtk_scale_buildable_interface_init))
 
 
 static gint

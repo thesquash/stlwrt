@@ -51,11 +51,8 @@ enum
 
 static void gtk_recent_chooser_iface_init (GtkRecentChooserIface *iface);
 
-G_DEFINE_TYPE_WITH_CODE (GtkRecentAction,
-                         gtk_recent_action,
-                         GTK_TYPE_ACTION,
-                         G_IMPLEMENT_INTERFACE (GTK_TYPE_RECENT_CHOOSER,
-                                                gtk_recent_chooser_iface_init));
+STLWRT_DEFINE_FTYPE (GtkRecentAction, gtk_recent_action, GTK_TYPE_ACTION, G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_RECENT_CHOOSER, gtk_recent_chooser_iface_init))
 
 static gboolean
 gtk_recent_action_set_current_uri (GtkRecentChooser  *chooser,

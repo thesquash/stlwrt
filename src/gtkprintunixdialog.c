@@ -162,9 +162,10 @@ enum {
 };
 
 
-G_DEFINE_TYPE_WITH_CODE (GtkPrintUnixDialog, gtk_print_unix_dialog, GTK_TYPE_DIALOG,
-                         G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-                                                gtk_print_unix_dialog_buildable_init))
+STLWRT_DEFINE_FTYPE_VPARENT (GtkPrintUnixDialog, gtk_print_unix_dialog, GTK_TYPE_DIALOG,
+                             G_TYPE_FLAG_NONE,
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
+                                                    gtk_print_unix_dialog_buildable_init))
 
 static GtkBuildableIface *parent_buildable_iface;
 

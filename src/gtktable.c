@@ -95,7 +95,7 @@ static void gtk_table_size_allocate_pass1 (GtkTable *table);
 static void gtk_table_size_allocate_pass2 (GtkTable *table);
 
 
-STLWRT_DEFINE_TYPE (GtkTable, gtk_table, GTK_TYPE_CONTAINER)
+STLWRT_DEFINE_VTYPE (GtkTable, gtk_table, GTK_TYPE_CONTAINER, G_TYPE_FLAG_NONE, ;)
 
 static void
 gtk_table_class_init (GtkTableClass *class)

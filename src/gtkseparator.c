@@ -62,8 +62,8 @@ static gboolean   gtk_separator_expose       (GtkWidget      *widget,
                                               GdkEventExpose *event);
 
 
-G_DEFINE_TYPE_WITH_CODE (GtkSeparator, gtk_separator, GTK_TYPE_WIDGET,
-                         G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE, NULL))
+STLWRT_DEFINE_FTYPE_VPARENT (GtkSeparator, gtk_separator, GTK_TYPE_WIDGET, G_TYPE_FLAG_NONE,
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE, NULL))
 
 
 static void

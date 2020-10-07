@@ -364,7 +364,7 @@ new_region_tag (void)
   return ++tag;
 }
 
-STLWRT_DEFINE_VTYPE (GdkWindow, gdk_window, GDK_TYPE_DRAWABLE, 0, ;)
+STLWRT_DEFINE_FTYPE (GdkWindow, gdk_window, GDK_TYPE_DRAWABLE, 0, ;)
 
 STLWRT_DEFINE_INTERFACE (GdkPaintable, _gdk_paintable, G_TYPE_OBJECT, NULL, ;)
 

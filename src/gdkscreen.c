@@ -59,7 +59,7 @@ enum
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-STLWRT_DEFINE_VTYPE (GdkScreen, gdk_screen, G_TYPE_OBJECT)
+STLWRT_DEFINE_FTYPE (GdkScreen, gdk_screen, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 static void
 gdk_screen_class_init (GdkScreenClass *klass)

@@ -157,9 +157,7 @@ static void gdk_pixmap_finalize   (GObject              *object);
 
 static gpointer parent_class = NULL;
 
-STLWRT_DEFINE_VTYPE (GdkPixmap, gdk_pixmap, GDK_TYPE_DRAWABLE,
-                     G_TYPE_FLAG_NONE,
-                     ;)
+STLWRT_DEFINE_FTYPE (GdkPixmap, gdk_pixmap, GDK_TYPE_DRAWABLE, G_TYPE_FLAG_NONE, ;)
 
 static void
 gdk_pixmap_init (GdkPixmapObject *pixmap)

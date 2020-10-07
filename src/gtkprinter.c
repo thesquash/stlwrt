@@ -1237,7 +1237,7 @@ gtk_enumerate_printers (GtkPrinterFunc func,
 }
 
 GType
-gtk_print_capabilities_get_type (void)
+__gtk_print_capabilities_get_type (void)
 {
   static GType etype = 0;
 

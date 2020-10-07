@@ -127,32 +127,12 @@ gtk_theme_engine_class_init (GtkThemeEngineClass *class)
   module_class->unload = gtk_theme_engine_unload;
 }
 
-GType
-gtk_theme_engine_get_type (void)
+static void
+gtk_theme_engine_init (GtkThemeEngine *theme_engine)
 {
-  static GType theme_engine_type = 0;
-
-  if (!theme_engine_type)
-    {
-      const GTypeInfo theme_engine_info = {
-        sizeof (GtkThemeEngineClass),
-        NULL,           /* base_init */
-        NULL,           /* base_finalize */
-        (GClassInitFunc) gtk_theme_engine_class_init,
-        NULL,           /* class_finalize */
-        NULL,           /* class_data */
-        sizeof (GtkThemeEngine),
-        0,              /* n_preallocs */
-        NULL,           /* instance_init */
-      };
-
-      theme_engine_type =
-	g_type_register_static (G_TYPE_TYPE_MODULE, I_("GtkThemeEngine"),
-				&theme_engine_info, 0);
-    }
-  
-  return theme_engine_type;
 }
+
+STLWRT_DEFINE_FTYPE (GtkThemeEngine, gtk_theme_engine, G_TYPE_TYPE_MODULE, G_TYPE_FLAG_NONE, ;)
 
 GtkThemeEngine*
 gtk_theme_engine_get (const gchar *name)

@@ -30,7 +30,6 @@ G_BEGIN_DECLS
 /* Pixmap implementation for X11
  */
 
-typedef struct _GdkPixmapImplX11 GdkPixmapImplX11;
 typedef struct _GdkPixmapImplX11Class GdkPixmapImplX11Class;
 
 #define GDK_TYPE_PIXMAP_IMPL_X11              (gdk_pixmap_impl_x11_get_type ())
@@ -40,23 +39,18 @@ typedef struct _GdkPixmapImplX11Class GdkPixmapImplX11Class;
 #define GDK_IS_PIXMAP_IMPL_X11_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GDK_TYPE_PIXMAP_IMPL_X11))
 #define GDK_PIXMAP_IMPL_X11_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GDK_TYPE_PIXMAP_IMPL_X11, GdkPixmapImplX11Class))
 
-struct _GdkPixmapImplX11
-{
-  GdkDrawableImplX11 parent_instance;
-
+STLWRT_DECLARE_FTYPE (GdkPixmapImplX11, gdk_pixmap_impl_x11, GdkDrawableImplX11,
   gint width;
   gint height;
 
   guint is_foreign : 1;
-};
+)
  
 struct _GdkPixmapImplX11Class 
 {
   GdkDrawableImplX11Class parent_class;
 
 };
-
-GType gdk_pixmap_impl_x11_get_type (void);
 
 G_END_DECLS
 

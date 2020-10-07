@@ -2581,7 +2581,7 @@ icon_data_free (GtkIconData *icon_data)
  * GtkIconInfo
  */
 
-STLWRT_DEFINE_BOXED_TYPE (GtkIconInfo, gtk_icon_info, __gtk_icon_info_copy, __gtk_icon_info_free)
+STLWRT_DEFINE_BOXED_TYPE (GtkIconInfo, gtk_icon_info, __gtk_icon_info_copy, __gtk_icon_info_free, ;)
 
 static GtkIconInfo *
 icon_info_new (void)

@@ -55,7 +55,7 @@ static const gchar gtk_use_action_appearance_key[]        = "gtk-use-action-appe
 static guint chooser_signals[LAST_SIGNAL] = { 0, };
 
 STLWRT_DEFINE_INTERFACE (GtkRecentChooser, gtk_recent_chooser, G_TYPE_OBJECT,
-                         gtk_recent_chooser_class_init)
+                         gtk_recent_chooser_class_init, ;)
 
 static void
 gtk_recent_chooser_class_init (gpointer g_iface)

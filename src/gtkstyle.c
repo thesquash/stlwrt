@@ -6855,7 +6855,7 @@ __gtk_border_free (GtkBorder *border)
   g_slice_free (GtkBorder, border);
 }
 
-STLWRT_DEFINE_BOXED_TYPE (GtkBorder, gtk_border, __gtk_border_copy, __gtk_border_free)
+STLWRT_DEFINE_BOXED_TYPE (GtkBorder, gtk_border, __gtk_border_copy, __gtk_border_free, ;)
 
 static GdkFont *
 __gtk_style_get_font_internal (GtkStyle *style)

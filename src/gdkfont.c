@@ -26,7 +26,7 @@
 #include <gdkfont.h>
 #include <gdkinternals.h>
 
-STLWRT_DEFINE_BOXED_TYPE (GdkFont, gdk_font, __gdk_font_ref, __gdk_font_unref)
+STLWRT_DEFINE_BOXED_TYPE (GdkFont, gdk_font, __gdk_font_ref, __gdk_font_unref, ;)
 
 /**
  * __gdk_font_ref:

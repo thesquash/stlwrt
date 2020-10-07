@@ -532,6 +532,7 @@ G_BEGIN_DECLS
 #define STLWRT_DECLARE_INTERFACE(TN, t_n, Properties) \
   STLWRT_DECLARE_OPAQUE_TYPE(TN, t_n) \
   typedef struct _##TN##Iface TN##Iface; \
+  typedef struct _##TN##Iface TN##Interface; \
  \
   struct _##TN##Iface \
   { \

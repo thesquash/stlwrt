@@ -1341,7 +1341,7 @@ __gdk_display_set_double_click_distance (GdkDisplay *display,
   display->double_click_distance = distance;
 }
 
-STLWRT_DEFINE_BOXED_TYPE (GdkEvent, gdk_event, __gdk_event_copy, __gdk_event_free)
+STLWRT_DEFINE_BOXED_TYPE (GdkEvent, gdk_event, __gdk_event_copy, __gdk_event_free, ;)
 
 /**
  * __gdk_setting_get:

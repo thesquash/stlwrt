@@ -48,7 +48,7 @@ struct _GtkPaperSize
 };
 
 STLWRT_DEFINE_BOXED_TYPE (GtkPaperSize, gtk_paper_size, __gtk_paper_size_copy,
-                          __gtk_paper_size_free)
+                          __gtk_paper_size_free, ;)
 
 static const PaperInfo *
 lookup_paper_info (const gchar *name)

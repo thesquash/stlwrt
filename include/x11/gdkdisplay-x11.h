@@ -35,7 +35,6 @@
 
 G_BEGIN_DECLS
 
-typedef struct _GdkDisplayX11 GdkDisplayX11;
 typedef struct _GdkDisplayX11Class GdkDisplayX11Class;
 
 #define GDK_TYPE_DISPLAY_X11              (_gdk_display_x11_get_type())
@@ -52,9 +51,7 @@ typedef enum
   GDK_YES
 } GdkTristate;
 
-struct _GdkDisplayX11
-{
-  GdkDisplay parent_instance;
+STLWRT_DECLARE_FTYPE (GdkDisplayX11, _gdk_display_x11, GdkDisplay,
   Display *xdisplay;
   GdkScreen *default_screen;
   GdkScreen **screens;
@@ -155,14 +152,13 @@ struct _GdkDisplayX11
 
   /* The offscreen window that has the pointer in it (if any) */
   GdkWindow *active_offscreen_window;
-};
+)
 
 struct _GdkDisplayX11Class
 {
   GdkDisplayClass parent_class;
 };
 
-GType      _gdk_display_x11_get_type            (void);
 GdkScreen *_gdk_x11_display_screen_for_xrootwin (GdkDisplay *display,
 						 Window      xrootwin);
 

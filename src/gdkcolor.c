@@ -300,7 +300,7 @@ __gdk_color_equal (const GdkColor *colora,
 	  (colora->blue == colorb->blue));
 }
 
-STLWRT_DEFINE_BOXED_TYPE (GdkColor, gdk_color, __gdk_color_copy, __gdk_color_free)
+STLWRT_DEFINE_BOXED_TYPE (GdkColor, gdk_color, __gdk_color_copy, __gdk_color_free, ;)
 
 /**
  * __gdk_color_parse:

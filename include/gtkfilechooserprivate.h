@@ -54,6 +54,7 @@ G_BEGIN_DECLS
 #define GTK_FILE_CHOOSER_GET_IFACE(inst)  (G_TYPE_INSTANCE_GET_INTERFACE ((inst), GTK_TYPE_FILE_CHOOSER, GtkFileChooserIface))
 
 typedef struct _GtkFileChooserIface GtkFileChooserIface;
+typedef struct _GtkFileChooserIface GtkFileChooserInterface;
 
 struct _GtkFileChooserIface
 {

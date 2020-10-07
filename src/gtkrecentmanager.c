@@ -1614,7 +1614,7 @@ gtk_recent_manager_clamp_to_size (GtkRecentManager *manager,
  *****************/
 
 STLWRT_DEFINE_BOXED_TYPE (GtkRecentInfo, gtk_recent_info, __gtk_recent_info_ref,
-                          __gtk_recent_info_unref)
+                          __gtk_recent_info_unref, ;)
 
 static GtkRecentInfo *
 gtk_recent_info_new (const gchar *uri)

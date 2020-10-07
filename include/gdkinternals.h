@@ -526,6 +526,7 @@ void _gdk_windowing_window_set_composited (GdkWindow *window,
 
 typedef struct _GdkPaintable        GdkPaintable;
 typedef struct _GdkPaintableIface   GdkPaintableIface;
+typedef struct _GdkPaintableIface   GdkPaintableInterface;
 
 struct _GdkPaintableIface
 {

@@ -34,7 +34,7 @@ G_BEGIN_DECLS
 #define GTK_IS_FILE_CHOOSER_EMBED(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FILE_CHOOSER_EMBED))
 #define GTK_FILE_CHOOSER_EMBED_GET_IFACE(obj)   (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GTK_TYPE_FILE_CHOOSER_EMBED, GtkFileChooserEmbedIface))
 
-STLWRT_DECLARE_INTERFACE(GtkFileChooserEmbed, _gtk_file_chooser_embed)
+STLWRT_DECLARE_INTERFACE(GtkFileChooserEmbed, _gtk_file_chooser_embed,
   /* Methods
    */
   void (*get_default_size)        (GtkFileChooserEmbed *chooser_embed,
@@ -48,7 +48,7 @@ STLWRT_DECLARE_INTERFACE(GtkFileChooserEmbed, _gtk_file_chooser_embed)
    */
   void (*default_size_changed)    (GtkFileChooserEmbed *chooser_embed);
   void (*response_requested)      (GtkFileChooserEmbed *chooser_embed);
-};
+)
 
 
 void  _gtk_file_chooser_embed_get_default_size    (GtkFileChooserEmbed *chooser_embed,

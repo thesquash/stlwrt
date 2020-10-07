@@ -33,7 +33,6 @@
 
 G_BEGIN_DECLS
   
-typedef struct _GdkScreenX11 GdkScreenX11;
 typedef struct _GdkScreenX11Class GdkScreenX11Class;
 
 #define GDK_TYPE_SCREEN_X11              (_gdk_screen_x11_get_type ())
@@ -45,10 +44,7 @@ typedef struct _GdkScreenX11Class GdkScreenX11Class;
 
 typedef struct _GdkX11Monitor GdkX11Monitor;
 
-struct _GdkScreenX11
-{
-  GdkScreen parent_instance;
-  
+STLWRT_DECLARE_FTYPE (GdkScreenX11, _gdk_screen_x11, GdkScreen,
   GdkDisplay *display;
   Display *xdisplay;
   Screen *xscreen;
@@ -110,7 +106,7 @@ struct _GdkScreenX11
 
   GdkAtom cm_selection_atom;
   gboolean is_composited;
-};
+)
   
 struct _GdkScreenX11Class
 {
@@ -119,7 +115,6 @@ struct _GdkScreenX11Class
   void (* window_manager_changed) (GdkScreenX11 *screen_x11);
 };
 
-GType       _gdk_screen_x11_get_type (void);
 GdkScreen * _gdk_x11_screen_new      (GdkDisplay *display,
 				      gint	  screen_number);
 

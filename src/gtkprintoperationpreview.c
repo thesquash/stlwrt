@@ -31,7 +31,7 @@
 static void gtk_print_operation_preview_base_init (gpointer g_iface);
 
 STLWRT_DEFINE_INTERFACE (GtkPrintOperationPreview, gtk_print_operation_preview, G_TYPE_OBJECT,
-                         gtk_print_operation_preview_base_init)
+                         gtk_print_operation_preview_base_init, ;)
 
 static void
 gtk_print_operation_preview_base_init (gpointer g_iface)

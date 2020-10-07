@@ -24,7 +24,7 @@
 #include <gdkdisplay.h>
 #include <gdkinternals.h>
 
-STLWRT_DEFINE_BOXED_TYPE (GdkCursor, gdk_cursor, __gdk_cursor_ref, __gdk_cursor_unref)
+STLWRT_DEFINE_BOXED_TYPE (GdkCursor, gdk_cursor, __gdk_cursor_ref, __gdk_cursor_unref, ;)
 
 /**
  * __gdk_cursor_ref:

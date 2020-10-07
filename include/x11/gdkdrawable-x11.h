@@ -40,7 +40,6 @@ typedef enum
   GDK_X11_FORMAT_ARGB
 } GdkX11FormatType;
 
-typedef struct _GdkDrawableImplX11 GdkDrawableImplX11;
 typedef struct _GdkDrawableImplX11Class GdkDrawableImplX11Class;
 
 #define GDK_TYPE_DRAWABLE_IMPL_X11              (_gdk_drawable_impl_x11_get_type ())
@@ -50,10 +49,7 @@ typedef struct _GdkDrawableImplX11Class GdkDrawableImplX11Class;
 #define GDK_IS_DRAWABLE_IMPL_X11_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GDK_TYPE_DRAWABLE_IMPL_X11))
 #define GDK_DRAWABLE_IMPL_X11_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GDK_TYPE_DRAWABLE_IMPL_X11, GdkDrawableImplX11Class))
 
-struct _GdkDrawableImplX11
-{
-  GdkDrawable parent_instance;
-
+STLWRT_DECLARE_FTYPE(GdkDrawableImplX11, _gdk_drawable_impl_x11, GdkDrawable,
   GdkDrawable *wrapper;
   
   GdkColormap *colormap;
@@ -63,15 +59,13 @@ struct _GdkDrawableImplX11
 
   Picture picture;
   cairo_surface_t *cairo_surface;
-};
+)
  
 struct _GdkDrawableImplX11Class 
 {
   GdkDrawableClass parent_class;
 
 };
-
-GType _gdk_drawable_impl_x11_get_type (void);
 
 void  _gdk_x11_convert_to_format      (guchar           *src_buf,
                                        gint              src_rowstride,

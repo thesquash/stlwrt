@@ -33,13 +33,7 @@ G_BEGIN_DECLS
 #define GDK_IS_WINDOW_IMPL(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GDK_TYPE_WINDOW_IMPL))
 #define GDK_WINDOW_IMPL_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GDK_TYPE_WINDOW_IMPL, GdkWindowImplIface))
 
-typedef struct _GdkWindowImpl       GdkWindowImpl;      /* dummy */
-typedef struct _GdkWindowImplIface  GdkWindowImplIface;
-
-struct _GdkWindowImplIface
-{
-  GTypeInterface g_iface;
-
+STLWRT_DECLARE_INTERFACE (GdkWindowImpl, gdk_window_impl,
   void         (* show)                 (GdkWindow       *window,
 					 gboolean         already_mapped);
   void         (* hide)                 (GdkWindow       *window);
@@ -144,13 +138,7 @@ struct _GdkWindowImplIface
   void         (* input_window_crossing)(GdkWindow       *window,
 					 gboolean         enter);
   gboolean     supports_native_bg;
-};
-
-/* Interface Functions */
-GType SF(_T2_gdk_window_impl_get_type) (void) G_GNUC_CONST;
-GType SF(_3T_gdk_window_impl_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType SF(gdk_window_impl_get_type) (void) G_GNUC_CONST;
+)
 
 /* private definitions from gdkwindow.h */
 

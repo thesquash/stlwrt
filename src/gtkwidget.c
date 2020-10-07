@@ -10153,7 +10153,7 @@ __gtk_requisition_free (GtkRequisition *requisition)
 }
 
 STLWRT_DEFINE_BOXED_TYPE (GtkRequisition, gtk_requisition, __gtk_requisition_copy,
-                          __gtk_requisition_free)
+                          __gtk_requisition_free, ;)
 
 /**
  * __gtk_widget_get_accessible:

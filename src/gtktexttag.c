@@ -2000,7 +2000,7 @@ __gtk_text_attributes_copy (GtkTextAttributes *src)
 }
 
 STLWRT_DEFINE_BOXED_TYPE (GtkTextAttributes, gtk_text_attributes, __gtk_text_attributes_ref,
-                          __gtk_text_attributes_unref)
+                          __gtk_text_attributes_unref, ;)
 
 /**
  * __gtk_text_attributes_copy_values:

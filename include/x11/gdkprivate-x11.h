@@ -42,20 +42,16 @@
 
 typedef struct _GdkCursorPrivate       GdkCursorPrivate;
 typedef struct _GdkVisualPrivate       GdkVisualPrivate;
-typedef struct _GdkGCX11      GdkGCX11;
 typedef struct _GdkGCX11Class GdkGCX11Class;
 
-struct _GdkGCX11
-{
-  GdkGC parent_instance;
-  
+STLWRT_DECLARE_FTYPE (GdkGCX11, _gdk_gc_x11, GdkGC,
   GC xgc;
   GdkScreen *screen;
   guint16 dirty_mask;
   guint have_clip_region : 1;
   guint have_clip_mask : 1;
   guint depth : 8;
-};
+)
 
 struct _GdkGCX11Class
 {
@@ -90,8 +86,6 @@ gint _gdk_send_xevent      (GdkDisplay *display,
 			    gboolean    propagate,
 			    glong       event_mask,
 			    XEvent     *event_send);
-
-GType _gdk_gc_x11_get_type (void);
 
 gboolean _gdk_x11_have_render           (GdkDisplay *display);
 

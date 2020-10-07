@@ -35,7 +35,6 @@
 G_BEGIN_DECLS
 
 typedef struct _GdkToplevelX11 GdkToplevelX11;
-typedef struct _GdkWindowImplX11 GdkWindowImplX11;
 typedef struct _GdkWindowImplX11Class GdkWindowImplX11Class;
 typedef struct _GdkXPositionInfo GdkXPositionInfo;
 
@@ -49,10 +48,7 @@ typedef struct _GdkXPositionInfo GdkXPositionInfo;
 #define GDK_IS_WINDOW_IMPL_X11_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GDK_TYPE_WINDOW_IMPL_X11))
 #define GDK_WINDOW_IMPL_X11_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GDK_TYPE_WINDOW_IMPL_X11, GdkWindowImplX11Class))
 
-struct _GdkWindowImplX11
-{
-  GdkDrawableImplX11 parent_instance;
-
+STLWRT_DECLARE_FTYPE (GdkWindowImplX11, gdk_window_impl_x11, GdkDrawableImplX11,
   GdkToplevelX11 *toplevel;	/* Toplevel-specific information */
   GdkCursor *cursor;
   gint8 toplevel_window_type;
@@ -64,7 +60,7 @@ struct _GdkWindowImplX11
 #if defined (HAVE_XCOMPOSITE) && defined(HAVE_XDAMAGE) && defined (HAVE_XFIXES)
   Damage damage;
 #endif
-};
+)
  
 struct _GdkWindowImplX11Class 
 {
@@ -133,8 +129,6 @@ struct _GdkToplevelX11
 				     */
 #endif
 };
-
-GType gdk_window_impl_x11_get_type (void);
 
 void            gdk_x11_window_set_user_time        (GdkWindow *window,
 						     guint32    timestamp);

@@ -656,7 +656,7 @@ __gtk_tree_path_copy (const GtkTreePath *path)
   return retval;
 }
 
-STLWRT_DEFINE_BOXED_TYPE (GtkTreePath, gtk_tree_path, __gtk_tree_path_copy, __gtk_tree_path_free)
+STLWRT_DEFINE_BOXED_TYPE (GtkTreePath, gtk_tree_path, __gtk_tree_path_copy, __gtk_tree_path_free, ;)
 
 /**
  * __gtk_tree_path_compare:
@@ -874,7 +874,7 @@ __gtk_tree_iter_free (GtkTreeIter *iter)
   g_slice_free (GtkTreeIter, iter);
 }
 
-STLWRT_DEFINE_BOXED_TYPE (GtkTreeIter, gtk_tree_iter, __gtk_tree_iter_copy, __gtk_tree_iter_free)
+STLWRT_DEFINE_BOXED_TYPE (GtkTreeIter, gtk_tree_iter, __gtk_tree_iter_copy, __gtk_tree_iter_free, ;)
 
 /**
  * __gtk_tree_model_get_flags:
@@ -1616,7 +1616,7 @@ static void gtk_tree_row_reference_unref_path (GtkTreePath  *path,
 					       gint          depth);
 
 STLWRT_DEFINE_BOXED_TYPE (GtkTreeRowReference, gtk_tree_row_reference,
-                          __gtk_tree_row_reference_copy, __gtk_tree_row_reference_free)
+                          __gtk_tree_row_reference_copy, __gtk_tree_row_reference_free, ;)
 
 struct _GtkTreeRowReference
 {

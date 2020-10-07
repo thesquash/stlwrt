@@ -76,7 +76,7 @@ typedef enum
 GQuark  SF(gtk_recent_chooser_error_quark) (void);
 
 
-STLWRT_DECLARE_INTERFACE(GtkRecentChooser, gtk_recent_chooser)
+STLWRT_DECLARE_INTERFACE(GtkRecentChooser, gtk_recent_chooser,
   /*
    * Methods
    */

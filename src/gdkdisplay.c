@@ -560,12 +560,12 @@ gdk_window_real_window_get_pointer (GdkDisplay       *display,
                                     gint             *y,
                                     GdkModifierType  *mask)
 {
-  GdkWindowObject *private;
+  GdkWindow *private;
   gint tmpx, tmpy;
   GdkModifierType tmp_mask;
   gboolean normal_child;
 
-  private = (GdkWindowObject *) window;
+  private = (GdkWindow *) window;
 
   normal_child = GDK_WINDOW_IMPL_GET_IFACE (private->impl)->get_pointer (window,
 									 &tmpx, &tmpy,
@@ -701,7 +701,7 @@ singlehead_default_window_get_pointer (GdkWindow       *window,
 				       gint            *y,
 				       GdkModifierType *mask)
 {
-  return gdk_window_real_window_get_pointer (__gdk_drawable_get_display (window),
+  return gdk_window_real_window_get_pointer (__gdk_drawable_get_display ((GdkDrawable *)window),
                                              window, x, y, mask);
 }
 

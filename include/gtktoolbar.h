@@ -75,7 +75,7 @@ struct _GtkToolbarPrivate
   guint         animation : 1;
 };
 
-STLWRT_DECLARE_VTYPE_VPARENT(GtkToolbar, gtk_toolbar, gtk_container,
+STLWRT_DECLARE_VTYPE_VPARENT(GtkToolbar, gtk_toolbar, GtkContainer,
   /*< public >*/
   gint              (num_children);
   GList           * (children);

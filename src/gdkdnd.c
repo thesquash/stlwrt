@@ -54,7 +54,7 @@ __gdk_drag_find_window (GdkDragContext  *context,
 		      GdkDragProtocol *protocol)
 {
   __gdk_drag_find_window_for_screen (context, drag_window,
-				   __gdk_drawable_get_screen (context->source_window),
+				   __gdk_drawable_get_screen ((GdkDrawable *)context->source_window),
 				   x_root, y_root, dest_window, protocol);
 }
 

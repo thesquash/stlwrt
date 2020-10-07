@@ -124,8 +124,8 @@ GType SF(gdk_visual_type_get_type) (void) G_GNUC_CONST;
 #define GDK_TYPE_VISUAL_TYPE (gdk_visual_type_get_type ())
 
 /* enumerations from "include/gdkwindow.h" */
-GType SF(gdk_window_class_get_type) (void) G_GNUC_CONST;
-#define GDK_TYPE_WINDOW_CLASS (gdk_window_class_get_type ())
+GType SF(gdk_window_window_class_get_type) (void) G_GNUC_CONST;
+#define GDK_TYPE_WINDOW_WINDOW_CLASS (gdk_window_window_class_get_type ())
 GType SF(gdk_window_type_get_type) (void) G_GNUC_CONST;
 #define GDK_TYPE_WINDOW_TYPE (gdk_window_type_get_type ())
 GType SF(gdk_window_attributes_type_get_type) (void) G_GNUC_CONST;

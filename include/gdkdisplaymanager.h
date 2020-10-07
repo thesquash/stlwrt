@@ -47,6 +47,8 @@ struct _GdkDisplayManagerClass
 			  GdkDisplay *display);
 };
 
+STLWRT_DECLARE_GET_FTYPE_FUNCTIONS (gdk_display_manager)
+
 GdkDisplayManager *SF(gdk_display_manager_get)                 (void);
 GdkDisplay *       SF(gdk_display_manager_get_default_display) (GdkDisplayManager *display_manager);
 void               SF(gdk_display_manager_set_default_display) (GdkDisplayManager *display_manager,

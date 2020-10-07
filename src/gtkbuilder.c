@@ -59,7 +59,8 @@ enum {
 };
 
 
-STLWRT_DEFINE_FTYPE (GtkBuilder, gtk_builder, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_FTYPE (GtkBuilder, gtk_builder, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkBuilder))
 
 static void
 gtk_builder_class_init (GtkBuilderClass *klass)
@@ -91,15 +92,12 @@ gtk_builder_class_init (GtkBuilderClass *klass)
                                                         P_("The translation domain used by gettext"),
                                                         NULL,
                                                         GTK_PARAM_READWRITE));
-
-  g_type_class_add_private (gobject_class, sizeof (GtkBuilderPrivate));
 }
 
 static void
 gtk_builder_init (GtkBuilder *builder)
 {
-  builder->priv = G_TYPE_INSTANCE_GET_PRIVATE (builder, GTK_TYPE_BUILDER,
-                                               GtkBuilderPrivate);
+  builder->priv = gtk_builder_get_instance_private (builder);
   builder->priv->domain = NULL;
   builder->priv->objects = g_hash_table_new_full (g_str_hash, g_str_equal,
                                                   g_free, g_object_unref);

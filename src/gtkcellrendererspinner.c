@@ -65,10 +65,8 @@ enum {
 };
 
 
-#define GTK_CELL_RENDERER_SPINNER_GET_PRIVATE(object)        \
-                (G_TYPE_INSTANCE_GET_PRIVATE ((object),        \
-                        GTK_TYPE_CELL_RENDERER_SPINNER, \
-                        GtkCellRendererSpinnerPrivate))
+#define GTK_CELL_RENDERER_SPINNER_GET_PRIVATE(object)  \
+        gtk_cell_renderer_spinner_get_instance_private (object)
 
 static void gtk_cell_renderer_spinner_get_property (GObject         *object,
                                                     guint            param_id,
@@ -94,7 +92,7 @@ static void gtk_cell_renderer_spinner_render       (GtkCellRenderer *cell,
                                                     guint            flags);
 
 STLWRT_DEFINE_FTYPE_VPARENT (GtkCellRendererSpinner, gtk_cell_renderer_spinner, GTK_TYPE_CELL_RENDERER,
-                             G_TYPE_FLAG_NONE, ;)
+                             G_TYPE_FLAG_NONE, G_ADD_PRIVATE (GtkCellRendererSpinner))
 
 static void
 gtk_cell_renderer_spinner_class_init (GtkCellRendererSpinnerClass *klass)
@@ -155,18 +153,15 @@ gtk_cell_renderer_spinner_class_init (GtkCellRendererSpinnerClass *klass)
                                                       P_("The GtkIconSize value that specifies the size of the rendered spinner"),
                                                       GTK_TYPE_ICON_SIZE, GTK_ICON_SIZE_MENU,
                                                       G_PARAM_READWRITE));
-
-
-  g_type_class_add_private (object_class, sizeof (GtkCellRendererSpinnerPrivate));
 }
 
 static void
 gtk_cell_renderer_spinner_init (GtkCellRendererSpinner *cell)
 {
-  cell->priv = GTK_CELL_RENDERER_SPINNER_GET_PRIVATE (cell);
-  cell->priv->pulse = 0;
-  cell->priv->old_icon_size = GTK_ICON_SIZE_INVALID;
-  cell->priv->icon_size = GTK_ICON_SIZE_MENU;
+  GtkCellRendererSpinnerPrivate *priv = GTK_CELL_RENDERER_SPINNER_GET_PRIVATE (cell);
+  priv->pulse = 0;
+  priv->old_icon_size = GTK_ICON_SIZE_INVALID;
+  priv->icon_size = GTK_ICON_SIZE_MENU;
 }
 
 /**
@@ -189,12 +184,12 @@ static void
 gtk_cell_renderer_spinner_update_size (GtkCellRendererSpinner *cell,
                                        GtkWidget              *widget)
 {
-  GtkCellRendererSpinnerPrivate *priv = cell->priv;
+  GtkCellRendererSpinnerPrivate *priv = GTK_CELL_RENDERER_SPINNER_GET_PRIVATE (cell);
   GdkScreen *screen;
   GtkIconTheme *icon_theme;
   GtkSettings *settings;
 
-  if (cell->priv->old_icon_size == cell->priv->icon_size)
+  if (priv->old_icon_size == priv->icon_size)
     return;
 
   screen = __gtk_widget_get_screen (GTK_WIDGET (widget));
@@ -215,7 +210,7 @@ gtk_cell_renderer_spinner_get_property (GObject    *object,
                                         GParamSpec *pspec)
 {
   GtkCellRendererSpinner *cell = GTK_CELL_RENDERER_SPINNER (object);
-  GtkCellRendererSpinnerPrivate *priv = cell->priv;
+  GtkCellRendererSpinnerPrivate *priv = GTK_CELL_RENDERER_SPINNER_GET_PRIVATE (cell);
 
   switch (param_id)
     {
@@ -240,7 +235,7 @@ gtk_cell_renderer_spinner_set_property (GObject      *object,
                                         GParamSpec   *pspec)
 {
   GtkCellRendererSpinner *cell = GTK_CELL_RENDERER_SPINNER (object);
-  GtkCellRendererSpinnerPrivate *priv = cell->priv;
+  GtkCellRendererSpinnerPrivate *priv = GTK_CELL_RENDERER_SPINNER_GET_PRIVATE (cell);
 
   switch (param_id)
     {
@@ -269,7 +264,7 @@ gtk_cell_renderer_spinner_get_size (GtkCellRenderer *cellr,
                                     gint            *height)
 {
   GtkCellRendererSpinner *cell = GTK_CELL_RENDERER_SPINNER (cellr);
-  GtkCellRendererSpinnerPrivate *priv = cell->priv;
+  GtkCellRendererSpinnerPrivate *priv = GTK_CELL_RENDERER_SPINNER_GET_PRIVATE (cell);
   gdouble align;
   gint w, h;
   gint xpad, ypad;
@@ -327,7 +322,7 @@ gtk_cell_renderer_spinner_render (GtkCellRenderer *cellr,
                                   guint            flags)
 {
   GtkCellRendererSpinner *cell = GTK_CELL_RENDERER_SPINNER (cellr);
-  GtkCellRendererSpinnerPrivate *priv = cell->priv;
+  GtkCellRendererSpinnerPrivate *priv = GTK_CELL_RENDERER_SPINNER_GET_PRIVATE (cell);
   GtkStateType state;
   GdkRectangle pix_rect;
   GdkRectangle draw_rect;

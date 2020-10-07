@@ -315,7 +315,7 @@ __gdk_event_put (const GdkEvent *event)
   g_return_if_fail (event != NULL);
 
   if (event->any.window)
-    display = __gdk_drawable_get_display (event->any.window);
+    display = __gdk_drawable_get_display ((GdkDrawable *)event->any.window);
   else
     {
       GDK_NOTE (MULTIHEAD,
@@ -948,7 +948,7 @@ __gdk_event_request_motions (const GdkEventMotion *event)
     {
       __gdk_device_get_state (event->device, event->window, NULL, NULL);
       
-      display = __gdk_drawable_get_display (event->window);
+      display = __gdk_drawable_get_display ((GdkDrawable *)event->window);
       _gdk_display_enable_motion_hints (display);
     }
 }
@@ -1005,7 +1005,7 @@ __gdk_event_get_screen (const GdkEvent *event)
     }
 
   if (event->any.window)
-    return __gdk_drawable_get_screen (event->any.window);
+    return __gdk_drawable_get_screen ((GdkDrawable *)event->any.window);
 
   return NULL;
 }
@@ -1246,7 +1246,7 @@ gdk_synthesize_window_state (GdkWindow     *window,
   temp_event.window_state.type = GDK_WINDOW_STATE;
   temp_event.window_state.send_event = FALSE;
   
-  old = ((GdkWindowObject*) temp_event.window_state.window)->state;
+  old = ((GdkWindow*) temp_event.window_state.window)->state;
   
   temp_event.window_state.new_window_state = old;
   temp_event.window_state.new_window_state |= set_flags;
@@ -1261,7 +1261,7 @@ gdk_synthesize_window_state (GdkWindow     *window,
    * inconsistent state to the user.
    */
   
-  ((GdkWindowObject*) window)->state = temp_event.window_state.new_window_state;
+  ((GdkWindow*) window)->state = temp_event.window_state.new_window_state;
 
   if (temp_event.window_state.changed_mask & GDK_WINDOW_STATE_WITHDRAWN)
     _gdk_window_update_viewable (window);
@@ -1271,12 +1271,12 @@ gdk_synthesize_window_state (GdkWindow     *window,
    * Non-toplevels do use the GDK_WINDOW_STATE_WITHDRAWN flag
    * internally so we needed to update window->state.
    */
-  switch (((GdkWindowObject*) window)->window_type)
+  switch (((GdkWindow*) window)->window_type)
     {
     case GDK_WINDOW_TOPLEVEL:
     case GDK_WINDOW_DIALOG:
     case GDK_WINDOW_TEMP: /* ? */
-      __gdk_display_put_event (__gdk_drawable_get_display (window), &temp_event);
+      __gdk_display_put_event (__gdk_drawable_get_display ((GdkDrawable *)window), &temp_event);
       break;
       
     case GDK_WINDOW_FOREIGN:

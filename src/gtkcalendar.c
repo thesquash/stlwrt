@@ -229,9 +229,6 @@ enum
 
 static guint gtk_calendar_signals[LAST_SIGNAL] = { 0 };
 
-
-#define GTK_CALENDAR_GET_PRIVATE(widget)  (GTK_CALENDAR (widget)->priv)
-
 static void gtk_calendar_finalize     (GObject      *calendar);
 static void gtk_calendar_set_property (GObject      *object,
 				       guint         prop_id,
@@ -323,7 +320,10 @@ static gint calendar_get_ysep          (GtkCalendar *calendar);
 static char    *default_abbreviated_dayname[7];
 static char    *default_monthname[12];
 
-STLWRT_DEFINE_VTYPE (GtkCalendar, gtk_calendar, GTK_TYPE_WIDGET, G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_VTYPE (GtkCalendar, gtk_calendar, GTK_TYPE_WIDGET, G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkCalendar))
+
+#define GTK_CALENDAR_GET_PRIVATE(calendar) gtk_calendar_get_instance_private (calendar)
 
 static void
 gtk_calendar_class_init (GtkCalendarClass *class)
@@ -613,8 +613,6 @@ gtk_calendar_class_init (GtkCalendarClass *class)
 		  NULL, NULL,
 		  NULL,
 		  G_TYPE_NONE, 0);
-  
-  g_type_class_add_private (gobject_class, sizeof (GtkCalendarPrivate));
 }
 
 static void
@@ -641,9 +639,7 @@ gtk_calendar_init (GtkCalendar *calendar)
   gchar *week_start;
 #endif
 
-  priv = calendar->priv = G_TYPE_INSTANCE_GET_PRIVATE (calendar,
-						       GTK_TYPE_CALENDAR,
-						       GtkCalendarPrivate);
+  priv = gtk_calendar_get_instance_private (calendar);
 
   __gtk_widget_set_can_focus (widget, TRUE);
   

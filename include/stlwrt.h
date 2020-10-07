@@ -263,14 +263,14 @@ G_BEGIN_DECLS
   } \
  \
   G_GNUC_UNUSED \
-  gpointer \
+  static inline gpointer \
   t_n##_get_instance_private (TN *self) \
   { \
     return (G_STRUCT_MEMBER_P (self, TN##_private_offset)); \
   } \
  \
   G_GNUC_UNUSED \
-  static inline gpointer \
+  gpointer \
   t_n##_get_props (TN *self) \
   { \
     return (G_STRUCT_MEMBER_P (self, TN##_props_offset)); \
@@ -363,7 +363,7 @@ G_BEGIN_DECLS
  \
   struct _##TN \
   { \
-    PTN _parent; \
+    PTN parent_type; \
  \
     Properties \
   }; \

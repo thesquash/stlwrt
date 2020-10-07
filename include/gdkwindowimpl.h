@@ -144,7 +144,7 @@ STLWRT_DECLARE_INTERFACE (GdkWindowImpl, gdk_window_impl,
 
 struct _GdkWindowRedirect
 {
-  GdkWindowObject *redirected;
+  GdkWindow *redirected;
   GdkDrawable *pixmap;
 
   gint src_x;

@@ -170,7 +170,7 @@ STLWRT_DECLARE_VTYPE_VPARENT(GtkCalendar, gtk_calendar, GtkWidget,
   gint  (highlight_row);
   gint  (highlight_col);
   
-  GtkCalendarPrivate * (priv);
+  gpointer (priv);
   gchar  (grow_space [32]);
 
   /* Padding for future expansion */

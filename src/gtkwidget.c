@@ -382,8 +382,7 @@ GObjectNotifyContext   *_gtk_widget_child_property_notify_context = NULL;
 
 typedef struct _GtkWidgetPrivate GtkWidgetPrivate;
 
-
-#define GTK_WIDGET_FLAGS(obj) (GTK_WIDGET_GET_PRIVATE(obj) -> flags)
+#define GTK_WIDGET_FLAGS(obj) (gtk_widget_get_instance_private (obj)->flags)
 
 
 STLWRT_DEFINE_VTYPE (GtkWidget, gtk_widget, G_TYPE_OBJECT,  G_TYPE_FLAG_NONE,
@@ -8224,7 +8223,7 @@ __gtk_widget_get_colormap (GtkWidget *widget)
   
   if (widget->window)
     {
-      colormap = __gdk_drawable_get_colormap (widget->window);
+      colormap = __gdk_drawable_get_colormap ((GdkDrawable *)widget->window);
       /* If window was destroyed previously, we'll get NULL here */
       if (colormap)
 	return colormap;
@@ -8745,7 +8744,7 @@ gtk_widget_dispose (GObject *object)
  * destruction, because when you destroy a toplevel its children will
  * be destroyed as well.
  **/
-static void
+void
 __gtk_widget_destroy (GtkWidget *object)
 {
   GtkWidget *widget = object;
@@ -9698,7 +9697,7 @@ __gtk_widget_get_snapshot (GtkWidget    *widget,
     }
 
   /* render snapshot */
-  pixmap = __gdk_pixmap_new (widget->window, width, height, __gdk_drawable_get_depth (widget->window));
+  pixmap = __gdk_pixmap_new (widget->window, width, height, __gdk_drawable_get_depth ((GdkDrawable *)widget->window));
   for (list = windows; list; list = list->next) /* !NO_WINDOW widgets */
     {
       GdkWindow *subwin = list->data;

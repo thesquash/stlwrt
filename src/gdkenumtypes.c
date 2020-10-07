@@ -775,7 +775,7 @@ __gdk_visual_type_get_type (void)
 }
 /* enumerations from <gdkwindow.h> */
 GType
-__gdk_window_class_get_type (void)
+__gdk_window_window_class_get_type (void)
 {
     static GType etype = 0;
     if (G_UNLIKELY(etype == 0)) {
@@ -784,7 +784,7 @@ __gdk_window_class_get_type (void)
             { GDK_INPUT_ONLY, "GDK_INPUT_ONLY", "only" },
             { 0, NULL, NULL }
         };
-        etype = g_enum_register_static (g_intern_static_string ("GdkWindowClass"), values);
+        etype = g_enum_register_static (g_intern_static_string ("GdkWindowWindowClass"), values);
     }
     return etype;
 }

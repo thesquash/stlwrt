@@ -405,9 +405,9 @@ __gdk_draw_line (GdkDrawable *drawable,
  *
  * A rectangle drawn filled is 1 pixel smaller in both dimensions than a 
  * rectangle outlined. Calling 
- * <literal>__gdk_draw_rectangle (window, gc, TRUE, 0, 0, 20, 20)</literal> 
+ * <literal>__gdk_draw_rectangle ((GdkDrawable *)window, gc, TRUE, 0, 0, 20, 20)</literal> 
  * results in a filled rectangle 20 pixels wide and 20 pixels high. Calling
- * <literal>__gdk_draw_rectangle (window, gc, FALSE, 0, 0, 20, 20)</literal> 
+ * <literal>__gdk_draw_rectangle ((GdkDrawable *)window, gc, FALSE, 0, 0, 20, 20)</literal> 
  * results in an outlined rectangle with corners at (0, 0), (0, 20), (20, 20),
  * and (20, 0), which makes it 21 pixels wide and 21 pixels high.
  *
@@ -1697,7 +1697,7 @@ gdk_drawable_real_draw_pixbuf (GdkDrawable  *drawable,
      in the pixmap target case to avoid resetting the
      already set clip on the GC. */
   if (GDK_IS_WINDOW (drawable))
-    real_drawable = GDK_WINDOW_OBJECT (drawable)->impl;
+    real_drawable = GDK_WINDOW (drawable)->impl;
   else
     real_drawable = GDK_PIXMAP_OBJECT (drawable)->impl;
 

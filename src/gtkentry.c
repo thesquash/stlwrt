@@ -498,7 +498,10 @@ STLWRT_DEFINE_VTYPE (GtkEntry, gtk_entry, GTK_TYPE_WIDGET, G_TYPE_FLAG_NONE,
                      G_IMPLEMENT_INTERFACE (GTK_TYPE_EDITABLE,
                                             gtk_entry_editable_init)
                      G_IMPLEMENT_INTERFACE (GTK_TYPE_CELL_EDITABLE,
-                                            gtk_entry_cell_editable_init))
+                                            gtk_entry_cell_editable_init)
+                     G_ADD_PRIVATE (GtkEntry))
+
+#define GTK_ENTRY_GET_PRIVATE(object) gtk_entry_get_instance_private (object)
 
 static void
 add_move_binding (GtkBindingSet  *binding_set,
@@ -1722,8 +1725,6 @@ gtk_entry_class_init (GtkEntryClass *class)
                                                                   P_("Whether to pass a proper state when drawing shadow or background"),
                                                                   FALSE,
                                                                   GTK_PARAM_READABLE));
-
-  g_type_class_add_private (gobject_class, sizeof (GtkEntryPrivate));
 }
 
 static void

@@ -804,7 +804,7 @@ typedef struct _GdkEventGrabBroken  GdkEventGrabBroken;
 typedef union  _GdkEvent	    GdkEvent;
 
 
-typedef struct _GdkWindowObject GdkWindow;
+typedef struct _GdkWindow GdkWindow;
 typedef struct _GdkRegion GdkRegion;
 typedef struct _GdkImage GdkImage;
 typedef struct _GdkDragContext GdkDragContext;

@@ -111,8 +111,49 @@ enum {
   COLORSEL_NUM_CHANNELS
 };
 
-typedef struct _ColorSelectionPrivate ColorSelectionPrivate;
+typedef struct _GtkColorSelectionPrivate GtkColorSelectionPrivate;
 
+struct _GtkColorSelectionPrivate
+{
+  guint has_opacity : 1;
+  guint has_palette : 1;
+  guint changing : 1;
+  guint default_set : 1;
+  guint default_alpha_set : 1;
+  guint has_grab : 1;
+  
+  gdouble color[COLORSEL_NUM_CHANNELS];
+  gdouble old_color[COLORSEL_NUM_CHANNELS];
+  
+  GtkWidget *triangle_colorsel;
+  GtkWidget *hue_spinbutton;
+  GtkWidget *sat_spinbutton;
+  GtkWidget *val_spinbutton;
+  GtkWidget *red_spinbutton;
+  GtkWidget *green_spinbutton;
+  GtkWidget *blue_spinbutton;
+  GtkWidget *opacity_slider;
+  GtkWidget *opacity_label;
+  GtkWidget *opacity_entry;
+  GtkWidget *palette_frame;
+  GtkWidget *hex_entry;
+  
+  /* The Palette code */
+  GtkWidget *custom_palette [GTK_CUSTOM_PALETTE_WIDTH][GTK_CUSTOM_PALETTE_HEIGHT];
+  
+  /* The color_sample stuff */
+  GtkWidget *sample_area;
+  GtkWidget *old_sample;
+  GtkWidget *cur_sample;
+  GtkWidget *colorsel;
+
+  /* Window for grabbing on */
+  GtkWidget *dropper_grab_widget;
+  guint32    grab_time;
+
+  /* Connection to settings */
+  gulong settings_connection;
+};
 
 
 static void gtk_color_selection_finalize        (GObject		 *object);
@@ -216,7 +257,7 @@ static const guchar dropper_mask[] = {
   0x02, 0x00, 0x00, 0x00 };
 
 STLWRT_DEFINE_FTYPE_VPARENT (GtkColorSelection, gtk_color_selection, GTK_TYPE_VBOX,
-                             G_TYPE_FLAG_NONE, ;)
+                             G_TYPE_FLAG_NONE, G_ADD_PRIVATE (GtkColorSelection))
 
 static void
 gtk_color_selection_class_init (GtkColorSelectionClass *klass)
@@ -272,8 +313,6 @@ gtk_color_selection_class_init (GtkColorSelectionClass *klass)
 		  NULL, NULL,
 		  NULL,
 		  G_TYPE_NONE, 0);
-
-  g_type_class_add_private (gobject_class, sizeof (ColorSelectionPrivate));
 }
 
 static void
@@ -291,7 +330,7 @@ gtk_color_selection_init (GtkColorSelection *colorsel)
   
   __gtk_widget_push_composite_child ();
 
-  priv = colorsel->private_data = G_TYPE_INSTANCE_GET_PRIVATE (colorsel, GTK_TYPE_COLOR_SELECTION, ColorSelectionPrivate);
+  priv = gtk_color_selection_get_instance_private (colorsel);
   priv->changing = FALSE;
   priv->default_set = FALSE;
   priv->default_alpha_set = FALSE;
@@ -534,7 +573,7 @@ static void
 gtk_color_selection_realize (GtkWidget *widget)
 {
   GtkColorSelection *colorsel = GTK_COLOR_SELECTION (widget);
-  ColorSelectionPrivate *priv = colorsel->private_data;
+  ColorSelectionPrivate *priv = gtk_color_selection_get_instance_private (colorsel);
   GtkSettings *settings = __gtk_widget_get_settings (widget);
 
   priv->settings_connection =  g_signal_connect (settings,
@@ -550,7 +589,7 @@ static void
 gtk_color_selection_unrealize (GtkWidget *widget)
 {
   GtkColorSelection *colorsel = GTK_COLOR_SELECTION (widget);
-  ColorSelectionPrivate *priv = colorsel->private_data;
+  ColorSelectionPrivate *priv = gtk_color_selection_get_instance_private (colorsel);
   GtkSettings *settings = __gtk_widget_get_settings (widget);
 
   g_signal_handler_disconnect (settings, priv->settings_connection);
@@ -593,7 +632,7 @@ set_color_internal (GtkColorSelection *colorsel,
   ColorSelectionPrivate *priv;
   gint i;
   
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   priv->changing = TRUE;
   priv->color[COLORSEL_RED] = color[0];
   priv->color[COLORSEL_GREEN] = color[1];
@@ -644,7 +683,7 @@ color_sample_drag_begin (GtkWidget      *widget,
   ColorSelectionPrivate *priv;
   gdouble *colsrc;
   
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   
   if (widget == priv->old_sample)
     colsrc = priv->old_color;
@@ -676,7 +715,7 @@ color_sample_drop_handle (GtkWidget        *widget,
   ColorSelectionPrivate *priv;
   guint16 *vals;
   gdouble color[4];
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   
   /* This is currently a guint16 array of the format:
    * R
@@ -723,7 +762,7 @@ color_sample_drag_handle (GtkWidget        *widget,
   guint16 vals[4];
   gdouble *colsrc;
   
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   
   if (widget == priv->old_sample)
     colsrc = priv->old_color;
@@ -750,7 +789,7 @@ color_sample_draw_sample (GtkColorSelection *colorsel, int which)
   cairo_t *cr;
   
   g_return_if_fail (colorsel != NULL);
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   
   g_return_if_fail (priv->sample_area != NULL);
   if (!__gtk_widget_is_drawable (priv->sample_area))
@@ -819,7 +858,7 @@ color_sample_draw_sample (GtkColorSelection *colorsel, int which)
 static void
 color_sample_update_samples (GtkColorSelection *colorsel)
 {
-  ColorSelectionPrivate *priv = colorsel->private_data;
+  ColorSelectionPrivate *priv = gtk_color_selection_get_instance_private (colorsel);
   __gtk_widget_queue_draw (priv->old_sample);
   __gtk_widget_queue_draw (priv->cur_sample);
 }
@@ -850,7 +889,7 @@ color_sample_setup_dnd (GtkColorSelection *colorsel, GtkWidget *sample)
     { "application/x-color", 0 }
   };
   ColorSelectionPrivate *priv;
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   
   __gtk_drag_source_set (sample,
 		       GDK_BUTTON1_MASK | GDK_BUTTON3_MASK,
@@ -889,7 +928,7 @@ update_tooltips (GtkColorSelection *colorsel)
 {
   ColorSelectionPrivate *priv;
 
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
 
   if (priv->has_palette == TRUE)
     {
@@ -914,7 +953,7 @@ color_sample_new (GtkColorSelection *colorsel)
 {
   ColorSelectionPrivate *priv;
   
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   
   priv->sample_area = __gtk_hbox_new (FALSE, 0);
   priv->old_sample = __gtk_drawing_area_new ();
@@ -1154,7 +1193,7 @@ palette_change_color (GtkWidget         *drawing_area,
   g_return_if_fail (GTK_IS_COLOR_SELECTION (colorsel));
   g_return_if_fail (GTK_IS_DRAWING_AREA (drawing_area));
   
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   
   gdk_color.red = UNSCALE (color[0]);
   gdk_color.green = UNSCALE (color[1]);
@@ -1302,7 +1341,7 @@ save_color_selected (GtkWidget *menuitem,
   colorsel = GTK_COLOR_SELECTION (g_object_get_data (G_OBJECT (drawing_area),
                                                      "gtk-color-sel"));
 
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   
   palette_change_color (drawing_area, colorsel, priv->color);  
 }
@@ -1484,7 +1523,7 @@ palette_new (GtkColorSelection *colorsel)
     { "application/x-color", 0 }
   };
 
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   
   retval = __gtk_drawing_area_new ();
 
@@ -1608,7 +1647,7 @@ grab_color_at_mouse (GdkScreen *screen,
   GdkColor color;
   GdkWindow *root_window = __gdk_screen_get_root_window (screen);
   
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   
   pixbuf = __gdk_pixbuf_get_from_drawable (NULL, root_window, NULL,
                                          x_root, y_root,
@@ -1656,7 +1695,7 @@ shutdown_eyedropper (GtkWidget *widget)
   GdkDisplay *display = __gtk_widget_get_display (widget);
 
   colorsel = GTK_COLOR_SELECTION (widget);
-  priv = colorsel->private_data;    
+  priv = gtk_color_selection_get_instance_private (colorsel);    
 
   if (priv->has_grab)
     {
@@ -1807,7 +1846,7 @@ static void
 get_screen_color (GtkWidget *button)
 {
   GtkColorSelection *colorsel = g_object_get_data (G_OBJECT (button), "COLORSEL");
-  ColorSelectionPrivate *priv = colorsel->private_data;
+  ColorSelectionPrivate *priv = gtk_color_selection_get_instance_private (colorsel);
   GdkScreen *screen = __gtk_widget_get_screen (GTK_WIDGET (button));
   GdkCursor *picker_cursor;
   GdkGrabStatus grab_status;
@@ -1877,7 +1916,7 @@ hex_changed (GtkWidget *hex_entry,
   gchar *text;
   
   colorsel = GTK_COLOR_SELECTION (data);
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   
   if (priv->changing)
     return;
@@ -1917,7 +1956,7 @@ hsv_changed (GtkWidget *hsv,
   ColorSelectionPrivate *priv;
   
   colorsel = GTK_COLOR_SELECTION (data);
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   
   if (priv->changing)
     return;
@@ -1943,7 +1982,7 @@ adjustment_changed (GtkAdjustment *adjustment,
   ColorSelectionPrivate *priv;
   
   colorsel = GTK_COLOR_SELECTION (g_object_get_data (G_OBJECT (adjustment), "COLORSEL"));
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   
   if (priv->changing)
     return;
@@ -1998,7 +2037,7 @@ opacity_entry_changed (GtkWidget *opacity_entry,
   gchar *text;
   
   colorsel = GTK_COLOR_SELECTION (data);
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   
   if (priv->changing)
     return;
@@ -2063,7 +2102,7 @@ make_palette_frame (GtkColorSelection *colorsel,
   GtkWidget *frame;
   ColorSelectionPrivate *priv;
   
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   frame = __gtk_frame_new (NULL);
   __gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
   priv->custom_palette[i][j] = palette_new (colorsel);
@@ -2076,7 +2115,7 @@ make_palette_frame (GtkColorSelection *colorsel,
 static void 
 set_selected_palette (GtkColorSelection *colorsel, int x, int y)
 {
-  ColorSelectionPrivate *priv = colorsel->private_data; 
+  ColorSelectionPrivate *priv = gtk_color_selection_get_instance_private (colorsel); 
 
   __gtk_widget_grab_focus (priv->custom_palette[x][y]);
 }
@@ -2093,7 +2132,7 @@ scale_round (double val, double factor)
 static void
 update_color (GtkColorSelection *colorsel)
 {
-  ColorSelectionPrivate *priv = colorsel->private_data;
+  ColorSelectionPrivate *priv = gtk_color_selection_get_instance_private (colorsel);
   gchar entryval[12];
   gchar opacity_text[32];
   gchar *ptr;
@@ -2229,7 +2268,7 @@ __gtk_color_selection_new (void)
   color[3] = 1.0;
   
   colorsel = g_object_new (GTK_TYPE_COLOR_SELECTION, NULL);
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   set_color_internal (colorsel, color);
   __gtk_color_selection_set_has_opacity_control (colorsel, TRUE);
   
@@ -2264,7 +2303,7 @@ __gtk_color_selection_get_has_opacity_control (GtkColorSelection *colorsel)
   
   g_return_val_if_fail (GTK_IS_COLOR_SELECTION (colorsel), FALSE);
   
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   
   return priv->has_opacity;
 }
@@ -2285,7 +2324,7 @@ __gtk_color_selection_set_has_opacity_control (GtkColorSelection *colorsel,
   
   g_return_if_fail (GTK_IS_COLOR_SELECTION (colorsel));
   
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   has_opacity = has_opacity != FALSE;
   
   if (priv->has_opacity != has_opacity)
@@ -2324,7 +2363,7 @@ __gtk_color_selection_get_has_palette (GtkColorSelection *colorsel)
   
   g_return_val_if_fail (GTK_IS_COLOR_SELECTION (colorsel), FALSE);
   
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   
   return priv->has_palette;
 }
@@ -2344,7 +2383,7 @@ __gtk_color_selection_set_has_palette (GtkColorSelection *colorsel,
   ColorSelectionPrivate *priv;
   g_return_if_fail (GTK_IS_COLOR_SELECTION (colorsel));
   
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   has_palette = has_palette != FALSE;
   
   if (priv->has_palette != has_palette)
@@ -2379,7 +2418,7 @@ __gtk_color_selection_set_current_color (GtkColorSelection *colorsel,
   g_return_if_fail (GTK_IS_COLOR_SELECTION (colorsel));
   g_return_if_fail (color != NULL);
 
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   priv->changing = TRUE;
   priv->color[COLORSEL_RED] = SCALE (color->red);
   priv->color[COLORSEL_GREEN] = SCALE (color->green);
@@ -2416,7 +2455,7 @@ __gtk_color_selection_set_current_alpha (GtkColorSelection *colorsel,
   
   g_return_if_fail (GTK_IS_COLOR_SELECTION (colorsel));
   
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   priv->changing = TRUE;
   priv->color[COLORSEL_OPACITY] = SCALE (alpha);
   if (priv->default_alpha_set == FALSE)
@@ -2464,7 +2503,7 @@ __gtk_color_selection_get_current_color (GtkColorSelection *colorsel,
   g_return_if_fail (GTK_IS_COLOR_SELECTION (colorsel));
   g_return_if_fail (color != NULL);
   
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   color->red = UNSCALE (priv->color[COLORSEL_RED]);
   color->green = UNSCALE (priv->color[COLORSEL_GREEN]);
   color->blue = UNSCALE (priv->color[COLORSEL_BLUE]);
@@ -2485,7 +2524,7 @@ __gtk_color_selection_get_current_alpha (GtkColorSelection *colorsel)
   
   g_return_val_if_fail (GTK_IS_COLOR_SELECTION (colorsel), 0);
   
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   return priv->has_opacity ? UNSCALE (priv->color[COLORSEL_OPACITY]) : 65535;
 }
 
@@ -2506,7 +2545,7 @@ __gtk_color_selection_get_color (GtkColorSelection *colorsel,
   
   g_return_if_fail (GTK_IS_COLOR_SELECTION (colorsel));
   
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   color[0] = priv->color[COLORSEL_RED];
   color[1] = priv->color[COLORSEL_GREEN];
   color[2] = priv->color[COLORSEL_BLUE];
@@ -2532,7 +2571,7 @@ __gtk_color_selection_set_previous_color (GtkColorSelection *colorsel,
   g_return_if_fail (GTK_IS_COLOR_SELECTION (colorsel));
   g_return_if_fail (color != NULL);
   
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   priv->changing = TRUE;
   priv->old_color[COLORSEL_RED] = SCALE (color->red);
   priv->old_color[COLORSEL_GREEN] = SCALE (color->green);
@@ -2564,7 +2603,7 @@ __gtk_color_selection_set_previous_alpha (GtkColorSelection *colorsel,
   
   g_return_if_fail (GTK_IS_COLOR_SELECTION (colorsel));
   
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   priv->changing = TRUE;
   priv->old_color[COLORSEL_OPACITY] = SCALE (alpha);
   color_sample_update_samples (colorsel);
@@ -2589,7 +2628,7 @@ __gtk_color_selection_get_previous_color (GtkColorSelection *colorsel,
   g_return_if_fail (GTK_IS_COLOR_SELECTION (colorsel));
   g_return_if_fail (color != NULL);
   
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   color->red = UNSCALE (priv->old_color[COLORSEL_RED]);
   color->green = UNSCALE (priv->old_color[COLORSEL_GREEN]);
   color->blue = UNSCALE (priv->old_color[COLORSEL_BLUE]);
@@ -2610,7 +2649,7 @@ __gtk_color_selection_get_previous_alpha (GtkColorSelection *colorsel)
   
   g_return_val_if_fail (GTK_IS_COLOR_SELECTION (colorsel), 0);
   
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   return priv->has_opacity ? UNSCALE (priv->old_color[COLORSEL_OPACITY]) : 65535;
 }
 
@@ -2638,7 +2677,7 @@ gtk_color_selection_set_palette_color (GtkColorSelection   *colorsel,
   x = index % GTK_CUSTOM_PALETTE_WIDTH;
   y = index / GTK_CUSTOM_PALETTE_WIDTH;
   
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   col[0] = SCALE (color->red);
   col[1] = SCALE (color->green);
   col[2] = SCALE (color->blue);
@@ -2662,7 +2701,7 @@ __gtk_color_selection_is_adjusting (GtkColorSelection *colorsel)
   
   g_return_val_if_fail (GTK_IS_COLOR_SELECTION (colorsel), FALSE);
   
-  priv = colorsel->private_data;
+  priv = gtk_color_selection_get_instance_private (colorsel);
   
   return (__gtk_hsv_is_adjusting (GTK_HSV (priv->triangle_colorsel)));
 }

@@ -2055,7 +2055,7 @@ gtk_image_expose (GtkWidget      *widget,
 
               if (pixbuf)
                 {
-                  __gdk_draw_pixbuf (widget->window,
+                  __gdk_draw_pixbuf ((GdkDrawable *)widget->window,
 				   widget->style->black_gc,
 				   pixbuf,
 				   image_bound.x - x,
@@ -2073,7 +2073,7 @@ gtk_image_expose (GtkWidget      *widget,
               switch (image->storage_type)
                 {
                 case GTK_IMAGE_PIXMAP:
-                  __gdk_draw_drawable (widget->window,
+                  __gdk_draw_drawable ((GdkDrawable *)widget->window,
                                      widget->style->black_gc,
                                      image->data.pixmap.pixmap,
                                      image_bound.x - x, image_bound.y - y,
@@ -2082,7 +2082,7 @@ gtk_image_expose (GtkWidget      *widget,
                   break;
               
                 case GTK_IMAGE_IMAGE:
-                  __gdk_draw_image (widget->window,
+                  __gdk_draw_image ((GdkDrawable *)widget->window,
                                   widget->style->black_gc,
                                   image->data.image.image,
                                   image_bound.x - x, image_bound.y - y,

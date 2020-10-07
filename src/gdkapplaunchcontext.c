@@ -56,9 +56,7 @@ gdk_app_launch_context_class_init (GdkAppLaunchContextClass *klass)
 static void
 gdk_app_launch_context_init (GdkAppLaunchContext *context)
 {
-  context->priv = G_TYPE_INSTANCE_GET_PRIVATE (context,
-					       GDK_TYPE_APP_LAUNCH_CONTEXT,
-					       GdkAppLaunchContextPrivate);
+  context->priv = gdk_app_launch_context_get_instance_private (context);
   context->priv->workspace = -1;
 }
 

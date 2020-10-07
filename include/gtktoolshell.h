@@ -56,9 +56,6 @@ G_BEGIN_DECLS
  * Virtual function table for the #GtkToolShell interface.
  */
 STLWRT_DECLARE_INTERFACE(GtkToolShell, gtk_tool_shell,
-  /*< private >*/
-  GTypeInterface g_iface;
-
   /*< public >*/
   GtkIconSize        (*get_icon_size)        (GtkToolShell *shell);
   GtkOrientation     (*get_orientation)      (GtkToolShell *shell);

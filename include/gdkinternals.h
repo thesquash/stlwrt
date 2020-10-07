@@ -194,18 +194,14 @@ typedef struct
 
 typedef struct _GdkInputWindow GdkInputWindow;
 
-/* Private version of GdkWindowObject. The initial part of this strucuture
+/* Private version of GdkWindow. The initial part of this strucuture
    is public for historical reasons. Don't change that part */
 typedef struct _GdkWindowPaint             GdkWindowPaint;
 
-struct _GdkWindowObject
-{
-  /* vvvvvvv THIS PART IS PUBLIC. DON'T CHANGE vvvvvvvvvvvvvv */
-  GdkDrawable parent_instance;
-
+STLWRT_DECLARE_FTYPE_FPARENT(GdkWindow, gdk_window, GdkDrawable,
   GdkDrawable *impl; /* window-system-specific delegate object */  
   
-  GdkWindowObject *parent;
+  GdkWindow *parent;
 
   gpointer user_data;
 
@@ -250,12 +246,14 @@ struct _GdkWindowObject
 
   /* ^^^^^^^^^^ THIS PART IS PUBLIC. DON'T CHANGE ^^^^^^^^^^ */
   
-  /* The GdkWindowObject that has the impl, ref:ed if another window.
+  /* The GdkWindow that has the impl, ref:ed if another window.
    * This ref is required to keep the wrapper of the impl window alive
    * for as long as any GdkWindow references the impl. */
-  GdkWindowObject *impl_window; 
-  int abs_x, abs_y; /* Absolute offset in impl */
-  gint width, height;
+  GdkWindow *impl_window; 
+  int abs_x;
+  int abs_y; /* Absolute offset in impl */
+  gint width;
+  gint height;
   guint32 clip_tag;
   GdkRegion *clip_region; /* Clip region (wrt toplevel) in window coords */
   GdkRegion *clip_region_with_children; /* Clip region in window coords */
@@ -276,15 +274,15 @@ struct _GdkWindowObject
 
   GdkRegion *shape;
   GdkRegion *input_shape;
-  
+
   cairo_surface_t *cairo_surface;
   guint outstanding_surfaces; /* only set on impl window */
 
   cairo_pattern_t *background;
-};
+)
 
-#define GDK_WINDOW_TYPE(d) (((GdkWindowObject*)(GDK_WINDOW (d)))->window_type)
-#define GDK_WINDOW_DESTROYED(d) (((GdkWindowObject*)(GDK_WINDOW (d)))->destroyed)
+#define GDK_WINDOW_TYPE(d) (((GdkWindow*)(GDK_WINDOW (d)))->window_type)
+#define GDK_WINDOW_DESTROYED(d) (((GdkWindow*)(GDK_WINDOW (d)))->destroyed)
 
 extern GdkEventFunc   _gdk_event_func;    /* Callback for events */
 extern gpointer       _gdk_event_data;
@@ -503,7 +501,7 @@ gint _gdk_windowing_get_bits_for_depth (GdkDisplay *display,
 					gint        depth);
 
 
-#define GDK_WINDOW_IS_MAPPED(window) ((((GdkWindowObject*)window)->state & GDK_WINDOW_STATE_WITHDRAWN) == 0)
+#define GDK_WINDOW_IS_MAPPED(window) ((((GdkWindow*)window)->state & GDK_WINDOW_STATE_WITHDRAWN) == 0)
 
 
 /* Called when gdk_window_destroy() is called on a foreign window

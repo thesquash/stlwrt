@@ -50,7 +50,7 @@ typedef enum
 {
   GDK_INPUT_OUTPUT,
   GDK_INPUT_ONLY
-} GdkWindowClass;
+} GdkWindowWindowClass;
 
 /* Types of windows.
  *   Root: There is only 1 root window and it is initialized
@@ -207,7 +207,7 @@ struct _GdkWindowAttr
   gint x, y;
   gint width;
   gint height;
-  GdkWindowClass wclass;
+  GdkWindowWindowClass wclass;
   GdkVisual *visual;
   GdkColormap *colormap;
   GdkWindowType window_type;
@@ -244,26 +244,28 @@ struct _GdkPointerHooks
                                    gint            *win_y);
 };
 
-typedef struct _GdkWindowObject GdkWindowObject;
-typedef struct _GdkWindowObjectClass GdkWindowObjectClass;
+typedef struct _GdkWindow GdkWindow;
+typedef struct _GdkWindowClass GdkWindowClass;
 
 #define GDK_TYPE_WINDOW              (gdk_window_get_type ())
 #define GDK_WINDOW(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_WINDOW, GdkWindow))
-#define GDK_WINDOW_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_WINDOW, GdkWindowObjectClass))
+#define GDK_WINDOW_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GDK_TYPE_WINDOW, GdkWindowClass))
 #define GDK_IS_WINDOW(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), GDK_TYPE_WINDOW))
 #define GDK_IS_WINDOW_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GDK_TYPE_WINDOW))
-#define GDK_WINDOW_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GDK_TYPE_WINDOW, GdkWindowObjectClass))
+#define GDK_WINDOW_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GDK_TYPE_WINDOW, GdkWindowClass))
 
-/* We used to export all of GdkWindowObject, but we don't want to keep doing so.
+#ifndef STLWRT_COMPILATION
+
+/* We used to export all of GdkWindow, but we don't want to keep doing so.
    However, there are various parts of it accessed by macros and other code,
    so we keep the old exported version public, but in reality it is larger. */
 
 /**** DON'T CHANGE THIS STRUCT, the real version is in gdkinternals.h ****/
 /********************************************************************/
-STLWRT_DECLARE_VTYPE_FPARENT(GdkWindow, gdk_window, GdkDrawable,
+STLWRT_DECLARE_FTYPE_FPARENT(GdkWindow, gdk_window, GdkDrawable,
   GdkDrawable * (impl); /* window-system-specific delegate object */
   
-  GdkWindowObject * (parent);
+  GdkWindow * (parent);
 
   gpointer  (user_data);
 
@@ -306,6 +308,8 @@ STLWRT_DECLARE_VTYPE_FPARENT(GdkWindow, gdk_window, GdkDrawable,
 
   GdkWindowRedirect * (redirect);
 )
+
+#endif
 
 struct _GdkWindowClass
 {

@@ -26,7 +26,7 @@ following hypothetical function which packs a widget inside of a GtkDialog:
         gtk_dialog_really_stupid_function (GtkDialog *dialog, GtkWidget *child)
         {
           g_return_if_fail (GTK_IS_DIALOG (dialog));
-          g_return_if_fail (GTK_IS_WIDGET (widget));
+          g_return_if_fail (GTK_IS_WIDGET (child));
         
           gtk_container_add (GTK_CONTAINER (dialog->vbox), child);
         }
@@ -39,7 +39,7 @@ following hypothetical function which packs a widget inside of a GtkDialog:
           GtkDialogProps *dialog_props;
         
           g_return_if_fail (GTK_IS_DIALOG (dialog));
-          g_return_if_fail (GTK_IS_WIDGET (widget));
+          g_return_if_fail (GTK_IS_WIDGET (child));
         
           dialog_props = gtk_dialog_get_props (dialog);
         

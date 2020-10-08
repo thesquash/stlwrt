@@ -15,6 +15,11 @@ making and have made, and I hope we may be able to collaborate somehow.
 
 ## What's new?
 
+(**NOTE:**  This section of the README recently contained a major slip-up in
+both code snippets.  To wit, `child` was referenced incorrectly as `widget`
+on the `g_return_if_fail` line.  I apologize for any confusion it may have
+caused.  The corrected version follows.)
+
 After implementing incremental changes to the STLWRT codebase to reduce the
 error count, I have reached the point where it is time to go head-on and start
 phase 3 of the STLWRT-ization of the roughly 260 source files.  Specifically,

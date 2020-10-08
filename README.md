@@ -15,24 +15,42 @@ making and have made, and I hope we may be able to collaborate somehow.
 
 ## What's new?
 
-In my last update, I explained that the compiler errors and warnings totalled
-up to about 49 MB.  Now they total up to 1.7 MB -- not bad.  When compiled
-today, GTK+ 2 displays over 100 KB of warnings.  Considering that STLWRT is
-unstable software, that's really not too bad.
+After implementing incremental changes to the STLWRT codebase to reduce the
+error count, I have reached the point where it is time to go head-on and start
+phase 3 of the STLWRT-ization of the roughly 260 source files.  Specifically,
+all STLWRT objects need to stop using object instance structures directly and
+need to go through at least one generated function.  As an example, the
+following hypothetical function which packs a widget inside of a GtkDialog:
 
-Even when you compile it with '-Wall', the log file is still only 1.8 MB --
-that's great, considering all the warnings that '-Wall' turns on!  (Though
-modern versions of GCC are a lot more verbose by default than they used to
-be.)
+        void
+        gtk_dialog_really_stupid_function (GtkDialog *dialog, GtkWidget *child)
+        {
+          g_return_if_fail (GTK_IS_DIALOG (dialog));
+          g_return_if_fail (GTK_IS_WIDGET (widget));
+        
+          gtk_container_add (GTK_CONTAINER (dialog->vbox), child);
+        }
 
-Compiling (or attempt-compiling) STLWRT is quick compared to GTK+ 2.  On
-recent hardware (I briefly tried it on borrowed 6-year-old hardware), it
-takes less than a minute to (fail to) build!  For fun, you can try it too:
+...needs to become:
 
-        gcc -Wall -pipe -o libstlwrt.so -fPIC -shared -I include -I \
-         include/x11 -DSTLWRT_COMPILATION -DGETTEXT_PACKAGE='"stlwrt"' \
-         `pkg-config --cflags --libs glib-2.0 pango cairo atk \
-          gdk-pixbuf-2.0` src/*.c 2>error_dump.log
+        void
+        gtk_dialog_really_stupid_function (GtkDialog *dialog, GtkWidget *child)
+        {
+          GtkDialogProps *dialog_props;
+        
+          g_return_if_fail (GTK_IS_DIALOG (dialog));
+          g_return_if_fail (GTK_IS_WIDGET (widget));
+        
+          dialog_props = gtk_dialog_get_props (dialog);
+        
+          gtk_container_add (GTK_CONTAINER (dialog_props->vbox), child);
+        }
 
-I'm getting close to real results, considering that the error log was 49 MB
-just a few days ago.  Have fun!
+Of course, many functions are a lot longer than this, so the `dialog_props` can
+be used multiple times in the same function, or maybe even shared between local
+functions which have no need for ABI compatibility.  As I write this, I have
+just converted the code for GtkAboutDialog to such a form.  I'd suggest any
+curious parties look at the code for GtkAboutDialog (under `src/gtkaboutdialog.c`)
+to see a case of accessing GtkDialog properties from a decendant,
+GtkAboutDialog.  It's at the very least a lesson in the internal design of GTK
+(and STLWRT)!

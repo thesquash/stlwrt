@@ -40,10 +40,6 @@ G_BEGIN_DECLS
 #define GTK_IS_ACCEL_LABEL_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_ACCEL_LABEL))
 #define GTK_ACCEL_LABEL_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ACCEL_LABEL, GtkAccelLabelClass))
 
-
-typedef struct _GtkAccelLabel	    GtkAccelLabelFat;
-typedef struct _GtkAccelLabel	    GtkAccelLabelThin;
-
 typedef struct _GtkAccelLabelClass  GtkAccelLabelClass;
 
 /**

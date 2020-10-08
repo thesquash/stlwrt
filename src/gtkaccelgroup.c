@@ -89,7 +89,7 @@ enum {
   PROP_MODIFIER_MASK,
 };
 
-STLWRT_DEFINE_VTYPE (GtkAccelGroup, gtk_accel_group, G_TYPE_OBJECT,
+STLWRT_DEFINE_FTYPE (GtkAccelGroup, gtk_accel_group, G_TYPE_OBJECT,
                      G_TYPE_FLAG_NONE, STLWRT_CODE_NONE)
 
 /* --- functions --- */

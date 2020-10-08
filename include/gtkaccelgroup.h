@@ -77,7 +77,13 @@ typedef gboolean (*GtkAccelGroupFindFunc) (GtkAccelKey    *key,
  * An object representing and maintaining a group of accelerators.
  */
 
-STLWRT_DECLARE_VTYPE_FPARENT(GtkAccelGroup, gtk_accel_group, GObject,
+/*
+ * STLWRT NOTE:  The likelihood of somebody actually subclassing GtkAccelGroup
+ * is remote as far as I can tell right now, so keep this as an FType unless
+ * somebody actually subclasses this.  (Who *would*, though?)
+ */
+
+STLWRT_DECLARE_FTYPE_FPARENT(GtkAccelGroup, gtk_accel_group, GObject,
   guint                (lock_count);
   GdkModifierType      (modifier_mask);
   GSList             * (acceleratables);

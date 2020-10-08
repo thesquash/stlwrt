@@ -241,9 +241,8 @@ enum {
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-STLWRT_DEFINE_FTYPE (GtkAboutDialog, gtk_about_dialog, GTK_TYPE_DIALOG,
-                     G_TYPE_FLAG_NONE,
-                     G_ADD_PRIVATE (GtkAboutDialog))
+STLWRT_DEFINE_FTYPE_VPARENT (GtkAboutDialog, gtk_about_dialog, GTK_TYPE_DIALOG, G_TYPE_FLAG_NONE,
+                             G_ADD_PRIVATE (GtkAboutDialog))
 
 static void
 gtk_about_dialog_class_init (GtkAboutDialogClass *klass)
@@ -531,12 +530,12 @@ static void
 gtk_about_dialog_init (GtkAboutDialog *about)
 {
   GtkDialog *dialog = GTK_DIALOG (about);
+  GtkDialogProps *dialog_props = gtk_dialog_get_props (dialog);
   GtkAboutDialogPrivate *priv;
   GtkWidget *vbox, *hbox, *button, *close_button, *image;
 
   /* Data */
-  priv = gtk_about_dialog_get_private (about);
-  about->private_data = priv;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   priv->name = NULL;
   priv->version = NULL;
@@ -557,15 +556,15 @@ gtk_about_dialog_init (GtkAboutDialog *about)
 
   __gtk_dialog_set_has_separator (dialog, FALSE);
   __gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-  __gtk_box_set_spacing (GTK_BOX (dialog->vbox), 2); /* 2 * 5 + 2 = 12 */
-  __gtk_container_set_border_width (GTK_CONTAINER (dialog->action_area), 5);
+  __gtk_box_set_spacing (GTK_BOX (dialog_props->vbox), 2); /* 2 * 5 + 2 = 12 */
+  __gtk_container_set_border_width (GTK_CONTAINER (dialog_props->action_area), 5);
 
   /* Widgets */
   __gtk_widget_push_composite_child ();
 
   vbox = __gtk_vbox_new (FALSE, 8);
   __gtk_container_set_border_width (GTK_CONTAINER (vbox), 5);
-  __gtk_box_pack_start (GTK_BOX (dialog->vbox), vbox, TRUE, TRUE, 0);
+  __gtk_box_pack_start (GTK_BOX (dialog_props->vbox), vbox, TRUE, TRUE, 0);
 
   priv->logo_image = __gtk_image_new ();
   __gtk_box_pack_start (GTK_BOX (vbox), priv->logo_image, FALSE, FALSE, 0);
@@ -648,7 +647,7 @@ static void
 gtk_about_dialog_finalize (GObject *object)
 {
   GtkAboutDialog *about = GTK_ABOUT_DIALOG (object);
-  GtkAboutDialogPrivate *priv = (GtkAboutDialogPrivate *)about->private_data;
+  GtkAboutDialogPrivate *priv = gtk_about_dialog_get_instance_private (about);
 
   g_free (priv->name);
   g_free (priv->version);
@@ -679,7 +678,7 @@ gtk_about_dialog_set_property (GObject      *object,
                                GParamSpec   *pspec)
 {
   GtkAboutDialog *about = GTK_ABOUT_DIALOG (object);
-  GtkAboutDialogPrivate *priv = (GtkAboutDialogPrivate *)about->private_data;
+  GtkAboutDialogPrivate *priv = gtk_about_dialog_get_instance_private (about);
 
   switch (prop_id)
     {
@@ -738,7 +737,7 @@ gtk_about_dialog_get_property (GObject    *object,
                                GParamSpec *pspec)
 {
   GtkAboutDialog *about = GTK_ABOUT_DIALOG (object);
-  GtkAboutDialogPrivate *priv = (GtkAboutDialogPrivate *)about->private_data;
+  GtkAboutDialogPrivate *priv = gtk_about_dialog_get_instance_private (about);
 
   switch (prop_id)
     {
@@ -832,7 +831,7 @@ gtk_about_dialog_activate_link (GtkAboutDialog *about,
 static void
 update_website (GtkAboutDialog *about)
 {
-  GtkAboutDialogPrivate *priv = (GtkAboutDialogPrivate *)about->private_data;
+  GtkAboutDialogPrivate *priv = gtk_about_dialog_get_instance_private (about);
 
   __gtk_widget_show (priv->website_label);
 
@@ -914,7 +913,7 @@ __gtk_about_dialog_get_program_name (GtkAboutDialog *about)
 
   g_return_val_if_fail (GTK_IS_ABOUT_DIALOG (about), NULL);
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   return priv->name;
 }
@@ -925,7 +924,7 @@ update_name_version (GtkAboutDialog *about)
   GtkAboutDialogPrivate *priv;
   gchar *title_string, *name_string;
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   title_string = g_strdup_printf (_("About %s"), priv->name);
   __gtk_window_set_title (GTK_WINDOW (about), title_string);
@@ -981,7 +980,7 @@ __gtk_about_dialog_set_program_name (GtkAboutDialog *about,
 
   g_return_if_fail (GTK_IS_ABOUT_DIALOG (about));
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
   tmp = priv->name;
   priv->name = g_strdup (name ? name : g_get_application_name ());
   g_free (tmp);
@@ -1010,7 +1009,7 @@ __gtk_about_dialog_get_version (GtkAboutDialog *about)
 
   g_return_val_if_fail (GTK_IS_ABOUT_DIALOG (about), NULL);
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   return priv->version;
 }
@@ -1033,7 +1032,7 @@ __gtk_about_dialog_set_version (GtkAboutDialog *about,
 
   g_return_if_fail (GTK_IS_ABOUT_DIALOG (about));
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   tmp = priv->version;
   priv->version = g_strdup (version);
@@ -1062,7 +1061,7 @@ __gtk_about_dialog_get_copyright (GtkAboutDialog *about)
 
   g_return_val_if_fail (GTK_IS_ABOUT_DIALOG (about), NULL);
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   return priv->copyright;
 }
@@ -1086,7 +1085,7 @@ __gtk_about_dialog_set_copyright (GtkAboutDialog *about,
 
   g_return_if_fail (GTK_IS_ABOUT_DIALOG (about));
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   tmp = priv->copyright;
   priv->copyright = g_strdup (copyright);
@@ -1125,7 +1124,7 @@ __gtk_about_dialog_get_comments (GtkAboutDialog *about)
 
   g_return_val_if_fail (GTK_IS_ABOUT_DIALOG (about), NULL);
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   return priv->comments;
 }
@@ -1149,7 +1148,7 @@ __gtk_about_dialog_set_comments (GtkAboutDialog *about,
 
   g_return_if_fail (GTK_IS_ABOUT_DIALOG (about));
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   tmp = priv->comments;
   if (comments)
@@ -1186,7 +1185,7 @@ __gtk_about_dialog_get_license (GtkAboutDialog *about)
 
   g_return_val_if_fail (GTK_IS_ABOUT_DIALOG (about), NULL);
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   return priv->license;
 }
@@ -1211,7 +1210,7 @@ __gtk_about_dialog_set_license (GtkAboutDialog *about,
 
   g_return_if_fail (GTK_IS_ABOUT_DIALOG (about));
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   tmp = priv->license;
   if (license)
@@ -1247,7 +1246,7 @@ __gtk_about_dialog_get_wrap_license (GtkAboutDialog *about)
 
   g_return_val_if_fail (GTK_IS_ABOUT_DIALOG (about), FALSE);
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   return priv->wrap_license;
 }
@@ -1270,7 +1269,7 @@ __gtk_about_dialog_set_wrap_license (GtkAboutDialog *about,
 
   g_return_if_fail (GTK_IS_ABOUT_DIALOG (about));
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   wrap_license = wrap_license != FALSE;
 
@@ -1300,7 +1299,7 @@ __gtk_about_dialog_get_website (GtkAboutDialog *about)
 
   g_return_val_if_fail (GTK_IS_ABOUT_DIALOG (about), NULL);
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   return priv->website_url;
 }
@@ -1326,7 +1325,7 @@ __gtk_about_dialog_set_website (GtkAboutDialog *about,
 
   g_return_if_fail (GTK_IS_ABOUT_DIALOG (about));
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   tmp = priv->website_url;
   priv->website_url = g_strdup (website);
@@ -1355,7 +1354,7 @@ __gtk_about_dialog_get_website_label (GtkAboutDialog *about)
 
   g_return_val_if_fail (GTK_IS_ABOUT_DIALOG (about), NULL);
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   return priv->website_text;
 }
@@ -1379,7 +1378,7 @@ __gtk_about_dialog_set_website_label (GtkAboutDialog *about,
 
   g_return_if_fail (GTK_IS_ABOUT_DIALOG (about));
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   tmp = priv->website_text;
   priv->website_text = g_strdup (website_label);
@@ -1410,7 +1409,7 @@ __gtk_about_dialog_get_authors (GtkAboutDialog *about)
 
   g_return_val_if_fail (GTK_IS_ABOUT_DIALOG (about), NULL);
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   return (const gchar * const *) priv->authors;
 }
@@ -1418,7 +1417,7 @@ __gtk_about_dialog_get_authors (GtkAboutDialog *about)
 static void
 update_credits_button_visibility (GtkAboutDialog *about)
 {
-  GtkAboutDialogPrivate *priv = about->private_data;
+  GtkAboutDialogPrivate *priv = gtk_about_dialog_get_instance_private (about);
   gboolean show;
 
   show = priv->authors != NULL ||
@@ -1452,7 +1451,7 @@ __gtk_about_dialog_set_authors (GtkAboutDialog  *about,
 
   g_return_if_fail (GTK_IS_ABOUT_DIALOG (about));
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   tmp = priv->authors;
   priv->authors = g_strdupv ((gchar **)authors);
@@ -1483,7 +1482,7 @@ __gtk_about_dialog_get_documenters (GtkAboutDialog *about)
 
   g_return_val_if_fail (GTK_IS_ABOUT_DIALOG (about), NULL);
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   return (const gchar * const *)priv->documenters;
 }
@@ -1507,7 +1506,7 @@ __gtk_about_dialog_set_documenters (GtkAboutDialog *about,
 
   g_return_if_fail (GTK_IS_ABOUT_DIALOG (about));
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   tmp = priv->documenters;
   priv->documenters = g_strdupv ((gchar **)documenters);
@@ -1538,7 +1537,7 @@ __gtk_about_dialog_get_artists (GtkAboutDialog *about)
 
   g_return_val_if_fail (GTK_IS_ABOUT_DIALOG (about), NULL);
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   return (const gchar * const *)priv->artists;
 }
@@ -1562,7 +1561,7 @@ __gtk_about_dialog_set_artists (GtkAboutDialog *about,
 
   g_return_if_fail (GTK_IS_ABOUT_DIALOG (about));
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   tmp = priv->artists;
   priv->artists = g_strdupv ((gchar **)artists);
@@ -1592,7 +1591,7 @@ __gtk_about_dialog_get_translator_credits (GtkAboutDialog *about)
 
   g_return_val_if_fail (GTK_IS_ABOUT_DIALOG (about), NULL);
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   return priv->translator_credits;
 }
@@ -1628,7 +1627,7 @@ __gtk_about_dialog_set_translator_credits (GtkAboutDialog *about,
 
   g_return_if_fail (GTK_IS_ABOUT_DIALOG (about));
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   tmp = priv->translator_credits;
   priv->translator_credits = g_strdup (translator_credits);
@@ -1658,7 +1657,7 @@ __gtk_about_dialog_get_logo (GtkAboutDialog *about)
 
   g_return_val_if_fail (GTK_IS_ABOUT_DIALOG (about), NULL);
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   if (__gtk_image_get_storage_type (GTK_IMAGE (priv->logo_image)) == GTK_IMAGE_PIXBUF)
     return __gtk_image_get_pixbuf (GTK_IMAGE (priv->logo_image));
@@ -1703,7 +1702,7 @@ __gtk_about_dialog_set_logo (GtkAboutDialog *about,
 
   g_return_if_fail (GTK_IS_ABOUT_DIALOG (about));
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   g_object_freeze_notify (G_OBJECT (about));
 
@@ -1753,7 +1752,7 @@ __gtk_about_dialog_get_logo_icon_name (GtkAboutDialog *about)
 
   g_return_val_if_fail (GTK_IS_ABOUT_DIALOG (about), NULL);
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   if (__gtk_image_get_storage_type (GTK_IMAGE (priv->logo_image)) == GTK_IMAGE_ICON_NAME)
     __gtk_image_get_icon_name (GTK_IMAGE (priv->logo_image), &icon_name, NULL);
@@ -1780,7 +1779,7 @@ __gtk_about_dialog_set_logo_icon_name (GtkAboutDialog *about,
 
   g_return_if_fail (GTK_IS_ABOUT_DIALOG (about));
 
-  priv = (GtkAboutDialogPrivate *)about->private_data;
+  priv = gtk_about_dialog_get_instance_private (about);
 
   g_object_freeze_notify (G_OBJECT (about));
 
@@ -1800,7 +1799,7 @@ follow_if_link (GtkAboutDialog *about,
                 GtkTextIter    *iter)
 {
   GSList *tags = NULL, *tagp = NULL;
-  GtkAboutDialogPrivate *priv = (GtkAboutDialogPrivate *)about->private_data;
+  GtkAboutDialogPrivate *priv = gtk_about_dialog_get_instance_private (about);
   gchar *uri = NULL;
 
   tags = __gtk_text_iter_get_tags (iter);
@@ -1907,7 +1906,7 @@ set_cursor_if_appropriate (GtkAboutDialog *about,
                            gint            x,
                            gint            y)
 {
-  GtkAboutDialogPrivate *priv = (GtkAboutDialogPrivate *)about->private_data;
+  GtkAboutDialogPrivate *priv = gtk_about_dialog_get_instance_private (about);
   GSList *tags = NULL, *tagp = NULL;
   GtkTextIter iter;
   gboolean hovering_over_link = FALSE;
@@ -1994,7 +1993,7 @@ text_view_new (GtkAboutDialog  *about,
   GdkColor color;
   GdkColor link_color;
   GdkColor visited_link_color;
-  GtkAboutDialogPrivate *priv = (GtkAboutDialogPrivate *)about->private_data;
+  GtkAboutDialogPrivate *priv = gtk_about_dialog_get_instance_private (about);
 
   __gtk_widget_ensure_style (GTK_WIDGET (about));
   __gtk_widget_style_get (GTK_WIDGET (about),
@@ -2160,9 +2159,10 @@ display_credits_dialog (GtkWidget *button,
                         gpointer   data)
 {
   GtkAboutDialog *about = (GtkAboutDialog *)data;
-  GtkAboutDialogPrivate *priv = (GtkAboutDialogPrivate *)about->private_data;
+  GtkAboutDialogPrivate *priv = gtk_about_dialog_get_instance_private (about);
   GtkWidget *dialog, *notebook;
   GtkDialog *credits_dialog;
+  GtkDialogProps *credits_dialog_props;
 
   if (priv->credits_dialog != NULL)
     {
@@ -2176,10 +2176,11 @@ display_credits_dialog (GtkWidget *button,
                                         GTK_STOCK_CLOSE, GTK_RESPONSE_CANCEL,
                                         NULL);
   credits_dialog = GTK_DIALOG (dialog);
+  credits_dialog_props = gtk_dialog_get_props (credits_dialog);
   __gtk_dialog_set_has_separator (credits_dialog, FALSE);
   __gtk_container_set_border_width (GTK_CONTAINER (credits_dialog), 5);
-  __gtk_box_set_spacing (GTK_BOX (credits_dialog->vbox), 2); /* 2 * 5 + 2 = 12 */
-  __gtk_container_set_border_width (GTK_CONTAINER (credits_dialog->action_area), 5);
+  __gtk_box_set_spacing (GTK_BOX (credits_dialog_props->vbox), 2); /* 2 * 5 + 2 = 12 */
+  __gtk_container_set_border_width (GTK_CONTAINER (credits_dialog_props->action_area), 5);
 
   priv->credits_dialog = dialog;
   __gtk_window_set_default_size (GTK_WINDOW (dialog), 360, 260);
@@ -2236,9 +2237,10 @@ display_license_dialog (GtkWidget *button,
                         gpointer   data)
 {
   GtkAboutDialog *about = (GtkAboutDialog *)data;
-  GtkAboutDialogPrivate *priv = (GtkAboutDialogPrivate *)about->private_data;
+  GtkAboutDialogPrivate *priv = gtk_about_dialog_get_instance_private (about);
   GtkWidget *dialog, *view, *sw;
   GtkDialog *licence_dialog;
+  GtkDialogProps *licence_dialog_props;
   gchar *strings[2];
 
   if (priv->license_dialog != NULL)
@@ -2253,10 +2255,11 @@ display_license_dialog (GtkWidget *button,
                                         GTK_STOCK_CLOSE, GTK_RESPONSE_CANCEL,
                                         NULL);
   licence_dialog = GTK_DIALOG (dialog);
+  licence_dialog_props = gtk_dialog_get_props (licence_dialog);
   __gtk_dialog_set_has_separator (licence_dialog, FALSE);
   __gtk_container_set_border_width (GTK_CONTAINER (licence_dialog), 5);
-  __gtk_box_set_spacing (GTK_BOX (licence_dialog->vbox), 2); /* 2 * 5 + 2 = 12 */
-  __gtk_container_set_border_width (GTK_CONTAINER (licence_dialog->action_area), 5);
+  __gtk_box_set_spacing (GTK_BOX (licence_dialog_props->vbox), 2); /* 2 * 5 + 2 = 12 */
+  __gtk_container_set_border_width (GTK_CONTAINER (licence_dialog_props->action_area), 5);
 
   priv->license_dialog = dialog;
   __gtk_window_set_default_size (GTK_WINDOW (dialog), 420, 320);
@@ -2387,7 +2390,7 @@ __gtk_about_dialog_set_url_hook (GtkAboutDialogActivateLinkFunc func,
 static void
 close_cb (GtkAboutDialog *about)
 {
-  GtkAboutDialogPrivate *priv = (GtkAboutDialogPrivate *)about->private_data;
+  GtkAboutDialogPrivate *priv = gtk_about_dialog_get_instance_private (about);
 
   if (priv->license_dialog != NULL)
     {

@@ -454,5 +454,3 @@ gtk_radio_menu_item_activate (GtkMenuItem *menu_item)
 
   __gtk_widget_queue_draw (GTK_WIDGET (radio_menu_item));
 }
-
-#define __GTK_RADIO_MENU_ITEM_C__

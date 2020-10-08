@@ -67,5 +67,3 @@ __gtk_hscrollbar_new (GtkAdjustment *adjustment)
                        "adjustment", adjustment,
                        NULL);
 }
-
-#define __GTK_HSCROLLBAR_C__

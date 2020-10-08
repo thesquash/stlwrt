@@ -1391,5 +1391,3 @@ ___gtk_action_group_emit_post_activate (GtkActionGroup *action_group,
 {
   g_signal_emit (action_group, action_group_signals[POST_ACTIVATE], 0, action);
 }
-
-#define __GTK_ACTION_GROUP_C__

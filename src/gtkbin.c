@@ -155,5 +155,3 @@ __gtk_bin_get_child (GtkBin *bin)
 
   return bin->child;
 }
-
-#define __GTK_BIN_C__

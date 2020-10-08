@@ -941,6 +941,3 @@ gtk_size_group_buildable_custom_finished (GtkBuildable  *buildable,
   g_slist_free (data->items);
   g_slice_free (GSListSubParserData, data);
 }
-
-
-#define __GTK_SIZE_GROUP_C__

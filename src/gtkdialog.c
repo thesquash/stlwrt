@@ -1562,5 +1562,3 @@ __gtk_dialog_get_content_area (GtkDialog *dialog)
 
   return dialog->vbox;
 }
-
-#define __GTK_DIALOG_C__

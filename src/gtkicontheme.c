@@ -3641,5 +3641,3 @@ __gtk_icon_info_get_filename (GtkIconInfo *icon_info)
 }
 
 #endif
-
-#define __GTK_ICON_THEME_C__

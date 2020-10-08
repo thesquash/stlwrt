@@ -2915,5 +2915,3 @@ make_all_relations (AtkObject *atk_obj,
   make_control_relations (atk_obj, priv->green_spinbutton);
   make_control_relations (atk_obj, priv->blue_spinbutton);
 }
-
-#define __GTK_COLOR_SELECTION_C__

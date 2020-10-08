@@ -651,5 +651,3 @@ __gdk_image_new (GdkImageType  type,
   return _gdk_image_new_for_depth (__gdk_visual_get_screen (visual), type,
 				   visual, width, height, -1);
 }
-
-#define __GDK_IMAGE_C__

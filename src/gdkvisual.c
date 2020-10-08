@@ -251,5 +251,3 @@ __gdk_visual_get_blue_pixel_details (GdkVisual *visual,
   if (precision)
     *precision = visual->blue_prec;
 }
-
-#define __GDK_VISUAL_C__

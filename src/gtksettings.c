@@ -2667,6 +2667,3 @@ get_color_scheme (GtkSettings *settings)
 
   return g_string_free (string, FALSE);
 }
-
-
-#define __GTK_SETTINGS_C__

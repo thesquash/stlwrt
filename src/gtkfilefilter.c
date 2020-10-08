@@ -434,5 +434,3 @@ __gtk_file_filter_filter (GtkFileFilter           *filter,
 
   return FALSE;
 }
-
-#define __GTK_FILE_FILTER_C__

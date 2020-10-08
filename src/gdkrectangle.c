@@ -120,5 +120,3 @@ gdk_rectangle_copy (const GdkRectangle *rectangle)
 }
 
 STLWRT_DEFINE_BOXED_TYPE (GdkRectangle, gdk_rectangle, gdk_rectangle_copy, g_free, ;)
-
-#define __GDK_RECTANGLE_C__

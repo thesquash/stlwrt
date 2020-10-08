@@ -2727,5 +2727,3 @@ __gtk_container_propagate_expose (GtkContainer   *container,
       __gdk_event_free (child_event);
     }
 }
-
-#define __GTK_CONTAINER_C__

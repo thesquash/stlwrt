@@ -255,5 +255,3 @@ __gtk_radio_tool_button_set_group (GtkRadioToolButton *button,
 
   __gtk_radio_button_set_group (get_radio_button (button), group);
 }
-
-#define __GTK_RADIO_TOOL_BUTTON_C__

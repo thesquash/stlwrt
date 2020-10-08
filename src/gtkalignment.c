@@ -633,5 +633,3 @@ __gtk_alignment_get_padding (GtkAlignment    *alignment,
   if(padding_right)
     *padding_right = priv->padding_right;
 }
-
-#define __GTK_ALIGNMENT_C__

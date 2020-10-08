@@ -354,5 +354,3 @@ __gtk_buildable_get_internal_child (GtkBuildable *buildable,
 
   return (* iface->get_internal_child) (buildable, builder, childname);
 }
-
-#define __GTK_BUILDABLE_C__

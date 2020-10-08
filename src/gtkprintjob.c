@@ -664,6 +664,3 @@ gtk_print_job_send (GtkPrintJob             *job,
 				  priv->spool_io,
                                   callback, user_data, dnotify);
 }
-
-
-#define __GTK_PRINT_JOB_C__

@@ -1069,5 +1069,3 @@ _gtk_socket_advance_toplevel_focus (GtkSocket        *socket,
         return;
     }
 }
-
-#define __GTK_SOCKET_C__

@@ -488,5 +488,3 @@ __gtk_file_chooser_dialog_new_with_backend (const gchar          *title,
 
   return result;
 }
-
-#define __GTK_FILE_CHOOSER_DIALOG_C__

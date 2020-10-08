@@ -11388,5 +11388,3 @@ __gtk_widget_send_focus_change (GtkWidget *widget,
 
   return res;
 }
-
-#define __GTK_WIDGET_C__

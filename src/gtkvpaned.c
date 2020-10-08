@@ -69,5 +69,3 @@ __gtk_vpaned_new (void)
 {
   return g_object_new (GTK_TYPE_VPANED, NULL);
 }
-
-#define __GTK_VPANED_C__

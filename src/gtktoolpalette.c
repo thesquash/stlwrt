@@ -1903,6 +1903,3 @@ _gtk_tool_palette_get_size_group (GtkToolPalette *palette)
 
   return palette->priv->text_size_group;
 }
-
-
-#define __GTK_TOOL_PALETTE_C__

@@ -739,5 +739,3 @@ __gtk_recent_action_set_show_numbers (GtkRecentAction *action,
       g_object_unref (action);
     }
 }
-
-#define __GTK_RECENT_ACTION_C__

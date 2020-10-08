@@ -867,5 +867,3 @@ gtk_viewport_style_set (GtkWidget *widget,
 	__gtk_style_set_background (widget->style, widget->window, widget->state);
      }
 }
-
-#define __GTK_VIEWPORT_C__

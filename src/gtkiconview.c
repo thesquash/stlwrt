@@ -9971,7 +9971,3 @@ gtk_icon_view_buildable_custom_tag_end (GtkBuildable *buildable,
     parent_buildable_iface->custom_tag_end (buildable, builder, child, tagname,
 					    data);
 }
-
-
-
-#define __GTK_ICON_VIEW_C__

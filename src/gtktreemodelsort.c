@@ -2521,5 +2521,3 @@ __gtk_tree_model_sort_iter_is_valid (GtkTreeModelSort *tree_model_sort,
   return __gtk_tree_model_sort_iter_is_valid_helper (iter,
 						   tree_model_sort->root);
 }
-
-#define __GTK_TREE_MODEL_SORT_C__

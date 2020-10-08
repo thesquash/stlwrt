@@ -1705,5 +1705,3 @@ __gdk_unicode_to_keyval (guint32 wc)
    */
   return wc | 0x01000000;
 }
-
-#define __GDK_KEYUNI_C__

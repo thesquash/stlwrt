@@ -551,5 +551,3 @@ init_stock_hash (void)
 				    NULL);
     }
 }
-
-#define __GTK_STOCK_C__

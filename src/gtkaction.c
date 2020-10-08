@@ -1922,5 +1922,3 @@ __gtk_action_create_menu (GtkAction *action)
 
   return NULL;
 }
-
-#define __GTK_ACTION_C__

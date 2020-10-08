@@ -1636,5 +1636,3 @@ gtk_table_size_allocate_pass2 (GtkTable *table)
 	}
     }
 }
-
-#define __GTK_TABLE_C__

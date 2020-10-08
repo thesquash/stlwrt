@@ -781,6 +781,3 @@ __gtk_link_button_get_visited (GtkLinkButton *link_button)
   
   return link_button->priv->visited;
 }
-
-
-#define __GTK_LINK_BUTTON_C__

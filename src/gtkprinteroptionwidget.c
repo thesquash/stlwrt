@@ -971,5 +971,3 @@ gtk_printer_option_widget_get_value (GtkPrinterOptionWidget *widget)
   
   return "";
 }
-
-#define __GTK_PRINTER_OPTION_WIDGET_C__

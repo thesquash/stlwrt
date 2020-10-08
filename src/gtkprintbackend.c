@@ -831,6 +831,3 @@ gtk_print_backend_destroy (GtkPrintBackend *print_backend)
    */
   g_object_run_dispose (G_OBJECT (print_backend));
 }
-
-
-#define __GTK_PRINT_BACKEND_C__

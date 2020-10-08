@@ -3785,5 +3785,3 @@ __gtk_tree_view_column_get_tree_view (GtkTreeViewColumn *tree_column)
 
   return tree_column->tree_view;
 }
-
-#define __GTK_TREE_VIEW_COLUMN_C__

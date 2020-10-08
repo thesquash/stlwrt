@@ -498,5 +498,3 @@ __gtk_fixed_get_has_window (GtkFixed *fixed)
 
   return __gtk_widget_get_has_window (GTK_WIDGET (fixed));
 }
-
-#define __GTK_FIXED_C__

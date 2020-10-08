@@ -338,5 +338,3 @@ __gdk_font_load (const gchar *font_name)
 {  
    return __gdk_font_load_for_display (__gdk_display_get_default(), font_name);
 }
-
-#define __GDK_FONT_C__

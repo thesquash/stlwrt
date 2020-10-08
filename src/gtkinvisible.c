@@ -299,5 +299,3 @@ gtk_invisible_constructor (GType                  type,
 
   return object;
 }
-
-#define __GTK_INVISIBLE_C__

@@ -3035,5 +3035,3 @@ __gtk_file_chooser_button_get_focus_on_click (GtkFileChooserButton *button)
 
   return button->priv->focus_on_click;
 }
-
-#define __GTK_FILE_CHOOSER_BUTTON_C__

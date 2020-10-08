@@ -2466,6 +2466,3 @@ gtk_assistant_buildable_custom_finished (GtkBuildable *buildable,
   parent_buildable_iface->custom_finished (buildable, builder, child,
                                            tagname, user_data);
 }
-
-
-#define __GTK_ASSISTANT_C__

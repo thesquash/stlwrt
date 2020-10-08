@@ -987,5 +987,3 @@ __gtk_cell_renderer_stop_editing (GtkCellRenderer *cell,
 	g_signal_emit (cell, cell_renderer_signals[EDITING_CANCELED], 0);
     }
 }
-
-#define __GTK_CELL_RENDERER_C__

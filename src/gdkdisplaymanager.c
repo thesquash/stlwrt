@@ -300,5 +300,3 @@ __gdk_set_allowed_backends (const gchar *backends)
 {
 	return;
 }
-
-#define __GDK_DISPLAY_MANAGER_C__

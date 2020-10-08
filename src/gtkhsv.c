@@ -1675,5 +1675,3 @@ gtk_hsv_move (GtkHSV          *hsv,
   
   __gtk_hsv_set_color (hsv, hue, sat, val);
 }
-
-#define __GTK_HSV_C__

@@ -519,5 +519,3 @@ __gtk_cell_renderer_toggle_set_activatable (GtkCellRendererToggle *toggle,
       g_object_notify (G_OBJECT (toggle), "activatable");
     }
 }
-
-#define __GTK_CELL_RENDERER_TOGGLE_C__

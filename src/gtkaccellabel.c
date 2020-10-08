@@ -858,5 +858,3 @@ __gtk_accel_label_refetch (GtkAccelLabel *accel_label)
 
   return FALSE;
 }
-
-#define __GTK_ACCEL_LABEL_C__

@@ -466,5 +466,3 @@ ___gtk_text_tag_table_remove_buffer (GtkTextTagTable *table,
   
   table->buffers = g_slist_remove (table->buffers, buffer);
 }
-
-#define __GTK_TEXT_TAG_TABLE_C__

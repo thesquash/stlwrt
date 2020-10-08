@@ -653,5 +653,3 @@ __gtk_menu_tool_button_set_arrow_tooltip_markup (GtkMenuToolButton *button,
 
   __gtk_widget_set_tooltip_markup (button->priv->arrow_button, markup);
 }
-
-#define __GTK_MENU_TOOL_BUTTON_C__

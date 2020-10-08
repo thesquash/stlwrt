@@ -694,5 +694,3 @@ __gtk_adjustment_clamp_page (GtkAdjustment *adjustment,
   if (need_emission)
     __gtk_adjustment_value_changed (adjustment);
 }
-
-#define __GTK_ADJUSTMENT_C__

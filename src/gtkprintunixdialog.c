@@ -4337,5 +4337,3 @@ gtk_print_unix_dialog_get_embed_page_setup (GtkPrintUnixDialog *dialog)
 
   return dialog->priv->embed_page_setup;
 }
-
-#define __GTK_PRINT_UNIX_DIALOG_C__

@@ -1242,5 +1242,3 @@ __gtk_im_context_simple_add_table (GtkIMContextSimple *context_simple,
 
   context_simple->tables = g_slist_prepend (context_simple->tables, table);
 }
-
-#define __GTK_IM_CONTEXT_SIMPLE_C__

@@ -2569,5 +2569,3 @@ ___gtk_recent_manager_sync (void)
       gtk_recent_manager_real_changed (recent_manager_singleton);
     }
 }
-
-#define __GTK_RECENT_MANAGER_C__

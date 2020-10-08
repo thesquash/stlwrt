@@ -910,6 +910,3 @@ __gtk_paper_size_to_key_file (GtkPaperSize *size,
   g_key_file_set_double (key_file, group_name,
 			 "Height", __gtk_paper_size_get_height (size, GTK_UNIT_MM));
 }
-
-
-#define __GTK_PAPER_SIZE_C__

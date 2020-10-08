@@ -3762,5 +3762,3 @@ __gdk_rgb_get_visual (void)
 {
   return __gdk_screen_get_rgb_visual (__gdk_screen_get_default ());
 }
-
-#define __GDK_RGB_C__

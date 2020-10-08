@@ -140,5 +140,3 @@ __gtk_cell_editable_remove_widget (GtkCellEditable *cell_editable)
 
   g_signal_emit_by_name (cell_editable, "remove-widget");
 }
-
-#define __GTK_CELL_EDITABLE_C__

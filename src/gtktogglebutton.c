@@ -528,5 +528,3 @@ gtk_toggle_button_update_state (GtkButton *button)
   ___gtk_button_set_depressed (button, depressed); 
   __gtk_widget_set_state (GTK_WIDGET (toggle_button), new_state);
 }
-
-#define __GTK_TOGGLE_BUTTON_C__

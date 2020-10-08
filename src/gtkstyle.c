@@ -7216,5 +7216,3 @@ __gtk_draw_insertion_cursor (GtkWidget          *widget,
   if (area)
     __gdk_gc_set_clip_rectangle (gc, NULL);
 }
-
-#define __GTK_STYLE_C__

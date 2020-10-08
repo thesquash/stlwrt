@@ -308,5 +308,3 @@ __gdk_keymap_get_default (void)
 {
   return __gdk_keymap_get_for_display (__gdk_display_get_default ());
 }
-
-#define __GDK_KEYS_C__

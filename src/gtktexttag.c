@@ -2344,5 +2344,3 @@ _gtk_text_tag_affects_nonsize_appearance (GtkTextTag *tag)
     tag->bg_full_height_set ||
     tag->pg_bg_color_set;
 }
-
-#define __GTK_TEXT_TAG_C__

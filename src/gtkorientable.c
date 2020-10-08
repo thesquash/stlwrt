@@ -98,5 +98,3 @@ __gtk_orientable_get_orientation (GtkOrientable *orientable)
 
   return orientation;
 }
-
-#define __GTK_ORIENTABLE_C__

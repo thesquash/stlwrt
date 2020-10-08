@@ -1262,6 +1262,3 @@ __gtk_print_capabilities_get_type (void)
 
   return etype;
 }
-
-
-#define __GTK_PRINTER_C__

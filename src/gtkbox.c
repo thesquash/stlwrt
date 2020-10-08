@@ -1257,5 +1257,3 @@ gtk_box_forall (GtkContainer *container,
 	(* callback) (child->widget, callback_data);
     }
 }
-
-#define __GTK_BOX_C__

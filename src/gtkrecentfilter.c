@@ -576,5 +576,3 @@ __gtk_recent_filter_filter (GtkRecentFilter           *filter,
   
   return FALSE;
 }
-
-#define __GTK_RECENT_FILTER_C__

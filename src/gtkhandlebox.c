@@ -1424,5 +1424,3 @@ gtk_handle_box_end_drag (GtkHandleBox *hb,
 					G_CALLBACK (gtk_handle_box_grab_event),
 					hb);
 }
-
-#define __GTK_HANDLE_BOX_C__

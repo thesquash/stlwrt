@@ -1304,5 +1304,3 @@ __gdk_display_pointer_is_grabbed (GdkDisplay *display)
   
   return (info && !info->implicit);
 }
-
-#define __GDK_DISPLAY_C__

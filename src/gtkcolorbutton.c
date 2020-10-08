@@ -859,5 +859,3 @@ gtk_color_button_get_property (GObject    *object,
       break;
     }
 }
-
-#define __GTK_COLOR_BUTTON_C__

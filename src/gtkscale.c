@@ -1719,5 +1719,3 @@ gtk_scale_buildable_custom_finished (GtkBuildable *buildable,
       g_slice_free (MarksSubparserData, marks_data);
     }
 }
-
-#define __GTK_SCALE_C__

@@ -1485,5 +1485,3 @@ __gtk_accelerator_get_default_mod_mask (void)
 {
   return default_accel_mod_mask;
 }
-
-#define __GTK_ACCEL_GROUP_C__

@@ -11358,6 +11358,3 @@ __gdk_window_get_height (GdkWindow *window)
 
   return height;
 }
-
-
-#define __GDK_WINDOW_C__

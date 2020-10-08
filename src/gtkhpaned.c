@@ -51,5 +51,3 @@ __gtk_hpaned_new (void)
 {
   return g_object_new (GTK_TYPE_HPANED, NULL);
 }
-
-#define __GTK_HPANED_C__

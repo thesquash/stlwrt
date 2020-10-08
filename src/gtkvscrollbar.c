@@ -81,5 +81,3 @@ __gtk_vscrollbar_new (GtkAdjustment *adjustment)
                        "adjustment", adjustment,
                        NULL);
 }
-
-#define __GTK_VSCROLLBAR_C__

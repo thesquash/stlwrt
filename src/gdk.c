@@ -655,5 +655,3 @@ __gdk_set_program_class (const char *program_class)
 
   gdk_progclass = g_strdup (program_class);
 }
-
-#define __GDK_C__

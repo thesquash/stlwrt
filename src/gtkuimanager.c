@@ -3064,5 +3064,3 @@ __gtk_ui_manager_add_ui_from_file (GtkUIManager *self,
 }
 
 #endif
-
-#define __GTK_UI_MANAGER_C__

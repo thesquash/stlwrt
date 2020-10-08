@@ -113,5 +113,3 @@ __gtk_hscale_new_with_range (gdouble min,
 
   return GTK_WIDGET (scale);
 }
-
-#define __GTK_HSCALE_C__

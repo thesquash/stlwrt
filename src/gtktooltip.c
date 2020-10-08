@@ -1636,6 +1636,3 @@ ___gtk_tooltip_handle_event (GdkEvent *event)
 	break;
     }
 }
-
-
-#define __GTK_TOOLTIP_C__

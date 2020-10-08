@@ -2382,5 +2382,3 @@ gtk_list_store_buildable_custom_tag_end (GtkBuildable *buildable,
   else
     g_warning ("Unknown custom list store tag: %s", tagname);
 }
-
-#define __GTK_LIST_STORE_C__

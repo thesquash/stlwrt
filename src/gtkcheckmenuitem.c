@@ -557,5 +557,3 @@ gtk_check_menu_item_set_property (GObject      *object,
       break;
     }
 }
-
-#define __GTK_CHECK_MENU_ITEM_C__

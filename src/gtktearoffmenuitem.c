@@ -248,5 +248,3 @@ gtk_tearoff_menu_item_parent_set (GtkWidget *widget,
 			tearoff_menu_item);
     }  
 }
-
-#define __GTK_TEAROFF_MENU_ITEM_C__

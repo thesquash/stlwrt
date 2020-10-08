@@ -1256,5 +1256,3 @@ __gtk_recent_chooser_menu_set_show_numbers (GtkRecentChooserMenu *menu,
   menu->priv->show_numbers = show_numbers;
   g_object_notify (G_OBJECT (menu), "show-numbers");
 }
-
-#define __GTK_RECENT_CHOOSER_MENU_C__

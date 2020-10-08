@@ -232,5 +232,3 @@ __gtk_tree_sortable_has_default_sort_func (GtkTreeSortable *sortable)
   
   return (* iface->has_default_sort_func) (sortable);
 }
-
-#define __GTK_TREE_SORTABLE_C__

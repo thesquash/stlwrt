@@ -1258,6 +1258,3 @@ ___gtk_tool_button_get_button (GtkToolButton *button)
 
   return button->priv->button;
 }
-
-
-#define __GTK_TOOL_BUTTON_C__

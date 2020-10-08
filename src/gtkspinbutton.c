@@ -2332,5 +2332,3 @@ __gtk_spin_button_update (GtkSpinButton *spin_button)
   else
     __gtk_spin_button_set_value (spin_button, val);
 }
-
-#define __GTK_SPIN_BUTTON_C__

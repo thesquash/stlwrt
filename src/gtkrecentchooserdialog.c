@@ -344,5 +344,3 @@ __gtk_recent_chooser_dialog_new_for_manager (const gchar      *title,
   
   return result;
 }
-
-#define __GTK_RECENT_CHOOSER_DIALOG_C__

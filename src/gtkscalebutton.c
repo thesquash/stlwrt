@@ -1556,5 +1556,3 @@ gtk_scale_button_scale_value_changed (GtkRange *range)
   g_signal_emit (button, signals[VALUE_CHANGED], 0, value);
   g_object_notify (G_OBJECT (button), "value");
 }
-
-#define __GTK_SCALE_BUTTON_C__

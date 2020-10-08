@@ -825,5 +825,3 @@ deserialize_quark (void)
 
   return quark;
 }
-
-#define __GTK_TEXT_BUFFER_RICH_TEXT_C__

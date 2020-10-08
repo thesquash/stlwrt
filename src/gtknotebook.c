@@ -8069,5 +8069,3 @@ __gtk_notebook_set_action_widget (GtkNotebook *notebook,
 
   __gtk_widget_queue_resize (GTK_WIDGET (notebook));
 }
-
-#define __GTK_NOTEBOOK_C__

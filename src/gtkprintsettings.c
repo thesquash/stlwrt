@@ -1924,6 +1924,3 @@ __gtk_print_settings_to_key_file (GtkPrintSettings  *settings,
 			      (GtkPrintSettingsFunc) add_value_to_key_file,
 			      &data);
 }
-
-
-#define __GTK_PRINT_SETTINGS_C__

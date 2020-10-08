@@ -131,5 +131,3 @@ __gdk_utf8_to_compound_text (const gchar *str,
 						str, encoding, format, 
 						ctext, length);
 }
-
-#define __GDK_SELECTION_C__

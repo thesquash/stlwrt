@@ -118,5 +118,3 @@ gtk_accessible_real_connect_widget_destroyed (GtkAccessible *accessible)
                       &accessible->widget);
   }
 }
-
-#define __GTK_ACCESSIBLE_C__

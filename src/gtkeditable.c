@@ -402,5 +402,3 @@ __gtk_editable_get_editable (GtkEditable *editable)
 
   return value;
 }
-
-#define __GTK_EDITABLE_C__

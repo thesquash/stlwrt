@@ -154,6 +154,3 @@ __gtk_scrollbar_new (GtkOrientation  orientation,
                        "adjustment",  adjustment,
                        NULL);
 }
-
-
-#define __GTK_SCROLLBAR_C__

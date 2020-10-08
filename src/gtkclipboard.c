@@ -2086,5 +2086,3 @@ ___gtk_clipboard_store_all (void)
   g_slist_free (displays);
   
 }
-
-#define __GTK_CLIPBOARD_C__

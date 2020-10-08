@@ -4033,5 +4033,3 @@ __gtk_calendar_thaw (GtkCalendar *calendar)
 {
   g_return_if_fail (GTK_IS_CALENDAR (calendar));
 }
-
-#define __GTK_CALENDAR_C__

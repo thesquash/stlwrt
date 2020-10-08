@@ -545,5 +545,3 @@ __gtk_activatable_get_use_action_appearance  (GtkActivatable *activatable)
 
   return use_appearance;
 }
-
-#define __GTK_ACTIVATABLE_C__

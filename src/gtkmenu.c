@@ -5277,5 +5277,3 @@ __gtk_menu_get_reserve_toggle_size (GtkMenu *menu)
 
   return !priv->no_toggle_size;
 }
-
-#define __GTK_MENU_C__

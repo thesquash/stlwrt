@@ -204,5 +204,3 @@ __gdk_drag_context_get_protocol (GdkDragContext *context)
 
   return context->protocol;
 }
-
-#define __GDK_DND_C__

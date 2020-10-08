@@ -522,5 +522,3 @@ __gtk_combo_box_text_get_active_text (GtkComboBoxText *combo_box)
 
   return text;
 }
-
-#define __GTK_COMBO_BOX_TEXT_C__

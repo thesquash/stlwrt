@@ -7291,5 +7291,3 @@ _gtk_text_btree_spew_segment (GtkTextBTree* tree, GtkTextLineSegment * seg)
               seg->body.toggle.info->tag->priority);
     }
 }
-
-#define __GTK_TEXT_BTREE_C__

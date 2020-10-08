@@ -658,5 +658,3 @@ gtk_cell_renderer_progress_render (GtkCellRenderer *cell,
       g_object_unref (layout);
     }
 }
-
-#define __GTK_CELL_RENDERER_PROGRESS_C__

@@ -921,5 +921,3 @@ __gtk_menu_bar_set_child_pack_direction (GtkMenuBar       *menubar,
       g_object_notify (G_OBJECT (menubar), "child-pack-direction");
     }
 }
-
-#define __GTK_MENU_BAR_C__

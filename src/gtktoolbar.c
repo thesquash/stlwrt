@@ -5009,5 +5009,3 @@ toolbar_rebuild_menu (GtkToolShell *shell)
   
   __gtk_widget_queue_resize (GTK_WIDGET (shell));
 }
-
-#define __GTK_TOOLBAR_C__

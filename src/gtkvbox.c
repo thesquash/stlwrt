@@ -80,5 +80,3 @@ __gtk_vbox_new (gboolean homogeneous,
                        "homogeneous", homogeneous ? TRUE : FALSE,
                        NULL);
 }
-
-#define __GTK_VBOX_C__

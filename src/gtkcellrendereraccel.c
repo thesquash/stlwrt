@@ -678,6 +678,3 @@ gtk_cell_renderer_accel_start_editing (GtkCellRenderer      *cell,
   
   return GTK_CELL_EDITABLE (accel->edit_widget);
 }
-
-
-#define __GTK_CELL_RENDERER_ACCEL_C__

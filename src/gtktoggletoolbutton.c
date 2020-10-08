@@ -445,5 +445,3 @@ __gtk_toggle_tool_button_get_active (GtkToggleToolButton *button)
 
   return button->priv->active;
 }
-
-#define __GTK_TOGGLE_TOOL_BUTTON_C__

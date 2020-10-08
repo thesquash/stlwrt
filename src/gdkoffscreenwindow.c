@@ -1304,5 +1304,3 @@ gdk_offscreen_window_impl_iface_init (GdkWindowImplIface *iface)
   iface->get_pointer = gdk_offscreen_window_get_pointer;
   iface->destroy = gdk_offscreen_window_destroy;
 }
-
-#define __GDK_OFFSCREEN_WINDOW_C__

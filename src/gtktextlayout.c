@@ -3716,5 +3716,3 @@ gtk_text_layout_buffer_delete_range (GtkTextBuffer *textbuffer,
 
   gtk_text_layout_update_cursor_line (layout);
 }
-
-#define __GTK_TEXT_LAYOUT_C__

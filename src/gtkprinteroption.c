@@ -234,6 +234,3 @@ gtk_printer_option_get_activates_default (GtkPrinterOption *option)
 
   return option->activates_default;
 }
-
-
-#define __GTK_PRINTER_OPTION_C__

@@ -249,6 +249,3 @@ __gtk_separator_new (GtkOrientation orientation)
                        "orientation", orientation,
                        NULL);
 }
-
-
-#define __GTK_SEPARATOR_C__

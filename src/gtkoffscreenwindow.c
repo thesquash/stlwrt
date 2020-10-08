@@ -316,5 +316,3 @@ __gtk_offscreen_window_get_pixbuf (GtkOffscreenWindow *offscreen)
 
   return pixbuf;
 }
-
-#define __GTK_OFFSCREEN_WINDOW_C__

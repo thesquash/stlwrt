@@ -2241,5 +2241,3 @@ __gtk_paned_get_handle_window (GtkPaned *paned)
 
   return paned->handle;
 }
-
-#define __GTK_PANED_C__

@@ -194,5 +194,3 @@ __gtk_file_chooser_widget_new_with_backend (GtkFileChooserAction  action,
 		       "action", action,
 		       NULL);
 }
-
-#define __GTK_FILE_CHOOSER_WIDGET_C__

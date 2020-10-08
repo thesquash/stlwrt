@@ -4936,5 +4936,3 @@ __gtk_rc_parse (const gchar *filename)
 }
 
 #endif
-
-#define __GTK_RC_C__

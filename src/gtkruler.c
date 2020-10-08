@@ -889,5 +889,3 @@ gtk_ruler_real_draw_pos (GtkRuler *ruler)
 	}
     }
 }
-
-#define __GTK_RULER_C__

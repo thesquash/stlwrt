@@ -285,5 +285,3 @@ __gdk_app_launch_context_new (void)
 {
   return g_object_new (GDK_TYPE_APP_LAUNCH_CONTEXT, NULL);
 }
-
-#define __GDK_APP_LAUNCH_CONTEXT_C__

@@ -422,5 +422,3 @@ gtk_real_check_button_draw_indicator (GtkCheckButton *check_button,
 		       x, y, indicator_size, indicator_size);
     }
 }
-
-#define __GTK_CHECK_BUTTON_C__

@@ -2484,5 +2484,3 @@ __gtk_image_set_from_file   (GtkImage    *image,
 }
 
 #endif
-
-#define __GTK_IMAGE_C__

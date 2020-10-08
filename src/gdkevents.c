@@ -1360,5 +1360,3 @@ __gdk_setting_get (const gchar *name,
 {
   return __gdk_screen_get_setting (__gdk_screen_get_default (), name, value);
 }
-
-#define __GDK_EVENTS_C__

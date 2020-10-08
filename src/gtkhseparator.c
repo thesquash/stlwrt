@@ -51,5 +51,3 @@ __gtk_hseparator_new (void)
 {
   return g_object_new (GTK_TYPE_HSEPARATOR, NULL);
 }
-
-#define __GTK_HSEPARATOR_C__

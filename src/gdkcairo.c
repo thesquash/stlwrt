@@ -347,6 +347,3 @@ __gdk_cairo_set_source_window (cairo_t   *cr,
   cairo_set_source_surface (cr, surface, x, y);
   cairo_surface_destroy (surface);
 }
-
-
-#define __GDK_CAIRO_C__

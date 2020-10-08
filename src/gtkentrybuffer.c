@@ -741,5 +741,3 @@ __gtk_entry_buffer_emit_deleted_text (GtkEntryBuffer *buffer,
   g_return_if_fail (GTK_IS_ENTRY_BUFFER (buffer));
   g_signal_emit (buffer, signals[DELETED_TEXT], 0, position, n_chars);
 }
-
-#define __GTK_ENTRY_BUFFER_C__

@@ -1924,5 +1924,3 @@ _gtk_translate_keyboard_accel_state (GdkKeymap       *keymap,
 
   return retval;
 }
-
-#define __GTK_MAIN_C__

@@ -380,5 +380,3 @@ __gdk_colormap_get_system (void)
 {
   return __gdk_screen_get_system_colormap (__gdk_screen_get_default ());
 }
-
-#define __GDK_COLOR_C__

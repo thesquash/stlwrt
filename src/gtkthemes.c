@@ -168,5 +168,3 @@ gtk_theme_engine_create_rc_style (GtkThemeEngine *engine)
 
   return engine->create_rc_style ();
 }
-
-#define __GTK_THEMES_C__

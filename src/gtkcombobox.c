@@ -6276,5 +6276,3 @@ gtk_combo_box_buildable_get_internal_child (GtkBuildable *buildable,
 
   return parent_buildable_iface->get_internal_child (buildable, builder, childname);
 }
-
-#define __GTK_COMBO_BOX_C__

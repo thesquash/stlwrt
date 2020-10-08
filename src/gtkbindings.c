@@ -1721,5 +1721,3 @@ ___gtk_binding_reset_parsed (void)
       slist = next;
     }
 }
-
-#define __GTK_BINDINGS_C__

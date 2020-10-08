@@ -1468,5 +1468,3 @@ gtk_tree_selection_real_select_node (GtkTreeSelection *selection,
 
   return FALSE;
 }
-
-#define __GTK_TREE_SELECTION_C__

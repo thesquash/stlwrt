@@ -4400,5 +4400,3 @@ ___gtk_text_buffer_spew (GtkTextBuffer *buffer)
 {
   _gtk_text_btree_spew (get_btree (buffer));
 }
-
-#define __GTK_TEXT_BUFFER_C__

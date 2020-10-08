@@ -842,5 +842,3 @@ GtkWidget*
                        "orientation", orientation,
                        NULL);
 }
-
-#define __GTK_BUTTON_BOX_C__

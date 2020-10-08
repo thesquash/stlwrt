@@ -1062,5 +1062,3 @@ _gtk_plug_focus_first_last (GtkPlug          *plug,
 
   __gtk_widget_child_focus (GTK_WIDGET (plug), direction);
 }
-
-#define __GTK_PLUG_C__

@@ -8541,5 +8541,3 @@ __gtk_window_set_default_icon_from_file (const gchar *filename,
 }
 
 #endif
-
-#define __GTK_WINDOW_C__

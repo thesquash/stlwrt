@@ -1834,5 +1834,3 @@ __gtk_menu_shell_set_take_focus (GtkMenuShell *menu_shell,
       g_object_notify (G_OBJECT (menu_shell), "take-focus");
     }
 }
-
-#define __GTK_MENU_SHELL_C__

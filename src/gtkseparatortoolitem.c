@@ -279,5 +279,3 @@ __gtk_separator_tool_item_set_draw (GtkSeparatorToolItem *item,
       g_object_notify (G_OBJECT (item), "draw");
     }
 }
-
-#define __GTK_SEPARATOR_TOOL_ITEM_C__

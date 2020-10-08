@@ -305,5 +305,3 @@ gtk_arrow_expose (GtkWidget      *widget,
 
   return FALSE;
 }
-
-#define __GTK_ARROW_C__

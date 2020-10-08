@@ -1758,5 +1758,3 @@ ___gtk_scrolled_window_get_scrollbar_spacing (GtkScrolledWindow *scrolled_window
       return scrollbar_spacing;
     }
 }
-
-#define __GTK_SCROLLED_WINDOW_C__

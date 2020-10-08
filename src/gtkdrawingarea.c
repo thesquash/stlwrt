@@ -146,5 +146,3 @@ gtk_drawing_area_send_configure (GtkDrawingArea *darea)
   __gtk_widget_event (widget, event);
   __gdk_event_free (event);
 }
-
-#define __GTK_DRAWING_AREA_C__

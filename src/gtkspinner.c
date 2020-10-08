@@ -619,5 +619,3 @@ __gtk_spinner_stop (GtkSpinner *spinner)
 
   gtk_spinner_set_active (spinner, FALSE);
 }
-
-#define __GTK_SPINNER_C__

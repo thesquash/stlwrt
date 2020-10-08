@@ -640,5 +640,3 @@ const GtkTextLineSegmentClass gtk_text_toggle_off_type = {
   toggle_segment_line_change_func,                      /* lineChangeFunc */
   _gtk_toggle_segment_check_func                        /* checkFunc */
 };
-
-#define __GTK_TEXT_SEGMENT_C__

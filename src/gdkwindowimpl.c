@@ -24,5 +24,3 @@
 #include <gdkinternals.h>
 
 STLWRT_DEFINE_INTERFACE (GdkWindowImpl, gdk_window_impl, G_TYPE_OBJECT, NULL, ;)
-
-#define __GDK_WINDOW_IMPL_C__

@@ -15633,5 +15633,3 @@ __gtk_tree_view_get_tooltip_column (GtkTreeView *tree_view)
 
   return tree_view->priv->tooltip_column;
 }
-
-#define __GTK_TREE_VIEW_C__

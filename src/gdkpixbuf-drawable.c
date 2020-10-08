@@ -1415,5 +1415,3 @@ __gdk_pixbuf_get_from_image (GdkPixbuf   *dest,
   
   return dest;
 }
-
-#define __GDK_PIXBUF_DRAWABLE_C__

@@ -1622,5 +1622,3 @@ _gtk_builder_get_absolute_filename (GtkBuilder *builder, const gchar *string)
   
   return filename;
 }
-
-#define __GTK_BUILDER_C__

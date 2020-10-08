@@ -519,6 +519,3 @@ __gtk_print_context_create_pango_layout (GtkPrintContext *context)
 
   return layout;
 }
-
-
-#define __GTK_PRINT_CONTEXT_C__

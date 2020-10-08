@@ -131,5 +131,3 @@ __gtk_vscale_new_with_range (gdouble min,
 
   return GTK_WIDGET (scale);
 }
-
-#define __GTK_VSCALE_C__

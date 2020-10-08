@@ -1033,5 +1033,3 @@ label_selectable_changed (GtkWidget  *label,
       statusbar->has_resize_grip && statusbar->grip_window)
     __gdk_window_raise (statusbar->grip_window);
 }
-
-#define __GTK_STATUSBAR_C__

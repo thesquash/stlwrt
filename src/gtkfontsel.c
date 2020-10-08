@@ -1869,5 +1869,3 @@ __gtk_font_selection_dialog_set_preview_text (GtkFontSelectionDialog *fsd,
 
   __gtk_font_selection_set_preview_text (GTK_FONT_SELECTION (fsd->fontsel), text);
 }
-
-#define __GTK_FONTSEL_C__

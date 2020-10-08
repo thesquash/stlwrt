@@ -5565,5 +5565,3 @@ _gtk_text_iter_check (const GtkTextIter *iter)
   if (_gtk_text_line_is_last (real->line, real->tree))
     g_error ("Iterator was on last line (past the end iterator)");
 }
-
-#define __GTK_TEXT_ITER_C__

@@ -3972,6 +3972,3 @@ __gtk_range_get_round_digits (GtkRange *range)
 
   return range->round_digits;
 }
-
-
-#define __GTK_RANGE_C__

@@ -1390,5 +1390,3 @@ __gtk_tool_item_toolbar_reconfigured (GtkToolItem *tool_item)
 
   __gtk_widget_queue_resize (GTK_WIDGET (tool_item));
 }
-
-#define __GTK_TOOL_ITEM_C__

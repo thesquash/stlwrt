@@ -347,6 +347,3 @@ __gtk_cell_renderer_spin_new (void)
 {
   return g_object_new (GTK_TYPE_CELL_RENDERER_SPIN, NULL);
 }
-
-
-#define __GTK_CELL_RENDERER_SPIN_C__

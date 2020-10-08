@@ -344,5 +344,3 @@ create_menu_item (GtkAction *action)
 		       "draw-as-radio", toggle_action->private_data->draw_as_radio,
 		       NULL);
 }
-
-#define __GTK_TOGGLE_ACTION_C__

@@ -784,5 +784,3 @@ __gtk_page_setup_to_key_file (GtkPageSetup *setup,
 			 "Orientation", orientation);
   g_free (orientation);
 }
-
-#define __GTK_PAGE_SETUP_C__

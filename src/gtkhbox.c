@@ -82,5 +82,3 @@ __gtk_hbox_new (gboolean homogeneous,
                        "homogeneous", homogeneous ? TRUE : FALSE,
                        NULL);
 }
-
-#define __GTK_HBOX_C__

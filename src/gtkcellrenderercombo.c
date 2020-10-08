@@ -487,5 +487,3 @@ gtk_cell_renderer_combo_start_editing (GtkCellRenderer     *cell,
 
   return GTK_CELL_EDITABLE (combo);
 }
-
-#define __GTK_CELL_RENDERER_COMBO_C__

@@ -1184,5 +1184,3 @@ _gtk_recent_chooser_get_use_action_appearance (GtkRecentChooser *recent_chooser)
 {
   return !GPOINTER_TO_INT (g_object_get_qdata (G_OBJECT (recent_chooser), quark_gtk_use_action_appearance));
 }
-
-#define __GTK_RECENT_CHOOSER_C__

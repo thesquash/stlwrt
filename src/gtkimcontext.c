@@ -711,5 +711,3 @@ __gtk_im_context_delete_surrounding (GtkIMContext *context,
 
   return result;
 }
-
-#define __GTK_IM_CONTEXT_C__

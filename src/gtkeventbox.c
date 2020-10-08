@@ -572,5 +572,3 @@ gtk_event_box_expose (GtkWidget      *widget,
 
   return FALSE;
 }
-
-#define __GTK_EVENT_BOX_C__

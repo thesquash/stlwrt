@@ -542,5 +542,3 @@ gdk_screen_set_property (GObject      *object,
       break;
     }
 }
-
-#define __GDK_SCREEN_C__

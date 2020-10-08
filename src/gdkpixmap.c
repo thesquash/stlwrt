@@ -843,5 +843,3 @@ __gdk_pixmap_get_size (GdkPixmap *pixmap,
 
     __gdk_drawable_get_size (pixmap, width, height);
 }
-
-#define __GDK_PIXMAP_C__

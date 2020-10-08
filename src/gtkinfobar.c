@@ -1254,6 +1254,3 @@ __gtk_info_bar_get_message_type (GtkInfoBar *info_bar)
 
   return priv->message_type;
 }
-
-
-#define __GTK_INFO_BAR_C__

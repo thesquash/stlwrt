@@ -1,4 +1,6 @@
-/* $TOG: Region.c /main/31 1998/02/06 17:50:22 kaleb $ */
+/* 
+TOG: Region.c /main/31 1998/02/06 17:50:22 kaleb 
+ */
 /************************************************************************
 
 Copyright 1987, 1988, 1998  The Open Group
@@ -41,7 +43,9 @@ ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
 SOFTWARE.
 
 ************************************************************************/
-/* $XFree86: xc/lib/X11/Region.c,v 1.5 1999/05/09 10:50:01 dawes Exp $ */
+/* 
+XFree86: xc/lib/X11/Region.c,v 1.5 1999/05/09 10:50:01 dawes Exp 
+ */
 /*
  * The functions in this file implement the Region abstraction, similar to one
  * used in the X11 sample server. A Region is simply an area, as the name
@@ -1906,5 +1910,3 @@ __gdk_region_spans_intersect_foreach (GdkRegion     *region,
       pbox++;
     }
 }
-
-#define __GDK_REGION_GENERIC_C__

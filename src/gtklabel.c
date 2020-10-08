@@ -6012,6 +6012,3 @@ gtk_label_query_tooltip (GtkWidget  *widget,
                                                                    keyboard_tip,
                                                                    tooltip);
 }
-
-
-#define __GTK_LABEL_C__

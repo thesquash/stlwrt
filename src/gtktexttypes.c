@@ -46,5 +46,3 @@ gtk_text_byte_begins_utf8_char (const gchar *byte)
 {
   return inline_byte_begins_utf8_char (byte);
 }
-
-#define __GTK_TEXT_TYPES_C__

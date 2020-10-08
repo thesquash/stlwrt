@@ -9305,5 +9305,3 @@ __gtk_text_view_move_visually (GtkTextView *text_view,
 
   return gtk_text_layout_move_iter_visually (text_view->layout, iter, count);
 }
-
-#define __GTK_TEXT_VIEW_C__

@@ -125,5 +125,3 @@ __gdk_keyval_from_name (const gchar *keyval_name)
   else
     return GDK_VoidSymbol;
 }
-
-#define __GDK_KEYNAMES_C__

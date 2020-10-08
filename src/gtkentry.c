@@ -10121,5 +10121,3 @@ keymap_state_changed (GdkKeymap *keymap,
   else
     remove_capslock_feedback (entry);
 }
-
-#define __GTK_ENTRY_C__

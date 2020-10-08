@@ -412,5 +412,3 @@ gtk_gc_drawable_equal (GtkGCDrawable *a,
 {
   return (a->depth == b->depth);
 }
-
-#define __GTK_GC_C__

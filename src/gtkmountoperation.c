@@ -1531,5 +1531,3 @@ __gtk_mount_operation_get_screen (GtkMountOperation *op)
   else
     return __gdk_screen_get_default ();
 }
-
-#define __GTK_MOUNT_OPERATION_C__

@@ -1111,5 +1111,3 @@ gtk_layout_adjustment_changed (GtkAdjustment *adjustment,
       __gdk_window_process_updates (layout->bin_window, TRUE);
     }
 }
-
-#define __GTK_LAYOUT_C__

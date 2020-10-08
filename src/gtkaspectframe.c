@@ -347,5 +347,3 @@ gtk_aspect_frame_compute_child_allocation (GtkFrame      *frame,
   else
     GTK_FRAME_CLASS (gtk_aspect_frame_parent_class)->compute_child_allocation (frame, child_allocation);
 }
-
-#define __GTK_ASPECT_FRAME_C__

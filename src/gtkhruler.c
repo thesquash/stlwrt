@@ -53,5 +53,3 @@ __gtk_hruler_new (void)
 {
   return g_object_new (GTK_TYPE_HRULER, NULL);
 }
-
-#define __GTK_HRULER_C__

@@ -725,5 +725,3 @@ gtk_frame_real_compute_child_allocation (GtkFrame      *frame,
   child_allocation->x += allocation->x;
   child_allocation->y += allocation->y;
 }
-
-#define __GTK_FRAME_C__

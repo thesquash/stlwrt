@@ -83,5 +83,3 @@ __gtk_vruler_new (void)
 {
   return g_object_new (GTK_TYPE_VRULER, NULL);
 }
-
-#define __GTK_VRULER_C__

@@ -3152,5 +3152,3 @@ gtk_selection_bytes_per_item (gint format)
     }
   return 0;
 }
-
-#define __GTK_SELECTION_C__

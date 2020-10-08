@@ -2466,5 +2466,3 @@ __gtk_show_about_dialog (GtkWindow   *parent,
 
   __gtk_window_present (GTK_WINDOW (dialog));
 }
-
-#define __GTK_ABOUT_DIALOG_C__

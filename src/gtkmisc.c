@@ -335,5 +335,3 @@ gtk_misc_realize (GtkWidget *widget)
       __gdk_window_set_back_pixmap (widget->window, NULL, TRUE);
     }
 }
-
-#define __GTK_MISC_C__

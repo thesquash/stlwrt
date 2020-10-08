@@ -1038,5 +1038,3 @@ gtk_image_menu_item_screen_changed (GtkWidget *widget,
 
   show_image_change_notify (GTK_IMAGE_MENU_ITEM (widget));
 }
-
-#define __GTK_IMAGE_MENU_ITEM_C__

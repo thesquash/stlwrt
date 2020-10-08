@@ -1496,5 +1496,3 @@ __gdk_pango_context_get_for_screen (GdkScreen *screen)
 
   return context;
 }
-
-#define __GDK_PANGO_C__

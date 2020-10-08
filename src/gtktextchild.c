@@ -512,5 +512,3 @@ gtk_text_anchored_child_set_layout (GtkWidget     *child,
   
   _gtk_anchored_child_set_layout (child, layout);
 }
-
-#define __GTK_TEXT_CHILD_C__

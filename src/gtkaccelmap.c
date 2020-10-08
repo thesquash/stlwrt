@@ -1034,5 +1034,3 @@ __gtk_accel_map_save (const gchar *file_name)
 }
 
 #endif
-
-#define __GTK_ACCEL_MAP_C__

@@ -492,5 +492,3 @@ mark_segment_check_func (GtkTextLineSegment *seg,
   if (seg->body.mark.line != line)
     g_error ("mark_segment_check_func: seg->body.mark.line bogus");
 }
-
-#define __GTK_TEXT_MARK_C__

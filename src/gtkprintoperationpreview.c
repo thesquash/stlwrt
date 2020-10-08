@@ -151,6 +151,3 @@ __gtk_print_operation_preview_is_selected (GtkPrintOperationPreview *preview,
 
   return GTK_PRINT_OPERATION_PREVIEW_GET_IFACE (preview)->is_selected (preview, page_nr);
 }
-
-
-#define __GTK_PRINT_OPERATION_PREVIEW_C__

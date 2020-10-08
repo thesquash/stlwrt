@@ -79,6 +79,3 @@ __gtk_show_uri (GdkScreen    *screen,
 
   return ret;
 }
-
-
-#define __GTK_SHOW_C__

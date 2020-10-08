@@ -769,5 +769,3 @@ gtk_cell_renderer_pixbuf_render (GtkCellRenderer      *cell,
   if (colorized)
     g_object_unref (colorized);
 }
-
-#define __GTK_CELL_RENDERER_PIXBUF_C__

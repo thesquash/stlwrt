@@ -1154,6 +1154,3 @@ populate_dialog (GtkCustomPaperUnixDialog *dialog)
 
   load_print_backends (dialog);
 }
-
-
-#define __GTK_CUSTOM_PAPER_UNIX_DIALOG_C__

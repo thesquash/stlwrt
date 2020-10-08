@@ -2406,6 +2406,3 @@ _gtk_tool_item_group_palette_reconfigured (GtkToolItemGroup *group)
 
   gtk_tool_item_group_header_adjust_style (group);
 }
-
-
-#define __GTK_TOOL_ITEM_GROUP_C__

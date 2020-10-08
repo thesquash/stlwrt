@@ -2226,7 +2226,3 @@ __gtk_menu_item_get_use_underline (GtkMenuItem *menu_item)
 
   return FALSE;
 }
-
-
-
-#define __GTK_MENU_ITEM_C__

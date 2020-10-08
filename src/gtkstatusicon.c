@@ -2961,6 +2961,3 @@ __gtk_status_icon_set_name (GtkStatusIcon *status_icon,
     __gtk_window_set_wmclass (GTK_WINDOW (priv->tray_icon), name, name);
 #endif
 }
-
-
-#define __GTK_STATUS_ICON_C__

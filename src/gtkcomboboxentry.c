@@ -470,5 +470,3 @@ gtk_combo_box_entry_get_active_text (GtkComboBox *combo_box)
 
   return NULL;
 }
-
-#define __GTK_COMBO_BOX_ENTRY_C__

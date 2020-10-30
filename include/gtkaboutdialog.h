@@ -84,7 +84,7 @@ struct _GtkAboutDialogPrivate
   guint wrap_license : 1;
 };
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkAboutDialog, gtk_about_dialog, GtkDialog,
+STLWRT_DECLARE_VTYPE(GtkAboutDialog, gtk_about_dialog, GtkDialog,
   /*< private >*/
   gpointer  (private_data);
 )

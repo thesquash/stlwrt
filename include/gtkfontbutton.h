@@ -43,7 +43,7 @@ G_BEGIN_DECLS
 typedef struct _GtkFontButtonClass   GtkFontButtonClass;
 typedef struct _GtkFontButtonPrivate GtkFontButtonPrivate;
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkFontButton, gtk_font_button, GtkButton,
+STLWRT_DECLARE_VTYPE(GtkFontButton, gtk_font_button, GtkButton,
   /*< private >*/
   GtkFontButtonPrivate * (priv);
 )

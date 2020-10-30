@@ -38,7 +38,7 @@ G_BEGIN_DECLS
 
 typedef struct _GtkScrollbarClass   GtkScrollbarClass;
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkScrollbar, gtk_scrollbar, GtkRange, ;)
+STLWRT_DECLARE_FTYPE_VPARENT(GtkScrollbar, gtk_scrollbar, GtkRange)
 
 struct _GtkScrollbarClass
 {

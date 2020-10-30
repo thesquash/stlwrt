@@ -38,7 +38,7 @@ G_BEGIN_DECLS
 
 typedef struct _GtkHButtonBoxClass  GtkHButtonBoxClass;
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkHButtonBox, gtk_hbutton_box, GtkButtonBox, ;)
+STLWRT_DECLARE_FTYPE_VPARENT(GtkHButtonBox, gtk_hbutton_box, GtkButtonBox)
 
 struct _GtkHButtonBoxClass
 {

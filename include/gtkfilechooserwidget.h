@@ -41,7 +41,7 @@ G_BEGIN_DECLS
 typedef struct _GtkFileChooserWidgetPrivate GtkFileChooserWidgetPrivate;
 typedef struct _GtkFileChooserWidgetClass   GtkFileChooserWidgetClass;
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkFileChooserWidget, gtk_file_chooser_widget, GtkVBox,
+STLWRT_DECLARE_VTYPE(GtkFileChooserWidget, gtk_file_chooser_widget, GtkVBox,
   GtkFileChooserWidgetPrivate * (priv);
 )
 

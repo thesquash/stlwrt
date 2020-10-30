@@ -63,7 +63,7 @@ struct _GtkToolItemPrivate
   gboolean   use_action_appearance;
 };
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkToolItem, gtk_tool_item, GtkBin,
+STLWRT_DECLARE_VTYPE(GtkToolItem, gtk_tool_item, GtkBin,
   /*< private >*/
   GtkToolItemPrivate * (priv);
 )

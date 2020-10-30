@@ -47,7 +47,7 @@ typedef void (* GtkColorSelectionChangePaletteWithScreenFunc) (GdkScreen        
 							       const GdkColor    *colors,
 							       gint               n_colors);
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkColorSelection, gtk_color_selection, GtkVBox,
+STLWRT_DECLARE_VTYPE(GtkColorSelection, gtk_color_selection, GtkVBox,
   /* < private_data > */
   gpointer  (private_data);
 )

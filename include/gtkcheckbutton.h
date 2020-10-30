@@ -43,7 +43,7 @@ G_BEGIN_DECLS
 
 typedef struct _GtkCheckButtonClass  GtkCheckButtonClass;
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkCheckButton, gtk_check_button, GtkToggleButton, ;)
+STLWRT_DECLARE_FTYPE_VPARENT(GtkCheckButton, gtk_check_button, GtkToggleButton)
 
 struct _GtkCheckButtonClass
 {

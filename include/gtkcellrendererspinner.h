@@ -50,7 +50,7 @@ struct _GtkCellRendererSpinnerPrivate
   gint size;
 };
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkCellRendererSpinner, gtk_cell_renderer_spinner, GtkCellRenderer,
+STLWRT_DECLARE_VTYPE(GtkCellRendererSpinner, gtk_cell_renderer_spinner, GtkCellRenderer,
   GtkCellRendererSpinnerPrivate *priv;
 )
 

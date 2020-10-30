@@ -87,7 +87,7 @@ struct _GtkToolPalettePrivate
   guint                 drag_source : 2;
 };
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkToolPalette, gtk_tool_palette, GtkContainer,
+STLWRT_DECLARE_VTYPE(GtkToolPalette, gtk_tool_palette, GtkContainer,
   GtkToolPalettePrivate *priv;
 )
 

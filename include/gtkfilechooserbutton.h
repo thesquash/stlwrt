@@ -87,7 +87,7 @@ struct _GtkFileChooserButtonPrivate
   guint  is_changing_selection        : 1;
 };
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkFileChooserButton, gtk_file_chooser_button, GtkHBox,
+STLWRT_DECLARE_VTYPE(GtkFileChooserButton, gtk_file_chooser_button, GtkHBox,
   /*< private >*/
   GtkHBox parent;
 

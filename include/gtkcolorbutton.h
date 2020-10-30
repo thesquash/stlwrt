@@ -54,7 +54,7 @@ typedef struct _GtkColorButtonClass     GtkColorButtonClass;
 typedef struct _GtkColorButtonPrivate   GtkColorButtonPrivate;
 
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkColorButton, gtk_color_button, GtkButton,
+STLWRT_DECLARE_VTYPE(GtkColorButton, gtk_color_button, GtkButton,
   /*< private >*/
 
   GtkColorButtonPrivate * (priv);

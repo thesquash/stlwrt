@@ -39,7 +39,7 @@ typedef struct _GtkCustomPaperUnixDialogClass    GtkCustomPaperUnixDialogClass;
 typedef struct GtkCustomPaperUnixDialogPrivate   GtkCustomPaperUnixDialogPrivate;
 
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkCustomPaperUnixDialog, gtk_custom_paper_unix_dialog, GtkDialog,
+STLWRT_DECLARE_VTYPE(GtkCustomPaperUnixDialog, gtk_custom_paper_unix_dialog, GtkDialog,
   GtkCustomPaperUnixDialogPrivate * (priv);
 )
 

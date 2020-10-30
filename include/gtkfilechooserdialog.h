@@ -41,7 +41,7 @@ G_BEGIN_DECLS
 typedef struct _GtkFileChooserDialogPrivate GtkFileChooserDialogPrivate;
 typedef struct _GtkFileChooserDialogClass   GtkFileChooserDialogClass;
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkFileChooserDialog, gtk_file_chooser_dialog, GtkDialog,
+STLWRT_DECLARE_VTYPE(GtkFileChooserDialog, gtk_file_chooser_dialog, GtkDialog,
   GtkFileChooserDialogPrivate * (priv);
 )
 

@@ -42,7 +42,7 @@ G_BEGIN_DECLS
 
 typedef struct _GtkHSVClass GtkHSVClass;
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkHSV, gtk_hsv, GtkWidget,
+STLWRT_DECLARE_VTYPE(GtkHSV, gtk_hsv, GtkWidget,
   /* Private data */
   gpointer  (priv);
 )

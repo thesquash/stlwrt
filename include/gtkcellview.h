@@ -54,7 +54,7 @@ struct _GtkCellViewPrivate
   gboolean background_set;
 };
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkCellView, gtk_cell_view, GtkWidget,
+STLWRT_DECLARE_VTYPE(GtkCellView, gtk_cell_view, GtkWidget,
   /*< private >*/
   GtkCellViewPrivate * (priv);
 )

@@ -38,7 +38,7 @@ G_BEGIN_DECLS
 
 typedef struct _GtkRadioButtonClass  GtkRadioButtonClass;
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkRadioButton, gtk_radio_button, GtkCheckButton,
+STLWRT_DECLARE_VTYPE(GtkRadioButton, gtk_radio_button, GtkCheckButton,
   GSList * (group);
 )
 

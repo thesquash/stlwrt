@@ -109,7 +109,7 @@ struct _GtkComboBoxPrivate
   gchar *tearoff_title;
 };
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkComboBox, gtk_combo_box, GtkBin,
+STLWRT_DECLARE_VTYPE(GtkComboBox, gtk_combo_box, GtkBin,
   /*< private >*/
   GtkComboBoxPrivate * (priv);
 )

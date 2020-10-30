@@ -43,7 +43,7 @@ typedef struct _GtkVScrollbarClass  GtkVScrollbarClass;
  * The #GtkVScrollbar struct contains private data and should be accessed
  * using the functions below.
  */
-STLWRT_DECLARE_FTYPE_VPARENT(GtkVScrollbar, gtk_vscrollbar, GtkScrollbar, ;)
+STLWRT_DECLARE_FTYPE_VPARENT(GtkVScrollbar, gtk_vscrollbar, GtkScrollbar)
 
 struct _GtkVScrollbarClass
 {

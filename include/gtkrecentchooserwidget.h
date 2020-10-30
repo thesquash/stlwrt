@@ -48,7 +48,7 @@ struct _GtkRecentChooserWidgetPrivate
   GtkWidget *chooser;
 };
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkRecentChooserWidget, gtk_recent_chooser_widget, GtkVBox,
+STLWRT_DECLARE_VTYPE(GtkRecentChooserWidget, gtk_recent_chooser_widget, GtkVBox,
   GtkRecentChooserWidgetPrivate * (priv);
 )
 

@@ -44,7 +44,7 @@ G_BEGIN_DECLS
 typedef struct _GtkFixedClass   GtkFixedClass;
 typedef struct _GtkFixedChild   GtkFixedChild;
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkFixed, gtk_fixed, GtkContainer,
+STLWRT_DECLARE_VTYPE(GtkFixed, gtk_fixed, GtkContainer,
   GList * (children);
 )
 

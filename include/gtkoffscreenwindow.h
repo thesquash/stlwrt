@@ -38,7 +38,7 @@ G_BEGIN_DECLS
 
 typedef struct _GtkOffscreenWindowClass GtkOffscreenWindowClass;
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkOffscreenWindow, gtk_offscreen_window, GtkWindow, ;)
+STLWRT_DECLARE_FTYPE_VPARENT(GtkOffscreenWindow, gtk_offscreen_window, GtkWindow)
 
 struct _GtkOffscreenWindowClass
 {

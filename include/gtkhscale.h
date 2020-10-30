@@ -39,7 +39,7 @@ G_BEGIN_DECLS
 
 typedef struct _GtkHScaleClass  GtkHScaleClass;
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkHScale, gtk_hscale, GtkScale, ;)
+STLWRT_DECLARE_FTYPE_VPARENT(GtkHScale, gtk_hscale, GtkScale)
 
 struct _GtkHScaleClass
 {

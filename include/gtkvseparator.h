@@ -43,7 +43,7 @@ typedef struct _GtkVSeparatorClass  GtkVSeparatorClass;
  * The #GtkVSeparator struct contains private data only, and
  * should be accessed using the functions below.
  */
-STLWRT_DECLARE_FTYPE_VPARENT(GtkVSeparator, gtk_vseparator, GtkSeparator, ;)
+STLWRT_DECLARE_FTYPE_VPARENT(GtkVSeparator, gtk_vseparator, GtkSeparator)
 
 struct _GtkVSeparatorClass
 {

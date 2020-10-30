@@ -372,7 +372,7 @@ G_BEGIN_DECLS
 
 #ifdef STLWRT_COMPILATION
 
- #define STLWRT_DECLARE_FTYPE_VPARENT(TN, t_n, PTN, Properties) \
+ #define STLWRT_DECLARE_FTYPE_VPARENT(TN, t_n, PTN) \
    /*typedef struct _##TN##Fat   TN##Fat;*/ \
    /*typedef struct _##TN##Thin  TN##Thin;*/ \
    /*typedef union  _##TN        TN;*/ \
@@ -453,7 +453,7 @@ G_BEGIN_DECLS
 
 #elif STLWRT_GTK_VERSION <= 2
 
- #define STLWRT_DECLARE_FTYPE_VPARENT(TN, t_n, PTN, Properties) \
+ #define STLWRT_DECLARE_FTYPE_VPARENT(TN, t_n, PTN) \
    typedef struct _##TN   TN; \
   \
    struct _##TN \
@@ -491,7 +491,7 @@ G_BEGIN_DECLS
 
 #elif STLWRT_GTK_VERSION >= 3
 
- #define STLWRT_DECLARE_FTYPE_VPARENT(TN, t_n, PTN, Properties) \
+ #define STLWRT_DECLARE_FTYPE_VPARENT(TN, t_n, PTN) \
    typedef struct _##TN  TN; \
   \
    struct _##TN \

@@ -39,7 +39,7 @@ G_BEGIN_DECLS
 typedef struct _GtkPrinterOptionWidgetClass    GtkPrinterOptionWidgetClass;
 typedef struct GtkPrinterOptionWidgetPrivate   GtkPrinterOptionWidgetPrivate;
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkPrinterOptionWidget, gtk_printer_option_widget, GtkHBox,
+STLWRT_DECLARE_VTYPE(GtkPrinterOptionWidget, gtk_printer_option_widget, GtkHBox,
   GtkPrinterOptionWidgetPrivate *priv;
 )
 

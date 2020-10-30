@@ -45,7 +45,7 @@ struct _GtkSeparatorToolItemPrivate
   guint draw : 1;
 };
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkSeparatorToolItem, gtk_separator_tool_item, GtkToolItem,
+STLWRT_DECLARE_VTYPE(GtkSeparatorToolItem, gtk_separator_tool_item, GtkToolItem,
   /*< private >*/
   GtkSeparatorToolItemPrivate * (priv);
 )

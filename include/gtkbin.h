@@ -40,7 +40,7 @@ G_BEGIN_DECLS
 
 typedef struct _GtkBinClass  GtkBinClass;
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkBin, gtk_bin, GtkContainer,
+STLWRT_DECLARE_VTYPE(GtkBin, gtk_bin, GtkContainer,
   GtkWidget * (child);
 )
 

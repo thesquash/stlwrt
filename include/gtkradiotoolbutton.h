@@ -40,7 +40,7 @@ G_BEGIN_DECLS
 
 typedef struct _GtkRadioToolButtonClass GtkRadioToolButtonClass;
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkRadioToolButton, gtk_radio_tool_button, GtkToggleToolButton, ;)
+STLWRT_DECLARE_FTYPE_VPARENT(GtkRadioToolButton, gtk_radio_tool_button, GtkToggleToolButton)
 
 struct _GtkRadioToolButtonClass
 {

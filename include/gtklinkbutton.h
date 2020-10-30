@@ -56,7 +56,7 @@ struct _GtkLinkButtonPrivate
   GtkWidget *popup_menu;
 };
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkLinkButton, gtk_link_button, GtkButton,
+STLWRT_DECLARE_VTYPE(GtkLinkButton, gtk_link_button, GtkButton,
   GtkLinkButtonPrivate * (priv);
 )
 

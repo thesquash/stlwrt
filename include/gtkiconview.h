@@ -60,7 +60,7 @@ typedef enum
   GTK_ICON_VIEW_DROP_BELOW
 } GtkIconViewDropPosition;
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkIconView, gtk_icon_view, GtkContainer,
+STLWRT_DECLARE_VTYPE(GtkIconView, gtk_icon_view, GtkContainer,
   GtkIconViewPrivate * (priv);
 )
 

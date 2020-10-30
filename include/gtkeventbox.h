@@ -38,7 +38,7 @@ G_BEGIN_DECLS
 
 typedef struct _GtkEventBoxClass  GtkEventBoxClass;
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkEventBox, gtk_event_box, GtkBin, ;)
+STLWRT_DECLARE_FTYPE_VPARENT(GtkEventBox, gtk_event_box, GtkBin)
 
 struct _GtkEventBoxClass
 {

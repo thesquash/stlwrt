@@ -43,7 +43,7 @@ struct _GtkSeparatorPrivate
   GtkOrientation orientation;
 };
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkSeparator, gtk_separator, GtkWidget, ;)
+STLWRT_DECLARE_FTYPE_VPARENT(GtkSeparator, gtk_separator, GtkWidget)
 
 struct _GtkSeparatorClass
 {

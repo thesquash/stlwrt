@@ -49,7 +49,7 @@ struct _GtkComboBoxEntryPrivate
   gint text_column;
 };
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkComboBoxEntry, gtk_combo_box_entry, GtkComboBox,
+STLWRT_DECLARE_VTYPE(GtkComboBoxEntry, gtk_combo_box_entry, GtkComboBox,
   /*< private >*/
   GtkComboBoxEntryPrivate * (priv);
 )

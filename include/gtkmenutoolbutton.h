@@ -51,7 +51,7 @@ struct _GtkMenuToolButtonPrivate
   GtkMenu   *menu;
 };
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkMenuToolButton, gtk_menu_tool_button, GtkToolButton,
+STLWRT_DECLARE_VTYPE(GtkMenuToolButton, gtk_menu_tool_button, GtkToolButton,
   /*< private >*/
   GtkMenuToolButtonPrivate * (priv);
 )

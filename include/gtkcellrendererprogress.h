@@ -54,7 +54,7 @@ struct _GtkCellRendererProgressPrivate
   GtkProgressBarOrientation orientation;
 };
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkCellRendererProgress, gtk_cell_renderer_progress, GtkCellRenderer,
+STLWRT_DECLARE_VTYPE(GtkCellRendererProgress, gtk_cell_renderer_progress, GtkCellRenderer,
   /*< private >*/
   GtkCellRendererProgressPrivate * (priv);
 )

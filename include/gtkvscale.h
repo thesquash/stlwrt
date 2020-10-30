@@ -43,7 +43,7 @@ typedef struct _GtkVScaleClass  GtkVScaleClass;
  * The #GtkVScale struct contains private data only, and
  * should be accessed using the functions below.
  */
-STLWRT_DECLARE_FTYPE_VPARENT(GtkVScale, gtk_vscale, GtkScale, ;)
+STLWRT_DECLARE_FTYPE_VPARENT(GtkVScale, gtk_vscale, GtkScale)
 
 struct _GtkVScaleClass
 {

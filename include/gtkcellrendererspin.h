@@ -46,7 +46,7 @@ struct _GtkCellRendererSpinPrivate
   guint   digits;
 };
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkCellRendererSpin, gtk_cell_renderer_spin, GtkCellRendererText, ;)
+STLWRT_DECLARE_FTYPE_VPARENT(GtkCellRendererSpin, gtk_cell_renderer_spin, GtkCellRendererText)
 
 struct _GtkCellRendererSpinClass
 {

@@ -37,7 +37,7 @@ G_BEGIN_DECLS
 
 typedef struct _GtkVPanedClass GtkVPanedClass;
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkVPaned, gtk_vpaned, GtkPaned, ;)
+STLWRT_DECLARE_FTYPE_VPARENT(GtkVPaned, gtk_vpaned, GtkPaned)
 
 struct _GtkVPanedClass
 {

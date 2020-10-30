@@ -38,7 +38,7 @@ G_BEGIN_DECLS
 
 typedef struct _GtkSeparatorMenuItemClass  GtkSeparatorMenuItemClass;
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkSeparatorMenuItem, gtk_separator_menu_item, GtkMenuItem, ;)
+STLWRT_DECLARE_FTYPE_VPARENT(GtkSeparatorMenuItem, gtk_separator_menu_item, GtkMenuItem)
 
 struct _GtkSeparatorMenuItemClass
 {

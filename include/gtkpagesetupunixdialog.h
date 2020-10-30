@@ -38,7 +38,7 @@ G_BEGIN_DECLS
 typedef struct _GtkPageSetupUnixDialogClass    GtkPageSetupUnixDialogClass;
 typedef struct GtkPageSetupUnixDialogPrivate   GtkPageSetupUnixDialogPrivate;
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkPageSetupUnixDialog, gtk_page_setup_unix_dialog, GtkDialog,
+STLWRT_DECLARE_VTYPE(GtkPageSetupUnixDialog, gtk_page_setup_unix_dialog, GtkDialog,
   GtkPageSetupUnixDialogPrivate * (priv);
 )
 

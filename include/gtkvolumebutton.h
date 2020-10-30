@@ -40,7 +40,7 @@ G_BEGIN_DECLS
 
 typedef struct _GtkVolumeButtonClass  GtkVolumeButtonClass;
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkVolumeButton, gtk_volume_button, GtkScaleButton, ;)
+STLWRT_DECLARE_FTYPE_VPARENT(GtkVolumeButton, gtk_volume_button, GtkScaleButton)
 
 struct _GtkVolumeButtonClass
 {

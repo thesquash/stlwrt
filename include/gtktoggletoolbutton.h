@@ -46,7 +46,7 @@ struct _GtkToggleToolButtonPrivate
   guint active : 1;
 };
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkToggleToolButton, gtk_toggle_tool_button, GtkToolButton,
+STLWRT_DECLARE_VTYPE(GtkToggleToolButton, gtk_toggle_tool_button, GtkToolButton,
   /*< private >*/
   GtkToggleToolButtonPrivate * (priv);
 )

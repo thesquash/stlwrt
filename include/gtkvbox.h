@@ -37,7 +37,7 @@ G_BEGIN_DECLS
 
 typedef struct _GtkVBoxClass  GtkVBoxClass;
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkVBox, gtk_vbox, GtkBox, ;)
+STLWRT_DECLARE_FTYPE_VPARENT(GtkVBox, gtk_vbox, GtkBox)
 
 struct _GtkVBoxClass
 {

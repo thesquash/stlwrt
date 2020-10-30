@@ -42,7 +42,7 @@ G_BEGIN_DECLS
 typedef struct _GtkPrintUnixDialogClass    GtkPrintUnixDialogClass;
 typedef struct GtkPrintUnixDialogPrivate   GtkPrintUnixDialogPrivate;
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkPrintUnixDialog, gtk_print_unix_dialog, GtkDialog,
+STLWRT_DECLARE_VTYPE(GtkPrintUnixDialog, gtk_print_unix_dialog, GtkDialog,
   GtkPrintUnixDialogPrivate * (priv);
 )
 

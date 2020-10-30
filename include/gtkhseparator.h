@@ -38,7 +38,7 @@ G_BEGIN_DECLS
 
 typedef struct _GtkHSeparatorClass  GtkHSeparatorClass;
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkHSeparator, gtk_hseparator, GtkSeparator, ;)
+STLWRT_DECLARE_FTYPE_VPARENT(GtkHSeparator, gtk_hseparator, GtkSeparator)
 
 struct _GtkHSeparatorClass
 {

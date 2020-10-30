@@ -42,7 +42,7 @@ G_BEGIN_DECLS
 
 typedef struct _GtkHRulerClass  GtkHRulerClass;
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkHRuler, gtk_hruler, GtkRuler, ;)
+STLWRT_DECLARE_FTYPE_VPARENT(GtkHRuler, gtk_hruler, GtkRuler)
 
 struct _GtkHRulerClass
 {

@@ -207,12 +207,14 @@ gtk_adjustment_class_init (GtkAdjustmentClass *class)
 static void
 gtk_adjustment_init (GtkAdjustment *adjustment)
 {
-  adjustment->value = 0.0;
-  adjustment->lower = 0.0;
-  adjustment->upper = 0.0;
-  adjustment->step_increment = 0.0;
-  adjustment->page_increment = 0.0;
-  adjustment->page_size = 0.0;
+  GtkAdjustmentProps *adjustment_props = gtk_adjustment_get_props (adjustment);
+
+  adjustment_props->value = 0.0;
+  adjustment_props->lower = 0.0;
+  adjustment_props->upper = 0.0;
+  adjustment_props->step_increment = 0.0;
+  adjustment_props->page_increment = 0.0;
+  adjustment_props->page_size = 0.0;
 }
 
 static void
@@ -222,26 +224,27 @@ gtk_adjustment_get_property (GObject    *object,
                              GParamSpec *pspec)
 {
   GtkAdjustment *adjustment = GTK_ADJUSTMENT (object);
+  GtkAdjustmentProps *adjustment_props = gtk_adjustment_get_props (adjustment);
 
   switch (prop_id)
     {
     case PROP_VALUE:
-      g_value_set_double (value, adjustment->value);
+      g_value_set_double (value, adjustment_props->value);
       break;
     case PROP_LOWER:
-      g_value_set_double (value, adjustment->lower);
+      g_value_set_double (value, adjustment_props->lower);
       break;
     case PROP_UPPER:
-      g_value_set_double (value, adjustment->upper);
+      g_value_set_double (value, adjustment_props->upper);
       break;
     case PROP_STEP_INCREMENT:
-      g_value_set_double (value, adjustment->step_increment);
+      g_value_set_double (value, adjustment_props->step_increment);
       break;
     case PROP_PAGE_INCREMENT:
-      g_value_set_double (value, adjustment->page_increment);
+      g_value_set_double (value, adjustment_props->page_increment);
       break;
     case PROP_PAGE_SIZE:
-      g_value_set_double (value, adjustment->page_size);
+      g_value_set_double (value, adjustment_props->page_size);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -256,6 +259,7 @@ gtk_adjustment_set_property (GObject      *object,
                              GParamSpec   *pspec)
 {
   GtkAdjustment *adjustment = GTK_ADJUSTMENT (object);
+  GtkAdjustmentProps *adjustment_props = gtk_adjustment_get_props (adjustment);
   gdouble double_value = g_value_get_double (value);
 
   switch (prop_id)
@@ -264,19 +268,19 @@ gtk_adjustment_set_property (GObject      *object,
       __gtk_adjustment_set_value (adjustment, double_value);
       break;
     case PROP_LOWER:
-      adjustment->lower = double_value;
+      adjustment_props->lower = double_value;
       break;
     case PROP_UPPER:
-      adjustment->upper = double_value;
+      adjustment_props->upper = double_value;
       break;
     case PROP_STEP_INCREMENT:
-      adjustment->step_increment = double_value;
+      adjustment_props->step_increment = double_value;
       break;
     case PROP_PAGE_INCREMENT:
-      adjustment->page_increment = double_value;
+      adjustment_props->page_increment = double_value;
       break;
     case PROP_PAGE_SIZE:
-      adjustment->page_size = double_value;
+      adjustment_props->page_size = double_value;
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -345,22 +349,26 @@ __gtk_adjustment_new (gdouble value,
 gdouble
 __gtk_adjustment_get_value (GtkAdjustment *adjustment)
 {
+  GtkAdjustmentProps *adjustment_props = gtk_adjustment_get_props (adjustment);
+
   g_return_val_if_fail (GTK_IS_ADJUSTMENT (adjustment), 0.0);
 
-  return adjustment->value;
+  return adjustment_props->value;
 }
 
 void
 __gtk_adjustment_set_value (GtkAdjustment *adjustment,
 			  gdouble        value)
 {
+  GtkAdjustmentProps *adjustment_props = gtk_adjustment_get_props (adjustment);
+
   g_return_if_fail (GTK_IS_ADJUSTMENT (adjustment));
 
-  value = CLAMP (value, adjustment->lower, adjustment->upper);
+  value = CLAMP (value, adjustment_props->lower, adjustment_props->upper);
 
-  if (value != adjustment->value)
+  if (value != adjustment_props->value)
     {
-      adjustment->value = value;
+      adjustment_props->value = value;
 
       __gtk_adjustment_value_changed (adjustment);
     }
@@ -379,9 +387,11 @@ __gtk_adjustment_set_value (GtkAdjustment *adjustment,
 gdouble
 __gtk_adjustment_get_lower (GtkAdjustment *adjustment)
 {
+  GtkAdjustmentProps *adjustment_props = gtk_adjustment_get_props (adjustment);
+
   g_return_val_if_fail (GTK_IS_ADJUSTMENT (adjustment), 0.0);
 
-  return adjustment->lower;
+  return adjustment_props->lower;
 }
 
 /**
@@ -409,9 +419,11 @@ void
 __gtk_adjustment_set_lower (GtkAdjustment *adjustment,
                           gdouble        lower)
 {
+  GtkAdjustmentProps *adjustment_props = gtk_adjustment_get_props (adjustment);
+
   g_return_if_fail (GTK_IS_ADJUSTMENT (adjustment));
 
-  if (lower != adjustment->lower)
+  if (lower != adjustment_props->lower)
     g_object_set (adjustment, "lower", lower, NULL);
 }
 
@@ -428,9 +440,11 @@ __gtk_adjustment_set_lower (GtkAdjustment *adjustment,
 gdouble
 __gtk_adjustment_get_upper (GtkAdjustment *adjustment)
 {
+  GtkAdjustmentProps *adjustment_props = gtk_adjustment_get_props (adjustment);
+
   g_return_val_if_fail (GTK_IS_ADJUSTMENT (adjustment), 0.0);
 
-  return adjustment->upper;
+  return adjustment_props->upper;
 }
 
 /**
@@ -454,9 +468,11 @@ void
 __gtk_adjustment_set_upper (GtkAdjustment *adjustment,
                           gdouble        upper)
 {
+  GtkAdjustmentProps *adjustment_props = gtk_adjustment_get_props (adjustment);
+
   g_return_if_fail (GTK_IS_ADJUSTMENT (adjustment));
 
-  if (upper != adjustment->upper)
+  if (upper != adjustment_props->upper)
     g_object_set (adjustment, "upper", upper, NULL);
 }
 
@@ -473,9 +489,11 @@ __gtk_adjustment_set_upper (GtkAdjustment *adjustment,
 gdouble
 __gtk_adjustment_get_step_increment (GtkAdjustment *adjustment)
 {
+  GtkAdjustmentProps *adjustment_props = gtk_adjustment_get_props (adjustment);
+
   g_return_val_if_fail (GTK_IS_ADJUSTMENT (adjustment), 0.0);
 
-  return adjustment->step_increment;
+  return adjustment_props->step_increment;
 }
 
 /**
@@ -495,9 +513,11 @@ void
 __gtk_adjustment_set_step_increment (GtkAdjustment *adjustment,
                                    gdouble        step_increment)
 {
+  GtkAdjustmentProps *adjustment_props = gtk_adjustment_get_props (adjustment);
+
   g_return_if_fail (GTK_IS_ADJUSTMENT (adjustment));
 
-  if (step_increment != adjustment->step_increment)
+  if (step_increment != adjustment_props->step_increment)
     g_object_set (adjustment, "step-increment", step_increment, NULL);
 }
 
@@ -514,9 +534,11 @@ __gtk_adjustment_set_step_increment (GtkAdjustment *adjustment,
 gdouble
 __gtk_adjustment_get_page_increment (GtkAdjustment *adjustment)
 {
+  GtkAdjustmentProps *adjustment_props = gtk_adjustment_get_props (adjustment);
+
   g_return_val_if_fail (GTK_IS_ADJUSTMENT (adjustment), 0.0);
 
-  return adjustment->page_increment;
+  return adjustment_props->page_increment;
 }
 
 /**
@@ -536,9 +558,11 @@ void
 __gtk_adjustment_set_page_increment (GtkAdjustment *adjustment,
                                    gdouble        page_increment)
 {
+  GtkAdjustmentProps *adjustment_props = gtk_adjustment_get_props (adjustment);
+
   g_return_if_fail (GTK_IS_ADJUSTMENT (adjustment));
 
-  if (page_increment != adjustment->page_increment)
+  if (page_increment != adjustment_props->page_increment)
     g_object_set (adjustment, "page-increment", page_increment, NULL);
 }
 
@@ -555,9 +579,11 @@ __gtk_adjustment_set_page_increment (GtkAdjustment *adjustment,
 gdouble
 __gtk_adjustment_get_page_size (GtkAdjustment *adjustment)
 {
+  GtkAdjustmentProps *adjustment_props = gtk_adjustment_get_props (adjustment);
+
   g_return_val_if_fail (GTK_IS_ADJUSTMENT (adjustment), 0.0);
 
-  return adjustment->page_size;
+  return adjustment_props->page_size;
 }
 
 /**
@@ -577,9 +603,11 @@ void
 __gtk_adjustment_set_page_size (GtkAdjustment *adjustment,
                               gdouble        page_size)
 {
+  GtkAdjustmentProps *adjustment_props = gtk_adjustment_get_props (adjustment);
+
   g_return_if_fail (GTK_IS_ADJUSTMENT (adjustment));
 
-  if (page_size != adjustment->page_size)
+  if (page_size != adjustment_props->page_size)
     g_object_set (adjustment, "page-size", page_size, NULL);
 }
 
@@ -610,6 +638,8 @@ __gtk_adjustment_configure (GtkAdjustment *adjustment,
                           gdouble        page_increment,
                           gdouble        page_size)
 {
+  GtkAdjustmentProps *adjustment_props = gtk_adjustment_get_props (adjustment);
+
   gboolean value_changed = FALSE;
   guint64 old_stamp = adjustment_changed_stamp;
 
@@ -631,12 +661,12 @@ __gtk_adjustment_configure (GtkAdjustment *adjustment,
   value = MIN (value, upper - page_size);
   value = MAX (value, lower);
 
-  if (value != adjustment->value)
+  if (value != adjustment_props->value)
     {
       /* set value manually to make sure "changed" is emitted with the
        * new value in place and is emitted before "value-changed"
        */
-      adjustment->value = value;
+      adjustment_props->value = value;
       value_changed = TRUE;
     }
 
@@ -652,6 +682,8 @@ __gtk_adjustment_configure (GtkAdjustment *adjustment,
 void
 __gtk_adjustment_changed (GtkAdjustment *adjustment)
 {
+  GtkAdjustmentProps *adjustment_props = gtk_adjustment_get_props (adjustment);
+
   g_return_if_fail (GTK_IS_ADJUSTMENT (adjustment));
 
   g_signal_emit (adjustment, adjustment_signals[CHANGED], 0);
@@ -660,6 +692,8 @@ __gtk_adjustment_changed (GtkAdjustment *adjustment)
 void
 __gtk_adjustment_value_changed (GtkAdjustment *adjustment)
 {
+  GtkAdjustmentProps *adjustment_props = gtk_adjustment_get_props (adjustment);
+
   g_return_if_fail (GTK_IS_ADJUSTMENT (adjustment));
 
   g_signal_emit (adjustment, adjustment_signals[VALUE_CHANGED], 0);
@@ -671,23 +705,24 @@ __gtk_adjustment_clamp_page (GtkAdjustment *adjustment,
 			   gdouble        lower,
 			   gdouble        upper)
 {
+  GtkAdjustmentProps *adjustment_props = gtk_adjustment_get_props (adjustment);
   gboolean need_emission;
 
   g_return_if_fail (GTK_IS_ADJUSTMENT (adjustment));
 
-  lower = CLAMP (lower, adjustment->lower, adjustment->upper);
-  upper = CLAMP (upper, adjustment->lower, adjustment->upper);
+  lower = CLAMP (lower, adjustment_props->lower, adjustment_props->upper);
+  upper = CLAMP (upper, adjustment_props->lower, adjustment_props->upper);
 
   need_emission = FALSE;
 
-  if (adjustment->value + adjustment->page_size < upper)
+  if (adjustment_props->value + adjustment_props->page_size < upper)
     {
-      adjustment->value = upper - adjustment->page_size;
+      adjustment_props->value = upper - adjustment_props->page_size;
       need_emission = TRUE;
     }
-  if (adjustment->value > lower)
+  if (adjustment_props->value > lower)
     {
-      adjustment->value = lower;
+      adjustment_props->value = lower;
       need_emission = TRUE;
     }
 

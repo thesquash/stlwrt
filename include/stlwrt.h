@@ -269,7 +269,7 @@ G_BEGIN_DECLS
     return (G_STRUCT_MEMBER_P (self, TN##_private_offset)); \
   } \
  \
-  G_GNUC_UNUSED \
+  G_GNUC_UNUSED  G_GNUC_CONST \
   gpointer \
   t_n##_get_props (TN *self) \
   { \
@@ -418,7 +418,7 @@ G_BEGIN_DECLS
      gpointer reserved; \
    }; \
   \
-   gpointer t_n##_get_props (TN * instance); \
+   G_GNUC_CONST gpointer t_n##_get_props (TN * instance); \
   \
    STLWRT_DECLARE_GET_VTYPE_FUNCTIONS(t_n)
 
@@ -447,7 +447,7 @@ G_BEGIN_DECLS
      gpointer reserved; \
    }; \
   \
-   gpointer t_n##_get_props (TN * instance); \
+   G_GNUC_CONST gpointer t_n##_get_props (TN * instance); \
   \
    STLWRT_DECLARE_GET_VTYPE_FUNCTIONS(t_n)
 
@@ -542,6 +542,7 @@ G_BEGIN_DECLS
   }; \
  \
   STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(t_n)
+
 
 G_END_DECLS
 

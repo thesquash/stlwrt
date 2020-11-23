@@ -61,7 +61,7 @@ typedef struct _GtkTreeViewPrivate    GtkTreeViewPrivate;
 
 typedef struct _GtkTreeSelectionClass GtkTreeSelectionClass;
 
-STLWRT_DECLARE_VTYPE(GtkTreeView, gtk_tree_view, GtkContainer,
+STLWRT_DECLARE_VTYPE_VPARENT(GtkTreeView, gtk_tree_view, GtkContainer,
   GtkTreeViewPrivate * (priv);
 )
 

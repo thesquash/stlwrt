@@ -508,7 +508,7 @@ gdk_pango_renderer_get_property (GObject    *object,
 static void
 gdk_pango_renderer_init (GdkPangoRenderer *renderer)
 {
-  renderer->priv = gdk_pango_renderer_get_private (renderer);
+  renderer->priv = gdk_pango_renderer_get_instance_private (renderer);
 
   renderer->priv->last_part = (PangoRenderPart)-1;
   renderer->priv->gc_changed = TRUE;

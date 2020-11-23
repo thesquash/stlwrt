@@ -72,7 +72,7 @@ struct _GtkToolItemGroupPrivate
   guint              collapsed : 1;
 };
 
-STLWRT_DECLARE_VTYPE(GtkToolItemGroup, gtk_tool_item_group, GtkContainer,
+STLWRT_DECLARE_VTYPE_VPARENT(GtkToolItemGroup, gtk_tool_item_group, GtkContainer,
   GtkToolItemGroupPrivate *priv;
 )
 

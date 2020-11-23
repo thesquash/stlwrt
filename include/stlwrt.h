@@ -127,6 +127,8 @@ G_BEGIN_DECLS
  * is a Vtype.
  */
 #define STLWRT_DEFINE_FTYPE(TN, t_n, PT, F, C) \
+  typedef struct _##TN##Private TN##Private; \
+  \
   static void     t_n##_init              (TN        *self); \
   static void     t_n##_class_init        (TN##Class *klass); \
   static gpointer t_n##_parent_class  = NULL; \
@@ -141,10 +143,10 @@ G_BEGIN_DECLS
   } \
  \
   G_GNUC_UNUSED \
-  static inline gpointer \
+  static inline TN##Private * \
   t_n##_get_instance_private (TN *self) \
   { \
-    return (G_STRUCT_MEMBER_P (self, TN##_private_offset)); \
+    return (TN##Private *)(G_STRUCT_MEMBER_P (self, TN##_private_offset)); \
   } \
  \
   GType \
@@ -169,6 +171,8 @@ G_BEGIN_DECLS
 
 
 #define STLWRT_DEFINE_FTYPE_VPARENT(TN, t_n, PT, F, C) \
+  typedef struct _##TN##Private TN##Private; \
+  \
   static void     t_n##_init              (TN        *self); \
   static void     t_n##_class_init        (TN##Class *klass); \
   static gpointer t_n##_parent_class  = NULL; \
@@ -184,10 +188,10 @@ G_BEGIN_DECLS
   } \
  \
   G_GNUC_UNUSED \
-  gpointer \
+  static inline TN##Private * \
   t_n##_get_instance_private (TN *self) \
   { \
-    return (G_STRUCT_MEMBER_P (self, TN##_private_offset)); \
+    return (TN##Private *)(G_STRUCT_MEMBER_P (self, TN##_private_offset)); \
   } \
  \
   GType \
@@ -232,6 +236,8 @@ G_BEGIN_DECLS
 
 
 #define STLWRT_DEFINE_VTYPE(TN, t_n, PT, F, C) \
+  typedef struct _##TN##Private TN##Private; \
+  \
   static void     t_n##_init              (TN        *self); \
   static void     t_n##_class_init        (TN##Class *klass); \
   static gpointer t_n##_parent_class  = NULL; \
@@ -263,17 +269,17 @@ G_BEGIN_DECLS
   } \
  \
   G_GNUC_UNUSED \
-  static inline gpointer \
+  static inline TN##Private * \
   t_n##_get_instance_private (TN *self) \
   { \
-    return (G_STRUCT_MEMBER_P (self, TN##_private_offset)); \
+    return (TN##Private *)(G_STRUCT_MEMBER_P (self, TN##_private_offset)); \
   } \
  \
   G_GNUC_UNUSED  G_GNUC_CONST \
-  gpointer \
-  t_n##_get_props (TN *self) \
+  TN##Props * \
+  t_n##_get_props (gpointer self) \
   { \
-    return (G_STRUCT_MEMBER_P (self, TN##_props_offset)); \
+    return (TN##Props *)(G_STRUCT_MEMBER_P (self, TN##_props_offset)); \
   } \
  \
   GType \
@@ -380,15 +386,11 @@ G_BEGIN_DECLS
    struct _##TN##Fat \
    { \
      PTN##Fat _parent; \
-  \
-     Properties \
    }; \
   \
    struct _##TN##Thin \
    { \
      PTN##Thin _parent; \
-  \
-     Properties \
    }; \
   \
    STLWRT_DECLARE_GET_VTYPE_FUNCTIONS(t_n)
@@ -418,7 +420,7 @@ G_BEGIN_DECLS
      gpointer reserved; \
    }; \
   \
-   G_GNUC_CONST gpointer t_n##_get_props (TN * instance); \
+   G_GNUC_CONST TN##Props * t_n##_get_props (gpointer  instance); \
   \
    STLWRT_DECLARE_GET_VTYPE_FUNCTIONS(t_n)
 
@@ -447,7 +449,7 @@ G_BEGIN_DECLS
      gpointer reserved; \
    }; \
   \
-   G_GNUC_CONST gpointer t_n##_get_props (TN * instance); \
+   G_GNUC_CONST TN##Props * t_n##_get_props (gpointer  instance); \
   \
    STLWRT_DECLARE_GET_VTYPE_FUNCTIONS(t_n)
 
@@ -459,8 +461,6 @@ G_BEGIN_DECLS
    struct _##TN \
    { \
      PTN _parent; \
-  \
-     Properties \
    }; \
   \
    STLWRT_DECLARE_GET_VTYPE_FUNCTIONS(t_n)
@@ -497,8 +497,6 @@ G_BEGIN_DECLS
    struct _##TN \
    { \
      PTN _parent; \
-  \
-     Properties \
    }; \
   \
    STLWRT_DECLARE_GET_VTYPE_FUNCTIONS(t_n)

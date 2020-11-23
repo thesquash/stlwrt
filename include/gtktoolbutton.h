@@ -57,7 +57,7 @@ struct _GtkToolButtonPrivate
   guint contents_invalid : 1;
 };
 
-STLWRT_DECLARE_VTYPE(GtkToolButton, gtk_tool_button, GtkToolItem,
+STLWRT_DECLARE_VTYPE_VPARENT(GtkToolButton, gtk_tool_button, GtkToolItem,
   /*< private >*/
   GtkToolButtonPrivate * (priv);
 )

@@ -215,7 +215,7 @@ gtk_alignment_init (GtkAlignment *alignment)
   alignment_props->yscale = 1.0;
 
   /* Initialize padding with default values: */
-  priv = gtk_alignment_get_private (alignment);
+  priv = gtk_alignment_get_instance_private (alignment);
   priv->padding_top = 0;
   priv->padding_bottom = 0;
   priv->padding_left = 0;
@@ -272,7 +272,7 @@ gtk_alignment_set_property (GObject         *object,
   
   alignment = GTK_ALIGNMENT (object);
   alignment_props = gtk_alignment_get_props (alignment);
-  priv = gtk_alignment_get_private (alignment);
+  priv = gtk_alignment_get_instance_private (alignment);
   
   switch (prop_id)
     {
@@ -353,7 +353,7 @@ gtk_alignment_get_property (GObject         *object,
 
   alignment = GTK_ALIGNMENT (object);
   alignment_props = gtk_alignment_get_props (alignment);
-  priv = gtk_alignment_get_private (alignment);
+  priv = gtk_alignment_get_instance_private (alignment);
    
   switch (prop_id)
     {
@@ -465,7 +465,7 @@ gtk_alignment_size_request (GtkWidget      *widget,
   GtkBin *bin = GTK_BIN (widget);
   GtkBinProps *bin_props = gtk_bin_get_props (bin);
   GtkContainerProps *container_props = gtk_container_get_props (GTK_CONTAINER (widget));
-  GtkAlignmentPrivate *priv = gtk_alignment_get_private (widget);
+  GtkAlignmentPrivate *priv = gtk_alignment_get_instance_private (widget);
 
   requisition->width = container_props->border_width * 2;
   requisition->height = container_props->border_width * 2;
@@ -514,7 +514,7 @@ gtk_alignment_size_allocate (GtkWidget     *widget,
 
       border_width = GTK_CONTAINER (alignment)->border_width;
 
-      priv = gtk_alignment_get_private (widget);
+      priv = gtk_alignment_get_instance_private (widget);
       padding_horizontal = priv->padding_left + priv->padding_right;
       padding_vertical = priv->padding_top + priv->padding_bottom;
 
@@ -572,7 +572,7 @@ __gtk_alignment_set_padding (GtkAlignment    *alignment,
   
   g_return_if_fail (GTK_IS_ALIGNMENT (alignment));
 
-  priv = gtk_alignment_get_private (alignment);
+  priv = gtk_alignment_get_instance_private (alignment);
 
   g_object_freeze_notify (G_OBJECT (alignment));
 
@@ -634,7 +634,7 @@ __gtk_alignment_get_padding (GtkAlignment    *alignment,
  
   g_return_if_fail (GTK_IS_ALIGNMENT (alignment));
 
-  priv = gtk_alignment_get_private (alignment);
+  priv = gtk_alignment_get_instance_private (alignment);
   if(padding_top)
     *padding_top = priv->padding_top;
   if(padding_bottom)

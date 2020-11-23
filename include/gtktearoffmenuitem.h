@@ -38,7 +38,7 @@ G_BEGIN_DECLS
 
 typedef struct _GtkTearoffMenuItemClass  GtkTearoffMenuItemClass;
 
-STLWRT_DECLARE_VTYPE(GtkTearoffMenuItem, gtk_tearoff_menu_item, GtkMenuItem,
+STLWRT_DECLARE_VTYPE_VPARENT(GtkTearoffMenuItem, gtk_tearoff_menu_item, GtkMenuItem,
   guint  (torn_off) : 1;
 )
 

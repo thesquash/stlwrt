@@ -38,7 +38,7 @@ G_BEGIN_DECLS
 
 typedef struct _GtkRadioMenuItemClass  GtkRadioMenuItemClass;
 
-STLWRT_DECLARE_VTYPE(GtkRadioMenuItem, gtk_radio_menu_item, GtkCheckMenuItem,
+STLWRT_DECLARE_VTYPE_VPARENT(GtkRadioMenuItem, gtk_radio_menu_item, GtkCheckMenuItem,
   GSList * (group);
 )
 

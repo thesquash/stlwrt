@@ -581,7 +581,7 @@ void _gdk_windowing_gc_get_foreground (GdkGC    *gc,
 void _gdk_windowing_gc_get_background (GdkGC    *gc,
 				       GdkColor *color);
 
-struct GdkAppLaunchContextPrivate
+struct _GdkAppLaunchContextPrivate
 {
   GdkDisplay *display;
   GdkScreen *screen;

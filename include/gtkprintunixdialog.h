@@ -40,9 +40,9 @@ G_BEGIN_DECLS
 #define GTK_PRINT_UNIX_DIALOG_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_PRINT_UNIX_DIALOG, GtkPrintUnixDialogClass))
 
 typedef struct _GtkPrintUnixDialogClass    GtkPrintUnixDialogClass;
-typedef struct GtkPrintUnixDialogPrivate   GtkPrintUnixDialogPrivate;
+typedef struct _GtkPrintUnixDialogPrivate   GtkPrintUnixDialogPrivate;
 
-STLWRT_DECLARE_VTYPE(GtkPrintUnixDialog, gtk_print_unix_dialog, GtkDialog,
+STLWRT_DECLARE_VTYPE_VPARENT(GtkPrintUnixDialog, gtk_print_unix_dialog, GtkDialog,
   GtkPrintUnixDialogPrivate * (priv);
 )
 

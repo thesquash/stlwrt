@@ -76,7 +76,7 @@ struct GtkFolderClass
 };
 
 
-struct GtkFolderPrivate
+struct _GtkFolderPrivate
 {
   GFile *folder_file;
   GHashTable *children;

@@ -106,7 +106,7 @@ STLWRT_DECLARE_VTYPE_VPARENT(GtkAssistant, gtk_assistant, GtkWindow,
   GtkWidget * (last);
 
   /*< private >*/
-  GtkAssistantPrivate * (priv);
+  gpointer * (dummy);
 )
 
 struct _GtkAssistantClass

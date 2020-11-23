@@ -49,7 +49,7 @@ gdk_gc_class_init (GdkGCClass *class)
 static void
 gdk_gc_init (GdkGC *gc)
 {
-  GdkGCPrivate *priv = gdk_gc_get_private (gc);
+  GdkGCPrivate *priv = gdk_gc_get_instance_private (gc);
 
   priv->fill = GDK_SOLID;
 
@@ -131,7 +131,7 @@ _gdk_gc_init (GdkGC           *gc,
 
   g_return_if_fail (GDK_IS_GC (gc));
 
-  priv = gdk_gc_get_private (gc);
+  priv = gdk_gc_get_instance_private (gc);
 
   if (values_mask & GDK_GC_CLIP_X_ORIGIN)
     gc->clip_x_origin = values->clip_x_origin;
@@ -177,7 +177,7 @@ static void
 gdk_gc_finalize (GObject *object)
 {
   GdkGC *gc = GDK_GC (object);
-  GdkGCPrivate *priv = gdk_gc_get_private (gc);
+  GdkGCPrivate *priv = gdk_gc_get_instance_private (gc);
 
   if (priv->clip_region)
     __gdk_region_destroy (priv->clip_region);
@@ -273,7 +273,7 @@ __gdk_gc_set_values (GdkGC           *gc,
   g_return_if_fail (GDK_IS_GC (gc));
   g_return_if_fail (values != NULL);
 
-  priv = gdk_gc_get_private (gc);
+  priv = gdk_gc_get_instance_private (gc);
 
   if ((values_mask & GDK_GC_CLIP_X_ORIGIN) ||
       (values_mask & GDK_GC_CLIP_Y_ORIGIN) ||
@@ -607,7 +607,7 @@ ___gdk_gc_set_clip_region_real (GdkGC     *gc,
 			      GdkRegion *region,
 			      gboolean reset_origin)
 {
-  GdkGCPrivate *priv = gdk_gc_get_private (gc);
+  GdkGCPrivate *priv = gdk_gc_get_instance_private (gc);
 
   if (priv->clip_mask)
     {
@@ -641,7 +641,7 @@ _gdk_gc_add_drawable_clip (GdkGC     *gc,
 			   int        offset_x,
 			   int        offset_y)
 {
-  GdkGCPrivate *priv = gdk_gc_get_private (gc);
+  GdkGCPrivate *priv = gdk_gc_get_instance_private (gc);
 
   if (priv->region_tag_applied == region_tag &&
       offset_x == priv->region_tag_offset_x &&
@@ -732,7 +732,7 @@ _gdk_gc_add_drawable_clip (GdkGC     *gc,
 void
 _gdk_gc_remove_drawable_clip (GdkGC *gc)
 {
-  GdkGCPrivate *priv = gdk_gc_get_private (gc);
+  GdkGCPrivate *priv = gdk_gc_get_instance_private (gc);
 
   if (priv->region_tag_applied)
     {
@@ -830,7 +830,7 @@ _gdk_gc_get_clip_region (GdkGC *gc)
 {
   g_return_val_if_fail (GDK_IS_GC (gc), NULL);
 
-  return gdk_gc_get_private (gc)->clip_region;
+  return gdk_gc_get_instance_private (gc)->clip_region;
 }
 
 /**
@@ -848,7 +848,7 @@ _gdk_gc_get_clip_mask (GdkGC *gc)
 {
   g_return_val_if_fail (GDK_IS_GC (gc), NULL);
 
-  return gdk_gc_get_private (gc)->clip_mask;
+  return gdk_gc_get_instance_private (gc)->clip_mask;
 }
 
 /**
@@ -864,7 +864,7 @@ _gdk_gc_get_fill (GdkGC *gc)
 {
   g_return_val_if_fail (GDK_IS_GC (gc), GDK_SOLID);
 
-  return gdk_gc_get_private (gc)->fill;
+  return gdk_gc_get_instance_private (gc)->fill;
 }
 
 gboolean
@@ -872,7 +872,7 @@ _gdk_gc_get_exposures (GdkGC *gc)
 {
   g_return_val_if_fail (GDK_IS_GC (gc), FALSE);
 
-  return gdk_gc_get_private (gc)->exposures;
+  return gdk_gc_get_instance_private (gc)->exposures;
 }
 
 /**
@@ -889,7 +889,7 @@ _gdk_gc_get_tile (GdkGC *gc)
 {
   g_return_val_if_fail (GDK_IS_GC (gc), NULL);
 
-  return gdk_gc_get_private (gc)->tile;
+  return gdk_gc_get_instance_private (gc)->tile;
 }
 
 /**
@@ -906,7 +906,7 @@ _gdk_gc_get_stipple (GdkGC *gc)
 {
   g_return_val_if_fail (GDK_IS_GC (gc), NULL);
 
-  return gdk_gc_get_private (gc)->stipple;
+  return gdk_gc_get_instance_private (gc)->stipple;
 }
 
 /**
@@ -924,7 +924,7 @@ _gdk_gc_get_fg_pixel (GdkGC *gc)
 {
   g_return_val_if_fail (GDK_IS_GC (gc), 0);
   
-  return gdk_gc_get_private (gc)->fg_pixel;
+  return gdk_gc_get_instance_private (gc)->fg_pixel;
 }
 
 /**
@@ -942,7 +942,7 @@ _gdk_gc_get_bg_pixel (GdkGC *gc)
 {
   g_return_val_if_fail (GDK_IS_GC (gc), 0);
   
-  return gdk_gc_get_private (gc)->bg_pixel;
+  return gdk_gc_get_instance_private (gc)->bg_pixel;
 }
 
 /**
@@ -963,7 +963,7 @@ __gdk_gc_set_subwindow (GdkGC	       *gc,
 		      GdkSubwindowMode	mode)
 {
   GdkGCValues values;
-  GdkGCPrivate *priv = gdk_gc_get_private (gc);
+  GdkGCPrivate *priv = gdk_gc_get_instance_private (gc);
 
   g_return_if_fail (GDK_IS_GC (gc));
 
@@ -979,7 +979,7 @@ __gdk_gc_set_subwindow (GdkGC	       *gc,
 GdkSubwindowMode
 _gdk_gc_get_subwindow (GdkGC *gc)
 {
-  GdkGCPrivate *priv = gdk_gc_get_private (gc);
+  GdkGCPrivate *priv = gdk_gc_get_instance_private (gc);
 
   return priv->subwindow_mode;
 }
@@ -1138,8 +1138,8 @@ __gdk_gc_copy (GdkGC *dst_gc,
   g_return_if_fail (GDK_IS_GC (dst_gc));
   g_return_if_fail (GDK_IS_GC (src_gc));
 
-  dst_priv = gdk_gc_get_private (dst_gc);
-  src_priv = gdk_gc_get_private (src_gc);
+  dst_priv = gdk_gc_get_instance_private (dst_gc);
+  src_priv = gdk_gc_get_instance_private (src_gc);
 
   _gdk_windowing_gc_copy (dst_gc, src_gc);
 
@@ -1386,7 +1386,7 @@ static void
 gc_get_foreground (GdkGC    *gc,
 		   GdkColor *color)
 {
-  GdkGCPrivate *priv = gdk_gc_get_private (gc);
+  GdkGCPrivate *priv = gdk_gc_get_instance_private (gc);
   
   color->pixel = priv->bg_pixel;
 
@@ -1400,7 +1400,7 @@ static void
 gc_get_background (GdkGC    *gc,
 		   GdkColor *color)
 {
-  GdkGCPrivate *priv = gdk_gc_get_private (gc);
+  GdkGCPrivate *priv = gdk_gc_get_instance_private (gc);
   
   color->pixel = priv->bg_pixel;
 
@@ -1448,7 +1448,7 @@ _gdk_gc_update_context (GdkGC          *gc,
   g_return_if_fail (cr != NULL);
   g_return_if_fail (override_stipple == NULL || GDK_IS_PIXMAP (override_stipple));
 
-  priv = gdk_gc_get_private (gc);
+  priv = gdk_gc_get_instance_private (gc);
 
   _gdk_gc_remove_drawable_clip (gc);
 

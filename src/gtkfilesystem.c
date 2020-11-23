@@ -79,8 +79,8 @@ enum {
 static guint fs_signals [FS_LAST_SIGNAL] = { 0, };
 static guint folder_signals [FOLDER_LAST_SIGNAL] = { 0, };
 
-typedef struct GtkFileSystemPrivate GtkFileSystemPrivate;
-typedef struct GtkFolderPrivate GtkFolderPrivate;
+typedef struct _GtkFileSystemPrivate GtkFileSystemPrivate;
+typedef struct _GtkFolderPrivate GtkFolderPrivate;
 typedef struct AsyncFuncData AsyncFuncData;
 
 

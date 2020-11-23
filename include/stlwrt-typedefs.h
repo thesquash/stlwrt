@@ -14,6 +14,7 @@ typedef struct _GdkGCValues GdkGCValues;
 typedef struct _GdkRectangle GdkRectangle;
 typedef struct _GdkScreen GdkScreen;
 typedef struct _GdkVisual GdkVisual;
+typedef struct _GtkAccelGroup GtkAccelGroup;
 typedef struct _GtkAccelMap GtkAccelMap;
 typedef struct _GtkAccessible GtkAccessible;
 typedef struct _GtkActionGroup GtkActionGroup;
@@ -94,10 +95,6 @@ typedef struct _GtkWindowGroup GtkWindowGroup;
 typedef struct _GtkAboutDialogFat GtkAboutDialogFat;
 typedef struct _GtkAboutDialogThin GtkAboutDialogThin;
 typedef union _GtkAboutDialog GtkAboutDialog;
-
-typedef struct _GtkAccelGroupFat GtkAccelGroupFat;
-typedef struct _GtkAccelGroupThin GtkAccelGroupThin;
-typedef union _GtkAccelGroup GtkAccelGroup;
 
 typedef struct _GtkAccelLabelFat GtkAccelLabelFat;
 typedef struct _GtkAccelLabelThin GtkAccelLabelThin;
@@ -642,7 +639,6 @@ typedef union _GtkWindow GtkWindow;
 #else
 
 typedef struct _GtkAboutDialog GtkAboutDialog;
-typedef struct _GtkAccelGroup GtkAccelGroup;
 typedef struct _GtkAccelLabel GtkAccelLabel;
 typedef struct _GtkAdjustment GtkAdjustment;
 typedef struct _GtkAlignment GtkAlignment;

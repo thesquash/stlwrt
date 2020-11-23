@@ -293,8 +293,8 @@ add_damage (GdkOffscreenWindow *offscreen,
 static GdkDrawable *
 get_real_drawable (GdkOffscreenWindow *offscreen)
 {
-  GdkPixmapObject *pixmap;
-  pixmap = (GdkPixmapObject *) offscreen->pixmap;
+  GdkPixmap *pixmap;
+  pixmap = (GdkPixmap *) offscreen->pixmap;
   return GDK_DRAWABLE (pixmap->impl);
 }
 

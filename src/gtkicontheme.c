@@ -532,7 +532,7 @@ gtk_icon_theme_init (GtkIconTheme *icon_theme)
   const gchar * const *xdg_data_dirs;
   int i, j;
   
-  priv = gtk_icon_theme_get_private (icon_theme);
+  priv = gtk_icon_theme_get_instance_private (icon_theme);
   icon_theme->priv = priv;
 
   priv->custom_theme = FALSE;

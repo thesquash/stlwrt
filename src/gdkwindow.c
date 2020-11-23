@@ -3723,7 +3723,7 @@ start_draw_helper (GdkDrawable *drawable,
       /* After having set up the drawable clip rect on a GC we need to make sure
        * that we draw to th the impl, otherwise the pixmap code will reset the
        * drawable clip. */
-      impl = ((GdkPixmapObject *)(paint->pixmap))->impl;
+      impl = ((GdkPixmap *)(paint->pixmap))->impl;
     }
   else
     {

@@ -42,7 +42,7 @@ G_BEGIN_DECLS
 #define GDK_APP_LAUNCH_CONTEXT_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GDK_TYPE_APP_LAUNCH_CONTEXT, GdkAppLaunchContextClass))
 
 typedef struct GdkAppLaunchContextClass       GdkAppLaunchContextClass;
-typedef struct GdkAppLaunchContextPrivate     GdkAppLaunchContextPrivate;
+typedef struct _GdkAppLaunchContextPrivate     GdkAppLaunchContextPrivate;
 
 STLWRT_DECLARE_FTYPE_FPARENT (GdkAppLaunchContext, gdk_app_launch_context, GAppLaunchContext,
 

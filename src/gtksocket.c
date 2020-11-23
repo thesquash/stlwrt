@@ -153,7 +153,7 @@ enum {
 static guint socket_signals[LAST_SIGNAL] = { 0 };
 
 /*
- * _gtk_socket_get_private:
+ * _gtk_socket_get_instance_private:
  *
  * @socket: a #GtkSocket
  *
@@ -161,7 +161,7 @@ static guint socket_signals[LAST_SIGNAL] = { 0 };
  * first if necessary.
  */
 GtkSocketPrivate *
-_gtk_socket_get_private (GtkSocket *socket)
+_gtk_socket_get_instance_private (GtkSocket *socket)
 {
   return G_TYPE_INSTANCE_GET_PRIVATE (socket, GTK_TYPE_SOCKET, GtkSocketPrivate);
 }
@@ -438,7 +438,7 @@ gtk_socket_realize (GtkWidget *widget)
 void
 _gtk_socket_end_embedding (GtkSocket *socket)
 {
-  GtkSocketPrivate *private = _gtk_socket_get_private (socket);
+  GtkSocketPrivate *private = _gtk_socket_get_instance_private (socket);
   GtkWidget *toplevel = __gtk_widget_get_toplevel (GTK_WIDGET (socket));
   
   if (GTK_IS_WINDOW (toplevel))
@@ -526,7 +526,7 @@ gtk_socket_size_allocate (GtkWidget     *widget,
 	}
       else if (socket->plug_window)
 	{
-	  GtkSocketPrivate *private = _gtk_socket_get_private (socket);
+	  GtkSocketPrivate *private = _gtk_socket_get_instance_private (socket);
 	  
 	  __gdk_error_trap_push ();
 	  

@@ -467,7 +467,7 @@ ___gtk_recent_chooser_get_items (GtkRecentChooser  *chooser,
           if (local_only && !__gtk_recent_info_is_local (info))
             remove_item = TRUE;
 
-          if (!show_private && __gtk_recent_info_get_private_hint (info))
+          if (!show_private && __gtk_recent_info_get_instance_private_hint (info))
             remove_item = TRUE;
 
           if (!show_not_found && !__gtk_recent_info_exists (info))

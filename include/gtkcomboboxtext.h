@@ -37,7 +37,7 @@ G_BEGIN_DECLS
 typedef struct _GtkComboBoxTextPrivate      GtkComboBoxTextPrivate;
 typedef struct _GtkComboBoxTextClass        GtkComboBoxTextClass;
 
-STLWRT_DECLARE_VTYPE(GtkComboBoxText, gtk_combo_box_text, GtkComboBox,
+STLWRT_DECLARE_VTYPE_VPARENT(GtkComboBoxText, gtk_combo_box_text, GtkComboBox,
   GtkComboBoxTextPrivate *priv;
 )
 

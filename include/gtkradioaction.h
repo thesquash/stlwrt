@@ -50,7 +50,7 @@ struct _GtkRadioActionPrivate
   gint    value;
 };
 
-STLWRT_DECLARE_VTYPE(GtkRadioAction, gtk_radio_action, GtkToggleAction,
+STLWRT_DECLARE_VTYPE_VPARENT(GtkRadioAction, gtk_radio_action, GtkToggleAction,
   GtkRadioActionPrivate * (private_data);
 )
 

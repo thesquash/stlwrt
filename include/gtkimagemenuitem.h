@@ -38,7 +38,7 @@ G_BEGIN_DECLS
 
 typedef struct _GtkImageMenuItemClass  GtkImageMenuItemClass;
 
-STLWRT_DECLARE_VTYPE(GtkImageMenuItem, gtk_image_menu_item, GtkMenuItem,
+STLWRT_DECLARE_VTYPE_VPARENT(GtkImageMenuItem, gtk_image_menu_item, GtkMenuItem,
   /*< private >*/
   GtkWidget      * (image);
 )

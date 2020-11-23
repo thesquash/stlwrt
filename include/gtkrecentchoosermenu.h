@@ -79,7 +79,7 @@ struct _GtkRecentChooserMenuPrivate
   gulong populate_id;
 };
 
-STLWRT_DECLARE_VTYPE(GtkRecentChooserMenu, gtk_recent_chooser_menu, GtkMenu,
+STLWRT_DECLARE_VTYPE_VPARENT(GtkRecentChooserMenu, gtk_recent_chooser_menu, GtkMenu,
   GtkRecentChooserMenuPrivate * (priv);
 )
 

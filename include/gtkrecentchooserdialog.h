@@ -50,7 +50,7 @@ struct _GtkRecentChooserDialogPrivate
   GtkWidget *chooser;
 };
 
-STLWRT_DECLARE_VTYPE(GtkRecentChooserDialog, gtk_recent_chooser_dialog, GtkDialog,
+STLWRT_DECLARE_VTYPE_VPARENT(GtkRecentChooserDialog, gtk_recent_chooser_dialog, GtkDialog,
   GtkRecentChooserDialogPrivate * (priv);
 )
 

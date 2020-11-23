@@ -54,7 +54,7 @@ struct _GtkInfoBarPrivate
   GtkMessageType message_type;
 };
 
-STLWRT_DECLARE_VTYPE(GtkInfoBar, gtk_info_bar, GtkHBox,
+STLWRT_DECLARE_VTYPE_VPARENT(GtkInfoBar, gtk_info_bar, GtkHBox,
   /*< private > */
   GtkInfoBarPrivate *priv;
 )

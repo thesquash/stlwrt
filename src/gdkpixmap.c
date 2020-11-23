@@ -151,8 +151,8 @@ static void         gdk_pixmap_real_set_colormap (GdkDrawable *drawable,
 static GdkColormap* gdk_pixmap_real_get_colormap (GdkDrawable *drawable);
 static GdkScreen*   gdk_pixmap_real_get_screen   (GdkDrawable *drawable);
 
-static void gdk_pixmap_init       (GdkPixmapObject      *pixmap);
-static void gdk_pixmap_class_init (GdkPixmapObjectClass *klass);
+static void gdk_pixmap_init       (GdkPixmap      *pixmap);
+static void gdk_pixmap_class_init (GdkPixmapClass *klass);
 static void gdk_pixmap_finalize   (GObject              *object);
 
 static gpointer parent_class = NULL;
@@ -160,14 +160,14 @@ static gpointer parent_class = NULL;
 STLWRT_DEFINE_FTYPE (GdkPixmap, gdk_pixmap, GDK_TYPE_DRAWABLE, G_TYPE_FLAG_NONE, ;)
 
 static void
-gdk_pixmap_init (GdkPixmapObject *pixmap)
+gdk_pixmap_init (GdkPixmap *pixmap)
 {
   /* 0-initialization is good for all other fields. */
   pixmap->impl = g_object_new (_gdk_pixmap_impl_get_type (), NULL);
 }
 
 static void
-gdk_pixmap_class_init (GdkPixmapObjectClass *klass)
+gdk_pixmap_class_init (GdkPixmapClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GdkDrawableClass *drawable_class = GDK_DRAWABLE_CLASS (klass);
@@ -205,7 +205,7 @@ gdk_pixmap_class_init (GdkPixmapObjectClass *klass)
 static void
 gdk_pixmap_finalize (GObject *object)
 {
-  GdkPixmapObject *obj = (GdkPixmapObject *) object;
+  GdkPixmap *obj = (GdkPixmap *) object;
 
   g_object_unref (obj->impl);
   obj->impl = NULL;
@@ -266,7 +266,7 @@ gdk_pixmap_create_gc (GdkDrawable     *drawable,
                       GdkGCValues     *values,
                       GdkGCValuesMask  mask)
 {
-  return __gdk_gc_new_with_values (((GdkPixmapObject *) drawable)->impl,
+  return __gdk_gc_new_with_values (((GdkPixmap *) drawable)->impl,
                                  values, mask);
 }
 
@@ -279,7 +279,7 @@ gdk_pixmap_draw_rectangle (GdkDrawable *drawable,
 			   gint         width,
 			   gint         height)
 {
-  GdkPixmapObject *private = (GdkPixmapObject *)drawable;
+  GdkPixmap *private = (GdkPixmap *)drawable;
 
   _gdk_gc_remove_drawable_clip (gc);  
   __gdk_draw_rectangle (private->impl, gc, filled,
@@ -297,7 +297,7 @@ gdk_pixmap_draw_arc (GdkDrawable *drawable,
 		     gint         angle1,
 		     gint         angle2)
 {
-  GdkPixmapObject *private = (GdkPixmapObject *)drawable;
+  GdkPixmap *private = (GdkPixmap *)drawable;
 
   _gdk_gc_remove_drawable_clip (gc);  
   __gdk_draw_arc (private->impl, gc, filled,
@@ -312,7 +312,7 @@ gdk_pixmap_draw_polygon (GdkDrawable *drawable,
 			 GdkPoint    *points,
 			 gint         npoints)
 {
-  GdkPixmapObject *private = (GdkPixmapObject *)drawable;
+  GdkPixmap *private = (GdkPixmap *)drawable;
 
   _gdk_gc_remove_drawable_clip (gc);  
   __gdk_draw_polygon (private->impl, gc, filled, points, npoints);
@@ -327,7 +327,7 @@ gdk_pixmap_draw_text (GdkDrawable *drawable,
 		      const gchar *text,
 		      gint         text_length)
 {
-  GdkPixmapObject *private = (GdkPixmapObject *)drawable;
+  GdkPixmap *private = (GdkPixmap *)drawable;
 
   _gdk_gc_remove_drawable_clip (gc);  
   __gdk_draw_text (private->impl, font, gc,
@@ -343,7 +343,7 @@ gdk_pixmap_draw_text_wc (GdkDrawable    *drawable,
 			 const GdkWChar *text,
 			 gint            text_length)
 {
-  GdkPixmapObject *private = (GdkPixmapObject *)drawable;
+  GdkPixmap *private = (GdkPixmap *)drawable;
 
   _gdk_gc_remove_drawable_clip (gc);  
   __gdk_draw_text_wc (private->impl, font, gc,
@@ -362,7 +362,7 @@ gdk_pixmap_draw_drawable (GdkDrawable *drawable,
 			  gint         height,
 			  GdkPixmap   *original_src)
 {
-  GdkPixmapObject *private = (GdkPixmapObject *)drawable;
+  GdkPixmap *private = (GdkPixmap *)drawable;
 
   _gdk_gc_remove_drawable_clip (gc);
   /* Call the method directly to avoid getting the composite drawable again */
@@ -380,7 +380,7 @@ gdk_pixmap_draw_points (GdkDrawable *drawable,
 			GdkPoint    *points,
 			gint         npoints)
 {
-  GdkPixmapObject *private = (GdkPixmapObject *)drawable;
+  GdkPixmap *private = (GdkPixmap *)drawable;
 
   _gdk_gc_remove_drawable_clip (gc);  
   __gdk_draw_points (private->impl, gc, points, npoints);
@@ -392,7 +392,7 @@ gdk_pixmap_draw_segments (GdkDrawable *drawable,
 			  GdkSegment  *segs,
 			  gint         nsegs)
 {
-  GdkPixmapObject *private = (GdkPixmapObject *)drawable;
+  GdkPixmap *private = (GdkPixmap *)drawable;
 
   _gdk_gc_remove_drawable_clip (gc);  
   __gdk_draw_segments (private->impl, gc, segs, nsegs);
@@ -404,7 +404,7 @@ gdk_pixmap_draw_lines (GdkDrawable *drawable,
 		       GdkPoint    *points,
 		       gint         npoints)
 {
-  GdkPixmapObject *private = (GdkPixmapObject *)drawable;
+  GdkPixmap *private = (GdkPixmap *)drawable;
 
   _gdk_gc_remove_drawable_clip (gc);  
   __gdk_draw_lines (private->impl, gc, points, npoints);
@@ -418,7 +418,7 @@ gdk_pixmap_draw_glyphs (GdkDrawable      *drawable,
                         gint              y,
                         PangoGlyphString *glyphs)
 {
-  GdkPixmapObject *private = (GdkPixmapObject *)drawable;
+  GdkPixmap *private = (GdkPixmap *)drawable;
 
   _gdk_gc_remove_drawable_clip (gc);  
   __gdk_draw_glyphs (private->impl, gc, font, x, y, glyphs);
@@ -433,7 +433,7 @@ gdk_pixmap_draw_glyphs_transformed (GdkDrawable      *drawable,
 				    gint              y,
 				    PangoGlyphString *glyphs)
 {
-  GdkPixmapObject *private = (GdkPixmapObject *)drawable;
+  GdkPixmap *private = (GdkPixmap *)drawable;
 
   _gdk_gc_remove_drawable_clip (gc);  
   __gdk_draw_glyphs_transformed (private->impl, gc, matrix, font, x, y, glyphs);
@@ -450,7 +450,7 @@ gdk_pixmap_draw_image (GdkDrawable     *drawable,
                        gint             width,
                        gint             height)
 {
-  GdkPixmapObject *private = (GdkPixmapObject *)drawable;
+  GdkPixmap *private = (GdkPixmap *)drawable;
 
   _gdk_gc_remove_drawable_clip (gc);  
   __gdk_draw_image (private->impl, gc, image, xsrc, ysrc, xdest, ydest,
@@ -471,7 +471,7 @@ gdk_pixmap_draw_pixbuf (GdkDrawable     *drawable,
 			gint             x_dither,
 			gint             y_dither)
 {
-  GdkPixmapObject *private = (GdkPixmapObject *)drawable;
+  GdkPixmap *private = (GdkPixmap *)drawable;
 
   if (gc)
     _gdk_gc_remove_drawable_clip (gc);  
@@ -486,7 +486,7 @@ gdk_pixmap_draw_trapezoids (GdkDrawable     *drawable,
 			    GdkTrapezoid    *trapezoids,
 			    gint             n_trapezoids)
 {
-  GdkPixmapObject *private = (GdkPixmapObject *)drawable;
+  GdkPixmap *private = (GdkPixmap *)drawable;
 
   _gdk_gc_remove_drawable_clip (gc);  
   __gdk_draw_trapezoids (private->impl, gc, trapezoids, n_trapezoids);
@@ -499,7 +499,7 @@ gdk_pixmap_real_get_size (GdkDrawable *drawable,
 {
   g_return_if_fail (GDK_IS_PIXMAP (drawable));
 
-  __gdk_drawable_get_size (GDK_DRAWABLE (((GdkPixmapObject*)drawable)->impl),
+  __gdk_drawable_get_size (GDK_DRAWABLE (((GdkPixmap*)drawable)->impl),
                          width, height);
 }
 
@@ -532,7 +532,7 @@ gdk_pixmap_real_set_colormap (GdkDrawable *drawable,
 {
   g_return_if_fail (GDK_IS_PIXMAP (drawable));  
   
-  __gdk_drawable_set_colormap (((GdkPixmapObject*)drawable)->impl, cmap);
+  __gdk_drawable_set_colormap (((GdkPixmap*)drawable)->impl, cmap);
 }
 
 static GdkColormap*
@@ -540,7 +540,7 @@ gdk_pixmap_real_get_colormap (GdkDrawable *drawable)
 {
   g_return_val_if_fail (GDK_IS_PIXMAP (drawable), NULL);
   
-  return __gdk_drawable_get_colormap (((GdkPixmapObject*)drawable)->impl);
+  return __gdk_drawable_get_colormap (((GdkPixmap*)drawable)->impl);
 }
 
 static GdkImage*
@@ -555,7 +555,7 @@ gdk_pixmap_copy_to_image (GdkDrawable     *drawable,
 {
   g_return_val_if_fail (GDK_IS_PIXMAP (drawable), NULL);
   
-  return __gdk_drawable_copy_to_image (((GdkPixmapObject*)drawable)->impl,
+  return __gdk_drawable_copy_to_image (((GdkPixmap*)drawable)->impl,
 				     image,
 				     src_x, src_y, dest_x, dest_y,
 				     width, height);
@@ -564,7 +564,7 @@ gdk_pixmap_copy_to_image (GdkDrawable     *drawable,
 static cairo_surface_t *
 gdk_pixmap_ref_cairo_surface (GdkDrawable *drawable)
 {
-  return _gdk_drawable_ref_cairo_surface (((GdkPixmapObject*)drawable)->impl);
+  return _gdk_drawable_ref_cairo_surface (((GdkPixmap*)drawable)->impl);
 }
 
 static cairo_surface_t *

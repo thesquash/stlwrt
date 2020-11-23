@@ -192,10 +192,12 @@ gtk_button_box_get_property (GObject         *object,
 			     GValue          *value,
 			     GParamSpec      *pspec)
 {
+  GtkButtonBoxProps *button_box_props = gtk_button_box_get_props (GTK_BUTTON_BOX (object));
+
   switch (prop_id)
     {
     case PROP_LAYOUT_STYLE:
-      g_value_set_enum (value, GTK_BUTTON_BOX (object)->layout_style);
+      g_value_set_enum (value, button_box_props->layout_style);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -248,6 +250,8 @@ void
 __gtk_button_box_set_child_size (GtkButtonBox *widget, 
                                gint width, gint height)
 {
+  GtkButtonBoxProps *widget_props = gtk_button_box_get_props (widget);
+
   g_return_if_fail (GTK_IS_BUTTON_BOX (widget));
 
   widget->child_min_width = width;
@@ -258,6 +262,8 @@ void
 __gtk_button_box_set_child_ipadding (GtkButtonBox *widget,
                                    gint ipad_x, gint ipad_y)
 {
+  GtkButtonBoxProps *widget_props = gtk_button_box_get_props (widget);
+
   g_return_if_fail (GTK_IS_BUTTON_BOX (widget));
 
   widget->child_ipad_x = ipad_x;
@@ -268,6 +274,8 @@ void
 __gtk_button_box_set_layout (GtkButtonBox      *widget, 
                            GtkButtonBoxStyle  layout_style)
 {
+  GtkButtonBoxProps *widget_props = gtk_button_box_get_props (widget);
+
   g_return_if_fail (GTK_IS_BUTTON_BOX (widget));
   g_return_if_fail (layout_style >= GTK_BUTTONBOX_DEFAULT_STYLE &&
 		    layout_style <= GTK_BUTTONBOX_CENTER);
@@ -287,6 +295,8 @@ void
 __gtk_button_box_get_child_size (GtkButtonBox *widget,
                                gint *width, gint *height)
 {
+  GtkButtonBoxProps *widget_props = gtk_button_box_get_props (widget);
+
   g_return_if_fail (GTK_IS_BUTTON_BOX (widget));
   g_return_if_fail (width != NULL);
   g_return_if_fail (height != NULL);
@@ -299,6 +309,8 @@ void
 __gtk_button_box_get_child_ipadding (GtkButtonBox *widget,
                                    gint* ipad_x, gint *ipad_y)
 {
+  GtkButtonBoxProps *widget_props = gtk_button_box_get_props (widget);
+
   g_return_if_fail (GTK_IS_BUTTON_BOX (widget));
   g_return_if_fail (ipad_x != NULL);
   g_return_if_fail (ipad_y != NULL);
@@ -310,6 +322,8 @@ __gtk_button_box_get_child_ipadding (GtkButtonBox *widget,
 GtkButtonBoxStyle 
 __gtk_button_box_get_layout (GtkButtonBox *widget)
 {
+  GtkButtonBoxProps *widget_props = gtk_button_box_get_props (widget);
+
   g_return_val_if_fail (GTK_IS_BUTTON_BOX (widget), GTK_BUTTONBOX_SPREAD);
   
   return widget->layout_style;

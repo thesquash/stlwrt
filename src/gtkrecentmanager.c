@@ -1863,7 +1863,7 @@ __gtk_recent_info_get_visited (GtkRecentInfo *info)
 }
 
 /**
- * __gtk_recent_info_get_private_hint:
+ * __gtk_recent_info_get_instance_private_hint:
  * @info: a #GtkRecentInfo
  *
  * Gets the value of the "private" flag.  Resources in the recently used
@@ -1875,7 +1875,7 @@ __gtk_recent_info_get_visited (GtkRecentInfo *info)
  * Since: 2.10
  */
 gboolean
-__gtk_recent_info_get_private_hint (GtkRecentInfo *info)
+__gtk_recent_info_get_instance_private_hint (GtkRecentInfo *info)
 {
   g_return_val_if_fail (info != NULL, FALSE);
   

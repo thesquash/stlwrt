@@ -39,7 +39,7 @@ G_BEGIN_DECLS
 typedef struct _GtkDrawingAreaClass  GtkDrawingAreaClass;
 
 
-STLWRT_DECLARE_VTYPE(GtkDrawingArea, gtk_drawing_area, GtkWidget,
+STLWRT_DECLARE_VTYPE_VPARENT(GtkDrawingArea, gtk_drawing_area, GtkWidget,
   gpointer  (draw_data);
 )
 

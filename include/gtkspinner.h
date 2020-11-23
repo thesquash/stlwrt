@@ -52,7 +52,7 @@ struct _GtkSpinnerPrivate
   guint timeout;
 };
 
-STLWRT_DECLARE_VTYPE(GtkSpinner, gtk_spinner, GtkDrawingArea,
+STLWRT_DECLARE_VTYPE_VPARENT(GtkSpinner, gtk_spinner, GtkDrawingArea,
   GtkSpinnerPrivate *priv;
 )
 

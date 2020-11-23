@@ -38,7 +38,7 @@ G_BEGIN_DECLS
 typedef struct _GtkTrayIconPrivate GtkTrayIconPrivate;
 typedef struct _GtkTrayIconClass   GtkTrayIconClass;
 
-STLWRT_DECLARE_VTYPE(GtkTrayIcon, gtk_tray_icon, GtkPlug,
+STLWRT_DECLARE_VTYPE_VPARENT(GtkTrayIcon, gtk_tray_icon, GtkPlug,
   GtkTrayIconPrivate *priv;
 )
 

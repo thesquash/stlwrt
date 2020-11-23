@@ -61,7 +61,7 @@ struct _GtkExpanderPrivate
   guint             label_fill : 1;
 };
 
-STLWRT_DECLARE_VTYPE(GtkExpander, gtk_expander, GtkBin,
+STLWRT_DECLARE_VTYPE_VPARENT(GtkExpander, gtk_expander, GtkBin,
   GtkExpanderPrivate * (priv);
 )
 

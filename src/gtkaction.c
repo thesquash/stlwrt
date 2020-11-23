@@ -400,7 +400,7 @@ gtk_action_class_init (GtkActionClass *klass)
 static void
 gtk_action_init (GtkAction *action)
 {
-  action->private_data = gtk_action_get_private (action);
+  action->private_data = gtk_action_get_instance_private (action);
 
   action->private_data->name = NULL;
   action->private_data->label = NULL;

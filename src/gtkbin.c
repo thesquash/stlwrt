@@ -68,16 +68,20 @@ gtk_bin_class_init (GtkBinClass *class)
 static void
 gtk_bin_init (GtkBin *bin)
 {
+  GtkBinProps *bin_props = gtk_bin_get_props (bin);
+
   __gtk_widget_set_has_window (GTK_WIDGET (bin), FALSE);
 
-  bin->child = NULL;
+  bin_props->child = NULL;
 }
 
 
 static GType
 gtk_bin_child_type (GtkContainer *container)
 {
-  if (!GTK_BIN (container)->child)
+  GtkBinProps *bin_props = gtk_bin_get_props (GTK_BIN (container));
+
+  if (!bin_props->child)
     return GTK_TYPE_WIDGET;
   else
     return G_TYPE_NONE;
@@ -88,8 +92,9 @@ gtk_bin_add (GtkContainer *container,
 	     GtkWidget    *child)
 {
   GtkBin *bin = GTK_BIN (container);
+  GtkBinProps *bin_props = gtk_bin_get_props (bin);
 
-  if (bin->child != NULL)
+  if (bin_props->child != NULL)
     {
       g_warning ("Attempting to add a widget with type %s to a %s, "
                  "but as a GtkBin subclass a %s can only contain one widget at a time; "
@@ -97,12 +102,12 @@ gtk_bin_add (GtkContainer *container,
                  g_type_name (G_OBJECT_TYPE (child)),
                  g_type_name (G_OBJECT_TYPE (bin)),
                  g_type_name (G_OBJECT_TYPE (bin)),
-                 g_type_name (G_OBJECT_TYPE (bin->child)));
+                 g_type_name (G_OBJECT_TYPE (bin_props->child)));
       return;
     }
 
   __gtk_widget_set_parent (child, GTK_WIDGET (bin));
-  bin->child = child;
+  bin_props->child = child;
 }
 
 static void
@@ -110,14 +115,15 @@ gtk_bin_remove (GtkContainer *container,
 		GtkWidget    *child)
 {
   GtkBin *bin = GTK_BIN (container);
+  GtkBinProps *bin_props = gtk_bin_get_props (bin);
   gboolean widget_was_visible;
 
-  g_return_if_fail (bin->child == child);
+  g_return_if_fail (bin_props->child == child);
 
   widget_was_visible = __gtk_widget_get_visible (child);
   
   __gtk_widget_unparent (child);
-  bin->child = NULL;
+  bin_props->child = NULL;
   
   /* queue resize regardless of __gtk_widget_get_visible (container),
    * since that's what is needed by toplevels, which derive from GtkBin.
@@ -133,9 +139,10 @@ gtk_bin_forall (GtkContainer *container,
 		gpointer      callback_data)
 {
   GtkBin *bin = GTK_BIN (container);
+  GtkBinProps *bin_props = gtk_bin_get_props (bin);
 
-  if (bin->child)
-    (* callback) (bin->child, callback_data);
+  if (bin_props->child)
+    (* callback) (bin_props->child, callback_data);
 }
 
 /**
@@ -151,7 +158,9 @@ gtk_bin_forall (GtkContainer *container,
 GtkWidget*
 __gtk_bin_get_child (GtkBin *bin)
 {
+  GtkBinProps *bin_props = gtk_bin_get_props (bin);
+
   g_return_val_if_fail (GTK_IS_BIN (bin), NULL);
 
-  return bin->child;
+  return bin_props->child;
 }

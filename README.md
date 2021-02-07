@@ -15,17 +15,12 @@ making and have made, and I hope we may be able to collaborate somehow.
 
 ## What's new?
 
-(**NOTE:**  This section of the README recently contained a major slip-up in
-both code snippets.  To wit, `child` was referenced incorrectly as `widget`
-on the `g_return_if_fail` line.  I apologize for any confusion it may have
-caused.  The corrected version follows.)
-
-After implementing incremental changes to the STLWRT codebase to reduce the
-error count, I have reached the point where it is time to go head-on and start
-phase 3 of the STLWRT-ization of the roughly 260 source files.  Specifically,
-all STLWRT objects need to stop using object instance structures directly and
-need to go through at least one generated function.  As an example, the
-following hypothetical function which packs a widget inside of a GtkDialog:
+Progress has been slow since the mid-to-late fall, as anybody who reads the
+commit logs can see.  The stuff I've been doing lately is STLWRT-ization of
+the roughly 260 source files.  Specifically, all STLWRT objects need to stop
+using object instance structures directly and need to go through at least one
+generated function.  As an example, the following hypothetical function
+which packs a widget inside of a GtkDialog:
 
         void
         gtk_dialog_really_stupid_function (GtkDialog *dialog, GtkWidget *child)
@@ -53,9 +48,10 @@ following hypothetical function which packs a widget inside of a GtkDialog:
 
 Of course, many functions are a lot longer than this, so the `dialog_props` can
 be used multiple times in the same function, or maybe even shared between local
-functions which have no need for ABI compatibility.  As I write this, I have
-just converted the code for GtkAboutDialog to such a form.  I'd suggest any
-curious parties look at the code for GtkAboutDialog (under `src/gtkaboutdialog.c`)
-to see a case of accessing GtkDialog properties from a decendant,
-GtkAboutDialog.  It's at the very least a lesson in the internal design of GTK
-(and STLWRT)!
+functions which have no need for ABI compatibility.  `src/gtkbbox.c` is an
+example of a coding nightmare, something which was allowed to collect a lot of
+bad coding practices over time.  A cursory look at GTK+ 1.0.0 source code
+reveals that GtkButtonBox existed even back then in 1998, when GTK worked much
+differently than it does now.  So in short, there are some files which are hard
+to convert because they're full of inconsistencies, such as inconsistent
+variable naming schemes.

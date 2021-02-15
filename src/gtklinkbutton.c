@@ -162,7 +162,7 @@ gtk_link_button_class_init (GtkLinkButtonClass *klass)
 static void
 gtk_link_button_init (GtkLinkButton *link_button)
 {
-  link_button->priv = GTK_LINK_BUTTON_GET_PRIVATE (link_button),
+  gtk_link_button_get_props (link_button)->priv = GTK_LINK_BUTTON_GET_PRIVATE (gtk_link_button_get_props (link_button)),
   
   __gtk_button_set_relief (GTK_BUTTON (link_button), GTK_RELIEF_NONE);
   
@@ -189,7 +189,7 @@ gtk_link_button_finalize (GObject *object)
 {
   GtkLinkButton *link_button = GTK_LINK_BUTTON (object);
   
-  g_free (link_button->priv->uri);
+  g_free (gtk_link_button_get_props (link_button)->priv->uri);
   
   G_OBJECT_CLASS (gtk_link_button_parent_class)->finalize (object);
 }
@@ -205,10 +205,10 @@ gtk_link_button_get_property (GObject    *object,
   switch (prop_id)
     {
     case PROP_URI:
-      g_value_set_string (value, link_button->priv->uri);
+      g_value_set_string (value, gtk_link_button_get_props (link_button)->priv->uri);
       break;
     case PROP_VISITED:
-      g_value_set_boolean (value, link_button->priv->visited);
+      g_value_set_boolean (value, gtk_link_button_get_props (link_button)->priv->visited);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -248,7 +248,7 @@ set_link_color (GtkLinkButton *link_button)
   if (!GTK_IS_LABEL (label))
     return;
 
-  if (link_button->priv->visited)
+  if (gtk_link_button_get_props (link_button)->priv->visited)
     {
       __gtk_widget_style_get (GTK_WIDGET (link_button),
 			    "visited-link-color", &link_color, NULL);
@@ -326,7 +326,7 @@ set_hand_cursor (GtkWidget *widget,
   if (show_hand)
     cursor = __gdk_cursor_new_for_display (display, GDK_HAND2);
 
-  __gdk_window_set_cursor (widget->window, cursor);
+  __gdk_window_set_cursor (gtk_widget_get_props (widget)->window, cursor);
   __gdk_display_flush (display);
 
   if (cursor)
@@ -339,7 +339,7 @@ popup_menu_detach (GtkWidget *attach_widget,
 {
   GtkLinkButton *link_button = GTK_LINK_BUTTON (attach_widget);
 
-  link_button->priv->popup_menu = NULL;
+  gtk_link_button_get_props (link_button)->priv->popup_menu = NULL;
 }
 
 static void
@@ -350,7 +350,7 @@ popup_position_func (GtkMenu  *menu,
 		     gpointer  user_data)
 {
   GtkLinkButton *link_button = GTK_LINK_BUTTON (user_data);
-  GtkLinkButtonPrivate *priv = link_button->priv;
+  GtkLinkButtonPrivate *priv = gtk_link_button_get_props (link_button)->priv;
   GtkWidget *widget = GTK_WIDGET (link_button);
   GdkScreen *screen = __gtk_widget_get_screen (widget);
   GtkRequisition req;
@@ -359,12 +359,12 @@ popup_position_func (GtkMenu  *menu,
   
   g_return_if_fail (__gtk_widget_get_realized (widget));
 
-  __gdk_window_get_origin (widget->window, x, y);
+  __gdk_window_get_origin (gtk_widget_get_props (widget)->window, x, y);
 
   __gtk_widget_size_request (priv->popup_menu, &req);
 
-  *x += widget->allocation.width / 2;
-  *y += widget->allocation.height;
+  *x += gtk_widget_get_props (widget)->allocation.width / 2;
+  *y += gtk_widget_get_props (widget)->allocation.height;
 
   monitor_num = __gdk_screen_get_monitor_at_point (screen, *x, *y);
   __gtk_menu_set_monitor (menu, monitor_num);
@@ -380,7 +380,7 @@ static void
 copy_activate_cb (GtkWidget     *widget,
 		  GtkLinkButton *link_button)
 {
-  GtkLinkButtonPrivate *priv = link_button->priv;
+  GtkLinkButtonPrivate *priv = gtk_link_button_get_props (link_button)->priv;
   
   __gtk_clipboard_set_text (__gtk_widget_get_clipboard (GTK_WIDGET (link_button),
 			  			    GDK_SELECTION_CLIPBOARD),
@@ -391,7 +391,7 @@ static void
 gtk_link_button_do_popup (GtkLinkButton  *link_button,
 			  GdkEventButton *event)
 {
-  GtkLinkButtonPrivate *priv = link_button->priv;
+  GtkLinkButtonPrivate *priv = gtk_link_button_get_props (link_button)->priv;
   gint button;
   guint time;
   
@@ -468,7 +468,7 @@ gtk_link_button_clicked (GtkButton *button)
   GtkLinkButton *link_button = GTK_LINK_BUTTON (button);
 
   if (uri_func)
-    (* uri_func) (link_button, link_button->priv->uri, uri_func_data);
+    (* uri_func) (gtk_link_button_get_props (link_button), gtk_link_button_get_props (link_button)->priv->uri, uri_func_data);
   else
     {
       GdkScreen *screen;
@@ -480,11 +480,11 @@ gtk_link_button_clicked (GtkButton *button)
         screen = NULL;
 
       error = NULL;
-      __gtk_show_uri (screen, link_button->priv->uri, GDK_CURRENT_TIME, &error);
+      __gtk_show_uri (screen, gtk_link_button_get_props (link_button)->priv->uri, GDK_CURRENT_TIME, &error);
       if (error)
         {
           g_warning ("Unable to show '%s': %s",
-                     link_button->priv->uri,
+                     gtk_link_button_get_props (link_button)->priv->uri,
                      error->message);
           g_error_free (error);
         }
@@ -532,7 +532,7 @@ gtk_link_button_drag_data_get_cb (GtkWidget        *widget,
   GtkLinkButton *link_button = GTK_LINK_BUTTON (widget);
   gchar *uri;
   
-  uri = g_strdup_printf ("%s\r\n", link_button->priv->uri);
+  uri = g_strdup_printf ("%s\r\n", gtk_link_button_get_props (link_button)->priv->uri);
   __gtk_selection_data_set (selection,
   			  selection->target,
   			  8,
@@ -633,7 +633,7 @@ gtk_link_button_query_tooltip_cb (GtkWidget    *widget,
   const gchar *label, *uri;
 
   label = __gtk_button_get_label (GTK_BUTTON (link_button));
-  uri = link_button->priv->uri;
+  uri = gtk_link_button_get_props (link_button)->priv->uri;
 
   if (!__gtk_widget_get_tooltip_text (widget)
     && !__gtk_widget_get_tooltip_markup (widget)
@@ -666,7 +666,7 @@ __gtk_link_button_set_uri (GtkLinkButton *link_button,
   g_return_if_fail (GTK_IS_LINK_BUTTON (link_button));
   g_return_if_fail (uri != NULL);
 
-  priv = link_button->priv;
+  priv = gtk_link_button_get_props (link_button)->priv;
 
   g_free (priv->uri);
   priv->uri = g_strdup (uri);
@@ -692,7 +692,7 @@ __gtk_link_button_get_uri (GtkLinkButton *link_button)
 {
   g_return_val_if_fail (GTK_IS_LINK_BUTTON (link_button), NULL);
   
-  return link_button->priv->uri;
+  return gtk_link_button_get_props (link_button)->priv->uri;
 }
 
 /**
@@ -750,9 +750,9 @@ __gtk_link_button_set_visited (GtkLinkButton *link_button,
 
   visited = visited != FALSE;
 
-  if (link_button->priv->visited != visited)
+  if (gtk_link_button_get_props (link_button)->priv->visited != visited)
     {
-      link_button->priv->visited = visited;
+      gtk_link_button_get_props (link_button)->priv->visited = visited;
 
       set_link_color (link_button);
 
@@ -779,5 +779,5 @@ __gtk_link_button_get_visited (GtkLinkButton *link_button)
 {
   g_return_val_if_fail (GTK_IS_LINK_BUTTON (link_button), FALSE);
   
-  return link_button->priv->visited;
+  return gtk_link_button_get_props (link_button)->priv->visited;
 }

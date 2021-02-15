@@ -1781,12 +1781,12 @@ _gtk_text_btree_tag (const GtkTextIter *start_orig,
   g_return_if_fail (GTK_IS_TEXT_TAG (tag));
   g_return_if_fail (_gtk_text_iter_get_btree (start_orig) ==
                     _gtk_text_iter_get_btree (end_orig));
-  g_return_if_fail (tag->table == _gtk_text_iter_get_btree (start_orig)->table);
+  g_return_if_fail (gtk_text_tag_get_props (tag)->table == _gtk_text_iter_get_btree (start_orig)->table);
   
 #if 0
   printf ("%s tag %s from %d to %d\n",
           add ? "Adding" : "Removing",
-          tag->name,
+          gtk_text_tag_get_props (tag)->name,
           gtk_text_buffer_get_offset (start_orig),
           gtk_text_buffer_get_offset (end_orig));
 #endif
@@ -2508,10 +2508,10 @@ _gtk_text_btree_char_is_invisible (const GtkTextIter *iter)
           || (seg->type == &gtk_text_toggle_off_type))
         {
           tag = seg->body.toggle.info->tag;
-          if (tag->invisible_set)
+          if (gtk_text_tag_get_props (tag)->invisible_set)
             {
-              tags[tag->priority] = tag;
-              tagCnts[tag->priority]++;
+              tags[gtk_text_tag_get_props (tag)->priority] = gtk_text_tag_get_props (tag);
+              tagCnts[gtk_text_tag_get_props (tag)->priority]++;
             }
         }
     }
@@ -2532,10 +2532,10 @@ _gtk_text_btree_char_is_invisible (const GtkTextIter *iter)
               || (seg->type == &gtk_text_toggle_off_type))
             {
               tag = seg->body.toggle.info->tag;
-              if (tag->invisible_set)
+              if (gtk_text_tag_get_props (tag)->invisible_set)
                 {
-                  tags[tag->priority] = tag;
-                  tagCnts[tag->priority]++;
+                  tags[gtk_text_tag_get_props (tag)->priority] = gtk_text_tag_get_props (tag);
+                  tagCnts[gtk_text_tag_get_props (tag)->priority]++;
                 }
             }
         }
@@ -2561,10 +2561,10 @@ _gtk_text_btree_char_is_invisible (const GtkTextIter *iter)
               if (summary->toggle_count & 1)
                 {
                   tag = summary->info->tag;
-                  if (tag->invisible_set)
+                  if (gtk_text_tag_get_props (tag)->invisible_set)
                     {
-                      tags[tag->priority] = tag;
-                      tagCnts[tag->priority] += summary->toggle_count;
+                      tags[gtk_text_tag_get_props (tag)->priority] = gtk_text_tag_get_props (tag);
+                      tagCnts[gtk_text_tag_get_props (tag)->priority] += summary->toggle_count;
                     }
                 }
             }
@@ -6022,7 +6022,7 @@ gtk_text_btree_get_tag_info (GtkTextBTree *tree,
 
 #if 0
       g_print ("Created tag info %p for tag %s(%p)\n",
-               info, info->tag->name ? info->tag->name : "anon",
+               info, info->gtk_text_tag_get_props (tag)->name ? info->gtk_text_tag_get_props (tag)->name : "anon",
                info->tag);
 #endif
     }
@@ -6047,7 +6047,7 @@ gtk_text_btree_remove_tag_info (GtkTextBTree *tree,
         {
 #if 0
           g_print ("Removing tag info %p for tag %s(%p)\n",
-                   info, info->tag->name ? info->tag->name : "anon",
+                   info, info->gtk_text_tag_get_props (tag)->name ? info->gtk_text_tag_get_props (tag)->name : "anon",
                    info->tag);
 #endif
           
@@ -6801,7 +6801,7 @@ gtk_text_btree_node_check_consistency (GtkTextBTree     *tree,
                           break;
                         }
                       g_error ("gtk_text_btree_node_check_consistency: GtkTextBTreeNode tag \"%s\" not %s",
-                               summary->info->tag->name,
+                               summary->info->gtk_text_tag_get_props (tag)->name,
                                "present in parent summaries");
                     }
                   if (summary->info == summary2->info)
@@ -6837,7 +6837,7 @@ gtk_text_btree_node_check_consistency (GtkTextBTree     *tree,
       if (summary->info->toggle_count == summary->toggle_count)
         {
           g_error ("gtk_text_btree_node_check_consistency: found unpruned root for \"%s\"",
-                   summary->info->tag->name);
+                   summary->info->gtk_text_tag_get_props (tag)->name);
         }
       toggle_count = 0;
       if (node->level == 0)
@@ -6891,7 +6891,7 @@ gtk_text_btree_node_check_consistency (GtkTextBTree     *tree,
           if (summary2->info == summary->info)
             {
               g_error ("gtk_text_btree_node_check_consistency: duplicated GtkTextBTreeNode tag: %s",
-                       summary->info->tag->name);
+                       summary->info->gtk_text_tag_get_props (tag)->name);
             }
         }
     }
@@ -6943,19 +6943,19 @@ _gtk_text_btree_check (GtkTextBTree *tree)
               if (info->toggle_count != 0)
                 {
                   g_error ("_gtk_text_btree_check found \"%s\" with toggles (%d) but no root",
-                           tag->name, info->toggle_count);
+                           gtk_text_tag_get_props (tag)->name, info->toggle_count);
                 }
               continue;         /* no ranges for the tag */
             }
           else if (info->toggle_count == 0)
             {
               g_error ("_gtk_text_btree_check found root for \"%s\" with no toggles",
-                       tag->name);
+                       gtk_text_tag_get_props (tag)->name);
             }
           else if (info->toggle_count & 1)
             {
               g_error ("_gtk_text_btree_check found odd toggle count for \"%s\" (%d)",
-                       tag->name, info->toggle_count);
+                       gtk_text_tag_get_props (tag)->name, info->toggle_count);
             }
           for (summary = node->summary; summary != NULL;
                summary = summary->next)
@@ -7010,7 +7010,7 @@ _gtk_text_btree_check (GtkTextBTree *tree)
           if (count != info->toggle_count)
             {
               g_error ("_gtk_text_btree_check toggle_count (%d) wrong for \"%s\" should be (%d)",
-                       info->toggle_count, tag->name, count);
+                       info->toggle_count, gtk_text_tag_get_props (tag)->name, count);
             }
         }
     }
@@ -7119,7 +7119,7 @@ _gtk_text_btree_spew (GtkTextBTree *tree)
         info = list->data;
 
         printf ("  tag `%s': root at %p, toggle count %d\n",
-                info->tag->name, info->tag_root, info->toggle_count);
+                info->gtk_text_tag_get_props (tag)->name, info->tag_root, info->toggle_count);
 
         list = g_slist_next (list);
       }
@@ -7185,7 +7185,7 @@ _gtk_text_btree_spew_line_short (GtkTextLine *line, int indent)
                seg->type == &gtk_text_toggle_off_type)
         {
           printf ("%s tag `%s' %s\n",
-                  spaces, seg->body.toggle.info->tag->name,
+                  spaces, seg->body.toggle.info->gtk_text_tag_get_props (tag)->name,
                   seg->type == &gtk_text_toggle_off_type ? "off" : "on");
         }
 
@@ -7212,7 +7212,7 @@ _gtk_text_btree_spew_node (GtkTextBTreeNode *node, int indent)
   while (s)
     {
       printf ("%s %d toggles of `%s' below this node\n",
-              spaces, s->toggle_count, s->info->tag->name);
+              spaces, s->toggle_count, s->info->gtk_text_tag_get_props (tag)->name);
       s = s->next;
     }
 
@@ -7287,7 +7287,7 @@ _gtk_text_btree_spew_segment (GtkTextBTree* tree, GtkTextLineSegment * seg)
            seg->type == &gtk_text_toggle_off_type)
     {
       printf ("       tag `%s' priority %d\n",
-              seg->body.toggle.info->tag->name,
-              seg->body.toggle.info->tag->priority);
+              seg->body.toggle.info->gtk_text_tag_get_props (tag)->name,
+              seg->body.toggle.info->gtk_text_tag_get_props (tag)->priority);
     }
 }

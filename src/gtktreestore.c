@@ -147,9 +147,9 @@ validate_tree (GtkTreeStore *tree_store)
 {
   if (gtk_debug_flags & GTK_DEBUG_TREE)
     {
-      g_assert (G_NODE (tree_store->root)->parent == NULL);
+      g_assert (G_NODE (gtk_tree_store_get_props (tree_store)->root)->parent == NULL);
 
-      validate_gnode (G_NODE (tree_store->root));
+      validate_gnode (G_NODE (gtk_tree_store_get_props (tree_store)->root));
     }
 }
 
@@ -223,18 +223,18 @@ gtk_tree_store_buildable_init (GtkBuildableIface *iface)
 static void
 gtk_tree_store_init (GtkTreeStore *tree_store)
 {
-  tree_store->root = g_node_new (NULL);
+  gtk_tree_store_get_props (tree_store)->root = g_node_new (NULL);
   /* While the odds are against us getting 0...
    */
   do
     {
-      tree_store->stamp = g_random_int ();
+      gtk_tree_store_get_props (tree_store)->stamp = g_random_int ();
     }
-  while (tree_store->stamp == 0);
+  while (gtk_tree_store_get_props (tree_store)->stamp == 0);
 
-  tree_store->sort_list = NULL;
-  tree_store->sort_column_id = GTK_TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID;
-  tree_store->columns_dirty = FALSE;
+  gtk_tree_store_get_props (tree_store)->sort_list = NULL;
+  gtk_tree_store_get_props (tree_store)->sort_column_id = GTK_TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID;
+  gtk_tree_store_get_props (tree_store)->columns_dirty = FALSE;
 }
 
 /**
@@ -338,7 +338,7 @@ __gtk_tree_store_set_column_types (GtkTreeStore *tree_store,
   gint i;
 
   g_return_if_fail (GTK_IS_TREE_STORE (tree_store));
-  g_return_if_fail (tree_store->columns_dirty == 0);
+  g_return_if_fail (gtk_tree_store_get_props (tree_store)->columns_dirty == 0);
 
   __gtk_tree_store_set_n_columns (tree_store, n_columns);
    for (i = 0; i < n_columns; i++)
@@ -358,18 +358,18 @@ __gtk_tree_store_set_n_columns (GtkTreeStore *tree_store,
 {
   int i;
 
-  if (tree_store->n_columns == n_columns)
+  if (gtk_tree_store_get_props (tree_store)->n_columns == n_columns)
     return;
 
-  tree_store->column_headers = g_renew (GType, tree_store->column_headers, n_columns);
-  for (i = tree_store->n_columns; i < n_columns; i++)
-    tree_store->column_headers[i] = G_TYPE_INVALID;
-  tree_store->n_columns = n_columns;
+  gtk_tree_store_get_props (tree_store)->column_headers = g_renew (GType, gtk_tree_store_get_props (tree_store)->column_headers, n_columns);
+  for (i = gtk_tree_store_get_props (tree_store)->n_columns; i < n_columns; i++)
+    gtk_tree_store_get_props (tree_store)->column_headers[i] = G_TYPE_INVALID;
+  gtk_tree_store_get_props (tree_store)->n_columns = n_columns;
 
-  if (tree_store->sort_list)
-    _gtk_tree_data_list_header_free (tree_store->sort_list);
+  if (gtk_tree_store_get_props (tree_store)->sort_list)
+    _gtk_tree_data_list_header_free (gtk_tree_store_get_props (tree_store)->sort_list);
 
-  tree_store->sort_list = _gtk_tree_data_list_header_new (n_columns, tree_store->column_headers);
+  gtk_tree_store_get_props (tree_store)->sort_list = _gtk_tree_data_list_header_new (n_columns, gtk_tree_store_get_props (tree_store)->column_headers);
 }
 
 /**
@@ -394,7 +394,7 @@ __gtk_tree_store_set_column_type (GtkTreeStore *tree_store,
       g_warning ("%s: Invalid type %s\n", G_STRLOC, g_type_name (type));
       return;
     }
-  tree_store->column_headers[column] = type;
+  gtk_tree_store_get_props (tree_store)->column_headers[column] = type;
 }
 
 static gboolean
@@ -412,19 +412,19 @@ gtk_tree_store_finalize (GObject *object)
 {
   GtkTreeStore *tree_store = GTK_TREE_STORE (object);
 
-  g_node_traverse (tree_store->root, G_POST_ORDER, G_TRAVERSE_ALL, -1,
-		   node_free, tree_store->column_headers);
-  g_node_destroy (tree_store->root);
-  _gtk_tree_data_list_header_free (tree_store->sort_list);
-  g_free (tree_store->column_headers);
+  g_node_traverse (gtk_tree_store_get_props (tree_store)->root, G_POST_ORDER, G_TRAVERSE_ALL, -1,
+		   node_free, gtk_tree_store_get_props (tree_store)->column_headers);
+  g_node_destroy (gtk_tree_store_get_props (tree_store)->root);
+  _gtk_tree_data_list_header_free (gtk_tree_store_get_props (tree_store)->sort_list);
+  g_free (gtk_tree_store_get_props (tree_store)->column_headers);
 
-  if (tree_store->default_sort_destroy)
+  if (gtk_tree_store_get_props (tree_store)->default_sort_destroy)
     {
-      GDestroyNotify d = tree_store->default_sort_destroy;
+      GDestroyNotify d = gtk_tree_store_get_props (tree_store)->default_sort_destroy;
 
-      tree_store->default_sort_destroy = NULL;
-      d (tree_store->default_sort_data);
-      tree_store->default_sort_data = NULL;
+      gtk_tree_store_get_props (tree_store)->default_sort_destroy = NULL;
+      d (gtk_tree_store_get_props (tree_store)->default_sort_data);
+      gtk_tree_store_get_props (tree_store)->default_sort_data = NULL;
     }
 
   /* must chain up */
@@ -449,9 +449,9 @@ gtk_tree_store_get_n_columns (GtkTreeModel *tree_model)
 {
   GtkTreeStore *tree_store = (GtkTreeStore *) tree_model;
 
-  tree_store->columns_dirty = TRUE;
+  gtk_tree_store_get_props (tree_store)->columns_dirty = TRUE;
 
-  return tree_store->n_columns;
+  return gtk_tree_store_get_props (tree_store)->n_columns;
 }
 
 static GType
@@ -460,11 +460,11 @@ gtk_tree_store_get_column_type (GtkTreeModel *tree_model,
 {
   GtkTreeStore *tree_store = (GtkTreeStore *) tree_model;
 
-  g_return_val_if_fail (index < tree_store->n_columns, G_TYPE_INVALID);
+  g_return_val_if_fail (index < gtk_tree_store_get_props (tree_store)->n_columns, G_TYPE_INVALID);
 
-  tree_store->columns_dirty = TRUE;
+  gtk_tree_store_get_props (tree_store)->columns_dirty = TRUE;
 
-  return tree_store->column_headers[index];
+  return gtk_tree_store_get_props (tree_store)->column_headers[index];
 }
 
 static gboolean
@@ -477,15 +477,15 @@ gtk_tree_store_get_iter (GtkTreeModel *tree_model,
   gint *indices;
   gint depth, i;
 
-  tree_store->columns_dirty = TRUE;
+  gtk_tree_store_get_props (tree_store)->columns_dirty = TRUE;
 
   indices = __gtk_tree_path_get_indices (path);
   depth = __gtk_tree_path_get_depth (path);
 
   g_return_val_if_fail (depth > 0, FALSE);
 
-  parent.stamp = tree_store->stamp;
-  parent.user_data = tree_store->root;
+  parent.stamp = gtk_tree_store_get_props (tree_store)->stamp;
+  parent.user_data = gtk_tree_store_get_props (tree_store)->root;
 
   if (!gtk_tree_store_iter_nth_child (tree_model, iter, &parent, indices[0]))
     return FALSE;
@@ -510,19 +510,19 @@ gtk_tree_store_get_path (GtkTreeModel *tree_model,
   gint i = 0;
 
   g_return_val_if_fail (iter->user_data != NULL, NULL);
-  g_return_val_if_fail (iter->stamp == tree_store->stamp, NULL);
+  g_return_val_if_fail (iter->stamp == gtk_tree_store_get_props (tree_store)->stamp, NULL);
 
   validate_tree (tree_store);
 
   if (G_NODE (iter->user_data)->parent == NULL &&
-      G_NODE (iter->user_data) == tree_store->root)
+      G_NODE (iter->user_data) == gtk_tree_store_get_props (tree_store)->root)
     return __gtk_tree_path_new ();
   g_assert (G_NODE (iter->user_data)->parent != NULL);
 
-  if (G_NODE (iter->user_data)->parent == G_NODE (tree_store->root))
+  if (G_NODE (iter->user_data)->parent == G_NODE (gtk_tree_store_get_props (tree_store)->root))
     {
       retval = __gtk_tree_path_new ();
-      tmp_node = G_NODE (tree_store->root)->children;
+      tmp_node = G_NODE (gtk_tree_store_get_props (tree_store)->root)->children;
     }
   else
     {
@@ -574,7 +574,7 @@ gtk_tree_store_get_value (GtkTreeModel *tree_model,
   GtkTreeDataList *list;
   gint tmp_column = column;
 
-  g_return_if_fail (column < tree_store->n_columns);
+  g_return_if_fail (column < gtk_tree_store_get_props (tree_store)->n_columns);
   g_return_if_fail (VALID_ITER (iter, tree_store));
 
   list = G_NODE (iter->user_data)->data;
@@ -585,13 +585,13 @@ gtk_tree_store_get_value (GtkTreeModel *tree_model,
   if (list)
     {
       _gtk_tree_data_list_node_to_value (list,
-					 tree_store->column_headers[column],
+					 gtk_tree_store_get_props (tree_store)->column_headers[column],
 					 value);
     }
   else
     {
       /* We want to return an initialized but empty (default) value */
-      g_value_init (value, tree_store->column_headers[column]);
+      g_value_init (value, gtk_tree_store_get_props (tree_store)->column_headers[column]);
     }
 }
 
@@ -628,11 +628,11 @@ gtk_tree_store_iter_children (GtkTreeModel *tree_model,
   if (parent)
     children = G_NODE (parent->user_data)->children;
   else
-    children = G_NODE (tree_store->root)->children;
+    children = G_NODE (gtk_tree_store_get_props (tree_store)->root)->children;
 
   if (children)
     {
-      iter->stamp = tree_store->stamp;
+      iter->stamp = gtk_tree_store_get_props (tree_store)->stamp;
       iter->user_data = children;
       return TRUE;
     }
@@ -689,7 +689,7 @@ gtk_tree_store_iter_nth_child (GtkTreeModel *tree_model,
   g_return_val_if_fail (parent == NULL || parent->user_data != NULL, FALSE);
 
   if (parent == NULL)
-    parent_node = tree_store->root;
+    parent_node = gtk_tree_store_get_props (tree_store)->root;
   else
     parent_node = parent->user_data;
 
@@ -698,7 +698,7 @@ gtk_tree_store_iter_nth_child (GtkTreeModel *tree_model,
   if (child)
     {
       iter->user_data = child;
-      iter->stamp = tree_store->stamp;
+      iter->stamp = gtk_tree_store_get_props (tree_store)->stamp;
       return TRUE;
     }
   else
@@ -723,10 +723,10 @@ gtk_tree_store_iter_parent (GtkTreeModel *tree_model,
 
   g_assert (parent != NULL);
 
-  if (parent != tree_store->root)
+  if (parent != gtk_tree_store_get_props (tree_store)->root)
     {
       iter->user_data = parent;
-      iter->stamp = tree_store->stamp;
+      iter->stamp = gtk_tree_store_get_props (tree_store)->stamp;
       return TRUE;
     }
   else
@@ -752,15 +752,15 @@ gtk_tree_store_real_set_value (GtkTreeStore *tree_store,
   gboolean converted = FALSE;
   gboolean retval = FALSE;
 
-  if (! g_type_is_a (G_VALUE_TYPE (value), tree_store->column_headers[column]))
+  if (! g_type_is_a (G_VALUE_TYPE (value), gtk_tree_store_get_props (tree_store)->column_headers[column]))
     {
-      if (! (g_value_type_compatible (G_VALUE_TYPE (value), tree_store->column_headers[column]) &&
-	     g_value_type_compatible (tree_store->column_headers[column], G_VALUE_TYPE (value))))
+      if (! (g_value_type_compatible (G_VALUE_TYPE (value), gtk_tree_store_get_props (tree_store)->column_headers[column]) &&
+	     g_value_type_compatible (gtk_tree_store_get_props (tree_store)->column_headers[column], G_VALUE_TYPE (value))))
 	{
 	  g_warning ("%s: Unable to convert from %s to %s\n",
 		     G_STRLOC,
 		     g_type_name (G_VALUE_TYPE (value)),
-		     g_type_name (tree_store->column_headers[column]));
+		     g_type_name (gtk_tree_store_get_props (tree_store)->column_headers[column]));
 	  return retval;
 	}
       if (!g_value_transform (value, &real_value))
@@ -768,7 +768,7 @@ gtk_tree_store_real_set_value (GtkTreeStore *tree_store,
 	  g_warning ("%s: Unable to make conversion from %s to %s\n",
 		     G_STRLOC,
 		     g_type_name (G_VALUE_TYPE (value)),
-		     g_type_name (tree_store->column_headers[column]));
+		     g_type_name (gtk_tree_store_get_props (tree_store)->column_headers[column]));
 	  g_value_unset (&real_value);
 	  return retval;
 	}
@@ -852,7 +852,7 @@ __gtk_tree_store_set_value (GtkTreeStore *tree_store,
 {
   g_return_if_fail (GTK_IS_TREE_STORE (tree_store));
   g_return_if_fail (VALID_ITER (iter, tree_store));
-  g_return_if_fail (column >= 0 && column < tree_store->n_columns);
+  g_return_if_fail (column >= 0 && column < gtk_tree_store_get_props (tree_store)->n_columns);
   g_return_if_fail (G_IS_VALUE (value));
 
   if (gtk_tree_store_real_set_value (tree_store, iter, column, value, TRUE))
@@ -872,18 +872,18 @@ gtk_tree_store_get_compare_func (GtkTreeStore *tree_store)
 
   if (GTK_TREE_STORE_IS_SORTED (tree_store))
     {
-      if (tree_store->sort_column_id != -1)
+      if (gtk_tree_store_get_props (tree_store)->sort_column_id != -1)
 	{
 	  GtkTreeDataSortHeader *header;
-	  header = _gtk_tree_data_list_get_header (tree_store->sort_list,
-						   tree_store->sort_column_id);
+	  header = _gtk_tree_data_list_get_header (gtk_tree_store_get_props (tree_store)->sort_list,
+						   gtk_tree_store_get_props (tree_store)->sort_column_id);
 	  g_return_val_if_fail (header != NULL, NULL);
 	  g_return_val_if_fail (header->func != NULL, NULL);
 	  func = header->func;
 	}
       else
 	{
-	  func = tree_store->default_sort_func;
+	  func = gtk_tree_store_get_props (tree_store)->default_sort_func;
 	}
     }
 
@@ -913,7 +913,7 @@ __gtk_tree_store_set_vector_internal (GtkTreeStore *tree_store,
 						    FALSE) || *emit_signal;
 
       if (func == _gtk_tree_data_list_compare_func &&
-	  columns[i] == tree_store->sort_column_id)
+	  columns[i] == gtk_tree_store_get_props (tree_store)->sort_column_id)
 	*maybe_need_sort = TRUE;
     }
 }
@@ -939,12 +939,12 @@ __gtk_tree_store_set_valist_internal (GtkTreeStore *tree_store,
       GValue value = { 0, };
       gchar *error = NULL;
 
-      if (column < 0 || column >= tree_store->n_columns)
+      if (column < 0 || column >= gtk_tree_store_get_props (tree_store)->n_columns)
 	{
 	  g_warning ("%s: Invalid column number %d added to iter (remember to end your list of columns with a -1)", G_STRLOC, column);
 	  break;
 	}
-      g_value_init (&value, tree_store->column_headers[column]);
+      g_value_init (&value, gtk_tree_store_get_props (tree_store)->column_headers[column]);
 
       G_VALUE_COLLECT (&value, var_args, 0, &error);
       if (error)
@@ -965,7 +965,7 @@ __gtk_tree_store_set_valist_internal (GtkTreeStore *tree_store,
 						    FALSE) || *emit_signal;
 
       if (func == _gtk_tree_data_list_compare_func &&
-	  column == tree_store->sort_column_id)
+	  column == gtk_tree_store_get_props (tree_store)->sort_column_id)
 	*maybe_need_sort = TRUE;
 
       g_value_unset (&value);
@@ -1008,7 +1008,7 @@ __gtk_tree_store_set_valuesv (GtkTreeStore *tree_store,
 				      columns, values, n_values);
 
   if (maybe_need_sort && GTK_TREE_STORE_IS_SORTED (tree_store))
-    gtk_tree_store_sort_iter_changed (tree_store, iter, tree_store->sort_column_id, TRUE);
+    gtk_tree_store_sort_iter_changed (gtk_tree_store_get_props (tree_store), iter, gtk_tree_store_get_props (tree_store)->sort_column_id, TRUE);
 
   if (emit_signal)
     {
@@ -1047,7 +1047,7 @@ __gtk_tree_store_set_valist (GtkTreeStore *tree_store,
 				      var_args);
 
   if (maybe_need_sort && GTK_TREE_STORE_IS_SORTED (tree_store))
-    gtk_tree_store_sort_iter_changed (tree_store, iter, tree_store->sort_column_id, TRUE);
+    gtk_tree_store_sort_iter_changed (gtk_tree_store_get_props (tree_store), iter, gtk_tree_store_get_props (tree_store)->sort_column_id, TRUE);
 
   if (emit_signal)
     {
@@ -1117,21 +1117,21 @@ __gtk_tree_store_remove (GtkTreeStore *tree_store,
 
   if (G_NODE (iter->user_data)->data)
     g_node_traverse (G_NODE (iter->user_data), G_POST_ORDER, G_TRAVERSE_ALL,
-		     -1, node_free, tree_store->column_headers);
+		     -1, node_free, gtk_tree_store_get_props (tree_store)->column_headers);
 
   path = gtk_tree_store_get_path (GTK_TREE_MODEL (tree_store), iter);
   g_node_destroy (G_NODE (iter->user_data));
 
   __gtk_tree_model_row_deleted (GTK_TREE_MODEL (tree_store), path);
 
-  if (parent != G_NODE (tree_store->root))
+  if (parent != G_NODE (gtk_tree_store_get_props (tree_store)->root))
     {
       /* child_toggled */
       if (parent->children == NULL)
 	{
 	  __gtk_tree_path_up (path);
 
-	  new_iter.stamp = tree_store->stamp;
+	  new_iter.stamp = gtk_tree_store_get_props (tree_store)->stamp;
 	  new_iter.user_data = parent;
 	  __gtk_tree_model_row_has_child_toggled (GTK_TREE_MODEL (tree_store), path, &new_iter);
 	}
@@ -1141,7 +1141,7 @@ __gtk_tree_store_remove (GtkTreeStore *tree_store,
   /* revalidate iter */
   if (next_node != NULL)
     {
-      iter->stamp = tree_store->stamp;
+      iter->stamp = gtk_tree_store_get_props (tree_store)->stamp;
       iter->user_data = next_node;
       return TRUE;
     }
@@ -1188,20 +1188,20 @@ __gtk_tree_store_insert (GtkTreeStore *tree_store,
   if (parent)
     parent_node = parent->user_data;
   else
-    parent_node = tree_store->root;
+    parent_node = gtk_tree_store_get_props (tree_store)->root;
 
-  tree_store->columns_dirty = TRUE;
+  gtk_tree_store_get_props (tree_store)->columns_dirty = TRUE;
 
   new_node = g_node_new (NULL);
 
-  iter->stamp = tree_store->stamp;
+  iter->stamp = gtk_tree_store_get_props (tree_store)->stamp;
   iter->user_data = new_node;
   g_node_insert (parent_node, position, new_node);
 
   path = gtk_tree_store_get_path (GTK_TREE_MODEL (tree_store), iter);
   __gtk_tree_model_row_inserted (GTK_TREE_MODEL (tree_store), path, iter);
 
-  if (parent_node != tree_store->root)
+  if (parent_node != gtk_tree_store_get_props (tree_store)->root)
     {
       if (new_node->prev == NULL && new_node->next == NULL)
         {
@@ -1251,7 +1251,7 @@ __gtk_tree_store_insert_before (GtkTreeStore *tree_store,
     g_return_if_fail (VALID_ITER (sibling, tree_store));
 
   if (parent == NULL && sibling == NULL)
-    parent_node = tree_store->root;
+    parent_node = gtk_tree_store_get_props (tree_store)->root;
   else if (parent == NULL)
     parent_node = G_NODE (sibling->user_data)->parent;
   else if (sibling == NULL)
@@ -1262,7 +1262,7 @@ __gtk_tree_store_insert_before (GtkTreeStore *tree_store,
       parent_node = G_NODE (parent->user_data);
     }
 
-  tree_store->columns_dirty = TRUE;
+  gtk_tree_store_get_props (tree_store)->columns_dirty = TRUE;
 
   new_node = g_node_new (NULL);
 
@@ -1270,19 +1270,19 @@ __gtk_tree_store_insert_before (GtkTreeStore *tree_store,
 			sibling ? G_NODE (sibling->user_data) : NULL,
                         new_node);
 
-  iter->stamp = tree_store->stamp;
+  iter->stamp = gtk_tree_store_get_props (tree_store)->stamp;
   iter->user_data = new_node;
 
   path = gtk_tree_store_get_path (GTK_TREE_MODEL (tree_store), iter);
   __gtk_tree_model_row_inserted (GTK_TREE_MODEL (tree_store), path, iter);
 
-  if (parent_node != tree_store->root)
+  if (parent_node != gtk_tree_store_get_props (tree_store)->root)
     {
       if (new_node->prev == NULL && new_node->next == NULL)
         {
           GtkTreeIter parent_iter;
 
-          parent_iter.stamp = tree_store->stamp;
+          parent_iter.stamp = gtk_tree_store_get_props (tree_store)->stamp;
           parent_iter.user_data = parent_node;
 
           __gtk_tree_path_up (path);
@@ -1331,7 +1331,7 @@ __gtk_tree_store_insert_after (GtkTreeStore *tree_store,
     g_return_if_fail (VALID_ITER (sibling, tree_store));
 
   if (parent == NULL && sibling == NULL)
-    parent_node = tree_store->root;
+    parent_node = gtk_tree_store_get_props (tree_store)->root;
   else if (parent == NULL)
     parent_node = G_NODE (sibling->user_data)->parent;
   else if (sibling == NULL)
@@ -1343,7 +1343,7 @@ __gtk_tree_store_insert_after (GtkTreeStore *tree_store,
       parent_node = G_NODE (parent->user_data);
     }
 
-  tree_store->columns_dirty = TRUE;
+  gtk_tree_store_get_props (tree_store)->columns_dirty = TRUE;
 
   new_node = g_node_new (NULL);
 
@@ -1351,19 +1351,19 @@ __gtk_tree_store_insert_after (GtkTreeStore *tree_store,
 		       sibling ? G_NODE (sibling->user_data) : NULL,
                        new_node);
 
-  iter->stamp = tree_store->stamp;
+  iter->stamp = gtk_tree_store_get_props (tree_store)->stamp;
   iter->user_data = new_node;
 
   path = gtk_tree_store_get_path (GTK_TREE_MODEL (tree_store), iter);
   __gtk_tree_model_row_inserted (GTK_TREE_MODEL (tree_store), path, iter);
 
-  if (parent_node != tree_store->root)
+  if (parent_node != gtk_tree_store_get_props (tree_store)->root)
     {
       if (new_node->prev == NULL && new_node->next == NULL)
         {
           GtkTreeIter parent_iter;
 
-          parent_iter.stamp = tree_store->stamp;
+          parent_iter.stamp = gtk_tree_store_get_props (tree_store)->stamp;
           parent_iter.user_data = parent_node;
 
           __gtk_tree_path_up (path);
@@ -1431,13 +1431,13 @@ __gtk_tree_store_insert_with_values (GtkTreeStore *tree_store,
   if (parent)
     parent_node = parent->user_data;
   else
-    parent_node = tree_store->root;
+    parent_node = gtk_tree_store_get_props (tree_store)->root;
 
-  tree_store->columns_dirty = TRUE;
+  gtk_tree_store_get_props (tree_store)->columns_dirty = TRUE;
 
   new_node = g_node_new (NULL);
 
-  iter->stamp = tree_store->stamp;
+  iter->stamp = gtk_tree_store_get_props (tree_store)->stamp;
   iter->user_data = new_node;
   g_node_insert (parent_node, position, new_node);
 
@@ -1448,12 +1448,12 @@ __gtk_tree_store_insert_with_values (GtkTreeStore *tree_store,
   va_end (var_args);
 
   if (maybe_need_sort && GTK_TREE_STORE_IS_SORTED (tree_store))
-    gtk_tree_store_sort_iter_changed (tree_store, iter, tree_store->sort_column_id, FALSE);
+    gtk_tree_store_sort_iter_changed (gtk_tree_store_get_props (tree_store), iter, gtk_tree_store_get_props (tree_store)->sort_column_id, FALSE);
 
   path = gtk_tree_store_get_path (GTK_TREE_MODEL (tree_store), iter);
   __gtk_tree_model_row_inserted (GTK_TREE_MODEL (tree_store), path, iter);
 
-  if (parent_node != tree_store->root)
+  if (parent_node != gtk_tree_store_get_props (tree_store)->root)
     {
       if (new_node->prev == NULL && new_node->next == NULL)
         {
@@ -1510,13 +1510,13 @@ __gtk_tree_store_insert_with_valuesv (GtkTreeStore *tree_store,
   if (parent)
     parent_node = parent->user_data;
   else
-    parent_node = tree_store->root;
+    parent_node = gtk_tree_store_get_props (tree_store)->root;
 
-  tree_store->columns_dirty = TRUE;
+  gtk_tree_store_get_props (tree_store)->columns_dirty = TRUE;
 
   new_node = g_node_new (NULL);
 
-  iter->stamp = tree_store->stamp;
+  iter->stamp = gtk_tree_store_get_props (tree_store)->stamp;
   iter->user_data = new_node;
   g_node_insert (parent_node, position, new_node);
 
@@ -1525,12 +1525,12 @@ __gtk_tree_store_insert_with_valuesv (GtkTreeStore *tree_store,
 				      columns, values, n_values);
 
   if (maybe_need_sort && GTK_TREE_STORE_IS_SORTED (tree_store))
-    gtk_tree_store_sort_iter_changed (tree_store, iter, tree_store->sort_column_id, FALSE);
+    gtk_tree_store_sort_iter_changed (gtk_tree_store_get_props (tree_store), iter, gtk_tree_store_get_props (tree_store)->sort_column_id, FALSE);
 
   path = gtk_tree_store_get_path (GTK_TREE_MODEL (tree_store), iter);
   __gtk_tree_model_row_inserted (GTK_TREE_MODEL (tree_store), path, iter);
 
-  if (parent_node != tree_store->root)
+  if (parent_node != gtk_tree_store_get_props (tree_store)->root)
     {
       if (new_node->prev == NULL && new_node->next == NULL)
         {
@@ -1568,10 +1568,10 @@ __gtk_tree_store_prepend (GtkTreeStore *tree_store,
   if (parent != NULL)
     g_return_if_fail (VALID_ITER (parent, tree_store));
 
-  tree_store->columns_dirty = TRUE;
+  gtk_tree_store_get_props (tree_store)->columns_dirty = TRUE;
 
   if (parent == NULL)
-    parent_node = tree_store->root;
+    parent_node = gtk_tree_store_get_props (tree_store)->root;
   else
     parent_node = parent->user_data;
 
@@ -1579,7 +1579,7 @@ __gtk_tree_store_prepend (GtkTreeStore *tree_store,
     {
       GtkTreePath *path;
       
-      iter->stamp = tree_store->stamp;
+      iter->stamp = gtk_tree_store_get_props (tree_store)->stamp;
       iter->user_data = g_node_new (NULL);
 
       g_node_prepend (parent_node, G_NODE (iter->user_data));
@@ -1587,7 +1587,7 @@ __gtk_tree_store_prepend (GtkTreeStore *tree_store,
       path = gtk_tree_store_get_path (GTK_TREE_MODEL (tree_store), iter);
       __gtk_tree_model_row_inserted (GTK_TREE_MODEL (tree_store), path, iter);
 
-      if (parent_node != tree_store->root)
+      if (parent_node != gtk_tree_store_get_props (tree_store)->root)
 	{
 	  __gtk_tree_path_up (path);
 	  __gtk_tree_model_row_has_child_toggled (GTK_TREE_MODEL (tree_store), path, parent);
@@ -1627,17 +1627,17 @@ __gtk_tree_store_append (GtkTreeStore *tree_store,
     g_return_if_fail (VALID_ITER (parent, tree_store));
 
   if (parent == NULL)
-    parent_node = tree_store->root;
+    parent_node = gtk_tree_store_get_props (tree_store)->root;
   else
     parent_node = parent->user_data;
 
-  tree_store->columns_dirty = TRUE;
+  gtk_tree_store_get_props (tree_store)->columns_dirty = TRUE;
 
   if (parent_node->children == NULL)
     {
       GtkTreePath *path;
 
-      iter->stamp = tree_store->stamp;
+      iter->stamp = gtk_tree_store_get_props (tree_store)->stamp;
       iter->user_data = g_node_new (NULL);
 
       g_node_append (parent_node, G_NODE (iter->user_data));
@@ -1645,7 +1645,7 @@ __gtk_tree_store_append (GtkTreeStore *tree_store,
       path = gtk_tree_store_get_path (GTK_TREE_MODEL (tree_store), iter);
       __gtk_tree_model_row_inserted (GTK_TREE_MODEL (tree_store), path, iter);
 
-      if (parent_node != tree_store->root)
+      if (parent_node != gtk_tree_store_get_props (tree_store)->root)
 	{
 	  __gtk_tree_path_up (path);
 	  __gtk_tree_model_row_has_child_toggled (GTK_TREE_MODEL (tree_store), path, parent);
@@ -1729,7 +1729,7 @@ __gtk_tree_store_clear_traverse (GNode        *node,
 
       if (node->parent)
         {
-	  iter.stamp = store->stamp;
+	  iter.stamp = gtk_tree_store_get_props (store)->stamp;
 	  iter.user_data = node;
 
 	  __gtk_tree_store_remove (store, &iter);
@@ -1737,7 +1737,7 @@ __gtk_tree_store_clear_traverse (GNode        *node,
     }
   else if (node->parent)
     {
-      iter.stamp = store->stamp;
+      iter.stamp = gtk_tree_store_get_props (store)->stamp;
       iter.user_data = node;
 
       __gtk_tree_store_remove (store, &iter);
@@ -1751,9 +1751,9 @@ gtk_tree_store_increment_stamp (GtkTreeStore *tree_store)
 {
   do
     {
-      tree_store->stamp++;
+      gtk_tree_store_get_props (tree_store)->stamp++;
     }
-  while (tree_store->stamp == 0);
+  while (gtk_tree_store_get_props (tree_store)->stamp == 0);
 }
 
 /**
@@ -1767,7 +1767,7 @@ __gtk_tree_store_clear (GtkTreeStore *tree_store)
 {
   g_return_if_fail (GTK_IS_TREE_STORE (tree_store));
 
-  __gtk_tree_store_clear_traverse (tree_store->root, tree_store);
+  __gtk_tree_store_clear_traverse (gtk_tree_store_get_props (tree_store)->root, gtk_tree_store_get_props (tree_store));
   gtk_tree_store_increment_stamp (tree_store);
 }
 
@@ -1819,7 +1819,7 @@ __gtk_tree_store_iter_is_valid (GtkTreeStore *tree_store,
   if (!VALID_ITER (iter, tree_store))
     return FALSE;
 
-  return __gtk_tree_store_iter_is_valid_helper (iter, tree_store->root);
+  return __gtk_tree_store_iter_is_valid_helper (iter, gtk_tree_store_get_props (tree_store)->root);
 }
 
 /* DND */
@@ -1891,7 +1891,7 @@ copy_node_data (GtkTreeStore *tree_store,
   col = 0;
   while (dl)
     {
-      copy_iter = _gtk_tree_data_list_node_copy (dl, tree_store->column_headers[col]);
+      copy_iter = _gtk_tree_data_list_node_copy (dl, gtk_tree_store_get_props (tree_store)->column_headers[col]);
 
       if (copy_head == NULL)
         copy_head = copy_iter;
@@ -2167,7 +2167,7 @@ __gtk_tree_store_reorder (GtkTreeStore *tree_store,
   g_return_if_fail (new_order != NULL);
 
   if (!parent)
-    level = G_NODE (tree_store->root)->children;
+    level = G_NODE (gtk_tree_store_get_props (tree_store)->root)->children;
   else
     level = G_NODE (parent->user_data)->children;
 
@@ -2209,7 +2209,7 @@ __gtk_tree_store_reorder (GtkTreeStore *tree_store,
   if (parent)
     G_NODE (parent->user_data)->children = sort_array[0].node;
   else
-    G_NODE (tree_store->root)->children = sort_array[0].node;
+    G_NODE (gtk_tree_store_get_props (tree_store)->root)->children = sort_array[0].node;
 
   /* emit signal */
   if (parent)
@@ -2274,7 +2274,7 @@ __gtk_tree_store_swap (GtkTreeStore *tree_store,
           g_warning ("Given children are not in the same level\n");
           return;
         }
-      parent_node = G_NODE (tree_store->root);
+      parent_node = G_NODE (gtk_tree_store_get_props (tree_store)->root);
     }
   else
     {
@@ -2359,7 +2359,7 @@ __gtk_tree_store_swap (GtkTreeStore *tree_store,
       order[i] = i;
 
   __gtk_tree_model_rows_reordered (GTK_TREE_MODEL (tree_store), path_a,
-				 parent_node == tree_store->root 
+				 parent_node == gtk_tree_store_get_props (tree_store)->root 
 				 ? NULL : &parent, order);
   __gtk_tree_path_free (path_a);
   g_free (order);
@@ -2457,7 +2457,7 @@ gtk_tree_store_move (GtkTreeStore *tree_store,
       parent = G_NODE (parent_iter.user_data);
     }
   else
-    parent = G_NODE (tree_store->root);
+    parent = G_NODE (gtk_tree_store_get_props (tree_store)->root);
 
   /* yes, I know that this can be done shorter, but I'm doing it this way
    * so the code is also maintainable
@@ -2744,12 +2744,12 @@ gtk_tree_store_compare_func (gconstpointer a,
   GtkTreeIter iter_b;
   gint retval;
 
-  if (tree_store->sort_column_id != -1)
+  if (gtk_tree_store_get_props (tree_store)->sort_column_id != -1)
     {
       GtkTreeDataSortHeader *header;
 
-      header = _gtk_tree_data_list_get_header (tree_store->sort_list,
-					       tree_store->sort_column_id);
+      header = _gtk_tree_data_list_get_header (gtk_tree_store_get_props (tree_store)->sort_list,
+					       gtk_tree_store_get_props (tree_store)->sort_column_id);
       g_return_val_if_fail (header != NULL, 0);
       g_return_val_if_fail (header->func != NULL, 0);
 
@@ -2758,22 +2758,22 @@ gtk_tree_store_compare_func (gconstpointer a,
     }
   else
     {
-      g_return_val_if_fail (tree_store->default_sort_func != NULL, 0);
-      func = tree_store->default_sort_func;
-      data = tree_store->default_sort_data;
+      g_return_val_if_fail (gtk_tree_store_get_props (tree_store)->default_sort_func != NULL, 0);
+      func = gtk_tree_store_get_props (tree_store)->default_sort_func;
+      data = gtk_tree_store_get_props (tree_store)->default_sort_data;
     }
 
   node_a = ((SortTuple *) a)->node;
   node_b = ((SortTuple *) b)->node;
 
-  iter_a.stamp = tree_store->stamp;
+  iter_a.stamp = gtk_tree_store_get_props (tree_store)->stamp;
   iter_a.user_data = node_a;
-  iter_b.stamp = tree_store->stamp;
+  iter_b.stamp = gtk_tree_store_get_props (tree_store)->stamp;
   iter_b.user_data = node_b;
 
   retval = (* func) (GTK_TREE_MODEL (user_data), &iter_a, &iter_b, data);
 
-  if (tree_store->order == GTK_SORT_DESCENDING)
+  if (gtk_tree_store_get_props (tree_store)->order == GTK_SORT_DESCENDING)
     {
       if (retval > 0)
 	retval = -1;
@@ -2842,7 +2842,7 @@ gtk_tree_store_sort_helper (GtkTreeStore *tree_store,
   for (i = 0; i < list_length; i++)
     new_order[i] = g_array_index (sort_array, SortTuple, i).offset;
 
-  iter.stamp = tree_store->stamp;
+  iter.stamp = gtk_tree_store_get_props (tree_store)->stamp;
   iter.user_data = parent;
   path = gtk_tree_store_get_path (GTK_TREE_MODEL (tree_store), &iter);
   __gtk_tree_model_rows_reordered (GTK_TREE_MODEL (tree_store),
@@ -2867,12 +2867,12 @@ gtk_tree_store_sort (GtkTreeStore *tree_store)
   if (!GTK_TREE_STORE_IS_SORTED (tree_store))
     return;
 
-  if (tree_store->sort_column_id != -1)
+  if (gtk_tree_store_get_props (tree_store)->sort_column_id != -1)
     {
       GtkTreeDataSortHeader *header = NULL;
 
-      header = _gtk_tree_data_list_get_header (tree_store->sort_list, 
-					       tree_store->sort_column_id);
+      header = _gtk_tree_data_list_get_header (gtk_tree_store_get_props (tree_store)->sort_list, 
+					       gtk_tree_store_get_props (tree_store)->sort_column_id);
 
       /* We want to make sure that we have a function */
       g_return_if_fail (header != NULL);
@@ -2880,10 +2880,10 @@ gtk_tree_store_sort (GtkTreeStore *tree_store)
     }
   else
     {
-      g_return_if_fail (tree_store->default_sort_func != NULL);
+      g_return_if_fail (gtk_tree_store_get_props (tree_store)->default_sort_func != NULL);
     }
 
-  gtk_tree_store_sort_helper (tree_store, G_NODE (tree_store->root), TRUE);
+  gtk_tree_store_sort_helper (gtk_tree_store_get_props (tree_store), G_NODE (gtk_tree_store_get_props (tree_store)->root), TRUE);
 }
 
 static void
@@ -2909,12 +2909,12 @@ gtk_tree_store_sort_iter_changed (GtkTreeStore *tree_store,
 
   g_return_if_fail (G_NODE (iter->user_data)->parent != NULL);
 
-  tmp_iter.stamp = tree_store->stamp;
-  if (tree_store->sort_column_id != -1)
+  tmp_iter.stamp = gtk_tree_store_get_props (tree_store)->stamp;
+  if (gtk_tree_store_get_props (tree_store)->sort_column_id != -1)
     {
       GtkTreeDataSortHeader *header;
-      header = _gtk_tree_data_list_get_header (tree_store->sort_list,
-					       tree_store->sort_column_id);
+      header = _gtk_tree_data_list_get_header (gtk_tree_store_get_props (tree_store)->sort_list,
+					       gtk_tree_store_get_props (tree_store)->sort_column_id);
       g_return_if_fail (header != NULL);
       g_return_if_fail (header->func != NULL);
       func = header->func;
@@ -2922,14 +2922,14 @@ gtk_tree_store_sort_iter_changed (GtkTreeStore *tree_store,
     }
   else
     {
-      g_return_if_fail (tree_store->default_sort_func != NULL);
-      func = tree_store->default_sort_func;
-      data = tree_store->default_sort_data;
+      g_return_if_fail (gtk_tree_store_get_props (tree_store)->default_sort_func != NULL);
+      func = gtk_tree_store_get_props (tree_store)->default_sort_func;
+      data = gtk_tree_store_get_props (tree_store)->default_sort_data;
     }
 
   /* If it's the built in function, we don't sort. */
   if (func == _gtk_tree_data_list_compare_func &&
-      tree_store->sort_column_id != column)
+      gtk_tree_store_get_props (tree_store)->sort_column_id != column)
     return;
 
   old_location = 0;
@@ -2960,7 +2960,7 @@ gtk_tree_store_sort_iter_changed (GtkTreeStore *tree_store,
       cmp_b = (* func) (GTK_TREE_MODEL (tree_store), iter, &tmp_iter, data);
     }
 
-  if (tree_store->order == GTK_SORT_DESCENDING)
+  if (gtk_tree_store_get_props (tree_store)->order == GTK_SORT_DESCENDING)
     {
       if (cmp_a < 0)
 	cmp_a = 1;
@@ -3000,7 +3000,7 @@ gtk_tree_store_sort_iter_changed (GtkTreeStore *tree_store,
   node = node->parent->children;
   new_location = 0;
   tmp_iter.user_data = node;
-  if (tree_store->order == GTK_SORT_DESCENDING)
+  if (gtk_tree_store_get_props (tree_store)->order == GTK_SORT_DESCENDING)
     cmp_a = (* func) (GTK_TREE_MODEL (tree_store), &tmp_iter, iter, data);
   else
     cmp_a = (* func) (GTK_TREE_MODEL (tree_store), iter, &tmp_iter, data);
@@ -3011,7 +3011,7 @@ gtk_tree_store_sort_iter_changed (GtkTreeStore *tree_store,
       node = node->next;
       new_location++;
       tmp_iter.user_data = node;
-      if (tree_store->order == GTK_SORT_DESCENDING)
+      if (gtk_tree_store_get_props (tree_store)->order == GTK_SORT_DESCENDING)
 	cmp_a = (* func) (GTK_TREE_MODEL (tree_store), &tmp_iter, iter, data);
       else
 	cmp_a = (* func) (GTK_TREE_MODEL (tree_store), iter, &tmp_iter, data);
@@ -3088,12 +3088,12 @@ gtk_tree_store_get_sort_column_id (GtkTreeSortable  *sortable,
   GtkTreeStore *tree_store = (GtkTreeStore *) sortable;
 
   if (sort_column_id)
-    * sort_column_id = tree_store->sort_column_id;
+    * sort_column_id = gtk_tree_store_get_props (tree_store)->sort_column_id;
   if (order)
-    * order = tree_store->order;
+    * order = gtk_tree_store_get_props (tree_store)->order;
 
-  if (tree_store->sort_column_id == GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID ||
-      tree_store->sort_column_id == GTK_TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID)
+  if (gtk_tree_store_get_props (tree_store)->sort_column_id == GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID ||
+      gtk_tree_store_get_props (tree_store)->sort_column_id == GTK_TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID)
     return FALSE;
 
   return TRUE;
@@ -3107,8 +3107,8 @@ __gtk_tree_store_set_sort_column_id (GtkTreeSortable  *sortable,
   GtkTreeStore *tree_store = (GtkTreeStore *) sortable;
 
   
-  if ((tree_store->sort_column_id == sort_column_id) &&
-      (tree_store->order == order))
+  if ((gtk_tree_store_get_props (tree_store)->sort_column_id == sort_column_id) &&
+      (gtk_tree_store_get_props (tree_store)->order == order))
     return;
 
   if (sort_column_id != GTK_TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID)
@@ -3117,7 +3117,7 @@ __gtk_tree_store_set_sort_column_id (GtkTreeSortable  *sortable,
 	{
 	  GtkTreeDataSortHeader *header = NULL;
 
-	  header = _gtk_tree_data_list_get_header (tree_store->sort_list, 
+	  header = _gtk_tree_data_list_get_header (gtk_tree_store_get_props (tree_store)->sort_list, 
 						   sort_column_id);
 
 	  /* We want to make sure that we have a function */
@@ -3126,12 +3126,12 @@ __gtk_tree_store_set_sort_column_id (GtkTreeSortable  *sortable,
 	}
       else
 	{
-	  g_return_if_fail (tree_store->default_sort_func != NULL);
+	  g_return_if_fail (gtk_tree_store_get_props (tree_store)->default_sort_func != NULL);
 	}
     }
 
-  tree_store->sort_column_id = sort_column_id;
-  tree_store->order = order;
+  gtk_tree_store_get_props (tree_store)->sort_column_id = sort_column_id;
+  gtk_tree_store_get_props (tree_store)->order = order;
 
   __gtk_tree_sortable_sort_column_changed (sortable);
 
@@ -3147,11 +3147,11 @@ __gtk_tree_store_set_sort_func (GtkTreeSortable        *sortable,
 {
   GtkTreeStore *tree_store = (GtkTreeStore *) sortable;
 
-  tree_store->sort_list = _gtk_tree_data_list_set_header (tree_store->sort_list, 
+  gtk_tree_store_get_props (tree_store)->sort_list = _gtk_tree_data_list_set_header (gtk_tree_store_get_props (tree_store)->sort_list, 
 							  sort_column_id, 
 							  func, data, destroy);
 
-  if (tree_store->sort_column_id == sort_column_id)
+  if (gtk_tree_store_get_props (tree_store)->sort_column_id == sort_column_id)
     gtk_tree_store_sort (tree_store);
 }
 
@@ -3163,19 +3163,19 @@ __gtk_tree_store_set_default_sort_func (GtkTreeSortable        *sortable,
 {
   GtkTreeStore *tree_store = (GtkTreeStore *) sortable;
 
-  if (tree_store->default_sort_destroy)
+  if (gtk_tree_store_get_props (tree_store)->default_sort_destroy)
     {
-      GDestroyNotify d = tree_store->default_sort_destroy;
+      GDestroyNotify d = gtk_tree_store_get_props (tree_store)->default_sort_destroy;
 
-      tree_store->default_sort_destroy = NULL;
-      d (tree_store->default_sort_data);
+      gtk_tree_store_get_props (tree_store)->default_sort_destroy = NULL;
+      d (gtk_tree_store_get_props (tree_store)->default_sort_data);
     }
 
-  tree_store->default_sort_func = func;
-  tree_store->default_sort_data = data;
-  tree_store->default_sort_destroy = destroy;
+  gtk_tree_store_get_props (tree_store)->default_sort_func = func;
+  gtk_tree_store_get_props (tree_store)->default_sort_data = data;
+  gtk_tree_store_get_props (tree_store)->default_sort_destroy = destroy;
 
-  if (tree_store->sort_column_id == GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID)
+  if (gtk_tree_store_get_props (tree_store)->sort_column_id == GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID)
     gtk_tree_store_sort (tree_store);
 }
 
@@ -3184,7 +3184,7 @@ gtk_tree_store_has_default_sort_func (GtkTreeSortable *sortable)
 {
   GtkTreeStore *tree_store = (GtkTreeStore *) sortable;
 
-  return (tree_store->default_sort_func != NULL);
+  return (gtk_tree_store_get_props (tree_store)->default_sort_func != NULL);
 }
 
 static void

@@ -504,13 +504,13 @@ gtk_alignment_size_allocate (GtkWidget     *widget,
   padding_horizontal = 0;
   padding_vertical = 0;
 
-  widget_props->allocation = *allocation;
+  gtk_widget_get_props (widget_props)->allocation = *allocation;
   alignment = GTK_ALIGNMENT (widget);
   bin = GTK_BIN (widget);
   
-  if (bin->child && __gtk_widget_get_visible (bin->child))
+  if (gtk_bin_get_props (bin)->child && __gtk_widget_get_visible (gtk_bin_get_props (bin)->child))
     {
-      __gtk_widget_get_child_requisition (bin->child, &child_requisition);
+      __gtk_widget_get_child_requisition (gtk_bin_get_props (bin)->child, &child_requisition);
 
       border_width = GTK_CONTAINER (alignment)->border_width;
 
@@ -523,26 +523,26 @@ gtk_alignment_size_allocate (GtkWidget     *widget,
     
       if (width > child_requisition.width)
 	child_allocation.width = (child_requisition.width *
-				  (1.0 - alignment_props->xscale) +
-				  width * alignment_props->xscale);
+				  (1.0 - gtk_alignment_get_props (alignment_props)->xscale) +
+				  width * gtk_alignment_get_props (alignment_props)->xscale);
       else
 	child_allocation.width = width;
       
       if (height > child_requisition.height)
 	child_allocation.height = (child_requisition.height *
-				   (1.0 - alignment_props->yscale) +
-				   height * alignment_props->yscale);
+				   (1.0 - gtk_alignment_get_props (alignment_props)->yscale) +
+				   height * gtk_alignment_get_props (alignment_props)->yscale);
       else
 	child_allocation.height = height;
 
       if (__gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL)
-	child_allocation.x = (1.0 - alignment_props->xalign) * (width - child_allocation.width) + allocation->x + border_width + priv->padding_right;
+	child_allocation.x = (1.0 - gtk_alignment_get_props (alignment_props)->xalign) * (width - child_allocation.width) + allocation->x + border_width + priv->padding_right;
       else 
-	child_allocation.x = alignment_props->xalign * (width - child_allocation.width) + allocation->x + border_width + priv->padding_left;
+	child_allocation.x = gtk_alignment_get_props (alignment_props)->xalign * (width - child_allocation.width) + allocation->x + border_width + priv->padding_left;
 
-      child_allocation.y = alignment_props->yalign * (height - child_allocation.height) + allocation->y + border_width + priv->padding_top;
+      child_allocation.y = gtk_alignment_get_props (alignment_props)->yalign * (height - child_allocation.height) + allocation->y + border_width + priv->padding_top;
 
-      __gtk_widget_size_allocate (bin->child, &child_allocation);
+      __gtk_widget_size_allocate (gtk_bin_get_props (bin)->child, &child_allocation);
     }
 }
 

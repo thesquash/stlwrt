@@ -255,16 +255,16 @@ update_spacings (GtkDialog *dialog)
                         "action-area-border", &action_area_border,
                         NULL);
 
-  __gtk_container_set_border_width (GTK_CONTAINER (dialog->vbox),
+  __gtk_container_set_border_width (GTK_CONTAINER (gtk_dialog_get_props (dialog)->vbox),
                                   content_area_border);
-  if (!___gtk_box_get_spacing_set (GTK_BOX (dialog->vbox)))
+  if (!___gtk_box_get_spacing_set (GTK_BOX (gtk_dialog_get_props (dialog)->vbox)))
     {
-      __gtk_box_set_spacing (GTK_BOX (dialog->vbox), content_area_spacing);
-      ___gtk_box_set_spacing_set (GTK_BOX (dialog->vbox), FALSE);
+      __gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_props (dialog)->vbox), content_area_spacing);
+      ___gtk_box_set_spacing_set (GTK_BOX (gtk_dialog_get_props (dialog)->vbox), FALSE);
     }
-  __gtk_box_set_spacing (GTK_BOX (dialog->action_area),
+  __gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_props (dialog)->action_area),
                        button_spacing);
-  __gtk_container_set_border_width (GTK_CONTAINER (dialog->action_area),
+  __gtk_container_set_border_width (GTK_CONTAINER (gtk_dialog_get_props (dialog)->action_area),
                                   action_area_border);
 }
 
@@ -285,21 +285,21 @@ gtk_dialog_init (GtkDialog *dialog)
                     G_CALLBACK (gtk_dialog_delete_event_handler),
                     NULL);
 
-  dialog->vbox = __gtk_vbox_new (FALSE, 0);
+  gtk_dialog_get_props (dialog)->vbox = __gtk_vbox_new (FALSE, 0);
 
-  __gtk_container_add (GTK_CONTAINER (dialog), dialog->vbox);
-  __gtk_widget_show (dialog->vbox);
+  __gtk_container_add (GTK_CONTAINER (gtk_dialog_get_props (dialog)), gtk_dialog_get_props (dialog)->vbox);
+  __gtk_widget_show (gtk_dialog_get_props (dialog)->vbox);
 
-  dialog->action_area = __gtk_hbutton_box_new ();
+  gtk_dialog_get_props (dialog)->action_area = __gtk_hbutton_box_new ();
 
-  __gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog->action_area),
+  __gtk_button_box_set_layout (GTK_BUTTON_BOX (gtk_dialog_get_props (dialog)->action_area),
                              GTK_BUTTONBOX_END);
 
-  __gtk_box_pack_end (GTK_BOX (dialog->vbox), dialog->action_area,
+  __gtk_box_pack_end (GTK_BOX (gtk_dialog_get_props (dialog)->vbox), gtk_dialog_get_props (dialog)->action_area,
                     FALSE, TRUE, 0);
-  __gtk_widget_show (dialog->action_area);
+  __gtk_widget_show (gtk_dialog_get_props (dialog)->action_area);
 
-  dialog->separator = NULL;
+  gtk_dialog_get_props (dialog)->separator = NULL;
 
   __gtk_window_set_type_hint (GTK_WINDOW (dialog),
                             GDK_WINDOW_TYPE_HINT_DIALOG);
@@ -367,7 +367,7 @@ gtk_dialog_get_property (GObject     *object,
   switch (prop_id)
     {
     case PROP_HAS_SEPARATOR:
-      g_value_set_boolean (value, dialog->separator != NULL);
+      g_value_set_boolean (value, gtk_dialog_get_props (dialog)->separator != NULL);
       break;
 
     default:
@@ -405,7 +405,7 @@ gtk_dialog_map (GtkWidget *widget)
   
   GTK_WIDGET_CLASS (gtk_dialog_parent_class)->map (widget);
 
-  if (!window->focus_widget)
+  if (!gtk_window_get_props (window)->focus_widget)
     {
       GList *children, *tmp_list;
       GtkWidget *first_focus = NULL;
@@ -415,28 +415,28 @@ gtk_dialog_map (GtkWidget *widget)
 	  g_signal_emit_by_name (window, "move_focus", GTK_DIR_TAB_FORWARD);
 
 	  if (first_focus == NULL)
-	    first_focus = window->focus_widget;
-	  else if (first_focus == window->focus_widget)
+	    first_focus = gtk_window_get_props (window)->focus_widget;
+	  else if (first_focus == gtk_window_get_props (window)->focus_widget)
             break;
-	  if (!GTK_IS_LABEL (window->focus_widget))
+	  if (!GTK_IS_LABEL (gtk_window_get_props (window)->focus_widget))
 	    break;
-          if (!__gtk_label_get_current_uri (GTK_LABEL (window->focus_widget)))
-            __gtk_label_select_region (GTK_LABEL (window->focus_widget), 0, 0);
+          if (!__gtk_label_get_current_uri (GTK_LABEL (gtk_window_get_props (window)->focus_widget)))
+            __gtk_label_select_region (GTK_LABEL (gtk_window_get_props (window)->focus_widget), 0, 0);
 	}
       while (TRUE);
 
-      tmp_list = children = __gtk_container_get_children (GTK_CONTAINER (dialog->action_area));
+      tmp_list = children = __gtk_container_get_children (GTK_CONTAINER (gtk_dialog_get_props (dialog)->action_area));
       
       while (tmp_list)
 	{
 	  GtkWidget *child = tmp_list->data;
 	  
-	  if ((window->focus_widget == NULL || 
-	       child == window->focus_widget) && 
-	      child != window->default_widget &&
-	      window->default_widget)
+	  if ((gtk_window_get_props (window)->focus_widget == NULL || 
+	       child == gtk_window_get_props (window)->focus_widget) && 
+	      child != gtk_window_get_props (window)->default_widget &&
+	      gtk_window_get_props (window)->default_widget)
 	    {
-	      __gtk_widget_grab_focus (window->default_widget);
+	      __gtk_widget_grab_focus (gtk_window_get_props (window)->default_widget);
 	      break;
 	    }
 	  
@@ -461,7 +461,7 @@ dialog_find_button (GtkDialog *dialog,
   GList *children, *tmp_list;
   GtkWidget *child = NULL;
       
-  children = __gtk_container_get_children (GTK_CONTAINER (dialog->action_area));
+  children = __gtk_container_get_children (GTK_CONTAINER (gtk_dialog_get_props (dialog)->action_area));
 
   for (tmp_list = children; tmp_list; tmp_list = tmp_list->next)
     {
@@ -489,7 +489,7 @@ gtk_dialog_close (GtkDialog *dialog)
 
   event = __gdk_event_new (GDK_DELETE);
   
-  event->any.window = g_object_ref (widget->window);
+  event->any.window = g_object_ref (gtk_widget_get_props (widget)->window);
   event->any.send_event = TRUE;
   
   __gtk_main_do_event (event);
@@ -677,12 +677,12 @@ __gtk_dialog_add_action_widget (GtkDialog *dialog,
   else
     g_warning ("Only 'activatable' widgets can be packed into the action area of a GtkDialog");
 
-  __gtk_box_pack_end (GTK_BOX (dialog->action_area),
+  __gtk_box_pack_end (GTK_BOX (gtk_dialog_get_props (dialog)->action_area),
                     child,
                     FALSE, TRUE, 0);
   
   if (response_id == GTK_RESPONSE_HELP)
-    __gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (dialog->action_area), child, TRUE);
+    __gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (gtk_dialog_get_props (dialog)->action_area), child, TRUE);
 }
 
 /**
@@ -796,7 +796,7 @@ __gtk_dialog_set_response_sensitive (GtkDialog *dialog,
 
   g_return_if_fail (GTK_IS_DIALOG (dialog));
 
-  children = __gtk_container_get_children (GTK_CONTAINER (dialog->action_area));
+  children = __gtk_container_get_children (GTK_CONTAINER (gtk_dialog_get_props (dialog)->action_area));
 
   tmp_list = children;
   while (tmp_list != NULL)
@@ -831,7 +831,7 @@ __gtk_dialog_set_default_response (GtkDialog *dialog,
 
   g_return_if_fail (GTK_IS_DIALOG (dialog));
 
-  children = __gtk_container_get_children (GTK_CONTAINER (dialog->action_area));
+  children = __gtk_container_get_children (GTK_CONTAINER (gtk_dialog_get_props (dialog)->action_area));
 
   tmp_list = children;
   while (tmp_list != NULL)
@@ -868,7 +868,7 @@ __gtk_dialog_set_has_separator (GtkDialog *dialog,
   priv = GET_PRIVATE (dialog);
 
   /* this might fail if we get called before _init() somehow */
-  g_assert (dialog->vbox != NULL);
+  g_assert (gtk_dialog_get_props (dialog)->vbox != NULL);
 
   if (priv->ignore_separator)
     {
@@ -876,21 +876,21 @@ __gtk_dialog_set_has_separator (GtkDialog *dialog,
       return;
     }
   
-  if (setting && dialog->separator == NULL)
+  if (setting && gtk_dialog_get_props (dialog)->separator == NULL)
     {
-      dialog->separator = __gtk_hseparator_new ();
-      __gtk_box_pack_end (GTK_BOX (dialog->vbox), dialog->separator, FALSE, TRUE, 0);
+      gtk_dialog_get_props (dialog)->separator = __gtk_hseparator_new ();
+      __gtk_box_pack_end (GTK_BOX (gtk_dialog_get_props (dialog)->vbox), gtk_dialog_get_props (dialog)->separator, FALSE, TRUE, 0);
 
       /* The app programmer could screw this up, but, their own fault.
        * Moves the separator just above the action area.
        */
-      __gtk_box_reorder_child (GTK_BOX (dialog->vbox), dialog->separator, 1);
-      __gtk_widget_show (dialog->separator);
+      __gtk_box_reorder_child (GTK_BOX (gtk_dialog_get_props (dialog)->vbox), gtk_dialog_get_props (dialog)->separator, 1);
+      __gtk_widget_show (gtk_dialog_get_props (dialog)->separator);
     }
-  else if (!setting && dialog->separator != NULL)
+  else if (!setting && gtk_dialog_get_props (dialog)->separator != NULL)
     {
-      __gtk_widget_destroy (dialog->separator);
-      dialog->separator = NULL;
+      __gtk_widget_destroy (gtk_dialog_get_props (dialog)->separator);
+      gtk_dialog_get_props (dialog)->separator = NULL;
     }
 
   g_object_notify (G_OBJECT (dialog), "has-separator");
@@ -911,7 +911,7 @@ __gtk_dialog_get_has_separator (GtkDialog *dialog)
 {
   g_return_val_if_fail (GTK_IS_DIALOG (dialog), FALSE);
 
-  return dialog->separator != NULL;
+  return gtk_dialog_get_props (dialog)->separator != NULL;
 }
 
 /**
@@ -1146,7 +1146,7 @@ __gtk_dialog_get_widget_for_response (GtkDialog *dialog,
 
   g_return_val_if_fail (GTK_IS_DIALOG (dialog), NULL);
 
-  children = __gtk_container_get_children (GTK_CONTAINER (dialog->action_area));
+  children = __gtk_container_get_children (GTK_CONTAINER (gtk_dialog_get_props (dialog)->action_area));
 
   tmp_list = children;
   while (tmp_list != NULL)
@@ -1245,7 +1245,7 @@ __gtk_dialog_set_alternative_button_order_valist (GtkDialog *dialog,
       /* reorder child with response_id to position */
       child = dialog_find_button (dialog, response_id);
       if (child != NULL)
-        __gtk_box_reorder_child (GTK_BOX (dialog->action_area), child, position);
+        __gtk_box_reorder_child (GTK_BOX (gtk_dialog_get_props (dialog)->action_area), child, position);
       else
         g_warning ("%s : no child button with response id %d.", G_STRFUNC,
                    response_id);
@@ -1359,7 +1359,7 @@ __gtk_dialog_set_alternative_button_order_from_array (GtkDialog *dialog,
       /* reorder child with response_id to position */
       child = dialog_find_button (dialog, new_order[position]);
       if (child != NULL)
-        __gtk_box_reorder_child (GTK_BOX (dialog->action_area), child, position);
+        __gtk_box_reorder_child (GTK_BOX (gtk_dialog_get_props (dialog)->action_area), child, position);
       else
         g_warning ("%s : no child button with response id %d.", G_STRFUNC,
                    new_order[position]);
@@ -1516,7 +1516,7 @@ gtk_dialog_buildable_custom_finished (GtkBuildable *buildable,
 	}
 
       if (ad->response_id == GTK_RESPONSE_HELP)
-	__gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (dialog->action_area),
+	__gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (gtk_dialog_get_props (dialog)->action_area),
 					    GTK_WIDGET (object), TRUE);
 
       g_free (item->widget_name);
@@ -1542,7 +1542,7 @@ __gtk_dialog_get_action_area (GtkDialog *dialog)
 {
   g_return_val_if_fail (GTK_IS_DIALOG (dialog), NULL);
 
-  return dialog->action_area;
+  return gtk_dialog_get_props (dialog)->action_area;
 }
 
 /**
@@ -1560,5 +1560,5 @@ __gtk_dialog_get_content_area (GtkDialog *dialog)
 {
   g_return_val_if_fail (GTK_IS_DIALOG (dialog), NULL);
 
-  return dialog->vbox;
+  return gtk_dialog_get_props (dialog)->vbox;
 }

@@ -314,7 +314,7 @@ gtk_aspect_frame_compute_child_allocation (GtkFrame      *frame,
   GtkBin *bin_props = gtk_bin_get_props (bin);
   gdouble ratio;
 
-  if (bin_props->child && __gtk_widget_get_visible (bin_props->child))
+  if (gtk_bin_get_props (bin_props)->child && __gtk_widget_get_visible (gtk_bin_get_props (bin_props)->child))
     {
       GtkAllocation full_allocation;
       
@@ -322,7 +322,7 @@ gtk_aspect_frame_compute_child_allocation (GtkFrame      *frame,
 	{
 	  GtkRequisition child_requisition;
 
-	  __gtk_widget_get_child_requisition (bin_props->child, &child_requisition);
+	  __gtk_widget_get_child_requisition (gtk_bin_get_props (bin_props)->child, &child_requisition);
 	  if (child_requisition.height != 0)
 	    {
 	      ratio = ((gdouble) child_requisition.width /

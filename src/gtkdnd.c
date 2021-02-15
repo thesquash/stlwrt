@@ -459,7 +459,7 @@ grab_dnd_keys (GtkWidget *widget,
   GdkWindow *window, *root;
   gint keycode;
 
-  window = widget->window;
+  window = gtk_widget_get_props (widget)->window;
   root = __gdk_screen_get_root_window (__gtk_widget_get_screen (widget));
 
   __gdk_error_trap_push ();
@@ -491,7 +491,7 @@ ungrab_dnd_keys (GtkWidget *widget,
   GdkWindow *window, *root;
   gint keycode;
 
-  window = widget->window;
+  window = gtk_widget_get_props (widget)->window;
   root = __gdk_screen_get_root_window (__gtk_widget_get_screen (widget));
 
   __gdk_window_remove_filter (NULL, root_key_filter, (gpointer) GDK_WINDOW_XID (window));
@@ -518,7 +518,7 @@ static void
 grab_dnd_keys (GtkWidget *widget,
                guint32    time)
 {
-  __gdk_keyboard_grab (widget->window, FALSE, time);
+  __gdk_keyboard_grab (gtk_widget_get_props (widget)->window, FALSE, time);
 }
 
 static void
@@ -547,8 +547,8 @@ gtk_drag_release_ipc_widget (GtkWidget *widget)
   GSList *drag_widgets = g_object_get_data (G_OBJECT (screen),
 					    "gtk-dnd-ipc-widgets");
   ungrab_dnd_keys (widget, GDK_CURRENT_TIME);
-  if (window->group)
-    __gtk_window_group_remove_window (window->group, window);
+  if (gtk_window_get_props (window)->group)
+    __gtk_window_group_remove_window (gtk_window_get_props (window)->group, gtk_window_get_props (window));
   drag_widgets = g_slist_prepend (drag_widgets, widget);
   g_object_set_data (G_OBJECT (screen),
 		     I_("gtk-dnd-ipc-widgets"),
@@ -939,7 +939,7 @@ gtk_drag_update_cursor (GtkDragSourceInfo *info)
   
   if (cursor != info->cursor)
     {
-      __gdk_pointer_grab (info->ipc_widget->window, FALSE,
+      __gdk_pointer_grab (info->gtk_widget_get_props (ipc_widget)->window, FALSE,
 			GDK_POINTER_MOTION_MASK |
 			GDK_BUTTON_RELEASE_MASK,
 			NULL,
@@ -1103,25 +1103,25 @@ __gtk_drag_highlight_expose (GtkWidget      *widget,
       
       if (!__gtk_widget_get_has_window (widget))
 	{
-	  x = widget->allocation.x;
-	  y = widget->allocation.y;
-	  width = widget->allocation.width;
-	  height = widget->allocation.height;
+	  x = gtk_widget_get_props (widget)->allocation.x;
+	  y = gtk_widget_get_props (widget)->allocation.y;
+	  width = gtk_widget_get_props (widget)->allocation.width;
+	  height = gtk_widget_get_props (widget)->allocation.height;
 	}
       else
 	{
 	  x = 0;
 	  y = 0;
-          width = __gdk_window_get_width (widget->window);
-          height = __gdk_window_get_height (widget->window);
+          width = __gdk_window_get_width (gtk_widget_get_props (widget)->window);
+          height = __gdk_window_get_height (gtk_widget_get_props (widget)->window);
 	}
       
-      __gtk_paint_shadow (widget->style, widget->window,
+      __gtk_paint_shadow (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window,
 		        GTK_STATE_NORMAL, GTK_SHADOW_OUT,
 		        &event->area, widget, "dnd",
 			x, y, width, height);
 
-      cr = __gdk_cairo_create (widget->window);
+      cr = __gdk_cairo_create (gtk_widget_get_props (widget)->window);
       cairo_set_source_rgb (cr, 0.0, 0.0, 0.0); /* black */
       cairo_set_line_width (cr, 1.0);
       cairo_rectangle (cr,
@@ -1615,10 +1615,10 @@ ___gtk_drag_dest_handle_event (GtkWidget *toplevel,
 	 * expensive __gdk_window_get_origin().
 	 */
 	if (GTK_IS_PLUG (toplevel))
-	  __gdk_window_get_origin (toplevel->window, &tx, &ty);
+	  __gdk_window_get_origin (gtk_widget_get_props (toplevel)->window, &tx, &ty);
 	else
 #endif /* GDK_WINDOWING_X11 */
-	  __gdk_window_get_position (toplevel->window, &tx, &ty);
+	  __gdk_window_get_position (gtk_widget_get_props (toplevel)->window, &tx, &ty);
 
 	found = gtk_drag_find_widget (toplevel,
                                       context,
@@ -2023,7 +2023,7 @@ gtk_drag_dest_realized (GtkWidget *widget)
   GtkWidget *toplevel = __gtk_widget_get_toplevel (widget);
 
   if (__gtk_widget_is_toplevel (toplevel))
-    __gdk_window_register_dnd (toplevel->window);
+    __gdk_window_register_dnd (gtk_widget_get_props (toplevel)->window);
 }
 
 static void
@@ -2033,7 +2033,7 @@ gtk_drag_dest_hierarchy_changed (GtkWidget *widget,
   GtkWidget *toplevel = __gtk_widget_get_toplevel (widget);
 
   if (__gtk_widget_is_toplevel (toplevel) && __gtk_widget_get_realized (toplevel))
-    __gdk_window_register_dnd (toplevel->window);
+    __gdk_window_register_dnd (gtk_widget_get_props (toplevel)->window);
 }
 
 static void
@@ -2340,7 +2340,7 @@ __gtk_drag_begin_internal (GtkWidget         *widget,
         time = __gtk_get_current_event_time ();
     }
 
-  if (__gdk_pointer_grab (ipc_widget->window, FALSE,
+  if (__gdk_pointer_grab (gtk_widget_get_props (ipc_widget)->window, FALSE,
 			GDK_POINTER_MOTION_MASK |
 			GDK_BUTTON_RELEASE_MASK, NULL,
 			cursor, time) != GDK_GRAB_SUCCESS)
@@ -2367,7 +2367,7 @@ __gtk_drag_begin_internal (GtkWidget         *widget,
 
   source_widgets = g_slist_prepend (source_widgets, ipc_widget);
 
-  context = __gdk_drag_begin (ipc_widget->window, targets);
+  context = __gdk_drag_begin (gtk_widget_get_props (ipc_widget)->window, targets);
   g_list_free (targets);
   
   info = gtk_drag_get_source_info (context, TRUE);
@@ -2458,7 +2458,7 @@ __gtk_drag_begin_internal (GtkWidget         *widget,
   
       if (cursor != info->cursor)
         {
-	  __gdk_pointer_grab (widget->window, FALSE,
+	  __gdk_pointer_grab (gtk_widget_get_props (widget)->window, FALSE,
 	 	            GDK_POINTER_MOTION_MASK |
 		  	    GDK_BUTTON_RELEASE_MASK,
 			    NULL,
@@ -3022,7 +3022,7 @@ gtk_drag_update_icon (GtkDragSourceInfo *info)
 		       info->cur_y - hot_y);
 
       if (__gtk_widget_get_visible (icon_window))
-	__gdk_window_raise (icon_window->window);
+	__gdk_window_raise (gtk_widget_get_props (icon_window)->window);
       else
 	__gtk_widget_show (icon_window);
     }
@@ -3101,7 +3101,7 @@ icon_window_realize (GtkWidget *window,
 						  __gtk_widget_get_colormap (window),
 						  &pixmap, &mask, 128);
   
-  __gdk_window_set_back_pixmap (window->window, pixmap, FALSE);
+  __gdk_window_set_back_pixmap (gtk_widget_get_props (window)->gtk_widget_get_props (window), pixmap, FALSE);
   g_object_unref (pixmap);
   
   if (mask)
@@ -3287,7 +3287,7 @@ __gtk_drag_set_icon_pixmap (GdkDragContext    *context,
   __gtk_widget_set_size_request (window, width, height);
   __gtk_widget_realize (window);
 
-  __gdk_window_set_back_pixmap (window->window, pixmap, FALSE);
+  __gdk_window_set_back_pixmap (gtk_widget_get_props (window)->gtk_widget_get_props (window), pixmap, FALSE);
   
   if (mask)
     __gtk_widget_shape_combine_mask (window, mask, 0, 0);
@@ -3480,7 +3480,7 @@ ___gtk_drag_source_handle_event (GtkWidget *widget,
 					  info);
 	    if (info->cursor != cursor)
 	      {
-		__gdk_pointer_grab (widget->window, FALSE,
+		__gdk_pointer_grab (gtk_widget_get_props (widget)->window, FALSE,
 				  GDK_POINTER_MOTION_MASK |
 				  GDK_BUTTON_RELEASE_MASK,
 				  NULL,
@@ -3636,7 +3636,7 @@ gtk_drag_source_release_selections (GtkDragSourceInfo *info,
   while (tmp_list)
     {
       GdkAtom selection = GDK_POINTER_TO_ATOM (tmp_list->data);
-      if (__gdk_selection_owner_get_for_display (display, selection) == info->ipc_widget->window)
+      if (__gdk_selection_owner_get_for_display (display, selection) == info->gtk_widget_get_props (ipc_widget)->window)
 	__gtk_selection_owner_set_for_display (display, NULL, selection, time);
 
       tmp_list = tmp_list->next;
@@ -3989,7 +3989,7 @@ gtk_drag_update_idle (gpointer data)
 				  &action, &possible_actions);
       gtk_drag_update_icon (info);
       __gdk_drag_find_window_for_screen (info->context,
-				       info->icon_window ? info->icon_window->window : NULL,
+				       info->gtk_widget_get_props (icon_window) ? info->gtk_widget_get_props (icon_window)->window : NULL,
 				       info->cur_screen, info->cur_x, info->cur_y,
 				       &dest_window, &protocol);
       
@@ -4292,8 +4292,8 @@ gtk_drag_grab_broken_event_cb (GtkWidget          *widget,
    * example, when changing the drag cursor.
    */
   if (event->implicit
-      || event->grab_window == info->widget->window
-      || event->grab_window == info->ipc_widget->window)
+      || event->grab_window == info->gtk_widget_get_props (widget)->window
+      || event->grab_window == info->gtk_widget_get_props (ipc_widget)->window)
     return FALSE;
 
   gtk_drag_cancel (info, GTK_DRAG_RESULT_GRAB_BROKEN, __gtk_get_current_event_time ());

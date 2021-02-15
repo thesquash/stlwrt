@@ -139,12 +139,12 @@ gtk_toggle_tool_button_init (GtkToggleToolButton *button)
   GtkToolButton *tool_button = GTK_TOOL_BUTTON (button);
   GtkToggleButton *toggle_button = GTK_TOGGLE_BUTTON (___gtk_tool_button_get_button (tool_button));
 
-  button->priv = GTK_TOGGLE_TOOL_BUTTON_GET_PRIVATE (button);
+  gtk_toggle_tool_button_get_props (button)->priv = GTK_TOGGLE_TOOL_BUTTON_GET_PRIVATE (gtk_toggle_tool_button_get_props (button));
 
   /* If the real button is a radio button, it may have been
    * active at the time it was created.
    */
-  button->priv->active = __gtk_toggle_button_get_active (toggle_button);
+  gtk_toggle_tool_button_get_props (button)->priv->active = __gtk_toggle_button_get_active (toggle_button);
     
   g_signal_connect_object (toggle_button,
 			   "toggled", G_CALLBACK (button_toggled), button, 0);
@@ -236,7 +236,7 @@ gtk_toggle_tool_button_create_menu_proxy (GtkToolItem *item)
     menu_item = __gtk_check_menu_item_new_with_label (label);
 
   __gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item),
-				  toggle_tool_button->priv->active);
+				  gtk_toggle_tool_button_get_props (toggle_tool_button)->priv->active);
 
   if (GTK_IS_RADIO_TOOL_BUTTON (toggle_tool_button))
     {
@@ -274,12 +274,12 @@ menu_item_activated (GtkWidget           *menu_item,
   GtkToolButton *tool_button = GTK_TOOL_BUTTON (toggle_tool_button);
   gboolean menu_active = __gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (menu_item));
 
-  if (toggle_tool_button->priv->active != menu_active)
+  if (gtk_toggle_tool_button_get_props (toggle_tool_button)->priv->active != menu_active)
     {
-      toggle_tool_button->priv->active = menu_active;
+      gtk_toggle_tool_button_get_props (toggle_tool_button)->priv->active = menu_active;
 
       __gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (___gtk_tool_button_get_button (tool_button)),
-				    toggle_tool_button->priv->active);
+				    gtk_toggle_tool_button_get_props (toggle_tool_button)->priv->active);
 
       g_object_notify (G_OBJECT (toggle_tool_button), "active");
       g_signal_emit (toggle_tool_button, toggle_signals[TOGGLED], 0);
@@ -292,17 +292,17 @@ button_toggled (GtkWidget           *widget,
 {
   gboolean toggle_active = GTK_TOGGLE_BUTTON (widget)->active;
 
-  if (toggle_tool_button->priv->active != toggle_active)
+  if (gtk_toggle_tool_button_get_props (toggle_tool_button)->priv->active != toggle_active)
     {
       GtkWidget *menu_item;
       
-      toggle_tool_button->priv->active = toggle_active;
+      gtk_toggle_tool_button_get_props (toggle_tool_button)->priv->active = toggle_active;
        
       if ((menu_item =
 	   __gtk_tool_item_get_proxy_menu_item (GTK_TOOL_ITEM (toggle_tool_button), MENU_ID)))
 	{
 	  __gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item),
-					  toggle_tool_button->priv->active);
+					  gtk_toggle_tool_button_get_props (toggle_tool_button)->priv->active);
 	}
 
       g_object_notify (G_OBJECT (toggle_tool_button), "active");
@@ -423,7 +423,7 @@ __gtk_toggle_tool_button_set_active (GtkToggleToolButton *button,
 
   is_active = is_active != FALSE;
 
-  if (button->priv->active != is_active)
+  if (gtk_toggle_tool_button_get_props (button)->priv->active != is_active)
     __gtk_button_clicked (GTK_BUTTON (___gtk_tool_button_get_button (GTK_TOOL_BUTTON (button))));
 }
 
@@ -443,5 +443,5 @@ __gtk_toggle_tool_button_get_active (GtkToggleToolButton *button)
 {
   g_return_val_if_fail (GTK_IS_TOGGLE_TOOL_BUTTON (button), FALSE);
 
-  return button->priv->active;
+  return gtk_toggle_tool_button_get_props (button)->priv->active;
 }

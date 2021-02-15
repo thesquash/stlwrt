@@ -259,14 +259,14 @@ gtk_tool_item_init (GtkToolItem *toolitem)
 {
   __gtk_widget_set_can_focus (GTK_WIDGET (toolitem), FALSE);
 
-  toolitem->priv = GTK_TOOL_ITEM_GET_PRIVATE (toolitem);
+  gtk_tool_item_get_props (toolitem)->priv = GTK_TOOL_ITEM_GET_PRIVATE (gtk_tool_item_get_props (toolitem));
 
-  toolitem->priv->visible_horizontal = TRUE;
-  toolitem->priv->visible_vertical = TRUE;
-  toolitem->priv->homogeneous = FALSE;
-  toolitem->priv->expand = FALSE;
+  gtk_tool_item_get_props (toolitem)->priv->visible_horizontal = TRUE;
+  gtk_tool_item_get_props (toolitem)->priv->visible_vertical = TRUE;
+  gtk_tool_item_get_props (toolitem)->priv->homogeneous = FALSE;
+  gtk_tool_item_get_props (toolitem)->priv->expand = FALSE;
 
-  toolitem->priv->use_action_appearance = TRUE;
+  gtk_tool_item_get_props (toolitem)->priv->use_action_appearance = TRUE;
 }
 
 static void
@@ -274,10 +274,10 @@ gtk_tool_item_finalize (GObject *object)
 {
   GtkToolItem *item = GTK_TOOL_ITEM (object);
 
-  g_free (item->priv->menu_item_id);
+  g_free (gtk_tool_item_get_props (item)->priv->menu_item_id);
 
-  if (item->priv->menu_item)
-    g_object_unref (item->priv->menu_item);
+  if (gtk_tool_item_get_props (item)->priv->menu_item)
+    g_object_unref (gtk_tool_item_get_props (item)->priv->menu_item);
 
   G_OBJECT_CLASS (gtk_tool_item_parent_class)->finalize (object);
 }
@@ -287,10 +287,10 @@ gtk_tool_item_dispose (GObject *object)
 {
   GtkToolItem *item = GTK_TOOL_ITEM (object);
 
-  if (item->priv->action)
+  if (gtk_tool_item_get_props (item)->priv->action)
     {
       __gtk_activatable_do_set_related_action (GTK_ACTIVATABLE (item), NULL);      
-      item->priv->action = NULL;
+      gtk_tool_item_get_props (item)->priv->action = NULL;
     }
   G_OBJECT_CLASS (gtk_tool_item_parent_class)->dispose (object);
 }
@@ -346,19 +346,19 @@ gtk_tool_item_get_property (GObject    *object,
   switch (prop_id)
     {
     case PROP_VISIBLE_HORIZONTAL:
-      g_value_set_boolean (value, toolitem->priv->visible_horizontal);
+      g_value_set_boolean (value, gtk_tool_item_get_props (toolitem)->priv->visible_horizontal);
       break;
     case PROP_VISIBLE_VERTICAL:
-      g_value_set_boolean (value, toolitem->priv->visible_vertical);
+      g_value_set_boolean (value, gtk_tool_item_get_props (toolitem)->priv->visible_vertical);
       break;
     case PROP_IS_IMPORTANT:
-      g_value_set_boolean (value, toolitem->priv->is_important);
+      g_value_set_boolean (value, gtk_tool_item_get_props (toolitem)->priv->is_important);
       break;
     case PROP_ACTIVATABLE_RELATED_ACTION:
-      g_value_set_object (value, toolitem->priv->action);
+      g_value_set_object (value, gtk_tool_item_get_props (toolitem)->priv->action);
       break;
     case PROP_ACTIVATABLE_USE_ACTION_APPEARANCE:
-      g_value_set_boolean (value, toolitem->priv->use_action_appearance);
+      g_value_set_boolean (value, gtk_tool_item_get_props (toolitem)->priv->use_action_appearance);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -372,8 +372,8 @@ gtk_tool_item_property_notify (GObject    *object,
 {
   GtkToolItem *tool_item = GTK_TOOL_ITEM (object);
 
-  if (tool_item->priv->menu_item && strcmp (pspec->name, "sensitive") == 0)
-    __gtk_widget_set_sensitive (tool_item->priv->menu_item,
+  if (gtk_tool_item_get_props (tool_item)->priv->menu_item && strcmp (pspec->name, "sensitive") == 0)
+    __gtk_widget_set_sensitive (gtk_tool_item_get_props (tool_item)->priv->menu_item,
 			      __gtk_widget_get_sensitive (GTK_WIDGET (tool_item)));
 }
 
@@ -384,25 +384,25 @@ create_drag_window (GtkToolItem *toolitem)
   GdkWindowAttr attributes;
   gint attributes_mask, border_width;
 
-  g_return_if_fail (toolitem->priv->use_drag_window == TRUE);
+  g_return_if_fail (gtk_tool_item_get_props (toolitem)->priv->use_drag_window == TRUE);
 
   widget = GTK_WIDGET (toolitem);
   border_width = GTK_CONTAINER (toolitem)->border_width;
 
   attributes.window_type = GDK_WINDOW_CHILD;
-  attributes.x = widget->allocation.x + border_width;
-  attributes.y = widget->allocation.y + border_width;
-  attributes.width = widget->allocation.width - border_width * 2;
-  attributes.height = widget->allocation.height - border_width * 2;
+  attributes.x = gtk_widget_get_props (widget)->allocation.x + border_width;
+  attributes.y = gtk_widget_get_props (widget)->allocation.y + border_width;
+  attributes.width = gtk_widget_get_props (widget)->allocation.width - border_width * 2;
+  attributes.height = gtk_widget_get_props (widget)->allocation.height - border_width * 2;
   attributes.wclass = GDK_INPUT_ONLY;
   attributes.event_mask = __gtk_widget_get_events (widget);
   attributes.event_mask |= (GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK);
 
   attributes_mask = GDK_WA_X | GDK_WA_Y;
 
-  toolitem->priv->drag_window = __gdk_window_new (__gtk_widget_get_parent_window (widget),
+  gtk_tool_item_get_props (toolitem)->priv->drag_window = __gdk_window_new (__gtk_widget_get_parent_window (widget),
 					  &attributes, attributes_mask);
-  __gdk_window_set_user_data (toolitem->priv->drag_window, toolitem);
+  __gdk_window_set_user_data (gtk_tool_item_get_props (toolitem)->priv->drag_window, gtk_tool_item_get_props (toolitem));
 }
 
 static void
@@ -413,23 +413,23 @@ gtk_tool_item_realize (GtkWidget *widget)
   toolitem = GTK_TOOL_ITEM (widget);
   __gtk_widget_set_realized (widget, TRUE);
 
-  widget->window = __gtk_widget_get_parent_window (widget);
-  g_object_ref (widget->window);
+  gtk_widget_get_props (widget)->window = __gtk_widget_get_parent_window (gtk_widget_get_props (widget));
+  g_object_ref (gtk_widget_get_props (widget)->window);
 
-  if (toolitem->priv->use_drag_window)
+  if (gtk_tool_item_get_props (toolitem)->priv->use_drag_window)
     create_drag_window(toolitem);
 
-  widget->style = __gtk_style_attach (widget->style, widget->window);
+  gtk_widget_get_props (widget)->style = __gtk_style_attach (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window);
 }
 
 static void
 destroy_drag_window (GtkToolItem *toolitem)
 {
-  if (toolitem->priv->drag_window)
+  if (gtk_tool_item_get_props (toolitem)->priv->drag_window)
     {
-      __gdk_window_set_user_data (toolitem->priv->drag_window, NULL);
-      __gdk_window_destroy (toolitem->priv->drag_window);
-      toolitem->priv->drag_window = NULL;
+      __gdk_window_set_user_data (gtk_tool_item_get_props (toolitem)->priv->drag_window, NULL);
+      __gdk_window_destroy (gtk_tool_item_get_props (toolitem)->priv->drag_window);
+      gtk_tool_item_get_props (toolitem)->priv->drag_window = NULL;
     }
 }
 
@@ -452,8 +452,8 @@ gtk_tool_item_map (GtkWidget *widget)
 
   toolitem = GTK_TOOL_ITEM (widget);
   GTK_WIDGET_CLASS (gtk_tool_item_parent_class)->map (widget);
-  if (toolitem->priv->drag_window)
-    __gdk_window_show (toolitem->priv->drag_window);
+  if (gtk_tool_item_get_props (toolitem)->priv->drag_window)
+    __gdk_window_show (gtk_tool_item_get_props (toolitem)->priv->drag_window);
 }
 
 static void
@@ -462,8 +462,8 @@ gtk_tool_item_unmap (GtkWidget *widget)
   GtkToolItem *toolitem;
 
   toolitem = GTK_TOOL_ITEM (widget);
-  if (toolitem->priv->drag_window)
-    __gdk_window_hide (toolitem->priv->drag_window);
+  if (gtk_tool_item_get_props (toolitem)->priv->drag_window)
+    __gdk_window_hide (gtk_tool_item_get_props (toolitem)->priv->drag_window);
   GTK_WIDGET_CLASS (gtk_tool_item_parent_class)->unmap (widget);
 }
 
@@ -496,15 +496,15 @@ gtk_tool_item_size_allocate (GtkWidget     *widget,
   gint border_width;
   GtkWidget *child = GTK_BIN (widget)->child;
 
-  widget->allocation = *allocation;
+  gtk_widget_get_props (widget)->allocation = *allocation;
   border_width = GTK_CONTAINER (widget)->border_width;
 
-  if (toolitem->priv->drag_window)
-    __gdk_window_move_resize (toolitem->priv->drag_window,
-                            widget->allocation.x + border_width,
-                            widget->allocation.y + border_width,
-                            widget->allocation.width - border_width * 2,
-                            widget->allocation.height - border_width * 2);
+  if (gtk_tool_item_get_props (toolitem)->priv->drag_window)
+    __gdk_window_move_resize (gtk_tool_item_get_props (toolitem)->priv->drag_window,
+                            gtk_widget_get_props (widget)->allocation.x + border_width,
+                            gtk_widget_get_props (widget)->allocation.y + border_width,
+                            gtk_widget_get_props (widget)->allocation.width - border_width * 2,
+                            gtk_widget_get_props (widget)->allocation.height - border_width * 2);
   
   if (child && __gtk_widget_get_visible (child))
     {
@@ -523,13 +523,13 @@ ___gtk_tool_item_create_menu_proxy (GtkToolItem *item)
   GtkWidget *menu_item;
   gboolean visible_overflown;
 
-  if (item->priv->action)
+  if (gtk_tool_item_get_props (item)->priv->action)
     {
-      g_object_get (item->priv->action, "visible-overflown", &visible_overflown, NULL);
+      g_object_get (gtk_tool_item_get_props (item)->priv->action, "visible-overflown", &visible_overflown, NULL);
     
       if (visible_overflown)
 	{
-	  menu_item = __gtk_action_create_menu_item (item->priv->action);
+	  menu_item = __gtk_action_create_menu_item (gtk_tool_item_get_props (item)->priv->action);
 
 	  g_object_ref_sink (menu_item);
       	  __gtk_tool_item_set_proxy_menu_item (item, "gtk-action-menu-item", menu_item);
@@ -607,12 +607,12 @@ static void
 gtk_tool_item_set_related_action (GtkToolItem *item, 
 				  GtkAction   *action)
 {
-  if (item->priv->action == action)
+  if (gtk_tool_item_get_props (item)->priv->action == action)
     return;
 
   __gtk_activatable_do_set_related_action (GTK_ACTIVATABLE (item), action);
 
-  item->priv->action = action;
+  gtk_tool_item_get_props (item)->priv->action = action;
 
   if (action)
     {
@@ -624,11 +624,11 @@ static void
 gtk_tool_item_set_use_action_appearance (GtkToolItem *item,
 					 gboolean     use_appearance)
 {
-  if (item->priv->use_action_appearance != use_appearance)
+  if (gtk_tool_item_get_props (item)->priv->use_action_appearance != use_appearance)
     {
-      item->priv->use_action_appearance = use_appearance;
+      gtk_tool_item_get_props (item)->priv->use_action_appearance = use_appearance;
 
-      __gtk_activatable_sync_action_properties (GTK_ACTIVATABLE (item), item->priv->action);
+      __gtk_activatable_sync_action_properties (GTK_ACTIVATABLE (gtk_tool_item_get_props (item)), gtk_tool_item_get_props (item)->priv->action);
     }
 }
 
@@ -904,9 +904,9 @@ __gtk_tool_item_set_expand (GtkToolItem *tool_item,
     
   expand = expand != FALSE;
 
-  if (tool_item->priv->expand != expand)
+  if (gtk_tool_item_get_props (tool_item)->priv->expand != expand)
     {
-      tool_item->priv->expand = expand;
+      gtk_tool_item_get_props (tool_item)->priv->expand = expand;
       __gtk_widget_child_notify (GTK_WIDGET (tool_item), "expand");
       __gtk_widget_queue_resize (GTK_WIDGET (tool_item));
     }
@@ -928,7 +928,7 @@ __gtk_tool_item_get_expand (GtkToolItem *tool_item)
 {
   g_return_val_if_fail (GTK_IS_TOOL_ITEM (tool_item), FALSE);
 
-  return tool_item->priv->expand;
+  return gtk_tool_item_get_props (tool_item)->priv->expand;
 }
 
 /**
@@ -950,9 +950,9 @@ __gtk_tool_item_set_homogeneous (GtkToolItem *tool_item,
     
   homogeneous = homogeneous != FALSE;
 
-  if (tool_item->priv->homogeneous != homogeneous)
+  if (gtk_tool_item_get_props (tool_item)->priv->homogeneous != homogeneous)
     {
-      tool_item->priv->homogeneous = homogeneous;
+      gtk_tool_item_get_props (tool_item)->priv->homogeneous = homogeneous;
       __gtk_widget_child_notify (GTK_WIDGET (tool_item), "homogeneous");
       __gtk_widget_queue_resize (GTK_WIDGET (tool_item));
     }
@@ -975,7 +975,7 @@ __gtk_tool_item_get_homogeneous (GtkToolItem *tool_item)
 {
   g_return_val_if_fail (GTK_IS_TOOL_ITEM (tool_item), FALSE);
 
-  return tool_item->priv->homogeneous;
+  return gtk_tool_item_get_props (tool_item)->priv->homogeneous;
 }
 
 /**
@@ -994,7 +994,7 @@ __gtk_tool_item_get_is_important (GtkToolItem *tool_item)
 {
   g_return_val_if_fail (GTK_IS_TOOL_ITEM (tool_item), FALSE);
 
-  return tool_item->priv->is_important;
+  return gtk_tool_item_get_props (tool_item)->priv->is_important;
 }
 
 /**
@@ -1017,9 +1017,9 @@ __gtk_tool_item_set_is_important (GtkToolItem *tool_item, gboolean is_important)
 
   is_important = is_important != FALSE;
 
-  if (is_important != tool_item->priv->is_important)
+  if (is_important != gtk_tool_item_get_props (tool_item)->priv->is_important)
     {
-      tool_item->priv->is_important = is_important;
+      gtk_tool_item_get_props (tool_item)->priv->is_important = is_important;
 
       __gtk_widget_queue_resize (GTK_WIDGET (tool_item));
 
@@ -1095,18 +1095,18 @@ __gtk_tool_item_set_use_drag_window (GtkToolItem *toolitem,
 
   use_drag_window = use_drag_window != FALSE;
 
-  if (toolitem->priv->use_drag_window != use_drag_window)
+  if (gtk_tool_item_get_props (toolitem)->priv->use_drag_window != use_drag_window)
     {
-      toolitem->priv->use_drag_window = use_drag_window;
+      gtk_tool_item_get_props (toolitem)->priv->use_drag_window = use_drag_window;
       
       if (use_drag_window)
 	{
-	  if (!toolitem->priv->drag_window &&
+	  if (!gtk_tool_item_get_props (toolitem)->priv->drag_window &&
               __gtk_widget_get_realized (GTK_WIDGET (toolitem)))
 	    {
 	      create_drag_window(toolitem);
 	      if (__gtk_widget_get_mapped (GTK_WIDGET (toolitem)))
-		__gdk_window_show (toolitem->priv->drag_window);
+		__gdk_window_show (gtk_tool_item_get_props (toolitem)->priv->drag_window);
 	    }
 	}
       else
@@ -1132,7 +1132,7 @@ __gtk_tool_item_get_use_drag_window (GtkToolItem *toolitem)
 {
   g_return_val_if_fail (GTK_IS_TOOL_ITEM (toolitem), FALSE);
 
-  return toolitem->priv->use_drag_window;
+  return gtk_tool_item_get_props (toolitem)->priv->use_drag_window;
 }
 
 /**
@@ -1152,9 +1152,9 @@ __gtk_tool_item_set_visible_horizontal (GtkToolItem *toolitem,
 
   visible_horizontal = visible_horizontal != FALSE;
 
-  if (toolitem->priv->visible_horizontal != visible_horizontal)
+  if (gtk_tool_item_get_props (toolitem)->priv->visible_horizontal != visible_horizontal)
     {
-      toolitem->priv->visible_horizontal = visible_horizontal;
+      gtk_tool_item_get_props (toolitem)->priv->visible_horizontal = visible_horizontal;
 
       g_object_notify (G_OBJECT (toolitem), "visible-horizontal");
 
@@ -1179,7 +1179,7 @@ __gtk_tool_item_get_visible_horizontal (GtkToolItem *toolitem)
 {
   g_return_val_if_fail (GTK_IS_TOOL_ITEM (toolitem), FALSE);
 
-  return toolitem->priv->visible_horizontal;
+  return gtk_tool_item_get_props (toolitem)->priv->visible_horizontal;
 }
 
 /**
@@ -1203,9 +1203,9 @@ __gtk_tool_item_set_visible_vertical (GtkToolItem *toolitem,
 
   visible_vertical = visible_vertical != FALSE;
 
-  if (toolitem->priv->visible_vertical != visible_vertical)
+  if (gtk_tool_item_get_props (toolitem)->priv->visible_vertical != visible_vertical)
     {
-      toolitem->priv->visible_vertical = visible_vertical;
+      gtk_tool_item_get_props (toolitem)->priv->visible_vertical = visible_vertical;
 
       g_object_notify (G_OBJECT (toolitem), "visible-vertical");
 
@@ -1229,7 +1229,7 @@ __gtk_tool_item_get_visible_vertical (GtkToolItem *toolitem)
 {
   g_return_val_if_fail (GTK_IS_TOOL_ITEM (toolitem), FALSE);
 
-  return toolitem->priv->visible_vertical;
+  return gtk_tool_item_get_props (toolitem)->priv->visible_vertical;
 }
 
 /**
@@ -1255,7 +1255,7 @@ __gtk_tool_item_retrieve_proxy_menu_item (GtkToolItem *tool_item)
   g_signal_emit (tool_item, toolitem_signals[CREATE_MENU_PROXY], 0,
 		 &retval);
   
-  return tool_item->priv->menu_item;
+  return gtk_tool_item_get_props (tool_item)->priv->menu_item;
 }
 
 /**
@@ -1284,8 +1284,8 @@ __gtk_tool_item_get_proxy_menu_item (GtkToolItem *tool_item,
   g_return_val_if_fail (GTK_IS_TOOL_ITEM (tool_item), NULL);
   g_return_val_if_fail (menu_item_id != NULL, NULL);
 
-  if (tool_item->priv->menu_item_id && strcmp (tool_item->priv->menu_item_id, menu_item_id) == 0)
-    return tool_item->priv->menu_item;
+  if (gtk_tool_item_get_props (tool_item)->priv->menu_item_id && strcmp (gtk_tool_item_get_props (tool_item)->priv->menu_item_id, menu_item_id) == 0)
+    return gtk_tool_item_get_props (tool_item)->priv->menu_item;
 
   return NULL;
 }
@@ -1313,8 +1313,8 @@ __gtk_tool_item_rebuild_menu (GtkToolItem *tool_item)
 
   widget = GTK_WIDGET (tool_item);
 
-  if (GTK_IS_TOOL_SHELL (widget->parent))
-    __gtk_tool_shell_rebuild_menu (GTK_TOOL_SHELL (widget->parent));
+  if (GTK_IS_TOOL_SHELL (gtk_widget_get_props (widget)->parent))
+    __gtk_tool_shell_rebuild_menu (GTK_TOOL_SHELL (gtk_widget_get_props (widget)->parent));
 }
 
 /**
@@ -1340,14 +1340,14 @@ __gtk_tool_item_set_proxy_menu_item (GtkToolItem *tool_item,
   g_return_if_fail (menu_item == NULL || GTK_IS_MENU_ITEM (menu_item));
   g_return_if_fail (menu_item_id != NULL);
 
-  g_free (tool_item->priv->menu_item_id);
+  g_free (gtk_tool_item_get_props (tool_item)->priv->menu_item_id);
       
-  tool_item->priv->menu_item_id = g_strdup (menu_item_id);
+  gtk_tool_item_get_props (tool_item)->priv->menu_item_id = g_strdup (menu_item_id);
 
-  if (tool_item->priv->menu_item != menu_item)
+  if (gtk_tool_item_get_props (tool_item)->priv->menu_item != menu_item)
     {
-      if (tool_item->priv->menu_item)
-	g_object_unref (tool_item->priv->menu_item);
+      if (gtk_tool_item_get_props (tool_item)->priv->menu_item)
+	g_object_unref (gtk_tool_item_get_props (tool_item)->priv->menu_item);
       
       if (menu_item)
 	{
@@ -1357,7 +1357,7 @@ __gtk_tool_item_set_proxy_menu_item (GtkToolItem *tool_item,
 				    __gtk_widget_get_sensitive (GTK_WIDGET (tool_item)));
 	}
       
-      tool_item->priv->menu_item = menu_item;
+      gtk_tool_item_get_props (tool_item)->priv->menu_item = menu_item;
     }
 }
 
@@ -1385,8 +1385,8 @@ __gtk_tool_item_toolbar_reconfigured (GtkToolItem *tool_item)
 
   g_signal_emit (tool_item, toolitem_signals[TOOLBAR_RECONFIGURED], 0);
   
-  if (tool_item->priv->drag_window)
-    __gdk_window_raise (tool_item->priv->drag_window);
+  if (gtk_tool_item_get_props (tool_item)->priv->drag_window)
+    __gdk_window_raise (gtk_tool_item_get_props (tool_item)->priv->drag_window);
 
   __gtk_widget_queue_resize (GTK_WIDGET (tool_item));
 }

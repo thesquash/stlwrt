@@ -198,13 +198,13 @@ gtk_viewport_get_property (GObject         *object,
   switch (prop_id)
     {
     case PROP_HADJUSTMENT:
-      g_value_set_object (value, viewport->hadjustment);
+      g_value_set_object (value, gtk_viewport_get_props (viewport)->hadjustment);
       break;
     case PROP_VADJUSTMENT:
-      g_value_set_object (value, viewport->vadjustment);
+      g_value_set_object (value, gtk_viewport_get_props (viewport)->vadjustment);
       break;
     case PROP_SHADOW_TYPE:
-      g_value_set_enum (value, viewport->shadow_type);
+      g_value_set_enum (value, gtk_viewport_get_props (viewport)->shadow_type);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -220,11 +220,11 @@ gtk_viewport_init (GtkViewport *viewport)
   __gtk_widget_set_redraw_on_allocate (GTK_WIDGET (viewport), FALSE);
   __gtk_container_set_resize_mode (GTK_CONTAINER (viewport), GTK_RESIZE_QUEUE);
   
-  viewport->shadow_type = GTK_SHADOW_IN;
-  viewport->view_window = NULL;
-  viewport->bin_window = NULL;
-  viewport->hadjustment = NULL;
-  viewport->vadjustment = NULL;
+  gtk_viewport_get_props (viewport)->shadow_type = GTK_SHADOW_IN;
+  gtk_viewport_get_props (viewport)->view_window = NULL;
+  gtk_viewport_get_props (viewport)->bin_window = NULL;
+  gtk_viewport_get_props (viewport)->hadjustment = NULL;
+  gtk_viewport_get_props (viewport)->vadjustment = NULL;
 }
 
 /**
@@ -294,10 +294,10 @@ __gtk_viewport_get_hadjustment (GtkViewport *viewport)
 {
   g_return_val_if_fail (GTK_IS_VIEWPORT (viewport), NULL);
 
-  if (!viewport->hadjustment)
+  if (!gtk_viewport_get_props (viewport)->hadjustment)
     __gtk_viewport_set_hadjustment (viewport, NULL);
 
-  return viewport->hadjustment;
+  return gtk_viewport_get_props (viewport)->hadjustment;
 }
 
 /**
@@ -313,10 +313,10 @@ __gtk_viewport_get_vadjustment (GtkViewport *viewport)
 {
   g_return_val_if_fail (GTK_IS_VIEWPORT (viewport), NULL);
 
-  if (!viewport->vadjustment)
+  if (!gtk_viewport_get_props (viewport)->vadjustment)
     __gtk_viewport_set_vadjustment (viewport, NULL);
 
-  return viewport->vadjustment;
+  return gtk_viewport_get_props (viewport)->vadjustment;
 }
 
 static void
@@ -324,16 +324,16 @@ viewport_get_view_allocation (GtkViewport   *viewport,
 			      GtkAllocation *view_allocation)
 {
   GtkWidget *widget = GTK_WIDGET (viewport);
-  GtkAllocation *allocation = &widget->allocation;
+  GtkAllocation *allocation = &gtk_widget_get_props (widget)->allocation;
   gint border_width = GTK_CONTAINER (viewport)->border_width;
   
   view_allocation->x = 0;
   view_allocation->y = 0;
 
-  if (viewport->shadow_type != GTK_SHADOW_NONE)
+  if (gtk_viewport_get_props (viewport)->shadow_type != GTK_SHADOW_NONE)
     {
-      view_allocation->x = widget->style->xthickness;
-      view_allocation->y = widget->style->ythickness;
+      view_allocation->x = gtk_widget_get_props (widget)->style->xthickness;
+      view_allocation->y = gtk_widget_get_props (widget)->style->ythickness;
     }
 
   view_allocation->width = MAX (1, allocation->width - view_allocation->x * 2 - border_width * 2);
@@ -344,12 +344,12 @@ static void
 viewport_reclamp_adjustment (GtkAdjustment *adjustment,
 			     gboolean      *value_changed)
 {
-  gdouble value = adjustment->value;
+  gdouble value = gtk_adjustment_get_props (adjustment)->value;
   
-  value = CLAMP (value, 0, adjustment->upper - adjustment->page_size);
-  if (value != adjustment->value)
+  value = CLAMP (value, 0, gtk_adjustment_get_props (adjustment)->upper - gtk_adjustment_get_props (adjustment)->page_size);
+  if (value != gtk_adjustment_get_props (adjustment)->value)
     {
-      adjustment->value = value;
+      gtk_adjustment_get_props (adjustment)->value = value;
       if (value_changed)
 	*value_changed = TRUE;
     }
@@ -370,31 +370,31 @@ viewport_set_hadjustment_values (GtkViewport *viewport,
   
   viewport_get_view_allocation (viewport, &view_allocation);  
 
-  old_page_size = hadjustment->page_size;
-  old_upper = hadjustment->upper;
-  old_value = hadjustment->value;
-  hadjustment->page_size = view_allocation.width;
-  hadjustment->step_increment = view_allocation.width * 0.1;
-  hadjustment->page_increment = view_allocation.width * 0.9;
+  old_page_size = gtk_adjustment_get_props (hadjustment)->page_size;
+  old_upper = gtk_adjustment_get_props (hadjustment)->upper;
+  old_value = gtk_adjustment_get_props (hadjustment)->value;
+  gtk_adjustment_get_props (hadjustment)->page_size = view_allocation.width;
+  gtk_adjustment_get_props (hadjustment)->step_increment = view_allocation.width * 0.1;
+  gtk_adjustment_get_props (hadjustment)->page_increment = view_allocation.width * 0.9;
   
-  hadjustment->lower = 0;
+  gtk_adjustment_get_props (hadjustment)->lower = 0;
 
-  if (bin->child && __gtk_widget_get_visible (bin->child))
+  if (gtk_bin_get_props (bin)->child && __gtk_widget_get_visible (gtk_bin_get_props (bin)->child))
     {
       GtkRequisition child_requisition;
       
-      __gtk_widget_get_child_requisition (bin->child, &child_requisition);
-      hadjustment->upper = MAX (child_requisition.width, view_allocation.width);
+      __gtk_widget_get_child_requisition (gtk_bin_get_props (bin)->child, &child_requisition);
+      gtk_adjustment_get_props (hadjustment)->upper = MAX (child_requisition.width, view_allocation.width);
     }
   else
-    hadjustment->upper = view_allocation.width;
+    gtk_adjustment_get_props (hadjustment)->upper = view_allocation.width;
 
   if (__gtk_widget_get_direction (GTK_WIDGET (viewport)) == GTK_TEXT_DIR_RTL) 
     {
       gdouble dist = old_upper - (old_value + old_page_size);
-      hadjustment->value = hadjustment->upper - dist - hadjustment->page_size;
+      gtk_adjustment_get_props (hadjustment)->value = gtk_adjustment_get_props (hadjustment)->upper - dist - gtk_adjustment_get_props (hadjustment)->page_size;
       viewport_reclamp_adjustment (hadjustment, value_changed);
-      *value_changed = (old_value != hadjustment->value);
+      *value_changed = (old_value != gtk_adjustment_get_props (hadjustment)->value);
     }
   else
     viewport_reclamp_adjustment (hadjustment, value_changed);
@@ -410,21 +410,21 @@ viewport_set_vadjustment_values (GtkViewport *viewport,
 
   viewport_get_view_allocation (viewport, &view_allocation);  
 
-  vadjustment->page_size = view_allocation.height;
-  vadjustment->step_increment = view_allocation.height * 0.1;
-  vadjustment->page_increment = view_allocation.height * 0.9;
+  gtk_adjustment_get_props (vadjustment)->page_size = view_allocation.height;
+  gtk_adjustment_get_props (vadjustment)->step_increment = view_allocation.height * 0.1;
+  gtk_adjustment_get_props (vadjustment)->page_increment = view_allocation.height * 0.9;
   
-  vadjustment->lower = 0;
+  gtk_adjustment_get_props (vadjustment)->lower = 0;
 
-  if (bin->child && __gtk_widget_get_visible (bin->child))
+  if (gtk_bin_get_props (bin)->child && __gtk_widget_get_visible (gtk_bin_get_props (bin)->child))
     {
       GtkRequisition child_requisition;
       
-      __gtk_widget_get_child_requisition (bin->child, &child_requisition);
-      vadjustment->upper = MAX (child_requisition.height, view_allocation.height);
+      __gtk_widget_get_child_requisition (gtk_bin_get_props (bin)->child, &child_requisition);
+      gtk_adjustment_get_props (vadjustment)->upper = MAX (child_requisition.height, view_allocation.height);
     }
   else
-    vadjustment->upper = view_allocation.height;
+    gtk_adjustment_get_props (vadjustment)->upper = view_allocation.height;
 
   viewport_reclamp_adjustment (vadjustment, value_changed);
 }
@@ -526,9 +526,9 @@ __gtk_viewport_set_shadow_type (GtkViewport   *viewport,
 {
   g_return_if_fail (GTK_IS_VIEWPORT (viewport));
 
-  if ((GtkShadowType) viewport->shadow_type != type)
+  if ((GtkShadowType) gtk_viewport_get_props (viewport)->shadow_type != type)
     {
-      viewport->shadow_type = type;
+      gtk_viewport_get_props (viewport)->shadow_type = type;
 
       if (__gtk_widget_get_visible (GTK_WIDGET (viewport)))
 	{
@@ -554,7 +554,7 @@ __gtk_viewport_get_shadow_type (GtkViewport *viewport)
 {
   g_return_val_if_fail (GTK_IS_VIEWPORT (viewport), GTK_SHADOW_NONE);
 
-  return viewport->shadow_type;
+  return gtk_viewport_get_props (viewport)->shadow_type;
 }
 
 /**
@@ -572,7 +572,7 @@ __gtk_viewport_get_bin_window (GtkViewport *viewport)
 {
   g_return_val_if_fail (GTK_IS_VIEWPORT (viewport), NULL);
 
-  return viewport->bin_window;
+  return gtk_viewport_get_props (viewport)->bin_window;
 }
 
 /**
@@ -590,7 +590,7 @@ __gtk_viewport_get_view_window (GtkViewport *viewport)
 {
   g_return_val_if_fail (GTK_IS_VIEWPORT (viewport), NULL);
 
-  return viewport->view_window;
+  return gtk_viewport_get_props (viewport)->view_window;
 }
 
 static void
@@ -609,10 +609,10 @@ gtk_viewport_realize (GtkWidget *widget)
 
   __gtk_widget_set_realized (widget, TRUE);
 
-  attributes.x = widget->allocation.x + border_width;
-  attributes.y = widget->allocation.y + border_width;
-  attributes.width = widget->allocation.width - border_width * 2;
-  attributes.height = widget->allocation.height - border_width * 2;
+  attributes.x = gtk_widget_get_props (widget)->allocation.x + border_width;
+  attributes.y = gtk_widget_get_props (widget)->allocation.y + border_width;
+  attributes.width = gtk_widget_get_props (widget)->allocation.width - border_width * 2;
+  attributes.height = gtk_widget_get_props (widget)->allocation.height - border_width * 2;
   attributes.window_type = GDK_WINDOW_CHILD;
   attributes.wclass = GDK_INPUT_OUTPUT;
   attributes.visual = __gtk_widget_get_visual (widget);
@@ -625,9 +625,9 @@ gtk_viewport_realize (GtkWidget *widget)
 
   attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
 
-  widget->window = __gdk_window_new (__gtk_widget_get_parent_window (widget),
+  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (gtk_widget_get_props (widget)),
 				   &attributes, attributes_mask);
-  __gdk_window_set_user_data (widget->window, viewport);
+  __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, viewport);
 
   viewport_get_view_allocation (viewport, &view_allocation);
   
@@ -637,37 +637,37 @@ gtk_viewport_realize (GtkWidget *widget)
   attributes.height = view_allocation.height;
   attributes.event_mask = 0;
 
-  viewport->view_window = __gdk_window_new (widget->window, &attributes, attributes_mask);
-  __gdk_window_set_user_data (viewport->view_window, viewport);
+  gtk_viewport_get_props (viewport)->view_window = __gdk_window_new (gtk_widget_get_props (widget)->window, &attributes, attributes_mask);
+  __gdk_window_set_user_data (gtk_viewport_get_props (viewport)->view_window, gtk_viewport_get_props (viewport));
 
-  __gdk_window_set_back_pixmap (viewport->view_window, NULL, FALSE);
+  __gdk_window_set_back_pixmap (gtk_viewport_get_props (viewport)->view_window, NULL, FALSE);
   
-  attributes.x = - hadjustment->value;
-  attributes.y = - vadjustment->value;
-  attributes.width = hadjustment->upper;
-  attributes.height = vadjustment->upper;
+  attributes.x = - gtk_adjustment_get_props (hadjustment)->value;
+  attributes.y = - gtk_adjustment_get_props (vadjustment)->value;
+  attributes.width = gtk_adjustment_get_props (hadjustment)->upper;
+  attributes.height = gtk_adjustment_get_props (vadjustment)->upper;
   
   attributes.event_mask = event_mask;
 
-  viewport->bin_window = __gdk_window_new (viewport->view_window, &attributes, attributes_mask);
-  __gdk_window_set_user_data (viewport->bin_window, viewport);
+  gtk_viewport_get_props (viewport)->bin_window = __gdk_window_new (gtk_viewport_get_props (viewport)->view_window, &attributes, attributes_mask);
+  __gdk_window_set_user_data (gtk_viewport_get_props (viewport)->bin_window, gtk_viewport_get_props (viewport));
 
-  if (bin->child)
-    __gtk_widget_set_parent_window (bin->child, viewport->bin_window);
+  if (gtk_bin_get_props (bin)->child)
+    __gtk_widget_set_parent_window (gtk_bin_get_props (bin)->child, gtk_viewport_get_props (viewport)->bin_window);
 
-  widget->style = __gtk_style_attach (widget->style, widget->window);
-  __gtk_style_set_background (widget->style, widget->window, GTK_STATE_NORMAL);
-  __gtk_style_set_background (widget->style, viewport->bin_window, GTK_STATE_NORMAL);
+  gtk_widget_get_props (widget)->style = __gtk_style_attach (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window);
+  __gtk_style_set_background (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, GTK_STATE_NORMAL);
+  __gtk_style_set_background (gtk_widget_get_props (widget)->style, gtk_viewport_get_props (viewport)->bin_window, GTK_STATE_NORMAL);
 
   /* Call paint here to allow a theme to set the background without flashing
    */
-  __gtk_paint_flat_box(widget->style, viewport->bin_window, GTK_STATE_NORMAL,
+  __gtk_paint_flat_box(gtk_widget_get_props (widget)->style, gtk_viewport_get_props (viewport)->bin_window, GTK_STATE_NORMAL,
 		     GTK_SHADOW_NONE,
 		     NULL, widget, "viewportbin",
 		     0, 0, -1, -1);
    
-  __gdk_window_show (viewport->bin_window);
-  __gdk_window_show (viewport->view_window);
+  __gdk_window_show (gtk_viewport_get_props (viewport)->bin_window);
+  __gdk_window_show (gtk_viewport_get_props (viewport)->view_window);
 }
 
 static void
@@ -675,13 +675,13 @@ gtk_viewport_unrealize (GtkWidget *widget)
 {
   GtkViewport *viewport = GTK_VIEWPORT (widget);
 
-  __gdk_window_set_user_data (viewport->view_window, NULL);
-  __gdk_window_destroy (viewport->view_window);
-  viewport->view_window = NULL;
+  __gdk_window_set_user_data (gtk_viewport_get_props (viewport)->view_window, NULL);
+  __gdk_window_destroy (gtk_viewport_get_props (viewport)->view_window);
+  gtk_viewport_get_props (viewport)->view_window = NULL;
 
-  __gdk_window_set_user_data (viewport->bin_window, NULL);
-  __gdk_window_destroy (viewport->bin_window);
-  viewport->bin_window = NULL;
+  __gdk_window_set_user_data (gtk_viewport_get_props (viewport)->bin_window, NULL);
+  __gdk_window_destroy (gtk_viewport_get_props (viewport)->bin_window);
+  gtk_viewport_get_props (viewport)->bin_window = NULL;
 
   GTK_WIDGET_CLASS (gtk_viewport_parent_class)->unrealize (widget);
 }
@@ -694,8 +694,8 @@ gtk_viewport_paint (GtkWidget    *widget,
     {
       GtkViewport *viewport = GTK_VIEWPORT (widget);
 
-      __gtk_paint_shadow (widget->style, widget->window,
-			GTK_STATE_NORMAL, viewport->shadow_type,
+      __gtk_paint_shadow (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window,
+			GTK_STATE_NORMAL, gtk_viewport_get_props (viewport)->shadow_type,
 			area, widget, "viewport",
 			0, 0, -1, -1);
     }
@@ -711,11 +711,11 @@ gtk_viewport_expose (GtkWidget      *widget,
     {
       viewport = GTK_VIEWPORT (widget);
 
-      if (event->window == widget->window)
+      if (event->window == gtk_widget_get_props (widget)->window)
 	gtk_viewport_paint (widget, &event->area);
-      else if (event->window == viewport->bin_window)
+      else if (event->window == gtk_viewport_get_props (viewport)->bin_window)
 	{
-	  __gtk_paint_flat_box(widget->style, viewport->bin_window, 
+	  __gtk_paint_flat_box(gtk_widget_get_props (widget)->style, gtk_viewport_get_props (viewport)->bin_window, 
 			     GTK_STATE_NORMAL, GTK_SHADOW_NONE,
 			     &event->area, widget, "viewportbin",
 			     0, 0, -1, -1);
@@ -733,7 +733,7 @@ gtk_viewport_add (GtkContainer *container,
 {
   GtkBin *bin = GTK_BIN (container);
 
-  g_return_if_fail (bin->child == NULL);
+  g_return_if_fail (gtk_bin_get_props (bin)->child == NULL);
 
   __gtk_widget_set_parent_window (child, GTK_VIEWPORT (bin)->bin_window);
 
@@ -753,13 +753,13 @@ gtk_viewport_size_request (GtkWidget      *widget,
 
   if (GTK_VIEWPORT (widget)->shadow_type != GTK_SHADOW_NONE)
     {
-      requisition->width += 2 * widget->style->xthickness;
-      requisition->height += 2 * widget->style->ythickness;
+      requisition->width += 2 * gtk_widget_get_props (widget)->style->xthickness;
+      requisition->height += 2 * gtk_widget_get_props (widget)->style->ythickness;
     }
 
-  if (bin->child && __gtk_widget_get_visible (bin->child))
+  if (gtk_bin_get_props (bin)->child && __gtk_widget_get_visible (gtk_bin_get_props (bin)->child))
     {
-      __gtk_widget_size_request (bin->child, &child_requisition);
+      __gtk_widget_size_request (gtk_bin_get_props (bin)->child, &child_requisition);
       requisition->width += child_requisition.width;
       requisition->height += child_requisition.height;
     }
@@ -777,47 +777,47 @@ gtk_viewport_size_allocate (GtkWidget     *widget,
   GtkAdjustment *vadjustment = __gtk_viewport_get_vadjustment (viewport);
   GtkAllocation child_allocation;
 
-  /* If our size changed, and we have a shadow, queue a redraw on widget->window to
+  /* If our size changed, and we have a shadow, queue a redraw on gtk_widget_get_props (widget)->window to
    * redraw the shadow correctly.
    */
   if (__gtk_widget_get_mapped (widget) &&
-      viewport->shadow_type != GTK_SHADOW_NONE &&
-      (widget->allocation.width != allocation->width ||
-       widget->allocation.height != allocation->height))
-    __gdk_window_invalidate_rect (widget->window, NULL, FALSE);
+      gtk_viewport_get_props (viewport)->shadow_type != GTK_SHADOW_NONE &&
+      (gtk_widget_get_props (widget)->allocation.width != allocation->width ||
+       gtk_widget_get_props (widget)->allocation.height != allocation->height))
+    __gdk_window_invalidate_rect (gtk_widget_get_props (widget)->window, NULL, FALSE);
   
-  widget->allocation = *allocation;
+  gtk_widget_get_props (widget)->allocation = *allocation;
   
   viewport_set_hadjustment_values (viewport, &hadjustment_value_changed);
   viewport_set_vadjustment_values (viewport, &vadjustment_value_changed);
   
   child_allocation.x = 0;
   child_allocation.y = 0;
-  child_allocation.width = hadjustment->upper;
-  child_allocation.height = vadjustment->upper;
+  child_allocation.width = gtk_adjustment_get_props (hadjustment)->upper;
+  child_allocation.height = gtk_adjustment_get_props (vadjustment)->upper;
   if (__gtk_widget_get_realized (widget))
     {
       GtkAllocation view_allocation;
-      __gdk_window_move_resize (widget->window,
+      __gdk_window_move_resize (gtk_widget_get_props (widget)->window,
 			      allocation->x + border_width,
 			      allocation->y + border_width,
 			      allocation->width - border_width * 2,
 			      allocation->height - border_width * 2);
       
       viewport_get_view_allocation (viewport, &view_allocation);
-      __gdk_window_move_resize (viewport->view_window,
+      __gdk_window_move_resize (gtk_viewport_get_props (viewport)->view_window,
 			      view_allocation.x,
 			      view_allocation.y,
 			      view_allocation.width,
 			      view_allocation.height);
-      __gdk_window_move_resize (viewport->bin_window,
-                              - hadjustment->value,
-                              - vadjustment->value,
+      __gdk_window_move_resize (gtk_viewport_get_props (viewport)->bin_window,
+                              - gtk_adjustment_get_props (hadjustment)->value,
+                              - gtk_adjustment_get_props (vadjustment)->value,
                               child_allocation.width,
                               child_allocation.height);
     }
-  if (bin->child && __gtk_widget_get_visible (bin->child))
-    __gtk_widget_size_allocate (bin->child, &child_allocation);
+  if (gtk_bin_get_props (bin)->child && __gtk_widget_get_visible (gtk_bin_get_props (bin)->child))
+    __gtk_widget_size_allocate (gtk_bin_get_props (bin)->child, &child_allocation);
 
   __gtk_adjustment_changed (hadjustment);
   __gtk_adjustment_changed (vadjustment);
@@ -834,7 +834,7 @@ gtk_viewport_adjustment_value_changed (GtkAdjustment *adjustment,
   GtkViewport *viewport = GTK_VIEWPORT (data);
   GtkBin *bin = GTK_BIN (data);
 
-  if (bin->child && __gtk_widget_get_visible (bin->child) &&
+  if (gtk_bin_get_props (bin)->child && __gtk_widget_get_visible (gtk_bin_get_props (bin)->child) &&
       __gtk_widget_get_realized (GTK_WIDGET (viewport)))
     {
       GtkAdjustment *hadjustment = __gtk_viewport_get_hadjustment (viewport);
@@ -842,14 +842,14 @@ gtk_viewport_adjustment_value_changed (GtkAdjustment *adjustment,
       gint old_x, old_y;
       gint new_x, new_y;
 
-      __gdk_window_get_position (viewport->bin_window, &old_x, &old_y);
-      new_x = - hadjustment->value;
-      new_y = - vadjustment->value;
+      __gdk_window_get_position (gtk_viewport_get_props (viewport)->bin_window, &old_x, &old_y);
+      new_x = - gtk_adjustment_get_props (hadjustment)->value;
+      new_y = - gtk_adjustment_get_props (vadjustment)->value;
 
       if (new_x != old_x || new_y != old_y)
 	{
-	  __gdk_window_move (viewport->bin_window, new_x, new_y);
-	  __gdk_window_process_updates (viewport->bin_window, TRUE);
+	  __gdk_window_move (gtk_viewport_get_props (viewport)->bin_window, new_x, new_y);
+	  __gdk_window_process_updates (gtk_viewport_get_props (viewport)->bin_window, TRUE);
 	}
     }
 }
@@ -863,7 +863,7 @@ gtk_viewport_style_set (GtkWidget *widget,
      {
 	GtkViewport *viewport = GTK_VIEWPORT (widget);
 
-	__gtk_style_set_background (widget->style, viewport->bin_window, GTK_STATE_NORMAL);
-	__gtk_style_set_background (widget->style, widget->window, widget->state);
+	__gtk_style_set_background (gtk_widget_get_props (widget)->style, gtk_viewport_get_props (viewport)->bin_window, GTK_STATE_NORMAL);
+	__gtk_style_set_background (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, gtk_widget_get_props (widget)->state);
      }
 }

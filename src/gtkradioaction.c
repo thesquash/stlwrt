@@ -171,9 +171,9 @@ gtk_radio_action_class_init (GtkRadioActionClass *klass)
 static void
 gtk_radio_action_init (GtkRadioAction *action)
 {
-  action->private_data = GTK_RADIO_ACTION_GET_PRIVATE (action);
-  action->private_data->group = g_slist_prepend (NULL, action);
-  action->private_data->value = 0;
+  gtk_radio_action_get_props (action)->private_data = GTK_RADIO_ACTION_GET_PRIVATE (gtk_radio_action_get_props (action));
+  gtk_radio_action_get_props (action)->private_data->group = g_slist_prepend (NULL, gtk_radio_action_get_props (action));
+  gtk_radio_action_get_props (action)->private_data->value = 0;
 
   __gtk_toggle_action_set_draw_as_radio (GTK_TOGGLE_ACTION (action), TRUE);
 }
@@ -222,16 +222,16 @@ gtk_radio_action_finalize (GObject *object)
 
   action = GTK_RADIO_ACTION (object);
 
-  action->private_data->group = g_slist_remove (action->private_data->group, action);
+  gtk_radio_action_get_props (action)->private_data->group = g_slist_remove (gtk_radio_action_get_props (action)->private_data->group, gtk_radio_action_get_props (action));
 
-  tmp_list = action->private_data->group;
+  tmp_list = gtk_radio_action_get_props (action)->private_data->group;
 
   while (tmp_list)
     {
       GtkRadioAction *tmp_action = tmp_list->data;
 
       tmp_list = tmp_list->next;
-      tmp_action->private_data->group = action->private_data->group;
+      gtk_radio_action_get_props (tmp_action)->private_data->group = gtk_radio_action_get_props (action)->private_data->group;
     }
 
   G_OBJECT_CLASS (gtk_radio_action_parent_class)->finalize (object);
@@ -250,7 +250,7 @@ gtk_radio_action_set_property (GObject         *object,
   switch (prop_id)
     {
     case PROP_VALUE:
-      radio_action->private_data->value = g_value_get_int (value);
+      gtk_radio_action_get_props (radio_action)->private_data->value = g_value_get_int (value);
       break;
     case PROP_GROUP: 
       {
@@ -289,7 +289,7 @@ gtk_radio_action_get_property (GObject    *object,
   switch (prop_id)
     {
     case PROP_VALUE:
-      g_value_set_int (value, radio_action->private_data->value);
+      g_value_set_int (value, gtk_radio_action_get_props (radio_action)->private_data->value);
       break;
     case PROP_CURRENT_VALUE:
       g_value_set_int (value,
@@ -314,7 +314,7 @@ gtk_radio_action_activate (GtkAction *action)
 
   if (toggle_action->private_data->active)
     {
-      tmp_list = radio_action->private_data->group;
+      tmp_list = gtk_radio_action_get_props (radio_action)->private_data->group;
 
       while (tmp_list)
 	{
@@ -335,7 +335,7 @@ gtk_radio_action_activate (GtkAction *action)
       toggle_action->private_data->active = !toggle_action->private_data->active;
       g_object_notify (G_OBJECT (action), "active");
 
-      tmp_list = radio_action->private_data->group;
+      tmp_list = gtk_radio_action_get_props (radio_action)->private_data->group;
       while (tmp_list)
 	{
 	  tmp_action = tmp_list->data;
@@ -348,7 +348,7 @@ gtk_radio_action_activate (GtkAction *action)
 	    }
 	}
 
-      tmp_list = radio_action->private_data->group;
+      tmp_list = gtk_radio_action_get_props (radio_action)->private_data->group;
       while (tmp_list)
 	{
 	  tmp_action = tmp_list->data;
@@ -402,7 +402,7 @@ __gtk_radio_action_get_group (GtkRadioAction *action)
 {
   g_return_val_if_fail (GTK_IS_RADIO_ACTION (action), NULL);
 
-  return action->private_data->group;
+  return gtk_radio_action_get_props (action)->private_data->group;
 }
 
 /**
@@ -421,31 +421,31 @@ __gtk_radio_action_set_group (GtkRadioAction *action,
   g_return_if_fail (GTK_IS_RADIO_ACTION (action));
   g_return_if_fail (!g_slist_find (group, action));
 
-  if (action->private_data->group)
+  if (gtk_radio_action_get_props (action)->private_data->group)
     {
       GSList *slist;
 
-      action->private_data->group = g_slist_remove (action->private_data->group, action);
+      gtk_radio_action_get_props (action)->private_data->group = g_slist_remove (gtk_radio_action_get_props (action)->private_data->group, gtk_radio_action_get_props (action));
 
-      for (slist = action->private_data->group; slist; slist = slist->next)
+      for (slist = gtk_radio_action_get_props (action)->private_data->group; slist; slist = slist->next)
 	{
 	  GtkRadioAction *tmp_action = slist->data;
 
-	  tmp_action->private_data->group = action->private_data->group;
+	  gtk_radio_action_get_props (tmp_action)->private_data->group = gtk_radio_action_get_props (action)->private_data->group;
 	}
     }
 
-  action->private_data->group = g_slist_prepend (group, action);
+  gtk_radio_action_get_props (action)->private_data->group = g_slist_prepend (group, gtk_radio_action_get_props (action));
 
   if (group)
     {
       GSList *slist;
 
-      for (slist = action->private_data->group; slist; slist = slist->next)
+      for (slist = gtk_radio_action_get_props (action)->private_data->group; slist; slist = slist->next)
 	{
 	  GtkRadioAction *tmp_action = slist->data;
 
-	  tmp_action->private_data->group = action->private_data->group;
+	  gtk_radio_action_get_props (tmp_action)->private_data->group = gtk_radio_action_get_props (action)->private_data->group;
 	}
     }
   else
@@ -472,9 +472,9 @@ __gtk_radio_action_get_current_value (GtkRadioAction *action)
 
   g_return_val_if_fail (GTK_IS_RADIO_ACTION (action), 0);
 
-  if (action->private_data->group)
+  if (gtk_radio_action_get_props (action)->private_data->group)
     {
-      for (slist = action->private_data->group; slist; slist = slist->next)
+      for (slist = gtk_radio_action_get_props (action)->private_data->group; slist; slist = slist->next)
 	{
 	  GtkToggleAction *toggle_action = slist->data;
 
@@ -483,7 +483,7 @@ __gtk_radio_action_get_current_value (GtkRadioAction *action)
 	}
     }
 
-  return action->private_data->value;
+  return gtk_radio_action_get_props (action)->private_data->value;
 }
 
 /**
@@ -504,13 +504,13 @@ __gtk_radio_action_set_current_value (GtkRadioAction *action,
 
   g_return_if_fail (GTK_IS_RADIO_ACTION (action));
 
-  if (action->private_data->group)
+  if (gtk_radio_action_get_props (action)->private_data->group)
     {
-      for (slist = action->private_data->group; slist; slist = slist->next)
+      for (slist = gtk_radio_action_get_props (action)->private_data->group; slist; slist = slist->next)
 	{
 	  GtkRadioAction *radio_action = slist->data;
 
-	  if (radio_action->private_data->value == current_value)
+	  if (gtk_radio_action_get_props (radio_action)->private_data->value == current_value)
             {
               __gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (radio_action),
                                             TRUE);
@@ -519,7 +519,7 @@ __gtk_radio_action_set_current_value (GtkRadioAction *action,
 	}
     }
 
-  if (action->private_data->value == current_value)
+  if (gtk_radio_action_get_props (action)->private_data->value == current_value)
     __gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
   else
     g_warning ("Radio group does not contain an action with value '%d'",

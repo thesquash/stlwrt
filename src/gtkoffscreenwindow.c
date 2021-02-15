@@ -66,11 +66,11 @@ gtk_offscreen_window_size_request (GtkWidget *widget,
   requisition->width = border_width * 2;
   requisition->height = border_width * 2;
 
-  if (bin->child && __gtk_widget_get_visible (bin->child))
+  if (gtk_bin_get_props (bin)->child && __gtk_widget_get_visible (gtk_bin_get_props (bin)->child))
     {
       GtkRequisition child_req;
 
-      __gtk_widget_size_request (bin->child, &child_req);
+      __gtk_widget_size_request (gtk_bin_get_props (bin)->child, &child_req);
 
       requisition->width += child_req.width;
       requisition->height += child_req.height;
@@ -92,18 +92,18 @@ gtk_offscreen_window_size_allocate (GtkWidget *widget,
   GtkBin *bin = GTK_BIN (widget);
   gint border_width;
 
-  widget->allocation = *allocation;
+  gtk_widget_get_props (widget)->allocation = *allocation;
 
   border_width = __gtk_container_get_border_width (GTK_CONTAINER (widget));
 
   if (__gtk_widget_get_realized (widget))
-    __gdk_window_move_resize (widget->window,
+    __gdk_window_move_resize (gtk_widget_get_props (widget)->window,
                             allocation->x,
                             allocation->y,
                             allocation->width,
                             allocation->height);
 
-  if (bin->child && __gtk_widget_get_visible (bin->child))
+  if (gtk_bin_get_props (bin)->child && __gtk_widget_get_visible (gtk_bin_get_props (bin)->child))
     {
       GtkAllocation  child_alloc;
 
@@ -112,7 +112,7 @@ gtk_offscreen_window_size_allocate (GtkWidget *widget,
       child_alloc.width = allocation->width - 2 * border_width;
       child_alloc.height = allocation->height - 2 * border_width;
 
-      __gtk_widget_size_allocate (bin->child, &child_alloc);
+      __gtk_widget_size_allocate (gtk_bin_get_props (bin)->child, &child_alloc);
     }
 
   __gtk_widget_queue_draw (widget);
@@ -132,10 +132,10 @@ gtk_offscreen_window_realize (GtkWidget *widget)
 
   border_width = __gtk_container_get_border_width (GTK_CONTAINER (widget));
 
-  attributes.x = widget->allocation.x;
-  attributes.y = widget->allocation.y;
-  attributes.width = widget->allocation.width;
-  attributes.height = widget->allocation.height;
+  attributes.x = gtk_widget_get_props (widget)->allocation.x;
+  attributes.y = gtk_widget_get_props (widget)->allocation.y;
+  attributes.width = gtk_widget_get_props (widget)->allocation.width;
+  attributes.height = gtk_widget_get_props (widget)->allocation.height;
   attributes.window_type = GDK_WINDOW_OFFSCREEN;
   attributes.event_mask = __gtk_widget_get_events (widget) | GDK_EXPOSURE_MASK;
   attributes.visual = __gtk_widget_get_visual (widget);
@@ -144,16 +144,16 @@ gtk_offscreen_window_realize (GtkWidget *widget)
 
   attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
 
-  widget->window = __gdk_window_new (__gtk_widget_get_parent_window (widget),
+  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (gtk_widget_get_props (widget)),
                                    &attributes, attributes_mask);
-  __gdk_window_set_user_data (widget->window, widget);
+  __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, gtk_widget_get_props (widget));
 
-  if (bin->child)
-    __gtk_widget_set_parent_window (bin->child, widget->window);
+  if (gtk_bin_get_props (bin)->child)
+    __gtk_widget_set_parent_window (gtk_bin_get_props (bin)->child, gtk_widget_get_props (widget)->window);
 
-  widget->style = __gtk_style_attach (widget->style, widget->window);
+  gtk_widget_get_props (widget)->style = __gtk_style_attach (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window);
 
-  __gtk_style_set_background (widget->style, widget->window, GTK_STATE_NORMAL);
+  __gtk_style_set_background (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, GTK_STATE_NORMAL);
 }
 
 static void
@@ -188,8 +188,8 @@ gtk_offscreen_window_show (GtkWidget *widget)
   GTK_WIDGET_SET_FLAGS (widget, GTK_VISIBLE);
 
   container = GTK_CONTAINER (widget);
-  need_resize = container->need_resize || !__gtk_widget_get_realized (widget);
-  container->need_resize = FALSE;
+  need_resize = gtk_container_get_props (container)->need_resize || !__gtk_widget_get_realized (widget);
+  gtk_container_get_props (container)->need_resize = FALSE;
 
   if (need_resize)
     gtk_offscreen_window_resize (widget);

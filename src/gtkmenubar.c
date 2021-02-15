@@ -282,7 +282,7 @@ gtk_menu_bar_size_request (GtkWidget      *widget,
       priv = GTK_MENU_BAR_GET_PRIVATE (menu_bar);
 
       nchildren = 0;
-      children = menu_shell->children;
+      children = gtk_menu_shell_get_props (menu_shell)->children;
 
       while (children)
 	{
@@ -330,8 +330,8 @@ gtk_menu_bar_size_request (GtkWidget      *widget,
 
       if (get_shadow_type (menu_bar) != GTK_SHADOW_NONE)
 	{
-	  requisition->width += widget->style->xthickness * 2;
-	  requisition->height += widget->style->ythickness * 2;
+	  requisition->width += gtk_widget_get_props (widget)->style->xthickness * 2;
+	  requisition->height += gtk_widget_get_props (widget)->style->ythickness * 2;
 	}
     }
 }
@@ -361,15 +361,15 @@ gtk_menu_bar_size_allocate (GtkWidget     *widget,
 
   direction = __gtk_widget_get_direction (widget);
 
-  widget->allocation = *allocation;
+  gtk_widget_get_props (widget)->allocation = *allocation;
   if (__gtk_widget_get_realized (widget))
-    __gdk_window_move_resize (widget->window,
+    __gdk_window_move_resize (gtk_widget_get_props (widget)->window,
 			    allocation->x, allocation->y,
 			    allocation->width, allocation->height);
 
   __gtk_widget_style_get (widget, "internal-padding", &ipadding, NULL);
   
-  if (menu_shell->children)
+  if (gtk_menu_shell_get_props (menu_shell)->children)
     {
       child_allocation.x = (GTK_CONTAINER (menu_bar)->border_width +
 			    ipadding + 
@@ -379,8 +379,8 @@ gtk_menu_bar_size_allocate (GtkWidget     *widget,
       
       if (get_shadow_type (menu_bar) != GTK_SHADOW_NONE)
 	{
-	  child_allocation.x += widget->style->xthickness;
-	  child_allocation.y += widget->style->ythickness;
+	  child_allocation.x += gtk_widget_get_props (widget)->style->xthickness;
+	  child_allocation.y += gtk_widget_get_props (widget)->style->ythickness;
 	}
       
       if (priv->pack_direction == GTK_PACK_DIRECTION_LTR ||
@@ -391,7 +391,7 @@ gtk_menu_bar_size_allocate (GtkWidget     *widget,
 	  offset = child_allocation.x; 	/* Window edge to menubar start */
 	  ltr_x = child_allocation.x;
 	  
-	  children = menu_shell->children;
+	  children = gtk_menu_shell_get_props (menu_shell)->children;
 	  while (children)
 	    {
 	      gint toggle_size;          
@@ -441,7 +441,7 @@ gtk_menu_bar_size_allocate (GtkWidget     *widget,
 	  offset = child_allocation.y; 	/* Window edge to menubar start */
 	  ltr_y = child_allocation.y;
 	  
-	  children = menu_shell->children;
+	  children = gtk_menu_shell_get_props (menu_shell)->children;
 	  while (children)
 	    {
 	      gint toggle_size;          
@@ -499,14 +499,14 @@ gtk_menu_bar_paint (GtkWidget    *widget,
 
       border = GTK_CONTAINER (widget)->border_width;
       
-      __gtk_paint_box (widget->style,
-		     widget->window,
+      __gtk_paint_box (gtk_widget_get_props (widget)->style,
+		     gtk_widget_get_props (widget)->window,
                      __gtk_widget_get_state (widget),
                      get_shadow_type (GTK_MENU_BAR (widget)),
 		     area, widget, "menubar",
 		     border, border,
-		     widget->allocation.width - border * 2,
-                     widget->allocation.height - border * 2);
+		     gtk_widget_get_props (widget)->allocation.width - border * 2,
+                     gtk_widget_get_props (widget)->allocation.height - border * 2);
     }
 }
 
@@ -551,7 +551,7 @@ get_viewable_menu_bars (GtkWindow *window)
 	  if (!__gtk_widget_get_mapped (widget))
 	    viewable = FALSE;
 	  
-	  widget = widget->parent;
+	  gtk_widget_get_props (widget) = gtk_widget_get_props (widget)->parent;
 	}
 
       if (viewable)
@@ -708,8 +708,8 @@ ___gtk_menu_bar_cycle_focus (GtkMenuBar       *menubar,
 	  if (current && current->next)
 	    {
 	      GtkMenuShell *new_menushell = GTK_MENU_SHELL (current->next->data);
-	      if (new_menushell->children)
-		to_activate = new_menushell->children->data;
+	      if (gtk_menu_shell_get_props (new_menushell)->children)
+		to_activate = gtk_menu_shell_get_props (new_menushell)->children->data;
 	    }
 	}
 	  

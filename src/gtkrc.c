@@ -682,9 +682,9 @@ gtk_rc_color_hash_changed (GtkSettings  *settings,
 static GtkRcContext *
 gtk_rc_context_get (GtkSettings *settings)
 {
-  if (!settings->rc_context)
+  if (!gtk_settings_get_props (settings)->rc_context)
     {
-      GtkRcContext *context = settings->rc_context = g_new (GtkRcContext, 1);
+      GtkRcContext *context = gtk_settings_get_props (settings)->rc_context = g_new (GtkRcContext, 1);
 
       context->settings = settings;
       context->rc_style_ht = NULL;
@@ -723,10 +723,10 @@ gtk_rc_context_get (GtkSettings *settings)
 
       context->default_priority = GTK_PATH_PRIO_RC;
 
-      rc_contexts = g_slist_prepend (rc_contexts, settings->rc_context);
+      rc_contexts = g_slist_prepend (rc_contexts, gtk_settings_get_props (settings)->rc_context);
     }
 
-  return settings->rc_context;
+  return gtk_settings_get_props (settings)->rc_context;
 }
 
 static void 
@@ -759,7 +759,7 @@ ___gtk_rc_context_destroy (GtkSettings *settings)
 
   g_return_if_fail (GTK_IS_SETTINGS (settings));
 
-  context = settings->rc_context;
+  context = gtk_settings_get_props (settings)->rc_context;
   if (!context)
     return;
 
@@ -790,7 +790,7 @@ ___gtk_rc_context_destroy (GtkSettings *settings)
 
   g_free (context);
 
-  settings->rc_context = NULL;
+  gtk_settings_get_props (settings)->rc_context = NULL;
 }
 
 static void
@@ -1630,7 +1630,7 @@ gtk_rc_reset_widgets (GtkSettings *settings)
   
   for (list = toplevels; list; list = list->next)
     {
-      if (__gtk_widget_get_screen (list->data) == settings->screen)
+      if (__gtk_widget_get_screen (list->data) == gtk_settings_get_props (settings)->screen)
 	{
 	  __gtk_widget_reset_rc_styles (list->data);
 	}

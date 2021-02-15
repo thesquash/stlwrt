@@ -649,12 +649,12 @@ gtk_toolbar_init (GtkToolbar *toolbar)
   
   priv = GTK_TOOLBAR_GET_PRIVATE (toolbar);
   
-  toolbar->orientation = GTK_ORIENTATION_HORIZONTAL;
-  toolbar->style = DEFAULT_TOOLBAR_STYLE;
-  toolbar->icon_size = DEFAULT_ICON_SIZE;
+  gtk_toolbar_get_props (toolbar)->orientation = GTK_ORIENTATION_HORIZONTAL;
+  gtk_toolbar_get_props (toolbar)->style = DEFAULT_TOOLBAR_STYLE;
+  gtk_toolbar_get_props (toolbar)->icon_size = DEFAULT_ICON_SIZE;
   priv->animation = DEFAULT_ANIMATION_STATE;
-  toolbar->tooltips = gtk_tooltips_new ();
-  g_object_ref_sink (toolbar->tooltips);
+  gtk_toolbar_get_props (toolbar)->tooltips = gtk_tooltips_new ();
+  g_object_ref_sink (gtk_toolbar_get_props (toolbar)->tooltips);
   
   priv->arrow_button = __gtk_toggle_button_new ();
   g_signal_connect (priv->arrow_button, "button-press-event",
@@ -713,7 +713,7 @@ gtk_toolbar_set_property (GObject      *object,
       break;
     case PROP_ICON_SIZE_SET:
       if (g_value_get_boolean (value))
-	toolbar->icon_size_set = TRUE;
+	gtk_toolbar_get_props (toolbar)->icon_size_set = TRUE;
       else
 	__gtk_toolbar_unset_icon_size (toolbar);
       break;
@@ -735,10 +735,10 @@ gtk_toolbar_get_property (GObject    *object,
   switch (prop_id)
     {
     case PROP_ORIENTATION:
-      g_value_set_enum (value, toolbar->orientation);
+      g_value_set_enum (value, gtk_toolbar_get_props (toolbar)->orientation);
       break;
     case PROP_TOOLBAR_STYLE:
-      g_value_set_enum (value, toolbar->style);
+      g_value_set_enum (value, gtk_toolbar_get_props (toolbar)->style);
       break;
     case PROP_SHOW_ARROW:
       g_value_set_boolean (value, priv->show_arrow);
@@ -750,7 +750,7 @@ gtk_toolbar_get_property (GObject    *object,
       g_value_set_int (value, __gtk_toolbar_get_icon_size (toolbar));
       break;
     case PROP_ICON_SIZE_SET:
-      g_value_set_boolean (value, toolbar->icon_size_set);
+      g_value_set_boolean (value, gtk_toolbar_get_props (toolbar)->icon_size_set);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -796,10 +796,10 @@ gtk_toolbar_realize (GtkWidget *widget)
   
   attributes.wclass = GDK_INPUT_ONLY;
   attributes.window_type = GDK_WINDOW_CHILD;
-  attributes.x = widget->allocation.x + border_width;
-  attributes.y = widget->allocation.y + border_width;
-  attributes.width = widget->allocation.width - border_width * 2;
-  attributes.height = widget->allocation.height - border_width * 2;
+  attributes.x = gtk_widget_get_props (widget)->allocation.x + border_width;
+  attributes.y = gtk_widget_get_props (widget)->allocation.y + border_width;
+  attributes.width = gtk_widget_get_props (widget)->allocation.width - border_width * 2;
+  attributes.height = gtk_widget_get_props (widget)->allocation.height - border_width * 2;
   attributes.event_mask = __gtk_widget_get_events (widget);
   attributes.event_mask |= (GDK_BUTTON_PRESS_MASK |
 			    GDK_BUTTON_RELEASE_MASK |
@@ -808,9 +808,9 @@ gtk_toolbar_realize (GtkWidget *widget)
   
   attributes_mask = GDK_WA_X | GDK_WA_Y;
   
-  widget->window = __gtk_widget_get_parent_window (widget);
-  g_object_ref (widget->window);
-  widget->style = __gtk_style_attach (widget->style, widget->window);
+  gtk_widget_get_props (widget)->window = __gtk_widget_get_parent_window (gtk_widget_get_props (widget));
+  g_object_ref (gtk_widget_get_props (widget)->window);
+  gtk_widget_get_props (widget)->style = __gtk_style_attach (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window);
   
   priv->event_window = __gdk_window_new (__gtk_widget_get_parent_window (widget),
 				       &attributes, attributes_mask);
@@ -846,15 +846,15 @@ gtk_toolbar_expose (GtkWidget      *widget,
   
   if (__gtk_widget_is_drawable (widget))
     {
-      __gtk_paint_box (widget->style,
-		     widget->window,
+      __gtk_paint_box (gtk_widget_get_props (widget)->style,
+		     gtk_widget_get_props (widget)->window,
                      __gtk_widget_get_state (widget),
                      get_shadow_type (toolbar),
 		     &event->area, widget, "toolbar",
-		     border_width + widget->allocation.x,
-                     border_width + widget->allocation.y,
-		     widget->allocation.width - 2 * border_width,
-                     widget->allocation.height - 2 * border_width);
+		     border_width + gtk_widget_get_props (widget)->allocation.x,
+                     border_width + gtk_widget_get_props (widget)->allocation.y,
+		     gtk_widget_get_props (widget)->allocation.width - 2 * border_width,
+                     gtk_widget_get_props (widget)->allocation.height - 2 * border_width);
     }
   
   for (list = priv->content; list != NULL; list = list->next)
@@ -912,7 +912,7 @@ gtk_toolbar_size_request (GtkWidget      *widget,
 	}
     }
   
-  if (toolbar->orientation == GTK_ORIENTATION_HORIZONTAL)
+  if (gtk_toolbar_get_props (toolbar)->orientation == GTK_ORIENTATION_HORIZONTAL)
     homogeneous_size = max_homogeneous_child_width;
   else
     homogeneous_size = max_homogeneous_child_height;
@@ -936,7 +936,7 @@ gtk_toolbar_size_request (GtkWidget      *widget,
 	  
 	  toolbar_content_size_request (content, toolbar, &requisition);
 	  
-	  if (toolbar->orientation == GTK_ORIENTATION_HORIZONTAL)
+	  if (gtk_toolbar_get_props (toolbar)->orientation == GTK_ORIENTATION_HORIZONTAL)
 	    size = requisition.width;
 	  else
 	    size = requisition.height;
@@ -949,7 +949,7 @@ gtk_toolbar_size_request (GtkWidget      *widget,
     {
       __gtk_widget_size_request (priv->arrow_button, &arrow_requisition);
       
-      if (toolbar->orientation == GTK_ORIENTATION_HORIZONTAL)
+      if (gtk_toolbar_get_props (toolbar)->orientation == GTK_ORIENTATION_HORIZONTAL)
 	long_req = arrow_requisition.width;
       else
 	long_req = arrow_requisition.height;
@@ -967,7 +967,7 @@ gtk_toolbar_size_request (GtkWidget      *widget,
       long_req = pack_front_size;
     }
   
-  if (toolbar->orientation == GTK_ORIENTATION_HORIZONTAL)
+  if (gtk_toolbar_get_props (toolbar)->orientation == GTK_ORIENTATION_HORIZONTAL)
     {
       requisition->width = long_req;
       requisition->height = MAX (max_child_height, arrow_requisition.height);
@@ -986,12 +986,12 @@ gtk_toolbar_size_request (GtkWidget      *widget,
   
   if (get_shadow_type (toolbar) != GTK_SHADOW_NONE)
     {
-      requisition->width += 2 * widget->style->xthickness;
-      requisition->height += 2 * widget->style->ythickness;
+      requisition->width += 2 * gtk_widget_get_props (widget)->style->xthickness;
+      requisition->height += 2 * gtk_widget_get_props (widget)->style->ythickness;
     }
   
-  toolbar->button_maxw = max_homogeneous_child_width;
-  toolbar->button_maxh = max_homogeneous_child_height;
+  gtk_toolbar_get_props (toolbar)->button_maxw = max_homogeneous_child_width;
+  gtk_toolbar_get_props (toolbar)->button_maxh = max_homogeneous_child_height;
 }
 
 static gint
@@ -1074,17 +1074,17 @@ get_item_size (GtkToolbar     *toolbar,
   
   toolbar_content_size_request (content, toolbar, &requisition);
   
-  if (toolbar->orientation == GTK_ORIENTATION_HORIZONTAL)
+  if (gtk_toolbar_get_props (toolbar)->orientation == GTK_ORIENTATION_HORIZONTAL)
     {
       if (toolbar_content_is_homogeneous (content, toolbar))
-	return toolbar->button_maxw;
+	return gtk_toolbar_get_props (toolbar)->button_maxw;
       else
 	return requisition.width;
     }
   else
     {
       if (toolbar_content_is_homogeneous (content, toolbar))
-	return toolbar->button_maxh;
+	return gtk_toolbar_get_props (toolbar)->button_maxh;
       else
 	return requisition.height;
     }
@@ -1212,22 +1212,22 @@ gtk_toolbar_begin_sliding (GtkToolbar *toolbar)
     priv->idle_id = __gdk_threads_add_idle (slide_idle_handler, toolbar);
   
   rtl = (__gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL);
-  vertical = (toolbar->orientation == GTK_ORIENTATION_VERTICAL);
+  vertical = (gtk_toolbar_get_props (toolbar)->orientation == GTK_ORIENTATION_VERTICAL);
   border_width = get_internal_padding (toolbar) + GTK_CONTAINER (toolbar)->border_width;
   
   if (rtl)
     {
-      cur_x = widget->allocation.width - border_width - widget->style->xthickness;
-      cur_y = widget->allocation.height - border_width - widget->style->ythickness;
+      cur_x = gtk_widget_get_props (widget)->allocation.width - border_width - gtk_widget_get_props (widget)->style->xthickness;
+      cur_y = gtk_widget_get_props (widget)->allocation.height - border_width - gtk_widget_get_props (widget)->style->ythickness;
     }
   else
     {
-      cur_x = border_width + widget->style->xthickness;
-      cur_y = border_width + widget->style->ythickness;
+      cur_x = border_width + gtk_widget_get_props (widget)->style->xthickness;
+      cur_y = border_width + gtk_widget_get_props (widget)->style->ythickness;
     }
   
-  cur_x += widget->allocation.x;
-  cur_y += widget->allocation.y;
+  cur_x += gtk_widget_get_props (widget)->allocation.x;
+  cur_y += gtk_widget_get_props (widget)->allocation.y;
   
   for (list = priv->content; list != NULL; list = list->next)
     {
@@ -1240,7 +1240,7 @@ gtk_toolbar_begin_sliding (GtkToolbar *toolbar)
       toolbar_content_get_allocation (content, &item_allocation);
       
       if ((state == NORMAL &&
-	   rect_within (&item_allocation, &(widget->allocation))) ||
+	   rect_within (&item_allocation, &(gtk_widget_get_props (widget)->allocation))) ||
 	  state == OVERFLOWN)
 	{
 	  new_start_allocation = item_allocation;
@@ -1252,15 +1252,15 @@ gtk_toolbar_begin_sliding (GtkToolbar *toolbar)
 	  
 	  if (vertical)
 	    {
-	      new_start_allocation.width = widget->allocation.width -
-		2 * border_width - 2 * widget->style->xthickness;
+	      new_start_allocation.width = gtk_widget_get_props (widget)->allocation.width -
+		2 * border_width - 2 * gtk_widget_get_props (widget)->style->xthickness;
 	      new_start_allocation.height = 0;
 	    }
 	  else
 	    {
 	      new_start_allocation.width = 0;
-	      new_start_allocation.height = widget->allocation.height -
-		2 * border_width - 2 * widget->style->ythickness;
+	      new_start_allocation.height = gtk_widget_get_props (widget)->allocation.height -
+		2 * border_width - 2 * gtk_widget_get_props (widget)->style->ythickness;
 	    }
 	}
       
@@ -1321,7 +1321,7 @@ static void
 remove_item (GtkWidget *menu_item,
 	     gpointer   data)
 {
-  __gtk_container_remove (GTK_CONTAINER (menu_item->parent), menu_item);
+  __gtk_container_remove (GTK_CONTAINER (gtk_widget_get_props (menu_item)->parent), gtk_widget_get_props (menu_item));
 }
 
 static void
@@ -1432,10 +1432,10 @@ gtk_toolbar_size_allocate (GtkWidget     *widget,
   GtkShadowType shadow_type;
   
   size_changed = FALSE;
-  if (widget->allocation.x != allocation->x		||
-      widget->allocation.y != allocation->y		||
-      widget->allocation.width != allocation->width	||
-      widget->allocation.height != allocation->height)
+  if (gtk_widget_get_props (widget)->allocation.x != allocation->x		||
+      gtk_widget_get_props (widget)->allocation.y != allocation->y		||
+      gtk_widget_get_props (widget)->allocation.width != allocation->width	||
+      gtk_widget_get_props (widget)->allocation.height != allocation->height)
     {
       size_changed = TRUE;
     }
@@ -1443,7 +1443,7 @@ gtk_toolbar_size_allocate (GtkWidget     *widget,
   if (size_changed)
     gtk_toolbar_stop_sliding (toolbar);
   
-  widget->allocation = *allocation;
+  gtk_widget_get_props (widget)->allocation = *allocation;
   
   border_width = GTK_CONTAINER (toolbar)->border_width;
   
@@ -1463,7 +1463,7 @@ gtk_toolbar_size_allocate (GtkWidget     *widget,
   
   shadow_type = get_shadow_type (toolbar);
 
-  if (toolbar->orientation == GTK_ORIENTATION_HORIZONTAL)
+  if (gtk_toolbar_get_props (toolbar)->orientation == GTK_ORIENTATION_HORIZONTAL)
     {
       available_size = size = allocation->width - 2 * border_width;
       short_size = allocation->height - 2 * border_width;
@@ -1471,8 +1471,8 @@ gtk_toolbar_size_allocate (GtkWidget     *widget,
       
       if (shadow_type != GTK_SHADOW_NONE)
 	{
-	  available_size -= 2 * widget->style->xthickness;
-	  short_size -= 2 * widget->style->ythickness;
+	  available_size -= 2 * gtk_widget_get_props (widget)->style->xthickness;
+	  short_size -= 2 * gtk_widget_get_props (widget)->style->ythickness;
 	}
     }
   else
@@ -1483,8 +1483,8 @@ gtk_toolbar_size_allocate (GtkWidget     *widget,
       
       if (shadow_type != GTK_SHADOW_NONE)
 	{
-	  available_size -= 2 * widget->style->ythickness;
-	  short_size -= 2 * widget->style->xthickness;
+	  available_size -= 2 * gtk_widget_get_props (widget)->style->ythickness;
+	  short_size -= 2 * gtk_widget_get_props (widget)->style->xthickness;
 	}
     }
   
@@ -1632,7 +1632,7 @@ gtk_toolbar_size_allocate (GtkWidget     *widget,
   item_area.height = short_size;
 
   /* fix up allocations in the vertical or RTL cases */
-  if (toolbar->orientation == GTK_ORIENTATION_VERTICAL)
+  if (gtk_toolbar_get_props (toolbar)->orientation == GTK_ORIENTATION_VERTICAL)
     {
       for (i = 0; i < n_items; ++i)
 	fixup_allocation_for_vertical (&(allocations[i]));
@@ -1661,8 +1661,8 @@ gtk_toolbar_size_allocate (GtkWidget     *widget,
       
       if (shadow_type != GTK_SHADOW_NONE)
 	{
-	  allocations[i].x += widget->style->xthickness;
-	  allocations[i].y += widget->style->ythickness;
+	  allocations[i].x += gtk_widget_get_props (widget)->style->xthickness;
+	  allocations[i].y += gtk_widget_get_props (widget)->style->ythickness;
 	}
     }
   
@@ -1673,8 +1673,8 @@ gtk_toolbar_size_allocate (GtkWidget     *widget,
       
       if (shadow_type != GTK_SHADOW_NONE)
 	{
-	  arrow_allocation.x += widget->style->xthickness;
-	  arrow_allocation.y += widget->style->ythickness;
+	  arrow_allocation.x += gtk_widget_get_props (widget)->style->xthickness;
+	  arrow_allocation.y += gtk_widget_get_props (widget)->style->ythickness;
 	}
     }
 
@@ -1682,8 +1682,8 @@ gtk_toolbar_size_allocate (GtkWidget     *widget,
   item_area.y += allocation->y;
   if (shadow_type != GTK_SHADOW_NONE)
     {
-      item_area.x += widget->style->xthickness;
-      item_area.y += widget->style->ythickness;
+      item_area.x += gtk_widget_get_props (widget)->style->xthickness;
+      item_area.y += gtk_widget_get_props (widget)->style->ythickness;
     }
 
   /* did anything change? */
@@ -1812,7 +1812,7 @@ gtk_toolbar_style_set (GtkWidget *widget,
   priv->max_homogeneous_pixels = -1;
 
   if (__gtk_widget_get_realized (widget))
-    __gtk_style_set_background (widget->style, widget->window, widget->state);
+    __gtk_style_set_background (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, gtk_widget_get_props (widget)->state);
   
   if (prev_style)
     gtk_toolbar_update_button_relief (GTK_TOOLBAR (widget));
@@ -1907,8 +1907,8 @@ gtk_toolbar_move_focus (GtkWidget        *widget,
   gboolean try_focus = FALSE;
   GList *children;
 
-  if (container->focus_child &&
-      __gtk_widget_child_focus (container->focus_child, dir))
+  if (gtk_container_get_props (container)->focus_child &&
+      __gtk_widget_child_focus (gtk_container_get_props (container)->focus_child, dir))
     {
       return;
     }
@@ -1976,10 +1976,10 @@ toolbar_get_settings (GtkToolbar *toolbar)
 static void
 style_change_notify (GtkToolbar *toolbar)
 {
-  if (!toolbar->style_set)
+  if (!gtk_toolbar_get_props (toolbar)->style_set)
     {
       /* pretend it was set, then unset, thus reverting to new default */
-      toolbar->style_set = TRUE;
+      gtk_toolbar_get_props (toolbar)->style_set = TRUE;
       __gtk_toolbar_unset_style (toolbar);
     }
 }
@@ -1987,10 +1987,10 @@ style_change_notify (GtkToolbar *toolbar)
 static void
 icon_size_change_notify (GtkToolbar *toolbar)
 {
-  if (!toolbar->icon_size_set)
+  if (!gtk_toolbar_get_props (toolbar)->icon_size_set)
     {
       /* pretend it was set, then unset, thus reverting to new default */
-      toolbar->icon_size_set = TRUE;
+      gtk_toolbar_get_props (toolbar)->icon_size_set = TRUE;
       __gtk_toolbar_unset_icon_size (toolbar);
     }
 }
@@ -2097,7 +2097,7 @@ find_drop_index (GtkToolbar *toolbar,
   if (!interesting_content)
     return 0;
   
-  orientation = toolbar->orientation;
+  orientation = gtk_toolbar_get_props (toolbar)->orientation;
   direction = __gtk_widget_get_direction (GTK_WIDGET (toolbar));
   
   /* distance to first interesting item */
@@ -2331,7 +2331,7 @@ __gtk_toolbar_set_drop_highlight_item (GtkToolbar  *toolbar,
   
   restart_sliding = FALSE;
   toolbar_content_size_request (content, toolbar, &old_requisition);
-  if (toolbar->orientation == GTK_ORIENTATION_HORIZONTAL)
+  if (gtk_toolbar_get_props (toolbar)->orientation == GTK_ORIENTATION_HORIZONTAL)
     {
       requisition.height = -1;
       if (requisition.width != old_requisition.width)
@@ -2540,9 +2540,9 @@ gtk_toolbar_orientation_changed (GtkToolbar    *toolbar,
 				 GtkOrientation orientation)
 {
   GtkToolbarPrivate *priv = GTK_TOOLBAR_GET_PRIVATE (toolbar);
-  if (toolbar->orientation != orientation)
+  if (gtk_toolbar_get_props (toolbar)->orientation != orientation)
     {
-      toolbar->orientation = orientation;
+      gtk_toolbar_get_props (toolbar)->orientation = orientation;
       
       if (orientation == GTK_ORIENTATION_HORIZONTAL)
 	__gtk_arrow_set (GTK_ARROW (priv->arrow), GTK_ARROW_DOWN, GTK_SHADOW_NONE);
@@ -2560,9 +2560,9 @@ static void
 gtk_toolbar_real_style_changed (GtkToolbar     *toolbar,
 				GtkToolbarStyle style)
 {
-  if (toolbar->style != style)
+  if (gtk_toolbar_get_props (toolbar)->style != style)
     {
-      toolbar->style = style;
+      gtk_toolbar_get_props (toolbar)->style = style;
       
       gtk_toolbar_reconfigured (toolbar);
       
@@ -2596,7 +2596,7 @@ menu_position_func (GtkMenu  *menu,
   __gdk_screen_get_monitor_geometry (screen, monitor_num, &monitor);
 
   __gdk_window_get_origin (GTK_BUTTON (priv->arrow_button)->event_window, x, y);
-  if (toolbar->orientation == GTK_ORIENTATION_HORIZONTAL)
+  if (gtk_toolbar_get_props (toolbar)->orientation == GTK_ORIENTATION_HORIZONTAL)
     {
       if (__gtk_widget_get_direction (GTK_WIDGET (toolbar)) == GTK_TEXT_DIR_LTR) 
 	*x += priv->arrow_button->allocation.width - req.width;
@@ -2829,7 +2829,7 @@ __gtk_toolbar_get_orientation (GtkToolbar *toolbar)
 {
   g_return_val_if_fail (GTK_IS_TOOLBAR (toolbar), GTK_ORIENTATION_HORIZONTAL);
   
-  return toolbar->orientation;
+  return gtk_toolbar_get_props (toolbar)->orientation;
 }
 
 /**
@@ -2845,7 +2845,7 @@ __gtk_toolbar_set_style (GtkToolbar      *toolbar,
 {
   g_return_if_fail (GTK_IS_TOOLBAR (toolbar));
   
-  toolbar->style_set = TRUE;  
+  gtk_toolbar_get_props (toolbar)->style_set = TRUE;  
   g_signal_emit (toolbar, toolbar_signals[STYLE_CHANGED], 0, style);
 }
 
@@ -2863,7 +2863,7 @@ __gtk_toolbar_get_style (GtkToolbar *toolbar)
 {
   g_return_val_if_fail (GTK_IS_TOOLBAR (toolbar), DEFAULT_TOOLBAR_STYLE);
   
-  return toolbar->style;
+  return gtk_toolbar_get_props (toolbar)->style;
 }
 
 /**
@@ -2880,7 +2880,7 @@ __gtk_toolbar_unset_style (GtkToolbar *toolbar)
   
   g_return_if_fail (GTK_IS_TOOLBAR (toolbar));
   
-  if (toolbar->style_set)
+  if (gtk_toolbar_get_props (toolbar)->style_set)
     {
       GtkSettings *settings = toolbar_get_settings (toolbar);
       
@@ -2891,10 +2891,10 @@ __gtk_toolbar_unset_style (GtkToolbar *toolbar)
       else
 	style = DEFAULT_TOOLBAR_STYLE;
       
-      if (style != toolbar->style)
+      if (style != gtk_toolbar_get_props (toolbar)->style)
 	g_signal_emit (toolbar, toolbar_signals[STYLE_CHANGED], 0, style);
       
-      toolbar->style_set = FALSE;
+      gtk_toolbar_get_props (toolbar)->style_set = FALSE;
     }
 }
 
@@ -2915,9 +2915,9 @@ __gtk_toolbar_set_tooltips (GtkToolbar *toolbar,
   g_return_if_fail (GTK_IS_TOOLBAR (toolbar));
   
   if (enable)
-    gtk_tooltips_enable (toolbar->tooltips);
+    gtk_tooltips_enable (gtk_toolbar_get_props (toolbar)->tooltips);
   else
-    gtk_tooltips_disable (toolbar->tooltips);
+    gtk_tooltips_disable (gtk_toolbar_get_props (toolbar)->tooltips);
 
   g_object_notify (G_OBJECT (toolbar), "tooltips");
 }
@@ -3022,7 +3022,7 @@ __gtk_toolbar_get_icon_size (GtkToolbar *toolbar)
 {
   g_return_val_if_fail (GTK_IS_TOOLBAR (toolbar), DEFAULT_ICON_SIZE);
   
-  return toolbar->icon_size;
+  return gtk_toolbar_get_props (toolbar)->icon_size;
 }
 
 /**
@@ -3162,8 +3162,8 @@ gtk_toolbar_finalize (GObject *object)
   GtkToolbar *toolbar = GTK_TOOLBAR (object);
   GtkToolbarPrivate *priv = GTK_TOOLBAR_GET_PRIVATE (toolbar);
   
-  if (toolbar->tooltips)
-    g_object_unref (toolbar->tooltips);
+  if (gtk_toolbar_get_props (toolbar)->tooltips)
+    g_object_unref (gtk_toolbar_get_props (toolbar)->tooltips);
 
   for (list = priv->content; list != NULL; list = list->next)
     {
@@ -3173,7 +3173,7 @@ gtk_toolbar_finalize (GObject *object)
     }
   
   g_list_free (priv->content);
-  g_list_free (toolbar->children);
+  g_list_free (gtk_toolbar_get_props (toolbar)->children);
   
   g_timer_destroy (priv->timer);
 
@@ -3205,16 +3205,16 @@ __gtk_toolbar_set_icon_size (GtkToolbar  *toolbar,
   g_return_if_fail (GTK_IS_TOOLBAR (toolbar));
   g_return_if_fail (icon_size != GTK_ICON_SIZE_INVALID);
   
-  if (!toolbar->icon_size_set)
+  if (!gtk_toolbar_get_props (toolbar)->icon_size_set)
     {
-      toolbar->icon_size_set = TRUE;  
+      gtk_toolbar_get_props (toolbar)->icon_size_set = TRUE;  
       g_object_notify (G_OBJECT (toolbar), "icon-size-set");
     }
 
-  if (toolbar->icon_size == icon_size)
+  if (gtk_toolbar_get_props (toolbar)->icon_size == icon_size)
     return;
   
-  toolbar->icon_size = icon_size;
+  gtk_toolbar_get_props (toolbar)->icon_size = icon_size;
   g_object_notify (G_OBJECT (toolbar), "icon-size");
   
   gtk_toolbar_reconfigured (toolbar);
@@ -3236,7 +3236,7 @@ __gtk_toolbar_unset_icon_size (GtkToolbar *toolbar)
   
   g_return_if_fail (GTK_IS_TOOLBAR (toolbar));
   
-  if (toolbar->icon_size_set)
+  if (gtk_toolbar_get_props (toolbar)->icon_size_set)
     {
       GtkSettings *settings = toolbar_get_settings (toolbar);
       
@@ -3249,13 +3249,13 @@ __gtk_toolbar_unset_icon_size (GtkToolbar *toolbar)
       else
 	size = DEFAULT_ICON_SIZE;
       
-      if (size != toolbar->icon_size)
+      if (size != gtk_toolbar_get_props (toolbar)->icon_size)
 	{
 	  __gtk_toolbar_set_icon_size (toolbar, size);
 	  g_object_notify (G_OBJECT (toolbar), "icon-size");	  
 	}
       
-      toolbar->icon_size_set = FALSE;
+      gtk_toolbar_get_props (toolbar)->icon_size_set = FALSE;
       g_object_notify (G_OBJECT (toolbar), "icon-size-set");      
     }
 }
@@ -3297,7 +3297,7 @@ __gtk_toolbar_append_item (GtkToolbar    *toolbar,
 				     NULL, text,
 				     tooltip_text, tooltip_private_text,
 				     icon, callback, user_data,
-				     toolbar->num_children);
+				     gtk_toolbar_get_props (toolbar)->num_children);
 }
 
 /**
@@ -3426,7 +3426,7 @@ __gtk_toolbar_append_space (GtkToolbar *toolbar)
 			      NULL, NULL,
 			      NULL, NULL,
 			      NULL, NULL, NULL,
-			      toolbar->num_children);
+			      gtk_toolbar_get_props (toolbar)->num_children);
 }
 
 /**
@@ -3529,7 +3529,7 @@ __gtk_toolbar_append_widget (GtkToolbar  *toolbar,
 			      widget, NULL,
 			      tooltip_text, tooltip_private_text,
 			      NULL, NULL, NULL,
-			      toolbar->num_children);
+			      gtk_toolbar_get_props (toolbar)->num_children);
 }
 
 /**
@@ -3622,7 +3622,7 @@ __gtk_toolbar_append_element (GtkToolbar          *toolbar,
   return __gtk_toolbar_insert_element (toolbar, type, widget, text,
 				     tooltip_text, tooltip_private_text,
 				     icon, callback, user_data,
-				     toolbar->num_children);
+				     gtk_toolbar_get_props (toolbar)->num_children);
 }
 
 /**
@@ -3725,12 +3725,12 @@ set_child_packing_and_visibility(GtkToolbar      *toolbar,
   
   if (child->label)
     {
-      expand = (toolbar->style != GTK_TOOLBAR_BOTH);
+      expand = (gtk_toolbar_get_props (toolbar)->style != GTK_TOOLBAR_BOTH);
       
       __gtk_box_set_child_packing (GTK_BOX (box), child->label,
                                  expand, expand, 0, GTK_PACK_END);
       
-      if (toolbar->style != GTK_TOOLBAR_ICONS)
+      if (gtk_toolbar_get_props (toolbar)->style != GTK_TOOLBAR_ICONS)
         __gtk_widget_show (child->label);
       else
         __gtk_widget_hide (child->label);
@@ -3738,12 +3738,12 @@ set_child_packing_and_visibility(GtkToolbar      *toolbar,
   
   if (child->icon)
     {
-      expand = (toolbar->style != GTK_TOOLBAR_BOTH_HORIZ);
+      expand = (gtk_toolbar_get_props (toolbar)->style != GTK_TOOLBAR_BOTH_HORIZ);
       
       __gtk_box_set_child_packing (GTK_BOX (box), child->icon,
                                  expand, expand, 0, GTK_PACK_END);
       
-      if (toolbar->style != GTK_TOOLBAR_TEXT)
+      if (gtk_toolbar_get_props (toolbar)->style != GTK_TOOLBAR_TEXT)
         __gtk_widget_show (child->icon);
       else
         __gtk_widget_hide (child->icon);
@@ -3827,7 +3827,7 @@ internal_insert_element (GtkToolbar          *toolbar,
 			    callback, user_data);
 	}
       
-      if (toolbar->style == GTK_TOOLBAR_BOTH_HORIZ)
+      if (gtk_toolbar_get_props (toolbar)->style == GTK_TOOLBAR_BOTH_HORIZ)
 	box = __gtk_hbox_new (FALSE, 0);
       else
 	box = __gtk_vbox_new (FALSE, 0);
@@ -3841,7 +3841,7 @@ internal_insert_element (GtkToolbar          *toolbar,
 	  if (__gtk_stock_lookup (text, &stock_item))
 	    {
 	      if (!icon)
-		icon = __gtk_image_new_from_stock (text, toolbar->icon_size);
+		icon = __gtk_image_new_from_stock (text, gtk_toolbar_get_props (toolbar)->icon_size);
 	  
 	      text = free_me = ___gtk_toolbar_elide_underscores (stock_item.label);
 	    }
@@ -3870,7 +3870,7 @@ internal_insert_element (GtkToolbar          *toolbar,
   
   if ((type != GTK_TOOLBAR_CHILD_SPACE) && tooltip_text)
     {
-      gtk_tooltips_set_tip (toolbar->tooltips, child_widget,
+      gtk_tooltips_set_tip (gtk_toolbar_get_props (toolbar)->tooltips, child_widget,
 			    tooltip_text, tooltip_private_text);
     }
   
@@ -3939,7 +3939,7 @@ toolbar_content_new_tool_item (GtkToolbar  *toolbar,
   
   if (!is_placeholder)
     {
-      toolbar->num_children++;
+      gtk_toolbar_get_props (toolbar)->num_children++;
 
       gtk_toolbar_stop_sliding (toolbar);
     }
@@ -3990,10 +3990,10 @@ toolbar_content_new_compatibility (GtkToolbar          *toolbar,
     }
 
   priv->content = g_list_insert (priv->content, content, pos);
-  toolbar->children = g_list_insert (toolbar->children, child, pos);
+  gtk_toolbar_get_props (toolbar)->children = g_list_insert (gtk_toolbar_get_props (toolbar)->children, child, pos);
   priv->need_rebuild = TRUE;
   
-  toolbar->num_children++;
+  gtk_toolbar_get_props (toolbar)->num_children++;
   
   return content;
 }
@@ -4024,14 +4024,14 @@ toolbar_content_remove (ToolbarContent *content,
 	  g_object_unref (child->widget);
 	}
       
-      toolbar->children = g_list_remove (toolbar->children, child);
+      gtk_toolbar_get_props (toolbar)->children = g_list_remove (gtk_toolbar_get_props (toolbar)->children, child);
       break;
     }
 
   priv->content = g_list_remove (priv->content, content);
 
   if (!toolbar_content_is_placeholder (content))
-    toolbar->num_children--;
+    gtk_toolbar_get_props (toolbar)->num_children--;
 
   __gtk_widget_queue_resize (GTK_WIDGET (toolbar));
   priv->need_rebuild = TRUE;
@@ -4052,7 +4052,7 @@ calculate_max_homogeneous_pixels (GtkWidget *widget)
   
   context = __gtk_widget_get_pango_context (widget);
   metrics = pango_context_get_metrics (context,
-				       widget->style->font_desc,
+				       gtk_widget_get_props (widget)->style->font_desc,
 				       pango_context_get_language (context));
   char_width = pango_font_metrics_get_approximate_char_width (metrics);
   pango_font_metrics_unref (metrics);
@@ -4111,11 +4111,11 @@ toolbar_content_visible (ToolbarContent *content,
       if (!__gtk_widget_get_visible (GTK_WIDGET (item)))
 	return FALSE;
       
-      if (toolbar->orientation == GTK_ORIENTATION_HORIZONTAL &&
+      if (gtk_toolbar_get_props (toolbar)->orientation == GTK_ORIENTATION_HORIZONTAL &&
 	  __gtk_tool_item_get_visible_horizontal (item))
 	return TRUE;
       
-      if ((toolbar->orientation == GTK_ORIENTATION_VERTICAL &&
+      if ((gtk_toolbar_get_props (toolbar)->orientation == GTK_ORIENTATION_VERTICAL &&
 	   __gtk_tool_item_get_visible_vertical (item)))
 	return TRUE;
       
@@ -4164,7 +4164,7 @@ toolbar_content_size_request (ToolbarContent *content,
 	}
       else
 	{
-	  if (toolbar->orientation == GTK_ORIENTATION_HORIZONTAL)
+	  if (gtk_toolbar_get_props (toolbar)->orientation == GTK_ORIENTATION_HORIZONTAL)
 	    {
 	      requisition->width = space_size;
 	      requisition->height = 0;
@@ -4206,8 +4206,8 @@ toolbar_content_is_homogeneous (ToolbarContent *content,
 	!GTK_IS_SEPARATOR_TOOL_ITEM (content->u.tool_item.item);
       
       if (__gtk_tool_item_get_is_important (content->u.tool_item.item) &&
-	  toolbar->style == GTK_TOOLBAR_BOTH_HORIZ &&
-	  toolbar->orientation == GTK_ORIENTATION_HORIZONTAL)
+	  gtk_toolbar_get_props (toolbar)->style == GTK_TOOLBAR_BOTH_HORIZ &&
+	  gtk_toolbar_get_props (toolbar)->orientation == GTK_ORIENTATION_HORIZONTAL)
 	{
 	  result = FALSE;
 	}
@@ -4319,7 +4319,7 @@ toolbar_content_get_allocation (ToolbarContent *content,
       if (child->type == GTK_TOOLBAR_CHILD_SPACE)
 	*allocation = content->u.compatibility.space_allocation;
       else
-	*allocation = child->widget->allocation;
+	*allocation = child->gtk_widget_get_props (widget)->allocation;
       break;
 
     default:
@@ -4869,7 +4869,7 @@ ___gtk_toolbar_paint_space_line (GtkWidget           *widget,
 
   g_return_if_fail (GTK_IS_WIDGET (widget));
   
-  orientation = toolbar? toolbar->orientation : GTK_ORIENTATION_HORIZONTAL;
+  orientation = gtk_toolbar_get_props (toolbar)? gtk_toolbar_get_props (toolbar)->orientation : GTK_ORIENTATION_HORIZONTAL;
 
   if (orientation == GTK_ORIENTATION_HORIZONTAL)
     {
@@ -4882,7 +4882,7 @@ ___gtk_toolbar_paint_space_line (GtkWidget           *widget,
                             NULL);
 
       if (wide_separators)
-        __gtk_paint_box (widget->style, widget->window,
+        __gtk_paint_box (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window,
                        __gtk_widget_get_state (widget), GTK_SHADOW_ETCHED_OUT,
                        area, widget, "vseparator",
                        allocation->x + (allocation->width - separator_width) / 2,
@@ -4890,12 +4890,12 @@ ___gtk_toolbar_paint_space_line (GtkWidget           *widget,
                        separator_width,
                        allocation->height * (end_fraction - start_fraction));
       else
-        __gtk_paint_vline (widget->style, widget->window,
+        __gtk_paint_vline (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window,
                          __gtk_widget_get_state (widget), area, widget,
                          "toolbar",
                          allocation->y + allocation->height * start_fraction,
                          allocation->y + allocation->height * end_fraction,
-                         allocation->x + (allocation->width - widget->style->xthickness) / 2);
+                         allocation->x + (allocation->width - gtk_widget_get_props (widget)->style->xthickness) / 2);
     }
   else
     {
@@ -4908,7 +4908,7 @@ ___gtk_toolbar_paint_space_line (GtkWidget           *widget,
                             NULL);
 
       if (wide_separators)
-        __gtk_paint_box (widget->style, widget->window,
+        __gtk_paint_box (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window,
                        __gtk_widget_get_state (widget), GTK_SHADOW_ETCHED_OUT,
                        area, widget, "hseparator",
                        allocation->x + allocation->width * start_fraction,
@@ -4916,12 +4916,12 @@ ___gtk_toolbar_paint_space_line (GtkWidget           *widget,
                        allocation->width * (end_fraction - start_fraction),
                        separator_height);
       else
-        __gtk_paint_hline (widget->style, widget->window,
+        __gtk_paint_hline (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window,
                          __gtk_widget_get_state (widget), area, widget,
                          "toolbar",
                          allocation->x + allocation->width * start_fraction,
                          allocation->x + allocation->width * end_fraction,
-                         allocation->y + (allocation->height - widget->style->ythickness) / 2);
+                         allocation->y + (allocation->height - gtk_widget_get_props (widget)->style->ythickness) / 2);
     }
 }
 

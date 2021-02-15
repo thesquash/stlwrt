@@ -272,8 +272,8 @@ gtk_arrow_expose (GtkWidget      *widget,
 
       __gtk_widget_style_get (widget, "arrow-scaling", &arrow_scaling, NULL);
 
-      width = widget->allocation.width - misc_props->xpad * 2;
-      height = widget->allocation.height - misc_props->ypad * 2;
+      width = gtk_widget_get_props (widget)->allocation.width - misc_props->xpad * 2;
+      height = gtk_widget_get_props (widget)->allocation.height - misc_props->ypad * 2;
       extent = MIN (width, height) * arrow_scaling;
       effective_arrow_type = arrow_props->arrow_type;
 
@@ -288,14 +288,14 @@ gtk_arrow_expose (GtkWidget      *widget,
 	    effective_arrow_type = GTK_ARROW_LEFT;
 	}
 
-      x = floor (widget->allocation.x + misc_props->xpad
-		 + ((widget->allocation.width - extent) * xalign));
-      y = floor (widget->allocation.y + misc_props->ypad
-		 + ((widget->allocation.height - extent) * misc_props->yalign));
+      x = floor (gtk_widget_get_props (widget)->allocation.x + misc_props->xpad
+		 + ((gtk_widget_get_props (widget)->allocation.width - extent) * xalign));
+      y = floor (gtk_widget_get_props (widget)->allocation.y + misc_props->ypad
+		 + ((gtk_widget_get_props (widget)->allocation.height - extent) * misc_props->yalign));
 
       shadow_type = arrow_props->shadow_type;
 
-      if (widget->state == GTK_STATE_ACTIVE)
+      if (gtk_widget_get_props (widget)->state == GTK_STATE_ACTIVE)
 	{
           if (shadow_type == GTK_SHADOW_IN)
             shadow_type = GTK_SHADOW_OUT;
@@ -307,8 +307,8 @@ gtk_arrow_expose (GtkWidget      *widget,
             shadow_type = GTK_SHADOW_ETCHED_IN;
 	}
 
-      __gtk_paint_arrow (widget->style, widget->window,
-		       widget->state, shadow_type,
+      __gtk_paint_arrow (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window,
+		       gtk_widget_get_props (widget)->state, shadow_type,
 		       &event->area, widget, "arrow",
 		       effective_arrow_type, TRUE,
 		       x, y, extent, extent);

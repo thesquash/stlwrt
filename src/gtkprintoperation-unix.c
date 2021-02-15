@@ -604,18 +604,18 @@ finish_print (PrintResponseData *rdata,
 	    g_signal_connect (job, "status-changed",
 			      G_CALLBACK (job_status_changed_cb), op);
 	  
-          priv->print_pages = job->print_pages;
-          priv->page_ranges = job->page_ranges;
-          priv->num_page_ranges = job->num_page_ranges;
+          priv->print_pages = gtk_print_job_get_props (job)->print_pages;
+          priv->page_ranges = gtk_print_job_get_props (job)->page_ranges;
+          priv->num_page_ranges = gtk_print_job_get_props (job)->num_page_ranges;
 	  
-          priv->manual_num_copies = job->num_copies;
-          priv->manual_collation = job->collate;
-          priv->manual_reverse = job->reverse;
-          priv->manual_page_set = job->page_set;
-          priv->manual_scale = job->scale;
-          priv->manual_orientation = job->rotate_to_orientation;
-          priv->manual_number_up = job->number_up;
-          priv->manual_number_up_layout = job->number_up_layout;
+          priv->manual_num_copies = gtk_print_job_get_props (job)->num_copies;
+          priv->manual_collation = gtk_print_job_get_props (job)->collate;
+          priv->manual_reverse = gtk_print_job_get_props (job)->reverse;
+          priv->manual_page_set = gtk_print_job_get_props (job)->page_set;
+          priv->manual_scale = gtk_print_job_get_props (job)->scale;
+          priv->manual_orientation = gtk_print_job_get_props (job)->rotate_to_orientation;
+          priv->manual_number_up = gtk_print_job_get_props (job)->number_up;
+          priv->manual_number_up_layout = gtk_print_job_get_props (job)->number_up_layout;
         }
     } 
  out:

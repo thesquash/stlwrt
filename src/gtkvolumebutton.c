@@ -90,17 +90,17 @@ gtk_volume_button_init (GtkVolumeButton *button)
 			      1,
 			      _("Adjusts the volume"));
 
-  atk_object_set_name (__gtk_widget_get_accessible (sbutton->minus_button),
+  atk_object_set_name (__gtk_widget_get_accessible (gtk_scale_button_get_props (sbutton)->minus_button),
 		       _("Volume Down"));
-  atk_object_set_description (__gtk_widget_get_accessible (sbutton->minus_button),
+  atk_object_set_description (__gtk_widget_get_accessible (gtk_scale_button_get_props (sbutton)->minus_button),
 		       _("Decreases the volume"));
-  __gtk_widget_set_tooltip_text (sbutton->minus_button, _("Volume Down"));
+  __gtk_widget_set_tooltip_text (gtk_scale_button_get_props (sbutton)->minus_button, _("Volume Down"));
 
-  atk_object_set_name (__gtk_widget_get_accessible (sbutton->plus_button),
+  atk_object_set_name (__gtk_widget_get_accessible (gtk_scale_button_get_props (sbutton)->plus_button),
 		       _("Volume Up"));
-  atk_object_set_description (__gtk_widget_get_accessible (sbutton->plus_button),
+  atk_object_set_description (__gtk_widget_get_accessible (gtk_scale_button_get_props (sbutton)->plus_button),
 		       _("Increases the volume"));
-  __gtk_widget_set_tooltip_text (sbutton->plus_button, _("Volume Up"));
+  __gtk_widget_set_tooltip_text (gtk_scale_button_get_props (sbutton)->plus_button, _("Volume Up"));
 
   __gtk_scale_button_set_icons (sbutton, icons);
 
@@ -155,11 +155,11 @@ cb_query_tooltip (GtkWidget  *button,
   adj = __gtk_scale_button_get_adjustment (scale_button);
   val = __gtk_scale_button_get_value (scale_button);
 
-  if (val < (adj->lower + EPSILON))
+  if (val < (gtk_adjustment_get_props (adj)->lower + EPSILON))
     {
       str = g_strdup (_("Muted"));
     }
-  else if (val >= (adj->upper - EPSILON))
+  else if (val >= (gtk_adjustment_get_props (adj)->upper - EPSILON))
     {
       str = g_strdup (_("Full Volume"));
     }
@@ -167,7 +167,7 @@ cb_query_tooltip (GtkWidget  *button,
     {
       int percent;
 
-      percent = (int) (100. * val / (adj->upper - adj->lower) + .5);
+      percent = (int) (100. * val / (gtk_adjustment_get_props (adj)->upper - gtk_adjustment_get_props (adj)->lower) + .5);
 
       /* Translators: this is the percentage of the current volume,
        * as used in the tooltip, eg. "49 %".

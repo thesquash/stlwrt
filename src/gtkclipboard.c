@@ -410,40 +410,40 @@ get_clipboard_widget (GdkDisplay *display)
 static guint32
 clipboard_get_timestamp (GtkClipboard *clipboard)
 {
-  GtkWidget *clipboard_widget = get_clipboard_widget (clipboard->display);
+  GtkWidget *clipboard_widget = get_clipboard_widget (gtk_widget_get_props (clipboard)->display);
   guint32 timestamp = __gtk_get_current_event_time ();
 
   if (timestamp == GDK_CURRENT_TIME)
     {
 #ifdef GDK_WINDOWING_X11
-      timestamp = __gdk_x11_get_server_time (clipboard_widget->window);
+      timestamp = __gdk_x11_get_server_time (gtk_widget_get_props (clipboard_widget)->window);
 #elif defined GDK_WINDOWING_WIN32
       timestamp = GetMessageTime ();
 #endif
     }
   else
     {
-      if (clipboard->timestamp != GDK_CURRENT_TIME)
+      if (gtk_widget_get_props (clipboard)->timestamp != GDK_CURRENT_TIME)
 	{
-	  /* Check to see if clipboard->timestamp is newer than
+	  /* Check to see if gtk_widget_get_props (clipboard)->timestamp is newer than
 	   * timestamp, accounting for wraparound.
 	   */
 
 	  guint32 max = timestamp + 0x80000000;
 
 	  if ((max > timestamp &&
-	       (clipboard->timestamp > timestamp &&
-		clipboard->timestamp <= max)) ||
+	       (gtk_widget_get_props (clipboard)->timestamp > timestamp &&
+		gtk_widget_get_props (clipboard)->timestamp <= max)) ||
 	      (max <= timestamp &&
-	       (clipboard->timestamp > timestamp ||
-		clipboard->timestamp <= max)))
+	       (gtk_widget_get_props (clipboard)->timestamp > timestamp ||
+		gtk_widget_get_props (clipboard)->timestamp <= max)))
 	    {
-	      timestamp = clipboard->timestamp;
+	      timestamp = gtk_widget_get_props (clipboard)->timestamp;
 	    }
 	}
     }
 
-  clipboard->timestamp = timestamp;
+  gtk_widget_get_props (clipboard)->timestamp = timestamp;
 
   return timestamp;
 }
@@ -506,34 +506,34 @@ gtk_clipboard_set_contents (GtkClipboard         *clipboard,
 			    gpointer              user_data,
 			    gboolean              have_owner)
 {
-  GtkWidget *clipboard_widget = get_clipboard_widget (clipboard->display);
+  GtkWidget *clipboard_widget = get_clipboard_widget (gtk_widget_get_props (clipboard)->display);
 
-  if (__gtk_selection_owner_set_for_display (clipboard->display,
+  if (__gtk_selection_owner_set_for_display (gtk_widget_get_props (clipboard)->display,
 					   clipboard_widget,
-					   clipboard->selection,
+					   gtk_widget_get_props (clipboard)->selection,
 					   clipboard_get_timestamp (clipboard)))
     {
-      clipboard->have_selection = TRUE;
+      gtk_widget_get_props (clipboard)->have_selection = TRUE;
 
-      if (clipboard->n_cached_targets != -1)
+      if (gtk_widget_get_props (clipboard)->n_cached_targets != -1)
         {
-          g_free (clipboard->cached_targets);
-	  clipboard->cached_targets = NULL;
-          clipboard->n_cached_targets = -1;
+          g_free (gtk_widget_get_props (clipboard)->cached_targets);
+	  gtk_widget_get_props (clipboard)->cached_targets = NULL;
+          gtk_widget_get_props (clipboard)->n_cached_targets = -1;
         }
 
-      if (!(clipboard->have_owner && have_owner) ||
-	  clipboard->user_data != user_data)
+      if (!(gtk_widget_get_props (clipboard)->have_owner && have_owner) ||
+	  gtk_widget_get_props (clipboard)->user_data != user_data)
 	{
 	  clipboard_unset (clipboard);
 
-	  if (clipboard->get_func)
+	  if (gtk_widget_get_props (clipboard)->get_func)
 	    {
 	      /* Calling unset() caused the clipboard contents to be reset!
 	       * Avoid leaking and return 
 	       */
-	      if (!(clipboard->have_owner && have_owner) ||
-		  clipboard->user_data != user_data)
+	      if (!(gtk_widget_get_props (clipboard)->have_owner && have_owner) ||
+		  gtk_widget_get_props (clipboard)->user_data != user_data)
 		{
 		  (*clear_func) (clipboard, user_data);
 		  return FALSE;
@@ -543,19 +543,19 @@ gtk_clipboard_set_contents (GtkClipboard         *clipboard,
 	    }
 	  else
 	    {
-	      clipboard->user_data = user_data;
-	      clipboard->have_owner = have_owner;
+	      gtk_widget_get_props (clipboard)->user_data = user_data;
+	      gtk_widget_get_props (clipboard)->have_owner = have_owner;
 	      if (have_owner)
 		clipboard_add_owner_notify (clipboard);
 	    }
 	  
  	}
 
-      clipboard->get_func = get_func;
-      clipboard->clear_func = clear_func;
+      gtk_widget_get_props (clipboard)->get_func = get_func;
+      gtk_widget_get_props (clipboard)->clear_func = clear_func;
 
-      __gtk_selection_clear_targets (clipboard_widget, clipboard->selection);
-      __gtk_selection_add_targets (clipboard_widget, clipboard->selection,
+      __gtk_selection_clear_targets (clipboard_widget, gtk_widget_get_props (clipboard)->selection);
+      __gtk_selection_add_targets (clipboard_widget, gtk_widget_get_props (clipboard)->selection,
 				 targets, n_targets);
 
       return TRUE;
@@ -903,10 +903,10 @@ __gtk_clipboard_request_contents (GtkClipboard            *clipboard,
   g_return_if_fail (target != GDK_NONE);
   g_return_if_fail (callback != NULL);
   
-  clipboard_widget = get_clipboard_widget (clipboard->display);
+  clipboard_widget = get_clipboard_widget (gtk_widget_get_props (clipboard)->display);
 
   if (get_request_contents_info (clipboard_widget))
-    widget = make_clipboard_widget (clipboard->display, FALSE);
+    widget = make_clipboard_widget (gtk_widget_get_props (clipboard)->display, FALSE);
   else
     widget = clipboard_widget;
 
@@ -916,7 +916,7 @@ __gtk_clipboard_request_contents (GtkClipboard            *clipboard,
 
   set_request_contents_info (widget, info);
 
-  __gtk_selection_convert (widget, clipboard->selection, target,
+  __gtk_selection_convert (widget, gtk_widget_get_props (clipboard)->selection, target,
 			 clipboard_get_timestamp (clipboard));
 }
 
@@ -1959,32 +1959,32 @@ __gtk_clipboard_set_can_store (GtkClipboard         *clipboard,
   g_return_if_fail (GTK_IS_CLIPBOARD (clipboard));
   g_return_if_fail (n_targets >= 0);
 
-  if (clipboard->selection != GDK_SELECTION_CLIPBOARD)
+  if (gtk_widget_get_props (clipboard)->selection != GDK_SELECTION_CLIPBOARD)
     return;
   
-  g_free (clipboard->storable_targets);
+  g_free (gtk_widget_get_props (clipboard)->storable_targets);
   
-  clipboard_widget = get_clipboard_widget (clipboard->display);
+  clipboard_widget = get_clipboard_widget (gtk_widget_get_props (clipboard)->display);
 
   /* n_storable_targets being -1 means that
    * __gtk_clipboard_set_can_store hasn't been called since the
    * clipboard owner changed. We only want to add SAVE_TARGETS and 
    * ref the owner once , so we do that here
    */  
-  if (clipboard->n_storable_targets == -1)
+  if (gtk_widget_get_props (clipboard)->n_storable_targets == -1)
     {
-      __gtk_selection_add_targets (clipboard_widget, clipboard->selection,
+      __gtk_selection_add_targets (clipboard_widget, gtk_widget_get_props (clipboard)->selection,
 				 save_targets, 1);
 
       /* Ref the owner so it won't go away */
-      if (clipboard->have_owner)
-	g_object_ref (clipboard->user_data);
+      if (gtk_widget_get_props (clipboard)->have_owner)
+	g_object_ref (gtk_widget_get_props (clipboard)->user_data);
     }
   
-  clipboard->n_storable_targets = n_targets;
-  clipboard->storable_targets = g_new (GdkAtom, n_targets);
+  gtk_widget_get_props (clipboard)->n_storable_targets = n_targets;
+  gtk_widget_get_props (clipboard)->storable_targets = g_new (GdkAtom, n_targets);
   for (i = 0; i < n_targets; i++)
-    clipboard->storable_targets[i] = __gdk_atom_intern (targets[i].target, FALSE);
+    gtk_widget_get_props (clipboard)->storable_targets[i] = __gdk_atom_intern (targets[i].target, FALSE);
 }
 
 static gboolean
@@ -2015,47 +2015,47 @@ __gtk_clipboard_store (GtkClipboard *clipboard)
 
   g_return_if_fail (GTK_IS_CLIPBOARD (clipboard));
 
-  if (clipboard->n_storable_targets < 0)
+  if (gtk_widget_get_props (clipboard)->n_storable_targets < 0)
     return;
   
-  if (!__gdk_display_supports_clipboard_persistence (clipboard->display))
+  if (!__gdk_display_supports_clipboard_persistence (gtk_widget_get_props (clipboard)->display))
     return;
 
   g_object_ref (clipboard);
 
-  clipboard_widget = get_clipboard_widget (clipboard->display);
-  clipboard->notify_signal_id = g_signal_connect (clipboard_widget,
+  clipboard_widget = get_clipboard_widget (gtk_widget_get_props (clipboard)->display);
+  gtk_widget_get_props (clipboard)->notify_signal_id = g_signal_connect (clipboard_widget,
 						  "selection-notify-event",
 						  G_CALLBACK (gtk_clipboard_selection_notify),
 						  clipboard);
 
-  __gdk_display_store_clipboard (clipboard->display,
-			       clipboard_widget->window,
+  __gdk_display_store_clipboard (gtk_widget_get_props (clipboard)->display,
+			       gtk_widget_get_props (clipboard_widget)->window,
 			       clipboard_get_timestamp (clipboard),
-			       clipboard->storable_targets,
-			       clipboard->n_storable_targets);
+			       gtk_widget_get_props (clipboard)->storable_targets,
+			       gtk_widget_get_props (clipboard)->n_storable_targets);
 
-  clipboard->storing_selection = TRUE;
+  gtk_widget_get_props (clipboard)->storing_selection = TRUE;
 
-  clipboard->store_loop = g_main_loop_new (NULL, TRUE);
-  clipboard->store_timeout = g_timeout_add_seconds (10, (GSourceFunc) __gtk_clipboard_store_timeout, clipboard);
+  gtk_widget_get_props (clipboard)->store_loop = g_main_loop_new (NULL, TRUE);
+  gtk_widget_get_props (clipboard)->store_timeout = g_timeout_add_seconds (10, (GSourceFunc) __gtk_clipboard_store_timeout, gtk_widget_get_props (clipboard));
 
-  if (g_main_loop_is_running (clipboard->store_loop))
+  if (g_main_loop_is_running (gtk_widget_get_props (clipboard)->store_loop))
     {
       GDK_THREADS_LEAVE ();
-      g_main_loop_run (clipboard->store_loop);
+      g_main_loop_run (gtk_widget_get_props (clipboard)->store_loop);
       GDK_THREADS_ENTER ();
     }
   
-  g_main_loop_unref (clipboard->store_loop);
-  clipboard->store_loop = NULL;
+  g_main_loop_unref (gtk_widget_get_props (clipboard)->store_loop);
+  gtk_widget_get_props (clipboard)->store_loop = NULL;
   
-  g_source_remove (clipboard->store_timeout);
-  clipboard->store_timeout = 0;
-  g_signal_handler_disconnect (clipboard_widget, clipboard->notify_signal_id);
-  clipboard->notify_signal_id = 0;
+  g_source_remove (gtk_widget_get_props (clipboard)->store_timeout);
+  gtk_widget_get_props (clipboard)->store_timeout = 0;
+  g_signal_handler_disconnect (clipboard_widget, gtk_widget_get_props (clipboard)->notify_signal_id);
+  gtk_widget_get_props (clipboard)->notify_signal_id = 0;
   
-  clipboard->storing_selection = FALSE;
+  gtk_widget_get_props (clipboard)->storing_selection = FALSE;
 
   g_object_unref (clipboard);
 }

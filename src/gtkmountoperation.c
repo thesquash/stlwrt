@@ -484,9 +484,9 @@ gtk_mount_operation_ask_password (GMountOperation   *mount_op,
   /* Set the dialog up with HIG properties */
   __gtk_dialog_set_has_separator (dialog, FALSE);
   __gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-  __gtk_box_set_spacing (GTK_BOX (dialog->vbox), 2); /* 2 * 5 + 2 = 12 */
-  __gtk_container_set_border_width (GTK_CONTAINER (dialog->action_area), 5);
-  __gtk_box_set_spacing (GTK_BOX (dialog->action_area), 6);
+  __gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_props (dialog)->vbox), 2); /* 2 * 5 + 2 = 12 */
+  __gtk_container_set_border_width (GTK_CONTAINER (gtk_dialog_get_props (dialog)->action_area), 5);
+  __gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_props (dialog)->action_area), 6);
 
   __gtk_window_set_resizable (window, FALSE);
   __gtk_window_set_title (window, "");
@@ -506,7 +506,7 @@ gtk_mount_operation_ask_password (GMountOperation   *mount_op,
   /* Build contents */
   hbox = __gtk_hbox_new (FALSE, 12);
   __gtk_container_set_border_width (GTK_CONTAINER (hbox), 5);
-  __gtk_box_pack_start (GTK_BOX (dialog->vbox), hbox, TRUE, TRUE, 0);
+  __gtk_box_pack_start (GTK_BOX (gtk_dialog_get_props (dialog)->vbox), hbox, TRUE, TRUE, 0);
 
   icon = __gtk_image_new_from_stock (GTK_STOCK_DIALOG_AUTHENTICATION,
                                    GTK_ICON_SIZE_DIALOG);

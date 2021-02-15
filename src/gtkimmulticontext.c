@@ -110,12 +110,12 @@ gtk_im_multicontext_class_init (GtkIMMulticontextClass *class)
 static void
 gtk_im_multicontext_init (GtkIMMulticontext *multicontext)
 {
-  multicontext->slave = NULL;
+  gtk_im_multicontext_get_props (multicontext)->slave = NULL;
   
-  multicontext->priv = G_TYPE_INSTANCE_GET_PRIVATE (multicontext, GTK_TYPE_IM_MULTICONTEXT, GtkIMMulticontextPrivate);
-  multicontext->priv->use_preedit = TRUE;
-  multicontext->priv->have_cursor_location = FALSE;
-  multicontext->priv->focus_in = FALSE;
+  gtk_im_multicontext_get_props (multicontext)->priv = G_TYPE_INSTANCE_GET_PRIVATE (gtk_im_multicontext_get_props (multicontext), GTK_TYPE_IM_MULTICONTEXT, GtkIMMulticontextPrivate);
+  gtk_im_multicontext_get_props (multicontext)->priv->use_preedit = TRUE;
+  gtk_im_multicontext_get_props (multicontext)->priv->have_cursor_location = FALSE;
+  gtk_im_multicontext_get_props (multicontext)->priv->focus_in = FALSE;
 }
 
 /**
@@ -137,8 +137,8 @@ gtk_im_multicontext_finalize (GObject *object)
   GtkIMMulticontext *multicontext = GTK_IM_MULTICONTEXT (object);
   
   gtk_im_multicontext_set_slave (multicontext, NULL, TRUE);
-  g_free (multicontext->context_id);
-  g_free (multicontext->priv->context_id);
+  g_free (gtk_im_multicontext_get_props (multicontext)->context_id);
+  g_free (gtk_im_multicontext_get_props (multicontext)->priv->context_id);
 
   G_OBJECT_CLASS (gtk_im_multicontext_parent_class)->finalize (object);
 }
@@ -148,56 +148,56 @@ gtk_im_multicontext_set_slave (GtkIMMulticontext *multicontext,
 			       GtkIMContext      *slave,
 			       gboolean           finalizing)
 {
-  GtkIMMulticontextPrivate *priv = multicontext->priv;
+  GtkIMMulticontextPrivate *priv = gtk_im_multicontext_get_props (multicontext)->priv;
   gboolean need_preedit_changed = FALSE;
   
-  if (multicontext->slave)
+  if (gtk_im_multicontext_get_props (multicontext)->slave)
     {
       if (!finalizing)
-	__gtk_im_context_reset (multicontext->slave);
+	__gtk_im_context_reset (gtk_im_multicontext_get_props (multicontext)->slave);
       
-      g_signal_handlers_disconnect_by_func (multicontext->slave,
+      g_signal_handlers_disconnect_by_func (gtk_im_multicontext_get_props (multicontext)->slave,
 					    gtk_im_multicontext_preedit_start_cb,
 					    multicontext);
-      g_signal_handlers_disconnect_by_func (multicontext->slave,
+      g_signal_handlers_disconnect_by_func (gtk_im_multicontext_get_props (multicontext)->slave,
 					    gtk_im_multicontext_preedit_end_cb,
 					    multicontext);
-      g_signal_handlers_disconnect_by_func (multicontext->slave,
+      g_signal_handlers_disconnect_by_func (gtk_im_multicontext_get_props (multicontext)->slave,
 					    gtk_im_multicontext_preedit_changed_cb,
 					    multicontext);
-      g_signal_handlers_disconnect_by_func (multicontext->slave,
+      g_signal_handlers_disconnect_by_func (gtk_im_multicontext_get_props (multicontext)->slave,
 					    gtk_im_multicontext_commit_cb,
 					    multicontext);
 
-      g_object_unref (multicontext->slave);
-      multicontext->slave = NULL;
+      g_object_unref (gtk_im_multicontext_get_props (multicontext)->slave);
+      gtk_im_multicontext_get_props (multicontext)->slave = NULL;
 
       if (!finalizing)
 	need_preedit_changed = TRUE;
     }
   
-  multicontext->slave = slave;
+  gtk_im_multicontext_get_props (multicontext)->slave = slave;
 
-  if (multicontext->slave)
+  if (gtk_im_multicontext_get_props (multicontext)->slave)
     {
-      g_object_ref (multicontext->slave);
+      g_object_ref (gtk_im_multicontext_get_props (multicontext)->slave);
 
-      g_signal_connect (multicontext->slave, "preedit-start",
+      g_signal_connect (gtk_im_multicontext_get_props (multicontext)->slave, "preedit-start",
 			G_CALLBACK (gtk_im_multicontext_preedit_start_cb),
 			multicontext);
-      g_signal_connect (multicontext->slave, "preedit-end",
+      g_signal_connect (gtk_im_multicontext_get_props (multicontext)->slave, "preedit-end",
 			G_CALLBACK (gtk_im_multicontext_preedit_end_cb),
 			multicontext);
-      g_signal_connect (multicontext->slave, "preedit-changed",
+      g_signal_connect (gtk_im_multicontext_get_props (multicontext)->slave, "preedit-changed",
 			G_CALLBACK (gtk_im_multicontext_preedit_changed_cb),
 			multicontext);
-      g_signal_connect (multicontext->slave, "commit",
+      g_signal_connect (gtk_im_multicontext_get_props (multicontext)->slave, "commit",
 			G_CALLBACK (gtk_im_multicontext_commit_cb),
 			multicontext);
-      g_signal_connect (multicontext->slave, "retrieve-surrounding",
+      g_signal_connect (gtk_im_multicontext_get_props (multicontext)->slave, "retrieve-surrounding",
 			G_CALLBACK (gtk_im_multicontext_retrieve_surrounding_cb),
 			multicontext);
-      g_signal_connect (multicontext->slave, "delete-surrounding",
+      g_signal_connect (gtk_im_multicontext_get_props (multicontext)->slave, "delete-surrounding",
 			G_CALLBACK (gtk_im_multicontext_delete_surrounding_cb),
 			multicontext);
       
@@ -218,11 +218,11 @@ gtk_im_multicontext_set_slave (GtkIMMulticontext *multicontext,
 static const gchar *
 get_effective_context_id (GtkIMMulticontext *multicontext)
 {
-  if (multicontext->priv->context_id)
-    return multicontext->priv->context_id;
+  if (gtk_im_multicontext_get_props (multicontext)->priv->context_id)
+    return gtk_im_multicontext_get_props (multicontext)->priv->context_id;
 
   if (!global_context_id)
-    global_context_id = _gtk_im_module_get_default_context_id (multicontext->priv->client_window);
+    global_context_id = _gtk_im_module_get_default_context_id (gtk_im_multicontext_get_props (multicontext)->priv->client_window);
 
   return global_context_id;
 }
@@ -230,26 +230,26 @@ get_effective_context_id (GtkIMMulticontext *multicontext)
 static GtkIMContext *
 gtk_im_multicontext_get_slave (GtkIMMulticontext *multicontext)
 {
-  if (g_strcmp0 (multicontext->context_id, get_effective_context_id (multicontext)) != 0)
+  if (g_strcmp0 (gtk_im_multicontext_get_props (multicontext)->context_id, get_effective_context_id (gtk_im_multicontext_get_props (multicontext))) != 0)
     gtk_im_multicontext_set_slave (multicontext, NULL, FALSE);
 
-  if (!multicontext->slave)
+  if (!gtk_im_multicontext_get_props (multicontext)->slave)
     {
       GtkIMContext *slave;
 
-      g_free (multicontext->context_id);
+      g_free (gtk_im_multicontext_get_props (multicontext)->context_id);
 
-      multicontext->context_id = g_strdup (get_effective_context_id (multicontext));
+      gtk_im_multicontext_get_props (multicontext)->context_id = g_strdup (get_effective_context_id (gtk_im_multicontext_get_props (multicontext)));
 
-      if (g_strcmp0 (multicontext->context_id, NONE_ID) == 0)
+      if (g_strcmp0 (gtk_im_multicontext_get_props (multicontext)->context_id, NONE_ID) == 0)
         return NULL;
 
-      slave = _gtk_im_module_create (multicontext->context_id);
+      slave = _gtk_im_module_create (gtk_im_multicontext_get_props (multicontext)->context_id);
       gtk_im_multicontext_set_slave (multicontext, slave, FALSE);
       g_object_unref (slave);
     }
 
-  return multicontext->slave;
+  return gtk_im_multicontext_get_props (multicontext)->slave;
 }
 
 static void
@@ -270,7 +270,7 @@ gtk_im_multicontext_set_client_window (GtkIMContext *context,
   GtkSettings *settings;
   gboolean connected;
 
-  multicontext->priv->client_window = window;
+  gtk_im_multicontext_get_props (multicontext)->priv->client_window = window;
 
   if (window)
     {
@@ -353,7 +353,7 @@ gtk_im_multicontext_focus_in (GtkIMContext   *context)
   GtkIMMulticontext *multicontext = GTK_IM_MULTICONTEXT (context);
   GtkIMContext *slave = gtk_im_multicontext_get_slave (multicontext);
 
-  multicontext->priv->focus_in = TRUE;
+  gtk_im_multicontext_get_props (multicontext)->priv->focus_in = TRUE;
 
   if (slave)
     __gtk_im_context_focus_in (slave);
@@ -365,7 +365,7 @@ gtk_im_multicontext_focus_out (GtkIMContext   *context)
   GtkIMMulticontext *multicontext = GTK_IM_MULTICONTEXT (context);
   GtkIMContext *slave = gtk_im_multicontext_get_slave (multicontext);
 
-  multicontext->priv->focus_in = FALSE;
+  gtk_im_multicontext_get_props (multicontext)->priv->focus_in = FALSE;
   
   if (slave)
     __gtk_im_context_focus_out (slave);
@@ -388,8 +388,8 @@ gtk_im_multicontext_set_cursor_location (GtkIMContext   *context,
   GtkIMMulticontext *multicontext = GTK_IM_MULTICONTEXT (context);
   GtkIMContext *slave = gtk_im_multicontext_get_slave (multicontext);
 
-  multicontext->priv->have_cursor_location = TRUE;
-  multicontext->priv->cursor_location = *area;
+  gtk_im_multicontext_get_props (multicontext)->priv->have_cursor_location = TRUE;
+  gtk_im_multicontext_get_props (multicontext)->priv->cursor_location = *area;
 
   if (slave)
     __gtk_im_context_set_cursor_location (slave, area);
@@ -404,7 +404,7 @@ gtk_im_multicontext_set_use_preedit (GtkIMContext   *context,
 
   use_preedit = use_preedit != FALSE;
 
-  multicontext->priv->use_preedit = use_preedit;
+  gtk_im_multicontext_get_props (multicontext)->priv->use_preedit = use_preedit;
 
   if (slave)
     __gtk_im_context_set_use_preedit (slave, use_preedit);
@@ -549,9 +549,9 @@ __gtk_im_multicontext_append_menuitems (GtkIMMulticontext *context,
   GtkWidget *menuitem, *system_menuitem;
   const char *system_context_id; 
   
-  system_context_id = _gtk_im_module_get_default_context_id (context->priv->client_window);
+  system_context_id = _gtk_im_module_get_default_context_id (gtk_im_multicontext_get_props (context)->priv->client_window);
   system_menuitem = menuitem = __gtk_radio_menu_item_new_with_label (group, C_("input method menu", "System"));
-  if (!context->priv->context_id)
+  if (!gtk_im_multicontext_get_props (context)->priv->context_id)
     __gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menuitem), TRUE);
   group = __gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (menuitem));
   g_object_set_data (G_OBJECT (menuitem), I_("gtk-context-id"), NULL);
@@ -561,7 +561,7 @@ __gtk_im_multicontext_append_menuitems (GtkIMMulticontext *context,
   __gtk_menu_shell_append (menushell, menuitem);
 
   menuitem = __gtk_radio_menu_item_new_with_label (group, C_("input method menu", "None"));
-  if (g_strcmp0 (context->priv->context_id, NONE_ID) == 0)
+  if (g_strcmp0 (gtk_im_multicontext_get_props (context)->priv->context_id, NONE_ID) == 0)
     __gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menuitem), TRUE);
   g_object_set_data (G_OBJECT (menuitem), I_("gtk-context-id"), NONE_ID);
   g_signal_connect (menuitem, "activate", G_CALLBACK (activate_cb), context);
@@ -633,8 +633,8 @@ __gtk_im_multicontext_append_menuitems (GtkIMMulticontext *context,
       menuitem = __gtk_radio_menu_item_new_with_label (group,
 						     translated_name);
       
-      if ((context->priv->context_id &&
-           strcmp (contexts[i]->context_id, context->priv->context_id) == 0))
+      if ((gtk_im_multicontext_get_props (context)->priv->context_id &&
+           strcmp (contexts[i]->context_id, gtk_im_multicontext_get_props (context)->priv->context_id) == 0))
         __gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menuitem), TRUE);
 
       if (strcmp (contexts[i]->context_id, system_context_id) == 0)
@@ -675,7 +675,7 @@ __gtk_im_multicontext_append_menuitems (GtkIMMulticontext *context,
 const char *
 __gtk_im_multicontext_get_context_id (GtkIMMulticontext *context)
 {
-  return context->context_id;
+  return gtk_im_multicontext_get_props (context)->context_id;
 }
 
 /**
@@ -695,7 +695,7 @@ __gtk_im_multicontext_set_context_id (GtkIMMulticontext *context,
                                     const char        *context_id)
 {
   __gtk_im_context_reset (GTK_IM_CONTEXT (context));
-  g_free (context->priv->context_id);
-  context->priv->context_id = g_strdup (context_id);
+  g_free (gtk_im_multicontext_get_props (context)->priv->context_id);
+  gtk_im_multicontext_get_props (context)->priv->context_id = g_strdup (context_id);
   gtk_im_multicontext_set_slave (context, NULL, FALSE);
 }

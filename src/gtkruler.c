@@ -187,17 +187,17 @@ gtk_ruler_init (GtkRuler *ruler)
 
   private->orientation = GTK_ORIENTATION_HORIZONTAL;
 
-  widget->requisition.width  = widget->style->xthickness * 2 + 1;
-  widget->requisition.height = widget->style->ythickness * 2 + RULER_WIDTH;
+  gtk_widget_get_props (widget)->requisition.width  = gtk_widget_get_props (widget)->style->xthickness * 2 + 1;
+  gtk_widget_get_props (widget)->requisition.height = gtk_widget_get_props (widget)->style->ythickness * 2 + RULER_WIDTH;
 
-  ruler->backing_store = NULL;
-  ruler->xsrc = 0;
-  ruler->ysrc = 0;
-  ruler->slider_size = 0;
-  ruler->lower = 0;
-  ruler->upper = 0;
-  ruler->position = 0;
-  ruler->max_size = 0;
+  gtk_ruler_get_props (ruler)->backing_store = NULL;
+  gtk_ruler_get_props (ruler)->xsrc = 0;
+  gtk_ruler_get_props (ruler)->ysrc = 0;
+  gtk_ruler_get_props (ruler)->slider_size = 0;
+  gtk_ruler_get_props (ruler)->lower = 0;
+  gtk_ruler_get_props (ruler)->upper = 0;
+  gtk_ruler_get_props (ruler)->position = 0;
+  gtk_ruler_get_props (ruler)->max_size = 0;
 
   __gtk_ruler_set_metric (ruler, GTK_PIXELS);
 }
@@ -218,20 +218,20 @@ gtk_ruler_set_property (GObject      *object,
       __gtk_widget_queue_resize (GTK_WIDGET (ruler));
       break;
     case PROP_LOWER:
-      __gtk_ruler_set_range (ruler, g_value_get_double (value), ruler->upper,
-			   ruler->position, ruler->max_size);
+      __gtk_ruler_set_range (gtk_ruler_get_props (ruler), g_value_get_double (value), gtk_ruler_get_props (ruler)->upper,
+			   gtk_ruler_get_props (ruler)->position, gtk_ruler_get_props (ruler)->max_size);
       break;
     case PROP_UPPER:
-      __gtk_ruler_set_range (ruler, ruler->lower, g_value_get_double (value),
-			   ruler->position, ruler->max_size);
+      __gtk_ruler_set_range (gtk_ruler_get_props (ruler), gtk_ruler_get_props (ruler)->lower, g_value_get_double (value),
+			   gtk_ruler_get_props (ruler)->position, gtk_ruler_get_props (ruler)->max_size);
       break;
     case PROP_POSITION:
-      __gtk_ruler_set_range (ruler, ruler->lower, ruler->upper,
-			   g_value_get_double (value), ruler->max_size);
+      __gtk_ruler_set_range (gtk_ruler_get_props (ruler), gtk_ruler_get_props (ruler)->lower, gtk_ruler_get_props (ruler)->upper,
+			   g_value_get_double (value), gtk_ruler_get_props (ruler)->max_size);
       break;
     case PROP_MAX_SIZE:
-      __gtk_ruler_set_range (ruler, ruler->lower, ruler->upper,
-			   ruler->position,  g_value_get_double (value));
+      __gtk_ruler_set_range (gtk_ruler_get_props (ruler), gtk_ruler_get_props (ruler)->lower, gtk_ruler_get_props (ruler)->upper,
+			   gtk_ruler_get_props (ruler)->position,  g_value_get_double (value));
       break;
     case PROP_METRIC:
       __gtk_ruler_set_metric (ruler, g_value_get_enum (value));
@@ -257,16 +257,16 @@ gtk_ruler_get_property (GObject      *object,
       g_value_set_enum (value, private->orientation);
       break;
     case PROP_LOWER:
-      g_value_set_double (value, ruler->lower);
+      g_value_set_double (value, gtk_ruler_get_props (ruler)->lower);
       break;
     case PROP_UPPER:
-      g_value_set_double (value, ruler->upper);
+      g_value_set_double (value, gtk_ruler_get_props (ruler)->upper);
       break;
     case PROP_POSITION:
-      g_value_set_double (value, ruler->position);
+      g_value_set_double (value, gtk_ruler_get_props (ruler)->position);
       break;
     case PROP_MAX_SIZE:
-      g_value_set_double (value, ruler->max_size);
+      g_value_set_double (value, gtk_ruler_get_props (ruler)->max_size);
       break;
     case PROP_METRIC:
       g_value_set_enum (value, __gtk_ruler_get_metric (ruler));
@@ -283,7 +283,7 @@ __gtk_ruler_set_metric (GtkRuler      *ruler,
 {
   g_return_if_fail (GTK_IS_RULER (ruler));
 
-  ruler->metric = (GtkRulerMetric *) &ruler_metrics[metric];
+  gtk_ruler_get_props (ruler)->metric = (GtkRulerMetric *) &ruler_metrics[metric];
 
   if (__gtk_widget_is_drawable (GTK_WIDGET (ruler)))
     __gtk_widget_queue_draw (GTK_WIDGET (ruler));
@@ -310,7 +310,7 @@ __gtk_ruler_get_metric (GtkRuler *ruler)
   g_return_val_if_fail (GTK_IS_RULER (ruler), 0);
 
   for (i = 0; i < G_N_ELEMENTS (ruler_metrics); i++)
-    if (ruler->metric == &ruler_metrics[i])
+    if (gtk_ruler_get_props (ruler)->metric == &ruler_metrics[i])
       return i;
 
   g_assert_not_reached ();
@@ -342,24 +342,24 @@ __gtk_ruler_set_range (GtkRuler *ruler,
   g_return_if_fail (GTK_IS_RULER (ruler));
 
   g_object_freeze_notify (G_OBJECT (ruler));
-  if (ruler->lower != lower)
+  if (gtk_ruler_get_props (ruler)->lower != lower)
     {
-      ruler->lower = lower;
+      gtk_ruler_get_props (ruler)->lower = lower;
       g_object_notify (G_OBJECT (ruler), "lower");
     }
-  if (ruler->upper != upper)
+  if (gtk_ruler_get_props (ruler)->upper != upper)
     {
-      ruler->upper = upper;
+      gtk_ruler_get_props (ruler)->upper = upper;
       g_object_notify (G_OBJECT (ruler), "upper");
     }
-  if (ruler->position != position)
+  if (gtk_ruler_get_props (ruler)->position != position)
     {
-      ruler->position = position;
+      gtk_ruler_get_props (ruler)->position = position;
       g_object_notify (G_OBJECT (ruler), "position");
     }
-  if (ruler->max_size != max_size)
+  if (gtk_ruler_get_props (ruler)->max_size != max_size)
     {
-      ruler->max_size = max_size;
+      gtk_ruler_get_props (ruler)->max_size = max_size;
       g_object_notify (G_OBJECT (ruler), "max-size");
     }
   g_object_thaw_notify (G_OBJECT (ruler));
@@ -393,13 +393,13 @@ __gtk_ruler_get_range (GtkRuler *ruler,
   g_return_if_fail (GTK_IS_RULER (ruler));
 
   if (lower)
-    *lower = ruler->lower;
+    *lower = gtk_ruler_get_props (ruler)->lower;
   if (upper)
-    *upper = ruler->upper;
+    *upper = gtk_ruler_get_props (ruler)->upper;
   if (position)
-    *position = ruler->position;
+    *position = gtk_ruler_get_props (ruler)->position;
   if (max_size)
-    *max_size = ruler->max_size;
+    *max_size = gtk_ruler_get_props (ruler)->max_size;
 }
 
 void
@@ -433,10 +433,10 @@ gtk_ruler_realize (GtkWidget *widget)
   __gtk_widget_set_realized (widget, TRUE);
 
   attributes.window_type = GDK_WINDOW_CHILD;
-  attributes.x = widget->allocation.x;
-  attributes.y = widget->allocation.y;
-  attributes.width = widget->allocation.width;
-  attributes.height = widget->allocation.height;
+  attributes.x = gtk_widget_get_props (widget)->allocation.x;
+  attributes.y = gtk_widget_get_props (widget)->allocation.y;
+  attributes.width = gtk_widget_get_props (widget)->allocation.width;
+  attributes.height = gtk_widget_get_props (widget)->allocation.height;
   attributes.wclass = GDK_INPUT_OUTPUT;
   attributes.visual = __gtk_widget_get_visual (widget);
   attributes.colormap = __gtk_widget_get_colormap (widget);
@@ -447,11 +447,11 @@ gtk_ruler_realize (GtkWidget *widget)
 
   attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
 
-  widget->window = __gdk_window_new (__gtk_widget_get_parent_window (widget), &attributes, attributes_mask);
-  __gdk_window_set_user_data (widget->window, ruler);
+  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (gtk_widget_get_props (widget)), &attributes, attributes_mask);
+  __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, ruler);
 
-  widget->style = __gtk_style_attach (widget->style, widget->window);
-  __gtk_style_set_background (widget->style, widget->window, GTK_STATE_ACTIVE);
+  gtk_widget_get_props (widget)->style = __gtk_style_attach (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window);
+  __gtk_style_set_background (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, GTK_STATE_ACTIVE);
 
   gtk_ruler_make_pixmap (ruler);
 }
@@ -461,10 +461,10 @@ gtk_ruler_unrealize (GtkWidget *widget)
 {
   GtkRuler *ruler = GTK_RULER (widget);
 
-  if (ruler->backing_store)
+  if (gtk_ruler_get_props (ruler)->backing_store)
     {
-      g_object_unref (ruler->backing_store);
-      ruler->backing_store = NULL;
+      g_object_unref (gtk_ruler_get_props (ruler)->backing_store);
+      gtk_ruler_get_props (ruler)->backing_store = NULL;
     }
 
   GTK_WIDGET_CLASS (gtk_ruler_parent_class)->unrealize (widget);
@@ -478,13 +478,13 @@ gtk_ruler_size_request (GtkWidget      *widget,
 
   if (private->orientation == GTK_ORIENTATION_HORIZONTAL)
     {
-      requisition->width  = widget->style->xthickness * 2 + 1;
-      requisition->height = widget->style->ythickness * 2 + RULER_WIDTH;
+      requisition->width  = gtk_widget_get_props (widget)->style->xthickness * 2 + 1;
+      requisition->height = gtk_widget_get_props (widget)->style->ythickness * 2 + RULER_WIDTH;
     }
   else
     {
-      requisition->width  = widget->style->xthickness * 2 + RULER_WIDTH;
-      requisition->height = widget->style->ythickness * 2 + 1;
+      requisition->width  = gtk_widget_get_props (widget)->style->xthickness * 2 + RULER_WIDTH;
+      requisition->height = gtk_widget_get_props (widget)->style->ythickness * 2 + 1;
     }
 }
 
@@ -494,11 +494,11 @@ gtk_ruler_size_allocate (GtkWidget     *widget,
 {
   GtkRuler *ruler = GTK_RULER (widget);
 
-  widget->allocation = *allocation;
+  gtk_widget_get_props (widget)->allocation = *allocation;
 
   if (__gtk_widget_get_realized (widget))
     {
-      __gdk_window_move_resize (widget->window,
+      __gdk_window_move_resize (gtk_widget_get_props (widget)->window,
 			      allocation->x, allocation->y,
 			      allocation->width, allocation->height);
 
@@ -520,14 +520,14 @@ gtk_ruler_motion_notify (GtkWidget      *widget,
   y = event->y;
 
   if (private->orientation == GTK_ORIENTATION_HORIZONTAL)
-    ruler->position = ruler->lower + ((ruler->upper - ruler->lower) * x) / widget->allocation.width;
+    gtk_ruler_get_props (ruler)->position = gtk_ruler_get_props (ruler)->lower + ((gtk_ruler_get_props (ruler)->upper - gtk_ruler_get_props (ruler)->lower) * x) / gtk_widget_get_props (widget)->allocation.width;
   else
-    ruler->position = ruler->lower + ((ruler->upper - ruler->lower) * y) / widget->allocation.height;
+    gtk_ruler_get_props (ruler)->position = gtk_ruler_get_props (ruler)->lower + ((gtk_ruler_get_props (ruler)->upper - gtk_ruler_get_props (ruler)->lower) * y) / gtk_widget_get_props (widget)->allocation.height;
 
   g_object_notify (G_OBJECT (ruler), "position");
 
   /*  Make sure the ruler has been allocated already  */
-  if (ruler->backing_store != NULL)
+  if (gtk_ruler_get_props (ruler)->backing_store != NULL)
     __gtk_ruler_draw_pos (ruler);
 
   return FALSE;
@@ -544,8 +544,8 @@ gtk_ruler_expose (GtkWidget      *widget,
 
       __gtk_ruler_draw_ticks (ruler);
       
-      cr = __gdk_cairo_create (widget->window);
-      __gdk_cairo_set_source_pixmap (cr, ruler->backing_store, 0, 0);
+      cr = __gdk_cairo_create (gtk_widget_get_props (widget)->window);
+      __gdk_cairo_set_source_pixmap (cr, gtk_ruler_get_props (ruler)->backing_store, 0, 0);
       __gdk_cairo_rectangle (cr, &event->area);
       cairo_fill (cr);
       cairo_destroy (cr);
@@ -565,23 +565,23 @@ gtk_ruler_make_pixmap (GtkRuler *ruler)
 
   widget = GTK_WIDGET (ruler);
 
-  if (ruler->backing_store)
+  if (gtk_ruler_get_props (ruler)->backing_store)
     {
-      __gdk_drawable_get_size (ruler->backing_store, &width, &height);
-      if ((width == widget->allocation.width) &&
-	  (height == widget->allocation.height))
+      __gdk_drawable_get_size (gtk_ruler_get_props (ruler)->backing_store, &width, &height);
+      if ((width == gtk_widget_get_props (widget)->allocation.width) &&
+	  (height == gtk_widget_get_props (widget)->allocation.height))
 	return;
 
-      g_object_unref (ruler->backing_store);
+      g_object_unref (gtk_ruler_get_props (ruler)->backing_store);
     }
 
-  ruler->backing_store = __gdk_pixmap_new (widget->window,
-					 widget->allocation.width,
-					 widget->allocation.height,
+  gtk_ruler_get_props (ruler)->backing_store = __gdk_pixmap_new (gtk_widget_get_props (widget)->window,
+					 gtk_widget_get_props (widget)->allocation.width,
+					 gtk_widget_get_props (widget)->allocation.height,
 					 -1);
 
-  ruler->xsrc = 0;
-  ruler->ysrc = 0;
+  gtk_ruler_get_props (ruler)->xsrc = 0;
+  gtk_ruler_get_props (ruler)->ysrc = 0;
 }
 
 static void
@@ -612,8 +612,8 @@ gtk_ruler_real_draw_ticks (GtkRuler *ruler)
   if (!__gtk_widget_is_drawable (widget))
     return;
 
-  xthickness = widget->style->xthickness;
-  ythickness = widget->style->ythickness;
+  xthickness = gtk_widget_get_props (widget)->style->xthickness;
+  ythickness = gtk_widget_get_props (widget)->style->ythickness;
 
   layout = __gtk_widget_create_pango_layout (widget, "012456789");
   pango_layout_get_extents (layout, &ink_rect, &logical_rect);
@@ -623,34 +623,34 @@ gtk_ruler_real_draw_ticks (GtkRuler *ruler)
 
   if (private->orientation == GTK_ORIENTATION_HORIZONTAL)
     {
-      width = widget->allocation.width;
-      height = widget->allocation.height - ythickness * 2;
+      width = gtk_widget_get_props (widget)->allocation.width;
+      height = gtk_widget_get_props (widget)->allocation.height - ythickness * 2;
     }
   else
     {
-      width = widget->allocation.height;
-      height = widget->allocation.width - ythickness * 2;
+      width = gtk_widget_get_props (widget)->allocation.height;
+      height = gtk_widget_get_props (widget)->allocation.width - ythickness * 2;
     }
 
 #define DETAILE(private) (private->orientation == GTK_ORIENTATION_HORIZONTAL ? "hruler" : "vruler");
 
-  __gtk_paint_box (widget->style, ruler->backing_store,
+  __gtk_paint_box (gtk_widget_get_props (widget)->style, gtk_ruler_get_props (ruler)->backing_store,
 		 GTK_STATE_NORMAL, GTK_SHADOW_OUT,
 		 NULL, widget,
                  private->orientation == GTK_ORIENTATION_HORIZONTAL ?
                  "hruler" : "vruler",
 		 0, 0,
-		 widget->allocation.width, widget->allocation.height);
+		 gtk_widget_get_props (widget)->allocation.width, gtk_widget_get_props (widget)->allocation.height);
 
-  cr = __gdk_cairo_create (ruler->backing_store);
-  __gdk_cairo_set_source_color (cr, &widget->style->fg[widget->state]);
+  cr = __gdk_cairo_create (gtk_ruler_get_props (ruler)->backing_store);
+  __gdk_cairo_set_source_color (cr, &gtk_widget_get_props (widget)->style->fg[gtk_widget_get_props (widget)->state]);
 
   if (private->orientation == GTK_ORIENTATION_HORIZONTAL)
     {
       cairo_rectangle (cr,
                        xthickness,
                        height + ythickness,
-                       widget->allocation.width - 2 * xthickness,
+                       gtk_widget_get_props (widget)->allocation.width - 2 * xthickness,
                        1);
     }
   else
@@ -659,11 +659,11 @@ gtk_ruler_real_draw_ticks (GtkRuler *ruler)
                        height + xthickness,
                        ythickness,
                        1,
-                       widget->allocation.height - 2 * ythickness);
+                       gtk_widget_get_props (widget)->allocation.height - 2 * ythickness);
     }
 
-  upper = ruler->upper / ruler->metric->pixels_per_unit;
-  lower = ruler->lower / ruler->metric->pixels_per_unit;
+  upper = gtk_ruler_get_props (ruler)->upper / gtk_ruler_get_props (ruler)->metric->pixels_per_unit;
+  lower = gtk_ruler_get_props (ruler)->lower / gtk_ruler_get_props (ruler)->metric->pixels_per_unit;
 
   if ((upper - lower) == 0)
     goto out;
@@ -681,7 +681,7 @@ gtk_ruler_real_draw_ticks (GtkRuler *ruler)
    *   of this displayed text. Use this height to find a scale which
    *   leaves sufficient room for drawing the ruler.
    */
-  scale = ceil (ruler->max_size / ruler->metric->pixels_per_unit);
+  scale = ceil (gtk_ruler_get_props (ruler)->max_size / gtk_ruler_get_props (ruler)->metric->pixels_per_unit);
   g_snprintf (unit_str, sizeof (unit_str), "%d", scale);
 
   if (private->orientation == GTK_ORIENTATION_HORIZONTAL)
@@ -689,7 +689,7 @@ gtk_ruler_real_draw_ticks (GtkRuler *ruler)
       text_width = strlen (unit_str) * digit_height + 1;
 
       for (scale = 0; scale < MAXIMUM_SCALES; scale++)
-        if (ruler->metric->ruler_scale[scale] * fabs(increment) > 2 * text_width)
+        if (gtk_ruler_get_props (ruler)->metric->ruler_scale[scale] * fabs(increment) > 2 * text_width)
           break;
     }
   else
@@ -697,7 +697,7 @@ gtk_ruler_real_draw_ticks (GtkRuler *ruler)
       text_height = strlen (unit_str) * digit_height + 1;
 
       for (scale = 0; scale < MAXIMUM_SCALES; scale++)
-        if (ruler->metric->ruler_scale[scale] * fabs(increment) > 2 * text_height)
+        if (gtk_ruler_get_props (ruler)->metric->ruler_scale[scale] * fabs(increment) > 2 * text_height)
           break;
     }
 
@@ -708,8 +708,8 @@ gtk_ruler_real_draw_ticks (GtkRuler *ruler)
   length = 0;
   for (i = MAXIMUM_SUBDIVIDE - 1; i >= 0; i--)
     {
-      subd_incr = (gdouble) ruler->metric->ruler_scale[scale] /
-	          (gdouble) ruler->metric->subdivide[i];
+      subd_incr = (gdouble) gtk_ruler_get_props (ruler)->metric->ruler_scale[scale] /
+	          (gdouble) gtk_ruler_get_props (ruler)->metric->subdivide[i];
       if (subd_incr * fabs(increment) <= MINIMUM_INCR)
 	continue;
 
@@ -758,8 +758,8 @@ gtk_ruler_real_draw_ticks (GtkRuler *ruler)
                   pango_layout_set_text (layout, unit_str, -1);
                   pango_layout_get_extents (layout, &logical_rect, NULL);
 
-                  __gtk_paint_layout (widget->style,
-                                    ruler->backing_store,
+                  __gtk_paint_layout (gtk_widget_get_props (widget)->style,
+                                    gtk_ruler_get_props (ruler)->backing_store,
                                     __gtk_widget_get_state (widget),
                                     FALSE,
                                     NULL,
@@ -775,8 +775,8 @@ gtk_ruler_real_draw_ticks (GtkRuler *ruler)
                       pango_layout_set_text (layout, unit_str + j, 1);
                       pango_layout_get_extents (layout, NULL, &logical_rect);
 
-                      __gtk_paint_layout (widget->style,
-                                        ruler->backing_store,
+                      __gtk_paint_layout (gtk_widget_get_props (widget)->style,
+                                        gtk_ruler_get_props (ruler)->backing_store,
                                         __gtk_widget_get_state (widget),
                                         FALSE,
                                         NULL,
@@ -812,10 +812,10 @@ gtk_ruler_real_draw_pos (GtkRuler *ruler)
 
   if (__gtk_widget_is_drawable (widget))
     {
-      xthickness = widget->style->xthickness;
-      ythickness = widget->style->ythickness;
-      width = widget->allocation.width;
-      height = widget->allocation.height;
+      xthickness = gtk_widget_get_props (widget)->style->xthickness;
+      ythickness = gtk_widget_get_props (widget)->style->ythickness;
+      width = gtk_widget_get_props (widget)->allocation.width;
+      height = gtk_widget_get_props (widget)->allocation.height;
 
       if (private->orientation == GTK_ORIENTATION_HORIZONTAL)
         {
@@ -836,15 +836,15 @@ gtk_ruler_real_draw_pos (GtkRuler *ruler)
 
       if ((bs_width > 0) && (bs_height > 0))
 	{
-	  cairo_t *cr = __gdk_cairo_create (widget->window);
+	  cairo_t *cr = __gdk_cairo_create (gtk_widget_get_props (widget)->window);
 
 	  /*  If a backing store exists, restore the ruler  */
-	  if (ruler->backing_store)
+	  if (gtk_ruler_get_props (ruler)->backing_store)
             {
-              cairo_t *cr = __gdk_cairo_create (widget->window);
+              cairo_t *cr = __gdk_cairo_create (gtk_widget_get_props (widget)->window);
 
-              __gdk_cairo_set_source_pixmap (cr, ruler->backing_store, 0, 0);
-              cairo_rectangle (cr, ruler->xsrc, ruler->ysrc, bs_width, bs_height);
+              __gdk_cairo_set_source_pixmap (cr, gtk_ruler_get_props (ruler)->backing_store, 0, 0);
+              cairo_rectangle (cr, gtk_ruler_get_props (ruler)->xsrc, gtk_ruler_get_props (ruler)->ysrc, bs_width, bs_height);
               cairo_fill (cr);
 
               cairo_destroy (cr);
@@ -852,20 +852,20 @@ gtk_ruler_real_draw_pos (GtkRuler *ruler)
 
           if (private->orientation == GTK_ORIENTATION_HORIZONTAL)
             {
-              increment = (gdouble) width / (ruler->upper - ruler->lower);
+              increment = (gdouble) width / (gtk_ruler_get_props (ruler)->upper - gtk_ruler_get_props (ruler)->lower);
 
-              x = ROUND ((ruler->position - ruler->lower) * increment) + (xthickness - bs_width) / 2 - 1;
+              x = ROUND ((gtk_ruler_get_props (ruler)->position - gtk_ruler_get_props (ruler)->lower) * increment) + (xthickness - bs_width) / 2 - 1;
               y = (height + bs_height) / 2 + ythickness;
             }
           else
             {
-              increment = (gdouble) height / (ruler->upper - ruler->lower);
+              increment = (gdouble) height / (gtk_ruler_get_props (ruler)->upper - gtk_ruler_get_props (ruler)->lower);
 
               x = (width + bs_width) / 2 + xthickness;
-              y = ROUND ((ruler->position - ruler->lower) * increment) + (ythickness - bs_height) / 2 - 1;
+              y = ROUND ((gtk_ruler_get_props (ruler)->position - gtk_ruler_get_props (ruler)->lower) * increment) + (ythickness - bs_height) / 2 - 1;
             }
 
-	  __gdk_cairo_set_source_color (cr, &widget->style->fg[widget->state]);
+	  __gdk_cairo_set_source_color (cr, &gtk_widget_get_props (widget)->style->fg[gtk_widget_get_props (widget)->state]);
 
 	  cairo_move_to (cr, x, y);
 
@@ -884,8 +884,8 @@ gtk_ruler_real_draw_pos (GtkRuler *ruler)
 
 	  cairo_destroy (cr);
 
-	  ruler->xsrc = x;
-	  ruler->ysrc = y;
+	  gtk_ruler_get_props (ruler)->xsrc = x;
+	  gtk_ruler_get_props (ruler)->ysrc = y;
 	}
     }
 }

@@ -122,13 +122,13 @@ gtk_scrollbar_style_set (GtkWidget *widget,
                         "has-forward-stepper", &has_d,
                         NULL);
 
-  range->min_slider_size = slider_length;
-  range->slider_size_fixed = fixed_size;
+  gtk_range_get_props (range)->min_slider_size = slider_length;
+  gtk_range_get_props (range)->slider_size_fixed = fixed_size;
 
-  range->has_stepper_a = has_a;
-  range->has_stepper_b = has_b;
-  range->has_stepper_c = has_c;
-  range->has_stepper_d = has_d;
+  gtk_range_get_props (range)->has_stepper_a = has_a;
+  gtk_range_get_props (range)->has_stepper_b = has_b;
+  gtk_range_get_props (range)->has_stepper_c = has_c;
+  gtk_range_get_props (range)->has_stepper_d = has_d;
 
   GTK_WIDGET_CLASS (gtk_scrollbar_parent_class)->style_set (widget, previous);
 }

@@ -92,8 +92,8 @@ gtk_invisible_init (GtkInvisible *invisible)
 
   g_object_ref_sink (invisible);
 
-  invisible->has_user_ref_count = TRUE;
-  invisible->screen = __gdk_screen_get_default ();
+  gtk_invisible_get_props (invisible)->has_user_ref_count = TRUE;
+  gtk_invisible_get_props (invisible)->screen = __gdk_screen_get_default ();
   
   colormap = ___gtk_widget_peek_colormap ();
   if (colormap)
@@ -152,18 +152,18 @@ __gtk_invisible_set_screen (GtkInvisible *invisible,
   g_return_if_fail (GTK_IS_INVISIBLE (invisible));
   g_return_if_fail (GDK_IS_SCREEN (screen));
 
-  if (screen == invisible->screen)
+  if (screen == gtk_invisible_get_props (invisible)->screen)
     return;
 
   widget = GTK_WIDGET (invisible);
 
-  previous_screen = invisible->screen;
+  previous_screen = gtk_invisible_get_props (invisible)->screen;
   was_realized = __gtk_widget_get_realized (widget);
 
   if (was_realized)
     __gtk_widget_unrealize (widget);
   
-  invisible->screen = screen;
+  gtk_invisible_get_props (invisible)->screen = screen;
   if (screen != previous_screen)
     ___gtk_widget_propagate_screen_changed (widget, previous_screen);
   g_object_notify (G_OBJECT (invisible), "screen");
@@ -187,7 +187,7 @@ __gtk_invisible_get_screen (GtkInvisible *invisible)
 {
   g_return_val_if_fail (GTK_IS_INVISIBLE (invisible), NULL);
   
-  return invisible->screen;
+  return gtk_invisible_get_props (invisible)->screen;
 }
 
 static void
@@ -214,11 +214,11 @@ gtk_invisible_realize (GtkWidget *widget)
 
   attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_NOREDIR;
 
-  widget->window = __gdk_window_new (parent, &attributes, attributes_mask);
+  gtk_widget_get_props (widget)->window = __gdk_window_new (parent, &attributes, attributes_mask);
 					      
-  __gdk_window_set_user_data (widget->window, widget);
+  __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, gtk_widget_get_props (widget));
   
-  widget->style = __gtk_style_attach (widget->style, widget->window);
+  gtk_widget_get_props (widget)->style = __gtk_style_attach (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window);
 }
 
 static void
@@ -239,7 +239,7 @@ static void
 gtk_invisible_size_allocate (GtkWidget     *widget,
 			    GtkAllocation *allocation)
 {
-  widget->allocation = *allocation;
+  gtk_widget_get_props (widget)->allocation = *allocation;
 } 
 
 
@@ -273,7 +273,7 @@ gtk_invisible_get_property  (GObject      *object,
   switch (prop_id)
     {
     case PROP_SCREEN:
-      g_value_set_object (value, invisible->screen);
+      g_value_set_object (value, gtk_invisible_get_props (invisible)->screen);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);

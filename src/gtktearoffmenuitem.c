@@ -68,7 +68,7 @@ gtk_tearoff_menu_item_class_init (GtkTearoffMenuItemClass *klass)
 static void
 gtk_tearoff_menu_item_init (GtkTearoffMenuItem *tearoff_menu_item)
 {
-  tearoff_menu_item->torn_off = FALSE;
+  gtk_tearoff_menu_item_get_props (tearoff_menu_item)->torn_off = FALSE;
 }
 
 static void
@@ -76,18 +76,18 @@ gtk_tearoff_menu_item_size_request (GtkWidget      *widget,
 				    GtkRequisition *requisition)
 {
   requisition->width = (GTK_CONTAINER (widget)->border_width +
-			widget->style->xthickness +
+			gtk_widget_get_props (widget)->style->xthickness +
 			BORDER_SPACING) * 2;
   requisition->height = (GTK_CONTAINER (widget)->border_width +
-			 widget->style->ythickness) * 2;
+			 gtk_widget_get_props (widget)->style->ythickness) * 2;
 
-  if (GTK_IS_MENU (widget->parent) && GTK_MENU (widget->parent)->torn_off)
+  if (GTK_IS_MENU (gtk_widget_get_props (widget)->parent) && GTK_MENU (gtk_widget_get_props (widget)->parent)->torn_off)
     {
       requisition->height += ARROW_SIZE;
     }
   else
     {
-      requisition->height += widget->style->ythickness + 4;
+      requisition->height += gtk_widget_get_props (widget)->style->ythickness + 4;
     }
 }
 
@@ -109,49 +109,49 @@ gtk_tearoff_menu_item_paint (GtkWidget   *widget,
 
       direction = __gtk_widget_get_direction (widget);
 
-      x = widget->allocation.x + GTK_CONTAINER (menu_item)->border_width;
-      y = widget->allocation.y + GTK_CONTAINER (menu_item)->border_width;
-      width = widget->allocation.width - GTK_CONTAINER (menu_item)->border_width * 2;
-      height = widget->allocation.height - GTK_CONTAINER (menu_item)->border_width * 2;
+      x = gtk_widget_get_props (widget)->allocation.x + GTK_CONTAINER (menu_item)->border_width;
+      y = gtk_widget_get_props (widget)->allocation.y + GTK_CONTAINER (menu_item)->border_width;
+      width = gtk_widget_get_props (widget)->allocation.width - GTK_CONTAINER (menu_item)->border_width * 2;
+      height = gtk_widget_get_props (widget)->allocation.height - GTK_CONTAINER (menu_item)->border_width * 2;
       right_max = x + width;
 
-      if (widget->state == GTK_STATE_PRELIGHT)
+      if (gtk_widget_get_props (widget)->state == GTK_STATE_PRELIGHT)
 	{
 	  gint selected_shadow_type;
 	  
 	  __gtk_widget_style_get (widget,
 				"selected-shadow-type", &selected_shadow_type,
 				NULL);
-	  __gtk_paint_box (widget->style,
-			 widget->window,
+	  __gtk_paint_box (gtk_widget_get_props (widget)->style,
+			 gtk_widget_get_props (widget)->window,
 			 GTK_STATE_PRELIGHT,
 			 selected_shadow_type,
 			 area, widget, "menuitem",
 			 x, y, width, height);
 	}
       else
-	__gdk_window_clear_area (widget->window, area->x, area->y, area->width, area->height);
+	__gdk_window_clear_area (gtk_widget_get_props (widget)->window, area->x, area->y, area->width, area->height);
 
-      if (GTK_IS_MENU (widget->parent) && GTK_MENU (widget->parent)->torn_off)
+      if (GTK_IS_MENU (gtk_widget_get_props (widget)->parent) && GTK_MENU (gtk_widget_get_props (widget)->parent)->torn_off)
 	{
 	  gint arrow_x;
 
-	  if (widget->state == GTK_STATE_PRELIGHT)
+	  if (gtk_widget_get_props (widget)->state == GTK_STATE_PRELIGHT)
 	    shadow_type = GTK_SHADOW_IN;
 	  else
 	    shadow_type = GTK_SHADOW_OUT;
 
-	  if (menu_item->toggle_size > ARROW_SIZE)
+	  if (gtk_menu_item_get_props (menu_item)->toggle_size > ARROW_SIZE)
 	    {
 	      if (direction == GTK_TEXT_DIR_LTR) {
-		arrow_x = x + (menu_item->toggle_size - ARROW_SIZE)/2;
+		arrow_x = x + (gtk_menu_item_get_props (menu_item)->toggle_size - ARROW_SIZE)/2;
 		arrow_type = GTK_ARROW_LEFT;
 	      }
 	      else {
-		arrow_x = x + width - menu_item->toggle_size + (menu_item->toggle_size - ARROW_SIZE)/2; 
+		arrow_x = x + width - gtk_menu_item_get_props (menu_item)->toggle_size + (gtk_menu_item_get_props (menu_item)->toggle_size - ARROW_SIZE)/2; 
 		arrow_type = GTK_ARROW_RIGHT;	    
 	      }
-	      x += menu_item->toggle_size + BORDER_SPACING;
+	      x += gtk_menu_item_get_props (menu_item)->toggle_size + BORDER_SPACING;
 	    }
 	  else
 	    {
@@ -167,8 +167,8 @@ gtk_tearoff_menu_item_paint (GtkWidget   *widget,
 	    }
 
 
-	  __gtk_paint_arrow (widget->style, widget->window,
-			   widget->state, shadow_type,
+	  __gtk_paint_arrow (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window,
+			   gtk_widget_get_props (widget)->state, shadow_type,
 			   NULL, widget, "tearoffmenuitem",
 			   arrow_type, FALSE,
 			   arrow_x, y + height / 2 - 5, 
@@ -188,9 +188,9 @@ gtk_tearoff_menu_item_paint (GtkWidget   *widget,
 	    x2 = MAX (right_max - x - TEAR_LENGTH, 0);
 	  }
 	  
-	  __gtk_paint_hline (widget->style, widget->window, GTK_STATE_NORMAL,
+	  __gtk_paint_hline (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, GTK_STATE_NORMAL,
 			   NULL, widget, "tearoffmenuitem",
-			   x1, x2, y + (height - widget->style->ythickness) / 2);
+			   x1, x2, y + (height - gtk_widget_get_props (widget)->style->ythickness) / 2);
 	  x += 2 * TEAR_LENGTH;
 	}
     }
@@ -214,7 +214,7 @@ gtk_tearoff_menu_item_activate (GtkMenuItem *menu_item)
       
       __gtk_widget_queue_resize (GTK_WIDGET (menu_item));
       __gtk_menu_set_tearoff_state (GTK_MENU (GTK_WIDGET (menu_item)->parent),
-				  !menu->torn_off);
+				  !gtk_menu_get_props (menu)->torn_off);
     }
 }
 
@@ -225,7 +225,7 @@ tearoff_state_changed (GtkMenu            *menu,
 {
   GtkTearoffMenuItem *tearoff_menu_item = GTK_TEAROFF_MENU_ITEM (data);
 
-  tearoff_menu_item->torn_off = __gtk_menu_get_tearoff_state (menu);
+  gtk_tearoff_menu_item_get_props (tearoff_menu_item)->torn_off = __gtk_menu_get_tearoff_state (menu);
 }
 
 static void
@@ -233,7 +233,7 @@ gtk_tearoff_menu_item_parent_set (GtkWidget *widget,
 				  GtkWidget *previous)
 {
   GtkTearoffMenuItem *tearoff_menu_item = GTK_TEAROFF_MENU_ITEM (widget);
-  GtkMenu *menu = GTK_IS_MENU (widget->parent) ? GTK_MENU (widget->parent) : NULL;
+  GtkMenu *menu = GTK_IS_MENU (gtk_widget_get_props (widget)->parent) ? GTK_MENU (gtk_widget_get_props (widget)->parent) : NULL;
 
   if (previous)
     g_signal_handlers_disconnect_by_func (previous, 
@@ -242,7 +242,7 @@ gtk_tearoff_menu_item_parent_set (GtkWidget *widget,
   
   if (menu)
     {
-      tearoff_menu_item->torn_off = __gtk_menu_get_tearoff_state (menu);
+      gtk_tearoff_menu_item_get_props (tearoff_menu_item)->torn_off = __gtk_menu_get_tearoff_state (menu);
       g_signal_connect (menu, "notify::tearoff-state", 
 			G_CALLBACK (tearoff_state_changed), 
 			tearoff_menu_item);

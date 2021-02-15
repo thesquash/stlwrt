@@ -1148,7 +1148,7 @@ rewrite_event_for_grabs (GdkEvent *event)
   gboolean owner_events;
   GdkDisplay *display;
 
-  switch (event->type)
+  switch (gtk_widget_get_props (event)->type)
     {
     case GDK_SCROLL:
     case GDK_BUTTON_PRESS:
@@ -1158,7 +1158,7 @@ rewrite_event_for_grabs (GdkEvent *event)
     case GDK_MOTION_NOTIFY:
     case GDK_PROXIMITY_IN:
     case GDK_PROXIMITY_OUT:
-      display = __gdk_window_get_display (event->proximity.window);
+      display = __gdk_window_get_display (gtk_widget_get_props (event)->proximity.window);
       if (!__gdk_pointer_grab_info_libgtk_only (display, &grab_window, &owner_events) ||
 	  !owner_events)
 	return NULL;
@@ -1166,7 +1166,7 @@ rewrite_event_for_grabs (GdkEvent *event)
 
     case GDK_KEY_PRESS:
     case GDK_KEY_RELEASE:
-      display = __gdk_window_get_display (event->key.window);
+      display = __gdk_window_get_display (gtk_widget_get_props (event)->key.window);
       if (!__gdk_keyboard_grab_info_libgtk_only (display, &grab_window, &owner_events) ||
 	  !owner_events)
 	return NULL;
@@ -1196,15 +1196,15 @@ __gtk_main_do_event (GdkEvent *event)
   GdkEvent *rewritten_event = NULL;
   GList *tmp_list;
 
-  if (event->type == GDK_SETTING)
+  if (gtk_widget_get_props (event)->type == GDK_SETTING)
     {
-      ___gtk_settings_handle_event (&event->setting);
+      ___gtk_settings_handle_event (&gtk_widget_get_props (event)->setting);
       return;
     }
 
-  if (event->type == GDK_OWNER_CHANGE)
+  if (gtk_widget_get_props (event)->type == GDK_OWNER_CHANGE)
     {
-      ___gtk_clipboard_handle_event (&event->owner_change);
+      ___gtk_clipboard_handle_event (&gtk_widget_get_props (event)->owner_change);
       return;
     }
 
@@ -1224,9 +1224,9 @@ __gtk_main_do_event (GdkEvent *event)
        * here. There won't be a widget though, so we have to handle
 	   * them specially
 	   */
-      if (event->type == GDK_PROPERTY_NOTIFY)
-	___gtk_selection_incr_event (event->any.window,
-				   &event->property);
+      if (gtk_widget_get_props (event)->type == GDK_PROPERTY_NOTIFY)
+	___gtk_selection_incr_event (gtk_widget_get_props (event)->any.window,
+				   &gtk_widget_get_props (event)->property);
 
       return;
     }
@@ -1258,7 +1258,7 @@ __gtk_main_do_event (GdkEvent *event)
        *  then we send the event to the original event widget.
        *  This is the key to implementing modality.
        */
-      if ((__gtk_widget_is_sensitive (event_widget) || event->type == GDK_SCROLL) &&
+      if ((__gtk_widget_is_sensitive (event_widget) || gtk_widget_get_props (event)->type == GDK_SCROLL) &&
 	  __gtk_widget_is_ancestor (event_widget, grab_widget))
 	grab_widget = event_widget;
     }
@@ -1277,7 +1277,7 @@ __gtk_main_do_event (GdkEvent *event)
    * Drag events are also not redirected, since it isn't
    *  clear what the semantics of that would be.
    */
-  switch (event->type)
+  switch (gtk_widget_get_props (event)->type)
     {
     case GDK_NOTHING:
       break;
@@ -1294,7 +1294,7 @@ __gtk_main_do_event (GdkEvent *event)
       /* Unexpected GDK_DESTROY from the outside, ignore for
        * child windows, handle like a GDK_DELETE for toplevels
        */
-      if (!event_widget->parent)
+      if (!gtk_widget_get_props (event_widget)->parent)
 	{
 	  g_object_ref (event_widget);
 	  if (!__gtk_widget_event (event_widget, event) &&
@@ -1305,11 +1305,11 @@ __gtk_main_do_event (GdkEvent *event)
       break;
       
     case GDK_EXPOSE:
-      if (event->any.window && __gtk_widget_get_double_buffered (event_widget))
+      if (gtk_widget_get_props (event)->any.window && __gtk_widget_get_double_buffered (event_widget))
 	{
-	  __gdk_window_begin_paint_region (event->any.window, event->expose.region);
+	  __gdk_window_begin_paint_region (gtk_widget_get_props (event)->any.window, gtk_widget_get_props (event)->expose.region);
 	  __gtk_widget_send_expose (event_widget, event);
-	  __gdk_window_end_paint (event->any.window);
+	  __gdk_window_end_paint (gtk_widget_get_props (event)->any.window);
 	}
       else
 	{
@@ -1318,7 +1318,7 @@ __gtk_main_do_event (GdkEvent *event)
 	     drap operatoins to automatically flush the window, thus we
 	     need to explicitly flush any outstanding moves or double
 	     buffering */
-	  __gdk_window_flush (event->any.window);
+	  __gdk_window_flush (gtk_widget_get_props (event)->any.window);
 	  __gtk_widget_send_expose (event_widget, event);
 	}
       break;
@@ -1357,7 +1357,7 @@ __gtk_main_do_event (GdkEvent *event)
       /* Catch alt press to enable auto-mnemonics;
        * menus are handled elsewhere
        */
-      if ((event->key.keyval == GDK_Alt_L || event->key.keyval == GDK_Alt_R) &&
+      if ((gtk_widget_get_props (event)->key.keyval == GDK_Alt_L || gtk_widget_get_props (event)->key.keyval == GDK_Alt_R) &&
           !GTK_IS_MENU_SHELL (grab_widget))
         {
           gboolean auto_mnemonics;
@@ -1370,7 +1370,7 @@ __gtk_main_do_event (GdkEvent *event)
               gboolean mnemonics_visible;
               GtkWidget *window;
 
-              mnemonics_visible = (event->type == GDK_KEY_PRESS);
+              mnemonics_visible = (gtk_widget_get_props (event)->type == GDK_KEY_PRESS);
 
               window = __gtk_widget_get_toplevel (grab_widget);
 
@@ -1388,7 +1388,7 @@ __gtk_main_do_event (GdkEvent *event)
       
     case GDK_ENTER_NOTIFY:
       GTK_PRIVATE_SET_FLAG (event_widget, GTK_HAS_POINTER);
-      ___gtk_widget_set_pointer_window (event_widget, event->any.window);
+      ___gtk_widget_set_pointer_window (event_widget, gtk_widget_get_props (event)->any.window);
       if (__gtk_widget_is_sensitive (grab_widget))
 	__gtk_widget_event (grab_widget, event);
       break;
@@ -1414,16 +1414,16 @@ __gtk_main_do_event (GdkEvent *event)
       break;
     }
 
-  if (event->type == GDK_ENTER_NOTIFY
-      || event->type == GDK_LEAVE_NOTIFY
-      || event->type == GDK_BUTTON_PRESS
-      || event->type == GDK_2BUTTON_PRESS
-      || event->type == GDK_3BUTTON_PRESS
-      || event->type == GDK_KEY_PRESS
-      || event->type == GDK_DRAG_ENTER
-      || event->type == GDK_GRAB_BROKEN
-      || event->type == GDK_MOTION_NOTIFY
-      || event->type == GDK_SCROLL)
+  if (gtk_widget_get_props (event)->type == GDK_ENTER_NOTIFY
+      || gtk_widget_get_props (event)->type == GDK_LEAVE_NOTIFY
+      || gtk_widget_get_props (event)->type == GDK_BUTTON_PRESS
+      || gtk_widget_get_props (event)->type == GDK_2BUTTON_PRESS
+      || gtk_widget_get_props (event)->type == GDK_3BUTTON_PRESS
+      || gtk_widget_get_props (event)->type == GDK_KEY_PRESS
+      || gtk_widget_get_props (event)->type == GDK_DRAG_ENTER
+      || gtk_widget_get_props (event)->type == GDK_GRAB_BROKEN
+      || gtk_widget_get_props (event)->type == GDK_MOTION_NOTIFY
+      || gtk_widget_get_props (event)->type == GDK_SCROLL)
     {
       ___gtk_tooltip_handle_event (event);
     }
@@ -1829,7 +1829,7 @@ __gtk_propagate_event (GtkWidget *widget,
 	  else
 	    handled_event = __gtk_widget_event (widget, event);
 	      
-	  tmp = widget->parent;
+	  tmp = gtk_widget_get_props (widget)->parent;
 	  g_object_unref (widget);
 
 	  widget = tmp;

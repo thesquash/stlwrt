@@ -7013,8 +7013,8 @@ make_cursor_gc (GtkWidget      *widget,
   else
     gc_values.foreground = *fallback;
   
-  __gdk_rgb_find_color (widget->style->colormap, &gc_values.foreground);
-  return __gtk_gc_get (widget->style->depth, widget->style->colormap, &gc_values, gc_values_mask);
+  __gdk_rgb_find_color (gtk_widget_get_props (widget)->style->colormap, &gc_values.foreground);
+  return __gtk_gc_get (gtk_widget_get_props (widget)->style->depth, gtk_widget_get_props (widget)->style->colormap, &gc_values, gc_values_mask);
 }
 
 static GdkGC *
@@ -7023,11 +7023,11 @@ get_insertion_cursor_gc (GtkWidget *widget,
 {
   CursorInfo *cursor_info;
 
-  cursor_info = g_object_get_data (G_OBJECT (widget->style), "gtk-style-cursor-info");
+  cursor_info = g_object_get_data (G_OBJECT (gtk_widget_get_props (widget)->style), "gtk-style-cursor-info");
   if (!cursor_info)
     {
       cursor_info = g_new (CursorInfo, 1);
-      g_object_set_data (G_OBJECT (widget->style), I_("gtk-style-cursor-info"), cursor_info);
+      g_object_set_data (G_OBJECT (gtk_widget_get_props (widget)->style), I_("gtk-style-cursor-info"), cursor_info);
       cursor_info->primary_gc = NULL;
       cursor_info->secondary_gc = NULL;
       cursor_info->for_type = G_TYPE_INVALID;
@@ -7061,7 +7061,7 @@ get_insertion_cursor_gc (GtkWidget *widget,
       if (!cursor_info->primary_gc)
 	cursor_info->primary_gc = make_cursor_gc (widget,
 						  "cursor-color",
-						  &widget->style->text[GTK_STATE_NORMAL]);
+						  &gtk_widget_get_props (widget)->style->text[GTK_STATE_NORMAL]);
 
       return cursor_info->primary_gc;
     }
@@ -7072,7 +7072,7 @@ get_insertion_cursor_gc (GtkWidget *widget,
 						    "secondary-cursor-color",
 						    /* text_aa is the average of text and base colors,
 						     * in usual black-on-white case it's grey. */
-						    &widget->style->text_aa[GTK_STATE_NORMAL]);
+						    &gtk_widget_get_props (widget)->style->text_aa[GTK_STATE_NORMAL]);
 
       return cursor_info->secondary_gc;
     }
@@ -7103,7 +7103,7 @@ ___gtk_widget_get_cursor_color (GtkWidget *widget,
       __gdk_color_free (style_color);
     }
   else
-    *color = widget->style->text[GTK_STATE_NORMAL];
+    *color = gtk_widget_get_props (widget)->style->text[GTK_STATE_NORMAL];
 }
 
 static void

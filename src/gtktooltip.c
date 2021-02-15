@@ -179,10 +179,10 @@ gtk_tooltip_init (GtkTooltip *tooltip)
 
   tooltip->alignment = __gtk_alignment_new (0.5, 0.5, 1.0, 1.0);
   __gtk_alignment_set_padding (GTK_ALIGNMENT (tooltip->alignment),
-			     tooltip->window->style->ythickness,
-			     tooltip->window->style->ythickness,
-			     tooltip->window->style->xthickness,
-			     tooltip->window->style->xthickness);
+			     tooltip->gtk_widget_get_props (window)->style->ythickness,
+			     tooltip->gtk_widget_get_props (window)->style->ythickness,
+			     tooltip->gtk_widget_get_props (window)->style->xthickness,
+			     tooltip->gtk_widget_get_props (window)->style->xthickness);
   __gtk_container_add (GTK_CONTAINER (tooltip->window), tooltip->alignment);
   __gtk_widget_show (tooltip->alignment);
 
@@ -191,7 +191,7 @@ gtk_tooltip_init (GtkTooltip *tooltip)
   g_signal_connect_swapped (tooltip->window, "expose-event",
 			    G_CALLBACK (gtk_tooltip_paint_window), tooltip);
 
-  tooltip->box = __gtk_hbox_new (FALSE, tooltip->window->style->xthickness);
+  tooltip->box = __gtk_hbox_new (FALSE, tooltip->gtk_widget_get_props (window)->style->xthickness);
   __gtk_container_add (GTK_CONTAINER (tooltip->alignment), tooltip->box);
   __gtk_widget_show (tooltip->box);
 
@@ -627,8 +627,8 @@ fill_background (GtkWidget  *widget,
 
   draw_round_rect (cr,
                    1.0, 0.5, 0.5, tooltip_radius,
-                   widget->allocation.width - 1,
-                   widget->allocation.height - 1);
+                   gtk_widget_get_props (widget)->allocation.width - 1,
+                   gtk_widget_get_props (widget)->allocation.height - 1);
 
   cairo_set_source_rgba (cr,
                          (float) bg_color->red / 65535.0,
@@ -765,17 +765,17 @@ child_location_foreach (GtkWidget *child,
 #ifdef DEBUG_TOOLTIP
       g_print ("candidate: %s  alloc=[(%d,%d)  %dx%d]     (%d, %d)->(%d, %d)\n",
 	       __gtk_widget_get_name (child),
-	       child->allocation.x,
-	       child->allocation.y,
-	       child->allocation.width,
-	       child->allocation.height,
+	       gtk_widget_get_props (child)->allocation.x,
+	       gtk_widget_get_props (child)->allocation.y,
+	       gtk_widget_get_props (child)->allocation.width,
+	       gtk_widget_get_props (child)->allocation.height,
 	       child_loc->x, child_loc->y,
 	       x, y);
 #endif /* DEBUG_TOOLTIP */
 
       /* (x, y) relative to child's allocation. */
-      if (x >= 0 && x < child->allocation.width
-	  && y >= 0 && y < child->allocation.height)
+      if (x >= 0 && x < gtk_widget_get_props (child)->allocation.width
+	  && y >= 0 && y < gtk_widget_get_props (child)->allocation.height)
         {
 	  if (GTK_IS_CONTAINER (child))
 	    {
@@ -813,21 +813,21 @@ window_to_alloc (GtkWidget *dest_widget,
 		 gint      *dest_y)
 {
   /* Translate from window relative to allocation relative */
-  if (__gtk_widget_get_has_window (dest_widget) && dest_widget->parent)
+  if (__gtk_widget_get_has_window (gtk_widget_get_props (dest_widget)) && gtk_widget_get_props (dest_widget)->parent)
     {
       gint wx, wy;
-      __gdk_window_get_position (dest_widget->window, &wx, &wy);
+      __gdk_window_get_position (gtk_widget_get_props (dest_widget)->window, &wx, &wy);
 
-      /* Offset coordinates if widget->window is smaller than
-       * widget->allocation.
+      /* Offset coordinates if gtk_widget_get_props (widget)->window is smaller than
+       * gtk_widget_get_props (widget)->allocation.
        */
-      src_x += wx - dest_widget->allocation.x;
-      src_y += wy - dest_widget->allocation.y;
+      src_x += wx - gtk_widget_get_props (dest_widget)->allocation.x;
+      src_y += wy - gtk_widget_get_props (dest_widget)->allocation.y;
     }
   else
     {
-      src_x -= dest_widget->allocation.x;
-      src_y -= dest_widget->allocation.y;
+      src_x -= gtk_widget_get_props (dest_widget)->allocation.x;
+      src_y -= gtk_widget_get_props (dest_widget)->allocation.y;
     }
 
   if (dest_x)
@@ -866,11 +866,11 @@ ___gtk_widget_find_at_coords (GdkWindow *window,
   child_loc.x = window_x;
   child_loc.y = window_y;
 
-  /* We go down the window hierarchy to the widget->window,
+  /* We go down the window hierarchy to the gtk_widget_get_props (widget)->window,
    * coordinates stay relative to the current window.
-   * We end up with window == widget->window, coordinates relative to that.
+   * We end up with window == gtk_widget_get_props (widget)->window, coordinates relative to that.
    */
-  while (window && window != event_widget->window)
+  while (window && window != gtk_widget_get_props (event_widget)->window)
     {
       gdouble px, py;
 
@@ -883,7 +883,7 @@ ___gtk_widget_find_at_coords (GdkWindow *window,
       window = __gdk_window_get_effective_parent (window);
     }
 
-  /* Failing to find widget->window can happen for e.g. a detached handle box;
+  /* Failing to find gtk_widget_get_props (widget)->window can happen for e.g. a detached handle box;
    * chaining ::query-tooltip up to its parent probably makes little sense,
    * and users better implement tooltips on handle_box->child.
    * so we simply ignore the event for tooltips here.
@@ -953,8 +953,8 @@ find_topmost_widget_coords_from_event (GdkEvent *event,
     return NULL;
 
   /* Make sure the pointer can actually be on the widget returned. */
-  if (tx < 0 || tx >= tmp->allocation.width ||
-      ty < 0 || ty >= tmp->allocation.height)
+  if (tx < 0 || tx >= gtk_widget_get_props (tmp)->allocation.width ||
+      ty < 0 || ty >= gtk_widget_get_props (tmp)->allocation.height)
     return NULL;
 
   if (x)
@@ -1070,10 +1070,10 @@ get_bounding_box (GtkWidget    *widget,
 
   window = __gtk_widget_get_parent_window (widget);
 
-  x = widget->allocation.x;
-  y = widget->allocation.y;
-  w = widget->allocation.width;
-  h = widget->allocation.height;
+  x = gtk_widget_get_props (widget)->allocation.x;
+  y = gtk_widget_get_props (widget)->allocation.y;
+  w = gtk_widget_get_props (widget)->allocation.width;
+  h = gtk_widget_get_props (widget)->allocation.height;
 
   __gdk_window_get_root_coords (window, x, y, &x1, &y1);
   __gdk_window_get_root_coords (window, x + w, y, &x2, &y2);
@@ -1378,7 +1378,7 @@ ___gtk_tooltip_focus_in (GtkWidget *widget)
 
   tooltip->keyboard_widget = g_object_ref (widget);
 
-  __gdk_window_get_pointer (widget->window, &x, &y, NULL);
+  __gdk_window_get_pointer (gtk_widget_get_props (widget)->window, &x, &y, NULL);
 
   return_value = gtk_tooltip_run_requery (&widget, tooltip, &x, &y);
   if (!return_value)
@@ -1478,7 +1478,7 @@ ___gtk_tooltip_hide (GtkWidget *widget)
   toplevel = __gtk_widget_get_toplevel (widget);
 
   if (widget == tooltip->tooltip_widget
-      || toplevel->window == tooltip->toplevel_window)
+      || gtk_widget_get_props (toplevel)->window == tooltip->toplevel_window)
     ___gtk_tooltip_hide_tooltip (tooltip);
 }
 
@@ -1546,10 +1546,10 @@ ___gtk_tooltip_handle_event (GdkEvent *event)
   if (has_tooltip_widget)
     g_print ("%p (%s) at (%d, %d) %dx%d     pointer: (%d, %d)\n",
 	     has_tooltip_widget, __gtk_widget_get_name (has_tooltip_widget),
-	     has_tooltip_widget->allocation.x,
-	     has_tooltip_widget->allocation.y,
-	     has_tooltip_widget->allocation.width,
-	     has_tooltip_widget->allocation.height,
+	     gtk_widget_get_props (has_tooltip_widget)->allocation.x,
+	     gtk_widget_get_props (has_tooltip_widget)->allocation.y,
+	     gtk_widget_get_props (has_tooltip_widget)->allocation.width,
+	     gtk_widget_get_props (has_tooltip_widget)->allocation.height,
 	     x, y);
 #endif /* DEBUG_TOOLTIP */
 

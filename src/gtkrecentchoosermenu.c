@@ -207,7 +207,7 @@ gtk_recent_chooser_menu_init (GtkRecentChooserMenu *menu)
   
   priv = GTK_RECENT_CHOOSER_MENU_GET_PRIVATE (menu);
   
-  menu->priv = priv;
+  gtk_recent_chooser_menu_get_props (menu)->priv = priv;
   
   priv->show_icons= TRUE;
   priv->show_numbers = FALSE;
@@ -231,7 +231,7 @@ static void
 gtk_recent_chooser_menu_finalize (GObject *object)
 {
   GtkRecentChooserMenu *menu = GTK_RECENT_CHOOSER_MENU (object);
-  GtkRecentChooserMenuPrivate *priv = menu->priv;
+  GtkRecentChooserMenuPrivate *priv = gtk_recent_chooser_menu_get_props (menu)->priv;
   
   priv->manager = NULL;
   
@@ -251,7 +251,7 @@ static void
 gtk_recent_chooser_menu_dispose (GObject *object)
 {
   GtkRecentChooserMenu *menu = GTK_RECENT_CHOOSER_MENU (object);
-  GtkRecentChooserMenuPrivate *priv = menu->priv;
+  GtkRecentChooserMenuPrivate *priv = gtk_recent_chooser_menu_get_props (menu)->priv;
 
   if (priv->manager_changed_id)
     {
@@ -289,7 +289,7 @@ gtk_recent_chooser_menu_constructor (GType                  type,
   parent_class = G_OBJECT_CLASS (gtk_recent_chooser_menu_parent_class);
   object = parent_class->constructor (type, n_params, params);
   menu = GTK_RECENT_CHOOSER_MENU (object);
-  priv = menu->priv;
+  priv = gtk_recent_chooser_menu_get_props (menu)->priv;
   
   g_assert (priv->manager);
 
@@ -326,7 +326,7 @@ gtk_recent_chooser_menu_set_property (GObject      *object,
 				      GParamSpec   *pspec)
 {
   GtkRecentChooserMenu *menu = GTK_RECENT_CHOOSER_MENU (object);
-  GtkRecentChooserMenuPrivate *priv = menu->priv;
+  GtkRecentChooserMenuPrivate *priv = gtk_recent_chooser_menu_get_props (menu)->priv;
   
   switch (prop_id)
     {
@@ -384,7 +384,7 @@ gtk_recent_chooser_menu_get_property (GObject    *object,
 				      GParamSpec *pspec)
 {
   GtkRecentChooserMenu *menu = GTK_RECENT_CHOOSER_MENU (object);
-  GtkRecentChooserMenuPrivate *priv = menu->priv;
+  GtkRecentChooserMenuPrivate *priv = gtk_recent_chooser_menu_get_props (menu)->priv;
   
   switch (prop_id)
     {
@@ -569,7 +569,7 @@ gtk_recent_chooser_menu_set_sort_func (GtkRecentChooser  *chooser,
 				       GDestroyNotify     data_destroy)
 {
   GtkRecentChooserMenu *menu = GTK_RECENT_CHOOSER_MENU (chooser);
-  GtkRecentChooserMenuPrivate *priv = menu->priv;
+  GtkRecentChooserMenuPrivate *priv = gtk_recent_chooser_menu_get_props (menu)->priv;
   
   if (priv->sort_data_destroy)
     {
@@ -593,10 +593,10 @@ static void
 chooser_set_sort_type (GtkRecentChooserMenu *menu,
 		       GtkRecentSortType     sort_type)
 {
-  if (menu->priv->sort_type == sort_type)
+  if (gtk_recent_chooser_menu_get_props (menu)->priv->sort_type == sort_type)
     return;
 
-  menu->priv->sort_type = sort_type;
+  gtk_recent_chooser_menu_get_props (menu)->priv->sort_type = sort_type;
 }
 
 
@@ -604,7 +604,7 @@ static GList *
 gtk_recent_chooser_menu_get_items (GtkRecentChooser *chooser)
 {
   GtkRecentChooserMenu *menu = GTK_RECENT_CHOOSER_MENU (chooser);
-  GtkRecentChooserMenuPrivate *priv = menu->priv;
+  GtkRecentChooserMenuPrivate *priv = gtk_recent_chooser_menu_get_props (menu)->priv;
 
   return ___gtk_recent_chooser_get_items (chooser,
                                         priv->current_filter,
@@ -641,10 +641,10 @@ gtk_recent_chooser_menu_remove_filter (GtkRecentChooser *chooser,
 
   menu = GTK_RECENT_CHOOSER_MENU (chooser);
   
-  if (filter == menu->priv->current_filter)
+  if (filter == gtk_recent_chooser_menu_get_props (menu)->priv->current_filter)
     {
-      g_object_unref (menu->priv->current_filter);
-      menu->priv->current_filter = NULL;
+      g_object_unref (gtk_recent_chooser_menu_get_props (menu)->priv->current_filter);
+      gtk_recent_chooser_menu_get_props (menu)->priv->current_filter = NULL;
 
       g_object_notify (G_OBJECT (menu), "filter");
     }
@@ -658,8 +658,8 @@ gtk_recent_chooser_menu_list_filters (GtkRecentChooser *chooser)
 
   menu = GTK_RECENT_CHOOSER_MENU (chooser);
  
-  if (menu->priv->current_filter)
-    retval = g_slist_prepend (retval, menu->priv->current_filter);
+  if (gtk_recent_chooser_menu_get_props (menu)->priv->current_filter)
+    retval = g_slist_prepend (retval, gtk_recent_chooser_menu_get_props (menu)->priv->current_filter);
 
   return retval;
 }
@@ -670,7 +670,7 @@ gtk_recent_chooser_menu_set_current_filter (GtkRecentChooserMenu *menu,
 {
   GtkRecentChooserMenuPrivate *priv;
 
-  priv = menu->priv;
+  priv = gtk_recent_chooser_menu_get_props (menu)->priv;
   
   if (priv->current_filter)
     g_object_unref (G_OBJECT (priv->current_filter));
@@ -730,7 +730,7 @@ gtk_recent_chooser_menu_add_tip (GtkRecentChooserMenu *menu,
   g_assert (info != NULL);
   g_assert (item != NULL);
 
-  priv = menu->priv;
+  priv = gtk_recent_chooser_menu_get_props (menu)->priv;
   
   path = __gtk_recent_info_get_uri_display (info);
   if (path)
@@ -757,7 +757,7 @@ gtk_recent_chooser_menu_create_item (GtkRecentChooserMenu *menu,
 
   g_assert (info != NULL);
 
-  priv = menu->priv;
+  priv = gtk_recent_chooser_menu_get_props (menu)->priv;
 
   if (priv->show_numbers)
     {
@@ -830,7 +830,7 @@ gtk_recent_chooser_menu_insert_item (GtkRecentChooserMenu *menu,
                                      GtkWidget            *menuitem,
                                      gint                  position)
 {
-  GtkRecentChooserMenuPrivate *priv = menu->priv;
+  GtkRecentChooserMenuPrivate *priv = gtk_widget_get_props (menu)->priv;
   gint real_position;
 
   if (priv->first_recent_item_pos == -1)
@@ -896,7 +896,7 @@ gtk_recent_chooser_menu_dispose_items (GtkRecentChooserMenu *menu)
     }
 
   /* recalculate the position of the first recent item */
-  menu->priv->first_recent_item_pos = -1;
+  gtk_widget_get_props (menu)->priv->first_recent_item_pos = -1;
 
   g_list_free (children);
 }
@@ -921,7 +921,7 @@ idle_populate_func (gpointer data)
   GtkWidget *item;
 
   pdata = (MenuPopulateData *) data;
-  priv = pdata->menu->priv;
+  priv = pdata->gtk_recent_chooser_menu_get_props (menu)->priv;
 
   if (!pdata->items)
     {
@@ -991,7 +991,7 @@ idle_populate_clean_up (gpointer data)
 {
   MenuPopulateData *pdata = data;
 
-  if (pdata->menu->priv->populate_id == 0)
+  if (pdata->gtk_recent_chooser_menu_get_props (menu)->priv->populate_id == 0)
     {
       /* show the placeholder in case no item survived
        * the filtering process in the idle loop
@@ -1008,9 +1008,9 @@ static void
 gtk_recent_chooser_menu_populate (GtkRecentChooserMenu *menu)
 {
   MenuPopulateData *pdata;
-  GtkRecentChooserMenuPrivate *priv = menu->priv;
+  GtkRecentChooserMenuPrivate *priv = gtk_recent_chooser_menu_get_props (menu)->priv;
 
-  if (menu->priv->populate_id)
+  if (gtk_recent_chooser_menu_get_props (menu)->priv->populate_id)
     return;
 
   pdata = g_slice_new (MenuPopulateData);
@@ -1058,7 +1058,7 @@ static void
 set_recent_manager (GtkRecentChooserMenu *menu,
 		    GtkRecentManager     *manager)
 {
-  GtkRecentChooserMenuPrivate *priv = menu->priv;
+  GtkRecentChooserMenuPrivate *priv = gtk_recent_chooser_menu_get_props (menu)->priv;
 
   if (priv->manager)
     {
@@ -1111,7 +1111,7 @@ foreach_set_shot_tips (GtkWidget *widget,
                        gpointer   user_data)
 {
   GtkRecentChooserMenu *menu = user_data;
-  GtkRecentChooserMenuPrivate *priv = menu->priv;
+  GtkRecentChooserMenuPrivate *priv = gtk_recent_chooser_menu_get_props (menu)->priv;
   gboolean has_mark;
 
   /* toggle the tooltip only on the items we create */
@@ -1126,7 +1126,7 @@ static void
 gtk_recent_chooser_menu_set_show_tips (GtkRecentChooserMenu *menu,
 				       gboolean              show_tips)
 {
-  GtkRecentChooserMenuPrivate *priv = menu->priv;
+  GtkRecentChooserMenuPrivate *priv = gtk_recent_chooser_menu_get_props (menu)->priv;
 
   if (priv->show_tips == show_tips)
     return;
@@ -1229,7 +1229,7 @@ __gtk_recent_chooser_menu_get_show_numbers (GtkRecentChooserMenu *menu)
 {
   g_return_val_if_fail (GTK_IS_RECENT_CHOOSER_MENU (menu), FALSE);
 
-  return menu->priv->show_numbers;
+  return gtk_recent_chooser_menu_get_props (menu)->priv->show_numbers;
 }
 
 /**
@@ -1250,9 +1250,9 @@ __gtk_recent_chooser_menu_set_show_numbers (GtkRecentChooserMenu *menu,
 {
   g_return_if_fail (GTK_IS_RECENT_CHOOSER_MENU (menu));
 
-  if (menu->priv->show_numbers == show_numbers)
+  if (gtk_recent_chooser_menu_get_props (menu)->priv->show_numbers == show_numbers)
     return;
 
-  menu->priv->show_numbers = show_numbers;
+  gtk_recent_chooser_menu_get_props (menu)->priv->show_numbers = show_numbers;
   g_object_notify (G_OBJECT (menu), "show-numbers");
 }

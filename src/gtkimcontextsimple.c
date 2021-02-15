@@ -126,12 +126,12 @@ gtk_im_context_simple_finalize (GObject *obj)
 {
   GtkIMContextSimple *context_simple = GTK_IM_CONTEXT_SIMPLE (obj);
 
-  if (context_simple->tables)
+  if (gtk_im_context_simple_get_props (context_simple)->tables)
     {
-      g_slist_foreach (context_simple->tables, (GFunc)g_free, NULL);
-      g_slist_free (context_simple->tables);
+      g_slist_foreach (gtk_im_context_simple_get_props (context_simple)->tables, (GFunc)g_free, NULL);
+      g_slist_free (gtk_im_context_simple_get_props (context_simple)->tables);
 
-      context_simple->tables = NULL;
+      gtk_im_context_simple_get_props (context_simple)->tables = NULL;
     }
 
   G_OBJECT_CLASS (gtk_im_context_simple_parent_class)->finalize (obj);
@@ -164,11 +164,11 @@ gtk_im_context_simple_commit_char (GtkIMContext *context,
   len = g_unichar_to_utf8 (ch, buf);
   buf[len] = '\0';
 
-  if (context_simple->tentative_match || context_simple->in_hex_sequence)
+  if (gtk_im_context_simple_get_props (context_simple)->tentative_match || gtk_im_context_simple_get_props (context_simple)->in_hex_sequence)
     {
-      context_simple->in_hex_sequence = FALSE;  
-      context_simple->tentative_match = 0;
-      context_simple->tentative_match_len = 0;
+      gtk_im_context_simple_get_props (context_simple)->in_hex_sequence = FALSE;  
+      gtk_im_context_simple_get_props (context_simple)->tentative_match = 0;
+      gtk_im_context_simple_get_props (context_simple)->tentative_match_len = 0;
       g_signal_emit_by_name (context_simple, "preedit-changed");
       g_signal_emit_by_name (context_simple, "preedit-end");
     }
@@ -224,7 +224,7 @@ check_table (GtkIMContextSimple    *context_simple,
   if (n_compose > table->max_seq_len)
     return FALSE;
   
-  seq = bsearch (context_simple->compose_buffer,
+  seq = bsearch (gtk_im_context_simple_get_props (context_simple)->compose_buffer,
 		 table->data, table->n_seqs,
 		 sizeof (guint16) *  row_stride, 
 		 compare_seq);
@@ -239,7 +239,7 @@ check_table (GtkIMContextSimple    *context_simple,
       while (seq > table->data)
 	{
 	  prev_seq = seq - row_stride;
-	  if (compare_seq (context_simple->compose_buffer, prev_seq) != 0)
+	  if (compare_seq (gtk_im_context_simple_get_props (context_simple)->compose_buffer, prev_seq) != 0)
 	    break;
 	  seq = prev_seq;
 	}
@@ -258,10 +258,10 @@ check_table (GtkIMContextSimple    *context_simple,
 	  next_seq = seq + row_stride;
 	  if (next_seq < table->data + row_stride * table->n_seqs)
 	    {
-	      if (compare_seq (context_simple->compose_buffer, next_seq) == 0)
+	      if (compare_seq (gtk_im_context_simple_get_props (context_simple)->compose_buffer, next_seq) == 0)
 		{
-		  context_simple->tentative_match = value;
-		  context_simple->tentative_match_len = n_compose;
+		  gtk_im_context_simple_get_props (context_simple)->tentative_match = value;
+		  gtk_im_context_simple_get_props (context_simple)->tentative_match_len = n_compose;
 		
 		  g_signal_emit_by_name (context_simple, "preedit-changed");
 
@@ -270,7 +270,7 @@ check_table (GtkIMContextSimple    *context_simple,
 	    }
 
 	  gtk_im_context_simple_commit_char (GTK_IM_CONTEXT (context_simple), value);
-	  context_simple->compose_buffer[0] = 0;
+	  gtk_im_context_simple_get_props (context_simple)->compose_buffer[0] = 0;
 	}
       
       return TRUE;
@@ -303,11 +303,11 @@ check_win32_special_cases (GtkIMContextSimple    *context_simple,
 			   gint                   n_compose)
 {
   if (n_compose == 2 &&
-      context_simple->compose_buffer[1] == GDK_space)
+      gtk_im_context_simple_get_props (context_simple)->compose_buffer[1] == GDK_space)
     {
       gunichar value = 0;
 
-      switch (context_simple->compose_buffer[0])
+      switch (gtk_im_context_simple_get_props (context_simple)->compose_buffer[0])
 	{
 	case GDK_dead_acute:
 	  value = 0x00B4; break;
@@ -317,7 +317,7 @@ check_win32_special_cases (GtkIMContextSimple    *context_simple,
       if (value > 0)
 	{
 	  gtk_im_context_simple_commit_char (GTK_IM_CONTEXT (context_simple), value);
-	  context_simple->compose_buffer[0] = 0;
+	  gtk_im_context_simple_get_props (context_simple)->compose_buffer[0] = 0;
 
 	  GTK_NOTE (MISC, g_print ("win32: U+%04X\n", value));
 	  return TRUE;
@@ -335,8 +335,8 @@ check_win32_special_case_after_compact_match (GtkIMContextSimple    *context_sim
    * two corresponding spacing accents.
    */
   if (n_compose == 2 &&
-      context_simple->compose_buffer[0] == context_simple->compose_buffer[1] &&
-      IS_DEAD_KEY (context_simple->compose_buffer[0]))
+      gtk_im_context_simple_get_props (context_simple)->compose_buffer[0] == gtk_im_context_simple_get_props (context_simple)->compose_buffer[1] &&
+      IS_DEAD_KEY (gtk_im_context_simple_get_props (context_simple)->compose_buffer[0]))
     {
       gtk_im_context_simple_commit_char (GTK_IM_CONTEXT (context_simple), value);
       GTK_NOTE (MISC, g_print ("win32: U+%04X ", value));
@@ -355,10 +355,10 @@ check_quartz_special_cases (GtkIMContextSimple *context_simple,
 
   if (n_compose == 2)
     {
-      switch (context_simple->compose_buffer[0])
+      switch (gtk_im_context_simple_get_props (context_simple)->compose_buffer[0])
         {
         case GDK_KEY_dead_doubleacute:
-          switch (context_simple->compose_buffer[1])
+          switch (gtk_im_context_simple_get_props (context_simple)->compose_buffer[1])
             {
             case GDK_KEY_dead_doubleacute:
             case GDK_KEY_space:
@@ -380,7 +380,7 @@ check_quartz_special_cases (GtkIMContextSimple *context_simple,
           break;
 
         case GDK_KEY_dead_acute:
-          switch (context_simple->compose_buffer[1])
+          switch (gtk_im_context_simple_get_props (context_simple)->compose_buffer[1])
             {
             case 'c': value = GDK_KEY_ccedilla; break;
             case 'C': value = GDK_KEY_Ccedilla; break;
@@ -393,7 +393,7 @@ check_quartz_special_cases (GtkIMContextSimple *context_simple,
     {
       gtk_im_context_simple_commit_char (GTK_IM_CONTEXT (context_simple),
                                          __gdk_keyval_to_unicode (value));
-      context_simple->compose_buffer[0] = 0;
+      gtk_im_context_simple_get_props (context_simple)->compose_buffer[0] = 0;
 
       GTK_NOTE (MISC, g_print ("quartz: U+%04X\n", value));
       return TRUE;
@@ -420,7 +420,7 @@ check_compact_table (GtkIMContextSimple    *context_simple,
   if (n_compose > table->max_seq_len)
     return FALSE;
   
-  seq_index = bsearch (context_simple->compose_buffer,
+  seq_index = bsearch (gtk_im_context_simple_get_props (context_simple)->compose_buffer,
 		 table->data, table->n_index_size,
 		 sizeof (guint16) *  table->n_index_stride, 
 		 compare_seq_index);
@@ -446,7 +446,7 @@ check_compact_table (GtkIMContextSimple    *context_simple,
 
       if (seq_index[i+1] - seq_index[i] > 0)
         {
-	  seq = bsearch (context_simple->compose_buffer + 1,
+	  seq = bsearch (gtk_im_context_simple_get_props (context_simple)->compose_buffer + 1,
 		 table->data + seq_index[i], (seq_index[i+1] - seq_index[i]) / row_stride,
 		 sizeof (guint16) *  row_stride, 
 		 compare_seq);
@@ -481,7 +481,7 @@ check_compact_table (GtkIMContextSimple    *context_simple,
 #ifdef G_OS_WIN32
       check_win32_special_case_after_compact_match (context_simple, n_compose, value);
 #endif
-      context_simple->compose_buffer[0] = 0;
+      gtk_im_context_simple_get_props (context_simple)->compose_buffer[0] = 0;
 
       GTK_NOTE (MISC, g_print ("U+%04X\n", value));
       return TRUE;
@@ -570,19 +570,19 @@ check_algorithmically (GtkIMContextSimple    *context_simple,
   if (n_compose >= GTK_MAX_COMPOSE_LEN)
     return FALSE;
 
-  for (i = 0; i < n_compose && IS_DEAD_KEY (context_simple->compose_buffer[i]); i++)
+  for (i = 0; i < n_compose && IS_DEAD_KEY (gtk_im_context_simple_get_props (context_simple)->compose_buffer[i]); i++)
     ;
   if (i == n_compose)
     return TRUE;
 
   if (i > 0 && i == n_compose - 1)
     {
-      combination_buffer[0] = __gdk_keyval_to_unicode (context_simple->compose_buffer[i]);
+      combination_buffer[0] = __gdk_keyval_to_unicode (gtk_im_context_simple_get_props (context_simple)->compose_buffer[i]);
       combination_buffer[n_compose] = 0;
       i--;
       while (i >= 0)
 	{
-	  switch (context_simple->compose_buffer[i])
+	  switch (gtk_im_context_simple_get_props (context_simple)->compose_buffer[i])
 	    {
 #define CASE(keysym, unicode) \
 	    case GDK_dead_##keysym: combination_buffer[i+1] = unicode; break
@@ -619,7 +619,7 @@ check_algorithmically (GtkIMContextSimple    *context_simple,
 	    /* CASE (psili, 0x343); */
 #undef CASE
 	    default:
-	      combination_buffer[i+1] = __gdk_keyval_to_unicode (context_simple->compose_buffer[i]);
+	      combination_buffer[i+1] = __gdk_keyval_to_unicode (gtk_im_context_simple_get_props (context_simple)->compose_buffer[i]);
 	    }
 	  i--;
 	}
@@ -636,7 +636,7 @@ check_algorithmically (GtkIMContextSimple    *context_simple,
 
           value = g_utf8_get_char (nfc);
           gtk_im_context_simple_commit_char (GTK_IM_CONTEXT (context_simple), value);
-          context_simple->compose_buffer[0] = 0;
+          gtk_im_context_simple_get_props (context_simple)->compose_buffer[0] = 0;
 
           g_free (combination_utf8);
           g_free (nfc);
@@ -676,8 +676,8 @@ check_hex (GtkIMContextSimple *context_simple,
   gchar *nptr = NULL;
   gchar buf[7];
 
-  context_simple->tentative_match = 0;
-  context_simple->tentative_match_len = 0;
+  gtk_im_context_simple_get_props (context_simple)->tentative_match = 0;
+  gtk_im_context_simple_get_props (context_simple)->tentative_match_len = 0;
 
   str = g_string_new (NULL);
   
@@ -686,7 +686,7 @@ check_hex (GtkIMContextSimple *context_simple,
     {
       gunichar ch;
       
-      ch = __gdk_keyval_to_unicode (context_simple->compose_buffer[i]);
+      ch = __gdk_keyval_to_unicode (gtk_im_context_simple_get_props (context_simple)->compose_buffer[i]);
       
       if (ch == 0)
         return FALSE;
@@ -716,8 +716,8 @@ check_hex (GtkIMContextSimple *context_simple,
 
   if (g_unichar_validate (n))
     {
-      context_simple->tentative_match = n;
-      context_simple->tentative_match_len = n_compose;
+      gtk_im_context_simple_get_props (context_simple)->tentative_match = n;
+      gtk_im_context_simple_get_props (context_simple)->tentative_match_len = n_compose;
     }
   
   return TRUE;
@@ -761,18 +761,18 @@ no_sequence_matches (GtkIMContextSimple *context_simple,
   /* No compose sequences found, check first if we have a partial
    * match pending.
    */
-  if (context_simple->tentative_match)
+  if (gtk_im_context_simple_get_props (context_simple)->tentative_match)
     {
-      gint len = context_simple->tentative_match_len;
+      gint len = gtk_im_context_simple_get_props (context_simple)->tentative_match_len;
       int i;
       
-      gtk_im_context_simple_commit_char (context, context_simple->tentative_match);
-      context_simple->compose_buffer[0] = 0;
+      gtk_im_context_simple_commit_char (context, gtk_im_context_simple_get_props (context_simple)->tentative_match);
+      gtk_im_context_simple_get_props (context_simple)->compose_buffer[0] = 0;
       
       for (i=0; i < n_compose - len - 1; i++)
 	{
 	  GdkEvent *tmp_event = __gdk_event_copy ((GdkEvent *)event);
-	  tmp_event->key.keyval = context_simple->compose_buffer[len + i];
+	  tmp_event->key.keyval = gtk_im_context_simple_get_props (context_simple)->compose_buffer[len + i];
 	  
 	  __gtk_im_context_filter_keypress (context, (GdkEventKey *)tmp_event);
 	  __gdk_event_free (tmp_event);
@@ -782,7 +782,7 @@ no_sequence_matches (GtkIMContextSimple *context_simple,
     }
   else
     {
-      context_simple->compose_buffer[0] = 0;
+      gtk_im_context_simple_get_props (context_simple)->compose_buffer[0] = 0;
       if (n_compose > 1)		/* Invalid sequence */
 	{
 	  beep_window (event->window);
@@ -867,34 +867,34 @@ gtk_im_context_simple_filter_keypress (GtkIMContext *context,
   guint hex_keyval;
   int i;
 
-  while (context_simple->compose_buffer[n_compose] != 0)
+  while (gtk_im_context_simple_get_props (context_simple)->compose_buffer[n_compose] != 0)
     n_compose++;
 
   if (event->type == GDK_KEY_RELEASE)
     {
-      if (context_simple->in_hex_sequence &&
+      if (gtk_im_context_simple_get_props (context_simple)->in_hex_sequence &&
 	  (event->keyval == GDK_Control_L || event->keyval == GDK_Control_R ||
 	   event->keyval == GDK_Shift_L || event->keyval == GDK_Shift_R))
 	{
-	  if (context_simple->tentative_match &&
-	      g_unichar_validate (context_simple->tentative_match))
+	  if (gtk_im_context_simple_get_props (context_simple)->tentative_match &&
+	      g_unichar_validate (gtk_im_context_simple_get_props (context_simple)->tentative_match))
 	    {
-	      gtk_im_context_simple_commit_char (context, context_simple->tentative_match);
-	      context_simple->compose_buffer[0] = 0;
+	      gtk_im_context_simple_commit_char (context, gtk_im_context_simple_get_props (context_simple)->tentative_match);
+	      gtk_im_context_simple_get_props (context_simple)->compose_buffer[0] = 0;
 
 	    }
 	  else if (n_compose == 0)
 	    {
-	      context_simple->modifiers_dropped = TRUE;
+	      gtk_im_context_simple_get_props (context_simple)->modifiers_dropped = TRUE;
 	    }
 	  else
 	    {
 	      /* invalid hex sequence */
 	      beep_window (event->window);
 	      
-	      context_simple->tentative_match = 0;
-	      context_simple->in_hex_sequence = FALSE;
-	      context_simple->compose_buffer[0] = 0;
+	      gtk_im_context_simple_get_props (context_simple)->tentative_match = 0;
+	      gtk_im_context_simple_get_props (context_simple)->in_hex_sequence = FALSE;
+	      gtk_im_context_simple_get_props (context_simple)->compose_buffer[0] = 0;
 	      
 	      g_signal_emit_by_name (context_simple, "preedit-changed");
 	      g_signal_emit_by_name (context_simple, "preedit-end");
@@ -911,7 +911,7 @@ gtk_im_context_simple_filter_keypress (GtkIMContext *context,
     if (event->keyval == gtk_compose_ignore[i])
       return FALSE;
 
-  if (context_simple->in_hex_sequence && context_simple->modifiers_dropped)
+  if (gtk_im_context_simple_get_props (context_simple)->in_hex_sequence && gtk_im_context_simple_get_props (context_simple)->modifiers_dropped)
     have_hex_mods = TRUE;
   else
     have_hex_mods = (event->state & (HEX_MOD_MASK)) == HEX_MOD_MASK;
@@ -933,13 +933,13 @@ gtk_im_context_simple_filter_keypress (GtkIMContext *context,
    * ISO_Level3_Switch.
    */
   if (!have_hex_mods ||
-      (n_compose > 0 && !context_simple->in_hex_sequence) || 
-      (n_compose == 0 && !context_simple->in_hex_sequence && !is_hex_start) ||
-      (context_simple->in_hex_sequence && !hex_keyval && 
+      (n_compose > 0 && !gtk_im_context_simple_get_props (context_simple)->in_hex_sequence) || 
+      (n_compose == 0 && !gtk_im_context_simple_get_props (context_simple)->in_hex_sequence && !is_hex_start) ||
+      (gtk_im_context_simple_get_props (context_simple)->in_hex_sequence && !hex_keyval && 
        !is_hex_start && !is_hex_end && !is_escape && !is_backspace))
     {
       if (event->state & GTK_NO_TEXT_INPUT_MOD_MASK ||
-	  (context_simple->in_hex_sequence && context_simple->modifiers_dropped &&
+	  (gtk_im_context_simple_get_props (context_simple)->in_hex_sequence && gtk_im_context_simple_get_props (context_simple)->modifiers_dropped &&
 	   (event->keyval == GDK_Return || 
 	    event->keyval == GDK_ISO_Enter ||
 	    event->keyval == GDK_KP_Enter)))
@@ -949,35 +949,35 @@ gtk_im_context_simple_filter_keypress (GtkIMContext *context,
     }
   
   /* Handle backspace */
-  if (context_simple->in_hex_sequence && have_hex_mods && is_backspace)
+  if (gtk_im_context_simple_get_props (context_simple)->in_hex_sequence && have_hex_mods && is_backspace)
     {
       if (n_compose > 0)
 	{
 	  n_compose--;
-	  context_simple->compose_buffer[n_compose] = 0;
+	  gtk_im_context_simple_get_props (context_simple)->compose_buffer[n_compose] = 0;
           check_hex (context_simple, n_compose);
 	}
       else
 	{
-	  context_simple->in_hex_sequence = FALSE;
+	  gtk_im_context_simple_get_props (context_simple)->in_hex_sequence = FALSE;
 	}
 
       g_signal_emit_by_name (context_simple, "preedit-changed");
 
-      if (!context_simple->in_hex_sequence)
+      if (!gtk_im_context_simple_get_props (context_simple)->in_hex_sequence)
         g_signal_emit_by_name (context_simple, "preedit-end");
       
       return TRUE;
     }
 
   /* Check for hex sequence restart */
-  if (context_simple->in_hex_sequence && have_hex_mods && is_hex_start)
+  if (gtk_im_context_simple_get_props (context_simple)->in_hex_sequence && have_hex_mods && is_hex_start)
     {
-      if (context_simple->tentative_match &&
-	  g_unichar_validate (context_simple->tentative_match))
+      if (gtk_im_context_simple_get_props (context_simple)->tentative_match &&
+	  g_unichar_validate (gtk_im_context_simple_get_props (context_simple)->tentative_match))
 	{
-	  gtk_im_context_simple_commit_char (context, context_simple->tentative_match);
-	  context_simple->compose_buffer[0] = 0;
+	  gtk_im_context_simple_commit_char (context, gtk_im_context_simple_get_props (context_simple)->tentative_match);
+	  gtk_im_context_simple_get_props (context_simple)->compose_buffer[0] = 0;
 	}
       else 
 	{
@@ -985,19 +985,19 @@ gtk_im_context_simple_filter_keypress (GtkIMContext *context,
 	  if (n_compose > 0)
 	    beep_window (event->window);
 	  
-	  context_simple->tentative_match = 0;
-	  context_simple->in_hex_sequence = FALSE;
-	  context_simple->compose_buffer[0] = 0;
+	  gtk_im_context_simple_get_props (context_simple)->tentative_match = 0;
+	  gtk_im_context_simple_get_props (context_simple)->in_hex_sequence = FALSE;
+	  gtk_im_context_simple_get_props (context_simple)->compose_buffer[0] = 0;
 	}
     }
   
   /* Check for hex sequence start */
-  if (!context_simple->in_hex_sequence && have_hex_mods && is_hex_start)
+  if (!gtk_im_context_simple_get_props (context_simple)->in_hex_sequence && have_hex_mods && is_hex_start)
     {
-      context_simple->compose_buffer[0] = 0;
-      context_simple->in_hex_sequence = TRUE;
-      context_simple->modifiers_dropped = FALSE;
-      context_simple->tentative_match = 0;
+      gtk_im_context_simple_get_props (context_simple)->compose_buffer[0] = 0;
+      gtk_im_context_simple_get_props (context_simple)->in_hex_sequence = TRUE;
+      gtk_im_context_simple_get_props (context_simple)->modifiers_dropped = FALSE;
+      gtk_im_context_simple_get_props (context_simple)->tentative_match = 0;
 
       g_signal_emit_by_name (context_simple, "preedit-start");
       g_signal_emit_by_name (context_simple, "preedit-changed");
@@ -1006,10 +1006,10 @@ gtk_im_context_simple_filter_keypress (GtkIMContext *context,
     }
   
   /* Then, check for compose sequences */
-  if (context_simple->in_hex_sequence)
+  if (gtk_im_context_simple_get_props (context_simple)->in_hex_sequence)
     {
       if (hex_keyval)
-	context_simple->compose_buffer[n_compose++] = hex_keyval;
+	gtk_im_context_simple_get_props (context_simple)->compose_buffer[n_compose++] = hex_keyval;
       else if (is_escape)
 	{
 	  gtk_im_context_simple_reset (context);
@@ -1025,11 +1025,11 @@ gtk_im_context_simple_filter_keypress (GtkIMContext *context,
 	}
     }
   else
-    context_simple->compose_buffer[n_compose++] = event->keyval;
+    gtk_im_context_simple_get_props (context_simple)->compose_buffer[n_compose++] = event->keyval;
 
-  context_simple->compose_buffer[n_compose] = 0;
+  gtk_im_context_simple_get_props (context_simple)->compose_buffer[n_compose] = 0;
 
-  if (context_simple->in_hex_sequence)
+  if (gtk_im_context_simple_get_props (context_simple)->in_hex_sequence)
     {
       /* If the modifiers are still held down, consider the sequence again */
       if (have_hex_mods)
@@ -1037,20 +1037,20 @@ gtk_im_context_simple_filter_keypress (GtkIMContext *context,
           /* space or return ends the sequence, and we eat the key */
           if (n_compose > 0 && is_hex_end)
             {
-	      if (context_simple->tentative_match &&
-		  g_unichar_validate (context_simple->tentative_match))
+	      if (gtk_im_context_simple_get_props (context_simple)->tentative_match &&
+		  g_unichar_validate (gtk_im_context_simple_get_props (context_simple)->tentative_match))
 		{
-		  gtk_im_context_simple_commit_char (context, context_simple->tentative_match);
-		  context_simple->compose_buffer[0] = 0;
+		  gtk_im_context_simple_commit_char (context, gtk_im_context_simple_get_props (context_simple)->tentative_match);
+		  gtk_im_context_simple_get_props (context_simple)->compose_buffer[0] = 0;
 		}
 	      else
 		{
 		  /* invalid hex sequence */
 		  beep_window (event->window);
 
-		  context_simple->tentative_match = 0;
-		  context_simple->in_hex_sequence = FALSE;
-		  context_simple->compose_buffer[0] = 0;
+		  gtk_im_context_simple_get_props (context_simple)->tentative_match = 0;
+		  gtk_im_context_simple_get_props (context_simple)->in_hex_sequence = FALSE;
+		  gtk_im_context_simple_get_props (context_simple)->compose_buffer[0] = 0;
 		}
             }
           else if (!check_hex (context_simple, n_compose))
@@ -1058,7 +1058,7 @@ gtk_im_context_simple_filter_keypress (GtkIMContext *context,
 	  
 	  g_signal_emit_by_name (context_simple, "preedit-changed");
 
-	  if (!context_simple->in_hex_sequence)
+	  if (!gtk_im_context_simple_get_props (context_simple)->in_hex_sequence)
 	    g_signal_emit_by_name (context_simple, "preedit-end");
 
 	  return TRUE;
@@ -1071,7 +1071,7 @@ gtk_im_context_simple_filter_keypress (GtkIMContext *context,
       gsize    output_size = 2;
 
       switch (gdk_win32_keymap_check_compose (GDK_WIN32_KEYMAP (__gdk_keymap_get_default ()),
-                                              context_simple->compose_buffer,
+                                              gtk_im_context_simple_get_props (context_simple)->compose_buffer,
                                               n_compose,
                                               output, &output_size))
         {
@@ -1085,7 +1085,7 @@ gtk_im_context_simple_filter_keypress (GtkIMContext *context,
               gtk_im_context_simple_commit_char (GTK_IM_CONTEXT (context_simple),
                                                  output_char);
             }
-          context_simple->compose_buffer[0] = 0;
+          gtk_im_context_simple_get_props (context_simple)->compose_buffer[0] = 0;
           return TRUE;
         case GDK_WIN32_KEYMAP_MATCH_INCOMPLETE:
           return TRUE;
@@ -1093,7 +1093,7 @@ gtk_im_context_simple_filter_keypress (GtkIMContext *context,
 #endif
 
 
-      tmp_list = context_simple->tables;
+      tmp_list = gtk_im_context_simple_get_props (context_simple)->tables;
       while (tmp_list)
         {
           if (check_table (context_simple, tmp_list->data, n_compose))
@@ -1105,12 +1105,12 @@ gtk_im_context_simple_filter_keypress (GtkIMContext *context,
 	  g_print ("[ ");
 	  for (i = 0; i < n_compose; i++)
 	    {
-	      const gchar *keyval_name = __gdk_keyval_name (context_simple->compose_buffer[i]);
+	      const gchar *keyval_name = __gdk_keyval_name (gtk_im_context_simple_get_props (context_simple)->compose_buffer[i]);
 	      
 	      if (keyval_name != NULL)
 		g_print ("%s ", keyval_name);
 	      else
-		g_print ("%04x ", context_simple->compose_buffer[i]);
+		g_print ("%04x ", gtk_im_context_simple_get_props (context_simple)->compose_buffer[i]);
 	    }
 	  g_print ("] ");
 	});
@@ -1141,13 +1141,13 @@ gtk_im_context_simple_reset (GtkIMContext *context)
 {
   GtkIMContextSimple *context_simple = GTK_IM_CONTEXT_SIMPLE (context);
 
-  context_simple->compose_buffer[0] = 0;
+  gtk_im_context_simple_get_props (context_simple)->compose_buffer[0] = 0;
 
-  if (context_simple->tentative_match || context_simple->in_hex_sequence)
+  if (gtk_im_context_simple_get_props (context_simple)->tentative_match || gtk_im_context_simple_get_props (context_simple)->in_hex_sequence)
     {
-      context_simple->in_hex_sequence = FALSE;
-      context_simple->tentative_match = 0;
-      context_simple->tentative_match_len = 0;
+      gtk_im_context_simple_get_props (context_simple)->in_hex_sequence = FALSE;
+      gtk_im_context_simple_get_props (context_simple)->tentative_match = 0;
+      gtk_im_context_simple_get_props (context_simple)->tentative_match_len = 0;
       g_signal_emit_by_name (context_simple, "preedit-changed");
       g_signal_emit_by_name (context_simple, "preedit-end");
     }
@@ -1164,24 +1164,24 @@ gtk_im_context_simple_get_preedit_string (GtkIMContext   *context,
   
   GtkIMContextSimple *context_simple = GTK_IM_CONTEXT_SIMPLE (context);
 
-  if (context_simple->in_hex_sequence)
+  if (gtk_im_context_simple_get_props (context_simple)->in_hex_sequence)
     {
       int hexchars = 0;
          
       outbuf[0] = 'u';
       len = 1;
 
-      while (context_simple->compose_buffer[hexchars] != 0)
+      while (gtk_im_context_simple_get_props (context_simple)->compose_buffer[hexchars] != 0)
 	{
-	  len += g_unichar_to_utf8 (__gdk_keyval_to_unicode (context_simple->compose_buffer[hexchars]),
+	  len += g_unichar_to_utf8 (__gdk_keyval_to_unicode (gtk_im_context_simple_get_props (context_simple)->compose_buffer[hexchars]),
 				    outbuf + len);
 	  ++hexchars;
 	}
 
       g_assert (len < 25);
     }
-  else if (context_simple->tentative_match)
-    len = g_unichar_to_utf8 (context_simple->tentative_match, outbuf);
+  else if (gtk_im_context_simple_get_props (context_simple)->tentative_match)
+    len = g_unichar_to_utf8 (gtk_im_context_simple_get_props (context_simple)->tentative_match, outbuf);
       
   outbuf[len] = '\0';      
 
@@ -1240,5 +1240,5 @@ __gtk_im_context_simple_add_table (GtkIMContextSimple *context_simple,
   table->max_seq_len = max_seq_len;
   table->n_seqs = n_seqs;
 
-  context_simple->tables = g_slist_prepend (context_simple->tables, table);
+  gtk_im_context_simple_get_props (context_simple)->tables = g_slist_prepend (gtk_im_context_simple_get_props (context_simple)->tables, table);
 }

@@ -113,7 +113,7 @@ gtk_fixed_init (GtkFixed *fixed)
 {
   __gtk_widget_set_has_window (GTK_WIDGET (fixed), FALSE);
 
-  fixed->children = NULL;
+  gtk_fixed_get_props (fixed)->children = NULL;
 }
 
 GtkWidget*
@@ -128,7 +128,7 @@ get_child (GtkFixed  *fixed,
 {
   GList *children;
   
-  children = fixed->children;
+  children = gtk_fixed_get_props (fixed)->children;
   while (children)
     {
       GtkFixedChild *child;
@@ -162,7 +162,7 @@ __gtk_fixed_put (GtkFixed       *fixed,
 
   __gtk_widget_set_parent (widget, GTK_WIDGET (fixed));
 
-  fixed->children = g_list_append (fixed->children, child_info);
+  gtk_fixed_get_props (fixed)->children = g_list_append (gtk_fixed_get_props (fixed)->children, child_info);
 }
 
 static void
@@ -177,7 +177,7 @@ __gtk_fixed_move_internal (GtkFixed       *fixed,
   
   g_return_if_fail (GTK_IS_FIXED (fixed));
   g_return_if_fail (GTK_IS_WIDGET (widget));
-  g_return_if_fail (widget->parent == GTK_WIDGET (fixed));  
+  g_return_if_fail (gtk_widget_get_props (widget)->parent == GTK_WIDGET (fixed));  
   
   child = get_child (fixed, widget);
 
@@ -278,10 +278,10 @@ gtk_fixed_realize (GtkWidget *widget)
       __gtk_widget_set_realized (widget, TRUE);
 
       attributes.window_type = GDK_WINDOW_CHILD;
-      attributes.x = widget->allocation.x;
-      attributes.y = widget->allocation.y;
-      attributes.width = widget->allocation.width;
-      attributes.height = widget->allocation.height;
+      attributes.x = gtk_widget_get_props (widget)->allocation.x;
+      attributes.y = gtk_widget_get_props (widget)->allocation.y;
+      attributes.width = gtk_widget_get_props (widget)->allocation.width;
+      attributes.height = gtk_widget_get_props (widget)->allocation.height;
       attributes.wclass = GDK_INPUT_OUTPUT;
       attributes.visual = __gtk_widget_get_visual (widget);
       attributes.colormap = __gtk_widget_get_colormap (widget);
@@ -290,12 +290,12 @@ gtk_fixed_realize (GtkWidget *widget)
       
       attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
       
-      widget->window = __gdk_window_new (__gtk_widget_get_parent_window (widget), &attributes, 
+      gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (gtk_widget_get_props (widget)), &attributes, 
 				       attributes_mask);
-      __gdk_window_set_user_data (widget->window, widget);
+      __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, gtk_widget_get_props (widget));
       
-      widget->style = __gtk_style_attach (widget->style, widget->window);
-      __gtk_style_set_background (widget->style, widget->window, GTK_STATE_NORMAL);
+      gtk_widget_get_props (widget)->style = __gtk_style_attach (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window);
+      __gtk_style_set_background (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, GTK_STATE_NORMAL);
     }
 }
 
@@ -312,7 +312,7 @@ gtk_fixed_size_request (GtkWidget      *widget,
   requisition->width = 0;
   requisition->height = 0;
 
-  children = fixed->children;
+  children = gtk_fixed_get_props (fixed)->children;
   while (children)
     {
       child = children->data;
@@ -348,12 +348,12 @@ gtk_fixed_size_allocate (GtkWidget     *widget,
 
   fixed = GTK_FIXED (widget);
 
-  widget->allocation = *allocation;
+  gtk_widget_get_props (widget)->allocation = *allocation;
 
   if (__gtk_widget_get_has_window (widget))
     {
       if (__gtk_widget_get_realized (widget))
-	__gdk_window_move_resize (widget->window,
+	__gdk_window_move_resize (gtk_widget_get_props (widget)->window,
 				allocation->x, 
 				allocation->y,
 				allocation->width, 
@@ -362,7 +362,7 @@ gtk_fixed_size_allocate (GtkWidget     *widget,
       
   border_width = GTK_CONTAINER (fixed)->border_width;
   
-  children = fixed->children;
+  children = gtk_fixed_get_props (fixed)->children;
   while (children)
     {
       child = children->data;
@@ -376,8 +376,8 @@ gtk_fixed_size_allocate (GtkWidget     *widget,
 
 	  if (!__gtk_widget_get_has_window (widget))
 	    {
-	      child_allocation.x += widget->allocation.x;
-	      child_allocation.y += widget->allocation.y;
+	      child_allocation.x += gtk_widget_get_props (widget)->allocation.x;
+	      child_allocation.y += gtk_widget_get_props (widget)->allocation.y;
 	    }
 	  
 	  child_allocation.width = child_requisition.width;
@@ -406,7 +406,7 @@ gtk_fixed_remove (GtkContainer *container,
   fixed = GTK_FIXED (container);
   widget_container = GTK_WIDGET (container);
 
-  children = fixed->children;
+  children = gtk_fixed_get_props (fixed)->children;
   while (children)
     {
       child = children->data;
@@ -417,7 +417,7 @@ gtk_fixed_remove (GtkContainer *container,
 	  
 	  __gtk_widget_unparent (widget);
 
-	  fixed->children = g_list_remove_link (fixed->children, children);
+	  gtk_fixed_get_props (fixed)->children = g_list_remove_link (gtk_fixed_get_props (fixed)->children, children);
 	  g_list_free (children);
 	  g_free (child);
 
@@ -441,7 +441,7 @@ gtk_fixed_forall (GtkContainer *container,
   GtkFixedChild *child;
   GList *children;
 
-  children = fixed->children;
+  children = gtk_fixed_get_props (fixed)->children;
   while (children)
     {
       child = children->data;
@@ -457,7 +457,7 @@ gtk_fixed_forall (GtkContainer *container,
  * @has_window: %TRUE if a separate window should be created
  * 
  * Sets whether a #GtkFixed widget is created with a separate
- * #GdkWindow for @widget->window or not. (By default, it will be
+ * #GdkWindow for @gtk_widget_get_props (widget)->window or not. (By default, it will be
  * created with no separate #GdkWindow). This function must be called
  * while the #GtkFixed is not realized, for instance, immediately after the
  * window is created.

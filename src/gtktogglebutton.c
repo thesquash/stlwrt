@@ -143,8 +143,8 @@ gtk_toggle_button_class_init (GtkToggleButtonClass *class)
 static void
 gtk_toggle_button_init (GtkToggleButton *toggle_button)
 {
-  toggle_button->active = FALSE;
-  toggle_button->draw_indicator = FALSE;
+  gtk_toggle_button_get_props (toggle_button)->active = FALSE;
+  gtk_toggle_button_get_props (toggle_button)->draw_indicator = FALSE;
   GTK_BUTTON (toggle_button)->depress_on_activate = TRUE;
 }
 
@@ -266,13 +266,13 @@ gtk_toggle_button_get_property (GObject      *object,
   switch (prop_id)
     {
     case PROP_ACTIVE:
-      g_value_set_boolean (value, tb->active);
+      g_value_set_boolean (value, gtk_toggle_button_get_props (tb)->active);
       break;
     case PROP_INCONSISTENT:
-      g_value_set_boolean (value, tb->inconsistent);
+      g_value_set_boolean (value, gtk_toggle_button_get_props (tb)->inconsistent);
       break;
     case PROP_DRAW_INDICATOR:
-      g_value_set_boolean (value, tb->draw_indicator);
+      g_value_set_boolean (value, gtk_toggle_button_get_props (tb)->draw_indicator);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -302,9 +302,9 @@ __gtk_toggle_button_set_mode (GtkToggleButton *toggle_button,
 
   draw_indicator = draw_indicator ? TRUE : FALSE;
 
-  if (toggle_button->draw_indicator != draw_indicator)
+  if (gtk_toggle_button_get_props (toggle_button)->draw_indicator != draw_indicator)
     {
-      toggle_button->draw_indicator = draw_indicator;
+      gtk_toggle_button_get_props (toggle_button)->draw_indicator = draw_indicator;
       GTK_BUTTON (toggle_button)->depress_on_activate = !draw_indicator;
       
       if (__gtk_widget_get_visible (GTK_WIDGET (toggle_button)))
@@ -329,7 +329,7 @@ __gtk_toggle_button_get_mode (GtkToggleButton *toggle_button)
 {
   g_return_val_if_fail (GTK_IS_TOGGLE_BUTTON (toggle_button), FALSE);
 
-  return toggle_button->draw_indicator;
+  return gtk_toggle_button_get_props (toggle_button)->draw_indicator;
 }
 
 void
@@ -340,7 +340,7 @@ __gtk_toggle_button_set_active (GtkToggleButton *toggle_button,
 
   is_active = is_active != FALSE;
 
-  if (toggle_button->active != is_active)
+  if (gtk_toggle_button_get_props (toggle_button)->active != is_active)
     __gtk_button_clicked (GTK_BUTTON (toggle_button));
 }
 
@@ -350,7 +350,7 @@ __gtk_toggle_button_get_active (GtkToggleButton *toggle_button)
 {
   g_return_val_if_fail (GTK_IS_TOGGLE_BUTTON (toggle_button), FALSE);
 
-  return (toggle_button->active) ? TRUE : FALSE;
+  return (gtk_toggle_button_get_props (toggle_button)->active) ? TRUE : FALSE;
 }
 
 
@@ -385,9 +385,9 @@ __gtk_toggle_button_set_inconsistent (GtkToggleButton *toggle_button,
   
   setting = setting != FALSE;
 
-  if (setting != toggle_button->inconsistent)
+  if (setting != gtk_toggle_button_get_props (toggle_button)->inconsistent)
     {
-      toggle_button->inconsistent = setting;
+      gtk_toggle_button_get_props (toggle_button)->inconsistent = setting;
       
       gtk_toggle_button_update_state (GTK_BUTTON (toggle_button));
       __gtk_widget_queue_draw (GTK_WIDGET (toggle_button));
@@ -409,7 +409,7 @@ __gtk_toggle_button_get_inconsistent (GtkToggleButton *toggle_button)
 {
   g_return_val_if_fail (GTK_IS_TOGGLE_BUTTON (toggle_button), FALSE);
 
-  return toggle_button->inconsistent;
+  return gtk_toggle_button_get_props (toggle_button)->inconsistent;
 }
 
 static gint
@@ -432,7 +432,7 @@ gtk_toggle_button_expose (GtkWidget      *widget,
           shadow_type = GTK_SHADOW_ETCHED_IN;
         }
       else
-	shadow_type = button->depressed ? GTK_SHADOW_IN : GTK_SHADOW_OUT;
+	shadow_type = gtk_button_get_props (button)->depressed ? GTK_SHADOW_IN : GTK_SHADOW_OUT;
 
       ___gtk_button_paint (button, &event->area, state_type, shadow_type,
 			 "togglebutton", "togglebuttondefault");
@@ -465,7 +465,7 @@ gtk_toggle_button_mnemonic_activate (GtkWidget *widget,
 static void
 gtk_toggle_button_pressed (GtkButton *button)
 {
-  button->button_down = TRUE;
+  gtk_button_get_props (button)->button_down = TRUE;
 
   gtk_toggle_button_update_state (button);
   __gtk_widget_queue_draw (GTK_WIDGET (button));
@@ -474,11 +474,11 @@ gtk_toggle_button_pressed (GtkButton *button)
 static void
 gtk_toggle_button_released (GtkButton *button)
 {
-  if (button->button_down)
+  if (gtk_button_get_props (button)->button_down)
     {
-      button->button_down = FALSE;
+      gtk_button_get_props (button)->button_down = FALSE;
 
-      if (button->in_button)
+      if (gtk_button_get_props (button)->in_button)
 	__gtk_button_clicked (button);
 
       gtk_toggle_button_update_state (button);
@@ -490,7 +490,7 @@ static void
 gtk_toggle_button_clicked (GtkButton *button)
 {
   GtkToggleButton *toggle_button = GTK_TOGGLE_BUTTON (button);
-  toggle_button->active = !toggle_button->active;
+  gtk_toggle_button_get_props (toggle_button)->active = !gtk_toggle_button_get_props (toggle_button)->active;
 
   __gtk_toggle_button_toggled (toggle_button);
 
@@ -513,14 +513,14 @@ gtk_toggle_button_update_state (GtkButton *button)
                 "gtk-touchscreen-mode", &touchscreen,
                 NULL);
 
-  if (toggle_button->inconsistent)
+  if (gtk_toggle_button_get_props (toggle_button)->inconsistent)
     depressed = FALSE;
-  else if (button->in_button && button->button_down)
+  else if (gtk_button_get_props (button)->in_button && gtk_button_get_props (button)->button_down)
     depressed = TRUE;
   else
-    depressed = toggle_button->active;
+    depressed = gtk_toggle_button_get_props (toggle_button)->active;
       
-  if (!touchscreen && button->in_button && (!button->button_down || toggle_button->draw_indicator))
+  if (!touchscreen && gtk_button_get_props (button)->in_button && (!gtk_button_get_props (button)->button_down || gtk_toggle_button_get_props (toggle_button)->draw_indicator))
     new_state = GTK_STATE_PRELIGHT;
   else
     new_state = depressed ? GTK_STATE_ACTIVE : GTK_STATE_NORMAL;

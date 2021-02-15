@@ -269,7 +269,7 @@ find_button (GtkInfoBar *info_bar,
   GList *children, *list;
   GtkWidget *child = NULL;
 
-  children = __gtk_container_get_children (GTK_CONTAINER (info_bar->priv->action_area));
+  children = __gtk_container_get_children (GTK_CONTAINER (gtk_info_bar_get_props (info_bar)->priv->action_area));
 
   for (list = children; list; list = list->next)
     {
@@ -316,17 +316,17 @@ gtk_info_bar_expose (GtkWidget      *widget,
 
       detail = type_detail[priv->message_type];
 
-      __gtk_paint_box (widget->style,
-                     widget->window,
+      __gtk_paint_box (gtk_widget_get_props (widget)->style,
+                     gtk_widget_get_props (widget)->window,
                      GTK_STATE_NORMAL,
                      GTK_SHADOW_OUT,
                      NULL,
                      widget,
                      detail,
-                     widget->allocation.x,
-                     widget->allocation.y,
-                     widget->allocation.width,
-                     widget->allocation.height);
+                     gtk_widget_get_props (widget)->allocation.x,
+                     gtk_widget_get_props (widget)->allocation.y,
+                     gtk_widget_get_props (widget)->allocation.width,
+                     gtk_widget_get_props (widget)->allocation.height);
     }
 
   if (GTK_WIDGET_CLASS (gtk_info_bar_parent_class)->expose_event)
@@ -572,9 +572,9 @@ gtk_info_bar_update_colors (GtkInfoBar *info_bar)
         }
     }
 
-  if (!__gdk_color_equal (bg, &widget->style->bg[GTK_STATE_NORMAL]))
+  if (!__gdk_color_equal (bg, &gtk_widget_get_props (widget)->style->bg[GTK_STATE_NORMAL]))
     __gtk_widget_modify_bg (widget, GTK_STATE_NORMAL, bg);
-  if (!__gdk_color_equal (fg, &widget->style->fg[GTK_STATE_NORMAL]))
+  if (!__gdk_color_equal (fg, &gtk_widget_get_props (widget)->style->fg[GTK_STATE_NORMAL]))
     __gtk_widget_modify_fg (widget, GTK_STATE_NORMAL, fg);
 }
 
@@ -595,11 +595,11 @@ gtk_info_bar_style_set (GtkWidget *widget,
                         "content-area-border", &content_area_border,
                         NULL);
 
-  __gtk_box_set_spacing (GTK_BOX (info_bar->priv->action_area), button_spacing);
-  __gtk_container_set_border_width (GTK_CONTAINER (info_bar->priv->action_area),
+  __gtk_box_set_spacing (GTK_BOX (gtk_info_bar_get_props (info_bar)->priv->action_area), button_spacing);
+  __gtk_container_set_border_width (GTK_CONTAINER (gtk_info_bar_get_props (info_bar)->priv->action_area),
                                   action_area_border);
-  __gtk_box_set_spacing (GTK_BOX (info_bar->priv->content_area), content_area_spacing);
-  __gtk_container_set_border_width (GTK_CONTAINER (info_bar->priv->content_area),
+  __gtk_box_set_spacing (GTK_BOX (gtk_info_bar_get_props (info_bar)->priv->content_area), content_area_spacing);
+  __gtk_container_set_border_width (GTK_CONTAINER (gtk_info_bar_get_props (info_bar)->priv->content_area),
                                   content_area_border);
 
   gtk_info_bar_update_colors (info_bar);
@@ -613,7 +613,7 @@ gtk_info_bar_init (GtkInfoBar *info_bar)
 
   __gtk_widget_push_composite_child ();
 
-  info_bar->priv = GTK_INFO_BAR_GET_PRIVATE (info_bar);
+  gtk_info_bar_get_props (info_bar)->priv = GTK_INFO_BAR_GET_PRIVATE (gtk_info_bar_get_props (info_bar));
 
   content_area = __gtk_hbox_new (FALSE, 0);
   __gtk_widget_show (content_area);
@@ -627,8 +627,8 @@ gtk_info_bar_init (GtkInfoBar *info_bar)
   __gtk_widget_set_app_paintable (GTK_WIDGET (info_bar), TRUE);
   __gtk_widget_set_redraw_on_allocate (GTK_WIDGET (info_bar), TRUE);
 
-  info_bar->priv->content_area = content_area;
-  info_bar->priv->action_area = action_area;
+  gtk_info_bar_get_props (info_bar)->priv->content_area = content_area;
+  gtk_info_bar_get_props (info_bar)->priv->action_area = action_area;
 
   __gtk_widget_pop_composite_child ();
 }
@@ -726,10 +726,10 @@ __gtk_info_bar_add_action_widget (GtkInfoBar *info_bar,
   else
     g_warning ("Only 'activatable' widgets can be packed into the action area of a GtkInfoBar");
 
-  __gtk_box_pack_end (GTK_BOX (info_bar->priv->action_area),
+  __gtk_box_pack_end (GTK_BOX (gtk_info_bar_get_props (info_bar)->priv->action_area),
                     child, FALSE, FALSE, 0);
   if (response_id == GTK_RESPONSE_HELP)
-    __gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (info_bar->priv->action_area),
+    __gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (gtk_info_bar_get_props (info_bar)->priv->action_area),
                                         child, TRUE);
 }
 
@@ -748,7 +748,7 @@ __gtk_info_bar_get_action_area (GtkInfoBar *info_bar)
 {
   g_return_val_if_fail (GTK_IS_INFO_BAR (info_bar), NULL);
 
-  return info_bar->priv->action_area;
+  return gtk_info_bar_get_props (info_bar)->priv->action_area;
 }
 
 /**
@@ -766,7 +766,7 @@ __gtk_info_bar_get_content_area (GtkInfoBar *info_bar)
 {
   g_return_val_if_fail (GTK_IS_INFO_BAR (info_bar), NULL);
 
-  return info_bar->priv->content_area;
+  return gtk_info_bar_get_props (info_bar)->priv->content_area;
 }
 
 /**
@@ -928,7 +928,7 @@ __gtk_info_bar_set_response_sensitive (GtkInfoBar *info_bar,
 
   g_return_if_fail (GTK_IS_INFO_BAR (info_bar));
 
-  children = __gtk_container_get_children (GTK_CONTAINER (info_bar->priv->action_area));
+  children = __gtk_container_get_children (GTK_CONTAINER (gtk_info_bar_get_props (info_bar)->priv->action_area));
 
   for (list = children; list; list = list->next)
     {
@@ -964,7 +964,7 @@ __gtk_info_bar_set_default_response (GtkInfoBar *info_bar,
 
   g_return_if_fail (GTK_IS_INFO_BAR (info_bar));
 
-  children = __gtk_container_get_children (GTK_CONTAINER (info_bar->priv->action_area));
+  children = __gtk_container_get_children (GTK_CONTAINER (gtk_info_bar_get_props (info_bar)->priv->action_area));
 
   for (list = children; list; list = list->next)
     {
@@ -1148,7 +1148,7 @@ gtk_info_bar_buildable_custom_finished (GtkBuildable *buildable,
         }
 
       if (ad->response_id == GTK_RESPONSE_HELP)
-        __gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (info_bar->priv->action_area),
+        __gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (gtk_info_bar_get_props (info_bar)->priv->action_area),
                                             GTK_WIDGET (object), TRUE);
 
       g_free (item->widget_name);

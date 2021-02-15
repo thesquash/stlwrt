@@ -115,7 +115,7 @@ add_group_to_closure (GtkSizeGroup    *group,
   *groups = g_slist_prepend (*groups, group);
   mark_visited (group);
 
-  tmp_widgets = group->widgets;
+  tmp_widgets = gtk_size_group_get_props (group)->widgets;
   while (tmp_widgets)
     {
       GtkWidget *tmp_widget = tmp_widgets->data;
@@ -143,7 +143,7 @@ add_widget_to_closure (GtkWidget       *widget,
     {
       GtkSizeGroup *tmp_group = tmp_groups->data;
       
-      if ((tmp_group->mode == GTK_SIZE_GROUP_BOTH || tmp_group->mode == mode) &&
+      if ((gtk_size_group_get_props (tmp_group)->mode == GTK_SIZE_GROUP_BOTH || gtk_size_group_get_props (tmp_group)->mode == mode) &&
 	  !is_visited (tmp_group))
 	add_group_to_closure (tmp_group, mode, groups, widgets);
 
@@ -157,8 +157,8 @@ real_queue_resize (GtkWidget *widget)
   GTK_PRIVATE_SET_FLAG (widget, GTK_ALLOC_NEEDED);
   GTK_PRIVATE_SET_FLAG (widget, GTK_REQUEST_NEEDED);
   
-  if (widget->parent)
-    ___gtk_container_queue_resize (GTK_CONTAINER (widget->parent));
+  if (gtk_widget_get_props (widget)->parent)
+    ___gtk_container_queue_resize (GTK_CONTAINER (gtk_widget_get_props (widget)->parent));
   else if (__gtk_widget_is_toplevel (widget) && GTK_IS_CONTAINER (widget))
     ___gtk_container_queue_resize (GTK_CONTAINER (widget));
 }
@@ -171,8 +171,8 @@ reset_group_sizes (GSList *groups)
     {
       GtkSizeGroup *tmp_group = tmp_list->data;
 
-      tmp_group->have_width = FALSE;
-      tmp_group->have_height = FALSE;
+      gtk_size_group_get_props (tmp_group)->have_width = FALSE;
+      gtk_size_group_get_props (tmp_group)->have_height = FALSE;
       
       tmp_list = tmp_list->next;
     }
@@ -194,7 +194,7 @@ queue_resize_on_widget (GtkWidget *widget,
       if (widget == parent && !check_siblings)
 	{
 	  real_queue_resize (widget);
-	  parent = parent->parent;
+	  gtk_widget_get_props (parent) = gtk_widget_get_props (parent)->gtk_widget_get_props (parent);
 	  continue;
 	}
       
@@ -204,7 +204,7 @@ queue_resize_on_widget (GtkWidget *widget,
 	  if (widget == parent)
 	    real_queue_resize (widget);
 
-	  parent = parent->parent;
+	  gtk_widget_get_props (parent) = gtk_widget_get_props (parent)->gtk_widget_get_props (parent);
 	  continue;
 	}
 
@@ -268,15 +268,15 @@ queue_resize_on_widget (GtkWidget *widget,
       g_slist_free (widgets);
       g_slist_free (groups);
       
-      parent = parent->parent;
+      gtk_widget_get_props (parent) = gtk_widget_get_props (parent)->gtk_widget_get_props (parent);
     }
 }
 
 static void
 queue_resize_on_group (GtkSizeGroup *size_group)
 {
-  if (size_group->widgets)
-    queue_resize_on_widget (size_group->widgets->data, TRUE);
+  if (gtk_size_group_get_props (size_group)->widgets)
+    queue_resize_on_widget (gtk_size_group_get_props (size_group)->widgets->data, TRUE);
 }
 
 static void
@@ -329,11 +329,11 @@ gtk_size_group_class_init (GtkSizeGroupClass *klass)
 static void
 gtk_size_group_init (GtkSizeGroup *size_group)
 {
-  size_group->widgets = NULL;
-  size_group->mode = GTK_SIZE_GROUP_HORIZONTAL;
-  size_group->have_width = 0;
-  size_group->have_height = 0;
-  size_group->ignore_hidden = 0;
+  gtk_size_group_get_props (size_group)->widgets = NULL;
+  gtk_size_group_get_props (size_group)->mode = GTK_SIZE_GROUP_HORIZONTAL;
+  gtk_size_group_get_props (size_group)->have_width = 0;
+  gtk_size_group_get_props (size_group)->have_height = 0;
+  gtk_size_group_get_props (size_group)->ignore_hidden = 0;
 }
 
 static void
@@ -379,10 +379,10 @@ gtk_size_group_get_property (GObject      *object,
   switch (prop_id)
     {
     case PROP_MODE:
-      g_value_set_enum (value, size_group->mode);
+      g_value_set_enum (value, gtk_size_group_get_props (size_group)->mode);
       break;
     case PROP_IGNORE_HIDDEN:
-      g_value_set_boolean (value, size_group->ignore_hidden);
+      g_value_set_boolean (value, gtk_size_group_get_props (size_group)->ignore_hidden);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -403,7 +403,7 @@ __gtk_size_group_new (GtkSizeGroupMode mode)
 {
   GtkSizeGroup *size_group = g_object_new (GTK_TYPE_SIZE_GROUP, NULL);
 
-  size_group->mode = mode;
+  gtk_size_group_get_props (size_group)->mode = mode;
 
   return size_group;
 }
@@ -426,12 +426,12 @@ __gtk_size_group_set_mode (GtkSizeGroup     *size_group,
 {
   g_return_if_fail (GTK_IS_SIZE_GROUP (size_group));
 
-  if (size_group->mode != mode)
+  if (gtk_size_group_get_props (size_group)->mode != mode)
     {
-      if (size_group->mode != GTK_SIZE_GROUP_NONE)
+      if (gtk_size_group_get_props (size_group)->mode != GTK_SIZE_GROUP_NONE)
 	queue_resize_on_group (size_group);
-      size_group->mode = mode;
-      if (size_group->mode != GTK_SIZE_GROUP_NONE)
+      gtk_size_group_get_props (size_group)->mode = mode;
+      if (gtk_size_group_get_props (size_group)->mode != GTK_SIZE_GROUP_NONE)
 	queue_resize_on_group (size_group);
 
       g_object_notify (G_OBJECT (size_group), "mode");
@@ -451,7 +451,7 @@ __gtk_size_group_get_mode (GtkSizeGroup *size_group)
 {
   g_return_val_if_fail (GTK_IS_SIZE_GROUP (size_group), GTK_SIZE_GROUP_BOTH);
 
-  return size_group->mode;
+  return gtk_size_group_get_props (size_group)->mode;
 }
 
 /**
@@ -473,9 +473,9 @@ __gtk_size_group_set_ignore_hidden (GtkSizeGroup *size_group,
   
   ignore_hidden = ignore_hidden != FALSE;
 
-  if (size_group->ignore_hidden != ignore_hidden)
+  if (gtk_size_group_get_props (size_group)->ignore_hidden != ignore_hidden)
     {
-      size_group->ignore_hidden = ignore_hidden;
+      gtk_size_group_get_props (size_group)->ignore_hidden = ignore_hidden;
 
       g_object_notify (G_OBJECT (size_group), "ignore-hidden");
     }
@@ -496,7 +496,7 @@ __gtk_size_group_get_ignore_hidden (GtkSizeGroup *size_group)
 {
   g_return_val_if_fail (GTK_IS_SIZE_GROUP (size_group), FALSE);
 
-  return size_group->ignore_hidden;
+  return gtk_size_group_get_props (size_group)->ignore_hidden;
 }
 
 static void
@@ -536,7 +536,7 @@ __gtk_size_group_add_widget (GtkSizeGroup     *size_group,
       groups = g_slist_prepend (groups, size_group);
       set_size_groups (widget, groups);
 
-      size_group->widgets = g_slist_prepend (size_group->widgets, widget);
+      gtk_size_group_get_props (size_group)->widgets = g_slist_prepend (gtk_size_group_get_props (size_group)->widgets, widget);
 
       g_signal_connect (widget, "destroy",
 			G_CALLBACK (gtk_size_group_widget_destroyed),
@@ -563,7 +563,7 @@ __gtk_size_group_remove_widget (GtkSizeGroup *size_group,
   
   g_return_if_fail (GTK_IS_SIZE_GROUP (size_group));
   g_return_if_fail (GTK_IS_WIDGET (widget));
-  g_return_if_fail (g_slist_find (size_group->widgets, widget));
+  g_return_if_fail (g_slist_find (gtk_size_group_get_props (size_group)->widgets, widget));
 
   g_signal_handlers_disconnect_by_func (widget,
 					gtk_size_group_widget_destroyed,
@@ -573,7 +573,7 @@ __gtk_size_group_remove_widget (GtkSizeGroup *size_group,
   groups = g_slist_remove (groups, size_group);
   set_size_groups (widget, groups);
 
-  size_group->widgets = g_slist_remove (size_group->widgets, widget);
+  gtk_size_group_get_props (size_group)->widgets = g_slist_remove (gtk_size_group_get_props (size_group)->widgets, widget);
   queue_resize_on_group (size_group);
   __gtk_widget_queue_resize (widget);
 
@@ -594,7 +594,7 @@ __gtk_size_group_remove_widget (GtkSizeGroup *size_group,
 GSList *
 __gtk_size_group_get_widgets (GtkSizeGroup *size_group)
 {
-  return size_group->widgets;
+  return gtk_size_group_get_props (size_group)->widgets;
 }
 
 static gint
@@ -608,14 +608,14 @@ get_base_dimension (GtkWidget        *widget,
       if (aux_info && aux_info->width > 0)
 	return aux_info->width;
       else
-	return widget->requisition.width;
+	return gtk_widget_get_props (widget)->requisition.width;
     }
   else
     {
       if (aux_info && aux_info->height > 0)
 	return aux_info->height;
       else
-	return widget->requisition.height;
+	return gtk_widget_get_props (widget)->requisition.height;
     }
 }
 
@@ -628,7 +628,7 @@ do_size_request (GtkWidget *widget)
       GTK_PRIVATE_UNSET_FLAG (widget, GTK_REQUEST_NEEDED);
       g_signal_emit_by_name (widget,
 			     "size-request",
-			     &widget->requisition);
+			     &gtk_widget_get_props (widget)->requisition);
     }
 }
 
@@ -665,10 +665,10 @@ compute_dimension (GtkWidget        *widget,
     {
       GtkSizeGroup *group = groups->data;
 
-      if (mode == GTK_SIZE_GROUP_HORIZONTAL && group->have_width)
-	result = group->requisition.width;
-      else if (mode == GTK_SIZE_GROUP_VERTICAL && group->have_height)
-	result = group->requisition.height;
+      if (mode == GTK_SIZE_GROUP_HORIZONTAL && gtk_size_group_get_props (group)->have_width)
+	result = gtk_size_group_get_props (group)->requisition.width;
+      else if (mode == GTK_SIZE_GROUP_VERTICAL && gtk_size_group_get_props (group)->have_height)
+	result = gtk_size_group_get_props (group)->requisition.height;
       else
 	{
 	  tmp_list = widgets;
@@ -678,7 +678,7 @@ compute_dimension (GtkWidget        *widget,
 
 	      gint dimension = compute_base_dimension (tmp_widget, mode);
 
-	      if (__gtk_widget_get_mapped (tmp_widget) || !group->ignore_hidden)
+	      if (__gtk_widget_get_mapped (tmp_widget) || !gtk_size_group_get_props (group)->ignore_hidden)
 		{
 		  if (dimension > result)
 		    result = dimension;
@@ -694,13 +694,13 @@ compute_dimension (GtkWidget        *widget,
 
 	      if (mode == GTK_SIZE_GROUP_HORIZONTAL)
 		{
-		  tmp_group->have_width = TRUE;
-		  tmp_group->requisition.width = result;
+		  gtk_size_group_get_props (tmp_group)->have_width = TRUE;
+		  gtk_size_group_get_props (tmp_group)->requisition.width = result;
 		}
 	      else
 		{
-		  tmp_group->have_height = TRUE;
-		  tmp_group->requisition.height = result;
+		  gtk_size_group_get_props (tmp_group)->have_height = TRUE;
+		  gtk_size_group_get_props (tmp_group)->requisition.height = result;
 		}
 	      
 	      tmp_list = tmp_list->next;
@@ -737,10 +737,10 @@ get_dimension (GtkWidget        *widget,
     {
       GtkSizeGroup *group = groups->data;
 
-      if (mode == GTK_SIZE_GROUP_HORIZONTAL && group->have_width)
-	result = group->requisition.width;
-      else if (mode == GTK_SIZE_GROUP_VERTICAL && group->have_height)
-	result = group->requisition.height;
+      if (mode == GTK_SIZE_GROUP_HORIZONTAL && gtk_size_group_get_props (group)->have_width)
+	result = gtk_size_group_get_props (group)->requisition.width;
+      else if (mode == GTK_SIZE_GROUP_VERTICAL && gtk_size_group_get_props (group)->have_height)
+	result = gtk_size_group_get_props (group)->requisition.height;
     }
 
   g_slist_free (widgets);
@@ -755,7 +755,7 @@ get_fast_child_requisition (GtkWidget      *widget,
 {
   GtkWidgetAuxInfo *aux_info = ___gtk_widget_get_aux_info (widget, FALSE);
   
-  *requisition = widget->requisition;
+  *requisition = gtk_widget_get_props (widget)->requisition;
   
   if (aux_info)
     {

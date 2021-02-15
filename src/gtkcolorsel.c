@@ -803,13 +803,13 @@ color_sample_draw_sample (GtkColorSelection *colorsel, int which)
   else
     {
       da = priv->cur_sample;
-      goff =  priv->old_sample->allocation.width % 32;
+      goff =  priv->gtk_widget_get_props (old_sample)->allocation.width % 32;
     }
 
-  cr = __gdk_cairo_create (da->window);
+  cr = __gdk_cairo_create (gtk_widget_get_props (da)->window);
   
-  wid = da->allocation.width;
-  heig = da->allocation.height;
+  wid = gtk_widget_get_props (da)->allocation.width;
+  heig = gtk_widget_get_props (da)->allocation.height;
 
   /* Below needs tweaking for non-power-of-two */  
   
@@ -1018,12 +1018,12 @@ palette_paint (GtkWidget    *drawing_area,
   cairo_t *cr;
   gint focus_width;
     
-  if (drawing_area->window == NULL)
+  if (gtk_widget_get_props (drawing_area)->window == NULL)
     return;
 
-  cr = __gdk_cairo_create (drawing_area->window);
+  cr = __gdk_cairo_create (gtk_widget_get_props (drawing_area)->window);
 
-  __gdk_cairo_set_source_color (cr, &drawing_area->style->bg[GTK_STATE_NORMAL]);
+  __gdk_cairo_set_source_color (cr, &gtk_widget_get_props (drawing_area)->style->bg[GTK_STATE_NORMAL]);
   __gdk_cairo_rectangle (cr, area);
   cairo_fill (cr);
   
@@ -1033,8 +1033,8 @@ palette_paint (GtkWidget    *drawing_area,
 
       cairo_rectangle (cr,
 		       focus_width / 2., focus_width / 2.,
-		       drawing_area->allocation.width - focus_width,
-		       drawing_area->allocation.height - focus_width);
+		       gtk_widget_get_props (drawing_area)->allocation.width - focus_width,
+		       gtk_widget_get_props (drawing_area)->allocation.height - focus_width);
       cairo_stroke (cr);
     }
 
@@ -1290,7 +1290,7 @@ palette_expose (GtkWidget      *drawing_area,
 		GdkEventExpose *event,
 		gpointer        data)
 {
-  if (drawing_area->window == NULL)
+  if (gtk_widget_get_props (drawing_area)->window == NULL)
     return FALSE;
   
   palette_paint (drawing_area, &(event->area), data);
@@ -1314,13 +1314,13 @@ popup_position_func (GtkMenu   *menu,
   
   g_return_if_fail (__gtk_widget_get_realized (widget));
 
-  __gdk_window_get_origin (widget->window, &root_x, &root_y);
+  __gdk_window_get_origin (gtk_widget_get_props (widget)->window, &root_x, &root_y);
   
   __gtk_widget_size_request (GTK_WIDGET (menu), &req);
 
   /* Put corner of menu centered on color cell */
-  *x = root_x + widget->allocation.width / 2;
-  *y = root_y + widget->allocation.height / 2;
+  *x = root_x + gtk_widget_get_props (widget)->allocation.width / 2;
+  *y = root_y + gtk_widget_get_props (widget)->allocation.height / 2;
 
   /* Ensure sanity */
   screen = __gtk_widget_get_screen (widget);
@@ -1877,12 +1877,12 @@ get_screen_color (GtkWidget *button)
       priv->dropper_grab_widget = grab_widget;
     }
 
-  if (__gdk_keyboard_grab (priv->dropper_grab_widget->window,
+  if (__gdk_keyboard_grab (priv->gtk_widget_get_props (dropper_grab_widget)->window,
                          FALSE, time) != GDK_GRAB_SUCCESS)
     return;
   
   picker_cursor = make_picker_cursor (screen);
-  grab_status = __gdk_pointer_grab (priv->dropper_grab_widget->window,
+  grab_status = __gdk_pointer_grab (priv->gtk_widget_get_props (dropper_grab_widget)->window,
 				  FALSE,
 				  GDK_BUTTON_RELEASE_MASK | GDK_BUTTON_PRESS_MASK | GDK_POINTER_MOTION_MASK,
 				  NULL,
@@ -1991,7 +1991,7 @@ adjustment_changed (GtkAdjustment *adjustment,
     {
     case COLORSEL_SATURATION:
     case COLORSEL_VALUE:
-      priv->color[GPOINTER_TO_INT (data)] = adjustment->value / 100;
+      priv->color[GPOINTER_TO_INT (data)] = gtk_adjustment_get_props (adjustment)->value / 100;
       __gtk_hsv_to_rgb (priv->color[COLORSEL_HUE],
 		      priv->color[COLORSEL_SATURATION],
 		      priv->color[COLORSEL_VALUE],
@@ -2000,7 +2000,7 @@ adjustment_changed (GtkAdjustment *adjustment,
 		      &priv->color[COLORSEL_BLUE]);
       break;
     case COLORSEL_HUE:
-      priv->color[GPOINTER_TO_INT (data)] = adjustment->value / 360;
+      priv->color[GPOINTER_TO_INT (data)] = gtk_adjustment_get_props (adjustment)->value / 360;
       __gtk_hsv_to_rgb (priv->color[COLORSEL_HUE],
 		      priv->color[COLORSEL_SATURATION],
 		      priv->color[COLORSEL_VALUE],
@@ -2011,7 +2011,7 @@ adjustment_changed (GtkAdjustment *adjustment,
     case COLORSEL_RED:
     case COLORSEL_GREEN:
     case COLORSEL_BLUE:
-      priv->color[GPOINTER_TO_INT (data)] = adjustment->value / 255;
+      priv->color[GPOINTER_TO_INT (data)] = gtk_adjustment_get_props (adjustment)->value / 255;
       
       __gtk_rgb_to_hsv (priv->color[COLORSEL_RED],
 		      priv->color[COLORSEL_GREEN],
@@ -2021,7 +2021,7 @@ adjustment_changed (GtkAdjustment *adjustment,
 		      &priv->color[COLORSEL_VALUE]);
       break;
     default:
-      priv->color[GPOINTER_TO_INT (data)] = adjustment->value / 255;
+      priv->color[GPOINTER_TO_INT (data)] = gtk_adjustment_get_props (adjustment)->value / 255;
       break;
     }
   update_color (colorsel);

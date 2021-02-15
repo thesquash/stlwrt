@@ -214,12 +214,12 @@ gtk_cell_renderer_pixbuf_finalize (GObject *object)
 
   priv = GTK_CELL_RENDERER_PIXBUF_GET_PRIVATE (object);
   
-  if (cellpixbuf->pixbuf)
-    g_object_unref (cellpixbuf->pixbuf);
-  if (cellpixbuf->pixbuf_expander_open)
-    g_object_unref (cellpixbuf->pixbuf_expander_open);
-  if (cellpixbuf->pixbuf_expander_closed)
-    g_object_unref (cellpixbuf->pixbuf_expander_closed);
+  if (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf)
+    g_object_unref (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf);
+  if (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_open)
+    g_object_unref (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_open);
+  if (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_closed)
+    g_object_unref (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_closed);
 
   g_free (priv->stock_id);
   g_free (priv->stock_detail);
@@ -245,13 +245,13 @@ gtk_cell_renderer_pixbuf_get_property (GObject        *object,
   switch (param_id)
     {
     case PROP_PIXBUF:
-      g_value_set_object (value, cellpixbuf->pixbuf);
+      g_value_set_object (value, gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf);
       break;
     case PROP_PIXBUF_EXPANDER_OPEN:
-      g_value_set_object (value, cellpixbuf->pixbuf_expander_open);
+      g_value_set_object (value, gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_open);
       break;
     case PROP_PIXBUF_EXPANDER_CLOSED:
-      g_value_set_object (value, cellpixbuf->pixbuf_expander_closed);
+      g_value_set_object (value, gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_closed);
       break;
     case PROP_STOCK_ID:
       g_value_set_string (value, priv->stock_id);
@@ -291,10 +291,10 @@ gtk_cell_renderer_pixbuf_set_property (GObject      *object,
   switch (param_id)
     {
     case PROP_PIXBUF:
-      if (cellpixbuf->pixbuf)
-	g_object_unref (cellpixbuf->pixbuf);
-      cellpixbuf->pixbuf = (GdkPixbuf*) g_value_dup_object (value);
-      if (cellpixbuf->pixbuf)
+      if (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf)
+	g_object_unref (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf);
+      gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf = (GdkPixbuf*) g_value_dup_object (value);
+      if (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf)
         {
           if (priv->stock_id)
             {
@@ -317,22 +317,22 @@ gtk_cell_renderer_pixbuf_set_property (GObject      *object,
         }
       break;
     case PROP_PIXBUF_EXPANDER_OPEN:
-      if (cellpixbuf->pixbuf_expander_open)
-	g_object_unref (cellpixbuf->pixbuf_expander_open);
-      cellpixbuf->pixbuf_expander_open = (GdkPixbuf*) g_value_dup_object (value);
+      if (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_open)
+	g_object_unref (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_open);
+      gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_open = (GdkPixbuf*) g_value_dup_object (value);
       break;
     case PROP_PIXBUF_EXPANDER_CLOSED:
-      if (cellpixbuf->pixbuf_expander_closed)
-	g_object_unref (cellpixbuf->pixbuf_expander_closed);
-      cellpixbuf->pixbuf_expander_closed = (GdkPixbuf*) g_value_dup_object (value);
+      if (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_closed)
+	g_object_unref (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_closed);
+      gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_closed = (GdkPixbuf*) g_value_dup_object (value);
       break;
     case PROP_STOCK_ID:
       if (priv->stock_id)
         {
-          if (cellpixbuf->pixbuf)
+          if (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf)
             {
-              g_object_unref (cellpixbuf->pixbuf);
-              cellpixbuf->pixbuf = NULL;
+              g_object_unref (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf);
+              gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf = NULL;
               g_object_notify (object, "pixbuf");
             }
           g_free (priv->stock_id);
@@ -340,10 +340,10 @@ gtk_cell_renderer_pixbuf_set_property (GObject      *object,
       priv->stock_id = g_value_dup_string (value);
       if (priv->stock_id)
         {
-          if (cellpixbuf->pixbuf)
+          if (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf)
             {
-              g_object_unref (cellpixbuf->pixbuf);
-              cellpixbuf->pixbuf = NULL;
+              g_object_unref (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf);
+              gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf = NULL;
               g_object_notify (object, "pixbuf");
             }
           if (priv->icon_name)
@@ -370,10 +370,10 @@ gtk_cell_renderer_pixbuf_set_property (GObject      *object,
     case PROP_ICON_NAME:
       if (priv->icon_name)
 	{
-	  if (cellpixbuf->pixbuf)
+	  if (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf)
 	    {
-	      g_object_unref (cellpixbuf->pixbuf);
-	      cellpixbuf->pixbuf = NULL;
+	      g_object_unref (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf);
+	      gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf = NULL;
               g_object_notify (object, "pixbuf");
 	    }
 	  g_free (priv->icon_name);
@@ -381,10 +381,10 @@ gtk_cell_renderer_pixbuf_set_property (GObject      *object,
       priv->icon_name = g_value_dup_string (value);
       if (priv->icon_name)
         {
-	  if (cellpixbuf->pixbuf)
+	  if (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf)
 	    {
-              g_object_unref (cellpixbuf->pixbuf);
-              cellpixbuf->pixbuf = NULL;
+              g_object_unref (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf);
+              gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf = NULL;
               g_object_notify (object, "pixbuf");
 	    }
           if (priv->stock_id)
@@ -407,10 +407,10 @@ gtk_cell_renderer_pixbuf_set_property (GObject      *object,
     case PROP_GICON:
       if (priv->gicon)
 	{
-	  if (cellpixbuf->pixbuf)
+	  if (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf)
 	    {
-	      g_object_unref (cellpixbuf->pixbuf);
-	      cellpixbuf->pixbuf = NULL;
+	      g_object_unref (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf);
+	      gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf = NULL;
               g_object_notify (object, "pixbuf");
 	    }
 	  g_object_unref (priv->gicon);
@@ -418,10 +418,10 @@ gtk_cell_renderer_pixbuf_set_property (GObject      *object,
       priv->gicon = (GIcon *) g_value_dup_object (value);
       if (priv->gicon)
         {
-	  if (cellpixbuf->pixbuf)
+	  if (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf)
 	    {
-              g_object_unref (cellpixbuf->pixbuf);
-              cellpixbuf->pixbuf = NULL;
+              g_object_unref (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf);
+              gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf = NULL;
               g_object_notify (object, "pixbuf");
 	    }
           if (priv->stock_id)
@@ -471,10 +471,10 @@ gtk_cell_renderer_pixbuf_create_stock_pixbuf (GtkCellRendererPixbuf *cellpixbuf,
 
   priv = GTK_CELL_RENDERER_PIXBUF_GET_PRIVATE (cellpixbuf);
 
-  if (cellpixbuf->pixbuf)
-    g_object_unref (cellpixbuf->pixbuf);
+  if (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf)
+    g_object_unref (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf);
 
-  cellpixbuf->pixbuf = __gtk_widget_render_icon (widget,
+  gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf = __gtk_widget_render_icon (widget,
                                                priv->stock_id,
                                                priv->stock_size,
                                                priv->stock_detail);
@@ -494,10 +494,10 @@ gtk_cell_renderer_pixbuf_create_themed_pixbuf (GtkCellRendererPixbuf *cellpixbuf
 
   priv = GTK_CELL_RENDERER_PIXBUF_GET_PRIVATE (cellpixbuf);
 
-  if (cellpixbuf->pixbuf)
+  if (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf)
     {
-      g_object_unref (cellpixbuf->pixbuf);
-      cellpixbuf->pixbuf = NULL;
+      g_object_unref (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf);
+      gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf = NULL;
     }
 
   screen = __gtk_widget_get_screen (GTK_WIDGET (widget));
@@ -513,7 +513,7 @@ gtk_cell_renderer_pixbuf_create_themed_pixbuf (GtkCellRendererPixbuf *cellpixbuf
     }
 
   if (priv->icon_name)
-    cellpixbuf->pixbuf = __gtk_icon_theme_load_icon (icon_theme,
+    gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf = __gtk_icon_theme_load_icon (icon_theme,
 			                           priv->icon_name,
 			                           MIN (width, height), 
                                                    GTK_ICON_LOOKUP_USE_BUILTIN,
@@ -528,7 +528,7 @@ gtk_cell_renderer_pixbuf_create_themed_pixbuf (GtkCellRendererPixbuf *cellpixbuf
                                              GTK_ICON_LOOKUP_USE_BUILTIN);
       if (info)
         {
-          cellpixbuf->pixbuf = __gtk_icon_info_load_icon (info, NULL);
+          gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf = __gtk_icon_info_load_icon (info, NULL);
           __gtk_icon_info_free (info);
         }
     }
@@ -601,7 +601,7 @@ gtk_cell_renderer_pixbuf_get_size (GtkCellRenderer *cell,
 
   priv = GTK_CELL_RENDERER_PIXBUF_GET_PRIVATE (cell);
 
-  if (!cellpixbuf->pixbuf)
+  if (!gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf)
     {
       if (priv->stock_id)
 	gtk_cell_renderer_pixbuf_create_stock_pixbuf (cellpixbuf, widget);
@@ -609,37 +609,37 @@ gtk_cell_renderer_pixbuf_get_size (GtkCellRenderer *cell,
 	gtk_cell_renderer_pixbuf_create_themed_pixbuf (cellpixbuf, widget);
     }
   
-  if (cellpixbuf->pixbuf)
+  if (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf)
     {
-      pixbuf_width  = gdk_pixbuf_get_width (cellpixbuf->pixbuf);
-      pixbuf_height = gdk_pixbuf_get_height (cellpixbuf->pixbuf);
+      pixbuf_width  = gdk_pixbuf_get_width (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf);
+      pixbuf_height = gdk_pixbuf_get_height (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf);
     }
-  if (cellpixbuf->pixbuf_expander_open)
+  if (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_open)
     {
-      pixbuf_width  = MAX (pixbuf_width, gdk_pixbuf_get_width (cellpixbuf->pixbuf_expander_open));
-      pixbuf_height = MAX (pixbuf_height, gdk_pixbuf_get_height (cellpixbuf->pixbuf_expander_open));
+      pixbuf_width  = MAX (pixbuf_width, gdk_pixbuf_get_width (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_open));
+      pixbuf_height = MAX (pixbuf_height, gdk_pixbuf_get_height (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_open));
     }
-  if (cellpixbuf->pixbuf_expander_closed)
+  if (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_closed)
     {
-      pixbuf_width  = MAX (pixbuf_width, gdk_pixbuf_get_width (cellpixbuf->pixbuf_expander_closed));
-      pixbuf_height = MAX (pixbuf_height, gdk_pixbuf_get_height (cellpixbuf->pixbuf_expander_closed));
+      pixbuf_width  = MAX (pixbuf_width, gdk_pixbuf_get_width (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_closed));
+      pixbuf_height = MAX (pixbuf_height, gdk_pixbuf_get_height (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_closed));
     }
   
-  calc_width  = (gint) cell->xpad * 2 + pixbuf_width;
-  calc_height = (gint) cell->ypad * 2 + pixbuf_height;
+  calc_width  = (gint) gtk_cell_renderer_pixbuf_get_props (cell)->xpad * 2 + pixbuf_width;
+  calc_height = (gint) gtk_cell_renderer_pixbuf_get_props (cell)->ypad * 2 + pixbuf_height;
   
   if (cell_area && pixbuf_width > 0 && pixbuf_height > 0)
     {
       if (x_offset)
 	{
 	  *x_offset = (((__gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL) ?
-                        (1.0 - cell->xalign) : cell->xalign) * 
+                        (1.0 - gtk_cell_renderer_pixbuf_get_props (cell)->xalign) : gtk_cell_renderer_pixbuf_get_props (cell)->xalign) * 
                        (cell_area->width - calc_width));
 	  *x_offset = MAX (*x_offset, 0);
 	}
       if (y_offset)
 	{
-	  *y_offset = (cell->yalign *
+	  *y_offset = (gtk_cell_renderer_pixbuf_get_props (cell)->yalign *
                        (cell_area->height - calc_height));
           *y_offset = MAX (*y_offset, 0);
 	}
@@ -684,31 +684,31 @@ gtk_cell_renderer_pixbuf_render (GtkCellRenderer      *cell,
 				     &pix_rect.width,
 				     &pix_rect.height);
 
-  pix_rect.x += cell_area->x + cell->xpad;
-  pix_rect.y += cell_area->y + cell->ypad;
-  pix_rect.width  -= cell->xpad * 2;
-  pix_rect.height -= cell->ypad * 2;
+  pix_rect.x += cell_area->x + gtk_cell_renderer_pixbuf_get_props (cell)->xpad;
+  pix_rect.y += cell_area->y + gtk_cell_renderer_pixbuf_get_props (cell)->ypad;
+  pix_rect.width  -= gtk_cell_renderer_pixbuf_get_props (cell)->xpad * 2;
+  pix_rect.height -= gtk_cell_renderer_pixbuf_get_props (cell)->ypad * 2;
 
   if (!__gdk_rectangle_intersect (cell_area, &pix_rect, &draw_rect) ||
       !__gdk_rectangle_intersect (expose_area, &draw_rect, &draw_rect))
     return;
 
-  pixbuf = cellpixbuf->pixbuf;
+  pixbuf = gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf;
 
-  if (cell->is_expander)
+  if (gtk_cell_renderer_pixbuf_get_props (cell)->is_expander)
     {
-      if (cell->is_expanded &&
-	  cellpixbuf->pixbuf_expander_open != NULL)
-	pixbuf = cellpixbuf->pixbuf_expander_open;
-      else if (!cell->is_expanded &&
-	       cellpixbuf->pixbuf_expander_closed != NULL)
-	pixbuf = cellpixbuf->pixbuf_expander_closed;
+      if (gtk_cell_renderer_pixbuf_get_props (cell)->is_expanded &&
+	  gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_open != NULL)
+	pixbuf = gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_open;
+      else if (!gtk_cell_renderer_pixbuf_get_props (cell)->is_expanded &&
+	       gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_closed != NULL)
+	pixbuf = gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_closed;
     }
 
   if (!pixbuf)
     return;
 
-  if (__gtk_widget_get_state (widget) == GTK_STATE_INSENSITIVE || !cell->sensitive)
+  if (__gtk_widget_get_state (widget) == GTK_STATE_INSENSITIVE || !gtk_cell_renderer_pixbuf_get_props (cell)->sensitive)
     {
       GtkIconSource *source;
       
@@ -721,7 +721,7 @@ gtk_cell_renderer_pixbuf_render (GtkCellRenderer      *cell,
       __gtk_icon_source_set_size (source, GTK_ICON_SIZE_SMALL_TOOLBAR);
       __gtk_icon_source_set_size_wildcarded (source, FALSE);
       
-     invisible = __gtk_style_render_icon (widget->style,
+     invisible = __gtk_style_render_icon (gtk_widget_get_props (widget)->style,
 					source,
 					__gtk_widget_get_direction (widget),
 					GTK_STATE_INSENSITIVE,
@@ -750,7 +750,7 @@ gtk_cell_renderer_pixbuf_render (GtkCellRenderer      *cell,
 	state = GTK_STATE_PRELIGHT;
 
       colorized = create_colorized_pixbuf (pixbuf,
-					   &widget->style->base[state]);
+					   &gtk_widget_get_props (widget)->style->base[state]);
 
       pixbuf = colorized;
     }

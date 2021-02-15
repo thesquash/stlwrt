@@ -120,16 +120,16 @@ gtk_combo_box_entry_init (GtkComboBoxEntry *entry_box)
 {
   GtkWidget *entry;
 
-  entry_box->priv = GTK_COMBO_BOX_ENTRY_GET_PRIVATE (entry_box);
-  entry_box->priv->text_column = -1;
+  gtk_combo_box_entry_get_props (entry_box)->priv = GTK_COMBO_BOX_ENTRY_GET_PRIVATE (gtk_combo_box_entry_get_props (entry_box));
+  gtk_combo_box_entry_get_props (entry_box)->priv->text_column = -1;
 
   entry = __gtk_entry_new ();
   __gtk_widget_show (entry);
   __gtk_container_add (GTK_CONTAINER (entry_box), entry);
 
-  entry_box->priv->text_renderer = __gtk_cell_renderer_text_new ();
+  gtk_combo_box_entry_get_props (entry_box)->priv->text_renderer = __gtk_cell_renderer_text_new ();
   __gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (entry_box),
-                              entry_box->priv->text_renderer, TRUE);
+                              gtk_combo_box_entry_get_props (entry_box)->priv->text_renderer, TRUE);
 
   __gtk_combo_box_set_active (GTK_COMBO_BOX (entry_box), -1);
 
@@ -187,7 +187,7 @@ gtk_combo_box_entry_get_property (GObject    *object,
   switch (prop_id)
     {
       case PROP_TEXT_COLUMN:
-        g_value_set_int (value, entry_box->priv->text_column);
+        g_value_set_int (value, gtk_combo_box_entry_get_props (entry_box)->priv->text_column);
         break;
 
       default:
@@ -259,7 +259,7 @@ gtk_combo_box_entry_active_changed (GtkComboBox *combo_box,
 	  model = __gtk_combo_box_get_model (combo_box);
 
 	  __gtk_tree_model_get (model, &iter, 
-			      entry_box->priv->text_column, &str, 
+			      gtk_combo_box_entry_get_props (entry_box)->priv->text_column, &str, 
 			      -1);
 	  __gtk_entry_set_text (entry, str);
 	  g_free (str);
@@ -380,10 +380,10 @@ __gtk_combo_box_entry_set_text_column (GtkComboBoxEntry *entry_box,
   g_return_if_fail (text_column >= 0);
   g_return_if_fail (model == NULL || text_column < __gtk_tree_model_get_n_columns (model));
 
-  entry_box->priv->text_column = text_column;
+  gtk_combo_box_entry_get_props (entry_box)->priv->text_column = text_column;
 
   __gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (entry_box),
-                                  entry_box->priv->text_renderer,
+                                  gtk_combo_box_entry_get_props (entry_box)->priv->text_renderer,
                                   "text", text_column,
                                   NULL);
 }
@@ -405,7 +405,7 @@ __gtk_combo_box_entry_get_text_column (GtkComboBoxEntry *entry_box)
 {
   g_return_val_if_fail (GTK_IS_COMBO_BOX_ENTRY (entry_box), 0);
 
-  return entry_box->priv->text_column;
+  return gtk_combo_box_entry_get_props (entry_box)->priv->text_column;
 }
 
 static gboolean
@@ -414,8 +414,8 @@ gtk_combo_box_entry_mnemonic_activate (GtkWidget *widget,
 {
   GtkBin *entry_box = GTK_BIN (widget);
 
-  if (entry_box->child)
-    __gtk_widget_grab_focus (entry_box->child);
+  if (gtk_bin_get_props (entry_box)->child)
+    __gtk_widget_grab_focus (gtk_bin_get_props (entry_box)->child);
 
   return TRUE;
 }
@@ -425,8 +425,8 @@ gtk_combo_box_entry_grab_focus (GtkWidget *widget)
 {
   GtkBin *entry_box = GTK_BIN (widget);
 
-  if (entry_box->child)
-    __gtk_widget_grab_focus (entry_box->child);
+  if (gtk_bin_get_props (entry_box)->child)
+    __gtk_widget_grab_focus (gtk_bin_get_props (entry_box)->child);
 }
 
 
@@ -465,8 +465,8 @@ gtk_combo_box_entry_get_active_text (GtkComboBox *combo_box)
 {
   GtkBin *combo = GTK_BIN (combo_box);
 
-  if (combo->child)
-    return g_strdup (__gtk_entry_get_text (GTK_ENTRY (combo->child)));
+  if (gtk_bin_get_props (combo)->child)
+    return g_strdup (__gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_props (combo)->child)));
 
   return NULL;
 }

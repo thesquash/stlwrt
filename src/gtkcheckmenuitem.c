@@ -241,7 +241,7 @@ __gtk_check_menu_item_set_active (GtkCheckMenuItem *check_menu_item,
 
   is_active = is_active != 0;
 
-  if (check_menu_item->active != is_active)
+  if (gtk_check_menu_item_get_props (check_menu_item)->active != is_active)
     __gtk_menu_item_activate (GTK_MENU_ITEM (check_menu_item));
 }
 
@@ -259,7 +259,7 @@ __gtk_check_menu_item_get_active (GtkCheckMenuItem *check_menu_item)
 {
   g_return_val_if_fail (GTK_IS_CHECK_MENU_ITEM (check_menu_item), FALSE);
 
-  return check_menu_item->active;
+  return gtk_check_menu_item_get_props (check_menu_item)->active;
 }
 
 static void
@@ -286,7 +286,7 @@ __gtk_check_menu_item_set_show_toggle (GtkCheckMenuItem *menu_item,
   g_return_if_fail (GTK_IS_CHECK_MENU_ITEM (menu_item));
 
 #if 0
-  menu_item->always_show_toggle = always != FALSE;
+  gtk_check_menu_item_get_props (menu_item)->always_show_toggle = always != FALSE;
 #endif  
 }
 
@@ -319,9 +319,9 @@ __gtk_check_menu_item_set_inconsistent (GtkCheckMenuItem *check_menu_item,
   
   setting = setting != FALSE;
 
-  if (setting != check_menu_item->inconsistent)
+  if (setting != gtk_check_menu_item_get_props (check_menu_item)->inconsistent)
     {
-      check_menu_item->inconsistent = setting;
+      gtk_check_menu_item_get_props (check_menu_item)->inconsistent = setting;
       __gtk_widget_queue_draw (GTK_WIDGET (check_menu_item));
       g_object_notify (G_OBJECT (check_menu_item), "inconsistent");
     }
@@ -340,7 +340,7 @@ __gtk_check_menu_item_get_inconsistent (GtkCheckMenuItem *check_menu_item)
 {
   g_return_val_if_fail (GTK_IS_CHECK_MENU_ITEM (check_menu_item), FALSE);
 
-  return check_menu_item->inconsistent;
+  return gtk_check_menu_item_get_props (check_menu_item)->inconsistent;
 }
 
 /**
@@ -360,9 +360,9 @@ __gtk_check_menu_item_set_draw_as_radio (GtkCheckMenuItem *check_menu_item,
   
   draw_as_radio = draw_as_radio != FALSE;
 
-  if (draw_as_radio != check_menu_item->draw_as_radio)
+  if (draw_as_radio != gtk_check_menu_item_get_props (check_menu_item)->draw_as_radio)
     {
-      check_menu_item->draw_as_radio = draw_as_radio;
+      gtk_check_menu_item_get_props (check_menu_item)->draw_as_radio = draw_as_radio;
 
       __gtk_widget_queue_draw (GTK_WIDGET (check_menu_item));
 
@@ -385,14 +385,14 @@ __gtk_check_menu_item_get_draw_as_radio (GtkCheckMenuItem *check_menu_item)
 {
   g_return_val_if_fail (GTK_IS_CHECK_MENU_ITEM (check_menu_item), FALSE);
   
-  return check_menu_item->draw_as_radio;
+  return gtk_check_menu_item_get_props (check_menu_item)->draw_as_radio;
 }
 
 static void
 gtk_check_menu_item_init (GtkCheckMenuItem *check_menu_item)
 {
-  check_menu_item->active = FALSE;
-  check_menu_item->always_show_toggle = TRUE;
+  gtk_check_menu_item_get_props (check_menu_item)->active = FALSE;
+  gtk_check_menu_item_get_props (check_menu_item)->always_show_toggle = TRUE;
 }
 
 static gint
@@ -411,7 +411,7 @@ static void
 gtk_check_menu_item_activate (GtkMenuItem *menu_item)
 {
   GtkCheckMenuItem *check_menu_item = GTK_CHECK_MENU_ITEM (menu_item);
-  check_menu_item->active = !check_menu_item->active;
+  gtk_check_menu_item_get_props (check_menu_item)->active = !gtk_check_menu_item_get_props (check_menu_item)->active;
 
   __gtk_check_menu_item_toggled (check_menu_item);
   __gtk_widget_queue_draw (GTK_WIDGET (check_menu_item));
@@ -456,31 +456,31 @@ gtk_real_check_menu_item_draw_indicator (GtkCheckMenuItem *check_menu_item,
 
       toggle_size = GTK_MENU_ITEM (check_menu_item)->toggle_size;
       offset = GTK_CONTAINER (check_menu_item)->border_width +
-	widget->style->xthickness + 2; 
+	gtk_widget_get_props (widget)->style->xthickness + 2; 
 
       if (__gtk_widget_get_direction (widget) == GTK_TEXT_DIR_LTR)
 	{
-	  x = widget->allocation.x + offset + horizontal_padding +
+	  x = gtk_widget_get_props (widget)->allocation.x + offset + horizontal_padding +
 	    (toggle_size - toggle_spacing - indicator_size) / 2;
 	}
       else 
 	{
-	  x = widget->allocation.x + widget->allocation.width -
+	  x = gtk_widget_get_props (widget)->allocation.x + gtk_widget_get_props (widget)->allocation.width -
 	    offset - horizontal_padding - toggle_size + toggle_spacing +
 	    (toggle_size - toggle_spacing - indicator_size) / 2;
 	}
       
-      y = widget->allocation.y + (widget->allocation.height - indicator_size) / 2;
+      y = gtk_widget_get_props (widget)->allocation.y + (gtk_widget_get_props (widget)->allocation.height - indicator_size) / 2;
 
-      if (check_menu_item->active ||
-	  check_menu_item->always_show_toggle ||
+      if (gtk_check_menu_item_get_props (check_menu_item)->active ||
+	  gtk_check_menu_item_get_props (check_menu_item)->always_show_toggle ||
 	  (__gtk_widget_get_state (widget) == GTK_STATE_PRELIGHT))
 	{
 	  state_type = __gtk_widget_get_state (widget);
 	  
-	  if (check_menu_item->inconsistent)
+	  if (gtk_check_menu_item_get_props (check_menu_item)->inconsistent)
 	    shadow_type = GTK_SHADOW_ETCHED_IN;
-	  else if (check_menu_item->active)
+	  else if (gtk_check_menu_item_get_props (check_menu_item)->active)
 	    shadow_type = GTK_SHADOW_IN;
 	  else 
 	    shadow_type = GTK_SHADOW_OUT;
@@ -488,16 +488,16 @@ gtk_real_check_menu_item_draw_indicator (GtkCheckMenuItem *check_menu_item,
 	  if (!__gtk_widget_is_sensitive (widget))
 	    state_type = GTK_STATE_INSENSITIVE;
 
-	  if (check_menu_item->draw_as_radio)
+	  if (gtk_check_menu_item_get_props (check_menu_item)->draw_as_radio)
 	    {
-	      __gtk_paint_option (widget->style, widget->window,
+	      __gtk_paint_option (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window,
 				state_type, shadow_type,
 				area, widget, "option",
 				x, y, indicator_size, indicator_size);
 	    }
 	  else
 	    {
-	      __gtk_paint_check (widget->style, widget->window,
+	      __gtk_paint_check (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window,
 			       state_type, shadow_type,
 			       area, widget, "check",
 			       x, y, indicator_size, indicator_size);
@@ -518,13 +518,13 @@ gtk_check_menu_item_get_property (GObject     *object,
   switch (prop_id)
     {
     case PROP_ACTIVE:
-      g_value_set_boolean (value, checkitem->active);
+      g_value_set_boolean (value, gtk_check_menu_item_get_props (checkitem)->active);
       break;
     case PROP_INCONSISTENT:
-      g_value_set_boolean (value, checkitem->inconsistent);
+      g_value_set_boolean (value, gtk_check_menu_item_get_props (checkitem)->inconsistent);
       break;
     case PROP_DRAW_AS_RADIO:
-      g_value_set_boolean (value, checkitem->draw_as_radio);
+      g_value_set_boolean (value, gtk_check_menu_item_get_props (checkitem)->draw_as_radio);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);

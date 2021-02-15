@@ -2374,7 +2374,7 @@ __gtk_status_icon_is_embedded (GtkStatusIcon *status_icon)
 #ifdef GDK_WINDOWING_X11
   plug = GTK_PLUG (status_icon->priv->tray_icon);
 
-  if (plug->socket_window)
+  if (gtk_plug_get_props (plug)->socket_window)
     return TRUE;
   else
     return FALSE;
@@ -2432,30 +2432,30 @@ __gtk_status_icon_position_menu (GtkMenu  *menu,
   screen = __gtk_widget_get_screen (widget);
   __gtk_menu_set_screen (menu, screen);
 
-  monitor_num = __gdk_screen_get_monitor_at_window (screen, widget->window);
+  monitor_num = __gdk_screen_get_monitor_at_window (screen, gtk_widget_get_props (widget)->window);
   if (monitor_num < 0)
     monitor_num = 0;
   __gtk_menu_set_monitor (menu, monitor_num);
 
   __gdk_screen_get_monitor_geometry (screen, monitor_num, &monitor);
 
-  __gdk_window_get_origin (widget->window, x, y);
+  __gdk_window_get_origin (gtk_widget_get_props (widget)->window, x, y);
   
   __gtk_widget_size_request (GTK_WIDGET (menu), &menu_req);
 
   if (_gtk_tray_icon_get_orientation (tray_icon) == GTK_ORIENTATION_VERTICAL)
     {
       width = 0;
-      height = widget->allocation.height;
-      xoffset = widget->allocation.width;
+      height = gtk_widget_get_props (widget)->allocation.height;
+      xoffset = gtk_widget_get_props (widget)->allocation.width;
       yoffset = 0;
     }
   else
     {
-      width = widget->allocation.width;
+      width = gtk_widget_get_props (widget)->allocation.width;
       height = 0;
       xoffset = 0;
-      yoffset = widget->allocation.height;
+      yoffset = gtk_widget_get_props (widget)->allocation.height;
     }
 
   if (direction == GTK_TEXT_DIR_RTL)
@@ -2564,11 +2564,11 @@ __gtk_status_icon_get_geometry (GtkStatusIcon    *status_icon,
 
   if (area)
     {
-      __gdk_window_get_origin (widget->window, &x, &y);
+      __gdk_window_get_origin (gtk_widget_get_props (widget)->window, &x, &y);
       area->x = x;
       area->y = y;
-      area->width = widget->allocation.width;
-      area->height = widget->allocation.height;
+      area->width = gtk_widget_get_props (widget)->allocation.width;
+      area->height = gtk_widget_get_props (widget)->allocation.height;
     }
 
   if (orientation)

@@ -75,7 +75,7 @@ gtk_file_chooser_widget_init (GtkFileChooserWidget *chooser_widget)
   GtkFileChooserWidgetPrivate *priv = G_TYPE_INSTANCE_GET_PRIVATE (chooser_widget,
 								   GTK_TYPE_FILE_CHOOSER_WIDGET,
 								   GtkFileChooserWidgetPrivate);
-  chooser_widget->priv = priv;
+  gtk_file_chooser_widget_get_props (chooser_widget)->priv = priv;
 }
 
 static void
@@ -83,7 +83,7 @@ gtk_file_chooser_widget_finalize (GObject *object)
 {
   GtkFileChooserWidget *chooser = GTK_FILE_CHOOSER_WIDGET (object);
 
-  g_free (chooser->priv->file_system);
+  g_free (gtk_file_chooser_widget_get_props (chooser)->priv->file_system);
 
   G_OBJECT_CLASS (gtk_file_chooser_widget_parent_class)->finalize (object);
 }

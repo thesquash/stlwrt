@@ -115,29 +115,29 @@ __gtk_radio_menu_item_set_group (GtkRadioMenuItem *radio_menu_item,
   g_return_if_fail (GTK_IS_RADIO_MENU_ITEM (radio_menu_item));
   g_return_if_fail (!g_slist_find (group, radio_menu_item));
 
-  if (radio_menu_item->group)
+  if (gtk_radio_menu_item_get_props (radio_menu_item)->group)
     {
       GSList *slist;
 
-      radio_menu_item->group = g_slist_remove (radio_menu_item->group, radio_menu_item);
+      gtk_radio_menu_item_get_props (radio_menu_item)->group = g_slist_remove (gtk_radio_menu_item_get_props (radio_menu_item)->group, gtk_radio_menu_item_get_props (radio_menu_item));
       
-      if (radio_menu_item->group && !radio_menu_item->group->next)
-	old_group_singleton = g_object_ref (radio_menu_item->group->data);
+      if (gtk_radio_menu_item_get_props (radio_menu_item)->group && !gtk_radio_menu_item_get_props (radio_menu_item)->group->next)
+	old_group_singleton = g_object_ref (gtk_radio_menu_item_get_props (radio_menu_item)->group->data);
 	  
-      for (slist = radio_menu_item->group; slist; slist = slist->next)
+      for (slist = gtk_radio_menu_item_get_props (radio_menu_item)->group; slist; slist = slist->next)
 	{
 	  GtkRadioMenuItem *tmp_item;
 	  
 	  tmp_item = slist->data;
 	  
-	  tmp_item->group = radio_menu_item->group;
+	  gtk_radio_menu_item_get_props (tmp_item)->group = gtk_radio_menu_item_get_props (radio_menu_item)->group;
 	}
     }
   
   if (group && !group->next)
     new_group_singleton = g_object_ref (group->data);
   
-  radio_menu_item->group = g_slist_prepend (group, radio_menu_item);
+  gtk_radio_menu_item_get_props (radio_menu_item)->group = g_slist_prepend (group, gtk_radio_menu_item_get_props (radio_menu_item));
   
   if (group)
     {
@@ -149,7 +149,7 @@ __gtk_radio_menu_item_set_group (GtkRadioMenuItem *radio_menu_item,
 	  
 	  tmp_item = slist->data;
 	  
-	  tmp_item->group = radio_menu_item->group;
+	  gtk_radio_menu_item_get_props (tmp_item)->group = gtk_radio_menu_item_get_props (radio_menu_item)->group;
 	}
     }
   else
@@ -328,7 +328,7 @@ __gtk_radio_menu_item_get_group (GtkRadioMenuItem *radio_menu_item)
 {
   g_return_val_if_fail (GTK_IS_RADIO_MENU_ITEM (radio_menu_item), NULL);
 
-  return radio_menu_item->group;
+  return gtk_radio_menu_item_get_props (radio_menu_item)->group;
 }
 
 
@@ -386,7 +386,7 @@ gtk_radio_menu_item_class_init (GtkRadioMenuItemClass *klass)
 static void
 gtk_radio_menu_item_init (GtkRadioMenuItem *radio_menu_item)
 {
-  radio_menu_item->group = g_slist_prepend (NULL, radio_menu_item);
+  gtk_radio_menu_item_get_props (radio_menu_item)->group = g_slist_prepend (NULL, gtk_radio_menu_item_get_props (radio_menu_item));
   __gtk_check_menu_item_set_draw_as_radio (GTK_CHECK_MENU_ITEM (radio_menu_item), TRUE);
 }
 
@@ -406,17 +406,17 @@ gtk_radio_menu_item_activate (GtkMenuItem *menu_item)
 
   toggled = FALSE;
 
-  if (check_menu_item->active)
+  if (gtk_check_menu_item_get_props (check_menu_item)->active)
     {
       tmp_menu_item = NULL;
-      tmp_list = radio_menu_item->group;
+      tmp_list = gtk_radio_menu_item_get_props (radio_menu_item)->group;
 
       while (tmp_list)
 	{
 	  tmp_menu_item = tmp_list->data;
 	  tmp_list = tmp_list->next;
 
-	  if (tmp_menu_item->active && (tmp_menu_item != check_menu_item))
+	  if (gtk_check_menu_item_get_props (tmp_menu_item)->active && (gtk_check_menu_item_get_props (tmp_menu_item) != check_menu_item))
 	    break;
 
 	  tmp_menu_item = NULL;
@@ -425,21 +425,21 @@ gtk_radio_menu_item_activate (GtkMenuItem *menu_item)
       if (tmp_menu_item)
 	{
 	  toggled = TRUE;
-	  check_menu_item->active = !check_menu_item->active;
+	  gtk_check_menu_item_get_props (check_menu_item)->active = !gtk_check_menu_item_get_props (check_menu_item)->active;
 	}
     }
   else
     {
       toggled = TRUE;
-      check_menu_item->active = !check_menu_item->active;
+      gtk_check_menu_item_get_props (check_menu_item)->active = !gtk_check_menu_item_get_props (check_menu_item)->active;
 
-      tmp_list = radio_menu_item->group;
+      tmp_list = gtk_radio_menu_item_get_props (radio_menu_item)->group;
       while (tmp_list)
 	{
 	  tmp_menu_item = tmp_list->data;
 	  tmp_list = tmp_list->next;
 
-	  if (tmp_menu_item->active && (tmp_menu_item != check_menu_item))
+	  if (gtk_check_menu_item_get_props (tmp_menu_item)->active && (gtk_check_menu_item_get_props (tmp_menu_item) != check_menu_item))
 	    {
 	      __gtk_menu_item_activate (GTK_MENU_ITEM (tmp_menu_item));
 	      break;

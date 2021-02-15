@@ -141,7 +141,7 @@ gtk_text_tag_table_class_init (GtkTextTagTableClass *klass)
 static void
 gtk_text_tag_table_init (GtkTextTagTable *table)
 {
-  table->hash = g_hash_table_new (g_str_hash, g_str_equal);
+  gtk_text_tag_table_get_props (table)->hash = g_hash_table_new (g_str_hash, g_str_equal);
 }
 
 /**
@@ -171,7 +171,7 @@ foreach_unref (GtkTextTag *tag, gpointer data)
    * and unref the tag.
    */
 
-  tmp = tag->table->buffers;
+  tmp = gtk_text_tag_get_props (tag)->gtk_text_tag_table_get_props (table)->buffers;
   while (tmp != NULL)
     {
       ___gtk_text_buffer_notify_will_remove_tag (GTK_TEXT_BUFFER (tmp->data),
@@ -180,7 +180,7 @@ foreach_unref (GtkTextTag *tag, gpointer data)
       tmp = tmp->next;
     }
   
-  tag->table = NULL;
+  gtk_text_tag_get_props (tag)->table = NULL;
   g_object_unref (tag);
 }
 
@@ -193,10 +193,10 @@ gtk_text_tag_table_finalize (GObject *object)
   
   __gtk_text_tag_table_foreach (table, foreach_unref, NULL);
 
-  g_hash_table_destroy (table->hash);
-  g_slist_free (table->anonymous);
+  g_hash_table_destroy (gtk_text_tag_table_get_props (table)->hash);
+  g_slist_free (gtk_text_tag_table_get_props (table)->anonymous);
 
-  g_slist_free (table->buffers);
+  g_slist_free (gtk_text_tag_table_get_props (table)->buffers);
 
   G_OBJECT_CLASS (gtk_text_tag_table_parent_class)->finalize (object);
 }
@@ -267,33 +267,33 @@ __gtk_text_tag_table_add (GtkTextTagTable *table,
 
   g_return_if_fail (GTK_IS_TEXT_TAG_TABLE (table));
   g_return_if_fail (GTK_IS_TEXT_TAG (tag));
-  g_return_if_fail (tag->table == NULL);
+  g_return_if_fail (gtk_text_tag_get_props (tag)->table == NULL);
 
-  if (tag->name && g_hash_table_lookup (table->hash, tag->name))
+  if (gtk_text_tag_get_props (gtk_text_tag_get_props (tag))->name && g_hash_table_lookup (gtk_text_tag_table_get_props (table)->hash, gtk_text_tag_get_props (gtk_text_tag_get_props (tag))->name))
     {
       g_warning ("A tag named '%s' is already in the tag table.",
-                 tag->name);
+                 gtk_text_tag_get_props (tag)->name);
       return;
     }
   
   g_object_ref (tag);
 
-  if (tag->name)
-    g_hash_table_insert (table->hash, tag->name, tag);
+  if (gtk_text_tag_get_props (tag)->name)
+    g_hash_table_insert (gtk_text_tag_table_get_props (table)->hash, gtk_text_tag_get_props (tag)->name, gtk_text_tag_get_props (tag));
   else
     {
-      table->anonymous = g_slist_prepend (table->anonymous, tag);
-      table->anon_count += 1;
+      gtk_text_tag_table_get_props (table)->anonymous = g_slist_prepend (gtk_text_tag_table_get_props (table)->anonymous, tag);
+      gtk_text_tag_table_get_props (table)->anon_count += 1;
     }
 
-  tag->table = table;
+  gtk_text_tag_get_props (tag)->table = table;
 
   /* We get the highest tag priority, as the most-recently-added
      tag. Note that we do NOT use __gtk_text_tag_set_priority,
      as it assumes the tag is already in the table. */
   size = __gtk_text_tag_table_get_size (table);
   g_assert (size > 0);
-  tag->priority = size - 1;
+  gtk_text_tag_get_props (tag)->priority = size - 1;
 
   g_signal_emit (table, signals[TAG_ADDED], 0, tag);
 }
@@ -314,7 +314,7 @@ __gtk_text_tag_table_lookup (GtkTextTagTable *table,
   g_return_val_if_fail (GTK_IS_TEXT_TAG_TABLE (table), NULL);
   g_return_val_if_fail (name != NULL, NULL);
 
-  return g_hash_table_lookup (table->hash, name);
+  return g_hash_table_lookup (gtk_text_tag_table_get_props (table)->hash, name);
 }
 
 /**
@@ -334,12 +334,12 @@ __gtk_text_tag_table_remove (GtkTextTagTable *table,
   
   g_return_if_fail (GTK_IS_TEXT_TAG_TABLE (table));
   g_return_if_fail (GTK_IS_TEXT_TAG (tag));
-  g_return_if_fail (tag->table == table);
+  g_return_if_fail (gtk_text_tag_get_props (tag)->table == table);
 
   /* Our little bad hack to be sure buffers don't still have the tag
    * applied to text in the buffer
    */
-  tmp = table->buffers;
+  tmp = gtk_text_tag_table_get_props (table)->buffers;
   while (tmp != NULL)
     {
       ___gtk_text_buffer_notify_will_remove_tag (GTK_TEXT_BUFFER (tmp->data),
@@ -353,14 +353,14 @@ __gtk_text_tag_table_remove (GtkTextTagTable *table,
      priorities of the tags in the table. */
   __gtk_text_tag_set_priority (tag, __gtk_text_tag_table_get_size (table) - 1);
 
-  tag->table = NULL;
+  gtk_text_tag_get_props (tag)->table = NULL;
 
-  if (tag->name)
-    g_hash_table_remove (table->hash, tag->name);
+  if (gtk_text_tag_get_props (tag)->name)
+    g_hash_table_remove (gtk_text_tag_table_get_props (table)->hash, gtk_text_tag_get_props (tag)->name);
   else
     {
-      table->anonymous = g_slist_remove (table->anonymous, tag);
-      table->anon_count -= 1;
+      gtk_text_tag_table_get_props (table)->anonymous = g_slist_remove (gtk_text_tag_table_get_props (table)->anonymous, tag);
+      gtk_text_tag_table_get_props (table)->anon_count -= 1;
     }
 
   g_signal_emit (table, signals[TAG_REMOVED], 0, tag);
@@ -417,8 +417,8 @@ __gtk_text_tag_table_foreach (GtkTextTagTable       *table,
   d.func = func;
   d.data = data;
 
-  g_hash_table_foreach (table->hash, hash_foreach, &d);
-  g_slist_foreach (table->anonymous, list_foreach, &d);
+  g_hash_table_foreach (gtk_text_tag_table_get_props (table)->hash, hash_foreach, &d);
+  g_slist_foreach (gtk_text_tag_table_get_props (table)->anonymous, list_foreach, &d);
 }
 
 /**
@@ -434,7 +434,7 @@ __gtk_text_tag_table_get_size (GtkTextTagTable *table)
 {
   g_return_val_if_fail (GTK_IS_TEXT_TAG_TABLE (table), 0);
 
-  return g_hash_table_size (table->hash) + table->anon_count;
+  return g_hash_table_size (gtk_text_tag_table_get_props (table)->hash) + gtk_text_tag_table_get_props (table)->anon_count;
 }
 
 void
@@ -443,7 +443,7 @@ ___gtk_text_tag_table_add_buffer (GtkTextTagTable *table,
 {
   g_return_if_fail (GTK_IS_TEXT_TAG_TABLE (table));
 
-  table->buffers = g_slist_prepend (table->buffers, buffer);
+  gtk_text_tag_table_get_props (table)->buffers = g_slist_prepend (gtk_text_tag_table_get_props (table)->buffers, buffer);
 }
 
 static void
@@ -464,5 +464,5 @@ ___gtk_text_tag_table_remove_buffer (GtkTextTagTable *table,
 
   __gtk_text_tag_table_foreach (table, foreach_remove_tag, buffer);
   
-  table->buffers = g_slist_remove (table->buffers, buffer);
+  gtk_text_tag_table_get_props (table)->buffers = g_slist_remove (gtk_text_tag_table_get_props (table)->buffers, buffer);
 }

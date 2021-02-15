@@ -70,16 +70,16 @@ gtk_color_selection_dialog_get_property (GObject         *object,
   switch (prop_id)
     {
     case PROP_COLOR_SELECTION:
-      g_value_set_object (value, colorsel->colorsel);
+      g_value_set_object (value, gtk_color_selection_dialog_get_props (colorsel)->gtk_color_selection_dialog_get_props (colorsel));
       break;
     case PROP_OK_BUTTON:
-      g_value_set_object (value, colorsel->ok_button);
+      g_value_set_object (value, gtk_color_selection_dialog_get_props (colorsel)->ok_button);
       break;
     case PROP_CANCEL_BUTTON:
-      g_value_set_object (value, colorsel->cancel_button);
+      g_value_set_object (value, gtk_color_selection_dialog_get_props (colorsel)->cancel_button);
       break;
     case PROP_HELP_BUTTON:
-      g_value_set_object (value, colorsel->help_button);
+      g_value_set_object (value, gtk_color_selection_dialog_get_props (colorsel)->help_button);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -130,32 +130,32 @@ gtk_color_selection_dialog_init (GtkColorSelectionDialog *colorseldiag)
 
   __gtk_dialog_set_has_separator (dialog, FALSE);
   __gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-  __gtk_box_set_spacing (GTK_BOX (dialog->vbox), 2); /* 2 * 5 + 2 = 12 */
-  __gtk_container_set_border_width (GTK_CONTAINER (dialog->action_area), 5);
-  __gtk_box_set_spacing (GTK_BOX (dialog->action_area), 6);
+  __gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_props (dialog)->vbox), 2); /* 2 * 5 + 2 = 12 */
+  __gtk_container_set_border_width (GTK_CONTAINER (gtk_dialog_get_props (dialog)->action_area), 5);
+  __gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_props (dialog)->action_area), 6);
 
-  colorseldiag->colorsel = __gtk_color_selection_new ();
-  __gtk_container_set_border_width (GTK_CONTAINER (colorseldiag->colorsel), 5);
-  __gtk_color_selection_set_has_palette (GTK_COLOR_SELECTION(colorseldiag->colorsel), FALSE); 
-  __gtk_color_selection_set_has_opacity_control (GTK_COLOR_SELECTION(colorseldiag->colorsel), FALSE);
-  __gtk_container_add (GTK_CONTAINER (GTK_DIALOG (colorseldiag)->vbox), colorseldiag->colorsel);
-  __gtk_widget_show (colorseldiag->colorsel);
+  gtk_color_selection_dialog_get_props (colorseldiag)->colorsel = __gtk_color_selection_new ();
+  __gtk_container_set_border_width (GTK_CONTAINER (gtk_color_selection_dialog_get_props (colorseldiag)->colorsel), 5);
+  __gtk_color_selection_set_has_palette (GTK_COLOR_SELECTION(gtk_color_selection_dialog_get_props (colorseldiag)->colorsel), FALSE); 
+  __gtk_color_selection_set_has_opacity_control (GTK_COLOR_SELECTION(gtk_color_selection_dialog_get_props (colorseldiag)->colorsel), FALSE);
+  __gtk_container_add (GTK_CONTAINER (GTK_DIALOG (gtk_color_selection_dialog_get_props (colorseldiag))->vbox), gtk_color_selection_dialog_get_props (colorseldiag)->colorsel);
+  __gtk_widget_show (gtk_color_selection_dialog_get_props (colorseldiag)->colorsel);
   
-  colorseldiag->cancel_button = __gtk_dialog_add_button (GTK_DIALOG (colorseldiag),
+  gtk_color_selection_dialog_get_props (colorseldiag)->cancel_button = __gtk_dialog_add_button (GTK_DIALOG (gtk_color_selection_dialog_get_props (colorseldiag)),
                                                        GTK_STOCK_CANCEL,
                                                        GTK_RESPONSE_CANCEL);
 
-  colorseldiag->ok_button = __gtk_dialog_add_button (GTK_DIALOG (colorseldiag),
+  gtk_color_selection_dialog_get_props (colorseldiag)->ok_button = __gtk_dialog_add_button (GTK_DIALOG (gtk_color_selection_dialog_get_props (colorseldiag)),
                                                    GTK_STOCK_OK,
                                                    GTK_RESPONSE_OK);
                                                    
-  __gtk_widget_grab_default (colorseldiag->ok_button);
+  __gtk_widget_grab_default (gtk_color_selection_dialog_get_props (colorseldiag)->ok_button);
   
-  colorseldiag->help_button = __gtk_dialog_add_button (GTK_DIALOG (colorseldiag),
+  gtk_color_selection_dialog_get_props (colorseldiag)->help_button = __gtk_dialog_add_button (GTK_DIALOG (gtk_color_selection_dialog_get_props (colorseldiag)),
                                                      GTK_STOCK_HELP,
                                                      GTK_RESPONSE_HELP);
 
-  __gtk_widget_hide (colorseldiag->help_button);
+  __gtk_widget_hide (gtk_color_selection_dialog_get_props (colorseldiag)->help_button);
 
   __gtk_dialog_set_alternative_button_order (GTK_DIALOG (colorseldiag),
 					   GTK_RESPONSE_OK,
@@ -199,7 +199,7 @@ __gtk_color_selection_dialog_get_color_selection (GtkColorSelectionDialog *color
 {
   g_return_val_if_fail (GTK_IS_COLOR_SELECTION_DIALOG (colorsel), NULL);
 
-  return colorsel->colorsel;
+  return gtk_color_selection_dialog_get_props (colorsel)->gtk_color_selection_dialog_get_props (colorsel);
 }
 
 static void

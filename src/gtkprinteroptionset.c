@@ -49,9 +49,9 @@ gtk_printer_option_set_finalize (GObject *object)
 {
   GtkPrinterOptionSet *set = GTK_PRINTER_OPTION_SET (object);
 
-  g_hash_table_destroy (set->hash);
-  g_ptr_array_foreach (set->array, (GFunc)g_object_unref, NULL);
-  g_ptr_array_free (set->array, TRUE);
+  g_hash_table_destroy (gtk_printer_option_set_get_props (set)->hash);
+  g_ptr_array_foreach (gtk_printer_option_set_get_props (set)->array, (GFunc)g_object_unref, NULL);
+  g_ptr_array_free (gtk_printer_option_set_get_props (set)->array, TRUE);
   
   G_OBJECT_CLASS (gtk_printer_option_set_parent_class)->finalize (object);
 }
@@ -59,8 +59,8 @@ gtk_printer_option_set_finalize (GObject *object)
 static void
 gtk_printer_option_set_init (GtkPrinterOptionSet *set)
 {
-  set->array = g_ptr_array_new ();
-  set->hash = g_hash_table_new (g_str_hash, g_str_equal);
+  gtk_printer_option_set_get_props (set)->array = g_ptr_array_new ();
+  gtk_printer_option_set_get_props (set)->hash = g_hash_table_new (g_str_hash, g_str_equal);
 }
 
 static void
@@ -99,12 +99,12 @@ gtk_printer_option_set_remove (GtkPrinterOptionSet *set,
 {
   int i;
   
-  for (i = 0; i < set->array->len; i++)
+  for (i = 0; i < gtk_printer_option_set_get_props (set)->array->len; i++)
     {
-      if (g_ptr_array_index (set->array, i) == option)
+      if (g_ptr_array_index (gtk_printer_option_set_get_props (set)->array, i) == option)
 	{
-	  g_ptr_array_remove_index (set->array, i);
-	  g_hash_table_remove (set->hash, option->name);
+	  g_ptr_array_remove_index (gtk_printer_option_set_get_props (set)->array, i);
+	  g_hash_table_remove (gtk_printer_option_set_get_props (set)->hash, gtk_printer_option_get_props (option)->name);
 	  g_signal_handlers_disconnect_by_func (option, emit_changed, set);
 
 	  g_object_unref (option);
@@ -119,11 +119,11 @@ gtk_printer_option_set_add (GtkPrinterOptionSet *set,
 {
   g_object_ref (option);
   
-  if (gtk_printer_option_set_lookup (set, option->name))
+  if (gtk_printer_option_set_lookup (set, gtk_printer_option_get_props (option)->name))
     gtk_printer_option_set_remove (set, option);
     
-  g_ptr_array_add (set->array, option);
-  g_hash_table_insert (set->hash, option->name, option);
+  g_ptr_array_add (gtk_printer_option_set_get_props (set)->array, option);
+  g_hash_table_insert (gtk_printer_option_set_get_props (set)->hash, gtk_printer_option_get_props (option)->name, gtk_printer_option_get_props (option));
   g_signal_connect_object (option, "changed", G_CALLBACK (emit_changed), set, G_CONNECT_SWAPPED);
 }
 
@@ -133,7 +133,7 @@ gtk_printer_option_set_lookup (GtkPrinterOptionSet *set,
 {
   gpointer ptr;
 
-  ptr = g_hash_table_lookup (set->hash, name);
+  ptr = g_hash_table_lookup (gtk_printer_option_set_get_props (set)->hash, name);
 
   return GTK_PRINTER_OPTION (ptr);
 }
@@ -158,12 +158,12 @@ gtk_printer_option_set_get_groups (GtkPrinterOptionSet *set)
   GList *list = NULL;
   int i;
 
-  for (i = 0; i < set->array->len; i++)
+  for (i = 0; i < gtk_printer_option_set_get_props (set)->array->len; i++)
     {
-      option = g_ptr_array_index (set->array, i);
+      option = g_ptr_array_index (gtk_printer_option_set_get_props (set)->array, i);
 
-      if (g_list_find_custom (list, option->group, (GCompareFunc)g_strcmp0) == NULL)
-	list = g_list_prepend (list, g_strdup (option->group));
+      if (g_list_find_custom (list, gtk_printer_option_get_props (option)->group, (GCompareFunc)g_strcmp0) == NULL)
+	list = g_list_prepend (list, g_strdup (gtk_printer_option_get_props (option)->group));
     }
 
   return g_list_reverse (list);
@@ -178,11 +178,11 @@ gtk_printer_option_set_foreach_in_group (GtkPrinterOptionSet     *set,
   GtkPrinterOption *option;
   int i;
 
-  for (i = 0; i < set->array->len; i++)
+  for (i = 0; i < gtk_printer_option_set_get_props (set)->array->len; i++)
     {
-      option = g_ptr_array_index (set->array, i);
+      option = g_ptr_array_index (gtk_printer_option_set_get_props (set)->array, i);
 
-      if (group == NULL || g_strcmp0 (group, option->group) == 0)
+      if (group == NULL || g_strcmp0 (group, gtk_printer_option_get_props (option)->group) == 0)
 	func (option, user_data);
     }
 }

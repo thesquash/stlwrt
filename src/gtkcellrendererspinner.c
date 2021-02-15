@@ -351,7 +351,7 @@ gtk_cell_renderer_spinner_render (GtkCellRenderer *cellr,
     }
 
   state = GTK_STATE_NORMAL;
-  if (__gtk_widget_get_state (widget) == GTK_STATE_INSENSITIVE || !cellr->sensitive)
+  if (__gtk_widget_get_state (widget) == GTK_STATE_INSENSITIVE || !gtk_cell_renderer_get_props (cellr)->sensitive)
     {
       state = GTK_STATE_INSENSITIVE;
     }
@@ -368,7 +368,7 @@ gtk_cell_renderer_spinner_render (GtkCellRenderer *cellr,
         state = GTK_STATE_PRELIGHT;
     }
 
-  __gtk_paint_spinner (widget->style,
+  __gtk_paint_spinner (gtk_widget_get_props (widget)->style,
                      window,
                      state,
                      expose_area,

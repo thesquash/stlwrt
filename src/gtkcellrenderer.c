@@ -77,18 +77,18 @@ STLWRT_DEFINE_VTYPE (GtkCellRenderer, gtk_cell_renderer, G_TYPE_OBJECT, G_TYPE_F
 static void
 gtk_cell_renderer_init (GtkCellRenderer *cell)
 {
-  cell->mode = GTK_CELL_RENDERER_MODE_INERT;
-  cell->visible = TRUE;
-  cell->width = -1;
-  cell->height = -1;
-  cell->xalign = 0.5;
-  cell->yalign = 0.5;
-  cell->xpad = 0;
-  cell->ypad = 0;
-  cell->sensitive = TRUE;
-  cell->is_expander = FALSE;
-  cell->is_expanded = FALSE;
-  cell->editing = FALSE;
+  gtk_cell_renderer_get_props (cell)->mode = GTK_CELL_RENDERER_MODE_INERT;
+  gtk_cell_renderer_get_props (cell)->visible = TRUE;
+  gtk_cell_renderer_get_props (cell)->width = -1;
+  gtk_cell_renderer_get_props (cell)->height = -1;
+  gtk_cell_renderer_get_props (cell)->xalign = 0.5;
+  gtk_cell_renderer_get_props (cell)->yalign = 0.5;
+  gtk_cell_renderer_get_props (cell)->xpad = 0;
+  gtk_cell_renderer_get_props (cell)->ypad = 0;
+  gtk_cell_renderer_get_props (cell)->sensitive = TRUE;
+  gtk_cell_renderer_get_props (cell)->is_expander = FALSE;
+  gtk_cell_renderer_get_props (cell)->is_expanded = FALSE;
+  gtk_cell_renderer_get_props (cell)->editing = FALSE;
 }
 
 static void
@@ -316,40 +316,40 @@ gtk_cell_renderer_get_property (GObject     *object,
   switch (param_id)
     {
     case PROP_MODE:
-      g_value_set_enum (value, cell->mode);
+      g_value_set_enum (value, gtk_cell_renderer_get_props (cell)->mode);
       break;
     case PROP_VISIBLE:
-      g_value_set_boolean (value, cell->visible);
+      g_value_set_boolean (value, gtk_cell_renderer_get_props (cell)->visible);
       break;
     case PROP_SENSITIVE:
-      g_value_set_boolean (value, cell->sensitive);
+      g_value_set_boolean (value, gtk_cell_renderer_get_props (cell)->sensitive);
       break;
     case PROP_EDITING:
-      g_value_set_boolean (value, cell->editing);
+      g_value_set_boolean (value, gtk_cell_renderer_get_props (cell)->editing);
       break;
     case PROP_XALIGN:
-      g_value_set_float (value, cell->xalign);
+      g_value_set_float (value, gtk_cell_renderer_get_props (cell)->xalign);
       break;
     case PROP_YALIGN:
-      g_value_set_float (value, cell->yalign);
+      g_value_set_float (value, gtk_cell_renderer_get_props (cell)->yalign);
       break;
     case PROP_XPAD:
-      g_value_set_uint (value, cell->xpad);
+      g_value_set_uint (value, gtk_cell_renderer_get_props (cell)->xpad);
       break;
     case PROP_YPAD:
-      g_value_set_uint (value, cell->ypad);
+      g_value_set_uint (value, gtk_cell_renderer_get_props (cell)->ypad);
       break;
     case PROP_WIDTH:
-      g_value_set_int (value, cell->width);
+      g_value_set_int (value, gtk_cell_renderer_get_props (cell)->width);
       break;
     case PROP_HEIGHT:
-      g_value_set_int (value, cell->height);
+      g_value_set_int (value, gtk_cell_renderer_get_props (cell)->height);
       break;
     case PROP_IS_EXPANDER:
-      g_value_set_boolean (value, cell->is_expander);
+      g_value_set_boolean (value, gtk_cell_renderer_get_props (cell)->is_expander);
       break;
     case PROP_IS_EXPANDED:
-      g_value_set_boolean (value, cell->is_expanded);
+      g_value_set_boolean (value, gtk_cell_renderer_get_props (cell)->is_expanded);
       break;
     case PROP_CELL_BACKGROUND_GDK:
       {
@@ -363,7 +363,7 @@ gtk_cell_renderer_get_property (GObject     *object,
       }
       break;
     case PROP_CELL_BACKGROUND_SET:
-      g_value_set_boolean (value, cell->cell_background_set);
+      g_value_set_boolean (value, gtk_cell_renderer_get_props (cell)->cell_background_set);
       break;
     case PROP_CELL_BACKGROUND:
     default:
@@ -384,40 +384,40 @@ gtk_cell_renderer_set_property (GObject      *object,
   switch (param_id)
     {
     case PROP_MODE:
-      cell->mode = g_value_get_enum (value);
+      gtk_cell_renderer_get_props (cell)->mode = g_value_get_enum (value);
       break;
     case PROP_VISIBLE:
-      cell->visible = g_value_get_boolean (value);
+      gtk_cell_renderer_get_props (cell)->visible = g_value_get_boolean (value);
       break;
     case PROP_SENSITIVE:
-      cell->sensitive = g_value_get_boolean (value);
+      gtk_cell_renderer_get_props (cell)->sensitive = g_value_get_boolean (value);
       break;
     case PROP_EDITING:
-      cell->editing = g_value_get_boolean (value);
+      gtk_cell_renderer_get_props (cell)->editing = g_value_get_boolean (value);
       break;
     case PROP_XALIGN:
-      cell->xalign = g_value_get_float (value);
+      gtk_cell_renderer_get_props (cell)->xalign = g_value_get_float (value);
       break;
     case PROP_YALIGN:
-      cell->yalign = g_value_get_float (value);
+      gtk_cell_renderer_get_props (cell)->yalign = g_value_get_float (value);
       break;
     case PROP_XPAD:
-      cell->xpad = g_value_get_uint (value);
+      gtk_cell_renderer_get_props (cell)->xpad = g_value_get_uint (value);
       break;
     case PROP_YPAD:
-      cell->ypad = g_value_get_uint (value);
+      gtk_cell_renderer_get_props (cell)->ypad = g_value_get_uint (value);
       break;
     case PROP_WIDTH:
-      cell->width = g_value_get_int (value);
+      gtk_cell_renderer_get_props (cell)->width = g_value_get_int (value);
       break;
     case PROP_HEIGHT:
-      cell->height = g_value_get_int (value);
+      gtk_cell_renderer_get_props (cell)->height = g_value_get_int (value);
       break;
     case PROP_IS_EXPANDER:
-      cell->is_expander = g_value_get_boolean (value);
+      gtk_cell_renderer_get_props (cell)->is_expander = g_value_get_boolean (value);
       break;
     case PROP_IS_EXPANDED:
-      cell->is_expanded = g_value_get_boolean (value);
+      gtk_cell_renderer_get_props (cell)->is_expanded = g_value_get_boolean (value);
       break;
     case PROP_CELL_BACKGROUND:
       {
@@ -437,7 +437,7 @@ gtk_cell_renderer_set_property (GObject      *object,
       set_cell_bg_color (cell, g_value_get_boxed (value));
       break;
     case PROP_CELL_BACKGROUND_SET:
-      cell->cell_background_set = g_value_get_boolean (value);
+      gtk_cell_renderer_get_props (cell)->cell_background_set = g_value_get_boolean (value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
@@ -453,9 +453,9 @@ set_cell_bg_color (GtkCellRenderer *cell,
 
   if (color)
     {
-      if (!cell->cell_background_set)
+      if (!gtk_cell_renderer_get_props (cell)->cell_background_set)
         {
-	  cell->cell_background_set = TRUE;
+	  gtk_cell_renderer_get_props (cell)->cell_background_set = TRUE;
 	  g_object_notify (G_OBJECT (cell), "cell-background-set");
 	}
 
@@ -465,9 +465,9 @@ set_cell_bg_color (GtkCellRenderer *cell,
     }
   else
     {
-      if (cell->cell_background_set)
+      if (gtk_cell_renderer_get_props (cell)->cell_background_set)
         {
-	  cell->cell_background_set = FALSE;
+	  gtk_cell_renderer_get_props (cell)->cell_background_set = FALSE;
 	  g_object_notify (G_OBJECT (cell), "cell-background-set");
 	}
     }
@@ -693,19 +693,19 @@ __gtk_cell_renderer_set_fixed_size (GtkCellRenderer *cell,
   g_return_if_fail (GTK_IS_CELL_RENDERER (cell));
   g_return_if_fail (width >= -1 && height >= -1);
 
-  if ((width != cell->width) || (height != cell->height))
+  if ((width != gtk_cell_renderer_get_props (cell)->width) || (height != gtk_cell_renderer_get_props (cell)->height))
     {
       g_object_freeze_notify (G_OBJECT (cell));
 
-      if (width != cell->width)
+      if (width != gtk_cell_renderer_get_props (cell)->width)
         {
-          cell->width = width;
+          gtk_cell_renderer_get_props (cell)->width = width;
           g_object_notify (G_OBJECT (cell), "width");
         }
 
-      if (height != cell->height)
+      if (height != gtk_cell_renderer_get_props (cell)->height)
         {
-          cell->height = height;
+          gtk_cell_renderer_get_props (cell)->height = height;
           g_object_notify (G_OBJECT (cell), "height");
         }
 
@@ -729,9 +729,9 @@ __gtk_cell_renderer_get_fixed_size (GtkCellRenderer *cell,
   g_return_if_fail (GTK_IS_CELL_RENDERER (cell));
 
   if (width)
-    *width = cell->width;
+    *width = gtk_cell_renderer_get_props (cell)->width;
   if (height)
-    *height = cell->height;
+    *height = gtk_cell_renderer_get_props (cell)->height;
 }
 
 /**
@@ -753,19 +753,19 @@ __gtk_cell_renderer_set_alignment (GtkCellRenderer *cell,
   g_return_if_fail (xalign >= 0.0 && xalign <= 1.0);
   g_return_if_fail (yalign >= 0.0 && yalign <= 1.0);
 
-  if ((xalign != cell->xalign) || (yalign != cell->yalign))
+  if ((xalign != gtk_cell_renderer_get_props (cell)->xalign) || (yalign != gtk_cell_renderer_get_props (cell)->yalign))
     {
       g_object_freeze_notify (G_OBJECT (cell));
 
-      if (xalign != cell->xalign)
+      if (xalign != gtk_cell_renderer_get_props (cell)->xalign)
         {
-          cell->xalign = xalign;
+          gtk_cell_renderer_get_props (cell)->xalign = xalign;
           g_object_notify (G_OBJECT (cell), "xalign");
         }
 
-      if (yalign != cell->yalign)
+      if (yalign != gtk_cell_renderer_get_props (cell)->yalign)
         {
-          cell->yalign = yalign;
+          gtk_cell_renderer_get_props (cell)->yalign = yalign;
           g_object_notify (G_OBJECT (cell), "yalign");
         }
 
@@ -791,9 +791,9 @@ __gtk_cell_renderer_get_alignment (GtkCellRenderer *cell,
   g_return_if_fail (GTK_IS_CELL_RENDERER (cell));
 
   if (xalign)
-    *xalign = cell->xalign;
+    *xalign = gtk_cell_renderer_get_props (cell)->xalign;
   if (yalign)
-    *yalign = cell->yalign;
+    *yalign = gtk_cell_renderer_get_props (cell)->yalign;
 }
 
 /**
@@ -814,19 +814,19 @@ __gtk_cell_renderer_set_padding (GtkCellRenderer *cell,
   g_return_if_fail (GTK_IS_CELL_RENDERER (cell));
   g_return_if_fail (xpad >= 0 && xpad >= 0);
 
-  if ((xpad != cell->xpad) || (ypad != cell->ypad))
+  if ((xpad != gtk_cell_renderer_get_props (cell)->xpad) || (ypad != gtk_cell_renderer_get_props (cell)->ypad))
     {
       g_object_freeze_notify (G_OBJECT (cell));
 
-      if (xpad != cell->xpad)
+      if (xpad != gtk_cell_renderer_get_props (cell)->xpad)
         {
-          cell->xpad = xpad;
+          gtk_cell_renderer_get_props (cell)->xpad = xpad;
           g_object_notify (G_OBJECT (cell), "xpad");
         }
 
-      if (ypad != cell->ypad)
+      if (ypad != gtk_cell_renderer_get_props (cell)->ypad)
         {
-          cell->ypad = ypad;
+          gtk_cell_renderer_get_props (cell)->ypad = ypad;
           g_object_notify (G_OBJECT (cell), "ypad");
         }
 
@@ -852,9 +852,9 @@ __gtk_cell_renderer_get_padding (GtkCellRenderer *cell,
   g_return_if_fail (GTK_IS_CELL_RENDERER (cell));
 
   if (xpad)
-    *xpad = cell->xpad;
+    *xpad = gtk_cell_renderer_get_props (cell)->xpad;
   if (ypad)
-    *ypad = cell->ypad;
+    *ypad = gtk_cell_renderer_get_props (cell)->ypad;
 }
 
 /**
@@ -872,9 +872,9 @@ __gtk_cell_renderer_set_visible (GtkCellRenderer *cell,
 {
   g_return_if_fail (GTK_IS_CELL_RENDERER (cell));
 
-  if (cell->visible != visible)
+  if (gtk_cell_renderer_get_props (cell)->visible != visible)
     {
-      cell->visible = visible ? TRUE : FALSE;
+      gtk_cell_renderer_get_props (cell)->visible = visible ? TRUE : FALSE;
       g_object_notify (G_OBJECT (cell), "visible");
     }
 }
@@ -894,7 +894,7 @@ __gtk_cell_renderer_get_visible (GtkCellRenderer *cell)
 {
   g_return_val_if_fail (GTK_IS_CELL_RENDERER (cell), FALSE);
 
-  return cell->visible;
+  return gtk_cell_renderer_get_props (cell)->visible;
 }
 
 /**
@@ -912,9 +912,9 @@ __gtk_cell_renderer_set_sensitive (GtkCellRenderer *cell,
 {
   g_return_if_fail (GTK_IS_CELL_RENDERER (cell));
 
-  if (cell->sensitive != sensitive)
+  if (gtk_cell_renderer_get_props (cell)->sensitive != sensitive)
     {
-      cell->sensitive = sensitive ? TRUE : FALSE;
+      gtk_cell_renderer_get_props (cell)->sensitive = sensitive ? TRUE : FALSE;
       g_object_notify (G_OBJECT (cell), "sensitive");
     }
 }
@@ -934,7 +934,7 @@ __gtk_cell_renderer_get_sensitive (GtkCellRenderer *cell)
 {
   g_return_val_if_fail (GTK_IS_CELL_RENDERER (cell), FALSE);
 
-  return cell->sensitive;
+  return gtk_cell_renderer_get_props (cell)->sensitive;
 }
 
 /**
@@ -980,9 +980,9 @@ __gtk_cell_renderer_stop_editing (GtkCellRenderer *cell,
 {
   g_return_if_fail (GTK_IS_CELL_RENDERER (cell));
 
-  if (cell->editing)
+  if (gtk_cell_renderer_get_props (cell)->editing)
     {
-      cell->editing = FALSE;
+      gtk_cell_renderer_get_props (cell)->editing = FALSE;
       if (canceled)
 	g_signal_emit (cell, cell_renderer_signals[EDITING_CANCELED], 0);
     }

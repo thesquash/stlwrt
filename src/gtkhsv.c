@@ -207,7 +207,7 @@ gtk_hsv_init (GtkHSV *hsv)
 
   priv = G_TYPE_INSTANCE_GET_PRIVATE (hsv, GTK_TYPE_HSV, HSVPrivate);
   
-  hsv->priv = priv;
+  gtk_hsv_get_props (hsv)->priv = priv;
 
   __gtk_widget_set_has_window (GTK_WIDGET (hsv), FALSE);
   __gtk_widget_set_can_focus (GTK_WIDGET (hsv), TRUE);
@@ -232,7 +232,7 @@ gtk_hsv_map (GtkWidget *widget)
   HSVPrivate *priv;
 
   hsv = GTK_HSV (widget);
-  priv = hsv->priv;
+  priv = gtk_hsv_get_props (hsv)->priv;
 
   GTK_WIDGET_CLASS (gtk_hsv_parent_class)->map (widget);
 
@@ -248,7 +248,7 @@ gtk_hsv_unmap (GtkWidget *widget)
   HSVPrivate *priv;
 
   hsv = GTK_HSV (widget);
-  priv = hsv->priv;
+  priv = gtk_hsv_get_props (hsv)->priv;
 
   __gdk_window_hide (priv->window);
 
@@ -266,17 +266,17 @@ gtk_hsv_realize (GtkWidget *widget)
   GdkWindow *parent_window;
   
   hsv = GTK_HSV (widget);
-  priv = hsv->priv;
+  priv = gtk_hsv_get_props (hsv)->priv;
   
   __gtk_widget_set_realized (widget, TRUE);
   
   /* Create window */
   
   attr.window_type = GDK_WINDOW_CHILD;
-  attr.x = widget->allocation.x;
-  attr.y = widget->allocation.y;
-  attr.width = widget->allocation.width;
-  attr.height = widget->allocation.height;
+  attr.x = gtk_widget_get_props (widget)->allocation.x;
+  attr.y = gtk_widget_get_props (widget)->allocation.y;
+  attr.width = gtk_widget_get_props (widget)->allocation.width;
+  attr.height = gtk_widget_get_props (widget)->allocation.height;
   attr.wclass = GDK_INPUT_ONLY;
   attr.event_mask = __gtk_widget_get_events (widget);
   attr.event_mask |= (GDK_KEY_PRESS_MASK
@@ -290,13 +290,13 @@ gtk_hsv_realize (GtkWidget *widget)
   
   parent_window = __gtk_widget_get_parent_window (widget);
   
-  widget->window = parent_window;
-  g_object_ref (widget->window);
+  gtk_widget_get_props (widget)->window = parent_window;
+  g_object_ref (gtk_widget_get_props (widget)->window);
   
   priv->window = __gdk_window_new (parent_window, &attr, attr_mask);
   __gdk_window_set_user_data (priv->window, hsv);
   
-  widget->style = __gtk_style_attach (widget->style, widget->window);
+  gtk_widget_get_props (widget)->style = __gtk_style_attach (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window);
 }
 
 /* Unrealize handler for the HSV color selector */
@@ -307,7 +307,7 @@ gtk_hsv_unrealize (GtkWidget *widget)
   HSVPrivate *priv;
   
   hsv = GTK_HSV (widget);
-  priv = hsv->priv;
+  priv = gtk_hsv_get_props (hsv)->priv;
   
   __gdk_window_set_user_data (priv->window, NULL);
   __gdk_window_destroy (priv->window);
@@ -322,7 +322,7 @@ gtk_hsv_size_request (GtkWidget      *widget,
 		      GtkRequisition *requisition)
 {
   GtkHSV *hsv = GTK_HSV (widget);
-  HSVPrivate *priv = hsv->priv;
+  HSVPrivate *priv = gtk_hsv_get_props (hsv)->priv;
   gint focus_width;
   gint focus_pad;
 
@@ -344,9 +344,9 @@ gtk_hsv_size_allocate (GtkWidget     *widget,
   HSVPrivate *priv;
   
   hsv = GTK_HSV (widget);
-  priv = hsv->priv;
+  priv = gtk_hsv_get_props (hsv)->priv;
   
-  widget->allocation = *allocation;
+  gtk_widget_get_props (widget)->allocation = *allocation;
   
   if (__gtk_widget_get_realized (widget))
     __gdk_window_move_resize (priv->window,
@@ -525,7 +525,7 @@ compute_triangle (GtkHSV *hsv,
   gdouble inner, outer;
   gdouble angle;
 
-  priv = hsv->priv;
+  priv = gtk_hsv_get_props (hsv)->priv;
 
   center_x = GTK_WIDGET (hsv)->allocation.width / 2.0;
   center_y = GTK_WIDGET (hsv)->allocation.height / 2.0;
@@ -553,7 +553,7 @@ is_in_ring (GtkHSV *hsv,
   gdouble center_y;
   gdouble inner, outer;
 
-  priv = hsv->priv;
+  priv = gtk_hsv_get_props (hsv)->priv;
 
   center_x = GTK_WIDGET (hsv)->allocation.width / 2.0;
   center_y = GTK_WIDGET (hsv)->allocation.height / 2.0;
@@ -704,7 +704,7 @@ set_cross_grab (GtkHSV *hsv,
   HSVPrivate *priv;
   GdkCursor *cursor;
   
-  priv = hsv->priv;
+  priv = gtk_hsv_get_props (hsv)->priv;
   
   cursor = __gdk_cursor_new_for_display (__gtk_widget_get_display (GTK_WIDGET (hsv)),
 				       GDK_CROSSHAIR);
@@ -725,7 +725,7 @@ gtk_hsv_grab_broken (GtkWidget          *widget,
   GtkHSV *hsv = GTK_HSV (widget);
   HSVPrivate *priv;
   
-  priv = hsv->priv;
+  priv = gtk_hsv_get_props (hsv)->priv;
   
   priv->mode = DRAG_NONE;
   
@@ -742,7 +742,7 @@ gtk_hsv_button_press (GtkWidget      *widget,
   double x, y;
   
   hsv = GTK_HSV (widget);
-  priv = hsv->priv;
+  priv = gtk_hsv_get_props (hsv)->priv;
   
   if (priv->mode != DRAG_NONE || event->button != 1)
     return FALSE;
@@ -796,7 +796,7 @@ gtk_hsv_button_release (GtkWidget      *widget,
   gdouble x, y;
   
   hsv = GTK_HSV (widget);
-  priv = hsv->priv;
+  priv = gtk_hsv_get_props (hsv)->priv;
   
   if (priv->mode == DRAG_NONE || event->button != 1)
     return FALSE;
@@ -837,7 +837,7 @@ gtk_hsv_motion (GtkWidget      *widget,
   GdkModifierType mods;
   
   hsv = GTK_HSV (widget);
-  priv = hsv->priv;
+  priv = gtk_hsv_get_props (hsv)->priv;
   
   if (priv->mode == DRAG_NONE)
     return FALSE;
@@ -899,10 +899,10 @@ paint_ring (GtkHSV      *hsv,
 			"focus-padding", &focus_pad,
 			NULL);
   
-  priv = hsv->priv;
+  priv = gtk_hsv_get_props (hsv)->priv;
 
-  center_x = widget->allocation.width / 2.0;
-  center_y = widget->allocation.height / 2.0;
+  center_x = gtk_widget_get_props (widget)->allocation.width / 2.0;
+  center_y = gtk_widget_get_props (widget)->allocation.height / 2.0;
 
   outer = priv->size / 2.0;
   inner = outer - priv->ring_width;
@@ -1045,7 +1045,7 @@ paint_triangle (GtkHSV      *hsv,
   gchar *detail;
   gint stride;
   
-  priv = hsv->priv;
+  priv = gtk_hsv_get_props (hsv)->priv;
   
   /* Compute triangle's vertices */
   
@@ -1216,11 +1216,11 @@ paint_triangle (GtkHSV      *hsv,
 			    "focus-padding", &focus_pad,
 			    NULL);
   
-      __gtk_paint_focus (widget->style, widget->window,
+      __gtk_paint_focus (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window,
 		       __gtk_widget_get_state (widget),
 		       NULL, widget, detail,
-		       widget->allocation.x + xx - FOCUS_RADIUS - focus_width - focus_pad, 
-		       widget->allocation.y + yy - FOCUS_RADIUS - focus_width - focus_pad, 
+		       gtk_widget_get_props (widget)->allocation.x + xx - FOCUS_RADIUS - focus_width - focus_pad, 
+		       gtk_widget_get_props (widget)->allocation.y + yy - FOCUS_RADIUS - focus_width - focus_pad, 
 		       2 * (FOCUS_RADIUS + focus_width + focus_pad), 
 		       2 * (FOCUS_RADIUS + focus_width + focus_pad));
     }
@@ -1251,36 +1251,36 @@ gtk_hsv_expose (GtkWidget      *widget,
   cairo_t *cr;
   
   hsv = GTK_HSV (widget);
-  priv = hsv->priv;
+  priv = gtk_hsv_get_props (hsv)->priv;
   
-  if (!(event->window == widget->window && __gtk_widget_is_drawable (widget)))
+  if (!(event->window == gtk_widget_get_props (widget)->window && __gtk_widget_is_drawable (gtk_widget_get_props (widget))))
     return FALSE;
 
-  rect.x = widget->allocation.x;
-  rect.y = widget->allocation.y;
-  rect.width = widget->allocation.width;
-  rect.height = widget->allocation.height;
+  rect.x = gtk_widget_get_props (widget)->allocation.x;
+  rect.y = gtk_widget_get_props (widget)->allocation.y;
+  rect.width = gtk_widget_get_props (widget)->allocation.width;
+  rect.height = gtk_widget_get_props (widget)->allocation.height;
   
   if (!__gdk_rectangle_intersect (&event->area, &rect, &dest))
     return FALSE;
   
-  cr = __gdk_cairo_create (widget->window);
+  cr = __gdk_cairo_create (gtk_widget_get_props (widget)->window);
 
-  cairo_translate (cr, widget->allocation.x, widget->allocation.y);
+  cairo_translate (cr, gtk_widget_get_props (widget)->allocation.x, gtk_widget_get_props (widget)->allocation.y);
   paint (hsv, cr,
-	 dest.x - widget->allocation.x,
-	 dest.y - widget->allocation.y,
+	 dest.x - gtk_widget_get_props (widget)->allocation.x,
+	 dest.y - gtk_widget_get_props (widget)->allocation.y,
 	 dest.width, dest.height);
   cairo_destroy (cr);
 
   if (__gtk_widget_has_focus (widget) && priv->focus_on_ring)
-    __gtk_paint_focus (widget->style, widget->window,
+    __gtk_paint_focus (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window,
 		     __gtk_widget_get_state (widget),
 		     &event->area, widget, NULL,
-		     widget->allocation.x,
-		     widget->allocation.y, 
-		     widget->allocation.width, 
-		     widget->allocation.height);
+		     gtk_widget_get_props (widget)->allocation.x,
+		     gtk_widget_get_props (widget)->allocation.y, 
+		     gtk_widget_get_props (widget)->allocation.width, 
+		     gtk_widget_get_props (widget)->allocation.height);
 
   return FALSE;
 }
@@ -1293,7 +1293,7 @@ gtk_hsv_focus (GtkWidget       *widget,
   HSVPrivate *priv;
 
   hsv = GTK_HSV (widget);
-  priv = hsv->priv;
+  priv = gtk_hsv_get_props (hsv)->priv;
 
   if (!__gtk_widget_has_focus (widget))
     {
@@ -1384,7 +1384,7 @@ __gtk_hsv_set_color (GtkHSV *hsv,
   g_return_if_fail (s >= 0.0 && s <= 1.0);
   g_return_if_fail (v >= 0.0 && v <= 1.0);
   
-  priv = hsv->priv;
+  priv = gtk_hsv_get_props (hsv)->priv;
   
   priv->h = h;
   priv->s = s;
@@ -1417,7 +1417,7 @@ __gtk_hsv_get_color (GtkHSV *hsv,
   
   g_return_if_fail (GTK_IS_HSV (hsv));
   
-  priv = hsv->priv;
+  priv = gtk_hsv_get_props (hsv)->priv;
   
   if (h)
     *h = priv->h;
@@ -1452,7 +1452,7 @@ __gtk_hsv_set_metrics (GtkHSV *hsv,
   g_return_if_fail (ring_width > 0);
   g_return_if_fail (2 * ring_width + 1 <= size);
   
-  priv = hsv->priv;
+  priv = gtk_hsv_get_props (hsv)->priv;
   
   same_size = (priv->size == size);
   
@@ -1484,7 +1484,7 @@ __gtk_hsv_get_metrics (GtkHSV *hsv,
   
   g_return_if_fail (GTK_IS_HSV (hsv));
   
-  priv = hsv->priv;
+  priv = gtk_hsv_get_props (hsv)->priv;
   
   if (size)
     *size = priv->size;
@@ -1515,7 +1515,7 @@ __gtk_hsv_is_adjusting (GtkHSV *hsv)
   
   g_return_val_if_fail (GTK_IS_HSV (hsv), FALSE);
   
-  priv = hsv->priv;
+  priv = gtk_hsv_get_props (hsv)->priv;
 
   return priv->mode != DRAG_NONE;
 }
@@ -1607,7 +1607,7 @@ gtk_hsv_move (GtkHSV          *hsv,
   gint hx, hy, sx, sy, vx, vy; /* HSV vertices */
   gint x, y; /* position in triangle */
   
-  priv = hsv->priv;
+  priv = gtk_hsv_get_props (hsv)->priv;
 
   hue = priv->h;
   sat = priv->s;

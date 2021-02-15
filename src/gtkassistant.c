@@ -1133,7 +1133,7 @@ gtk_assistant_size_allocate (GtkWidget      *widget,
 			"content-padding", &content_padding,
 			NULL);
 
-  widget->allocation = *allocation;
+  gtk_widget_get_props (widget)->allocation = *allocation;
 
   /* Header */
   __gtk_widget_get_child_requisition (priv->header_image, &header_requisition);
@@ -1284,7 +1284,7 @@ assistant_paint_colored_box (GtkWidget *widget)
   gint content_x, content_width;
   gboolean rtl;
 
-  cr   = __gdk_cairo_create (widget->window);
+  cr   = __gdk_cairo_create (gtk_widget_get_props (widget)->window);
   rtl  = (__gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL);
   border_width = __gtk_container_get_border_width (GTK_CONTAINER (widget));
 
@@ -1294,17 +1294,17 @@ assistant_paint_colored_box (GtkWidget *widget)
 			NULL);
 
   /* colored box */
-  __gdk_cairo_set_source_color (cr, &widget->style->bg[GTK_STATE_SELECTED]);
+  __gdk_cairo_set_source_color (cr, &gtk_widget_get_props (widget)->style->bg[GTK_STATE_SELECTED]);
   cairo_rectangle (cr,
 		   border_width,
 		   border_width,
-		   widget->allocation.width - 2 * border_width,
-		   widget->allocation.height - priv->action_area->allocation.height - 2 * border_width - ACTION_AREA_SPACING);
+		   gtk_widget_get_props (widget)->allocation.width - 2 * border_width,
+		   gtk_widget_get_props (widget)->allocation.height - priv->action_area->allocation.height - 2 * border_width - ACTION_AREA_SPACING);
   cairo_fill (cr);
 
   /* content box */
   content_x = content_padding + border_width;
-  content_width = widget->allocation.width - 2 * content_padding - 2 * border_width;
+  content_width = gtk_widget_get_props (widget)->allocation.width - 2 * content_padding - 2 * border_width;
 
   if (__gtk_widget_get_visible (priv->sidebar_image))
     {
@@ -1313,13 +1313,13 @@ assistant_paint_colored_box (GtkWidget *widget)
       content_width -= priv->sidebar_image->allocation.width;
     }
   
-  __gdk_cairo_set_source_color (cr, &widget->style->bg[GTK_STATE_NORMAL]);
+  __gdk_cairo_set_source_color (cr, &gtk_widget_get_props (widget)->style->bg[GTK_STATE_NORMAL]);
 
   cairo_rectangle (cr,
 		   content_x,
 		   priv->header_image->allocation.height + content_padding + 2 * header_padding + border_width,
 		   content_width,
-		   widget->allocation.height - 2 * border_width - priv->action_area->allocation.height -
+		   gtk_widget_get_props (widget)->allocation.height - 2 * border_width - priv->action_area->allocation.height -
 		   priv->header_image->allocation.height - 2 * content_padding - 2 * header_padding - ACTION_AREA_SPACING);
   cairo_fill (cr);
 
@@ -1365,7 +1365,7 @@ gtk_assistant_focus (GtkWidget        *widget,
   priv = GTK_ASSISTANT (widget)->priv;
 
   /* we only have to care about 2 widgets, action area and the current page */
-  if (container->focus_child == priv->action_area)
+  if (gtk_container_get_props (container)->focus_child == priv->action_area)
     {
       if (!__gtk_widget_child_focus (priv->action_area, direction) &&
 	  (priv->current_page == NULL ||

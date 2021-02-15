@@ -2926,8 +2926,8 @@ print_pages (GtkPrintOperation       *op,
           __gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (error_dialog),
                                                     _("The most probable reason is that a temporary file could not be created."));
 
-          if (parent && parent->group)
-            __gtk_window_group_add_window (parent->group, GTK_WINDOW (error_dialog));
+          if (gtk_window_get_props (parent) && gtk_window_get_props (parent)->group)
+            __gtk_window_group_add_window (gtk_window_get_props (parent)->group, GTK_WINDOW (error_dialog));
 
           g_signal_connect (error_dialog, "response",
                             G_CALLBACK (__gtk_widget_destroy), NULL);
@@ -3053,7 +3053,7 @@ __gtk_print_operation_get_error (GtkPrintOperation  *op,
  * 					     GTK_MESSAGE_ERROR,
  * 					     GTK_BUTTONS_CLOSE,
  * 					     "Error printing file:\n%s",
- * 					     error->message);
+ * 					     gtk_widget_get_props (error)->message);
  *    g_signal_connect (error_dialog, "response", 
  *                      G_CALLBACK (__gtk_widget_destroy), NULL);
  *    __gtk_widget_show (error_dialog);

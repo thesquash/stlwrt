@@ -663,7 +663,7 @@ __gtk_selection_owner_set_for_display (GdkDisplay   *display,
   if (widget == NULL)
     window = NULL;
   else
-    window = widget->window;
+    window = gtk_widget_get_props (widget)->window;
 
   tmp_list = current_selections;
   while (tmp_list)
@@ -719,7 +719,7 @@ __gtk_selection_owner_set_for_display (GdkDisplay   *display,
 	{
 	  GdkEvent *event = __gdk_event_new (GDK_SELECTION_CLEAR);
 	  
-	  event->selection.window = g_object_ref (old_owner->window);
+	  event->selection.window = g_object_ref (gtk_widget_get_props (old_owner)->window);
 	  event->selection.selection = selection;
 	  event->selection.time = time;
 	  
@@ -892,7 +892,7 @@ __gtk_selection_add_target (GtkWidget	    *widget,
   list = gtk_selection_target_list_get (widget, selection);
   __gtk_target_list_add (list, target, 0, info);
 #ifdef GDK_WINDOWING_WIN32
-  gdk_win32_selection_add_targets (widget->window, selection, 1, &target);
+  gdk_win32_selection_add_targets (gtk_widget_get_props (widget)->window, selection, 1, &target);
 #endif
 }
 
@@ -928,7 +928,7 @@ __gtk_selection_add_targets (GtkWidget            *widget,
 
     for (i = 0; i < ntargets; ++i)
       atoms[i] = __gdk_atom_intern (targets[i].target, FALSE);
-    gdk_win32_selection_add_targets (widget->window, selection, ntargets, atoms);
+    gdk_win32_selection_add_targets (gtk_widget_get_props (widget)->window, selection, ntargets, atoms);
     g_free (atoms);
   }
 #endif
@@ -1102,7 +1102,7 @@ __gtk_selection_convert (GtkWidget *widget,
   /* Otherwise, we need to go through X */
   
   current_retrievals = g_list_append (current_retrievals, info);
-  __gdk_selection_convert (widget->window, selection, target, time_);
+  __gdk_selection_convert (gtk_widget_get_props (widget)->window, selection, target, time_);
   __gdk_threads_add_timeout (1000,
       (GSourceFunc) gtk_selection_retrieval_timeout, info);
   
@@ -2715,7 +2715,7 @@ ___gtk_selection_notify (GtkWidget	       *widget,
     return FALSE;
 
   if (event->property != GDK_NONE)
-    length = __gdk_selection_property_get (widget->window, &buffer, 
+    length = __gdk_selection_property_get (gtk_widget_get_props (widget)->window, &buffer, 
 					 &type, &format);
   else
     length = 0; /* silence gcc */
@@ -2739,8 +2739,8 @@ ___gtk_selection_notify (GtkWidget	       *widget,
       info->notify_time = event->time;
       info->idle_time = 0;
       info->offset = 0;		/* Mark as OK to proceed */
-      __gdk_window_set_events (widget->window,
-			     __gdk_window_get_events (widget->window)
+      __gdk_window_set_events (gtk_widget_get_props (widget)->window,
+			     __gdk_window_get_events (gtk_widget_get_props (widget)->window)
 			     | GDK_PROPERTY_CHANGE_MASK);
     }
   else
@@ -2755,7 +2755,7 @@ ___gtk_selection_notify (GtkWidget	       *widget,
 				      buffer, length, event->time);
     }
   
-  __gdk_property_delete (widget->window, event->property);
+  __gdk_property_delete (gtk_widget_get_props (widget)->window, event->property);
   
   g_free (buffer);
   
@@ -2818,9 +2818,9 @@ ___gtk_selection_property_notify (GtkWidget	*widget,
   
   info->idle_time = 0;
   
-  length = __gdk_selection_property_get (widget->window, &new_buffer, 
+  length = __gdk_selection_property_get (gtk_widget_get_props (widget)->window, &new_buffer, 
 				       &type, &format);
-  __gdk_property_delete (widget->window, event->atom);
+  __gdk_property_delete (gtk_widget_get_props (widget)->window, event->atom);
   
   /* We could do a lot better efficiency-wise by paying attention to
      what length was sent in the initial INCR transaction, instead of

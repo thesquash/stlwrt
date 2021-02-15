@@ -227,8 +227,8 @@ gtk_color_button_class_init (GtkColorButtonClass *klass)
 static gboolean
 gtk_color_button_has_alpha (GtkColorButton *color_button)
 {
-  return color_button->priv->use_alpha &&
-      color_button->priv->alpha < 65535;
+  return gtk_color_button_get_props (color_button)->priv->use_alpha &&
+      gtk_color_button_get_props (color_button)->priv->alpha < 65535;
 }
 
 static cairo_pattern_t *
@@ -288,14 +288,14 @@ expose_event (GtkWidget      *widget,
       cairo_restore (cr);
 
       cairo_set_source_rgba (cr,
-                             color_button->priv->color.red / 65535.,
-                             color_button->priv->color.green / 65535.,
-                             color_button->priv->color.blue / 65535.,
-                             color_button->priv->alpha / 65535.);
+                             gtk_color_button_get_props (color_button)->priv->color.red / 65535.,
+                             gtk_color_button_get_props (color_button)->priv->color.green / 65535.,
+                             gtk_color_button_get_props (color_button)->priv->color.blue / 65535.,
+                             gtk_color_button_get_props (color_button)->priv->alpha / 65535.);
     }
   else
     {
-      __gdk_cairo_set_source_color (cr, &color_button->priv->color);
+      __gdk_cairo_set_source_color (cr, &gtk_color_button_get_props (color_button)->priv->color);
     }
 
   cairo_paint (cr);
@@ -347,12 +347,12 @@ gtk_color_button_drag_data_received (GtkWidget        *widget,
 
   dropped = (guint16 *)selection_data->data;
 
-  color_button->priv->color.red = dropped[0];
-  color_button->priv->color.green = dropped[1];
-  color_button->priv->color.blue = dropped[2];
-  color_button->priv->alpha = dropped[3];
+  gtk_color_button_get_props (color_button)->priv->color.red = dropped[0];
+  gtk_color_button_get_props (color_button)->priv->color.green = dropped[1];
+  gtk_color_button_get_props (color_button)->priv->color.blue = dropped[2];
+  gtk_color_button_get_props (color_button)->priv->alpha = dropped[3];
 
-  __gtk_widget_queue_draw (color_button->priv->draw_area);
+  __gtk_widget_queue_draw (gtk_color_button_get_props (color_button)->priv->draw_area);
 
   g_signal_emit (color_button, color_button_signals[COLOR_SET], 0);
 
@@ -389,7 +389,7 @@ gtk_color_button_drag_begin (GtkWidget      *widget,
 {
   GtkColorButton *color_button = data;
   
-  set_color_icon (context, &color_button->priv->color);
+  set_color_icon (context, &gtk_color_button_get_props (color_button)->priv->color);
 }
 
 static void
@@ -402,10 +402,10 @@ gtk_color_button_drag_data_get (GtkWidget        *widget,
 {
   guint16 dropped[4];
 
-  dropped[0] = color_button->priv->color.red;
-  dropped[1] = color_button->priv->color.green;
-  dropped[2] = color_button->priv->color.blue;
-  dropped[3] = color_button->priv->alpha;
+  dropped[0] = gtk_color_button_get_props (color_button)->priv->color.red;
+  dropped[1] = gtk_color_button_get_props (color_button)->priv->color.green;
+  dropped[2] = gtk_color_button_get_props (color_button)->priv->color.blue;
+  dropped[3] = gtk_color_button_get_props (color_button)->priv->alpha;
 
   __gtk_selection_data_set (selection_data, selection_data->target,
 			  16, (guchar *)dropped, 8);
@@ -420,7 +420,7 @@ gtk_color_button_init (GtkColorButton *color_button)
   PangoRectangle rect;
 
   /* Create the widgets */
-  color_button->priv = GTK_COLOR_BUTTON_GET_PRIVATE (color_button);
+  gtk_color_button_get_props (color_button)->priv = GTK_COLOR_BUTTON_GET_PRIVATE (gtk_color_button_get_props (color_button));
 
   __gtk_widget_push_composite_child ();
 
@@ -435,27 +435,27 @@ gtk_color_button_init (GtkColorButton *color_button)
   __gtk_widget_show (frame);
 
   /* Just some widget we can hook to expose-event on */
-  color_button->priv->draw_area = __gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
+  gtk_color_button_get_props (color_button)->priv->draw_area = __gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
 
   layout = __gtk_widget_create_pango_layout (GTK_WIDGET (color_button), "Black");
   pango_layout_get_pixel_extents (layout, NULL, &rect);
   g_object_unref (layout);
 
-  __gtk_widget_set_size_request (color_button->priv->draw_area, rect.width - 2, rect.height - 2);
-  g_signal_connect (color_button->priv->draw_area, "expose-event",
+  __gtk_widget_set_size_request (gtk_color_button_get_props (color_button)->priv->draw_area, rect.width - 2, rect.height - 2);
+  g_signal_connect (gtk_color_button_get_props (color_button)->priv->draw_area, "expose-event",
                     G_CALLBACK (expose_event), color_button);
-  __gtk_container_add (GTK_CONTAINER (frame), color_button->priv->draw_area);
-  __gtk_widget_show (color_button->priv->draw_area);
+  __gtk_container_add (GTK_CONTAINER (frame), gtk_color_button_get_props (color_button)->priv->draw_area);
+  __gtk_widget_show (gtk_color_button_get_props (color_button)->priv->draw_area);
 
-  color_button->priv->title = g_strdup (_("Pick a Color")); /* default title */
+  gtk_color_button_get_props (color_button)->priv->title = g_strdup (_("Pick a Color")); /* default title */
 
   /* Start with opaque black, alpha disabled */
 
-  color_button->priv->color.red = 0;
-  color_button->priv->color.green = 0;
-  color_button->priv->color.blue = 0;
-  color_button->priv->alpha = 65535;
-  color_button->priv->use_alpha = FALSE;
+  gtk_color_button_get_props (color_button)->priv->color.red = 0;
+  gtk_color_button_get_props (color_button)->priv->color.green = 0;
+  gtk_color_button_get_props (color_button)->priv->color.blue = 0;
+  gtk_color_button_get_props (color_button)->priv->alpha = 65535;
+  gtk_color_button_get_props (color_button)->priv->use_alpha = FALSE;
 
   __gtk_drag_dest_set (GTK_WIDGET (color_button),
                      GTK_DEST_DEFAULT_MOTION |
@@ -481,12 +481,12 @@ gtk_color_button_finalize (GObject *object)
 {
   GtkColorButton *color_button = GTK_COLOR_BUTTON (object);
 
-  if (color_button->priv->cs_dialog != NULL)
-    __gtk_widget_destroy (color_button->priv->cs_dialog);
-  color_button->priv->cs_dialog = NULL;
+  if (gtk_color_button_get_props (color_button)->priv->cs_dialog != NULL)
+    __gtk_widget_destroy (gtk_color_button_get_props (color_button)->priv->cs_dialog);
+  gtk_color_button_get_props (color_button)->priv->cs_dialog = NULL;
 
-  g_free (color_button->priv->title);
-  color_button->priv->title = NULL;
+  g_free (gtk_color_button_get_props (color_button)->priv->title);
+  gtk_color_button_get_props (color_button)->priv->title = NULL;
 
   G_OBJECT_CLASS (gtk_color_button_parent_class)->finalize (object);
 }
@@ -534,14 +534,14 @@ dialog_ok_clicked (GtkWidget *widget,
   GtkColorButton *color_button = GTK_COLOR_BUTTON (data);
   GtkColorSelection *color_selection;
 
-  color_selection = GTK_COLOR_SELECTION (GTK_COLOR_SELECTION_DIALOG (color_button->priv->cs_dialog)->colorsel);
+  color_selection = GTK_COLOR_SELECTION (GTK_COLOR_SELECTION_DIALOG (gtk_color_button_get_props (color_button)->priv->cs_dialog)->colorsel);
 
-  __gtk_color_selection_get_current_color (color_selection, &color_button->priv->color);
-  color_button->priv->alpha = __gtk_color_selection_get_current_alpha (color_selection);
+  __gtk_color_selection_get_current_color (color_selection, &gtk_color_button_get_props (color_button)->priv->color);
+  gtk_color_button_get_props (color_button)->priv->alpha = __gtk_color_selection_get_current_alpha (color_selection);
 
-  __gtk_widget_hide (color_button->priv->cs_dialog);
+  __gtk_widget_hide (gtk_color_button_get_props (color_button)->priv->cs_dialog);
 
-  __gtk_widget_queue_draw (color_button->priv->draw_area);
+  __gtk_widget_queue_draw (gtk_color_button_get_props (color_button)->priv->draw_area);
 
   g_signal_emit (color_button, color_button_signals[COLOR_SET], 0);
 
@@ -557,7 +557,7 @@ dialog_destroy (GtkWidget *widget,
 {
   GtkColorButton *color_button = GTK_COLOR_BUTTON (data);
   
-  color_button->priv->cs_dialog = NULL;
+  gtk_color_button_get_props (color_button)->priv->cs_dialog = NULL;
 
   return FALSE;
 }
@@ -568,7 +568,7 @@ dialog_cancel_clicked (GtkWidget *widget,
 {
   GtkColorButton *color_button = GTK_COLOR_BUTTON (data);
   
-  __gtk_widget_hide (color_button->priv->cs_dialog);  
+  __gtk_widget_hide (gtk_color_button_get_props (color_button)->priv->cs_dialog);  
 }
 
 static void
@@ -578,16 +578,16 @@ gtk_color_button_clicked (GtkButton *button)
   GtkColorSelectionDialog *color_dialog;
 
   /* if dialog already exists, make sure it's shown and raised */
-  if (!color_button->priv->cs_dialog) 
+  if (!gtk_color_button_get_props (color_button)->priv->cs_dialog) 
     {
       /* Create the dialog and connects its buttons */
       GtkWidget *parent;
       
       parent = __gtk_widget_get_toplevel (GTK_WIDGET (color_button));
       
-      color_button->priv->cs_dialog = __gtk_color_selection_dialog_new (color_button->priv->title);
+      gtk_color_button_get_props (color_button)->priv->cs_dialog = __gtk_color_selection_dialog_new (gtk_color_button_get_props (color_button)->priv->title);
       
-      color_dialog = GTK_COLOR_SELECTION_DIALOG (color_button->priv->cs_dialog);
+      color_dialog = GTK_COLOR_SELECTION_DIALOG (gtk_color_button_get_props (color_button)->priv->cs_dialog);
 
       if (__gtk_widget_is_toplevel (parent) && GTK_IS_WINDOW (parent))
         {
@@ -598,30 +598,30 @@ gtk_color_button_clicked (GtkButton *button)
 				__gtk_window_get_modal (GTK_WINDOW (parent)));
 	}
       
-      g_signal_connect (color_dialog->ok_button, "clicked",
+      g_signal_connect (gtk_color_selection_dialog_get_props (color_dialog)->ok_button, "clicked",
                         G_CALLBACK (dialog_ok_clicked), color_button);
-      g_signal_connect (color_dialog->cancel_button, "clicked",
+      g_signal_connect (gtk_color_selection_dialog_get_props (color_dialog)->cancel_button, "clicked",
 			G_CALLBACK (dialog_cancel_clicked), color_button);
       g_signal_connect (color_dialog, "destroy",
                         G_CALLBACK (dialog_destroy), color_button);
     }
 
-  color_dialog = GTK_COLOR_SELECTION_DIALOG (color_button->priv->cs_dialog);
+  color_dialog = GTK_COLOR_SELECTION_DIALOG (gtk_color_button_get_props (color_button)->priv->cs_dialog);
 
-  __gtk_color_selection_set_has_opacity_control (GTK_COLOR_SELECTION (color_dialog->colorsel),
-                                               color_button->priv->use_alpha);
+  __gtk_color_selection_set_has_opacity_control (GTK_COLOR_SELECTION (gtk_color_selection_dialog_get_props (color_dialog)->colorsel),
+                                               gtk_color_button_get_props (color_button)->priv->use_alpha);
   
-  __gtk_color_selection_set_previous_color (GTK_COLOR_SELECTION (color_dialog->colorsel), 
-					  &color_button->priv->color);
-  __gtk_color_selection_set_previous_alpha (GTK_COLOR_SELECTION (color_dialog->colorsel), 
-					  color_button->priv->alpha);
+  __gtk_color_selection_set_previous_color (GTK_COLOR_SELECTION (gtk_color_selection_dialog_get_props (color_dialog)->colorsel), 
+					  &gtk_color_button_get_props (color_button)->priv->color);
+  __gtk_color_selection_set_previous_alpha (GTK_COLOR_SELECTION (gtk_color_selection_dialog_get_props (color_dialog)->colorsel), 
+					  gtk_color_button_get_props (color_button)->priv->alpha);
 
-  __gtk_color_selection_set_current_color (GTK_COLOR_SELECTION (color_dialog->colorsel), 
-					 &color_button->priv->color);
-  __gtk_color_selection_set_current_alpha (GTK_COLOR_SELECTION (color_dialog->colorsel), 
-					 color_button->priv->alpha);
+  __gtk_color_selection_set_current_color (GTK_COLOR_SELECTION (gtk_color_selection_dialog_get_props (color_dialog)->colorsel), 
+					 &gtk_color_button_get_props (color_button)->priv->color);
+  __gtk_color_selection_set_current_alpha (GTK_COLOR_SELECTION (gtk_color_selection_dialog_get_props (color_dialog)->colorsel), 
+					 gtk_color_button_get_props (color_button)->priv->alpha);
 
-  __gtk_window_present (GTK_WINDOW (color_button->priv->cs_dialog));
+  __gtk_window_present (GTK_WINDOW (gtk_color_button_get_props (color_button)->priv->cs_dialog));
 }
 
 /**
@@ -640,11 +640,11 @@ __gtk_color_button_set_color (GtkColorButton *color_button,
   g_return_if_fail (GTK_IS_COLOR_BUTTON (color_button));
   g_return_if_fail (color != NULL);
 
-  color_button->priv->color.red = color->red;
-  color_button->priv->color.green = color->green;
-  color_button->priv->color.blue = color->blue;
+  gtk_color_button_get_props (color_button)->priv->color.red = color->red;
+  gtk_color_button_get_props (color_button)->priv->color.green = color->green;
+  gtk_color_button_get_props (color_button)->priv->color.blue = color->blue;
 
-  __gtk_widget_queue_draw (color_button->priv->draw_area);
+  __gtk_widget_queue_draw (gtk_color_button_get_props (color_button)->priv->draw_area);
   
   g_object_notify (G_OBJECT (color_button), "color");
 }
@@ -665,9 +665,9 @@ __gtk_color_button_set_alpha (GtkColorButton *color_button,
 {
   g_return_if_fail (GTK_IS_COLOR_BUTTON (color_button));
 
-  color_button->priv->alpha = alpha;
+  gtk_color_button_get_props (color_button)->priv->alpha = alpha;
 
-  __gtk_widget_queue_draw (color_button->priv->draw_area);
+  __gtk_widget_queue_draw (gtk_color_button_get_props (color_button)->priv->draw_area);
 
   g_object_notify (G_OBJECT (color_button), "alpha");
 }
@@ -687,9 +687,9 @@ __gtk_color_button_get_color (GtkColorButton *color_button,
 {
   g_return_if_fail (GTK_IS_COLOR_BUTTON (color_button));
   
-  color->red = color_button->priv->color.red;
-  color->green = color_button->priv->color.green;
-  color->blue = color_button->priv->color.blue;
+  color->red = gtk_color_button_get_props (color_button)->priv->color.red;
+  color->green = gtk_color_button_get_props (color_button)->priv->color.green;
+  color->blue = gtk_color_button_get_props (color_button)->priv->color.blue;
 }
 
 /**
@@ -707,7 +707,7 @@ __gtk_color_button_get_alpha (GtkColorButton *color_button)
 {
   g_return_val_if_fail (GTK_IS_COLOR_BUTTON (color_button), 0);
   
-  return color_button->priv->alpha;
+  return gtk_color_button_get_props (color_button)->priv->alpha;
 }
 
 /**
@@ -727,11 +727,11 @@ __gtk_color_button_set_use_alpha (GtkColorButton *color_button,
 
   use_alpha = (use_alpha != FALSE);
 
-  if (color_button->priv->use_alpha != use_alpha) 
+  if (gtk_color_button_get_props (color_button)->priv->use_alpha != use_alpha) 
     {
-      color_button->priv->use_alpha = use_alpha;
+      gtk_color_button_get_props (color_button)->priv->use_alpha = use_alpha;
 
-      __gtk_widget_queue_draw (color_button->priv->draw_area);
+      __gtk_widget_queue_draw (gtk_color_button_get_props (color_button)->priv->draw_area);
 
       g_object_notify (G_OBJECT (color_button), "use-alpha");
     }
@@ -752,7 +752,7 @@ __gtk_color_button_get_use_alpha (GtkColorButton *color_button)
 {
   g_return_val_if_fail (GTK_IS_COLOR_BUTTON (color_button), FALSE);
 
-  return color_button->priv->use_alpha;
+  return gtk_color_button_get_props (color_button)->priv->use_alpha;
 }
 
 
@@ -773,13 +773,13 @@ __gtk_color_button_set_title (GtkColorButton *color_button,
 
   g_return_if_fail (GTK_IS_COLOR_BUTTON (color_button));
 
-  old_title = color_button->priv->title;
-  color_button->priv->title = g_strdup (title);
+  old_title = gtk_color_button_get_props (color_button)->priv->title;
+  gtk_color_button_get_props (color_button)->priv->title = g_strdup (title);
   g_free (old_title);
 
-  if (color_button->priv->cs_dialog)
-    __gtk_window_set_title (GTK_WINDOW (color_button->priv->cs_dialog), 
-			  color_button->priv->title);
+  if (gtk_color_button_get_props (color_button)->priv->cs_dialog)
+    __gtk_window_set_title (GTK_WINDOW (gtk_color_button_get_props (color_button)->priv->cs_dialog), 
+			  gtk_color_button_get_props (color_button)->priv->title);
   
   g_object_notify (G_OBJECT (color_button), "title");
 }
@@ -799,7 +799,7 @@ __gtk_color_button_get_title (GtkColorButton *color_button)
 {
   g_return_val_if_fail (GTK_IS_COLOR_BUTTON (color_button), NULL);
 
-  return color_button->priv->title;
+  return gtk_color_button_get_props (color_button)->priv->title;
 }
 
 static void

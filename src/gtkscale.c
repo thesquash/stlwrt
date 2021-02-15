@@ -148,7 +148,7 @@ gtk_scale_notify (GObject    *object,
     {
       GtkRange *range = GTK_RANGE (object);
 
-      range->flippable = (range->orientation == GTK_ORIENTATION_HORIZONTAL);
+      gtk_range_get_props (range)->flippable = (gtk_range_get_props (range)->orientation == GTK_ORIENTATION_HORIZONTAL);
     }
   else if (strcmp (pspec->name, "inverted") == 0)
     {
@@ -438,18 +438,18 @@ gtk_scale_init (GtkScale *scale)
 
   __gtk_widget_set_can_focus (GTK_WIDGET (scale), TRUE);
 
-  range->slider_size_fixed = TRUE;
-  range->has_stepper_a = FALSE;
-  range->has_stepper_b = FALSE;
-  range->has_stepper_c = FALSE;
-  range->has_stepper_d = FALSE;
+  gtk_range_get_props (range)->slider_size_fixed = TRUE;
+  gtk_range_get_props (range)->has_stepper_a = FALSE;
+  gtk_range_get_props (range)->has_stepper_b = FALSE;
+  gtk_range_get_props (range)->has_stepper_c = FALSE;
+  gtk_range_get_props (range)->has_stepper_d = FALSE;
 
-  scale->draw_value = TRUE;
-  scale->value_pos = GTK_POS_TOP;
-  scale->digits = 1;
-  range->round_digits = scale->digits;
+  gtk_scale_get_props (scale)->draw_value = TRUE;
+  gtk_scale_get_props (scale)->value_pos = GTK_POS_TOP;
+  gtk_scale_get_props (scale)->digits = 1;
+  gtk_range_get_props (range)->round_digits = gtk_scale_get_props (scale)->digits;
 
-  range->flippable = (range->orientation == GTK_ORIENTATION_HORIZONTAL);
+  gtk_range_get_props (range)->flippable = (gtk_range_get_props (range)->orientation == GTK_ORIENTATION_HORIZONTAL);
 }
 
 static void
@@ -492,13 +492,13 @@ gtk_scale_get_property (GObject      *object,
   switch (prop_id)
     {
     case PROP_DIGITS:
-      g_value_set_int (value, scale->digits);
+      g_value_set_int (value, gtk_scale_get_props (scale)->digits);
       break;
     case PROP_DRAW_VALUE:
-      g_value_set_boolean (value, scale->draw_value);
+      g_value_set_boolean (value, gtk_scale_get_props (scale)->draw_value);
       break;
     case PROP_VALUE_POS:
-      g_value_set_enum (value, scale->value_pos);
+      g_value_set_enum (value, gtk_scale_get_props (scale)->value_pos);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -610,11 +610,11 @@ __gtk_scale_set_digits (GtkScale *scale,
   
   digits = CLAMP (digits, -1, MAX_DIGITS);
 
-  if (scale->digits != digits)
+  if (gtk_scale_get_props (scale)->digits != digits)
     {
-      scale->digits = digits;
-      if (scale->draw_value)
-	range->round_digits = digits;
+      gtk_scale_get_props (scale)->digits = digits;
+      if (gtk_scale_get_props (scale)->draw_value)
+	gtk_range_get_props (range)->round_digits = digits;
       
       ___gtk_scale_clear_layout (scale);
       __gtk_widget_queue_resize (GTK_WIDGET (scale));
@@ -636,7 +636,7 @@ __gtk_scale_get_digits (GtkScale *scale)
 {
   g_return_val_if_fail (GTK_IS_SCALE (scale), -1);
 
-  return scale->digits;
+  return gtk_scale_get_props (scale)->digits;
 }
 
 /**
@@ -655,11 +655,11 @@ __gtk_scale_set_draw_value (GtkScale *scale,
 
   draw_value = draw_value != FALSE;
 
-  if (scale->draw_value != draw_value)
+  if (gtk_scale_get_props (scale)->draw_value != draw_value)
     {
-      scale->draw_value = draw_value;
+      gtk_scale_get_props (scale)->draw_value = draw_value;
       if (draw_value)
-	GTK_RANGE (scale)->round_digits = scale->digits;
+	GTK_RANGE (gtk_scale_get_props (scale))->round_digits = gtk_scale_get_props (scale)->digits;
       else
 	GTK_RANGE (scale)->round_digits = -1;
 
@@ -685,7 +685,7 @@ __gtk_scale_get_draw_value (GtkScale *scale)
 {
   g_return_val_if_fail (GTK_IS_SCALE (scale), FALSE);
 
-  return scale->draw_value;
+  return gtk_scale_get_props (scale)->draw_value;
 }
 
 /**
@@ -703,9 +703,9 @@ __gtk_scale_set_value_pos (GtkScale        *scale,
 
   g_return_if_fail (GTK_IS_SCALE (scale));
 
-  if (scale->value_pos != pos)
+  if (gtk_scale_get_props (scale)->value_pos != pos)
     {
-      scale->value_pos = pos;
+      gtk_scale_get_props (scale)->value_pos = pos;
       widget = GTK_WIDGET (scale);
 
       ___gtk_scale_clear_layout (scale);
@@ -729,7 +729,7 @@ __gtk_scale_get_value_pos (GtkScale *scale)
 {
   g_return_val_if_fail (GTK_IS_SCALE (scale), 0);
 
-  return scale->value_pos;
+  return gtk_scale_get_props (scale)->value_pos;
 }
 
 static void
@@ -752,12 +752,12 @@ gtk_scale_get_range_border (GtkRange  *range,
   border->top = 0;
   border->bottom = 0;
 
-  if (scale->draw_value)
+  if (gtk_scale_get_props (scale)->draw_value)
     {
       gint value_spacing;
       __gtk_widget_style_get (widget, "value-spacing", &value_spacing, NULL);
 
-      switch (scale->value_pos)
+      switch (gtk_scale_get_props (scale)->value_pos)
         {
         case GTK_POS_LEFT:
           border->left += w + value_spacing;
@@ -815,7 +815,7 @@ ___gtk_scale_get_value_size (GtkScale *scale,
 
   g_return_if_fail (GTK_IS_SCALE (scale));
 
-  if (scale->draw_value)
+  if (gtk_scale_get_props (scale)->draw_value)
     {
       PangoLayout *layout;
       PangoRectangle logical_rect;
@@ -825,7 +825,7 @@ ___gtk_scale_get_value_size (GtkScale *scale,
 
       layout = __gtk_widget_create_pango_layout (GTK_WIDGET (scale), NULL);
 
-      txt = ___gtk_scale_format_value (scale, range->adjustment->lower);
+      txt = ___gtk_scale_format_value (scale, gtk_range_get_props (range)->gtk_adjustment_get_props (adjustment)->lower);
       pango_layout_set_text (layout, txt, -1);
       g_free (txt);
       
@@ -836,7 +836,7 @@ ___gtk_scale_get_value_size (GtkScale *scale,
       if (height)
 	*height = logical_rect.height;
 
-      txt = ___gtk_scale_format_value (scale, range->adjustment->upper);
+      txt = ___gtk_scale_format_value (scale, gtk_range_get_props (range)->gtk_adjustment_get_props (adjustment)->upper);
       pango_layout_set_text (layout, txt, -1);
       g_free (txt);
       
@@ -929,7 +929,7 @@ gtk_scale_style_set (GtkWidget *widget,
                         "slider-length", &slider_length,
                         NULL);
   
-  range->min_slider_size = slider_length;
+  gtk_range_get_props (range)->min_slider_size = slider_length;
   
   ___gtk_scale_clear_layout (GTK_SCALE (widget));
 
@@ -956,7 +956,7 @@ gtk_scale_size_request (GtkWidget      *widget,
   __gtk_widget_style_get (widget, "slider-length", &slider_length, NULL);
 
 
-  if (range->orientation == GTK_ORIENTATION_HORIZONTAL)
+  if (gtk_range_get_props (range)->orientation == GTK_ORIENTATION_HORIZONTAL)
     {
       gtk_scale_get_mark_label_size (GTK_SCALE (widget), GTK_POS_TOP, &n1, &w1, &h1, &n2, &w2, &h2);
 
@@ -991,9 +991,9 @@ find_next_pos (GtkWidget      *widget,
     }
     
   if (GTK_RANGE(widget)->orientation == GTK_ORIENTATION_HORIZONTAL)
-    return widget->allocation.width;
+    return gtk_widget_get_props (widget)->allocation.width;
   else
-    return widget->allocation.height;
+    return gtk_widget_get_props (widget)->allocation.height;
 }
 
 static gboolean
@@ -1039,33 +1039,33 @@ gtk_scale_expose (GtkWidget      *widget,
 
       layout = __gtk_widget_create_pango_layout (widget, NULL);
 
-      if (range->orientation == GTK_ORIENTATION_HORIZONTAL)
-        min_pos_before = min_pos_after = widget->allocation.x;
+      if (gtk_range_get_props (range)->orientation == GTK_ORIENTATION_HORIZONTAL)
+        min_pos_before = min_pos_after = gtk_widget_get_props (widget)->allocation.x;
       else
-        min_pos_before = min_pos_after = widget->allocation.y;
+        min_pos_before = min_pos_after = gtk_widget_get_props (widget)->allocation.y;
       for (m = priv->marks, i = 0; m; m = m->next, i++)
         {
           GtkScaleMark *mark = m->data;
     
-          if (range->orientation == GTK_ORIENTATION_HORIZONTAL)
+          if (gtk_range_get_props (range)->orientation == GTK_ORIENTATION_HORIZONTAL)
             {
-              x1 = widget->allocation.x + marks[i];
+              x1 = gtk_widget_get_props (widget)->allocation.x + marks[i];
               if (mark->position == GTK_POS_TOP)
                 {
-                  y1 = widget->allocation.y + range->range_rect.y;
+                  y1 = gtk_widget_get_props (widget)->allocation.y + gtk_range_get_props (range)->range_rect.y;
                   y2 = y1 - slider_width / 2;
                   min_pos = min_pos_before;
-                  max_pos = widget->allocation.x + find_next_pos (widget, m, marks + i, GTK_POS_TOP) - min_sep;
+                  max_pos = gtk_widget_get_props (widget)->allocation.x + find_next_pos (gtk_widget_get_props (widget), m, marks + i, GTK_POS_TOP) - min_sep;
                 }
               else
                 {
-                  y1 = widget->allocation.y + range->range_rect.y + range->range_rect.height;
+                  y1 = gtk_widget_get_props (widget)->allocation.y + gtk_range_get_props (range)->range_rect.y + gtk_range_get_props (range)->range_rect.height;
                   y2 = y1 + slider_width / 2;
                   min_pos = min_pos_after;
-                  max_pos = widget->allocation.x + find_next_pos (widget, m, marks + i, GTK_POS_BOTTOM) - min_sep;
+                  max_pos = gtk_widget_get_props (widget)->allocation.x + find_next_pos (gtk_widget_get_props (widget), m, marks + i, GTK_POS_BOTTOM) - min_sep;
                 }
 
-              __gtk_paint_vline (widget->style, widget->window, state_type,
+              __gtk_paint_vline (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, state_type,
                                NULL, widget, "scale-mark", y1, y2, x1);
 
               if (mark->markup)
@@ -1078,8 +1078,8 @@ gtk_scale_expose (GtkWidget      *widget,
                     x3 = min_pos;
                   if (x3 + logical_rect.width > max_pos)
                         x3 = max_pos - logical_rect.width;
-                  if (x3 < widget->allocation.x)
-                     x3 = widget->allocation.x;
+                  if (x3 < gtk_widget_get_props (widget)->allocation.x)
+                     x3 = gtk_widget_get_props (widget)->allocation.x;
                   if (mark->position == GTK_POS_TOP)
                     {
                       y3 = y2 - value_spacing - logical_rect.height;
@@ -1091,7 +1091,7 @@ gtk_scale_expose (GtkWidget      *widget,
                       min_pos_after = x3 + logical_rect.width + min_sep;
                     }
 
-                  __gtk_paint_layout (widget->style, widget->window, state_type,
+                  __gtk_paint_layout (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, state_type,
                                     FALSE, NULL, widget, "scale-mark",
                                     x3, y3, layout);
                 }
@@ -1100,21 +1100,21 @@ gtk_scale_expose (GtkWidget      *widget,
             {
               if (mark->position == GTK_POS_LEFT)
                 {
-                  x1 = widget->allocation.x + range->range_rect.x;
-                  x2 = widget->allocation.x + range->range_rect.x - slider_width / 2;
+                  x1 = gtk_widget_get_props (widget)->allocation.x + gtk_range_get_props (range)->range_rect.x;
+                  x2 = gtk_widget_get_props (widget)->allocation.x + gtk_range_get_props (range)->range_rect.x - slider_width / 2;
                   min_pos = min_pos_before;
-                  max_pos = widget->allocation.y + find_next_pos (widget, m, marks + i, GTK_POS_LEFT) - min_sep;
+                  max_pos = gtk_widget_get_props (widget)->allocation.y + find_next_pos (gtk_widget_get_props (widget), m, marks + i, GTK_POS_LEFT) - min_sep;
                 }
               else
                 {
-                  x1 = widget->allocation.x + range->range_rect.x + range->range_rect.width;
-                  x2 = widget->allocation.x + range->range_rect.x + range->range_rect.width + slider_width / 2;
+                  x1 = gtk_widget_get_props (widget)->allocation.x + gtk_range_get_props (range)->range_rect.x + gtk_range_get_props (range)->range_rect.width;
+                  x2 = gtk_widget_get_props (widget)->allocation.x + gtk_range_get_props (range)->range_rect.x + gtk_range_get_props (range)->range_rect.width + slider_width / 2;
                   min_pos = min_pos_after;
-                  max_pos = widget->allocation.y + find_next_pos (widget, m, marks + i, GTK_POS_RIGHT) - min_sep;
+                  max_pos = gtk_widget_get_props (widget)->allocation.y + find_next_pos (gtk_widget_get_props (widget), m, marks + i, GTK_POS_RIGHT) - min_sep;
                 }
-              y1 = widget->allocation.y + marks[i];
+              y1 = gtk_widget_get_props (widget)->allocation.y + marks[i];
 
-              __gtk_paint_hline (widget->style, widget->window, state_type,
+              __gtk_paint_hline (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, state_type,
                                NULL, widget, "range-mark", x1, x2, y1);
 
               if (mark->markup)
@@ -1127,8 +1127,8 @@ gtk_scale_expose (GtkWidget      *widget,
                     y3 = min_pos;
                   if (y3 + logical_rect.height > max_pos)
                     y3 = max_pos - logical_rect.height;
-                  if (y3 < widget->allocation.y)
-                    y3 = widget->allocation.y;
+                  if (y3 < gtk_widget_get_props (widget)->allocation.y)
+                    y3 = gtk_widget_get_props (widget)->allocation.y;
                   if (mark->position == GTK_POS_LEFT)
                     {
                       x3 = x2 - value_spacing - logical_rect.width;
@@ -1140,7 +1140,7 @@ gtk_scale_expose (GtkWidget      *widget,
                       min_pos_after = y3 + logical_rect.height + min_sep;
                     }
 
-                  __gtk_paint_layout (widget->style, widget->window, state_type,
+                  __gtk_paint_layout (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, state_type,
                                     FALSE, NULL, widget, "scale-mark",
                                     x3, y3, layout);
                 }
@@ -1151,7 +1151,7 @@ gtk_scale_expose (GtkWidget      *widget,
       g_free (marks);
     }
 
-  if (scale->draw_value)
+  if (gtk_scale_get_props (scale)->draw_value)
     {
       PangoLayout *layout;
       gint x, y;
@@ -1159,13 +1159,13 @@ gtk_scale_expose (GtkWidget      *widget,
       layout = __gtk_scale_get_layout (scale);
       __gtk_scale_get_layout_offsets (scale, &x, &y);
 
-      __gtk_paint_layout (widget->style,
-                        widget->window,
+      __gtk_paint_layout (gtk_widget_get_props (widget)->style,
+                        gtk_widget_get_props (widget)->window,
                         state_type,
 			FALSE,
                         NULL,
                         widget,
-                        range->orientation == GTK_ORIENTATION_HORIZONTAL ?
+                        gtk_range_get_props (range)->orientation == GTK_ORIENTATION_HORIZONTAL ?
                         "hscale" : "vscale",
                         x, y,
                         layout);
@@ -1198,32 +1198,32 @@ gtk_scale_real_get_layout_offsets (GtkScale *scale,
 
   pango_layout_get_pixel_extents (layout, NULL, &logical_rect);
 
-  if (range->orientation == GTK_ORIENTATION_HORIZONTAL)
+  if (gtk_range_get_props (range)->orientation == GTK_ORIENTATION_HORIZONTAL)
     {
-      switch (scale->value_pos)
+      switch (gtk_scale_get_props (scale)->value_pos)
         {
         case GTK_POS_LEFT:
-          *x = range->range_rect.x - value_spacing - logical_rect.width;
-          *y = range->range_rect.y + (range->range_rect.height - logical_rect.height) / 2;
+          *x = gtk_range_get_props (range)->range_rect.x - value_spacing - logical_rect.width;
+          *y = gtk_range_get_props (range)->range_rect.y + (gtk_range_get_props (range)->range_rect.height - logical_rect.height) / 2;
           break;
 
         case GTK_POS_RIGHT:
-          *x = range->range_rect.x + range->range_rect.width + value_spacing;
-          *y = range->range_rect.y + (range->range_rect.height - logical_rect.height) / 2;
+          *x = gtk_range_get_props (range)->range_rect.x + gtk_range_get_props (range)->range_rect.width + value_spacing;
+          *y = gtk_range_get_props (range)->range_rect.y + (gtk_range_get_props (range)->range_rect.height - logical_rect.height) / 2;
           break;
 
         case GTK_POS_TOP:
-          *x = range->slider_start +
-            (range->slider_end - range->slider_start - logical_rect.width) / 2;
-          *x = CLAMP (*x, 0, widget->allocation.width - logical_rect.width);
-          *y = range->range_rect.y - logical_rect.height - value_spacing;
+          *x = gtk_range_get_props (range)->slider_start +
+            (gtk_range_get_props (range)->slider_end - gtk_range_get_props (range)->slider_start - logical_rect.width) / 2;
+          *x = CLAMP (*x, 0, gtk_widget_get_props (widget)->allocation.width - logical_rect.width);
+          *y = gtk_range_get_props (range)->range_rect.y - logical_rect.height - value_spacing;
           break;
 
         case GTK_POS_BOTTOM:
-          *x = range->slider_start +
-            (range->slider_end - range->slider_start - logical_rect.width) / 2;
-          *x = CLAMP (*x, 0, widget->allocation.width - logical_rect.width);
-          *y = range->range_rect.y + range->range_rect.height + value_spacing;
+          *x = gtk_range_get_props (range)->slider_start +
+            (gtk_range_get_props (range)->slider_end - gtk_range_get_props (range)->slider_start - logical_rect.width) / 2;
+          *x = CLAMP (*x, 0, gtk_widget_get_props (widget)->allocation.width - logical_rect.width);
+          *y = gtk_range_get_props (range)->range_rect.y + gtk_range_get_props (range)->range_rect.height + value_spacing;
           break;
 
         default:
@@ -1233,28 +1233,28 @@ gtk_scale_real_get_layout_offsets (GtkScale *scale,
     }
   else
     {
-      switch (scale->value_pos)
+      switch (gtk_scale_get_props (scale)->value_pos)
         {
         case GTK_POS_LEFT:
-          *x = range->range_rect.x - logical_rect.width - value_spacing;
-          *y = range->slider_start + (range->slider_end - range->slider_start - logical_rect.height) / 2;
-          *y = CLAMP (*y, 0, widget->allocation.height - logical_rect.height);
+          *x = gtk_range_get_props (range)->range_rect.x - logical_rect.width - value_spacing;
+          *y = gtk_range_get_props (range)->slider_start + (gtk_range_get_props (range)->slider_end - gtk_range_get_props (range)->slider_start - logical_rect.height) / 2;
+          *y = CLAMP (*y, 0, gtk_widget_get_props (widget)->allocation.height - logical_rect.height);
           break;
 
         case GTK_POS_RIGHT:
-          *x = range->range_rect.x + range->range_rect.width + value_spacing;
-          *y = range->slider_start + (range->slider_end - range->slider_start - logical_rect.height) / 2;
-          *y = CLAMP (*y, 0, widget->allocation.height - logical_rect.height);
+          *x = gtk_range_get_props (range)->range_rect.x + gtk_range_get_props (range)->range_rect.width + value_spacing;
+          *y = gtk_range_get_props (range)->slider_start + (gtk_range_get_props (range)->slider_end - gtk_range_get_props (range)->slider_start - logical_rect.height) / 2;
+          *y = CLAMP (*y, 0, gtk_widget_get_props (widget)->allocation.height - logical_rect.height);
           break;
 
         case GTK_POS_TOP:
-          *x = range->range_rect.x + (range->range_rect.width - logical_rect.width) / 2;
-          *y = range->range_rect.y - logical_rect.height - value_spacing;
+          *x = gtk_range_get_props (range)->range_rect.x + (gtk_range_get_props (range)->range_rect.width - logical_rect.width) / 2;
+          *y = gtk_range_get_props (range)->range_rect.y - logical_rect.height - value_spacing;
           break;
 
         case GTK_POS_BOTTOM:
-          *x = range->range_rect.x + (range->range_rect.width - logical_rect.width) / 2;
-          *y = range->range_rect.y + range->range_rect.height + value_spacing;
+          *x = gtk_range_get_props (range)->range_rect.x + (gtk_range_get_props (range)->range_rect.width - logical_rect.width) / 2;
+          *y = gtk_range_get_props (range)->range_rect.y + gtk_range_get_props (range)->range_rect.height + value_spacing;
           break;
 
         default:
@@ -1262,8 +1262,8 @@ gtk_scale_real_get_layout_offsets (GtkScale *scale,
         }
     }
 
-  *x += widget->allocation.x;
-  *y += widget->allocation.y;
+  *x += gtk_widget_get_props (widget)->allocation.x;
+  *y += gtk_widget_get_props (widget)->allocation.y;
 }
 
 /**
@@ -1291,7 +1291,7 @@ ___gtk_scale_format_value (GtkScale *scale,
     return fmt;
   else
     /* insert a LRM, to prevent -20 to come out as 20- in RTL locales */
-    return g_strdup_printf ("\342\200\216%0.*f", scale->digits, value);
+    return g_strdup_printf ("\342\200\216%0.*f", gtk_scale_get_props (scale)->digits, value);
 }
 
 static void
@@ -1328,14 +1328,14 @@ __gtk_scale_get_layout (GtkScale *scale)
 
   if (!priv->layout)
     {
-      if (scale->draw_value)
+      if (gtk_scale_get_props (scale)->draw_value)
 	priv->layout = __gtk_widget_create_pango_layout (GTK_WIDGET (scale), NULL);
     }
 
-  if (scale->draw_value) 
+  if (gtk_scale_get_props (scale)->draw_value) 
     {
       txt = ___gtk_scale_format_value (scale,
-				     GTK_RANGE (scale)->adjustment->value);
+				     GTK_RANGE (scale)->gtk_adjustment_get_props (adjustment)->value);
       pango_layout_set_text (priv->layout, txt, -1);
       g_free (txt);
     }

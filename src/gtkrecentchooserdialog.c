@@ -86,12 +86,12 @@ gtk_recent_chooser_dialog_init (GtkRecentChooserDialog *dialog)
   								     GtkRecentChooserDialogPrivate);
   GtkDialog *rc_dialog = GTK_DIALOG (dialog);
   
-  dialog->priv = priv;
+  gtk_recent_chooser_dialog_get_props (dialog)->priv = priv;
 
   __gtk_dialog_set_has_separator (rc_dialog, FALSE);
   __gtk_container_set_border_width (GTK_CONTAINER (rc_dialog), 5);
-  __gtk_box_set_spacing (GTK_BOX (rc_dialog->vbox), 2); /* 2 * 5 + 2 = 12 */
-  __gtk_container_set_border_width (GTK_CONTAINER (rc_dialog->action_area), 5);
+  __gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_props (rc_dialog)->vbox), 2); /* 2 * 5 + 2 = 12 */
+  __gtk_container_set_border_width (GTK_CONTAINER (gtk_dialog_get_props (rc_dialog)->action_area), 5);
 
 }
 
@@ -214,7 +214,7 @@ gtk_recent_chooser_dialog_finalize (GObject *object)
 {
   GtkRecentChooserDialog *dialog = GTK_RECENT_CHOOSER_DIALOG (object);
  
-  dialog->priv->manager = NULL;
+  gtk_recent_chooser_dialog_get_props (dialog)->priv->manager = NULL;
   
   G_OBJECT_CLASS (gtk_recent_chooser_dialog_parent_class)->finalize (object);
 }
@@ -223,7 +223,7 @@ static void
 gtk_recent_chooser_dialog_map (GtkWidget *widget)
 {
   GtkRecentChooserDialog *dialog = GTK_RECENT_CHOOSER_DIALOG (widget);
-  GtkRecentChooserDialogPrivate *priv = dialog->priv;
+  GtkRecentChooserDialogPrivate *priv = gtk_recent_chooser_dialog_get_props (dialog)->priv;
   
   if (!__gtk_widget_get_mapped (priv->chooser))
     __gtk_widget_map (priv->chooser);
@@ -235,7 +235,7 @@ static void
 gtk_recent_chooser_dialog_unmap (GtkWidget *widget)
 {
   GtkRecentChooserDialog *dialog = GTK_RECENT_CHOOSER_DIALOG (widget);
-  GtkRecentChooserDialogPrivate *priv = dialog->priv;
+  GtkRecentChooserDialogPrivate *priv = gtk_recent_chooser_dialog_get_props (dialog)->priv;
   
   GTK_WIDGET_CLASS (gtk_recent_chooser_dialog_parent_class)->unmap (widget);
   

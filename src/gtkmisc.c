@@ -108,10 +108,10 @@ gtk_misc_class_init (GtkMiscClass *class)
 static void
 gtk_misc_init (GtkMisc *misc)
 {
-  misc->xalign = 0.5;
-  misc->yalign = 0.5;
-  misc->xpad = 0;
-  misc->ypad = 0;
+  gtk_misc_get_props (misc)->xalign = 0.5;
+  gtk_misc_get_props (misc)->yalign = 0.5;
+  gtk_misc_get_props (misc)->xpad = 0;
+  gtk_misc_get_props (misc)->ypad = 0;
 }
 
 static void
@@ -127,16 +127,16 @@ gtk_misc_set_property (GObject      *object,
   switch (prop_id)
     {
     case PROP_XALIGN:
-      __gtk_misc_set_alignment (misc, g_value_get_float (value), misc->yalign);
+      __gtk_misc_set_alignment (gtk_misc_get_props (misc), g_value_get_float (value), gtk_misc_get_props (misc)->yalign);
       break;
     case PROP_YALIGN:
-      __gtk_misc_set_alignment (misc, misc->xalign, g_value_get_float (value));
+      __gtk_misc_set_alignment (gtk_misc_get_props (misc), gtk_misc_get_props (misc)->xalign, g_value_get_float (value));
       break;
     case PROP_XPAD:
-      __gtk_misc_set_padding (misc, g_value_get_int (value), misc->ypad);
+      __gtk_misc_set_padding (gtk_misc_get_props (misc), g_value_get_int (value), gtk_misc_get_props (misc)->ypad);
       break;
     case PROP_YPAD:
-      __gtk_misc_set_padding (misc, misc->xpad, g_value_get_int (value));
+      __gtk_misc_set_padding (gtk_misc_get_props (misc), gtk_misc_get_props (misc)->xpad, g_value_get_int (value));
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -157,16 +157,16 @@ gtk_misc_get_property (GObject      *object,
   switch (prop_id)
     {
     case PROP_XALIGN:
-      g_value_set_float (value, misc->xalign);
+      g_value_set_float (value, gtk_misc_get_props (misc)->xalign);
       break;
     case PROP_YALIGN:
-      g_value_set_float (value, misc->yalign);
+      g_value_set_float (value, gtk_misc_get_props (misc)->yalign);
       break;
     case PROP_XPAD:
-      g_value_set_int (value, misc->xpad);
+      g_value_set_int (value, gtk_misc_get_props (misc)->xpad);
       break;
     case PROP_YPAD:
-      g_value_set_int (value, misc->ypad);
+      g_value_set_int (value, gtk_misc_get_props (misc)->ypad);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -193,17 +193,17 @@ __gtk_misc_set_alignment (GtkMisc *misc,
   else if (yalign > 1.0)
     yalign = 1.0;
 
-  if ((xalign != misc->xalign) || (yalign != misc->yalign))
+  if ((xalign != gtk_misc_get_props (misc)->xalign) || (yalign != gtk_misc_get_props (misc)->yalign))
     {
       g_object_freeze_notify (G_OBJECT (misc));
-      if (xalign != misc->xalign)
+      if (xalign != gtk_misc_get_props (misc)->xalign)
 	g_object_notify (G_OBJECT (misc), "xalign");
 
-      if (yalign != misc->yalign)
+      if (yalign != gtk_misc_get_props (misc)->yalign)
 	g_object_notify (G_OBJECT (misc), "yalign");
 
-      misc->xalign = xalign;
-      misc->yalign = yalign;
+      gtk_misc_get_props (misc)->xalign = xalign;
+      gtk_misc_get_props (misc)->yalign = yalign;
       
       /* clear the area that was allocated before the change
        */
@@ -232,9 +232,9 @@ __gtk_misc_get_alignment (GtkMisc *misc,
   g_return_if_fail (GTK_IS_MISC (misc));
 
   if (xalign)
-    *xalign = misc->xalign;
+    *xalign = gtk_misc_get_props (misc)->xalign;
   if (yalign)
-    *yalign = misc->yalign;
+    *yalign = gtk_misc_get_props (misc)->yalign;
 }
 
 void
@@ -251,24 +251,24 @@ __gtk_misc_set_padding (GtkMisc *misc,
   if (ypad < 0)
     ypad = 0;
   
-  if ((xpad != misc->xpad) || (ypad != misc->ypad))
+  if ((xpad != gtk_misc_get_props (misc)->xpad) || (ypad != gtk_misc_get_props (misc)->ypad))
     {
       g_object_freeze_notify (G_OBJECT (misc));
-      if (xpad != misc->xpad)
+      if (xpad != gtk_misc_get_props (misc)->xpad)
 	g_object_notify (G_OBJECT (misc), "xpad");
 
-      if (ypad != misc->ypad)
+      if (ypad != gtk_misc_get_props (misc)->ypad)
 	g_object_notify (G_OBJECT (misc), "ypad");
 
       requisition = &(GTK_WIDGET (misc)->requisition);
-      requisition->width -= misc->xpad * 2;
-      requisition->height -= misc->ypad * 2;
+      requisition->width -= gtk_misc_get_props (misc)->xpad * 2;
+      requisition->height -= gtk_misc_get_props (misc)->ypad * 2;
       
-      misc->xpad = xpad;
-      misc->ypad = ypad;
+      gtk_misc_get_props (misc)->xpad = xpad;
+      gtk_misc_get_props (misc)->ypad = ypad;
       
-      requisition->width += misc->xpad * 2;
-      requisition->height += misc->ypad * 2;
+      requisition->width += gtk_misc_get_props (misc)->xpad * 2;
+      requisition->height += gtk_misc_get_props (misc)->ypad * 2;
       
       if (__gtk_widget_is_drawable (GTK_WIDGET (misc)))
 	__gtk_widget_queue_resize (GTK_WIDGET (misc));
@@ -296,9 +296,9 @@ __gtk_misc_get_padding (GtkMisc *misc,
   g_return_if_fail (GTK_IS_MISC (misc));
 
   if (xpad)
-    *xpad = misc->xpad;
+    *xpad = gtk_misc_get_props (misc)->xpad;
   if (ypad)
-    *ypad = misc->ypad;
+    *ypad = gtk_misc_get_props (misc)->ypad;
 }
 
 static void
@@ -311,27 +311,27 @@ gtk_misc_realize (GtkWidget *widget)
 
   if (!__gtk_widget_get_has_window (widget))
     {
-      widget->window = __gtk_widget_get_parent_window (widget);
-      g_object_ref (widget->window);
-      widget->style = __gtk_style_attach (widget->style, widget->window);
+      gtk_widget_get_props (widget)->window = __gtk_widget_get_parent_window (gtk_widget_get_props (widget));
+      g_object_ref (gtk_widget_get_props (widget)->window);
+      gtk_widget_get_props (widget)->style = __gtk_style_attach (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window);
     }
   else
     {
       attributes.window_type = GDK_WINDOW_CHILD;
-      attributes.x = widget->allocation.x;
-      attributes.y = widget->allocation.y;
-      attributes.width = widget->allocation.width;
-      attributes.height = widget->allocation.height;
+      attributes.x = gtk_widget_get_props (widget)->allocation.x;
+      attributes.y = gtk_widget_get_props (widget)->allocation.y;
+      attributes.width = gtk_widget_get_props (widget)->allocation.width;
+      attributes.height = gtk_widget_get_props (widget)->allocation.height;
       attributes.wclass = GDK_INPUT_OUTPUT;
       attributes.visual = __gtk_widget_get_visual (widget);
       attributes.colormap = __gtk_widget_get_colormap (widget);
       attributes.event_mask = __gtk_widget_get_events (widget) | GDK_EXPOSURE_MASK;
       attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
 
-      widget->window = __gdk_window_new (__gtk_widget_get_parent_window (widget), &attributes, attributes_mask);
-      __gdk_window_set_user_data (widget->window, widget);
+      gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (gtk_widget_get_props (widget)), &attributes, attributes_mask);
+      __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, gtk_widget_get_props (widget));
 
-      widget->style = __gtk_style_attach (widget->style, widget->window);
-      __gdk_window_set_back_pixmap (widget->window, NULL, TRUE);
+      gtk_widget_get_props (widget)->style = __gtk_style_attach (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window);
+      __gdk_window_set_back_pixmap (gtk_widget_get_props (widget)->window, NULL, TRUE);
     }
 }

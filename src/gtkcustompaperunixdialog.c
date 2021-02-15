@@ -246,7 +246,7 @@ gtk_custom_paper_unix_dialog_init (GtkCustomPaperUnixDialog *dialog)
   GtkCustomPaperUnixDialogPrivate *priv;
   GtkTreeIter iter;
 
-  priv = dialog->priv = GTK_CUSTOM_PAPER_UNIX_DIALOG_GET_PRIVATE (dialog);
+  priv = gtk_custom_paper_unix_dialog_get_props (dialog)->priv = GTK_CUSTOM_PAPER_UNIX_DIALOG_GET_PRIVATE (gtk_custom_paper_unix_dialog_get_props (dialog));
 
   priv->print_backends = NULL;
 
@@ -277,7 +277,7 @@ static void
 gtk_custom_paper_unix_dialog_finalize (GObject *object)
 {
   GtkCustomPaperUnixDialog *dialog = GTK_CUSTOM_PAPER_UNIX_DIALOG (object);
-  GtkCustomPaperUnixDialogPrivate *priv = dialog->priv;
+  GtkCustomPaperUnixDialogPrivate *priv = gtk_custom_paper_unix_dialog_get_props (dialog)->priv;
   GtkPrintBackend *backend;
   GList *node;
 
@@ -360,7 +360,7 @@ printer_added_cb (GtkPrintBackend          *backend,
 		  GtkPrinter               *printer,
 		  GtkCustomPaperUnixDialog *dialog)
 {
-  GtkCustomPaperUnixDialogPrivate *priv = dialog->priv;
+  GtkCustomPaperUnixDialogPrivate *priv = gtk_custom_paper_unix_dialog_get_props (dialog)->priv;
   GtkTreeIter iter;
   gchar *str;
 
@@ -398,7 +398,7 @@ printer_removed_cb (GtkPrintBackend        *backend,
 		    GtkPrinter             *printer,
 		    GtkCustomPaperUnixDialog *dialog)
 {
-  GtkCustomPaperUnixDialogPrivate *priv = dialog->priv;
+  GtkCustomPaperUnixDialogPrivate *priv = gtk_custom_paper_unix_dialog_get_props (dialog)->priv;
   GtkTreeIter *iter;
 
   iter = g_object_get_data (G_OBJECT (printer), "gtk-print-tree-iter");
@@ -411,7 +411,7 @@ printer_status_cb (GtkPrintBackend        *backend,
                    GtkPrinter             *printer,
 		   GtkCustomPaperUnixDialog *dialog)
 {
-  GtkCustomPaperUnixDialogPrivate *priv = dialog->priv;
+  GtkCustomPaperUnixDialogPrivate *priv = gtk_custom_paper_unix_dialog_get_props (dialog)->priv;
   GtkTreeIter *iter;
   gchar *str;
 
@@ -463,7 +463,7 @@ printer_list_initialize (GtkCustomPaperUnixDialog *dialog,
 static void
 load_print_backends (GtkCustomPaperUnixDialog *dialog)
 {
-  GtkCustomPaperUnixDialogPrivate *priv = dialog->priv;
+  GtkCustomPaperUnixDialogPrivate *priv = gtk_custom_paper_unix_dialog_get_props (dialog)->priv;
   GList *node;
 
   if (g_module_supported ())
@@ -559,7 +559,7 @@ custom_paper_printer_data_func (GtkCellLayout   *cell_layout,
 static void
 update_combo_sensitivity_from_printers (GtkCustomPaperUnixDialog *dialog)
 {
-  GtkCustomPaperUnixDialogPrivate *priv = dialog->priv;
+  GtkCustomPaperUnixDialogPrivate *priv = gtk_custom_paper_unix_dialog_get_props (dialog)->priv;
   GtkTreeIter iter;
   gboolean sensitive;
   GtkTreeSelection *selection;
@@ -579,7 +579,7 @@ update_combo_sensitivity_from_printers (GtkCustomPaperUnixDialog *dialog)
 static void
 update_custom_widgets_from_list (GtkCustomPaperUnixDialog *dialog)
 {
-  GtkCustomPaperUnixDialogPrivate *priv = dialog->priv;
+  GtkCustomPaperUnixDialogPrivate *priv = gtk_custom_paper_unix_dialog_get_props (dialog)->priv;
   GtkTreeSelection *selection;
   GtkTreeModel *model;
   GtkTreeIter iter;
@@ -628,7 +628,7 @@ selected_custom_paper_changed (GtkTreeSelection         *selection,
 static void
 unit_widget_changed (GtkCustomPaperUnixDialog *dialog)
 {
-  GtkCustomPaperUnixDialogPrivate *priv = dialog->priv;
+  GtkCustomPaperUnixDialogPrivate *priv = gtk_custom_paper_unix_dialog_get_props (dialog)->priv;
   gdouble w, h, top, bottom, left, right;
   GtkTreeSelection *selection;
   GtkTreeIter iter;
@@ -668,7 +668,7 @@ static gboolean
 custom_paper_name_used (GtkCustomPaperUnixDialog *dialog,
 			const gchar              *name)
 {
-  GtkCustomPaperUnixDialogPrivate *priv = dialog->priv;
+  GtkCustomPaperUnixDialogPrivate *priv = gtk_custom_paper_unix_dialog_get_props (dialog)->priv;
   GtkTreeModel *model;
   GtkTreeIter iter;
   GtkPageSetup *page_setup;
@@ -698,7 +698,7 @@ custom_paper_name_used (GtkCustomPaperUnixDialog *dialog,
 static void
 add_custom_paper (GtkCustomPaperUnixDialog *dialog)
 {
-  GtkCustomPaperUnixDialogPrivate *priv = dialog->priv;
+  GtkCustomPaperUnixDialogPrivate *priv = gtk_custom_paper_unix_dialog_get_props (dialog)->priv;
   GtkListStore *store;
   GtkPageSetup *page_setup;
   GtkPaperSize *paper_size;
@@ -744,7 +744,7 @@ add_custom_paper (GtkCustomPaperUnixDialog *dialog)
 static void
 remove_custom_paper (GtkCustomPaperUnixDialog *dialog)
 {
-  GtkCustomPaperUnixDialogPrivate *priv = dialog->priv;
+  GtkCustomPaperUnixDialogPrivate *priv = gtk_custom_paper_unix_dialog_get_props (dialog)->priv;
   GtkTreeSelection *selection;
   GtkTreeIter iter;
   GtkListStore *store;
@@ -770,7 +770,7 @@ static void
 set_margins_from_printer (GtkCustomPaperUnixDialog *dialog,
 			  GtkPrinter               *printer)
 {
-  GtkCustomPaperUnixDialogPrivate *priv = dialog->priv;
+  GtkCustomPaperUnixDialogPrivate *priv = gtk_custom_paper_unix_dialog_get_props (dialog)->priv;
   gdouble top, bottom, left, right;
 
   top = bottom = left = right = 0;
@@ -793,7 +793,7 @@ get_margins_finished_callback (GtkPrinter               *printer,
 			       gboolean                  success,
 			       GtkCustomPaperUnixDialog *dialog)
 {
-  GtkCustomPaperUnixDialogPrivate *priv = dialog->priv;
+  GtkCustomPaperUnixDialogPrivate *priv = gtk_custom_paper_unix_dialog_get_props (dialog)->priv;
 
   g_signal_handler_disconnect (priv->request_details_printer,
 			       priv->request_details_tag);
@@ -810,7 +810,7 @@ get_margins_finished_callback (GtkPrinter               *printer,
 static void
 margins_from_printer_changed (GtkCustomPaperUnixDialog *dialog)
 {
-  GtkCustomPaperUnixDialogPrivate *priv = dialog->priv;
+  GtkCustomPaperUnixDialogPrivate *priv = gtk_custom_paper_unix_dialog_get_props (dialog)->priv;
   GtkTreeIter iter;
   GtkComboBox *combo;
   GtkPrinter *printer;
@@ -858,7 +858,7 @@ custom_size_name_edited (GtkCellRenderer          *cell,
 			 gchar                    *new_text,
 			 GtkCustomPaperUnixDialog *dialog)
 {
-  GtkCustomPaperUnixDialogPrivate *priv = dialog->priv;
+  GtkCustomPaperUnixDialogPrivate *priv = gtk_custom_paper_unix_dialog_get_props (dialog)->priv;
   GtkTreePath *path;
   GtkTreeIter iter;
   GtkListStore *store;
@@ -934,7 +934,7 @@ wrap_in_frame (const gchar *label,
 static void
 populate_dialog (GtkCustomPaperUnixDialog *dialog)
 {
-  GtkCustomPaperUnixDialogPrivate *priv = dialog->priv;
+  GtkCustomPaperUnixDialogPrivate *priv = gtk_custom_paper_unix_dialog_get_props (dialog)->priv;
   GtkWidget *image, *table, *label, *widget, *frame, *combo;
   GtkWidget *hbox, *vbox, *treeview, *scrolled, *button_box, *button;
   GtkCellRenderer *cell;

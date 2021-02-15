@@ -112,8 +112,8 @@ gtk_separator_tool_item_class_init (GtkSeparatorToolItemClass *class)
 static void
 gtk_separator_tool_item_init (GtkSeparatorToolItem      *separator_item)
 {
-  separator_item->priv = GTK_SEPARATOR_TOOL_ITEM_GET_PRIVATE (separator_item);
-  separator_item->priv->draw = TRUE;
+  gtk_separator_tool_item_get_props (separator_item)->priv = GTK_SEPARATOR_TOOL_ITEM_GET_PRIVATE (gtk_separator_tool_item_get_props (separator_item));
+  gtk_separator_tool_item_get_props (separator_item)->priv->draw = TRUE;
 }
 
 static void
@@ -202,11 +202,11 @@ gtk_separator_tool_item_expose (GtkWidget      *widget,
 
   if (priv->draw)
     {
-      if (GTK_IS_TOOLBAR (widget->parent))
-	toolbar = GTK_TOOLBAR (widget->parent);
+      if (GTK_IS_TOOLBAR (gtk_widget_get_props (widget)->parent))
+	toolbar = GTK_TOOLBAR (gtk_widget_get_props (widget)->parent);
 
       ___gtk_toolbar_paint_space_line (widget, toolbar,
-				     &(event->area), &widget->allocation);
+				     &(event->area), &gtk_widget_get_props (widget)->allocation);
     }
   
   return FALSE;
@@ -248,7 +248,7 @@ __gtk_separator_tool_item_get_draw (GtkSeparatorToolItem *item)
 {
   g_return_val_if_fail (GTK_IS_SEPARATOR_TOOL_ITEM (item), FALSE);
   
-  return item->priv->draw;
+  return gtk_separator_tool_item_get_props (item)->priv->draw;
 }
 
 /**
@@ -270,9 +270,9 @@ __gtk_separator_tool_item_set_draw (GtkSeparatorToolItem *item,
 
   draw = draw != FALSE;
 
-  if (draw != item->priv->draw)
+  if (draw != gtk_separator_tool_item_get_props (item)->priv->draw)
     {
-      item->priv->draw = draw;
+      gtk_separator_tool_item_get_props (item)->priv->draw = draw;
 
       __gtk_widget_queue_draw (GTK_WIDGET (item));
 

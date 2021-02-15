@@ -601,8 +601,8 @@ gtk_text_buffer_class_init (GtkTextBufferClass *klass)
 static void
 gtk_text_buffer_init (GtkTextBuffer *buffer)
 {
-  buffer->clipboard_contents_buffers = NULL;
-  buffer->tag_table = NULL;
+  gtk_text_buffer_get_props (buffer)->clipboard_contents_buffers = NULL;
+  gtk_text_buffer_get_props (buffer)->tag_table = NULL;
 
   /* allow copying of arbiatray stuff in the internal rich text format */
   __gtk_text_buffer_register_serialize_tagset (buffer, NULL);
@@ -611,12 +611,12 @@ gtk_text_buffer_init (GtkTextBuffer *buffer)
 static void
 set_table (GtkTextBuffer *buffer, GtkTextTagTable *table)
 {
-  g_return_if_fail (buffer->tag_table == NULL);
+  g_return_if_fail (gtk_text_buffer_get_props (buffer)->tag_table == NULL);
 
   if (table)
     {
-      buffer->tag_table = table;
-      g_object_ref (buffer->tag_table);
+      gtk_text_buffer_get_props (buffer)->tag_table = table;
+      g_object_ref (gtk_text_buffer_get_props (buffer)->tag_table);
       ___gtk_text_tag_table_add_buffer (table, buffer);
     }
 }
@@ -624,13 +624,13 @@ set_table (GtkTextBuffer *buffer, GtkTextTagTable *table)
 static GtkTextTagTable*
 get_table (GtkTextBuffer *buffer)
 {
-  if (buffer->tag_table == NULL)
+  if (gtk_text_buffer_get_props (buffer)->tag_table == NULL)
     {
-      buffer->tag_table = __gtk_text_tag_table_new ();
-      ___gtk_text_tag_table_add_buffer (buffer->tag_table, buffer);
+      gtk_text_buffer_get_props (buffer)->tag_table = __gtk_text_tag_table_new ();
+      ___gtk_text_tag_table_add_buffer (gtk_text_buffer_get_props (buffer)->tag_table, gtk_text_buffer_get_props (buffer));
     }
 
-  return buffer->tag_table;
+  return gtk_text_buffer_get_props (buffer)->tag_table;
 }
 
 static void
@@ -691,7 +691,7 @@ gtk_text_buffer_get_property (GObject         *object,
       }
 
     case PROP_HAS_SELECTION:
-      g_value_set_boolean (value, text_buffer->has_selection);
+      g_value_set_boolean (value, gtk_text_buffer_get_props (text_buffer)->has_selection);
       break;
 
     case PROP_CURSOR_POSITION:
@@ -752,23 +752,23 @@ gtk_text_buffer_finalize (GObject *object)
 
   remove_all_selection_clipboards (buffer);
 
-  if (buffer->tag_table)
+  if (gtk_text_buffer_get_props (buffer)->tag_table)
     {
-      ___gtk_text_tag_table_remove_buffer (buffer->tag_table, buffer);
-      g_object_unref (buffer->tag_table);
-      buffer->tag_table = NULL;
+      ___gtk_text_tag_table_remove_buffer (gtk_text_buffer_get_props (buffer)->tag_table, gtk_text_buffer_get_props (buffer));
+      g_object_unref (gtk_text_buffer_get_props (buffer)->tag_table);
+      gtk_text_buffer_get_props (buffer)->tag_table = NULL;
     }
 
-  if (buffer->btree)
+  if (gtk_text_buffer_get_props (buffer)->btree)
     {
-      _gtk_text_btree_unref (buffer->btree);
-      buffer->btree = NULL;
+      _gtk_text_btree_unref (gtk_text_buffer_get_props (buffer)->btree);
+      gtk_text_buffer_get_props (buffer)->btree = NULL;
     }
 
-  if (buffer->log_attr_cache)
-    free_log_attr_cache (buffer->log_attr_cache);
+  if (gtk_text_buffer_get_props (buffer)->log_attr_cache)
+    free_log_attr_cache (gtk_text_buffer_get_props (buffer)->log_attr_cache);
 
-  buffer->log_attr_cache = NULL;
+  gtk_text_buffer_get_props (buffer)->log_attr_cache = NULL;
 
   gtk_text_buffer_free_target_lists (buffer);
 
@@ -778,11 +778,11 @@ gtk_text_buffer_finalize (GObject *object)
 static GtkTextBTree*
 get_btree (GtkTextBuffer *buffer)
 {
-  if (buffer->btree == NULL)
-    buffer->btree = _gtk_text_btree_new (__gtk_text_buffer_get_tag_table (buffer),
+  if (gtk_text_buffer_get_props (buffer)->btree == NULL)
+    gtk_text_buffer_get_props (buffer)->btree = _gtk_text_btree_new (__gtk_text_buffer_get_tag_table (gtk_text_buffer_get_props (buffer)),
                                          buffer);
 
-  return buffer->btree;
+  return gtk_text_buffer_get_props (buffer)->btree;
 }
 
 GtkTextBTree*
@@ -1392,7 +1392,7 @@ __gtk_text_buffer_insert_range (GtkTextBuffer     *buffer,
   g_return_if_fail (__gtk_text_iter_get_buffer (start) ==
                     __gtk_text_iter_get_buffer (end));
   g_return_if_fail (__gtk_text_iter_get_buffer (start)->tag_table ==
-                    buffer->tag_table);  
+                    gtk_text_buffer_get_props (buffer)->tag_table);  
   g_return_if_fail (__gtk_text_iter_get_buffer (iter) == buffer);
   
   gtk_text_buffer_real_insert_range (buffer, iter, start, end, FALSE);
@@ -1428,7 +1428,7 @@ __gtk_text_buffer_insert_range_interactive (GtkTextBuffer     *buffer,
   g_return_val_if_fail (__gtk_text_iter_get_buffer (start) ==
                         __gtk_text_iter_get_buffer (end), FALSE);
   g_return_val_if_fail (__gtk_text_iter_get_buffer (start)->tag_table ==
-                        buffer->tag_table, FALSE);
+                        gtk_text_buffer_get_props (buffer)->tag_table, FALSE);
 
   if (__gtk_text_iter_can_insert (iter, default_editable))
     {
@@ -1538,7 +1538,7 @@ __gtk_text_buffer_insert_with_tags_by_name  (GtkTextBuffer *buffer,
     {
       GtkTextTag *tag;
 
-      tag = __gtk_text_tag_table_lookup (buffer->tag_table,
+      tag = __gtk_text_tag_table_lookup (gtk_text_buffer_get_props (buffer)->tag_table,
                                        tag_name);
 
       if (tag == NULL)
@@ -1578,9 +1578,9 @@ gtk_text_buffer_real_delete_range (GtkTextBuffer *buffer,
   update_selection_clipboards (buffer);
 
   has_selection = __gtk_text_buffer_get_selection_bounds (buffer, NULL, NULL);
-  if (has_selection != buffer->has_selection)
+  if (has_selection != gtk_text_buffer_get_props (buffer)->has_selection)
     {
-      buffer->has_selection = has_selection;
+      gtk_text_buffer_get_props (buffer)->has_selection = has_selection;
       g_object_notify (G_OBJECT (buffer), "has-selection");
     }
 
@@ -2473,7 +2473,7 @@ gtk_text_buffer_real_apply_tag (GtkTextBuffer     *buffer,
                                 const GtkTextIter *start,
                                 const GtkTextIter *end)
 {
-  if (tag->table != buffer->tag_table)
+  if (gtk_text_tag_get_props (tag)->table != gtk_text_buffer_get_props (buffer)->tag_table)
     {
       g_warning ("Can only apply tags that are in the tag table for the buffer");
       return;
@@ -2488,7 +2488,7 @@ gtk_text_buffer_real_remove_tag (GtkTextBuffer     *buffer,
                                  const GtkTextIter *start,
                                  const GtkTextIter *end)
 {
-  if (tag->table != buffer->tag_table)
+  if (gtk_text_tag_get_props (tag)->table != gtk_text_buffer_get_props (buffer)->tag_table)
     {
       g_warning ("Can only remove tags that are in the tag table for the buffer");
       return;
@@ -2522,9 +2522,9 @@ gtk_text_buffer_real_mark_set (GtkTextBuffer     *buffer,
                                                             NULL,
                                                             NULL);
 
-      if (has_selection != buffer->has_selection)
+      if (has_selection != gtk_text_buffer_get_props (buffer)->has_selection)
         {
-          buffer->has_selection = has_selection;
+          gtk_text_buffer_get_props (buffer)->has_selection = has_selection;
           g_object_notify (G_OBJECT (buffer), "has-selection");
         }
     }
@@ -2580,7 +2580,7 @@ __gtk_text_buffer_apply_tag (GtkTextBuffer     *buffer,
   g_return_if_fail (end != NULL);
   g_return_if_fail (__gtk_text_iter_get_buffer (start) == buffer);
   g_return_if_fail (__gtk_text_iter_get_buffer (end) == buffer);
-  g_return_if_fail (tag->table == buffer->tag_table);
+  g_return_if_fail (gtk_text_tag_get_props (tag)->table == gtk_text_buffer_get_props (buffer)->tag_table);
   
   gtk_text_buffer_emit_tag (buffer, tag, TRUE, start, end);
 }
@@ -2609,7 +2609,7 @@ __gtk_text_buffer_remove_tag (GtkTextBuffer     *buffer,
   g_return_if_fail (end != NULL);
   g_return_if_fail (__gtk_text_iter_get_buffer (start) == buffer);
   g_return_if_fail (__gtk_text_iter_get_buffer (end) == buffer);
-  g_return_if_fail (tag->table == buffer->tag_table);
+  g_return_if_fail (gtk_text_tag_get_props (tag)->table == gtk_text_buffer_get_props (buffer)->tag_table);
   
   gtk_text_buffer_emit_tag (buffer, tag, FALSE, start, end);
 }
@@ -2991,7 +2991,7 @@ __gtk_text_buffer_get_modified (GtkTextBuffer *buffer)
 {
   g_return_val_if_fail (GTK_IS_TEXT_BUFFER (buffer), FALSE);
 
-  return buffer->modified;
+  return gtk_text_buffer_get_props (buffer)->modified;
 }
 
 /**
@@ -3015,11 +3015,11 @@ __gtk_text_buffer_set_modified (GtkTextBuffer *buffer,
 
   fixed_setting = setting != FALSE;
 
-  if (buffer->modified == fixed_setting)
+  if (gtk_text_buffer_get_props (buffer)->modified == fixed_setting)
     return;
   else
     {
-      buffer->modified = fixed_setting;
+      gtk_text_buffer_get_props (buffer)->modified = fixed_setting;
       g_signal_emit (buffer, signals[MODIFIED_CHANGED], 0);
     }
 }
@@ -3039,7 +3039,7 @@ __gtk_text_buffer_get_has_selection (GtkTextBuffer *buffer)
 {
   g_return_val_if_fail (GTK_IS_TEXT_BUFFER (buffer), FALSE);
 
-  return buffer->has_selection;
+  return gtk_text_buffer_get_props (buffer)->has_selection;
 }
 
 
@@ -3596,7 +3596,7 @@ static void
 update_selection_clipboards (GtkTextBuffer *buffer)
 {
   GtkTextBufferPrivate *priv;
-  GSList               *tmp_list = buffer->selection_clipboards;
+  GSList               *tmp_list = gtk_text_buffer_get_props (buffer)->selection_clipboards;
 
   priv = GTK_TEXT_BUFFER_GET_PRIVATE (buffer);
 
@@ -3640,7 +3640,7 @@ static SelectionClipboard *
 find_selection_clipboard (GtkTextBuffer *buffer,
 			  GtkClipboard  *clipboard)
 {
-  GSList *tmp_list = buffer->selection_clipboards;
+  GSList *tmp_list = gtk_text_buffer_get_props (buffer)->selection_clipboards;
   while (tmp_list)
     {
       SelectionClipboard *selection_clipboard = tmp_list->data;
@@ -3683,7 +3683,7 @@ __gtk_text_buffer_add_selection_clipboard (GtkTextBuffer *buffer,
       selection_clipboard->clipboard = clipboard;
       selection_clipboard->ref_count = 1;
 
-      buffer->selection_clipboards = g_slist_prepend (buffer->selection_clipboards, selection_clipboard);
+      gtk_text_buffer_get_props (buffer)->selection_clipboards = g_slist_prepend (gtk_text_buffer_get_props (buffer)->selection_clipboards, selection_clipboard);
     }
 }
 
@@ -3714,7 +3714,7 @@ __gtk_text_buffer_remove_selection_clipboard (GtkTextBuffer *buffer,
       if (__gtk_clipboard_get_owner (selection_clipboard->clipboard) == G_OBJECT (buffer))
 	__gtk_clipboard_clear (selection_clipboard->clipboard);
 
-      buffer->selection_clipboards = g_slist_remove (buffer->selection_clipboards,
+      gtk_text_buffer_get_props (buffer)->selection_clipboards = g_slist_remove (gtk_text_buffer_get_props (buffer)->selection_clipboards,
                                                      selection_clipboard);
       
       g_free (selection_clipboard);
@@ -3724,9 +3724,9 @@ __gtk_text_buffer_remove_selection_clipboard (GtkTextBuffer *buffer,
 static void
 remove_all_selection_clipboards (GtkTextBuffer *buffer)
 {
-  g_slist_foreach (buffer->selection_clipboards, (GFunc)g_free, NULL);
-  g_slist_free (buffer->selection_clipboards);
-  buffer->selection_clipboards = NULL;
+  g_slist_foreach (gtk_text_buffer_get_props (buffer)->selection_clipboards, (GFunc)g_free, NULL);
+  g_slist_free (gtk_text_buffer_get_props (buffer)->selection_clipboards);
+  gtk_text_buffer_get_props (buffer)->selection_clipboards = NULL;
 }
 
 /**
@@ -4072,9 +4072,9 @@ __gtk_text_buffer_begin_user_action (GtkTextBuffer *buffer)
 {
   g_return_if_fail (GTK_IS_TEXT_BUFFER (buffer));
 
-  buffer->user_action_count += 1;
+  gtk_text_buffer_get_props (buffer)->user_action_count += 1;
   
-  if (buffer->user_action_count == 1)
+  if (gtk_text_buffer_get_props (buffer)->user_action_count == 1)
     {
       /* Outermost nested user action begin emits the signal */
       g_signal_emit (buffer, signals[BEGIN_USER_ACTION], 0);
@@ -4092,11 +4092,11 @@ void
 __gtk_text_buffer_end_user_action (GtkTextBuffer *buffer)
 {
   g_return_if_fail (GTK_IS_TEXT_BUFFER (buffer));
-  g_return_if_fail (buffer->user_action_count > 0);
+  g_return_if_fail (gtk_text_buffer_get_props (buffer)->user_action_count > 0);
   
-  buffer->user_action_count -= 1;
+  gtk_text_buffer_get_props (buffer)->user_action_count -= 1;
   
-  if (buffer->user_action_count == 0)
+  if (gtk_text_buffer_get_props (buffer)->user_action_count == 0)
     {
       /* Ended the outermost-nested user action end, so emit the signal */
       g_signal_emit (buffer, signals[END_USER_ACTION], 0);
@@ -4334,19 +4334,19 @@ ___gtk_text_buffer_get_line_log_attrs (GtkTextBuffer     *buffer,
    * the start of a paragraph changes
    */
   
-  if (buffer->log_attr_cache == NULL)
+  if (gtk_text_buffer_get_props (buffer)->log_attr_cache == NULL)
     {
-      buffer->log_attr_cache = g_new0 (GtkTextLogAttrCache, 1);
-      buffer->log_attr_cache->chars_changed_stamp =
+      gtk_text_buffer_get_props (buffer)->log_attr_cache = g_new0 (GtkTextLogAttrCache, 1);
+      gtk_text_buffer_get_props (buffer)->log_attr_cache->chars_changed_stamp =
         _gtk_text_btree_get_chars_changed_stamp (get_btree (buffer));
     }
-  else if (buffer->log_attr_cache->chars_changed_stamp !=
+  else if (gtk_text_buffer_get_props (buffer)->log_attr_cache->chars_changed_stamp !=
            _gtk_text_btree_get_chars_changed_stamp (get_btree (buffer)))
     {
-      clear_log_attr_cache (buffer->log_attr_cache);
+      clear_log_attr_cache (gtk_text_buffer_get_props (buffer)->log_attr_cache);
     }
   
-  cache = buffer->log_attr_cache;
+  cache = gtk_text_buffer_get_props (buffer)->log_attr_cache;
   line = __gtk_text_iter_get_line (anywhere_in_line);
 
   i = 0;
@@ -4387,8 +4387,8 @@ ___gtk_text_buffer_notify_will_remove_tag (GtkTextBuffer *buffer,
    * code messing things up at this point; the tag MUST be removed
    * entirely.
    */
-  if (buffer->btree)
-    _gtk_text_btree_notify_will_remove_tag (buffer->btree, tag);
+  if (gtk_text_buffer_get_props (buffer)->btree)
+    _gtk_text_btree_notify_will_remove_tag (gtk_text_buffer_get_props (buffer)->btree, tag);
 }
 
 /*

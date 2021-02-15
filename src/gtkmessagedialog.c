@@ -334,13 +334,13 @@ gtk_message_dialog_init (GtkMessageDialog *dialog)
   priv->secondary_label = __gtk_label_new (NULL);
   __gtk_widget_set_no_show_all (priv->secondary_label, TRUE);
   
-  dialog->label = __gtk_label_new (NULL);
-  dialog->image = __gtk_image_new_from_stock (NULL, GTK_ICON_SIZE_DIALOG);
-  __gtk_misc_set_alignment (GTK_MISC (dialog->image), 0.5, 0.0);
+  gtk_message_dialog_get_props (dialog)->label = __gtk_label_new (NULL);
+  gtk_message_dialog_get_props (dialog)->image = __gtk_image_new_from_stock (NULL, GTK_ICON_SIZE_DIALOG);
+  __gtk_misc_set_alignment (GTK_MISC (gtk_message_dialog_get_props (dialog)->image), 0.5, 0.0);
   
-  __gtk_label_set_line_wrap  (GTK_LABEL (dialog->label), TRUE);
-  __gtk_label_set_selectable (GTK_LABEL (dialog->label), TRUE);
-  __gtk_misc_set_alignment   (GTK_MISC  (dialog->label), 0.0, 0.0);
+  __gtk_label_set_line_wrap  (GTK_LABEL (gtk_message_dialog_get_props (dialog)->label), TRUE);
+  __gtk_label_set_selectable (GTK_LABEL (gtk_message_dialog_get_props (dialog)->label), TRUE);
+  __gtk_misc_set_alignment   (GTK_MISC  (gtk_message_dialog_get_props (dialog)->label), 0.0, 0.0);
   
   __gtk_label_set_line_wrap  (GTK_LABEL (priv->secondary_label), TRUE);
   __gtk_label_set_selectable (GTK_LABEL (priv->secondary_label), TRUE);
@@ -349,13 +349,13 @@ gtk_message_dialog_init (GtkMessageDialog *dialog)
   hbox = __gtk_hbox_new (FALSE, 12);
   priv->message_area = __gtk_vbox_new (FALSE, 12);
 
-  __gtk_box_pack_start (GTK_BOX (priv->message_area), dialog->label,
+  __gtk_box_pack_start (GTK_BOX (priv->message_area), gtk_message_dialog_get_props (dialog)->label,
                       FALSE, FALSE, 0);
 
   __gtk_box_pack_start (GTK_BOX (priv->message_area), priv->secondary_label,
                       TRUE, TRUE, 0);
 
-  __gtk_box_pack_start (GTK_BOX (hbox), dialog->image,
+  __gtk_box_pack_start (GTK_BOX (hbox), gtk_message_dialog_get_props (dialog)->image,
                       FALSE, FALSE, 0);
 
   __gtk_box_pack_start (GTK_BOX (hbox), priv->message_area,
@@ -386,15 +386,15 @@ setup_primary_label_font (GtkMessageDialog *dialog)
   priv = GTK_MESSAGE_DIALOG_GET_PRIVATE (dialog);
 
   /* unset the font settings */
-  __gtk_widget_modify_font (dialog->label, NULL);
+  __gtk_widget_modify_font (gtk_message_dialog_get_props (dialog)->label, NULL);
 
   if (priv->has_secondary_text && !priv->has_primary_markup)
     {
-      size = pango_font_description_get_size (dialog->label->style->font_desc);
+      size = pango_font_description_get_size (gtk_message_dialog_get_props (dialog)->label->style->font_desc);
       font_desc = pango_font_description_new ();
       pango_font_description_set_weight (font_desc, PANGO_WEIGHT_BOLD);
       pango_font_description_set_size (font_desc, size * PANGO_SCALE_LARGE);
-      __gtk_widget_modify_font (dialog->label, font_desc);
+      __gtk_widget_modify_font (gtk_message_dialog_get_props (dialog)->label, font_desc);
       pango_font_description_free (font_desc);
     }
 }
@@ -436,7 +436,7 @@ setup_type (GtkMessageDialog *dialog,
     }
 
   if (stock_id)
-    __gtk_image_set_from_stock (GTK_IMAGE (dialog->image), stock_id,
+    __gtk_image_set_from_stock (GTK_IMAGE (gtk_message_dialog_get_props (dialog)->image), stock_id,
                               GTK_ICON_SIZE_DIALOG);
       
   atk_obj = __gtk_widget_get_accessible (GTK_WIDGET (dialog));
@@ -475,15 +475,15 @@ gtk_message_dialog_set_property (GObject      *object,
       break;
     case PROP_TEXT:
       if (priv->has_primary_markup)
-	__gtk_label_set_markup (GTK_LABEL (dialog->label), 
+	__gtk_label_set_markup (GTK_LABEL (gtk_message_dialog_get_props (dialog)->label), 
 			      g_value_get_string (value));
       else
-	__gtk_label_set_text (GTK_LABEL (dialog->label), 
+	__gtk_label_set_text (GTK_LABEL (gtk_message_dialog_get_props (dialog)->label), 
 			    g_value_get_string (value));
       break;
     case PROP_USE_MARKUP:
       priv->has_primary_markup = g_value_get_boolean (value) != FALSE;
-      __gtk_label_set_use_markup (GTK_LABEL (dialog->label), 
+      __gtk_label_set_use_markup (GTK_LABEL (gtk_message_dialog_get_props (dialog)->label), 
 				priv->has_primary_markup);
       setup_primary_label_font (dialog);
       break;
@@ -541,7 +541,7 @@ gtk_message_dialog_get_property (GObject     *object,
       g_value_set_enum (value, (GtkMessageType) priv->message_type);
       break;
     case PROP_TEXT:
-      g_value_set_string (value, __gtk_label_get_label (GTK_LABEL (dialog->label)));
+      g_value_set_string (value, __gtk_label_get_label (GTK_LABEL (gtk_message_dialog_get_props (dialog)->label)));
       break;
     case PROP_USE_MARKUP:
       g_value_set_boolean (value, priv->has_primary_markup);
@@ -561,7 +561,7 @@ gtk_message_dialog_get_property (GObject     *object,
 	g_value_set_boolean (value, FALSE);
       break;
     case PROP_IMAGE:
-      g_value_set_object (value, dialog->image);
+      g_value_set_object (value, gtk_message_dialog_get_props (dialog)->image);
       break;
     case PROP_MESSAGE_AREA:
       g_value_set_object (value, priv->message_area);
@@ -739,12 +739,12 @@ __gtk_message_dialog_set_image (GtkMessageDialog *dialog,
 
   priv->message_type = GTK_MESSAGE_OTHER;
   
-  parent = dialog->image->parent;
+  parent = gtk_message_dialog_get_props (dialog)->gtk_widget_get_props (image)->parent;
   __gtk_container_add (GTK_CONTAINER (parent), image);
-  __gtk_container_remove (GTK_CONTAINER (parent), dialog->image);
+  __gtk_container_remove (GTK_CONTAINER (parent), gtk_message_dialog_get_props (dialog)->image);
   __gtk_box_reorder_child (GTK_BOX (parent), image, 0);
 
-  dialog->image = image;
+  gtk_message_dialog_get_props (dialog)->image = image;
 
   g_object_notify (G_OBJECT (dialog), "image");
 }
@@ -764,7 +764,7 @@ __gtk_message_dialog_get_image (GtkMessageDialog *dialog)
 {
   g_return_val_if_fail (GTK_IS_MESSAGE_DIALOG (dialog), NULL);
 
-  return dialog->image;
+  return gtk_message_dialog_get_props (dialog)->image;
 }
 
 /**
@@ -788,7 +788,7 @@ __gtk_message_dialog_set_markup (GtkMessageDialog *message_dialog,
 
   priv = GTK_MESSAGE_DIALOG_GET_PRIVATE (message_dialog);
   priv->has_primary_markup = TRUE;
-  __gtk_label_set_markup (GTK_LABEL (message_dialog->label), str);
+  __gtk_label_set_markup (GTK_LABEL (gtk_message_dialog_get_props (message_dialog)->label), str);
 }
 
 /**
@@ -1005,7 +1005,7 @@ gtk_message_dialog_style_set (GtkWidget *widget,
   GtkWidget *parent;
   gint border_width;
 
-  parent = GTK_WIDGET (GTK_MESSAGE_DIALOG (widget)->image->parent);
+  parent = GTK_WIDGET (GTK_MESSAGE_DIALOG (widget)->gtk_widget_get_props (image)->parent);
 
   if (parent)
     {

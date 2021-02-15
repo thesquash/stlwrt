@@ -197,7 +197,7 @@ gtk_settings_init (GtkSettings *settings)
   GParamSpec **pspecs, **p;
   guint i = 0;
   
-  g_datalist_init (&settings->queued_settings);
+  g_datalist_init (&gtk_settings_get_props (settings)->queued_settings);
   object_list = g_slist_prepend (object_list, settings);
 
   /* build up property array for all yet existing properties and queue
@@ -208,7 +208,7 @@ gtk_settings_init (GtkSettings *settings)
   for (p = pspecs; *p; p++)
     if ((*p)->owner_type == G_OBJECT_TYPE (settings))
       i++;
-  settings->property_values = g_new0 (GtkSettingsPropertyValue, i);
+  gtk_settings_get_props (settings)->property_values = g_new0 (GtkSettingsPropertyValue, i);
   i = 0;
   g_object_freeze_notify (G_OBJECT (settings));
   for (p = pspecs; *p; p++)
@@ -217,10 +217,10 @@ gtk_settings_init (GtkSettings *settings)
 
       if (pspec->owner_type != G_OBJECT_TYPE (settings))
 	continue;
-      g_value_init (&settings->property_values[i].value, G_PARAM_SPEC_VALUE_TYPE (pspec));
-      g_param_value_set_default (pspec, &settings->property_values[i].value);
+      g_value_init (&gtk_settings_get_props (settings)->property_values[i].value, G_PARAM_SPEC_VALUE_TYPE (pspec));
+      g_param_value_set_default (pspec, &gtk_settings_get_props (settings)->property_values[i].value);
       g_object_notify (G_OBJECT (settings), pspec->name);
-      settings->property_values[i].source = GTK_SETTINGS_SOURCE_DEFAULT;
+      gtk_settings_get_props (settings)->property_values[i].source = GTK_SETTINGS_SOURCE_DEFAULT;
       i++;
     }
   g_object_thaw_notify (G_OBJECT (settings));
@@ -1221,10 +1221,10 @@ gtk_settings_finalize (GObject *object)
   ___gtk_rc_context_destroy (settings);
 
   for (i = 0; i < class_n_properties; i++)
-    g_value_unset (&settings->property_values[i].value);
-  g_free (settings->property_values);
+    g_value_unset (&gtk_settings_get_props (settings)->property_values[i].value);
+  g_free (gtk_settings_get_props (settings)->property_values);
   
-  g_datalist_clear (&settings->queued_settings);
+  g_datalist_clear (&gtk_settings_get_props (settings)->queued_settings);
 
   G_OBJECT_CLASS (gtk_settings_parent_class)->finalize (object);
 }
@@ -1250,7 +1250,7 @@ __gtk_settings_get_for_screen (GdkScreen *screen)
   if (!settings)
     {
       settings = g_object_new (GTK_TYPE_SETTINGS, NULL);
-      settings->screen = screen;
+      gtk_settings_get_props (settings)->screen = screen;
       g_object_set_data_full (G_OBJECT (screen), I_("gtk-settings"), 
 			      settings, g_object_unref);
 
@@ -1295,8 +1295,8 @@ gtk_settings_set_property (GObject      *object,
 {
   GtkSettings *settings = GTK_SETTINGS (object);
 
-  g_value_copy (value, &settings->property_values[property_id - 1].value);
-  settings->property_values[property_id - 1].source = GTK_SETTINGS_SOURCE_APPLICATION;
+  g_value_copy (value, &gtk_settings_get_props (settings)->property_values[property_id - 1].value);
+  gtk_settings_get_props (settings)->property_values[property_id - 1].source = GTK_SETTINGS_SOURCE_APPLICATION;
   
   if (pspec->param_id == PROP_COLOR_SCHEME)
     merge_color_scheme (settings, value, GTK_SETTINGS_SOURCE_APPLICATION);
@@ -1333,9 +1333,9 @@ gtk_settings_get_property (GObject     *object,
       g_value_type_transformable (G_TYPE_STRING, G_VALUE_TYPE (value)) ||
       g_value_type_transformable (GDK_TYPE_COLOR, G_VALUE_TYPE (value)))
     {
-      if (settings->property_values[property_id - 1].source == GTK_SETTINGS_SOURCE_APPLICATION ||
-	  !__gdk_screen_get_setting (settings->screen, pspec->name, value))
-        g_value_copy (&settings->property_values[property_id - 1].value, value);
+      if (gtk_settings_get_props (settings)->property_values[property_id - 1].source == GTK_SETTINGS_SOURCE_APPLICATION ||
+	  !__gdk_screen_get_setting (gtk_settings_get_props (settings)->screen, pspec->name, value))
+        g_value_copy (&gtk_settings_get_props (settings)->property_values[property_id - 1].value, value);
       else 
         g_param_value_validate (pspec, value);
     }
@@ -1347,10 +1347,10 @@ gtk_settings_get_property (GObject     *object,
       
       g_value_init (&val, G_TYPE_STRING);
 
-      if (settings->property_values[property_id - 1].source == GTK_SETTINGS_SOURCE_APPLICATION ||
-	  !__gdk_screen_get_setting (settings->screen, pspec->name, &val))
+      if (gtk_settings_get_props (settings)->property_values[property_id - 1].source == GTK_SETTINGS_SOURCE_APPLICATION ||
+	  !__gdk_screen_get_setting (gtk_settings_get_props (settings)->screen, pspec->name, &val))
         {
-          g_value_copy (&settings->property_values[property_id - 1].value, value);
+          g_value_copy (&gtk_settings_get_props (settings)->property_values[property_id - 1].value, value);
         }
       else
         {
@@ -1372,7 +1372,7 @@ gtk_settings_get_property (GObject     *object,
             }
           else
             {
-              g_value_copy (&settings->property_values[property_id - 1].value, value);
+              g_value_copy (&gtk_settings_get_props (settings)->property_values[property_id - 1].value, value);
             }
 
           g_value_unset (&gstring_value);
@@ -1390,7 +1390,7 @@ gtk_settings_notify (GObject    *object,
   GtkSettings *settings = GTK_SETTINGS (object);
   guint property_id = pspec->param_id;
 
-  if (settings->screen == NULL) /* initialization */
+  if (gtk_settings_get_props (settings)->screen == NULL) /* initialization */
     return;
 
   switch (property_id)
@@ -1515,10 +1515,10 @@ apply_queued_setting (GtkSettings             *data,
       if (pspec->param_id == PROP_COLOR_SCHEME) 
         merge_color_scheme (data, &tmp_value, qvalue->source);
 
-      if (data->property_values[pspec->param_id - 1].source <= qvalue->source)
+      if (gtk_settings_get_props (data)->property_values[pspec->param_id - 1].source <= qvalue->source)
 	{
-          g_value_copy (&tmp_value, &data->property_values[pspec->param_id - 1].value);
-	  data->property_values[pspec->param_id - 1].source = qvalue->source;
+          g_value_copy (&tmp_value, &gtk_settings_get_props (data)->property_values[pspec->param_id - 1].value);
+	  gtk_settings_get_props (data)->property_values[pspec->param_id - 1].source = qvalue->source;
           g_object_notify (G_OBJECT (data), g_param_spec_get_name (pspec));
 	}
 
@@ -1591,14 +1591,14 @@ settings_install_property_parser (GtkSettingsClass   *class,
       GtkSettings *settings = node->data;
       GtkSettingsValuePrivate *qvalue;
       
-      settings->property_values = g_renew (GtkSettingsPropertyValue, settings->property_values, class_n_properties);
-      settings->property_values[class_n_properties - 1].value.g_type = 0;
-      g_value_init (&settings->property_values[class_n_properties - 1].value, G_PARAM_SPEC_VALUE_TYPE (pspec));
-      g_param_value_set_default (pspec, &settings->property_values[class_n_properties - 1].value);
-      settings->property_values[class_n_properties - 1].source = GTK_SETTINGS_SOURCE_DEFAULT;
+      gtk_settings_get_props (settings)->property_values = g_renew (GtkSettingsPropertyValue, gtk_settings_get_props (settings)->property_values, class_n_properties);
+      gtk_settings_get_props (settings)->property_values[class_n_properties - 1].value.g_type = 0;
+      g_value_init (&gtk_settings_get_props (settings)->property_values[class_n_properties - 1].value, G_PARAM_SPEC_VALUE_TYPE (pspec));
+      g_param_value_set_default (pspec, &gtk_settings_get_props (settings)->property_values[class_n_properties - 1].value);
+      gtk_settings_get_props (settings)->property_values[class_n_properties - 1].source = GTK_SETTINGS_SOURCE_DEFAULT;
       g_object_notify (G_OBJECT (settings), pspec->name);
       
-      qvalue = g_datalist_get_data (&settings->queued_settings, pspec->name);
+      qvalue = g_datalist_get_data (&gtk_settings_get_props (settings)->queued_settings, pspec->name);
       if (qvalue)
 	apply_queued_setting (settings, pspec, qvalue);
     }
@@ -1696,11 +1696,11 @@ __gtk_settings_set_property_value_internal (GtkSettings            *settings,
   name_quark = g_quark_from_string (name);
   g_free (name);
 
-  qvalue = g_datalist_id_get_data (&settings->queued_settings, name_quark);
+  qvalue = g_datalist_id_get_data (&gtk_settings_get_props (settings)->queued_settings, name_quark);
   if (!qvalue)
     {
       qvalue = g_slice_new0 (GtkSettingsValuePrivate);
-      g_datalist_id_set_data_full (&settings->queued_settings, name_quark, qvalue, free_value);
+      g_datalist_id_set_data_full (&gtk_settings_get_props (settings)->queued_settings, name_quark, qvalue, free_value);
     }
   else
     {
@@ -2146,7 +2146,7 @@ ___gtk_settings_handle_event (GdkEventSetting *event)
           GValue value = { 0, };
  
           g_value_init (&value, G_TYPE_STRING);
-          if (!__gdk_screen_get_setting (settings->screen, pspec->name, &value))
+          if (!__gdk_screen_get_setting (gtk_settings_get_props (settings)->screen, pspec->name, &value))
             g_value_set_static_string (&value, "");
           merge_color_scheme (settings, &value, GTK_SETTINGS_SOURCE_XSETTING);
           g_value_unset (&value);
@@ -2177,14 +2177,14 @@ ___gtk_settings_reset_rc_values (GtkSettings *settings)
 
   /* Remove any queued settings
    */
-  g_datalist_foreach (&settings->queued_settings,
+  g_datalist_foreach (&gtk_settings_get_props (settings)->queued_settings,
 		      reset_rc_values_foreach,
 		      &to_reset);
 
   for (tmp_list = to_reset; tmp_list; tmp_list = tmp_list->next)
     {
       GQuark key_id = GPOINTER_TO_UINT (tmp_list->data);
-      g_datalist_id_remove_data (&settings->queued_settings, key_id);
+      g_datalist_id_remove_data (&gtk_settings_get_props (settings)->queued_settings, key_id);
     }
 
    g_slist_free (to_reset);
@@ -2197,11 +2197,11 @@ ___gtk_settings_reset_rc_values (GtkSettings *settings)
   g_object_freeze_notify (G_OBJECT (settings));
   for (p = pspecs; *p; p++)
     {
-      if (settings->property_values[i].source == GTK_SETTINGS_SOURCE_RC_FILE)
+      if (gtk_settings_get_props (settings)->property_values[i].source == GTK_SETTINGS_SOURCE_RC_FILE)
 	{
 	  GParamSpec *pspec = *p;
 
-	  g_param_value_set_default (pspec, &settings->property_values[i].value);
+	  g_param_value_set_default (pspec, &gtk_settings_get_props (settings)->property_values[i].value);
 	  g_object_notify (G_OBJECT (settings), pspec->name);
 	}
       i++;
@@ -2213,9 +2213,9 @@ ___gtk_settings_reset_rc_values (GtkSettings *settings)
 static void
 settings_update_double_click (GtkSettings *settings)
 {
-  if (__gdk_screen_get_number (settings->screen) == 0)
+  if (__gdk_screen_get_number (gtk_settings_get_props (settings)->screen) == 0)
     {
-      GdkDisplay *display = __gdk_screen_get_display (settings->screen);
+      GdkDisplay *display = __gdk_screen_get_display (gtk_settings_get_props (settings)->screen);
       gint double_click_time;
       gint double_click_distance;
   
@@ -2247,7 +2247,7 @@ settings_update_modules (GtkSettings *settings)
 static void
 settings_update_cursor_theme (GtkSettings *settings)
 {
-  GdkDisplay *display = __gdk_screen_get_display (settings->screen);
+  GdkDisplay *display = __gdk_screen_get_display (gtk_settings_get_props (settings)->screen);
   gchar *theme = NULL;
   gint size = 0;
   
@@ -2329,7 +2329,7 @@ settings_update_font_options (GtkSettings *settings)
   
   cairo_font_options_set_antialias (options, antialias_mode);
 
-  __gdk_screen_set_font_options (settings->screen, options);
+  __gdk_screen_set_font_options (gtk_settings_get_props (settings)->screen, options);
   
   cairo_font_options_destroy (options);
 }
@@ -2387,7 +2387,7 @@ settings_update_resolution (GtkSettings *settings)
   else
     dpi = -1.;
 
-  __gdk_screen_set_resolution (settings->screen, dpi);
+  __gdk_screen_set_resolution (gtk_settings_get_props (settings)->screen, dpi);
 }
 #endif
 
@@ -2402,13 +2402,13 @@ color_scheme_data_free (ColorSchemeData *data)
 {
   gint i;
 
-  g_hash_table_unref (data->color_hash);
+  g_hash_table_unref (gtk_settings_get_props (data)->color_hash);
 
   for (i = 0; i <= GTK_SETTINGS_SOURCE_APPLICATION; i++)
     {
-      if (data->tables[i])
-	g_hash_table_unref (data->tables[i]);
-      g_free (data->lastentry[i]);
+      if (gtk_settings_get_props (data)->tables[i])
+	g_hash_table_unref (gtk_settings_get_props (data)->tables[i]);
+      g_free (gtk_settings_get_props (data)->lastentry[i]);
     }
 
   g_slice_free (ColorSchemeData, data);
@@ -2423,13 +2423,13 @@ settings_update_color_scheme (GtkSettings *settings)
       GValue value = { 0, };
 
       data = g_slice_new0 (ColorSchemeData);
-      data->color_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free,
+      gtk_settings_get_props (data)->color_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free,
 					        (GDestroyNotify) __gdk_color_free);
       g_object_set_data_full (G_OBJECT (settings), "gtk-color-scheme",
 			      data, (GDestroyNotify) color_scheme_data_free); 
 
       g_value_init (&value, G_TYPE_STRING);
-      if (__gdk_screen_get_setting (settings->screen, "gtk-color-scheme", &value))
+      if (__gdk_screen_get_setting (gtk_settings_get_props (settings)->screen, "gtk-color-scheme", &value))
         {
           merge_color_scheme (settings, &value, GTK_SETTINGS_SOURCE_XSETTING);
           g_value_unset (&value);
@@ -2515,43 +2515,43 @@ update_color_hash (ColorSchemeData   *data,
   gpointer color;
 
   if ((str == NULL || *str == '\0') &&
-      (data->lastentry[source] == NULL || data->lastentry[source][0] == '\0'))
+      (gtk_settings_get_props (data)->lastentry[source] == NULL || gtk_settings_get_props (data)->lastentry[source][0] == '\0'))
     return FALSE;
 
-  if (str && data->lastentry[source] && strcmp (str, data->lastentry[source]) == 0)
+  if (str && gtk_settings_get_props (data)->lastentry[source] && strcmp (str, gtk_settings_get_props (data)->lastentry[source]) == 0)
     return FALSE;
 
   /* For the RC_FILE source we merge the values rather than over-writing
    * them, since multiple rc files might define independent sets of colors
    */
   if ((source != GTK_SETTINGS_SOURCE_RC_FILE) &&
-      data->tables[source] && g_hash_table_size (data->tables[source]) > 0)
+      gtk_settings_get_props (data)->tables[source] && g_hash_table_size (gtk_settings_get_props (data)->tables[source]) > 0)
     {
-      g_hash_table_unref (data->tables[source]);
-      data->tables[source] = NULL;
+      g_hash_table_unref (gtk_settings_get_props (data)->tables[source]);
+      gtk_settings_get_props (data)->tables[source] = NULL;
       changed = TRUE; /* We can't rely on the code below since str might be "" */
     }
 
-  if (data->tables[source] == NULL)
-    data->tables[source] = g_hash_table_new_full (g_str_hash, g_str_equal,
+  if (gtk_settings_get_props (data)->tables[source] == NULL)
+    gtk_settings_get_props (data)->tables[source] = g_hash_table_new_full (g_str_hash, g_str_equal,
 						  g_free,
 						  (GDestroyNotify) __gdk_color_free);
 
-  g_free (data->lastentry[source]);
-  data->lastentry[source] = g_strdup (str);
+  g_free (gtk_settings_get_props (data)->lastentry[source]);
+  gtk_settings_get_props (data)->lastentry[source] = g_strdup (str);
 
-  changed |= add_colors_to_hash_from_string (data->tables[source], str);
+  changed |= add_colors_to_hash_from_string (gtk_settings_get_props (data)->tables[source], str);
 
   if (!changed)
     return FALSE;
 
   /* Rebuild the merged hash table. */
-  if (data->color_hash)
+  if (gtk_settings_get_props (data)->color_hash)
     {
       old_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free,
                                         (GDestroyNotify) __gdk_color_free);
 
-      g_hash_table_iter_init (&iter, data->color_hash);
+      g_hash_table_iter_init (&iter, gtk_settings_get_props (data)->color_hash);
       while (g_hash_table_iter_next (&iter, &name, &color))
         {
           g_hash_table_insert (old_hash, name, color);
@@ -2565,16 +2565,16 @@ update_color_hash (ColorSchemeData   *data,
 
   for (i = 0; i <= GTK_SETTINGS_SOURCE_APPLICATION; i++)
     {
-      if (data->tables[i])
-	g_hash_table_foreach (data->tables[i], (GHFunc) add_color_to_hash,
-			      data->color_hash);
+      if (gtk_settings_get_props (data)->tables[i])
+	g_hash_table_foreach (gtk_settings_get_props (data)->tables[i], (GHFunc) add_color_to_hash,
+			      gtk_settings_get_props (data)->color_hash);
     }
 
   if (old_hash)
     {
       /* now check if the merged hash has changed */
       changed = FALSE;
-      if (g_hash_table_size (old_hash) != g_hash_table_size (data->color_hash))
+      if (g_hash_table_size (old_hash) != g_hash_table_size (gtk_settings_get_props (data)->color_hash))
         changed = TRUE;
       else
         {
@@ -2584,7 +2584,7 @@ update_color_hash (ColorSchemeData   *data,
           g_hash_table_iter_init (&iter, old_hash);
           while (g_hash_table_iter_next (&iter, &key, &value))
             {
-              new_value = g_hash_table_lookup (data->color_hash, key);
+              new_value = g_hash_table_lookup (gtk_settings_get_props (data)->color_hash, key);
               if (!new_value || !__gdk_color_equal (value, new_value))
                 {
                   changed = TRUE;
@@ -2634,7 +2634,7 @@ get_color_hash (GtkSettings *settings)
   data = (ColorSchemeData *)g_object_get_data (G_OBJECT (settings), 
 					       "gtk-color-scheme");
 
-  return data->color_hash;
+  return gtk_settings_get_props (data)->color_hash;
 }
 
 static void 
@@ -2663,7 +2663,7 @@ get_color_scheme (GtkSettings *settings)
 
   string = g_string_new ("");
 
-  g_hash_table_foreach (data->color_hash, append_color_scheme, string);
+  g_hash_table_foreach (gtk_settings_get_props (data)->color_hash, append_color_scheme, string);
 
   return g_string_free (string, FALSE);
 }

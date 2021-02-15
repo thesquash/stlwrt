@@ -1966,7 +1966,7 @@ text_view_visibility_notify_event (GtkWidget          *text_view,
 {
   gint wx, wy, bx, by;
 
-  __gdk_window_get_pointer (text_view->window, &wx, &wy, NULL);
+  __gdk_window_get_pointer (gtk_widget_get_props (text_view)->window, &wx, &wy, NULL);
 
   __gtk_text_view_window_to_buffer_coords (GTK_TEXT_VIEW (text_view),
                                          GTK_TEXT_WINDOW_WIDGET,

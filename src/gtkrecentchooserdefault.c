@@ -709,8 +709,8 @@ error_message_with_parent (GtkWindow   *parent,
   __gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
 					    "%s", detail);
 
-  if (parent->group)
-    __gtk_window_group_add_window (parent->group, GTK_WINDOW (dialog));
+  if (gtk_window_get_props (parent)->group)
+    __gtk_window_group_add_window (gtk_window_get_props (parent)->group, GTK_WINDOW (dialog));
 
   __gtk_dialog_run (GTK_DIALOG (dialog));
   __gtk_widget_destroy (dialog);
@@ -936,7 +936,7 @@ set_default_size (GtkRecentChooserDefault *impl)
   widget = GTK_WIDGET (impl);
 
   /* Size based on characters and the icon size */
-  font_size = pango_font_description_get_size (widget->style->font_desc);
+  font_size = pango_font_description_get_size (gtk_widget_get_props (widget)->style->font_desc);
   font_size = PANGO_PIXELS (font_size);
 
   width = impl->icon_size + font_size * NUM_CHARS;
@@ -949,7 +949,7 @@ set_default_size (GtkRecentChooserDefault *impl)
 
   /* ... but no larger than the monitor */
   screen = __gtk_widget_get_screen (widget);
-  monitor_num = __gdk_screen_get_monitor_at_window (screen, widget->window);
+  monitor_num = __gdk_screen_get_monitor_at_window (screen, gtk_widget_get_props (widget)->window);
 
   __gdk_screen_get_monitor_geometry (screen, monitor_num, &monitor);
 
@@ -1840,12 +1840,12 @@ popup_position_func (GtkMenu   *menu,
   if (G_UNLIKELY (!__gtk_widget_get_realized (widget)))
     return;
 
-  __gdk_window_get_origin (widget->window, x, y);
+  __gdk_window_get_origin (gtk_widget_get_props (widget)->window, x, y);
 
   __gtk_widget_size_request (GTK_WIDGET (menu), &req);
 
-  *x += (widget->allocation.width - req.width) / 2;
-  *y += (widget->allocation.height - req.height) / 2;
+  *x += (gtk_widget_get_props (widget)->allocation.width - req.width) / 2;
+  *y += (gtk_widget_get_props (widget)->allocation.height - req.height) / 2;
 
   monitor_num = __gdk_screen_get_monitor_at_point (screen, *x, *y);
   __gtk_menu_set_monitor (menu, monitor_num);

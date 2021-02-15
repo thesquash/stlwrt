@@ -185,9 +185,9 @@ gtk_box_init (GtkBox *box)
   __gtk_widget_set_has_window (GTK_WIDGET (box), FALSE);
   __gtk_widget_set_redraw_on_allocate (GTK_WIDGET (box), FALSE);
 
-  box->children = NULL;
-  box->spacing = 0;
-  box->homogeneous = FALSE;
+  gtk_box_get_props (box)->children = NULL;
+  gtk_box_get_props (box)->spacing = 0;
+  gtk_box_get_props (box)->homogeneous = FALSE;
 
   private->orientation = GTK_ORIENTATION_HORIZONTAL;
   private->default_expand = FALSE;
@@ -236,10 +236,10 @@ gtk_box_get_property (GObject    *object,
       g_value_set_enum (value, private->orientation);
       break;
     case PROP_SPACING:
-      g_value_set_int (value, box->spacing);
+      g_value_set_int (value, gtk_box_get_props (box)->spacing);
       break;
     case PROP_HOMOGENEOUS:
-      g_value_set_boolean (value, box->homogeneous);
+      g_value_set_boolean (value, gtk_box_get_props (box)->homogeneous);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -263,7 +263,7 @@ gtk_box_size_request (GtkWidget      *widget,
   requisition->height = 0;
   nvis_children = 0;
 
-  children = box->children;
+  children = gtk_box_get_props (box)->children;
   while (children)
     {
       child = children->data;
@@ -275,7 +275,7 @@ gtk_box_size_request (GtkWidget      *widget,
 
 	  __gtk_widget_size_request (child->widget, &child_requisition);
 
-	  if (box->homogeneous)
+	  if (gtk_box_get_props (box)->homogeneous)
 	    {
 	      width = child_requisition.width + child->padding * 2;
 	      height = child_requisition.height + child->padding * 2;
@@ -304,7 +304,7 @@ gtk_box_size_request (GtkWidget      *widget,
 
   if (nvis_children > 0)
     {
-      if (box->homogeneous)
+      if (gtk_box_get_props (box)->homogeneous)
         {
           if (private->orientation == GTK_ORIENTATION_HORIZONTAL)
             requisition->width *= nvis_children;
@@ -313,9 +313,9 @@ gtk_box_size_request (GtkWidget      *widget,
         }
 
       if (private->orientation == GTK_ORIENTATION_HORIZONTAL)
-        requisition->width += (nvis_children - 1) * box->spacing;
+        requisition->width += (nvis_children - 1) * gtk_box_get_props (box)->spacing;
       else
-        requisition->height += (nvis_children - 1) * box->spacing;
+        requisition->height += (nvis_children - 1) * gtk_box_get_props (box)->spacing;
     }
 
   requisition->width += GTK_CONTAINER (box)->border_width * 2;
@@ -342,11 +342,11 @@ gtk_box_size_allocate (GtkWidget     *widget,
   gint y = 0;
   GtkTextDirection direction;
 
-  widget->allocation = *allocation;
+  gtk_widget_get_props (widget)->allocation = *allocation;
 
   direction = __gtk_widget_get_direction (widget);
 
-  for (children = box->children; children; children = children->next)
+  for (children = gtk_box_get_props (box)->children; children; children = children->next)
     {
       child = children->data;
 
@@ -360,20 +360,20 @@ gtk_box_size_allocate (GtkWidget     *widget,
 
   if (nvis_children > 0)
     {
-      if (box->homogeneous)
+      if (gtk_box_get_props (box)->homogeneous)
 	{
           if (private->orientation == GTK_ORIENTATION_HORIZONTAL)
             {
               width = (allocation->width -
                        GTK_CONTAINER (box)->border_width * 2 -
-                       (nvis_children - 1) * box->spacing);
+                       (nvis_children - 1) * gtk_box_get_props (box)->spacing);
               extra = width / nvis_children;
             }
           else
             {
               height = (allocation->height -
                         GTK_CONTAINER (box)->border_width * 2 -
-                        (nvis_children - 1) * box->spacing);
+                        (nvis_children - 1) * gtk_box_get_props (box)->spacing);
               extra = height / nvis_children;
             }
 	}
@@ -381,12 +381,12 @@ gtk_box_size_allocate (GtkWidget     *widget,
 	{
           if (private->orientation == GTK_ORIENTATION_HORIZONTAL)
             {
-              width = (gint) allocation->width - (gint) widget->requisition.width;
+              width = (gint) allocation->width - (gint) gtk_widget_get_props (widget)->requisition.width;
               extra = width / nexpand_children;
             }
           else
             {
-              height = (gint) allocation->height - (gint) widget->requisition.height;
+              height = (gint) allocation->height - (gint) gtk_widget_get_props (widget)->requisition.height;
               extra = height / nexpand_children;
             }
 	}
@@ -404,7 +404,7 @@ gtk_box_size_allocate (GtkWidget     *widget,
           child_allocation.width = MAX (1, (gint) allocation->width - (gint) GTK_CONTAINER (box)->border_width * 2);
         }
 
-      children = box->children;
+      children = gtk_box_get_props (box)->children;
       while (children)
 	{
 	  child = children->data;
@@ -412,7 +412,7 @@ gtk_box_size_allocate (GtkWidget     *widget,
 
 	  if ((child->pack == GTK_PACK_START) && __gtk_widget_get_visible (child->widget))
 	    {
-	      if (box->homogeneous)
+	      if (gtk_box_get_props (box)->homogeneous)
 		{
 		  if (nvis_children == 1)
                     {
@@ -495,15 +495,15 @@ gtk_box_size_allocate (GtkWidget     *widget,
 
 	      __gtk_widget_size_allocate (child->widget, &child_allocation);
 
-	      x += child_width + box->spacing;
-	      y += child_height + box->spacing;
+	      x += child_width + gtk_box_get_props (box)->spacing;
+	      y += child_height + gtk_box_get_props (box)->spacing;
 	    }
 	}
 
       x = allocation->x + allocation->width - GTK_CONTAINER (box)->border_width;
       y = allocation->y + allocation->height - GTK_CONTAINER (box)->border_width;
 
-      children = box->children;
+      children = gtk_box_get_props (box)->children;
       while (children)
 	{
 	  child = children->data;
@@ -515,7 +515,7 @@ gtk_box_size_allocate (GtkWidget     *widget,
 
 	      __gtk_widget_get_child_requisition (child->widget, &child_requisition);
 
-              if (box->homogeneous)
+              if (gtk_box_get_props (box)->homogeneous)
                 {
                   if (nvis_children == 1)
                     {
@@ -591,8 +591,8 @@ gtk_box_size_allocate (GtkWidget     *widget,
 
               __gtk_widget_size_allocate (child->widget, &child_allocation);
 
-              x -= (child_width + box->spacing);
-              y -= (child_height + box->spacing);
+              x -= (child_width + gtk_box_get_props (box)->spacing);
+              y -= (child_height + gtk_box_get_props (box)->spacing);
 	    }
 	}
     }
@@ -744,7 +744,7 @@ gtk_box_pack (GtkBox      *box,
   child_info->pack = pack_type;
   child_info->is_secondary = FALSE;
 
-  box->children = g_list_append (box->children, child_info);
+  gtk_box_get_props (box)->children = g_list_append (gtk_box_get_props (box)->children, child_info);
 
   __gtk_widget_freeze_child_notify (child);
 
@@ -906,9 +906,9 @@ __gtk_box_set_homogeneous (GtkBox  *box,
 {
   g_return_if_fail (GTK_IS_BOX (box));
 
-  if ((homogeneous ? TRUE : FALSE) != box->homogeneous)
+  if ((homogeneous ? TRUE : FALSE) != gtk_box_get_props (box)->homogeneous)
     {
-      box->homogeneous = homogeneous ? TRUE : FALSE;
+      gtk_box_get_props (box)->homogeneous = homogeneous ? TRUE : FALSE;
       g_object_notify (G_OBJECT (box), "homogeneous");
       __gtk_widget_queue_resize (GTK_WIDGET (box));
     }
@@ -928,7 +928,7 @@ __gtk_box_get_homogeneous (GtkBox *box)
 {
   g_return_val_if_fail (GTK_IS_BOX (box), FALSE);
 
-  return box->homogeneous;
+  return gtk_box_get_props (box)->homogeneous;
 }
 
 /**
@@ -945,9 +945,9 @@ __gtk_box_set_spacing (GtkBox *box,
 {
   g_return_if_fail (GTK_IS_BOX (box));
 
-  if (spacing != box->spacing)
+  if (spacing != gtk_box_get_props (box)->spacing)
     {
-      box->spacing = spacing;
+      gtk_box_get_props (box)->spacing = spacing;
       ___gtk_box_set_spacing_set (box, TRUE);
 
       g_object_notify (G_OBJECT (box), "spacing");
@@ -969,7 +969,7 @@ __gtk_box_get_spacing (GtkBox *box)
 {
   g_return_val_if_fail (GTK_IS_BOX (box), 0);
 
-  return box->spacing;
+  return gtk_box_get_props (box)->spacing;
 }
 
 void
@@ -1029,7 +1029,7 @@ __gtk_box_reorder_child (GtkBox    *box,
   g_return_if_fail (GTK_IS_BOX (box));
   g_return_if_fail (GTK_IS_WIDGET (child));
 
-  old_link = box->children;
+  old_link = gtk_box_get_props (box)->children;
   old_position = 0;
   while (old_link)
     {
@@ -1046,14 +1046,14 @@ __gtk_box_reorder_child (GtkBox    *box,
   if (position == old_position)
     return;
 
-  box->children = g_list_delete_link (box->children, old_link);
+  gtk_box_get_props (box)->children = g_list_delete_link (gtk_box_get_props (box)->children, old_link);
 
   if (position < 0)
     new_link = NULL;
   else
-    new_link = g_list_nth (box->children, position);
+    new_link = g_list_nth (gtk_box_get_props (box)->children, position);
 
-  box->children = g_list_insert_before (box->children, new_link, child_info);
+  gtk_box_get_props (box)->children = g_list_insert_before (gtk_box_get_props (box)->children, new_link, child_info);
 
   __gtk_widget_child_notify (child, "position");
   if (__gtk_widget_get_visible (child)
@@ -1086,7 +1086,7 @@ __gtk_box_query_child_packing (GtkBox      *box,
   g_return_if_fail (GTK_IS_BOX (box));
   g_return_if_fail (GTK_IS_WIDGET (child));
 
-  list = box->children;
+  list = gtk_box_get_props (box)->children;
   while (list)
     {
       child_info = list->data;
@@ -1134,7 +1134,7 @@ __gtk_box_set_child_packing (GtkBox      *box,
   g_return_if_fail (GTK_IS_BOX (box));
   g_return_if_fail (GTK_IS_WIDGET (child));
 
-  list = box->children;
+  list = gtk_box_get_props (box)->children;
   while (list)
     {
       child_info = list->data;
@@ -1198,7 +1198,7 @@ gtk_box_remove (GtkContainer *container,
   GtkBoxChild *child;
   GList *children;
 
-  children = box->children;
+  children = gtk_box_get_props (box)->children;
   while (children)
     {
       child = children->data;
@@ -1210,7 +1210,7 @@ gtk_box_remove (GtkContainer *container,
 	  was_visible = __gtk_widget_get_visible (widget);
 	  __gtk_widget_unparent (widget);
 
-	  box->children = g_list_remove_link (box->children, children);
+	  gtk_box_get_props (box)->children = g_list_remove_link (gtk_box_get_props (box)->children, children);
 	  g_list_free (children);
 	  g_free (child);
 
@@ -1237,7 +1237,7 @@ gtk_box_forall (GtkContainer *container,
   GtkBoxChild *child;
   GList *children;
 
-  children = box->children;
+  children = gtk_box_get_props (box)->children;
   while (children)
     {
       child = children->data;
@@ -1247,7 +1247,7 @@ gtk_box_forall (GtkContainer *container,
 	(* callback) (child->widget, callback_data);
     }
 
-  children = g_list_last (box->children);
+  children = g_list_last (gtk_box_get_props (box)->children);
   while (children)
     {
       child = children->data;

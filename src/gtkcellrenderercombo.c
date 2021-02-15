@@ -188,10 +188,10 @@ gtk_cell_renderer_combo_class_init (GtkCellRendererComboClass *klass)
 static void
 gtk_cell_renderer_combo_init (GtkCellRendererCombo *self)
 {
-  self->model = NULL;
-  self->text_column = -1;
-  self->has_entry = TRUE;
-  self->focus_out_id = 0;
+  gtk_cell_renderer_combo_get_props (self)->model = NULL;
+  gtk_cell_renderer_combo_get_props (self)->text_column = -1;
+  gtk_cell_renderer_combo_get_props (self)->has_entry = TRUE;
+  gtk_cell_renderer_combo_get_props (self)->focus_out_id = 0;
 }
 
 /**
@@ -220,10 +220,10 @@ gtk_cell_renderer_combo_finalize (GObject *object)
 {
   GtkCellRendererCombo *cell = GTK_CELL_RENDERER_COMBO (object);
   
-  if (cell->model)
+  if (gtk_cell_renderer_combo_get_props (cell)->model)
     {
-      g_object_unref (cell->model);
-      cell->model = NULL;
+      g_object_unref (gtk_cell_renderer_combo_get_props (cell)->model);
+      gtk_cell_renderer_combo_get_props (cell)->model = NULL;
     }
   
   G_OBJECT_CLASS (gtk_cell_renderer_combo_parent_class)->finalize (object);
@@ -240,13 +240,13 @@ gtk_cell_renderer_combo_get_property (GObject    *object,
   switch (prop_id)
     {
     case PROP_MODEL:
-      g_value_set_object (value, cell->model);
+      g_value_set_object (value, gtk_cell_renderer_combo_get_props (cell)->model);
       break; 
     case PROP_TEXT_COLUMN:
-      g_value_set_int (value, cell->text_column);
+      g_value_set_int (value, gtk_cell_renderer_combo_get_props (cell)->text_column);
       break;
     case PROP_HAS_ENTRY:
-      g_value_set_boolean (value, cell->has_entry);
+      g_value_set_boolean (value, gtk_cell_renderer_combo_get_props (cell)->has_entry);
       break;
    default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -270,18 +270,18 @@ gtk_cell_renderer_combo_set_property (GObject      *object,
 
         priv = GTK_CELL_RENDERER_COMBO_GET_PRIVATE (cell);
 
-        if (cell->model)
-          g_object_unref (cell->model);
-        cell->model = GTK_TREE_MODEL (g_value_get_object (value));
-        if (cell->model)
-          g_object_ref (cell->model);
+        if (gtk_cell_renderer_combo_get_props (cell)->model)
+          g_object_unref (gtk_cell_renderer_combo_get_props (cell)->model);
+        gtk_cell_renderer_combo_get_props (cell)->model = GTK_TREE_MODEL (g_value_get_object (value));
+        if (gtk_cell_renderer_combo_get_props (cell)->model)
+          g_object_ref (gtk_cell_renderer_combo_get_props (cell)->model);
         break;
       }
     case PROP_TEXT_COLUMN:
-      cell->text_column = g_value_get_int (value);
+      gtk_cell_renderer_combo_get_props (cell)->text_column = g_value_get_int (value);
       break;
     case PROP_HAS_ENTRY:
-      cell->has_entry = g_value_get_boolean (value);
+      gtk_cell_renderer_combo_get_props (cell)->has_entry = g_value_get_boolean (value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -324,10 +324,10 @@ gtk_cell_renderer_combo_editing_done (GtkCellEditable *combo,
   cell = GTK_CELL_RENDERER_COMBO (data);
   priv = GTK_CELL_RENDERER_COMBO_GET_PRIVATE (data);
 
-  if (cell->focus_out_id > 0)
+  if (gtk_cell_renderer_combo_get_props (cell)->focus_out_id > 0)
     {
-      g_signal_handler_disconnect (combo, cell->focus_out_id);
-      cell->focus_out_id = 0;
+      g_signal_handler_disconnect (combo, gtk_cell_renderer_combo_get_props (cell)->focus_out_id);
+      gtk_cell_renderer_combo_get_props (cell)->focus_out_id = 0;
     }
 
   g_object_get (combo,
@@ -351,7 +351,7 @@ gtk_cell_renderer_combo_editing_done (GtkCellEditable *combo,
 
       if (model
           && __gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &iter))
-        __gtk_tree_model_get (model, &iter, cell->text_column, &new_text, -1);
+        __gtk_tree_model_get (model, &iter, gtk_cell_renderer_combo_get_props (cell)->text_column, &new_text, -1);
     }
 
   path = g_object_get_data (G_OBJECT (combo), GTK_CELL_RENDERER_COMBO_PATH);
@@ -389,7 +389,7 @@ find_text (GtkTreeModel *model,
   SearchData *search_data = (SearchData *)data;
   gchar *text;
   
-  __gtk_tree_model_get (model, iter, search_data->cell->text_column, &text, -1);
+  __gtk_tree_model_get (model, iter, search_data->gtk_cell_renderer_combo_get_props (cell)->text_column, &text, -1);
   if (text && GTK_CELL_RENDERER_TEXT (search_data->cell)->text &&
       strcmp (text, GTK_CELL_RENDERER_TEXT (search_data->cell)->text) == 0)
     {
@@ -418,47 +418,47 @@ gtk_cell_renderer_combo_start_editing (GtkCellRenderer     *cell,
   GtkCellRendererComboPrivate *priv;
 
   cell_text = GTK_CELL_RENDERER_TEXT (cell);
-  if (cell_text->editable == FALSE)
+  if (gtk_cell_renderer_text_get_props (cell_text)->editable == FALSE)
     return NULL;
 
   cell_combo = GTK_CELL_RENDERER_COMBO (cell);
-  if (cell_combo->text_column < 0)
+  if (gtk_cell_renderer_combo_get_props (cell_combo)->text_column < 0)
     return NULL;
 
   priv = GTK_CELL_RENDERER_COMBO_GET_PRIVATE (cell_combo);
 
-  if (cell_combo->has_entry) 
+  if (gtk_cell_renderer_combo_get_props (cell_combo)->has_entry) 
     {
       combo = g_object_new (GTK_TYPE_COMBO_BOX, "has-entry", TRUE, NULL);
 
-      if (cell_combo->model)
-        __gtk_combo_box_set_model (GTK_COMBO_BOX (combo), cell_combo->model);
+      if (gtk_cell_renderer_combo_get_props (cell_combo)->model)
+        __gtk_combo_box_set_model (GTK_COMBO_BOX (combo), gtk_cell_renderer_combo_get_props (cell_combo)->model);
       __gtk_combo_box_set_entry_text_column (GTK_COMBO_BOX (combo),
-                                           cell_combo->text_column);
+                                           gtk_cell_renderer_combo_get_props (cell_combo)->text_column);
 
-      if (cell_text->text)
+      if (gtk_cell_renderer_text_get_props (cell_text)->text)
 	__gtk_entry_set_text (GTK_ENTRY (GTK_BIN (combo)->child), 
-			    cell_text->text);
+			    gtk_cell_renderer_text_get_props (cell_text)->text);
     }
   else
     {
       cell = __gtk_cell_renderer_text_new ();
 
       combo = __gtk_combo_box_new ();
-      if (cell_combo->model)
-        __gtk_combo_box_set_model (GTK_COMBO_BOX (combo), cell_combo->model);
+      if (gtk_cell_renderer_combo_get_props (cell_combo)->model)
+        __gtk_combo_box_set_model (GTK_COMBO_BOX (combo), gtk_cell_renderer_combo_get_props (cell_combo)->model);
 
       __gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo), cell, TRUE);
       __gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combo), 
-				      cell, "text", cell_combo->text_column, 
+				      cell, "text", gtk_cell_renderer_combo_get_props (cell_combo)->text_column, 
 				      NULL);
 
       /* determine the current value */
-      if (cell_combo->model)
+      if (gtk_cell_renderer_combo_get_props (cell_combo)->model)
         {
           search_data.cell = cell_combo;
           search_data.found = FALSE;
-          __gtk_tree_model_foreach (cell_combo->model, find_text, &search_data);
+          __gtk_tree_model_foreach (gtk_cell_renderer_combo_get_props (cell_combo)->model, find_text, &search_data);
           if (search_data.found)
             __gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combo),
                                            &(search_data.iter));
@@ -478,7 +478,7 @@ gtk_cell_renderer_combo_start_editing (GtkCellRenderer     *cell,
   g_signal_connect (GTK_CELL_EDITABLE (combo), "changed",
 		    G_CALLBACK (gtk_cell_renderer_combo_changed),
 		    cell_combo);
-  cell_combo->focus_out_id = 
+  gtk_cell_renderer_combo_get_props (cell_combo)->focus_out_id = 
     g_signal_connect (combo, "focus-out-event",
 		      G_CALLBACK (gtk_cell_renderer_combo_focus_out_event),
 		      cell_combo);

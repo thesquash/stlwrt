@@ -221,16 +221,16 @@ gtk_cell_view_get_property (GObject    *object,
         {
           GdkColor color;
 
-          color = view->priv->background;
+          color = gtk_cell_view_get_props (view)->priv->background;
 
           g_value_set_boxed (value, &color);
         }
         break;
       case PROP_BACKGROUND_SET:
-        g_value_set_boolean (value, view->priv->background_set);
+        g_value_set_boolean (value, gtk_cell_view_get_props (view)->priv->background_set);
         break;
       case PROP_MODEL:
-	g_value_set_object (value, view->priv->model);
+	g_value_set_object (value, gtk_cell_view_get_props (view)->priv->model);
 	break;
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
@@ -266,7 +266,7 @@ gtk_cell_view_set_property (GObject      *object,
         __gtk_cell_view_set_background_color (view, g_value_get_boxed (value));
         break;
       case PROP_BACKGROUND_SET:
-        view->priv->background_set = g_value_get_boolean (value);
+        gtk_cell_view_get_props (view)->priv->background_set = g_value_get_boolean (value);
         break;
       case PROP_MODEL:
 	__gtk_cell_view_set_model (view, g_value_get_object (value));
@@ -282,7 +282,7 @@ gtk_cell_view_init (GtkCellView *cellview)
 {
   __gtk_widget_set_has_window (GTK_WIDGET (cellview), FALSE);
 
-  cellview->priv = GTK_CELL_VIEW_GET_PRIVATE (cellview);
+  gtk_cell_view_get_props (cellview)->priv = GTK_CELL_VIEW_GET_PRIVATE (gtk_cell_view_get_props (cellview));
 }
 
 static void
@@ -292,11 +292,11 @@ gtk_cell_view_finalize (GObject *object)
 
   gtk_cell_view_cell_layout_clear (GTK_CELL_LAYOUT (cellview));
 
-  if (cellview->priv->model)
-     g_object_unref (cellview->priv->model);
+  if (gtk_cell_view_get_props (cellview)->priv->model)
+     g_object_unref (gtk_cell_view_get_props (cellview)->priv->model);
 
-  if (cellview->priv->displayed_row)
-     __gtk_tree_row_reference_free (cellview->priv->displayed_row);
+  if (gtk_cell_view_get_props (cellview)->priv->displayed_row)
+     __gtk_tree_row_reference_free (gtk_cell_view_get_props (cellview)->priv->displayed_row);
 
   G_OBJECT_CLASS (gtk_cell_view_parent_class)->finalize (object);
 }
@@ -314,19 +314,19 @@ gtk_cell_view_size_request (GtkWidget      *widget,
   requisition->width = 0;
   requisition->height = 0;
 
-  if (cellview->priv->displayed_row)
+  if (gtk_cell_view_get_props (cellview)->priv->displayed_row)
     gtk_cell_view_set_cell_data (cellview);
 
-  for (i = cellview->priv->cell_list; i; i = i->next)
+  for (i = gtk_cell_view_get_props (cellview)->priv->cell_list; i; i = i->next)
     {
       gint width, height;
       GtkCellViewCellInfo *info = (GtkCellViewCellInfo *)i->data;
 
-      if (!info->cell->visible)
+      if (!info->gtk_cell_view_get_props (cell)->visible)
         continue;
 
       if (!first_cell)
-        requisition->width += cellview->priv->spacing;
+        requisition->width += gtk_cell_view_get_props (cellview)->priv->spacing;
 
       __gtk_cell_renderer_get_size (info->cell, widget, NULL, NULL, NULL,
                                   &width, &height);
@@ -349,16 +349,16 @@ gtk_cell_view_size_allocate (GtkWidget     *widget,
   gint extra_space;
   GtkCellView *cellview;
 
-  widget->allocation = *allocation;
+  gtk_widget_get_props (widget)->allocation = *allocation;
 
   cellview = GTK_CELL_VIEW (widget);
 
   /* checking how much extra space we have */
-  for (i = cellview->priv->cell_list; i; i = i->next)
+  for (i = gtk_cell_view_get_props (cellview)->priv->cell_list; i; i = i->next)
     {
       GtkCellViewCellInfo *info = (GtkCellViewCellInfo *)i->data;
 
-      if (!info->cell->visible)
+      if (!info->gtk_cell_view_get_props (cell)->visible)
         continue;
 
       if (info->expand)
@@ -367,17 +367,17 @@ gtk_cell_view_size_allocate (GtkWidget     *widget,
       full_requested_width += info->requested_width;
     }
 
-  extra_space = widget->allocation.width - full_requested_width;
+  extra_space = gtk_widget_get_props (widget)->allocation.width - full_requested_width;
   if (extra_space < 0)
     extra_space = 0;
   else if (extra_space > 0 && expand_cell_count > 0)
     extra_space /= expand_cell_count;
 
-  for (i = cellview->priv->cell_list; i; i = i->next)
+  for (i = gtk_cell_view_get_props (cellview)->priv->cell_list; i; i = i->next)
     {
       GtkCellViewCellInfo *info = (GtkCellViewCellInfo *)i->data;
 
-      if (!info->cell->visible)
+      if (!info->gtk_cell_view_get_props (cell)->visible)
         continue;
 
       info->real_width = info->requested_width +
@@ -401,32 +401,32 @@ gtk_cell_view_expose (GtkWidget      *widget,
     return FALSE;
 
   /* "blank" background */
-  if (cellview->priv->background_set)
+  if (gtk_cell_view_get_props (cellview)->priv->background_set)
     {
       cairo_t *cr = __gdk_cairo_create (GTK_WIDGET (cellview)->window);
 
-      __gdk_cairo_rectangle (cr, &widget->allocation);
+      __gdk_cairo_rectangle (cr, &gtk_widget_get_props (widget)->allocation);
       cairo_set_source_rgb (cr,
-			    cellview->priv->background.red / 65535.,
-			    cellview->priv->background.green / 65535.,
-			    cellview->priv->background.blue / 65535.);
+			    gtk_cell_view_get_props (cellview)->priv->background.red / 65535.,
+			    gtk_cell_view_get_props (cellview)->priv->background.green / 65535.,
+			    gtk_cell_view_get_props (cellview)->priv->background.blue / 65535.);
       cairo_fill (cr);
 
       cairo_destroy (cr);
     }
 
   /* set cell data (if available) */
-  if (cellview->priv->displayed_row)
+  if (gtk_cell_view_get_props (cellview)->priv->displayed_row)
     gtk_cell_view_set_cell_data (cellview);
-  else if (cellview->priv->model)
+  else if (gtk_cell_view_get_props (cellview)->priv->model)
     return FALSE;
 
   /* render cells */
-  area = widget->allocation;
+  area = gtk_widget_get_props (widget)->allocation;
 
   /* we draw on our very own window, initialize x and y to zero */
-  area.x = widget->allocation.x + (rtl ? widget->allocation.width : 0); 
-  area.y = widget->allocation.y;
+  area.x = gtk_widget_get_props (widget)->allocation.x + (rtl ? gtk_widget_get_props (widget)->allocation.width : 0); 
+  area.y = gtk_widget_get_props (widget)->allocation.y;
 
   if (__gtk_widget_get_state (widget) == GTK_STATE_PRELIGHT)
     state = GTK_CELL_RENDERER_PRELIT;
@@ -436,14 +436,14 @@ gtk_cell_view_expose (GtkWidget      *widget,
     state = 0;
       
   /* PACK_START */
-  for (i = cellview->priv->cell_list; i; i = i->next)
+  for (i = gtk_cell_view_get_props (cellview)->priv->cell_list; i; i = i->next)
     {
       GtkCellViewCellInfo *info = (GtkCellViewCellInfo *)i->data;
 
       if (info->pack == GTK_PACK_END)
         continue;
 
-      if (!info->cell->visible)
+      if (!info->gtk_cell_view_get_props (cell)->visible)
         continue;
 
       area.width = info->real_width;
@@ -460,17 +460,17 @@ gtk_cell_view_expose (GtkWidget      *widget,
          area.x += info->real_width;
     }
 
-   area.x = rtl ? widget->allocation.x : (widget->allocation.x + widget->allocation.width);  
+   area.x = rtl ? gtk_widget_get_props (widget)->allocation.x : (gtk_widget_get_props (widget)->allocation.x + gtk_widget_get_props (widget)->allocation.width);  
 
   /* PACK_END */
-  for (i = cellview->priv->cell_list; i; i = i->next)
+  for (i = gtk_cell_view_get_props (cellview)->priv->cell_list; i; i = i->next)
     {
       GtkCellViewCellInfo *info = (GtkCellViewCellInfo *)i->data;
 
       if (info->pack == GTK_PACK_START)
         continue;
 
-      if (!info->cell->visible)
+      if (!info->gtk_cell_view_get_props (cell)->visible)
         continue;
 
       area.width = info->real_width;
@@ -478,7 +478,7 @@ gtk_cell_view_expose (GtkWidget      *widget,
          area.x -= area.width;   
 
       __gtk_cell_renderer_render (info->cell,
-                                widget->window,
+                                gtk_widget_get_props (widget)->window,
                                 widget,
                                 /* FIXME ! */
                                 &area, &area, &event->area, state);
@@ -495,7 +495,7 @@ gtk_cell_view_get_cell_info (GtkCellView     *cellview,
 {
   GList *i;
 
-  for (i = cellview->priv->cell_list; i; i = i->next)
+  for (i = gtk_cell_view_get_props (cellview)->priv->cell_list; i; i = i->next)
     {
       GtkCellViewCellInfo *info = (GtkCellViewCellInfo *)i->data;
 
@@ -513,16 +513,16 @@ gtk_cell_view_set_cell_data (GtkCellView *cell_view)
   GtkTreeIter iter;
   GtkTreePath *path;
 
-  g_return_if_fail (cell_view->priv->displayed_row != NULL);
+  g_return_if_fail (gtk_cell_view_get_props (cell_view)->priv->displayed_row != NULL);
 
-  path = __gtk_tree_row_reference_get_path (cell_view->priv->displayed_row);
+  path = __gtk_tree_row_reference_get_path (gtk_cell_view_get_props (cell_view)->priv->displayed_row);
   if (!path)
     return;
 
-  __gtk_tree_model_get_iter (cell_view->priv->model, &iter, path);
+  __gtk_tree_model_get_iter (gtk_cell_view_get_props (cell_view)->priv->model, &iter, path);
   __gtk_tree_path_free (path);
 
-  for (i = cell_view->priv->cell_list; i; i = i->next)
+  for (i = gtk_cell_view_get_props (cell_view)->priv->cell_list; i; i = i->next)
     {
       GSList *j;
       GtkCellViewCellInfo *info = i->data;
@@ -535,7 +535,7 @@ gtk_cell_view_set_cell_data (GtkCellView *cell_view)
           gint column = GPOINTER_TO_INT (j->next->data);
           GValue value = {0, };
 
-          __gtk_tree_model_get_value (cell_view->priv->model, &iter,
+          __gtk_tree_model_get_value (gtk_cell_view_get_props (cell_view)->priv->model, &iter,
                                     column, &value);
           g_object_set_property (G_OBJECT (info->cell),
                                  property, &value);
@@ -545,7 +545,7 @@ gtk_cell_view_set_cell_data (GtkCellView *cell_view)
       if (info->func)
 	(* info->func) (GTK_CELL_LAYOUT (cell_view),
 			info->cell,
-			cell_view->priv->model,
+			gtk_cell_view_get_props (cell_view)->priv->model,
 			&iter,
 			info->func_data);
 
@@ -571,7 +571,7 @@ gtk_cell_view_cell_layout_pack_start (GtkCellLayout   *layout,
   info->expand = expand ? TRUE : FALSE;
   info->pack = GTK_PACK_START;
 
-  cellview->priv->cell_list = g_list_append (cellview->priv->cell_list, info);
+  gtk_cell_view_get_props (cellview)->priv->cell_list = g_list_append (gtk_cell_view_get_props (cellview)->priv->cell_list, info);
 
   __gtk_widget_queue_resize (GTK_WIDGET (cellview));
 }
@@ -593,7 +593,7 @@ gtk_cell_view_cell_layout_pack_end (GtkCellLayout   *layout,
   info->expand = expand ? TRUE : FALSE;
   info->pack = GTK_PACK_END;
 
-  cellview->priv->cell_list = g_list_append (cellview->priv->cell_list, info);
+  gtk_cell_view_get_props (cellview)->priv->cell_list = g_list_append (gtk_cell_view_get_props (cellview)->priv->cell_list, info);
 
   __gtk_widget_queue_resize (GTK_WIDGET (cellview));
 }
@@ -621,15 +621,15 @@ gtk_cell_view_cell_layout_clear (GtkCellLayout *layout)
 {
   GtkCellView *cellview = GTK_CELL_VIEW (layout);
 
-  while (cellview->priv->cell_list)
+  while (gtk_cell_view_get_props (cellview)->priv->cell_list)
     {
-      GtkCellViewCellInfo *info = (GtkCellViewCellInfo *)cellview->priv->cell_list->data;
+      GtkCellViewCellInfo *info = (GtkCellViewCellInfo *)gtk_cell_view_get_props (cellview)->priv->cell_list->data;
 
       gtk_cell_view_cell_layout_clear_attributes (layout, info->cell);
       g_object_unref (info->cell);
       g_slice_free (GtkCellViewCellInfo, info);
-      cellview->priv->cell_list = g_list_delete_link (cellview->priv->cell_list, 
-						      cellview->priv->cell_list);
+      gtk_cell_view_get_props (cellview)->priv->cell_list = g_list_delete_link (gtk_cell_view_get_props (cellview)->priv->cell_list, 
+						      gtk_cell_view_get_props (cellview)->priv->cell_list);
     }
 
   __gtk_widget_queue_resize (GTK_WIDGET (cellview));
@@ -698,13 +698,13 @@ gtk_cell_view_cell_layout_reorder (GtkCellLayout   *layout,
   g_return_if_fail (info != NULL);
   g_return_if_fail (position >= 0);
 
-  link = g_list_find (cellview->priv->cell_list, info);
+  link = g_list_find (gtk_cell_view_get_props (cellview)->priv->cell_list, info);
 
   g_return_if_fail (link != NULL);
 
-  cellview->priv->cell_list = g_list_delete_link (cellview->priv->cell_list,
+  gtk_cell_view_get_props (cellview)->priv->cell_list = g_list_delete_link (gtk_cell_view_get_props (cellview)->priv->cell_list,
                                                   link);
-  cellview->priv->cell_list = g_list_insert (cellview->priv->cell_list,
+  gtk_cell_view_get_props (cellview)->priv->cell_list = g_list_insert (gtk_cell_view_get_props (cellview)->priv->cell_list,
                                              info, position);
 
   __gtk_widget_queue_draw (GTK_WIDGET (cellview));
@@ -869,20 +869,20 @@ __gtk_cell_view_set_model (GtkCellView  *cell_view,
   g_return_if_fail (GTK_IS_CELL_VIEW (cell_view));
   g_return_if_fail (model == NULL || GTK_IS_TREE_MODEL (model));
 
-  if (cell_view->priv->model)
+  if (gtk_cell_view_get_props (cell_view)->priv->model)
     {
-      if (cell_view->priv->displayed_row)
-        __gtk_tree_row_reference_free (cell_view->priv->displayed_row);
-      cell_view->priv->displayed_row = NULL;
+      if (gtk_cell_view_get_props (cell_view)->priv->displayed_row)
+        __gtk_tree_row_reference_free (gtk_cell_view_get_props (cell_view)->priv->displayed_row);
+      gtk_cell_view_get_props (cell_view)->priv->displayed_row = NULL;
 
-      g_object_unref (cell_view->priv->model);
-      cell_view->priv->model = NULL;
+      g_object_unref (gtk_cell_view_get_props (cell_view)->priv->model);
+      gtk_cell_view_get_props (cell_view)->priv->model = NULL;
     }
 
-  cell_view->priv->model = model;
+  gtk_cell_view_get_props (cell_view)->priv->model = model;
 
-  if (cell_view->priv->model)
-    g_object_ref (cell_view->priv->model);
+  if (gtk_cell_view_get_props (cell_view)->priv->model)
+    g_object_ref (gtk_cell_view_get_props (cell_view)->priv->model);
 
   __gtk_widget_queue_resize (GTK_WIDGET (cell_view));
 }
@@ -903,7 +903,7 @@ __gtk_cell_view_get_model (GtkCellView *cell_view)
 {
   g_return_val_if_fail (GTK_IS_CELL_VIEW (cell_view), NULL);
 
-  return cell_view->priv->model;
+  return gtk_cell_view_get_props (cell_view)->priv->model;
 }
 
 /**
@@ -925,18 +925,18 @@ __gtk_cell_view_set_displayed_row (GtkCellView *cell_view,
                                  GtkTreePath *path)
 {
   g_return_if_fail (GTK_IS_CELL_VIEW (cell_view));
-  g_return_if_fail (GTK_IS_TREE_MODEL (cell_view->priv->model));
+  g_return_if_fail (GTK_IS_TREE_MODEL (gtk_cell_view_get_props (cell_view)->priv->model));
 
-  if (cell_view->priv->displayed_row)
-    __gtk_tree_row_reference_free (cell_view->priv->displayed_row);
+  if (gtk_cell_view_get_props (cell_view)->priv->displayed_row)
+    __gtk_tree_row_reference_free (gtk_cell_view_get_props (cell_view)->priv->displayed_row);
 
   if (path)
     {
-      cell_view->priv->displayed_row =
-	__gtk_tree_row_reference_new (cell_view->priv->model, path);
+      gtk_cell_view_get_props (cell_view)->priv->displayed_row =
+	__gtk_tree_row_reference_new (gtk_cell_view_get_props (cell_view)->priv->model, path);
     }
   else
-    cell_view->priv->displayed_row = NULL;
+    gtk_cell_view_get_props (cell_view)->priv->displayed_row = NULL;
 
   /* force resize and redraw */
   __gtk_widget_queue_resize (GTK_WIDGET (cell_view));
@@ -959,10 +959,10 @@ __gtk_cell_view_get_displayed_row (GtkCellView *cell_view)
 {
   g_return_val_if_fail (GTK_IS_CELL_VIEW (cell_view), NULL);
 
-  if (!cell_view->priv->displayed_row)
+  if (!gtk_cell_view_get_props (cell_view)->priv->displayed_row)
     return NULL;
 
-  return __gtk_tree_row_reference_get_path (cell_view->priv->displayed_row);
+  return __gtk_tree_row_reference_get_path (gtk_cell_view_get_props (cell_view)->priv->displayed_row);
 }
 
 /**
@@ -990,14 +990,14 @@ __gtk_cell_view_get_size_of_row (GtkCellView    *cell_view,
   g_return_val_if_fail (path != NULL, FALSE);
   g_return_val_if_fail (requisition != NULL, FALSE);
 
-  tmp = cell_view->priv->displayed_row;
-  cell_view->priv->displayed_row =
-    __gtk_tree_row_reference_new (cell_view->priv->model, path);
+  tmp = gtk_cell_view_get_props (cell_view)->priv->displayed_row;
+  gtk_cell_view_get_props (cell_view)->priv->displayed_row =
+    __gtk_tree_row_reference_new (gtk_cell_view_get_props (cell_view)->priv->model, path);
 
   gtk_cell_view_size_request (GTK_WIDGET (cell_view), requisition);
 
-  __gtk_tree_row_reference_free (cell_view->priv->displayed_row);
-  cell_view->priv->displayed_row = tmp;
+  __gtk_tree_row_reference_free (gtk_cell_view_get_props (cell_view)->priv->displayed_row);
+  gtk_cell_view_get_props (cell_view)->priv->displayed_row = tmp;
 
   /* restore actual size info */
   gtk_cell_view_size_request (GTK_WIDGET (cell_view), &req);
@@ -1022,19 +1022,19 @@ __gtk_cell_view_set_background_color (GtkCellView    *cell_view,
 
   if (color)
     {
-      if (!cell_view->priv->background_set)
+      if (!gtk_cell_view_get_props (cell_view)->priv->background_set)
         {
-          cell_view->priv->background_set = TRUE;
+          gtk_cell_view_get_props (cell_view)->priv->background_set = TRUE;
           g_object_notify (G_OBJECT (cell_view), "background-set");
         }
 
-      cell_view->priv->background = *color;
+      gtk_cell_view_get_props (cell_view)->priv->background = *color;
     }
   else
     {
-      if (cell_view->priv->background_set)
+      if (gtk_cell_view_get_props (cell_view)->priv->background_set)
         {
-          cell_view->priv->background_set = FALSE;
+          gtk_cell_view_get_props (cell_view)->priv->background_set = FALSE;
           g_object_notify (G_OBJECT (cell_view), "background-set");
         }
     }
@@ -1052,7 +1052,7 @@ gtk_cell_view_cell_layout_get_cells (GtkCellLayout *layout)
 
   gtk_cell_view_set_cell_data (cell_view);
 
-  for (list = cell_view->priv->cell_list; list; list = list->next)
+  for (list = gtk_cell_view_get_props (cell_view)->priv->cell_list; list; list = list->next)
     {
       GtkCellViewCellInfo *info = (GtkCellViewCellInfo *)list->data;
 

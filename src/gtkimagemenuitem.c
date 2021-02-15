@@ -196,7 +196,7 @@ gtk_image_menu_item_init (GtkImageMenuItem *image_menu_item)
   priv->use_stock   = FALSE;
   priv->label  = NULL;
 
-  image_menu_item->image = NULL;
+  gtk_image_menu_item_get_props (image_menu_item)->image = NULL;
 }
 
 static void 
@@ -285,8 +285,8 @@ gtk_image_menu_item_map (GtkWidget *widget)
 
   GTK_WIDGET_CLASS (gtk_image_menu_item_parent_class)->map (widget);
 
-  if (image_menu_item->image)
-    g_object_set (image_menu_item->image,
+  if (gtk_image_menu_item_get_props (image_menu_item)->image)
+    g_object_set (gtk_image_menu_item_get_props (image_menu_item)->image,
                   "visible", show_image (image_menu_item),
                   NULL);
 }
@@ -305,11 +305,11 @@ gtk_image_menu_item_toggle_size_request (GtkMenuItem *menu_item,
 
   *requisition = 0;
 
-  if (image_menu_item->image && __gtk_widget_get_visible (image_menu_item->image))
+  if (gtk_image_menu_item_get_props (image_menu_item)->image && __gtk_widget_get_visible (gtk_image_menu_item_get_props (image_menu_item)->image))
     {
       GtkRequisition image_requisition;
       guint toggle_spacing;
-      __gtk_widget_get_child_requisition (image_menu_item->image,
+      __gtk_widget_get_child_requisition (gtk_image_menu_item_get_props (image_menu_item)->image,
                                         &image_requisition);
 
       __gtk_widget_style_get (GTK_WIDGET (menu_item),
@@ -340,7 +340,7 @@ gtk_image_menu_item_recalculate (GtkImageMenuItem *image_menu_item)
   if (priv->use_stock && priv->label)
     {
 
-      if (!image_menu_item->image)
+      if (!gtk_image_menu_item_get_props (image_menu_item)->image)
 	{
 	  image = __gtk_image_new_from_stock (priv->label, GTK_ICON_SIZE_MENU);
 	  __gtk_image_menu_item_set_image (image_menu_item, image);
@@ -392,18 +392,18 @@ gtk_image_menu_item_size_request (GtkWidget      *widget,
   gint child_height = 0;
   GtkPackDirection pack_dir;
   
-  if (GTK_IS_MENU_BAR (widget->parent))
-    pack_dir = __gtk_menu_bar_get_child_pack_direction (GTK_MENU_BAR (widget->parent));
+  if (GTK_IS_MENU_BAR (gtk_widget_get_props (widget)->parent))
+    pack_dir = __gtk_menu_bar_get_child_pack_direction (GTK_MENU_BAR (gtk_widget_get_props (widget)->parent));
   else
     pack_dir = GTK_PACK_DIRECTION_LTR;
 
   image_menu_item = GTK_IMAGE_MENU_ITEM (widget);
 
-  if (image_menu_item->image && __gtk_widget_get_visible (image_menu_item->image))
+  if (gtk_image_menu_item_get_props (image_menu_item)->image && __gtk_widget_get_visible (gtk_image_menu_item_get_props (image_menu_item)->image))
     {
       GtkRequisition child_requisition;
       
-      __gtk_widget_size_request (image_menu_item->image,
+      __gtk_widget_size_request (gtk_image_menu_item_get_props (image_menu_item)->image,
                                &child_requisition);
 
       child_width = child_requisition.width;
@@ -423,7 +423,7 @@ gtk_image_menu_item_size_request (GtkWidget      *widget,
   
   /* Note that GtkMenuShell always size requests before
    * toggle_size_request, so toggle_size_request will be able to use
-   * image_menu_item->image->requisition
+   * gtk_image_menu_item_get_props (image_menu_item)->gtk_image_menu_item_get_props (image)->requisition
    */
 }
 
@@ -434,8 +434,8 @@ gtk_image_menu_item_size_allocate (GtkWidget     *widget,
   GtkImageMenuItem *image_menu_item;
   GtkPackDirection pack_dir;
   
-  if (GTK_IS_MENU_BAR (widget->parent))
-    pack_dir = __gtk_menu_bar_get_child_pack_direction (GTK_MENU_BAR (widget->parent));
+  if (GTK_IS_MENU_BAR (gtk_widget_get_props (widget)->parent))
+    pack_dir = __gtk_menu_bar_get_child_pack_direction (GTK_MENU_BAR (gtk_widget_get_props (widget)->parent));
   else
     pack_dir = GTK_PACK_DIRECTION_LTR;
   
@@ -443,7 +443,7 @@ gtk_image_menu_item_size_allocate (GtkWidget     *widget,
 
   GTK_WIDGET_CLASS (gtk_image_menu_item_parent_class)->size_allocate (widget, allocation);
 
-  if (image_menu_item->image && __gtk_widget_get_visible (image_menu_item->image))
+  if (gtk_image_menu_item_get_props (image_menu_item)->image && __gtk_widget_get_visible (gtk_image_menu_item_get_props (image_menu_item)->image))
     {
       gint x, y, offset;
       GtkRequisition child_requisition;
@@ -459,14 +459,14 @@ gtk_image_menu_item_size_allocate (GtkWidget     *widget,
        * come up with a solution that's really better.
        */
 
-      __gtk_widget_get_child_requisition (image_menu_item->image,
+      __gtk_widget_get_child_requisition (gtk_image_menu_item_get_props (image_menu_item)->image,
                                         &child_requisition);
 
       if (pack_dir == GTK_PACK_DIRECTION_LTR ||
 	  pack_dir == GTK_PACK_DIRECTION_RTL)
 	{
 	  offset = GTK_CONTAINER (image_menu_item)->border_width +
-	    widget->style->xthickness;
+	    gtk_widget_get_props (widget)->style->xthickness;
 	  
 	  if ((__gtk_widget_get_direction (widget) == GTK_TEXT_DIR_LTR) ==
 	      (pack_dir == GTK_PACK_DIRECTION_LTR))
@@ -474,17 +474,17 @@ gtk_image_menu_item_size_allocate (GtkWidget     *widget,
 	      (GTK_MENU_ITEM (image_menu_item)->toggle_size -
 	       toggle_spacing - child_requisition.width) / 2;
 	  else
-	    x = widget->allocation.width - offset - horizontal_padding -
+	    x = gtk_widget_get_props (widget)->allocation.width - offset - horizontal_padding -
 	      GTK_MENU_ITEM (image_menu_item)->toggle_size + toggle_spacing +
 	      (GTK_MENU_ITEM (image_menu_item)->toggle_size -
 	       toggle_spacing - child_requisition.width) / 2;
 	  
-	  y = (widget->allocation.height - child_requisition.height) / 2;
+	  y = (gtk_widget_get_props (widget)->allocation.height - child_requisition.height) / 2;
 	}
       else
 	{
 	  offset = GTK_CONTAINER (image_menu_item)->border_width +
-	    widget->style->ythickness;
+	    gtk_widget_get_props (widget)->style->ythickness;
 	  
 	  if ((__gtk_widget_get_direction (widget) == GTK_TEXT_DIR_LTR) ==
 	      (pack_dir == GTK_PACK_DIRECTION_TTB))
@@ -492,20 +492,20 @@ gtk_image_menu_item_size_allocate (GtkWidget     *widget,
 	      (GTK_MENU_ITEM (image_menu_item)->toggle_size -
 	       toggle_spacing - child_requisition.height) / 2;
 	  else
-	    y = widget->allocation.height - offset - horizontal_padding -
+	    y = gtk_widget_get_props (widget)->allocation.height - offset - horizontal_padding -
 	      GTK_MENU_ITEM (image_menu_item)->toggle_size + toggle_spacing +
 	      (GTK_MENU_ITEM (image_menu_item)->toggle_size -
 	       toggle_spacing - child_requisition.height) / 2;
 
-	  x = (widget->allocation.width - child_requisition.width) / 2;
+	  x = (gtk_widget_get_props (widget)->allocation.width - child_requisition.width) / 2;
 	}
       
       child_allocation.width = child_requisition.width;
       child_allocation.height = child_requisition.height;
-      child_allocation.x = widget->allocation.x + MAX (x, 0);
-      child_allocation.y = widget->allocation.y + MAX (y, 0);
+      child_allocation.x = gtk_widget_get_props (widget)->allocation.x + MAX (x, 0);
+      child_allocation.y = gtk_widget_get_props (widget)->allocation.y + MAX (y, 0);
 
-      __gtk_widget_size_allocate (image_menu_item->image, &child_allocation);
+      __gtk_widget_size_allocate (gtk_image_menu_item_get_props (image_menu_item)->image, &child_allocation);
     }
 }
 
@@ -522,8 +522,8 @@ gtk_image_menu_item_forall (GtkContainer   *container,
                                                                   callback,
                                                                   callback_data);
 
-  if (include_internals && image_menu_item->image)
-    (* callback) (image_menu_item->image, callback_data);
+  if (include_internals && gtk_image_menu_item_get_props (image_menu_item)->image)
+    (* callback) (gtk_image_menu_item_get_props (image_menu_item)->image, callback_data);
 }
 
 
@@ -811,12 +811,12 @@ __gtk_image_menu_item_set_always_show_image (GtkImageMenuItem *image_menu_item,
     {
       priv->always_show_image = always_show;
 
-      if (image_menu_item->image)
+      if (gtk_image_menu_item_get_props (image_menu_item)->image)
         {
           if (show_image (image_menu_item))
-            __gtk_widget_show (image_menu_item->image);
+            __gtk_widget_show (gtk_image_menu_item_get_props (image_menu_item)->image);
           else
-            __gtk_widget_hide (image_menu_item->image);
+            __gtk_widget_hide (gtk_image_menu_item_get_props (image_menu_item)->image);
         }
 
       g_object_notify (G_OBJECT (image_menu_item), "always-show-image");
@@ -907,14 +907,14 @@ __gtk_image_menu_item_set_image (GtkImageMenuItem *image_menu_item,
 {
   g_return_if_fail (GTK_IS_IMAGE_MENU_ITEM (image_menu_item));
 
-  if (image == image_menu_item->image)
+  if (image == gtk_image_menu_item_get_props (image_menu_item)->image)
     return;
 
-  if (image_menu_item->image)
+  if (gtk_image_menu_item_get_props (image_menu_item)->image)
     __gtk_container_remove (GTK_CONTAINER (image_menu_item),
-			  image_menu_item->image);
+			  gtk_image_menu_item_get_props (image_menu_item)->image);
 
-  image_menu_item->image = image;
+  gtk_image_menu_item_get_props (image_menu_item)->image = image;
 
   if (image == NULL)
     return;
@@ -942,7 +942,7 @@ __gtk_image_menu_item_get_image (GtkImageMenuItem *image_menu_item)
 {
   g_return_val_if_fail (GTK_IS_IMAGE_MENU_ITEM (image_menu_item), NULL);
 
-  return image_menu_item->image;
+  return gtk_image_menu_item_get_props (image_menu_item)->image;
 }
 
 static void
@@ -953,14 +953,14 @@ gtk_image_menu_item_remove (GtkContainer *container,
 
   image_menu_item = GTK_IMAGE_MENU_ITEM (container);
 
-  if (child == image_menu_item->image)
+  if (child == gtk_image_menu_item_get_props (image_menu_item)->image)
     {
       gboolean widget_was_visible;
       
       widget_was_visible = __gtk_widget_get_visible (child);
       
       __gtk_widget_unparent (child);
-      image_menu_item->image = NULL;
+      gtk_image_menu_item_get_props (image_menu_item)->image = NULL;
       
       if (widget_was_visible &&
           __gtk_widget_get_visible (GTK_WIDGET (container)))
@@ -977,12 +977,12 @@ gtk_image_menu_item_remove (GtkContainer *container,
 static void 
 show_image_change_notify (GtkImageMenuItem *image_menu_item)
 {
-  if (image_menu_item->image)
+  if (gtk_image_menu_item_get_props (image_menu_item)->image)
     {
       if (show_image (image_menu_item))
-	__gtk_widget_show (image_menu_item->image);
+	__gtk_widget_show (gtk_image_menu_item_get_props (image_menu_item)->image);
       else
-	__gtk_widget_hide (image_menu_item->image);
+	__gtk_widget_hide (gtk_image_menu_item_get_props (image_menu_item)->image);
     }
 }
 

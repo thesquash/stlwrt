@@ -87,13 +87,13 @@ gtk_file_chooser_dialog_init (GtkFileChooserDialog *dialog)
 								   GtkFileChooserDialogPrivate);
   GtkDialog *fc_dialog = GTK_DIALOG (dialog);
 
-  dialog->priv = priv;
-  dialog->priv->response_requested = FALSE;
+  gtk_file_chooser_dialog_get_props (dialog)->priv = priv;
+  gtk_file_chooser_dialog_get_props (dialog)->priv->response_requested = FALSE;
 
   __gtk_dialog_set_has_separator (fc_dialog, FALSE);
   __gtk_container_set_border_width (GTK_CONTAINER (fc_dialog), 5);
-  __gtk_box_set_spacing (GTK_BOX (fc_dialog->vbox), 2); /* 2 * 5 + 2 = 12 */
-  __gtk_container_set_border_width (GTK_CONTAINER (fc_dialog->action_area), 5);
+  __gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_props (fc_dialog)->vbox), 2); /* 2 * 5 + 2 = 12 */
+  __gtk_container_set_border_width (GTK_CONTAINER (gtk_dialog_get_props (fc_dialog)->action_area), 5);
 
   __gtk_window_set_role (GTK_WINDOW (dialog), "GtkFileChooserDialog");
 
@@ -111,7 +111,7 @@ gtk_file_chooser_dialog_finalize (GObject *object)
 {
   GtkFileChooserDialog *dialog = GTK_FILE_CHOOSER_DIALOG (object);
 
-  g_free (dialog->priv->file_system);
+  g_free (gtk_file_chooser_dialog_get_props (dialog)->priv->file_system);
 
   G_OBJECT_CLASS (gtk_file_chooser_dialog_parent_class)->finalize (object);  
 }
@@ -193,7 +193,7 @@ file_chooser_widget_default_size_changed (GtkWidget            *widget,
   if (__gtk_widget_is_drawable (widget))
     {
       /* Force a size request of everything before we start.  This will make sure
-       * that widget->requisition is meaningful. */
+       * that gtk_widget_get_props (widget)->requisition is meaningful. */
       __gtk_widget_size_request (GTK_WIDGET (dialog), &req);
       __gtk_widget_size_request (widget, &widget_req);
     }
@@ -227,7 +227,7 @@ file_chooser_widget_response_requested (GtkWidget            *widget,
 {
   GList *children, *l;
 
-  dialog->priv->response_requested = TRUE;
+  gtk_file_chooser_dialog_get_props (dialog)->priv->response_requested = TRUE;
 
   if (__gtk_window_activate_default (GTK_WINDOW (dialog)))
     return;
@@ -253,7 +253,7 @@ file_chooser_widget_response_requested (GtkWidget            *widget,
     }
 
   if (l == NULL)
-    dialog->priv->response_requested = FALSE;
+    gtk_file_chooser_dialog_get_props (dialog)->priv->response_requested = FALSE;
 
   g_list_free (children);
 }

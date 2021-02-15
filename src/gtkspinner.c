@@ -203,7 +203,7 @@ gtk_spinner_init (GtkSpinner *spinner)
   priv->current = 0;
   priv->timeout = 0;
 
-  spinner->priv = priv;
+  gtk_spinner_get_props (spinner)->priv = priv;
 
   __gtk_widget_set_has_window (GTK_WIDGET (spinner), FALSE);
 }
@@ -218,8 +218,8 @@ gtk_spinner_expose (GtkWidget      *widget,
 
   priv = GTK_SPINNER (widget)->priv;
 
-  width = widget->allocation.width;
-  height = widget->allocation.height;
+  width = gtk_widget_get_props (widget)->allocation.width;
+  height = gtk_widget_get_props (widget)->allocation.height;
 
   if ((width < 12) || (height <12))
     __gtk_widget_set_size_request (widget, 12, 12);
@@ -228,8 +228,8 @@ gtk_spinner_expose (GtkWidget      *widget,
   if (!__gtk_widget_is_sensitive (widget))
    state_type = GTK_STATE_INSENSITIVE;
 
-  __gtk_paint_spinner (widget->style,
-                     widget->window,
+  __gtk_paint_spinner (gtk_widget_get_props (widget)->style,
+                     gtk_widget_get_props (widget)->window,
                      state_type,
                      &event->area,
                      widget,
@@ -263,7 +263,7 @@ gtk_spinner_add_timeout (GtkSpinner *spinner)
 {
   GtkSpinnerPrivate *priv;
 
-  priv = spinner->priv;
+  priv = gtk_spinner_get_props (spinner)->priv;
 
   priv->timeout = __gdk_threads_add_timeout ((guint) priv->cycle_duration / priv->num_steps, gtk_spinner_timeout, spinner);
 }
@@ -273,7 +273,7 @@ gtk_spinner_remove_timeout (GtkSpinner *spinner)
 {
   GtkSpinnerPrivate *priv;
 
-  priv = spinner->priv;
+  priv = gtk_spinner_get_props (spinner)->priv;
 
   g_source_remove (priv->timeout);
   priv->timeout = 0;
@@ -477,8 +477,8 @@ gtk_spinner_accessible_image_get_size (AtkImage *image,
     }
   else
     {
-      *width = widget->allocation.width;
-      *height = widget->allocation.height;
+      *width = gtk_widget_get_props (widget)->allocation.width;
+      *height = gtk_widget_get_props (widget)->allocation.height;
     }
 }
 

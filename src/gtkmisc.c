@@ -260,7 +260,7 @@ __gtk_misc_set_padding (GtkMisc *misc,
       if (ypad != gtk_misc_get_props (misc)->ypad)
 	g_object_notify (G_OBJECT (misc), "ypad");
 
-      requisition = &(GTK_WIDGET (misc)->requisition);
+      requisition = &(gtk_widget_get_props (GTK_WIDGET (misc))->requisition);
       requisition->width -= gtk_misc_get_props (misc)->xpad * 2;
       requisition->height -= gtk_misc_get_props (misc)->ypad * 2;
       

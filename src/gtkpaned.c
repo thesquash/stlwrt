@@ -544,7 +544,7 @@ gtk_paned_class_init (GtkPanedClass *class)
 static GType
 gtk_paned_child_type (GtkContainer *container)
 {
-  if (!GTK_PANED (container)->child1 || !GTK_PANED (container)->child2)
+  if (!gtk_paned_get_props (GTK_PANED (container))->child1 || !gtk_paned_get_props (GTK_PANED (container))->child2)
     return GTK_TYPE_WIDGET;
   else
     return G_TYPE_NONE;
@@ -610,7 +610,7 @@ gtk_paned_set_property (GObject        *object,
         gtk_paned_get_props (paned)->cursor_type = GDK_SB_V_DOUBLE_ARROW;
 
       /* state_changed updates the cursor */
-      gtk_paned_state_changed (GTK_WIDGET (paned), GTK_WIDGET (paned)->state);
+      gtk_paned_state_changed (GTK_WIDGET (paned), gtk_widget_get_props (GTK_WIDGET (paned))->state);
       __gtk_widget_queue_resize (GTK_WIDGET (paned));
       break;
     case PROP_POSITION:
@@ -783,8 +783,8 @@ gtk_paned_size_request (GtkWidget      *widget,
         }
     }
 
-  requisition->width += GTK_CONTAINER (paned)->border_width * 2;
-  requisition->height += GTK_CONTAINER (paned)->border_width * 2;
+  requisition->width += gtk_container_get_props (GTK_CONTAINER (paned))->border_width * 2;
+  requisition->height += gtk_container_get_props (GTK_CONTAINER (paned))->border_width * 2;
 
   if (gtk_paned_get_props (paned)->child1 && __gtk_widget_get_visible (gtk_paned_get_props (paned)->child1) &&
       gtk_paned_get_props (paned)->child2 && __gtk_widget_get_visible (gtk_paned_get_props (paned)->child2))
@@ -815,7 +815,7 @@ gtk_paned_size_allocate (GtkWidget     *widget,
                          GtkAllocation *allocation)
 {
   GtkPaned *paned = GTK_PANED (widget);
-  gint border_width = GTK_CONTAINER (paned)->border_width;
+  gint border_width = gtk_container_get_props (GTK_CONTAINER (paned))->border_width;
 
   gtk_widget_get_props (widget)->allocation = *allocation;
 
@@ -1123,14 +1123,14 @@ update_drag (GtkPaned *paned)
 			    "handle-size", &handle_size,
 			    NULL);
       
-      size = GTK_WIDGET (paned)->allocation.width - pos - handle_size;
+      size = gtk_widget_get_props (GTK_WIDGET (paned))->allocation.width - pos - handle_size;
     }
   else
     {
       size = pos;
     }
 
-  size -= GTK_CONTAINER (paned)->border_width;
+  size -= gtk_container_get_props (GTK_CONTAINER (paned))->border_width;
   
   size = CLAMP (size, gtk_paned_get_props (paned)->min_position, gtk_paned_get_props (paned)->max_position);
 
@@ -1702,7 +1702,7 @@ paned_get_focus_widget (GtkPaned *paned)
 
   toplevel = __gtk_widget_get_toplevel (GTK_WIDGET (paned));
   if (__gtk_widget_is_toplevel (toplevel))
-    return GTK_WINDOW (toplevel)->focus_widget;
+    return gtk_window_get_props (GTK_WINDOW (toplevel))->focus_widget;
 
   return NULL;
 }
@@ -1771,8 +1771,8 @@ gtk_paned_get_cycle_chain (GtkPaned          *paned,
       gtk_paned_set_last_child2_focus (paned, NULL);
     }
 
-  if (GTK_WIDGET (paned)->parent)
-    ancestor = __gtk_widget_get_ancestor (GTK_WIDGET (paned)->parent, GTK_TYPE_PANED);
+  if (gtk_widget_get_props (GTK_WIDGET (paned))->parent)
+    ancestor = __gtk_widget_get_ancestor (gtk_widget_get_props (GTK_WIDGET (paned))->parent, GTK_TYPE_PANED);
 
   /* The idea here is that temp_list is a list of widgets we want to cycle
    * to. The list is prioritized so that the first element is our first
@@ -2198,7 +2198,7 @@ gtk_paned_cycle_handle_focus (GtkPaned *paned,
       toplevel = __gtk_widget_get_toplevel (GTK_WIDGET (paned));
 
       if (GTK_IS_WINDOW (toplevel))
-	gtk_paned_set_saved_focus (focus, GTK_WINDOW (toplevel)->focus_widget);
+	gtk_paned_set_saved_focus (focus, gtk_window_get_props (GTK_WINDOW (toplevel))->focus_widget);
       gtk_paned_set_first_paned (focus, first);
       gtk_paned_get_props (focus)->original_position = __gtk_paned_get_position (gtk_paned_get_props (focus)); 
 

@@ -454,8 +454,8 @@ gtk_real_check_menu_item_draw_indicator (GtkCheckMenuItem *check_menu_item,
 			    "indicator-size", &indicator_size,
  			    NULL);
 
-      toggle_size = GTK_MENU_ITEM (check_menu_item)->toggle_size;
-      offset = GTK_CONTAINER (check_menu_item)->border_width +
+      toggle_size = gtk_menu_item_get_props (GTK_MENU_ITEM (check_menu_item))->toggle_size;
+      offset = gtk_container_get_props (GTK_CONTAINER (check_menu_item))->border_width +
 	gtk_widget_get_props (widget)->style->xthickness + 2; 
 
       if (__gtk_widget_get_direction (widget) == GTK_TEXT_DIR_LTR)

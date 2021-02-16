@@ -792,7 +792,7 @@ gtk_toolbar_realize (GtkWidget *widget)
   
   __gtk_widget_set_realized (widget, TRUE);
   
-  border_width = GTK_CONTAINER (widget)->border_width;
+  border_width = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
   
   attributes.wclass = GDK_INPUT_ONLY;
   attributes.window_type = GDK_WINDOW_CHILD;
@@ -842,7 +842,7 @@ gtk_toolbar_expose (GtkWidget      *widget,
   GList *list;
   gint border_width;
   
-  border_width = GTK_CONTAINER (widget)->border_width;
+  border_width = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
   
   if (__gtk_widget_is_drawable (widget))
     {
@@ -981,8 +981,8 @@ gtk_toolbar_size_request (GtkWidget      *widget,
   /* Extra spacing */
   ipadding = get_internal_padding (toolbar);
   
-  requisition->width += 2 * (ipadding + GTK_CONTAINER (toolbar)->border_width);
-  requisition->height += 2 * (ipadding + GTK_CONTAINER (toolbar)->border_width);
+  requisition->width += 2 * (ipadding + gtk_container_get_props (GTK_CONTAINER (toolbar))->border_width);
+  requisition->height += 2 * (ipadding + gtk_container_get_props (GTK_CONTAINER (toolbar))->border_width);
   
   if (get_shadow_type (toolbar) != GTK_SHADOW_NONE)
     {
@@ -1213,7 +1213,7 @@ gtk_toolbar_begin_sliding (GtkToolbar *toolbar)
   
   rtl = (__gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL);
   vertical = (gtk_toolbar_get_props (toolbar)->orientation == GTK_ORIENTATION_VERTICAL);
-  border_width = get_internal_padding (toolbar) + GTK_CONTAINER (toolbar)->border_width;
+  border_width = get_internal_padding (toolbar) + gtk_container_get_props (GTK_CONTAINER (toolbar))->border_width;
   
   if (rtl)
     {
@@ -1445,7 +1445,7 @@ gtk_toolbar_size_allocate (GtkWidget     *widget,
   
   gtk_widget_get_props (widget)->allocation = *allocation;
   
-  border_width = GTK_CONTAINER (toolbar)->border_width;
+  border_width = gtk_container_get_props (GTK_CONTAINER (toolbar))->border_width;
   
   if (__gtk_widget_get_realized (widget))
     {
@@ -1882,7 +1882,7 @@ gtk_toolbar_focus_home_or_end (GtkToolbar *toolbar,
     {
       GtkWidget *child = list->data;
       
-      if (GTK_CONTAINER (toolbar)->focus_child == child)
+      if (gtk_container_get_props (GTK_CONTAINER (toolbar))->focus_child == child)
 	break;
       
       if (__gtk_widget_get_mapped (child) && __gtk_widget_child_focus (child, dir))
@@ -1922,7 +1922,7 @@ gtk_toolbar_move_focus (GtkWidget        *widget,
       if (try_focus && __gtk_widget_get_mapped (child) && __gtk_widget_child_focus (child, dir))
 	break;
       
-      if (child == GTK_CONTAINER (toolbar)->focus_child)
+      if (child == gtk_container_get_props (GTK_CONTAINER (toolbar))->focus_child)
 	try_focus = TRUE;
     }
   
@@ -1945,7 +1945,7 @@ gtk_toolbar_focus (GtkWidget        *widget,
    * arrow keys or Ctrl TAB (both of which are handled by the
    * gtk_toolbar_move_focus() keybinding function.
    */
-  if (GTK_CONTAINER (widget)->focus_child)
+  if (gtk_container_get_props (GTK_CONTAINER (widget))->focus_child)
     return FALSE;
 
   children = gtk_toolbar_list_children_in_focus_order (toolbar, dir);
@@ -2771,7 +2771,7 @@ __gtk_toolbar_get_item_index (GtkToolbar  *toolbar,
   
   g_return_val_if_fail (GTK_IS_TOOLBAR (toolbar), -1);
   g_return_val_if_fail (GTK_IS_TOOL_ITEM (item), -1);
-  g_return_val_if_fail (GTK_WIDGET (item)->parent == GTK_WIDGET (toolbar), -1);
+  g_return_val_if_fail (gtk_widget_get_props (GTK_WIDGET (item))->parent == GTK_WIDGET (toolbar), -1);
   
   if (!gtk_toolbar_check_new_api (toolbar))
     return -1;
@@ -4971,19 +4971,19 @@ ___gtk_toolbar_elide_underscores (const gchar *original)
 static GtkIconSize
 toolbar_get_icon_size (GtkToolShell *shell)
 {
-  return GTK_TOOLBAR (shell)->icon_size;
+  return gtk_toolbar_get_props (GTK_TOOLBAR (shell))->icon_size;
 }
 
 static GtkOrientation
 toolbar_get_orientation (GtkToolShell *shell)
 {
-  return GTK_TOOLBAR (shell)->orientation;
+  return gtk_toolbar_get_props (GTK_TOOLBAR (shell))->orientation;
 }
 
 static GtkToolbarStyle
 toolbar_get_style (GtkToolShell *shell)
 {
-  return GTK_TOOLBAR (shell)->style;
+  return gtk_toolbar_get_props (GTK_TOOLBAR (shell))->style;
 }
 
 static GtkReliefStyle

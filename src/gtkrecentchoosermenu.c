@@ -617,7 +617,7 @@ gtk_recent_chooser_menu_get_recent_manager (GtkRecentChooser *chooser)
 {
   GtkRecentChooserMenuPrivate *priv;
  
-  priv = GTK_RECENT_CHOOSER_MENU (chooser)->priv;
+  priv = gtk_recent_chooser_menu_get_props (GTK_RECENT_CHOOSER_MENU (chooser))->priv;
   
   return priv->manager;
 }
@@ -802,7 +802,7 @@ gtk_recent_chooser_menu_create_item (GtkRecentChooserMenu *menu,
   /* ellipsize the menu item label, in case the recent document
    * display name is huge.
    */
-  label = GTK_BIN (item)->child;
+  label = gtk_bin_get_props (GTK_BIN (item))->child;
   if (GTK_IS_LABEL (label))
     {
       __gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_END);

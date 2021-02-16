@@ -29,7 +29,7 @@
 
 
 
-#define GTK_RECENT_CHOOSER_WIDGET_GET_PRIVATE(obj)	(GTK_RECENT_CHOOSER_WIDGET (obj)->priv)
+#define GTK_RECENT_CHOOSER_WIDGET_GET_PRIVATE(obj)	(gtk_recent_chooser_widget_get_props (GTK_RECENT_CHOOSER_WIDGET (obj))->priv)
 
 static GObject *gtk_recent_chooser_widget_constructor  (GType                  type,
 						        guint                  n_params,

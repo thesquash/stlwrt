@@ -451,8 +451,8 @@ __gtk_alignment_set (GtkAlignment *alignment,
         }
       g_object_thaw_notify (G_OBJECT (alignment));
 
-      if (GTK_BIN (alignment)->child)
-        __gtk_widget_queue_resize (GTK_BIN (alignment)->child);
+      if (gtk_bin_get_props (GTK_BIN (alignment))->child)
+        __gtk_widget_queue_resize (gtk_bin_get_props (GTK_BIN (alignment))->child);
       __gtk_widget_queue_draw (GTK_WIDGET (alignment));
     }
 }
@@ -512,7 +512,7 @@ gtk_alignment_size_allocate (GtkWidget     *widget,
     {
       __gtk_widget_get_child_requisition (gtk_bin_get_props (bin)->child, &child_requisition);
 
-      border_width = GTK_CONTAINER (alignment)->border_width;
+      border_width = gtk_container_get_props (GTK_CONTAINER (alignment))->border_width;
 
       priv = gtk_alignment_get_instance_private (widget);
       padding_horizontal = priv->padding_left + priv->padding_right;

@@ -1869,8 +1869,8 @@ get_screen_color (GtkWidget *button)
   
       if (GTK_IS_WINDOW (toplevel))
 	{
-	  if (GTK_WINDOW (toplevel)->group)
-	    __gtk_window_group_add_window (GTK_WINDOW (toplevel)->group, 
+	  if (gtk_window_get_props (GTK_WINDOW (toplevel))->group)
+	    __gtk_window_group_add_window (gtk_window_get_props (GTK_WINDOW (toplevel))->group, 
 					 GTK_WINDOW (grab_widget));
 	}
 

@@ -1761,13 +1761,13 @@ gtk_font_selection_dialog_buildable_get_internal_child (GtkBuildable *buildable,
 							const gchar  *childname)
 {
     if (strcmp(childname, "ok_button") == 0)
-	return G_OBJECT (GTK_FONT_SELECTION_DIALOG(buildable)->ok_button);
+	return G_OBJECT (gtk_font_selection_dialog_get_props (GTK_FONT_SELECTION_DIALOG(buildable))->ok_button);
     else if (strcmp(childname, "cancel_button") == 0)
-	return G_OBJECT (GTK_FONT_SELECTION_DIALOG (buildable)->cancel_button);
+	return G_OBJECT (gtk_font_selection_dialog_get_props (GTK_FONT_SELECTION_DIALOG (buildable))->cancel_button);
     else if (strcmp(childname, "apply_button") == 0)
-	return G_OBJECT (GTK_FONT_SELECTION_DIALOG(buildable)->apply_button);
+	return G_OBJECT (gtk_font_selection_dialog_get_props (GTK_FONT_SELECTION_DIALOG(buildable))->apply_button);
     else if (strcmp(childname, "font_selection") == 0)
-	return G_OBJECT (GTK_FONT_SELECTION_DIALOG(buildable)->fontsel);
+	return G_OBJECT (gtk_font_selection_dialog_get_props (GTK_FONT_SELECTION_DIALOG(buildable))->fontsel);
 
     return parent_buildable_iface->get_internal_child (buildable, builder, childname);
 }

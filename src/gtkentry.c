@@ -2942,7 +2942,7 @@ __gtk_entry_get_text_area_size (GtkEntry *entry,
     *y = frame_height / 2 - (requisition.height - yborder * 2) / 2;
 
   if (width)
-    *width = GTK_WIDGET (entry)->allocation.width - xborder * 2;
+    *width = gtk_widget_get_props (GTK_WIDGET (entry))->allocation.width - xborder * 2;
 
   if (height)
     *height = requisition.height - yborder * 2;
@@ -4289,7 +4289,7 @@ gtk_entry_real_set_position (GtkEditable *editable,
 static gint
 gtk_entry_get_position (GtkEditable *editable)
 {
-  return GTK_ENTRY (editable)->current_pos;
+  return gtk_entry_get_props (GTK_ENTRY (editable))->current_pos;
 }
 
 static void
@@ -4440,7 +4440,7 @@ static void
 gtk_entry_start_editing (GtkCellEditable *cell_editable,
 			 GdkEvent        *event)
 {
-  GTK_ENTRY (cell_editable)->is_cell_renderer = TRUE;
+  gtk_entry_get_props (GTK_ENTRY (cell_editable))->is_cell_renderer = TRUE;
 
   g_signal_connect (cell_editable, "activate",
 		    G_CALLBACK (gtk_cell_editable_entry_activated), NULL);
@@ -8588,7 +8588,7 @@ static void
 popup_menu_detach (GtkWidget *attach_widget,
 		   GtkMenu   *menu)
 {
-  GTK_ENTRY (attach_widget)->popup_menu = NULL;
+  gtk_entry_get_props (GTK_ENTRY (attach_widget))->popup_menu = NULL;
 }
 
 static void
@@ -9071,7 +9071,7 @@ gtk_entry_drag_data_delete (GtkWidget      *widget,
         }
     }
   
-  if (GTK_ENTRY (widget)->editable &&
+  if (gtk_entry_get_props (GTK_ENTRY (widget))->editable &&
       __gtk_editable_get_selection_bounds (editable, &sel_start, &sel_end))
     __gtk_editable_delete_text (editable, sel_start, sel_end);
 }

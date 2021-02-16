@@ -215,13 +215,13 @@ gtk_color_selection_dialog_buildable_get_internal_child (GtkBuildable *buildable
 							 const gchar  *childname)
 {
     if (strcmp(childname, "ok_button") == 0)
-	return G_OBJECT (GTK_COLOR_SELECTION_DIALOG (buildable)->ok_button);
+	return G_OBJECT (gtk_color_selection_dialog_get_props (GTK_COLOR_SELECTION_DIALOG (buildable))->ok_button);
     else if (strcmp(childname, "cancel_button") == 0)
-	return G_OBJECT (GTK_COLOR_SELECTION_DIALOG (buildable)->cancel_button);
+	return G_OBJECT (gtk_color_selection_dialog_get_props (GTK_COLOR_SELECTION_DIALOG (buildable))->cancel_button);
     else if (strcmp(childname, "help_button") == 0)
-	return G_OBJECT (GTK_COLOR_SELECTION_DIALOG(buildable)->help_button);
+	return G_OBJECT (gtk_color_selection_dialog_get_props (GTK_COLOR_SELECTION_DIALOG(buildable))->help_button);
     else if (strcmp(childname, "color_selection") == 0)
-	return G_OBJECT (GTK_COLOR_SELECTION_DIALOG(buildable)->colorsel);
+	return G_OBJECT (gtk_color_selection_dialog_get_props (GTK_COLOR_SELECTION_DIALOG(buildable))->colorsel);
 
     return parent_buildable_iface->get_internal_child (buildable, builder, childname);
 }

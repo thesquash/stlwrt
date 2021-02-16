@@ -323,9 +323,9 @@ gtk_dialog_buildable_get_internal_child (GtkBuildable *buildable,
 					 const gchar  *childname)
 {
     if (strcmp (childname, "vbox") == 0)
-      return G_OBJECT (GTK_DIALOG (buildable)->vbox);
+      return G_OBJECT (gtk_dialog_get_props (GTK_DIALOG (buildable))->vbox);
     else if (strcmp (childname, "action_area") == 0)
-      return G_OBJECT (GTK_DIALOG (buildable)->action_area);
+      return G_OBJECT (gtk_dialog_get_props (GTK_DIALOG (buildable))->action_area);
 
     return parent_buildable_iface->get_internal_child (buildable,
 						       builder,
@@ -1058,7 +1058,7 @@ __gtk_dialog_run (GtkDialog *dialog)
 
   g_object_ref (dialog);
 
-  was_modal = GTK_WINDOW (dialog)->modal;
+  was_modal = gtk_window_get_props (GTK_WINDOW (dialog))->modal;
   if (!was_modal)
     __gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 

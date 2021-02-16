@@ -327,7 +327,7 @@ static void
 gtk_tool_palette_size_request (GtkWidget      *widget,
                                GtkRequisition *requisition)
 {
-  const gint border_width = GTK_CONTAINER (widget)->border_width;
+  const gint border_width = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
   GtkToolPalette *palette = GTK_TOOL_PALETTE (widget);
   GtkRequisition child_requisition;
   guint i;
@@ -364,7 +364,7 @@ static void
 gtk_tool_palette_size_allocate (GtkWidget     *widget,
                                 GtkAllocation *allocation)
 {
-  const gint border_width = GTK_CONTAINER (widget)->border_width;
+  const gint border_width = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
   GtkToolPalette *palette = GTK_TOOL_PALETTE (widget);
   GtkAdjustment *adjustment = NULL;
   GtkAllocation child_allocation;
@@ -628,7 +628,7 @@ gtk_tool_palette_expose_event (GtkWidget      *widget,
 static void
 gtk_tool_palette_realize (GtkWidget *widget)
 {
-  const gint border_width = GTK_CONTAINER (widget)->border_width;
+  const gint border_width = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
   gint attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
   GdkWindowAttr attributes;
 
@@ -1562,7 +1562,7 @@ __gtk_tool_palette_get_drop_group (GtkToolPalette *palette,
 
   g_return_val_if_fail (GTK_IS_TOOL_PALETTE (palette), NULL);
 
-  allocation = &GTK_WIDGET (palette)->allocation;
+  allocation = &gtk_widget_get_props (GTK_WIDGET (palette))->allocation;
 
   g_return_val_if_fail (x >= 0 && x < allocation->width, NULL);
   g_return_val_if_fail (y >= 0 && y < allocation->height, NULL);

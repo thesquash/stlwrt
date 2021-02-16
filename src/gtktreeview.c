@@ -1566,7 +1566,7 @@ gtk_tree_view_buildable_get_internal_child (GtkBuildable      *buildable,
 					    const gchar       *childname)
 {
     if (strcmp (childname, "selection") == 0)
-      return G_OBJECT (GTK_TREE_VIEW (buildable)->priv->selection);
+      return G_OBJECT (gtk_tree_view_get_props (GTK_TREE_VIEW (buildable))->priv->selection);
     
     return parent_buildable_iface->get_internal_child (buildable,
 						       builder,
@@ -3950,9 +3950,9 @@ gtk_tree_view_paint_rubber_band (GtkTreeView  *tree_view,
   cairo_set_line_width (cr, 1.0);
 
   cairo_set_source_rgba (cr,
-			 GTK_WIDGET (tree_view)->style->fg[GTK_STATE_NORMAL].red / 65535.,
-			 GTK_WIDGET (tree_view)->style->fg[GTK_STATE_NORMAL].green / 65535.,
-			 GTK_WIDGET (tree_view)->style->fg[GTK_STATE_NORMAL].blue / 65535.,
+			 gtk_widget_get_props (GTK_WIDGET (tree_view))->style->fg[GTK_STATE_NORMAL].red / 65535.,
+			 gtk_widget_get_props (GTK_WIDGET (tree_view))->style->fg[GTK_STATE_NORMAL].green / 65535.,
+			 gtk_widget_get_props (GTK_WIDGET (tree_view))->style->fg[GTK_STATE_NORMAL].blue / 65535.,
 			 .25);
 
   __gdk_cairo_rectangle (cr, &rect);
@@ -3960,9 +3960,9 @@ gtk_tree_view_paint_rubber_band (GtkTreeView  *tree_view,
   cairo_paint (cr);
 
   cairo_set_source_rgb (cr,
-			GTK_WIDGET (tree_view)->style->fg[GTK_STATE_NORMAL].red / 65535.,
-			GTK_WIDGET (tree_view)->style->fg[GTK_STATE_NORMAL].green / 65535.,
-			GTK_WIDGET (tree_view)->style->fg[GTK_STATE_NORMAL].blue / 65535.);
+			gtk_widget_get_props (GTK_WIDGET (tree_view))->style->fg[GTK_STATE_NORMAL].red / 65535.,
+			gtk_widget_get_props (GTK_WIDGET (tree_view))->style->fg[GTK_STATE_NORMAL].green / 65535.,
+			gtk_widget_get_props (GTK_WIDGET (tree_view))->style->fg[GTK_STATE_NORMAL].blue / 65535.);
 
   cairo_rectangle (cr,
 		   rubber_rect.x + 0.5, rubber_rect.y + 0.5,
@@ -4136,7 +4136,7 @@ gtk_tree_view_draw_line (GtkTreeView         *tree_view,
     case GTK_TREE_VIEW_FOREGROUND_LINE:
       cairo_set_line_width (cr, 1.0);
       __gdk_cairo_set_source_color (cr,
-          &GTK_WIDGET (tree_view)->style->fg[__gtk_widget_get_state (GTK_WIDGET (tree_view))]);
+          &gtk_widget_get_props (GTK_WIDGET (tree_view))->style->fg[__gtk_widget_get_state (GTK_WIDGET (tree_view))]);
       break;
     }
 
@@ -5557,7 +5557,7 @@ gtk_tree_view_node_queue_redraw (GtkTreeView *tree_view,
 
   __gtk_widget_queue_draw_area (GTK_WIDGET (tree_view),
 			      0, y,
-			      GTK_WIDGET (tree_view)->allocation.width,
+			      gtk_widget_get_props (GTK_WIDGET (tree_view))->allocation.width,
 			      GTK_RBNODE_GET_HEIGHT (node));
 }
 
@@ -5733,7 +5733,7 @@ validate_visible_area (GtkTreeView *tree_view)
       gtk_tree_view_get_props (tree_view)->priv->scroll_to_path == NULL)
     return;
 
-  total_height = GTK_WIDGET (tree_view)->allocation.height - TREE_VIEW_HEADER_HEIGHT (tree_view);
+  total_height = gtk_widget_get_props (GTK_WIDGET (tree_view))->allocation.height - TREE_VIEW_HEADER_HEIGHT (tree_view);
 
   if (total_height == 0)
     return;
@@ -7695,7 +7695,7 @@ gtk_tree_view_header_focus (GtkTreeView      *tree_view,
   if (! GTK_TREE_VIEW_FLAG_SET (tree_view, GTK_TREE_VIEW_HEADERS_VISIBLE))
     return FALSE;
 
-  focus_child = GTK_CONTAINER (tree_view)->focus_child;
+  focus_child = gtk_container_get_props (GTK_CONTAINER (tree_view))->focus_child;
 
   first_column = gtk_tree_view_get_props (tree_view)->priv->columns;
   while (first_column)
@@ -10229,8 +10229,8 @@ gtk_tree_view_ensure_interactive_directory (GtkTreeView *tree_view)
 
    if (gtk_tree_view_get_props (tree_view)->priv->search_window != NULL)
      {
-       if (GTK_WINDOW (toplevel)->group)
-	 __gtk_window_group_add_window (GTK_WINDOW (toplevel)->group,
+       if (gtk_window_get_props (GTK_WINDOW (toplevel))->group)
+	 __gtk_window_group_add_window (gtk_window_get_props (GTK_WINDOW (toplevel))->group,
 				      GTK_WINDOW (gtk_tree_view_get_props (tree_view)->priv->search_window));
        else if (GTK_WINDOW (gtk_tree_view_get_props (tree_view)->priv->search_window)->group)
 	 __gtk_window_group_remove_window (GTK_WINDOW (gtk_tree_view_get_props (tree_view)->priv->search_window)->group,
@@ -10242,8 +10242,8 @@ gtk_tree_view_ensure_interactive_directory (GtkTreeView *tree_view)
   gtk_tree_view_get_props (tree_view)->priv->search_window = __gtk_window_new (GTK_WINDOW_POPUP);
   __gtk_window_set_screen (GTK_WINDOW (gtk_tree_view_get_props (tree_view)->priv->search_window), screen);
 
-  if (GTK_WINDOW (toplevel)->group)
-    __gtk_window_group_add_window (GTK_WINDOW (toplevel)->group,
+  if (gtk_window_get_props (GTK_WINDOW (toplevel))->group)
+    __gtk_window_group_add_window (gtk_window_get_props (GTK_WINDOW (toplevel))->group,
 				 GTK_WINDOW (gtk_tree_view_get_props (tree_view)->priv->search_window));
 
   __gtk_window_set_type_hint (GTK_WINDOW (gtk_tree_view_get_props (tree_view)->priv->search_window),
@@ -14130,7 +14130,7 @@ gtk_tree_view_search_position_func (GtkTreeView *tree_view,
   gint x, y;
   gint tree_x, tree_y;
   gint tree_width, tree_height;
-  GdkWindow *tree_window = GTK_WIDGET (tree_view)->window;
+  GdkWindow *tree_window = gtk_widget_get_props (GTK_WIDGET (tree_view))->window;
   GdkScreen *screen = __gdk_window_get_screen (tree_window);
   GtkRequisition requisition;
   gint monitor_num;
@@ -15417,7 +15417,7 @@ __gtk_tree_view_set_tooltip_cell (GtkTreeView       *tree_view,
   else
     {
       rect.x = 0;
-      rect.width = GTK_WIDGET (tree_view)->allocation.width;
+      rect.width = gtk_widget_get_props (GTK_WIDGET (tree_view))->allocation.width;
     }
 
   /* Determine y values. */

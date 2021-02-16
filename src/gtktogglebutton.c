@@ -145,7 +145,7 @@ gtk_toggle_button_init (GtkToggleButton *toggle_button)
 {
   gtk_toggle_button_get_props (toggle_button)->active = FALSE;
   gtk_toggle_button_get_props (toggle_button)->draw_indicator = FALSE;
-  GTK_BUTTON (toggle_button)->depress_on_activate = TRUE;
+  gtk_button_get_props (GTK_BUTTON (toggle_button))->depress_on_activate = TRUE;
 }
 
 static void
@@ -305,7 +305,7 @@ __gtk_toggle_button_set_mode (GtkToggleButton *toggle_button,
   if (gtk_toggle_button_get_props (toggle_button)->draw_indicator != draw_indicator)
     {
       gtk_toggle_button_get_props (toggle_button)->draw_indicator = draw_indicator;
-      GTK_BUTTON (toggle_button)->depress_on_activate = !draw_indicator;
+      gtk_button_get_props (GTK_BUTTON (toggle_button))->depress_on_activate = !draw_indicator;
       
       if (__gtk_widget_get_visible (GTK_WIDGET (toggle_button)))
 	__gtk_widget_queue_resize (GTK_WIDGET (toggle_button));
@@ -418,14 +418,14 @@ gtk_toggle_button_expose (GtkWidget      *widget,
 {
   if (__gtk_widget_is_drawable (widget))
     {
-      GtkWidget *child = GTK_BIN (widget)->child;
+      GtkWidget *child = gtk_bin_get_props (GTK_BIN (widget))->child;
       GtkButton *button = GTK_BUTTON (widget);
       GtkStateType state_type;
       GtkShadowType shadow_type;
 
       state_type = __gtk_widget_get_state (widget);
       
-      if (GTK_TOGGLE_BUTTON (widget)->inconsistent)
+      if (gtk_toggle_button_get_props (GTK_TOGGLE_BUTTON (widget))->inconsistent)
         {
           if (state_type == GTK_STATE_ACTIVE)
             state_type = GTK_STATE_NORMAL;

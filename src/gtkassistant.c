@@ -1106,8 +1106,8 @@ gtk_assistant_size_request (GtkWidget      *widget,
   width   = MAX (width, child_requisition.width);
   height += child_requisition.height + ACTION_AREA_SPACING;
 
-  width += GTK_CONTAINER (widget)->border_width * 2 + content_padding * 2;
-  height += GTK_CONTAINER (widget)->border_width * 2 + content_padding * 2;
+  width += gtk_container_get_props (GTK_CONTAINER (widget))->border_width * 2 + content_padding * 2;
+  height += gtk_container_get_props (GTK_CONTAINER (widget))->border_width * 2 + content_padding * 2;
 
   requisition->width = width;
   requisition->height = height;
@@ -1138,18 +1138,18 @@ gtk_assistant_size_allocate (GtkWidget      *widget,
   /* Header */
   __gtk_widget_get_child_requisition (priv->header_image, &header_requisition);
 
-  header_allocation.x = GTK_CONTAINER (widget)->border_width + header_padding;
-  header_allocation.y = GTK_CONTAINER (widget)->border_width + header_padding;
-  header_allocation.width  = allocation->width - 2 * GTK_CONTAINER (widget)->border_width - 2 * header_padding;
+  header_allocation.x = gtk_container_get_props (GTK_CONTAINER (widget))->border_width + header_padding;
+  header_allocation.y = gtk_container_get_props (GTK_CONTAINER (widget))->border_width + header_padding;
+  header_allocation.width  = allocation->width - 2 * gtk_container_get_props (GTK_CONTAINER (widget))->border_width - 2 * header_padding;
   header_allocation.height = header_requisition.height;
 
   __gtk_widget_size_allocate (priv->header_image, &header_allocation);
 
   /* Action area */
-  child_allocation.x = GTK_CONTAINER (widget)->border_width;
+  child_allocation.x = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
   child_allocation.y = allocation->height -
-    GTK_CONTAINER (widget)->border_width - priv->action_area->requisition.height;
-  child_allocation.width  = allocation->width - 2 * GTK_CONTAINER (widget)->border_width;
+    gtk_container_get_props (GTK_CONTAINER (widget))->border_width - priv->action_area->requisition.height;
+  child_allocation.width  = allocation->width - 2 * gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
   child_allocation.height = priv->action_area->requisition.height;
 
   __gtk_widget_size_allocate (priv->action_area, &child_allocation);
@@ -1157,24 +1157,24 @@ gtk_assistant_size_allocate (GtkWidget      *widget,
   /* Sidebar */
   if (rtl)
     child_allocation.x = allocation->width -
-      GTK_CONTAINER (widget)->border_width - priv->sidebar_image->requisition.width;
+      gtk_container_get_props (GTK_CONTAINER (widget))->border_width - priv->sidebar_image->requisition.width;
   else
-    child_allocation.x = GTK_CONTAINER (widget)->border_width;
+    child_allocation.x = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
 
-  child_allocation.y = GTK_CONTAINER (widget)->border_width +
+  child_allocation.y = gtk_container_get_props (GTK_CONTAINER (widget))->border_width +
     priv->header_image->allocation.height + 2 * header_padding;
   child_allocation.width = priv->sidebar_image->requisition.width;
-  child_allocation.height = allocation->height - 2 * GTK_CONTAINER (widget)->border_width -
+  child_allocation.height = allocation->height - 2 * gtk_container_get_props (GTK_CONTAINER (widget))->border_width -
     priv->header_image->allocation.height - 2 * header_padding - priv->action_area->allocation.height;
 
   __gtk_widget_size_allocate (priv->sidebar_image, &child_allocation);
 
   /* Pages */
-  child_allocation.x = GTK_CONTAINER (widget)->border_width + content_padding;
-  child_allocation.y = GTK_CONTAINER (widget)->border_width +
+  child_allocation.x = gtk_container_get_props (GTK_CONTAINER (widget))->border_width + content_padding;
+  child_allocation.y = gtk_container_get_props (GTK_CONTAINER (widget))->border_width +
     priv->header_image->allocation.height + 2 * header_padding + content_padding;
-  child_allocation.width  = allocation->width - 2 * GTK_CONTAINER (widget)->border_width - 2 * content_padding;
-  child_allocation.height = allocation->height - 2 * GTK_CONTAINER (widget)->border_width -
+  child_allocation.width  = allocation->width - 2 * gtk_container_get_props (GTK_CONTAINER (widget))->border_width - 2 * content_padding;
+  child_allocation.height = allocation->height - 2 * gtk_container_get_props (GTK_CONTAINER (widget))->border_width -
     priv->header_image->allocation.height - 2 * header_padding - ACTION_AREA_SPACING - priv->action_area->allocation.height - 2 * content_padding;
 
   if (__gtk_widget_get_visible (priv->sidebar_image))
@@ -1362,7 +1362,7 @@ gtk_assistant_focus (GtkWidget        *widget,
   GtkContainer *container;
 
   container = GTK_CONTAINER (widget);
-  priv = GTK_ASSISTANT (widget)->priv;
+  priv = gtk_assistant_get_props (GTK_ASSISTANT (widget))->priv;
 
   /* we only have to care about 2 widgets, action area and the current page */
   if (gtk_container_get_props (container)->focus_child == priv->action_area)
@@ -2443,7 +2443,7 @@ gtk_assistant_buildable_get_internal_child (GtkBuildable *buildable,
                                             const gchar  *childname)
 {
     if (strcmp (childname, "action_area") == 0)
-      return G_OBJECT (GTK_ASSISTANT (buildable)->priv->action_area);
+      return G_OBJECT (gtk_assistant_get_props (GTK_ASSISTANT (buildable))->priv->action_area);
 
     return parent_buildable_iface->get_internal_child (buildable,
                                                        builder,

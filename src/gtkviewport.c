@@ -325,7 +325,7 @@ viewport_get_view_allocation (GtkViewport   *viewport,
 {
   GtkWidget *widget = GTK_WIDGET (viewport);
   GtkAllocation *allocation = &gtk_widget_get_props (widget)->allocation;
-  gint border_width = GTK_CONTAINER (viewport)->border_width;
+  gint border_width = gtk_container_get_props (GTK_CONTAINER (viewport))->border_width;
   
   view_allocation->x = 0;
   view_allocation->y = 0;
@@ -532,7 +532,7 @@ __gtk_viewport_set_shadow_type (GtkViewport   *viewport,
 
       if (__gtk_widget_get_visible (GTK_WIDGET (viewport)))
 	{
-	  __gtk_widget_size_allocate (GTK_WIDGET (viewport), &(GTK_WIDGET (viewport)->allocation));
+	  __gtk_widget_size_allocate (GTK_WIDGET (viewport), &(gtk_widget_get_props (GTK_WIDGET (viewport))->allocation));
 	  __gtk_widget_queue_draw (GTK_WIDGET (viewport));
 	}
 
@@ -600,7 +600,7 @@ gtk_viewport_realize (GtkWidget *widget)
   GtkBin *bin = GTK_BIN (widget);
   GtkAdjustment *hadjustment = __gtk_viewport_get_hadjustment (viewport);
   GtkAdjustment *vadjustment = __gtk_viewport_get_vadjustment (viewport);
-  gint border_width = GTK_CONTAINER (widget)->border_width;
+  gint border_width = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
   
   GtkAllocation view_allocation;
   GdkWindowAttr attributes;
@@ -735,7 +735,7 @@ gtk_viewport_add (GtkContainer *container,
 
   g_return_if_fail (gtk_bin_get_props (bin)->child == NULL);
 
-  __gtk_widget_set_parent_window (child, GTK_VIEWPORT (bin)->bin_window);
+  __gtk_widget_set_parent_window (child, gtk_viewport_get_props (GTK_VIEWPORT (bin))->bin_window);
 
   GTK_CONTAINER_CLASS (gtk_viewport_parent_class)->add (container, child);
 }
@@ -747,11 +747,11 @@ gtk_viewport_size_request (GtkWidget      *widget,
   GtkBin *bin = GTK_BIN (widget);
   GtkRequisition child_requisition;
 
-  requisition->width = GTK_CONTAINER (widget)->border_width;
+  requisition->width = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
 
-  requisition->height = GTK_CONTAINER (widget)->border_width;
+  requisition->height = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
 
-  if (GTK_VIEWPORT (widget)->shadow_type != GTK_SHADOW_NONE)
+  if (gtk_viewport_get_props (GTK_VIEWPORT (widget))->shadow_type != GTK_SHADOW_NONE)
     {
       requisition->width += 2 * gtk_widget_get_props (widget)->style->xthickness;
       requisition->height += 2 * gtk_widget_get_props (widget)->style->ythickness;
@@ -771,7 +771,7 @@ gtk_viewport_size_allocate (GtkWidget     *widget,
 {
   GtkViewport *viewport = GTK_VIEWPORT (widget);
   GtkBin *bin = GTK_BIN (widget);
-  gint border_width = GTK_CONTAINER (widget)->border_width;
+  gint border_width = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
   gboolean hadjustment_value_changed, vadjustment_value_changed;
   GtkAdjustment *hadjustment = __gtk_viewport_get_hadjustment (viewport);
   GtkAdjustment *vadjustment = __gtk_viewport_get_vadjustment (viewport);

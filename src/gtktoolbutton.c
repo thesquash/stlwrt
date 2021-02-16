@@ -713,7 +713,7 @@ gtk_tool_button_create_menu_proxy (GtkToolItem *item)
   g_signal_connect_closure_by_id (menu_item,
 				  g_signal_lookup ("activate", G_OBJECT_TYPE (menu_item)), 0,
 				  g_cclosure_new_object_swap (G_CALLBACK (__gtk_button_clicked),
-							      G_OBJECT (GTK_TOOL_BUTTON (button)->priv->button)),
+							      G_OBJECT (gtk_tool_button_get_props (GTK_TOOL_BUTTON (button))->priv->button)),
 				  FALSE);
 
   __gtk_tool_item_set_proxy_menu_item (GTK_TOOL_ITEM (button), MENU_ID, menu_item);

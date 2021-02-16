@@ -479,7 +479,7 @@ __gtk_radio_action_get_current_value (GtkRadioAction *action)
 	  GtkToggleAction *toggle_action = slist->data;
 
 	  if (toggle_action->private_data->active)
-	    return GTK_RADIO_ACTION (toggle_action)->private_data->value;
+	    return gtk_radio_action_get_props (GTK_RADIO_ACTION (toggle_action))->private_data->value;
 	}
     }
 

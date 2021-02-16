@@ -856,8 +856,8 @@ gtk_table_size_request (GtkWidget      *widget,
   for (row = 0; row + 1 < gtk_table_get_props (table)->nrows; row++)
     requisition->height += gtk_table_get_props (table)->rows[row].spacing;
   
-  requisition->width += GTK_CONTAINER (table)->border_width * 2;
-  requisition->height += GTK_CONTAINER (table)->border_width * 2;
+  requisition->width += gtk_container_get_props (GTK_CONTAINER (table))->border_width * 2;
+  requisition->height += gtk_container_get_props (GTK_CONTAINER (table))->border_width * 2;
 }
 
 static void
@@ -1364,8 +1364,8 @@ gtk_table_size_allocate_pass1 (GtkTable *table)
    *  to fill in the extra space.
    */
   
-  real_width = GTK_WIDGET (table)->allocation.width - GTK_CONTAINER (table)->border_width * 2;
-  real_height = GTK_WIDGET (table)->allocation.height - GTK_CONTAINER (table)->border_width * 2;
+  real_width = gtk_widget_get_props (GTK_WIDGET (table))->allocation.width - gtk_container_get_props (GTK_CONTAINER (table))->border_width * 2;
+  real_height = gtk_widget_get_props (GTK_WIDGET (table))->allocation.height - gtk_container_get_props (GTK_CONTAINER (table))->border_width * 2;
   
   if (gtk_table_get_props (table)->homogeneous)
     {
@@ -1575,8 +1575,8 @@ gtk_table_size_allocate_pass2 (GtkTable *table)
 	  GtkRequisition child_requisition;
 	  __gtk_widget_get_child_requisition (child->widget, &child_requisition);
 
-	  x = GTK_WIDGET (table)->allocation.x + GTK_CONTAINER (table)->border_width;
-	  y = GTK_WIDGET (table)->allocation.y + GTK_CONTAINER (table)->border_width;
+	  x = gtk_widget_get_props (GTK_WIDGET (table))->allocation.x + gtk_container_get_props (GTK_CONTAINER (table))->border_width;
+	  y = gtk_widget_get_props (GTK_WIDGET (table))->allocation.y + gtk_container_get_props (GTK_CONTAINER (table))->border_width;
 	  max_width = 0;
 	  max_height = 0;
 	  

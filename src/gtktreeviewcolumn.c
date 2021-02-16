@@ -913,7 +913,7 @@ gtk_tree_view_column_update_button (GtkTreeViewColumn *tree_column)
   hbox = GTK_BIN (gtk_tree_view_column_get_props (tree_column)->button)->child;
   alignment = gtk_tree_view_column_get_props (tree_column)->alignment;
   arrow = gtk_tree_view_column_get_props (tree_column)->arrow;
-  current_child = GTK_BIN (alignment)->child;
+  current_child = gtk_bin_get_props (GTK_BIN (alignment))->child;
 
   /* Set up the actual button */
   __gtk_alignment_set (GTK_ALIGNMENT (alignment), gtk_tree_view_column_get_props (tree_column)->xalign,
@@ -1078,7 +1078,7 @@ gtk_tree_view_column_button_event (GtkWidget *widget,
       ((GdkEventButton *)event)->button == 1)
     {
       gtk_tree_view_column_get_props (column)->maybe_reordered = TRUE;
-      __gdk_window_get_pointer (GTK_BUTTON (widget)->event_window,
+      __gdk_window_get_pointer (gtk_button_get_props (GTK_BUTTON (widget))->event_window,
 			      &gtk_tree_view_column_get_props (column)->drag_x,
 			      &gtk_tree_view_column_get_props (column)->drag_y,
 			      NULL);

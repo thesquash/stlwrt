@@ -1271,7 +1271,7 @@ gtk_scale_button_release_grab (GtkScaleButton *button,
   priv->timeout = FALSE;
 
   e = (GdkEventButton *) __gdk_event_copy ((GdkEvent *) event);
-  e->window = GTK_WIDGET (button)->window;
+  e->window = gtk_widget_get_props (GTK_WIDGET (button))->window;
   e->type = GDK_BUTTON_RELEASE;
   __gtk_widget_event (GTK_WIDGET (button), (GdkEvent *) e);
   e->window = event->window;

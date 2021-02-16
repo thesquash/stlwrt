@@ -75,10 +75,10 @@ static void
 gtk_tearoff_menu_item_size_request (GtkWidget      *widget,
 				    GtkRequisition *requisition)
 {
-  requisition->width = (GTK_CONTAINER (widget)->border_width +
+  requisition->width = (gtk_container_get_props (GTK_CONTAINER (widget))->border_width +
 			gtk_widget_get_props (widget)->style->xthickness +
 			BORDER_SPACING) * 2;
-  requisition->height = (GTK_CONTAINER (widget)->border_width +
+  requisition->height = (gtk_container_get_props (GTK_CONTAINER (widget))->border_width +
 			 gtk_widget_get_props (widget)->style->ythickness) * 2;
 
   if (GTK_IS_MENU (gtk_widget_get_props (widget)->parent) && GTK_MENU (gtk_widget_get_props (widget)->parent)->torn_off)
@@ -109,10 +109,10 @@ gtk_tearoff_menu_item_paint (GtkWidget   *widget,
 
       direction = __gtk_widget_get_direction (widget);
 
-      x = gtk_widget_get_props (widget)->allocation.x + GTK_CONTAINER (menu_item)->border_width;
-      y = gtk_widget_get_props (widget)->allocation.y + GTK_CONTAINER (menu_item)->border_width;
-      width = gtk_widget_get_props (widget)->allocation.width - GTK_CONTAINER (menu_item)->border_width * 2;
-      height = gtk_widget_get_props (widget)->allocation.height - GTK_CONTAINER (menu_item)->border_width * 2;
+      x = gtk_widget_get_props (widget)->allocation.x + gtk_container_get_props (GTK_CONTAINER (menu_item))->border_width;
+      y = gtk_widget_get_props (widget)->allocation.y + gtk_container_get_props (GTK_CONTAINER (menu_item))->border_width;
+      width = gtk_widget_get_props (widget)->allocation.width - gtk_container_get_props (GTK_CONTAINER (menu_item))->border_width * 2;
+      height = gtk_widget_get_props (widget)->allocation.height - gtk_container_get_props (GTK_CONTAINER (menu_item))->border_width * 2;
       right_max = x + width;
 
       if (gtk_widget_get_props (widget)->state == GTK_STATE_PRELIGHT)
@@ -208,12 +208,12 @@ gtk_tearoff_menu_item_expose (GtkWidget      *widget,
 static void
 gtk_tearoff_menu_item_activate (GtkMenuItem *menu_item)
 {
-  if (GTK_IS_MENU (GTK_WIDGET (menu_item)->parent))
+  if (GTK_IS_MENU (gtk_widget_get_props (GTK_WIDGET (menu_item))->parent))
     {
-      GtkMenu *menu = GTK_MENU (GTK_WIDGET (menu_item)->parent);
+      GtkMenu *menu = GTK_MENU (gtk_widget_get_props (GTK_WIDGET (menu_item))->parent);
       
       __gtk_widget_queue_resize (GTK_WIDGET (menu_item));
-      __gtk_menu_set_tearoff_state (GTK_MENU (GTK_WIDGET (menu_item)->parent),
+      __gtk_menu_set_tearoff_state (GTK_MENU (gtk_widget_get_props (GTK_WIDGET (menu_item))->parent),
 				  !gtk_menu_get_props (menu)->torn_off);
     }
 }

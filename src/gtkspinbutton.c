@@ -504,7 +504,7 @@ gtk_spin_button_map (GtkWidget *widget)
   if (__gtk_widget_get_realized (widget) && !__gtk_widget_get_mapped (widget))
     {
       GTK_WIDGET_CLASS (gtk_spin_button_parent_class)->map (widget);
-      __gdk_window_show (GTK_SPIN_BUTTON (widget)->panel);
+      __gdk_window_show (gtk_spin_button_get_props (GTK_SPIN_BUTTON (widget))->panel);
     }
 }
 
@@ -515,7 +515,7 @@ gtk_spin_button_unmap (GtkWidget *widget)
     {
       gtk_spin_button_stop_spinning (GTK_SPIN_BUTTON (widget));
 
-      __gdk_window_hide (GTK_SPIN_BUTTON (widget)->panel);
+      __gdk_window_hide (gtk_spin_button_get_props (GTK_SPIN_BUTTON (widget))->panel);
       GTK_WIDGET_CLASS (gtk_spin_button_parent_class)->unmap (widget);
     }
 }
@@ -706,7 +706,7 @@ gtk_spin_button_size_allocate (GtkWidget     *widget,
 
   if (__gtk_widget_get_realized (widget))
     {
-      __gdk_window_move_resize (GTK_SPIN_BUTTON (widget)->panel, 
+      __gdk_window_move_resize (gtk_spin_button_get_props (GTK_SPIN_BUTTON (widget))->panel, 
 			      panel_allocation.x,
 			      panel_allocation.y,
 			      panel_allocation.width,
@@ -970,7 +970,7 @@ static gint
 gtk_spin_button_focus_out (GtkWidget     *widget,
 			   GdkEventFocus *event)
 {
-  if (GTK_ENTRY (widget)->editable)
+  if (gtk_entry_get_props (GTK_ENTRY (widget))->editable)
     __gtk_spin_button_update (GTK_SPIN_BUTTON (widget));
 
   return GTK_WIDGET_CLASS (gtk_spin_button_parent_class)->focus_out_event (widget, event);
@@ -1100,7 +1100,7 @@ gtk_spin_button_button_press (GtkWidget      *widget,
 	    __gtk_widget_grab_focus (widget);
 	  gtk_spin_button_get_props (spin)->button = event->button;
 	  
-	  if (GTK_ENTRY (widget)->editable)
+	  if (gtk_entry_get_props (GTK_ENTRY (widget))->editable)
 	    __gtk_spin_button_update (spin);
 	  
 	  if (event->y <= gtk_widget_get_props (widget)->requisition.height / 2)
@@ -1428,7 +1428,7 @@ gtk_spin_button_get_text_area_size (GtkEntry *entry,
   GTK_ENTRY_CLASS (gtk_spin_button_parent_class)->get_text_area_size (entry, x, y, width, height);
 
   arrow_size = spin_button_get_arrow_size (GTK_SPIN_BUTTON (entry));
-  panel_width = arrow_size + 2 * GTK_WIDGET (entry)->style->xthickness;
+  panel_width = arrow_size + 2 * gtk_widget_get_props (GTK_WIDGET (entry))->style->xthickness;
 
   if (width)
     *width -= panel_width;
@@ -2134,7 +2134,7 @@ __gtk_spin_button_get_wrap (GtkSpinButton *spin_button)
 static gint
 spin_button_get_arrow_size (GtkSpinButton *spin_button)
 {
-  gint size = pango_font_description_get_size (GTK_WIDGET (spin_button)->style->font_desc);
+  gint size = pango_font_description_get_size (gtk_widget_get_props (GTK_WIDGET (spin_button))->style->font_desc);
   gint arrow_size;
 
   arrow_size = MAX (PANGO_PIXELS (size), MIN_ARROW_WIDTH);
@@ -2182,7 +2182,7 @@ __gtk_spin_button_set_snap_to_ticks (GtkSpinButton *spin_button,
   if (new_val != gtk_spin_button_get_props (spin_button)->snap_to_ticks)
     {
       gtk_spin_button_get_props (spin_button)->snap_to_ticks = new_val;
-      if (new_val && GTK_ENTRY (spin_button)->editable)
+      if (new_val && gtk_entry_get_props (GTK_ENTRY (spin_button))->editable)
 	__gtk_spin_button_update (spin_button);
       
       g_object_notify (G_OBJECT (spin_button), "snap-to-ticks");

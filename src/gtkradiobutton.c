@@ -115,9 +115,9 @@ gtk_radio_button_init (GtkRadioButton *radio_button)
   __gtk_widget_set_has_window (GTK_WIDGET (radio_button), FALSE);
   __gtk_widget_set_receives_default (GTK_WIDGET (radio_button), FALSE);
 
-  GTK_TOGGLE_BUTTON (radio_button)->active = TRUE;
+  gtk_toggle_button_get_props (GTK_TOGGLE_BUTTON (radio_button))->active = TRUE;
 
-  GTK_BUTTON (radio_button)->depress_on_activate = FALSE;
+  gtk_button_get_props (GTK_BUTTON (radio_button))->depress_on_activate = FALSE;
 
   gtk_radio_button_get_props (radio_button)->group = g_slist_prepend (NULL, gtk_radio_button_get_props (radio_button));
 
@@ -461,7 +461,7 @@ gtk_radio_button_focus (GtkWidget         *widget,
   /* Radio buttons with draw_indicator unset focus "normally", since
    * they look like buttons to the user.
    */
-  if (!GTK_TOGGLE_BUTTON (widget)->draw_indicator)
+  if (!gtk_toggle_button_get_props (GTK_TOGGLE_BUTTON (widget))->draw_indicator)
     return GTK_WIDGET_CLASS (gtk_radio_button_parent_class)->focus (widget, direction);
   
   if (__gtk_widget_is_focus (widget))
@@ -711,7 +711,7 @@ gtk_radio_button_draw_indicator (GtkCheckButton *check_button,
       x = gtk_widget_get_props (widget)->allocation.x + indicator_spacing + GTK_CONTAINER (gtk_widget_get_props (widget))->border_width;
       y = gtk_widget_get_props (widget)->allocation.y + (gtk_widget_get_props (widget)->allocation.height - indicator_size) / 2;
 
-      child = GTK_BIN (check_button)->child;
+      child = gtk_bin_get_props (GTK_BIN (check_button))->child;
       if (!interior_focus || !(child && __gtk_widget_get_visible (child)))
 	x += focus_width + focus_pad;      
 

@@ -2554,7 +2554,7 @@ gtk_range_scroll_event (GtkWidget      *widget,
 
   if (__gtk_widget_get_realized (widget))
     {
-      GtkAdjustment *adj = GTK_RANGE (range)->adjustment;
+      GtkAdjustment *adj = gtk_range_get_props (GTK_RANGE (range))->adjustment;
       gdouble delta;
       gboolean handled;
 
@@ -2701,7 +2701,7 @@ force_repaint (gpointer data)
 
   gtk_range_get_props (range)->layout->repaint_id = 0;
   if (__gtk_widget_is_drawable (GTK_WIDGET (range)))
-    __gdk_window_process_updates (GTK_WIDGET (range)->window, FALSE);
+    __gdk_window_process_updates (gtk_widget_get_props (GTK_WIDGET (range))->window, FALSE);
 
   return FALSE;
 }
@@ -2719,7 +2719,7 @@ gtk_range_adjustment_value_changed (GtkAdjustment *adjustment,
   
   /* now check whether the layout changed  */
   if (layout_changed (gtk_range_get_props (range)->layout, &layout) ||
-      (GTK_IS_SCALE (range) && GTK_SCALE (range)->draw_value))
+      (GTK_IS_SCALE (range) && gtk_scale_get_props (GTK_SCALE (range))->draw_value))
     {
       __gtk_widget_queue_draw (GTK_WIDGET (range));
       /* setup a timer to ensure the range isn't lagging too much behind the scroll position */

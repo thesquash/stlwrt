@@ -293,7 +293,7 @@ gtk_menu_bar_size_request (GtkWidget      *widget,
 	    {
               gint toggle_size;
 
-	      GTK_MENU_ITEM (child)->show_submenu_indicator = FALSE;
+	      gtk_menu_item_get_props (GTK_MENU_ITEM (child))->show_submenu_indicator = FALSE;
 	      __gtk_widget_size_request (child, &child_requisition);
               __gtk_menu_item_toggle_size_request (GTK_MENU_ITEM (child),
                                                  &toggle_size);
@@ -321,10 +321,10 @@ gtk_menu_bar_size_request (GtkWidget      *widget,
 
       __gtk_widget_style_get (widget, "internal-padding", &ipadding, NULL);
       
-      requisition->width += (GTK_CONTAINER (menu_bar)->border_width +
+      requisition->width += (gtk_container_get_props (GTK_CONTAINER (menu_bar))->border_width +
                              ipadding + 
 			     BORDER_SPACING) * 2;
-      requisition->height += (GTK_CONTAINER (menu_bar)->border_width +
+      requisition->height += (gtk_container_get_props (GTK_CONTAINER (menu_bar))->border_width +
                               ipadding +
 			      BORDER_SPACING) * 2;
 
@@ -371,10 +371,10 @@ gtk_menu_bar_size_allocate (GtkWidget     *widget,
   
   if (gtk_menu_shell_get_props (menu_shell)->children)
     {
-      child_allocation.x = (GTK_CONTAINER (menu_bar)->border_width +
+      child_allocation.x = (gtk_container_get_props (GTK_CONTAINER (menu_bar))->border_width +
 			    ipadding + 
 			    BORDER_SPACING);
-      child_allocation.y = (GTK_CONTAINER (menu_bar)->border_width +
+      child_allocation.y = (gtk_container_get_props (GTK_CONTAINER (menu_bar))->border_width +
 			    BORDER_SPACING);
       
       if (get_shadow_type (menu_bar) != GTK_SHADOW_NONE)
@@ -411,7 +411,7 @@ gtk_menu_bar_size_allocate (GtkWidget     *widget,
 	      
 	      /* Support for the right justified help menu */
 	      if ((children == NULL) && (GTK_IS_MENU_ITEM(child))
-		  && (GTK_MENU_ITEM(child)->right_justify)) 
+		  && (gtk_menu_item_get_props (GTK_MENU_ITEM(child))->right_justify)) 
 		{
 		  ltr_x = allocation->width -
 		    child_requisition.width - offset;
@@ -461,7 +461,7 @@ gtk_menu_bar_size_allocate (GtkWidget     *widget,
 	      
 	      /* Support for the right justified help menu */
 	      if ((children == NULL) && (GTK_IS_MENU_ITEM(child))
-		  && (GTK_MENU_ITEM(child)->right_justify)) 
+		  && (gtk_menu_item_get_props (GTK_MENU_ITEM(child))->right_justify)) 
 		{
 		  ltr_y = allocation->height -
 		    child_requisition.height - offset;
@@ -497,7 +497,7 @@ gtk_menu_bar_paint (GtkWidget    *widget,
     {
       gint border;
 
-      border = GTK_CONTAINER (widget)->border_width;
+      border = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
       
       __gtk_paint_box (gtk_widget_get_props (widget)->style,
 		     gtk_widget_get_props (widget)->window,
@@ -858,7 +858,7 @@ __gtk_menu_bar_set_pack_direction (GtkMenuBar       *menubar,
 
       __gtk_widget_queue_resize (GTK_WIDGET (menubar));
 
-      for (l = GTK_MENU_SHELL (menubar)->children; l; l = l->next)
+      for (l = gtk_menu_shell_get_props (GTK_MENU_SHELL (menubar))->children; l; l = l->next)
 	__gtk_widget_queue_resize (GTK_WIDGET (l->data));
 
       g_object_notify (G_OBJECT (menubar), "pack-direction");
@@ -915,7 +915,7 @@ __gtk_menu_bar_set_child_pack_direction (GtkMenuBar       *menubar,
 
       __gtk_widget_queue_resize (GTK_WIDGET (menubar));
 
-      for (l = GTK_MENU_SHELL (menubar)->children; l; l = l->next)
+      for (l = gtk_menu_shell_get_props (GTK_MENU_SHELL (menubar))->children; l; l = l->next)
 	__gtk_widget_queue_resize (GTK_WIDGET (l->data));
 
       g_object_notify (G_OBJECT (menubar), "child-pack-direction");

@@ -3153,7 +3153,7 @@ gtk_icon_view_paint_item (GtkIconView     *icon_view,
   
 #ifdef DEBUG_ICON_VIEW
   __gdk_draw_rectangle (drawable,
-		      GTK_WIDGET (icon_view)->style->black_gc,
+		      gtk_widget_get_props (GTK_WIDGET (icon_view))->style->black_gc,
 		      FALSE,
 		      x, y, 
 		      item->width, item->height);
@@ -3161,7 +3161,7 @@ gtk_icon_view_paint_item (GtkIconView     *icon_view,
 
   if (item->selected)
     {
-      __gtk_paint_flat_box (GTK_WIDGET (icon_view)->style,
+      __gtk_paint_flat_box (gtk_widget_get_props (GTK_WIDGET (icon_view))->style,
 			  (GdkWindow *) drawable,
 			  GTK_STATE_SELECTED,
 			  GTK_SHADOW_NONE,
@@ -3183,7 +3183,7 @@ gtk_icon_view_paint_item (GtkIconView     *icon_view,
       
 #ifdef DEBUG_ICON_VIEW
       __gdk_draw_rectangle (drawable,
-			  GTK_WIDGET (icon_view)->style->black_gc,
+			  gtk_widget_get_props (GTK_WIDGET (icon_view))->style->black_gc,
 			  FALSE,
 			  x - item->x + cell_area.x, 
 			  y - item->y + cell_area.y, 
@@ -3192,7 +3192,7 @@ gtk_icon_view_paint_item (GtkIconView     *icon_view,
       gtk_icon_view_get_cell_box (icon_view, item, info, &box);
 	  
       __gdk_draw_rectangle (drawable,
-			  GTK_WIDGET (icon_view)->style->black_gc,
+			  gtk_widget_get_props (GTK_WIDGET (icon_view))->style->black_gc,
 			  FALSE,
 			  x - item->x + box.x, 
 			  y - item->y + box.y, 
@@ -3228,7 +3228,7 @@ gtk_icon_view_paint_item (GtkIconView     *icon_view,
 
           if (i == gtk_icon_view_get_props (icon_view)->priv->cursor_cell)
             {
-              __gtk_paint_focus (GTK_WIDGET (icon_view)->style,
+              __gtk_paint_focus (gtk_widget_get_props (GTK_WIDGET (icon_view))->style,
                                drawable,
                                GTK_STATE_NORMAL,
                                area,
@@ -3246,7 +3246,7 @@ gtk_icon_view_paint_item (GtkIconView     *icon_view,
        * around the whole item.
        */
       if (gtk_icon_view_get_props (icon_view)->priv->cursor_cell < 0)
-        __gtk_paint_focus (GTK_WIDGET (icon_view)->style,
+        __gtk_paint_focus (gtk_widget_get_props (GTK_WIDGET (icon_view))->style,
                          drawable,
                          GTK_STATE_NORMAL,
                          area,
@@ -3283,7 +3283,7 @@ gtk_icon_view_paint_rubberband (GtkIconView     *icon_view,
                         NULL);
 
   if (!fill_color_gdk)
-    fill_color_gdk = __gdk_color_copy (&GTK_WIDGET (icon_view)->style->base[GTK_STATE_SELECTED]);
+    fill_color_gdk = __gdk_color_copy (&gtk_widget_get_props (GTK_WIDGET (icon_view))->style->base[GTK_STATE_SELECTED]);
 
   cairo_set_source_rgba (cr,
 			 fill_color_gdk->red / 65535.,
@@ -4391,14 +4391,14 @@ __gtk_icon_view_scroll_to_path (GtkIconView *icon_view,
       __gdk_window_get_position (gtk_icon_view_get_props (icon_view)->priv->bin_window, &x, &y);
       
       offset =  y + item->y - focus_width - 
-	row_align * (GTK_WIDGET (icon_view)->allocation.height - item->height);
+	row_align * (gtk_widget_get_props (GTK_WIDGET (icon_view))->allocation.height - item->height);
       value = CLAMP (gtk_icon_view_get_props (icon_view)->priv->gtk_adjustment_get_props (vadjustment)->value + offset, 
 		     gtk_icon_view_get_props (icon_view)->priv->gtk_adjustment_get_props (vadjustment)->lower,
 		     gtk_icon_view_get_props (gtk_icon_view_get_props (icon_view))->priv->gtk_adjustment_get_props (gtk_adjustment_get_props (vadjustment))->upper - gtk_icon_view_get_props (gtk_icon_view_get_props (icon_view))->priv->gtk_adjustment_get_props (gtk_adjustment_get_props (vadjustment))->page_size);
       __gtk_adjustment_set_value (gtk_icon_view_get_props (icon_view)->priv->vadjustment, value);
 
       offset = x + item->x - focus_width - 
-	col_align * (GTK_WIDGET (icon_view)->allocation.width - item->width);
+	col_align * (gtk_widget_get_props (GTK_WIDGET (icon_view))->allocation.width - item->width);
       value = CLAMP (gtk_icon_view_get_props (icon_view)->priv->gtk_adjustment_get_props (hadjustment)->value + offset, 
 		     gtk_icon_view_get_props (icon_view)->priv->gtk_adjustment_get_props (hadjustment)->lower,
 		     gtk_icon_view_get_props (gtk_icon_view_get_props (icon_view))->priv->gtk_adjustment_get_props (gtk_adjustment_get_props (hadjustment))->upper - gtk_icon_view_get_props (gtk_icon_view_get_props (icon_view))->priv->gtk_adjustment_get_props (gtk_adjustment_get_props (hadjustment))->page_size);
@@ -4430,18 +4430,18 @@ gtk_icon_view_scroll_to_item (GtkIconView     *icon_view,
   if (y + item->y - focus_width < 0)
     __gtk_adjustment_set_value (gtk_icon_view_get_props (icon_view)->priv->vadjustment, 
 			      gtk_icon_view_get_props (icon_view)->priv->gtk_adjustment_get_props (vadjustment)->value + y + item->y - focus_width);
-  else if (y + item->y + item->height + focus_width > GTK_WIDGET (icon_view)->allocation.height)
+  else if (y + item->y + item->height + focus_width > gtk_widget_get_props (GTK_WIDGET (icon_view))->allocation.height)
     __gtk_adjustment_set_value (gtk_icon_view_get_props (icon_view)->priv->vadjustment, 
 			      gtk_icon_view_get_props (icon_view)->priv->gtk_adjustment_get_props (vadjustment)->value + y + item->y + item->height 
-			      + focus_width - GTK_WIDGET (icon_view)->allocation.height);
+			      + focus_width - gtk_widget_get_props (GTK_WIDGET (icon_view))->allocation.height);
 
   if (x + item->x - focus_width < 0)
     __gtk_adjustment_set_value (gtk_icon_view_get_props (icon_view)->priv->hadjustment, 
 			      gtk_icon_view_get_props (icon_view)->priv->gtk_adjustment_get_props (hadjustment)->value + x + item->x - focus_width);
-  else if (x + item->x + item->width + focus_width > GTK_WIDGET (icon_view)->allocation.width)
+  else if (x + item->x + item->width + focus_width > gtk_widget_get_props (GTK_WIDGET (icon_view))->allocation.width)
     __gtk_adjustment_set_value (gtk_icon_view_get_props (icon_view)->priv->hadjustment, 
 			      gtk_icon_view_get_props (icon_view)->priv->gtk_adjustment_get_props (hadjustment)->value + x + item->x + item->width 
-			      + focus_width - GTK_WIDGET (icon_view)->allocation.width);
+			      + focus_width - gtk_widget_get_props (GTK_WIDGET (icon_view))->allocation.width);
 
   __gtk_adjustment_changed (gtk_icon_view_get_props (icon_view)->priv->hadjustment);
   __gtk_adjustment_changed (gtk_icon_view_get_props (icon_view)->priv->vadjustment);
@@ -6591,8 +6591,8 @@ gtk_icon_view_autoscroll (GtkIconView *icon_view)
   gint hoffset, voffset;
   gfloat value;
 
-  __gdk_window_get_pointer (GTK_WIDGET (icon_view)->window, &px, &py, NULL);
-  __gdk_window_get_geometry (GTK_WIDGET (icon_view)->window, NULL, NULL, &width, &height, NULL);
+  __gdk_window_get_pointer (gtk_widget_get_props (GTK_WIDGET (icon_view))->window, &px, &py, NULL);
+  __gdk_window_get_geometry (gtk_widget_get_props (GTK_WIDGET (icon_view))->window, NULL, NULL, &width, &height, NULL);
 
   /* see if we are near the edge. */
   voffset = py - 2 * SCROLL_EDGE_SIZE;

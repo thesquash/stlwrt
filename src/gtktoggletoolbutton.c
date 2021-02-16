@@ -290,7 +290,7 @@ static void
 button_toggled (GtkWidget           *widget,
 		GtkToggleToolButton *toggle_tool_button)
 {
-  gboolean toggle_active = GTK_TOGGLE_BUTTON (widget)->active;
+  gboolean toggle_active = gtk_toggle_button_get_props (GTK_TOGGLE_BUTTON (widget))->active;
 
   if (gtk_toggle_tool_button_get_props (toggle_tool_button)->priv->active != toggle_active)
     {

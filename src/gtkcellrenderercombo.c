@@ -437,7 +437,7 @@ gtk_cell_renderer_combo_start_editing (GtkCellRenderer     *cell,
                                            gtk_cell_renderer_combo_get_props (cell_combo)->text_column);
 
       if (gtk_cell_renderer_text_get_props (cell_text)->text)
-	__gtk_entry_set_text (GTK_ENTRY (GTK_BIN (combo)->child), 
+	__gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_props (GTK_BIN (combo))->child), 
 			    gtk_cell_renderer_text_get_props (cell_text)->text);
     }
   else

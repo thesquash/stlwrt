@@ -65,7 +65,7 @@ static gint
 get_space_size (GtkToolItem *tool_item)
 {
   gint space_size = ___gtk_toolbar_get_default_space_size();
-  GtkWidget *parent = GTK_WIDGET (tool_item)->parent;
+  GtkWidget *parent = gtk_widget_get_props (GTK_WIDGET (tool_item))->parent;
   
   if (GTK_IS_TOOLBAR (parent))
     {

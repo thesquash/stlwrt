@@ -403,7 +403,7 @@ gtk_cell_view_expose (GtkWidget      *widget,
   /* "blank" background */
   if (gtk_cell_view_get_props (cellview)->priv->background_set)
     {
-      cairo_t *cr = __gdk_cairo_create (GTK_WIDGET (cellview)->window);
+      cairo_t *cr = __gdk_cairo_create (gtk_widget_get_props (GTK_WIDGET (cellview))->window);
 
       __gdk_cairo_rectangle (cr, &gtk_widget_get_props (widget)->allocation);
       cairo_set_source_rgb (cr,

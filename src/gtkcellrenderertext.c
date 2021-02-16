@@ -139,10 +139,10 @@ gtk_cell_renderer_text_init (GtkCellRendererText *celltext)
 
   priv = GTK_CELL_RENDERER_TEXT_GET_PRIVATE (celltext);
 
-  GTK_CELL_RENDERER (celltext)->xalign = 0.0;
-  GTK_CELL_RENDERER (celltext)->yalign = 0.5;
-  GTK_CELL_RENDERER (celltext)->xpad = 2;
-  GTK_CELL_RENDERER (celltext)->ypad = 2;
+  gtk_cell_renderer_get_props (GTK_CELL_RENDERER (celltext))->xalign = 0.0;
+  gtk_cell_renderer_get_props (GTK_CELL_RENDERER (celltext))->yalign = 0.5;
+  gtk_cell_renderer_get_props (GTK_CELL_RENDERER (celltext))->xpad = 2;
+  gtk_cell_renderer_get_props (GTK_CELL_RENDERER (celltext))->ypad = 2;
   gtk_cell_renderer_text_get_props (celltext)->font_scale = 1.0;
   gtk_cell_renderer_text_get_props (celltext)->fixed_height_rows = -1;
   gtk_cell_renderer_text_get_props (celltext)->font = pango_font_description_new ();
@@ -1184,9 +1184,9 @@ gtk_cell_renderer_text_set_property (GObject      *object,
       gtk_cell_renderer_text_get_props (celltext)->editable = g_value_get_boolean (value);
       gtk_cell_renderer_text_get_props (celltext)->editable_set = TRUE;
       if (gtk_cell_renderer_text_get_props (celltext)->editable)
-        GTK_CELL_RENDERER (celltext)->mode = GTK_CELL_RENDERER_MODE_EDITABLE;
+        gtk_cell_renderer_get_props (GTK_CELL_RENDERER (celltext))->mode = GTK_CELL_RENDERER_MODE_EDITABLE;
       else
-        GTK_CELL_RENDERER (celltext)->mode = GTK_CELL_RENDERER_MODE_INERT;
+        gtk_cell_renderer_get_props (GTK_CELL_RENDERER (celltext))->mode = GTK_CELL_RENDERER_MODE_INERT;
       g_object_notify (object, "editable-set");
       break;
 
@@ -1900,7 +1900,7 @@ __gtk_cell_renderer_text_set_fixed_height_from_font (GtkCellRendererText *render
   if (number_of_rows == -1)
     {
       __gtk_cell_renderer_set_fixed_size (GTK_CELL_RENDERER (renderer),
-					GTK_CELL_RENDERER (renderer)->width,
+					gtk_cell_renderer_get_props (GTK_CELL_RENDERER (renderer))->width,
 					-1);
     }
   else

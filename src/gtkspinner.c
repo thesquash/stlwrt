@@ -166,7 +166,7 @@ gtk_spinner_get_property (GObject    *object,
 {
   GtkSpinnerPrivate *priv;
 
-  priv = GTK_SPINNER (object)->priv;
+  priv = gtk_spinner_get_props (GTK_SPINNER (object))->priv;
 
   switch (param_id)
     {
@@ -216,7 +216,7 @@ gtk_spinner_expose (GtkWidget      *widget,
   GtkSpinnerPrivate *priv;
   int width, height;
 
-  priv = GTK_SPINNER (widget)->priv;
+  priv = gtk_spinner_get_props (GTK_SPINNER (widget))->priv;
 
   width = gtk_widget_get_props (widget)->allocation.width;
   height = gtk_widget_get_props (widget)->allocation.height;
@@ -246,7 +246,7 @@ gtk_spinner_timeout (gpointer data)
 {
   GtkSpinnerPrivate *priv;
 
-  priv = GTK_SPINNER (data)->priv;
+  priv = gtk_spinner_get_props (GTK_SPINNER (data))->priv;
 
   if (priv->current + 1 >= priv->num_steps)
     priv->current = 0;
@@ -284,7 +284,7 @@ gtk_spinner_realize (GtkWidget *widget)
 {
   GtkSpinnerPrivate *priv;
 
-  priv = GTK_SPINNER (widget)->priv;
+  priv = gtk_spinner_get_props (GTK_SPINNER (widget))->priv;
 
   GTK_WIDGET_CLASS (gtk_spinner_parent_class)->realize (widget);
 
@@ -297,7 +297,7 @@ gtk_spinner_unrealize (GtkWidget *widget)
 {
   GtkSpinnerPrivate *priv;
 
-  priv = GTK_SPINNER (widget)->priv;
+  priv = gtk_spinner_get_props (GTK_SPINNER (widget))->priv;
 
   if (priv->timeout != 0)
     {
@@ -333,7 +333,7 @@ gtk_spinner_style_set (GtkWidget *widget,
 {
   GtkSpinnerPrivate *priv;
 
-  priv = GTK_SPINNER (widget)->priv;
+  priv = gtk_spinner_get_props (GTK_SPINNER (widget))->priv;
 
   __gtk_widget_style_get (GTK_WIDGET (widget),
                         "num-steps", &(priv->num_steps),
@@ -349,7 +349,7 @@ gtk_spinner_dispose (GObject *gobject)
 {
   GtkSpinnerPrivate *priv;
 
-  priv = GTK_SPINNER (gobject)->priv;
+  priv = gtk_spinner_get_props (GTK_SPINNER (gobject))->priv;
 
   if (priv->timeout != 0)
     {
@@ -366,7 +366,7 @@ gtk_spinner_set_active (GtkSpinner *spinner, gboolean active)
 
   active = active != FALSE;
 
-  priv = GTK_SPINNER (spinner)->priv;
+  priv = gtk_spinner_get_props (GTK_SPINNER (spinner))->priv;
 
   if (priv->active != active)
     {

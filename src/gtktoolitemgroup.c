@@ -137,7 +137,7 @@ gtk_tool_item_group_get_icon_size (GtkToolShell *shell)
 static PangoEllipsizeMode
 __gtk_tool_item_group_get_ellipsize_mode (GtkToolShell *shell)
 {
-  return GTK_TOOL_ITEM_GROUP (shell)->priv->ellipsize;
+  return gtk_tool_item_group_get_props (GTK_TOOL_ITEM_GROUP (shell))->priv->ellipsize;
 }
 
 static gfloat
@@ -523,7 +523,7 @@ static void
 gtk_tool_item_group_size_request (GtkWidget      *widget,
                                   GtkRequisition *requisition)
 {
-  const gint border_width = GTK_CONTAINER (widget)->border_width;
+  const gint border_width = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
   GtkToolItemGroup *group = GTK_TOOL_ITEM_GROUP (widget);
   GtkToolItemGroupPrivate* priv = gtk_tool_item_group_get_props (group)->priv;
   GtkOrientation orientation;
@@ -589,7 +589,7 @@ gtk_tool_item_group_real_size_query (GtkWidget      *widget,
                                      GtkAllocation  *allocation,
                                      GtkRequisition *inquery)
 {
-  const gint border_width = GTK_CONTAINER (widget)->border_width;
+  const gint border_width = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
   GtkToolItemGroup *group = GTK_TOOL_ITEM_GROUP (widget);
   GtkToolItemGroupPrivate* priv = gtk_tool_item_group_get_props (group)->priv;
 
@@ -825,7 +825,7 @@ static void
 gtk_tool_item_group_real_size_allocate (GtkWidget     *widget,
                                         GtkAllocation *allocation)
 {
-  const gint border_width = GTK_CONTAINER (widget)->border_width;
+  const gint border_width = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
   GtkToolItemGroup *group = GTK_TOOL_ITEM_GROUP (widget);
   GtkToolItemGroupPrivate* priv = gtk_tool_item_group_get_props (group)->priv;
   GtkRequisition child_requisition;
@@ -1141,7 +1141,7 @@ static void
 gtk_tool_item_group_realize (GtkWidget *widget)
 {
   GtkWidget *toplevel_window;
-  const gint border_width = GTK_CONTAINER (widget)->border_width;
+  const gint border_width = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
   gint attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
   GdkWindowAttr attributes;
   GdkDisplay *display;
@@ -2178,7 +2178,7 @@ __gtk_tool_item_group_get_drop_item (GtkToolItemGroup *group,
 
   g_return_val_if_fail (GTK_IS_TOOL_ITEM_GROUP (group), NULL);
 
-  allocation = &GTK_WIDGET (group)->allocation;
+  allocation = &gtk_widget_get_props (GTK_WIDGET (group))->allocation;
   orientation = __gtk_tool_shell_get_orientation (GTK_TOOL_SHELL (group));
 
   g_return_val_if_fail (x >= 0 && x < allocation->width, NULL);
@@ -2193,7 +2193,7 @@ __gtk_tool_item_group_get_drop_item (GtkToolItemGroup *group,
       if (!item || !gtk_tool_item_group_is_item_visible (group, child))
         continue;
 
-      allocation = &GTK_WIDGET (item)->allocation;
+      allocation = &gtk_widget_get_props (GTK_WIDGET (item))->allocation;
 
       x0 = x - allocation->x;
       y0 = y - allocation->y;

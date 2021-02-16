@@ -361,15 +361,15 @@ gtk_message_dialog_init (GtkMessageDialog *dialog)
   __gtk_box_pack_start (GTK_BOX (hbox), priv->message_area,
                       TRUE, TRUE, 0);
 
-  __gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox),
+  __gtk_box_pack_start (GTK_BOX (gtk_dialog_get_props (GTK_DIALOG (dialog))->vbox),
                       hbox,
                       FALSE, FALSE, 0);
 
   __gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
   __gtk_container_set_border_width (GTK_CONTAINER (hbox), 5);
-  __gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 14); /* 14 + 2 * 5 = 24 */
-  __gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dialog)->action_area), 5);
-  __gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->action_area), 6);
+  __gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_props (GTK_DIALOG (dialog))->vbox), 14); /* 14 + 2 * 5 = 24 */
+  __gtk_container_set_border_width (GTK_CONTAINER (gtk_dialog_get_props (GTK_DIALOG (dialog))->action_area), 5);
+  __gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_props (GTK_DIALOG (dialog))->action_area), 6);
 
   __gtk_widget_show_all (hbox);
 
@@ -622,7 +622,7 @@ __gtk_message_dialog_new (GtkWindow     *parent,
       msg = g_strdup_vprintf (message_format, args);
       va_end (args);
 
-      __gtk_label_set_text (GTK_LABEL (GTK_MESSAGE_DIALOG (widget)->label),
+      __gtk_label_set_text (GTK_LABEL (gtk_message_dialog_get_props (GTK_MESSAGE_DIALOG (widget))->label),
                           msg);
 
       g_free (msg);
@@ -1005,7 +1005,7 @@ gtk_message_dialog_style_set (GtkWidget *widget,
   GtkWidget *parent;
   gint border_width;
 
-  parent = GTK_WIDGET (GTK_MESSAGE_DIALOG (widget)->gtk_widget_get_props (image)->parent);
+  parent = GTK_WIDGET (gtk_message_dialog_get_props (GTK_MESSAGE_DIALOG (widget))->gtk_widget_get_props (image)->parent);
 
   if (parent)
     {

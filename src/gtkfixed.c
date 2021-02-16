@@ -331,8 +331,8 @@ gtk_fixed_size_request (GtkWidget      *widget,
 	}
     }
 
-  requisition->height += GTK_CONTAINER (fixed)->border_width * 2;
-  requisition->width += GTK_CONTAINER (fixed)->border_width * 2;
+  requisition->height += gtk_container_get_props (GTK_CONTAINER (fixed))->border_width * 2;
+  requisition->width += gtk_container_get_props (GTK_CONTAINER (fixed))->border_width * 2;
 }
 
 static void
@@ -360,7 +360,7 @@ gtk_fixed_size_allocate (GtkWidget     *widget,
 				allocation->height);
     }
       
-  border_width = GTK_CONTAINER (fixed)->border_width;
+  border_width = gtk_container_get_props (GTK_CONTAINER (fixed))->border_width;
   
   children = gtk_fixed_get_props (fixed)->children;
   while (children)

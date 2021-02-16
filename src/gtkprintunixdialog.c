@@ -299,7 +299,7 @@ set_busy_cursor (GtkPrintUnixDialog *dialog,
   else
     cursor = NULL;
 
-  __gdk_window_set_cursor (GTK_WIDGET (toplevel)->window, cursor);
+  __gdk_window_set_cursor (gtk_widget_get_props (GTK_WIDGET (toplevel))->window, cursor);
   __gdk_display_flush (display);
 
   if (cursor)
@@ -653,7 +653,7 @@ gtk_print_unix_dialog_buildable_get_internal_child (GtkBuildable *buildable,
                                                     const gchar  *childname)
 {
   if (strcmp (childname, "notebook") == 0)
-    return G_OBJECT (GTK_PRINT_UNIX_DIALOG (buildable)->priv->notebook);
+    return G_OBJECT (gtk_print_unix_dialog_get_props (GTK_PRINT_UNIX_DIALOG (buildable))->priv->notebook);
 
   return parent_buildable_iface->get_internal_child (buildable, builder, childname);
 }
@@ -1144,7 +1144,7 @@ setup_page_table (GtkPrinterOptionSet *options,
   gtk_printer_option_set_foreach_in_group (options, group,
                                            add_option_to_table,
                                            table);
-  if (GTK_TABLE (table)->nrows == 1)
+  if (gtk_table_get_props (GTK_TABLE (table))->nrows == 1)
     __gtk_widget_hide (page);
   else
     __gtk_widget_show (page);
@@ -1315,7 +1315,7 @@ update_dialog_from_settings (GtkPrintUnixDialog *dialog)
                                                group,
                                                add_option_to_table,
                                                table);
-      if (GTK_TABLE (table)->nrows == 1)
+      if (gtk_table_get_props (GTK_TABLE (table))->nrows == 1)
         __gtk_widget_destroy (table);
       else
         {
@@ -3630,7 +3630,7 @@ create_optional_page (GtkPrintUnixDialog  *dialog,
 
   __gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled),
                                          table);
-  __gtk_viewport_set_shadow_type (GTK_VIEWPORT (GTK_BIN(scrolled)->child),
+  __gtk_viewport_set_shadow_type (GTK_VIEWPORT (gtk_bin_get_props (GTK_BIN(scrolled))->child),
                                 GTK_SHADOW_NONE);
 
   label = __gtk_label_new (text);
@@ -3661,7 +3661,7 @@ create_advanced_page (GtkPrintUnixDialog *dialog)
 
   __gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled),
                                          main_vbox);
-  __gtk_viewport_set_shadow_type (GTK_VIEWPORT (GTK_BIN(scrolled)->child),
+  __gtk_viewport_set_shadow_type (GTK_VIEWPORT (gtk_bin_get_props (GTK_BIN(scrolled))->child),
                                 GTK_SHADOW_NONE);
 
   priv->advanced_vbox = main_vbox;

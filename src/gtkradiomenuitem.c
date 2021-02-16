@@ -154,7 +154,7 @@ __gtk_radio_menu_item_set_group (GtkRadioMenuItem *radio_menu_item,
     }
   else
     {
-      GTK_CHECK_MENU_ITEM (radio_menu_item)->active = TRUE;
+      gtk_check_menu_item_get_props (GTK_CHECK_MENU_ITEM (radio_menu_item))->active = TRUE;
       /* __gtk_widget_set_state (GTK_WIDGET (radio_menu_item), GTK_STATE_ACTIVE);
        */
     }

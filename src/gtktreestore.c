@@ -600,7 +600,7 @@ gtk_tree_store_iter_next (GtkTreeModel  *tree_model,
 			  GtkTreeIter   *iter)
 {
   g_return_val_if_fail (iter->user_data != NULL, FALSE);
-  g_return_val_if_fail (iter->stamp == GTK_TREE_STORE (tree_model)->stamp, FALSE);
+  g_return_val_if_fail (iter->stamp == gtk_tree_store_get_props (GTK_TREE_STORE (tree_model))->stamp, FALSE);
 
   if (G_NODE (iter->user_data)->next)
     {
@@ -663,7 +663,7 @@ gtk_tree_store_iter_n_children (GtkTreeModel *tree_model,
   g_return_val_if_fail (iter == NULL || iter->user_data != NULL, 0);
 
   if (iter == NULL)
-    node = G_NODE (GTK_TREE_STORE (tree_model)->root)->children;
+    node = G_NODE (gtk_tree_store_get_props (GTK_TREE_STORE (tree_model))->root)->children;
   else
     node = G_NODE (iter->user_data)->children;
 

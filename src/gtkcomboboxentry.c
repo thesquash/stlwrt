@@ -214,7 +214,7 @@ gtk_combo_box_entry_add (GtkContainer *container,
 
   /* this flag is a hack to tell the entry to fill its allocation.
    */
-  GTK_ENTRY (child)->is_cell_renderer = TRUE;
+  gtk_entry_get_props (GTK_ENTRY (child))->is_cell_renderer = TRUE;
 
   g_signal_connect (child, "changed",
 		    G_CALLBACK (gtk_combo_box_entry_contents_changed),
@@ -226,12 +226,12 @@ static void
 gtk_combo_box_entry_remove (GtkContainer *container,
 			    GtkWidget    *child)
 {
-  if (child && child == GTK_BIN (container)->child)
+  if (child && child == gtk_bin_get_props (GTK_BIN (container))->child)
     {
       g_signal_handlers_disconnect_by_func (child,
 					    gtk_combo_box_entry_contents_changed,
 					    container);
-      GTK_ENTRY (child)->is_cell_renderer = FALSE;
+      gtk_entry_get_props (GTK_ENTRY (child))->is_cell_renderer = FALSE;
     }
 
   GTK_CONTAINER_CLASS (gtk_combo_box_entry_parent_class)->remove (container, child);
@@ -248,7 +248,7 @@ gtk_combo_box_entry_active_changed (GtkComboBox *combo_box,
 
   if (__gtk_combo_box_get_active_iter (combo_box, &iter))
     {
-      GtkEntry *entry = GTK_ENTRY (GTK_BIN (combo_box)->child);
+      GtkEntry *entry = GTK_ENTRY (gtk_bin_get_props (GTK_BIN (combo_box))->child);
 
       if (entry)
 	{
@@ -276,13 +276,13 @@ has_frame_changed (GtkComboBoxEntry *entry_box,
 		   GParamSpec       *pspec,
 		   gpointer          data)
 {
-  if (GTK_BIN (entry_box)->child)
+  if (gtk_bin_get_props (GTK_BIN (entry_box))->child)
     {
       gboolean has_frame;
   
       g_object_get (entry_box, "has-frame", &has_frame, NULL);
 
-      __gtk_entry_set_has_frame (GTK_ENTRY (GTK_BIN (entry_box)->child), has_frame);
+      __gtk_entry_set_has_frame (GTK_ENTRY (gtk_bin_get_props (GTK_BIN (entry_box))->child), has_frame);
     }
 }
 
@@ -331,7 +331,7 @@ __gtk_combo_box_entry_new (void)
  *
  * Creates a new #GtkComboBoxEntry which has a #GtkEntry as child and a list
  * of strings as popup. You can get the #GtkEntry from a #GtkComboBoxEntry
- * using GTK_ENTRY (GTK_BIN (combo_box_entry)->child). To add and remove
+ * using GTK_ENTRY (gtk_bin_get_props (GTK_BIN (combo_box_entry))->child). To add and remove
  * strings from the list, just modify @model using its data manipulation
  * API.
  *

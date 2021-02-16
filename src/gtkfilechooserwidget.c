@@ -31,7 +31,7 @@
 #include <gtkintl.h>
 
 
-#define GTK_FILE_CHOOSER_WIDGET_GET_PRIVATE(o)  (GTK_FILE_CHOOSER_WIDGET (o)->priv)
+#define GTK_FILE_CHOOSER_WIDGET_GET_PRIVATE(o)  (gtk_file_chooser_widget_get_props (GTK_FILE_CHOOSER_WIDGET (o))->priv)
 
 static void gtk_file_chooser_widget_finalize     (GObject                   *object);
 

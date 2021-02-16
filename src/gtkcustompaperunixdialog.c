@@ -235,7 +235,7 @@ custom_paper_dialog_response_cb (GtkDialog *dialog,
 				 gint       response,
 				 gpointer   user_data)
 {
-  GtkCustomPaperUnixDialogPrivate *priv = GTK_CUSTOM_PAPER_UNIX_DIALOG (dialog)->priv;
+  GtkCustomPaperUnixDialogPrivate *priv = gtk_custom_paper_unix_dialog_get_props (GTK_CUSTOM_PAPER_UNIX_DIALOG (dialog))->priv;
 
   _gtk_print_save_custom_papers (priv->custom_paper_list);
 }
@@ -945,13 +945,13 @@ populate_dialog (GtkCustomPaperUnixDialog *dialog)
 
   __gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
   __gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-  __gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 2); /* 2 * 5 + 2 = 12 */
-  __gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dialog)->action_area), 5);
-  __gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->action_area), 6);
+  __gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_props (GTK_DIALOG (dialog))->vbox), 2); /* 2 * 5 + 2 = 12 */
+  __gtk_container_set_border_width (GTK_CONTAINER (gtk_dialog_get_props (GTK_DIALOG (dialog))->action_area), 5);
+  __gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_props (GTK_DIALOG (dialog))->action_area), 6);
 
   hbox = __gtk_hbox_new (FALSE, 18);
   __gtk_container_set_border_width (GTK_CONTAINER (hbox), 5);
-  __gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), hbox, TRUE, TRUE, 0);
+  __gtk_box_pack_start (GTK_BOX (gtk_dialog_get_props (GTK_DIALOG (dialog))->vbox), hbox, TRUE, TRUE, 0);
   __gtk_widget_show (hbox);
 
   vbox = __gtk_vbox_new (FALSE, 6);

@@ -96,9 +96,9 @@ gtk_cell_renderer_toggle_init (GtkCellRendererToggle *celltoggle)
   gtk_cell_renderer_toggle_get_props (celltoggle)->active = FALSE;
   gtk_cell_renderer_toggle_get_props (celltoggle)->radio = FALSE;
 
-  GTK_CELL_RENDERER (celltoggle)->mode = GTK_CELL_RENDERER_MODE_ACTIVATABLE;
-  GTK_CELL_RENDERER (celltoggle)->xpad = 2;
-  GTK_CELL_RENDERER (celltoggle)->ypad = 2;
+  gtk_cell_renderer_get_props (GTK_CELL_RENDERER (celltoggle))->mode = GTK_CELL_RENDERER_MODE_ACTIVATABLE;
+  gtk_cell_renderer_get_props (GTK_CELL_RENDERER (celltoggle))->xpad = 2;
+  gtk_cell_renderer_get_props (GTK_CELL_RENDERER (celltoggle))->ypad = 2;
 
   priv->indicator_size = TOGGLE_WIDTH;
   priv->inconsistent = FALSE;

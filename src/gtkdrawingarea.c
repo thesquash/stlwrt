@@ -64,8 +64,8 @@ __gtk_drawing_area_size (GtkDrawingArea *darea,
 {
   g_return_if_fail (GTK_IS_DRAWING_AREA (darea));
 
-  GTK_WIDGET (darea)->requisition.width = width;
-  GTK_WIDGET (darea)->requisition.height = height;
+  gtk_widget_get_props (GTK_WIDGET (darea))->requisition.width = width;
+  gtk_widget_get_props (GTK_WIDGET (darea))->requisition.height = height;
 
   __gtk_widget_queue_resize (GTK_WIDGET (darea));
 }

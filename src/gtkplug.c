@@ -215,7 +215,7 @@ static void
 gtk_plug_set_is_child (GtkPlug  *plug,
 		       gboolean  is_child)
 {
-  g_assert (!GTK_WIDGET (plug)->parent);
+  g_assert (!gtk_widget_get_props (GTK_WIDGET (plug))->parent);
       
   if (is_child)
     {
@@ -244,9 +244,9 @@ gtk_plug_set_is_child (GtkPlug  *plug,
     }
   else
     {
-      if (GTK_WINDOW (plug)->focus_widget)
+      if (gtk_window_get_props (GTK_WINDOW (plug))->focus_widget)
 	__gtk_window_set_focus (GTK_WINDOW (plug), NULL);
-      if (GTK_WINDOW (plug)->default_widget)
+      if (gtk_window_get_props (GTK_WINDOW (plug))->default_widget)
 	__gtk_window_set_default (GTK_WINDOW (plug), NULL);
 	  
       gtk_plug_get_props (plug)->modality_group = __gtk_window_group_new ();
@@ -341,7 +341,7 @@ ___gtk_plug_add_to_socket (GtkPlug   *plug,
   gtk_socket_get_props (socket_)->same_app = TRUE;
   gtk_socket_get_props (socket_)->plug_widget = widget;
 
-  gtk_plug_get_props (plug)->socket_window = GTK_WIDGET (socket_)->window;
+  gtk_plug_get_props (plug)->socket_window = gtk_widget_get_props (GTK_WIDGET (socket_))->window;
   g_object_ref (gtk_plug_get_props (plug)->socket_window);
   g_signal_emit (plug, plug_signals[EMBEDDED], 0);
   g_object_notify (G_OBJECT (plug), "embedded");
@@ -765,7 +765,7 @@ gtk_plug_size_allocate (GtkWidget     *widget,
 	{
 	  GtkAllocation child_allocation;
 	  
-	  child_allocation.x = child_allocation.y = GTK_CONTAINER (widget)->border_width;
+	  child_allocation.x = child_allocation.y = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
 	  child_allocation.width =
 	    MAX (1, (gint)allocation->width - child_allocation.x * 2);
 	  child_allocation.height =
@@ -964,7 +964,7 @@ gtk_plug_focus (GtkWidget        *widget,
 	  while (parent)
 	    {
 	      __gtk_container_set_focus_child (GTK_CONTAINER (parent), NULL);
-	      parent = GTK_WIDGET (parent)->parent;
+	      parent = gtk_widget_get_props (GTK_WIDGET (parent))->parent;
 	    }
 	  
 	  __gtk_window_set_focus (GTK_WINDOW (container), NULL);
@@ -977,7 +977,7 @@ gtk_plug_focus (GtkWidget        *widget,
         return TRUE;
     }
 
-  if (!GTK_CONTAINER (window)->focus_child)
+  if (!gtk_container_get_props (GTK_CONTAINER (window))->focus_child)
     _gtk_plug_windowing_focus_to_parent (plug, direction);
 
   return FALSE;
@@ -1054,7 +1054,7 @@ _gtk_plug_focus_first_last (GtkPlug          *plug,
       while (parent)
 	{
 	  __gtk_container_set_focus_child (GTK_CONTAINER (parent), NULL);
-	  parent = GTK_WIDGET (parent)->parent;
+	  parent = gtk_widget_get_props (GTK_WIDGET (parent))->parent;
 	}
       
       __gtk_window_set_focus (GTK_WINDOW (plug), NULL);

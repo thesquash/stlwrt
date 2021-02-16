@@ -1433,8 +1433,8 @@ gtk_label_mnemonic_activate (GtkWidget *widget,
 {
   GtkWidget *parent;
 
-  if (GTK_LABEL (widget)->mnemonic_widget)
-    return __gtk_widget_mnemonic_activate (GTK_LABEL (widget)->mnemonic_widget, group_cycling);
+  if (gtk_label_get_props (GTK_LABEL (widget))->mnemonic_widget)
+    return __gtk_widget_mnemonic_activate (gtk_label_get_props (GTK_LABEL (widget))->mnemonic_widget, group_cycling);
 
   /* Try to find the widget to activate by traversing the
    * widget's ancestry.
@@ -2906,7 +2906,7 @@ get_label_char_width (GtkLabel *label)
   priv = GTK_LABEL_GET_PRIVATE (label);
   
   context = pango_layout_get_context (gtk_label_get_props (label)->layout);
-  metrics = pango_context_get_metrics (context, GTK_WIDGET (label)->style->font_desc, 
+  metrics = pango_context_get_metrics (context, gtk_widget_get_props (GTK_WIDGET (label))->style->font_desc, 
 				       pango_context_get_language (context));
   
   char_width = pango_font_metrics_get_approximate_char_width (metrics);

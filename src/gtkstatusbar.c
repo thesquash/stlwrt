@@ -251,7 +251,7 @@ gtk_statusbar_buildable_get_internal_child (GtkBuildable *buildable,
                                             const gchar  *childname)
 {
     if (strcmp (childname, "message_area") == 0)
-      return G_OBJECT (__gtk_bin_get_child (GTK_BIN (GTK_STATUSBAR (buildable)->frame)));
+      return G_OBJECT (__gtk_bin_get_child (GTK_BIN (gtk_status_bar_get_props (GTK_STATUSBAR (buildable))->frame)));
 
     return parent_buildable_iface->get_internal_child (buildable,
                                                        builder,
@@ -923,7 +923,7 @@ has_extra_children (GtkStatusbar *statusbar)
     return TRUE;
 
   frame = NULL;
-  for (l = GTK_BOX (statusbar)->children; l; l = l->next)
+  for (l = gtk_box_get_props (GTK_BOX (statusbar))->children; l; l = l->next)
     {
       frame = l->data;
 

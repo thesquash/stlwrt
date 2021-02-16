@@ -175,7 +175,7 @@ move_focus (GtkWidget       *widget,
 {
   __gtk_widget_child_focus (widget, dir);
 
-  if (!GTK_CONTAINER (widget)->focus_child)
+  if (!gtk_container_get_props (GTK_CONTAINER (widget))->focus_child)
     __gtk_window_set_focus (GTK_WINDOW (widget), NULL);
 }
 
@@ -277,7 +277,7 @@ __gtk_offscreen_window_get_pixmap (GtkOffscreenWindow *offscreen)
 {
   g_return_val_if_fail (GTK_IS_OFFSCREEN_WINDOW (offscreen), NULL);
 
-  return __gdk_offscreen_window_get_pixmap (GTK_WIDGET (offscreen)->window);
+  return __gdk_offscreen_window_get_pixmap (gtk_widget_get_props (GTK_WIDGET (offscreen))->window);
 }
 
 /**
@@ -301,7 +301,7 @@ __gtk_offscreen_window_get_pixbuf (GtkOffscreenWindow *offscreen)
 
   g_return_val_if_fail (GTK_IS_OFFSCREEN_WINDOW (offscreen), NULL);
 
-  pixmap = __gdk_offscreen_window_get_pixmap (GTK_WIDGET (offscreen)->window);
+  pixmap = __gdk_offscreen_window_get_pixmap (gtk_widget_get_props (GTK_WIDGET (offscreen))->window);
 
   if (pixmap != NULL)
     {

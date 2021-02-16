@@ -35,7 +35,7 @@
 
 #include <stdarg.h>
 
-#define GTK_FILE_CHOOSER_DIALOG_GET_PRIVATE(o)  (GTK_FILE_CHOOSER_DIALOG (o)->priv)
+#define GTK_FILE_CHOOSER_DIALOG_GET_PRIVATE(o)  (gtk_file_chooser_default_get_props (GTK_FILE_CHOOSER_DIALOG (o))->priv)
 
 static void gtk_file_chooser_dialog_finalize   (GObject                   *object);
 
@@ -139,7 +139,7 @@ file_chooser_widget_file_activated (GtkFileChooser       *chooser,
    * programmer by looking for a reasonable button on our own.
    */
 
-  children = __gtk_container_get_children (GTK_CONTAINER (GTK_DIALOG (dialog)->action_area));
+  children = __gtk_container_get_children (GTK_CONTAINER (gtk_dialog_get_props (GTK_DIALOG (dialog))->action_area));
 
   for (l = children; l; l = l->next)
     {
@@ -236,7 +236,7 @@ file_chooser_widget_response_requested (GtkWidget            *widget,
    * programmer by looking for a reasonable button on our own.
    */
 
-  children = __gtk_container_get_children (GTK_CONTAINER (GTK_DIALOG (dialog)->action_area));
+  children = __gtk_container_get_children (GTK_CONTAINER (gtk_dialog_get_props (GTK_DIALOG (dialog))->action_area));
 
   for (l = children; l; l = l->next)
     {
@@ -288,7 +288,7 @@ gtk_file_chooser_dialog_constructor (GType                  type,
 		    G_CALLBACK (file_chooser_widget_response_requested), object);
 
   __gtk_container_set_border_width (GTK_CONTAINER (priv->widget), 5);
-  __gtk_box_pack_start (GTK_BOX (GTK_DIALOG (object)->vbox), priv->widget, TRUE, TRUE, 0);
+  __gtk_box_pack_start (GTK_BOX (gtk_dialog_get_props (GTK_DIALOG (object))->vbox), priv->widget, TRUE, TRUE, 0);
 
   __gtk_widget_show (priv->widget);
 
@@ -347,7 +347,7 @@ foreach_ensure_default_response_cb (GtkWidget *widget,
 static void
 ensure_default_response (GtkFileChooserDialog *dialog)
 {
-  __gtk_container_foreach (GTK_CONTAINER (GTK_DIALOG (dialog)->action_area),
+  __gtk_container_foreach (GTK_CONTAINER (gtk_dialog_get_props (GTK_DIALOG (dialog))->action_area),
 			 foreach_ensure_default_response_cb,
 			 dialog);
 }

@@ -305,7 +305,7 @@ gtk_container_buildable_add_child (GtkBuildable  *buildable,
     {
       GTK_BUILDER_WARN_INVALID_CHILD_TYPE (buildable, type);
     }
-  else if (GTK_IS_WIDGET (child) && GTK_WIDGET (child)->parent == NULL)
+  else if (GTK_IS_WIDGET (child) && gtk_widget_get_props (GTK_WIDGET (child))->parent == NULL)
     {
       __gtk_container_add (GTK_CONTAINER (buildable), GTK_WIDGET (child));
     }
@@ -1413,7 +1413,7 @@ gtk_container_real_check_resize (GtkContainer *container)
     {
       if (GTK_IS_RESIZE_CONTAINER (container))
 	__gtk_widget_size_allocate (GTK_WIDGET (container),
-				  &GTK_WIDGET (container)->allocation);
+				  &gtk_widget_get_props (GTK_WIDGET (container))->allocation);
       else
 	__gtk_widget_queue_resize (widget);
     }
@@ -1737,9 +1737,9 @@ gtk_container_real_set_focus_child (GtkContainer     *container,
 	{
 	  focus_child = gtk_container_get_props (container)->focus_child;
 	  while (GTK_IS_CONTAINER (focus_child) && 
-		 GTK_CONTAINER (focus_child)->focus_child)
+		 gtk_container_get_props (GTK_CONTAINER (focus_child))->focus_child)
 	    {
-	      focus_child = GTK_CONTAINER (focus_child)->focus_child;
+	      focus_child = gtk_container_get_props (GTK_CONTAINER (focus_child))->focus_child;
 	    }
 	  
            if (!__gtk_widget_translate_coordinates (focus_child, gtk_container_get_props (container)->focus_child,
@@ -1929,9 +1929,9 @@ old_focus_coords (GtkContainer *container,
   GtkWidget *widget = GTK_WIDGET (container);
   GtkWidget *toplevel = __gtk_widget_get_toplevel (widget);
 
-  if (GTK_IS_WINDOW (toplevel) && GTK_WINDOW (toplevel)->focus_widget)
+  if (GTK_IS_WINDOW (toplevel) && gtk_window_get_props (GTK_WINDOW (toplevel))->focus_widget)
     {
-      GtkWidget *old_focus = GTK_WINDOW (toplevel)->focus_widget;
+      GtkWidget *old_focus = gtk_window_get_props (GTK_WINDOW (toplevel))->focus_widget;
       
       return get_allocation_coords (container, old_focus, old_focus_rect);
     }

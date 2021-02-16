@@ -298,8 +298,8 @@ gtk_image_menu_item_toggle_size_request (GtkMenuItem *menu_item,
   GtkImageMenuItem *image_menu_item = GTK_IMAGE_MENU_ITEM (menu_item);
   GtkPackDirection pack_dir;
   
-  if (GTK_IS_MENU_BAR (GTK_WIDGET (menu_item)->parent))
-    pack_dir = __gtk_menu_bar_get_child_pack_direction (GTK_MENU_BAR (GTK_WIDGET (menu_item)->parent));
+  if (GTK_IS_MENU_BAR (gtk_widget_get_props (GTK_WIDGET (menu_item))->parent))
+    pack_dir = __gtk_menu_bar_get_child_pack_direction (GTK_MENU_BAR (gtk_widget_get_props (GTK_WIDGET (menu_item))->parent));
   else
     pack_dir = GTK_PACK_DIRECTION_LTR;
 
@@ -465,36 +465,36 @@ gtk_image_menu_item_size_allocate (GtkWidget     *widget,
       if (pack_dir == GTK_PACK_DIRECTION_LTR ||
 	  pack_dir == GTK_PACK_DIRECTION_RTL)
 	{
-	  offset = GTK_CONTAINER (image_menu_item)->border_width +
+	  offset = gtk_container_get_props (GTK_CONTAINER (image_menu_item))->border_width +
 	    gtk_widget_get_props (widget)->style->xthickness;
 	  
 	  if ((__gtk_widget_get_direction (widget) == GTK_TEXT_DIR_LTR) ==
 	      (pack_dir == GTK_PACK_DIRECTION_LTR))
 	    x = offset + horizontal_padding +
-	      (GTK_MENU_ITEM (image_menu_item)->toggle_size -
+	      (gtk_menu_item_get_props (GTK_MENU_ITEM (image_menu_item))->toggle_size -
 	       toggle_spacing - child_requisition.width) / 2;
 	  else
 	    x = gtk_widget_get_props (widget)->allocation.width - offset - horizontal_padding -
-	      GTK_MENU_ITEM (image_menu_item)->toggle_size + toggle_spacing +
-	      (GTK_MENU_ITEM (image_menu_item)->toggle_size -
+	      gtk_menu_item_get_props (GTK_MENU_ITEM (image_menu_item))->toggle_size + toggle_spacing +
+	      (gtk_menu_item_get_props (GTK_MENU_ITEM (image_menu_item))->toggle_size -
 	       toggle_spacing - child_requisition.width) / 2;
 	  
 	  y = (gtk_widget_get_props (widget)->allocation.height - child_requisition.height) / 2;
 	}
       else
 	{
-	  offset = GTK_CONTAINER (image_menu_item)->border_width +
+	  offset = gtk_container_get_props (GTK_CONTAINER (image_menu_item))->border_width +
 	    gtk_widget_get_props (widget)->style->ythickness;
 	  
 	  if ((__gtk_widget_get_direction (widget) == GTK_TEXT_DIR_LTR) ==
 	      (pack_dir == GTK_PACK_DIRECTION_TTB))
 	    y = offset + horizontal_padding +
-	      (GTK_MENU_ITEM (image_menu_item)->toggle_size -
+	      (gtk_menu_item_get_props (GTK_MENU_ITEM (image_menu_item))->toggle_size -
 	       toggle_spacing - child_requisition.height) / 2;
 	  else
 	    y = gtk_widget_get_props (widget)->allocation.height - offset - horizontal_padding -
-	      GTK_MENU_ITEM (image_menu_item)->toggle_size + toggle_spacing +
-	      (GTK_MENU_ITEM (image_menu_item)->toggle_size -
+	      gtk_menu_item_get_props (GTK_MENU_ITEM (image_menu_item))->toggle_size + toggle_spacing +
+	      (gtk_menu_item_get_props (GTK_MENU_ITEM (image_menu_item))->toggle_size -
 	       toggle_spacing - child_requisition.height) / 2;
 
 	  x = (gtk_widget_get_props (widget)->allocation.width - child_requisition.width) / 2;

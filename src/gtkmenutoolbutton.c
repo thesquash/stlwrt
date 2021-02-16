@@ -384,7 +384,7 @@ gtk_menu_tool_button_init (GtkMenuToolButton *button)
 
   box = __gtk_hbox_new (FALSE, 0);
 
-  real_button = GTK_BIN (button)->child;
+  real_button = gtk_bin_get_props (GTK_BIN (button))->child;
   g_object_ref (real_button);
   __gtk_container_remove (GTK_CONTAINER (button), real_button);
   __gtk_container_add (GTK_CONTAINER (box), real_button);
@@ -508,7 +508,7 @@ static void
 menu_detacher (GtkWidget *widget,
                GtkMenu   *menu)
 {
-  GtkMenuToolButtonPrivate *priv = GTK_MENU_TOOL_BUTTON (widget)->priv;
+  GtkMenuToolButtonPrivate *priv = gtk_menu_tool_button_get_props (GTK_MENU_TOOL_BUTTON (widget))->priv;
 
   g_return_if_fail (priv->menu == menu);
 

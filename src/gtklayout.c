@@ -563,7 +563,7 @@ __gtk_layout_thaw (GtkLayout *layout)
       if (!(--gtk_layout_get_props (layout)->freeze_count))
 	{
 	  __gtk_widget_queue_draw (GTK_WIDGET (layout));
-	  __gdk_window_process_updates (GTK_WIDGET (layout)->window, TRUE);
+	  __gdk_window_process_updates (gtk_widget_get_props (GTK_WIDGET (layout))->window, TRUE);
 	}
     }
 

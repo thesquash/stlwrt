@@ -1532,7 +1532,7 @@ __gtk_window_set_startup_id (GtkWindow   *window,
 
 #ifdef GDK_WINDOWING_X11
       if (timestamp != GDK_CURRENT_TIME)
-	__gdk_x11_window_set_user_time (GTK_WIDGET (window)->window, timestamp);
+	__gdk_x11_window_set_user_time (gtk_widget_get_props (GTK_WIDGET (window))->window, timestamp);
 #endif
 
       /* Here we differentiate real and "fake" startup notification IDs,
@@ -1542,7 +1542,7 @@ __gtk_window_set_startup_id (GtkWindow   *window,
 	__gtk_window_present_with_time (window, timestamp);
       else 
         {
-          __gdk_window_set_startup_id (GTK_WIDGET (window)->window,
+          __gdk_window_set_startup_id (gtk_widget_get_props (GTK_WIDGET (window))->window,
                                      priv->startup_id);
           
           /* If window is mapped, terminate the startup-notification too */
@@ -2396,7 +2396,7 @@ __gtk_window_set_opacity  (GtkWindow *window,
   priv->opacity = opacity;
 
   if (__gtk_widget_get_realized (GTK_WIDGET (window)))
-    __gdk_window_set_opacity (GTK_WIDGET (window)->window, priv->opacity);
+    __gdk_window_set_opacity (gtk_widget_get_props (GTK_WIDGET (window))->window, priv->opacity);
 }
 
 /**
@@ -2503,7 +2503,7 @@ __gtk_window_set_skip_taskbar_hint (GtkWindow *window,
     {
       priv->skips_taskbar = setting;
       if (__gtk_widget_get_realized (GTK_WIDGET (window)))
-        __gdk_window_set_skip_taskbar_hint (GTK_WIDGET (window)->window,
+        __gdk_window_set_skip_taskbar_hint (gtk_widget_get_props (GTK_WIDGET (window))->window,
                                           priv->skips_taskbar);
       g_object_notify (G_OBJECT (window), "skip-taskbar-hint");
     }
@@ -2560,7 +2560,7 @@ __gtk_window_set_skip_pager_hint (GtkWindow *window,
     {
       priv->skips_pager = setting;
       if (__gtk_widget_get_realized (GTK_WIDGET (window)))
-        __gdk_window_set_skip_pager_hint (GTK_WIDGET (window)->window,
+        __gdk_window_set_skip_pager_hint (gtk_widget_get_props (GTK_WIDGET (window))->window,
                                         priv->skips_pager);
       g_object_notify (G_OBJECT (window), "skip-pager-hint");
     }
@@ -2614,7 +2614,7 @@ __gtk_window_set_urgency_hint (GtkWindow *window,
     {
       priv->urgent = setting;
       if (__gtk_widget_get_realized (GTK_WIDGET (window)))
-        __gdk_window_set_urgency_hint (GTK_WIDGET (window)->window,
+        __gdk_window_set_urgency_hint (gtk_widget_get_props (GTK_WIDGET (window))->window,
 				     priv->urgent);
       g_object_notify (G_OBJECT (window), "urgency-hint");
     }
@@ -2668,7 +2668,7 @@ __gtk_window_set_accept_focus (GtkWindow *window,
     {
       priv->accept_focus = setting;
       if (__gtk_widget_get_realized (GTK_WIDGET (window)))
-        __gdk_window_set_accept_focus (GTK_WIDGET (window)->window,
+        __gdk_window_set_accept_focus (gtk_widget_get_props (GTK_WIDGET (window))->window,
 				     priv->accept_focus);
       g_object_notify (G_OBJECT (window), "accept-focus");
     }
@@ -2723,7 +2723,7 @@ __gtk_window_set_focus_on_map (GtkWindow *window,
     {
       priv->focus_on_map = setting;
       if (__gtk_widget_get_realized (GTK_WIDGET (window)))
-        __gdk_window_set_focus_on_map (GTK_WIDGET (window)->window,
+        __gdk_window_set_focus_on_map (gtk_widget_get_props (GTK_WIDGET (window))->window,
 				     priv->focus_on_map);
       g_object_notify (G_OBJECT (window), "focus-on-map");
     }
@@ -2916,13 +2916,13 @@ __gtk_window_set_decorated (GtkWindow *window,
 
   gtk_window_get_props (window)->decorated = setting;
   
-  if (GTK_WIDGET (window)->window)
+  if (gtk_widget_get_props (GTK_WIDGET (window))->window)
     {
       if (gtk_window_get_props (window)->decorated)
-        __gdk_window_set_decorations (GTK_WIDGET (window)->window,
+        __gdk_window_set_decorations (gtk_widget_get_props (GTK_WIDGET (window))->window,
                                     GDK_DECOR_ALL);
       else
-        __gdk_window_set_decorations (GTK_WIDGET (window)->window,
+        __gdk_window_set_decorations (gtk_widget_get_props (GTK_WIDGET (window))->window,
                                     0);
     }
 
@@ -2981,13 +2981,13 @@ __gtk_window_set_deletable (GtkWindow *window,
 
   priv->deletable = setting;
   
-  if (GTK_WIDGET (window)->window)
+  if (gtk_widget_get_props (GTK_WIDGET (window))->window)
     {
       if (priv->deletable)
-        __gdk_window_set_functions (GTK_WIDGET (window)->window,
+        __gdk_window_set_functions (gtk_widget_get_props (GTK_WIDGET (window))->window,
 				  GDK_FUNC_ALL);
       else
-        __gdk_window_set_functions (GTK_WIDGET (window)->window,
+        __gdk_window_set_functions (gtk_widget_get_props (GTK_WIDGET (window))->window,
 				  GDK_FUNC_ALL | GDK_FUNC_CLOSE);
     }
 
@@ -4087,8 +4087,8 @@ __gtk_window_get_size (GtkWindow *window,
 
   if (__gtk_widget_get_mapped (GTK_WIDGET (window)))
     {
-      w = __gdk_window_get_width (GTK_WIDGET (window)->window);
-      h = __gdk_window_get_height (GTK_WIDGET (window)->window);
+      w = __gdk_window_get_width (gtk_widget_get_props (GTK_WIDGET (window))->window);
+      h = __gdk_window_get_height (gtk_widget_get_props (GTK_WIDGET (window))->window);
     }
   else
     {
@@ -4201,7 +4201,7 @@ __gtk_window_move (GtkWindow *window,
                          x - gtk_window_get_props (window)->frame_left,
                          y - gtk_window_get_props (window)->frame_top);
       else
-        __gdk_window_move (GTK_WIDGET (window)->window,
+        __gdk_window_move (gtk_widget_get_props (GTK_WIDGET (window))->window,
                          x, y);
     }
   else
@@ -4912,8 +4912,8 @@ gtk_window_size_request (GtkWidget      *widget,
   window = GTK_WINDOW (widget);
   bin = GTK_BIN (window);
   
-  requisition->width = GTK_CONTAINER (window)->border_width * 2;
-  requisition->height = GTK_CONTAINER (window)->border_width * 2;
+  requisition->width = gtk_container_get_props (GTK_CONTAINER (window))->border_width * 2;
+  requisition->height = gtk_container_get_props (GTK_CONTAINER (window))->border_width * 2;
 
   if (gtk_bin_get_props (bin)->child && __gtk_widget_get_visible (gtk_bin_get_props (bin)->child))
     {
@@ -4938,8 +4938,8 @@ gtk_window_size_allocate (GtkWidget     *widget,
 
   if (gtk_window_get_props (window)->bin.child && __gtk_widget_get_visible (gtk_window_get_props (window)->bin.child))
     {
-      child_allocation.x = GTK_CONTAINER (window)->border_width;
-      child_allocation.y = GTK_CONTAINER (window)->border_width;
+      child_allocation.x = gtk_container_get_props (GTK_CONTAINER (window))->border_width;
+      child_allocation.y = gtk_container_get_props (GTK_CONTAINER (window))->border_width;
       child_allocation.width =
 	MAX (1, (gint)allocation->width - child_allocation.x * 2);
       child_allocation.height =
@@ -5225,7 +5225,7 @@ __gtk_window_move_focus (GtkWindow       *window,
 {
   __gtk_widget_child_focus (GTK_WIDGET (window), dir);
   
-  if (!GTK_CONTAINER (window)->focus_child)
+  if (!gtk_container_get_props (GTK_CONTAINER (window))->focus_child)
     __gtk_window_set_focus (window, NULL);
 }
 
@@ -5403,7 +5403,7 @@ gtk_window_focus (GtkWidget        *widget,
       while (parent)
 	{
 	  __gtk_container_set_focus_child (GTK_CONTAINER (parent), NULL);
-	  parent = GTK_WIDGET (parent)->parent;
+	  parent = gtk_widget_get_props (GTK_WIDGET (parent))->parent;
 	}
       
       __gtk_window_set_focus (GTK_WINDOW (container), NULL);

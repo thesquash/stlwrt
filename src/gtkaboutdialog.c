@@ -611,9 +611,9 @@ gtk_about_dialog_init (GtkAboutDialog *about)
   image = __gtk_image_new_from_stock (GTK_STOCK_ABOUT, GTK_ICON_SIZE_BUTTON);
   __gtk_button_set_image (GTK_BUTTON (button), image);
   __gtk_widget_set_no_show_all (button, TRUE);
-  __gtk_box_pack_end (GTK_BOX (GTK_DIALOG (about)->action_area),
+  __gtk_box_pack_end (GTK_BOX (gtk_dialog_get_props (GTK_DIALOG (about))->action_area),
                     button, FALSE, TRUE, 0);
-  __gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (GTK_DIALOG (about)->action_area), button, TRUE);
+  __gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (gtk_dialog_get_props (GTK_DIALOG (about))->action_area), button, TRUE);
   g_signal_connect (button, "clicked",
                     G_CALLBACK (display_credits_dialog), about);
   priv->credits_button = button;
@@ -623,9 +623,9 @@ gtk_about_dialog_init (GtkAboutDialog *about)
   button = __gtk_button_new_from_stock (_("_License"));
   __gtk_widget_set_can_default (button, TRUE);
   __gtk_widget_set_no_show_all (button, TRUE);
-  __gtk_box_pack_end (GTK_BOX (GTK_DIALOG (about)->action_area),
+  __gtk_box_pack_end (GTK_BOX (gtk_dialog_get_props (GTK_DIALOG (about))->action_area),
                     button, FALSE, TRUE, 0);
-  __gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (GTK_DIALOG (about)->action_area), button, TRUE);
+  __gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (gtk_dialog_get_props (GTK_DIALOG (about))->action_area), button, TRUE);
   g_signal_connect (button, "clicked",
                     G_CALLBACK (display_license_dialog), about);
   priv->license_button = button;
@@ -2197,7 +2197,7 @@ display_credits_dialog (GtkWidget *button,
 
   notebook = __gtk_notebook_new ();
   __gtk_container_set_border_width (GTK_CONTAINER (notebook), 5);
-  __gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), notebook, TRUE, TRUE, 0);
+  __gtk_box_pack_start (GTK_BOX (gtk_dialog_get_props (GTK_DIALOG (dialog))->vbox), notebook, TRUE, TRUE, 0);
 
   if (priv->authors != NULL)
     add_credits_page (about, dialog, notebook, _("Written by"), priv->authors);
@@ -2282,7 +2282,7 @@ display_license_dialog (GtkWidget *button,
                                   GTK_POLICY_NEVER,
                                   GTK_POLICY_AUTOMATIC);
   g_signal_connect (sw, "map", G_CALLBACK (set_policy), NULL);
-  __gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), sw, TRUE, TRUE, 0);
+  __gtk_box_pack_start (GTK_BOX (gtk_dialog_get_props (GTK_DIALOG (dialog))->vbox), sw, TRUE, TRUE, 0);
 
   strings[0] = priv->license;
   strings[1] = NULL;

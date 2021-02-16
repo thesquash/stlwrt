@@ -32,7 +32,7 @@
 #include <stdarg.h>
 
 
-#define GTK_RECENT_CHOOSER_DIALOG_GET_PRIVATE(obj)	(GTK_RECENT_CHOOSER_DIALOG (obj)->priv)
+#define GTK_RECENT_CHOOSER_DIALOG_GET_PRIVATE(obj)	(gtk_recent_chooser_dialog_get_props (GTK_RECENT_CHOOSER_DIALOG (obj))->priv)
 
 static void gtk_recent_chooser_dialog_class_init (GtkRecentChooserDialogClass *klass);
 static void gtk_recent_chooser_dialog_init       (GtkRecentChooserDialog      *dialog);
@@ -110,7 +110,7 @@ gtk_recent_chooser_item_activated_cb (GtkRecentChooser *chooser,
   if (__gtk_window_activate_default (GTK_WINDOW (dialog)))
     return;
   
-  children = __gtk_container_get_children (GTK_CONTAINER (GTK_DIALOG (dialog)->action_area));
+  children = __gtk_container_get_children (GTK_CONTAINER (gtk_dialog_get_props (GTK_DIALOG (dialog))->action_area));
   
   for (l = children; l; l = l->next)
     {
@@ -163,7 +163,7 @@ gtk_recent_chooser_dialog_constructor (GType                  type,
   		    object);
 
   __gtk_container_set_border_width (GTK_CONTAINER (priv->chooser), 5);
-  __gtk_box_pack_start (GTK_BOX (GTK_DIALOG (object)->vbox),
+  __gtk_box_pack_start (GTK_BOX (gtk_dialog_get_props (GTK_DIALOG (object))->vbox),
                       priv->chooser, TRUE, TRUE, 0);
   __gtk_widget_show (priv->chooser);
   

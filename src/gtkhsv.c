@@ -527,8 +527,8 @@ compute_triangle (GtkHSV *hsv,
 
   priv = gtk_hsv_get_props (hsv)->priv;
 
-  center_x = GTK_WIDGET (hsv)->allocation.width / 2.0;
-  center_y = GTK_WIDGET (hsv)->allocation.height / 2.0;
+  center_x = gtk_widget_get_props (GTK_WIDGET (hsv))->allocation.width / 2.0;
+  center_y = gtk_widget_get_props (GTK_WIDGET (hsv))->allocation.height / 2.0;
   outer = priv->size / 2.0;
   inner = outer - priv->ring_width;
   angle = priv->h * 2.0 * G_PI;
@@ -555,8 +555,8 @@ is_in_ring (GtkHSV *hsv,
 
   priv = gtk_hsv_get_props (hsv)->priv;
 
-  center_x = GTK_WIDGET (hsv)->allocation.width / 2.0;
-  center_y = GTK_WIDGET (hsv)->allocation.height / 2.0;
+  center_x = gtk_widget_get_props (GTK_WIDGET (hsv))->allocation.width / 2.0;
+  center_y = gtk_widget_get_props (GTK_WIDGET (hsv))->allocation.height / 2.0;
   outer = priv->size / 2.0;
   inner = outer - priv->ring_width;
 
@@ -581,8 +581,8 @@ compute_sv (GtkHSV  *hsv,
   double center_y;
 
   compute_triangle (hsv, &ihx, &ihy, &isx, &isy, &ivx, &ivy);
-  center_x = GTK_WIDGET (hsv)->allocation.width / 2.0;
-  center_y = GTK_WIDGET (hsv)->allocation.height / 2.0;
+  center_x = gtk_widget_get_props (GTK_WIDGET (hsv))->allocation.width / 2.0;
+  center_y = gtk_widget_get_props (GTK_WIDGET (hsv))->allocation.height / 2.0;
   hx = ihx - center_x;
   hy = center_y - ihy;
   sx = isx - center_x;
@@ -683,8 +683,8 @@ compute_v (GtkHSV *hsv,
   double dx, dy;
   double angle;
 
-  center_x = GTK_WIDGET (hsv)->allocation.width / 2.0;
-  center_y = GTK_WIDGET (hsv)->allocation.height / 2.0;
+  center_x = gtk_widget_get_props (GTK_WIDGET (hsv))->allocation.width / 2.0;
+  center_y = gtk_widget_get_props (GTK_WIDGET (hsv))->allocation.height / 2.0;
   dx = x - center_x;
   dy = center_y - y;
 

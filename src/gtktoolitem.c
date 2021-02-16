@@ -300,7 +300,7 @@ static void
 gtk_tool_item_parent_set (GtkWidget   *toolitem,
 			  GtkWidget   *prev_parent)
 {
-  if (GTK_WIDGET (toolitem)->parent != NULL)
+  if (gtk_widget_get_props (GTK_WIDGET (toolitem))->parent != NULL)
     __gtk_tool_item_toolbar_reconfigured (GTK_TOOL_ITEM (toolitem));
 }
 
@@ -387,7 +387,7 @@ create_drag_window (GtkToolItem *toolitem)
   g_return_if_fail (gtk_tool_item_get_props (toolitem)->priv->use_drag_window == TRUE);
 
   widget = GTK_WIDGET (toolitem);
-  border_width = GTK_CONTAINER (toolitem)->border_width;
+  border_width = gtk_container_get_props (GTK_CONTAINER (toolitem))->border_width;
 
   attributes.window_type = GDK_WINDOW_CHILD;
   attributes.x = gtk_widget_get_props (widget)->allocation.x + border_width;
@@ -471,7 +471,7 @@ static void
 gtk_tool_item_size_request (GtkWidget      *widget,
 			    GtkRequisition *requisition)
 {
-  GtkWidget *child = GTK_BIN (widget)->child;
+  GtkWidget *child = gtk_bin_get_props (GTK_BIN (widget))->child;
 
   if (child && __gtk_widget_get_visible (child))
     {
@@ -483,8 +483,8 @@ gtk_tool_item_size_request (GtkWidget      *widget,
       requisition->width = 0;
     }
   
-  requisition->width += (GTK_CONTAINER (widget)->border_width) * 2;
-  requisition->height += (GTK_CONTAINER (widget)->border_width) * 2;
+  requisition->width += (gtk_container_get_props (GTK_CONTAINER (widget))->border_width) * 2;
+  requisition->height += (gtk_container_get_props (GTK_CONTAINER (widget))->border_width) * 2;
 }
 
 static void
@@ -494,10 +494,10 @@ gtk_tool_item_size_allocate (GtkWidget     *widget,
   GtkToolItem *toolitem = GTK_TOOL_ITEM (widget);
   GtkAllocation child_allocation;
   gint border_width;
-  GtkWidget *child = GTK_BIN (widget)->child;
+  GtkWidget *child = gtk_bin_get_props (GTK_BIN (widget))->child;
 
   gtk_widget_get_props (widget)->allocation = *allocation;
-  border_width = GTK_CONTAINER (widget)->border_width;
+  border_width = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
 
   if (gtk_tool_item_get_props (toolitem)->priv->drag_window)
     __gdk_window_move_resize (gtk_tool_item_get_props (toolitem)->priv->drag_window,
@@ -672,7 +672,7 @@ __gtk_tool_item_get_ellipsize_mode (GtkToolItem *tool_item)
   
   g_return_val_if_fail (GTK_IS_TOOL_ITEM (tool_item), GTK_ORIENTATION_HORIZONTAL);
 
-  parent = GTK_WIDGET (tool_item)->parent;
+  parent = gtk_widget_get_props (GTK_WIDGET (tool_item))->parent;
   if (!parent || !GTK_IS_TOOL_SHELL (parent))
     return PANGO_ELLIPSIZE_NONE;
 
@@ -699,7 +699,7 @@ __gtk_tool_item_get_icon_size (GtkToolItem *tool_item)
 
   g_return_val_if_fail (GTK_IS_TOOL_ITEM (tool_item), GTK_ICON_SIZE_LARGE_TOOLBAR);
 
-  parent = GTK_WIDGET (tool_item)->parent;
+  parent = gtk_widget_get_props (GTK_WIDGET (tool_item))->parent;
   if (!parent || !GTK_IS_TOOL_SHELL (parent))
     return GTK_ICON_SIZE_LARGE_TOOLBAR;
 
@@ -726,7 +726,7 @@ __gtk_tool_item_get_orientation (GtkToolItem *tool_item)
   
   g_return_val_if_fail (GTK_IS_TOOL_ITEM (tool_item), GTK_ORIENTATION_HORIZONTAL);
 
-  parent = GTK_WIDGET (tool_item)->parent;
+  parent = gtk_widget_get_props (GTK_WIDGET (tool_item))->parent;
   if (!parent || !GTK_IS_TOOL_SHELL (parent))
     return GTK_ORIENTATION_HORIZONTAL;
 
@@ -769,7 +769,7 @@ __gtk_tool_item_get_toolbar_style (GtkToolItem *tool_item)
   
   g_return_val_if_fail (GTK_IS_TOOL_ITEM (tool_item), GTK_TOOLBAR_ICONS);
 
-  parent = GTK_WIDGET (tool_item)->parent;
+  parent = gtk_widget_get_props (GTK_WIDGET (tool_item))->parent;
   if (!parent || !GTK_IS_TOOL_SHELL (parent))
     return GTK_TOOLBAR_ICONS;
 
@@ -797,7 +797,7 @@ __gtk_tool_item_get_relief_style (GtkToolItem *tool_item)
   
   g_return_val_if_fail (GTK_IS_TOOL_ITEM (tool_item), GTK_RELIEF_NONE);
 
-  parent = GTK_WIDGET (tool_item)->parent;
+  parent = gtk_widget_get_props (GTK_WIDGET (tool_item))->parent;
   if (!parent || !GTK_IS_TOOL_SHELL (parent))
     return GTK_RELIEF_NONE;
 
@@ -824,7 +824,7 @@ __gtk_tool_item_get_text_alignment (GtkToolItem *tool_item)
   
   g_return_val_if_fail (GTK_IS_TOOL_ITEM (tool_item), GTK_ORIENTATION_HORIZONTAL);
 
-  parent = GTK_WIDGET (tool_item)->parent;
+  parent = gtk_widget_get_props (GTK_WIDGET (tool_item))->parent;
   if (!parent || !GTK_IS_TOOL_SHELL (parent))
     return 0.5;
 
@@ -851,7 +851,7 @@ __gtk_tool_item_get_text_orientation (GtkToolItem *tool_item)
   
   g_return_val_if_fail (GTK_IS_TOOL_ITEM (tool_item), GTK_ORIENTATION_HORIZONTAL);
 
-  parent = GTK_WIDGET (tool_item)->parent;
+  parent = gtk_widget_get_props (GTK_WIDGET (tool_item))->parent;
   if (!parent || !GTK_IS_TOOL_SHELL (parent))
     return GTK_ORIENTATION_HORIZONTAL;
 
@@ -877,7 +877,7 @@ __gtk_tool_item_get_text_size_group (GtkToolItem *tool_item)
   
   g_return_val_if_fail (GTK_IS_TOOL_ITEM (tool_item), NULL);
 
-  parent = GTK_WIDGET (tool_item)->parent;
+  parent = gtk_widget_get_props (GTK_WIDGET (tool_item))->parent;
   if (!parent || !GTK_IS_TOOL_SHELL (parent))
     return NULL;
 
@@ -1045,7 +1045,7 @@ __gtk_tool_item_set_tooltip_text (GtkToolItem *tool_item,
 
   g_return_if_fail (GTK_IS_TOOL_ITEM (tool_item));
 
-  child = GTK_BIN (tool_item)->child;
+  child = gtk_bin_get_props (GTK_BIN (tool_item))->child;
 
   if (child)
     __gtk_widget_set_tooltip_text (child, text);
@@ -1069,7 +1069,7 @@ __gtk_tool_item_set_tooltip_markup (GtkToolItem *tool_item,
 
   g_return_if_fail (GTK_IS_TOOL_ITEM (tool_item));
 
-  child = GTK_BIN (tool_item)->child;
+  child = gtk_bin_get_props (GTK_BIN (tool_item))->child;
 
   if (child)
     __gtk_widget_set_tooltip_markup (child, markup);

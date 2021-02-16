@@ -633,8 +633,8 @@ gtk_menu_shell_button_press (GtkWidget      *widget,
     }
 
   if (menu_item && ___gtk_menu_item_is_selectable (menu_item) &&
-      GTK_MENU_ITEM (menu_item)->submenu != NULL &&
-      !__gtk_widget_get_visible (GTK_MENU_ITEM (menu_item)->submenu))
+      gtk_menu_item_get_props (GTK_MENU_ITEM (menu_item))->submenu != NULL &&
+      !__gtk_widget_get_visible (gtk_menu_item_get_props (GTK_MENU_ITEM (menu_item))->submenu))
     {
       GtkMenuShellPrivate *priv;
 
@@ -694,7 +694,7 @@ gtk_menu_shell_button_release (GtkWidget      *widget,
           if (menu_item && (gtk_menu_shell_get_props (menu_shell)->active_menu_item == menu_item) &&
               ___gtk_menu_item_is_selectable (menu_item))
             {
-              GtkWidget *submenu = GTK_MENU_ITEM (menu_item)->submenu;
+              GtkWidget *submenu = gtk_menu_item_get_props (GTK_MENU_ITEM (menu_item))->submenu;
 
               if (submenu == NULL)
                 {
@@ -948,14 +948,14 @@ gtk_menu_shell_enter_notify (GtkWidget        *widget,
                * its submenu.
                */
               if ((event->state & (GDK_BUTTON1_MASK | GDK_BUTTON2_MASK | GDK_BUTTON3_MASK)) &&
-                  GTK_MENU_ITEM (menu_item)->submenu != NULL)
+                  gtk_menu_item_get_props (GTK_MENU_ITEM (menu_item))->submenu != NULL)
                 {
                   GtkMenuShellPrivate *priv;
 
                   priv = GTK_MENU_SHELL_GET_PRIVATE (gtk_widget_get_props (menu_item)->parent);
                   priv->activated_submenu = TRUE;
 
-                  if (!__gtk_widget_get_visible (GTK_MENU_ITEM (menu_item)->submenu))
+                  if (!__gtk_widget_get_visible (gtk_menu_item_get_props (GTK_MENU_ITEM (menu_item))->submenu))
                     {
                       gboolean touchscreen_mode;
 
@@ -1135,7 +1135,7 @@ gtk_menu_shell_is_item (GtkMenuShell *menu_shell,
     {
       if (parent == (GtkWidget*) menu_shell)
 	return TRUE;
-      parent = GTK_MENU_SHELL (parent)->parent_menu_shell;
+      parent = gtk_menu_shell_get_props (GTK_MENU_SHELL (parent))->parent_menu_shell;
     }
 
   return FALSE;
@@ -1487,7 +1487,7 @@ gtk_real_menu_shell_move_current (GtkMenuShell         *menu_shell,
           if (touchscreen_mode)
             {
               /* close menu when returning from submenu. */
-              ___gtk_menu_item_popdown_submenu (GTK_MENU (menu_shell)->parent_menu_item);
+              ___gtk_menu_item_popdown_submenu (gtk_menu_get_props (GTK_MENU (menu_shell))->parent_menu_item);
               ___gtk_menu_shell_update_mnemonics (parent_menu_shell);
               break;
             }

@@ -629,10 +629,10 @@ gtk_frame_size_request (GtkWidget      *widget,
       requisition->height += child_requisition.height;
     }
 
-  requisition->width += (GTK_CONTAINER (widget)->border_width +
-			 GTK_WIDGET (widget)->style->xthickness) * 2;
-  requisition->height += (GTK_CONTAINER (widget)->border_width +
-			  GTK_WIDGET (widget)->style->ythickness) * 2;
+  requisition->width += (gtk_container_get_props (GTK_CONTAINER (widget))->border_width +
+			 gtk_widget_get_props (GTK_WIDGET (widget))->style->xthickness) * 2;
+  requisition->height += (gtk_container_get_props (GTK_CONTAINER (widget))->border_width +
+			  gtk_widget_get_props (GTK_WIDGET (widget))->style->ythickness) * 2;
 }
 
 static void
@@ -713,13 +713,13 @@ gtk_frame_real_compute_child_allocation (GtkFrame      *frame,
   else
     top_margin = gtk_widget_get_props (widget)->style->ythickness;
   
-  child_allocation->x = (GTK_CONTAINER (frame)->border_width +
+  child_allocation->x = (gtk_container_get_props (GTK_CONTAINER (frame))->border_width +
 			 gtk_widget_get_props (widget)->style->xthickness);
   child_allocation->width = MAX(1, (gint)allocation->width - child_allocation->x * 2);
   
-  child_allocation->y = (GTK_CONTAINER (frame)->border_width + top_margin);
+  child_allocation->y = (gtk_container_get_props (GTK_CONTAINER (frame))->border_width + top_margin);
   child_allocation->height = MAX (1, ((gint)allocation->height - child_allocation->y -
-				      (gint)GTK_CONTAINER (frame)->border_width -
+				      (gint)gtk_container_get_props (GTK_CONTAINER (frame))->border_width -
 				      (gint)gtk_widget_get_props (widget)->style->ythickness));
   
   child_allocation->x += allocation->x;

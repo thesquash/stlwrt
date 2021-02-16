@@ -770,7 +770,7 @@ request_password (GtkPrintBackend  *backend,
 
 
   /* Packing */
-  __gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), main_box, TRUE, FALSE, 0);
+  __gtk_box_pack_start (GTK_BOX (gtk_dialog_get_props (GTK_DIALOG (dialog))->vbox), main_box, TRUE, FALSE, 0);
 
   __gtk_box_pack_start (GTK_BOX (main_box), icon, FALSE, FALSE, 6);
   __gtk_box_pack_start (GTK_BOX (main_box), vbox, FALSE, FALSE, 6);

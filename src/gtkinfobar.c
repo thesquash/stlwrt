@@ -650,9 +650,9 @@ gtk_info_bar_buildable_get_internal_child (GtkBuildable *buildable,
                                            const gchar  *childname)
 {
   if (strcmp (childname, "content_area") == 0)
-    return G_OBJECT (GTK_INFO_BAR (buildable)->priv->content_area);
+    return G_OBJECT (gtk_info_bar_get_props (GTK_INFO_BAR (buildable))->priv->content_area);
   else if (strcmp (childname, "action_area") == 0)
-    return G_OBJECT (GTK_INFO_BAR (buildable)->priv->action_area);
+    return G_OBJECT (gtk_info_bar_get_props (GTK_INFO_BAR (buildable))->priv->action_area);
 
   return parent_buildable_iface->get_internal_child (buildable,
                                                      builder,

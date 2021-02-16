@@ -416,7 +416,7 @@ gtk_handle_box_realize (GtkWidget *widget)
   attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
   gtk_handle_box_get_props (hb)->bin_window = __gdk_window_new (gtk_widget_get_props (widget)->window, &attributes, attributes_mask);
   __gdk_window_set_user_data (gtk_handle_box_get_props (hb)->bin_window, widget);
-  if (GTK_BIN (hb)->child)
+  if (gtk_bin_get_props (GTK_BIN (hb))->child)
     __gtk_widget_set_parent_window (GTK_BIN (gtk_handle_box_get_props (hb))->child, gtk_handle_box_get_props (hb)->bin_window);
   
   attributes.x = 0;
@@ -564,8 +564,8 @@ gtk_handle_box_size_request (GtkWidget      *widget,
     }
   else
     {
-      requisition->width += GTK_CONTAINER (widget)->border_width * 2;
-      requisition->height += GTK_CONTAINER (widget)->border_width * 2;
+      requisition->width += gtk_container_get_props (GTK_CONTAINER (widget))->border_width * 2;
+      requisition->height += gtk_container_get_props (GTK_CONTAINER (widget))->border_width * 2;
       
       if (gtk_bin_get_props (bin)->child)
 	{
@@ -617,7 +617,7 @@ gtk_handle_box_size_allocate (GtkWidget     *widget,
       GtkAllocation child_allocation;
       guint border_width;
 
-      border_width = GTK_CONTAINER (widget)->border_width;
+      border_width = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
 
       child_allocation.x = border_width;
       child_allocation.y = border_width;
@@ -1033,7 +1033,7 @@ gtk_handle_box_button_press (GtkWidget      *widget,
       if (event->window != gtk_handle_box_get_props (hb)->bin_window)
 	return FALSE;
 
-      child = GTK_BIN (hb)->child;
+      child = gtk_bin_get_props (GTK_BIN (hb))->child;
 
       if (child)
 	{
@@ -1046,10 +1046,10 @@ gtk_handle_box_button_press (GtkWidget      *widget,
 	      in_handle = event->y < DRAG_HANDLE_SIZE;
 	      break;
 	    case GTK_POS_RIGHT:
-	      in_handle = event->x > 2 * GTK_CONTAINER (hb)->border_width + gtk_widget_get_props (child)->allocation.width;
+	      in_handle = event->x > 2 * gtk_container_get_props (GTK_CONTAINER (hb))->border_width + gtk_widget_get_props (child)->allocation.width;
 	      break;
 	    case GTK_POS_BOTTOM:
-	      in_handle = event->y > 2 * GTK_CONTAINER (hb)->border_width + gtk_widget_get_props (child)->allocation.height;
+	      in_handle = event->y > 2 * gtk_container_get_props (GTK_CONTAINER (hb))->border_width + gtk_widget_get_props (child)->allocation.height;
 	      break;
 	    default:
 	      in_handle = FALSE;
@@ -1262,7 +1262,7 @@ gtk_handle_box_motion (GtkWidget      *widget,
 	  g_signal_emit (hb,
 			 handle_box_signals[SIGNAL_CHILD_ATTACHED],
 			 0,
-			 GTK_BIN (hb)->child);
+			 gtk_bin_get_props (GTK_BIN (hb))->child);
 	  
 	  __gtk_widget_queue_resize (widget);
 	}
@@ -1307,16 +1307,16 @@ gtk_handle_box_motion (GtkWidget      *widget,
 
 	  gtk_handle_box_get_props (hb)->child_detached = TRUE;
 
-	  if (GTK_BIN (hb)->child)
-	    __gtk_widget_get_child_requisition (GTK_BIN (hb)->child, &child_requisition);
+	  if (gtk_bin_get_props (GTK_BIN (hb))->child)
+	    __gtk_widget_get_child_requisition (gtk_bin_get_props (GTK_BIN (hb))->child, &child_requisition);
 	  else
 	    {
 	      child_requisition.width = 0;
 	      child_requisition.height = 0;
 	    }      
 
-	  width = child_requisition.width + 2 * GTK_CONTAINER (hb)->border_width;
-	  height = child_requisition.height + 2 * GTK_CONTAINER (hb)->border_width;
+	  width = child_requisition.width + 2 * gtk_container_get_props (GTK_CONTAINER (hb))->border_width;
+	  height = child_requisition.height + 2 * gtk_container_get_props (GTK_CONTAINER (hb))->border_width;
 
 	  if (handle_position == GTK_POS_LEFT || handle_position == GTK_POS_RIGHT)
 	    width += DRAG_HANDLE_SIZE;
@@ -1339,7 +1339,7 @@ gtk_handle_box_motion (GtkWidget      *widget,
 	  g_signal_emit (hb,
 			 handle_box_signals[SIGNAL_CHILD_DETACHED],
 			 0,
-			 GTK_BIN (hb)->child);
+			 gtk_bin_get_props (GTK_BIN (hb))->child);
 	  gtk_handle_box_draw_ghost (hb);
 	  
 	  __gtk_widget_queue_resize (widget);
@@ -1353,7 +1353,7 @@ static void
 gtk_handle_box_add (GtkContainer *container,
 		    GtkWidget    *widget)
 {
-  __gtk_widget_set_parent_window (widget, GTK_HANDLE_BOX (container)->bin_window);
+  __gtk_widget_set_parent_window (widget, gtk_handle_box_get_props (GTK_HANDLE_BOX (container))->bin_window);
   GTK_CONTAINER_CLASS (gtk_handle_box_parent_class)->add (container, widget);
 }
 
@@ -1395,11 +1395,11 @@ gtk_handle_box_reattach (GtkHandleBox *hb)
 	  __gdk_window_hide (gtk_handle_box_get_props (hb)->float_window);
 	  __gdk_window_reparent (gtk_handle_box_get_props (hb)->bin_window, gtk_widget_get_props (widget)->window, 0, 0);
 
-	  if (GTK_BIN (hb)->child)
+	  if (gtk_bin_get_props (GTK_BIN (hb))->child)
 	    g_signal_emit (hb,
 			   handle_box_signals[SIGNAL_CHILD_ATTACHED],
 			   0,
-			   GTK_BIN (hb)->child);
+			   gtk_bin_get_props (GTK_BIN (hb))->child);
 
 	}
       gtk_handle_box_get_props (hb)->float_window_mapped = FALSE;

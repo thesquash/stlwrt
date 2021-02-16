@@ -947,7 +947,7 @@ gtk_combo_box_init (GtkComboBox *combo_box)
 
   priv->cell_view = __gtk_cell_view_new ();
   __gtk_widget_set_parent (priv->cell_view, GTK_WIDGET (combo_box));
-  GTK_BIN (combo_box)->child = priv->cell_view;
+  gtk_bin_get_props (GTK_BIN (combo_box))->child = priv->cell_view;
   __gtk_widget_show (priv->cell_view);
 
   priv->width = 0;
@@ -1234,8 +1234,8 @@ gtk_combo_box_style_set (GtkWidget *widget,
     __gtk_cell_view_set_background_color (GTK_CELL_VIEW (priv->cell_view), 
 					&gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (gtk_widget_get_props (widget))]);
 
-  if (GTK_IS_ENTRY (GTK_BIN (combo_box)->child))
-    g_object_set (GTK_BIN (combo_box)->child, "shadow-type",
+  if (GTK_IS_ENTRY (gtk_bin_get_props (GTK_BIN (combo_box))->child))
+    g_object_set (gtk_bin_get_props (GTK_BIN (combo_box))->child, "shadow-type",
                   GTK_SHADOW_NONE == priv->shadow_type ?
                   GTK_SHADOW_IN : GTK_SHADOW_NONE, NULL);
 }
@@ -1274,12 +1274,12 @@ gtk_combo_box_add (GtkContainer *container,
       __gtk_widget_get_parent (priv->cell_view))
     {
       __gtk_widget_unparent (priv->cell_view);
-      GTK_BIN (container)->child = NULL;
+      gtk_bin_get_props (GTK_BIN (container))->child = NULL;
       __gtk_widget_queue_resize (GTK_WIDGET (container));
     }
   
   __gtk_widget_set_parent (widget, GTK_WIDGET (container));
-  GTK_BIN (container)->child = widget;
+  gtk_bin_get_props (GTK_BIN (container))->child = widget;
 
   if (priv->cell_view &&
       widget != priv->cell_view)
@@ -1307,7 +1307,7 @@ gtk_combo_box_add (GtkContainer *container,
     {
       /* this flag is a hack to tell the entry to fill its allocation.
        */
-      GTK_ENTRY (widget)->is_cell_renderer = TRUE;
+      gtk_entry_get_props (GTK_ENTRY (widget))->is_cell_renderer = TRUE;
 
       g_signal_connect (widget, "changed",
 			G_CALLBACK (gtk_combo_box_entry_contents_changed),
@@ -1336,7 +1336,7 @@ gtk_combo_box_remove (GtkContainer *container,
 	  g_signal_handlers_disconnect_by_func (widget,
 						gtk_combo_box_entry_contents_changed,
 						container);
-	  GTK_ENTRY (widget)->is_cell_renderer = FALSE;
+	  gtk_entry_get_props (GTK_ENTRY (widget))->is_cell_renderer = FALSE;
 	}
     }
 
@@ -1344,7 +1344,7 @@ gtk_combo_box_remove (GtkContainer *container,
     priv->cell_view = NULL;
 
   __gtk_widget_unparent (widget);
-  GTK_BIN (container)->child = NULL;
+  gtk_bin_get_props (GTK_BIN (container))->child = NULL;
 
   __gtk_widget_queue_resize (GTK_WIDGET (container));
 
@@ -1366,7 +1366,7 @@ gtk_combo_box_remove (GtkContainer *container,
     {
       priv->cell_view = __gtk_cell_view_new ();
       __gtk_widget_set_parent (priv->cell_view, GTK_WIDGET (container));
-      GTK_BIN (container)->child = priv->cell_view;
+      gtk_bin_get_props (GTK_BIN (container))->child = priv->cell_view;
       
       __gtk_widget_show (priv->cell_view);
       __gtk_cell_view_set_model (GTK_CELL_VIEW (priv->cell_view),
@@ -1500,9 +1500,9 @@ gtk_combo_box_set_popup_widget (GtkComboBox *combo_box,
        * menu itself, since the menu is not shown/hidden when it is
        * popped up while torn-off.
        */
-      g_signal_connect (GTK_MENU (popup)->toplevel, "show",
+      g_signal_connect (gtk_menu_get_props (GTK_MENU (popup))->toplevel, "show",
                         G_CALLBACK (gtk_combo_box_menu_show), combo_box);
-      g_signal_connect (GTK_MENU (popup)->toplevel, "hide",
+      g_signal_connect (gtk_menu_get_props (GTK_MENU (popup))->toplevel, "hide",
                         G_CALLBACK (gtk_combo_box_menu_hide), combo_box);
 
       __gtk_menu_attach_to_widget (GTK_MENU (popup),
@@ -1570,7 +1570,7 @@ gtk_combo_box_menu_position_below (GtkMenu  *menu,
   GdkRectangle monitor;
   
   /* FIXME: is using the size request here broken? */
-  child = GTK_BIN (combo_box)->child;
+  child = gtk_bin_get_props (GTK_BIN (combo_box))->child;
 
   sx = sy = 0;
 
@@ -1583,7 +1583,7 @@ gtk_combo_box_menu_position_below (GtkMenu  *menu,
   __gdk_window_get_root_coords (gtk_widget_get_props (child)->window, sx, sy, &sx, &sy);
 
   if (GTK_SHADOW_NONE != gtk_combo_box_get_props (combo_box)->priv->shadow_type)
-    sx -= GTK_WIDGET (combo_box)->style->xthickness;
+    sx -= gtk_widget_get_props (GTK_WIDGET (combo_box))->style->xthickness;
 
   __gtk_widget_size_request (GTK_WIDGET (menu), &req);
 
@@ -1595,7 +1595,7 @@ gtk_combo_box_menu_position_below (GtkMenu  *menu,
 
   screen = __gtk_widget_get_screen (GTK_WIDGET (combo_box));
   monitor_num = __gdk_screen_get_monitor_at_window (screen, 
-						  GTK_WIDGET (combo_box)->window);
+						  gtk_widget_get_props (GTK_WIDGET (combo_box))->window);
   __gdk_screen_get_monitor_geometry (screen, monitor_num, &monitor);
   
   if (*x < monitor.x)
@@ -1764,7 +1764,7 @@ gtk_combo_box_list_position (GtkComboBox *combo_box,
 
   screen = __gtk_widget_get_screen (GTK_WIDGET (combo_box));
   monitor_num = __gdk_screen_get_monitor_at_window (screen, 
-						  GTK_WIDGET (combo_box)->window);
+						  gtk_widget_get_props (GTK_WIDGET (combo_box))->window);
   __gdk_screen_get_monitor_geometry (screen, monitor_num, &monitor);
 
   if (*x < monitor.x)
@@ -1872,7 +1872,7 @@ update_menu_sensitivity (GtkComboBox *combo_box,
   for (child = children; child; child = child->next)
     {
       item = GTK_WIDGET (child->data);
-      cell_view = GTK_BIN (item)->child;
+      cell_view = gtk_bin_get_props (GTK_BIN (item))->child;
 
       if (!GTK_IS_CELL_VIEW (cell_view))
 	continue;
@@ -1930,7 +1930,7 @@ gtk_combo_box_menu_popup (GtkComboBox *combo_box,
   
   if (priv->wrap_width == 0)
     {
-      width = GTK_WIDGET (combo_box)->allocation.width;
+      width = gtk_widget_get_props (GTK_WIDGET (combo_box))->allocation.width;
       __gtk_widget_set_size_request (priv->popup_widget, -1, -1);
       __gtk_widget_size_request (priv->popup_widget, &requisition);
       
@@ -2200,7 +2200,7 @@ gtk_combo_box_size_request (GtkWidget      *widget,
   GtkComboBoxPrivate *priv = gtk_combo_box_get_props (combo_box)->priv;
  
   /* common */
-  __gtk_widget_size_request (GTK_BIN (widget)->child, &bin_req);
+  __gtk_widget_size_request (gtk_bin_get_props (GTK_BIN (widget))->child, &bin_req);
   gtk_combo_box_remeasure (combo_box);
   bin_req.width = MAX (bin_req.width, priv->width);
   bin_req.height = MAX (bin_req.height, priv->height);
@@ -2211,7 +2211,7 @@ gtk_combo_box_size_request (GtkWidget      *widget,
 			"arrow-size", &arrow_size,
 			NULL);
 
-  font_desc = GTK_BIN (widget)->child->style->font_desc;
+  font_desc = gtk_bin_get_props (GTK_BIN (widget))->child->style->font_desc;
   context = __gtk_widget_get_pango_context (widget);
   metrics = pango_context_get_metrics (context, font_desc,
 				       pango_context_get_language (context));
@@ -2233,7 +2233,7 @@ gtk_combo_box_size_request (GtkWidget      *widget,
           gint border_width, xthickness, ythickness;
 
           __gtk_widget_size_request (priv->button, &button_req);
-	  border_width = GTK_CONTAINER (combo_box)->border_width;
+	  border_width = gtk_container_get_props (GTK_CONTAINER (combo_box))->border_width;
           xthickness = priv->button->style->xthickness;
           ythickness = priv->button->style->ythickness;
 
@@ -2424,7 +2424,7 @@ gtk_combo_box_size_allocate (GtkWidget     *widget,
               __gtk_menu_reposition (GTK_MENU (priv->popup_widget));
               if (priv->wrap_width == 0)
                 {
-                  width = GTK_WIDGET (combo_box)->allocation.width;
+                  width = gtk_widget_get_props (GTK_WIDGET (combo_box))->allocation.width;
                   __gtk_widget_set_size_request (priv->popup_widget, -1, -1);
                   __gtk_widget_size_request (priv->popup_widget, &requisition);
                   __gtk_widget_set_size_request (priv->popup_widget,
@@ -2434,7 +2434,7 @@ gtk_combo_box_size_allocate (GtkWidget     *widget,
 
 	  child.width = MAX (1, child.width);
 	  child.height = MAX (1, child.height);
-          __gtk_widget_size_allocate (GTK_BIN (widget)->child, &child);
+          __gtk_widget_size_allocate (gtk_bin_get_props (GTK_BIN (widget))->child, &child);
         }
       else
         {
@@ -2448,7 +2448,7 @@ gtk_combo_box_size_allocate (GtkWidget     *widget,
           child.width = allocation->width - req.width - 2 * shadow_width;
 	  child.width = MAX (1, child.width);
 	  child.height = MAX (1, child.height);
-          __gtk_widget_size_allocate (GTK_BIN (widget)->child, &child);
+          __gtk_widget_size_allocate (gtk_bin_get_props (GTK_BIN (widget))->child, &child);
         }
     }
   else
@@ -2456,8 +2456,8 @@ gtk_combo_box_size_allocate (GtkWidget     *widget,
       /* list mode */
 
       /* Combobox thickness + border-width */
-      int delta_x = shadow_width + GTK_CONTAINER (widget)->border_width;
-      int delta_y = shadow_height + GTK_CONTAINER (widget)->border_width;
+      int delta_x = shadow_width + gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
+      int delta_y = shadow_height + gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
 
       /* button */
       GTK_COMBO_BOX_SIZE_ALLOCATE_BUTTON
@@ -2514,7 +2514,7 @@ gtk_combo_box_size_allocate (GtkWidget     *widget,
       child.width = MAX (1, child.width);
       child.height = MAX (1, child.height);
       
-      __gtk_widget_size_allocate (GTK_BIN (combo_box)->child, &child);
+      __gtk_widget_size_allocate (gtk_bin_get_props (GTK_BIN (combo_box))->child, &child);
     }
 }
 
@@ -2578,8 +2578,8 @@ gtk_combo_box_forall (GtkContainer *container,
 	(* callback) (priv->cell_view_frame, callback_data);
     }
 
-  if (GTK_BIN (container)->child)
-    (* callback) (GTK_BIN (container)->child, callback_data);
+  if (gtk_bin_get_props (GTK_BIN (container))->child)
+    (* callback) (gtk_bin_get_props (GTK_BIN (container))->child, callback_data);
 }
 
 static void 
@@ -2629,7 +2629,7 @@ gtk_combo_box_expose_event (GtkWidget      *widget,
     }
 
   __gtk_container_propagate_expose (GTK_CONTAINER (widget),
-                                  GTK_BIN (widget)->child, event);
+                                  gtk_bin_get_props (GTK_BIN (widget))->child, event);
 
   return FALSE;
 }
@@ -2920,7 +2920,7 @@ gtk_combo_box_menu_setup (GtkComboBox *combo_box,
       g_signal_connect (priv->button, "toggled",
                         G_CALLBACK (gtk_combo_box_button_toggled), combo_box);
       __gtk_widget_set_parent (priv->button,
-                             GTK_BIN (combo_box)->child->parent);
+                             gtk_bin_get_props (GTK_BIN (combo_box))->child->parent);
 
       priv->box = __gtk_hbox_new (FALSE, 0);
       __gtk_container_add (GTK_CONTAINER (priv->button), priv->box);
@@ -2942,7 +2942,7 @@ gtk_combo_box_menu_setup (GtkComboBox *combo_box,
       g_signal_connect (priv->button, "toggled",
                         G_CALLBACK (gtk_combo_box_button_toggled), combo_box);
       __gtk_widget_set_parent (priv->button,
-                             GTK_BIN (combo_box)->child->parent);
+                             gtk_bin_get_props (GTK_BIN (combo_box))->child->parent);
 
       priv->arrow = __gtk_arrow_new (GTK_ARROW_DOWN, GTK_SHADOW_NONE);
       __gtk_container_add (GTK_CONTAINER (priv->button), priv->arrow);
@@ -3149,7 +3149,7 @@ menu_occupied (GtkMenu   *menu,
 {
   GList *i;
 
-  for (i = GTK_MENU_SHELL (menu)->children; i; i = i->next)
+  for (i = gtk_menu_shell_get_props (GTK_MENU_SHELL (menu))->children; i; i = i->next)
     {
       guint l, r, b, t;
 
@@ -3287,7 +3287,7 @@ gtk_combo_box_menu_item_activate (GtkWidget *item,
   GtkTreePath *path;
   GtkTreeIter iter;
 
-  cell_view = GTK_BIN (item)->child;
+  cell_view = gtk_bin_get_props (GTK_BIN (item))->child;
 
   g_return_if_fail (GTK_IS_CELL_VIEW (cell_view));
 
@@ -3608,7 +3608,7 @@ gtk_combo_box_menu_row_inserted (GtkTreeModel *model,
 			    combo_box);
 	  __gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 	  __gtk_menu_shell_append (GTK_MENU_SHELL (menu), separator);
-	  if (cell_view_is_sensitive (GTK_CELL_VIEW (GTK_BIN (item)->child)))
+	  if (cell_view_is_sensitive (GTK_CELL_VIEW (gtk_bin_get_props (GTK_BIN (item))->child)))
 	    {
 	      __gtk_widget_show (item);
 	      __gtk_widget_show (separator);
@@ -3779,7 +3779,7 @@ gtk_combo_box_list_setup (GtkComboBox *combo_box)
 
   priv->button = __gtk_toggle_button_new ();
   __gtk_widget_set_parent (priv->button,
-                         GTK_BIN (combo_box)->child->parent);
+                         gtk_bin_get_props (GTK_BIN (combo_box))->child->parent);
   g_signal_connect (priv->button, "button-press-event",
                     G_CALLBACK (gtk_combo_box_list_button_pressed), combo_box);
   g_signal_connect (priv->button, "toggled",
@@ -3814,7 +3814,7 @@ gtk_combo_box_list_setup (GtkComboBox *combo_box)
 	}
       
       __gtk_widget_set_parent (priv->cell_view_frame,
-			     GTK_BIN (combo_box)->child->parent);
+			     gtk_bin_get_props (GTK_BIN (combo_box))->child->parent);
       __gtk_container_add (GTK_CONTAINER (priv->cell_view_frame), priv->box);
       __gtk_widget_show_all (priv->cell_view_frame);
 
@@ -5836,11 +5836,11 @@ gtk_combo_box_start_editing (GtkCellEditable *cell_editable,
     }
   else
     {
-      g_signal_connect_object (GTK_BIN (combo_box)->child, "key-press-event",
+      g_signal_connect_object (gtk_bin_get_props (GTK_BIN (combo_box))->child, "key-press-event",
 			       G_CALLBACK (gtk_cell_editable_key_press), 
 			       cell_editable, 0);  
 
-      __gtk_widget_grab_focus (GTK_WIDGET (GTK_BIN (combo_box)->child));
+      __gtk_widget_grab_focus (GTK_WIDGET (gtk_bin_get_props (GTK_BIN (combo_box))->child));
       __gtk_widget_set_can_focus (gtk_combo_box_get_props (combo_box)->priv->button, FALSE);
     }
 

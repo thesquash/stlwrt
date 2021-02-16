@@ -412,7 +412,7 @@ gtk_list_store_get_column_type (GtkTreeModel *tree_model,
 {
   GtkListStore *list_store = (GtkListStore *) tree_model;
 
-  g_return_val_if_fail (index < GTK_LIST_STORE (tree_model)->n_columns, 
+  g_return_val_if_fail (index < gtk_list_store_get_props (GTK_LIST_STORE (tree_model))->n_columns, 
 			G_TYPE_INVALID);
 
   gtk_list_store_get_props (list_store)->columns_dirty = TRUE;
@@ -450,7 +450,7 @@ gtk_list_store_get_path (GtkTreeModel *tree_model,
 {
   GtkTreePath *path;
 
-  g_return_val_if_fail (iter->stamp == GTK_LIST_STORE (tree_model)->stamp, NULL);
+  g_return_val_if_fail (iter->stamp == gtk_list_store_get_props (GTK_LIST_STORE (tree_model))->stamp, NULL);
 
   if (g_sequence_iter_is_end (iter->user_data))
     return NULL;
@@ -493,7 +493,7 @@ gtk_list_store_iter_next (GtkTreeModel  *tree_model,
 {
   gboolean retval;
 
-  g_return_val_if_fail (GTK_LIST_STORE (tree_model)->stamp == iter->stamp, FALSE);
+  g_return_val_if_fail (gtk_list_store_get_props (GTK_LIST_STORE (tree_model))->stamp == iter->stamp, FALSE);
   iter->user_data = g_sequence_iter_next (iter->user_data);
 
   retval = g_sequence_iter_is_end (iter->user_data);
@@ -1390,7 +1390,7 @@ gtk_list_store_row_drop_possible (GtkTreeDragDest  *drag_dest,
 
   indices = __gtk_tree_path_get_indices (dest_path);
 
-  if (indices[0] <= g_sequence_get_length (GTK_LIST_STORE (drag_dest)->seq))
+  if (indices[0] <= g_sequence_get_length (gtk_list_store_get_props (GTK_LIST_STORE (drag_dest))->seq))
     retval = TRUE;
 
  out:
@@ -2332,7 +2332,7 @@ gtk_list_store_buildable_custom_tag_start (GtkBuildable  *buildable,
       parser_data->values = g_new0 (GValue, n_columns);
       parser_data->colids = g_new0 (gint, n_columns);
       parser_data->columns = g_new0 (ColInfo*, n_columns);
-      parser_data->column_types = GTK_LIST_STORE (buildable)->column_headers;
+      parser_data->column_types = gtk_list_store_get_props (GTK_LIST_STORE (buildable))->column_headers;
       parser_data->n_columns = n_columns;
       parser_data->last_row = 0;
       parser_data->error_quark = g_quark_from_static_string ("GtkListStore");

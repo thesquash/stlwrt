@@ -1307,7 +1307,7 @@ gtk_notebook_move_focus_out (GtkNotebook      *notebook,
   GtkDirectionType effective_direction = get_effective_direction (notebook, direction_type);
   GtkWidget *toplevel;
   
-  if (GTK_CONTAINER (notebook)->focus_child && effective_direction == GTK_DIR_UP)
+  if (gtk_container_get_props (GTK_CONTAINER (notebook))->focus_child && effective_direction == GTK_DIR_UP)
     if (focus_tabs_in (notebook))
       return;
   if (__gtk_widget_is_focus (GTK_WIDGET (notebook)) && effective_direction == GTK_DIR_DOWN)
@@ -1608,7 +1608,7 @@ gtk_notebook_get_event_window_position (GtkNotebook  *notebook,
 {
   GtkNotebookPrivate *priv = GTK_NOTEBOOK_GET_PRIVATE (notebook);
   GtkWidget *widget = GTK_WIDGET (notebook);
-  gint border_width = GTK_CONTAINER (notebook)->border_width;
+  gint border_width = gtk_container_get_props (GTK_CONTAINER (notebook))->border_width;
   GtkNotebookPage *visible_page = NULL;
   GList *tmp_list;
   gint tab_pos = get_effective_tab_pos (notebook);
@@ -1747,7 +1747,7 @@ gtk_notebook_unmap (GtkWidget *widget)
   
   __gtk_widget_set_mapped (widget, FALSE);
 
-  __gdk_window_hide (GTK_NOTEBOOK (widget)->event_window);
+  __gdk_window_hide (gtk_notebook_get_props (GTK_NOTEBOOK (widget))->event_window);
 
   GTK_WIDGET_CLASS (gtk_notebook_parent_class)->unmap (widget);
 }
@@ -2133,7 +2133,7 @@ gtk_notebook_size_allocate (GtkWidget     *widget,
 
   if (gtk_notebook_get_props (notebook)->children)
     {
-      gint border_width = GTK_CONTAINER (widget)->border_width;
+      gint border_width = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
       GtkNotebookPage *page;
       GtkAllocation child_allocation;
       GList *children;
@@ -3304,7 +3304,7 @@ on_drag_icon_expose (GtkWidget      *widget,
   gint gap_pos;
 
   notebook = GTK_WIDGET (data);
-  child = GTK_BIN (widget)->child;
+  child = gtk_bin_get_props (GTK_BIN (widget))->child;
   __gtk_widget_size_request (widget, &requisition);
   gap_pos = get_tab_gap_pos (GTK_NOTEBOOK (notebook));
 
@@ -3491,8 +3491,8 @@ gtk_notebook_drag_motion (GtkWidget      *widget,
 
       if (widget_group && source_widget_group &&
 	  widget_group == source_widget_group &&
-	  !(widget == GTK_NOTEBOOK (source_widget)->cur_page->child || 
-	    __gtk_widget_is_ancestor (widget, GTK_NOTEBOOK (source_widget)->cur_page->child)))
+	  !(widget == gtk_notebook_get_props (GTK_NOTEBOOK (source_widget))->cur_page->child || 
+	    __gtk_widget_is_ancestor (widget, gtk_notebook_get_props (GTK_NOTEBOOK (source_widget))->cur_page->child)))
 	{
 	  __gdk_drag_status (context, GDK_ACTION_MOVE, time);
 	  return TRUE;
@@ -3615,8 +3615,8 @@ do_detach_tab (GtkNotebook     *from,
   __gtk_container_remove (GTK_CONTAINER (from), child);
 
   priv = GTK_NOTEBOOK_GET_PRIVATE (to);
-  priv->mouse_x = x + GTK_WIDGET (to)->allocation.x;
-  priv->mouse_y = y + GTK_WIDGET (to)->allocation.y;
+  priv->mouse_x = x + gtk_widget_get_props (GTK_WIDGET (to))->allocation.x;
+  priv->mouse_y = y + gtk_widget_get_props (GTK_WIDGET (to))->allocation.y;
 
   element = get_drop_position (to, tab_pack);
   page_num = g_list_position (gtk_notebook_get_props (to)->children, element);
@@ -3800,7 +3800,7 @@ gtk_notebook_get_child_property (GtkContainer    *container,
       label = __gtk_notebook_get_tab_label (notebook, child);
 
       if (GTK_IS_LABEL (label))
-	g_value_set_string (value, GTK_LABEL (label)->label);
+	g_value_set_string (value, gtk_label_get_props (GTK_LABEL (label))->label);
       else
 	g_value_set_string (value, NULL);
       break;
@@ -3808,7 +3808,7 @@ gtk_notebook_get_child_property (GtkContainer    *container,
       label = __gtk_notebook_get_menu_label (notebook, child);
 
       if (GTK_IS_LABEL (label))
-	g_value_set_string (value, GTK_LABEL (label)->label);
+	g_value_set_string (value, gtk_label_get_props (GTK_LABEL (label))->label);
       else
 	g_value_set_string (value, NULL);
       break;
@@ -4157,7 +4157,7 @@ gtk_notebook_set_focus_child (GtkContainer *container,
   toplevel = __gtk_widget_get_toplevel (GTK_WIDGET (container));
   if (toplevel && __gtk_widget_is_toplevel (toplevel))
     {
-      page_child = GTK_WINDOW (toplevel)->focus_widget; 
+      page_child = gtk_window_get_props (GTK_WINDOW (toplevel))->focus_widget; 
       while (page_child)
 	{
 	  if (gtk_widget_get_props (page_child)->parent == GTK_WIDGET (container))
@@ -4170,7 +4170,7 @@ gtk_notebook_set_focus_child (GtkContainer *container,
 		  if (page->last_focus_child)
 		    g_object_remove_weak_pointer (G_OBJECT (page->last_focus_child), (gpointer *)&page->last_focus_child);
 		  
-		  page->last_focus_child = GTK_WINDOW (toplevel)->focus_widget;
+		  page->last_focus_child = gtk_window_get_props (GTK_WINDOW (toplevel))->focus_widget;
 		  g_object_add_weak_pointer (G_OBJECT (page->last_focus_child), (gpointer *)&page->last_focus_child);
 	      
 		  break;
@@ -4405,7 +4405,7 @@ gtk_notebook_redraw_tabs (GtkNotebook *notebook)
   gint tab_pos = get_effective_tab_pos (notebook);
 
   widget = GTK_WIDGET (notebook);
-  border = GTK_CONTAINER (notebook)->border_width;
+  border = gtk_container_get_props (GTK_CONTAINER (notebook))->border_width;
 
   if (!__gtk_widget_get_mapped (widget) || !gtk_notebook_get_props (notebook)->first_tab)
     return;
@@ -4474,7 +4474,7 @@ gtk_notebook_redraw_arrows (GtkNotebook *notebook)
 	    continue;
 
 	  gtk_notebook_get_arrow_rect (notebook, &rect, arrow[i]);
-	  __gdk_window_invalidate_rect (GTK_WIDGET (notebook)->window, 
+	  __gdk_window_invalidate_rect (gtk_widget_get_props (GTK_WIDGET (notebook))->window, 
 				      &rect, FALSE);
 	}
     }
@@ -4804,7 +4804,7 @@ gtk_notebook_paint (GtkWidget    *widget,
   gboolean showarrow;
   gint width, height;
   gint x, y;
-  gint border_width = GTK_CONTAINER (widget)->border_width;
+  gint border_width = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
   gint gap_x = 0, gap_width = 0, step = STEP_PREV;
   gboolean is_rtl;
   gint tab_pos;
@@ -5089,8 +5089,8 @@ gtk_notebook_tab_space (GtkNotebook *notebook,
     {
     case GTK_POS_TOP:
     case GTK_POS_BOTTOM:
-      *min = gtk_widget_get_props (widget)->allocation.x + GTK_CONTAINER (notebook)->border_width;
-      *max = gtk_widget_get_props (widget)->allocation.x + gtk_widget_get_props (widget)->allocation.width - GTK_CONTAINER (notebook)->border_width;
+      *min = gtk_widget_get_props (widget)->allocation.x + gtk_container_get_props (GTK_CONTAINER (notebook))->border_width;
+      *max = gtk_widget_get_props (widget)->allocation.x + gtk_widget_get_props (widget)->allocation.width - gtk_container_get_props (GTK_CONTAINER (notebook))->border_width;
 
       for (i = 0; i < N_ACTION_WIDGETS; i++)
         {
@@ -5118,8 +5118,8 @@ gtk_notebook_tab_space (GtkNotebook *notebook,
       break;
     case GTK_POS_RIGHT:
     case GTK_POS_LEFT:
-      *min = gtk_widget_get_props (widget)->allocation.y + GTK_CONTAINER (notebook)->border_width;
-      *max = gtk_widget_get_props (widget)->allocation.y + gtk_widget_get_props (widget)->allocation.height - GTK_CONTAINER (notebook)->border_width;
+      *min = gtk_widget_get_props (widget)->allocation.y + gtk_container_get_props (GTK_CONTAINER (notebook))->border_width;
+      *max = gtk_widget_get_props (widget)->allocation.y + gtk_widget_get_props (widget)->allocation.height - gtk_container_get_props (GTK_CONTAINER (notebook))->border_width;
 
       for (i = 0; i < N_ACTION_WIDGETS; i++)
         {
@@ -6262,8 +6262,8 @@ static void
 gtk_notebook_menu_label_unparent (GtkWidget *widget, 
 				  gpointer  data)
 {
-  __gtk_widget_unparent (GTK_BIN (widget)->child);
-  GTK_BIN (widget)->child = NULL;
+  __gtk_widget_unparent (gtk_bin_get_props (GTK_BIN (widget))->child);
+  gtk_bin_get_props (GTK_BIN (widget))->child = NULL;
 }
 
 static void

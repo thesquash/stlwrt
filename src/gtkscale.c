@@ -661,7 +661,7 @@ __gtk_scale_set_draw_value (GtkScale *scale,
       if (draw_value)
 	GTK_RANGE (gtk_scale_get_props (scale))->round_digits = gtk_scale_get_props (scale)->digits;
       else
-	GTK_RANGE (scale)->round_digits = -1;
+	gtk_range_get_props (GTK_RANGE (scale))->round_digits = -1;
 
       ___gtk_scale_clear_layout (scale);
 
@@ -786,7 +786,7 @@ gtk_scale_get_range_border (GtkRange  *range,
                             NULL);
 
 
-      if (GTK_RANGE (scale)->orientation == GTK_ORIENTATION_HORIZONTAL)
+      if (gtk_range_get_props (GTK_RANGE (scale))->orientation == GTK_ORIENTATION_HORIZONTAL)
         {
           gtk_scale_get_mark_label_size (scale, GTK_POS_TOP, &n1, &w1, &h1, &n2, &w2, &h2);
           if (n1 > 0)
@@ -990,7 +990,7 @@ find_next_pos (GtkWidget      *widget,
         return marks[i];
     }
     
-  if (GTK_RANGE(widget)->orientation == GTK_ORIENTATION_HORIZONTAL)
+  if (gtk_range_get_props (GTK_RANGE(widget))->orientation == GTK_ORIENTATION_HORIZONTAL)
     return gtk_widget_get_props (widget)->allocation.width;
   else
     return gtk_widget_get_props (widget)->allocation.height;
@@ -1335,7 +1335,7 @@ __gtk_scale_get_layout (GtkScale *scale)
   if (gtk_scale_get_props (scale)->draw_value) 
     {
       txt = ___gtk_scale_format_value (scale,
-				     GTK_RANGE (scale)->gtk_adjustment_get_props (adjustment)->value);
+				     gtk_range_get_props (GTK_RANGE (scale))->gtk_adjustment_get_props (adjustment)->value);
       pango_layout_set_text (priv->layout, txt, -1);
       g_free (txt);
     }

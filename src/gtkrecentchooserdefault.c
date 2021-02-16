@@ -756,7 +756,7 @@ set_busy_cursor (GtkRecentChooserDefault *impl,
   if (show_busy_cursor)
     cursor = __gdk_cursor_new_for_display (display, GDK_WATCH);
 
-  __gdk_window_set_cursor (GTK_WIDGET (toplevel)->window, cursor);
+  __gdk_window_set_cursor (gtk_widget_get_props (GTK_WIDGET (toplevel))->window, cursor);
   __gdk_display_flush (display);
 
   if (cursor)

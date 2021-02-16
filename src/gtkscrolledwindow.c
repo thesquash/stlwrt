@@ -1275,8 +1275,8 @@ gtk_scrolled_window_size_request (GtkWidget      *widget,
 	extra_width = scrollbar_spacing + vscrollbar_requisition.width;
     }
 
-  requisition->width += GTK_CONTAINER (widget)->border_width * 2 + MAX (0, extra_width);
-  requisition->height += GTK_CONTAINER (widget)->border_width * 2 + MAX (0, extra_height);
+  requisition->width += gtk_container_get_props (GTK_CONTAINER (widget))->border_width * 2 + MAX (0, extra_width);
+  requisition->height += gtk_container_get_props (GTK_CONTAINER (widget))->border_width * 2 + MAX (0, extra_height);
 
   if (gtk_scrolled_window_get_props (scrolled_window)->shadow_type != GTK_SHADOW_NONE)
     {
@@ -1301,8 +1301,8 @@ gtk_scrolled_window_relative_allocation (GtkWidget     *widget,
 
   priv = GTK_SCROLLED_WINDOW_GET_PRIVATE (scrolled_window);
 
-  allocation->x = GTK_CONTAINER (widget)->border_width;
-  allocation->y = GTK_CONTAINER (widget)->border_width;
+  allocation->x = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
+  allocation->y = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
 
   if (gtk_scrolled_window_get_props (scrolled_window)->shadow_type != GTK_SHADOW_NONE)
     {
@@ -1446,7 +1446,7 @@ gtk_scrolled_window_size_allocate (GtkWidget     *widget,
 			      (gtk_scrolled_window_get_props (scrolled_window)->shadow_type == GTK_SHADOW_NONE ?
 			       0 : gtk_widget_get_props (widget)->style->ythickness));
       else
-	child_allocation.y = GTK_CONTAINER (scrolled_window)->border_width;
+	child_allocation.y = gtk_container_get_props (GTK_CONTAINER (scrolled_window))->border_width;
 
       child_allocation.width = relative_allocation.width;
       child_allocation.height = hscrollbar_requisition.height;
@@ -1497,7 +1497,7 @@ gtk_scrolled_window_size_allocate (GtkWidget     *widget,
 			      (gtk_scrolled_window_get_props (scrolled_window)->shadow_type == GTK_SHADOW_NONE ?
 			       0 : gtk_widget_get_props (widget)->style->xthickness));
       else
-	child_allocation.x = GTK_CONTAINER (scrolled_window)->border_width;
+	child_allocation.x = gtk_container_get_props (GTK_CONTAINER (scrolled_window))->border_width;
 
       child_allocation.y = relative_allocation.y;
       child_allocation.width = vscrollbar_requisition.width;
@@ -1539,13 +1539,13 @@ gtk_scrolled_window_scroll_event (GtkWidget      *widget,
   g_return_val_if_fail (event != NULL, FALSE);  
 
   if (event->direction == GDK_SCROLL_UP || event->direction == GDK_SCROLL_DOWN)
-    range = GTK_SCROLLED_WINDOW (widget)->vscrollbar;
+    range = gtk_scrolled_window_get_props (GTK_SCROLLED_WINDOW (widget))->vscrollbar;
   else
-    range = GTK_SCROLLED_WINDOW (widget)->hscrollbar;
+    range = gtk_scrolled_window_get_props (GTK_SCROLLED_WINDOW (widget))->hscrollbar;
 
   if (range && __gtk_widget_get_visible (range))
     {
-      GtkAdjustment *adj = GTK_RANGE (range)->adjustment;
+      GtkAdjustment *adj = gtk_range_get_props (GTK_RANGE (range))->adjustment;
       gdouble delta, new_value;
 
       delta = ___gtk_range_get_wheel_delta (GTK_RANGE (range), event->direction);
@@ -1565,7 +1565,7 @@ gtk_scrolled_window_focus (GtkWidget        *widget,
 			   GtkDirectionType  direction)
 {
   GtkScrolledWindow *scrolled_window = GTK_SCROLLED_WINDOW (widget);
-  gboolean had_focus_child = GTK_CONTAINER (widget)->focus_child != NULL;
+  gboolean had_focus_child = gtk_container_get_props (GTK_CONTAINER (widget))->focus_child != NULL;
   
   if (gtk_scrolled_window_get_props (scrolled_window)->focus_out)
     {
@@ -1579,9 +1579,9 @@ gtk_scrolled_window_focus (GtkWidget        *widget,
   /* We only put the scrolled window itself in the focus chain if it
    * isn't possible to focus any children.
    */
-  if (GTK_BIN (widget)->child)
+  if (gtk_bin_get_props (GTK_BIN (widget))->child)
     {
-      if (__gtk_widget_child_focus (GTK_BIN (widget)->child, direction))
+      if (__gtk_widget_child_focus (gtk_bin_get_props (GTK_BIN (widget))->child, direction))
 	return TRUE;
     }
 
@@ -1664,7 +1664,7 @@ gtk_scrolled_window_remove (GtkContainer *container,
 {
   g_return_if_fail (GTK_IS_SCROLLED_WINDOW (container));
   g_return_if_fail (child != NULL);
-  g_return_if_fail (GTK_BIN (container)->child == child);
+  g_return_if_fail (gtk_bin_get_props (GTK_BIN (container))->child == child);
   
   __gtk_widget_set_scroll_adjustments (child, NULL, NULL);
 

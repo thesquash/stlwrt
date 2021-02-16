@@ -384,10 +384,10 @@ gtk_expander_realize (GtkWidget *widget)
   GdkRectangle expander_rect;
   gint label_height;
 
-  priv = GTK_EXPANDER (widget)->priv;
+  priv = gtk_expander_get_props (GTK_EXPANDER (widget))->priv;
   __gtk_widget_set_realized (widget, TRUE);
 
-  border_width = GTK_CONTAINER (widget)->border_width;
+  border_width = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
 
   get_expander_bounds (GTK_EXPANDER (widget), &expander_rect);
   
@@ -428,7 +428,7 @@ gtk_expander_realize (GtkWidget *widget)
 static void
 gtk_expander_unrealize (GtkWidget *widget)
 {
-  GtkExpanderPrivate *priv = GTK_EXPANDER (widget)->priv;
+  GtkExpanderPrivate *priv = gtk_expander_get_props (GTK_EXPANDER (widget))->priv;
 
   if (priv->event_window)
     {
@@ -458,7 +458,7 @@ gtk_expander_size_request (GtkWidget      *widget,
   expander = GTK_EXPANDER (widget);
   priv = gtk_expander_get_props (expander)->priv;
 
-  border_width = GTK_CONTAINER (widget)->border_width;
+  border_width = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
 
   __gtk_widget_style_get (widget,
 			"interior-focus", &interior_focus,
@@ -518,7 +518,7 @@ get_expander_bounds (GtkExpander  *expander,
   widget = GTK_WIDGET (expander);
   priv = gtk_expander_get_props (expander)->priv;
 
-  border_width = GTK_CONTAINER (expander)->border_width;
+  border_width = gtk_container_get_props (GTK_CONTAINER (expander))->border_width;
 
   __gtk_widget_style_get (widget,
 			"interior-focus", &interior_focus,
@@ -588,7 +588,7 @@ gtk_expander_size_allocate (GtkWidget     *widget,
   bin = GTK_BIN (widget);
   priv = gtk_expander_get_props (expander)->priv;
 
-  border_width = GTK_CONTAINER (widget)->border_width;
+  border_width = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
 
   __gtk_widget_style_get (widget,
 			"interior-focus", &interior_focus,
@@ -702,7 +702,7 @@ gtk_expander_size_allocate (GtkWidget     *widget,
 static void
 gtk_expander_map (GtkWidget *widget)
 {
-  GtkExpanderPrivate *priv = GTK_EXPANDER (widget)->priv;
+  GtkExpanderPrivate *priv = gtk_expander_get_props (GTK_EXPANDER (widget))->priv;
 
   if (priv->label_widget)
     __gtk_widget_map (priv->label_widget);
@@ -716,7 +716,7 @@ gtk_expander_map (GtkWidget *widget)
 static void
 gtk_expander_unmap (GtkWidget *widget)
 {
-  GtkExpanderPrivate *priv = GTK_EXPANDER (widget)->priv;
+  GtkExpanderPrivate *priv = gtk_expander_get_props (GTK_EXPANDER (widget))->priv;
 
   if (priv->event_window)
     __gdk_window_hide (priv->event_window);
@@ -822,7 +822,7 @@ gtk_expander_paint_focus (GtkExpander  *expander,
   widget = GTK_WIDGET (expander);
   priv = gtk_expander_get_props (expander)->priv;
 
-  border_width = GTK_CONTAINER (widget)->border_width;
+  border_width = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
 
   __gtk_widget_style_get (widget,
 			"interior-focus", &interior_focus,
@@ -939,7 +939,7 @@ gtk_expander_grab_notify (GtkWidget *widget,
 			  gboolean   was_grabbed)
 {
   if (!was_grabbed)
-    GTK_EXPANDER (widget)->priv->button_down = FALSE;
+    gtk_expander_get_props (GTK_EXPANDER (widget))->priv->button_down = FALSE;
 }
 
 static void
@@ -947,7 +947,7 @@ gtk_expander_state_changed (GtkWidget    *widget,
 			    GtkStateType  previous_state)
 {
   if (!__gtk_widget_is_sensitive (widget))
-    GTK_EXPANDER (widget)->priv->button_down = FALSE;
+    gtk_expander_get_props (GTK_EXPANDER (widget))->priv->button_down = FALSE;
 }
 
 static void
@@ -1072,7 +1072,7 @@ focus_current_site (GtkExpander      *expander,
 {
   GtkWidget *current_focus;
 
-  current_focus = GTK_CONTAINER (expander)->focus_child;
+  current_focus = gtk_container_get_props (GTK_CONTAINER (expander))->focus_child;
 
   if (!current_focus)
     return FALSE;
@@ -1196,7 +1196,7 @@ gtk_expander_focus (GtkWidget        *widget,
       FocusSite site = FOCUS_NONE;
       
       widget_is_focus = __gtk_widget_is_focus (widget);
-      old_focus_child = GTK_CONTAINER (widget)->focus_child;
+      old_focus_child = gtk_container_get_props (GTK_CONTAINER (widget))->focus_child;
       
       if (old_focus_child && old_focus_child == gtk_expander_get_props (expander)->priv->label_widget)
 	site = FOCUS_LABEL;
@@ -1223,7 +1223,7 @@ gtk_expander_add (GtkContainer *container,
 {
   GTK_CONTAINER_CLASS (gtk_expander_parent_class)->add (container, widget);
 
-  __gtk_widget_set_child_visible (widget, GTK_EXPANDER (container)->priv->expanded);
+  __gtk_widget_set_child_visible (widget, gtk_expander_get_props (GTK_EXPANDER (container))->priv->expanded);
   __gtk_widget_queue_resize (GTK_WIDGET (container));
 }
 
@@ -1233,7 +1233,7 @@ gtk_expander_remove (GtkContainer *container,
 {
   GtkExpander *expander = GTK_EXPANDER (container);
 
-  if (GTK_EXPANDER (expander)->priv->label_widget == widget)
+  if (gtk_expander_get_props (GTK_EXPANDER (expander))->priv->label_widget == widget)
     __gtk_expander_set_label_widget (expander, NULL);
   else
     GTK_CONTAINER_CLASS (gtk_expander_parent_class)->remove (container, widget);
@@ -1246,7 +1246,7 @@ gtk_expander_forall (GtkContainer *container,
 		     gpointer      callback_data)
 {
   GtkBin *bin = GTK_BIN (container);
-  GtkExpanderPrivate *priv = GTK_EXPANDER (container)->priv;
+  GtkExpanderPrivate *priv = gtk_expander_get_props (GTK_EXPANDER (container))->priv;
 
   if (gtk_bin_get_props (bin)->child)
     (* callback) (gtk_bin_get_props (bin)->child, callback_data);
@@ -1312,7 +1312,7 @@ gtk_expander_animation_timeout (GtkExpander *expander)
   if (__gtk_widget_get_realized (GTK_WIDGET (expander)))
     {
       get_expander_bounds (expander, &area);
-      __gdk_window_invalidate_rect (GTK_WIDGET (expander)->window, &area, TRUE);
+      __gdk_window_invalidate_rect (gtk_widget_get_props (GTK_WIDGET (expander))->window, &area, TRUE);
     }
 
   if (priv->expanded)
@@ -1343,8 +1343,8 @@ gtk_expander_animation_timeout (GtkExpander *expander)
   if (finish)
     {
       priv->animation_timeout = 0;
-      if (GTK_BIN (expander)->child)
-	__gtk_widget_set_child_visible (GTK_BIN (expander)->child, priv->expanded);
+      if (gtk_bin_get_props (GTK_BIN (expander))->child)
+	__gtk_widget_set_child_visible (gtk_bin_get_props (GTK_BIN (expander))->child, priv->expanded);
       __gtk_widget_queue_resize (GTK_WIDGET (expander));
     }
 
@@ -1406,9 +1406,9 @@ __gtk_expander_set_expanded (GtkExpander *expander,
 	  priv->expander_style = expanded ? GTK_EXPANDER_EXPANDED :
 					    GTK_EXPANDER_COLLAPSED;
 
-	  if (GTK_BIN (expander)->child)
+	  if (gtk_bin_get_props (GTK_BIN (expander))->child)
 	    {
-	      __gtk_widget_set_child_visible (GTK_BIN (expander)->child, priv->expanded);
+	      __gtk_widget_set_child_visible (gtk_bin_get_props (GTK_BIN (expander))->child, priv->expanded);
 	      __gtk_widget_queue_resize (GTK_WIDGET (expander));
 	    }
 	}

@@ -1594,7 +1594,7 @@ animation_timeout (gpointer data)
       __gtk_widget_queue_draw (GTK_WIDGET (image));
 
       if (__gtk_widget_is_drawable (GTK_WIDGET (image)))
-        __gdk_window_process_updates (GTK_WIDGET (image)->window, TRUE);
+        __gdk_window_process_updates (gtk_widget_get_props (GTK_WIDGET (image))->window, TRUE);
     }
 
   return FALSE;
@@ -1810,7 +1810,7 @@ gtk_image_expose (GtkWidget      *widget,
   g_return_val_if_fail (event != NULL, FALSE);
   
   if (__gtk_widget_get_mapped (widget) &&
-      GTK_IMAGE (widget)->storage_type != GTK_IMAGE_EMPTY)
+      gtk_image_get_props (GTK_IMAGE (widget))->storage_type != GTK_IMAGE_EMPTY)
     {
       GtkImage *image;
       GtkMisc *misc;
@@ -2316,8 +2316,8 @@ gtk_image_calc_size (GtkImage *image)
 
   if (pixbuf)
     {
-      gtk_widget_get_props (widget)->requisition.width = gdk_pixbuf_get_width (pixbuf) + GTK_MISC (image)->xpad * 2;
-      gtk_widget_get_props (widget)->requisition.height = gdk_pixbuf_get_height (pixbuf) + GTK_MISC (image)->ypad * 2;
+      gtk_widget_get_props (widget)->requisition.width = gdk_pixbuf_get_width (pixbuf) + gtk_misc_get_props (GTK_MISC (image))->xpad * 2;
+      gtk_widget_get_props (widget)->requisition.height = gdk_pixbuf_get_height (pixbuf) + gtk_misc_get_props (GTK_MISC (image))->ypad * 2;
 
       g_object_unref (pixbuf);
     }
@@ -2372,8 +2372,8 @@ gtk_image_update_size (GtkImage *image,
 {
   GtkWidget *widget = GTK_WIDGET (image);
 
-  gtk_widget_get_props (widget)->requisition.width = image_width + GTK_MISC (image)->xpad * 2;
-  gtk_widget_get_props (widget)->requisition.height = image_height + GTK_MISC (image)->ypad * 2;
+  gtk_widget_get_props (widget)->requisition.width = image_width + gtk_misc_get_props (GTK_MISC (image))->xpad * 2;
+  gtk_widget_get_props (widget)->requisition.height = image_height + gtk_misc_get_props (GTK_MISC (image))->ypad * 2;
 
   if (__gtk_widget_get_visible (widget))
     __gtk_widget_queue_resize (widget);

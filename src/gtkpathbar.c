@@ -351,8 +351,8 @@ gtk_path_bar_size_request (GtkWidget      *widget,
   __gtk_widget_size_request (gtk_path_bar_get_props (path_bar)->up_slider_button, &child_requisition);
   __gtk_widget_size_request (gtk_path_bar_get_props (path_bar)->down_slider_button, &child_requisition);
 
-  requisition->width += GTK_CONTAINER (widget)->border_width * 2;
-  requisition->height += GTK_CONTAINER (widget)->border_width * 2;
+  requisition->width += gtk_container_get_props (GTK_CONTAINER (widget))->border_width * 2;
+  requisition->height += gtk_container_get_props (GTK_CONTAINER (widget))->border_width * 2;
 
   gtk_widget_get_props (widget)->requisition = *requisition;
 }
@@ -387,7 +387,7 @@ gtk_path_bar_update_slider_buttons (GtkPathBar *path_bar)
 static void
 gtk_path_bar_map (GtkWidget *widget)
 {
-  __gdk_window_show (GTK_PATH_BAR (widget)->event_window);
+  __gdk_window_show (gtk_path_bar_get_props (GTK_PATH_BAR (widget))->event_window);
 
   GTK_WIDGET_CLASS (gtk_path_bar_parent_class)->map (widget);
 }
@@ -396,7 +396,7 @@ static void
 gtk_path_bar_unmap (GtkWidget *widget)
 {
   gtk_path_bar_stop_scrolling (GTK_PATH_BAR (widget));
-  __gdk_window_hide (GTK_PATH_BAR (widget)->event_window);
+  __gdk_window_hide (gtk_path_bar_get_props (GTK_PATH_BAR (widget))->event_window);
 
   GTK_WIDGET_CLASS (gtk_path_bar_parent_class)->unmap (widget);
 }
@@ -474,7 +474,7 @@ gtk_path_bar_size_allocate (GtkWidget     *widget,
     return;
 
   direction = __gtk_widget_get_direction (widget);
-  border_width = (gint) GTK_CONTAINER (path_bar)->border_width;
+  border_width = (gint) gtk_container_get_props (GTK_CONTAINER (path_bar))->border_width;
   allocation_width = allocation->width - 2 * border_width;
 
   /* First, we check to see if we need the scrollbars. */
@@ -819,8 +819,8 @@ gtk_path_bar_scroll_down (GtkPathBar *path_bar)
 	}
     }
 
-  space_available = (GTK_WIDGET (path_bar)->allocation.width
-		     - 2 * GTK_CONTAINER (path_bar)->border_width
+  space_available = (gtk_widget_get_props (GTK_WIDGET (path_bar))->allocation.width
+		     - 2 * gtk_container_get_props (GTK_CONTAINER (path_bar))->border_width
 		     - 2 * gtk_path_bar_get_props (path_bar)->spacing - 2 * gtk_path_bar_get_props (path_bar)->slider_width
 		     - BUTTON_DATA (down_button->data)->gtk_widget_get_props (button)->allocation.width);
   gtk_path_bar_get_props (path_bar)->first_scrolled_button = down_button;

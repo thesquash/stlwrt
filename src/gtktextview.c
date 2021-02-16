@@ -95,8 +95,8 @@
 #define DV(x)
 #endif
 
-#define SCREEN_WIDTH(widget) text_window_get_width (GTK_TEXT_VIEW (widget)->text_window)
-#define SCREEN_HEIGHT(widget) text_window_get_height (GTK_TEXT_VIEW (widget)->text_window)
+#define SCREEN_WIDTH(widget) text_window_get_width (gtk_text_view_get_props (GTK_TEXT_VIEW (widget))->text_window)
+#define SCREEN_HEIGHT(widget) text_window_get_height (gtk_text_view_get_props (GTK_TEXT_VIEW (widget))->text_window)
 
 #define SPACE_FOR_CURSOR 1
 
@@ -3133,8 +3133,8 @@ gtk_text_view_size_request (GtkWidget      *widget,
   if (gtk_text_view_get_props (text_view)->bottom_window)
     requisition->height += gtk_text_view_get_props (text_view)->bottom_window->requisition.height;
 
-  requisition->width += GTK_CONTAINER (text_view)->border_width * 2;
-  requisition->height += GTK_CONTAINER (text_view)->border_width * 2;
+  requisition->width += gtk_container_get_props (GTK_CONTAINER (text_view))->border_width * 2;
+  requisition->height += gtk_container_get_props (GTK_CONTAINER (text_view))->border_width * 2;
   
   tmp_list = gtk_text_view_get_props (text_view)->children;
   while (tmp_list != NULL)
@@ -3353,7 +3353,7 @@ gtk_text_view_size_allocate (GtkWidget *widget,
   else
     focus_edge_width = focus_width;
   
-  width = allocation->width - focus_edge_width * 2 - GTK_CONTAINER (text_view)->border_width * 2;
+  width = allocation->width - focus_edge_width * 2 - gtk_container_get_props (GTK_CONTAINER (text_view))->border_width * 2;
 
   if (gtk_text_view_get_props (text_view)->left_window)
     left_rect.width = gtk_text_view_get_props (text_view)->left_window->requisition.width;
@@ -3375,7 +3375,7 @@ gtk_text_view_size_allocate (GtkWidget *widget,
   bottom_rect.width = text_rect.width;
 
 
-  height = allocation->height - focus_edge_width * 2 - GTK_CONTAINER (text_view)->border_width * 2;
+  height = allocation->height - focus_edge_width * 2 - gtk_container_get_props (GTK_CONTAINER (text_view))->border_width * 2;
 
   if (gtk_text_view_get_props (text_view)->top_window)
     top_rect.height = gtk_text_view_get_props (text_view)->top_window->requisition.height;
@@ -3397,8 +3397,8 @@ gtk_text_view_size_allocate (GtkWidget *widget,
   right_rect.height = text_rect.height;
 
   /* Origins */
-  left_rect.x = focus_edge_width + GTK_CONTAINER (text_view)->border_width;
-  top_rect.y = focus_edge_width + GTK_CONTAINER (text_view)->border_width;
+  left_rect.x = focus_edge_width + gtk_container_get_props (GTK_CONTAINER (text_view))->border_width;
+  top_rect.y = focus_edge_width + gtk_container_get_props (GTK_CONTAINER (text_view))->border_width;
 
   text_rect.x = left_rect.x + left_rect.width;
   text_rect.y = top_rect.y + top_rect.height;
@@ -4305,9 +4305,9 @@ gtk_text_view_button_press_event (GtkWidget *widget, GdkEventButton *event)
 #if 0
   /* debug hack */
   if (event->button == 3 && (event->state & GDK_CONTROL_MASK) != 0)
-    ___gtk_text_buffer_spew (GTK_TEXT_VIEW (widget)->buffer);
+    ___gtk_text_buffer_spew (gtk_text_view_get_props (GTK_TEXT_VIEW (widget))->buffer);
   else if (event->button == 3)
-    gtk_text_layout_spew (GTK_TEXT_VIEW (widget)->layout);
+    gtk_text_layout_spew (gtk_text_view_get_props (GTK_TEXT_VIEW (widget))->layout);
 #endif
 
   if (event->type == GDK_BUTTON_PRESS)
@@ -4467,7 +4467,7 @@ gtk_text_view_focus_in_event (GtkWidget *widget, GdkEventFocus *event)
   if (gtk_text_view_get_props (text_view)->editable)
     {
       gtk_text_view_get_props (text_view)->need_im_reset = TRUE;
-      __gtk_im_context_focus_in (GTK_TEXT_VIEW (widget)->im_context);
+      __gtk_im_context_focus_in (gtk_text_view_get_props (GTK_TEXT_VIEW (widget))->im_context);
     }
 
   return FALSE;
@@ -4497,7 +4497,7 @@ gtk_text_view_focus_out_event (GtkWidget *widget, GdkEventFocus *event)
   if (gtk_text_view_get_props (text_view)->editable)
     {
       gtk_text_view_get_props (text_view)->need_im_reset = TRUE;
-      __gtk_im_context_focus_out (GTK_TEXT_VIEW (widget)->im_context);
+      __gtk_im_context_focus_out (gtk_text_view_get_props (GTK_TEXT_VIEW (widget))->im_context);
     }
 
   return FALSE;
@@ -4625,7 +4625,7 @@ gtk_text_view_expose_event (GtkWidget *widget, GdkEventExpose *event)
   /* Propagate exposes to all unanchored children. 
    * Anchored children are handled in gtk_text_view_paint(). 
    */
-  tmp_list = GTK_TEXT_VIEW (widget)->children;
+  tmp_list = gtk_text_view_get_props (GTK_TEXT_VIEW (widget))->children;
   while (tmp_list != NULL)
     {
       GtkTextViewChild *vc = tmp_list->data;
@@ -6765,8 +6765,8 @@ static void
 gtk_text_view_drag_data_delete (GtkWidget        *widget,
                                 GdkDragContext   *context)
 {
-  __gtk_text_buffer_delete_selection (GTK_TEXT_VIEW (widget)->buffer,
-                                    TRUE, GTK_TEXT_VIEW (widget)->editable);
+  __gtk_text_buffer_delete_selection (gtk_text_view_get_props (GTK_TEXT_VIEW (widget))->buffer,
+                                    TRUE, gtk_text_view_get_props (GTK_TEXT_VIEW (widget))->editable);
 }
 
 static void
@@ -7763,7 +7763,7 @@ static void
 popup_menu_detach (GtkWidget *attach_widget,
 		   GtkMenu   *menu)
 {
-  GTK_TEXT_VIEW (attach_widget)->popup_menu = NULL;
+  gtk_text_view_get_props (GTK_TEXT_VIEW (attach_widget))->popup_menu = NULL;
 }
 
 static void
@@ -8143,7 +8143,7 @@ text_window_realize (GtkTextWindow *win,
           __gdk_cursor_unref (cursor);
         } 
 
-      __gtk_im_context_set_client_window (GTK_TEXT_VIEW (widget)->im_context,
+      __gtk_im_context_set_client_window (gtk_text_view_get_props (GTK_TEXT_VIEW (widget))->im_context,
                                         win->window);
 
 
@@ -8377,7 +8377,7 @@ __gtk_text_view_get_window (GtkTextView *text_view,
   switch (win)
     {
     case GTK_TEXT_WINDOW_WIDGET:
-      return GTK_WIDGET (text_view)->window;
+      return gtk_widget_get_props (GTK_WIDGET (text_view))->window;
       break;
 
     case GTK_TEXT_WINDOW_TEXT:
@@ -8443,7 +8443,7 @@ __gtk_text_view_get_window_type (GtkTextView *text_view,
   g_return_val_if_fail (GTK_IS_TEXT_VIEW (text_view), 0);
   g_return_val_if_fail (GDK_IS_WINDOW (window), 0);
 
-  if (window == GTK_WIDGET (text_view)->window)
+  if (window == gtk_widget_get_props (GTK_WIDGET (text_view))->window)
     return GTK_TEXT_WINDOW_WIDGET;
 
   win = g_object_get_qdata (G_OBJECT (window),

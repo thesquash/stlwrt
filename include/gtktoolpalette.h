@@ -64,29 +64,6 @@ GtkToolPaletteDragTargets;
  * This should not be accessed directly. Use the accessor functions below.
  */
 
-struct _GtkToolPalettePrivate
-{
-  GPtrArray* groups;
-
-  GtkAdjustment        *hadjustment;
-  GtkAdjustment        *vadjustment;
-
-  GtkIconSize           icon_size;
-  gboolean              icon_size_set;
-  GtkOrientation        orientation;
-  GtkToolbarStyle       style;
-  gboolean              style_set;
-
-  GtkWidget            *expanding_child;
-
-  GtkSizeGroup         *text_size_group;
-
-  GtkSettings       *settings;
-  gulong             settings_connection;
-
-  guint                 drag_source : 2;
-};
-
 STLWRT_DECLARE_VTYPE_VPARENT(GtkToolPalette, gtk_tool_palette, GtkContainer,
   GtkToolPalettePrivate *priv;
 )

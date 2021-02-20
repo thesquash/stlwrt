@@ -897,7 +897,7 @@ gtk_layout_style_set (GtkWidget *widget,
 
   if (__gtk_widget_get_realized (widget))
     {
-      __gtk_style_set_background (gtk_widget_get_props (widget)->style, GTK_LAYOUT (gtk_widget_get_props (widget))->bin_window, GTK_STATE_NORMAL);
+      __gtk_style_set_background (gtk_widget_get_props (widget)->style, GTK_LAYOUT (widget)->bin_window, GTK_STATE_NORMAL);
     }
 }
 

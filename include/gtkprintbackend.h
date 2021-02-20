@@ -66,17 +66,6 @@ typedef enum
   GTK_PRINT_BACKEND_STATUS_UNAVAILABLE
 } GtkPrintBackendStatus;
 
-
-struct _GtkPrintBackendPrivate
-{
-  GHashTable *printers;
-  guint printer_list_requested : 1;
-  guint printer_list_done : 1;
-  GtkPrintBackendStatus status;
-  char **auth_info_required;
-  char **auth_info;
-};
-
 STLWRT_DECLARE_FTYPE_FPARENT(GtkPrintBackend, gtk_print_backend, GObject,
   GtkPrintBackendPrivate *priv;
 )

@@ -146,7 +146,13 @@ static GType    gtk_paned_child_type            (GtkContainer     *container);
 static void     gtk_paned_grab_notify           (GtkWidget        *widget,
 		                                 gboolean          was_grabbed);
 
-
+struct _GtkPanedPrivate
+{
+  GtkOrientation  orientation;
+  GtkWidget      *saved_focus;
+  GtkPaned       *first_paned;
+  guint32         grab_time;
+};
 
 STLWRT_DEFINE_VTYPE (GtkPaned, gtk_paned, GTK_TYPE_CONTAINER, G_TYPE_FLAG_NONE,
                      G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE, NULL))
@@ -1760,13 +1766,13 @@ gtk_paned_get_cycle_chain (GtkPaned          *paned,
   g_assert (widgets != NULL);
 
   if (gtk_paned_get_props (paned)->last_child1_focus &&
-      !__gtk_widget_is_ancestor (gtk_paned_get_props (paned)->last_child1_focus, GTK_WIDGET (gtk_paned_get_props (paned))))
+      !__gtk_widget_is_ancestor (gtk_paned_get_props (paned)->last_child1_focus, GTK_WIDGET (paned)))
     {
       gtk_paned_set_last_child1_focus (paned, NULL);
     }
 
   if (gtk_paned_get_props (paned)->last_child2_focus &&
-      !__gtk_widget_is_ancestor (gtk_paned_get_props (paned)->last_child2_focus, GTK_WIDGET (gtk_paned_get_props (paned))))
+      !__gtk_widget_is_ancestor (gtk_paned_get_props (paned)->last_child2_focus, GTK_WIDGET (paned)))
     {
       gtk_paned_set_last_child2_focus (paned, NULL);
     }

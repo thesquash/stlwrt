@@ -59,15 +59,6 @@ typedef enum
 GQuark SF(gtk_builder_error_quark) (void);
 
 
-struct _GtkBuilderPrivate
-{
-  gchar *domain;
-  GHashTable *objects;
-  GSList *delayed_properties;
-  GSList *signals;
-  gchar *filename;
-};
-
 STLWRT_DECLARE_FTYPE_FPARENT(GtkBuilder, gtk_builder, GObject,
   GtkBuilderPrivate * (priv);
 )

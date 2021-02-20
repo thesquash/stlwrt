@@ -140,6 +140,27 @@ static void gtk_scale_button_scale_value_changed(GtkRange            *range);
 /* see below for scale definitions */
 static GtkWidget *gtk_scale_button_scale_new    (GtkScaleButton      *button);
 
+struct _GtkScaleButtonPrivate
+{
+  GtkWidget *dock;
+  GtkWidget *box;
+  GtkWidget *scale;
+  GtkWidget *image;
+
+  GtkIconSize size;
+  GtkOrientation orientation;
+
+  guint click_id;
+  gint click_timeout;
+  guint timeout : 1;
+  gdouble direction;
+  guint32 pop_time;
+
+  gchar **icon_list;
+
+  GtkAdjustment *adjustment; /* needed because it must be settable in init() */
+};
+
 STLWRT_DEFINE_VTYPE (GtkScaleButton, gtk_scale_button, GTK_TYPE_BUTTON, G_TYPE_FLAG_NONE,
                      G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE, NULL))
 
@@ -321,7 +342,7 @@ gtk_scale_button_init (GtkScaleButton *button)
   GtkScaleButtonPrivate *priv;
   GtkWidget *frame;
 
-  gtk_scale_button_get_props (button)->priv = priv = GET_PRIVATE (gtk_scale_button_get_props (button));
+  gtk_scale_button_get_props (button)->priv = priv = GET_PRIVATE (button);
 
   priv->timeout = FALSE;
   priv->click_id = 0;

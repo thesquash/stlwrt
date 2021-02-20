@@ -40,17 +40,6 @@ G_BEGIN_DECLS
 typedef struct _GtkIMMulticontextClass   GtkIMMulticontextClass;
 typedef struct _GtkIMMulticontextPrivate GtkIMMulticontextPrivate;
 
-struct _GtkIMMulticontextPrivate
-{
-  GdkWindow *client_window;
-  GdkRectangle cursor_location;
-  gchar *context_id;
-
-  guint use_preedit : 1;
-  guint have_cursor_location : 1;
-  guint focus_in : 1;
-};
-
 STLWRT_DECLARE_VTYPE_FPARENT(GtkIMMulticontext, gtk_im_multicontext, GtkIMContext,
   GtkIMContext * (slave);
 

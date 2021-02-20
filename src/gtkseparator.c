@@ -43,9 +43,10 @@ enum {
 
 typedef struct _GtkSeparatorPrivate GtkSeparatorPrivate;
 
-
-
-
+struct _GtkSeparatorPrivate
+{
+  GtkOrientation orientation;
+};
 
 static void       gtk_separator_set_property (GObject        *object,
                                               guint           prop_id,

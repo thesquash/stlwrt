@@ -39,10 +39,6 @@
 #include <gtkintl.h>
 #include <gtkprivate.h>
 
-
-
-
-
 enum 
 {
   CHANGED,
@@ -69,6 +65,11 @@ static void gtk_radio_action_get_property (GObject         *object,
 static void gtk_radio_action_activate     (GtkAction *action);
 static GtkWidget *create_menu_item        (GtkAction *action);
 
+struct _GtkRadioActionPrivate
+{
+  GSList *group;
+  gint    value;
+};
 
 STLWRT_DEFINE_FTYPE_VPARENT (GtkRadioAction, gtk_radio_action, GTK_TYPE_TOGGLE_ACTION,
                              G_TYPE_FLAG_NONE, ;)
@@ -171,7 +172,7 @@ gtk_radio_action_class_init (GtkRadioActionClass *klass)
 static void
 gtk_radio_action_init (GtkRadioAction *action)
 {
-  gtk_radio_action_get_props (action)->private_data = GTK_RADIO_ACTION_GET_PRIVATE (gtk_radio_action_get_props (action));
+  gtk_radio_action_get_props (action)->private_data = GTK_RADIO_ACTION_GET_PRIVATE (action);
   gtk_radio_action_get_props (action)->private_data->group = g_slist_prepend (NULL, gtk_radio_action_get_props (action));
   gtk_radio_action_get_props (action)->private_data->value = 0;
 

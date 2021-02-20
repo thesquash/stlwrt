@@ -179,6 +179,14 @@ static void      gtk_info_bar_buildable_custom_finished    (GtkBuildable  *build
                                                             const gchar   *tagname,
                                                             gpointer       user_data);
 
+struct _GtkInfoBarPrivate
+{
+  GtkWidget *content_area;
+  GtkWidget *action_area;
+
+  GtkMessageType message_type;
+};
+
 
 STLWRT_DEFINE_FTYPE_VPARENT (GtkInfoBar, gtk_info_bar, GTK_TYPE_HBOX, G_TYPE_FLAG_NONE,
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
@@ -613,7 +621,7 @@ gtk_info_bar_init (GtkInfoBar *info_bar)
 
   __gtk_widget_push_composite_child ();
 
-  gtk_info_bar_get_props (info_bar)->priv = GTK_INFO_BAR_GET_PRIVATE (gtk_info_bar_get_props (info_bar));
+  gtk_info_bar_get_props (info_bar)->priv = GTK_INFO_BAR_GET_PRIVATE (info_bar);
 
   content_area = __gtk_hbox_new (FALSE, 0);
   __gtk_widget_show (content_area);

@@ -102,9 +102,13 @@
 
 typedef struct _GtkTextViewPrivate GtkTextViewPrivate;
 
-
-
-
+struct _GtkTextViewPrivate 
+{
+  guint blink_time;  /* time in msec the cursor has blinked since last user event */
+  guint im_spot_idle;
+  gchar *im_module;
+  guint scroll_after_paste : 1;
+};
 
 struct _GtkTextPendingScroll
 {
@@ -3452,11 +3456,11 @@ gtk_text_view_size_allocate (GtkWidget *widget,
 
   __gtk_adjustment_changed (gtk_text_view_get_props (text_view)->hadjustment);
 
-  gtk_text_view_get_props (text_view)->vadjustment->page_size = SCREEN_HEIGHT (gtk_text_view_get_props (text_view));
-  gtk_text_view_get_props (text_view)->vadjustment->page_increment = SCREEN_HEIGHT (gtk_text_view_get_props (text_view)) * 0.9;
-  gtk_text_view_get_props (text_view)->vadjustment->step_increment = SCREEN_HEIGHT (gtk_text_view_get_props (text_view)) * 0.1;
+  gtk_text_view_get_props (text_view)->vadjustment->page_size = SCREEN_HEIGHT (text_view);
+  gtk_text_view_get_props (text_view)->vadjustment->page_increment = SCREEN_HEIGHT (text_view) * 0.9;
+  gtk_text_view_get_props (text_view)->vadjustment->step_increment = SCREEN_HEIGHT (text_view) * 0.1;
   gtk_text_view_get_props (text_view)->vadjustment->lower = 0;
-  gtk_text_view_get_props (text_view)->vadjustment->upper = MAX (SCREEN_HEIGHT (gtk_text_view_get_props (text_view)),
+  gtk_text_view_get_props (text_view)->vadjustment->upper = MAX (SCREEN_HEIGHT (text_view),
                                        gtk_text_view_get_props (text_view)->height);
 
   /* Now adjust the value of the adjustment to keep the cursor at the

@@ -128,7 +128,7 @@ gtk_page_setup_unix_dialog_init (GtkPageSetupUnixDialog *dialog)
   GtkTreeIter iter;
   gchar *tmp;
 
-  priv = gtk_page_setup_unix_dialog_get_props (dialog)->priv = GTK_PAGE_SETUP_UNIX_DIALOG_GET_PRIVATE (gtk_page_setup_unix_dialog_get_props (dialog));
+  priv = gtk_page_setup_unix_dialog_get_props (dialog)->priv = GTK_PAGE_SETUP_UNIX_DIALOG_GET_PRIVATE (dialog);
 
   priv->print_backends = NULL;
 

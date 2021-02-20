@@ -53,8 +53,12 @@ enum {
 
 typedef struct _GtkBoxPrivate GtkBoxPrivate;
 
-
-
+struct _GtkBoxPrivate
+{
+  GtkOrientation orientation;
+  guint          default_expand : 1;
+  guint          spacing_set    : 1;
+};
 
 
 static void gtk_box_set_property       (GObject        *object,

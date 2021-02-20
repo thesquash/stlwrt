@@ -158,6 +158,29 @@ static const GtkTargetEntry dnd_targets[] =
   { "application/x-gtk-tool-palette-group", GTK_TARGET_SAME_APP, 0 },
 };
 
+struct _GtkToolPalettePrivate
+{
+  GPtrArray* groups;
+
+  GtkAdjustment        *hadjustment;
+  GtkAdjustment        *vadjustment;
+
+  GtkIconSize           icon_size;
+  gboolean              icon_size_set;
+  GtkOrientation        orientation;
+  GtkToolbarStyle       style;
+  gboolean              style_set;
+
+  GtkWidget            *expanding_child;
+
+  GtkSizeGroup         *text_size_group;
+
+  GtkSettings       *settings;
+  gulong             settings_connection;
+
+  guint                 drag_source : 2;
+};
+
 STLWRT_DEFINE_FTYPE_VPARENT (GtkToolPalette, gtk_tool_palette, GTK_TYPE_CONTAINER, G_TYPE_FLAG_NONE,
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE, NULL))
 

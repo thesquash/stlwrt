@@ -41,14 +41,6 @@ G_BEGIN_DECLS
 typedef struct _GtkSearchEngineTrackerClass GtkSearchEngineTrackerClass;
 typedef struct _GtkSearchEngineTrackerPrivate GtkSearchEngineTrackerPrivate;
 
-struct _GtkSearchEngineTrackerPrivate
-{
-  GDBusConnection *connection;
-  GCancellable *cancellable;
-  GtkQuery *query;
-  gboolean query_pending;
-};
-
 STLWRT_DECLARE_FTYPE_FPARENT(GtkSearchEngineTracker, _gtk_search_engine_tracker, GtkSearchEngine,
   GtkSearchEngineTrackerPrivate *priv;
 )

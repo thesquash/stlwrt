@@ -73,6 +73,16 @@ enum {
 
 typedef struct _GtkCellRendererPixbufPrivate GtkCellRendererPixbufPrivate;
 
+struct _GtkCellRendererPixbufPrivate
+{
+  gchar *stock_id;
+  GtkIconSize stock_size;
+  gchar *stock_detail;
+  gboolean follow_state;
+  gchar *icon_name;
+  GIcon *gicon;
+};
+
 STLWRT_DEFINE_VTYPE (GtkCellRendererPixbuf, gtk_cell_renderer_pixbuf, GTK_TYPE_CELL_RENDERER,
                      G_TYPE_FLAG_NONE, ;)
 

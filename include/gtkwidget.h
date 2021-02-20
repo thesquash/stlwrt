@@ -248,11 +248,6 @@ STLWRT_DECLARE_VTYPE_FPARENT(GtkWidget, gtk_widget, GObject,
   GtkWidget * (parent);
 )
 
-struct _GtkWidgetPrivate
-{
-  guint32  widget_flags;
-};
-
 /**
  * GtkWidgetClass:
  * @parent_class:

@@ -42,25 +42,6 @@ G_BEGIN_DECLS
 typedef struct _GtkExpanderClass   GtkExpanderClass;
 typedef struct _GtkExpanderPrivate GtkExpanderPrivate;
 
-
-struct _GtkExpanderPrivate
-{
-  GtkWidget        *label_widget;
-  GdkWindow        *event_window;
-  gint              spacing;
-
-  GtkExpanderStyle  expander_style;
-  guint             animation_timeout;
-  guint             expand_timer;
-
-  guint             expanded : 1;
-  guint             use_underline : 1;
-  guint             use_markup : 1; 
-  guint             button_down : 1;
-  guint             prelight : 1;
-  guint             label_fill : 1;
-};
-
 STLWRT_DECLARE_VTYPE_VPARENT(GtkExpander, gtk_expander, GtkBin,
   GtkExpanderPrivate * (priv);
 )

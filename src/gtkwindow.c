@@ -1402,7 +1402,7 @@ __gtk_window_set_title (GtkWindow   *window,
   gtk_window_get_props (window)->title = new_title;
 
   if (__gtk_widget_get_realized (GTK_WIDGET (window)))
-      __gdk_window_set_title (GTK_WIDGET (gtk_window_get_props (window))->gtk_window_get_props (window), gtk_window_get_props (window)->title);
+      __gdk_window_set_title (GTK_WIDGET (window)->window, gtk_window_get_props (window)->title);
 
   g_object_notify (G_OBJECT (window), "title");
 }
@@ -1490,7 +1490,7 @@ __gtk_window_set_role (GtkWindow   *window,
   gtk_window_get_props (window)->wm_role = new_role;
 
   if (__gtk_widget_get_realized (GTK_WIDGET (window)))
-    __gdk_window_set_role (GTK_WIDGET (gtk_window_get_props (window))->gtk_window_get_props (window), gtk_window_get_props (window)->wm_role);
+    __gdk_window_set_role (GTK_WIDGET (window)->window, gtk_window_get_props (window)->wm_role);
 
   g_object_notify (G_OBJECT (window), "role");
 }
@@ -4510,7 +4510,7 @@ gtk_window_show (GtkWidget *widget)
 
   /* Try to make sure that we have some focused widget
    */
-  if (!gtk_window_get_props (window)->focus_widget && !GTK_IS_PLUG (gtk_window_get_props (window)))
+  if (!gtk_window_get_props (window)->focus_widget && !GTK_IS_PLUG (window))
     __gtk_window_move_focus (window, GTK_DIR_TAB_FORWARD);
   
   if (gtk_window_get_props (window)->modal)

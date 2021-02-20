@@ -64,6 +64,41 @@
 typedef struct _GtkMenuAttachData	GtkMenuAttachData;
 typedef struct _GtkMenuPrivate  	GtkMenuPrivate;
 
+struct _GtkMenuPrivate
+{
+  gint x;
+  gint y;
+  gboolean initially_pushed_in;
+
+  /* info used for the table */
+  guint *heights;
+  gint heights_length;
+
+  gint monitor_num;
+
+  /* Cached layout information */
+  gint n_rows;
+  gint n_columns;
+
+  gchar *title;
+
+  /* Arrow states */
+  GtkStateType lower_arrow_state;
+  GtkStateType upper_arrow_state;
+
+  /* navigation region */
+  int navigation_x;
+  int navigation_y;
+  int navigation_width;
+  int navigation_height;
+
+  guint have_layout           : 1;
+  guint seen_item_enter       : 1;
+  guint have_position         : 1;
+  guint ignore_button_release : 1;
+  guint no_toggle_size        : 1;
+};
+
 struct _GtkMenuAttachData
 {
   GtkWidget *attach_widget;
@@ -1823,7 +1858,7 @@ __gtk_menu_reposition (GtkMenu *menu)
 {
   g_return_if_fail (GTK_IS_MENU (menu));
 
-  if (!gtk_menu_get_props (menu)->torn_off && __gtk_widget_is_drawable (GTK_WIDGET (gtk_menu_get_props (menu))))
+  if (!gtk_menu_get_props (menu)->torn_off && __gtk_widget_is_drawable (GTK_WIDGET (menu)))
     gtk_menu_position (menu, FALSE);
 }
 
@@ -2626,8 +2661,8 @@ get_arrows_visible_area (GtkMenu      *menu,
                         "arrow-placement", &arrow_placement,
                         NULL);
 
-  border->x = GTK_CONTAINER (gtk_widget_get_props (widget))->border_width + gtk_widget_get_props (widget)->style->xthickness + horizontal_padding;
-  border->y = GTK_CONTAINER (gtk_widget_get_props (widget))->border_width + gtk_widget_get_props (widget)->style->ythickness + vertical_padding;
+  border->x = GTK_CONTAINER (widget)->border_width + gtk_widget_get_props (widget)->style->xthickness + horizontal_padding;
+  border->y = GTK_CONTAINER (widget)->border_width + gtk_widget_get_props (widget)->style->ythickness + vertical_padding;
   border->width = __gdk_window_get_width (gtk_widget_get_props (widget)->window);
   border->height = __gdk_window_get_height (gtk_widget_get_props (widget)->window);
 
@@ -3823,7 +3858,7 @@ gtk_menu_enter_notify (GtkWidget        *widget,
    * will not correspond to the event widget's parent.  Check to see
    * if we are in the parent's navigation region.
    */
-  if (GTK_IS_MENU_ITEM (gtk_widget_get_props (menu_item)) && GTK_IS_MENU (gtk_widget_get_props (menu_item)->parent) &&
+  if (GTK_IS_MENU_ITEM (menu_item) && GTK_IS_MENU (gtk_widget_get_props (menu_item)->parent) &&
       gtk_menu_navigating_submenu (GTK_MENU (gtk_widget_get_props (menu_item)->parent),
                                    event->x_root, event->y_root))
     return TRUE;
@@ -5045,7 +5080,7 @@ get_menu_height (GtkMenu *menu)
   GtkWidget *widget = GTK_WIDGET (menu);
 
   height = gtk_widget_get_props (widget)->requisition.height;
-  height -= (GTK_CONTAINER (gtk_widget_get_props (widget))->border_width + gtk_widget_get_props (widget)->style->ythickness) * 2;
+  height -= (GTK_CONTAINER (widget)->border_width + gtk_widget_get_props (widget)->style->ythickness) * 2;
 
   if (!gtk_menu_get_props (menu)->tearoff_active)
     {

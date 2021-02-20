@@ -60,9 +60,10 @@ enum {
 
 typedef struct _GtkRulerPrivate GtkRulerPrivate;
 
-
-
-
+struct _GtkRulerPrivate
+{
+  GtkOrientation orientation;
+};
 
 static void     gtk_ruler_set_property    (GObject        *object,
                                            guint            prop_id,

@@ -1107,7 +1107,7 @@ gtk_icon_view_cell_layout_init (GtkCellLayoutIface *iface)
 static void
 gtk_icon_view_init (GtkIconView *icon_view)
 {
-  gtk_icon_view_get_props (icon_view)->priv = GTK_ICON_VIEW_GET_PRIVATE (gtk_icon_view_get_props (icon_view));
+  gtk_icon_view_get_props (icon_view)->priv = GTK_ICON_VIEW_GET_PRIVATE (icon_view);
   
   gtk_icon_view_get_props (icon_view)->priv->width = 0;
   gtk_icon_view_get_props (icon_view)->priv->height = 0;
@@ -2689,7 +2689,7 @@ gtk_icon_view_layout_single_row (GtkIconView *icon_view,
 
       if (items != first_item)
 	{
-	  if ((gtk_icon_view_get_props (icon_view)->priv->columns <= 0 && current_width > GTK_WIDGET (gtk_icon_view_get_props (icon_view))->allocation.width) ||
+	  if ((gtk_icon_view_get_props (icon_view)->priv->columns <= 0 && current_width > GTK_WIDGET (icon_view)->allocation.width) ||
 	      (gtk_icon_view_get_props (icon_view)->priv->columns > 0 && col >= gtk_icon_view_get_props (icon_view)->priv->columns))
 	    break;
 	}
@@ -4369,7 +4369,7 @@ __gtk_icon_view_scroll_to_path (GtkIconView *icon_view,
       gtk_icon_view_get_props (icon_view)->priv->scroll_to_path = NULL;
 
       if (path)
-	gtk_icon_view_get_props (icon_view)->priv->scroll_to_path = __gtk_tree_row_reference_new_proxy (G_OBJECT (gtk_icon_view_get_props (icon_view)), gtk_icon_view_get_props (icon_view)->priv->model, path);
+	gtk_icon_view_get_props (icon_view)->priv->scroll_to_path = __gtk_tree_row_reference_new_proxy (G_OBJECT (icon_view), gtk_icon_view_get_props (icon_view)->priv->model, path);
 
       gtk_icon_view_get_props (icon_view)->priv->scroll_to_use_align = use_align;
       gtk_icon_view_get_props (icon_view)->priv->scroll_to_row_align = row_align;

@@ -88,6 +88,29 @@ struct _GtkAssistantPage
 };
 
 
+struct _GtkAssistantPrivate
+{
+  GtkWidget *header_image;
+  GtkWidget *sidebar_image;
+
+  GtkWidget *action_area;
+
+  GList     *pages;
+
+  GtkAssistantPage *current_page;
+
+  GSList    *visited_pages;
+
+  GtkSizeGroup *size_group;
+
+  GtkAssistantPageFunc forward_function;
+  gpointer forward_function_data;
+  GDestroyNotify forward_data_destroy;
+
+  guint committed : 1;
+};
+
+
 static void     gtk_assistant_class_init         (GtkAssistantClass *class);
 static void     gtk_assistant_init               (GtkAssistant      *assistant);
 static void     gtk_assistant_style_set          (GtkWidget         *widget,

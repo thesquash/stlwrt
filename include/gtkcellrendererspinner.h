@@ -42,14 +42,6 @@ typedef struct _GtkCellRendererSpinnerClass   GtkCellRendererSpinnerClass;
 typedef struct _GtkCellRendererSpinnerPrivate GtkCellRendererSpinnerPrivate;
 
 
-struct _GtkCellRendererSpinnerPrivate
-{
-  gboolean active;
-  guint pulse;
-  GtkIconSize icon_size, old_icon_size;
-  gint size;
-};
-
 STLWRT_DECLARE_VTYPE_VPARENT(GtkCellRendererSpinner, gtk_cell_renderer_spinner, GtkCellRenderer,
   GtkCellRendererSpinnerPrivate *priv;
 )

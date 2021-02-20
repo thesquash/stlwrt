@@ -246,7 +246,7 @@ gtk_custom_paper_unix_dialog_init (GtkCustomPaperUnixDialog *dialog)
   GtkCustomPaperUnixDialogPrivate *priv;
   GtkTreeIter iter;
 
-  priv = gtk_custom_paper_unix_dialog_get_props (dialog)->priv = GTK_CUSTOM_PAPER_UNIX_DIALOG_GET_PRIVATE (gtk_custom_paper_unix_dialog_get_props (dialog));
+  priv = gtk_custom_paper_unix_dialog_get_props (dialog)->priv = GTK_CUSTOM_PAPER_UNIX_DIALOG_GET_PRIVATE (dialog);
 
   priv->print_backends = NULL;
 

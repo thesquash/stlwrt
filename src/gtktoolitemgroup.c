@@ -90,6 +90,30 @@ struct _GtkToolItemGroupChild
 
 static void gtk_tool_item_group_tool_shell_init (GtkToolShellIface *iface);
 
+struct _GtkToolItemGroupPrivate
+{
+  GtkWidget         *header;
+  GtkWidget         *label_widget;
+
+  GList             *children;
+
+  gboolean           animation;
+  gint64             animation_start;
+  GSource           *animation_timeout;
+  GtkExpanderStyle   expander_style;
+  gint               expander_size;
+  gint               header_spacing;
+  PangoEllipsizeMode ellipsize;
+
+  gulong             focus_set_id;
+  GtkWidget         *toplevel;
+
+  GtkSettings       *settings;
+  gulong             settings_connection;
+
+  guint              collapsed : 1;
+};
+
 STLWRT_DEFINE_FTYPE_VPARENT (GtkToolItemGroup, gtk_tool_item_group, GTK_TYPE_CONTAINER,
                              G_TYPE_FLAG_NONE,
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_TOOL_SHELL,

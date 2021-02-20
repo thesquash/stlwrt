@@ -75,6 +75,25 @@ enum {
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
+struct _GtkPrintJobPrivate
+{
+  gchar *title;
+
+  GIOChannel *spool_io;
+  cairo_surface_t *surface;
+
+  GtkPrintStatus status;
+  GtkPrintBackend *backend;  
+  GtkPrinter *printer;
+  GtkPrintSettings *settings;
+  GtkPageSetup *page_setup;
+
+  guint printer_set : 1;
+  guint page_setup_set : 1;
+  guint settings_set  : 1;
+  guint track_print_status : 1;
+};
+
 STLWRT_DEFINE_VTYPE (GtkPrintJob, gtk_print_job, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 static void
@@ -161,7 +180,7 @@ gtk_print_job_init (GtkPrintJob *job)
 {
   GtkPrintJobPrivate *priv;
 
-  priv = gtk_print_job_get_props (job)->priv = GTK_PRINT_JOB_GET_PRIVATE (gtk_print_job_get_props (job)); 
+  priv = gtk_print_job_get_props (job)->priv = GTK_PRINT_JOB_GET_PRIVATE (job);
 
   priv->spool_io = NULL;
 

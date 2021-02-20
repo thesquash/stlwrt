@@ -1128,7 +1128,7 @@ gtk_path_bar_clear_buttons (GtkPathBar *path_bar)
 {
   while (gtk_path_bar_get_props (path_bar)->button_list != NULL)
     {
-      __gtk_container_remove (GTK_CONTAINER (gtk_path_bar_get_props (path_bar)), BUTTON_DATA (gtk_path_bar_get_props (path_bar)->button_list->data)->button);
+      __gtk_container_remove (GTK_CONTAINER (path_bar), BUTTON_DATA (gtk_path_bar_get_props (path_bar)->button_list->data)->button);
     }
   gtk_path_bar_get_props (path_bar)->first_scrolled_button = NULL;
   gtk_path_bar_get_props (path_bar)->fake_root = NULL;

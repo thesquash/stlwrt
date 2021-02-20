@@ -42,13 +42,6 @@ G_BEGIN_DECLS
 typedef struct _GtkComboBoxEntryClass        GtkComboBoxEntryClass;
 typedef struct _GtkComboBoxEntryPrivate      GtkComboBoxEntryPrivate;
 
-
-struct _GtkComboBoxEntryPrivate
-{
-  GtkCellRenderer *text_renderer;
-  gint text_column;
-};
-
 STLWRT_DECLARE_VTYPE_VPARENT(GtkComboBoxEntry, gtk_combo_box_entry, GtkComboBox,
   /*< private >*/
   GtkComboBoxEntryPrivate * (priv);

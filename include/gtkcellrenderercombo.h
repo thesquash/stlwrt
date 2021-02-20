@@ -48,11 +48,6 @@ STLWRT_DECLARE_VTYPE_VPARENT(GtkCellRendererCombo, gtk_cell_renderer_combo, GtkC
   guint          (focus_out_id);
 )
 
-struct _GtkCellRendererComboPrivate
-{
-  GtkWidget *combo;
-};
-
 struct _GtkCellRendererComboClass
 {
   GtkCellRendererTextClass parent;

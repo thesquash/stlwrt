@@ -125,6 +125,41 @@ static GdkColor default_visited_link_color = { 0, 0x5555, 0x1a1a, 0x8b8b };
 
 typedef struct _GtkAboutDialogPrivate GtkAboutDialogPrivate;
 
+struct _GtkAboutDialogPrivate
+{
+  gchar *name;
+  gchar *version;
+  gchar *copyright;
+  gchar *comments;
+  gchar *website_url;
+  gchar *website_text;
+  gchar *translator_credits;
+  gchar *license;
+
+  gchar **authors;
+  gchar **documenters;
+  gchar **artists;
+
+  GtkWidget *logo_image;
+  GtkWidget *name_label;
+  GtkWidget *comments_label;
+  GtkWidget *copyright_label;
+  GtkWidget *website_label;
+
+  GtkWidget *credits_button;
+  GtkWidget *credits_dialog;
+  GtkWidget *license_button;
+  GtkWidget *license_dialog;
+
+  GdkCursor *hand_cursor;
+  GdkCursor *regular_cursor;
+
+  GSList *visited_links;
+
+  guint hovering_over_link : 1;
+  guint wrap_license : 1;
+};
+
 enum
 {
   PROP_0,

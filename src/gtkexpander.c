@@ -119,6 +119,24 @@ static void gtk_expander_buildable_add_child      (GtkBuildable *buildable,
 						   GObject      *child,
 						   const gchar  *type);
 
+struct _GtkExpanderPrivate
+{
+  GtkWidget        *label_widget;
+  GdkWindow        *event_window;
+  gint              spacing;
+
+  GtkExpanderStyle  expander_style;
+  guint             animation_timeout;
+  guint             expand_timer;
+
+  guint             expanded : 1;
+  guint             use_underline : 1;
+  guint             use_markup : 1; 
+  guint             button_down : 1;
+  guint             prelight : 1;
+  guint             label_fill : 1;
+};
+
 STLWRT_DEFINE_FTYPE_VPARENT (GtkExpander, gtk_expander, GTK_TYPE_BIN, G_TYPE_FLAG_NONE,
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
                                                     gtk_expander_buildable_init))
@@ -253,7 +271,7 @@ gtk_expander_init (GtkExpander *expander)
 {
   GtkExpanderPrivate *priv;
 
-  gtk_expander_get_props (expander)->priv = priv = GTK_EXPANDER_GET_PRIVATE (gtk_expander_get_props (expander));
+  gtk_expander_get_props (expander)->priv = priv = GTK_EXPANDER_GET_PRIVATE (expander);
 
   __gtk_widget_set_can_focus (GTK_WIDGET (expander), TRUE);
   __gtk_widget_set_has_window (GTK_WIDGET (expander), FALSE);

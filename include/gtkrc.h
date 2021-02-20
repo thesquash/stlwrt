@@ -51,12 +51,6 @@ typedef enum
   GTK_RC_BASE		= 1 << 3
 } GtkRcFlags;
 
-
-struct _GtkRcStylePrivate
-{
-  GSList *color_hashes;
-};
-
 /*
  * This is a rare corner case in STLWRT where we can get away with not
  * bothering with fat and thin versions of this type.  In GTK+ 3 and later,

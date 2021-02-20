@@ -60,6 +60,14 @@ enum {
   PROP_RIGHT_PADDING
 };
 
+struct _GtkAlignmentPrivate
+{
+  guint padding_top;
+  guint padding_bottom;
+  guint padding_left;
+  guint padding_right;
+};
+
 static void gtk_alignment_size_request  (GtkWidget         *widget,
 					 GtkRequisition    *requisition);
 static void gtk_alignment_size_allocate (GtkWidget         *widget,

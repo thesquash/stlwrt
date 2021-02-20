@@ -58,6 +58,13 @@ enum {
   PROP_DIGITS
 };
 
+struct _GtkCellRendererSpinPrivate
+{
+  GtkAdjustment *adjustment;
+  gdouble climb_rate;
+  guint   digits;
+};
+
 #define GTK_CELL_RENDERER_SPIN_PATH "gtk-cell-renderer-spin-path"
 
 STLWRT_DEFINE_FTYPE_VPARENT (GtkCellRendererSpin, gtk_cell_renderer_spin, GTK_TYPE_CELL_RENDERER_TEXT,

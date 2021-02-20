@@ -118,7 +118,7 @@ gtk_printer_option_widget_class_init (GtkPrinterOptionWidgetClass *class)
 static void
 gtk_printer_option_widget_init (GtkPrinterOptionWidget *widget)
 {
-  gtk_printer_option_widget_get_props (widget)->priv = GTK_PRINTER_OPTION_WIDGET_GET_PRIVATE (gtk_printer_option_widget_get_props (widget)); 
+  gtk_printer_option_widget_get_props (widget)->priv = GTK_PRINTER_OPTION_WIDGET_GET_PRIVATE (widget);
 
   __gtk_box_set_spacing (GTK_BOX (widget), 12);
 }

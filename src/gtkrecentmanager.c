@@ -144,6 +144,23 @@ static guint signal_changed = 0;
 
 static GtkRecentManager *recent_manager_singleton = NULL;
 
+struct _GtkRecentManagerPrivate
+{
+  gchar *filename;
+
+  guint is_dirty : 1;
+  
+  gint limit;
+  gint size;
+
+  GBookmarkFile *recent_items;
+
+  GFileMonitor *monitor;
+
+  guint changed_timeout;
+  guint changed_age;
+};
+
 STLWRT_DEFINE_FTYPE (GtkRecentManager, gtk_recent_manager, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 static void

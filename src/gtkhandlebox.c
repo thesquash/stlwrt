@@ -35,6 +35,11 @@
 
 typedef struct _GtkHandleBoxPrivate GtkHandleBoxPrivate;
 
+struct _GtkHandleBoxPrivate
+{
+  gint orig_x;
+  gint orig_y;
+};
 
 enum {
   PROP_0,
@@ -417,7 +422,7 @@ gtk_handle_box_realize (GtkWidget *widget)
   gtk_handle_box_get_props (hb)->bin_window = __gdk_window_new (gtk_widget_get_props (widget)->window, &attributes, attributes_mask);
   __gdk_window_set_user_data (gtk_handle_box_get_props (hb)->bin_window, widget);
   if (gtk_bin_get_props (GTK_BIN (hb))->child)
-    __gtk_widget_set_parent_window (GTK_BIN (gtk_handle_box_get_props (hb))->child, gtk_handle_box_get_props (hb)->bin_window);
+    __gtk_widget_set_parent_window (GTK_BIN (hb)->child, gtk_handle_box_get_props (hb)->bin_window);
   
   attributes.x = 0;
   attributes.y = 0;

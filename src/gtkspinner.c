@@ -55,8 +55,14 @@
  * use __gtk_spinner_stop().
  */
 
-
-
+struct _GtkSpinnerPrivate
+{
+  guint current;
+  guint num_steps;
+  guint cycle_duration;
+  gboolean active;
+  guint timeout;
+};
 
 STLWRT_DEFINE_FTYPE_VPARENT (GtkSpinner, gtk_spinner, GTK_TYPE_DRAWING_AREA, G_TYPE_FLAG_NONE, ;)
 

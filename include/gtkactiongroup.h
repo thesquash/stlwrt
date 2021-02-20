@@ -51,18 +51,6 @@ typedef struct _GtkToggleActionEntry  GtkToggleActionEntry;
 typedef struct _GtkRadioActionEntry   GtkRadioActionEntry;
 
 
-struct _GtkActionGroupPrivate 
-{
-  gchar           *name;
-  gboolean	   sensitive;
-  gboolean	   visible;
-  GHashTable      *actions;
-
-  GtkTranslateFunc translate_func;
-  gpointer         translate_data;
-  GDestroyNotify   translate_notify;
-};
-
 STLWRT_DECLARE_FTYPE_FPARENT(GtkActionGroup, gtk_action_group, GObject,
   /*< private >*/
 

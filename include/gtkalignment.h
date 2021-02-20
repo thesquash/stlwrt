@@ -47,14 +47,6 @@ STLWRT_DECLARE_VTYPE_VPARENT(GtkAlignment, gtk_alignment, GtkBin,
   gfloat  (yscale);
 )
 
-struct _GtkAlignmentPrivate
-{
-  guint padding_top;
-  guint padding_bottom;
-  guint padding_left;
-  guint padding_right;
-};
-
 struct _GtkAlignmentClass
 {
   GtkBinClass parent_class;

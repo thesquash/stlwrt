@@ -54,6 +54,13 @@ static void gtk_recent_chooser_dialog_get_property (GObject      *object,
 static void gtk_recent_chooser_dialog_map       (GtkWidget *widget);
 static void gtk_recent_chooser_dialog_unmap     (GtkWidget *widget);
 
+struct _GtkRecentChooserDialogPrivate
+{
+  GtkRecentManager *manager;
+  
+  GtkWidget *chooser;
+};
+
 STLWRT_DEFINE_FTYPE_VPARENT (GtkRecentChooserDialog, gtk_recent_chooser_dialog, GTK_TYPE_DIALOG,
                              G_TYPE_FLAG_NONE,
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_RECENT_CHOOSER,

@@ -42,15 +42,6 @@ G_BEGIN_DECLS
 typedef struct _GtkMenuToolButtonClass   GtkMenuToolButtonClass;
 typedef struct _GtkMenuToolButtonPrivate GtkMenuToolButtonPrivate;
 
-struct _GtkMenuToolButtonPrivate
-{
-  GtkWidget *button;
-  GtkWidget *arrow;
-  GtkWidget *arrow_button;
-  GtkWidget *box;
-  GtkMenu   *menu;
-};
-
 STLWRT_DECLARE_VTYPE_VPARENT(GtkMenuToolButton, gtk_menu_tool_button, GtkToolButton,
   /*< private >*/
   GtkMenuToolButtonPrivate * (priv);

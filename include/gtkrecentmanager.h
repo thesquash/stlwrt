@@ -84,24 +84,6 @@ struct _GtkRecentData
   gboolean is_private;
 };
 
-
-struct _GtkRecentManagerPrivate
-{
-  gchar *filename;
-
-  guint is_dirty : 1;
-  
-  gint limit;
-  gint size;
-
-  GBookmarkFile *recent_items;
-
-  GFileMonitor *monitor;
-
-  guint changed_timeout;
-  guint changed_age;
-};
-
 STLWRT_DECLARE_FTYPE_FPARENT(GtkRecentManager, gtk_recent_manager, GObject,
   GtkRecentManagerPrivate * (priv);
 )

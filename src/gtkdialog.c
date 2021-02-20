@@ -287,7 +287,7 @@ gtk_dialog_init (GtkDialog *dialog)
 
   gtk_dialog_get_props (dialog)->vbox = __gtk_vbox_new (FALSE, 0);
 
-  __gtk_container_add (GTK_CONTAINER (gtk_dialog_get_props (dialog)), gtk_dialog_get_props (dialog)->vbox);
+  __gtk_container_add (GTK_CONTAINER (dialog), gtk_dialog_get_props (dialog)->vbox);
   __gtk_widget_show (gtk_dialog_get_props (dialog)->vbox);
 
   gtk_dialog_get_props (dialog)->action_area = __gtk_hbutton_box_new ();

@@ -60,6 +60,15 @@ enum
   PROP_MENU
 };
 
+struct _GtkMenuToolButtonPrivate
+{
+  GtkWidget *button;
+  GtkWidget *arrow;
+  GtkWidget *arrow_button;
+  GtkWidget *box;
+  GtkMenu   *menu;
+};
+
 static gint signals[LAST_SIGNAL];
 
 static GtkBuildableIface *parent_buildable_iface;
@@ -378,7 +387,7 @@ gtk_menu_tool_button_init (GtkMenuToolButton *button)
   GtkWidget *arrow_button;
   GtkWidget *real_button;
 
-  gtk_menu_tool_button_get_props (button)->priv = GTK_MENU_TOOL_BUTTON_GET_PRIVATE (gtk_menu_tool_button_get_props (button));
+  gtk_menu_tool_button_get_props (button)->priv = GTK_MENU_TOOL_BUTTON_GET_PRIVATE (button);
 
   __gtk_tool_item_set_homogeneous (GTK_TOOL_ITEM (button), FALSE);
 

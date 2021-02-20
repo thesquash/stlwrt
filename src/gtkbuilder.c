@@ -59,6 +59,16 @@ enum {
 };
 
 
+struct _GtkBuilderPrivate
+{
+  gchar *domain;
+  GHashTable *objects;
+  GSList *delayed_properties;
+  GSList *signals;
+  gchar *filename;
+};
+
+
 STLWRT_DEFINE_FTYPE (GtkBuilder, gtk_builder, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
                      G_ADD_PRIVATE (GtkBuilder))
 

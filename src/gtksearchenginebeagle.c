@@ -154,7 +154,15 @@ open_libbeagle (void)
 }
 
 
+struct _GtkSearchEngineBeaglePrivate 
+{
+  BeagleClient *client;
+  GtkQuery *query;
 
+  BeagleQuery *current_query;
+  char *current_query_uri_prefix;
+  gboolean query_finished;
+};
 
 STLWRT_DEFINE_FTYPE (GtkSearchEngineBeagle, _gtk_search_engine_beagle, GTK_TYPE_SEARCH_ENGINE,
                      G_TYPE_FLAG_NONE, ;)

@@ -420,7 +420,7 @@ gtk_color_button_init (GtkColorButton *color_button)
   PangoRectangle rect;
 
   /* Create the widgets */
-  gtk_color_button_get_props (color_button)->priv = GTK_COLOR_BUTTON_GET_PRIVATE (gtk_color_button_get_props (color_button));
+  gtk_color_button_get_props (color_button)->priv = GTK_COLOR_BUTTON_GET_PRIVATE (color_button);
 
   __gtk_widget_push_composite_child ();
 

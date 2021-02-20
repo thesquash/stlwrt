@@ -27,6 +27,12 @@
 
 #include <gtkquery.h>
 
+struct _GtkQueryPrivate 
+{
+  gchar *text;
+  gchar *location_uri;
+  GList *mime_types;
+};
 
 STLWRT_DEFINE_FTYPE (GtkQuery, _gtk_query, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;);
 

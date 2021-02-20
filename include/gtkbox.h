@@ -47,13 +47,6 @@ STLWRT_DECLARE_VTYPE_VPARENT(GtkBox, gtk_box, GtkContainer,
   guint  (homogeneous) : 1;
 )
 
-struct _GtkBoxPrivate
-{
-  GtkOrientation orientation;
-  guint          default_expand : 1;
-  guint          spacing_set    : 1;
-};
-
 struct _GtkBoxClass
 {
   GtkContainerClass parent_class;

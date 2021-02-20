@@ -46,14 +46,6 @@ G_BEGIN_DECLS
 typedef struct _GtkInfoBarPrivate GtkInfoBarPrivate;
 typedef struct _GtkInfoBarClass GtkInfoBarClass;
 
-struct _GtkInfoBarPrivate
-{
-  GtkWidget *content_area;
-  GtkWidget *action_area;
-
-  GtkMessageType message_type;
-};
-
 STLWRT_DECLARE_VTYPE_VPARENT(GtkInfoBar, gtk_info_bar, GtkHBox,
   /*< private > */
   GtkInfoBarPrivate *priv;

@@ -41,14 +41,6 @@ G_BEGIN_DECLS
 typedef struct _GtkQueryClass GtkQueryClass;
 typedef struct _GtkQueryPrivate GtkQueryPrivate;
 
-
-struct _GtkQueryPrivate 
-{
-  gchar *text;
-  gchar *location_uri;
-  GList *mime_types;
-};
-
 STLWRT_DECLARE_FTYPE_FPARENT(GtkQuery, _gtk_query, GObject,
   GtkQueryPrivate *priv;
 )

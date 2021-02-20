@@ -44,12 +44,6 @@ STLWRT_DECLARE_VTYPE_VPARENT(GtkScale, gtk_scale, GtkRange,
   guint  (value_pos) : 2;
 )
 
-struct _GtkScalePrivate
-{
-  PangoLayout *layout;
-  GSList      *marks;
-};
-
 struct _GtkScaleClass
 {
   GtkRangeClass parent_class;

@@ -47,15 +47,6 @@ typedef void (*GtkLinkButtonUriFunc) (GtkLinkButton *button,
 				      const gchar   *link_,
 				      gpointer       user_data);
 
-struct _GtkLinkButtonPrivate
-{
-  gchar *uri;
-
-  gboolean visited;
-
-  GtkWidget *popup_menu;
-};
-
 STLWRT_DECLARE_VTYPE_VPARENT(GtkLinkButton, gtk_link_button, GtkButton,
   GtkLinkButtonPrivate * (priv);
 )

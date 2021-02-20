@@ -39,12 +39,6 @@ G_BEGIN_DECLS
 
 typedef struct _GtkMenuBarClass  GtkMenuBarClass;
 
-struct _GtkMenuBarPrivate
-{
-  GtkPackDirection pack_direction;
-  GtkPackDirection child_pack_direction;
-};
-
 STLWRT_DECLARE_FTYPE_VPARENT(GtkMenuBar, gtk_menu_bar, GtkMenuShell)
 
 struct _GtkMenuBarClass

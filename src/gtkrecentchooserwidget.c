@@ -44,6 +44,12 @@ static void     gtk_recent_chooser_widget_get_property (GObject               *o
 						        GParamSpec            *pspec);
 static void     gtk_recent_chooser_widget_finalize     (GObject               *object);
 
+struct _GtkRecentChooserWidgetPrivate
+{
+  GtkRecentManager *manager;
+  
+  GtkWidget *chooser;
+};
 
 STLWRT_DEFINE_FTYPE_VPARENT (GtkRecentChooserWidget, gtk_recent_chooser_widget, GTK_TYPE_VBOX,
                              G_TYPE_FLAG_NONE,

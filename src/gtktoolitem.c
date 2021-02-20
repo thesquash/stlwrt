@@ -132,6 +132,27 @@ static void gtk_tool_item_set_use_action_appearance  (GtkToolItem          *item
 
 static guint toolitem_signals[LAST_SIGNAL] = { 0 };
 
+struct _GtkToolItemPrivate
+{
+  gchar *tip_text;
+  gchar *tip_private;
+
+  guint visible_horizontal : 1;
+  guint visible_vertical : 1;
+  guint homogeneous : 1;
+  guint expand : 1;
+  guint use_drag_window : 1;
+  guint is_important : 1;
+
+  GdkWindow *drag_window;
+  
+  gchar *menu_item_id;
+  GtkWidget *menu_item;
+
+  GtkAction *action;
+  gboolean   use_action_appearance;
+};
+
 STLWRT_DEFINE_FTYPE_VPARENT (GtkToolItem, gtk_tool_item, GTK_TYPE_BIN, G_TYPE_FLAG_NONE,
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_ACTIVATABLE,
                                                     gtk_tool_item_activatable_interface_init))
@@ -259,7 +280,7 @@ gtk_tool_item_init (GtkToolItem *toolitem)
 {
   __gtk_widget_set_can_focus (GTK_WIDGET (toolitem), FALSE);
 
-  gtk_tool_item_get_props (toolitem)->priv = GTK_TOOL_ITEM_GET_PRIVATE (gtk_tool_item_get_props (toolitem));
+  gtk_tool_item_get_props (toolitem)->priv = GTK_TOOL_ITEM_GET_PRIVATE (toolitem);
 
   gtk_tool_item_get_props (toolitem)->priv->visible_horizontal = TRUE;
   gtk_tool_item_get_props (toolitem)->priv->visible_vertical = TRUE;
@@ -628,7 +649,7 @@ gtk_tool_item_set_use_action_appearance (GtkToolItem *item,
     {
       gtk_tool_item_get_props (item)->priv->use_action_appearance = use_appearance;
 
-      __gtk_activatable_sync_action_properties (GTK_ACTIVATABLE (gtk_tool_item_get_props (item)), gtk_tool_item_get_props (item)->priv->action);
+      __gtk_activatable_sync_action_properties (GTK_ACTIVATABLE (item), gtk_tool_item_get_props (item)->priv->action);
     }
 }
 

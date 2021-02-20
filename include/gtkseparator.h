@@ -38,11 +38,6 @@ G_BEGIN_DECLS
 
 typedef struct _GtkSeparatorClass  GtkSeparatorClass;
 
-struct _GtkSeparatorPrivate
-{
-  GtkOrientation orientation;
-};
-
 STLWRT_DECLARE_FTYPE_VPARENT(GtkSeparator, gtk_separator, GtkWidget)
 
 struct _GtkSeparatorClass

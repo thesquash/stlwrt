@@ -291,6 +291,31 @@ static void            toolbar_rebuild_menu                 (GtkToolShell       
 #define GTK_TOOLBAR_GET_PRIVATE(o)  \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), GTK_TYPE_TOOLBAR, GtkToolbarPrivate))
 
+struct _GtkToolbarPrivate
+{
+  GList	*	content;
+  
+  GtkWidget *	arrow;
+  GtkWidget *	arrow_button;
+  GtkMenu *	menu;
+  
+  GdkWindow *	event_window;
+  ApiMode	api_mode;
+  GtkSettings *	settings;
+  int		idle_id;
+  GtkToolItem *	highlight_tool_item;
+  gint		max_homogeneous_pixels;
+  
+  GTimer *	timer;
+
+  gulong        settings_connection;
+
+  guint         show_arrow : 1;
+  guint         need_sync : 1;
+  guint         is_sliding : 1;
+  guint         need_rebuild : 1;  /* whether the overflow menu should be regenerated */
+  guint         animation : 1;
+};
 
 STLWRT_DEFINE_VTYPE (GtkToolbar, gtk_toolbar, GTK_TYPE_CONTAINER, G_TYPE_FLAG_NONE,
                      G_IMPLEMENT_INTERFACE (GTK_TYPE_TOOL_SHELL, toolbar_tool_shell_iface_init)

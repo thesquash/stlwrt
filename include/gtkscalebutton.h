@@ -47,27 +47,6 @@ G_BEGIN_DECLS
 typedef struct _GtkScaleButtonClass   GtkScaleButtonClass;
 typedef struct _GtkScaleButtonPrivate GtkScaleButtonPrivate;
 
-struct _GtkScaleButtonPrivate
-{
-  GtkWidget *dock;
-  GtkWidget *box;
-  GtkWidget *scale;
-  GtkWidget *image;
-
-  GtkIconSize size;
-  GtkOrientation orientation;
-
-  guint click_id;
-  gint click_timeout;
-  guint timeout : 1;
-  gdouble direction;
-  guint32 pop_time;
-
-  gchar **icon_list;
-
-  GtkAdjustment *adjustment; /* needed because it must be settable in init() */
-};
-
 STLWRT_DECLARE_VTYPE_VPARENT(GtkScaleButton, gtk_scale_button, GtkButton,
   GtkWidget * (plus_button);
   GtkWidget * (minus_button);

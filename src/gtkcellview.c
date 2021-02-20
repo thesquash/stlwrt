@@ -48,6 +48,17 @@ struct _GtkCellViewCellInfo
   GDestroyNotify destroy;
 };
 
+struct _GtkCellViewPrivate
+{
+  GtkTreeModel *model;
+  GtkTreeRowReference *displayed_row;
+  GList *cell_list;
+  gint spacing;
+
+  GdkColor background;
+  gboolean background_set;
+};
+
 
 
 static void        gtk_cell_view_cell_layout_init         (GtkCellLayoutIface *iface);
@@ -282,7 +293,7 @@ gtk_cell_view_init (GtkCellView *cellview)
 {
   __gtk_widget_set_has_window (GTK_WIDGET (cellview), FALSE);
 
-  gtk_cell_view_get_props (cellview)->priv = GTK_CELL_VIEW_GET_PRIVATE (gtk_cell_view_get_props (cellview));
+  gtk_cell_view_get_props (cellview)->priv = GTK_CELL_VIEW_GET_PRIVATE (cellview);
 }
 
 static void

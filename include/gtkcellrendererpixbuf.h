@@ -46,16 +46,6 @@ STLWRT_DECLARE_VTYPE_VPARENT(GtkCellRendererPixbuf, gtk_cell_renderer_pixbuf, Gt
   GdkPixbuf * (pixbuf_expander_closed);
 )
 
-struct _GtkCellRendererPixbufPrivate
-{
-  gchar *stock_id;
-  GtkIconSize stock_size;
-  gchar *stock_detail;
-  gboolean follow_state;
-  gchar *icon_name;
-  GIcon *gicon;
-};
-
 struct _GtkCellRendererPixbufClass
 {
   GtkCellRendererClass parent_class;

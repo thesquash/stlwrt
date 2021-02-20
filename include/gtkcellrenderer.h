@@ -73,11 +73,6 @@ STLWRT_DECLARE_VTYPE_FPARENT(GtkCellRenderer, gtk_cell_renderer, GObject,
   guint  (editing) : 1;
 )
 
-struct _GtkCellRendererPrivate
-{
-  GdkColor cell_background;
-};
-
 struct _GtkCellRendererClass
 {
   GObjectClass parent_class;

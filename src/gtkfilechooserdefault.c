@@ -4485,8 +4485,8 @@ save_widgets_create (GtkFileChooserDefault *impl)
   __gtk_widget_show (gtk_file_chooser_default_get_props (impl)->save_folder_label);
 
   gtk_file_chooser_default_get_props (impl)->save_widgets = vbox;
-  __gtk_box_pack_start (GTK_BOX (gtk_file_chooser_default_get_props (impl)), gtk_file_chooser_default_get_props (impl)->save_widgets, FALSE, FALSE, 0);
-  __gtk_box_reorder_child (GTK_BOX (gtk_file_chooser_default_get_props (impl)), gtk_file_chooser_default_get_props (impl)->save_widgets, 0);
+  __gtk_box_pack_start (GTK_BOX (impl), gtk_file_chooser_default_get_props (impl)->save_widgets, FALSE, FALSE, 0);
+  __gtk_box_reorder_child (GTK_BOX (impl), gtk_file_chooser_default_get_props (impl)->save_widgets, 0);
   __gtk_widget_show (gtk_file_chooser_default_get_props (impl)->save_widgets);
 }
 
@@ -4905,7 +4905,7 @@ browse_widgets_create (GtkFileChooserDefault *impl)
   GtkSizeGroup *size_group;
 
   gtk_file_chooser_default_get_props (impl)->browse_widgets_box = __gtk_vbox_new (FALSE, 12);
-  __gtk_box_pack_start (GTK_BOX (gtk_file_chooser_default_get_props (impl)), gtk_file_chooser_default_get_props (impl)->browse_widgets_box, TRUE, TRUE, 0);
+  __gtk_box_pack_start (GTK_BOX (impl), gtk_file_chooser_default_get_props (impl)->browse_widgets_box, TRUE, TRUE, 0);
   __gtk_widget_show (gtk_file_chooser_default_get_props (impl)->browse_widgets_box);
 
   gtk_file_chooser_default_get_props (impl)->browse_header_box = __gtk_vbox_new (FALSE, 12);
@@ -4967,7 +4967,7 @@ gtk_file_chooser_default_constructor (GType                  type,
 
   /* Alignment to hold extra widget */
   gtk_file_chooser_default_get_props (impl)->extra_align = __gtk_alignment_new (0.0, 0.5, 1.0, 1.0);
-  __gtk_box_pack_start (GTK_BOX (gtk_file_chooser_default_get_props (impl)), gtk_file_chooser_default_get_props (impl)->extra_align, FALSE, FALSE, 0);
+  __gtk_box_pack_start (GTK_BOX (impl), gtk_file_chooser_default_get_props (impl)->extra_align, FALSE, FALSE, 0);
 
   __gtk_widget_pop_composite_child ();
   update_appearance (impl);
@@ -6747,7 +6747,7 @@ file_system_model_set (GtkFileSystemModel *model,
         {
           if (g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_STANDARD_ICON))
             {
-              g_value_take_object (value, _gtk_file_info_render_icon (info, GTK_WIDGET (gtk_file_chooser_default_get_props (impl)), gtk_file_chooser_default_get_props (impl)->icon_size));
+              g_value_take_object (value, _gtk_file_info_render_icon (info, GTK_WIDGET (impl), gtk_file_chooser_default_get_props (impl)->icon_size));
             }
           else
             {

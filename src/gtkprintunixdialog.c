@@ -431,7 +431,7 @@ gtk_print_unix_dialog_init (GtkPrintUnixDialog *dialog)
 {
   GtkPrintUnixDialogPrivate *priv = gtk_print_unix_dialog_get_props (dialog)->priv;
 
-  priv = gtk_print_unix_dialog_get_props (dialog)->priv = GTK_PRINT_UNIX_DIALOG_GET_PRIVATE (gtk_print_unix_dialog_get_props (dialog));
+  priv = gtk_print_unix_dialog_get_props (dialog)->priv = GTK_PRINT_UNIX_DIALOG_GET_PRIVATE (dialog);
   priv->print_backends = NULL;
   priv->current_page = -1;
   priv->number_up_layout_n_option = NULL;

@@ -46,11 +46,6 @@ enum {
   PROP_ACTIVE
 };
 
-
-
-
-  
-
 static void     gtk_toggle_tool_button_set_property        (GObject      *object,
 							    guint         prop_id,
 							    const GValue *value,
@@ -77,6 +72,11 @@ static void gtk_toggle_tool_button_sync_action_properties     (GtkActivatable   
 
 static GtkActivatableIface *parent_activatable_iface;
 static guint                toggle_signals[LAST_SIGNAL] = { 0 };
+
+struct _GtkToggleToolButtonPrivate
+{
+  guint active : 1;
+};
 
 STLWRT_DEFINE_FTYPE_VPARENT (GtkToggleToolButton, gtk_toggle_tool_button, GTK_TYPE_TOOL_BUTTON,
                              G_TYPE_FLAG_NONE,
@@ -139,7 +139,7 @@ gtk_toggle_tool_button_init (GtkToggleToolButton *button)
   GtkToolButton *tool_button = GTK_TOOL_BUTTON (button);
   GtkToggleButton *toggle_button = GTK_TOGGLE_BUTTON (___gtk_tool_button_get_button (tool_button));
 
-  gtk_toggle_tool_button_get_props (button)->priv = GTK_TOGGLE_TOOL_BUTTON_GET_PRIVATE (gtk_toggle_tool_button_get_props (button));
+  gtk_toggle_tool_button_get_props (button)->priv = GTK_TOGGLE_TOOL_BUTTON_GET_PRIVATE (button);
 
   /* If the real button is a radio button, it may have been
    * active at the time it was created.

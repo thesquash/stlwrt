@@ -41,16 +41,6 @@ G_BEGIN_DECLS
 typedef struct _GtkSearchEngineSimpleClass GtkSearchEngineSimpleClass;
 typedef struct _GtkSearchEngineSimplePrivate GtkSearchEngineSimplePrivate;
 
-
-struct _GtkSearchEngineSimplePrivate 
-{
-  GtkQuery *query;
-  
-  SearchThreadData *active_search;
-  
-  gboolean query_finished;
-};
-
 STLWRT_DECLARE_FTYPE_FPARENT(GtkSearchEngineSimple, _gtk_search_engine_simple, GtkSearchEngine,
   GtkSearchEngineSimplePrivate *priv;
 )

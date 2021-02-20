@@ -39,13 +39,6 @@ typedef struct _GtkCellRendererSpinClass   GtkCellRendererSpinClass;
 typedef struct _GtkCellRendererSpinPrivate GtkCellRendererSpinPrivate;
 
 
-struct _GtkCellRendererSpinPrivate
-{
-  GtkAdjustment *adjustment;
-  gdouble climb_rate;
-  guint   digits;
-};
-
 STLWRT_DECLARE_FTYPE_VPARENT(GtkCellRendererSpin, gtk_cell_renderer_spin, GtkCellRendererText)
 
 struct _GtkCellRendererSpinClass

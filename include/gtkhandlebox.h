@@ -64,12 +64,6 @@ STLWRT_DECLARE_VTYPE_VPARENT(GtkHandleBox, gtk_handle_box, GtkBin,
   GtkAllocation    (float_allocation);
 )
 
-struct _GtkHandleBoxPrivate
-{
-  gint orig_x;
-  gint orig_y;
-};
-
 struct _GtkHandleBoxClass
 {
   GtkBinClass parent_class;

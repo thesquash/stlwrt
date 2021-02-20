@@ -41,15 +41,6 @@ G_BEGIN_DECLS
 typedef struct _GtkRecentChooserDialogClass   GtkRecentChooserDialogClass;
 typedef struct _GtkRecentChooserDialogPrivate GtkRecentChooserDialogPrivate;
 
-
-
-struct _GtkRecentChooserDialogPrivate
-{
-  GtkRecentManager *manager;
-  
-  GtkWidget *chooser;
-};
-
 STLWRT_DECLARE_VTYPE_VPARENT(GtkRecentChooserDialog, gtk_recent_chooser_dialog, GtkDialog,
   GtkRecentChooserDialogPrivate * (priv);
 )

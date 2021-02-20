@@ -44,12 +44,6 @@ G_BEGIN_DECLS
 typedef struct _GtkRadioActionPrivate GtkRadioActionPrivate;
 typedef struct _GtkRadioActionClass   GtkRadioActionClass;
 
-struct _GtkRadioActionPrivate
-{
-  GSList *group;
-  gint    value;
-};
-
 STLWRT_DECLARE_VTYPE_VPARENT(GtkRadioAction, gtk_radio_action, GtkToggleAction,
   GtkRadioActionPrivate * (private_data);
 )

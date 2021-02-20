@@ -1085,8 +1085,8 @@ gtk_menu_item_size_allocate (GtkWidget     *widget,
 			    "horizontal-padding", &horizontal_padding,
 			    NULL);
 
-      child_allocation.x = GTK_CONTAINER (gtk_widget_get_props (widget))->border_width + gtk_widget_get_props (widget)->style->xthickness;
-      child_allocation.y = GTK_CONTAINER (gtk_widget_get_props (widget))->border_width + gtk_widget_get_props (widget)->style->ythickness;
+      child_allocation.x = GTK_CONTAINER (widget)->border_width + gtk_widget_get_props (widget)->style->xthickness;
+      child_allocation.y = GTK_CONTAINER (widget)->border_width + gtk_widget_get_props (widget)->style->ythickness;
 
       if ((pack_dir == GTK_PACK_DIRECTION_LTR || pack_dir == GTK_PACK_DIRECTION_RTL) &&
 	  (child_pack_dir == GTK_PACK_DIRECTION_LTR || child_pack_dir == GTK_PACK_DIRECTION_RTL))

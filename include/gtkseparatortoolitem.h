@@ -40,11 +40,6 @@ G_BEGIN_DECLS
 typedef struct _GtkSeparatorToolItemClass   GtkSeparatorToolItemClass;
 typedef struct _GtkSeparatorToolItemPrivate GtkSeparatorToolItemPrivate;
 
-struct _GtkSeparatorToolItemPrivate
-{
-  guint draw : 1;
-};
-
 STLWRT_DECLARE_VTYPE_VPARENT(GtkSeparatorToolItem, gtk_separator_tool_item, GtkToolItem,
   /*< private >*/
   GtkSeparatorToolItemPrivate * (priv);

@@ -432,7 +432,7 @@ __gtk_scrolled_window_set_hadjustment (GtkScrolledWindow *scrolled_window,
       __gtk_widget_set_composite_name (gtk_scrolled_window_get_props (scrolled_window)->hscrollbar, "hscrollbar");
       __gtk_widget_pop_composite_child ();
 
-      __gtk_widget_set_parent (gtk_scrolled_window_get_props (scrolled_window)->hscrollbar, GTK_WIDGET (gtk_scrolled_window_get_props (scrolled_window)));
+      __gtk_widget_set_parent (gtk_scrolled_window_get_props (scrolled_window)->hscrollbar, GTK_WIDGET (scrolled_window));
       g_object_ref (gtk_scrolled_window_get_props (scrolled_window)->hscrollbar);
       __gtk_widget_show (gtk_scrolled_window_get_props (scrolled_window)->hscrollbar);
     }
@@ -493,7 +493,7 @@ __gtk_scrolled_window_set_vadjustment (GtkScrolledWindow *scrolled_window,
       __gtk_widget_set_composite_name (gtk_scrolled_window_get_props (scrolled_window)->vscrollbar, "vscrollbar");
       __gtk_widget_pop_composite_child ();
 
-      __gtk_widget_set_parent (gtk_scrolled_window_get_props (scrolled_window)->vscrollbar, GTK_WIDGET (gtk_scrolled_window_get_props (scrolled_window)));
+      __gtk_widget_set_parent (gtk_scrolled_window_get_props (scrolled_window)->vscrollbar, GTK_WIDGET (scrolled_window));
       g_object_ref (gtk_scrolled_window_get_props (scrolled_window)->vscrollbar);
       __gtk_widget_show (gtk_scrolled_window_get_props (scrolled_window)->vscrollbar);
     }

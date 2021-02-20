@@ -724,7 +724,7 @@ gtk_range_init (GtkRange *range)
   gtk_range_get_props (range)->has_stepper_d = FALSE;
   gtk_range_get_props (range)->need_recalc = TRUE;
   gtk_range_get_props (range)->round_digits = -1;
-  gtk_range_get_props (range)->layout = GTK_RANGE_GET_PRIVATE (gtk_range_get_props (range));
+  gtk_range_get_props (range)->layout = GTK_RANGE_GET_PRIVATE (range);
   gtk_range_get_props (range)->layout->mouse_location = MOUSE_OUTSIDE;
   gtk_range_get_props (range)->layout->mouse_x = -1;
   gtk_range_get_props (range)->layout->mouse_y = -1;
@@ -1457,8 +1457,8 @@ should_invert (GtkRange *range)
   if (gtk_range_get_props (range)->orientation == GTK_ORIENTATION_HORIZONTAL)
     return
       (gtk_range_get_props (range)->inverted && !gtk_range_get_props (range)->flippable) ||
-      (gtk_range_get_props (range)->inverted && gtk_range_get_props (range)->flippable && __gtk_widget_get_direction (GTK_WIDGET (gtk_range_get_props (range))) == GTK_TEXT_DIR_LTR) ||
-      (!gtk_range_get_props (range)->inverted && gtk_range_get_props (range)->flippable && __gtk_widget_get_direction (GTK_WIDGET (gtk_range_get_props (range))) == GTK_TEXT_DIR_RTL);
+      (gtk_range_get_props (range)->inverted && gtk_range_get_props (range)->flippable && __gtk_widget_get_direction (GTK_WIDGET (range)) == GTK_TEXT_DIR_LTR) ||
+      (!gtk_range_get_props (range)->inverted && gtk_range_get_props (range)->flippable && __gtk_widget_get_direction (GTK_WIDGET (range)) == GTK_TEXT_DIR_RTL);
   else
     return gtk_range_get_props (range)->inverted;
 }

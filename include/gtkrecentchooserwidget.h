@@ -41,13 +41,6 @@ G_BEGIN_DECLS
 typedef struct _GtkRecentChooserWidgetClass   GtkRecentChooserWidgetClass;
 typedef struct _GtkRecentChooserWidgetPrivate GtkRecentChooserWidgetPrivate;
 
-struct _GtkRecentChooserWidgetPrivate
-{
-  GtkRecentManager *manager;
-  
-  GtkWidget *chooser;
-};
-
 STLWRT_DECLARE_VTYPE_VPARENT(GtkRecentChooserWidget, gtk_recent_chooser_widget, GtkVBox,
   GtkRecentChooserWidgetPrivate * (priv);
 )

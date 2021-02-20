@@ -224,7 +224,7 @@ gtk_plug_set_is_child (GtkPlug  *plug,
 
       if (gtk_plug_get_props (plug)->modality_group)
 	{
-	  __gtk_window_group_remove_window (gtk_plug_get_props (plug)->modality_group, GTK_WINDOW (gtk_plug_get_props (plug)));
+	  __gtk_window_group_remove_window (gtk_plug_get_props (plug)->modality_group, GTK_WINDOW (plug));
 	  g_object_unref (gtk_plug_get_props (plug)->modality_group);
 	  gtk_plug_get_props (plug)->modality_group = NULL;
 	}
@@ -250,7 +250,7 @@ gtk_plug_set_is_child (GtkPlug  *plug,
 	__gtk_window_set_default (GTK_WINDOW (plug), NULL);
 	  
       gtk_plug_get_props (plug)->modality_group = __gtk_window_group_new ();
-      __gtk_window_group_add_window (gtk_plug_get_props (plug)->modality_group, GTK_WINDOW (gtk_plug_get_props (plug)));
+      __gtk_window_group_add_window (gtk_plug_get_props (plug)->modality_group, GTK_WINDOW (plug));
       
       ___gtk_window_set_is_toplevel (GTK_WINDOW (plug), TRUE);
       __gtk_container_set_resize_mode (GTK_CONTAINER (plug), GTK_RESIZE_QUEUE);
@@ -590,7 +590,7 @@ gtk_plug_unrealize (GtkWidget *widget)
       if (gtk_plug_get_props (plug)->modality_window)
 	_gtk_plug_handle_modality_off (plug);
 
-      __gtk_window_group_remove_window (gtk_plug_get_props (plug)->modality_group, GTK_WINDOW (gtk_plug_get_props (plug)));
+      __gtk_window_group_remove_window (gtk_plug_get_props (plug)->modality_group, GTK_WINDOW (plug));
       g_object_unref (gtk_plug_get_props (plug)->modality_group);
     }
 

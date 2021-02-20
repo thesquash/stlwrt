@@ -48,30 +48,6 @@ typedef struct _GtkToolItemGroupPrivate GtkToolItemGroupPrivate;
  * This should not be accessed directly. Use the accessor functions below.
  */
 
-struct _GtkToolItemGroupPrivate
-{
-  GtkWidget         *header;
-  GtkWidget         *label_widget;
-
-  GList             *children;
-
-  gboolean           animation;
-  gint64             animation_start;
-  GSource           *animation_timeout;
-  GtkExpanderStyle   expander_style;
-  gint               expander_size;
-  gint               header_spacing;
-  PangoEllipsizeMode ellipsize;
-
-  gulong             focus_set_id;
-  GtkWidget         *toplevel;
-
-  GtkSettings       *settings;
-  gulong             settings_connection;
-
-  guint              collapsed : 1;
-};
-
 STLWRT_DECLARE_VTYPE_VPARENT(GtkToolItemGroup, gtk_tool_item_group, GtkContainer,
   GtkToolItemGroupPrivate *priv;
 )

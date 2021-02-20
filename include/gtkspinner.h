@@ -43,15 +43,6 @@ G_BEGIN_DECLS
 typedef struct _GtkSpinnerClass GtkSpinnerClass;
 typedef struct _GtkSpinnerPrivate  GtkSpinnerPrivate;
 
-struct _GtkSpinnerPrivate
-{
-  guint current;
-  guint num_steps;
-  guint cycle_duration;
-  gboolean active;
-  guint timeout;
-};
-
 STLWRT_DECLARE_VTYPE_VPARENT(GtkSpinner, gtk_spinner, GtkDrawingArea,
   GtkSpinnerPrivate *priv;
 )

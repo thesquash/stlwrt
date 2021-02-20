@@ -138,20 +138,20 @@ gtk_color_selection_dialog_init (GtkColorSelectionDialog *colorseldiag)
   __gtk_container_set_border_width (GTK_CONTAINER (gtk_color_selection_dialog_get_props (colorseldiag)->colorsel), 5);
   __gtk_color_selection_set_has_palette (GTK_COLOR_SELECTION(gtk_color_selection_dialog_get_props (colorseldiag)->colorsel), FALSE); 
   __gtk_color_selection_set_has_opacity_control (GTK_COLOR_SELECTION(gtk_color_selection_dialog_get_props (colorseldiag)->colorsel), FALSE);
-  __gtk_container_add (GTK_CONTAINER (GTK_DIALOG (gtk_color_selection_dialog_get_props (colorseldiag))->vbox), gtk_color_selection_dialog_get_props (colorseldiag)->colorsel);
+  __gtk_container_add (GTK_CONTAINER (gtk_dialog_get_props (GTK_DIALOG (colorseldiag))->vbox), gtk_color_selection_dialog_get_props (colorseldiag)->colorsel);
   __gtk_widget_show (gtk_color_selection_dialog_get_props (colorseldiag)->colorsel);
   
-  gtk_color_selection_dialog_get_props (colorseldiag)->cancel_button = __gtk_dialog_add_button (GTK_DIALOG (gtk_color_selection_dialog_get_props (colorseldiag)),
+  gtk_color_selection_dialog_get_props (colorseldiag)->cancel_button = __gtk_dialog_add_button (GTK_DIALOG (colorseldiag),
                                                        GTK_STOCK_CANCEL,
                                                        GTK_RESPONSE_CANCEL);
 
-  gtk_color_selection_dialog_get_props (colorseldiag)->ok_button = __gtk_dialog_add_button (GTK_DIALOG (gtk_color_selection_dialog_get_props (colorseldiag)),
+  gtk_color_selection_dialog_get_props (colorseldiag)->ok_button = __gtk_dialog_add_button (GTK_DIALOG (colorseldiag),
                                                    GTK_STOCK_OK,
                                                    GTK_RESPONSE_OK);
                                                    
   __gtk_widget_grab_default (gtk_color_selection_dialog_get_props (colorseldiag)->ok_button);
   
-  gtk_color_selection_dialog_get_props (colorseldiag)->help_button = __gtk_dialog_add_button (GTK_DIALOG (gtk_color_selection_dialog_get_props (colorseldiag)),
+  gtk_color_selection_dialog_get_props (colorseldiag)->help_button = __gtk_dialog_add_button (GTK_DIALOG (colorseldiag),
                                                      GTK_STOCK_HELP,
                                                      GTK_RESPONSE_HELP);
 

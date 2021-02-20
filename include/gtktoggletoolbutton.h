@@ -41,11 +41,6 @@ G_BEGIN_DECLS
 typedef struct _GtkToggleToolButtonClass   GtkToggleToolButtonClass;
 typedef struct _GtkToggleToolButtonPrivate GtkToggleToolButtonPrivate;
 
-struct _GtkToggleToolButtonPrivate
-{
-  guint active : 1;
-};
-
 STLWRT_DECLARE_VTYPE_VPARENT(GtkToggleToolButton, gtk_toggle_tool_button, GtkToolButton,
   /*< private >*/
   GtkToggleToolButtonPrivate * (priv);

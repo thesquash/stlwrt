@@ -46,13 +46,6 @@ STLWRT_DECLARE_VTYPE_VPARENT(GtkCellRendererToggle, gtk_cell_renderer_toggle, Gt
   guint  (radio) : 1;
 )
 
-struct _GtkCellRendererTogglePrivate
-{
-  gint indicator_size;
-
-  guint inconsistent : 1;
-};
-
 struct _GtkCellRendererToggleClass
 {
   GtkCellRendererClass parent_class;

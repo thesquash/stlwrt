@@ -41,16 +41,6 @@ G_BEGIN_DECLS
 typedef struct _GtkSearchEngineBeagleClass GtkSearchEngineBeagleClass;
 typedef struct _GtkSearchEngineBeaglePrivate GtkSearchEngineBeaglePrivate;
 
-struct _GtkSearchEngineBeaglePrivate 
-{
-  BeagleClient *client;
-  GtkQuery *query;
-
-  BeagleQuery *current_query;
-  char *current_query_uri_prefix;
-  gboolean query_finished;
-};
-
 STLWRT_DECLARE_FTYPE_FPARENT(GtkSearchEngineBeagle, _gtk_search_engine_beagle, GtkSearchEngine,
   GtkSearchEngineBeaglePrivate *priv;
 )

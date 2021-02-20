@@ -60,21 +60,6 @@ STLWRT_DECLARE_VTYPE_VPARENT (GtkButton, gtk_button, GtkBin,
 )
 
 
-struct _GtkButtonPrivate
-{
-  gfloat          xalign;
-  gfloat          yalign;
-  GtkWidget      *image;
-  guint           align_set             : 1;
-  guint           image_is_stock        : 1;
-  guint           has_grab              : 1;
-  guint           use_action_appearance : 1;
-  guint32         grab_time;
-  GtkPositionType image_position;
-  GtkAction      *action;
-};
-
-
 struct _GtkButtonClass
 {
   GtkBinClass        parent_class;

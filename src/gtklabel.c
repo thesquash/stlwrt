@@ -1699,7 +1699,7 @@ __gtk_label_set_mnemonic_widget (GtkLabel  *label,
 
   if (gtk_label_get_props (label)->mnemonic_widget)
     {
-      __gtk_widget_remove_mnemonic_label (gtk_label_get_props (label)->mnemonic_widget, GTK_WIDGET (gtk_label_get_props (label)));
+      __gtk_widget_remove_mnemonic_label (gtk_label_get_props (label)->mnemonic_widget, GTK_WIDGET (label));
       g_object_weak_unref (G_OBJECT (gtk_label_get_props (label)->mnemonic_widget),
 			   label_mnemonic_widget_weak_notify,
 			   label);
@@ -1710,7 +1710,7 @@ __gtk_label_set_mnemonic_widget (GtkLabel  *label,
       g_object_weak_ref (G_OBJECT (gtk_label_get_props (label)->mnemonic_widget),
 		         label_mnemonic_widget_weak_notify,
 		         label);
-      __gtk_widget_add_mnemonic_label (gtk_label_get_props (label)->mnemonic_widget, GTK_WIDGET (gtk_label_get_props (label)));
+      __gtk_widget_add_mnemonic_label (gtk_label_get_props (label)->mnemonic_widget, GTK_WIDGET (label));
     }
   
   g_object_notify (G_OBJECT (label), "mnemonic-widget");

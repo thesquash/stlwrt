@@ -33,10 +33,12 @@
 #include <gtkprivate.h>
 
 
-
-
-
 typedef struct _GtkCellRendererComboPrivate GtkCellRendererComboPrivate;
+
+struct _GtkCellRendererComboPrivate
+{
+  GtkWidget *combo;
+};
 
 
 static void gtk_cell_renderer_combo_class_init (GtkCellRendererComboClass *klass);

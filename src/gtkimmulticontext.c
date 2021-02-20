@@ -82,6 +82,17 @@ static gboolean gtk_im_multicontext_delete_surrounding_cb   (GtkIMContext      *
 
 static const gchar *global_context_id = NULL;
 
+struct _GtkIMMulticontextPrivate
+{
+  GdkWindow *client_window;
+  GdkRectangle cursor_location;
+  gchar *context_id;
+
+  guint use_preedit : 1;
+  guint have_cursor_location : 1;
+  guint focus_in : 1;
+};
+
 STLWRT_DEFINE_VTYPE (GtkIMMulticontext, gtk_im_multicontext, GTK_TYPE_IM_CONTEXT,
                      G_TYPE_FLAG_NONE, ;)
 

@@ -90,7 +90,36 @@ static GQuark          quark_capslock_feedback = 0;
 
 typedef struct _GtkEntryPrivate GtkEntryPrivate;
 
+struct _GtkEntryPrivate 
+{
+  GtkEntryBuffer* buffer;
 
+  gfloat xalign;
+  gint insert_pos;
+  guint blink_time;  /* time in msec the cursor has blinked since last user event */
+  guint interior_focus          : 1;
+  guint real_changed            : 1;
+  guint invisible_char_set      : 1;
+  guint caps_lock_warning       : 1;
+  guint caps_lock_warning_shown : 1;
+  guint change_count            : 8;
+  guint progress_pulse_mode     : 1;
+  guint progress_pulse_way_back : 1;
+
+  gint focus_width;
+  GtkShadowType shadow_type;
+
+  gdouble progress_fraction;
+  gdouble progress_pulse_fraction;
+  gdouble progress_pulse_current;
+
+  EntryIconInfo *icons[MAX_ICONS];
+  gint icon_margin;
+  gint start_x;
+  gint start_y;
+
+  gchar *im_module;
+};
 
 typedef struct
 {
@@ -2244,7 +2273,7 @@ gtk_entry_init (GtkEntry *entry)
 
   gtk_entry_get_props (entry)->editable = TRUE;
   gtk_entry_get_props (entry)->visible = TRUE;
-  gtk_entry_get_props (entry)->invisible_char = find_invisible_char (GTK_WIDGET (gtk_entry_get_props (entry)));
+  gtk_entry_get_props (entry)->invisible_char = find_invisible_char (GTK_WIDGET (entry));
   gtk_entry_get_props (entry)->dnd_position = -1;
   gtk_entry_get_props (entry)->width_chars = -1;
   gtk_entry_get_props (entry)->is_cell_renderer = FALSE;
@@ -4196,7 +4225,7 @@ gtk_entry_state_changed (GtkWidget      *widget,
   if (!__gtk_widget_is_sensitive (widget))
     {
       /* Clear any selection */
-      __gtk_editable_select_region (GTK_EDITABLE (gtk_entry_get_props (entry)), gtk_entry_get_props (entry)->current_pos, gtk_entry_get_props (entry)->current_pos);
+      __gtk_editable_select_region (GTK_EDITABLE (entry), gtk_entry_get_props (entry)->current_pos, gtk_entry_get_props (entry)->current_pos);
     }
 
   __gtk_widget_queue_draw (widget);
@@ -4381,7 +4410,7 @@ gtk_entry_style_set (GtkWidget *widget,
   priv->interior_focus = interior_focus;
 
   if (!priv->invisible_char_set)
-    gtk_entry_get_props (entry)->invisible_char = find_invisible_char (GTK_WIDGET (gtk_entry_get_props (entry)));
+    gtk_entry_get_props (entry)->invisible_char = find_invisible_char (GTK_WIDGET (entry));
 
   gtk_entry_recompute (entry);
 
@@ -4821,7 +4850,7 @@ gtk_entry_move_cursor (GtkEntry       *entry,
     }
 
   if (extend_selection)
-    __gtk_editable_select_region (GTK_EDITABLE (gtk_entry_get_props (entry)), gtk_entry_get_props (entry)->selection_bound, new_pos);
+    __gtk_editable_select_region (GTK_EDITABLE (entry), gtk_entry_get_props (entry)->selection_bound, new_pos);
   else
     __gtk_editable_set_position (GTK_EDITABLE (entry), new_pos);
   
@@ -6355,7 +6384,7 @@ primary_clear_cb (GtkClipboard *clipboard,
 {
   GtkEntry *entry = GTK_ENTRY (data);
 
-  __gtk_editable_select_region (GTK_EDITABLE (gtk_entry_get_props (entry)), gtk_entry_get_props (entry)->current_pos, gtk_entry_get_props (entry)->current_pos);
+  __gtk_editable_select_region (GTK_EDITABLE (entry), gtk_entry_get_props (entry)->current_pos, gtk_entry_get_props (entry)->current_pos);
 }
 
 static void

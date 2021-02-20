@@ -74,29 +74,6 @@ typedef enum
 typedef struct _GtkAssistantPrivate GtkAssistantPrivate;
 typedef struct _GtkAssistantClass   GtkAssistantClass;
 
-
-struct _GtkAssistantPrivate
-{
-  GtkWidget *header_image;
-  GtkWidget *sidebar_image;
-
-  GtkWidget *action_area;
-
-  GList     *pages;
-
-  GtkAssistantPage *current_page;
-
-  GSList    *visited_pages;
-
-  GtkSizeGroup *size_group;
-
-  GtkAssistantPageFunc forward_function;
-  gpointer forward_function_data;
-  GDestroyNotify forward_data_destroy;
-
-  guint committed : 1;
-};
-
 STLWRT_DECLARE_VTYPE_VPARENT(GtkAssistant, gtk_assistant, GtkWindow,
   GtkWidget * (cancel);
   GtkWidget * (forward);

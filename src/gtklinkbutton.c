@@ -53,6 +53,14 @@ enum
   PROP_VISITED
 };
 
+struct _GtkLinkButtonPrivate
+{
+  gchar *uri;
+
+  gboolean visited;
+
+  GtkWidget *popup_menu;
+};
 
 
 static void     gtk_link_button_finalize     (GObject          *object);
@@ -162,7 +170,7 @@ gtk_link_button_class_init (GtkLinkButtonClass *klass)
 static void
 gtk_link_button_init (GtkLinkButton *link_button)
 {
-  gtk_link_button_get_props (link_button)->priv = GTK_LINK_BUTTON_GET_PRIVATE (gtk_link_button_get_props (link_button)),
+  gtk_link_button_get_props (link_button)->priv = GTK_LINK_BUTTON_GET_PRIVATE (link_button),
   
   __gtk_button_set_relief (GTK_BUTTON (link_button), GTK_RELIEF_NONE);
   

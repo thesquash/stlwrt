@@ -31,10 +31,6 @@
 #include <gtkintl.h>
 
 
-
-                                                                                     GTK_TYPE_CELL_RENDERER_PROGRESS, \
-                                                                                     GtkCellRendererProgressPrivate))
-
 enum
 {
   PROP_0,
@@ -82,7 +78,21 @@ static void gtk_cell_renderer_progress_render       (GtkCellRenderer         *ce
 						     GdkRectangle            *expose_area,
 						     guint                    flags);
 
-     
+struct _GtkCellRendererProgressPrivate
+{
+  gint value;
+  gchar *text;
+  gchar *label;
+  gint min_h;
+  gint min_w;
+  gint pulse;
+  gint offset;
+  gfloat text_xalign;
+  gfloat text_yalign;
+  GtkProgressBarOrientation orientation;
+};
+
+
 STLWRT_DEFINE_FTYPE_VPARENT (GtkCellRendererProgress, gtk_cell_renderer_progress, GTK_TYPE_CELL_RENDERER,
                              G_TYPE_FLAG_NONE, ;)
 

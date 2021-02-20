@@ -1171,7 +1171,7 @@ __gtk_font_selection_get_font_internal (GtkFontSelection *fontsel)
   if (!gtk_font_selection_get_props (fontsel)->font)
     {
       PangoFontDescription *font_desc = __gtk_font_selection_get_font_description (fontsel);
-      gtk_font_selection_get_props (fontsel)->font = __gdk_font_from_description_for_display (__gtk_widget_get_display (GTK_WIDGET (gtk_font_selection_get_props (fontsel))), font_desc);
+      gtk_font_selection_get_props (fontsel)->font = __gdk_font_from_description_for_display (__gtk_widget_get_display (GTK_WIDGET (fontsel)), font_desc);
       pango_font_description_free (font_desc);
     }
   

@@ -60,15 +60,6 @@ typedef struct _GtkTextViewClass GtkTextViewClass;
 typedef struct _GtkTextWindow GtkTextWindow;
 typedef struct _GtkTextPendingScroll GtkTextPendingScroll;
 
-
-struct _GtkTextViewPrivate 
-{
-  guint blink_time;  /* time in msec the cursor has blinked since last user event */
-  guint im_spot_idle;
-  gchar *im_module;
-  guint scroll_after_paste : 1;
-};
-
 STLWRT_DECLARE_VTYPE_VPARENT(GtkTextView, gtk_text_view, GtkContainer,
   struct _GtkTextLayout * (layout);
   GtkTextBuffer * (buffer);

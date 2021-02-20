@@ -94,6 +94,21 @@ static GObjectClass        *parent_class = NULL;
 static GtkActivatableIface *parent_activatable_iface;
 static guint                toolbutton_signals[LAST_SIGNAL] = { 0 };
 
+struct _GtkToolButtonPrivate
+{
+  GtkWidget *button;
+
+  gchar *stock_id;
+  gchar *icon_name;
+  gchar *label_text;
+  GtkWidget *label_widget;
+  GtkWidget *icon_widget;
+
+  GtkSizeGroup *text_size_group;
+
+  guint use_underline : 1;
+  guint contents_invalid : 1;
+};
 
 STLWRT_DEFINE_FTYPE_VPARENT (GtkToolButton, gtk_tool_button, GTK_TYPE_TOOL_ITEM, G_TYPE_FLAG_NONE,
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_ACTIVATABLE,
@@ -254,7 +269,7 @@ gtk_tool_button_init (GtkToolButton      *button,
 {
   GtkToolItem *toolitem = GTK_TOOL_ITEM (button);
   
-  gtk_tool_button_get_props (button)->priv = GTK_TOOL_BUTTON_GET_PRIVATE (gtk_tool_button_get_props (button));
+  gtk_tool_button_get_props (button)->priv = GTK_TOOL_BUTTON_GET_PRIVATE (button);
 
   gtk_tool_button_get_props (button)->priv->contents_invalid = TRUE;
 
@@ -266,7 +281,7 @@ gtk_tool_button_init (GtkToolButton      *button,
   g_signal_connect_object (gtk_tool_button_get_props (button)->priv->gtk_tool_button_get_props (button), "clicked",
 			   G_CALLBACK (button_clicked), button, 0);
 
-  __gtk_container_add (GTK_CONTAINER (gtk_tool_button_get_props (button)), gtk_tool_button_get_props (button)->priv->gtk_tool_button_get_props (button));
+  __gtk_container_add (GTK_CONTAINER (button), gtk_tool_button_get_props (button)->priv->gtk_tool_button_get_props (button));
   __gtk_widget_show (gtk_tool_button_get_props (button)->priv->gtk_tool_button_get_props (button));
 }
 

@@ -64,6 +64,18 @@ enum
   PROP_VISIBLE
 };
 
+struct _GtkActionGroupPrivate 
+{
+  gchar           *name;
+  gboolean	   sensitive;
+  gboolean	   visible;
+  GHashTable      *actions;
+
+  GtkTranslateFunc translate_func;
+  gpointer         translate_data;
+  GDestroyNotify   translate_notify;
+};
+
 static void       gtk_action_group_init            (GtkActionGroup      *self);
 static void       gtk_action_group_class_init      (GtkActionGroupClass *class);
 static void       gtk_action_group_finalize        (GObject             *object);

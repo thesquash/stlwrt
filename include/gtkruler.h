@@ -64,11 +64,6 @@ STLWRT_DECLARE_VTYPE_VPARENT(GtkRuler, gtk_ruler, GtkWidget,
   gdouble  (max_size);
 )
 
-struct _GtkRulerPrivate
-{
-  GtkOrientation orientation;
-};
-
 struct _GtkRulerClass
 {
   GtkWidgetClass parent_class;

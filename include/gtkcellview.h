@@ -42,18 +42,6 @@ G_BEGIN_DECLS
 typedef struct _GtkCellViewClass        GtkCellViewClass;
 typedef struct _GtkCellViewPrivate      GtkCellViewPrivate;
 
-
-struct _GtkCellViewPrivate
-{
-  GtkTreeModel *model;
-  GtkTreeRowReference *displayed_row;
-  GList *cell_list;
-  gint spacing;
-
-  GdkColor background;
-  gboolean background_set;
-};
-
 STLWRT_DECLARE_VTYPE_VPARENT(GtkCellView, gtk_cell_view, GtkWidget,
   /*< private >*/
   GtkCellViewPrivate * (priv);

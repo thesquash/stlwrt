@@ -382,6 +382,11 @@ GObjectNotifyContext   *_gtk_widget_child_property_notify_context = NULL;
 
 typedef struct _GtkWidgetPrivate GtkWidgetPrivate;
 
+struct _GtkWidgetPrivate
+{
+  guint32  widget_flags;
+};
+
 #define GTK_WIDGET_FLAGS(obj) (gtk_widget_get_instance_private (obj)->flags)
 
 
@@ -2908,7 +2913,7 @@ __gtk_widget_child_notify (GtkWidget    *widget,
 
   g_return_if_fail (GTK_IS_WIDGET (widget));
   g_return_if_fail (child_property != NULL);
-  if (!G_OBJECT (gtk_widget_get_props (widget))->ref_count || !gtk_widget_get_props (widget)->parent)
+  if (!G_OBJECT (widget)->ref_count || !gtk_widget_get_props (widget)->parent)
     return;
 
   g_object_ref (widget);
@@ -8448,7 +8453,7 @@ __gtk_widget_get_composite_name (GtkWidget *widget)
 {
   g_return_val_if_fail (GTK_IS_WIDGET (widget), NULL);
 
-  if (((GTK_WIDGET_FLAGS (gtk_widget_get_props (widget)) & GTK_COMPOSITE_CHILD) != 0) && gtk_widget_get_props (widget)->parent)
+  if (((GTK_WIDGET_FLAGS (widget) & GTK_COMPOSITE_CHILD) != 0) && gtk_widget_get_props (widget)->parent)
     return ___gtk_container_child_composite_name (GTK_CONTAINER (gtk_widget_get_props (widget)->parent),
 					       widget);
   else

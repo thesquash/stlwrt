@@ -932,7 +932,7 @@ _gtk_socket_add_window (GtkSocket       *socket,
       gtk_socket_get_props (socket)->need_map = gtk_socket_get_props (socket)->is_mapped;
 
       if (__gdk_drag_get_protocol_for_display (display, xid, &protocol))
-	__gtk_drag_dest_set_proxy (GTK_WIDGET (gtk_socket_get_props (socket)), gtk_socket_get_props (socket)->plug_window, 
+	__gtk_drag_dest_set_proxy (GTK_WIDGET (socket), gtk_socket_get_props (socket)->plug_window, 
 				 protocol, TRUE);
 
       __gdk_display_sync (display);

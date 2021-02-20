@@ -58,8 +58,14 @@ typedef struct
   volatile gboolean cancelled;
 } SearchThreadData;
 
-
-
+struct _GtkSearchEngineSimplePrivate 
+{
+  GtkQuery *query;
+  
+  SearchThreadData *active_search;
+  
+  gboolean query_finished;
+};
 
 STLWRT_DEFINE_FTYPE (GtkSearchEngineSimple, _gtk_search_engine_simple, GTK_TYPE_SEARCH_ENGINE,
                      G_TYPE_FLAG_NONE, ;)

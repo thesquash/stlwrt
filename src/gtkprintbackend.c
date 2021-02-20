@@ -100,6 +100,16 @@ struct _GtkPrintBackendModuleClass
   GTypeModuleClass parent_class;
 };
 
+struct _GtkPrintBackendPrivate
+{
+  GHashTable *printers;
+  guint printer_list_requested : 1;
+  guint printer_list_done : 1;
+  GtkPrintBackendStatus status;
+  char **auth_info_required;
+  char **auth_info;
+};
+
 STLWRT_DEFINE_FTYPE (GtkPrintBackendModule, _gtk_print_backend_module, G_TYPE_TYPE_MODULE,
                      G_TYPE_FLAG_NONE, ;)
 #define GTK_TYPE_PRINT_BACKEND_MODULE      (_gtk_print_backend_module_get_type ())

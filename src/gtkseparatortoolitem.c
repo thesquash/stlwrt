@@ -54,9 +54,10 @@ static void     gtk_separator_tool_item_add               (GtkContainer         
 static gint     get_space_size                            (GtkToolItem               *tool_item);
 
 
-
-
-
+struct _GtkSeparatorToolItemPrivate
+{
+  guint draw : 1;
+};
 
 STLWRT_DEFINE_FTYPE_VPARENT (GtkSeparatorToolItem, gtk_separator_tool_item, GTK_TYPE_TOOL_ITEM,
                              G_TYPE_FLAG_NONE, ;)
@@ -112,7 +113,7 @@ gtk_separator_tool_item_class_init (GtkSeparatorToolItemClass *class)
 static void
 gtk_separator_tool_item_init (GtkSeparatorToolItem      *separator_item)
 {
-  gtk_separator_tool_item_get_props (separator_item)->priv = GTK_SEPARATOR_TOOL_ITEM_GET_PRIVATE (gtk_separator_tool_item_get_props (separator_item));
+  gtk_separator_tool_item_get_props (separator_item)->priv = GTK_SEPARATOR_TOOL_ITEM_GET_PRIVATE (separator_item);
   gtk_separator_tool_item_get_props (separator_item)->priv->draw = TRUE;
 }
 

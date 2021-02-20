@@ -73,6 +73,12 @@ enum
   PROP_TEXT_COLUMN
 };
 
+struct _GtkComboBoxEntryPrivate
+{
+  GtkCellRenderer *text_renderer;
+  gint text_column;
+};
+
 STLWRT_DEFINE_FTYPE_VPARENT (GtkComboBoxEntry, gtk_combo_box_entry, GTK_TYPE_COMBO_BOX,
                              G_TYPE_FLAG_NONE,
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
@@ -120,7 +126,7 @@ gtk_combo_box_entry_init (GtkComboBoxEntry *entry_box)
 {
   GtkWidget *entry;
 
-  gtk_combo_box_entry_get_props (entry_box)->priv = GTK_COMBO_BOX_ENTRY_GET_PRIVATE (gtk_combo_box_entry_get_props (entry_box));
+  gtk_combo_box_entry_get_props (entry_box)->priv = GTK_COMBO_BOX_ENTRY_GET_PRIVATE (entry_box);
   gtk_combo_box_entry_get_props (entry_box)->priv->text_column = -1;
 
   entry = __gtk_entry_new ();

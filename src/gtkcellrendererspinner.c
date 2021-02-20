@@ -64,6 +64,14 @@ enum {
   PROP_SIZE
 };
 
+struct _GtkCellRendererSpinnerPrivate
+{
+  gboolean active;
+  guint pulse;
+  GtkIconSize icon_size, old_icon_size;
+  gint size;
+};
+
 
 #define GTK_CELL_RENDERER_SPINNER_GET_PRIVATE(object)  \
         gtk_cell_renderer_spinner_get_instance_private (object)

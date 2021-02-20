@@ -38,15 +38,6 @@ G_BEGIN_DECLS
 typedef struct _GtkPanedClass   GtkPanedClass;
 typedef struct _GtkPanedPrivate GtkPanedPrivate;
 
-
-struct _GtkPanedPrivate
-{
-  GtkOrientation  orientation;
-  GtkWidget      *saved_focus;
-  GtkPaned       *first_paned;
-  guint32         grab_time;
-};
-
 STLWRT_DECLARE_VTYPE_VPARENT(GtkPaned, gtk_paned, GtkContainer,
   GtkWidget * (child1);
   GtkWidget * (child2);

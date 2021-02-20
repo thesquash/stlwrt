@@ -51,6 +51,32 @@ enum
 
 static void gtk_recent_chooser_iface_init (GtkRecentChooserIface *iface);
 
+struct _GtkRecentActionPrivate
+{
+  GtkRecentManager *manager;
+
+  guint show_numbers   : 1;
+
+  /* RecentChooser properties */
+  guint show_private   : 1;
+  guint show_not_found : 1;
+  guint show_tips      : 1;
+  guint show_icons     : 1;
+  guint local_only     : 1;
+
+  gint limit;
+
+  GtkRecentSortType sort_type;
+  GtkRecentSortFunc sort_func;
+  gpointer          sort_data;
+  GDestroyNotify    data_destroy;
+
+  GtkRecentFilter *current_filter;
+
+  GSList *choosers;
+  GtkRecentChooser *current_chooser;
+};
+
 STLWRT_DEFINE_FTYPE (GtkRecentAction, gtk_recent_action, GTK_TYPE_ACTION, G_TYPE_FLAG_NONE,
                      G_IMPLEMENT_INTERFACE (GTK_TYPE_RECENT_CHOOSER, gtk_recent_chooser_iface_init))
 

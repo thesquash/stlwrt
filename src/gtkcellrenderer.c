@@ -38,10 +38,12 @@ static void gtk_cell_renderer_set_property  (GObject              *object,
 static void set_cell_bg_color               (GtkCellRenderer      *cell,
 					     GdkColor             *color);
 
-
-
-
 typedef struct _GtkCellRendererPrivate GtkCellRendererPrivate;
+
+struct _GtkCellRendererPrivate
+{
+  GdkColor cell_background;
+};
 
 
 enum {

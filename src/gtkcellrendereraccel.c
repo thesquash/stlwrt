@@ -369,7 +369,7 @@ gtk_cell_renderer_accel_set_property  (GObject      *object,
     {
       gchar *text;
 
-      text = convert_keysym_state_to_string (gtk_cell_renderer_accel_get_props (accel), gtk_cell_renderer_accel_get_props (accel)->accel_key, gtk_cell_renderer_accel_get_props (accel)->accel_mods, gtk_cell_renderer_accel_get_props (accel)->keycode);
+      text = convert_keysym_state_to_string (accel, gtk_cell_renderer_accel_get_props (accel)->accel_key, gtk_cell_renderer_accel_get_props (accel)->accel_mods, gtk_cell_renderer_accel_get_props (accel)->keycode);
       g_object_set (accel, "text", text, NULL);
       g_free (text);
     }

@@ -48,9 +48,10 @@
 
 
 
-typedef struct {
+struct _GtkDialogPrivate
+{
   guint ignore_separator : 1;
-} GtkDialogPrivate;
+};
 
 typedef struct _ResponseData ResponseData;
 

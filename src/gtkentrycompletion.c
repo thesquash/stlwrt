@@ -472,7 +472,7 @@ gtk_entry_completion_init (GtkEntryCompletion *completion)
                                        GTK_SHADOW_NONE);
 
   /* a nasty hack to get the completions treeview to size nicely */
-  __gtk_widget_set_size_request (GTK_SCROLLED_WINDOW (priv->scrolled_window)->vscrollbar, -1, 0);
+  __gtk_widget_set_size_request (gtk_scrolled_window_get_props (GTK_SCROLLED_WINDOW (priv->scrolled_window))->vscrollbar, -1, 0);
 
   /* actions */
   priv->actions = __gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_BOOLEAN);
@@ -1210,7 +1210,7 @@ gtk_entry_completion_insert_action (GtkEntryCompletion *completion,
                       1, markup,
                       -1);
 
-  if (!completion->priv->action_view->parent)
+  if (!completion->priv->gtk_widget_get_props (action_view)->parent)
     {
       GtkTreePath *path = __gtk_tree_path_new_from_indices (0, -1);
 
@@ -1390,10 +1390,10 @@ _gtk_entry_completion_resize_popup (GtkEntryCompletion *completion)
   GtkTreeViewColumn *action_column;
   gint action_height;
 
-  if (!completion->priv->entry->window)
+  if (!completion->priv->gtk_widget_get_props (entry)->window)
     return FALSE;
 
-  __gdk_window_get_origin (completion->priv->entry->window, &x, &y);
+  __gdk_window_get_origin (completion->priv->gtk_widget_get_props (entry)->window, &x, &y);
   _gtk_entry_get_borders (GTK_ENTRY (completion->priv->entry), &x_border, &y_border);
 
   matches = __gtk_tree_model_iter_n_children (GTK_TREE_MODEL (completion->priv->filter_model), NULL);
@@ -1415,7 +1415,7 @@ _gtk_entry_completion_resize_popup (GtkEntryCompletion *completion)
 
   screen = __gtk_widget_get_screen (GTK_WIDGET (completion->priv->entry));
   monitor_num = __gdk_screen_get_monitor_at_window (screen, 
-						  GTK_WIDGET (completion->priv->entry)->window);
+						  gtk_widget_get_props (GTK_WIDGET (completion->priv->entry))->window);
   __gdk_screen_get_monitor_geometry (screen, monitor_num, &monitor);
 
   
@@ -1431,7 +1431,7 @@ _gtk_entry_completion_resize_popup (GtkEntryCompletion *completion)
     __gtk_widget_show (completion->priv->scrolled_window);
 
   if (completion->priv->popup_set_width)
-    width = MIN (completion->priv->entry->allocation.width, monitor.width) - 2 * x_border;
+    width = MIN (completion->priv->gtk_widget_get_props (gtk_widget_get_props (entry))->allocation.width, monitor.width) - 2 * x_border;
   else
     width = -1;
 
@@ -1501,7 +1501,7 @@ _gtk_entry_completion_popup (GtkEntryCompletion *completion)
   renderers = __gtk_cell_layout_get_cells (GTK_CELL_LAYOUT (column));
   __gtk_widget_ensure_style (completion->priv->tree_view);
   g_object_set (GTK_CELL_RENDERER (renderers->data), "cell-background-gdk",
-                &completion->priv->tree_view->style->bg[GTK_STATE_NORMAL],
+                &completion->priv->gtk_widget_get_props (tree_view)->style->bg[GTK_STATE_NORMAL],
                 NULL);
   g_list_free (renderers);
 
@@ -1529,7 +1529,7 @@ _gtk_entry_completion_popup (GtkEntryCompletion *completion)
   __gtk_widget_show (completion->priv->popup_window);
     
   __gtk_grab_add (completion->priv->popup_window);
-  __gdk_pointer_grab (completion->priv->popup_window->window, TRUE,
+  __gdk_pointer_grab (completion->priv->gtk_widget_get_props (popup_window)->window, TRUE,
                     GDK_BUTTON_PRESS_MASK |
                     GDK_BUTTON_RELEASE_MASK |
                     GDK_POINTER_MOTION_MASK,

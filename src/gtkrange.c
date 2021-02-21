@@ -187,7 +187,7 @@ static gboolean      gtk_range_update_mouse_location    (GtkRange      *range);
 static void          gtk_range_calc_layout              (GtkRange      *range,
 							 gdouble	adjustment_value);
 static void          gtk_range_calc_marks               (GtkRange      *range);
-static void          gtk_range_get_props                (GtkRange      *range,
+static void          range_get_properties               (GtkRange      *range,
                                                          gint          *slider_width,
                                                          gint          *stepper_size,
                                                          gint          *focus_width,
@@ -973,7 +973,7 @@ __gtk_range_set_slider_size_fixed (GtkRange *range,
       gtk_range_get_props (range)->slider_size_fixed = size_fixed ? TRUE : FALSE;
 
       gtk_range_get_props (range)->need_recalc = TRUE;
-      gtk_range_calc_layout (gtk_range_get_props (range), gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value);
+      gtk_range_calc_layout (range, gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value);
       __gtk_widget_queue_draw (GTK_WIDGET (range));
     }
 }
@@ -1021,7 +1021,7 @@ __gtk_range_set_min_slider_size (GtkRange *range,
       gtk_range_get_props (range)->min_slider_size = min_size;
 
       gtk_range_get_props (range)->need_recalc = TRUE;
-      gtk_range_calc_layout (gtk_range_get_props (range), gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value);
+      gtk_range_calc_layout (range, gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value);
       __gtk_widget_queue_draw (GTK_WIDGET (range));
     }
 }
@@ -1065,9 +1065,9 @@ __gtk_range_get_range_rect (GtkRange     *range,
   g_return_if_fail (GTK_IS_RANGE (range));
   g_return_if_fail (range_rect != NULL);
 
-  gtk_range_calc_layout (range, range->adjustment->value);
+  gtk_range_calc_layout (range, gtk_range_get_props (range)->adjustment->value);
 
-  *range_rect = range->range_rect;
+  *range_rect = gtk_range_get_props (range)->range_rect;
 }
 
 /**
@@ -1092,7 +1092,7 @@ __gtk_range_get_slider_range (GtkRange *range,
 {
   g_return_if_fail (GTK_IS_RANGE (range));
 
-  gtk_range_calc_layout (gtk_range_get_props (range), gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value);
+  gtk_range_calc_layout (range, gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value);
 
   if (slider_start)
     *slider_start = gtk_range_get_props (range)->slider_start;
@@ -1122,7 +1122,7 @@ __gtk_range_set_lower_stepper_sensitivity (GtkRange           *range,
       gtk_range_get_props (range)->layout->lower_sensitivity = sensitivity;
 
       gtk_range_get_props (range)->need_recalc = TRUE;
-      gtk_range_calc_layout (gtk_range_get_props (range), gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value);
+      gtk_range_calc_layout (range, gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value);
       __gtk_widget_queue_draw (GTK_WIDGET (range));
 
       g_object_notify (G_OBJECT (range), "lower-stepper-sensitivity");
@@ -1169,7 +1169,7 @@ __gtk_range_set_upper_stepper_sensitivity (GtkRange           *range,
       gtk_range_get_props (range)->layout->upper_sensitivity = sensitivity;
 
       gtk_range_get_props (range)->need_recalc = TRUE;
-      gtk_range_calc_layout (gtk_range_get_props (range), gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value);
+      gtk_range_calc_layout (range, gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value);
       __gtk_widget_queue_draw (GTK_WIDGET (range));
 
       g_object_notify (G_OBJECT (range), "upper-stepper-sensitivity");
@@ -1249,7 +1249,7 @@ __gtk_range_set_range (GtkRange *range,
                              gtk_range_get_props (range)->layout->fill_level));
 
   value = CLAMP (value, gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->lower,
-                 (gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->upper - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->page_size));
+                 (gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->upper - gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->page_size));
 
   __gtk_adjustment_set_value (gtk_range_get_props (range)->adjustment, value);
   __gtk_adjustment_changed (gtk_range_get_props (range)->adjustment);
@@ -1276,7 +1276,7 @@ __gtk_range_set_value (GtkRange *range,
                              gtk_range_get_props (range)->layout->fill_level));
 
   value = CLAMP (value, gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->lower,
-                 (gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->upper - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->page_size));
+                 (gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->upper - gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->page_size));
 
   __gtk_adjustment_set_value (gtk_range_get_props (range)->adjustment, value);
 }
@@ -1473,7 +1473,7 @@ gtk_range_size_request (GtkWidget      *widget,
   
   range = GTK_RANGE (widget);
   
-  gtk_range_get_props (range,
+  get_range_properties (range,
                        &slider_width, &stepper_size,
                        &focus_width, &trough_border,
                        &stepper_spacing, NULL,
@@ -1501,7 +1501,7 @@ gtk_range_size_allocate (GtkWidget     *widget,
   gtk_range_get_props (range)->layout->recalc_marks = TRUE;
 
   gtk_range_get_props (range)->need_recalc = TRUE;
-  gtk_range_calc_layout (gtk_range_get_props (range), gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value);
+  gtk_range_calc_layout (range, gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value);
 
   if (__gtk_widget_get_realized (widget))
     __gdk_window_move_resize (gtk_range_get_props (range)->event_window,
@@ -1520,7 +1520,7 @@ gtk_range_realize (GtkWidget *widget)
 
   range = GTK_RANGE (widget);
 
-  gtk_range_calc_layout (gtk_range_get_props (range), gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value);
+  gtk_range_calc_layout (range, gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value);
   
   __gtk_widget_set_realized (widget, TRUE);
 
@@ -1823,7 +1823,7 @@ gtk_range_expose (GtkWidget      *widget,
   expose_area.y -= gtk_widget_get_props (widget)->allocation.y;
   
   gtk_range_calc_marks (range);
-  gtk_range_calc_layout (gtk_range_get_props (range), gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value);
+  gtk_range_calc_layout (range, gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value);
 
   sensitive = __gtk_widget_is_sensitive (widget);
 
@@ -1955,7 +1955,7 @@ gtk_range_expose (GtkWidget      *widget,
         }
 
       if (gtk_range_get_props (range)->layout->show_fill_level &&
-          gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->upper - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->page_size -
+          gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->upper - gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->page_size -
           gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->lower != 0)
 	{
           gdouble  fill_level  = gtk_range_get_props (range)->layout->fill_level;
@@ -1998,7 +1998,7 @@ gtk_range_expose (GtkWidget      *widget,
                 fill_y += gtk_range_get_props (range)->layout->trough.height - fill_height;
 	    }
 
-	  if (fill_level < gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->upper - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->page_size)
+	  if (fill_level < gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->upper - gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->page_size)
 	    fill_detail = "trough-fill-level-full";
 	  else
 	    fill_detail = "trough-fill-level";
@@ -2213,7 +2213,7 @@ coord_to_value (GtkRange *range,
       slider_length = gtk_range_get_props (range)->layout->slider.width;
     }
 
-  gtk_range_get_props (range, NULL, NULL, NULL, &trough_border, NULL,
+  get_range_properties (range, NULL, NULL, NULL, &trough_border, NULL,
                        &trough_under_steppers, NULL, NULL);
 
   if (! trough_under_steppers)
@@ -2231,7 +2231,7 @@ coord_to_value (GtkRange *range,
   if (should_invert (range))
     frac = 1.0 - frac;
 
-  value = gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->lower + frac * (gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->upper -
+  value = gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->lower + frac * (gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->upper -
                                              gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->lower -
                                              gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->page_size);
 
@@ -2323,9 +2323,9 @@ gtk_range_button_press (GtkWidget      *widget,
       GdkRectangle *stepper_area;
       GtkScrollType scroll;
       
-      range_grab_add (gtk_range_get_props (range), gtk_range_get_props (range)->layout->mouse_location, event->button);
+      range_grab_add (range, gtk_range_get_props (range)->layout->mouse_location, event->button);
 
-      stepper_area = get_area (gtk_range_get_props (range), gtk_range_get_props (range)->layout->mouse_location);
+      stepper_area = get_area (range, gtk_range_get_props (range)->layout->mouse_location);
       __gtk_widget_queue_draw_area (widget,
                                   gtk_widget_get_props (widget)->allocation.x + stepper_area->x,
                                   gtk_widget_get_props (widget)->allocation.y + stepper_area->y,
@@ -2470,7 +2470,7 @@ gtk_range_grab_broken (GtkWidget          *widget,
   if (gtk_range_get_props (range)->layout->grab_location != MOUSE_OUTSIDE)
     {
       if (gtk_range_get_props (range)->layout->grab_location == MOUSE_SLIDER)
-	update_slider_position (gtk_range_get_props (range), gtk_range_get_props (range)->layout->mouse_x, gtk_range_get_props (range)->layout->mouse_y);
+	update_slider_position (range, gtk_range_get_props (range)->layout->mouse_x, gtk_range_get_props (range)->layout->mouse_y);
       
       stop_scrolling (range);
       
@@ -2502,7 +2502,7 @@ gtk_range_button_release (GtkWidget      *widget,
   if (gtk_range_get_props (range)->layout->grab_button == event->button)
     {
       if (gtk_range_get_props (range)->layout->grab_location == MOUSE_SLIDER)
-        update_slider_position (gtk_range_get_props (range), gtk_range_get_props (range)->layout->mouse_x, gtk_range_get_props (range)->layout->mouse_y);
+        update_slider_position (range, gtk_range_get_props (range)->layout->mouse_x, gtk_range_get_props (range)->layout->mouse_y);
 
       stop_scrolling (range);
       
@@ -2678,7 +2678,7 @@ gtk_range_adjustment_changed (GtkAdjustment *adjustment,
 
   gtk_range_get_props (range)->layout->recalc_marks = TRUE;
   gtk_range_get_props (range)->need_recalc = TRUE;
-  gtk_range_calc_layout (gtk_range_get_props (range), gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value);
+  gtk_range_calc_layout (range, gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value);
   
   /* now check whether the layout changed  */
   if (layout_changed (gtk_range_get_props (range)->layout, &layout))
@@ -2714,7 +2714,7 @@ gtk_range_adjustment_value_changed (GtkAdjustment *adjustment,
   GtkRangeLayout layout = *gtk_range_get_props (range)->layout;
 
   gtk_range_get_props (range)->need_recalc = TRUE;
-  gtk_range_calc_layout (gtk_range_get_props (range), gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value);
+  gtk_range_calc_layout (range, gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value);
   
   /* now check whether the layout changed  */
   if (layout_changed (gtk_range_get_props (range)->layout, &layout) ||
@@ -2774,8 +2774,8 @@ step_back (GtkRange *range)
   gdouble newval;
   gboolean handled;
   
-  newval = gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->value - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->step_increment;
-  apply_marks (gtk_range_get_props (range), gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value, &newval);
+  newval = gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value - gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->step_increment;
+  apply_marks (range, gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value, &newval);
   g_signal_emit (range, signals[CHANGE_VALUE], 0,
                  GTK_SCROLL_STEP_BACKWARD, newval, &handled);
 }
@@ -2786,8 +2786,8 @@ step_forward (GtkRange *range)
   gdouble newval;
   gboolean handled;
 
-  newval = gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->value + gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->step_increment;
-  apply_marks (gtk_range_get_props (range), gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value, &newval);
+  newval = gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value + gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->step_increment;
+  apply_marks (range, gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value, &newval);
   g_signal_emit (range, signals[CHANGE_VALUE], 0,
                  GTK_SCROLL_STEP_FORWARD, newval, &handled);
 }
@@ -2799,8 +2799,8 @@ page_back (GtkRange *range)
   gdouble newval;
   gboolean handled;
 
-  newval = gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->value - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->page_increment;
-  apply_marks (gtk_range_get_props (range), gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value, &newval);
+  newval = gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value - gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->page_increment;
+  apply_marks (range, gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value, &newval);
   g_signal_emit (range, signals[CHANGE_VALUE], 0,
                  GTK_SCROLL_PAGE_BACKWARD, newval, &handled);
 }
@@ -2811,8 +2811,8 @@ page_forward (GtkRange *range)
   gdouble newval;
   gboolean handled;
 
-  newval = gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->value + gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->page_increment;
-  apply_marks (gtk_range_get_props (range), gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value, &newval);
+  newval = gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value + gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->page_increment;
+  apply_marks (range, gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value, &newval);
   g_signal_emit (range, signals[CHANGE_VALUE], 0,
                  GTK_SCROLL_PAGE_FORWARD, newval, &handled);
 }
@@ -2832,7 +2832,7 @@ scroll_end (GtkRange *range)
   gdouble newval;
   gboolean handled;
 
-  newval = gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->upper - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->page_size;
+  newval = gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->upper - gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->page_size;
   g_signal_emit (range, signals[CHANGE_VALUE], 0, GTK_SCROLL_END, newval,
                  &handled);
 }
@@ -2988,15 +2988,15 @@ gtk_range_move_slider (GtkRange     *range,
 }
 
 static void
-gtk_range_get_props (GtkRange  *range,
-                     gint      *slider_width,
-                     gint      *stepper_size,
-                     gint      *focus_width,
-                     gint      *trough_border,
-                     gint      *stepper_spacing,
-                     gboolean  *trough_under_steppers,
-		     gint      *arrow_displacement_x,
-		     gint      *arrow_displacement_y)
+range_get_properties (GtkRange  *range,
+                      gint      *slider_width,
+                      gint      *stepper_size,
+                      gint      *focus_width,
+                      gint      *trough_border,
+                      gint      *stepper_spacing,
+                      gboolean  *trough_under_steppers,
+                      gint      *arrow_displacement_x,
+                      gint      *arrow_displacement_y)
 {
   GtkWidget *widget =  GTK_WIDGET (range);
   gint tmp_slider_width, tmp_stepper_size, tmp_focus_width, tmp_trough_border;
@@ -3226,18 +3226,18 @@ gtk_range_calc_request (GtkRange      *range,
   n_steppers_ab = 0;
   n_steppers_cd = 0;
 
-  if (range->has_stepper_a)
+  if (gtk_range_get_props (range)->has_stepper_a)
     n_steppers_ab += 1;
-  if (range->has_stepper_b)
+  if (gtk_range_get_props (range)->has_stepper_b)
     n_steppers_ab += 1;
-  if (range->has_stepper_c)
+  if (gtk_range_get_props (range)->has_stepper_c)
     n_steppers_cd += 1;
-  if (range->has_stepper_d)
+  if (gtk_range_get_props (range)->has_stepper_d)
     n_steppers_cd += 1;
 
   n_steppers = n_steppers_ab + n_steppers_cd;
 
-  slider_length = range->min_slider_size;
+  slider_length = gtk_range_get_props (range)->min_slider_size;
 
   range_rect->x = 0;
   range_rect->y = 0;
@@ -3245,7 +3245,7 @@ gtk_range_calc_request (GtkRange      *range,
   /* We never expand to fill available space in the small dimension
    * (i.e. vertical scrollbars are always a fixed width)
    */
-  if (range->orientation == GTK_ORIENTATION_VERTICAL)
+  if (gtk_range_get_props (range)->orientation == GTK_ORIENTATION_VERTICAL)
     {
       range_rect->width = (focus_width + trough_border) * 2 + slider_width;
       range_rect->height = stepper_size * n_steppers + (focus_width + trough_border) * 2 + slider_length;
@@ -3312,7 +3312,7 @@ gtk_range_calc_layout (GtkRange *range,
   widget = GTK_WIDGET (range);
   layout = gtk_range_get_props (range)->layout;
   
-  gtk_range_get_props (range,
+  get_range_properties (range,
                        &slider_width, &stepper_size,
                        &focus_width, &trough_border,
                        &stepper_spacing, &trough_under_steppers,
@@ -3457,9 +3457,9 @@ gtk_range_calc_layout (GtkRange *range,
          * total_adjustment_range) times the trough height in pixels
          */
 
-	if (gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->upper - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->lower != 0)
+	if (gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->upper - gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->lower != 0)
 	  height = ((bottom - top) * (gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->page_size /
-				       (gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->upper - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->lower)));
+				       (gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->upper - gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->lower)));
 	else
 	  height = gtk_range_get_props (range)->min_slider_size;
         
@@ -3471,9 +3471,9 @@ gtk_range_calc_layout (GtkRange *range,
         
         y = top;
         
-	if (gtk_range_get_props (gtk_range_get_props (gtk_range_get_props (range)))->gtk_adjustment_get_props (gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment)))->upper - gtk_range_get_props (gtk_range_get_props (gtk_range_get_props (range)))->gtk_adjustment_get_props (gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment)))->lower - gtk_range_get_props (gtk_range_get_props (gtk_range_get_props (range)))->gtk_adjustment_get_props (gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment)))->page_size != 0)
+	if (gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->upper - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->lower - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->page_size != 0)
 	  y += (bottom - top - height) * ((adjustment_value - gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->lower) /
-					  (gtk_range_get_props (gtk_range_get_props (gtk_range_get_props (range)))->gtk_adjustment_get_props (gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment)))->upper - gtk_range_get_props (gtk_range_get_props (gtk_range_get_props (range)))->gtk_adjustment_get_props (gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment)))->lower - gtk_range_get_props (gtk_range_get_props (gtk_range_get_props (range)))->gtk_adjustment_get_props (gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment)))->page_size));
+					  (gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->upper - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->lower - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->page_size));
         
         y = CLAMP (y, top, bottom);
         
@@ -3606,9 +3606,9 @@ gtk_range_calc_layout (GtkRange *range,
          * total_adjustment_range) times the trough width in pixels
          */
 	
-	if (gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->upper - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->lower != 0)
+	if (gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->upper - gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->lower != 0)
 	  width = ((right - left) * (gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->page_size /
-                                   (gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->upper - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->lower)));
+                                   (gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->upper - gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->lower)));
 	else
 	  width = gtk_range_get_props (range)->min_slider_size;
         
@@ -3620,9 +3620,9 @@ gtk_range_calc_layout (GtkRange *range,
         
         x = left;
         
-	if (gtk_range_get_props (gtk_range_get_props (gtk_range_get_props (range)))->gtk_adjustment_get_props (gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment)))->upper - gtk_range_get_props (gtk_range_get_props (gtk_range_get_props (range)))->gtk_adjustment_get_props (gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment)))->lower - gtk_range_get_props (gtk_range_get_props (gtk_range_get_props (range)))->gtk_adjustment_get_props (gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment)))->page_size != 0)
+	if (gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->upper - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->lower - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->page_size != 0)
           x += (right - left - width) * ((adjustment_value - gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->lower) /
-                                         (gtk_range_get_props (gtk_range_get_props (gtk_range_get_props (range)))->gtk_adjustment_get_props (gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment)))->upper - gtk_range_get_props (gtk_range_get_props (gtk_range_get_props (range)))->gtk_adjustment_get_props (gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment)))->lower - gtk_range_get_props (gtk_range_get_props (gtk_range_get_props (range)))->gtk_adjustment_get_props (gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment)))->page_size));
+                                         (gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->upper - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->lower - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->page_size));
         
         x = CLAMP (x, left, right);
         
@@ -3645,7 +3645,7 @@ gtk_range_calc_layout (GtkRange *range,
     case GTK_SENSITIVITY_AUTO:
       gtk_range_get_props (range)->layout->upper_sensitive =
         (gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value <
-         (gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->upper - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->page_size));
+         (gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->upper - gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->page_size));
       break;
 
     case GTK_SENSITIVITY_ON:
@@ -3661,7 +3661,7 @@ gtk_range_calc_layout (GtkRange *range,
     {
     case GTK_SENSITIVITY_AUTO:
       gtk_range_get_props (range)->layout->lower_sensitive =
-        (gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->value > gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->lower);
+        (gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value > gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->lower);
       break;
 
     case GTK_SENSITIVITY_ON:
@@ -3714,7 +3714,7 @@ gtk_range_calc_marks (GtkRange *range)
   for (i = 0; i < gtk_range_get_props (range)->layout->n_marks; i++)
     {
       gtk_range_get_props (range)->need_recalc = TRUE;
-      gtk_range_calc_layout (gtk_range_get_props (range), gtk_range_get_props (range)->layout->marks[i]);
+      gtk_range_calc_layout (range, gtk_range_get_props (range)->layout->marks[i]);
       if (gtk_range_get_props (range)->orientation == GTK_ORIENTATION_HORIZONTAL)
         gtk_range_get_props (range)->layout->mark_pos[i] = gtk_range_get_props (range)->layout->slider.x + gtk_range_get_props (range)->layout->slider.width / 2;
       else
@@ -3737,7 +3737,7 @@ gtk_range_real_change_value (GtkRange     *range,
                              gtk_range_get_props (range)->layout->fill_level));
 
   value = CLAMP (value, gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->lower,
-                 (gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->upper - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->page_size));
+                 (gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->upper - gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->page_size));
 
   if (gtk_range_get_props (range)->round_digits >= 0)
     {
@@ -3805,7 +3805,7 @@ second_timeout (gpointer data)
   GtkRange *range;
 
   range = GTK_RANGE (data);
-  gtk_range_scroll (gtk_range_get_props (range), gtk_range_get_props (range)->timer->step);
+  gtk_range_scroll (range, gtk_range_get_props (range)->timer->step);
   
   return TRUE;
 }
@@ -3848,7 +3848,7 @@ gtk_range_add_step_timer (GtkRange      *range,
                                             range);
   gtk_range_get_props (range)->timer->step = step;
 
-  gtk_range_scroll (gtk_range_get_props (range), gtk_range_get_props (range)->timer->step);
+  gtk_range_scroll (range, gtk_range_get_props (range)->timer->step);
 }
 
 static void

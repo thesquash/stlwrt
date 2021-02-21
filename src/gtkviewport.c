@@ -252,7 +252,7 @@ __gtk_viewport_new (GtkAdjustment *hadjustment,
 
 #define ADJUSTMENT_POINTER(viewport, orientation)         \
   (((orientation) == GTK_ORIENTATION_HORIZONTAL) ?        \
-     &(viewport)->hadjustment : &(viewport)->vadjustment)
+     &gtk_viewport_get_props (gtk_viewport_get_props ((viewport)))->hadjustment : &gtk_viewport_get_props (gtk_viewport_get_props ((viewport)))->vadjustment)
 
 static void
 viewport_disconnect_adjustment (GtkViewport    *viewport,

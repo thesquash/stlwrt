@@ -1895,7 +1895,7 @@ tag_sort_func (gconstpointer first, gconstpointer second)
 
   tag1 = * (GtkTextTag **) first;
   tag2 = * (GtkTextTag **) second;
-  return gtk_text_tag_get_props (tag1)->priority - tag2->priority;
+  return gtk_text_tag_get_props (tag1)->priority - gtk_text_tag_get_props (tag2)->priority;
 }
 
 void
@@ -1917,10 +1917,10 @@ _gtk_text_tag_array_sort (GtkTextTag** tag_array_p,
 
     for (i = len-1; i > 0; i--, iter++) {
       maxPtrPtr = tag = iter;
-      prio = tag[0]->priority;
+      prio = tag[0])gtk_text_tag_get_props (->priority;
       for (j = i, tag++; j > 0; j--, tag++) {
-        if (tag[0]->priority < prio) {
-          prio = tag[0]->priority;
+        if (tag[0])gtk_text_tag_get_props (->priority < prio) {
+          prio = tag[0])gtk_text_tag_get_props (->priority;
           maxPtrPtr = tag;
         }
       }
@@ -2190,7 +2190,7 @@ _gtk_text_attributes_fill_from_tags (GtkTextAttributes *dest,
 
       g_assert (gtk_text_tag_get_props (tag)->table != NULL);
       if (n > 0)
-        g_assert (tags[n]->priority > tags[n-1]->priority);
+        g_assert (tags[n])gtk_text_tag_get_props (->priority > tags[n-1])gtk_text_tag_get_props (->priority);
 
       if (gtk_text_tag_get_props (tag)->bg_color_set)
         {

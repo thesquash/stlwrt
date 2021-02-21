@@ -459,7 +459,7 @@ gtk_spin_button_get_property (GObject      *object,
       g_value_set_enum (value, gtk_spin_button_get_props (spin_button)->update_policy);
       break;
      case PROP_VALUE:
-       g_value_set_double (value, gtk_spin_button_get_props (spin_button)->adjustment->value);
+       g_value_set_double (value, gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -657,14 +657,14 @@ gtk_spin_button_size_request (GtkWidget      *widget,
       /* Get max of MIN_SPIN_BUTTON_WIDTH, size of upper, size of lower */
       
       width = MIN_SPIN_BUTTON_WIDTH;
-      max_string_len = MAX (10, compute_double_length (1e9 * gtk_spin_button_get_props (spin_button)->adjustment->step_increment,
+      max_string_len = MAX (10, compute_double_length (1e9 * gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->step_increment,
                                                        gtk_spin_button_get_props (spin_button)->digits));
 
-      string_len = compute_double_length (gtk_spin_button_get_props (spin_button)->adjustment->upper,
+      string_len = compute_double_length (gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->upper,
                                           gtk_spin_button_get_props (spin_button)->digits);
       w = PANGO_PIXELS (MIN (string_len, max_string_len) * digit_width);
       width = MAX (width, w);
-      string_len = compute_double_length (gtk_spin_button_get_props (spin_button)->adjustment->lower,
+      string_len = compute_double_length (gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->lower,
 					  gtk_spin_button_get_props (spin_button)->digits);
       w = PANGO_PIXELS (MIN (string_len, max_string_len) * digit_width);
       width = MAX (width, w);
@@ -799,17 +799,17 @@ spin_button_at_limit (GtkSpinButton *spin_button,
   if (gtk_spin_button_get_props (spin_button)->wrap)
     return FALSE;
 
-  if (gtk_spin_button_get_props (spin_button)->adjustment->step_increment > 0)
+  if (gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->step_increment > 0)
     effective_arrow = arrow;
   else
     effective_arrow = arrow == GTK_ARROW_UP ? GTK_ARROW_DOWN : GTK_ARROW_UP; 
   
   if (effective_arrow == GTK_ARROW_UP &&
-      (gtk_spin_button_get_props (gtk_spin_button_get_props (spin_button))->adjustment->upper - gtk_spin_button_get_props (gtk_spin_button_get_props (spin_button))->adjustment->value <= EPSILON))
+      (gtk_spin_button_get_props (gtk_spin_button_get_props (spin_button))->gtk_adjustment_get_props (adjustment)->upper - gtk_spin_button_get_props (gtk_spin_button_get_props (spin_button))->gtk_adjustment_get_props (adjustment)->value <= EPSILON))
     return TRUE;
   
   if (effective_arrow == GTK_ARROW_DOWN &&
-      (gtk_spin_button_get_props (gtk_spin_button_get_props (spin_button))->adjustment->value - gtk_spin_button_get_props (gtk_spin_button_get_props (spin_button))->adjustment->lower <= EPSILON))
+      (gtk_spin_button_get_props (gtk_spin_button_get_props (spin_button))->gtk_adjustment_get_props (adjustment)->value - gtk_spin_button_get_props (gtk_spin_button_get_props (spin_button))->gtk_adjustment_get_props (adjustment)->lower <= EPSILON))
     return TRUE;
   
   return FALSE;
@@ -1025,13 +1025,13 @@ gtk_spin_button_scroll (GtkWidget      *widget,
     {
       if (!__gtk_widget_has_focus (widget))
 	__gtk_widget_grab_focus (widget);
-      gtk_spin_button_real_spin (gtk_spin_button_get_props (spin), gtk_adjustment_get_props (gtk_spin_button_get_props (spin)->adjustment)->step_increment);
+      gtk_spin_button_real_spin (spin, gtk_adjustment_get_props (gtk_spin_button_get_props (spin)->adjustment)->step_increment);
     }
   else if (event->direction == GDK_SCROLL_DOWN)
     {
       if (!__gtk_widget_has_focus (widget))
 	__gtk_widget_grab_focus (widget);
-      gtk_spin_button_real_spin (gtk_spin_button_get_props (spin), -gtk_adjustment_get_props (gtk_spin_button_get_props (spin)->adjustment)->step_increment); 
+      gtk_spin_button_real_spin (spin, -gtk_adjustment_get_props (gtk_spin_button_get_props (spin)->adjustment)->step_increment); 
     }
   else
     return FALSE;
@@ -1106,18 +1106,18 @@ gtk_spin_button_button_press (GtkWidget      *widget,
 	  if (event->y <= gtk_widget_get_props (widget)->requisition.height / 2)
 	    {
 	      if (event->button == 1)
-		start_spinning (gtk_spin_button_get_props (spin), GTK_ARROW_UP, gtk_adjustment_get_props (gtk_spin_button_get_props (spin)->adjustment)->step_increment);
+		start_spinning (spin, GTK_ARROW_UP, gtk_adjustment_get_props (gtk_spin_button_get_props (spin)->adjustment)->step_increment);
 	      else if (event->button == 2)
-		start_spinning (gtk_spin_button_get_props (spin), GTK_ARROW_UP, gtk_adjustment_get_props (gtk_spin_button_get_props (spin)->adjustment)->page_increment);
+		start_spinning (spin, GTK_ARROW_UP, gtk_adjustment_get_props (gtk_spin_button_get_props (spin)->adjustment)->page_increment);
 	      else
 		gtk_spin_button_get_props (spin)->click_child = GTK_ARROW_UP;
 	    }
 	  else 
 	    {
 	      if (event->button == 1)
-		start_spinning (gtk_spin_button_get_props (spin), GTK_ARROW_DOWN, gtk_adjustment_get_props (gtk_spin_button_get_props (spin)->adjustment)->step_increment);
+		start_spinning (spin, GTK_ARROW_DOWN, gtk_adjustment_get_props (gtk_spin_button_get_props (spin)->adjustment)->step_increment);
 	      else if (event->button == 2)
-		start_spinning (gtk_spin_button_get_props (spin), GTK_ARROW_DOWN, gtk_adjustment_get_props (gtk_spin_button_get_props (spin)->adjustment)->page_increment);
+		start_spinning (spin, GTK_ARROW_DOWN, gtk_adjustment_get_props (gtk_spin_button_get_props (spin)->adjustment)->page_increment);
 	      else
 		gtk_spin_button_get_props (spin)->click_child = GTK_ARROW_DOWN;
 	    }
@@ -1220,9 +1220,9 @@ gtk_spin_button_timer (GtkSpinButton *spin_button)
   if (gtk_spin_button_get_props (spin_button)->timer)
     {
       if (gtk_spin_button_get_props (spin_button)->click_child == GTK_ARROW_UP)
-	gtk_spin_button_real_spin (gtk_spin_button_get_props (spin_button),	gtk_spin_button_get_props (spin_button)->timer_step);
+	gtk_spin_button_real_spin (spin_button,	gtk_spin_button_get_props (spin_button)->timer_step);
       else
-	gtk_spin_button_real_spin (gtk_spin_button_get_props (spin_button),	-gtk_spin_button_get_props (spin_button)->timer_step);
+	gtk_spin_button_real_spin (spin_button,	-gtk_spin_button_get_props (spin_button)->timer_step);
 
       if (gtk_spin_button_get_props (spin_button)->need_timer)
 	{
@@ -1239,7 +1239,7 @@ gtk_spin_button_timer (GtkSpinButton *spin_button)
       else 
 	{
 	  if (gtk_spin_button_get_props (spin_button)->climb_rate > 0.0 && gtk_spin_button_get_props (spin_button)->timer_step 
-	      < gtk_spin_button_get_props (spin_button)->adjustment->page_increment)
+	      < gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->page_increment)
 	    {
 	      if (gtk_spin_button_get_props (spin_button)->timer_calls < MAX_TIMER_CALLS)
 		gtk_spin_button_get_props (spin_button)->timer_calls++;
@@ -1300,7 +1300,7 @@ gtk_spin_button_real_change_value (GtkSpinButton *spin,
     case GTK_SCROLL_STEP_BACKWARD:
     case GTK_SCROLL_STEP_DOWN:
     case GTK_SCROLL_STEP_LEFT:
-      gtk_spin_button_real_spin (gtk_spin_button_get_props (spin), -gtk_spin_button_get_props (spin)->timer_step);
+      gtk_spin_button_real_spin (spin, -gtk_spin_button_get_props (spin)->timer_step);
       
       if (gtk_spin_button_get_props (spin)->climb_rate > 0.0 && gtk_spin_button_get_props (spin)->timer_step
 	  < gtk_adjustment_get_props (gtk_spin_button_get_props (spin)->adjustment)->page_increment)
@@ -1318,7 +1318,7 @@ gtk_spin_button_real_change_value (GtkSpinButton *spin,
     case GTK_SCROLL_STEP_FORWARD:
     case GTK_SCROLL_STEP_UP:
     case GTK_SCROLL_STEP_RIGHT:
-      gtk_spin_button_real_spin (gtk_spin_button_get_props (spin), gtk_spin_button_get_props (spin)->timer_step);
+      gtk_spin_button_real_spin (spin, gtk_spin_button_get_props (spin)->timer_step);
       
       if (gtk_spin_button_get_props (spin)->climb_rate > 0.0 && gtk_spin_button_get_props (spin)->timer_step
 	  < gtk_adjustment_get_props (gtk_spin_button_get_props (spin)->adjustment)->page_increment)
@@ -1336,13 +1336,13 @@ gtk_spin_button_real_change_value (GtkSpinButton *spin,
     case GTK_SCROLL_PAGE_BACKWARD:
     case GTK_SCROLL_PAGE_DOWN:
     case GTK_SCROLL_PAGE_LEFT:
-      gtk_spin_button_real_spin (gtk_spin_button_get_props (spin), -gtk_adjustment_get_props (gtk_spin_button_get_props (spin)->adjustment)->page_increment);
+      gtk_spin_button_real_spin (spin, -gtk_adjustment_get_props (gtk_spin_button_get_props (spin)->adjustment)->page_increment);
       break;
       
     case GTK_SCROLL_PAGE_FORWARD:
     case GTK_SCROLL_PAGE_UP:
     case GTK_SCROLL_PAGE_RIGHT:
-      gtk_spin_button_real_spin (gtk_spin_button_get_props (spin), gtk_adjustment_get_props (gtk_spin_button_get_props (spin)->adjustment)->page_increment);
+      gtk_spin_button_real_spin (spin, gtk_adjustment_get_props (gtk_spin_button_get_props (spin)->adjustment)->page_increment);
       break;
       
     case GTK_SCROLL_START:
@@ -1392,15 +1392,15 @@ gtk_spin_button_snap (GtkSpinButton *spin_button,
   gdouble inc;
   gdouble tmp;
 
-  inc = gtk_spin_button_get_props (spin_button)->adjustment->step_increment;
+  inc = gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->step_increment;
   if (inc == 0)
     return;
   
-  tmp = (val - gtk_spin_button_get_props (spin_button)->adjustment->lower) / inc;
+  tmp = (val - gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->lower) / inc;
   if (tmp - floor (tmp) < ceil (tmp) - tmp)
-    val = gtk_spin_button_get_props (spin_button)->adjustment->lower + floor (tmp) * inc;
+    val = gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->lower + floor (tmp) * inc;
   else
-    val = gtk_spin_button_get_props (spin_button)->adjustment->lower + ceil (tmp) * inc;
+    val = gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->lower + ceil (tmp) * inc;
 
   __gtk_spin_button_set_value (spin_button, val);
 }
@@ -1609,7 +1609,7 @@ gtk_spin_button_default_input (GtkSpinButton *spin_button,
 static gint
 gtk_spin_button_default_output (GtkSpinButton *spin_button)
 {
-  gchar *buf = g_strdup_printf ("%0.*f", gtk_spin_button_get_props (spin_button)->digits, gtk_spin_button_get_props (spin_button)->adjustment->value);
+  gchar *buf = g_strdup_printf ("%0.*f", gtk_spin_button_get_props (spin_button)->digits, gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->value);
 
   if (strcmp (buf, __gtk_entry_get_text (GTK_ENTRY (spin_button))))
     __gtk_entry_set_text (GTK_ENTRY (spin_button), buf);
@@ -1748,7 +1748,7 @@ adjustment_changed_cb (GtkAdjustment *adjustment, gpointer data)
 
   spin_button = GTK_SPIN_BUTTON (data);
 
-  gtk_spin_button_get_props (spin_button)->timer_step = gtk_spin_button_get_props (spin_button)->adjustment->step_increment;
+  gtk_spin_button_get_props (spin_button)->timer_step = gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->step_increment;
   warn_nonzero_page_size (adjustment);
   __gtk_widget_queue_resize (GTK_WIDGET (spin_button));
 }
@@ -1788,7 +1788,7 @@ __gtk_spin_button_set_adjustment (GtkSpinButton *spin_button,
 	  g_signal_connect (adjustment, "changed",
 			    G_CALLBACK (adjustment_changed_cb),
 			    spin_button);
-	  gtk_spin_button_get_props (spin_button)->timer_step = gtk_spin_button_get_props (spin_button)->adjustment->step_increment;
+	  gtk_spin_button_get_props (spin_button)->timer_step = gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->step_increment;
           warn_nonzero_page_size (adjustment);
         }
 
@@ -1871,8 +1871,8 @@ __gtk_spin_button_set_increments (GtkSpinButton *spin_button,
 {
   g_return_if_fail (GTK_IS_SPIN_BUTTON (spin_button));
 
-  gtk_spin_button_get_props (spin_button)->adjustment->step_increment = step;
-  gtk_spin_button_get_props (spin_button)->adjustment->page_increment = page;
+  gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->step_increment = step;
+  gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->page_increment = page;
 }
 
 /**
@@ -1892,9 +1892,9 @@ __gtk_spin_button_get_increments (GtkSpinButton *spin_button,
   g_return_if_fail (GTK_IS_SPIN_BUTTON (spin_button));
 
   if (step)
-    *step = gtk_spin_button_get_props (spin_button)->adjustment->step_increment;
+    *step = gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->step_increment;
   if (page)
-    *page = gtk_spin_button_get_props (spin_button)->adjustment->page_increment;
+    *page = gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->page_increment;
 }
 
 /**
@@ -1914,14 +1914,14 @@ __gtk_spin_button_set_range (GtkSpinButton *spin_button,
   
   g_return_if_fail (GTK_IS_SPIN_BUTTON (spin_button));
 
-  gtk_spin_button_get_props (spin_button)->adjustment->lower = min;
-  gtk_spin_button_get_props (spin_button)->adjustment->upper = max;
+  gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->lower = min;
+  gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->upper = max;
 
-  value = CLAMP (gtk_spin_button_get_props (spin_button)->adjustment->value,
-                 gtk_spin_button_get_props (spin_button)->adjustment->lower,
-                 (gtk_spin_button_get_props (gtk_spin_button_get_props (spin_button))->adjustment->upper - gtk_spin_button_get_props (gtk_spin_button_get_props (spin_button))->adjustment->page_size));
+  value = CLAMP (gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->value,
+                 gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->lower,
+                 (gtk_spin_button_get_props (gtk_spin_button_get_props (spin_button))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->upper - gtk_spin_button_get_props (gtk_spin_button_get_props (spin_button))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->page_size));
 
-  if (value != gtk_spin_button_get_props (spin_button)->adjustment->value)
+  if (value != gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->value)
     __gtk_spin_button_set_value (spin_button, value);
 
   __gtk_adjustment_changed (gtk_spin_button_get_props (spin_button)->adjustment);
@@ -1944,9 +1944,9 @@ __gtk_spin_button_get_range (GtkSpinButton *spin_button,
   g_return_if_fail (GTK_IS_SPIN_BUTTON (spin_button));
 
   if (min)
-    *min = gtk_spin_button_get_props (spin_button)->adjustment->lower;
+    *min = gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->lower;
   if (max)
-    *max = gtk_spin_button_get_props (spin_button)->adjustment->upper;
+    *max = gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->upper;
 }
 
 /**
@@ -1962,7 +1962,7 @@ __gtk_spin_button_get_value (GtkSpinButton *spin_button)
 {
   g_return_val_if_fail (GTK_IS_SPIN_BUTTON (spin_button), 0.0);
 
-  return gtk_spin_button_get_props (spin_button)->adjustment->value;
+  return gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->value;
 }
 
 /**
@@ -1980,7 +1980,7 @@ __gtk_spin_button_get_value_as_int (GtkSpinButton *spin_button)
 
   g_return_val_if_fail (GTK_IS_SPIN_BUTTON (spin_button), 0);
 
-  val = gtk_spin_button_get_props (spin_button)->adjustment->value;
+  val = gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->value;
   if (val - floor (val) < ceil (val) - val)
     return floor (val);
   else
@@ -2000,7 +2000,7 @@ __gtk_spin_button_set_value (GtkSpinButton *spin_button,
 {
   g_return_if_fail (GTK_IS_SPIN_BUTTON (spin_button));
 
-  if (fabs (value - gtk_spin_button_get_props (spin_button)->adjustment->value) > EPSILON)
+  if (fabs (value - gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->value) > EPSILON)
     __gtk_adjustment_set_value (gtk_spin_button_get_props (spin_button)->adjustment, value);
   else
     {
@@ -2313,15 +2313,15 @@ __gtk_spin_button_update (GtkSpinButton *spin_button)
 
   if (gtk_spin_button_get_props (spin_button)->update_policy == GTK_UPDATE_ALWAYS)
     {
-      if (val < gtk_spin_button_get_props (spin_button)->adjustment->lower)
-	val = gtk_spin_button_get_props (spin_button)->adjustment->lower;
-      else if (val > gtk_spin_button_get_props (spin_button)->adjustment->upper)
-	val = gtk_spin_button_get_props (spin_button)->adjustment->upper;
+      if (val < gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->lower)
+	val = gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->lower;
+      else if (val > gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->upper)
+	val = gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->upper;
     }
   else if ((gtk_spin_button_get_props (spin_button)->update_policy == GTK_UPDATE_IF_VALID) && 
 	   (error ||
-	   val < gtk_spin_button_get_props (spin_button)->adjustment->lower ||
-	   val > gtk_spin_button_get_props (spin_button)->adjustment->upper))
+	   val < gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->lower ||
+	   val > gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->upper))
     {
       gtk_spin_button_value_changed (gtk_spin_button_get_props (spin_button)->adjustment, gtk_spin_button_get_props (spin_button));
       return;

@@ -1276,18 +1276,18 @@ gtk_menu_tearoff_bg_copy (GtkMenu *menu)
       gtk_menu_get_props (menu)->tearoff_active = FALSE;
       gtk_menu_get_props (menu)->saved_scroll_offset = gtk_menu_get_props (menu)->scroll_offset;
       
-      width = __gdk_window_get_width (gtk_menu_get_props (menu)->tearoff_window->window);
-      height = __gdk_window_get_height (gtk_menu_get_props (menu)->tearoff_window->window);
+      width = __gdk_window_get_width (gtk_menu_get_props (menu)->gtk_widget_get_props (tearoff_window)->window);
+      height = __gdk_window_get_height (gtk_menu_get_props (menu)->gtk_widget_get_props (tearoff_window)->window);
       
-      pixmap = __gdk_pixmap_new (gtk_menu_get_props (menu)->tearoff_window->window,
+      pixmap = __gdk_pixmap_new (gtk_menu_get_props (menu)->gtk_widget_get_props (tearoff_window)->window,
 			       width,
 			       height,
 			       -1);
 
-      cr = __gdk_cairo_create (pixmap);
+      cr = __gdk_cairo_create ((GdkDrawable *) (pixmap));
       /* Let's hope that function never notices we're not passing it a pixmap */
       __gdk_cairo_set_source_pixmap (cr,
-                                   gtk_menu_get_props (menu)->tearoff_window->window,
+                                   gtk_menu_get_props (menu)->gtk_widget_get_props (tearoff_window)->window,
                                    0, 0);
       cairo_paint (cr);
       cairo_destroy (cr);
@@ -1296,7 +1296,7 @@ gtk_menu_tearoff_bg_copy (GtkMenu *menu)
 				   width,
 				   height);
 
-      __gdk_window_set_back_pixmap (gtk_menu_get_props (menu)->tearoff_window->window, pixmap, FALSE);
+      __gdk_window_set_back_pixmap (gtk_menu_get_props (menu)->gtk_widget_get_props (tearoff_window)->window, pixmap, FALSE);
       g_object_unref (pixmap);
     }
 }
@@ -1476,7 +1476,7 @@ __gtk_menu_popup (GtkMenu		    *menu,
     {
       gtk_menu_tearoff_bg_copy (menu);
 
-      gtk_menu_reparent (gtk_menu_shell_get_props (menu), gtk_menu_get_props (menu)->toplevel, FALSE);
+      gtk_menu_reparent (menu, gtk_menu_get_props (menu)->toplevel, FALSE);
     }
 
   parent_toplevel = NULL;
@@ -1526,7 +1526,7 @@ __gtk_menu_popup (GtkMenu		    *menu,
     __gtk_widget_realize (GTK_WIDGET (menu));
   }
 
-  gtk_menu_scroll_to (gtk_menu_shell_get_props (menu), gtk_menu_get_props (menu)->scroll_offset);
+  gtk_menu_scroll_to (menu, gtk_menu_get_props (menu)->scroll_offset);
 
   /* if no item is selected, select the first one */
   if (!gtk_menu_shell_get_props (menu_shell)->active_menu_item)
@@ -1603,9 +1603,9 @@ __gtk_menu_popdown (GtkMenu *menu)
     {
       __gtk_widget_set_size_request (gtk_menu_get_props (menu)->tearoff_window, -1, -1);
       
-      if (GTK_BIN (gtk_menu_get_props (menu)->toplevel)->child) 
+      if (gtk_bin_get_props (GTK_BIN (gtk_menu_get_props (menu)->toplevel))->child) 
 	{
-	  gtk_menu_reparent (gtk_menu_shell_get_props (menu), gtk_menu_get_props (menu)->tearoff_hbox, TRUE);
+	  gtk_menu_reparent (menu, gtk_menu_get_props (menu)->tearoff_hbox, TRUE);
 	} 
       else
 	{
@@ -1626,7 +1626,7 @@ __gtk_menu_popdown (GtkMenu *menu)
        * non-tearoff menu was popped down.
        */
       if (!gtk_menu_get_props (menu)->tearoff_active)
-	gtk_menu_scroll_to (gtk_menu_shell_get_props (menu), gtk_menu_get_props (menu)->saved_scroll_offset);
+	gtk_menu_scroll_to (menu, gtk_menu_get_props (menu)->saved_scroll_offset);
       gtk_menu_get_props (menu)->tearoff_active = TRUE;
     }
   else
@@ -1884,7 +1884,7 @@ gtk_menu_set_tearoff_hints (GtkMenu *menu,
   if (__gtk_widget_get_visible (gtk_menu_get_props (menu)->tearoff_scrollbar))
     {
       __gtk_widget_size_request (gtk_menu_get_props (menu)->tearoff_scrollbar, NULL);
-      width += gtk_menu_get_props (menu)->tearoff_scrollbar->requisition.width;
+      width += gtk_menu_get_props (menu)->gtk_widget_get_props (tearoff_scrollbar)->requisition.width;
     }
 
   geometry_hints.min_width = width;
@@ -2020,13 +2020,13 @@ __gtk_menu_set_tearoff_state (GtkMenu  *menu,
 				gtk_menu_get_props (menu)->tearoff_scrollbar,
 				FALSE, FALSE, 0);
 	      
-	      if (gtk_menu_get_props (menu)->tearoff_adjustment->upper > height)
+	      if (gtk_menu_get_props (menu)->gtk_adjustment_get_props (tearoff_adjustment)->upper > height)
 		__gtk_widget_show (gtk_menu_get_props (menu)->tearoff_scrollbar);
 	      
 	      __gtk_widget_show (gtk_menu_get_props (menu)->tearoff_hbox);
 	    }
 	  
-	  gtk_menu_reparent (gtk_menu_get_props (menu), gtk_menu_get_props (menu)->tearoff_hbox, FALSE);
+	  gtk_menu_reparent (menu, gtk_menu_get_props (menu)->tearoff_hbox, FALSE);
 
           width = __gdk_window_get_width (gtk_widget_get_props (GTK_WIDGET (menu))->window);
 
@@ -2050,7 +2050,7 @@ __gtk_menu_set_tearoff_state (GtkMenu  *menu,
 	  __gtk_widget_hide (GTK_WIDGET (menu));
 	  __gtk_widget_hide (gtk_menu_get_props (menu)->tearoff_window);
 	  if (GTK_IS_CONTAINER (gtk_menu_get_props (menu)->toplevel))
-	    gtk_menu_reparent (gtk_menu_get_props (menu), gtk_menu_get_props (menu)->toplevel, FALSE);
+	    gtk_menu_reparent (menu, gtk_menu_get_props (menu)->toplevel, FALSE);
 	  __gtk_widget_destroy (gtk_menu_get_props (menu)->tearoff_window);
 	  
 	  gtk_menu_get_props (menu)->tearoff_window = NULL;
@@ -2517,7 +2517,7 @@ gtk_menu_size_allocate (GtkWidget     *widget,
   child_requisition.height -= y * 2;
 
   if (gtk_menu_shell_get_props (menu_shell)->active)
-    gtk_menu_scroll_to (gtk_menu_shell_get_props (menu), gtk_menu_get_props (menu)->scroll_offset);
+    gtk_menu_scroll_to (menu, gtk_menu_get_props (menu)->scroll_offset);
 
   if (!gtk_menu_get_props (menu)->tearoff_active)
     {
@@ -2606,9 +2606,9 @@ gtk_menu_size_allocate (GtkWidget     *widget,
 	{
 	  if (allocation->height >= gtk_widget_get_props (widget)->requisition.height)
 	    {
-	      if (__gtk_widget_get_visible (gtk_menu_shell_get_props (menu)->tearoff_scrollbar))
+	      if (__gtk_widget_get_visible (gtk_menu_get_props (menu)->tearoff_scrollbar))
 		{
-		  __gtk_widget_hide (gtk_menu_shell_get_props (menu)->tearoff_scrollbar);
+		  __gtk_widget_hide (gtk_menu_get_props (menu)->tearoff_scrollbar);
 		  gtk_menu_set_tearoff_hints (menu, allocation->width);
 
 		  gtk_menu_scroll_to (menu, 0);
@@ -2616,14 +2616,14 @@ gtk_menu_size_allocate (GtkWidget     *widget,
 	    }
 	  else
 	    {
-	      gtk_menu_get_props (menu)->tearoff_adjustment->upper = gtk_widget_get_props (widget)->requisition.height;
-	      gtk_menu_get_props (menu)->tearoff_adjustment->page_size = allocation->height;
+	      gtk_menu_get_props (menu)->gtk_adjustment_get_props (tearoff_adjustment)->upper = gtk_widget_get_props (widget)->requisition.height;
+	      gtk_menu_get_props (menu)->gtk_adjustment_get_props (tearoff_adjustment)->page_size = allocation->height;
 	      
-	      if (gtk_menu_get_props (menu)->tearoff_adjustment->value + gtk_menu_get_props (menu)->tearoff_adjustment->page_size >
-		  gtk_menu_get_props (menu)->tearoff_adjustment->upper)
+	      if (gtk_menu_get_props (menu)->gtk_adjustment_get_props (tearoff_adjustment)->value + gtk_menu_get_props (menu)->gtk_adjustment_get_props (tearoff_adjustment)->page_size >
+		  gtk_menu_get_props (menu)->gtk_adjustment_get_props (tearoff_adjustment)->upper)
 		{
 		  gint value;
-		  value = gtk_menu_get_props (menu)->tearoff_adjustment->upper - gtk_menu_get_props (menu)->tearoff_adjustment->page_size;
+		  value = gtk_menu_get_props (menu)->gtk_adjustment_get_props (tearoff_adjustment)->upper - gtk_menu_get_props (menu)->gtk_adjustment_get_props (tearoff_adjustment)->page_size;
 		  if (value < 0)
 		    value = 0;
 		  gtk_menu_scroll_to (menu, value);
@@ -2631,9 +2631,9 @@ gtk_menu_size_allocate (GtkWidget     *widget,
 	      
 	      __gtk_adjustment_changed (gtk_menu_get_props (menu)->tearoff_adjustment);
 	      
-	      if (!__gtk_widget_get_visible (gtk_menu_shell_get_props (menu)->tearoff_scrollbar))
+	      if (!__gtk_widget_get_visible (gtk_menu_get_props (menu)->tearoff_scrollbar))
 		{
-		  __gtk_widget_show (gtk_menu_shell_get_props (menu)->tearoff_scrollbar);
+		  __gtk_widget_show (gtk_menu_get_props (menu)->tearoff_scrollbar);
 		  gtk_menu_set_tearoff_hints (menu, allocation->width);
 		}
 	    }
@@ -2661,8 +2661,8 @@ get_arrows_visible_area (GtkMenu      *menu,
                         "arrow-placement", &arrow_placement,
                         NULL);
 
-  border->x = GTK_CONTAINER (widget)->border_width + gtk_widget_get_props (widget)->style->xthickness + horizontal_padding;
-  border->y = GTK_CONTAINER (widget)->border_width + gtk_widget_get_props (widget)->style->ythickness + vertical_padding;
+  border->x = gtk_container_get_props (GTK_CONTAINER (widget))->border_width + gtk_widget_get_props (widget)->style->xthickness + horizontal_padding;
+  border->y = gtk_container_get_props (GTK_CONTAINER (widget))->border_width + gtk_widget_get_props (widget)->style->ythickness + vertical_padding;
   border->width = __gdk_window_get_width (gtk_widget_get_props (widget)->window);
   border->height = __gdk_window_get_height (gtk_widget_get_props (widget)->window);
 
@@ -3087,8 +3087,8 @@ gtk_menu_key_press (GtkWidget	*widget,
   /* Modify the accelerators */
   if (can_change_accels &&
       gtk_menu_shell_get_props (menu_shell)->active_menu_item &&
-      GTK_BIN (gtk_menu_shell_get_props (menu_shell)->active_menu_item)->child &&			/* no separators */
-      GTK_MENU_ITEM (gtk_menu_shell_get_props (menu_shell)->active_menu_item)->submenu == NULL &&	/* no submenus */
+      gtk_bin_get_props (GTK_BIN (gtk_menu_shell_get_props (menu_shell)->active_menu_item))->child &&			/* no separators */
+      gtk_menu_item_get_props (GTK_MENU_ITEM (gtk_menu_shell_get_props (menu_shell)->active_menu_item))->submenu == NULL &&	/* no submenus */
       (delete || __gtk_accelerator_valid (accel_key, accel_mods)))
     {
       GtkWidget *menu_item = gtk_menu_shell_get_props (menu_shell)->active_menu_item;
@@ -3367,7 +3367,7 @@ gtk_menu_do_timeout_scroll (GtkMenu  *menu,
   upper_visible = gtk_menu_get_props (menu)->upper_arrow_visible;
   lower_visible = gtk_menu_get_props (menu)->lower_arrow_visible;
 
-  gtk_menu_scroll_by (gtk_menu_get_props (menu), gtk_menu_get_props (menu)->scroll_step);
+  gtk_menu_scroll_by (menu, gtk_menu_get_props (menu)->scroll_step);
 
   if (touchscreen_mode &&
       (upper_visible != gtk_menu_get_props (menu)->upper_arrow_visible ||
@@ -3875,18 +3875,18 @@ gtk_menu_leave_notify (GtkWidget        *widget,
   GtkMenuItem *menu_item;
   GtkWidget *event_widget;
 
-  if (gtk_widget_get_props (event)->mode == GDK_CROSSING_GTK_GRAB ||
-      gtk_widget_get_props (event)->mode == GDK_CROSSING_GTK_UNGRAB ||
-      gtk_widget_get_props (event)->mode == GDK_CROSSING_STATE_CHANGED)
+  if (event->mode == GDK_CROSSING_GTK_GRAB ||
+      event->mode == GDK_CROSSING_GTK_UNGRAB ||
+      event->mode == GDK_CROSSING_STATE_CHANGED)
     return TRUE;
 
   menu = GTK_MENU (widget);
   menu_shell = GTK_MENU_SHELL (widget); 
   
-  if (gtk_menu_navigating_submenu (menu, gtk_widget_get_props (event)->x_root, gtk_widget_get_props (event)->y_root))
+  if (gtk_menu_navigating_submenu (menu, event->x_root, event->y_root))
     return TRUE; 
 
-  gtk_menu_handle_scrolling (menu, gtk_widget_get_props (event)->x_root, gtk_widget_get_props (event)->y_root, FALSE, TRUE);
+  gtk_menu_handle_scrolling (menu, event->x_root, event->y_root, FALSE, TRUE);
 
   event_widget = __gtk_get_event_widget ((GdkEvent*) event);
   
@@ -3902,7 +3902,7 @@ gtk_menu_leave_notify (GtkWidget        *widget,
       && gtk_menu_item_get_props (menu_item)->submenu != NULL
       && gtk_menu_item_get_props (menu_item)->submenu_placement == GTK_LEFT_RIGHT)
     {
-      if (GTK_MENU_SHELL (gtk_menu_item_get_props (menu_item)->submenu)->active)
+      if (gtk_menu_shell_get_props (GTK_MENU_SHELL (gtk_menu_item_get_props (menu_item)->submenu))->active)
 	{
 	  gtk_menu_set_submenu_navigation_region (menu, menu_item, event);
 	  return TRUE;
@@ -4039,9 +4039,9 @@ gtk_menu_set_submenu_navigation_region (GtkMenu          *menu,
 
   event_widget = __gtk_get_event_widget ((GdkEvent*) event);
   
-  __gdk_window_get_origin (gtk_menu_item_get_props (menu_item)->submenu->window, &submenu_left, &submenu_top);
-  width = __gdk_window_get_width (gtk_menu_item_get_props (menu_item)->submenu->window);
-  height = __gdk_window_get_height (gtk_menu_item_get_props (menu_item)->submenu->window);
+  __gdk_window_get_origin (gtk_menu_item_get_props (menu_item)->gtk_widget_get_props (submenu)->window, &submenu_left, &submenu_top);
+  width = __gdk_window_get_width (gtk_menu_item_get_props (menu_item)->gtk_widget_get_props (submenu)->window);
+  height = __gdk_window_get_height (gtk_menu_item_get_props (menu_item)->gtk_widget_get_props (submenu)->window);
   
   submenu_right = submenu_left + width;
   submenu_bottom = submenu_top + height;
@@ -4049,7 +4049,7 @@ gtk_menu_set_submenu_navigation_region (GtkMenu          *menu,
   width = __gdk_window_get_width (gtk_widget_get_props (event_widget)->window);
   height = __gdk_window_get_height (gtk_widget_get_props (event_widget)->window);
   
-  if (gtk_widget_get_props (event)->x >= 0 && gtk_widget_get_props (event)->x < width)
+  if (event->x >= 0 && event->x < width)
     {
       gint popdown_delay;
       
@@ -4064,20 +4064,20 @@ gtk_menu_set_submenu_navigation_region (GtkMenu          *menu,
 	{
 	  /* right */
           priv->navigation_x = submenu_left;
-          priv->navigation_width = gtk_widget_get_props (event)->x_root - submenu_left;
+          priv->navigation_width = event->x_root - submenu_left;
 	}
       else
 	{
 	  /* left */
           priv->navigation_x = submenu_right;
-          priv->navigation_width = gtk_widget_get_props (event)->x_root - submenu_right;
+          priv->navigation_width = event->x_root - submenu_right;
 	}
 
-      if (gtk_widget_get_props (event)->y < 0)
+      if (event->y < 0)
 	{
 	  /* top */
-          priv->navigation_y = gtk_widget_get_props (event)->y_root;
-          priv->navigation_height = submenu_top - gtk_widget_get_props (event)->y_root - NAVIGATION_REGION_OVERSHOOT;
+          priv->navigation_y = event->y_root;
+          priv->navigation_height = submenu_top - event->y_root - NAVIGATION_REGION_OVERSHOOT;
 
 	  if (priv->navigation_height >= 0)
 	    return;
@@ -4085,8 +4085,8 @@ gtk_menu_set_submenu_navigation_region (GtkMenu          *menu,
       else
 	{
 	  /* bottom */
-          priv->navigation_y = gtk_widget_get_props (event)->y_root;
-          priv->navigation_height = submenu_bottom - gtk_widget_get_props (event)->y_root + NAVIGATION_REGION_OVERSHOOT;
+          priv->navigation_y = event->y_root;
+          priv->navigation_height = submenu_bottom - event->y_root + NAVIGATION_REGION_OVERSHOOT;
 
 	  if (priv->navigation_height <= 0)
 	    return;
@@ -4096,9 +4096,9 @@ gtk_menu_set_submenu_navigation_region (GtkMenu          *menu,
 		    "gtk-menu-popdown-delay", &popdown_delay,
 		    NULL);
 
-      gtk_menu_item_get_props (menu)->navigation_timeout = __gdk_threads_add_timeout (popdown_delay,
-                                                          gtk_menu_stop_navigating_submenu_cb,
-                                                          menu);
+      gtk_menu_get_props (menu)->navigation_timeout = __gdk_threads_add_timeout (popdown_delay,
+                                                                                 gtk_menu_stop_navigating_submenu_cb,
+                                                                                 menu);
     }
 }
 
@@ -4169,7 +4169,7 @@ gtk_menu_position (GtkMenu  *menu,
   
   if (gtk_menu_get_props (menu)->position_func)
     {
-      (* gtk_menu_get_props (menu)->position_func) (gtk_menu_get_props (menu), &x, &y, &private->initially_pushed_in,
+      (* gtk_menu_get_props (menu)->position_func) (menu, &x, &y, &private->initially_pushed_in,
                                gtk_menu_get_props (menu)->position_func_data);
 
       if (private->monitor_num < 0) 
@@ -4342,7 +4342,7 @@ gtk_menu_position (GtkMenu  *menu,
       scroll_offset += arrow_border.top;
     }
   
-  __gtk_window_move (GTK_WINDOW (GTK_MENU_SHELL (gtk_menu_get_props (menu))->active ? gtk_menu_get_props (menu)->toplevel : gtk_menu_get_props (menu)->tearoff_window), 
+  __gtk_window_move (GTK_WINDOW (gtk_menu_shell_get_props (GTK_MENU_SHELL (gtk_menu_get_props (menu)))->active ? gtk_menu_get_props (menu)->toplevel : gtk_menu_get_props (menu)->tearoff_window), 
 		   x, y);
 
   if (!gtk_menu_shell_get_props (GTK_MENU_SHELL (menu))->active)
@@ -4401,11 +4401,11 @@ gtk_menu_scroll_to (GtkMenu *menu,
 
   if (gtk_menu_get_props (menu)->tearoff_active &&
       gtk_menu_get_props (menu)->tearoff_adjustment &&
-      (gtk_menu_get_props (menu)->tearoff_adjustment->value != offset))
+      (gtk_menu_get_props (menu)->gtk_adjustment_get_props (tearoff_adjustment)->value != offset))
     {
-      gtk_menu_get_props (menu)->tearoff_adjustment->value =
+      gtk_menu_get_props (menu)->gtk_adjustment_get_props (tearoff_adjustment)->value =
 	CLAMP (offset,
-	       0, gtk_menu_get_props (menu)->tearoff_adjustment->upper - gtk_menu_get_props (menu)->tearoff_adjustment->page_size);
+	       0, gtk_menu_get_props (menu)->gtk_adjustment_get_props (gtk_adjustment_get_props (tearoff_adjustment))->upper - gtk_menu_get_props (menu)->gtk_adjustment_get_props (gtk_adjustment_get_props (tearoff_adjustment))->page_size);
       __gtk_adjustment_value_changed (gtk_menu_get_props (menu)->tearoff_adjustment);
     }
   
@@ -4990,7 +4990,7 @@ gtk_menu_move_current (GtkMenuShell         *menu_shell,
             {
               GtkWidget *parent = gtk_menu_shell_get_props (menu_shell)->parent_menu_shell;
 
-              if (! GTK_MENU_ITEM (gtk_menu_shell_get_props (menu_shell)->active_menu_item)->submenu &&
+              if (! gtk_menu_item_get_props (GTK_MENU_ITEM (gtk_menu_shell_get_props (menu_shell)->active_menu_item))->submenu &&
                   (!parent ||
                    g_list_length (gtk_menu_shell_get_props (GTK_MENU_SHELL (parent))->children) <= 1))
                 match = gtk_menu_shell_get_props (menu_shell)->active_menu_item;
@@ -5080,7 +5080,7 @@ get_menu_height (GtkMenu *menu)
   GtkWidget *widget = GTK_WIDGET (menu);
 
   height = gtk_widget_get_props (widget)->requisition.height;
-  height -= (GTK_CONTAINER (widget)->border_width + gtk_widget_get_props (widget)->style->ythickness) * 2;
+  height -= (gtk_container_get_props (GTK_CONTAINER (widget))->border_width + gtk_widget_get_props (widget)->style->ythickness) * 2;
 
   if (!gtk_menu_get_props (menu)->tearoff_active)
     {

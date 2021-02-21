@@ -254,8 +254,8 @@ __gtk_button_box_set_child_size (GtkButtonBox *widget,
 
   g_return_if_fail (GTK_IS_BUTTON_BOX (widget));
 
-  widget->child_min_width = width;
-  widget->child_min_height = height;
+  gtk_button_box_get_props (widget)->child_min_width = width;
+  gtk_button_box_get_props (widget)->child_min_height = height;
 }
 
 void 
@@ -266,8 +266,8 @@ __gtk_button_box_set_child_ipadding (GtkButtonBox *widget,
 
   g_return_if_fail (GTK_IS_BUTTON_BOX (widget));
 
-  widget->child_ipad_x = ipad_x;
-  widget->child_ipad_y = ipad_y;
+  gtk_button_box_get_props (widget)->child_ipad_x = ipad_x;
+  gtk_button_box_get_props (widget)->child_ipad_y = ipad_y;
 }
 
 void
@@ -280,9 +280,9 @@ __gtk_button_box_set_layout (GtkButtonBox      *widget,
   g_return_if_fail (layout_style >= GTK_BUTTONBOX_DEFAULT_STYLE &&
 		    layout_style <= GTK_BUTTONBOX_CENTER);
 
-  if (widget->layout_style != layout_style)
+  if (gtk_button_box_get_props (widget)->layout_style != layout_style)
     {
-      widget->layout_style = layout_style;
+      gtk_button_box_get_props (widget)->layout_style = layout_style;
       g_object_notify (G_OBJECT (widget), "layout-style");
       __gtk_widget_queue_resize (GTK_WIDGET (widget));
     }
@@ -301,8 +301,8 @@ __gtk_button_box_get_child_size (GtkButtonBox *widget,
   g_return_if_fail (width != NULL);
   g_return_if_fail (height != NULL);
 
-  *width  = widget->child_min_width;
-  *height = widget->child_min_height;
+  *width  = gtk_button_box_get_props (widget)->child_min_width;
+  *height = gtk_button_box_get_props (widget)->child_min_height;
 }
 
 void
@@ -315,8 +315,8 @@ __gtk_button_box_get_child_ipadding (GtkButtonBox *widget,
   g_return_if_fail (ipad_x != NULL);
   g_return_if_fail (ipad_y != NULL);
 
-  *ipad_x = widget->child_ipad_x;
-  *ipad_y = widget->child_ipad_y;
+  *ipad_x = gtk_button_box_get_props (widget)->child_ipad_x;
+  *ipad_y = gtk_button_box_get_props (widget)->child_ipad_y;
 }
 
 GtkButtonBoxStyle 
@@ -326,7 +326,7 @@ __gtk_button_box_get_layout (GtkButtonBox *widget)
 
   g_return_val_if_fail (GTK_IS_BUTTON_BOX (widget), GTK_BUTTONBOX_SPREAD);
   
-  return widget->layout_style;
+  gtk_button_box_get_props (return widget)->layout_style;
 }
 
 /**

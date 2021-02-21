@@ -2067,14 +2067,14 @@ gtk_text_view_update_adjustments (GtkTextView *text_view)
       /* Set up the step sizes; we'll say that a page is
          our allocation minus one step, and a step is
          1/10 of our allocation. */
-      gtk_text_view_get_props (text_view)->hadjustment->step_increment =
+      gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (hadjustment)->step_increment =
         SCREEN_WIDTH (text_view) / 10.0;
-      gtk_text_view_get_props (text_view)->hadjustment->page_increment =
+      gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (hadjustment)->page_increment =
         SCREEN_WIDTH (text_view) * 0.9;
       
-      gtk_text_view_get_props (text_view)->vadjustment->step_increment =
+      gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (vadjustment)->step_increment =
         SCREEN_HEIGHT (text_view) / 10.0;
-      gtk_text_view_get_props (text_view)->vadjustment->page_increment =
+      gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (vadjustment)->page_increment =
         SCREEN_HEIGHT (text_view) * 0.9;
 
       __gtk_adjustment_changed (get_hadjustment (text_view));
@@ -2781,7 +2781,7 @@ __gtk_text_view_get_tabs (GtkTextView *text_view)
 static void
 gtk_text_view_toggle_cursor_visible (GtkTextView *text_view)
 {
-  __gtk_text_view_set_cursor_visible (gtk_text_view_get_props (text_view), !gtk_text_view_get_props (text_view)->cursor_visible);
+  __gtk_text_view_set_cursor_visible (text_view, !gtk_text_view_get_props (text_view)->cursor_visible);
 }
 
 /**
@@ -3444,23 +3444,23 @@ gtk_text_view_size_allocate (GtkWidget *widget,
   get_hadjustment (text_view);
   get_vadjustment (text_view);
 
-  gtk_text_view_get_props (text_view)->hadjustment->page_size = SCREEN_WIDTH (gtk_text_view_get_props (text_view));
-  gtk_text_view_get_props (text_view)->hadjustment->page_increment = SCREEN_WIDTH (gtk_text_view_get_props (text_view)) * 0.9;
-  gtk_text_view_get_props (text_view)->hadjustment->step_increment = SCREEN_WIDTH (gtk_text_view_get_props (text_view)) * 0.1;
-  gtk_text_view_get_props (text_view)->hadjustment->lower = 0;
-  gtk_text_view_get_props (text_view)->hadjustment->upper = MAX (SCREEN_WIDTH (gtk_text_view_get_props (text_view)),
+  gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (hadjustment)->page_size = SCREEN_WIDTH (gtk_text_view_get_props (text_view));
+  gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (hadjustment)->page_increment = SCREEN_WIDTH (gtk_text_view_get_props (text_view)) * 0.9;
+  gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (hadjustment)->step_increment = SCREEN_WIDTH (gtk_text_view_get_props (text_view)) * 0.1;
+  gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (hadjustment)->lower = 0;
+  gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (hadjustment)->upper = MAX (SCREEN_WIDTH (gtk_text_view_get_props (text_view)),
                                        gtk_text_view_get_props (text_view)->width);
 
-  if (gtk_text_view_get_props (text_view)->hadjustment->value > gtk_text_view_get_props (text_view)->hadjustment->upper - gtk_text_view_get_props (text_view)->hadjustment->page_size)
-    __gtk_adjustment_set_value (gtk_text_view_get_props (text_view)->hadjustment, MAX (0, gtk_text_view_get_props (text_view)->hadjustment->upper - gtk_text_view_get_props (text_view)->hadjustment->page_size));
+  if (gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (hadjustment)->value > gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (hadjustment)->upper - gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (hadjustment)->page_size)
+    __gtk_adjustment_set_value (gtk_text_view_get_props (text_view)->hadjustment, MAX (0, gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (gtk_adjustment_get_props (hadjustment))->upper - gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (gtk_adjustment_get_props (hadjustment))->page_size));
 
   __gtk_adjustment_changed (gtk_text_view_get_props (text_view)->hadjustment);
 
-  gtk_text_view_get_props (text_view)->vadjustment->page_size = SCREEN_HEIGHT (text_view);
-  gtk_text_view_get_props (text_view)->vadjustment->page_increment = SCREEN_HEIGHT (text_view) * 0.9;
-  gtk_text_view_get_props (text_view)->vadjustment->step_increment = SCREEN_HEIGHT (text_view) * 0.1;
-  gtk_text_view_get_props (text_view)->vadjustment->lower = 0;
-  gtk_text_view_get_props (text_view)->vadjustment->upper = MAX (SCREEN_HEIGHT (text_view),
+  gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (vadjustment)->page_size = SCREEN_HEIGHT (text_view);
+  gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (vadjustment)->page_increment = SCREEN_HEIGHT (text_view) * 0.9;
+  gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (vadjustment)->step_increment = SCREEN_HEIGHT (text_view) * 0.1;
+  gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (vadjustment)->lower = 0;
+  gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (vadjustment)->upper = MAX (SCREEN_HEIGHT (text_view),
                                        gtk_text_view_get_props (text_view)->height);
 
   /* Now adjust the value of the adjustment to keep the cursor at the
@@ -3471,8 +3471,8 @@ gtk_text_view_size_allocate (GtkWidget *widget,
 
   y += gtk_text_view_get_props (text_view)->first_para_pixels;
 
-  if (y > gtk_text_view_get_props (text_view)->vadjustment->upper - gtk_text_view_get_props (text_view)->vadjustment->page_size)
-    y = MAX (0, gtk_text_view_get_props (text_view)->vadjustment->upper - gtk_text_view_get_props (text_view)->vadjustment->page_size);
+  if (y > gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (vadjustment)->upper - gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (vadjustment)->page_size)
+    y = MAX (0, gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (gtk_adjustment_get_props (vadjustment))->upper - gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (gtk_adjustment_get_props (vadjustment))->page_size);
 
   if (y != gtk_text_view_get_props (text_view)->yoffset)
     __gtk_adjustment_set_value (gtk_text_view_get_props (text_view)->vadjustment, y);
@@ -3746,7 +3746,7 @@ changed_handler (GtkTextLayout     *layout,
         {
           gtk_text_view_get_props (text_view)->yoffset += new_first_para_top - old_first_para_top;
           
-          get_vadjustment (gtk_text_view_get_props (text_view))->value = gtk_text_view_get_props (text_view)->yoffset;
+          gtk_adjustment_get_props (get_vadjustment (gtk_text_view_get_props (text_view)))->value = gtk_text_view_get_props (text_view)->yoffset;
           yoffset_changed = TRUE;
         }
 
@@ -5362,7 +5362,7 @@ gtk_text_view_move_viewport (GtkTextView     *text_view,
       break;
     }
 
-  return set_adjustment_clamped (gtk_adjustment_get_props (adjustment), gtk_adjustment_get_props (adjustment)->value + count * increment);
+  return set_adjustment_clamped (adjustment, gtk_adjustment_get_props (adjustment)->value + count * increment);
 }
 
 static void
@@ -6328,7 +6328,7 @@ gtk_text_view_start_selection_drag (GtkTextView       *text_view,
 
   gtk_text_view_check_cursor_blink (text_view);
 
-  gtk_text_view_get_props (text_view)->selection_drag_handler = g_signal_connect_data (gtk_text_view_get_props (text_view),
+  gtk_text_view_get_props (text_view)->selection_drag_handler = g_signal_connect_data (text_view,
                                                              "motion-notify-event",
                                                              G_CALLBACK (selection_motion_event_handler),
                                                              data,
@@ -6342,7 +6342,7 @@ gtk_text_view_end_selection_drag (GtkTextView    *text_view)
   if (gtk_text_view_get_props (text_view)->selection_drag_handler == 0)
     return FALSE;
 
-  g_signal_handler_disconnect (gtk_text_view_get_props (text_view), gtk_text_view_get_props (text_view)->selection_drag_handler);
+  g_signal_handler_disconnect (text_view, gtk_text_view_get_props (text_view)->selection_drag_handler);
   gtk_text_view_get_props (text_view)->selection_drag_handler = 0;
 
   if (gtk_text_view_get_props (text_view)->scroll_timeout != 0)
@@ -7217,8 +7217,8 @@ typedef struct
 /* The window to which gtk_widget_get_props (widget)->window is relative */
 #define ALLOCATION_WINDOW(widget)		\
    (!__gtk_widget_get_has_window (widget) ?		\
-    (widget)->window :                          \
-     __gdk_window_get_parent ((widget)->window))
+    gtk_widget_get_props (gtk_widget_get_props ((widget)))->window :                          \
+     __gdk_window_get_parent (gtk_widget_get_props (gtk_widget_get_props ((widget)))->window))
 
 static void
 adjust_allocation_recurse (GtkWidget *widget,
@@ -7921,13 +7921,13 @@ popup_targets_received (GtkClipboard     *clipboard,
       
       can_insert = __gtk_text_iter_can_insert (&iter, gtk_text_view_get_props (text_view)->editable);
       
-      append_action_signal (gtk_text_view_get_props (text_view), gtk_text_view_get_props (text_view)->popup_menu, GTK_STOCK_CUT, "cut-clipboard",
+      append_action_signal (text_view, gtk_text_view_get_props (text_view)->popup_menu, GTK_STOCK_CUT, "cut-clipboard",
 			    have_selection &&
                             range_contains_editable_text (&sel_start, &sel_end,
                                                           gtk_text_view_get_props (text_view)->editable));
-      append_action_signal (gtk_text_view_get_props (text_view), gtk_text_view_get_props (text_view)->popup_menu, GTK_STOCK_COPY, "copy-clipboard",
+      append_action_signal (text_view, gtk_text_view_get_props (text_view)->popup_menu, GTK_STOCK_COPY, "copy-clipboard",
 			    have_selection);
-      append_action_signal (gtk_text_view_get_props (text_view), gtk_text_view_get_props (text_view)->popup_menu, GTK_STOCK_PASTE, "paste-clipboard",
+      append_action_signal (text_view, gtk_text_view_get_props (text_view)->popup_menu, GTK_STOCK_PASTE, "paste-clipboard",
 			    can_insert && clipboard_contains_text);
       
       menuitem = __gtk_image_menu_item_new_from_stock (GTK_STOCK_DELETE, NULL);
@@ -8174,7 +8174,7 @@ text_window_unrealize (GtkTextWindow *win)
 {
   if (win->type == GTK_TEXT_WINDOW_TEXT)
     {
-      __gtk_im_context_set_client_window (GTK_TEXT_VIEW (win->widget)->im_context,
+      __gtk_im_context_set_client_window (gtk_text_view_get_props (GTK_TEXT_VIEW (win->widget))->im_context,
                                         NULL);
     }
 
@@ -8259,7 +8259,7 @@ text_window_invalidate_rect (GtkTextWindow *win,
 
 #if 0
   {
-    cairo_t *cr = __gdk_cairo_create (win->bin_window);
+    cairo_t *cr = __gdk_cairo_create ((GdkDrawable *) (win->bin_window));
     __gdk_cairo_rectangle (cr, &window_rect);
     cairo_set_source_rgb  (cr, 1.0, 0.0, 0.0);	/* red */
     cairo_fill (cr);

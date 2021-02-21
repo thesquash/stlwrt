@@ -3150,7 +3150,7 @@ draw_arrow (GdkWindow     *window,
 	    gint           width,
 	    gint           height)
 {
-  cairo_t *cr = __gdk_cairo_create (window);
+  cairo_t *cr = __gdk_cairo_create ((GdkDrawable *) (window));
   __gdk_cairo_set_source_color (cr, color);
   
   if (area)
@@ -3850,7 +3850,7 @@ gtk_default_draw_check (GtkStyle      *style,
 			gint           width,
 			gint           height)
 {
-  cairo_t *cr = __gdk_cairo_create (window);
+  cairo_t *cr = __gdk_cairo_create ((GdkDrawable *) (window));
   enum { BUTTON, MENU, CELL } type = BUTTON;
   int exterior_size;
   int interior_size;
@@ -3975,7 +3975,7 @@ gtk_default_draw_option (GtkStyle      *style,
 			 gint           width,
 			 gint           height)
 {
-  cairo_t *cr = __gdk_cairo_create (window);
+  cairo_t *cr = __gdk_cairo_create ((GdkDrawable *) (window));
   enum { BUTTON, MENU, CELL } type = BUTTON;
   int exterior_size;
   
@@ -4771,7 +4771,7 @@ gtk_default_draw_focus (GtkStyle      *style,
 
   sanitize_size (window, &width, &height);
 
-  cr = __gdk_cairo_create (window);
+  cr = __gdk_cairo_create ((GdkDrawable *) (window));
 
   if (detail && !strcmp (detail, "colorwheel_light"))
     cairo_set_source_rgb (cr, 0., 0., 0.);
@@ -5046,7 +5046,7 @@ gtk_default_draw_expander (GtkStyle        *style,
   double x_double, y_double;
   gint degrees = 0;
 
-  cairo_t *cr = __gdk_cairo_create (window);
+  cairo_t *cr = __gdk_cairo_create ((GdkDrawable *) (window));
   
   if (area)
     {
@@ -5689,7 +5689,7 @@ gtk_default_draw_spinner (GtkStyle     *style,
   real_step = step % num_steps;
 
   /* get cairo context */
-  cr = __gdk_cairo_create (window);
+  cr = __gdk_cairo_create ((GdkDrawable *) (window));
 
   /* set a clip region for the expose event */
   cairo_rectangle (cr, x, y, width, height);

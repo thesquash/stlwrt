@@ -575,7 +575,7 @@ gtk_radio_button_focus (GtkWidget         *widget,
       tmp_slist = gtk_radio_button_get_props (radio_button)->group;
       while (tmp_slist)
 	{
-	  if (GTK_TOGGLE_BUTTON (tmp_slist->data)->active)
+	  if (gtk_toggle_button_get_props (GTK_TOGGLE_BUTTON (tmp_slist->data))->active)
 	    selected_button = tmp_slist->data;
 	  tmp_slist = tmp_slist->next;
 	}
@@ -708,7 +708,7 @@ gtk_radio_button_draw_indicator (GtkCheckButton *check_button,
 
       ___gtk_check_button_get_props (check_button, &indicator_size, &indicator_spacing);
 
-      x = gtk_widget_get_props (widget)->allocation.x + indicator_spacing + GTK_CONTAINER (widget)->border_width;
+      x = gtk_widget_get_props (widget)->allocation.x + indicator_spacing + gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
       y = gtk_widget_get_props (widget)->allocation.y + (gtk_widget_get_props (widget)->allocation.height - indicator_size) / 2;
 
       child = gtk_bin_get_props (GTK_BIN (check_button))->child;
@@ -739,10 +739,10 @@ gtk_radio_button_draw_indicator (GtkCheckButton *check_button,
 	  GdkRectangle restrict_area;
 	  GdkRectangle new_area;
 	      
-	  restrict_area.x = gtk_widget_get_props (widget)->allocation.x + GTK_CONTAINER (widget)->border_width;
-	  restrict_area.y = gtk_widget_get_props (widget)->allocation.y + GTK_CONTAINER (widget)->border_width;
-	  restrict_area.width = gtk_widget_get_props (widget)->allocation.width - (2 * GTK_CONTAINER (widget)->border_width);
-	  restrict_area.height = gtk_widget_get_props (widget)->allocation.height - (2 * GTK_CONTAINER (widget)->border_width);
+	  restrict_area.x = gtk_widget_get_props (widget)->allocation.x + gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
+	  restrict_area.y = gtk_widget_get_props (widget)->allocation.y + gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
+	  restrict_area.width = gtk_widget_get_props (widget)->allocation.width - (2 * gtk_container_get_props (GTK_CONTAINER (widget))->border_width);
+	  restrict_area.height = gtk_widget_get_props (widget)->allocation.height - (2 * gtk_container_get_props (GTK_CONTAINER (widget))->border_width);
 	  
 	  if (__gdk_rectangle_intersect (area, &restrict_area, &new_area))
 	    {

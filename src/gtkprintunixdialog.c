@@ -671,12 +671,12 @@ gtk_print_unix_dialog_finalize (GObject *object)
 
   if (priv->number_up_layout_2_option)
     {
-      priv->number_up_layout_2_option->choices[0] = NULL;
-      priv->number_up_layout_2_option->choices[1] = NULL;
-      g_free (priv->number_up_layout_2_option->choices_display[0]);
-      g_free (priv->number_up_layout_2_option->choices_display[1]);
-      priv->number_up_layout_2_option->choices_display[0] = NULL;
-      priv->number_up_layout_2_option->choices_display[1] = NULL;
+      priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices[0] = NULL;
+      priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices[1] = NULL;
+      g_free (priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices_display[0]);
+      g_free (priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices_display[1]);
+      priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices_display[0] = NULL;
+      priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices_display[1] = NULL;
       g_object_unref (priv->number_up_layout_2_option);
       priv->number_up_layout_2_option = NULL;
     }
@@ -1216,7 +1216,7 @@ add_option_to_table (GtkPrinterOption *option,
   __gtk_widget_show (widget);
 
   row = gtk_table_get_props (table)->nrows;
-  __gtk_table_resize (gtk_table_get_props (table), gtk_table_get_props (table)->nrows + 1, 2);
+  __gtk_table_resize (table, gtk_table_get_props (table)->nrows + 1, 2);
 
   if (gtk_printer_option_widget_has_external_label (GTK_PRINTER_OPTION_WIDGET (widget)))
     {
@@ -2005,7 +2005,7 @@ draw_collate_cb (GtkWidget          *widget,
   scale = size / 48.0;
   text_x = rtl ? 4 : 11;
 
-  cr = __gdk_cairo_create (gtk_widget_get_props (widget)->window);
+  cr = __gdk_cairo_create ((GdkDrawable *) (gtk_widget_get_props (widget)->window));
 
   cairo_translate (cr, gtk_widget_get_props (widget)->allocation.x, gtk_widget_get_props (widget)->allocation.y);
 
@@ -2613,7 +2613,7 @@ draw_page_cb (GtkWidget          *widget,
 
   number_up_layout = dialog_get_number_up_layout (dialog);
 
-  cr = __gdk_cairo_create (gtk_widget_get_props (widget)->window);
+  cr = __gdk_cairo_create ((GdkDrawable *) (gtk_widget_get_props (widget)->window));
 
   cairo_save (cr);
 
@@ -3032,8 +3032,8 @@ update_number_up_layout (GtkPrintUnixDialog *dialog)
 
               for (i = 0; i < G_N_ELEMENTS (n_up_layout_display); i++)
                 {
-                  priv->number_up_layout_n_option->choices[i] = g_strdup (n_up_layout[i]);
-                  priv->number_up_layout_n_option->choices_display[i] = g_strdup (_(n_up_layout_display[i]));
+                  priv->gtk_printer_option_get_props (number_up_layout_n_option)->choices[i] = g_strdup (n_up_layout[i]);
+                  priv->gtk_printer_option_get_props (number_up_layout_n_option)->choices_display[i] = g_strdup (_(n_up_layout_display[i]));
                 }
             }
           g_object_ref (priv->number_up_layout_n_option);
@@ -3048,28 +3048,28 @@ update_number_up_layout (GtkPrintUnixDialog *dialog)
       if (page_orientation == GTK_PAGE_ORIENTATION_PORTRAIT ||
           page_orientation == GTK_PAGE_ORIENTATION_REVERSE_PORTRAIT)
         {
-          if (! (priv->number_up_layout_2_option->choices[0] == priv->number_up_layout_n_option->choices[0] &&
-                 priv->number_up_layout_2_option->choices[1] == priv->number_up_layout_n_option->choices[2]))
+          if (! (priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices[0] == priv->gtk_printer_option_get_props (number_up_layout_n_option)->choices[0] &&
+                 priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices[1] == priv->gtk_printer_option_get_props (number_up_layout_n_option)->choices[2]))
             {
-              g_free (priv->number_up_layout_2_option->choices_display[0]);
-              g_free (priv->number_up_layout_2_option->choices_display[1]);
-              priv->number_up_layout_2_option->choices[0] = priv->number_up_layout_n_option->choices[0];
-              priv->number_up_layout_2_option->choices[1] = priv->number_up_layout_n_option->choices[2];
-              priv->number_up_layout_2_option->choices_display[0] = g_strdup ( _("Left to right"));
-              priv->number_up_layout_2_option->choices_display[1] = g_strdup ( _("Right to left"));
+              g_free (priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices_display[0]);
+              g_free (priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices_display[1]);
+              priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices[0] = priv->gtk_printer_option_get_props (number_up_layout_n_option)->choices[0];
+              priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices[1] = priv->gtk_printer_option_get_props (number_up_layout_n_option)->choices[2];
+              priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices_display[0] = g_strdup ( _("Left to right"));
+              priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices_display[1] = g_strdup ( _("Right to left"));
             }
         }
       else
         {
-          if (! (priv->number_up_layout_2_option->choices[0] == priv->number_up_layout_n_option->choices[0] &&
-                 priv->number_up_layout_2_option->choices[1] == priv->number_up_layout_n_option->choices[1]))
+          if (! (priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices[0] == priv->gtk_printer_option_get_props (number_up_layout_n_option)->choices[0] &&
+                 priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices[1] == priv->gtk_printer_option_get_props (number_up_layout_n_option)->choices[1]))
             {
-              g_free (priv->number_up_layout_2_option->choices_display[0]);
-              g_free (priv->number_up_layout_2_option->choices_display[1]);
-              priv->number_up_layout_2_option->choices[0] = priv->number_up_layout_n_option->choices[0];
-              priv->number_up_layout_2_option->choices[1] = priv->number_up_layout_n_option->choices[1];
-              priv->number_up_layout_2_option->choices_display[0] = g_strdup ( _("Top to bottom"));
-              priv->number_up_layout_2_option->choices_display[1] = g_strdup ( _("Bottom to top"));
+              g_free (priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices_display[0]);
+              g_free (priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices_display[1]);
+              priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices[0] = priv->gtk_printer_option_get_props (number_up_layout_n_option)->choices[0];
+              priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices[1] = priv->gtk_printer_option_get_props (number_up_layout_n_option)->choices[1];
+              priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices_display[0] = g_strdup ( _("Top to bottom"));
+              priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices_display[1] = g_strdup ( _("Bottom to top"));
             }
         }
 

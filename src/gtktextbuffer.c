@@ -1396,7 +1396,7 @@ __gtk_text_buffer_insert_range (GtkTextBuffer     *buffer,
   g_return_if_fail (end != NULL);
   g_return_if_fail (__gtk_text_iter_get_buffer (start) ==
                     __gtk_text_iter_get_buffer (end));
-  g_return_if_fail (__gtk_text_iter_get_buffer (start)->tag_table ==
+  g_return_if_fail (gtk_text_buffer_get_props (__gtk_text_iter_get_buffer (start))->tag_table ==
                     gtk_text_buffer_get_props (buffer)->tag_table);  
   g_return_if_fail (__gtk_text_iter_get_buffer (iter) == buffer);
   
@@ -1432,7 +1432,7 @@ __gtk_text_buffer_insert_range_interactive (GtkTextBuffer     *buffer,
   g_return_val_if_fail (end != NULL, FALSE);
   g_return_val_if_fail (__gtk_text_iter_get_buffer (start) ==
                         __gtk_text_iter_get_buffer (end), FALSE);
-  g_return_val_if_fail (__gtk_text_iter_get_buffer (start)->tag_table ==
+  g_return_val_if_fail (gtk_text_buffer_get_props (__gtk_text_iter_get_buffer (start))->tag_table ==
                         gtk_text_buffer_get_props (buffer)->tag_table, FALSE);
 
   if (__gtk_text_iter_can_insert (iter, default_editable))

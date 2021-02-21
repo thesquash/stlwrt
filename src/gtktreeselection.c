@@ -1272,7 +1272,7 @@ _gtk_tree_selection_row_is_selectable (GtkTreeSelection *selection,
     }
 
   if (gtk_tree_selection_get_props (selection)->user_func)
-    return (*gtk_tree_selection_get_props (selection)->user_func) (gtk_tree_selection_get_props (selection), gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model, path,
+    return (*gtk_tree_selection_get_props (selection)->user_func) (selection, gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model, path,
 				    GTK_RBNODE_FLAG_SET (node, GTK_RBNODE_IS_SELECTED),
 				    gtk_tree_selection_get_props (selection)->user_data);
   else

@@ -2402,13 +2402,13 @@ color_scheme_data_free (ColorSchemeData *data)
 {
   gint i;
 
-  g_hash_table_unref (gtk_settings_get_props (data)->color_hash);
+  g_hash_table_unref (data->color_hash);
 
   for (i = 0; i <= GTK_SETTINGS_SOURCE_APPLICATION; i++)
     {
-      if (gtk_settings_get_props (data)->tables[i])
-	g_hash_table_unref (gtk_settings_get_props (data)->tables[i]);
-      g_free (gtk_settings_get_props (data)->lastentry[i]);
+      if (data->tables[i])
+	g_hash_table_unref (data->tables[i]);
+      g_free (data->lastentry[i]);
     }
 
   g_slice_free (ColorSchemeData, data);
@@ -2423,7 +2423,7 @@ settings_update_color_scheme (GtkSettings *settings)
       GValue value = { 0, };
 
       data = g_slice_new0 (ColorSchemeData);
-      gtk_settings_get_props (data)->color_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free,
+      data->color_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free,
 					        (GDestroyNotify) __gdk_color_free);
       g_object_set_data_full (G_OBJECT (settings), "gtk-color-scheme",
 			      data, (GDestroyNotify) color_scheme_data_free); 
@@ -2515,43 +2515,43 @@ update_color_hash (ColorSchemeData   *data,
   gpointer color;
 
   if ((str == NULL || *str == '\0') &&
-      (gtk_settings_get_props (data)->lastentry[source] == NULL || gtk_settings_get_props (data)->lastentry[source][0] == '\0'))
+      (data->lastentry[source] == NULL || data->lastentry[source][0] == '\0'))
     return FALSE;
 
-  if (str && gtk_settings_get_props (data)->lastentry[source] && strcmp (str, gtk_settings_get_props (data)->lastentry[source]) == 0)
+  if (str && data->lastentry[source] && strcmp (str, data->lastentry[source]) == 0)
     return FALSE;
 
   /* For the RC_FILE source we merge the values rather than over-writing
    * them, since multiple rc files might define independent sets of colors
    */
   if ((source != GTK_SETTINGS_SOURCE_RC_FILE) &&
-      gtk_settings_get_props (data)->tables[source] && g_hash_table_size (gtk_settings_get_props (data)->tables[source]) > 0)
+      data->tables[source] && g_hash_table_size (data->tables[source]) > 0)
     {
-      g_hash_table_unref (gtk_settings_get_props (data)->tables[source]);
-      gtk_settings_get_props (data)->tables[source] = NULL;
+      g_hash_table_unref (data->tables[source]);
+      data->tables[source] = NULL;
       changed = TRUE; /* We can't rely on the code below since str might be "" */
     }
 
-  if (gtk_settings_get_props (data)->tables[source] == NULL)
-    gtk_settings_get_props (data)->tables[source] = g_hash_table_new_full (g_str_hash, g_str_equal,
+  if (data->tables[source] == NULL)
+    data->tables[source] = g_hash_table_new_full (g_str_hash, g_str_equal,
 						  g_free,
 						  (GDestroyNotify) __gdk_color_free);
 
-  g_free (gtk_settings_get_props (data)->lastentry[source]);
-  gtk_settings_get_props (data)->lastentry[source] = g_strdup (str);
+  g_free (data->lastentry[source]);
+  data->lastentry[source] = g_strdup (str);
 
-  changed |= add_colors_to_hash_from_string (gtk_settings_get_props (data)->tables[source], str);
+  changed |= add_colors_to_hash_from_string (data->tables[source], str);
 
   if (!changed)
     return FALSE;
 
   /* Rebuild the merged hash table. */
-  if (gtk_settings_get_props (data)->color_hash)
+  if (data->color_hash)
     {
       old_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free,
                                         (GDestroyNotify) __gdk_color_free);
 
-      g_hash_table_iter_init (&iter, gtk_settings_get_props (data)->color_hash);
+      g_hash_table_iter_init (&iter, data->color_hash);
       while (g_hash_table_iter_next (&iter, &name, &color))
         {
           g_hash_table_insert (old_hash, name, color);
@@ -2565,16 +2565,16 @@ update_color_hash (ColorSchemeData   *data,
 
   for (i = 0; i <= GTK_SETTINGS_SOURCE_APPLICATION; i++)
     {
-      if (gtk_settings_get_props (data)->tables[i])
-	g_hash_table_foreach (gtk_settings_get_props (data)->tables[i], (GHFunc) add_color_to_hash,
-			      gtk_settings_get_props (data)->color_hash);
+      if (data->tables[i])
+	g_hash_table_foreach (data->tables[i], (GHFunc) add_color_to_hash,
+			      data->color_hash);
     }
 
   if (old_hash)
     {
       /* now check if the merged hash has changed */
       changed = FALSE;
-      if (g_hash_table_size (old_hash) != g_hash_table_size (gtk_settings_get_props (data)->color_hash))
+      if (g_hash_table_size (old_hash) != g_hash_table_size (data->color_hash))
         changed = TRUE;
       else
         {
@@ -2584,7 +2584,7 @@ update_color_hash (ColorSchemeData   *data,
           g_hash_table_iter_init (&iter, old_hash);
           while (g_hash_table_iter_next (&iter, &key, &value))
             {
-              new_value = g_hash_table_lookup (gtk_settings_get_props (data)->color_hash, key);
+              new_value = g_hash_table_lookup (data->color_hash, key);
               if (!new_value || !__gdk_color_equal (value, new_value))
                 {
                   changed = TRUE;
@@ -2634,7 +2634,7 @@ get_color_hash (GtkSettings *settings)
   data = (ColorSchemeData *)g_object_get_data (G_OBJECT (settings), 
 					       "gtk-color-scheme");
 
-  return gtk_settings_get_props (data)->color_hash;
+  return data->color_hash;
 }
 
 static void 
@@ -2663,7 +2663,7 @@ get_color_scheme (GtkSettings *settings)
 
   string = g_string_new ("");
 
-  g_hash_table_foreach (gtk_settings_get_props (data)->color_hash, append_color_scheme, string);
+  g_hash_table_foreach (data->color_hash, append_color_scheme, string);
 
   return g_string_free (string, FALSE);
 }

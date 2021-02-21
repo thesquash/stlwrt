@@ -295,7 +295,7 @@ __gtk_layout_set_hadjustment (GtkLayout     *layout,
 {
   g_return_if_fail (GTK_IS_LAYOUT (layout));
 
-  gtk_layout_set_adjustments (gtk_layout_get_props (layout), adjustment, gtk_layout_get_props (layout)->vadjustment);
+  gtk_layout_set_adjustments (layout, adjustment, gtk_layout_get_props (layout)->vadjustment);
   g_object_notify (G_OBJECT (layout), "hadjustment");
 }
  
@@ -315,7 +315,7 @@ __gtk_layout_set_vadjustment (GtkLayout     *layout,
 {
   g_return_if_fail (GTK_IS_LAYOUT (layout));
   
-  gtk_layout_set_adjustments (gtk_layout_get_props (layout), gtk_layout_get_props (layout)->hadjustment, adjustment);
+  gtk_layout_set_adjustments (layout, gtk_layout_get_props (layout)->hadjustment, adjustment);
   g_object_notify (G_OBJECT (layout), "vadjustment");
 }
 
@@ -730,7 +730,7 @@ gtk_layout_set_property (GObject      *object,
 			   gtk_layout_get_props (layout)->height);
       break;
     case PROP_HEIGHT:
-      __gtk_layout_set_size (gtk_layout_get_props (layout), gtk_layout_get_props (layout)->width,
+      __gtk_layout_set_size (layout, gtk_layout_get_props (layout)->width,
 			   g_value_get_uint (value));
       break;
     default:

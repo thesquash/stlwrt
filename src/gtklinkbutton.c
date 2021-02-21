@@ -476,7 +476,7 @@ gtk_link_button_clicked (GtkButton *button)
   GtkLinkButton *link_button = GTK_LINK_BUTTON (button);
 
   if (uri_func)
-    (* uri_func) (gtk_link_button_get_props (link_button), gtk_link_button_get_props (link_button)->priv->uri, uri_func_data);
+    (* uri_func) (link_button, gtk_link_button_get_props (link_button)->priv->uri, uri_func_data);
   else
     {
       GdkScreen *screen;

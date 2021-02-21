@@ -1661,7 +1661,7 @@ gtk_cell_renderer_text_render (GtkCellRenderer      *cell,
   if (gtk_cell_renderer_text_get_props (celltext)->background_set && 
       (flags & GTK_CELL_RENDERER_SELECTED) == 0)
     {
-      cairo_t *cr = __gdk_cairo_create (window);
+      cairo_t *cr = __gdk_cairo_create ((GdkDrawable *) (window));
 
       if (expose_area)
 	{

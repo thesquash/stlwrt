@@ -99,7 +99,7 @@ enum {
 
 
 #define GTK_TREE_MODEL_SORT_CACHE_CHILD_ITERS(tree_model_sort) \
-	(((GtkTreeModelSort *)tree_model_sort)->child_flags&GTK_TREE_MODEL_ITERS_PERSIST)
+	(gtk_tree_model_sort_get_props (gtk_tree_model_sort_get_props (gtk_tree_model_sort_get_props (gtk_tree_model_sort_get_props (gtk_tree_model_sort_get_props (gtk_tree_model_sort_get_props (gtk_tree_model_sort_get_props (((GtkTreeModelSort *)tree_model_sort))))))))->child_flags&GTK_TREE_MODEL_ITERS_PERSIST)
 #define SORT_ELT(sort_elt) ((SortElt *)sort_elt)
 #define SORT_LEVEL(sort_level) ((SortLevel *)sort_level)
 
@@ -351,7 +351,7 @@ gtk_tree_model_sort_finalize (GObject *object)
   gtk_tree_model_sort_set_model (tree_model_sort, NULL);
 
   if (gtk_tree_model_sort_get_props (tree_model_sort)->root)
-    gtk_tree_model_sort_free_level (gtk_tree_model_sort_get_props (tree_model_sort), gtk_tree_model_sort_get_props (tree_model_sort)->root);
+    gtk_tree_model_sort_free_level (tree_model_sort, gtk_tree_model_sort_get_props (tree_model_sort)->root);
 
   if (gtk_tree_model_sort_get_props (tree_model_sort)->sort_list)
     {
@@ -1743,7 +1743,7 @@ gtk_tree_model_sort_sort (GtkTreeModelSort *tree_model_sort)
   else
     g_return_if_fail (gtk_tree_model_sort_get_props (tree_model_sort)->default_sort_func != NULL);
 
-  gtk_tree_model_sort_sort_level (gtk_tree_model_sort_get_props (tree_model_sort), gtk_tree_model_sort_get_props (tree_model_sort)->root,
+  gtk_tree_model_sort_sort_level (tree_model_sort, gtk_tree_model_sort_get_props (tree_model_sort)->root,
 				  TRUE, TRUE);
 }
 
@@ -1935,7 +1935,7 @@ gtk_tree_model_sort_set_model (GtkTreeModelSort *tree_model_sort,
 
       /* reset our state */
       if (gtk_tree_model_sort_get_props (tree_model_sort)->root)
-	gtk_tree_model_sort_free_level (gtk_tree_model_sort_get_props (tree_model_sort), gtk_tree_model_sort_get_props (tree_model_sort)->root);
+	gtk_tree_model_sort_free_level (tree_model_sort, gtk_tree_model_sort_get_props (tree_model_sort)->root);
       gtk_tree_model_sort_get_props (tree_model_sort)->root = NULL;
       _gtk_tree_data_list_header_free (gtk_tree_model_sort_get_props (tree_model_sort)->sort_list);
       gtk_tree_model_sort_get_props (tree_model_sort)->sort_list = NULL;
@@ -2469,7 +2469,7 @@ __gtk_tree_model_sort_clear_cache (GtkTreeModelSort *tree_model_sort)
   g_return_if_fail (GTK_IS_TREE_MODEL_SORT (tree_model_sort));
 
   if (gtk_tree_model_sort_get_props (tree_model_sort)->zero_ref_count > 0)
-    __gtk_tree_model_sort_clear_cache_helper (gtk_tree_model_sort_get_props (tree_model_sort), (SortLevel *)gtk_tree_model_sort_get_props (tree_model_sort)->root);
+    __gtk_tree_model_sort_clear_cache_helper (tree_model_sort, (SortLevel *)gtk_tree_model_sort_get_props (tree_model_sort)->root);
 }
 
 static gboolean

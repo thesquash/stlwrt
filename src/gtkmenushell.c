@@ -590,7 +590,7 @@ gtk_menu_shell_button_press (GtkWidget      *widget,
   menu_item = gtk_menu_shell_get_item (menu_shell, (GdkEvent *)event);
 
   if (menu_item && ___gtk_menu_item_is_selectable (menu_item) &&
-      gtk_widget_get_props (menu_item) != GTK_MENU_SHELL (gtk_widget_get_props (menu_item)->parent)->active_menu_item)
+      gtk_widget_get_props (menu_item) != gtk_menu_shell_get_props (GTK_MENU_SHELL (gtk_widget_get_props (menu_item)->parent))->active_menu_item)
     {
       /*  select the menu item *before* activating the shell, so submenus
        *  which might be open are closed the friendly way. If we activate
@@ -1218,7 +1218,7 @@ gtk_menu_shell_real_select_item (GtkMenuShell *menu_shell,
   /* This allows the bizarre radio buttons-with-submenus-display-history
    * behavior
    */
-  if (GTK_MENU_ITEM (gtk_menu_shell_get_props (menu_shell)->active_menu_item)->submenu)
+  if (gtk_menu_item_get_props (GTK_MENU_ITEM (gtk_menu_shell_get_props (menu_shell)->active_menu_item))->submenu)
     __gtk_widget_activate (gtk_menu_shell_get_props (menu_shell)->active_menu_item);
 }
 
@@ -1438,7 +1438,7 @@ gtk_menu_shell_select_submenu_first (GtkMenuShell     *menu_shell)
     {
       ___gtk_menu_item_popup_submenu (GTK_WIDGET (menu_item), FALSE);
       __gtk_menu_shell_select_first (GTK_MENU_SHELL (gtk_menu_item_get_props (menu_item)->submenu), TRUE);
-      if (GTK_MENU_SHELL (gtk_menu_item_get_props (menu_item)->submenu)->active_menu_item)
+      if (gtk_menu_shell_get_props (GTK_MENU_SHELL (gtk_menu_item_get_props (menu_item)->submenu))->active_menu_item)
 	return TRUE;
     }
 
@@ -1470,8 +1470,8 @@ gtk_real_menu_shell_move_current (GtkMenuShell         *menu_shell,
     case GTK_MENU_DIR_PARENT:
       if (touchscreen_mode &&
           gtk_menu_shell_get_props (menu_shell)->active_menu_item &&
-          GTK_MENU_ITEM (gtk_menu_shell_get_props (menu_shell)->active_menu_item)->submenu &&
-          __gtk_widget_get_visible (GTK_MENU_ITEM (gtk_menu_shell_get_props (menu_shell)->active_menu_item)->submenu))
+          gtk_menu_item_get_props (GTK_MENU_ITEM (gtk_menu_shell_get_props (menu_shell)->active_menu_item))->submenu &&
+          __gtk_widget_get_visible (gtk_menu_item_get_props (GTK_MENU_ITEM (gtk_menu_shell_get_props (menu_shell)->active_menu_item))->submenu))
         {
           /* if we are on a menu item that has an open submenu but the
            * focus is not in that submenu (e.g. because it's empty or
@@ -1510,9 +1510,9 @@ gtk_real_menu_shell_move_current (GtkMenuShell         *menu_shell,
        */
       else if (gtk_menu_shell_get_props (menu_shell)->active_menu_item &&
 	       ___gtk_menu_item_is_selectable (gtk_menu_shell_get_props (menu_shell)->active_menu_item) &&
-	       GTK_MENU_ITEM (gtk_menu_shell_get_props (menu_shell)->active_menu_item)->submenu)
+	       gtk_menu_item_get_props (GTK_MENU_ITEM (gtk_menu_shell_get_props (menu_shell)->active_menu_item))->submenu)
 	{
-	  GtkMenuShell *submenu = GTK_MENU_SHELL (GTK_MENU_ITEM (gtk_menu_shell_get_props (menu_shell)->active_menu_item)->submenu);
+	  GtkMenuShell *submenu = GTK_MENU_SHELL (gtk_menu_item_get_props (GTK_MENU_ITEM (gtk_menu_shell_get_props (menu_shell)->active_menu_item))->submenu);
 
 	  if (GTK_MENU_SHELL_GET_CLASS (menu_shell)->submenu_placement !=
 	      GTK_MENU_SHELL_GET_CLASS (submenu)->submenu_placement)
@@ -1523,7 +1523,7 @@ gtk_real_menu_shell_move_current (GtkMenuShell         *menu_shell,
     case GTK_MENU_DIR_CHILD:
       if (gtk_menu_shell_get_props (menu_shell)->active_menu_item &&
 	  ___gtk_menu_item_is_selectable (gtk_menu_shell_get_props (menu_shell)->active_menu_item) &&
-	  GTK_MENU_ITEM (gtk_menu_shell_get_props (menu_shell)->active_menu_item)->submenu)
+	  gtk_menu_item_get_props (GTK_MENU_ITEM (gtk_menu_shell_get_props (menu_shell)->active_menu_item))->submenu)
 	{
 	  if (gtk_menu_shell_select_submenu_first (menu_shell))
 	    break;
@@ -1573,7 +1573,7 @@ gtk_real_menu_shell_activate_current (GtkMenuShell      *menu_shell,
   if (gtk_menu_shell_get_props (menu_shell)->active_menu_item &&
       ___gtk_menu_item_is_selectable (gtk_menu_shell_get_props (menu_shell)->active_menu_item))
   {
-    if (GTK_MENU_ITEM (gtk_menu_shell_get_props (menu_shell)->active_menu_item)->submenu == NULL)
+    if (gtk_menu_item_get_props (GTK_MENU_ITEM (gtk_menu_shell_get_props (menu_shell)->active_menu_item))->submenu == NULL)
       __gtk_menu_shell_activate_item (menu_shell,
 				    gtk_menu_shell_get_props (menu_shell)->active_menu_item,
 				    force_hide);

@@ -1073,7 +1073,7 @@ dnd_select_folder_get_info_cb (GCancellable *cancellable,
   gboolean cancelled = g_cancellable_is_cancelled (cancellable);
   struct DndSelectFolderData *data = user_data;
 
-  if (cancellable != data->gtk_file_chooser_button_get_props (button)->priv->dnd_select_folder_cancellable)
+  if (cancellable != gtk_file_chooser_button_get_props (data->button)->priv->dnd_select_folder_cancellable)
     {
       g_object_unref (data->button);
       g_object_unref (data->file);
@@ -1084,7 +1084,7 @@ dnd_select_folder_get_info_cb (GCancellable *cancellable,
       return;
     }
 
-  data->gtk_file_chooser_button_get_props (button)->priv->dnd_select_folder_cancellable = NULL;
+  gtk_file_chooser_button_get_props (data->button)->priv->dnd_select_folder_cancellable = NULL;
 
   if (!cancelled && !error && info != NULL)
     {
@@ -1095,7 +1095,7 @@ dnd_select_folder_get_info_cb (GCancellable *cancellable,
       data->selected =
 	(((data->action == GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER && is_folder) ||
 	  (data->action == GTK_FILE_CHOOSER_ACTION_OPEN && !is_folder)) &&
-	 __gtk_file_chooser_select_file (GTK_FILE_CHOOSER (data->gtk_file_chooser_button_get_props (button)->priv->dialog),
+	 __gtk_file_chooser_select_file (GTK_FILE_CHOOSER (gtk_file_chooser_button_get_props (data->button)->priv->dialog),
 				       data->file, NULL));
     }
   else
@@ -1119,7 +1119,7 @@ dnd_select_folder_get_info_cb (GCancellable *cancellable,
 
   data->file = g_file_new_for_uri (data->uris[data->i]);
 
-  data->gtk_file_chooser_button_get_props (button)->priv->dnd_select_folder_cancellable =
+  gtk_file_chooser_button_get_props (data->button)->priv->dnd_select_folder_cancellable =
     _gtk_file_system_get_info (data->file_system, data->file,
 			       "standard::type",
 			       dnd_select_folder_get_info_cb, user_data);
@@ -1283,16 +1283,16 @@ change_icon_theme_get_info_cb (GCancellable *cancellable,
   GdkPixbuf *pixbuf;
   struct ChangeIconThemeData *data = user_data;
 
-  if (!g_slist_find (data->gtk_file_chooser_button_get_props (button)->priv->change_icon_theme_cancellables, cancellable))
+  if (!g_slist_find (gtk_file_chooser_button_get_props (data->button)->priv->change_icon_theme_cancellables, cancellable))
     goto out;
 
-  data->gtk_file_chooser_button_get_props (button)->priv->change_icon_theme_cancellables =
-    g_slist_remove (data->gtk_file_chooser_button_get_props (button)->priv->change_icon_theme_cancellables, cancellable);
+  gtk_file_chooser_button_get_props (data->button)->priv->change_icon_theme_cancellables =
+    g_slist_remove (gtk_file_chooser_button_get_props (data->button)->priv->change_icon_theme_cancellables, cancellable);
 
   if (cancelled || error)
     goto out;
 
-  pixbuf = _gtk_file_info_render_icon (info, GTK_WIDGET (data->gtk_file_chooser_button_get_props (button)), data->gtk_file_chooser_button_get_props (button)->priv->icon_size);
+  pixbuf = _gtk_file_info_render_icon (info, GTK_WIDGET (gtk_file_chooser_button_get_props (data->button)), gtk_file_chooser_button_get_props (data->button)->priv->icon_size);
 
   if (pixbuf)
     {
@@ -1305,14 +1305,14 @@ change_icon_theme_get_info_cb (GCancellable *cancellable,
       path = __gtk_tree_row_reference_get_path (data->row_ref);
       if (path)
         {
-          __gtk_tree_model_get_iter (data->gtk_file_chooser_button_get_props (button)->priv->model, &iter, path);
+          __gtk_tree_model_get_iter (gtk_file_chooser_button_get_props (data->button)->priv->model, &iter, path);
           __gtk_tree_path_free (path);
 
-          __gtk_list_store_set (GTK_LIST_STORE (data->gtk_file_chooser_button_get_props (button)->priv->model), &iter,
+          __gtk_list_store_set (GTK_LIST_STORE (gtk_file_chooser_button_get_props (data->button)->priv->model), &iter,
 	  		      ICON_COLUMN, pixbuf,
 			      -1);
 
-          g_object_set (data->gtk_file_chooser_button_get_props (button)->priv->icon_cell,
+          g_object_set (gtk_file_chooser_button_get_props (data->button)->priv->icon_cell,
 		        "width", width,
 		        NULL);
         }
@@ -1504,7 +1504,7 @@ set_info_get_info_cb (GCancellable *cancellable,
   struct SetDisplayNameData *data = callback_data;
   gboolean is_folder;
 
-  if (!data->gtk_file_chooser_button_get_props (button)->priv->model)
+  if (!gtk_file_chooser_button_get_props (data->button)->priv->model)
     /* button got destroyed */
     goto out;
 
@@ -1513,17 +1513,17 @@ set_info_get_info_cb (GCancellable *cancellable,
     /* Cancellable doesn't exist anymore in the model */
     goto out;
 
-  __gtk_tree_model_get_iter (data->gtk_file_chooser_button_get_props (button)->priv->model, &iter, path);
+  __gtk_tree_model_get_iter (gtk_file_chooser_button_get_props (data->button)->priv->model, &iter, path);
   __gtk_tree_path_free (path);
 
   /* Validate the cancellable */
-  __gtk_tree_model_get (data->gtk_file_chooser_button_get_props (button)->priv->model, &iter,
+  __gtk_tree_model_get (gtk_file_chooser_button_get_props (data->button)->priv->model, &iter,
 		      CANCELLABLE_COLUMN, &model_cancellable,
 		      -1);
   if (cancellable != model_cancellable)
     goto out;
 
-  __gtk_list_store_set (GTK_LIST_STORE (data->gtk_file_chooser_button_get_props (button)->priv->model), &iter,
+  __gtk_list_store_set (GTK_LIST_STORE (gtk_file_chooser_button_get_props (data->button)->priv->model), &iter,
 		      CANCELLABLE_COLUMN, NULL,
 		      -1);
 
@@ -1531,14 +1531,14 @@ set_info_get_info_cb (GCancellable *cancellable,
     /* There was an error, leave the fallback name in there */
     goto out;
 
-  pixbuf = _gtk_file_info_render_icon (info, GTK_WIDGET (data->gtk_file_chooser_button_get_props (button)), data->gtk_file_chooser_button_get_props (button)->priv->icon_size);
+  pixbuf = _gtk_file_info_render_icon (info, GTK_WIDGET (gtk_file_chooser_button_get_props (data->button)), gtk_file_chooser_button_get_props (data->button)->priv->icon_size);
 
   if (!data->label)
     data->label = g_strdup (g_file_info_get_display_name (info));
 
   is_folder = _gtk_file_info_consider_as_directory (info);
 
-  __gtk_list_store_set (GTK_LIST_STORE (data->gtk_file_chooser_button_get_props (button)->priv->model), &iter,
+  __gtk_list_store_set (GTK_LIST_STORE (gtk_file_chooser_button_get_props (data->button)->priv->model), &iter,
 		      ICON_COLUMN, pixbuf,
 		      DISPLAY_NAME_COLUMN, data->label,
 		      IS_FOLDER_COLUMN, is_folder,
@@ -1688,7 +1688,7 @@ model_add_special_get_info_cb (GCancellable *cancellable,
   struct ChangeIconThemeData *data = user_data;
   gchar *name;
 
-  if (!data->gtk_file_chooser_button_get_props (button)->priv->model)
+  if (!gtk_file_chooser_button_get_props (data->button)->priv->model)
     /* button got destroyed */
     goto out;
 
@@ -1697,37 +1697,37 @@ model_add_special_get_info_cb (GCancellable *cancellable,
     /* Cancellable doesn't exist anymore in the model */
     goto out;
 
-  __gtk_tree_model_get_iter (data->gtk_file_chooser_button_get_props (button)->priv->model, &iter, path);
+  __gtk_tree_model_get_iter (gtk_file_chooser_button_get_props (data->button)->priv->model, &iter, path);
   __gtk_tree_path_free (path);
 
-  __gtk_tree_model_get (data->gtk_file_chooser_button_get_props (button)->priv->model, &iter,
+  __gtk_tree_model_get (gtk_file_chooser_button_get_props (data->button)->priv->model, &iter,
 		      CANCELLABLE_COLUMN, &model_cancellable,
 		      -1);
   if (cancellable != model_cancellable)
     goto out;
 
-  __gtk_list_store_set (GTK_LIST_STORE (data->gtk_file_chooser_button_get_props (button)->priv->model), &iter,
+  __gtk_list_store_set (GTK_LIST_STORE (gtk_file_chooser_button_get_props (data->button)->priv->model), &iter,
 		      CANCELLABLE_COLUMN, NULL,
 		      -1);
 
   if (cancelled || error)
     goto out;
 
-  pixbuf = _gtk_file_info_render_icon (info, GTK_WIDGET (data->gtk_file_chooser_button_get_props (button)), data->gtk_file_chooser_button_get_props (button)->priv->icon_size);
+  pixbuf = _gtk_file_info_render_icon (info, GTK_WIDGET (gtk_file_chooser_button_get_props (data->button)), gtk_file_chooser_button_get_props (data->button)->priv->icon_size);
 
   if (pixbuf)
     {
-      __gtk_list_store_set (GTK_LIST_STORE (data->gtk_file_chooser_button_get_props (button)->priv->model), &iter,
+      __gtk_list_store_set (GTK_LIST_STORE (gtk_file_chooser_button_get_props (data->button)->priv->model), &iter,
 			  ICON_COLUMN, pixbuf,
 			  -1);
       g_object_unref (pixbuf);
     }
 
-  __gtk_tree_model_get (data->gtk_file_chooser_button_get_props (button)->priv->model, &iter,
+  __gtk_tree_model_get (gtk_file_chooser_button_get_props (data->button)->priv->model, &iter,
                       DISPLAY_NAME_COLUMN, &name,
                       -1);
   if (!name)
-    __gtk_list_store_set (GTK_LIST_STORE (data->gtk_file_chooser_button_get_props (button)->priv->model), &iter,
+    __gtk_list_store_set (GTK_LIST_STORE (gtk_file_chooser_button_get_props (data->button)->priv->model), &iter,
   		        DISPLAY_NAME_COLUMN, g_file_info_get_display_name (info),
 		        -1);
   g_free (name);

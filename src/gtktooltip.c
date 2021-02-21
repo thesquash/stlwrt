@@ -547,12 +547,12 @@ static void
 gtk_tooltip_window_style_set (GtkTooltip *tooltip)
 {
   __gtk_alignment_set_padding (GTK_ALIGNMENT (tooltip->alignment),
-			     tooltip->window->style->ythickness,
-			     tooltip->window->style->ythickness,
-			     tooltip->window->style->xthickness,
-			     tooltip->window->style->xthickness);
+			     tooltip->gtk_widget_get_props (window)->style->ythickness,
+			     tooltip->gtk_widget_get_props (window)->style->ythickness,
+			     tooltip->gtk_widget_get_props (window)->style->xthickness,
+			     tooltip->gtk_widget_get_props (window)->style->xthickness);
   __gtk_box_set_spacing (GTK_BOX (tooltip->box),
-		       tooltip->window->style->xthickness);
+		       tooltip->gtk_widget_get_props (window)->style->xthickness);
 
   __gtk_widget_queue_draw (tooltip->window);
 }
@@ -666,11 +666,11 @@ update_shape (GtkTooltip *tooltip)
 
   __gtk_window_get_size (GTK_WINDOW (tooltip->window), &width, &height);
   mask = (GdkBitmap *) __gdk_pixmap_new (NULL, width, height, 1);
-  cr = __gdk_cairo_create (mask);
+  cr = __gdk_cairo_create ((GdkDrawable *) (mask));
 
   fill_background (tooltip->window, cr,
-                   &tooltip->window->style->black,
-                   &tooltip->window->style->black,
+                   &tooltip->gtk_widget_get_props (window)->style->black,
+                   &tooltip->gtk_widget_get_props (window)->style->black,
                    255);
   __gtk_widget_shape_combine_mask (tooltip->window, mask, 0, 0);
 
@@ -693,10 +693,10 @@ gtk_tooltip_paint_window (GtkTooltip *tooltip)
     {
       cairo_t *cr;
 
-      cr = __gdk_cairo_create (tooltip->window->window);
+      cr = __gdk_cairo_create ((GdkDrawable *) (tooltip->gtk_widget_get_props (window)->window));
       fill_background (tooltip->window, cr,
-                       &tooltip->window->style->bg [GTK_STATE_NORMAL],
-                       &tooltip->window->style->bg [GTK_STATE_SELECTED],
+                       &tooltip->gtk_widget_get_props (window)->style->bg [GTK_STATE_NORMAL],
+                       &tooltip->gtk_widget_get_props (window)->style->bg [GTK_STATE_SELECTED],
                        tooltip_alpha);
       cairo_destroy (cr);
 
@@ -704,16 +704,16 @@ gtk_tooltip_paint_window (GtkTooltip *tooltip)
     }
   else
     {
-      __gtk_paint_flat_box (tooltip->window->style,
-                          tooltip->window->window,
+      __gtk_paint_flat_box (tooltip->gtk_widget_get_props (window)->style,
+                          tooltip->gtk_widget_get_props (window)->window,
                           GTK_STATE_NORMAL,
                           GTK_SHADOW_OUT,
                           NULL,
                           tooltip->window,
                           "tooltip",
                           0, 0,
-                          tooltip->window->allocation.width,
-                          tooltip->window->allocation.height);
+                          tooltip->gtk_widget_get_props (window)->allocation.width,
+                          tooltip->gtk_widget_get_props (window)->allocation.height);
     }
 
   return FALSE;
@@ -1035,7 +1035,7 @@ gtk_tooltip_run_requery (GtkWidget  **widget,
 
       if (!return_value)
         {
-	  GtkWidget *parent = (*widget)->parent;
+	  GtkWidget *parent = gtk_widget_get_props ((*widget))->parent;
 
 	  if (parent)
 	    __gtk_widget_translate_coordinates (*widget, parent, *x, *y, x, y);

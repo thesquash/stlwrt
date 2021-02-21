@@ -1171,41 +1171,41 @@ gtk_assistant_size_allocate (GtkWidget      *widget,
   /* Action area */
   child_allocation.x = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
   child_allocation.y = allocation->height -
-    gtk_container_get_props (GTK_CONTAINER (widget))->border_width - priv->action_area->requisition.height;
+    gtk_container_get_props (GTK_CONTAINER (widget))->border_width - priv->gtk_widget_get_props (action_area)->requisition.height;
   child_allocation.width  = allocation->width - 2 * gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
-  child_allocation.height = priv->action_area->requisition.height;
+  child_allocation.height = priv->gtk_widget_get_props (action_area)->requisition.height;
 
   __gtk_widget_size_allocate (priv->action_area, &child_allocation);
 
   /* Sidebar */
   if (rtl)
     child_allocation.x = allocation->width -
-      gtk_container_get_props (GTK_CONTAINER (widget))->border_width - priv->sidebar_image->requisition.width;
+      gtk_container_get_props (GTK_CONTAINER (widget))->border_width - priv->gtk_widget_get_props (sidebar_image)->requisition.width;
   else
     child_allocation.x = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
 
   child_allocation.y = gtk_container_get_props (GTK_CONTAINER (widget))->border_width +
-    priv->header_image->allocation.height + 2 * header_padding;
-  child_allocation.width = priv->sidebar_image->requisition.width;
+    priv->gtk_widget_get_props (header_image)->allocation.height + 2 * header_padding;
+  child_allocation.width = priv->gtk_widget_get_props (sidebar_image)->requisition.width;
   child_allocation.height = allocation->height - 2 * gtk_container_get_props (GTK_CONTAINER (widget))->border_width -
-    priv->header_image->allocation.height - 2 * header_padding - priv->action_area->allocation.height;
+    priv->gtk_widget_get_props (header_image)->allocation.height - 2 * header_padding - priv->gtk_widget_get_props (action_area)->allocation.height;
 
   __gtk_widget_size_allocate (priv->sidebar_image, &child_allocation);
 
   /* Pages */
   child_allocation.x = gtk_container_get_props (GTK_CONTAINER (widget))->border_width + content_padding;
   child_allocation.y = gtk_container_get_props (GTK_CONTAINER (widget))->border_width +
-    priv->header_image->allocation.height + 2 * header_padding + content_padding;
+    priv->gtk_widget_get_props (header_image)->allocation.height + 2 * header_padding + content_padding;
   child_allocation.width  = allocation->width - 2 * gtk_container_get_props (GTK_CONTAINER (widget))->border_width - 2 * content_padding;
   child_allocation.height = allocation->height - 2 * gtk_container_get_props (GTK_CONTAINER (widget))->border_width -
-    priv->header_image->allocation.height - 2 * header_padding - ACTION_AREA_SPACING - priv->action_area->allocation.height - 2 * content_padding;
+    priv->gtk_widget_get_props (header_image)->allocation.height - 2 * header_padding - ACTION_AREA_SPACING - priv->gtk_widget_get_props (action_area)->allocation.height - 2 * content_padding;
 
   if (__gtk_widget_get_visible (priv->sidebar_image))
     {
       if (!rtl)
-	child_allocation.x += priv->sidebar_image->allocation.width;
+	child_allocation.x += priv->gtk_widget_get_props (sidebar_image)->allocation.width;
 
-      child_allocation.width -= priv->sidebar_image->allocation.width;
+      child_allocation.width -= priv->gtk_widget_get_props (sidebar_image)->allocation.width;
     }
 
   while (pages)
@@ -1307,7 +1307,7 @@ assistant_paint_colored_box (GtkWidget *widget)
   gint content_x, content_width;
   gboolean rtl;
 
-  cr   = __gdk_cairo_create (gtk_widget_get_props (widget)->window);
+  cr   = __gdk_cairo_create ((GdkDrawable *) (gtk_widget_get_props (widget)->window));
   rtl  = (__gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL);
   border_width = __gtk_container_get_border_width (GTK_CONTAINER (widget));
 
@@ -1322,7 +1322,7 @@ assistant_paint_colored_box (GtkWidget *widget)
 		   border_width,
 		   border_width,
 		   gtk_widget_get_props (widget)->allocation.width - 2 * border_width,
-		   gtk_widget_get_props (widget)->allocation.height - priv->action_area->allocation.height - 2 * border_width - ACTION_AREA_SPACING);
+		   gtk_widget_get_props (widget)->allocation.height - priv->gtk_widget_get_props (action_area)->allocation.height - 2 * border_width - ACTION_AREA_SPACING);
   cairo_fill (cr);
 
   /* content box */
@@ -1332,18 +1332,18 @@ assistant_paint_colored_box (GtkWidget *widget)
   if (__gtk_widget_get_visible (priv->sidebar_image))
     {
       if (!rtl)
-	content_x += priv->sidebar_image->allocation.width;
-      content_width -= priv->sidebar_image->allocation.width;
+	content_x += priv->gtk_widget_get_props (sidebar_image)->allocation.width;
+      content_width -= priv->gtk_widget_get_props (sidebar_image)->allocation.width;
     }
   
   __gdk_cairo_set_source_color (cr, &gtk_widget_get_props (widget)->style->bg[GTK_STATE_NORMAL]);
 
   cairo_rectangle (cr,
 		   content_x,
-		   priv->header_image->allocation.height + content_padding + 2 * header_padding + border_width,
+		   priv->gtk_widget_get_props (header_image)->allocation.height + content_padding + 2 * header_padding + border_width,
 		   content_width,
-		   gtk_widget_get_props (widget)->allocation.height - 2 * border_width - priv->action_area->allocation.height -
-		   priv->header_image->allocation.height - 2 * content_padding - 2 * header_padding - ACTION_AREA_SPACING);
+		   gtk_widget_get_props (widget)->allocation.height - 2 * border_width - priv->gtk_widget_get_props (action_area)->allocation.height -
+		   priv->gtk_widget_get_props (header_image)->allocation.height - 2 * content_padding - 2 * header_padding - ACTION_AREA_SPACING);
   cairo_fill (cr);
 
   cairo_destroy (cr);
@@ -1690,7 +1690,7 @@ __gtk_assistant_insert_page (GtkAssistant *assistant,
 
   g_return_val_if_fail (GTK_IS_ASSISTANT (assistant), 0);
   g_return_val_if_fail (GTK_IS_WIDGET (page), 0);
-  g_return_val_if_fail (page->parent == NULL, 0);
+  g_return_val_if_fail (gtk_widget_get_props (page)->parent == NULL, 0);
   g_return_val_if_fail (!__gtk_widget_is_toplevel (page), 0);
 
   priv = gtk_assistant_get_instance_private (assistant);

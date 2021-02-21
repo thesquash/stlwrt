@@ -95,6 +95,14 @@
 
 typedef struct _GtkTextLayoutPrivate GtkTextLayoutPrivate;
 
+struct _GtkTextLayoutPrivate
+{
+  /* Cache the line that the cursor is positioned on, as the keyboard
+     direction only influences the direction of the cursor line.
+  */
+  GtkTextLine *cursor_line;
+};
+
 
 static GtkTextLineData *gtk_text_layout_real_wrap (GtkTextLayout *layout,
                                                    GtkTextLine *line,
@@ -1279,8 +1287,8 @@ totally_invisible_line (GtkTextLayout *layout,
           invalidate_cached_style (layout);
 
           /* Bail out if an elision-unsetting tag begins */
-          if (seg->body.toggle.info->tag->invisible_set &&
-              !seg->body.toggle.info->tag->values->invisible)
+          if (seg->body.toggle.info->gtk_text_tag_get_props (tag)->invisible_set &&
+              !seg->body.toggle.info->gtk_text_tag_get_props (tag)->values->invisible)
             break;
         }
       else if (seg->type == &gtk_text_toggle_off_type)
@@ -1288,8 +1296,8 @@ totally_invisible_line (GtkTextLayout *layout,
           invalidate_cached_style (layout);
 
           /* Bail out if an elision-setting tag ends */
-          if (seg->body.toggle.info->tag->invisible_set &&
-              seg->body.toggle.info->tag->values->invisible)
+          if (seg->body.toggle.info->gtk_text_tag_get_props (tag)->invisible_set &&
+              seg->body.toggle.info->gtk_text_tag_get_props (tag)->values->invisible)
             break;
         }
 
@@ -2116,7 +2124,7 @@ tags_array_toggle_tag (GPtrArray  *array,
 
   tags = (GtkTextTag**) array->pdata;
 
-  for (pos = 0; pos < array->len && tags[pos]->priority < gtk_text_tag_get_props (tag)->priority; pos++) ;
+  for (pos = 0; pos < array->len && tags[pos])gtk_text_tag_get_props (->priority < gtk_text_tag_get_props (tag)->priority; pos++) ;
 
   if (pos < array->len && tags[pos] == tag)
     g_ptr_array_remove_index (array, pos);
@@ -2163,7 +2171,7 @@ gtk_text_layout_get_line_display (GtkTextLayout *layout,
           (size_only || !gtk_text_layout_get_props (layout)->one_display_cache->size_only))
 	{
 	  if (!size_only)
-            update_text_display_cursors (gtk_text_layout_get_props (layout), line, gtk_text_layout_get_props (layout)->one_display_cache);
+            update_text_display_cursors (layout, line, gtk_text_layout_get_props (layout)->one_display_cache);
 	  return gtk_text_layout_get_props (layout)->one_display_cache;
 	}
       else

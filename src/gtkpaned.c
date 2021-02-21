@@ -567,7 +567,7 @@ gtk_paned_init (GtkPaned *paned)
    */
   __gtk_widget_set_redraw_on_allocate (GTK_WIDGET (paned), FALSE);
 
-  gtk_paned_get_props (paned)->priv = G_TYPE_INSTANCE_GET_PRIVATE (gtk_paned_get_props (paned), GTK_TYPE_PANED, GtkPanedPrivate);
+  gtk_paned_get_props (paned)->priv = G_TYPE_INSTANCE_GET_PRIVATE (paned, GTK_TYPE_PANED, GtkPanedPrivate);
 
   gtk_paned_get_props (paned)->priv->orientation = GTK_ORIENTATION_HORIZONTAL;
   gtk_paned_get_props (paned)->cursor_type = GDK_SB_H_DOUBLE_ARROW;
@@ -933,10 +933,10 @@ gtk_paned_size_allocate (GtkWidget     *widget,
       if (__gtk_widget_get_mapped (widget) &&
 
           ((gtk_paned_get_props (paned)->priv->orientation == GTK_ORIENTATION_HORIZONTAL &&
-            gtk_paned_get_props (paned)->child1->allocation.width < child1_allocation.width) ||
+            gtk_paned_get_props (paned)->gtk_widget_get_props (child1)->allocation.width < child1_allocation.width) ||
 
            (gtk_paned_get_props (paned)->priv->orientation == GTK_ORIENTATION_VERTICAL &&
-            gtk_paned_get_props (paned)->child1->allocation.height < child1_allocation.height)))
+            gtk_paned_get_props (paned)->gtk_widget_get_props (child1)->allocation.height < child1_allocation.height)))
 	{
 	  __gtk_widget_size_allocate (gtk_paned_get_props (paned)->child2, &child2_allocation);
 	  __gtk_widget_size_allocate (gtk_paned_get_props (paned)->child1, &child1_allocation);
@@ -2086,7 +2086,7 @@ gtk_paned_cancel_position (GtkPaned *paned)
     {
       if (gtk_paned_get_props (paned)->original_position != -1)
 	{
-	  __gtk_paned_set_position (gtk_paned_get_props (paned), gtk_paned_get_props (paned)->original_position);
+	  __gtk_paned_set_position (paned, gtk_paned_get_props (paned)->original_position);
 	  gtk_paned_get_props (paned)->original_position = -1;
 	}
 

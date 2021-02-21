@@ -1443,7 +1443,7 @@ __gtk_container_resize_children (GtkContainer *container)
   g_return_if_fail (GTK_IS_CONTAINER (container));
 
   widget = GTK_WIDGET (container);
-  __gtk_widget_size_allocate (gtk_widget_get_props (widget), &gtk_widget_get_props (widget)->allocation);
+  __gtk_widget_size_allocate (widget, &gtk_widget_get_props (widget)->allocation);
 }
 
 /**
@@ -1907,7 +1907,7 @@ find_old_focus (GtkContainer *container,
       while (widget && widget != (GtkWidget *)container)
 	{
 	  GtkWidget *parent = gtk_widget_get_props (widget)->parent;
-	  if (parent && ((GtkContainer *)parent)->focus_child != widget)
+	  if (parent && gtk_container_get_props (((GtkContainer *)parent))->focus_child != widget)
 	    goto next;
 
 	  widget = parent;
@@ -2708,11 +2708,11 @@ __gtk_container_propagate_expose (GtkContainer   *container,
   g_return_if_fail (GTK_IS_WIDGET (child));
   g_return_if_fail (event != NULL);
 
-  g_assert (child->parent == GTK_WIDGET (container));
+  g_assert (gtk_widget_get_props (child)->parent == GTK_WIDGET (container));
   
   if (__gtk_widget_is_drawable (child) &&
       !__gtk_widget_get_has_window (child) &&
-      (child->window == event->window))
+      (gtk_widget_get_props (child)->window == event->window))
     {
       child_event = __gdk_event_new (GDK_EXPOSE);
       child_event->expose = *event;

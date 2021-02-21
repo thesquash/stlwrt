@@ -861,7 +861,7 @@ __gtk_list_store_set_valuesv (GtkListStore *list_store,
 				      columns, values, n_values);
 
   if (maybe_need_sort && GTK_LIST_STORE_IS_SORTED (list_store))
-    gtk_list_store_sort_iter_changed (gtk_list_store_get_props (list_store), iter, gtk_list_store_get_props (list_store)->sort_column_id);
+    gtk_list_store_sort_iter_changed (list_store, iter, gtk_list_store_get_props (list_store)->sort_column_id);
 
   if (emit_signal)
     {
@@ -900,7 +900,7 @@ __gtk_list_store_set_valist (GtkListStore *list_store,
 				      var_args);
 
   if (maybe_need_sort && GTK_LIST_STORE_IS_SORTED (list_store))
-    gtk_list_store_sort_iter_changed (gtk_list_store_get_props (list_store), iter, gtk_list_store_get_props (list_store)->sort_column_id);
+    gtk_list_store_sort_iter_changed (list_store, iter, gtk_list_store_get_props (list_store)->sort_column_id);
 
   if (emit_signal)
     {
@@ -1139,7 +1139,7 @@ __gtk_list_store_append (GtkListStore *list_store,
   g_return_if_fail (GTK_IS_LIST_STORE (list_store));
   g_return_if_fail (iter != NULL);
 
-  __gtk_list_store_insert (gtk_list_store_get_props (list_store), iter, g_sequence_get_length (gtk_list_store_get_props (list_store)->seq));
+  __gtk_list_store_insert (list_store, iter, g_sequence_get_length (gtk_list_store_get_props (list_store)->seq));
 }
 
 static void

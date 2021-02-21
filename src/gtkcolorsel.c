@@ -806,7 +806,7 @@ color_sample_draw_sample (GtkColorSelection *colorsel, int which)
       goff =  priv->gtk_widget_get_props (old_sample)->allocation.width % 32;
     }
 
-  cr = __gdk_cairo_create (gtk_widget_get_props (da)->window);
+  cr = __gdk_cairo_create ((GdkDrawable *) (gtk_widget_get_props (da)->window));
   
   wid = gtk_widget_get_props (da)->allocation.width;
   heig = gtk_widget_get_props (da)->allocation.height;
@@ -1021,7 +1021,7 @@ palette_paint (GtkWidget    *drawing_area,
   if (gtk_widget_get_props (drawing_area)->window == NULL)
     return;
 
-  cr = __gdk_cairo_create (gtk_widget_get_props (drawing_area)->window);
+  cr = __gdk_cairo_create ((GdkDrawable *) (gtk_widget_get_props (drawing_area)->window));
 
   __gdk_cairo_set_source_color (cr, &gtk_widget_get_props (drawing_area)->style->bg[GTK_STATE_NORMAL]);
   __gdk_cairo_rectangle (cr, area);
@@ -1597,7 +1597,7 @@ make_picker_cursor (GdkScreen *screen)
 
       pixmap = __gdk_pixmap_new (window, DROPPER_WIDTH, DROPPER_HEIGHT, 1);
 
-      cr = __gdk_cairo_create (pixmap);
+      cr = __gdk_cairo_create ((GdkDrawable *) (pixmap));
       cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
       image = cairo_image_surface_create_for_data ((guchar *) dropper_bits,
                                                    CAIRO_FORMAT_A1,
@@ -1612,7 +1612,7 @@ make_picker_cursor (GdkScreen *screen)
 
       mask = __gdk_pixmap_new (window, DROPPER_WIDTH, DROPPER_HEIGHT, 1);
 
-      cr = __gdk_cairo_create (mask);
+      cr = __gdk_cairo_create ((GdkDrawable *) (mask));
       cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
       image = cairo_image_surface_create_for_data ((guchar *) dropper_mask,
                                                    CAIRO_FORMAT_A1,

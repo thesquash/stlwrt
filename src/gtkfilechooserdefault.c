@@ -1191,21 +1191,21 @@ shortcuts_reload_icons_get_info_cb (GCancellable *cancellable,
   gboolean cancelled = g_cancellable_is_cancelled (cancellable);
   struct ReloadIconsData *data = user_data;
 
-  if (!g_slist_find (data->_gtk_file_chooser_default_get_props (impl)->reload_icon_cancellables, cancellable))
+  if (!g_slist_find (_gtk_file_chooser_default_get_props (data->impl)->reload_icon_cancellables, cancellable))
     goto out;
 
-  data->_gtk_file_chooser_default_get_props (impl)->reload_icon_cancellables = g_slist_remove (data->_gtk_file_chooser_default_get_props (impl)->reload_icon_cancellables, cancellable);
+  _gtk_file_chooser_default_get_props (data->impl)->reload_icon_cancellables = g_slist_remove (_gtk_file_chooser_default_get_props (data->impl)->reload_icon_cancellables, cancellable);
 
   if (cancelled || error)
     goto out;
 
-  pixbuf = _gtk_file_info_render_icon (info, GTK_WIDGET (data->_gtk_file_chooser_default_get_props (impl)), data->_gtk_file_chooser_default_get_props (impl)->icon_size);
+  pixbuf = _gtk_file_info_render_icon (info, GTK_WIDGET (data->impl), _gtk_file_chooser_default_get_props (data->impl)->icon_size);
 
   path = __gtk_tree_row_reference_get_path (data->row_ref);
   if (path)
     {
-      __gtk_tree_model_get_iter (GTK_TREE_MODEL (data->_gtk_file_chooser_default_get_props (impl)->shortcuts_model), &iter, path);
-      __gtk_list_store_set (data->_gtk_file_chooser_default_get_props (impl)->shortcuts_model, &iter,
+      __gtk_tree_model_get_iter (GTK_TREE_MODEL (_gtk_file_chooser_default_get_props (data->impl)->shortcuts_model), &iter, path);
+      __gtk_list_store_set (_gtk_file_chooser_default_get_props (data->impl)->shortcuts_model, &iter,
 			  SHORTCUTS_COL_PIXBUF, pixbuf,
 			  -1);
       __gtk_tree_path_free (path);
@@ -1464,19 +1464,19 @@ get_file_info_finished (GCancellable *cancellable,
     /* Handle doesn't exist anymore in the model */
     goto out;
 
-  __gtk_tree_model_get_iter (GTK_TREE_MODEL (request->_gtk_file_chooser_default_get_props (impl)->shortcuts_model),
+  __gtk_tree_model_get_iter (GTK_TREE_MODEL (request->gtk_file_chooser_default_get_props (impl)->shortcuts_model),
 			   &iter, path);
   __gtk_tree_path_free (path);
 
   /* validate cancellable, else goto out */
-  __gtk_tree_model_get (GTK_TREE_MODEL (request->_gtk_file_chooser_default_get_props (impl)->shortcuts_model), &iter,
+  __gtk_tree_model_get (GTK_TREE_MODEL (request->gtk_file_chooser_default_get_props (impl)->shortcuts_model), &iter,
 		      SHORTCUTS_COL_CANCELLABLE, &model_cancellable,
 		      -1);
   if (cancellable != model_cancellable)
     goto out;
 
   /* set the cancellable to NULL in the model (we unref later on) */
-  __gtk_list_store_set (request->_gtk_file_chooser_default_get_props (impl)->shortcuts_model, &iter,
+  __gtk_list_store_set (request->gtk_file_chooser_default_get_props (impl)->shortcuts_model, &iter,
 		      SHORTCUTS_COL_CANCELLABLE, NULL,
 		      -1);
 
@@ -1486,7 +1486,7 @@ get_file_info_finished (GCancellable *cancellable,
   if (!info)
     {
       shortcuts_free_row_data (request->impl, &iter);
-      __gtk_list_store_remove (request->_gtk_file_chooser_default_get_props (impl)->shortcuts_model, &iter);
+      __gtk_list_store_remove (request->gtk_file_chooser_default_get_props (impl)->shortcuts_model, &iter);
       shortcuts_update_count (request->impl, request->type, -1);
 
       if (request->type == SHORTCUTS_HOME)
@@ -1510,9 +1510,9 @@ get_file_info_finished (GCancellable *cancellable,
   if (!request->label_copy)
     request->label_copy = g_strdup (g_file_info_get_display_name (info));
   pixbuf = _gtk_file_info_render_icon (info, GTK_WIDGET (request->impl),
-				       request->_gtk_file_chooser_default_get_props (impl)->icon_size);
+				       request->gtk_file_chooser_default_get_props (impl)->icon_size);
 
-  __gtk_list_store_set (request->_gtk_file_chooser_default_get_props (impl)->shortcuts_model, &iter,
+  __gtk_list_store_set (request->gtk_file_chooser_default_get_props (impl)->shortcuts_model, &iter,
 		      SHORTCUTS_COL_PIXBUF, pixbuf,
 		      SHORTCUTS_COL_PIXBUF_VISIBLE, TRUE,
 		      SHORTCUTS_COL_NAME, request->label_copy,
@@ -1520,8 +1520,8 @@ get_file_info_finished (GCancellable *cancellable,
 		      SHORTCUTS_COL_REMOVABLE, request->removable,
 		      -1);
 
-  if (request->_gtk_file_chooser_default_get_props (impl)->shortcuts_pane_filter_model)
-    __gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (request->_gtk_file_chooser_default_get_props (impl)->shortcuts_pane_filter_model));
+  if (request->gtk_file_chooser_default_get_props (impl)->shortcuts_pane_filter_model)
+    __gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (request->gtk_file_chooser_default_get_props (impl)->shortcuts_pane_filter_model));
 
   if (pixbuf)
     g_object_unref (pixbuf);
@@ -1647,7 +1647,7 @@ shortcuts_insert_file (GtkFileChooserDefault *impl,
           request->row_ref = __gtk_tree_row_reference_new (GTK_TREE_MODEL (_gtk_file_chooser_default_get_props (impl)->shortcuts_model), p);
           __gtk_tree_path_free (p);
 
-          cancellable = _gtk_file_system_get_info (request->_gtk_file_chooser_default_get_props (impl)->file_system, request->file,
+          cancellable = _gtk_file_system_get_info (request->gtk_file_chooser_default_get_props (impl)->file_system, request->file,
 						   "standard::is-hidden,standard::is-backup,standard::display-name,standard::icon",
 						   get_file_info_finished, request);
 
@@ -3904,16 +3904,16 @@ file_list_drag_data_received_get_info_cb (GCancellable *cancellable,
   struct FileListDragData *data = user_data;
   GtkFileChooser *chooser = GTK_FILE_CHOOSER (data->impl);
 
-  if (cancellable != data->_gtk_file_chooser_default_get_props (impl)->file_list_drag_data_received_cancellable)
+  if (cancellable != _gtk_file_chooser_default_get_props (data->impl)->file_list_drag_data_received_cancellable)
     goto out;
 
-  data->_gtk_file_chooser_default_get_props (impl)->file_list_drag_data_received_cancellable = NULL;
+  _gtk_file_chooser_default_get_props (data->impl)->file_list_drag_data_received_cancellable = NULL;
 
   if (cancelled || error)
     goto out;
 
-  if ((data->_gtk_file_chooser_default_get_props (impl)->action == GTK_FILE_CHOOSER_ACTION_OPEN ||
-       data->_gtk_file_chooser_default_get_props (impl)->action == GTK_FILE_CHOOSER_ACTION_SAVE) &&
+  if ((_gtk_file_chooser_default_get_props (data->impl)->action == GTK_FILE_CHOOSER_ACTION_OPEN ||
+       _gtk_file_chooser_default_get_props (data->impl)->action == GTK_FILE_CHOOSER_ACTION_SAVE) &&
       data->uris[1] == 0 && !error && _gtk_file_info_consider_as_directory (info))
     change_folder_and_display_error (data->impl, data->file, FALSE);
   else
@@ -3928,7 +3928,7 @@ file_list_drag_data_received_get_info_cb (GCancellable *cancellable,
 	browse_files_center_selected_row (data->impl);
     }
 
-  if (data->_gtk_file_chooser_default_get_props (impl)->select_multiple)
+  if (_gtk_file_chooser_default_get_props (data->impl)->select_multiple)
     file_list_drag_data_select_uris (data->impl, data->uris);
 
 out:
@@ -6319,7 +6319,7 @@ center_selected_row_foreach_cb (GtkTreeModel      *model,
   if (closure->already_centered)
     return;
 
-  __gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (closure->_gtk_file_chooser_default_get_props (impl)->browse_files_tree_view), path, NULL, TRUE, 0.5, 0.0);
+  __gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (closure->gtk_file_chooser_default_get_props (impl)->browse_files_tree_view), path, NULL, TRUE, 0.5, 0.0);
   closure->already_centered = TRUE;
 }
 
@@ -7586,7 +7586,7 @@ get_files_foreach (GtkTreeModel *model,
   GtkFileSystemModel *fs_model;
 
   info = data;
-  fs_model = info->_gtk_file_chooser_default_get_props (impl)->browse_files_model;
+  fs_model = info->gtk_file_chooser_default_get_props (impl)->browse_files_model;
 
   file = _gtk_file_system_model_get_file (fs_model, iter);
   if (!file)
@@ -7840,15 +7840,15 @@ add_shortcut_get_info_cb (GCancellable *cancellable,
   gboolean cancelled = g_cancellable_is_cancelled (cancellable);
   struct AddShortcutData *data = user_data;
 
-  if (!g_slist_find (data->_gtk_file_chooser_default_get_props (impl)->loading_shortcuts, cancellable))
+  if (!g_slist_find (_gtk_file_chooser_default_get_props (data->impl)->loading_shortcuts, cancellable))
     goto out;
 
-  data->_gtk_file_chooser_default_get_props (impl)->loading_shortcuts = g_slist_remove (data->_gtk_file_chooser_default_get_props (impl)->loading_shortcuts, cancellable);
+  _gtk_file_chooser_default_get_props (data->impl)->loading_shortcuts = g_slist_remove (_gtk_file_chooser_default_get_props (data->impl)->loading_shortcuts, cancellable);
 
   if (cancelled || error || (! _gtk_file_info_consider_as_directory (info)))
     goto out;
 
-  pos = shortcuts_get_pos_for_shortcut_folder (data->_gtk_file_chooser_default_get_props (impl), data->_gtk_file_chooser_default_get_props (impl)->num_shortcuts);
+  pos = shortcuts_get_pos_for_shortcut_folder (data->impl, _gtk_file_chooser_default_get_props (data->impl)->num_shortcuts);
 
   shortcuts_insert_file (data->impl, pos, SHORTCUT_TYPE_FILE, NULL, data->file, NULL, FALSE, SHORTCUTS_SHORTCUTS);
 
@@ -8134,7 +8134,7 @@ switch_folder_foreach_cb (GtkTreeModel      *model,
 
   closure = data;
 
-  closure->file = _gtk_file_system_model_get_file (closure->_gtk_file_chooser_default_get_props (impl)->browse_files_model, iter);
+  closure->file = _gtk_file_system_model_get_file (closure->gtk_file_chooser_default_get_props (impl)->browse_files_model, iter);
   closure->num_selected++;
 }
 
@@ -8290,10 +8290,10 @@ confirmation_confirm_get_info_cb (GCancellable *cancellable,
   gboolean should_respond = FALSE;
   struct GetDisplayNameData *data = user_data;
 
-  if (cancellable != data->_gtk_file_chooser_default_get_props (impl)->should_respond_get_info_cancellable)
+  if (cancellable != _gtk_file_chooser_default_get_props (data->impl)->should_respond_get_info_cancellable)
     goto out;
 
-  data->_gtk_file_chooser_default_get_props (impl)->should_respond_get_info_cancellable = NULL;
+  _gtk_file_chooser_default_get_props (data->impl)->should_respond_get_info_cancellable = NULL;
 
   if (cancelled)
     goto out;
@@ -8387,10 +8387,10 @@ name_entry_get_parent_info_cb (GCancellable *cancellable,
   gboolean cancelled = g_cancellable_is_cancelled (cancellable);
   struct FileExistsData *data = user_data;
 
-  if (cancellable != data->_gtk_file_chooser_default_get_props (impl)->should_respond_get_info_cancellable)
+  if (cancellable != _gtk_file_chooser_default_get_props (data->impl)->should_respond_get_info_cancellable)
     goto out;
 
-  data->_gtk_file_chooser_default_get_props (impl)->should_respond_get_info_cancellable = NULL;
+  _gtk_file_chooser_default_get_props (data->impl)->should_respond_get_info_cancellable = NULL;
 
   set_busy_cursor (data->impl, FALSE);
 
@@ -8404,11 +8404,11 @@ name_entry_get_parent_info_cb (GCancellable *cancellable,
 
   if (parent_is_folder)
     {
-      if (data->_gtk_file_chooser_default_get_props (impl)->action == GTK_FILE_CHOOSER_ACTION_OPEN)
+      if (_gtk_file_chooser_default_get_props (data->impl)->action == GTK_FILE_CHOOSER_ACTION_OPEN)
 	{
 	  request_response_and_add_to_recent_list (data->impl); /* even if the file doesn't exist, apps can make good use of that (e.g. Emacs) */
 	}
-      else if (data->_gtk_file_chooser_default_get_props (impl)->action == GTK_FILE_CHOOSER_ACTION_SAVE)
+      else if (_gtk_file_chooser_default_get_props (data->impl)->action == GTK_FILE_CHOOSER_ACTION_SAVE)
         {
           if (data->file_exists_and_is_not_folder)
 	    {
@@ -8419,7 +8419,7 @@ name_entry_get_parent_info_cb (GCancellable *cancellable,
                * depending on what clients do in the confirm-overwrite
                * signal and this corrupts the pointer
                */
-              file_part = g_strdup (_gtk_file_chooser_entry_get_file_part (GTK_FILE_CHOOSER_ENTRY (data->_gtk_file_chooser_default_get_props (impl)->location_entry)));
+              file_part = g_strdup (_gtk_file_chooser_entry_get_file_part (GTK_FILE_CHOOSER_ENTRY (_gtk_file_chooser_default_get_props (data->impl)->location_entry)));
 	      retval = should_respond_after_confirm_overwrite (data->impl, file_part, data->parent_file);
               g_free (file_part);
 
@@ -8429,8 +8429,8 @@ name_entry_get_parent_info_cb (GCancellable *cancellable,
 	  else
 	    request_response_and_add_to_recent_list (data->impl);
 	}
-      else if (data->_gtk_file_chooser_default_get_props (impl)->action == GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER
-	       || data->_gtk_file_chooser_default_get_props (impl)->action == GTK_FILE_CHOOSER_ACTION_CREATE_FOLDER)
+      else if (_gtk_file_chooser_default_get_props (data->impl)->action == GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER
+	       || _gtk_file_chooser_default_get_props (data->impl)->action == GTK_FILE_CHOOSER_ACTION_CREATE_FOLDER)
         {
 	  GError *mkdir_error = NULL;
 
@@ -8490,10 +8490,10 @@ file_exists_get_info_cb (GCancellable *cancellable,
   gboolean needs_parent_check = FALSE;
   struct FileExistsData *data = user_data;
 
-  if (cancellable != data->_gtk_file_chooser_default_get_props (impl)->file_exists_get_info_cancellable)
+  if (cancellable != _gtk_file_chooser_default_get_props (data->impl)->file_exists_get_info_cancellable)
     goto out;
 
-  data->_gtk_file_chooser_default_get_props (impl)->file_exists_get_info_cancellable = NULL;
+  _gtk_file_chooser_default_get_props (data->impl)->file_exists_get_info_cancellable = NULL;
 
   set_busy_cursor (data->impl, FALSE);
 
@@ -8503,7 +8503,7 @@ file_exists_get_info_cb (GCancellable *cancellable,
   file_exists = (info != NULL);
   is_folder = (file_exists && _gtk_file_info_consider_as_directory (info));
 
-  if (data->_gtk_file_chooser_default_get_props (impl)->action == GTK_FILE_CHOOSER_ACTION_OPEN)
+  if (_gtk_file_chooser_default_get_props (data->impl)->action == GTK_FILE_CHOOSER_ACTION_OPEN)
     {
       if (is_folder)
 	change_folder_and_display_error (data->impl, data->file, TRUE);
@@ -8515,7 +8515,7 @@ file_exists_get_info_cb (GCancellable *cancellable,
 	    needs_parent_check = TRUE; /* file doesn't exist; see if its parent exists */
 	}
     }
-  else if (data->_gtk_file_chooser_default_get_props (impl)->action == GTK_FILE_CHOOSER_ACTION_CREATE_FOLDER)
+  else if (_gtk_file_chooser_default_get_props (data->impl)->action == GTK_FILE_CHOOSER_ACTION_CREATE_FOLDER)
     {
       if (file_exists && !is_folder)
         {
@@ -8530,7 +8530,7 @@ file_exists_get_info_cb (GCancellable *cancellable,
           needs_parent_check = TRUE;
         }
     }
-  else if (data->_gtk_file_chooser_default_get_props (impl)->action == GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER)
+  else if (_gtk_file_chooser_default_get_props (data->impl)->action == GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER)
     {
       if (!file_exists)
         {
@@ -8547,7 +8547,7 @@ file_exists_get_info_cb (GCancellable *cancellable,
 	    error_selecting_folder_over_existing_file_dialog (data->impl, data->file);
 	}
     }
-  else if (data->_gtk_file_chooser_default_get_props (impl)->action == GTK_FILE_CHOOSER_ACTION_SAVE)
+  else if (_gtk_file_chooser_default_get_props (data->impl)->action == GTK_FILE_CHOOSER_ACTION_SAVE)
     {
       if (is_folder)
 	change_folder_and_display_error (data->impl, data->file, TRUE);
@@ -8566,11 +8566,11 @@ file_exists_get_info_cb (GCancellable *cancellable,
       data->file_exists_and_is_not_folder = file_exists && !is_folder;
       data_ownership_taken = TRUE;
 
-      if (data->_gtk_file_chooser_default_get_props (impl)->should_respond_get_info_cancellable)
-        g_cancellable_cancel (data->_gtk_file_chooser_default_get_props (impl)->should_respond_get_info_cancellable);
+      if (_gtk_file_chooser_default_get_props (data->impl)->should_respond_get_info_cancellable)
+        g_cancellable_cancel (_gtk_file_chooser_default_get_props (data->impl)->should_respond_get_info_cancellable);
 
-      data->_gtk_file_chooser_default_get_props (impl)->should_respond_get_info_cancellable =
-	_gtk_file_system_get_info (data->_gtk_file_chooser_default_get_props (impl)->file_system,
+      _gtk_file_chooser_default_get_props (data->impl)->should_respond_get_info_cancellable =
+	_gtk_file_system_get_info (_gtk_file_chooser_default_get_props (data->impl)->file_system,
 				   data->parent_file,
 				   "standard::type",
 				   name_entry_get_parent_info_cb,
@@ -9751,10 +9751,10 @@ shortcuts_activate_get_info_cb (GCancellable *cancellable,
   gboolean cancelled = g_cancellable_is_cancelled (cancellable);
   struct ShortcutsActivateData *data = user_data;
 
-  if (cancellable != data->_gtk_file_chooser_default_get_props (impl)->shortcuts_activate_iter_cancellable)
+  if (cancellable != _gtk_file_chooser_default_get_props (data->impl)->shortcuts_activate_iter_cancellable)
     goto out;
 
-  data->_gtk_file_chooser_default_get_props (impl)->shortcuts_activate_iter_cancellable = NULL;
+  _gtk_file_chooser_default_get_props (data->impl)->shortcuts_activate_iter_cancellable = NULL;
 
   if (cancelled)
     goto out;
@@ -9793,8 +9793,8 @@ shortcuts_activate_mount_enclosing_volume (GCancellable        *cancellable,
       return;
     }
 
-  data->_gtk_file_chooser_default_get_props (impl)->shortcuts_activate_iter_cancellable =
-    _gtk_file_system_get_info (data->_gtk_file_chooser_default_get_props (impl)->file_system, data->file,
+  _gtk_file_chooser_default_get_props (data->impl)->shortcuts_activate_iter_cancellable =
+    _gtk_file_system_get_info (_gtk_file_chooser_default_get_props (data->impl)->file_system, data->file,
 			       "standard::type",
 			       shortcuts_activate_get_info_cb, data);
 
@@ -10294,7 +10294,7 @@ shortcuts_pane_model_filter_row_draggable (GtkTreeDragSource *drag_source,
   pos = *__gtk_tree_path_get_indices (path);
   bookmarks_pos = shortcuts_get_index (model->impl, SHORTCUTS_BOOKMARKS);
 
-  return (pos >= bookmarks_pos && pos < bookmarks_pos + model->_gtk_file_chooser_default_get_props (impl)->num_bookmarks);
+  return (pos >= bookmarks_pos && pos < bookmarks_pos + _gtk_file_chooser_default_get_props (model->impl)->num_bookmarks);
 }
 
 /* GtkTreeDragSource::drag_data_get implementation for the shortcuts

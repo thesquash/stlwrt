@@ -954,13 +954,13 @@ gtk_scale_popup (GtkWidget *widget,
 
   __gtk_widget_show_all (priv->dock);
 
-  __gdk_window_get_origin (priv->dock->window, &dx, &dy);
-  dx += priv->dock->allocation.x;
-  dy += priv->dock->allocation.y;
+  __gdk_window_get_origin (priv->gtk_widget_get_props (dock)->window, &dx, &dy);
+  dx += priv->gtk_widget_get_props (dock)->allocation.x;
+  dy += priv->gtk_widget_get_props (dock)->allocation.y;
 
-  __gdk_window_get_origin (priv->scale->window, &sx, &sy);
-  sx += priv->scale->allocation.x;
-  sy += priv->scale->allocation.y;
+  __gdk_window_get_origin (priv->gtk_widget_get_props (scale)->window, &sx, &sy);
+  sx += priv->gtk_widget_get_props (scale)->allocation.x;
+  sy += priv->gtk_widget_get_props (scale)->allocation.y;
 
   priv->timeout = TRUE;
 
@@ -971,11 +971,11 @@ gtk_scale_popup (GtkWidget *widget,
     {
       startoff = sy - dy;
 
-      x += (gtk_widget_get_props (widget)->allocation.width - priv->dock->allocation.width) / 2;
+      x += (gtk_widget_get_props (widget)->allocation.width - priv->gtk_widget_get_props (dock)->allocation.width) / 2;
       y -= startoff;
-      y -= GTK_RANGE (priv->scale)->min_slider_size / 2;
-      m = priv->scale->allocation.height -
-          GTK_RANGE (priv->scale)->min_slider_size;
+      y -= gtk_range_get_props (GTK_RANGE (priv->scale))->min_slider_size / 2;
+      m = priv->gtk_widget_get_props (scale)->allocation.height -
+          gtk_range_get_props (GTK_RANGE (priv->scale))->min_slider_size;
       y -= m * (1.0 - v);
     }
   else
@@ -983,10 +983,10 @@ gtk_scale_popup (GtkWidget *widget,
       startoff = sx - dx;
 
       x -= startoff;
-      y += (gtk_widget_get_props (widget)->allocation.height - priv->dock->allocation.height) / 2;
-      x -= GTK_RANGE (priv->scale)->min_slider_size / 2;
-      m = priv->scale->allocation.width -
-          GTK_RANGE (priv->scale)->min_slider_size;
+      y += (gtk_widget_get_props (widget)->allocation.height - priv->gtk_widget_get_props (dock)->allocation.height) / 2;
+      x -= gtk_range_get_props (GTK_RANGE (priv->scale))->min_slider_size / 2;
+      m = priv->gtk_widget_get_props (scale)->allocation.width -
+          gtk_range_get_props (GTK_RANGE (priv->scale))->min_slider_size;
       x -= m * v;
     }
 
@@ -1037,7 +1037,7 @@ gtk_scale_popup (GtkWidget *widget,
   /* grab focus */
   __gtk_grab_add (priv->dock);
 
-  if (__gdk_pointer_grab (priv->dock->window, TRUE,
+  if (__gdk_pointer_grab (priv->gtk_widget_get_props (dock)->window, TRUE,
 			GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK |
 			GDK_POINTER_MOTION_MASK, NULL, NULL, time)
       != GDK_GRAB_SUCCESS)
@@ -1047,7 +1047,7 @@ gtk_scale_popup (GtkWidget *widget,
       return FALSE;
     }
 
-  if (__gdk_keyboard_grab (priv->dock->window, TRUE, time) != GDK_GRAB_SUCCESS)
+  if (__gdk_keyboard_grab (priv->gtk_widget_get_props (dock)->window, TRUE, time) != GDK_GRAB_SUCCESS)
     {
       __gdk_display_pointer_ungrab (display, time);
       __gtk_grab_remove (priv->dock);
@@ -1064,7 +1064,7 @@ gtk_scale_popup (GtkWidget *widget,
 
       /* forward event to the slider */
       e = (GdkEventButton *) __gdk_event_copy ((GdkEvent *) event);
-      e->window = priv->scale->window;
+      e->window = priv->gtk_widget_get_props (scale)->window;
 
       /* position: the X position isn't relevant, halfway will work just fine.
        * The vertical position should be *exactly* in the middle of the slider
@@ -1073,17 +1073,17 @@ gtk_scale_popup (GtkWidget *widget,
        */
       if (priv->orientation == GTK_ORIENTATION_VERTICAL)
         {
-          e->x = priv->scale->allocation.width / 2;
-          m = priv->scale->allocation.height -
-              GTK_RANGE (priv->scale)->min_slider_size;
-          e->y = ((1.0 - v) * m) + GTK_RANGE (priv->scale)->min_slider_size / 2;
+          e->x = priv->gtk_widget_get_props (scale)->allocation.width / 2;
+          m = priv->gtk_widget_get_props (scale)->allocation.height -
+              gtk_range_get_props (GTK_RANGE (priv->scale))->min_slider_size;
+          e->y = ((1.0 - v) * m) + gtk_range_get_props (GTK_RANGE (priv->scale))->min_slider_size / 2;
         }
       else
         {
-          e->y = priv->scale->allocation.height / 2;
-          m = priv->scale->allocation.width -
-              GTK_RANGE (priv->scale)->min_slider_size;
-          e->x = (v * m) + GTK_RANGE (priv->scale)->min_slider_size / 2;
+          e->y = priv->gtk_widget_get_props (scale)->allocation.height / 2;
+          m = priv->gtk_widget_get_props (scale)->allocation.width -
+              gtk_range_get_props (GTK_RANGE (priv->scale))->min_slider_size;
+          e->x = (v * m) + gtk_range_get_props (GTK_RANGE (priv->scale))->min_slider_size / 2;
         }
 
       __gtk_widget_event (priv->scale, (GdkEvent *) e);

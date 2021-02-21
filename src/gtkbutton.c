@@ -1246,11 +1246,11 @@ gtk_button_style_set (GtkWidget *widget,
 }
 
 static void
-gtk_button_get_props (GtkButton *button,
-		      GtkBorder *default_border,
-		      GtkBorder *default_outside_border,
-                      GtkBorder *inner_border,
-		      gboolean  *interior_focus)
+get_button_properties (GtkButton *button,
+		       GtkBorder *default_border,
+		       GtkBorder *default_outside_border,
+                       GtkBorder *inner_border,
+		       gboolean  *interior_focus)
 {
   GtkWidget *widget =  GTK_WIDGET (button);
   GtkBorder *tmp_border;
@@ -1308,7 +1308,7 @@ gtk_button_size_request (GtkWidget      *widget,
   gint focus_width;
   gint focus_pad;
 
-  gtk_button_get_props (button, &default_border, NULL, &inner_border, NULL);
+  get_button_properties (button, &default_border, NULL, &inner_border, NULL);
   __gtk_widget_style_get (GTK_WIDGET (widget),
 			"focus-line-width", &focus_width,
 			"focus-padding", &focus_pad,
@@ -1356,7 +1356,7 @@ gtk_button_size_allocate (GtkWidget     *widget,
   gint focus_width;
   gint focus_pad;
 
-  gtk_button_get_props (button, &default_border, NULL, &inner_border, NULL);
+  get_button_properties (button, &default_border, NULL, &inner_border, NULL);
   __gtk_widget_style_get (GTK_WIDGET (widget),
 			"focus-line-width", &focus_width,
 			"focus-padding", &focus_pad,
@@ -1445,7 +1445,7 @@ ___gtk_button_paint (GtkButton          *button,
     {
       border_width = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
 
-      gtk_button_get_props (button, &default_border, &default_outside_border, NULL, &interior_focus);
+      get_button_properties (button, &default_border, &default_outside_border, NULL, &interior_focus);
       __gtk_widget_style_get (widget,
 			    "focus-line-width", &focus_width,
 			    "focus-padding", &focus_pad,

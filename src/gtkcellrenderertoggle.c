@@ -291,8 +291,8 @@ gtk_cell_renderer_toggle_get_size (GtkCellRenderer *cell,
 
   priv = GTK_CELL_RENDERER_TOGGLE_GET_PRIVATE (cell);
 
-  calc_width = (gint) cell->xpad * 2 + priv->indicator_size;
-  calc_height = (gint) cell->ypad * 2 + priv->indicator_size;
+  calc_width = gtk_cell_renderer_get_props ((gint) cell)->xpad * 2 + priv->indicator_size;
+  calc_height = gtk_cell_renderer_get_props ((gint) cell)->ypad * 2 + priv->indicator_size;
 
   if (width)
     *width = calc_width;
@@ -305,12 +305,12 @@ gtk_cell_renderer_toggle_get_size (GtkCellRenderer *cell,
       if (x_offset)
 	{
 	  *x_offset = ((__gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL) ?
-		       (1.0 - cell->xalign) : cell->xalign) * (cell_area->width - calc_width);
+		       (1.0 - gtk_cell_renderer_get_props (cell)->xalign) : gtk_cell_renderer_get_props (cell)->xalign) * (cell_area->width - calc_width);
 	  *x_offset = MAX (*x_offset, 0);
 	}
       if (y_offset)
 	{
-	  *y_offset = cell->yalign * (cell_area->height - calc_height);
+	  *y_offset = gtk_cell_renderer_get_props (cell)->yalign * (cell_area->height - calc_height);
 	  *y_offset = MAX (*y_offset, 0);
 	}
     }

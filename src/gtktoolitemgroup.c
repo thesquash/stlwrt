@@ -301,7 +301,7 @@ gtk_tool_item_group_header_expose_event_cb (GtkWidget      *widget,
     }
 
   __gtk_paint_expander (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window,
-                      priv->header->state,
+                      priv->gtk_widget_get_props (header)->state,
                       &event->area, GTK_WIDGET (group),
                       "tool-palette-header", x, y,
                       expander_style);
@@ -384,7 +384,7 @@ gtk_tool_item_group_init (GtkToolItemGroup *group)
 
   __gtk_widget_set_redraw_on_allocate (GTK_WIDGET (group), FALSE);
 
-  gtk_tool_item_group_get_props (group)->priv = priv = G_TYPE_INSTANCE_GET_PRIVATE (gtk_tool_item_group_get_props (group),
+  gtk_tool_item_group_get_props (group)->priv = priv = G_TYPE_INSTANCE_GET_PRIVATE (group,
                                              GTK_TYPE_TOOL_ITEM_GROUP,
                                              GtkToolItemGroupPrivate);
 
@@ -1088,7 +1088,7 @@ gtk_tool_item_group_set_focus_cb (GtkWidget *window,
               __gtk_adjustment_clamp_page (adjustment, y, y + gtk_widget_get_props (widget)->allocation.height);
             }
           else if (__gtk_widget_translate_coordinates
-                      (gtk_widget_get_props (widget), p, 0, gtk_widget_get_props (widget)->allocation.height, NULL, &y) &&
+                      (widget, p, 0, gtk_widget_get_props (widget)->allocation.height, NULL, &y) &&
                    y > gtk_widget_get_props (p)->allocation.height)
             {
               y += gtk_adjustment_get_props (adjustment)->value;
@@ -1110,7 +1110,7 @@ gtk_tool_item_group_set_focus_cb (GtkWidget *window,
               __gtk_adjustment_clamp_page (adjustment, x, x + gtk_widget_get_props (widget)->allocation.width);
             }
           else if (__gtk_widget_translate_coordinates
-                      (gtk_widget_get_props (widget), p, gtk_widget_get_props (widget)->allocation.width, 0, &x, NULL) &&
+                      (widget, p, gtk_widget_get_props (widget)->allocation.width, 0, &x, NULL) &&
                    x > gtk_widget_get_props (p)->allocation.width)
             {
               x += gtk_adjustment_get_props (adjustment)->value;
@@ -1781,7 +1781,7 @@ gtk_tool_item_group_force_expose (GtkToolItemGroup *group)
       area.width = priv->expander_size;
 
       /* ... and invalidated it to get it animated. */
-      __gdk_window_invalidate_rect (priv->header->window, &area, TRUE);
+      __gdk_window_invalidate_rect (priv->gtk_widget_get_props (header)->window, &area, TRUE);
     }
 
   if (__gtk_widget_get_realized (widget))
@@ -1797,8 +1797,8 @@ gtk_tool_item_group_force_expose (GtkToolItemGroup *group)
 
       if (__gtk_widget_get_visible (priv->header))
         {
-          height -= priv->header->allocation.height;
-          y += priv->header->allocation.height;
+          height -= priv->gtk_widget_get_props (header)->allocation.height;
+          y += priv->gtk_widget_get_props (header)->allocation.height;
         }
 
       /* ... and invalidated it to get it animated. */
@@ -2305,9 +2305,9 @@ _gtk_tool_item_group_paint (GtkToolItemGroup *group,
       if (!__gtk_widget_get_visible (priv->header))
         v0 = MAX (v0, 0);
       else if (GTK_ORIENTATION_VERTICAL == orientation)
-        v0 = MAX (v0, priv->header->allocation.height);
+        v0 = MAX (v0, priv->gtk_widget_get_props (gtk_widget_get_props (header))->allocation.height);
       else
-        v0 = MAX (v0, priv->header->allocation.width);
+        v0 = MAX (v0, priv->gtk_widget_get_props (gtk_widget_get_props (header))->allocation.width);
 
       v1 = MIN (v0 + 256, v1);
 
@@ -2402,7 +2402,7 @@ gint
 _gtk_tool_item_group_get_height_for_width (GtkToolItemGroup *group,
                                            gint              width)
 {
-  return _gtk_tool_item_group_get_size_for_limit (gtk_tool_item_group_get_props (group), width, TRUE, gtk_tool_item_group_get_props (group)->priv->animation);
+  return _gtk_tool_item_group_get_size_for_limit (group, width, TRUE, gtk_tool_item_group_get_props (group)->priv->animation);
 }
 
 gint

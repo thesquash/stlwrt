@@ -387,7 +387,7 @@ struct _GtkWidgetPrivate
   guint32  widget_flags;
 };
 
-#define GTK_WIDGET_FLAGS(obj) (gtk_widget_get_instance_private (obj)->flags)
+#define GTK_WIDGET_FLAGS(obj) (gtk_widget_get_instance_private (obj)->widget_flags)
 
 
 STLWRT_DEFINE_VTYPE (GtkWidget, gtk_widget, G_TYPE_OBJECT,  G_TYPE_FLAG_NONE,
@@ -3066,7 +3066,7 @@ __gtk_widget_unparent (GtkWidget *widget)
   if (__gtk_widget_is_toplevel (toplevel))
     ___gtk_window_unset_focus_and_default (GTK_WINDOW (toplevel), widget);
 
-  if (GTK_CONTAINER (gtk_widget_get_props (widget)->parent)->focus_child == gtk_widget_get_props (widget))
+  if (gtk_container_get_props (GTK_CONTAINER (gtk_widget_get_props (widget)->parent))->focus_child == gtk_widget_get_props (widget))
     __gtk_container_set_focus_child (GTK_CONTAINER (gtk_widget_get_props (widget)->parent), NULL);
 
   /* If we are unanchoring the child, we save around the toplevel
@@ -4081,7 +4081,7 @@ __gtk_widget_size_allocate (GtkWidget	*widget,
     }
 
   if ((size_changed || position_changed) && gtk_widget_get_props (widget)->parent &&
-      __gtk_widget_get_realized (gtk_widget_get_props (widget)->parent) && GTK_CONTAINER (gtk_widget_get_props (widget)->parent)->reallocate_redraws)
+      __gtk_widget_get_realized (gtk_widget_get_props (widget)->parent) && gtk_container_get_props (GTK_CONTAINER (gtk_widget_get_props (widget)->parent))->reallocate_redraws)
     {
       GdkRegion *invalidate = __gdk_region_rectangle (&gtk_widget_get_props (widget)->gtk_widget_get_props (parent)->allocation);
       gtk_widget_invalidate_widget_windows (gtk_widget_get_props (widget)->parent, invalidate);
@@ -5050,7 +5050,7 @@ __gtk_widget_reparent_subwindows (GtkWidget *widget,
 
 	  __gdk_window_get_user_data (window, &child);
 	  while (child && child != widget)
-	    child = ((GtkWidget*) child)->parent;
+	    child = gtk_widget_get_props (((GtkWidget*) child))->parent;
 
 	  if (child)
 	    __gdk_window_reparent (window, new_window, 0, 0);
@@ -7434,7 +7434,7 @@ __gtk_widget_get_parent_window (GtkWidget *widget)
   parent_window = g_object_get_qdata (G_OBJECT (widget), quark_parent_window);
 
   return (parent_window != NULL) ? parent_window :
-	 (gtk_widget_get_props (widget)->parent != NULL) ? gtk_widget_get_props (widget)->parent->window : NULL;
+	 (gtk_widget_get_props (widget)->parent != NULL) ? gtk_widget_get_props (widget)->gtk_widget_get_props (parent)->window : NULL;
 }
 
 
@@ -7865,7 +7865,7 @@ __gtk_widget_set_uposition (GtkWidget *widget,
     ___gtk_window_reposition (GTK_WINDOW (widget), aux_info->x, aux_info->y);
   
   if (__gtk_widget_get_visible (gtk_widget_get_props (widget)) && gtk_widget_get_props (widget)->parent)
-    __gtk_widget_size_allocate (gtk_widget_get_props (widget), &gtk_widget_get_props (widget)->allocation);
+    __gtk_widget_size_allocate (widget, &gtk_widget_get_props (widget)->allocation);
 }
 
 static void
@@ -9074,7 +9074,7 @@ ___gtk_widget_synthesize_crossing (GtkWidget      *from,
 
   if (from != NULL)
     from_window = GTK_WIDGET_HAS_POINTER (from)
-      ? ___gtk_widget_get_pointer_window (from) : from->window;
+      ? ___gtk_widget_get_pointer_window (from) : gtk_widget_get_props (from)->window;
   if (to != NULL)
     to_window = GTK_WIDGET_HAS_POINTER (to)
       ? ___gtk_widget_get_pointer_window (gtk_widget_get_props (to)) : gtk_widget_get_props (to)->window;
@@ -9484,7 +9484,7 @@ __gtk_widget_reset_shapes (GtkWidget *widget)
   g_return_if_fail (__gtk_widget_get_realized (widget));
 
   if (!GTK_WIDGET_HAS_SHAPE_MASK (widget))
-    gtk_reset_shapes_recurse (gtk_widget_get_props (widget), gtk_widget_get_props (widget)->window);
+    gtk_reset_shapes_recurse (widget, gtk_widget_get_props (widget)->window);
 }
 
 /**

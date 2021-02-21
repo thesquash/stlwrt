@@ -81,7 +81,7 @@ gtk_tearoff_menu_item_size_request (GtkWidget      *widget,
   requisition->height = (gtk_container_get_props (GTK_CONTAINER (widget))->border_width +
 			 gtk_widget_get_props (widget)->style->ythickness) * 2;
 
-  if (GTK_IS_MENU (gtk_widget_get_props (widget)->parent) && GTK_MENU (gtk_widget_get_props (widget)->parent)->torn_off)
+  if (GTK_IS_MENU (gtk_widget_get_props (widget)->parent) && gtk_menu_get_props (GTK_MENU (gtk_widget_get_props (widget)->parent))->torn_off)
     {
       requisition->height += ARROW_SIZE;
     }
@@ -132,7 +132,7 @@ gtk_tearoff_menu_item_paint (GtkWidget   *widget,
       else
 	__gdk_window_clear_area (gtk_widget_get_props (widget)->window, area->x, area->y, area->width, area->height);
 
-      if (GTK_IS_MENU (gtk_widget_get_props (widget)->parent) && GTK_MENU (gtk_widget_get_props (widget)->parent)->torn_off)
+      if (GTK_IS_MENU (gtk_widget_get_props (widget)->parent) && gtk_menu_get_props (GTK_MENU (gtk_widget_get_props (widget)->parent))->torn_off)
 	{
 	  gint arrow_x;
 

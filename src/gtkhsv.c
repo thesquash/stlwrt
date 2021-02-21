@@ -1264,7 +1264,7 @@ gtk_hsv_expose (GtkWidget      *widget,
   if (!__gdk_rectangle_intersect (&event->area, &rect, &dest))
     return FALSE;
   
-  cr = __gdk_cairo_create (gtk_widget_get_props (widget)->window);
+  cr = __gdk_cairo_create ((GdkDrawable *) (gtk_widget_get_props (widget)->window));
 
   cairo_translate (cr, gtk_widget_get_props (widget)->allocation.x, gtk_widget_get_props (widget)->allocation.y);
   paint (hsv, cr,

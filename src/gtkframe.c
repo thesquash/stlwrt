@@ -204,7 +204,7 @@ gtk_frame_set_property (GObject         *object,
 				 gtk_frame_get_props (frame)->label_yalign);
       break;
     case PROP_LABEL_YALIGN:
-      __gtk_frame_set_label_align (gtk_frame_get_props (frame), gtk_frame_get_props (frame)->label_xalign, 
+      __gtk_frame_set_label_align (frame, gtk_frame_get_props (frame)->label_xalign, 
 				 g_value_get_float (value));
       break;
     case PROP_SHADOW:

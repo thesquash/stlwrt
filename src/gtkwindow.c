@@ -1402,7 +1402,7 @@ __gtk_window_set_title (GtkWindow   *window,
   gtk_window_get_props (window)->title = new_title;
 
   if (__gtk_widget_get_realized (GTK_WIDGET (window)))
-      __gdk_window_set_title (GTK_WIDGET (window)->window, gtk_window_get_props (window)->title);
+      __gdk_window_set_title (gtk_widget_get_props (GTK_WIDGET (window))->window, gtk_window_get_props (window)->title);
 
   g_object_notify (G_OBJECT (window), "title");
 }
@@ -1490,7 +1490,7 @@ __gtk_window_set_role (GtkWindow   *window,
   gtk_window_get_props (window)->wm_role = new_role;
 
   if (__gtk_widget_get_realized (GTK_WIDGET (window)))
-    __gdk_window_set_role (GTK_WIDGET (window)->window, gtk_window_get_props (window)->wm_role);
+    __gdk_window_set_role (gtk_widget_get_props (GTK_WIDGET (window))->window, gtk_window_get_props (window)->wm_role);
 
   g_object_notify (G_OBJECT (window), "role");
 }
@@ -4814,7 +4814,7 @@ gtk_window_realize (GtkWidget *widget)
   if (gtk_window_get_props (window)->transient_parent &&
       __gtk_widget_get_realized (GTK_WIDGET (gtk_window_get_props (window)->transient_parent)))
     __gdk_window_set_transient_for (gtk_widget_get_props (widget)->window,
-				  GTK_WIDGET (gtk_window_get_props (window)->transient_parent)->gtk_window_get_props (window));
+				  gtk_widget_get_props (GTK_WIDGET (gtk_window_get_props (window)->transient_parent))->gtk_window_get_props (window));
 
   if (gtk_window_get_props (window)->wm_role)
     __gdk_window_set_role (gtk_widget_get_props (widget)->gtk_window_get_props (window), gtk_window_get_props (window)->wm_role);
@@ -5399,7 +5399,7 @@ gtk_window_focus (GtkWidget        *widget,
 	}
       
       /* Wrapped off the end, clear the focus setting for the toplpevel */
-      parent = gtk_window_get_props (window)->focus_widget->parent;
+      parent = gtk_window_get_props (window)->gtk_widget_get_props (focus_widget)->parent;
       while (parent)
 	{
 	  __gtk_container_set_focus_child (GTK_CONTAINER (parent), NULL);
@@ -5533,7 +5533,7 @@ ___gtk_window_unset_focus_and_default (GtkWindow *window,
   g_object_ref (window);
   g_object_ref (widget);
       
-  if (GTK_CONTAINER (gtk_widget_get_props (widget)->parent)->focus_child == gtk_widget_get_props (widget))
+  if (gtk_container_get_props (GTK_CONTAINER (gtk_widget_get_props (widget)->parent))->focus_child == gtk_widget_get_props (widget))
     {
       child = gtk_window_get_props (window)->focus_widget;
       

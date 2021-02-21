@@ -392,8 +392,8 @@ find_text (GtkTreeModel *model,
   gchar *text;
   
   __gtk_tree_model_get (model, iter, search_data->gtk_cell_renderer_combo_get_props (cell)->text_column, &text, -1);
-  if (text && GTK_CELL_RENDERER_TEXT (search_data->cell)->text &&
-      strcmp (text, GTK_CELL_RENDERER_TEXT (search_data->cell)->text) == 0)
+  if (text && gtk_cell_renderer_text_get_props (GTK_CELL_RENDERER_TEXT (search_data->cell))->text &&
+      strcmp (text, gtk_cell_renderer_text_get_props (GTK_CELL_RENDERER_TEXT (search_data->cell))->text) == 0)
     {
       search_data->iter = *iter;
       search_data->found = TRUE;

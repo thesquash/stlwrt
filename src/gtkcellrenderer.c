@@ -508,15 +508,15 @@ __gtk_cell_renderer_get_size (GtkCellRenderer    *cell,
   g_return_if_fail (GTK_IS_CELL_RENDERER (cell));
   g_return_if_fail (GTK_CELL_RENDERER_GET_CLASS (cell)->get_size != NULL);
 
-  if (width && cell->width != -1)
+  if (width && gtk_cell_renderer_get_props (cell)->width != -1)
     {
       real_width = NULL;
-      *width = cell->width;
+      *width = gtk_cell_renderer_get_props (cell)->width;
     }
-  if (height && cell->height != -1)
+  if (height && gtk_cell_renderer_get_props (cell)->height != -1)
     {
       real_height = NULL;
-      *height = cell->height;
+      *height = gtk_cell_renderer_get_props (cell)->height;
     }
 
   GTK_CELL_RENDERER_GET_CLASS (cell)->get_size (cell,
@@ -564,9 +564,9 @@ __gtk_cell_renderer_render (GtkCellRenderer      *cell,
 
   selected = (flags & GTK_CELL_RENDERER_SELECTED) == GTK_CELL_RENDERER_SELECTED;
 
-  if (cell->cell_background_set && !selected)
+  if (gtk_cell_renderer_get_props (cell)->cell_background_set && !selected)
     {
-      cairo_t *cr = __gdk_cairo_create (window);
+      cairo_t *cr = __gdk_cairo_create ((GdkDrawable *) (window));
 
       __gdk_cairo_rectangle (cr, background_area);
       __gdk_cairo_set_source_color (cr, &priv->cell_background);
@@ -612,7 +612,7 @@ __gtk_cell_renderer_activate (GtkCellRenderer      *cell,
 {
   g_return_val_if_fail (GTK_IS_CELL_RENDERER (cell), FALSE);
 
-  if (cell->mode != GTK_CELL_RENDERER_MODE_ACTIVATABLE)
+  if (gtk_cell_renderer_get_props (cell)->mode != GTK_CELL_RENDERER_MODE_ACTIVATABLE)
     return FALSE;
 
   if (GTK_CELL_RENDERER_GET_CLASS (cell)->activate == NULL)
@@ -656,7 +656,7 @@ __gtk_cell_renderer_start_editing (GtkCellRenderer      *cell,
 
   g_return_val_if_fail (GTK_IS_CELL_RENDERER (cell), NULL);
 
-  if (cell->mode != GTK_CELL_RENDERER_MODE_EDITABLE)
+  if (gtk_cell_renderer_get_props (cell)->mode != GTK_CELL_RENDERER_MODE_EDITABLE)
     return NULL;
 
   if (GTK_CELL_RENDERER_GET_CLASS (cell)->start_editing == NULL)
@@ -674,7 +674,7 @@ __gtk_cell_renderer_start_editing (GtkCellRenderer      *cell,
 		 cell_renderer_signals[EDITING_STARTED], 0,
 		 editable, path);
 
-  cell->editing = TRUE;
+  gtk_cell_renderer_get_props (cell)->editing = TRUE;
 
   return editable;
 }

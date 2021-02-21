@@ -42,8 +42,6 @@ enum {
   GTK_TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID = -2
 };
 
-typedef struct _GtkTreeSortableIface GtkTreeSortableIface;
-
 typedef gint (* GtkTreeIterCompareFunc) (GtkTreeModel *model,
 					 GtkTreeIter  *a,
 					 GtkTreeIter  *b,

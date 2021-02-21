@@ -219,19 +219,19 @@ gtk_ruler_set_property (GObject      *object,
       __gtk_widget_queue_resize (GTK_WIDGET (ruler));
       break;
     case PROP_LOWER:
-      __gtk_ruler_set_range (gtk_ruler_get_props (ruler), g_value_get_double (value), gtk_ruler_get_props (ruler)->upper,
+      __gtk_ruler_set_range (ruler, g_value_get_double (value), gtk_ruler_get_props (ruler)->upper,
 			   gtk_ruler_get_props (ruler)->position, gtk_ruler_get_props (ruler)->max_size);
       break;
     case PROP_UPPER:
-      __gtk_ruler_set_range (gtk_ruler_get_props (ruler), gtk_ruler_get_props (ruler)->lower, g_value_get_double (value),
+      __gtk_ruler_set_range (ruler, gtk_ruler_get_props (ruler)->lower, g_value_get_double (value),
 			   gtk_ruler_get_props (ruler)->position, gtk_ruler_get_props (ruler)->max_size);
       break;
     case PROP_POSITION:
-      __gtk_ruler_set_range (gtk_ruler_get_props (ruler), gtk_ruler_get_props (ruler)->lower, gtk_ruler_get_props (ruler)->upper,
+      __gtk_ruler_set_range (ruler, gtk_ruler_get_props (ruler)->lower, gtk_ruler_get_props (ruler)->upper,
 			   g_value_get_double (value), gtk_ruler_get_props (ruler)->max_size);
       break;
     case PROP_MAX_SIZE:
-      __gtk_ruler_set_range (gtk_ruler_get_props (ruler), gtk_ruler_get_props (ruler)->lower, gtk_ruler_get_props (ruler)->upper,
+      __gtk_ruler_set_range (ruler, gtk_ruler_get_props (ruler)->lower, gtk_ruler_get_props (ruler)->upper,
 			   gtk_ruler_get_props (ruler)->position,  g_value_get_double (value));
       break;
     case PROP_METRIC:
@@ -545,7 +545,7 @@ gtk_ruler_expose (GtkWidget      *widget,
 
       __gtk_ruler_draw_ticks (ruler);
       
-      cr = __gdk_cairo_create (gtk_widget_get_props (widget)->window);
+      cr = __gdk_cairo_create ((GdkDrawable *) (gtk_widget_get_props (widget)->window));
       __gdk_cairo_set_source_pixmap (cr, gtk_ruler_get_props (ruler)->backing_store, 0, 0);
       __gdk_cairo_rectangle (cr, &event->area);
       cairo_fill (cr);
@@ -643,7 +643,7 @@ gtk_ruler_real_draw_ticks (GtkRuler *ruler)
 		 0, 0,
 		 gtk_widget_get_props (widget)->allocation.width, gtk_widget_get_props (widget)->allocation.height);
 
-  cr = __gdk_cairo_create (gtk_ruler_get_props (ruler)->backing_store);
+  cr = __gdk_cairo_create ((GdkDrawable *) (gtk_ruler_get_props (ruler)->backing_store));
   __gdk_cairo_set_source_color (cr, &gtk_widget_get_props (widget)->style->fg[gtk_widget_get_props (widget)->state]);
 
   if (private->orientation == GTK_ORIENTATION_HORIZONTAL)
@@ -837,12 +837,12 @@ gtk_ruler_real_draw_pos (GtkRuler *ruler)
 
       if ((bs_width > 0) && (bs_height > 0))
 	{
-	  cairo_t *cr = __gdk_cairo_create (gtk_widget_get_props (widget)->window);
+	  cairo_t *cr = __gdk_cairo_create ((GdkDrawable *) (gtk_widget_get_props (widget)->window));
 
 	  /*  If a backing store exists, restore the ruler  */
 	  if (gtk_ruler_get_props (ruler)->backing_store)
             {
-              cairo_t *cr = __gdk_cairo_create (gtk_widget_get_props (widget)->window);
+              cairo_t *cr = __gdk_cairo_create ((GdkDrawable *) (gtk_widget_get_props (widget)->window));
 
               __gdk_cairo_set_source_pixmap (cr, gtk_ruler_get_props (ruler)->backing_store, 0, 0);
               cairo_rectangle (cr, gtk_ruler_get_props (ruler)->xsrc, gtk_ruler_get_props (ruler)->ysrc, bs_width, bs_height);

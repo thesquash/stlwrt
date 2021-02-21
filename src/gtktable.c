@@ -274,10 +274,10 @@ gtk_table_set_property (GObject      *object,
   switch (prop_id)
     {
     case PROP_N_ROWS:
-      __gtk_table_resize (gtk_table_get_props (table), g_value_get_uint (value), gtk_table_get_props (table)->ncols);
+      __gtk_table_resize (table, g_value_get_uint (value), gtk_table_get_props (table)->ncols);
       break;
     case PROP_N_COLUMNS:
-      __gtk_table_resize (gtk_table_get_props (table), gtk_table_get_props (table)->nrows, g_value_get_uint (value));
+      __gtk_table_resize (table, gtk_table_get_props (table)->nrows, g_value_get_uint (value));
       break;
     case PROP_ROW_SPACING:
       __gtk_table_set_row_spacings (table, g_value_get_uint (value));
@@ -306,7 +306,7 @@ gtk_table_set_child_property (GtkContainer    *container,
   GList *list;
 
   table_child = NULL;
-  for (list = table->children; list; list = list->next)
+  for (list = gtk_table_get_props (table)->children; list; list = list->next)
     {
       table_child = list->data;
 
@@ -325,29 +325,29 @@ gtk_table_set_child_property (GtkContainer    *container,
       table_child->left_attach = g_value_get_uint (value);
       if (table_child->right_attach <= table_child->left_attach)
 	table_child->right_attach = table_child->left_attach + 1;
-      if (table_child->right_attach >= table->ncols)
-	__gtk_table_resize (table, table->nrows, table_child->right_attach);
+      if (table_child->right_attach >= gtk_table_get_props (table)->ncols)
+	__gtk_table_resize (table, gtk_table_get_props (table)->nrows, table_child->right_attach);
       break;
     case CHILD_PROP_RIGHT_ATTACH:
       table_child->right_attach = g_value_get_uint (value);
       if (table_child->right_attach <= table_child->left_attach)
 	table_child->left_attach = table_child->right_attach - 1;
-      if (table_child->right_attach >= table->ncols)
-	__gtk_table_resize (table, table->nrows, table_child->right_attach);
+      if (table_child->right_attach >= gtk_table_get_props (table)->ncols)
+	__gtk_table_resize (table, gtk_table_get_props (table)->nrows, table_child->right_attach);
       break;
     case CHILD_PROP_TOP_ATTACH:
       table_child->top_attach = g_value_get_uint (value);
       if (table_child->bottom_attach <= table_child->top_attach)
 	table_child->bottom_attach = table_child->top_attach + 1;
-      if (table_child->bottom_attach >= table->nrows)
-	__gtk_table_resize (table, table_child->bottom_attach, table->ncols);
+      if (table_child->bottom_attach >= gtk_table_get_props (table)->nrows)
+	__gtk_table_resize (table, table_child->bottom_attach, gtk_table_get_props (table)->ncols);
       break;
     case CHILD_PROP_BOTTOM_ATTACH:
       table_child->bottom_attach = g_value_get_uint (value);
       if (table_child->bottom_attach <= table_child->top_attach)
 	table_child->top_attach = table_child->bottom_attach - 1;
-      if (table_child->bottom_attach >= table->nrows)
-	__gtk_table_resize (table, table_child->bottom_attach, table->ncols);
+      if (table_child->bottom_attach >= gtk_table_get_props (table)->nrows)
+	__gtk_table_resize (table, table_child->bottom_attach, gtk_table_get_props (table)->ncols);
       break;
     case CHILD_PROP_X_OPTIONS:
       table_child->xexpand = (g_value_get_flags (value) & GTK_EXPAND) != 0;
@@ -386,7 +386,7 @@ gtk_table_get_child_property (GtkContainer    *container,
   GList *list;
 
   table_child = NULL;
-  for (list = table->children; list; list = list->next)
+  for (list = gtk_table_get_props (table)->children; list; list = list->next)
     {
       table_child = list->data;
 
@@ -570,11 +570,11 @@ __gtk_table_attach (GtkTable	  *table,
   /* g_return_if_fail (top_attach >= 0); */
   g_return_if_fail (top_attach < bottom_attach);
   
-  if (right_attach >= table->ncols)
-    __gtk_table_resize (table, table->nrows, right_attach);
+  if (right_attach >= gtk_table_get_props (table)->ncols)
+    __gtk_table_resize (table, gtk_table_get_props (table)->nrows, right_attach);
   
-  if (bottom_attach >= table->nrows)
-    __gtk_table_resize (table, bottom_attach, table->ncols);
+  if (bottom_attach >= gtk_table_get_props (table)->nrows)
+    __gtk_table_resize (table, bottom_attach, gtk_table_get_props (table)->ncols);
   
   table_child = g_new (GtkTableChild, 1);
   table_child->widget = child;
@@ -591,7 +591,7 @@ __gtk_table_attach (GtkTable	  *table,
   table_child->yfill = (yoptions & GTK_FILL) != 0;
   table_child->ypadding = ypadding;
   
-  table->children = g_list_prepend (table->children, table_child);
+  gtk_table_get_props (table)->children = g_list_prepend (gtk_table_get_props (table)->children, table_child);
   
   __gtk_widget_set_parent (child, GTK_WIDGET (table));
 }

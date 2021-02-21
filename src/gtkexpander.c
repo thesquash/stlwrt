@@ -561,7 +561,7 @@ get_expander_bounds (GtkExpander  *expander,
     {
       GtkAllocation label_allocation;
 
-      label_allocation = priv->label_widget->allocation;
+      label_allocation = priv->gtk_widget_get_props (label_widget)->allocation;
 
       if (expander_size < label_allocation.height)
 	rect->y += focus_width + focus_pad + (label_allocation.height - expander_size) / 2;
@@ -775,7 +775,7 @@ gtk_expander_paint_prelight (GtkExpander *expander)
   area.width = gtk_widget_get_props (widget)->allocation.width - (2 * gtk_container_get_props (container)->border_width);
 
   if (priv->label_widget && __gtk_widget_get_visible (priv->label_widget))
-    area.height = priv->label_widget->allocation.height;
+    area.height = priv->gtk_widget_get_props (label_widget)->allocation.height;
   else
     area.height = 0;
 
@@ -858,7 +858,7 @@ gtk_expander_paint_focus (GtkExpander  *expander,
     {
       if (__gtk_widget_get_visible (priv->label_widget))
 	{
-	  GtkAllocation label_allocation = priv->label_widget->allocation;
+	  GtkAllocation label_allocation = priv->gtk_widget_get_props (label_widget)->allocation;
 
 	  width  = label_allocation.width;
 	  height = label_allocation.height;
@@ -1276,7 +1276,7 @@ gtk_expander_forall (GtkContainer *container,
 static void
 gtk_expander_activate (GtkExpander *expander)
 {
-  __gtk_expander_set_expanded (gtk_expander_get_props (expander), !gtk_expander_get_props (expander)->priv->expanded);
+  __gtk_expander_set_expanded (expander, !gtk_expander_get_props (expander)->priv->expanded);
 }
 
 /**

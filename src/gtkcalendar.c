@@ -892,7 +892,7 @@ calendar_set_month_next (GtkCalendar *calendar)
       __gtk_calendar_select_day (calendar, month_len);
     }
   else
-    __gtk_calendar_select_day (gtk_calendar_get_props (calendar), gtk_calendar_get_props (calendar)->selected_day);
+    __gtk_calendar_select_day (calendar, gtk_calendar_get_props (calendar)->selected_day);
 
   calendar_queue_refresh (calendar);
 }
@@ -919,7 +919,7 @@ calendar_set_year_prev (GtkCalendar *calendar)
       __gtk_calendar_select_day (calendar, month_len);
     }
   else
-    __gtk_calendar_select_day (gtk_calendar_get_props (calendar), gtk_calendar_get_props (calendar)->selected_day);
+    __gtk_calendar_select_day (calendar, gtk_calendar_get_props (calendar)->selected_day);
   
   calendar_queue_refresh (calendar);
 }
@@ -946,7 +946,7 @@ calendar_set_year_next (GtkCalendar *calendar)
       __gtk_calendar_select_day (calendar, month_len);
     }
   else
-    __gtk_calendar_select_day (gtk_calendar_get_props (calendar), gtk_calendar_get_props (calendar)->selected_day);
+    __gtk_calendar_select_day (calendar, gtk_calendar_get_props (calendar)->selected_day);
   
   calendar_queue_refresh (calendar);
 }
@@ -1252,7 +1252,7 @@ calendar_set_month_prev (GtkCalendar *calendar)
     {
       if (gtk_calendar_get_props (calendar)->selected_day < 0)
 	gtk_calendar_get_props (calendar)->selected_day = gtk_calendar_get_props (calendar)->selected_day + 1 + month_length[leap (gtk_calendar_get_props (calendar)->year)][gtk_calendar_get_props (calendar)->month + 1];
-      __gtk_calendar_select_day (gtk_calendar_get_props (calendar), gtk_calendar_get_props (calendar)->selected_day);
+      __gtk_calendar_select_day (calendar, gtk_calendar_get_props (calendar)->selected_day);
     }
 
   calendar_queue_refresh (calendar);
@@ -2177,7 +2177,7 @@ calendar_paint_header (GtkCalendar *calendar)
   else
     year_left = !priv->year_before;
 
-  cr = __gdk_cairo_create (priv->header_win);
+  cr = __gdk_cairo_create ((GdkDrawable *) (priv->header_win));
   
   header_width = gtk_widget_get_props (widget)->allocation.width - 2 * gtk_widget_get_props (widget)->style->xthickness;
   
@@ -2275,7 +2275,7 @@ calendar_paint_day_names (GtkCalendar *calendar)
   gint calendar_ysep = calendar_get_ysep (calendar);
   gint calendar_xsep = calendar_get_xsep (calendar);
 
-  cr = __gdk_cairo_create (priv->day_name_win);
+  cr = __gdk_cairo_create ((GdkDrawable *) (priv->day_name_win));
   
   __gtk_widget_style_get (GTK_WIDGET (widget),
 			"focus-line-width", &focus_width,
@@ -2358,7 +2358,7 @@ calendar_paint_week_numbers (GtkCalendar *calendar)
   gint focus_width;
   gint calendar_xsep = calendar_get_xsep (calendar);
 
-  cr = __gdk_cairo_create (priv->week_win);
+  cr = __gdk_cairo_create ((GdkDrawable *) (priv->week_win));
   
   __gtk_widget_style_get (GTK_WIDGET (widget),
 			"focus-line-width", &focus_width,
@@ -2503,7 +2503,7 @@ calendar_paint_day (GtkCalendar *calendar,
   g_return_if_fail (row < 6);
   g_return_if_fail (col < 7);
 
-  cr = __gdk_cairo_create (priv->main_win);
+  cr = __gdk_cairo_create ((GdkDrawable *) (priv->main_win));
 
   day = gtk_calendar_get_props (calendar)->day[row][col];
   show_details = (gtk_calendar_get_props (calendar)->display_flags & GTK_CALENDAR_SHOW_DETAILS);
@@ -2693,7 +2693,7 @@ calendar_paint_arrow (GtkCalendar *calendar,
   window = priv->arrow_win[arrow];
   if (window)
     {
-      cairo_t *cr = __gdk_cairo_create (window);
+      cairo_t *cr = __gdk_cairo_create ((GdkDrawable *) (window));
       gint width, height;
       gint state;
 	
@@ -3195,7 +3195,7 @@ gtk_calendar_key_press (GtkWidget   *widget,
 	{
 	  move_focus (calendar, -1);
 	  calendar_invalidate_day (calendar, old_focus_row, old_focus_col);
-	  calendar_invalidate_day (gtk_calendar_get_props (calendar), gtk_calendar_get_props (calendar)->focus_row,
+	  calendar_invalidate_day (calendar, gtk_calendar_get_props (calendar)->focus_row,
 				   gtk_calendar_get_props (calendar)->focus_col);
 	}
       break;
@@ -3208,7 +3208,7 @@ gtk_calendar_key_press (GtkWidget   *widget,
 	{
 	  move_focus (calendar, 1);
 	  calendar_invalidate_day (calendar, old_focus_row, old_focus_col);
-	  calendar_invalidate_day (gtk_calendar_get_props (calendar), gtk_calendar_get_props (calendar)->focus_row,
+	  calendar_invalidate_day (calendar, gtk_calendar_get_props (calendar)->focus_row,
 				   gtk_calendar_get_props (calendar)->focus_col);
 	}
       break;
@@ -3226,7 +3226,7 @@ gtk_calendar_key_press (GtkWidget   *widget,
           if (gtk_calendar_get_props (calendar)->focus_col < 0)
             gtk_calendar_get_props (calendar)->focus_col = 6;
 	  calendar_invalidate_day (calendar, old_focus_row, old_focus_col);
-	  calendar_invalidate_day (gtk_calendar_get_props (calendar), gtk_calendar_get_props (calendar)->focus_row,
+	  calendar_invalidate_day (calendar, gtk_calendar_get_props (calendar)->focus_row,
 				   gtk_calendar_get_props (calendar)->focus_col);
 	}
       break;
@@ -3242,7 +3242,7 @@ gtk_calendar_key_press (GtkWidget   *widget,
           if (gtk_calendar_get_props (calendar)->focus_col < 0)
             gtk_calendar_get_props (calendar)->focus_col = 0;
 	  calendar_invalidate_day (calendar, old_focus_row, old_focus_col);
-	  calendar_invalidate_day (gtk_calendar_get_props (calendar), gtk_calendar_get_props (calendar)->focus_row,
+	  calendar_invalidate_day (calendar, gtk_calendar_get_props (calendar)->focus_row,
 				   gtk_calendar_get_props (calendar)->focus_col);
 	}
       break;

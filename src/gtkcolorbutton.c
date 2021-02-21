@@ -278,7 +278,7 @@ expose_event (GtkWidget      *widget,
   cairo_pattern_t *checkered;
   cairo_t *cr;
 
-  cr = __gdk_cairo_create (event->window);
+  cr = __gdk_cairo_create ((GdkDrawable *) (event->window));
 
   __gtk_widget_get_allocation (widget, &allocation);
   __gdk_cairo_rectangle (cr, &allocation);
@@ -547,7 +547,7 @@ dialog_ok_clicked (GtkWidget *widget,
   GtkColorButton *color_button = GTK_COLOR_BUTTON (data);
   GtkColorSelection *color_selection;
 
-  color_selection = GTK_COLOR_SELECTION (GTK_COLOR_SELECTION_DIALOG (gtk_color_button_get_props (color_button)->priv->cs_dialog)->colorsel);
+  color_selection = GTK_COLOR_SELECTION (gtk_color_selection_dialog_get_props (GTK_COLOR_SELECTION_DIALOG (gtk_color_button_get_props (color_button)->priv->cs_dialog))->colorsel);
 
   __gtk_color_selection_get_current_color (color_selection, &gtk_color_button_get_props (color_button)->priv->color);
   gtk_color_button_get_props (color_button)->priv->alpha = __gtk_color_selection_get_current_alpha (color_selection);

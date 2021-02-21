@@ -306,15 +306,15 @@ gtk_tool_button_construct_contents (GtkToolItem *tool_item)
 			"icon-spacing", &icon_spacing,
 			NULL);
 
-  if (gtk_tool_button_get_props (button)->priv->icon_widget && gtk_tool_button_get_props (button)->priv->icon_widget->parent)
+  if (gtk_tool_button_get_props (button)->priv->icon_widget && gtk_tool_button_get_props (button)->priv->gtk_widget_get_props (icon_widget)->parent)
     {
-      __gtk_container_remove (GTK_CONTAINER (gtk_tool_button_get_props (button)->priv->icon_widget->parent),
+      __gtk_container_remove (GTK_CONTAINER (gtk_tool_button_get_props (button)->priv->gtk_widget_get_props (icon_widget)->parent),
 			    gtk_tool_button_get_props (button)->priv->icon_widget);
     }
 
-  if (gtk_tool_button_get_props (button)->priv->label_widget && gtk_tool_button_get_props (button)->priv->label_widget->parent)
+  if (gtk_tool_button_get_props (button)->priv->label_widget && gtk_tool_button_get_props (button)->priv->gtk_widget_get_props (label_widget)->parent)
     {
-      __gtk_container_remove (GTK_CONTAINER (gtk_tool_button_get_props (button)->priv->label_widget->parent),
+      __gtk_container_remove (GTK_CONTAINER (gtk_tool_button_get_props (button)->priv->gtk_widget_get_props (label_widget)->parent),
 			    gtk_tool_button_get_props (button)->priv->label_widget);
     }
 

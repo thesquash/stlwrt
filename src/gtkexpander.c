@@ -1276,7 +1276,7 @@ gtk_expander_forall (GtkContainer *container,
 static void
 gtk_expander_activate (GtkExpander *expander)
 {
-  __gtk_expander_set_expanded (gtk_expander_get_props (expander), !gtk_expander_get_props (expander)->priv->expanded);
+  __gtk_expander_set_expanded (expander, !gtk_expander_get_props (expander)->priv->expanded);
 }
 
 /**

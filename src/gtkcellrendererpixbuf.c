@@ -765,7 +765,7 @@ gtk_cell_renderer_pixbuf_render (GtkCellRenderer      *cell,
       pixbuf = colorized;
     }
 
-  cr = __gdk_cairo_create (window);
+  cr = __gdk_cairo_create ((GdkDrawable *) (window));
   
   __gdk_cairo_set_source_pixbuf (cr, pixbuf, pix_rect.x, pix_rect.y);
   __gdk_cairo_rectangle (cr, &draw_rect);

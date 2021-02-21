@@ -274,10 +274,10 @@ gtk_table_set_property (GObject      *object,
   switch (prop_id)
     {
     case PROP_N_ROWS:
-      __gtk_table_resize (gtk_table_get_props (table), g_value_get_uint (value), gtk_table_get_props (table)->ncols);
+      __gtk_table_resize (table, g_value_get_uint (value), gtk_table_get_props (table)->ncols);
       break;
     case PROP_N_COLUMNS:
-      __gtk_table_resize (gtk_table_get_props (table), gtk_table_get_props (table)->nrows, g_value_get_uint (value));
+      __gtk_table_resize (table, gtk_table_get_props (table)->nrows, g_value_get_uint (value));
       break;
     case PROP_ROW_SPACING:
       __gtk_table_set_row_spacings (table, g_value_get_uint (value));

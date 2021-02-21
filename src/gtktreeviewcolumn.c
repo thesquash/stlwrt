@@ -1879,7 +1879,7 @@ __gtk_tree_view_column_set_sizing (GtkTreeViewColumn       *tree_column,
   if (gtk_tree_view_column_get_props (tree_column)->column_type == GTK_TREE_VIEW_COLUMN_AUTOSIZE &&
       gtk_tree_view_column_get_props (tree_column)->requested_width != -1)
     {
-      __gtk_tree_view_column_set_sizing (gtk_tree_view_column_get_props (tree_column), gtk_tree_view_column_get_props (tree_column)->requested_width);
+      __gtk_tree_view_column_set_sizing (tree_column, gtk_tree_view_column_get_props (tree_column)->requested_width);
     }
 #endif
   gtk_tree_view_column_get_props (tree_column)->column_type = type;
@@ -2398,7 +2398,7 @@ __gtk_tree_view_column_set_sort_column_id (GtkTreeViewColumn *tree_column,
 
       if (gtk_tree_view_column_get_props (tree_column)->sort_clicked_signal)
 	{
-	  g_signal_handler_disconnect (gtk_tree_view_column_get_props (tree_column), gtk_tree_view_column_get_props (tree_column)->sort_clicked_signal);
+	  g_signal_handler_disconnect (tree_column, gtk_tree_view_column_get_props (tree_column)->sort_clicked_signal);
 	  gtk_tree_view_column_get_props (tree_column)->sort_clicked_signal = 0;
 	}
 
@@ -2418,7 +2418,7 @@ __gtk_tree_view_column_set_sort_column_id (GtkTreeViewColumn *tree_column,
   __gtk_tree_view_column_set_clickable (tree_column, TRUE);
 
   if (! gtk_tree_view_column_get_props (tree_column)->sort_clicked_signal)
-    gtk_tree_view_column_get_props (tree_column)->sort_clicked_signal = g_signal_connect (gtk_tree_view_column_get_props (tree_column),
+    gtk_tree_view_column_get_props (tree_column)->sort_clicked_signal = g_signal_connect (tree_column,
                                                          "clicked",
                                                          G_CALLBACK (gtk_tree_view_column_sort),
                                                          NULL);

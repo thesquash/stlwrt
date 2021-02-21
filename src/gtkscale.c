@@ -1061,14 +1061,14 @@ gtk_scale_expose (GtkWidget      *widget,
                   y1 = gtk_widget_get_props (widget)->allocation.y + gtk_range_get_props (range)->range_rect.y;
                   y2 = y1 - slider_width / 2;
                   min_pos = min_pos_before;
-                  max_pos = gtk_widget_get_props (widget)->allocation.x + find_next_pos (gtk_widget_get_props (widget), m, marks + i, GTK_POS_TOP) - min_sep;
+                  max_pos = gtk_widget_get_props (widget)->allocation.x + find_next_pos (widget, m, marks + i, GTK_POS_TOP) - min_sep;
                 }
               else
                 {
                   y1 = gtk_widget_get_props (widget)->allocation.y + gtk_range_get_props (range)->range_rect.y + gtk_range_get_props (range)->range_rect.height;
                   y2 = y1 + slider_width / 2;
                   min_pos = min_pos_after;
-                  max_pos = gtk_widget_get_props (widget)->allocation.x + find_next_pos (gtk_widget_get_props (widget), m, marks + i, GTK_POS_BOTTOM) - min_sep;
+                  max_pos = gtk_widget_get_props (widget)->allocation.x + find_next_pos (widget, m, marks + i, GTK_POS_BOTTOM) - min_sep;
                 }
 
               __gtk_paint_vline (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, state_type,
@@ -1109,14 +1109,14 @@ gtk_scale_expose (GtkWidget      *widget,
                   x1 = gtk_widget_get_props (widget)->allocation.x + gtk_range_get_props (range)->range_rect.x;
                   x2 = gtk_widget_get_props (widget)->allocation.x + gtk_range_get_props (range)->range_rect.x - slider_width / 2;
                   min_pos = min_pos_before;
-                  max_pos = gtk_widget_get_props (widget)->allocation.y + find_next_pos (gtk_widget_get_props (widget), m, marks + i, GTK_POS_LEFT) - min_sep;
+                  max_pos = gtk_widget_get_props (widget)->allocation.y + find_next_pos (widget, m, marks + i, GTK_POS_LEFT) - min_sep;
                 }
               else
                 {
                   x1 = gtk_widget_get_props (widget)->allocation.x + gtk_range_get_props (range)->range_rect.x + gtk_range_get_props (range)->range_rect.width;
                   x2 = gtk_widget_get_props (widget)->allocation.x + gtk_range_get_props (range)->range_rect.x + gtk_range_get_props (range)->range_rect.width + slider_width / 2;
                   min_pos = min_pos_after;
-                  max_pos = gtk_widget_get_props (widget)->allocation.y + find_next_pos (gtk_widget_get_props (widget), m, marks + i, GTK_POS_RIGHT) - min_sep;
+                  max_pos = gtk_widget_get_props (widget)->allocation.y + find_next_pos (widget, m, marks + i, GTK_POS_RIGHT) - min_sep;
                 }
               y1 = gtk_widget_get_props (widget)->allocation.y + marks[i];
 

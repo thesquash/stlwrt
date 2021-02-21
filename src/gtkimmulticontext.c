@@ -123,7 +123,7 @@ gtk_im_multicontext_init (GtkIMMulticontext *multicontext)
 {
   gtk_im_multicontext_get_props (multicontext)->slave = NULL;
   
-  gtk_im_multicontext_get_props (multicontext)->priv = G_TYPE_INSTANCE_GET_PRIVATE (gtk_im_multicontext_get_props (multicontext), GTK_TYPE_IM_MULTICONTEXT, GtkIMMulticontextPrivate);
+  gtk_im_multicontext_get_props (multicontext)->priv = G_TYPE_INSTANCE_GET_PRIVATE (multicontext, GTK_TYPE_IM_MULTICONTEXT, GtkIMMulticontextPrivate);
   gtk_im_multicontext_get_props (multicontext)->priv->use_preedit = TRUE;
   gtk_im_multicontext_get_props (multicontext)->priv->have_cursor_location = FALSE;
   gtk_im_multicontext_get_props (multicontext)->priv->focus_in = FALSE;

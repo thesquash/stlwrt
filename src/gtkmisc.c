@@ -127,16 +127,16 @@ gtk_misc_set_property (GObject      *object,
   switch (prop_id)
     {
     case PROP_XALIGN:
-      __gtk_misc_set_alignment (gtk_misc_get_props (misc), g_value_get_float (value), gtk_misc_get_props (misc)->yalign);
+      __gtk_misc_set_alignment (misc, g_value_get_float (value), gtk_misc_get_props (misc)->yalign);
       break;
     case PROP_YALIGN:
-      __gtk_misc_set_alignment (gtk_misc_get_props (misc), gtk_misc_get_props (misc)->xalign, g_value_get_float (value));
+      __gtk_misc_set_alignment (misc, gtk_misc_get_props (misc)->xalign, g_value_get_float (value));
       break;
     case PROP_XPAD:
-      __gtk_misc_set_padding (gtk_misc_get_props (misc), g_value_get_int (value), gtk_misc_get_props (misc)->ypad);
+      __gtk_misc_set_padding (misc, g_value_get_int (value), gtk_misc_get_props (misc)->ypad);
       break;
     case PROP_YPAD:
-      __gtk_misc_set_padding (gtk_misc_get_props (misc), gtk_misc_get_props (misc)->xpad, g_value_get_int (value));
+      __gtk_misc_set_padding (misc, gtk_misc_get_props (misc)->xpad, g_value_get_int (value));
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);

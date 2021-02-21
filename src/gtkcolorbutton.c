@@ -278,7 +278,7 @@ expose_event (GtkWidget      *widget,
   cairo_pattern_t *checkered;
   cairo_t *cr;
 
-  cr = __gdk_cairo_create (event->window);
+  cr = __gdk_cairo_create ((GdkDrawable *) (event->window));
 
   __gtk_widget_get_allocation (widget, &allocation);
   __gdk_cairo_rectangle (cr, &allocation);

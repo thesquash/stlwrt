@@ -384,7 +384,7 @@ gtk_tool_item_group_init (GtkToolItemGroup *group)
 
   __gtk_widget_set_redraw_on_allocate (GTK_WIDGET (group), FALSE);
 
-  gtk_tool_item_group_get_props (group)->priv = priv = G_TYPE_INSTANCE_GET_PRIVATE (gtk_tool_item_group_get_props (group),
+  gtk_tool_item_group_get_props (group)->priv = priv = G_TYPE_INSTANCE_GET_PRIVATE (group,
                                              GTK_TYPE_TOOL_ITEM_GROUP,
                                              GtkToolItemGroupPrivate);
 
@@ -1088,7 +1088,7 @@ gtk_tool_item_group_set_focus_cb (GtkWidget *window,
               __gtk_adjustment_clamp_page (adjustment, y, y + gtk_widget_get_props (widget)->allocation.height);
             }
           else if (__gtk_widget_translate_coordinates
-                      (gtk_widget_get_props (widget), p, 0, gtk_widget_get_props (widget)->allocation.height, NULL, &y) &&
+                      (widget, p, 0, gtk_widget_get_props (widget)->allocation.height, NULL, &y) &&
                    y > gtk_widget_get_props (p)->allocation.height)
             {
               y += gtk_adjustment_get_props (adjustment)->value;
@@ -1110,7 +1110,7 @@ gtk_tool_item_group_set_focus_cb (GtkWidget *window,
               __gtk_adjustment_clamp_page (adjustment, x, x + gtk_widget_get_props (widget)->allocation.width);
             }
           else if (__gtk_widget_translate_coordinates
-                      (gtk_widget_get_props (widget), p, gtk_widget_get_props (widget)->allocation.width, 0, &x, NULL) &&
+                      (widget, p, gtk_widget_get_props (widget)->allocation.width, 0, &x, NULL) &&
                    x > gtk_widget_get_props (p)->allocation.width)
             {
               x += gtk_adjustment_get_props (adjustment)->value;
@@ -2402,7 +2402,7 @@ gint
 _gtk_tool_item_group_get_height_for_width (GtkToolItemGroup *group,
                                            gint              width)
 {
-  return _gtk_tool_item_group_get_size_for_limit (gtk_tool_item_group_get_props (group), width, TRUE, gtk_tool_item_group_get_props (group)->priv->animation);
+  return _gtk_tool_item_group_get_size_for_limit (group, width, TRUE, gtk_tool_item_group_get_props (group)->priv->animation);
 }
 
 gint

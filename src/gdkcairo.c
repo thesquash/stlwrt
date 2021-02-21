@@ -77,7 +77,7 @@ __gdk_cairo_create (GdkDrawable *drawable)
  * @cr: a #cairo_t
  * @drawable: a #GdkDrawable
  *
- * Resets the clip region for a Cairo context created by __gdk_cairo_create().
+ * Resets the clip region for a Cairo context created by __gdk_cairo_create((GdkDrawable *) ().)
  *
  * This resets the clip region to the "empty" state for the given drawable.
  * This is required for non-native windows since a direct call to
@@ -86,7 +86,7 @@ __gdk_cairo_create (GdkDrawable *drawable)
  * draw outside your window.
  *
  * This is rarely needed though, since most code just create a new cairo_t
- * using __gdk_cairo_create() each time they want to draw something.
+ * using __gdk_cairo_create((GdkDrawable *) () each time they want to draw something.)
  *
  * Since: 2.18
  **/

@@ -95,6 +95,14 @@
 
 typedef struct _GtkTextLayoutPrivate GtkTextLayoutPrivate;
 
+struct _GtkTextLayoutPrivate
+{
+  /* Cache the line that the cursor is positioned on, as the keyboard
+     direction only influences the direction of the cursor line.
+  */
+  GtkTextLine *cursor_line;
+};
+
 
 static GtkTextLineData *gtk_text_layout_real_wrap (GtkTextLayout *layout,
                                                    GtkTextLine *line,
@@ -2163,7 +2171,7 @@ gtk_text_layout_get_line_display (GtkTextLayout *layout,
           (size_only || !gtk_text_layout_get_props (layout)->one_display_cache->size_only))
 	{
 	  if (!size_only)
-            update_text_display_cursors (gtk_text_layout_get_props (layout), line, gtk_text_layout_get_props (layout)->one_display_cache);
+            update_text_display_cursors (layout, line, gtk_text_layout_get_props (layout)->one_display_cache);
 	  return gtk_text_layout_get_props (layout)->one_display_cache;
 	}
       else

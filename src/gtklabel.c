@@ -1526,7 +1526,7 @@ gtk_label_hierarchy_changed (GtkWidget *widget,
 {
   GtkLabel *label = GTK_LABEL (widget);
 
-  gtk_label_setup_mnemonic (gtk_label_get_props (label), gtk_label_get_props (label)->mnemonic_keyval);
+  gtk_label_setup_mnemonic (label, gtk_label_get_props (label)->mnemonic_keyval);
 }
 
 static void
@@ -1854,9 +1854,9 @@ gtk_label_recalculate (GtkLabel *label)
   guint keyval = gtk_label_get_props (label)->mnemonic_keyval;
 
   if (gtk_label_get_props (label)->use_markup)
-    __gtk_label_set_markup_internal (gtk_label_get_props (label), gtk_label_get_props (label)->gtk_label_get_props (label), gtk_label_get_props (label)->use_underline);
+    __gtk_label_set_markup_internal (label, gtk_label_get_props (label)->gtk_label_get_props (label), gtk_label_get_props (label)->use_underline);
   else if (gtk_label_get_props (label)->use_underline)
-    gtk_label_set_uline_text_internal (gtk_label_get_props (label), gtk_label_get_props (label)->gtk_label_get_props (label));
+    gtk_label_set_uline_text_internal (label, gtk_label_get_props (label)->gtk_label_get_props (label));
   else
     {
       if (!gtk_label_get_props (label)->pattern_set)
@@ -1865,7 +1865,7 @@ gtk_label_recalculate (GtkLabel *label)
             pango_attr_list_unref (gtk_label_get_props (label)->effective_attrs);
           gtk_label_get_props (label)->effective_attrs = NULL;
         }
-      __gtk_label_set_text_internal (gtk_label_get_props (label), g_strdup (gtk_label_get_props (label)->gtk_label_get_props (label)));
+      __gtk_label_set_text_internal (label, g_strdup (gtk_label_get_props (label)->gtk_label_get_props (label)));
     }
 
   gtk_label_compose_effective_attrs (label);
@@ -3398,7 +3398,7 @@ draw_insertion_cursor (GtkLabel      *label,
   else
     text_dir = GTK_TEXT_DIR_RTL;
 
-  __gtk_draw_insertion_cursor (gtk_widget_get_props (widget), gtk_widget_get_props (widget)->window, &(gtk_widget_get_props (widget)->allocation),
+  __gtk_draw_insertion_cursor (widget, gtk_widget_get_props (widget)->window, &(gtk_widget_get_props (widget)->allocation),
 			     cursor_location,
 			     is_primary, text_dir, draw_arrow);
 }
@@ -3584,7 +3584,7 @@ gtk_label_expose (GtkWidget      *widget,
            * region
            */
 
-          cr = __gdk_cairo_create (event->window);
+          cr = __gdk_cairo_create ((GdkDrawable *) (event->window));
 
           __gdk_cairo_region (cr, clip);
           cairo_clip (cr);
@@ -3629,7 +3629,7 @@ gtk_label_expose (GtkWidget      *widget,
               range[0] = active_link->start;
               range[1] = active_link->end;
 
-              cr = __gdk_cairo_create (event->window);
+              cr = __gdk_cairo_create ((GdkDrawable *) (event->window));
 
               __gdk_cairo_region (cr, event->region);
               cairo_clip (cr);
@@ -3995,8 +3995,8 @@ gtk_label_select_word (GtkLabel *label)
 {
   gint min, max;
   
-  gint start_index = gtk_label_move_backward_word (gtk_label_get_props (label), gtk_label_get_props (label)->select_info->selection_end);
-  gint end_index = gtk_label_move_forward_word (gtk_label_get_props (label), gtk_label_get_props (label)->select_info->selection_end);
+  gint start_index = gtk_label_move_backward_word (label, gtk_label_get_props (label)->select_info->selection_end);
+  gint end_index = gtk_label_move_forward_word (label, gtk_label_get_props (label)->select_info->selection_end);
 
   min = MIN (gtk_label_get_props (label)->select_info->selection_anchor,
 	     gtk_label_get_props (label)->select_info->selection_end);
@@ -4203,7 +4203,7 @@ gtk_label_button_press (GtkWidget      *widget,
 
       if (event->type == GDK_3BUTTON_PRESS)
 	{
-	  __gtk_label_select_region_index (gtk_label_get_props (label), 0, strlen (gtk_label_get_props (label)->text));
+	  __gtk_label_select_region_index (label, 0, strlen (gtk_label_get_props (label)->text));
 	  return TRUE;
 	}
 
@@ -4239,7 +4239,7 @@ gtk_label_button_press (GtkWidget      *widget,
       else
 	{
 	  if (event->type == GDK_3BUTTON_PRESS)
-	    __gtk_label_select_region_index (gtk_label_get_props (label), 0, strlen (gtk_label_get_props (label)->text));
+	    __gtk_label_select_region_index (label, 0, strlen (gtk_label_get_props (label)->text));
 	  else if (event->type == GDK_2BUTTON_PRESS)
 	    gtk_label_select_word (label);
 	  else if (min < max && min <= index && index <= max)
@@ -5392,8 +5392,8 @@ gtk_label_move_cursor (GtkLabel       *label,
 	    gint anchor_x, anchor_y;
 	    gboolean end_is_left;
 	    
-	    get_better_cursor (gtk_label_get_props (label), gtk_label_get_props (label)->select_info->selection_end, &end_x, &end_y);
-	    get_better_cursor (gtk_label_get_props (label), gtk_label_get_props (label)->select_info->selection_anchor, &anchor_x, &anchor_y);
+	    get_better_cursor (label, gtk_label_get_props (label)->select_info->selection_end, &end_x, &end_y);
+	    get_better_cursor (label, gtk_label_get_props (label)->select_info->selection_anchor, &anchor_x, &anchor_y);
 
 	    end_is_left = (end_y < anchor_y) || (end_y == anchor_y && end_x < anchor_x);
 	    
@@ -5532,7 +5532,7 @@ gtk_label_copy_clipboard (GtkLabel *label)
 static void
 gtk_label_select_all (GtkLabel *label)
 {
-  __gtk_label_select_region_index (gtk_label_get_props (label), 0, strlen (gtk_label_get_props (label)->text));
+  __gtk_label_select_region_index (label, 0, strlen (gtk_label_get_props (label)->text));
 }
 
 /* Quick hack of a popup menu

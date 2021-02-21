@@ -1216,7 +1216,7 @@ add_option_to_table (GtkPrinterOption *option,
   __gtk_widget_show (widget);
 
   row = gtk_table_get_props (table)->nrows;
-  __gtk_table_resize (gtk_table_get_props (table), gtk_table_get_props (table)->nrows + 1, 2);
+  __gtk_table_resize (table, gtk_table_get_props (table)->nrows + 1, 2);
 
   if (gtk_printer_option_widget_has_external_label (GTK_PRINTER_OPTION_WIDGET (widget)))
     {
@@ -2005,7 +2005,7 @@ draw_collate_cb (GtkWidget          *widget,
   scale = size / 48.0;
   text_x = rtl ? 4 : 11;
 
-  cr = __gdk_cairo_create (gtk_widget_get_props (widget)->window);
+  cr = __gdk_cairo_create ((GdkDrawable *) (gtk_widget_get_props (widget)->window));
 
   cairo_translate (cr, gtk_widget_get_props (widget)->allocation.x, gtk_widget_get_props (widget)->allocation.y);
 
@@ -2613,7 +2613,7 @@ draw_page_cb (GtkWidget          *widget,
 
   number_up_layout = dialog_get_number_up_layout (dialog);
 
-  cr = __gdk_cairo_create (gtk_widget_get_props (widget)->window);
+  cr = __gdk_cairo_create ((GdkDrawable *) (gtk_widget_get_props (widget)->window));
 
   cairo_save (cr);
 

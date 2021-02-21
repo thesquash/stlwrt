@@ -921,7 +921,7 @@ update_widgets (GtkPrinterOptionWidget *widget)
         GtkEntry *entry;
 
         entry = GTK_ENTRY (__gtk_bin_get_child (GTK_BIN (priv->combo)));
-        if (gtk_printer_option_has_choice (gtk_printer_option_get_props (source), gtk_printer_option_get_props (source)->value))
+        if (gtk_printer_option_has_choice (source, gtk_printer_option_get_props (source)->value))
           combo_box_set (priv->combo, gtk_printer_option_get_props (source)->value);
         else
           __gtk_entry_set_text (entry, gtk_printer_option_get_props (source)->value);

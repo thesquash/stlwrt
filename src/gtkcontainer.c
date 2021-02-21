@@ -1443,7 +1443,7 @@ __gtk_container_resize_children (GtkContainer *container)
   g_return_if_fail (GTK_IS_CONTAINER (container));
 
   widget = GTK_WIDGET (container);
-  __gtk_widget_size_allocate (gtk_widget_get_props (widget), &gtk_widget_get_props (widget)->allocation);
+  __gtk_widget_size_allocate (widget, &gtk_widget_get_props (widget)->allocation);
 }
 
 /**

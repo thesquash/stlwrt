@@ -75,7 +75,7 @@ gtk_recent_chooser_widget_class_init (GtkRecentChooserWidgetClass *klass)
 static void
 gtk_recent_chooser_widget_init (GtkRecentChooserWidget *widget)
 {
-  gtk_recent_chooser_widget_get_props (widget)->priv = G_TYPE_INSTANCE_GET_PRIVATE (gtk_recent_chooser_widget_get_props (widget), GTK_TYPE_RECENT_CHOOSER_WIDGET,
+  gtk_recent_chooser_widget_get_props (widget)->priv = G_TYPE_INSTANCE_GET_PRIVATE (widget, GTK_TYPE_RECENT_CHOOSER_WIDGET,
 					      GtkRecentChooserWidgetPrivate);
 }
 

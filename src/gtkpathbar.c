@@ -177,8 +177,8 @@ gtk_path_bar_init (GtkPathBar *path_bar)
   gtk_path_bar_get_props (path_bar)->get_info_cancellable = NULL;
 
   gtk_path_bar_get_props (path_bar)->spacing = 0;
-  gtk_path_bar_get_props (path_bar)->up_slider_button = get_slider_button (gtk_path_bar_get_props (path_bar), GTK_ARROW_LEFT);
-  gtk_path_bar_get_props (path_bar)->down_slider_button = get_slider_button (gtk_path_bar_get_props (path_bar), GTK_ARROW_RIGHT);
+  gtk_path_bar_get_props (path_bar)->up_slider_button = get_slider_button (path_bar, GTK_ARROW_LEFT);
+  gtk_path_bar_get_props (path_bar)->down_slider_button = get_slider_button (path_bar, GTK_ARROW_RIGHT);
   gtk_path_bar_get_props (path_bar)->icon_size = FALLBACK_ICON_SIZE;
   
   g_signal_connect_swapped (gtk_path_bar_get_props (path_bar)->up_slider_button, "clicked",
@@ -1707,7 +1707,7 @@ _gtk_path_bar_set_file (GtkPathBar         *path_bar,
    * This could be a parent directory or a previous selected subdirectory.
    */
   if (keep_trail &&
-      gtk_path_bar_check_parent_path (gtk_path_bar_get_props (path_bar), file, gtk_path_bar_get_props (path_bar)->file_system))
+      gtk_path_bar_check_parent_path (path_bar, file, gtk_path_bar_get_props (path_bar)->file_system))
     return TRUE;
 
   info = g_new0 (struct SetFileInfo, 1);

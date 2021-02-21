@@ -566,7 +566,7 @@ __gtk_cell_renderer_render (GtkCellRenderer      *cell,
 
   if (cell->cell_background_set && !selected)
     {
-      cairo_t *cr = __gdk_cairo_create (window);
+      cairo_t *cr = __gdk_cairo_create ((GdkDrawable *) (window));
 
       __gdk_cairo_rectangle (cr, background_area);
       __gdk_cairo_set_source_color (cr, &priv->cell_background);

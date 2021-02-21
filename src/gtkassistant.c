@@ -1307,7 +1307,7 @@ assistant_paint_colored_box (GtkWidget *widget)
   gint content_x, content_width;
   gboolean rtl;
 
-  cr   = __gdk_cairo_create (gtk_widget_get_props (widget)->window);
+  cr   = __gdk_cairo_create ((GdkDrawable *) (gtk_widget_get_props (widget)->window));
   rtl  = (__gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL);
   border_width = __gtk_container_get_border_width (GTK_CONTAINER (widget));
 

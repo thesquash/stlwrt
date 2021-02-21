@@ -567,7 +567,7 @@ gtk_paned_init (GtkPaned *paned)
    */
   __gtk_widget_set_redraw_on_allocate (GTK_WIDGET (paned), FALSE);
 
-  gtk_paned_get_props (paned)->priv = G_TYPE_INSTANCE_GET_PRIVATE (gtk_paned_get_props (paned), GTK_TYPE_PANED, GtkPanedPrivate);
+  gtk_paned_get_props (paned)->priv = G_TYPE_INSTANCE_GET_PRIVATE (paned, GTK_TYPE_PANED, GtkPanedPrivate);
 
   gtk_paned_get_props (paned)->priv->orientation = GTK_ORIENTATION_HORIZONTAL;
   gtk_paned_get_props (paned)->cursor_type = GDK_SB_H_DOUBLE_ARROW;
@@ -2086,7 +2086,7 @@ gtk_paned_cancel_position (GtkPaned *paned)
     {
       if (gtk_paned_get_props (paned)->original_position != -1)
 	{
-	  __gtk_paned_set_position (gtk_paned_get_props (paned), gtk_paned_get_props (paned)->original_position);
+	  __gtk_paned_set_position (paned, gtk_paned_get_props (paned)->original_position);
 	  gtk_paned_get_props (paned)->original_position = -1;
 	}
 

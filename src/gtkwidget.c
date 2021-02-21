@@ -387,7 +387,7 @@ struct _GtkWidgetPrivate
   guint32  widget_flags;
 };
 
-#define GTK_WIDGET_FLAGS(obj) (gtk_widget_get_instance_private (obj)->flags)
+#define GTK_WIDGET_FLAGS(obj) (gtk_widget_get_instance_private (obj)->widget_flags)
 
 
 STLWRT_DEFINE_VTYPE (GtkWidget, gtk_widget, G_TYPE_OBJECT,  G_TYPE_FLAG_NONE,
@@ -7865,7 +7865,7 @@ __gtk_widget_set_uposition (GtkWidget *widget,
     ___gtk_window_reposition (GTK_WINDOW (widget), aux_info->x, aux_info->y);
   
   if (__gtk_widget_get_visible (gtk_widget_get_props (widget)) && gtk_widget_get_props (widget)->parent)
-    __gtk_widget_size_allocate (gtk_widget_get_props (widget), &gtk_widget_get_props (widget)->allocation);
+    __gtk_widget_size_allocate (widget, &gtk_widget_get_props (widget)->allocation);
 }
 
 static void
@@ -9484,7 +9484,7 @@ __gtk_widget_reset_shapes (GtkWidget *widget)
   g_return_if_fail (__gtk_widget_get_realized (widget));
 
   if (!GTK_WIDGET_HAS_SHAPE_MASK (widget))
-    gtk_reset_shapes_recurse (gtk_widget_get_props (widget), gtk_widget_get_props (widget)->window);
+    gtk_reset_shapes_recurse (widget, gtk_widget_get_props (widget)->window);
 }
 
 /**

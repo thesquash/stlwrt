@@ -187,7 +187,7 @@ STLWRT_DEFINE_FTYPE_VPARENT (GtkToolPalette, gtk_tool_palette, GTK_TYPE_CONTAINE
 static void
 gtk_tool_palette_init (GtkToolPalette *palette)
 {
-  gtk_tool_palette_get_props (palette)->priv = G_TYPE_INSTANCE_GET_PRIVATE (gtk_tool_palette_get_props (palette),
+  gtk_tool_palette_get_props (palette)->priv = G_TYPE_INSTANCE_GET_PRIVATE (palette,
                                                GTK_TYPE_TOOL_PALETTE,
                                                GtkToolPalettePrivate);
 
@@ -627,7 +627,7 @@ gtk_tool_palette_expose_event (GtkWidget      *widget,
   if (!__gdk_display_supports_composite (display))
     return FALSE;
 
-  cr = __gdk_cairo_create (gtk_widget_get_props (widget)->window);
+  cr = __gdk_cairo_create ((GdkDrawable *) (gtk_widget_get_props (widget)->window));
   __gdk_cairo_region (cr, event->region);
   cairo_clip (cr);
 
@@ -688,7 +688,7 @@ gtk_tool_palette_adjustment_value_changed (GtkAdjustment *adjustment,
                                            gpointer       data)
 {
   GtkWidget *widget = GTK_WIDGET (data);
-  gtk_tool_palette_size_allocate (gtk_widget_get_props (widget), &gtk_widget_get_props (widget)->allocation);
+  gtk_tool_palette_size_allocate (widget, &gtk_widget_get_props (widget)->allocation);
 }
 
 static void

@@ -1121,7 +1121,7 @@ __gtk_drag_highlight_expose (GtkWidget      *widget,
 		        &event->area, widget, "dnd",
 			x, y, width, height);
 
-      cr = __gdk_cairo_create (gtk_widget_get_props (widget)->window);
+      cr = __gdk_cairo_create ((GdkDrawable *) (gtk_widget_get_props (widget)->window));
       cairo_set_source_rgb (cr, 0.0, 0.0, 0.0); /* black */
       cairo_set_line_width (cr, 1.0);
       cairo_rectangle (cr,

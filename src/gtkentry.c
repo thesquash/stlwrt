@@ -3226,7 +3226,7 @@ draw_icon (GtkWidget            *widget,
       pixbuf = temp_pixbuf;
     }
 
-  cr = __gdk_cairo_create (icon_info->window);
+  cr = __gdk_cairo_create ((GdkDrawable *) (icon_info->window));
   __gdk_cairo_set_source_pixbuf (cr, pixbuf, x, y);
   cairo_paint (cr);
   cairo_destroy (cr);
@@ -3644,7 +3644,7 @@ gtk_entry_button_press (GtkWidget      *widget,
       gtk_entry_get_props (entry)->in_click = FALSE;
     }
   
-  tmp_pos = gtk_entry_find_position (gtk_entry_get_props (entry), event->x + gtk_entry_get_props (entry)->scroll_offset);
+  tmp_pos = gtk_entry_find_position (entry, event->x + gtk_entry_get_props (entry)->scroll_offset);
 
   if (_gtk_button_event_triggers_context_menu (event))
     {
@@ -3722,7 +3722,7 @@ gtk_entry_button_press (GtkWidget      *widget,
 	switch (event->type)
 	{
 	case GDK_BUTTON_PRESS:
-	  if (in_selection (gtk_entry_get_props (entry), event->x + gtk_entry_get_props (entry)->scroll_offset))
+	  if (in_selection (entry, event->x + gtk_entry_get_props (entry)->scroll_offset))
 	    {
 	      /* Click inside the selection - we'll either start a drag, or
 	       * clear the selection
@@ -3823,7 +3823,7 @@ gtk_entry_button_release (GtkWidget      *widget,
 
   if (gtk_entry_get_props (entry)->in_drag)
     {
-      gint tmp_pos = gtk_entry_find_position (gtk_entry_get_props (entry), gtk_entry_get_props (entry)->drag_start_x);
+      gint tmp_pos = gtk_entry_find_position (entry, gtk_entry_get_props (entry)->drag_start_x);
 
       __gtk_editable_set_position (GTK_EDITABLE (entry), tmp_pos);
 
@@ -3960,7 +3960,7 @@ gtk_entry_motion_notify (GtkWidget      *widget,
       else if (event->y >= height)
 	tmp_pos = __gtk_entry_buffer_get_length (get_buffer (entry));
       else
-	tmp_pos = gtk_entry_find_position (gtk_entry_get_props (entry), event->x + gtk_entry_get_props (entry)->scroll_offset);
+	tmp_pos = gtk_entry_find_position (entry, event->x + gtk_entry_get_props (entry)->scroll_offset);
       
       if (gtk_entry_get_props (entry)->select_words) 
 	{
@@ -4740,8 +4740,8 @@ gtk_entry_move_cursor (GtkEntry       *entry,
 	{
 	case GTK_MOVEMENT_VISUAL_POSITIONS:
 	  {
-	    gint current_x = get_better_cursor_x (gtk_entry_get_props (entry), gtk_entry_get_props (entry)->current_pos);
-	    gint bound_x = get_better_cursor_x (gtk_entry_get_props (entry), gtk_entry_get_props (entry)->selection_bound);
+	    gint current_x = get_better_cursor_x (entry, gtk_entry_get_props (entry)->current_pos);
+	    gint bound_x = get_better_cursor_x (entry, gtk_entry_get_props (entry)->selection_bound);
 
 	    if (count <= 0)
 	      new_pos = current_x < bound_x ? gtk_entry_get_props (entry)->current_pos : gtk_entry_get_props (entry)->selection_bound;
@@ -4900,7 +4900,7 @@ gtk_entry_delete_from_cursor (GtkEntry       *entry,
   switch (type)
     {
     case GTK_DELETE_CHARS:
-      end_pos = gtk_entry_move_logically (gtk_entry_get_props (entry), gtk_entry_get_props (entry)->current_pos, count);
+      end_pos = gtk_entry_move_logically (entry, gtk_entry_get_props (entry)->current_pos, count);
       __gtk_editable_delete_text (editable, MIN (start_pos, end_pos), MAX (start_pos, end_pos));
       break;
 
@@ -4980,7 +4980,7 @@ gtk_entry_backspace (GtkEntry *entry)
       return;
     }
 
-  prev_pos = gtk_entry_move_logically (gtk_entry_get_props (entry), gtk_entry_get_props (entry)->current_pos, -1);
+  prev_pos = gtk_entry_move_logically (entry, gtk_entry_get_props (entry)->current_pos, -1);
 
   if (prev_pos < gtk_entry_get_props (entry)->current_pos)
     {
@@ -5458,7 +5458,7 @@ gtk_entry_ensure_layout (GtkEntry *entry,
 
   if (!gtk_entry_get_props (entry)->cached_layout)
     {
-      gtk_entry_get_props (entry)->cached_layout = gtk_entry_create_layout (gtk_entry_get_props (entry), include_preedit);
+      gtk_entry_get_props (entry)->cached_layout = gtk_entry_create_layout (entry, include_preedit);
       gtk_entry_get_props (entry)->cache_includes_preedit = include_preedit;
     }
   
@@ -5599,7 +5599,7 @@ gtk_entry_draw_text (GtkEntry *entry)
                          &progress_x, &progress_y,
                          &progress_width, &progress_height);
 
-      cr = __gdk_cairo_create (gtk_entry_get_props (entry)->text_area);
+      cr = __gdk_cairo_create ((GdkDrawable *) (gtk_entry_get_props (entry)->text_area));
 
       /* If the color is the same, or the progress area has a zero
        * size, then we only need to draw once. */
@@ -5765,7 +5765,7 @@ gtk_entry_draw_cursor (GtkEntry  *entry,
           rect.width = PANGO_PIXELS (cursor_rect.width);
           rect.height = PANGO_PIXELS (cursor_rect.height);
 
-          cr = __gdk_cairo_create (gtk_entry_get_props (entry)->text_area);
+          cr = __gdk_cairo_create ((GdkDrawable *) (gtk_entry_get_props (entry)->text_area));
 
           ___gtk_widget_get_cursor_color (widget, &cursor_color);
           __gdk_cairo_set_source_color (cr, &cursor_color);
@@ -6268,8 +6268,8 @@ gtk_entry_delete_whitespace (GtkEntry *entry)
 static void
 gtk_entry_select_word (GtkEntry *entry)
 {
-  gint start_pos = gtk_entry_move_backward_word (gtk_entry_get_props (entry), gtk_entry_get_props (entry)->current_pos, TRUE);
-  gint end_pos = gtk_entry_move_forward_word (gtk_entry_get_props (entry), gtk_entry_get_props (entry)->current_pos, TRUE);
+  gint start_pos = gtk_entry_move_backward_word (entry, gtk_entry_get_props (entry)->current_pos, TRUE);
+  gint end_pos = gtk_entry_move_forward_word (entry, gtk_entry_get_props (entry)->current_pos, TRUE);
 
   __gtk_editable_select_region (GTK_EDITABLE (entry), start_pos, end_pos);
 }
@@ -8712,15 +8712,15 @@ popup_targets_received (GtkClipboard     *clipboard,
 				 popup_menu_detach);
       
       mode = gtk_entry_get_display_mode (entry);
-      append_action_signal (gtk_entry_get_props (entry), gtk_entry_get_props (entry)->popup_menu, GTK_STOCK_CUT, "cut-clipboard",
+      append_action_signal (entry, gtk_entry_get_props (entry)->popup_menu, GTK_STOCK_CUT, "cut-clipboard",
 			    gtk_entry_get_props (entry)->editable && mode == DISPLAY_NORMAL &&
 			    gtk_entry_get_props (entry)->current_pos != gtk_entry_get_props (entry)->selection_bound);
 
-      append_action_signal (gtk_entry_get_props (entry), gtk_entry_get_props (entry)->popup_menu, GTK_STOCK_COPY, "copy-clipboard",
+      append_action_signal (entry, gtk_entry_get_props (entry)->popup_menu, GTK_STOCK_COPY, "copy-clipboard",
                             mode == DISPLAY_NORMAL &&
                             gtk_entry_get_props (entry)->current_pos != gtk_entry_get_props (entry)->selection_bound);
 
-      append_action_signal (gtk_entry_get_props (entry), gtk_entry_get_props (entry)->popup_menu, GTK_STOCK_PASTE, "paste-clipboard",
+      append_action_signal (entry, gtk_entry_get_props (entry)->popup_menu, GTK_STOCK_PASTE, "paste-clipboard",
 			    gtk_entry_get_props (entry)->editable && clipboard_contains_text);
 
       menuitem = __gtk_image_menu_item_new_from_stock (GTK_STOCK_DELETE, NULL);
@@ -8943,7 +8943,7 @@ gtk_entry_drag_motion (GtkWidget        *widget,
   y -= gtk_widget_get_props (widget)->style->ythickness;
   
   old_position = gtk_entry_get_props (entry)->dnd_position;
-  new_position = gtk_entry_find_position (gtk_entry_get_props (entry), x + gtk_entry_get_props (entry)->scroll_offset);
+  new_position = gtk_entry_find_position (entry, x + gtk_entry_get_props (entry)->scroll_offset);
 
   if (gtk_entry_get_props (entry)->editable &&
       __gtk_drag_dest_find_target (widget, context, NULL) != GDK_NONE)
@@ -9015,7 +9015,7 @@ gtk_entry_drag_data_received (GtkWidget        *widget,
       if (gtk_entry_get_props (entry)->truncate_multiline)
         length = truncate_multiline (str);
 
-      new_position = gtk_entry_find_position (gtk_entry_get_props (entry), x + gtk_entry_get_props (entry)->scroll_offset);
+      new_position = gtk_entry_find_position (entry, x + gtk_entry_get_props (entry)->scroll_offset);
 
       if (!__gtk_editable_get_selection_bounds (editable, &sel1, &sel2) ||
 	  new_position < sel1 || new_position > sel2)

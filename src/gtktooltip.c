@@ -666,7 +666,7 @@ update_shape (GtkTooltip *tooltip)
 
   __gtk_window_get_size (GTK_WINDOW (tooltip->window), &width, &height);
   mask = (GdkBitmap *) __gdk_pixmap_new (NULL, width, height, 1);
-  cr = __gdk_cairo_create (mask);
+  cr = __gdk_cairo_create ((GdkDrawable *) (mask));
 
   fill_background (tooltip->window, cr,
                    &tooltip->window->style->black,
@@ -693,7 +693,7 @@ gtk_tooltip_paint_window (GtkTooltip *tooltip)
     {
       cairo_t *cr;
 
-      cr = __gdk_cairo_create (tooltip->window->window);
+      cr = __gdk_cairo_create ((GdkDrawable *) (tooltip->window->window));
       fill_background (tooltip->window, cr,
                        &tooltip->window->style->bg [GTK_STATE_NORMAL],
                        &tooltip->window->style->bg [GTK_STATE_SELECTED],

@@ -2781,7 +2781,7 @@ __gtk_text_view_get_tabs (GtkTextView *text_view)
 static void
 gtk_text_view_toggle_cursor_visible (GtkTextView *text_view)
 {
-  __gtk_text_view_set_cursor_visible (gtk_text_view_get_props (text_view), !gtk_text_view_get_props (text_view)->cursor_visible);
+  __gtk_text_view_set_cursor_visible (text_view, !gtk_text_view_get_props (text_view)->cursor_visible);
 }
 
 /**
@@ -5362,7 +5362,7 @@ gtk_text_view_move_viewport (GtkTextView     *text_view,
       break;
     }
 
-  return set_adjustment_clamped (gtk_adjustment_get_props (adjustment), gtk_adjustment_get_props (adjustment)->value + count * increment);
+  return set_adjustment_clamped (adjustment, gtk_adjustment_get_props (adjustment)->value + count * increment);
 }
 
 static void
@@ -6328,7 +6328,7 @@ gtk_text_view_start_selection_drag (GtkTextView       *text_view,
 
   gtk_text_view_check_cursor_blink (text_view);
 
-  gtk_text_view_get_props (text_view)->selection_drag_handler = g_signal_connect_data (gtk_text_view_get_props (text_view),
+  gtk_text_view_get_props (text_view)->selection_drag_handler = g_signal_connect_data (text_view,
                                                              "motion-notify-event",
                                                              G_CALLBACK (selection_motion_event_handler),
                                                              data,
@@ -6342,7 +6342,7 @@ gtk_text_view_end_selection_drag (GtkTextView    *text_view)
   if (gtk_text_view_get_props (text_view)->selection_drag_handler == 0)
     return FALSE;
 
-  g_signal_handler_disconnect (gtk_text_view_get_props (text_view), gtk_text_view_get_props (text_view)->selection_drag_handler);
+  g_signal_handler_disconnect (text_view, gtk_text_view_get_props (text_view)->selection_drag_handler);
   gtk_text_view_get_props (text_view)->selection_drag_handler = 0;
 
   if (gtk_text_view_get_props (text_view)->scroll_timeout != 0)
@@ -7921,13 +7921,13 @@ popup_targets_received (GtkClipboard     *clipboard,
       
       can_insert = __gtk_text_iter_can_insert (&iter, gtk_text_view_get_props (text_view)->editable);
       
-      append_action_signal (gtk_text_view_get_props (text_view), gtk_text_view_get_props (text_view)->popup_menu, GTK_STOCK_CUT, "cut-clipboard",
+      append_action_signal (text_view, gtk_text_view_get_props (text_view)->popup_menu, GTK_STOCK_CUT, "cut-clipboard",
 			    have_selection &&
                             range_contains_editable_text (&sel_start, &sel_end,
                                                           gtk_text_view_get_props (text_view)->editable));
-      append_action_signal (gtk_text_view_get_props (text_view), gtk_text_view_get_props (text_view)->popup_menu, GTK_STOCK_COPY, "copy-clipboard",
+      append_action_signal (text_view, gtk_text_view_get_props (text_view)->popup_menu, GTK_STOCK_COPY, "copy-clipboard",
 			    have_selection);
-      append_action_signal (gtk_text_view_get_props (text_view), gtk_text_view_get_props (text_view)->popup_menu, GTK_STOCK_PASTE, "paste-clipboard",
+      append_action_signal (text_view, gtk_text_view_get_props (text_view)->popup_menu, GTK_STOCK_PASTE, "paste-clipboard",
 			    can_insert && clipboard_contains_text);
       
       menuitem = __gtk_image_menu_item_new_from_stock (GTK_STOCK_DELETE, NULL);
@@ -8259,7 +8259,7 @@ text_window_invalidate_rect (GtkTextWindow *win,
 
 #if 0
   {
-    cairo_t *cr = __gdk_cairo_create (win->bin_window);
+    cairo_t *cr = __gdk_cairo_create ((GdkDrawable *) (win->bin_window));
     __gdk_cairo_rectangle (cr, &window_rect);
     cairo_set_source_rgb  (cr, 1.0, 0.0, 0.0);	/* red */
     cairo_fill (cr);

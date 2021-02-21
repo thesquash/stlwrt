@@ -159,8 +159,6 @@ static void     gtk_ui_manager_buildable_custom_tag_end (GtkBuildable 	 *buildab
 							 const gchar  	 *tagname,
 							 gpointer     	 *data);
 
-
-
 enum 
 {
   ADD_WIDGET,
@@ -180,6 +178,20 @@ enum
 };
 
 static guint ui_manager_signals[LAST_SIGNAL] = { 0 };
+
+struct _GtkUIManagerPrivate 
+{
+  GtkAccelGroup *accel_group;
+
+  GNode *root_node;
+  GList *action_groups;
+
+  guint last_merge_id;
+
+  guint update_tag;  
+
+  gboolean add_tearoffs;
+};
 
 STLWRT_DEFINE_FTYPE (GtkUIManager, gtk_ui_manager, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
                      G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE, gtk_ui_manager_buildable_init))

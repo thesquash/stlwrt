@@ -738,7 +738,7 @@ gtk_box_pack (GtkBox      *box,
 
   g_return_if_fail (GTK_IS_BOX (box));
   g_return_if_fail (GTK_IS_WIDGET (child));
-  g_return_if_fail (child->parent == NULL);
+  g_return_if_fail (gtk_widget_get_props (child)->parent == NULL);
 
   child_info = g_new (GtkBoxChild, 1);
   child_info->widget = child;

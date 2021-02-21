@@ -79,11 +79,12 @@ static void gtk_image_menu_item_update                     (GtkActivatable      
 static void gtk_image_menu_item_sync_action_properties     (GtkActivatable       *activatable,
 							    GtkAction            *action);
 
-typedef struct {
+struct _GtkImageMenuItemPrivate
+{
   gchar *label;
   guint  use_stock         : 1;
   guint  always_show_image : 1;
-} GtkImageMenuItemPrivate;
+};
 
 enum {
   PROP_0,

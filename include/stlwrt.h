@@ -144,7 +144,7 @@ G_BEGIN_DECLS
  \
   G_GNUC_UNUSED \
   static inline TN##Private * \
-  t_n##_get_instance_private (TN *self) \
+  t_n##_get_instance_private (gpointer self) \
   { \
     return (TN##Private *)(G_STRUCT_MEMBER_P (self, TN##_private_offset)); \
   } \
@@ -189,7 +189,7 @@ G_BEGIN_DECLS
  \
   G_GNUC_UNUSED \
   static inline TN##Private * \
-  t_n##_get_instance_private (TN *self) \
+  t_n##_get_instance_private (gpointer self) \
   { \
     return (TN##Private *)(G_STRUCT_MEMBER_P (self, TN##_private_offset)); \
   } \
@@ -257,7 +257,7 @@ G_BEGIN_DECLS
     { \
       g_type_class_adjust_private_offset (klass, &TN##_private_offset); \
       TN##_props_offset = TN##_private_offset; \
-      TN##_private_offset += TN##_props_size; \
+      TN##_private_offset += props_size; \
     } \
     else \
     { \
@@ -270,7 +270,7 @@ G_BEGIN_DECLS
  \
   G_GNUC_UNUSED \
   static inline TN##Private * \
-  t_n##_get_instance_private (TN *self) \
+  t_n##_get_instance_private (gpointer self) \
   { \
     return (TN##Private *)(G_STRUCT_MEMBER_P (self, TN##_private_offset)); \
   } \

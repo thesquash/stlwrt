@@ -32,11 +32,11 @@
 #include <gtkintl.h>
 
 
-typedef struct
+struct _GtkEventBoxPrivate
 {
   gboolean above_child;
   GdkWindow *event_window;
-} GtkEventBoxPrivate;
+};
 
 enum {
   PROP_0,

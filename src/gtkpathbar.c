@@ -1148,7 +1148,7 @@ button_clicked_cb (GtkWidget *button,
   if (button_data->ignore_changes)
     return;
 
-  path_bar = GTK_PATH_BAR (button->parent);
+  path_bar = GTK_PATH_BAR (gtk_widget_get_props (button)->parent);
 
   button_list = g_list_find (gtk_path_bar_get_props (path_bar)->button_list, button_data);
   g_assert (button_list != NULL);

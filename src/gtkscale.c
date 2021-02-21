@@ -665,9 +665,9 @@ __gtk_scale_set_draw_value (GtkScale *scale,
     {
       gtk_scale_get_props (scale)->draw_value = draw_value;
       if (draw_value)
-	GTK_RANGE (scale)->round_digits = gtk_scale_get_props (scale)->digits;
+	gtk_range_get_props (scale)->round_digits = gtk_scale_get_props (scale)->digits;
       else
-	gtk_range_get_props (GTK_RANGE (scale))->round_digits = -1;
+	gtk_range_get_props (scale)->round_digits = -1;
 
       ___gtk_scale_clear_layout (scale);
 

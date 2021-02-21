@@ -44,10 +44,11 @@
 
 
 
-typedef struct {
+struct _GtkMenuItemPrivate
+{
   GtkAction *action;
   gboolean   use_action_appearance;
-} GtkMenuItemPrivate;
+};
 
 enum {
   SELECT,

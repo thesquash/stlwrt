@@ -111,7 +111,7 @@ enum {
 
 #define NO_SORT_FUNC ((GtkTreeIterCompareFunc) 0x1)
 
-#define VALID_ITER(iter, tree_model_sort) ((iter) != NULL && (iter)->user_data != NULL && (iter)->user_data2 != NULL && (tree_model_sort)->stamp == (iter)->stamp)
+#define VALID_ITER(iter, tree_model_sort) ((iter) != NULL && (iter)->user_data != NULL && (iter)->user_data2 != NULL && gtk_tree_model_sort_get_props (tree_model_sort)->stamp == (iter)->stamp)
 
 /* general (object/interface init, etc) */
 static void gtk_tree_model_sort_tree_model_init       (GtkTreeModelIface     *iface);

@@ -68,15 +68,15 @@
 /* Translate from bin_window coordinates to rbtree (tree coordinates) and
  * vice versa.
  */
-#define TREE_WINDOW_Y_TO_RBTREE_Y(tree_view,y) ((y) + tree_view->priv->dy)
-#define RBTREE_Y_TO_TREE_WINDOW_Y(tree_view,y) ((y) - tree_view->priv->dy)
+#define TREE_WINDOW_Y_TO_RBTREE_Y(tree_view,y) ((y) + gtk_tree_view_get_instance_private (tree_view)->dy)
+#define RBTREE_Y_TO_TREE_WINDOW_Y(tree_view,y) ((y) - gtk_tree_view_get_instance_private (tree_view)->dy)
 
 /* This is in bin_window coordinates */
 #define BACKGROUND_FIRST_PIXEL(tree_view,tree,node) (RBTREE_Y_TO_TREE_WINDOW_Y (tree_view, _gtk_rbtree_node_find_offset ((tree), (node))))
 #define CELL_FIRST_PIXEL(tree_view,tree,node,separator) (BACKGROUND_FIRST_PIXEL (tree_view,tree,node) + separator/2)
 
 #define ROW_HEIGHT(tree_view,height) \
-  ((height > 0) ? (height) : (tree_view)->priv->expander_size)
+  ((height > 0) ? (height) : gtk_tree_view_get_instance_private (tree_view)->expander_size)
 
 
 typedef struct _GtkTreeViewChild GtkTreeViewChild;

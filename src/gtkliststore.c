@@ -33,8 +33,8 @@
 #include <gtkbuilderprivate.h>
 
 
-#define GTK_LIST_STORE_IS_SORTED(list) (((GtkListStore*)(list))->sort_column_id != GTK_TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID)
-#define VALID_ITER(iter, list_store) ((iter)!= NULL && (iter)->user_data != NULL && list_store->stamp == (iter)->stamp && !g_sequence_iter_is_end ((iter)->user_data) && g_sequence_iter_get_sequence ((iter)->user_data) == list_store->seq)
+#define GTK_LIST_STORE_IS_SORTED(list) (gtk_list_store_get_props ((GtkListStore*)(list))->sort_column_id != GTK_TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID)
+#define VALID_ITER(iter, list_store) ((iter)!= NULL && (iter)->user_data != NULL && gtk_list_store_get_props (list_store)->stamp == (iter)->stamp && !g_sequence_iter_is_end ((iter)->user_data) && g_sequence_iter_get_sequence ((iter)->user_data) == gtk_list_store_get_props (list_store)->seq)
 
 static void         gtk_list_store_tree_model_init (GtkTreeModelIface *iface);
 static void         gtk_list_store_drag_source_init(GtkTreeDragSourceIface *iface);

@@ -997,7 +997,7 @@ gtk_statusbar_size_allocate  (GtkWidget     *widget,
 	   */
 	  child = __gtk_bin_get_child (GTK_BIN (gtk_status_bar_get_props (statusbar)->frame));
 
-	  if (gtk_widget_get_props (child)->allocation.width + rect.width > gtk_status_bar_get_props (statusbar)->frame->allocation.width)
+	  if (gtk_widget_get_props (child)->allocation.width + rect.width > gtk_widget_get_props (gtk_status_bar_get_props (statusbar)->frame)->allocation.width)
 	    {
 	      /* shrink the label to make room for the grip */
 	      *allocation = gtk_widget_get_props (child)->allocation;

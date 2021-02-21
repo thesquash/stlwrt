@@ -66,6 +66,20 @@ enum {
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
+struct _GtkPrinterOptionWidgetPrivate
+{
+  GtkPrinterOption *source;
+  gulong source_changed_handler;
+  
+  GtkWidget *check;
+  GtkWidget *combo;
+  GtkWidget *entry;
+  GtkWidget *image;
+  GtkWidget *label;
+  GtkWidget *filechooser;
+  GtkWidget *box;
+};
+
 STLWRT_DEFINE_FTYPE_VPARENT (GtkPrinterOptionWidget, gtk_printer_option_widget, GTK_TYPE_HBOX, G_TYPE_FLAG_NONE, ;)
 
 static void gtk_printer_option_widget_set_property (GObject      *object,

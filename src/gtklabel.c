@@ -53,17 +53,14 @@
 #include <gtktooltip.h>
 #include <gtkprivate.h>
 
-
-
-
-typedef struct
+struct _GtkLabelPrivate
 {
   gint wrap_width;
   gint width_chars;
   gint max_width_chars;
 
   gboolean mnemonics_visible;
-} GtkLabelPrivate;
+};
 
 /* Notes about the handling of links:
  *

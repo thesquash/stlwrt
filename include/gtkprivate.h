@@ -49,7 +49,7 @@ typedef enum
 
 /* Macros for extracting a widgets private_flags from GtkWidget.
  */
-#define GTK_PRIVATE_FLAGS(wid)            (GTK_WIDGET (wid)->private_flags)
+#define GTK_PRIVATE_FLAGS(wid)            (gtk_widget_get_props (GTK_WIDGET (wid))->private_flags)
 #define GTK_WIDGET_USER_STYLE(obj)	  ((GTK_PRIVATE_FLAGS (obj) & PRIVATE_GTK_USER_STYLE) != 0)
 #define GTK_CONTAINER_RESIZE_PENDING(obj) ((GTK_PRIVATE_FLAGS (obj) & PRIVATE_GTK_RESIZE_PENDING) != 0)
 #define GTK_WIDGET_HAS_POINTER(obj)	  ((GTK_PRIVATE_FLAGS (obj) & PRIVATE_GTK_HAS_POINTER) != 0)

@@ -31,8 +31,8 @@
 
 
 #define G_NODE(node) ((GNode *)node)
-#define GTK_TREE_STORE_IS_SORTED(tree) (((GtkTreeStore*)(tree))->sort_column_id != GTK_TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID)
-#define VALID_ITER(iter, tree_store) ((iter)!= NULL && (iter)->user_data != NULL && ((GtkTreeStore*)(tree_store))->stamp == (iter)->stamp)
+#define GTK_TREE_STORE_IS_SORTED(tree) (gtk_tree_store_get_props ((GtkTreeStore*)(tree))->sort_column_id != GTK_TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID)
+#define VALID_ITER(iter, tree_store) ((iter)!= NULL && (iter)->user_data != NULL && (gtk_tree_store_get_props (tree_store))->stamp == (iter)->stamp)
 
 static void         gtk_tree_store_tree_model_init (GtkTreeModelIface *iface);
 static void         gtk_tree_store_drag_source_init(GtkTreeDragSourceIface *iface);

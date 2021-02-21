@@ -59,6 +59,37 @@ enum {
   PRINTER_LIST_N_COLS
 };
 
+struct _GtkCustomPaperUnixDialogPrivate
+{
+
+  GtkWidget *treeview;
+  GtkWidget *values_box;
+  GtkWidget *printer_combo;
+  GtkWidget *width_widget;
+  GtkWidget *height_widget;
+  GtkWidget *top_widget;
+  GtkWidget *bottom_widget;
+  GtkWidget *left_widget;
+  GtkWidget *right_widget;
+
+  GtkTreeViewColumn *text_column;
+
+  gulong printer_inserted_tag;
+  gulong printer_removed_tag;
+
+  guint request_details_tag;
+  GtkPrinter *request_details_printer;
+
+  guint non_user_change : 1;
+
+  GtkListStore *custom_paper_list;
+  GtkListStore *printer_list;
+
+  GList *print_backends;
+
+  gchar *waiting_for_printer;
+};
+
 STLWRT_DEFINE_FTYPE_VPARENT (GtkCustomPaperUnixDialog, gtk_custom_paper_unix_dialog,
                              GTK_TYPE_DIALOG, G_TYPE_FLAG_NONE, ;)
 

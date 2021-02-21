@@ -1637,7 +1637,7 @@ gtk_calendar_realize (GtkWidget *widget)
   attributes.colormap = __gtk_widget_get_colormap (widget);
   
   attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
-  gtk_widget_get_props (widget)->window = __gdk_window_new (gtk_widget_get_props (widget)->parent->window,
+  gtk_widget_get_props (widget)->window = __gdk_window_new (gtk_widget_get_props (gtk_widget_get_props (widget)->parent)->window,
 				   &attributes, attributes_mask);
   
   gtk_widget_get_props (widget)->style = __gtk_style_attach (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window);

@@ -58,8 +58,6 @@
 #include <gtkprintutils.h>
 
 
-
-
 enum {
   PRINTER_LIST_COL_NAME,
   PRINTER_LIST_COL_PRINTER,
@@ -70,6 +68,34 @@ enum {
   PAGE_SETUP_LIST_COL_PAGE_SETUP,
   PAGE_SETUP_LIST_COL_IS_SEPARATOR,
   PAGE_SETUP_LIST_N_COLS
+};
+
+struct _GtkPageSetupUnixDialogPrivate
+{
+  GtkListStore *printer_list;
+  GtkListStore *page_setup_list;
+  GtkListStore *custom_paper_list;
+  
+  GList *print_backends;
+
+  GtkWidget *printer_combo;
+  GtkWidget *paper_size_combo;
+  GtkWidget *paper_size_label;
+
+  GtkWidget *portrait_radio;
+  GtkWidget *reverse_portrait_radio;
+  GtkWidget *landscape_radio;
+  GtkWidget *reverse_landscape_radio;
+
+  guint request_details_tag;
+  GtkPrinter *request_details_printer;
+  
+  GtkPrintSettings *print_settings;
+
+  /* Save last setup so we can re-set it after selecting manage custom sizes */
+  GtkPageSetup *last_setup;
+
+  gchar *waiting_for_printer;
 };
 
 STLWRT_DEFINE_FTYPE_VPARENT (GtkPageSetupUnixDialog, gtk_page_setup_unix_dialog, GTK_TYPE_DIALOG,

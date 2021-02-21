@@ -75,10 +75,11 @@
 
 #define DEFAULT_SCROLLBAR_SPACING  3
 
-typedef struct {
+struct _GtkScrolledWindowPrivate
+{
 	gboolean window_placement_set;
 	GtkCornerType real_window_placement;
-} GtkScrolledWindowPrivate;
+};
 
 
 
@@ -1711,7 +1712,7 @@ __gtk_scrolled_window_add_with_viewport (GtkScrolledWindow *scrolled_window,
   if (gtk_bin_get_props (bin)->child != NULL)
     {
       g_return_if_fail (GTK_IS_VIEWPORT (gtk_bin_get_props (bin)->child));
-      g_return_if_fail (GTK_BIN (gtk_bin_get_props (bin)->child)->child == NULL);
+      g_return_if_fail (gtk_bin_get_props (gtk_bin_get_props (bin)->child)->child == NULL);
 
       viewport = gtk_bin_get_props (bin)->child;
     }

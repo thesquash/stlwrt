@@ -177,8 +177,8 @@ __gtk_tree_selection_set_mode (GtkTreeSelection *selection,
       __gtk_tree_selection_unselect_all (selection);
       gtk_tree_selection_get_props (selection)->user_func = tmp_func;
 
-      __gtk_tree_row_reference_free (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor);
-      gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor = NULL;
+      __gtk_tree_row_reference_free (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor);
+      gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor = NULL;
     }
   else if (type == GTK_SELECTION_SINGLE ||
 	   type == GTK_SELECTION_BROWSE)
@@ -188,9 +188,9 @@ __gtk_tree_selection_set_mode (GtkTreeSelection *selection,
       gint selected = FALSE;
       GtkTreePath *anchor_path = NULL;
 
-      if (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor)
+      if (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor)
 	{
-          anchor_path = __gtk_tree_row_reference_get_path (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor);
+          anchor_path = __gtk_tree_row_reference_get_path (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor);
 
           if (anchor_path)
             {
@@ -360,12 +360,12 @@ __gtk_tree_selection_get_selected (GtkTreeSelection  *selection,
     memset (iter, 0, sizeof (GtkTreeIter));
 
   if (model)
-    *model = gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->model;
+    *model = gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model;
 
-  if (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor == NULL)
+  if (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor == NULL)
     return FALSE;
 
-  anchor_path = __gtk_tree_row_reference_get_path (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor);
+  anchor_path = __gtk_tree_row_reference_get_path (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor);
 
   if (anchor_path == NULL)
     return FALSE;
@@ -385,7 +385,7 @@ __gtk_tree_selection_get_selected (GtkTreeSelection  *selection,
       if (iter == NULL)
 	retval = TRUE;
       else
-        retval = __gtk_tree_model_get_iter (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->model,
+        retval = __gtk_tree_model_get_iter (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model,
                                           iter,
                                           anchor_path);
     }
@@ -434,10 +434,10 @@ __gtk_tree_selection_get_selected_rows (GtkTreeSelection   *selection,
   g_return_val_if_fail (gtk_tree_selection_get_props (selection)->tree_view != NULL, NULL);
 
   if (model)
-    *model = gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->model;
+    *model = gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model;
 
-  if (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->tree == NULL ||
-      gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->tree->root == NULL)
+  if (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->tree == NULL ||
+      gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->tree->root == NULL)
     return NULL;
 
   if (gtk_tree_selection_get_props (selection)->type == GTK_SELECTION_NONE)
@@ -450,7 +450,7 @@ __gtk_tree_selection_get_selected_rows (GtkTreeSelection   *selection,
         {
 	  GtkTreePath *path;
 
-	  path = __gtk_tree_model_get_path (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->model, &iter);
+	  path = __gtk_tree_model_get_path (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model, &iter);
 	  list = g_list_append (list, path);
 
 	  return list;
@@ -459,8 +459,8 @@ __gtk_tree_selection_get_selected_rows (GtkTreeSelection   *selection,
       return NULL;
     }
 
-  tree = gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->tree;
-  node = gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->tree->root;
+  tree = gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->tree;
+  node = gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->tree->root;
 
   while (node->left != tree->nil)
     node = node->left;
@@ -553,8 +553,8 @@ __gtk_tree_selection_count_selected_rows (GtkTreeSelection *selection)
   g_return_val_if_fail (GTK_IS_TREE_SELECTION (selection), 0);
   g_return_val_if_fail (gtk_tree_selection_get_props (selection)->tree_view != NULL, 0);
 
-  if (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->tree == NULL ||
-      gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->tree->root == NULL)
+  if (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->tree == NULL ||
+      gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->tree->root == NULL)
     return 0;
 
   if (gtk_tree_selection_get_props (selection)->type == GTK_SELECTION_SINGLE ||
@@ -566,8 +566,8 @@ __gtk_tree_selection_count_selected_rows (GtkTreeSelection *selection)
 	return 0;
     }
 
-  _gtk_rbtree_traverse (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->tree,
-                        gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->tree->root,
+  _gtk_rbtree_traverse (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->tree,
+                        gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->tree->root,
 			G_PRE_ORDER,
 			__gtk_tree_selection_count_selected_rows_helper,
 			&count);
@@ -612,30 +612,30 @@ __gtk_tree_selection_selected_foreach (GtkTreeSelection            *selection,
   g_return_if_fail (gtk_tree_selection_get_props (selection)->tree_view != NULL);
 
   if (func == NULL ||
-      gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->tree == NULL ||
-      gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->tree->root == NULL)
+      gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->tree == NULL ||
+      gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->tree->root == NULL)
     return;
 
   if (gtk_tree_selection_get_props (selection)->type == GTK_SELECTION_SINGLE ||
       gtk_tree_selection_get_props (selection)->type == GTK_SELECTION_BROWSE)
     {
-      if (__gtk_tree_row_reference_valid (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor))
+      if (__gtk_tree_row_reference_valid (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor))
 	{
-	  path = __gtk_tree_row_reference_get_path (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor);
-	  __gtk_tree_model_get_iter (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->model, &iter, path);
-	  (* func) (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->model, path, &iter, data);
+	  path = __gtk_tree_row_reference_get_path (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor);
+	  __gtk_tree_model_get_iter (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model, &iter, path);
+	  (* func) (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model, path, &iter, data);
 	  __gtk_tree_path_free (path);
 	}
       return;
     }
 
-  tree = gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->tree;
-  node = gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->tree->root;
+  tree = gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->tree;
+  node = gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->tree->root;
   
   while (node->left != tree->nil)
     node = node->left;
 
-  model = gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->model;
+  model = gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model;
   g_object_ref (model);
 
   /* connect to signals to monitor changes in treemodel */
@@ -818,10 +818,10 @@ __gtk_tree_selection_select_iter (GtkTreeSelection *selection,
 
   g_return_if_fail (GTK_IS_TREE_SELECTION (selection));
   g_return_if_fail (gtk_tree_selection_get_props (selection)->tree_view != NULL);
-  g_return_if_fail (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->model != NULL);
+  g_return_if_fail (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model != NULL);
   g_return_if_fail (iter != NULL);
 
-  path = __gtk_tree_model_get_path (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->model,
+  path = __gtk_tree_model_get_path (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model,
 				  iter);
 
   if (path == NULL)
@@ -847,10 +847,10 @@ __gtk_tree_selection_unselect_iter (GtkTreeSelection *selection,
 
   g_return_if_fail (GTK_IS_TREE_SELECTION (selection));
   g_return_if_fail (gtk_tree_selection_get_props (selection)->tree_view != NULL);
-  g_return_if_fail (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->model != NULL);
+  g_return_if_fail (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model != NULL);
   g_return_if_fail (iter != NULL);
 
-  path = __gtk_tree_model_get_path (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->model,
+  path = __gtk_tree_model_get_path (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model,
 				  iter);
 
   if (path == NULL)
@@ -882,7 +882,7 @@ __gtk_tree_selection_path_is_selected (GtkTreeSelection *selection,
   g_return_val_if_fail (path != NULL, FALSE);
   g_return_val_if_fail (gtk_tree_selection_get_props (selection)->tree_view != NULL, FALSE);
 
-  if (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->model == NULL)
+  if (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model == NULL)
     return FALSE;
 
   ret = _gtk_tree_view_find_node (gtk_tree_selection_get_props (selection)->tree_view,
@@ -916,9 +916,9 @@ __gtk_tree_selection_iter_is_selected (GtkTreeSelection *selection,
   g_return_val_if_fail (GTK_IS_TREE_SELECTION (selection), FALSE);
   g_return_val_if_fail (iter != NULL, FALSE);
   g_return_val_if_fail (gtk_tree_selection_get_props (selection)->tree_view != NULL, FALSE);
-  g_return_val_if_fail (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->model != NULL, FALSE);
+  g_return_val_if_fail (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model != NULL, FALSE);
 
-  path = __gtk_tree_model_get_path (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->model, iter);
+  path = __gtk_tree_model_get_path (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model, iter);
   if (path == NULL)
     return FALSE;
 
@@ -963,7 +963,7 @@ gtk_tree_selection_real_select_all (GtkTreeSelection *selection)
 {
   struct _TempTuple *tuple;
 
-  if (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->tree == NULL)
+  if (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->tree == NULL)
     return FALSE;
 
   /* Mark all nodes selected */
@@ -971,8 +971,8 @@ gtk_tree_selection_real_select_all (GtkTreeSelection *selection)
   tuple->selection = selection;
   tuple->dirty = FALSE;
 
-  _gtk_rbtree_traverse (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->tree,
-			gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->tree->root,
+  _gtk_rbtree_traverse (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->tree,
+			gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->tree->root,
 			G_PRE_ORDER,
 			select_all_helper,
 			tuple);
@@ -1038,10 +1038,10 @@ gtk_tree_selection_real_unselect_all (GtkTreeSelection *selection)
       GtkRBNode *node = NULL;
       GtkTreePath *anchor_path;
 
-      if (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor == NULL)
+      if (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor == NULL)
 	return FALSE;
 
-      anchor_path = __gtk_tree_row_reference_get_path (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor);
+      anchor_path = __gtk_tree_row_reference_get_path (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor);
 
       if (anchor_path == NULL)
         return FALSE;
@@ -1060,8 +1060,8 @@ gtk_tree_selection_real_unselect_all (GtkTreeSelection *selection)
 	{
 	  if (gtk_tree_selection_real_select_node (selection, tree, node, FALSE))
 	    {
-	      __gtk_tree_row_reference_free (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor);
-	      gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor = NULL;
+	      __gtk_tree_row_reference_free (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor);
+	      gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor = NULL;
 	      return TRUE;
 	    }
 	}
@@ -1073,8 +1073,8 @@ gtk_tree_selection_real_unselect_all (GtkTreeSelection *selection)
       tuple->selection = selection;
       tuple->dirty = FALSE;
 
-      _gtk_rbtree_traverse (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->tree,
-                            gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->tree->root,
+      _gtk_rbtree_traverse (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->tree,
+                            gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->tree->root,
                             G_PRE_ORDER,
                             unselect_all_helper,
                             tuple);
@@ -1165,12 +1165,12 @@ gtk_tree_selection_real_modify_range (GtkTreeSelection *selection,
 
   if (anchor_path)
     {
-      if (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor)
-	__gtk_tree_row_reference_free (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor);
+      if (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor)
+	__gtk_tree_row_reference_free (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor);
 
-      gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor =
+      gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor =
 	__gtk_tree_row_reference_new_proxy (G_OBJECT (gtk_tree_selection_get_props (selection)->tree_view),
-	                                  gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->model,
+	                                  gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model,
 					  anchor_path);
     }
 
@@ -1221,7 +1221,7 @@ __gtk_tree_selection_select_range (GtkTreeSelection *selection,
   g_return_if_fail (GTK_IS_TREE_SELECTION (selection));
   g_return_if_fail (gtk_tree_selection_get_props (selection)->tree_view != NULL);
   g_return_if_fail (gtk_tree_selection_get_props (selection)->type == GTK_SELECTION_MULTIPLE);
-  g_return_if_fail (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->model != NULL);
+  g_return_if_fail (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model != NULL);
 
   if (gtk_tree_selection_real_modify_range (selection, RANGE_SELECT, start_path, end_path))
     g_signal_emit (selection, tree_selection_signals[CHANGED], 0);
@@ -1245,7 +1245,7 @@ __gtk_tree_selection_unselect_range (GtkTreeSelection *selection,
 {
   g_return_if_fail (GTK_IS_TREE_SELECTION (selection));
   g_return_if_fail (gtk_tree_selection_get_props (selection)->tree_view != NULL);
-  g_return_if_fail (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->model != NULL);
+  g_return_if_fail (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model != NULL);
 
   if (gtk_tree_selection_real_modify_range (selection, RANGE_UNSELECT, start_path, end_path))
     g_signal_emit (selection, tree_selection_signals[CHANGED], 0);
@@ -1259,20 +1259,20 @@ _gtk_tree_selection_row_is_selectable (GtkTreeSelection *selection,
   GtkTreeIter iter;
   gboolean sensitive = FALSE;
 
-  if (!__gtk_tree_model_get_iter (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->model, &iter, path))
+  if (!__gtk_tree_model_get_iter (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model, &iter, path))
     sensitive = TRUE;
 
-  if (!sensitive && gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->row_separator_func)
+  if (!sensitive && gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->row_separator_func)
     {
       /* never allow separators to be selected */
       if ((* gtk_tree_selection_get_props (gtk_tree_selection_get_props (selection))->gtk_tree_view_get_props (gtk_tree_view_get_props (tree_view))->priv->row_separator_func) (gtk_tree_selection_get_props (gtk_tree_selection_get_props (selection))->gtk_tree_view_get_props (gtk_tree_view_get_props (tree_view))->priv->model,
 							      &iter,
-							      gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->row_separator_data))
+							      gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->row_separator_data))
 	return FALSE;
     }
 
   if (gtk_tree_selection_get_props (selection)->user_func)
-    return (*gtk_tree_selection_get_props (selection)->user_func) (gtk_tree_selection_get_props (selection), gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->model, path,
+    return (*gtk_tree_selection_get_props (selection)->user_func) (gtk_tree_selection_get_props (selection), gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model, path,
 				    GTK_RBNODE_FLAG_SET (node, GTK_RBNODE_IS_SELECTED),
 				    gtk_tree_selection_get_props (selection)->user_data);
   else
@@ -1303,8 +1303,8 @@ _gtk_tree_selection_internal_select_node (GtkTreeSelection *selection,
   if (gtk_tree_selection_get_props (selection)->type == GTK_SELECTION_NONE)
     return;
 
-  if (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor)
-    anchor_path = __gtk_tree_row_reference_get_path (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor);
+  if (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor)
+    anchor_path = __gtk_tree_row_reference_get_path (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor);
 
   if (gtk_tree_selection_get_props (selection)->type == GTK_SELECTION_SINGLE ||
       gtk_tree_selection_get_props (selection)->type == GTK_SELECTION_BROWSE)
@@ -1341,16 +1341,16 @@ _gtk_tree_selection_internal_select_node (GtkTreeSelection *selection,
 	       * old one, and can then select the new one */
 	      if (dirty)
 		{
-		  if (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor)
+		  if (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor)
                     {
-                      __gtk_tree_row_reference_free (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor);
-                      gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor = NULL;
+                      __gtk_tree_row_reference_free (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor);
+                      gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor = NULL;
                     }
 
 		  if (gtk_tree_selection_real_select_node (selection, tree, node, TRUE))
 		    {
-		      gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor =
-			__gtk_tree_row_reference_new_proxy (G_OBJECT (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)), gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->model, path);
+		      gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor =
+			__gtk_tree_row_reference_new_proxy (G_OBJECT (gtk_tree_selection_get_props (selection)->tree_view), gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model, path);
 		    }
 		}
 	    }
@@ -1359,11 +1359,11 @@ _gtk_tree_selection_internal_select_node (GtkTreeSelection *selection,
 	      if (gtk_tree_selection_real_select_node (selection, tree, node, TRUE))
 		{
 		  dirty = TRUE;
-		  if (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor)
-		    __gtk_tree_row_reference_free (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor);
+		  if (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor)
+		    __gtk_tree_row_reference_free (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor);
 
-		  gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor =
-		    __gtk_tree_row_reference_new_proxy (G_OBJECT (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)), gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->model, path);
+		  gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor =
+		    __gtk_tree_row_reference_new_proxy (G_OBJECT (gtk_tree_selection_get_props (selection)->tree_view), gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model, path);
 		}
 	    }
 	}
@@ -1373,11 +1373,11 @@ _gtk_tree_selection_internal_select_node (GtkTreeSelection *selection,
       if ((mode & GTK_TREE_SELECT_MODE_EXTEND) == GTK_TREE_SELECT_MODE_EXTEND
           && (anchor_path == NULL))
 	{
-	  if (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor)
-	    __gtk_tree_row_reference_free (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor);
+	  if (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor)
+	    __gtk_tree_row_reference_free (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor);
 
-	  gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor =
-	    __gtk_tree_row_reference_new_proxy (G_OBJECT (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)), gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->model, path);
+	  gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor =
+	    __gtk_tree_row_reference_new_proxy (G_OBJECT (gtk_tree_selection_get_props (selection)->tree_view), gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model, path);
 	  dirty = gtk_tree_selection_real_select_node (selection, tree, node, TRUE);
 	}
       else if ((mode & (GTK_TREE_SELECT_MODE_EXTEND | GTK_TREE_SELECT_MODE_TOGGLE)) == (GTK_TREE_SELECT_MODE_EXTEND | GTK_TREE_SELECT_MODE_TOGGLE))
@@ -1389,11 +1389,11 @@ _gtk_tree_selection_internal_select_node (GtkTreeSelection *selection,
       else if ((mode & GTK_TREE_SELECT_MODE_TOGGLE) == GTK_TREE_SELECT_MODE_TOGGLE)
 	{
 	  flags = node->flags;
-	  if (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor)
-	    __gtk_tree_row_reference_free (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor);
+	  if (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor)
+	    __gtk_tree_row_reference_free (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor);
 
-	  gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor =
-	    __gtk_tree_row_reference_new_proxy (G_OBJECT (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)), gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->model, path);
+	  gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor =
+	    __gtk_tree_row_reference_new_proxy (G_OBJECT (gtk_tree_selection_get_props (selection)->tree_view), gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model, path);
 
 	  if ((flags & GTK_RBNODE_IS_SELECTED) == GTK_RBNODE_IS_SELECTED)
 	    dirty |= gtk_tree_selection_real_select_node (selection, tree, node, FALSE);
@@ -1412,11 +1412,11 @@ _gtk_tree_selection_internal_select_node (GtkTreeSelection *selection,
 	{
 	  dirty = gtk_tree_selection_real_unselect_all (selection);
 
-	  if (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor)
-	    __gtk_tree_row_reference_free (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor);
+	  if (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor)
+	    __gtk_tree_row_reference_free (gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor);
 
-	  gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->anchor =
-	    __gtk_tree_row_reference_new_proxy (G_OBJECT (gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)), gtk_tree_selection_get_props (selection)->gtk_tree_view_get_props (tree_view)->priv->model, path);
+	  gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->anchor =
+	    __gtk_tree_row_reference_new_proxy (G_OBJECT (gtk_tree_selection_get_props (selection)->tree_view), gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->model, path);
 
 	  dirty |= gtk_tree_selection_real_select_node (selection, tree, node, TRUE);
 	}

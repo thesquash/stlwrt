@@ -96,6 +96,23 @@ static void gtk_font_button_update_font_info        (GtkFontButton     *gfs);
 
 static guint font_button_signals[LAST_SIGNAL] = { 0 };
 
+struct _GtkFontButtonPrivate 
+{
+  gchar         *title;
+  
+  gchar         *fontname;
+  
+  guint         use_font : 1;
+  guint         use_size : 1;
+  guint         show_style : 1;
+  guint         show_size : 1;
+   
+  GtkWidget     *font_dialog;
+  GtkWidget     *inside;
+  GtkWidget     *font_label;
+  GtkWidget     *size_label;
+};
+
 STLWRT_DEFINE_FTYPE_VPARENT (GtkFontButton, gtk_font_button, GTK_TYPE_BUTTON, G_TYPE_FLAG_NONE, ;)
 
 static void

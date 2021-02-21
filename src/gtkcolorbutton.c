@@ -117,6 +117,19 @@ static guint color_button_signals[LAST_SIGNAL] = { 0 };
 
 static const GtkTargetEntry drop_types[] = { { "application/x-color", 0, 0 } };
 
+struct _GtkColorButtonPrivate 
+{
+  GtkWidget *draw_area; /* Widget where we draw the color sample */
+  GtkWidget *cs_dialog; /* Color selection dialog */
+  
+  gchar *title;         /* Title for the color selection window */
+  
+  GdkColor color;
+  guint16 alpha;
+  
+  guint use_alpha : 1;  /* Use alpha or not */
+};
+
 STLWRT_DEFINE_FTYPE_VPARENT (GtkColorButton, gtk_color_button, GTK_TYPE_BUTTON,
                              G_TYPE_FLAG_NONE, ;)
 

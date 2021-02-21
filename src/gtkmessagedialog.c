@@ -398,7 +398,7 @@ setup_primary_label_font (GtkMessageDialog *dialog)
 
   if (priv->has_secondary_text && !priv->has_primary_markup)
     {
-      size = pango_font_description_get_size (gtk_message_dialog_get_props (dialog)->label->style->font_desc);
+      size = pango_font_description_get_size (gtk_widget_get_props (gtk_message_dialog_get_props (dialog)->label)->style->font_desc);
       font_desc = pango_font_description_new ();
       pango_font_description_set_weight (font_desc, PANGO_WEIGHT_BOLD);
       pango_font_description_set_size (font_desc, size * PANGO_SCALE_LARGE);

@@ -2591,7 +2591,7 @@ _gtk_text_btree_char_is_invisible (const GtkTextIter *iter)
             }
 #endif
 #endif
-          invisible = tags[i]->values->invisible;
+          invisible = gtk_text_tag_get_props (tags[i])->values->invisible;
           break;
         }
     }

@@ -1065,7 +1065,7 @@ __gtk_range_get_range_rect (GtkRange     *range,
   g_return_if_fail (GTK_IS_RANGE (range));
   g_return_if_fail (range_rect != NULL);
 
-  gtk_range_calc_layout (range, gtk_range_get_props (range)->adjustment->value);
+  gtk_range_calc_layout (range, gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->value);
 
   *range_rect = gtk_range_get_props (range)->range_rect;
 }

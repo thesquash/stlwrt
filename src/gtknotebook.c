@@ -1889,17 +1889,17 @@ gtk_notebook_size_request (GtkWidget      *widget,
 	  gtk_widget_get_props (widget)->requisition.height = MAX (gtk_widget_get_props (widget)->requisition.height,
 					    child_requisition.height);
 
-	  if (gtk_notebook_get_props (notebook)->menu && page->gtk_widget_get_props (menu_label)->parent &&
-	      !__gtk_widget_get_visible (page->gtk_widget_get_props (menu_label)->parent))
-	    __gtk_widget_show (page->gtk_widget_get_props (menu_label)->parent);
+	  if (gtk_notebook_get_props (notebook)->menu && gtk_widget_get_props (page->menu_label)->parent &&
+	      !__gtk_widget_get_visible (gtk_widget_get_props (page->menu_label)->parent))
+	    __gtk_widget_show (gtk_widget_get_props (page->menu_label)->parent);
 	}
       else
 	{
 	  if (page == gtk_notebook_get_props (notebook)->cur_page)
 	    switch_page = TRUE;
-	  if (gtk_notebook_get_props (notebook)->menu && page->gtk_widget_get_props (menu_label)->parent &&
-	      __gtk_widget_get_visible (page->gtk_widget_get_props (menu_label)->parent))
-	    __gtk_widget_hide (page->gtk_widget_get_props (menu_label)->parent);
+	  if (gtk_notebook_get_props (notebook)->menu && gtk_widget_get_props (page->menu_label)->parent &&
+	      __gtk_widget_get_visible (gtk_widget_get_props (page->menu_label)->parent))
+	    __gtk_widget_hide (gtk_widget_get_props (page->menu_label)->parent);
 	}
     }
 
@@ -2322,7 +2322,7 @@ gtk_notebook_expose (GtkWidget      *widget,
 	      page = GTK_NOTEBOOK_PAGE (pages);
 	      pages = pages->next;
 
-	      if (page->gtk_widget_get_props (tab_label)->window == event->window &&
+	      if (gtk_widget_get_props (page->tab_label)->window == event->window &&
 		  __gtk_widget_is_drawable (page->tab_label))
 		__gtk_container_propagate_expose (GTK_CONTAINER (notebook),
 						page->tab_label, event);
@@ -2880,9 +2880,9 @@ hide_drag_window (GtkNotebook        *notebook,
 		  GtkNotebookPage    *page)
 {
   GtkWidget *widget = GTK_WIDGET (notebook);
-  GtkWidget *parent = page->gtk_widget_get_props (tab_label)->parent;
+  GtkWidget *parent = gtk_widget_get_props (page->tab_label)->parent;
 
-  if (page->gtk_widget_get_props (tab_label)->window != gtk_widget_get_props (widget)->window ||
+  if (gtk_widget_get_props (page->tab_label)->window != gtk_widget_get_props (widget)->window ||
       !NOTEBOOK_IS_TAB_LABEL_PARENT (notebook, page))
     {
       g_object_ref (page->tab_label);
@@ -3272,7 +3272,7 @@ gtk_notebook_draw_focus (GtkWidget      *widget,
 
   if (__gtk_widget_has_focus (widget) && __gtk_widget_is_drawable (widget) &&
       gtk_notebook_get_props (notebook)->show_tabs && gtk_notebook_get_props (notebook)->cur_page &&
-      gtk_notebook_get_props (notebook)->cur_page->gtk_widget_get_props (tab_label)->window == event->window)
+      gtk_widget_get_props (gtk_notebook_get_props (notebook)->cur_page->tab_label)->window == event->window)
     {
       GtkNotebookPage *page;
 
@@ -3285,10 +3285,10 @@ gtk_notebook_draw_focus (GtkWidget      *widget,
 
           __gtk_widget_style_get (widget, "focus-line-width", &focus_width, NULL);
 
-          area.x = page->gtk_widget_get_props (tab_label)->allocation.x - focus_width;
-          area.y = page->gtk_widget_get_props (tab_label)->allocation.y - focus_width;
-          area.width = page->gtk_widget_get_props (tab_label)->allocation.width + 2 * focus_width;
-          area.height = page->gtk_widget_get_props (tab_label)->allocation.height + 2 * focus_width;
+          area.x = gtk_widget_get_props (page->tab_label)->allocation.x - focus_width;
+          area.y = gtk_widget_get_props (page->tab_label)->allocation.y - focus_width;
+          area.width = gtk_widget_get_props (page->tab_label)->allocation.width + 2 * focus_width;
+          area.height = gtk_widget_get_props (page->tab_label)->allocation.height + 2 * focus_width;
 
 	  __gtk_paint_focus (gtk_widget_get_props (widget)->style, event->window, 
                            __gtk_widget_get_state (widget), NULL, widget, "tab",
@@ -4657,7 +4657,7 @@ gtk_notebook_real_remove (GtkNotebook *notebook,
 
   if (gtk_notebook_get_props (notebook)->menu)
     {
-      GtkWidget *parent = page->gtk_widget_get_props (menu_label)->parent;
+      GtkWidget *parent = gtk_widget_get_props (page->menu_label)->parent;
 
       gtk_notebook_menu_label_unparent (parent, NULL);
       __gtk_container_remove (GTK_CONTAINER (gtk_notebook_get_props (notebook)->menu), parent);
@@ -5940,10 +5940,10 @@ gtk_notebook_page_allocate (GtkNotebook     *notebook,
       break;
     }
 
-  tab_allocation_changed = (child_allocation.x != page->gtk_widget_get_props (tab_label)->allocation.x ||
-			    child_allocation.y != page->gtk_widget_get_props (tab_label)->allocation.y ||
-			    child_allocation.width != page->gtk_widget_get_props (tab_label)->allocation.width ||
-			    child_allocation.height != page->gtk_widget_get_props (tab_label)->allocation.height);
+  tab_allocation_changed = (child_allocation.x != gtk_widget_get_props (page->tab_label)->allocation.x ||
+			    child_allocation.y != gtk_widget_get_props (page->tab_label)->allocation.y ||
+			    child_allocation.width != gtk_widget_get_props (page->tab_label)->allocation.width ||
+			    child_allocation.height != gtk_widget_get_props (page->tab_label)->allocation.height);
 
   __gtk_widget_size_allocate (page->tab_label, &child_allocation);
 
@@ -7440,7 +7440,7 @@ __gtk_notebook_set_menu_label (GtkNotebook *notebook,
     {
       if (gtk_notebook_get_props (notebook)->menu)
 	__gtk_container_remove (GTK_CONTAINER (gtk_notebook_get_props (notebook)->menu), 
-			      page->gtk_widget_get_props (menu_label)->parent);
+			      gtk_widget_get_props (page->menu_label)->parent);
 
       if (!page->default_menu)
 	g_object_unref (page->menu_label);
@@ -7527,7 +7527,7 @@ gtk_notebook_child_reordered (GtkNotebook     *notebook,
     {
       GtkWidget *menu_item;
       
-      menu_item = page->gtk_widget_get_props (menu_label)->parent;
+      menu_item = gtk_widget_get_props (page->menu_label)->parent;
       __gtk_container_remove (GTK_CONTAINER (menu_item), page->menu_label);
       __gtk_container_remove (GTK_CONTAINER (gtk_notebook_get_props (notebook)->menu), menu_item);
       gtk_notebook_menu_item_create (notebook, g_list_find (gtk_notebook_get_props (notebook)->children, page));

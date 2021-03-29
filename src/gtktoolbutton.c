@@ -276,13 +276,13 @@ gtk_tool_button_init (GtkToolButton      *button,
   __gtk_tool_item_set_homogeneous (toolitem, TRUE);
 
   /* create button */
-  gtk_tool_button_get_props (button)->priv->gtk_tool_button_get_props (button) = g_object_new (klass->button_type, NULL);
-  __gtk_button_set_focus_on_click (GTK_BUTTON (gtk_tool_button_get_props (button)->priv->gtk_tool_button_get_props (button)), FALSE);
-  g_signal_connect_object (gtk_tool_button_get_props (button)->priv->gtk_tool_button_get_props (button), "clicked",
+  gtk_tool_button_get_props (gtk_tool_button_get_props (button)->priv->button) = g_object_new (klass->button_type, NULL);
+  __gtk_button_set_focus_on_click (GTK_BUTTON (gtk_tool_button_get_props (gtk_tool_button_get_props (button)->priv->button)), FALSE);
+  g_signal_connect_object (gtk_tool_button_get_props (gtk_tool_button_get_props (button)->priv->button), "clicked",
 			   G_CALLBACK (button_clicked), button, 0);
 
-  __gtk_container_add (GTK_CONTAINER (button), gtk_tool_button_get_props (button)->priv->gtk_tool_button_get_props (button));
-  __gtk_widget_show (gtk_tool_button_get_props (button)->priv->gtk_tool_button_get_props (button));
+  __gtk_container_add (GTK_CONTAINER (button), gtk_tool_button_get_props (gtk_tool_button_get_props (button)->priv->button));
+  __gtk_widget_show (gtk_tool_button_get_props (gtk_tool_button_get_props (button)->priv->button));
 }
 
 static void
@@ -306,24 +306,24 @@ gtk_tool_button_construct_contents (GtkToolItem *tool_item)
 			"icon-spacing", &icon_spacing,
 			NULL);
 
-  if (gtk_tool_button_get_props (button)->priv->icon_widget && gtk_tool_button_get_props (button)->priv->gtk_widget_get_props (icon_widget)->parent)
+  if (gtk_tool_button_get_props (button)->priv->icon_widget && gtk_widget_get_props (gtk_tool_button_get_props (button)->priv->icon_widget)->parent)
     {
-      __gtk_container_remove (GTK_CONTAINER (gtk_tool_button_get_props (button)->priv->gtk_widget_get_props (icon_widget)->parent),
+      __gtk_container_remove (GTK_CONTAINER (gtk_widget_get_props (gtk_tool_button_get_props (button)->priv->icon_widget)->parent),
 			    gtk_tool_button_get_props (button)->priv->icon_widget);
     }
 
-  if (gtk_tool_button_get_props (button)->priv->label_widget && gtk_tool_button_get_props (button)->priv->gtk_widget_get_props (label_widget)->parent)
+  if (gtk_tool_button_get_props (button)->priv->label_widget && gtk_widget_get_props (gtk_tool_button_get_props (button)->priv->label_widget)->parent)
     {
-      __gtk_container_remove (GTK_CONTAINER (gtk_tool_button_get_props (button)->priv->gtk_widget_get_props (label_widget)->parent),
+      __gtk_container_remove (GTK_CONTAINER (gtk_widget_get_props (gtk_tool_button_get_props (button)->priv->label_widget)->parent),
 			    gtk_tool_button_get_props (button)->priv->label_widget);
     }
 
-  if (GTK_BIN (gtk_tool_button_get_props (button)->priv->gtk_tool_button_get_props (button))->child)
+  if (GTK_BIN (gtk_tool_button_get_props (gtk_tool_button_get_props (button)->priv->button))->child)
     {
       /* Note: we are not destroying the label_widget or icon_widget
        * here because they were removed from their containers above
        */
-      __gtk_widget_destroy (GTK_BIN (gtk_tool_button_get_props (button)->priv->gtk_tool_button_get_props (button))->child);
+      __gtk_widget_destroy (GTK_BIN (gtk_tool_button_get_props (gtk_tool_button_get_props (button)->priv->button))->child);
     }
 
   style = __gtk_tool_item_get_toolbar_style (GTK_TOOL_ITEM (button));
@@ -471,7 +471,7 @@ gtk_tool_button_construct_contents (GtkToolItem *tool_item)
     {
     case GTK_TOOLBAR_ICONS:
       if (icon)
-	__gtk_container_add (GTK_CONTAINER (gtk_tool_button_get_props (button)->priv->gtk_tool_button_get_props (button)), icon);
+	__gtk_container_add (GTK_CONTAINER (gtk_tool_button_get_props (gtk_tool_button_get_props (button)->priv->button)), icon);
       break;
 
     case GTK_TOOLBAR_BOTH:
@@ -482,7 +482,7 @@ gtk_tool_button_construct_contents (GtkToolItem *tool_item)
       if (icon)
 	__gtk_box_pack_start (GTK_BOX (box), icon, TRUE, TRUE, 0);
       __gtk_box_pack_end (GTK_BOX (box), label, FALSE, TRUE, 0);
-      __gtk_container_add (GTK_CONTAINER (gtk_tool_button_get_props (button)->priv->gtk_tool_button_get_props (button)), box);
+      __gtk_container_add (GTK_CONTAINER (gtk_tool_button_get_props (gtk_tool_button_get_props (button)->priv->button)), box);
       break;
 
     case GTK_TOOLBAR_BOTH_HORIZ:
@@ -502,18 +502,18 @@ gtk_tool_button_construct_contents (GtkToolItem *tool_item)
 	  if (label)
 	    __gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
 	}
-      __gtk_container_add (GTK_CONTAINER (gtk_tool_button_get_props (button)->priv->gtk_tool_button_get_props (button)), box);
+      __gtk_container_add (GTK_CONTAINER (gtk_tool_button_get_props (gtk_tool_button_get_props (button)->priv->button)), box);
       break;
 
     case GTK_TOOLBAR_TEXT:
-      __gtk_container_add (GTK_CONTAINER (gtk_tool_button_get_props (button)->priv->gtk_tool_button_get_props (button)), label);
+      __gtk_container_add (GTK_CONTAINER (gtk_tool_button_get_props (gtk_tool_button_get_props (button)->priv->button)), label);
       break;
     }
 
   if (box)
     __gtk_widget_show (box);
 
-  __gtk_button_set_relief (GTK_BUTTON (gtk_tool_button_get_props (button)->priv->gtk_tool_button_get_props (button)),
+  __gtk_button_set_relief (GTK_BUTTON (gtk_tool_button_get_props (gtk_tool_button_get_props (button)->priv->button)),
 			 __gtk_tool_item_get_relief_style (GTK_TOOL_ITEM (button)));
 
   __gtk_tool_item_rebuild_menu (tool_item);
@@ -762,7 +762,7 @@ gtk_tool_button_update_icon_spacing (GtkToolButton *button)
   GtkWidget *box;
   guint spacing;
 
-  box = GTK_BIN (gtk_tool_button_get_props (button)->priv->gtk_tool_button_get_props (button))->child;
+  box = GTK_BIN (gtk_tool_button_get_props (gtk_tool_button_get_props (button)->priv->button))->child;
   if (GTK_IS_BOX (box))
     {
       __gtk_widget_style_get (GTK_WIDGET (button), 
@@ -964,7 +964,7 @@ __gtk_tool_button_set_label (GtkToolButton *button,
   if (label)
     {
       elided_label = ___gtk_toolbar_elide_underscores (label);
-      accessible = __gtk_widget_get_accessible (GTK_WIDGET (gtk_tool_button_get_props (button)->priv->gtk_tool_button_get_props (button)));
+      accessible = __gtk_widget_get_accessible (GTK_WIDGET (gtk_tool_button_get_props (gtk_tool_button_get_props (button)->priv->button)));
       atk_object_set_name (accessible, elided_label);
       g_free (elided_label);
     }
@@ -1168,8 +1168,8 @@ __gtk_tool_button_set_icon_widget (GtkToolButton *button,
     {
       if (gtk_tool_button_get_props (button)->priv->icon_widget)
 	{
-	  if (gtk_tool_button_get_props (button)->priv->gtk_widget_get_props (icon_widget)->parent)
-	    __gtk_container_remove (GTK_CONTAINER (gtk_tool_button_get_props (button)->priv->gtk_widget_get_props (icon_widget)->parent),
+	  if (gtk_widget_get_props (gtk_tool_button_get_props (button)->priv->icon_widget)->parent)
+	    __gtk_container_remove (GTK_CONTAINER (gtk_widget_get_props (gtk_tool_button_get_props (button)->priv->icon_widget)->parent),
 				    gtk_tool_button_get_props (button)->priv->icon_widget);
 
 	  g_object_unref (gtk_tool_button_get_props (button)->priv->icon_widget);
@@ -1209,8 +1209,8 @@ __gtk_tool_button_set_label_widget (GtkToolButton *button,
     {
       if (gtk_tool_button_get_props (button)->priv->label_widget)
 	{
-	  if (gtk_tool_button_get_props (button)->priv->gtk_widget_get_props (label_widget)->parent)
-	    __gtk_container_remove (GTK_CONTAINER (gtk_tool_button_get_props (button)->priv->gtk_widget_get_props (label_widget)->parent),
+	  if (gtk_widget_get_props (gtk_tool_button_get_props (button)->priv->label_widget)->parent)
+	    __gtk_container_remove (GTK_CONTAINER (gtk_widget_get_props (gtk_tool_button_get_props (button)->priv->label_widget)->parent),
 		    	          gtk_tool_button_get_props (button)->priv->label_widget);
 	  
 	  g_object_unref (gtk_tool_button_get_props (button)->priv->label_widget);
@@ -1271,5 +1271,5 @@ ___gtk_tool_button_get_button (GtkToolButton *button)
 {
   g_return_val_if_fail (GTK_IS_TOOL_BUTTON (button), NULL);
 
-  return gtk_tool_button_get_props (button)->priv->gtk_tool_button_get_props (button);
+  return gtk_tool_button_get_props (gtk_tool_button_get_props (button)->priv->button);
 }

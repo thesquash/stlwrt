@@ -2439,7 +2439,7 @@ gtk_icon_view_item_hit_test (GtkIconView      *icon_view,
     {
       GtkIconViewCellInfo *info = (GtkIconViewCellInfo *)l->data;
       
-      if (!info->gtk_cell_renderer_get_props (cell)->visible)
+      if (!gtk_cell_renderer_get_props (info->cell)->visible)
 	continue;
       
       gtk_icon_view_get_cell_box (icon_view, item, info, &box);
@@ -2973,7 +2973,7 @@ gtk_icon_view_calculate_item_size (GtkIconView     *icon_view,
     {
       GtkIconViewCellInfo *info = (GtkIconViewCellInfo *)l->data;
       
-      if (!info->gtk_cell_renderer_get_props (cell)->visible)
+      if (!gtk_cell_renderer_get_props (info->cell)->visible)
 	continue;
       
       __gtk_cell_renderer_get_size (info->cell, GTK_WIDGET (icon_view), 
@@ -3035,7 +3035,7 @@ gtk_icon_view_calculate_item_size2 (GtkIconView     *icon_view,
 	if (info->pack == (k ? GTK_PACK_START : GTK_PACK_END))
 	  continue;
 
-	if (!info->gtk_cell_renderer_get_props (cell)->visible)
+	if (!gtk_cell_renderer_get_props (info->cell)->visible)
 	  continue;
 
 	if (gtk_icon_view_get_props (icon_view)->priv->item_orientation == GTK_ORIENTATION_HORIZONTAL)
@@ -3176,7 +3176,7 @@ gtk_icon_view_paint_item (GtkIconView     *icon_view,
     {
       GtkIconViewCellInfo *info = (GtkIconViewCellInfo *)l->data;
       
-      if (!info->gtk_cell_renderer_get_props (cell)->visible)
+      if (!gtk_cell_renderer_get_props (info->cell)->visible)
 	continue;
       
       gtk_icon_view_get_cell_area (icon_view, item, info, &cell_area);
@@ -3216,12 +3216,12 @@ gtk_icon_view_paint_item (GtkIconView     *icon_view,
         {
           GtkIconViewCellInfo *info = (GtkIconViewCellInfo *)l->data;
 
-          if (!info->gtk_cell_renderer_get_props (cell)->visible)
+          if (!gtk_cell_renderer_get_props (info->cell)->visible)
             continue;
 
           /* If found a editable/activatable cell, draw focus on it. */
           if (gtk_icon_view_get_props (icon_view)->priv->cursor_cell < 0 &&
-              info->gtk_cell_renderer_get_props (cell)->mode != GTK_CELL_RENDERER_MODE_INERT)
+              gtk_cell_renderer_get_props (info->cell)->mode != GTK_CELL_RENDERER_MODE_INERT)
             gtk_icon_view_get_props (icon_view)->priv->cursor_cell = i;
 
           gtk_icon_view_get_cell_box (icon_view, item, info, &box);
@@ -3470,7 +3470,7 @@ gtk_icon_view_get_item_at_coords (GtkIconView          *icon_view,
 		{
 		  GtkIconViewCellInfo *info = (GtkIconViewCellInfo *)l->data;
 
-		  if (!info->gtk_cell_renderer_get_props (cell)->visible)
+		  if (!gtk_cell_renderer_get_props (info->cell)->visible)
 		    continue;
 
 		  gtk_icon_view_get_cell_box (icon_view, item, info, &box);
@@ -3902,10 +3902,10 @@ find_cell (GtkIconView     *icon_view,
 	if (info->pack == (k ? GTK_PACK_START : GTK_PACK_END))
 	  continue;
 	
-	if (!info->gtk_cell_renderer_get_props (cell)->visible)
+	if (!gtk_cell_renderer_get_props (info->cell)->visible)
 	  continue;
 
-	if (info->gtk_cell_renderer_get_props (cell)->mode != GTK_CELL_RENDERER_MODE_INERT)
+	if (gtk_cell_renderer_get_props (info->cell)->mode != GTK_CELL_RENDERER_MODE_INERT)
 	  {
 	    if (cell == i)
 	      current = n_focusable;
@@ -8685,8 +8685,8 @@ gtk_icon_view_item_accessible_is_showing (GtkIconViewItemAccessible *item)
   visible_rect.y = 0;
   if (gtk_icon_view_get_props (icon_view)->priv->hadjustment)
     visible_rect.y += gtk_adjustment_get_props (gtk_icon_view_get_props (icon_view)->priv->vadjustment)->value;
-  visible_rect.width = item->gtk_widget_get_props (widget)->allocation.width;
-  visible_rect.height = item->gtk_widget_get_props (widget)->allocation.height;
+  visible_rect.width = gtk_widget_get_props (item->widget)->allocation.width;
+  visible_rect.height = gtk_widget_get_props (item->widget)->allocation.height;
 
   if (((item->item->x + item->item->width) < visible_rect.x) ||
      ((item->item->y + item->item->height) < (visible_rect.y)) ||

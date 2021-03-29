@@ -570,7 +570,7 @@ gtk_progress_bar_size_request (GtkWidget      *widget,
       if (!progress->adjustment)
 	gtk_progress_set_adjustment (progress, NULL);
 
-      buf = gtk_progress_get_text_from_value (progress, progress->gtk_adjustment_get_props (adjustment)->upper);
+      buf = gtk_progress_get_text_from_value (progress, gtk_adjustment_get_props (progress->adjustment)->upper);
 
       layout = __gtk_widget_create_pango_layout (widget, buf);
 

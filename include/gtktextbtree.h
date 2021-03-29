@@ -35,18 +35,16 @@
 
 
 #include <gtktextbuffer.h>
-
 #include <gtktexttag.h>
-
 #include <gtktextmark.h>
-
 #include <gtktextchild.h>
-
 #include <gtktextsegment.h>
-
 #include <gtktextiter.h>
 
 G_BEGIN_DECLS
+
+typedef struct _GtkTextLineData GtkTextLineData;
+typedef struct _GtkTextLine GtkTextLine;
 
 GtkTextBTree  *_gtk_text_btree_new        (GtkTextTagTable *table,
                                            GtkTextBuffer   *buffer);
@@ -220,6 +218,7 @@ GtkTextLine *       _gtk_text_btree_last_could_contain_tag  (GtkTextBTree       
 
 /* Chunk of data associated with a line; views can use this to store
    info at the line. They should "subclass" the header struct here. */
+
 struct _GtkTextLineData {
   gpointer view_id;
   GtkTextLineData *next;
@@ -234,8 +233,6 @@ struct _GtkTextLineData {
  *
  * You can consider this line a "paragraph" also
  */
-
-typedef struct _GtkTextLine GtkTextLine;
 
 struct _GtkTextLine {
   GtkTextBTreeNode *parent;             /* Pointer to parent node containing

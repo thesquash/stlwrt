@@ -98,19 +98,19 @@ gtk_menu_tool_button_construct_contents (GtkMenuToolButton *button)
       __gtk_arrow_set (GTK_ARROW (priv->arrow), GTK_ARROW_RIGHT, GTK_SHADOW_NONE);
     }
 
-  if (priv->gtk_menu_tool_button_get_props (button) && priv->gtk_menu_tool_button_get_props (button)->parent)
+  if (gtk_menu_tool_button_get_props (priv->button) && gtk_menu_tool_button_get_props (priv->button)->parent)
     {
       g_object_ref (priv->button);
-      __gtk_container_remove (GTK_CONTAINER (priv->gtk_menu_tool_button_get_props (button)->parent),
+      __gtk_container_remove (GTK_CONTAINER (gtk_menu_tool_button_get_props (priv->button)->parent),
                             priv->button);
       __gtk_container_add (GTK_CONTAINER (box), priv->button);
       g_object_unref (priv->button);
     }
 
-  if (priv->arrow_button && priv->gtk_widget_get_props (arrow_button)->parent)
+  if (priv->arrow_button && gtk_widget_get_props (priv->arrow_button)->parent)
     {
       g_object_ref (priv->arrow_button);
-      __gtk_container_remove (GTK_CONTAINER (priv->gtk_widget_get_props (arrow_button)->parent),
+      __gtk_container_remove (GTK_CONTAINER (gtk_widget_get_props (priv->arrow_button)->parent),
                             priv->arrow_button);
       __gtk_box_pack_end (GTK_BOX (box), priv->arrow_button,
                         FALSE, FALSE, 0);
@@ -297,12 +297,12 @@ menu_position_func (GtkMenu           *menu,
       else if (menu_req.width > gtk_widget_get_props (widget)->allocation.width)
         *x -= menu_req.width - gtk_widget_get_props (widget)->allocation.width;
 
-      if ((*y + priv->gtk_widget_get_props (arrow_button)->allocation.height + menu_req.height) <= monitor.y + monitor.height)
-	*y += priv->gtk_widget_get_props (arrow_button)->allocation.height;
+      if ((*y + gtk_widget_get_props (priv->arrow_button)->allocation.height + menu_req.height) <= monitor.y + monitor.height)
+	*y += gtk_widget_get_props (priv->arrow_button)->allocation.height;
       else if ((*y - menu_req.height) >= monitor.y)
 	*y -= menu_req.height;
-      else if (monitor.y + monitor.height - (*y + priv->gtk_widget_get_props (arrow_button)->allocation.height) > *y)
-	*y += priv->gtk_widget_get_props (arrow_button)->allocation.height;
+      else if (monitor.y + monitor.height - (*y + gtk_widget_get_props (priv->arrow_button)->allocation.height) > *y)
+	*y += gtk_widget_get_props (priv->arrow_button)->allocation.height;
       else
 	*y -= menu_req.height;
     }
@@ -312,13 +312,13 @@ menu_position_func (GtkMenu           *menu,
       __gtk_widget_size_request (priv->arrow_button, &req);
 
       if (direction == GTK_TEXT_DIR_LTR)
-        *x += priv->gtk_widget_get_props (arrow_button)->allocation.width;
+        *x += gtk_widget_get_props (priv->arrow_button)->allocation.width;
       else 
         *x -= menu_req.width;
 
       if (*y + menu_req.height > monitor.y + monitor.height &&
-	  *y + priv->gtk_widget_get_props (arrow_button)->allocation.height - monitor.y > monitor.y + monitor.height - *y)
-	*y += priv->gtk_widget_get_props (arrow_button)->allocation.height - menu_req.height;
+	  *y + gtk_widget_get_props (priv->arrow_button)->allocation.height - monitor.y > monitor.y + monitor.height - *y)
+	*y += gtk_widget_get_props (priv->arrow_button)->allocation.height - menu_req.height;
     }
 
   *push_in = FALSE;
@@ -412,7 +412,7 @@ gtk_menu_tool_button_init (GtkMenuToolButton *button)
 
   __gtk_container_add (GTK_CONTAINER (button), box);
 
-  gtk_menu_tool_button_get_props (button)->priv->gtk_menu_tool_button_get_props (button) = real_button;
+  gtk_menu_tool_button_get_props (gtk_menu_tool_button_get_props (button)->priv->button) = real_button;
   gtk_menu_tool_button_get_props (button)->priv->arrow = arrow;
   gtk_menu_tool_button_get_props (button)->priv->arrow_button = arrow_button;
   gtk_menu_tool_button_get_props (button)->priv->box = box;

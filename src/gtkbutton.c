@@ -2201,8 +2201,8 @@ __gtk_button_set_image (GtkButton *button,
 
   priv = GTK_BUTTON_GET_PRIVATE (button);
 
-  if (priv->gtk_widget_get_props (image) && priv->gtk_widget_get_props (image)->parent)
-    __gtk_container_remove (GTK_CONTAINER (priv->gtk_widget_get_props (image)->parent), priv->gtk_widget_get_props (image));
+  if (gtk_widget_get_props (priv->image) && gtk_widget_get_props (priv->image)->parent)
+    __gtk_container_remove (GTK_CONTAINER (gtk_widget_get_props (priv->image)->parent), gtk_widget_get_props (priv->image));
 
   priv->image = image;
   priv->image_is_stock = (image == NULL);

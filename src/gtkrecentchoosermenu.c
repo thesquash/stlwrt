@@ -959,7 +959,7 @@ idle_populate_func (gpointer data)
   GtkWidget *item;
 
   pdata = (MenuPopulateData *) data;
-  priv = pdata->gtk_recent_chooser_menu_get_props (menu)->priv;
+  priv = gtk_recent_chooser_menu_get_props (pdata->menu)->priv;
 
   if (!pdata->items)
     {
@@ -1029,7 +1029,7 @@ idle_populate_clean_up (gpointer data)
 {
   MenuPopulateData *pdata = data;
 
-  if (pdata->gtk_recent_chooser_menu_get_props (menu)->priv->populate_id == 0)
+  if (gtk_recent_chooser_menu_get_props (pdata->menu)->priv->populate_id == 0)
     {
       /* show the placeholder in case no item survived
        * the filtering process in the idle loop

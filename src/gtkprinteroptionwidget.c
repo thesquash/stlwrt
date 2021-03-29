@@ -608,7 +608,7 @@ combo_changed_cb (GtkWidget              *combo,
   /* Handle constraints if the user entered a custom value. */
   if (custom)
     {
-      switch (priv->gtk_printer_option_get_props (source)->type)
+      switch (gtk_printer_option_get_props (priv->source)->type)
         {
         case GTK_PRINTER_OPTION_TYPE_PICKONE_PASSCODE:
           filtered_val = filter_numeric (value, FALSE, FALSE, &changed);
@@ -981,7 +981,7 @@ gtk_printer_option_widget_get_value (GtkPrinterOptionWidget *widget)
   GtkPrinterOptionWidgetPrivate *priv = gtk_printer_option_widget_get_props (widget)->priv;
 
   if (priv->source)
-    return priv->gtk_printer_option_get_props (source)->value;
+    return gtk_printer_option_get_props (priv->source)->value;
   
   return "";
 }

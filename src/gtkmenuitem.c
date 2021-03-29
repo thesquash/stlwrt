@@ -1746,7 +1746,7 @@ gtk_menu_item_position_menu (GtkMenu  *menu,
   else if (GTK_IS_MENU (gtk_widget_get_props (widget)->parent))
     {
       if (gtk_menu_get_props (GTK_MENU (gtk_widget_get_props (widget)->parent))->parent_menu_item)
-	gtk_menu_item_get_props (menu_item)->from_menubar = GTK_MENU_ITEM (gtk_menu_get_props (GTK_MENU (gtk_widget_get_props (widget)->parent))->parent_menu_item)->from_menubar;
+	gtk_menu_item_get_props (menu_item)->from_menubar = gtk_menu_item_get_props (gtk_menu_get_props (gtk_widget_get_props (widget)->parent)->parent_menu_item)->from_menubar;
       else
 	gtk_menu_item_get_props (menu_item)->from_menubar = FALSE;
     }
@@ -1781,7 +1781,7 @@ gtk_menu_item_position_menu (GtkMenu  *menu,
       else
 	parent_menu_item = NULL;
       
-      parent_xthickness = gtk_widget_get_props (widget)->gtk_menu_item_get_props (parent)->style->xthickness;
+      parent_xthickness = gtk_menu_item_get_props (gtk_widget_get_props (widget)->parent)->style->xthickness;
 
       if (parent_menu_item && !gtk_menu_get_props (GTK_MENU (gtk_widget_get_props (widget)->parent))->torn_off)
 	{

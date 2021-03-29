@@ -931,7 +931,7 @@ __gtk_label_get_property (GObject     *object,
   switch (prop_id)
     {
     case PROP_LABEL:
-      g_value_set_string (value, gtk_label_get_props (label)->gtk_label_get_props (label));
+      g_value_set_string (value, gtk_label_get_props (gtk_label_get_props (label)->label));
       break;
     case PROP_ATTRIBUTES:
       g_value_set_boxed (value, gtk_label_get_props (label)->attrs);
@@ -1015,7 +1015,7 @@ gtk_label_init (GtkLabel *label)
   priv->width_chars = -1;
   priv->max_width_chars = -1;
   priv->wrap_width = -1;
-  gtk_label_get_props (label)->gtk_label_get_props (label) = NULL;
+  gtk_label_get_props (gtk_label_get_props (label)->label) = NULL;
 
   gtk_label_get_props (label)->jtype = GTK_JUSTIFY_LEFT;
   gtk_label_get_props (label)->wrap = FALSE;
@@ -1445,10 +1445,10 @@ gtk_label_mnemonic_activate (GtkWidget *widget,
     {
       if (__gtk_widget_get_can_focus (parent) ||
 	  (!group_cycling && GTK_WIDGET_GET_CLASS (parent)->activate_signal) ||
-          GTK_IS_NOTEBOOK (gtk_widget_get_props (parent)->gtk_widget_get_props (parent)) ||
+          GTK_IS_NOTEBOOK (gtk_widget_get_props (gtk_widget_get_props (parent)->parent)) ||
 	  GTK_IS_MENU_ITEM (parent))
 	return __gtk_widget_mnemonic_activate (parent, group_cycling);
-      gtk_widget_get_props (parent) = gtk_widget_get_props (parent)->gtk_widget_get_props (parent);
+      gtk_widget_get_props (parent) = gtk_widget_get_props (gtk_widget_get_props (parent)->parent);
     }
 
   /* barf if there was nothing to activate */
@@ -1764,9 +1764,9 @@ static void
 __gtk_label_set_label_internal (GtkLabel *label,
 			      gchar    *str)
 {
-  g_free (gtk_label_get_props (label)->gtk_label_get_props (label));
+  g_free (gtk_label_get_props (gtk_label_get_props (label)->label));
   
-  gtk_label_get_props (label)->gtk_label_get_props (label) = str;
+  gtk_label_get_props (gtk_label_get_props (label)->label) = str;
 
   g_object_notify (G_OBJECT (label), "label");
 }
@@ -1854,9 +1854,9 @@ gtk_label_recalculate (GtkLabel *label)
   guint keyval = gtk_label_get_props (label)->mnemonic_keyval;
 
   if (gtk_label_get_props (label)->use_markup)
-    __gtk_label_set_markup_internal (label, gtk_label_get_props (label)->gtk_label_get_props (label), gtk_label_get_props (label)->use_underline);
+    __gtk_label_set_markup_internal (label, gtk_label_get_props (gtk_label_get_props (label)->label), gtk_label_get_props (label)->use_underline);
   else if (gtk_label_get_props (label)->use_underline)
-    gtk_label_set_uline_text_internal (label, gtk_label_get_props (label)->gtk_label_get_props (label));
+    gtk_label_set_uline_text_internal (label, gtk_label_get_props (gtk_label_get_props (label)->label));
   else
     {
       if (!gtk_label_get_props (label)->pattern_set)
@@ -1865,7 +1865,7 @@ gtk_label_recalculate (GtkLabel *label)
             pango_attr_list_unref (gtk_label_get_props (label)->effective_attrs);
           gtk_label_get_props (label)->effective_attrs = NULL;
         }
-      __gtk_label_set_text_internal (label, g_strdup (gtk_label_get_props (label)->gtk_label_get_props (label)));
+      __gtk_label_set_text_internal (label, g_strdup (gtk_label_get_props (gtk_label_get_props (label)->label)));
     }
 
   gtk_label_compose_effective_attrs (label);
@@ -2002,7 +2002,7 @@ __gtk_label_get_label (GtkLabel *label)
 {
   g_return_val_if_fail (GTK_IS_LABEL (label), NULL);
 
-  return gtk_label_get_props (label)->gtk_label_get_props (label);
+  return gtk_label_get_props (gtk_label_get_props (label)->label);
 }
 
 typedef struct
@@ -2069,10 +2069,10 @@ start_element_handler (GMarkupParseContext  *context,
         }
 
       visited = FALSE;
-      if (pdata->gtk_label_get_props (label)->track_links && pdata->gtk_label_get_props (label)->select_info)
+      if (gtk_label_get_props (pdata->label)->track_links && gtk_label_get_props (pdata->label)->select_info)
         {
           GList *l;
-          for (l = pdata->gtk_label_get_props (label)->select_info->links; l; l = l->next)
+          for (l = gtk_label_get_props (pdata->label)->select_info->links; l; l = l->next)
             {
               link = l->data;
               if (strcmp (uri, link->uri) == 0)
@@ -2862,7 +2862,7 @@ gtk_label_finalize (GObject *object)
 {
   GtkLabel *label = GTK_LABEL (object);
 
-  g_free (gtk_label_get_props (label)->gtk_label_get_props (label));
+  g_free (gtk_label_get_props (gtk_label_get_props (label)->label));
   g_free (gtk_label_get_props (label)->text);
 
   if (gtk_label_get_props (label)->layout)

@@ -1014,11 +1014,11 @@ tag_exists (GMarkupParseContext *context,
       real_name = g_hash_table_lookup (info->substitutions, name);
 
       if (real_name)
-	return __gtk_text_tag_table_lookup (info->gtk_text_buffer_get_props (buffer)->tag_table, real_name);
+	return __gtk_text_tag_table_lookup (gtk_text_buffer_get_props (info->buffer)->tag_table, real_name);
 
       /* Next, try the list of defined tags */
       if (g_hash_table_lookup (info->defined_tags, name) != NULL)
-	return __gtk_text_tag_table_lookup (info->gtk_text_buffer_get_props (buffer)->tag_table, name);
+	return __gtk_text_tag_table_lookup (gtk_text_buffer_get_props (info->buffer)->tag_table, name);
 
       set_error (error, context,
 		 G_MARKUP_ERROR, G_MARKUP_ERROR_PARSE,
@@ -1038,7 +1038,7 @@ tag_exists (GMarkupParseContext *context,
 	  return NULL;
 	}
 
-      tag = __gtk_text_tag_table_lookup (info->gtk_text_buffer_get_props (buffer)->tag_table, name);
+      tag = __gtk_text_tag_table_lookup (gtk_text_buffer_get_props (info->buffer)->tag_table, name);
 
       if (tag)
 	return tag;
@@ -1239,7 +1239,7 @@ get_tag_name (ParseInfo   *info,
 
   i = 0;
 
-  while (__gtk_text_tag_table_lookup (info->gtk_text_buffer_get_props (buffer)->tag_table, name) != NULL)
+  while (__gtk_text_tag_table_lookup (gtk_text_buffer_get_props (info->buffer)->tag_table, name) != NULL)
     {
       g_free (name);
       name = g_strdup_printf ("%s-%d", tag_name, ++i);
@@ -1458,7 +1458,7 @@ end_element_handler (GMarkupParseContext  *context,
 	  TextTagPrio *prio = list->data;
 
 	  if (info->create_tags)
-	    __gtk_text_tag_table_add (info->gtk_text_buffer_get_props (buffer)->tag_table, prio->tag);
+	    __gtk_text_tag_table_add (gtk_text_buffer_get_props (info->buffer)->tag_table, prio->tag);
 
 	  g_object_unref (prio->tag);
 	  prio->tag = NULL;
@@ -1471,10 +1471,10 @@ end_element_handler (GMarkupParseContext  *context,
       pop_state (info);
       g_assert (peek_state (info) == STATE_TAGS);
 
-      if (info->gtk_text_tag_get_props (current_tag)->name)
+      if (gtk_text_tag_get_props (info->current_tag)->name)
 	{
 	  /* Add tag to defined tags hash */
-	  tmp = g_strdup (info->gtk_text_tag_get_props (current_tag)->name);
+	  tmp = g_strdup (gtk_text_tag_get_props (info->current_tag)->name);
 	  g_hash_table_insert (info->defined_tags,
 			       tmp, tmp);
 	}

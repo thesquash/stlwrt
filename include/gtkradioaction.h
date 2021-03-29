@@ -44,7 +44,7 @@ G_BEGIN_DECLS
 typedef struct _GtkRadioActionPrivate GtkRadioActionPrivate;
 typedef struct _GtkRadioActionClass   GtkRadioActionClass;
 
-STLWRT_DECLARE_VTYPE_VPARENT(GtkRadioAction, gtk_radio_action, GtkToggleAction,
+STLWRT_DECLARE_FTYPE_FPARENT(GtkRadioAction, gtk_radio_action, GtkToggleAction,
   GtkRadioActionPrivate * (private_data);
 )
 

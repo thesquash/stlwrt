@@ -831,7 +831,7 @@ ___gtk_scale_get_value_size (GtkScale *scale,
 
       layout = __gtk_widget_create_pango_layout (GTK_WIDGET (scale), NULL);
 
-      txt = ___gtk_scale_format_value (scale, gtk_range_get_props (range)->gtk_adjustment_get_props (adjustment)->lower);
+      txt = ___gtk_scale_format_value (scale, gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->lower);
       pango_layout_set_text (layout, txt, -1);
       g_free (txt);
       
@@ -842,7 +842,7 @@ ___gtk_scale_get_value_size (GtkScale *scale,
       if (height)
 	*height = logical_rect.height;
 
-      txt = ___gtk_scale_format_value (scale, gtk_range_get_props (range)->gtk_adjustment_get_props (adjustment)->upper);
+      txt = ___gtk_scale_format_value (scale, gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->upper);
       pango_layout_set_text (layout, txt, -1);
       g_free (txt);
       

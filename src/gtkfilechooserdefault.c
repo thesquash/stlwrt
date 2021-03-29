@@ -1464,19 +1464,19 @@ get_file_info_finished (GCancellable *cancellable,
     /* Handle doesn't exist anymore in the model */
     goto out;
 
-  __gtk_tree_model_get_iter (GTK_TREE_MODEL (request->gtk_file_chooser_default_get_props (impl)->shortcuts_model),
+  __gtk_tree_model_get_iter (GTK_TREE_MODEL (gtk_file_chooser_default_get_props (request->impl)->shortcuts_model),
 			   &iter, path);
   __gtk_tree_path_free (path);
 
   /* validate cancellable, else goto out */
-  __gtk_tree_model_get (GTK_TREE_MODEL (request->gtk_file_chooser_default_get_props (impl)->shortcuts_model), &iter,
+  __gtk_tree_model_get (GTK_TREE_MODEL (gtk_file_chooser_default_get_props (request->impl)->shortcuts_model), &iter,
 		      SHORTCUTS_COL_CANCELLABLE, &model_cancellable,
 		      -1);
   if (cancellable != model_cancellable)
     goto out;
 
   /* set the cancellable to NULL in the model (we unref later on) */
-  __gtk_list_store_set (request->gtk_file_chooser_default_get_props (impl)->shortcuts_model, &iter,
+  __gtk_list_store_set (gtk_file_chooser_default_get_props (request->impl)->shortcuts_model, &iter,
 		      SHORTCUTS_COL_CANCELLABLE, NULL,
 		      -1);
 
@@ -1486,7 +1486,7 @@ get_file_info_finished (GCancellable *cancellable,
   if (!info)
     {
       shortcuts_free_row_data (request->impl, &iter);
-      __gtk_list_store_remove (request->gtk_file_chooser_default_get_props (impl)->shortcuts_model, &iter);
+      __gtk_list_store_remove (gtk_file_chooser_default_get_props (request->impl)->shortcuts_model, &iter);
       shortcuts_update_count (request->impl, request->type, -1);
 
       if (request->type == SHORTCUTS_HOME)
@@ -1510,9 +1510,9 @@ get_file_info_finished (GCancellable *cancellable,
   if (!request->label_copy)
     request->label_copy = g_strdup (g_file_info_get_display_name (info));
   pixbuf = _gtk_file_info_render_icon (info, GTK_WIDGET (request->impl),
-				       request->gtk_file_chooser_default_get_props (impl)->icon_size);
+				       gtk_file_chooser_default_get_props (request->impl)->icon_size);
 
-  __gtk_list_store_set (request->gtk_file_chooser_default_get_props (impl)->shortcuts_model, &iter,
+  __gtk_list_store_set (gtk_file_chooser_default_get_props (request->impl)->shortcuts_model, &iter,
 		      SHORTCUTS_COL_PIXBUF, pixbuf,
 		      SHORTCUTS_COL_PIXBUF_VISIBLE, TRUE,
 		      SHORTCUTS_COL_NAME, request->label_copy,
@@ -1520,8 +1520,8 @@ get_file_info_finished (GCancellable *cancellable,
 		      SHORTCUTS_COL_REMOVABLE, request->removable,
 		      -1);
 
-  if (request->gtk_file_chooser_default_get_props (impl)->shortcuts_pane_filter_model)
-    __gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (request->gtk_file_chooser_default_get_props (impl)->shortcuts_pane_filter_model));
+  if (gtk_file_chooser_default_get_props (request->impl)->shortcuts_pane_filter_model)
+    __gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (gtk_file_chooser_default_get_props (request->impl)->shortcuts_pane_filter_model));
 
   if (pixbuf)
     g_object_unref (pixbuf);
@@ -1647,7 +1647,7 @@ shortcuts_insert_file (GtkFileChooserDefault *impl,
           request->row_ref = __gtk_tree_row_reference_new (GTK_TREE_MODEL (_gtk_file_chooser_default_get_props (impl)->shortcuts_model), p);
           __gtk_tree_path_free (p);
 
-          cancellable = _gtk_file_system_get_info (request->gtk_file_chooser_default_get_props (impl)->file_system, request->file,
+          cancellable = _gtk_file_system_get_info (gtk_file_chooser_default_get_props (request->impl)->file_system, request->file,
 						   "standard::is-hidden,standard::is-backup,standard::display-name,standard::icon",
 						   get_file_info_finished, request);
 
@@ -6319,7 +6319,7 @@ center_selected_row_foreach_cb (GtkTreeModel      *model,
   if (closure->already_centered)
     return;
 
-  __gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (closure->gtk_file_chooser_default_get_props (impl)->browse_files_tree_view), path, NULL, TRUE, 0.5, 0.0);
+  __gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (gtk_file_chooser_default_get_props (closure->impl)->browse_files_tree_view), path, NULL, TRUE, 0.5, 0.0);
   closure->already_centered = TRUE;
 }
 
@@ -7586,7 +7586,7 @@ get_files_foreach (GtkTreeModel *model,
   GtkFileSystemModel *fs_model;
 
   info = data;
-  fs_model = info->gtk_file_chooser_default_get_props (impl)->browse_files_model;
+  fs_model = gtk_file_chooser_default_get_props (info->impl)->browse_files_model;
 
   file = _gtk_file_system_model_get_file (fs_model, iter);
   if (!file)
@@ -8134,7 +8134,7 @@ switch_folder_foreach_cb (GtkTreeModel      *model,
 
   closure = data;
 
-  closure->file = _gtk_file_system_model_get_file (closure->gtk_file_chooser_default_get_props (impl)->browse_files_model, iter);
+  closure->file = _gtk_file_system_model_get_file (gtk_file_chooser_default_get_props (closure->impl)->browse_files_model, iter);
   closure->num_selected++;
 }
 

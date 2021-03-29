@@ -194,7 +194,7 @@ queue_resize_on_widget (GtkWidget *widget,
       if (widget == parent && !check_siblings)
 	{
 	  real_queue_resize (widget);
-	  gtk_widget_get_props (parent) = gtk_widget_get_props (parent)->gtk_widget_get_props (parent);
+	  gtk_widget_get_props (parent) = gtk_widget_get_props (gtk_widget_get_props (parent)->parent);
 	  continue;
 	}
       
@@ -204,7 +204,7 @@ queue_resize_on_widget (GtkWidget *widget,
 	  if (widget == parent)
 	    real_queue_resize (widget);
 
-	  gtk_widget_get_props (parent) = gtk_widget_get_props (parent)->gtk_widget_get_props (parent);
+	  gtk_widget_get_props (parent) = gtk_widget_get_props (gtk_widget_get_props (parent)->parent);
 	  continue;
 	}
 
@@ -268,7 +268,7 @@ queue_resize_on_widget (GtkWidget *widget,
       g_slist_free (widgets);
       g_slist_free (groups);
       
-      gtk_widget_get_props (parent) = gtk_widget_get_props (parent)->gtk_widget_get_props (parent);
+      gtk_widget_get_props (parent) = gtk_widget_get_props (gtk_widget_get_props (parent)->parent);
     }
 }
 

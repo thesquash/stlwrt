@@ -3651,7 +3651,7 @@ widget_add_child_draw_rectangle (GtkWidget    *widget,
   GdkRectangle child_rect;
   
   if (!__gtk_widget_get_mapped (widget) ||
-      gtk_widget_get_props (widget)->window != gtk_widget_get_props (widget)->gtk_widget_get_props (parent)->window)
+      gtk_widget_get_props (widget)->window != gtk_widget_get_props (gtk_widget_get_props (widget)->parent)->window)
     return;
 
   gtk_widget_get_draw_rectangle (widget, &child_rect);
@@ -4083,7 +4083,7 @@ __gtk_widget_size_allocate (GtkWidget	*widget,
   if ((size_changed || position_changed) && gtk_widget_get_props (widget)->parent &&
       __gtk_widget_get_realized (gtk_widget_get_props (widget)->parent) && gtk_container_get_props (GTK_CONTAINER (gtk_widget_get_props (widget)->parent))->reallocate_redraws)
     {
-      GdkRegion *invalidate = __gdk_region_rectangle (&gtk_widget_get_props (widget)->gtk_widget_get_props (parent)->allocation);
+      GdkRegion *invalidate = __gdk_region_rectangle (&gtk_widget_get_props (gtk_widget_get_props (widget)->parent)->allocation);
       gtk_widget_invalidate_widget_windows (gtk_widget_get_props (widget)->parent, invalidate);
       __gdk_region_destroy (invalidate);
     }
@@ -6095,7 +6095,7 @@ __gtk_widget_set_mapped (GtkWidget *widget,
  * window using an RGBA visual), you can work around this by doing:
  * |[
  *  __gtk_widget_realize (window);
- *  __gdk_window_set_back_pixmap (gtk_widget_get_props (window)->gtk_widget_get_props (window), NULL, FALSE);
+ *  __gdk_window_set_back_pixmap (gtk_widget_get_props (gtk_widget_get_props (window)->window), NULL, FALSE);
  *  __gtk_widget_show (window);
  * ]|
  **/
@@ -7434,7 +7434,7 @@ __gtk_widget_get_parent_window (GtkWidget *widget)
   parent_window = g_object_get_qdata (G_OBJECT (widget), quark_parent_window);
 
   return (parent_window != NULL) ? parent_window :
-	 (gtk_widget_get_props (widget)->parent != NULL) ? gtk_widget_get_props (widget)->gtk_widget_get_props (parent)->window : NULL;
+	 (gtk_widget_get_props (widget)->parent != NULL) ? gtk_widget_get_props (gtk_widget_get_props (widget)->parent)->window : NULL;
 }
 
 

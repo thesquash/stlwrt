@@ -747,7 +747,7 @@ __gtk_message_dialog_set_image (GtkMessageDialog *dialog,
 
   priv->message_type = GTK_MESSAGE_OTHER;
   
-  parent = gtk_message_dialog_get_props (dialog)->gtk_widget_get_props (image)->parent;
+  parent = gtk_widget_get_props (gtk_message_dialog_get_props (dialog)->image)->parent;
   __gtk_container_add (GTK_CONTAINER (parent), image);
   __gtk_container_remove (GTK_CONTAINER (parent), gtk_message_dialog_get_props (dialog)->image);
   __gtk_box_reorder_child (GTK_BOX (parent), image, 0);

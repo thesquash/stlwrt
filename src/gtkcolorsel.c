@@ -803,7 +803,7 @@ color_sample_draw_sample (GtkColorSelection *colorsel, int which)
   else
     {
       da = priv->cur_sample;
-      goff =  priv->gtk_widget_get_props (old_sample)->allocation.width % 32;
+      goff =  gtk_widget_get_props (priv->old_sample)->allocation.width % 32;
     }
 
   cr = __gdk_cairo_create ((GdkDrawable *) (gtk_widget_get_props (da)->window));
@@ -1877,12 +1877,12 @@ get_screen_color (GtkWidget *button)
       priv->dropper_grab_widget = grab_widget;
     }
 
-  if (__gdk_keyboard_grab (priv->gtk_widget_get_props (dropper_grab_widget)->window,
+  if (__gdk_keyboard_grab (gtk_widget_get_props (priv->dropper_grab_widget)->window,
                          FALSE, time) != GDK_GRAB_SUCCESS)
     return;
   
   picker_cursor = make_picker_cursor (screen);
-  grab_status = __gdk_pointer_grab (priv->gtk_widget_get_props (dropper_grab_widget)->window,
+  grab_status = __gdk_pointer_grab (gtk_widget_get_props (priv->dropper_grab_widget)->window,
 				  FALSE,
 				  GDK_BUTTON_RELEASE_MASK | GDK_BUTTON_PRESS_MASK | GDK_POINTER_MOTION_MASK,
 				  NULL,

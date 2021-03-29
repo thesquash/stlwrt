@@ -671,12 +671,12 @@ gtk_print_unix_dialog_finalize (GObject *object)
 
   if (priv->number_up_layout_2_option)
     {
-      priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices[0] = NULL;
-      priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices[1] = NULL;
-      g_free (priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices_display[0]);
-      g_free (priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices_display[1]);
-      priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices_display[0] = NULL;
-      priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices_display[1] = NULL;
+      gtk_printer_option_get_props (priv->number_up_layout_2_option)->choices[0] = NULL;
+      gtk_printer_option_get_props (priv->number_up_layout_2_option)->choices[1] = NULL;
+      g_free (gtk_printer_option_get_props (priv->number_up_layout_2_option)->choices_display[0]);
+      g_free (gtk_printer_option_get_props (priv->number_up_layout_2_option)->choices_display[1]);
+      gtk_printer_option_get_props (priv->number_up_layout_2_option)->choices_display[0] = NULL;
+      gtk_printer_option_get_props (priv->number_up_layout_2_option)->choices_display[1] = NULL;
       g_object_unref (priv->number_up_layout_2_option);
       priv->number_up_layout_2_option = NULL;
     }
@@ -3032,8 +3032,8 @@ update_number_up_layout (GtkPrintUnixDialog *dialog)
 
               for (i = 0; i < G_N_ELEMENTS (n_up_layout_display); i++)
                 {
-                  priv->gtk_printer_option_get_props (number_up_layout_n_option)->choices[i] = g_strdup (n_up_layout[i]);
-                  priv->gtk_printer_option_get_props (number_up_layout_n_option)->choices_display[i] = g_strdup (_(n_up_layout_display[i]));
+                  gtk_printer_option_get_props (priv->number_up_layout_n_option)->choices[i] = g_strdup (n_up_layout[i]);
+                  gtk_printer_option_get_props (priv->number_up_layout_n_option)->choices_display[i] = g_strdup (_(n_up_layout_display[i]));
                 }
             }
           g_object_ref (priv->number_up_layout_n_option);
@@ -3048,28 +3048,28 @@ update_number_up_layout (GtkPrintUnixDialog *dialog)
       if (page_orientation == GTK_PAGE_ORIENTATION_PORTRAIT ||
           page_orientation == GTK_PAGE_ORIENTATION_REVERSE_PORTRAIT)
         {
-          if (! (priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices[0] == priv->gtk_printer_option_get_props (number_up_layout_n_option)->choices[0] &&
-                 priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices[1] == priv->gtk_printer_option_get_props (number_up_layout_n_option)->choices[2]))
+          if (! (gtk_printer_option_get_props (priv->number_up_layout_2_option)->choices[0] == gtk_printer_option_get_props (priv->number_up_layout_n_option)->choices[0] &&
+                 gtk_printer_option_get_props (priv->number_up_layout_2_option)->choices[1] == gtk_printer_option_get_props (priv->number_up_layout_n_option)->choices[2]))
             {
-              g_free (priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices_display[0]);
-              g_free (priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices_display[1]);
-              priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices[0] = priv->gtk_printer_option_get_props (number_up_layout_n_option)->choices[0];
-              priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices[1] = priv->gtk_printer_option_get_props (number_up_layout_n_option)->choices[2];
-              priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices_display[0] = g_strdup ( _("Left to right"));
-              priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices_display[1] = g_strdup ( _("Right to left"));
+              g_free (gtk_printer_option_get_props (priv->number_up_layout_2_option)->choices_display[0]);
+              g_free (gtk_printer_option_get_props (priv->number_up_layout_2_option)->choices_display[1]);
+              gtk_printer_option_get_props (priv->number_up_layout_2_option)->choices[0] = gtk_printer_option_get_props (priv->number_up_layout_n_option)->choices[0];
+              gtk_printer_option_get_props (priv->number_up_layout_2_option)->choices[1] = gtk_printer_option_get_props (priv->number_up_layout_n_option)->choices[2];
+              gtk_printer_option_get_props (priv->number_up_layout_2_option)->choices_display[0] = g_strdup ( _("Left to right"));
+              gtk_printer_option_get_props (priv->number_up_layout_2_option)->choices_display[1] = g_strdup ( _("Right to left"));
             }
         }
       else
         {
-          if (! (priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices[0] == priv->gtk_printer_option_get_props (number_up_layout_n_option)->choices[0] &&
-                 priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices[1] == priv->gtk_printer_option_get_props (number_up_layout_n_option)->choices[1]))
+          if (! (gtk_printer_option_get_props (priv->number_up_layout_2_option)->choices[0] == gtk_printer_option_get_props (priv->number_up_layout_n_option)->choices[0] &&
+                 gtk_printer_option_get_props (priv->number_up_layout_2_option)->choices[1] == gtk_printer_option_get_props (priv->number_up_layout_n_option)->choices[1]))
             {
-              g_free (priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices_display[0]);
-              g_free (priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices_display[1]);
-              priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices[0] = priv->gtk_printer_option_get_props (number_up_layout_n_option)->choices[0];
-              priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices[1] = priv->gtk_printer_option_get_props (number_up_layout_n_option)->choices[1];
-              priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices_display[0] = g_strdup ( _("Top to bottom"));
-              priv->gtk_printer_option_get_props (number_up_layout_2_option)->choices_display[1] = g_strdup ( _("Bottom to top"));
+              g_free (gtk_printer_option_get_props (priv->number_up_layout_2_option)->choices_display[0]);
+              g_free (gtk_printer_option_get_props (priv->number_up_layout_2_option)->choices_display[1]);
+              gtk_printer_option_get_props (priv->number_up_layout_2_option)->choices[0] = gtk_printer_option_get_props (priv->number_up_layout_n_option)->choices[0];
+              gtk_printer_option_get_props (priv->number_up_layout_2_option)->choices[1] = gtk_printer_option_get_props (priv->number_up_layout_n_option)->choices[1];
+              gtk_printer_option_get_props (priv->number_up_layout_2_option)->choices_display[0] = g_strdup ( _("Top to bottom"));
+              gtk_printer_option_get_props (priv->number_up_layout_2_option)->choices_display[1] = g_strdup ( _("Bottom to top"));
             }
         }
 

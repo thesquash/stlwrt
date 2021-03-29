@@ -25,14 +25,11 @@
 
 
 #include <gtktexttag.h>
-
 #include <gtktextiter.h>
-
 #include <gtktextmarkprivate.h>
-
 #include <gtktextchild.h>
-
 #include <gtktextchildprivate.h>
+#include <gtktextbtree.h>
 
 G_BEGIN_DECLS
 

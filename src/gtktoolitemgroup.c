@@ -301,7 +301,7 @@ gtk_tool_item_group_header_expose_event_cb (GtkWidget      *widget,
     }
 
   __gtk_paint_expander (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window,
-                      priv->gtk_widget_get_props (header)->state,
+                      gtk_widget_get_props (priv->header)->state,
                       &event->area, GTK_WIDGET (group),
                       "tool-palette-header", x, y,
                       expander_style);
@@ -1781,7 +1781,7 @@ gtk_tool_item_group_force_expose (GtkToolItemGroup *group)
       area.width = priv->expander_size;
 
       /* ... and invalidated it to get it animated. */
-      __gdk_window_invalidate_rect (priv->gtk_widget_get_props (header)->window, &area, TRUE);
+      __gdk_window_invalidate_rect (gtk_widget_get_props (priv->header)->window, &area, TRUE);
     }
 
   if (__gtk_widget_get_realized (widget))
@@ -1797,8 +1797,8 @@ gtk_tool_item_group_force_expose (GtkToolItemGroup *group)
 
       if (__gtk_widget_get_visible (priv->header))
         {
-          height -= priv->gtk_widget_get_props (header)->allocation.height;
-          y += priv->gtk_widget_get_props (header)->allocation.height;
+          height -= gtk_widget_get_props (priv->header)->allocation.height;
+          y += gtk_widget_get_props (priv->header)->allocation.height;
         }
 
       /* ... and invalidated it to get it animated. */

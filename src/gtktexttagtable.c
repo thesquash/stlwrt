@@ -171,7 +171,7 @@ foreach_unref (GtkTextTag *tag, gpointer data)
    * and unref the tag.
    */
 
-  tmp = gtk_text_tag_get_props (tag)->gtk_text_tag_table_get_props (table)->buffers;
+  tmp = gtk_text_tag_table_get_props (gtk_text_tag_get_props (tag)->table)->buffers;
   while (tmp != NULL)
     {
       ___gtk_text_buffer_notify_will_remove_tag (GTK_TEXT_BUFFER (tmp->data),

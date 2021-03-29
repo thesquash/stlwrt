@@ -70,7 +70,7 @@ gtk_color_selection_dialog_get_property (GObject         *object,
   switch (prop_id)
     {
     case PROP_COLOR_SELECTION:
-      g_value_set_object (value, gtk_color_selection_dialog_get_props (colorsel)->gtk_color_selection_dialog_get_props (colorsel));
+      g_value_set_object (value, gtk_color_selection_dialog_get_props (gtk_color_selection_dialog_get_props (colorsel)->colorsel));
       break;
     case PROP_OK_BUTTON:
       g_value_set_object (value, gtk_color_selection_dialog_get_props (colorsel)->ok_button);
@@ -199,7 +199,7 @@ __gtk_color_selection_dialog_get_color_selection (GtkColorSelectionDialog *color
 {
   g_return_val_if_fail (GTK_IS_COLOR_SELECTION_DIALOG (colorsel), NULL);
 
-  return gtk_color_selection_dialog_get_props (colorsel)->gtk_color_selection_dialog_get_props (colorsel);
+  return gtk_color_selection_dialog_get_props (gtk_color_selection_dialog_get_props (colorsel)->colorsel);
 }
 
 static void

@@ -933,10 +933,10 @@ gtk_paned_size_allocate (GtkWidget     *widget,
       if (__gtk_widget_get_mapped (widget) &&
 
           ((gtk_paned_get_props (paned)->priv->orientation == GTK_ORIENTATION_HORIZONTAL &&
-            gtk_paned_get_props (paned)->gtk_widget_get_props (child1)->allocation.width < child1_allocation.width) ||
+            gtk_widget_get_props (gtk_paned_get_props (paned)->child1)->allocation.width < child1_allocation.width) ||
 
            (gtk_paned_get_props (paned)->priv->orientation == GTK_ORIENTATION_VERTICAL &&
-            gtk_paned_get_props (paned)->gtk_widget_get_props (child1)->allocation.height < child1_allocation.height)))
+            gtk_widget_get_props (gtk_paned_get_props (paned)->child1)->allocation.height < child1_allocation.height)))
 	{
 	  __gtk_widget_size_allocate (gtk_paned_get_props (paned)->child2, &child2_allocation);
 	  __gtk_widget_size_allocate (gtk_paned_get_props (paned)->child1, &child1_allocation);

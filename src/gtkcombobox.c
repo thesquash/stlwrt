@@ -1353,7 +1353,7 @@ gtk_combo_box_add (GtkContainer *container,
 
       if (!priv->tree_view && priv->separator)
         {
-	  __gtk_container_remove (GTK_CONTAINER (priv->gtk_widget_get_props (separator)->parent),
+	  __gtk_container_remove (GTK_CONTAINER (gtk_widget_get_props (priv->separator)->parent),
 				priv->separator);
 	  priv->separator = NULL;
 
@@ -2120,7 +2120,7 @@ gtk_combo_box_real_popup (GtkComboBox *combo_box)
   if (!__gtk_widget_has_focus (priv->tree_view))
     __gtk_widget_grab_focus (priv->tree_view);
 
-  if (!popup_grab_on_window (priv->gtk_widget_get_props (popup_window)->window,
+  if (!popup_grab_on_window (gtk_widget_get_props (priv->popup_window)->window,
 			     GDK_CURRENT_TIME, TRUE))
     {
       __gtk_widget_hide (priv->popup_window);
@@ -2733,7 +2733,7 @@ tree_next_func (GtkTreeModel *model,
 	return FALSE;
       
       if (search_data->visible &&
-	  !path_visible (GTK_TREE_VIEW (search_data->gtk_combo_box_get_props (combo)->priv->tree_view), path))
+	  !path_visible (GTK_TREE_VIEW (gtk_combo_box_get_props (search_data->combo)->priv->tree_view), path))
 	return FALSE;
 
       search_data->set = TRUE;
@@ -2790,7 +2790,7 @@ tree_prev_func (GtkTreeModel *model,
     return FALSE;
       
   if (search_data->visible &&
-      !path_visible (GTK_TREE_VIEW (search_data->gtk_combo_box_get_props (combo)->priv->tree_view), path))
+      !path_visible (GTK_TREE_VIEW (gtk_combo_box_get_props (search_data->combo)->priv->tree_view), path))
     return FALSE; 
   
   search_data->set = TRUE;
@@ -2837,7 +2837,7 @@ tree_last_func (GtkTreeModel *model,
   /* Note that we rely on the fact that collapsed rows don't have nodes 
    */
   if (search_data->visible &&
-      !path_visible (GTK_TREE_VIEW (search_data->gtk_combo_box_get_props (combo)->priv->tree_view), path))
+      !path_visible (GTK_TREE_VIEW (gtk_combo_box_get_props (search_data->combo)->priv->tree_view), path))
     return FALSE; 
   
   search_data->set = TRUE;
@@ -2878,7 +2878,7 @@ tree_first_func (GtkTreeModel *model,
     return FALSE;
   
   if (search_data->visible &&
-      !path_visible (GTK_TREE_VIEW (search_data->gtk_combo_box_get_props (combo)->priv->tree_view), path))
+      !path_visible (GTK_TREE_VIEW (gtk_combo_box_get_props (search_data->combo)->priv->tree_view), path))
     return FALSE;
   
   search_data->set = TRUE;
@@ -4234,7 +4234,7 @@ gtk_combo_box_list_scroll_timeout (GtkComboBox *combo_box)
 
   if (priv->auto_scroll)
     {
-      __gdk_window_get_pointer (priv->gtk_widget_get_props (tree_view)->window, &x, &y, NULL);
+      __gdk_window_get_pointer (gtk_widget_get_props (priv->tree_view)->window, &x, &y, NULL);
       gtk_combo_box_list_auto_scroll (combo_box, x, y);
     }
 
@@ -4263,7 +4263,7 @@ gtk_combo_box_list_select_func (GtkTreeSelection *selection,
   GList *list;
   gboolean sensitive = FALSE;
 
-  for (list = gtk_tree_selection_get_props (selection)->gtk_widget_get_props (tree_view)->priv->columns; list && !sensitive; list = list->next)
+  for (list = gtk_widget_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->columns; list && !sensitive; list = list->next)
     {
       GList *cells, *cell;
       gboolean cell_sensitive, cell_visible;

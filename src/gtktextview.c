@@ -2067,14 +2067,14 @@ gtk_text_view_update_adjustments (GtkTextView *text_view)
       /* Set up the step sizes; we'll say that a page is
          our allocation minus one step, and a step is
          1/10 of our allocation. */
-      gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (hadjustment)->step_increment =
+      gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->hadjustment)->step_increment =
         SCREEN_WIDTH (text_view) / 10.0;
-      gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (hadjustment)->page_increment =
+      gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->hadjustment)->page_increment =
         SCREEN_WIDTH (text_view) * 0.9;
       
-      gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (vadjustment)->step_increment =
+      gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->vadjustment)->step_increment =
         SCREEN_HEIGHT (text_view) / 10.0;
-      gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (vadjustment)->page_increment =
+      gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->vadjustment)->page_increment =
         SCREEN_HEIGHT (text_view) * 0.9;
 
       __gtk_adjustment_changed (get_hadjustment (text_view));
@@ -2325,7 +2325,7 @@ __gtk_text_view_set_wrap_mode (GtkTextView *text_view,
 
       if (gtk_text_view_get_props (text_view)->layout)
         {
-          gtk_text_view_get_props (text_view)->gtk_text_layout_get_props (layout)->default_style->wrap_mode = wrap_mode;
+          gtk_text_layout_get_props (gtk_text_view_get_props (text_view)->layout)->default_style->wrap_mode = wrap_mode;
           gtk_text_layout_default_style_changed (gtk_text_view_get_props (text_view)->layout);
         }
     }
@@ -2428,7 +2428,7 @@ __gtk_text_view_set_pixels_above_lines (GtkTextView *text_view,
 
       if (gtk_text_view_get_props (text_view)->layout)
         {
-          gtk_text_view_get_props (text_view)->gtk_text_layout_get_props (layout)->default_style->pixels_above_lines = pixels_above_lines;
+          gtk_text_layout_get_props (gtk_text_view_get_props (text_view)->layout)->default_style->pixels_above_lines = pixels_above_lines;
           gtk_text_layout_default_style_changed (gtk_text_view_get_props (text_view)->layout);
         }
 
@@ -2473,7 +2473,7 @@ __gtk_text_view_set_pixels_below_lines (GtkTextView *text_view,
 
       if (gtk_text_view_get_props (text_view)->layout)
         {
-          gtk_text_view_get_props (text_view)->gtk_text_layout_get_props (layout)->default_style->pixels_below_lines = pixels_below_lines;
+          gtk_text_layout_get_props (gtk_text_view_get_props (text_view)->layout)->default_style->pixels_below_lines = pixels_below_lines;
           gtk_text_layout_default_style_changed (gtk_text_view_get_props (text_view)->layout);
         }
 
@@ -2518,7 +2518,7 @@ __gtk_text_view_set_pixels_inside_wrap (GtkTextView *text_view,
 
       if (gtk_text_view_get_props (text_view)->layout)
         {
-          gtk_text_view_get_props (text_view)->gtk_text_layout_get_props (layout)->default_style->pixels_inside_wrap = pixels_inside_wrap;
+          gtk_text_layout_get_props (gtk_text_view_get_props (text_view)->layout)->default_style->pixels_inside_wrap = pixels_inside_wrap;
           gtk_text_layout_default_style_changed (gtk_text_view_get_props (text_view)->layout);
         }
 
@@ -2563,7 +2563,7 @@ __gtk_text_view_set_justification (GtkTextView     *text_view,
 
       if (gtk_text_view_get_props (text_view)->layout)
         {
-          gtk_text_view_get_props (text_view)->gtk_text_layout_get_props (layout)->default_style->justification = justification;
+          gtk_text_layout_get_props (gtk_text_view_get_props (text_view)->layout)->default_style->justification = justification;
           gtk_text_layout_default_style_changed (gtk_text_view_get_props (text_view)->layout);
         }
 
@@ -2608,7 +2608,7 @@ __gtk_text_view_set_left_margin (GtkTextView *text_view,
 
       if (gtk_text_view_get_props (text_view)->layout)
         {
-          gtk_text_view_get_props (text_view)->gtk_text_layout_get_props (layout)->default_style->left_margin = left_margin;
+          gtk_text_layout_get_props (gtk_text_view_get_props (text_view)->layout)->default_style->left_margin = left_margin;
           gtk_text_layout_default_style_changed (gtk_text_view_get_props (text_view)->layout);
         }
 
@@ -2653,7 +2653,7 @@ __gtk_text_view_set_right_margin (GtkTextView *text_view,
 
       if (gtk_text_view_get_props (text_view)->layout)
         {
-          gtk_text_view_get_props (text_view)->gtk_text_layout_get_props (layout)->default_style->right_margin = right_margin;
+          gtk_text_layout_get_props (gtk_text_view_get_props (text_view)->layout)->default_style->right_margin = right_margin;
           gtk_text_layout_default_style_changed (gtk_text_view_get_props (text_view)->layout);
         }
 
@@ -2698,7 +2698,7 @@ __gtk_text_view_set_indent (GtkTextView *text_view,
 
       if (gtk_text_view_get_props (text_view)->layout)
         {
-          gtk_text_view_get_props (text_view)->gtk_text_layout_get_props (layout)->default_style->indent = indent;
+          gtk_text_layout_get_props (gtk_text_view_get_props (text_view)->layout)->default_style->indent = indent;
           gtk_text_layout_default_style_changed (gtk_text_view_get_props (text_view)->layout);
         }
 
@@ -2746,10 +2746,10 @@ __gtk_text_view_set_tabs (GtkTextView   *text_view,
   if (gtk_text_view_get_props (text_view)->layout)
     {
       /* some unkosher futzing in internal struct details... */
-      if (gtk_text_view_get_props (text_view)->gtk_text_layout_get_props (layout)->default_style->tabs)
-        pango_tab_array_free (gtk_text_view_get_props (text_view)->gtk_text_layout_get_props (layout)->default_style->tabs);
+      if (gtk_text_layout_get_props (gtk_text_view_get_props (text_view)->layout)->default_style->tabs)
+        pango_tab_array_free (gtk_text_layout_get_props (gtk_text_view_get_props (text_view)->layout)->default_style->tabs);
 
-      gtk_text_view_get_props (text_view)->gtk_text_layout_get_props (layout)->default_style->tabs =
+      gtk_text_layout_get_props (gtk_text_view_get_props (text_view)->layout)->default_style->tabs =
         gtk_text_view_get_props (text_view)->tabs ? pango_tab_array_copy (gtk_text_view_get_props (text_view)->tabs) : NULL;
 
       gtk_text_layout_default_style_changed (gtk_text_view_get_props (text_view)->layout);
@@ -3113,8 +3113,8 @@ gtk_text_view_size_request (GtkWidget      *widget,
 
   if (gtk_text_view_get_props (text_view)->layout)
     {
-      gtk_text_view_get_props (text_view)->text_window->requisition.width = gtk_text_view_get_props (text_view)->gtk_text_layout_get_props (layout)->width;
-      gtk_text_view_get_props (text_view)->text_window->requisition.height = gtk_text_view_get_props (text_view)->gtk_text_layout_get_props (layout)->height;
+      gtk_text_view_get_props (text_view)->text_window->requisition.width = gtk_text_layout_get_props (gtk_text_view_get_props (text_view)->layout)->width;
+      gtk_text_view_get_props (text_view)->text_window->requisition.height = gtk_text_layout_get_props (gtk_text_view_get_props (text_view)->layout)->height;
     }
   else
     {
@@ -3213,8 +3213,8 @@ gtk_text_view_update_child_allocation (GtkTextView      *text_view,
 #if 0
   g_print ("allocation for %p allocated to %d,%d yoffset = %d\n",
            vc->widget,
-           vc->gtk_widget_get_props (widget)->allocation.x,
-           vc->gtk_widget_get_props (widget)->allocation.y,
+           gtk_widget_get_props (vc->widget)->allocation.x,
+           gtk_widget_get_props (vc->widget)->allocation.y,
            gtk_text_view_get_props (text_view)->yoffset);
 #endif
 }
@@ -3444,23 +3444,23 @@ gtk_text_view_size_allocate (GtkWidget *widget,
   get_hadjustment (text_view);
   get_vadjustment (text_view);
 
-  gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (hadjustment)->page_size = SCREEN_WIDTH (gtk_text_view_get_props (text_view));
-  gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (hadjustment)->page_increment = SCREEN_WIDTH (gtk_text_view_get_props (text_view)) * 0.9;
-  gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (hadjustment)->step_increment = SCREEN_WIDTH (gtk_text_view_get_props (text_view)) * 0.1;
-  gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (hadjustment)->lower = 0;
-  gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (hadjustment)->upper = MAX (SCREEN_WIDTH (gtk_text_view_get_props (text_view)),
+  gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->hadjustment)->page_size = SCREEN_WIDTH (gtk_text_view_get_props (text_view));
+  gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->hadjustment)->page_increment = SCREEN_WIDTH (gtk_text_view_get_props (text_view)) * 0.9;
+  gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->hadjustment)->step_increment = SCREEN_WIDTH (gtk_text_view_get_props (text_view)) * 0.1;
+  gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->hadjustment)->lower = 0;
+  gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->hadjustment)->upper = MAX (SCREEN_WIDTH (gtk_text_view_get_props (text_view)),
                                        gtk_text_view_get_props (text_view)->width);
 
-  if (gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (hadjustment)->value > gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (hadjustment)->upper - gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (hadjustment)->page_size)
+  if (gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->hadjustment)->value > gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->hadjustment)->upper - gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->hadjustment)->page_size)
     __gtk_adjustment_set_value (gtk_text_view_get_props (text_view)->hadjustment, MAX (0, gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (gtk_adjustment_get_props (hadjustment))->upper - gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (gtk_adjustment_get_props (hadjustment))->page_size));
 
   __gtk_adjustment_changed (gtk_text_view_get_props (text_view)->hadjustment);
 
-  gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (vadjustment)->page_size = SCREEN_HEIGHT (text_view);
-  gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (vadjustment)->page_increment = SCREEN_HEIGHT (text_view) * 0.9;
-  gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (vadjustment)->step_increment = SCREEN_HEIGHT (text_view) * 0.1;
-  gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (vadjustment)->lower = 0;
-  gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (vadjustment)->upper = MAX (SCREEN_HEIGHT (text_view),
+  gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->vadjustment)->page_size = SCREEN_HEIGHT (text_view);
+  gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->vadjustment)->page_increment = SCREEN_HEIGHT (text_view) * 0.9;
+  gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->vadjustment)->step_increment = SCREEN_HEIGHT (text_view) * 0.1;
+  gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->vadjustment)->lower = 0;
+  gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->vadjustment)->upper = MAX (SCREEN_HEIGHT (text_view),
                                        gtk_text_view_get_props (text_view)->height);
 
   /* Now adjust the value of the adjustment to keep the cursor at the
@@ -3471,7 +3471,7 @@ gtk_text_view_size_allocate (GtkWidget *widget,
 
   y += gtk_text_view_get_props (text_view)->first_para_pixels;
 
-  if (y > gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (vadjustment)->upper - gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (vadjustment)->page_size)
+  if (y > gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->vadjustment)->upper - gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->vadjustment)->page_size)
     y = MAX (0, gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (gtk_adjustment_get_props (vadjustment))->upper - gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (gtk_adjustment_get_props (vadjustment))->page_size);
 
   if (y != gtk_text_view_get_props (text_view)->yoffset)
@@ -3944,7 +3944,7 @@ gtk_text_view_style_set (GtkWidget *widget,
   if (gtk_text_view_get_props (text_view)->layout && previous_style)
     {
       gtk_text_view_set_attributes_from_style (text_view,
-                                               gtk_text_view_get_props (text_view)->gtk_text_layout_get_props (layout)->default_style,
+                                               gtk_text_layout_get_props (gtk_text_view_get_props (text_view)->layout)->default_style,
                                                gtk_widget_get_props (widget)->style);
       
       
@@ -3968,7 +3968,7 @@ gtk_text_view_direction_changed (GtkWidget        *widget,
 
   if (gtk_text_view_get_props (text_view)->layout)
     {
-      gtk_text_view_get_props (text_view)->gtk_text_layout_get_props (layout)->default_style->direction = __gtk_widget_get_direction (widget);
+      gtk_text_layout_get_props (gtk_text_view_get_props (text_view)->layout)->default_style->direction = __gtk_widget_get_direction (widget);
 
       gtk_text_layout_default_style_changed (gtk_text_view_get_props (text_view)->layout);
     }
@@ -6524,7 +6524,7 @@ __gtk_text_view_get_default_attributes (GtkTextView *text_view)
   
   gtk_text_view_ensure_layout (text_view);
 
-  return __gtk_text_attributes_copy (gtk_text_view_get_props (text_view)->gtk_text_layout_get_props (layout)->default_style);
+  return __gtk_text_attributes_copy (gtk_text_layout_get_props (gtk_text_view_get_props (text_view)->layout)->default_style);
 }
 
 static void

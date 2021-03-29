@@ -1208,23 +1208,23 @@ set_button_image_get_info_cb (GCancellable *cancellable,
     goto out;
 
   pixbuf = _gtk_file_info_render_icon (info, GTK_WIDGET (data->path_bar),
-			 	       data->gtk_path_bar_get_props (path_bar)->icon_size);
+			 	       gtk_path_bar_get_props (data->path_bar)->icon_size);
   __gtk_image_set_from_pixbuf (GTK_IMAGE (data->button_data->image), pixbuf);
 
   switch (data->button_data->type)
     {
       case HOME_BUTTON:
-	if (data->gtk_path_bar_get_props (path_bar)->home_icon)
+	if (gtk_path_bar_get_props (data->path_bar)->home_icon)
 	  g_object_unref (pixbuf);
 	else
-	  data->gtk_path_bar_get_props (path_bar)->home_icon = pixbuf;
+	  gtk_path_bar_get_props (data->path_bar)->home_icon = pixbuf;
 	break;
 
       case DESKTOP_BUTTON:
-	if (data->gtk_path_bar_get_props (path_bar)->desktop_icon)
+	if (gtk_path_bar_get_props (data->path_bar)->desktop_icon)
 	  g_object_unref (pixbuf);
 	else
-	  data->gtk_path_bar_get_props (path_bar)->desktop_icon = pixbuf;
+	  gtk_path_bar_get_props (data->path_bar)->desktop_icon = pixbuf;
 	break;
 
       default:
@@ -1599,10 +1599,10 @@ gtk_path_bar_set_file_finish (struct SetFileInfo *info,
       GList *l;
 
       gtk_path_bar_clear_buttons (info->path_bar);
-      info->gtk_path_bar_get_props (path_bar)->button_list = g_list_reverse (info->new_buttons);
-      info->gtk_path_bar_get_props (path_bar)->fake_root = info->fake_root;
+      gtk_path_bar_get_props (info->path_bar)->button_list = g_list_reverse (info->new_buttons);
+      gtk_path_bar_get_props (info->path_bar)->fake_root = info->fake_root;
 
-      for (l = info->gtk_path_bar_get_props (path_bar)->button_list; l; l = l->next)
+      for (l = gtk_path_bar_get_props (info->path_bar)->button_list; l; l = l->next)
 	{
 	  GtkWidget *button = BUTTON_DATA (l->data)->button;
 	  __gtk_container_add (GTK_CONTAINER (info->path_bar), button);
@@ -1642,7 +1642,7 @@ gtk_path_bar_get_info_callback (GCancellable *cancellable,
   const gchar *display_name;
   gboolean is_hidden;
 
-  if (cancellable != file_info->gtk_path_bar_get_props (path_bar)->get_info_cancellable)
+  if (cancellable != gtk_path_bar_get_props (file_info->path_bar)->get_info_cancellable)
     {
       gtk_path_bar_set_file_finish (file_info, FALSE);
       g_object_unref (cancellable);
@@ -1650,7 +1650,7 @@ gtk_path_bar_get_info_callback (GCancellable *cancellable,
     }
 
   g_object_unref (cancellable);
-  file_info->gtk_path_bar_get_props (path_bar)->get_info_cancellable = NULL;
+  gtk_path_bar_get_props (file_info->path_bar)->get_info_cancellable = NULL;
 
   if (cancelled || !info)
     {
@@ -1684,8 +1684,8 @@ gtk_path_bar_get_info_callback (GCancellable *cancellable,
 
   file_info->parent_file = g_file_get_parent (file_info->file);
 
-  file_info->gtk_path_bar_get_props (path_bar)->get_info_cancellable =
-    _gtk_file_system_get_info (file_info->gtk_path_bar_get_props (path_bar)->file_system,
+  gtk_path_bar_get_props (file_info->path_bar)->get_info_cancellable =
+    _gtk_file_system_get_info (gtk_path_bar_get_props (file_info->path_bar)->file_system,
 			       file_info->file,
 			       "standard::display-name,standard::is-hidden,standard::is-backup",
 			       gtk_path_bar_get_info_callback,
@@ -1784,8 +1784,8 @@ _gtk_path_bar_up (GtkPathBar *path_bar)
 	{
 	  if (l->next)
 	    {
-	      GtkWidget *next_button = BUTTON_DATA (l->gtk_widget_get_props (next)->data)->button;
-	      button_clicked_cb (next_button, l->gtk_widget_get_props (next)->data);
+	      GtkWidget *next_button = BUTTON_DATA (gtk_widget_get_props (l->next)->data)->button;
+	      button_clicked_cb (next_button, gtk_widget_get_props (l->next)->data);
 	    }
 	  break;
 	}
@@ -1811,8 +1811,8 @@ _gtk_path_bar_down (GtkPathBar *path_bar)
 	{
 	  if (l->prev)
 	    {
-	      GtkWidget *prev_button = BUTTON_DATA (l->gtk_widget_get_props (prev)->data)->button;
-	      button_clicked_cb (prev_button, l->gtk_widget_get_props (prev)->data);
+	      GtkWidget *prev_button = BUTTON_DATA (gtk_widget_get_props (l->prev)->data)->button;
+	      button_clicked_cb (prev_button, gtk_widget_get_props (l->prev)->data);
 	    }
 	  break;
 	}

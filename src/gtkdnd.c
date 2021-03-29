@@ -939,7 +939,7 @@ gtk_drag_update_cursor (GtkDragSourceInfo *info)
   
   if (cursor != info->cursor)
     {
-      __gdk_pointer_grab (info->gtk_widget_get_props (ipc_widget)->window, FALSE,
+      __gdk_pointer_grab (gtk_widget_get_props (info->ipc_widget)->window, FALSE,
 			GDK_POINTER_MOTION_MASK |
 			GDK_BUTTON_RELEASE_MASK,
 			NULL,
@@ -3101,7 +3101,7 @@ icon_window_realize (GtkWidget *window,
 						  __gtk_widget_get_colormap (window),
 						  &pixmap, &mask, 128);
   
-  __gdk_window_set_back_pixmap (gtk_widget_get_props (window)->gtk_widget_get_props (window), pixmap, FALSE);
+  __gdk_window_set_back_pixmap (gtk_widget_get_props (gtk_widget_get_props (window)->window), pixmap, FALSE);
   g_object_unref (pixmap);
   
   if (mask)
@@ -3287,7 +3287,7 @@ __gtk_drag_set_icon_pixmap (GdkDragContext    *context,
   __gtk_widget_set_size_request (window, width, height);
   __gtk_widget_realize (window);
 
-  __gdk_window_set_back_pixmap (gtk_widget_get_props (window)->gtk_widget_get_props (window), pixmap, FALSE);
+  __gdk_window_set_back_pixmap (gtk_widget_get_props (gtk_widget_get_props (window)->window), pixmap, FALSE);
   
   if (mask)
     __gtk_widget_shape_combine_mask (window, mask, 0, 0);
@@ -3636,7 +3636,7 @@ gtk_drag_source_release_selections (GtkDragSourceInfo *info,
   while (tmp_list)
     {
       GdkAtom selection = GDK_POINTER_TO_ATOM (tmp_list->data);
-      if (__gdk_selection_owner_get_for_display (display, selection) == info->gtk_widget_get_props (ipc_widget)->window)
+      if (__gdk_selection_owner_get_for_display (display, selection) == gtk_widget_get_props (info->ipc_widget)->window)
 	__gtk_selection_owner_set_for_display (display, NULL, selection, time);
 
       tmp_list = tmp_list->next;
@@ -3989,7 +3989,7 @@ gtk_drag_update_idle (gpointer data)
 				  &action, &possible_actions);
       gtk_drag_update_icon (info);
       __gdk_drag_find_window_for_screen (info->context,
-				       info->gtk_widget_get_props (icon_window) ? info->gtk_widget_get_props (icon_window)->window : NULL,
+				       gtk_widget_get_props (info->icon_window) ? gtk_widget_get_props (info->icon_window)->window : NULL,
 				       info->cur_screen, info->cur_x, info->cur_y,
 				       &dest_window, &protocol);
       
@@ -4292,8 +4292,8 @@ gtk_drag_grab_broken_event_cb (GtkWidget          *widget,
    * example, when changing the drag cursor.
    */
   if (event->implicit
-      || event->grab_window == info->gtk_widget_get_props (widget)->window
-      || event->grab_window == info->gtk_widget_get_props (ipc_widget)->window)
+      || event->grab_window == gtk_widget_get_props (info->widget)->window
+      || event->grab_window == gtk_widget_get_props (info->ipc_widget)->window)
     return FALSE;
 
   gtk_drag_cancel (info, GTK_DRAG_RESULT_GRAB_BROKEN, __gtk_get_current_event_time ());

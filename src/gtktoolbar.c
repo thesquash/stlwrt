@@ -2615,7 +2615,7 @@ menu_position_func (GtkMenu  *menu,
   __gtk_widget_size_request (GTK_WIDGET (menu), &menu_req);
   
   screen = __gtk_widget_get_screen (GTK_WIDGET (menu));
-  monitor_num = __gdk_screen_get_monitor_at_window (screen, priv->gtk_widget_get_props (arrow_button)->window);
+  monitor_num = __gdk_screen_get_monitor_at_window (screen, gtk_widget_get_props (priv->arrow_button)->window);
   if (monitor_num < 0)
     monitor_num = 0;
   __gdk_screen_get_monitor_geometry (screen, monitor_num, &monitor);
@@ -2624,29 +2624,29 @@ menu_position_func (GtkMenu  *menu,
   if (gtk_toolbar_get_props (toolbar)->orientation == GTK_ORIENTATION_HORIZONTAL)
     {
       if (__gtk_widget_get_direction (GTK_WIDGET (toolbar)) == GTK_TEXT_DIR_LTR) 
-	*x += priv->gtk_widget_get_props (arrow_button)->allocation.width - req.width;
+	*x += gtk_widget_get_props (priv->arrow_button)->allocation.width - req.width;
       else 
 	*x += req.width - menu_req.width;
 
-      if ((*y + priv->gtk_widget_get_props (arrow_button)->allocation.height + menu_req.height) <= monitor.y + monitor.height)
-	*y += priv->gtk_widget_get_props (arrow_button)->allocation.height;
+      if ((*y + gtk_widget_get_props (priv->arrow_button)->allocation.height + menu_req.height) <= monitor.y + monitor.height)
+	*y += gtk_widget_get_props (priv->arrow_button)->allocation.height;
       else if ((*y - menu_req.height) >= monitor.y)
 	*y -= menu_req.height;
-      else if (monitor.y + monitor.height - (*y + priv->gtk_widget_get_props (arrow_button)->allocation.height) > *y)
-	*y += priv->gtk_widget_get_props (arrow_button)->allocation.height;
+      else if (monitor.y + monitor.height - (*y + gtk_widget_get_props (priv->arrow_button)->allocation.height) > *y)
+	*y += gtk_widget_get_props (priv->arrow_button)->allocation.height;
       else
 	*y -= menu_req.height;
     }
   else 
     {
       if (__gtk_widget_get_direction (GTK_WIDGET (toolbar)) == GTK_TEXT_DIR_LTR) 
-	*x += priv->gtk_widget_get_props (arrow_button)->allocation.width;
+	*x += gtk_widget_get_props (priv->arrow_button)->allocation.width;
       else 
 	*x -= menu_req.width;
 
       if (*y + menu_req.height > monitor.y + monitor.height &&
-	  *y + priv->gtk_widget_get_props (arrow_button)->allocation.height - monitor.y > monitor.y + monitor.height - *y)
-	*y += priv->gtk_widget_get_props (arrow_button)->allocation.height - menu_req.height;
+	  *y + gtk_widget_get_props (priv->arrow_button)->allocation.height - monitor.y > monitor.y + monitor.height - *y)
+	*y += gtk_widget_get_props (priv->arrow_button)->allocation.height - menu_req.height;
     }
 
   *push_in = FALSE;
@@ -4344,7 +4344,7 @@ toolbar_content_get_allocation (ToolbarContent *content,
       if (child->type == GTK_TOOLBAR_CHILD_SPACE)
 	*allocation = content->u.compatibility.space_allocation;
       else
-	*allocation = child->gtk_widget_get_props (widget)->allocation;
+	*allocation = gtk_widget_get_props (child->widget)->allocation;
       break;
 
     default:

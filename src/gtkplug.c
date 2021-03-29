@@ -960,7 +960,7 @@ gtk_plug_focus (GtkWidget        *widget,
       if (gtk_window_get_props (window)->focus_widget)
 	{
 	  /* Wrapped off the end, clear the focus setting for the toplevel */
-	  parent = gtk_window_get_props (window)->gtk_widget_get_props (focus_widget)->parent;
+	  parent = gtk_widget_get_props (gtk_window_get_props (window)->focus_widget)->parent;
 	  while (parent)
 	    {
 	      __gtk_container_set_focus_child (GTK_CONTAINER (parent), NULL);
@@ -1050,7 +1050,7 @@ _gtk_plug_focus_first_last (GtkPlug          *plug,
 
   if (gtk_window_get_props (window)->focus_widget)
     {
-      parent = gtk_window_get_props (window)->gtk_widget_get_props (focus_widget)->parent;
+      parent = gtk_widget_get_props (gtk_window_get_props (window)->focus_widget)->parent;
       while (parent)
 	{
 	  __gtk_container_set_focus_child (GTK_CONTAINER (parent), NULL);

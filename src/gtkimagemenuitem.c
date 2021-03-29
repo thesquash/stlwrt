@@ -424,7 +424,7 @@ gtk_image_menu_item_size_request (GtkWidget      *widget,
   
   /* Note that GtkMenuShell always size requests before
    * toggle_size_request, so toggle_size_request will be able to use
-   * gtk_image_menu_item_get_props (image_menu_item)->gtk_image_menu_item_get_props (image)->requisition
+   * gtk_image_menu_item_get_props (gtk_image_menu_item_get_props (image_menu_item)->image)->requisition
    */
 }
 

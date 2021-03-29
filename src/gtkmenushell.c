@@ -1260,7 +1260,7 @@ __gtk_menu_shell_activate_item (GtkMenuShell      *menu_shell,
 	{
 	  g_object_ref (parent_menu_shell);
 	  shells = g_slist_prepend (shells, parent_menu_shell);
-	  gtk_menu_shell_get_props (parent_menu_shell) = (GtkMenuShell*) gtk_menu_shell_get_props (parent_menu_shell)->gtk_menu_shell_get_props (parent_menu_shell);
+	  gtk_menu_shell_get_props (parent_menu_shell) = (GtkMenuShell*) gtk_menu_shell_get_props (gtk_menu_shell_get_props (parent_menu_shell)->parent_menu_shell);
 	}
       while (parent_menu_shell);
       shells = g_slist_reverse (shells);
@@ -1534,7 +1534,7 @@ gtk_real_menu_shell_move_current (GtkMenuShell         *menu_shell,
 	     (GTK_MENU_SHELL_GET_CLASS (parent_menu_shell)->submenu_placement ==
 	      GTK_MENU_SHELL_GET_CLASS (menu_shell)->submenu_placement))
 	{
-	  gtk_menu_shell_get_props (parent_menu_shell) = GTK_MENU_SHELL (gtk_menu_shell_get_props (parent_menu_shell)->gtk_menu_shell_get_props (parent_menu_shell));
+	  gtk_menu_shell_get_props (parent_menu_shell) = GTK_MENU_SHELL (gtk_menu_shell_get_props (gtk_menu_shell_get_props (parent_menu_shell)->parent_menu_shell));
 	}
 
       if (parent_menu_shell)

@@ -2212,7 +2212,7 @@ gtk_window_transient_parent_realized (GtkWidget *parent,
 				      GtkWidget *window)
 {
   if (__gtk_widget_get_realized (GTK_WIDGET (window)))
-    __gdk_window_set_transient_for (gtk_widget_get_props (window)->gtk_widget_get_props (window), gtk_widget_get_props (parent)->gtk_widget_get_props (window));
+    __gdk_window_set_transient_for (gtk_widget_get_props (gtk_widget_get_props (window)->window), gtk_widget_get_props (gtk_widget_get_props (parent)->window));
 }
 
 static void
@@ -2220,7 +2220,7 @@ gtk_window_transient_parent_unrealized (GtkWidget *parent,
 					GtkWidget *window)
 {
   if (__gtk_widget_get_realized (GTK_WIDGET (window)))
-    __gdk_property_delete (gtk_widget_get_props (window)->gtk_widget_get_props (window), 
+    __gdk_property_delete (gtk_widget_get_props (gtk_widget_get_props (window)->window), 
 			 __gdk_atom_intern_static_string ("WM_TRANSIENT_FOR"));
 }
 
@@ -4817,7 +4817,7 @@ gtk_window_realize (GtkWidget *widget)
 				  gtk_widget_get_props (GTK_WIDGET (gtk_window_get_props (window)->transient_parent))->gtk_window_get_props (window));
 
   if (gtk_window_get_props (window)->wm_role)
-    __gdk_window_set_role (gtk_widget_get_props (widget)->gtk_window_get_props (window), gtk_window_get_props (window)->wm_role);
+    __gdk_window_set_role (gtk_window_get_props (gtk_widget_get_props (widget)->window), gtk_window_get_props (window)->wm_role);
   
   if (!gtk_window_get_props (window)->decorated)
     __gdk_window_set_decorations (gtk_widget_get_props (widget)->window, 0);
@@ -5399,7 +5399,7 @@ gtk_window_focus (GtkWidget        *widget,
 	}
       
       /* Wrapped off the end, clear the focus setting for the toplpevel */
-      parent = gtk_window_get_props (window)->gtk_widget_get_props (focus_widget)->parent;
+      parent = gtk_widget_get_props (gtk_window_get_props (window)->focus_widget)->parent;
       while (parent)
 	{
 	  __gtk_container_set_focus_child (GTK_CONTAINER (parent), NULL);
@@ -6605,7 +6605,7 @@ gtk_window_expose (GtkWidget      *widget,
  * 
  * If this function is called on a window with setting of %TRUE, before
  * it is realized or showed, it will have a "frame" window around
- * @gtk_window_get_props (window)->gtk_window_get_props (window), accessible in @gtk_window_get_props (window)->frame. Using the signal 
+ * @gtk_window_get_props (gtk_window_get_props (window)->window), accessible in @gtk_window_get_props (window)->frame. Using the signal 
  * frame_event you can receive all events targeted at the frame.
  * 
  * This function is used by the linux-fb port to implement managed
@@ -6629,7 +6629,7 @@ __gtk_window_set_has_frame (GtkWindow *window,
  * @window: a #GtkWindow
  * 
  * Accessor for whether the window has a frame window exterior to
- * @gtk_window_get_props (window)->gtk_window_get_props (window). Gets the value set by __gtk_window_set_has_frame ().
+ * @gtk_window_get_props (gtk_window_get_props (window)->window). Gets the value set by __gtk_window_set_has_frame ().
  *
  * Return value: %TRUE if a frame has been added to the window
  *   via __gtk_window_set_has_frame().
@@ -8083,7 +8083,7 @@ gtk_window_mnemonic_hash_foreach (guint      keyval,
     gpointer func_data;
   } *info = data;
 
-  (*info->func) (info->gtk_window_get_props (window), keyval, info->gtk_window_get_props (window)->mnemonic_modifier, TRUE, info->func_data);
+  (*info->func) (gtk_window_get_props (info->window), keyval, gtk_window_get_props (info->window)->mnemonic_modifier, TRUE, info->func_data);
 }
 
 void

@@ -2696,7 +2696,7 @@ gtk_tree_view_button_press (GtkWidget      *widget,
 
 	  if (gtk_tree_view_get_props (tree_view)->priv->rubber_banding_enable
 	      && !node_selected
-	      && gtk_tree_view_get_props (tree_view)->priv->gtk_tree_selection_get_props (selection)->type == GTK_SELECTION_MULTIPLE)
+	      && gtk_tree_selection_get_props (gtk_tree_view_get_props (tree_view)->priv->selection)->type == GTK_SELECTION_MULTIPLE)
 	    {
 	      gtk_tree_view_get_props (tree_view)->priv->press_start_y += gtk_tree_view_get_props (tree_view)->priv->dy;
 	      gtk_tree_view_get_props (tree_view)->priv->rubber_band_x = event->x;
@@ -3282,9 +3282,9 @@ gtk_tree_view_motion_draw_column_motion_arrow (GtkTreeView *tree_view)
       GdkRectangle visible_rect;
       __gtk_tree_view_get_visible_rect (tree_view, &visible_rect);
       if (reorder->left_column)
-	x = reorder->gtk_tree_view_column_get_props (left_column)->button->allocation.x + reorder->gtk_tree_view_column_get_props (left_column)->button->allocation.width;
+	x = gtk_tree_view_column_get_props (reorder->left_column)->button->allocation.x + gtk_tree_view_column_get_props (reorder->left_column)->button->allocation.width;
       else
-	x = reorder->gtk_tree_view_column_get_props (right_column)->button->allocation.x;
+	x = gtk_tree_view_column_get_props (reorder->right_column)->button->allocation.x;
 
       if (x < visible_rect.x)
 	arrow_type = DRAG_COLUMN_WINDOW_STATE_ARROW_LEFT;
@@ -3343,13 +3343,13 @@ gtk_tree_view_motion_draw_column_motion_arrow (GtkTreeView *tree_view)
       __gdk_window_get_origin (gtk_tree_view_get_props (tree_view)->priv->header_window, &x, &y);
       if (reorder->left_column)
 	{
-	  x += reorder->gtk_tree_view_column_get_props (left_column)->button->allocation.x + reorder->gtk_tree_view_column_get_props (left_column)->button->allocation.width - width/2;
-	  height = reorder->gtk_tree_view_column_get_props (left_column)->button->allocation.height;
+	  x += gtk_tree_view_column_get_props (reorder->left_column)->button->allocation.x + gtk_tree_view_column_get_props (reorder->left_column)->button->allocation.width - width/2;
+	  height = gtk_tree_view_column_get_props (reorder->left_column)->button->allocation.height;
 	}
       else
 	{
-	  x += reorder->gtk_tree_view_column_get_props (right_column)->button->allocation.x - width/2;
-	  height = reorder->gtk_tree_view_column_get_props (right_column)->button->allocation.height;
+	  x += gtk_tree_view_column_get_props (reorder->right_column)->button->allocation.x - width/2;
+	  height = gtk_tree_view_column_get_props (reorder->right_column)->button->allocation.height;
 	}
       y -= gtk_tree_view_get_props (tree_view)->priv->expander_size/2; /* The arrow takes up only half the space */
       height += gtk_tree_view_get_props (tree_view)->priv->expander_size;
@@ -3413,9 +3413,9 @@ gtk_tree_view_motion_draw_column_motion_arrow (GtkTreeView *tree_view)
 	x += gtk_widget_get_props (widget)->allocation.width - width;
 
       if (reorder->left_column)
-	height = reorder->gtk_tree_view_column_get_props (left_column)->button->allocation.height;
+	height = gtk_tree_view_column_get_props (reorder->left_column)->button->allocation.height;
       else
-	height = reorder->gtk_tree_view_column_get_props (right_column)->button->allocation.height;
+	height = gtk_tree_view_column_get_props (reorder->right_column)->button->allocation.height;
 
       y -= gtk_tree_view_get_props (tree_view)->priv->expander_size;
       height += 2*gtk_tree_view_get_props (tree_view)->priv->expander_size;
@@ -8899,7 +8899,7 @@ _gtk_tree_view_find_path (GtkTreeView *tree_view,
   g_return_val_if_fail (node != NULL, path);
   g_return_val_if_fail (node != tree->nil, path);
 
-  count = 1 + node->gtk_tree_view_column_get_props (left)->count;
+  count = 1 + gtk_tree_view_column_get_props (node->left)->count;
 
   last = node;
   tmp_node = node->parent;
@@ -8909,7 +8909,7 @@ _gtk_tree_view_find_path (GtkTreeView *tree_view,
       while (tmp_node != tmp_tree->nil)
 	{
 	  if (tmp_node->right == last)
-	    count += 1 + tmp_node->gtk_tree_view_column_get_props (left)->count;
+	    count += 1 + gtk_tree_view_column_get_props (tmp_node->left)->count;
 	  last = tmp_node;
 	  tmp_node = tmp_node->parent;
 	}
@@ -8918,7 +8918,7 @@ _gtk_tree_view_find_path (GtkTreeView *tree_view,
       tmp_tree = tmp_tree->parent_tree;
       if (last)
 	{
-	  count = 1 + last->gtk_tree_view_column_get_props (left)->count;
+	  count = 1 + gtk_tree_view_column_get_props (last->left)->count;
 	  tmp_node = last->parent;
 	}
     }
@@ -9185,8 +9185,8 @@ gtk_tree_view_set_column_drag_info (GtkTreeView       *tree_view,
       if (tmp_list->next != NULL)
 	{
 	  g_assert (tmp_list->next->data);
-	  left = reorder->right_align = (reorder->gtk_tree_view_column_get_props (right_column)->button->allocation.x +
-					 reorder->gtk_tree_view_column_get_props (right_column)->button->allocation.width +
+	  left = reorder->right_align = (gtk_tree_view_column_get_props (reorder->right_column)->button->allocation.x +
+					 gtk_tree_view_column_get_props (reorder->right_column)->button->allocation.width +
 					 ((GtkTreeViewColumnReorder *)tmp_list->next->data)->gtk_tree_view_column_get_props (left_column)->button->allocation.x)/2;
 	}
       else
@@ -9501,7 +9501,7 @@ gtk_tree_view_focus_to_cursor (GtkTreeView *tree_view)
 
       if (cursor_path)
 	{
-	  if (gtk_tree_view_get_props (tree_view)->priv->gtk_tree_selection_get_props (selection)->type == GTK_SELECTION_MULTIPLE)
+	  if (gtk_tree_selection_get_props (gtk_tree_view_get_props (tree_view)->priv->selection)->type == GTK_SELECTION_MULTIPLE)
 	    gtk_tree_view_real_set_cursor (tree_view, cursor_path, FALSE, FALSE);
 	  else
 	    gtk_tree_view_real_set_cursor (tree_view, cursor_path, TRUE, FALSE);
@@ -9565,7 +9565,7 @@ gtk_tree_view_move_cursor_up_down (GtkTreeView *tree_view,
 						      cursor_path);
 
   if (selection_count == 0
-      && gtk_tree_view_get_props (tree_view)->priv->gtk_tree_selection_get_props (selection)->type != GTK_SELECTION_NONE
+      && gtk_tree_selection_get_props (gtk_tree_view_get_props (tree_view)->priv->selection)->type != GTK_SELECTION_NONE
       && !gtk_tree_view_get_props (tree_view)->priv->modify_selection_pressed
       && selectable)
     {
@@ -9603,7 +9603,7 @@ gtk_tree_view_move_cursor_up_down (GtkTreeView *tree_view,
    * If the list has only one item and multi-selection is set then select
    * the row (if not yet selected).
    */
-  if (gtk_tree_view_get_props (tree_view)->priv->gtk_tree_selection_get_props (selection)->type == GTK_SELECTION_MULTIPLE &&
+  if (gtk_tree_selection_get_props (gtk_tree_view_get_props (tree_view)->priv->selection)->type == GTK_SELECTION_MULTIPLE &&
       new_cursor_node == NULL)
     {
       if (count == -1)
@@ -9943,7 +9943,7 @@ gtk_tree_view_real_select_all (GtkTreeView *tree_view)
   if (!__gtk_widget_has_focus (GTK_WIDGET (tree_view)))
     return FALSE;
 
-  if (gtk_tree_view_get_props (tree_view)->priv->gtk_tree_selection_get_props (selection)->type != GTK_SELECTION_MULTIPLE)
+  if (gtk_tree_selection_get_props (gtk_tree_view_get_props (tree_view)->priv->selection)->type != GTK_SELECTION_MULTIPLE)
     return FALSE;
 
   __gtk_tree_selection_select_all (gtk_tree_view_get_props (tree_view)->priv->selection);
@@ -9957,7 +9957,7 @@ gtk_tree_view_real_unselect_all (GtkTreeView *tree_view)
   if (!__gtk_widget_has_focus (GTK_WIDGET (tree_view)))
     return FALSE;
 
-  if (gtk_tree_view_get_props (tree_view)->priv->gtk_tree_selection_get_props (selection)->type != GTK_SELECTION_MULTIPLE)
+  if (gtk_tree_selection_get_props (gtk_tree_view_get_props (tree_view)->priv->selection)->type != GTK_SELECTION_MULTIPLE)
     return FALSE;
 
   __gtk_tree_selection_unselect_all (gtk_tree_view_get_props (tree_view)->priv->selection);

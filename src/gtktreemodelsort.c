@@ -1541,7 +1541,7 @@ gtk_tree_model_sort_offset_compare_func (gconstpointer a,
   else
     retval = 0;
 
-  if (data->gtk_tree_model_sort_get_props (tree_model_sort)->order == GTK_SORT_DESCENDING)
+  if (gtk_tree_model_sort_get_props (data->tree_model_sort)->order == GTK_SORT_DESCENDING)
     {
       if (retval > 0)
 	retval = -1;

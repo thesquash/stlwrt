@@ -40,6 +40,7 @@ G_BEGIN_DECLS
 #define GTK_RANGE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_RANGE, GtkRangeClass))
 
 typedef struct _GtkRangeLayout  GtkRangeLayout;
+typedef struct _GtkRangeStepTimer GtkRangeStepTimer;
 
 typedef struct _GtkRangeClass   GtkRangeClass;
 

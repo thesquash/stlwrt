@@ -27,7 +27,6 @@
 #define __GTK_UI_MANAGER_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkaccelgroup.h>
@@ -85,7 +84,7 @@ struct _GtkUIManagerClass {
   void (*_gtk_reserved2) (void);
 };
 
-typedef enum {
+typedef enum  {
   GTK_UI_MANAGER_AUTO              = 0,
   GTK_UI_MANAGER_MENUBAR           = 1 << 0,
   GTK_UI_MANAGER_MENU              = 1 << 1,

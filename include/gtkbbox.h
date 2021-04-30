@@ -22,7 +22,6 @@
 #define __GTK_BUTTON_BOX_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 

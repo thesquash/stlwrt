@@ -21,7 +21,6 @@
 #define __GTK_WIDGET_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gdk.h>
@@ -95,7 +94,7 @@ G_BEGIN_DECLS
  *
  * Tells about certain properties of the widget.
  */
-typedef enum
+typedef enum 
 {
   GTK_TOPLEVEL         = 1 << 4,
   GTK_NO_WINDOW        = 1 << 5,
@@ -118,7 +117,7 @@ typedef enum
 } GtkWidgetFlags;
 
 /* Kinds of widget-specific help */
-typedef enum
+typedef enum 
 {
   GTK_WIDGET_HELP_TOOLTIP,
   GTK_WIDGET_HELP_WHATS_THIS

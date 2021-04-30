@@ -21,7 +21,6 @@
 #define __GTK_SCALE_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkrange.h>

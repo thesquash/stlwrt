@@ -21,7 +21,6 @@
 #define __GTK_IM_CONTEXT_SIMPLE_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkimcontext.h>

@@ -21,7 +21,6 @@
 #define __GTK_PRINT_JOB_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <cairo.h>

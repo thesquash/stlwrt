@@ -21,7 +21,6 @@
 #define __GDK_CURSOR_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gdktypes.h>
@@ -34,7 +33,7 @@ G_BEGIN_DECLS
 
 /* Cursor types.
  */
-typedef enum
+typedef enum 
 {
   GDK_X_CURSOR 		  = 0,
   GDK_ARROW 		  = 2,

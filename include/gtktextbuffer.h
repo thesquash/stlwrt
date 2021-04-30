@@ -21,7 +21,6 @@
 #define __GTK_TEXT_BUFFER_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkwidget.h>
@@ -49,7 +48,7 @@ G_BEGIN_DECLS
  * the enum counts down from G_MAXUINT to avoid clashes with application
  * added drag destinations which usually start at 0.
  */
-typedef enum
+typedef enum 
 {
   GTK_TEXT_BUFFER_TARGET_INFO_BUFFER_CONTENTS = - 1,
   GTK_TEXT_BUFFER_TARGET_INFO_RICH_TEXT       = - 2,

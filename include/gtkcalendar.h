@@ -23,7 +23,6 @@
 #define __GTK_CALENDAR_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 
@@ -56,7 +55,7 @@ typedef struct _GtkCalendarPrivate     GtkCalendarPrivate;
  *
  * These options can be used to influence the display and behaviour of a #GtkCalendar.
  */
-typedef enum
+typedef enum 
 {
   GTK_CALENDAR_SHOW_HEADING		= 1 << 0,
   GTK_CALENDAR_SHOW_DAY_NAMES		= 1 << 1,

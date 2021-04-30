@@ -24,7 +24,6 @@
 #define __GTK_SPIN_BUTTON_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkentry.h>
@@ -43,13 +42,13 @@ G_BEGIN_DECLS
 
 #define GTK_INPUT_ERROR -1
 
-typedef enum
+typedef enum 
 {
   GTK_UPDATE_ALWAYS,
   GTK_UPDATE_IF_VALID
 } GtkSpinButtonUpdatePolicy;
 
-typedef enum
+typedef enum 
 {
   GTK_SPIN_STEP_FORWARD,
   GTK_SPIN_STEP_BACKWARD,

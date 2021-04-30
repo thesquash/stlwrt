@@ -22,7 +22,6 @@
 #define __GTK_FILE_FILTER_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <glib-object.h>
@@ -36,7 +35,7 @@ G_BEGIN_DECLS
 STLWRT_DECLARE_OPAQUE_TYPE(GtkFileFilter, gtk_file_filter)
 typedef struct _GtkFileFilterInfo GtkFileFilterInfo;
 
-typedef enum {
+typedef enum  {
   GTK_FILE_FILTER_FILENAME     = 1 << 0,
   GTK_FILE_FILTER_URI          = 1 << 1,
   GTK_FILE_FILTER_DISPLAY_NAME = 1 << 2,

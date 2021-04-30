@@ -21,14 +21,13 @@
 #define __GDK_PROPERTY_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gdktypes.h>
 
 G_BEGIN_DECLS
 
-typedef enum
+typedef enum 
 {
   GDK_PROP_MODE_REPLACE,
   GDK_PROP_MODE_PREPEND,

@@ -25,7 +25,6 @@
 #define __GTK_EXPANDER_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkbin.h>

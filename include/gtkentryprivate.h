@@ -21,7 +21,6 @@
 #define __GTK_ENTRY_PRIVATE_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtktreeviewcolumn.h>

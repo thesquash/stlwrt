@@ -23,7 +23,6 @@
 #define __GTK_TOOL_PALETTE_PRIVATE_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtk.h>

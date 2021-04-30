@@ -21,7 +21,6 @@
 #define __GTK_DRAWING_AREA_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkwidget.h>

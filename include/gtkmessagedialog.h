@@ -21,7 +21,6 @@
 #define __GTK_MESSAGE_DIALOG_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkdialog.h>
@@ -74,7 +73,7 @@ struct _GtkMessageDialogClass
  *  <ulink url="http://library.gnome.org/devel/hig-book/stable/">GNOME HIG</ulink>.
  * </note>
  */
-typedef enum
+typedef enum 
 {
   GTK_BUTTONS_NONE,
   GTK_BUTTONS_OK,

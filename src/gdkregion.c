@@ -74,7 +74,6 @@ SOFTWARE.
 #include <stdlib.h>
 #include <string.h>
 #include <gdkregion.h>
-#include <gdkregion-generic.h>
 
 
 typedef void (* overlapFunc)    (GdkRegion    *pReg,

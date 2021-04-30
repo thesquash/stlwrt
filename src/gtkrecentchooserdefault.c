@@ -65,7 +65,6 @@
 #include <gtktreeselection.h>
 #include <gtktreestore.h>
 #include <gtktooltip.h>
-#include <gtktypebuiltins.h>
 #include <gtkvbox.h>
 #include <gtkactivatable.h>
 

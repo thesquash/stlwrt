@@ -21,7 +21,6 @@
 #define __GDK_DRAWABLE_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 #include <gdktypes.h>
 #include <gdkgc.h>

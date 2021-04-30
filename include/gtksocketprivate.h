@@ -20,7 +20,6 @@
 #define __GTK_SOCKET_PRIVATE_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 typedef struct _GtkSocketPrivate GtkSocketPrivate;
 

@@ -21,7 +21,6 @@
 #define __GTK_PRIVATE_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkwidget.h>
@@ -30,7 +29,7 @@ G_BEGIN_DECLS
 
 /* The private flags that are used in the private_flags member of GtkWidget.
  */
-typedef enum
+typedef enum 
 {
   PRIVATE_GTK_USER_STYLE	= 1 <<  0,
   PRIVATE_GTK_RESIZE_PENDING	= 1 <<  2,

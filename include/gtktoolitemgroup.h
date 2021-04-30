@@ -23,7 +23,6 @@
 #define __GTK_TOOL_ITEM_GROUP_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkcontainer.h>

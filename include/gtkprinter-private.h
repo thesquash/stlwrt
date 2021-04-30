@@ -22,7 +22,6 @@
 #define __GTK_PRINTER_PRIVATE_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtk.h>

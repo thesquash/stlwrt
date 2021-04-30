@@ -21,7 +21,6 @@
 #define __GDK_WINDOW_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gdkdrawable.h>
@@ -46,7 +45,7 @@ typedef struct _GdkWindowRedirect    GdkWindowRedirect;
  *		top of a group of windows in order to grab the events (or
  *		filter the events) from those windows.
  */
-typedef enum
+typedef enum 
 {
   GDK_INPUT_OUTPUT,
   GDK_INPUT_ONLY
@@ -65,7 +64,7 @@ typedef enum
  *	     transient window.
  *   Foreign: A window that actually belongs to another application
  */
-typedef enum
+typedef enum 
 {
   GDK_WINDOW_ROOT,
   GDK_WINDOW_TOPLEVEL,
@@ -84,7 +83,7 @@ typedef enum
  *   GDK_WA_COLORMAP: The "colormap" field is valid.
  *   GDK_WA_VISUAL: The "visual" field is valid.
  */
-typedef enum
+typedef enum 
 {
   GDK_WA_TITLE	   = 1 << 1,
   GDK_WA_X	   = 1 << 2,
@@ -99,7 +98,7 @@ typedef enum
 
 /* Size restriction enumeration.
  */
-typedef enum
+typedef enum 
 {
   GDK_HINT_POS	       = 1 << 0,
   GDK_HINT_MIN_SIZE    = 1 << 1,
@@ -125,7 +124,7 @@ typedef enum
  *   Menu: Window used to implement a menu.
  *   Toolbar: Window used to implement toolbars.
  */
-typedef enum
+typedef enum 
 {
   GDK_WINDOW_TYPE_HINT_NORMAL,
   GDK_WINDOW_TYPE_HINT_DIALOG,
@@ -148,7 +147,7 @@ typedef enum
  * of gdk_window_set_decorations/gdk_window_set_functions
  * will need to change as well.
  */
-typedef enum
+typedef enum 
 {
   GDK_DECOR_ALL		= 1 << 0,
   GDK_DECOR_BORDER	= 1 << 1,
@@ -159,7 +158,7 @@ typedef enum
   GDK_DECOR_MAXIMIZE	= 1 << 6
 } GdkWMDecoration;
 
-typedef enum
+typedef enum 
 {
   GDK_FUNC_ALL		= 1 << 0,
   GDK_FUNC_RESIZE	= 1 << 1,
@@ -173,7 +172,7 @@ typedef enum
  * X protocol. If you change that, gdkwindow-x11.c/SF(gdk_window_set_geometry_hints)()
  * will need fixing.
  */
-typedef enum
+typedef enum 
 {
   GDK_GRAVITY_NORTH_WEST = 1,
   GDK_GRAVITY_NORTH,
@@ -188,7 +187,7 @@ typedef enum
 } GdkGravity;
 
 
-typedef enum
+typedef enum 
 {
   GDK_WINDOW_EDGE_NORTH_WEST,
   GDK_WINDOW_EDGE_NORTH,

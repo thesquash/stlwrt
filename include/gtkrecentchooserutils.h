@@ -28,7 +28,6 @@
 #define __GTK_RECENT_CHOOSER_UTILS_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include "gtkrecentchooserprivate.h"
@@ -38,7 +37,7 @@ G_BEGIN_DECLS
 
 #define GTK_RECENT_CHOOSER_DELEGATE_QUARK	(_gtk_recent_chooser_delegate_get_quark ())
 
-typedef enum {
+typedef enum  {
   GTK_RECENT_CHOOSER_PROP_FIRST           = 0x3000,
   GTK_RECENT_CHOOSER_PROP_RECENT_MANAGER,
   GTK_RECENT_CHOOSER_PROP_SHOW_PRIVATE,

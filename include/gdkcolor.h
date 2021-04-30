@@ -21,7 +21,6 @@
 #define __GDK_COLOR_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 #include <cairo.h>
 #include <gdktypes.h>

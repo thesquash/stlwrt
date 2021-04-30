@@ -22,7 +22,6 @@
 #define __GTK_DND_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkwidget.h>
@@ -32,7 +31,7 @@
 
 G_BEGIN_DECLS
 
-typedef enum {
+typedef enum  {
   GTK_DEST_DEFAULT_MOTION     = 1 << 0, /* respond to "drag_motion" */
   GTK_DEST_DEFAULT_HIGHLIGHT  = 1 << 1, /* auto-highlight */
   GTK_DEST_DEFAULT_DROP       = 1 << 2, /* respond to "drag_drop" */
@@ -41,7 +40,7 @@ typedef enum {
 
 /* Flags for the GtkTargetEntry on the destination side
  */
-typedef enum {
+typedef enum  {
   GTK_TARGET_SAME_APP = 1 << 0,    /*< nick=same-app >*/
   GTK_TARGET_SAME_WIDGET = 1 << 1, /*< nick=same-widget >*/
   GTK_TARGET_OTHER_APP = 1 << 2,   /*< nick=other-app >*/

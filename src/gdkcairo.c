@@ -20,7 +20,7 @@
 #include <gdkcairo.h>
 #include <gdkdrawable.h>
 #include <gdkinternals.h>
-#include <gdkregion-generic.h>
+#include <gdkregion.h>
 
 
 static void

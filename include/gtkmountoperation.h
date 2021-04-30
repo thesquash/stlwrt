@@ -21,7 +21,6 @@
 #define __GTK_MOUNT_OPERATION_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 G_BEGIN_DECLS
 

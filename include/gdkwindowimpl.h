@@ -21,7 +21,6 @@
 #define __GDK_WINDOW_IMPL_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gdkwindow.h>

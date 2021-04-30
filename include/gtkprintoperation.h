@@ -22,7 +22,6 @@
 #define __GTK_PRINT_OPERATION_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <cairo.h>
@@ -53,7 +52,7 @@ G_BEGIN_DECLS
 typedef struct _GtkPrintOperationClass   GtkPrintOperationClass;
 typedef struct _GtkPrintOperationPrivate GtkPrintOperationPrivate;
 
-typedef enum {
+typedef enum  {
   GTK_PRINT_STATUS_INITIAL,
   GTK_PRINT_STATUS_PREPARING,
   GTK_PRINT_STATUS_GENERATING_DATA,
@@ -65,14 +64,14 @@ typedef enum {
   GTK_PRINT_STATUS_FINISHED_ABORTED
 } GtkPrintStatus;
 
-typedef enum {
+typedef enum  {
   GTK_PRINT_OPERATION_RESULT_ERROR,
   GTK_PRINT_OPERATION_RESULT_APPLY,
   GTK_PRINT_OPERATION_RESULT_CANCEL,
   GTK_PRINT_OPERATION_RESULT_IN_PROGRESS
 } GtkPrintOperationResult;
 
-typedef enum {
+typedef enum  {
   GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG,
   GTK_PRINT_OPERATION_ACTION_PRINT,
   GTK_PRINT_OPERATION_ACTION_PREVIEW,
@@ -130,7 +129,7 @@ struct _GtkPrintOperationClass
 
 #define GTK_PRINT_ERROR SF(gtk_print_error_quark) ()
 
-typedef enum
+typedef enum 
 {
   GTK_PRINT_ERROR_GENERAL,
   GTK_PRINT_ERROR_INTERNAL_ERROR,

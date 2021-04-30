@@ -21,7 +21,6 @@
 #define __GTK_HSEPARATOR_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkseparator.h>

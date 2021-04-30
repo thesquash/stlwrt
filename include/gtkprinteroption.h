@@ -22,7 +22,6 @@
 #define __GTK_PRINTER_OPTION_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 /* This is a "semi-private" header; it is meant only for
  * alternate GtkPrintDialog backend modules; no stability guarantees 
@@ -43,7 +42,7 @@ typedef struct _GtkPrinterOptionClass  GtkPrinterOptionClass;
 #define GTK_PRINTER_OPTION_GROUP_IMAGE_QUALITY "ImageQuality"
 #define GTK_PRINTER_OPTION_GROUP_FINISHING "Finishing"
 
-typedef enum {
+typedef enum  {
   GTK_PRINTER_OPTION_TYPE_BOOLEAN,
   GTK_PRINTER_OPTION_TYPE_PICKONE,
   GTK_PRINTER_OPTION_TYPE_PICKONE_PASSWORD,

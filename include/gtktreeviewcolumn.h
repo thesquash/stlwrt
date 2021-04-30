@@ -21,7 +21,6 @@
 #define __GTK_TREE_VIEW_COLUMN_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkcellrenderer.h>
@@ -41,7 +40,7 @@ G_BEGIN_DECLS
 #define GTK_IS_TREE_VIEW_COLUMN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TREE_VIEW_COLUMN))
 #define GTK_TREE_VIEW_COLUMN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TREE_VIEW_COLUMN, GtkTreeViewColumnClass))
 
-typedef enum
+typedef enum 
 {
   GTK_TREE_VIEW_COLUMN_GROW_ONLY,
   GTK_TREE_VIEW_COLUMN_AUTOSIZE,

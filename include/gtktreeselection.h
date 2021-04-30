@@ -21,7 +21,6 @@
 #define __GTK_TREE_SELECTION_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtktreeview.h>

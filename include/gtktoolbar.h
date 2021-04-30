@@ -26,7 +26,6 @@
 #define __GTK_TOOLBAR_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 #include <gtkcontainer.h>
 #include <gtktoolitem.h>
@@ -40,7 +39,7 @@ G_BEGIN_DECLS
 #define GTK_IS_TOOLBAR_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_TOOLBAR))
 #define GTK_TOOLBAR_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_TOOLBAR, GtkToolbarClass))
 
-typedef enum
+typedef enum 
 {
   GTK_TOOLBAR_SPACE_EMPTY,
   GTK_TOOLBAR_SPACE_LINE

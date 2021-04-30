@@ -26,7 +26,6 @@
 #define __GTK_SPINNER_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkdrawingarea.h>

@@ -21,7 +21,6 @@
 #define __GTK_TREE_PRIVATE_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 G_BEGIN_DECLS
@@ -36,7 +35,7 @@ G_BEGIN_DECLS
 
 #define TREE_VIEW_DRAG_WIDTH 6
 
-typedef enum
+typedef enum 
 {
   GTK_TREE_VIEW_IS_LIST = 1 << 0,
   GTK_TREE_VIEW_SHOW_EXPANDERS = 1 << 1,
@@ -48,12 +47,11 @@ typedef enum
   GTK_TREE_VIEW_IN_COLUMN_DRAG = 1 << 7
 } GtkTreeViewFlags;
 
-typedef enum
+typedef enum 
 {
   GTK_TREE_SELECT_MODE_TOGGLE = 1 << 0,
   GTK_TREE_SELECT_MODE_EXTEND = 1 << 1
-}
-GtkTreeSelectMode;
+} GtkTreeSelectMode;
 
 enum
 {

@@ -21,7 +21,6 @@
 #define __GDK_DND_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gdktypes.h>
@@ -31,7 +30,7 @@ G_BEGIN_DECLS
 typedef struct _GdkDragContext        GdkDragContextFat;
 typedef struct _GdkDragContext        GdkDragContextThin;
 
-typedef enum
+typedef enum 
 {
   GDK_ACTION_DEFAULT = 1 << 0,
   GDK_ACTION_COPY    = 1 << 1,
@@ -41,7 +40,7 @@ typedef enum
   GDK_ACTION_ASK     = 1 << 5
 } GdkDragAction;
 
-typedef enum
+typedef enum 
 {
   GDK_DRAG_PROTO_MOTIF,
   GDK_DRAG_PROTO_XDND,

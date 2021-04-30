@@ -25,7 +25,6 @@
 #include <gtkrecentchooserwidget.h>
 #include <gtkrecentchooserdefault.h>
 #include <gtkrecentchooserutils.h>
-#include <gtktypebuiltins.h>
 
 
 

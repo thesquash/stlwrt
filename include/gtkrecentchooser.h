@@ -23,7 +23,6 @@
 #define __GTK_RECENT_CHOOSER_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkwidget.h>
@@ -53,7 +52,7 @@ G_BEGIN_DECLS
  * Used to specify the sorting method to be applyed to the recently
  * used resource list.
  **/
-typedef enum
+typedef enum 
 {
   GTK_RECENT_SORT_NONE = 0,
   GTK_RECENT_SORT_MRU,
@@ -67,7 +66,7 @@ typedef gint (*GtkRecentSortFunc) (GtkRecentInfo *a,
 
 #define GTK_RECENT_CHOOSER_ERROR	(SF(gtk_recent_chooser_error_quark) ())
 
-typedef enum
+typedef enum 
 {
   GTK_RECENT_CHOOSER_ERROR_NOT_FOUND,
   GTK_RECENT_CHOOSER_ERROR_INVALID_URI

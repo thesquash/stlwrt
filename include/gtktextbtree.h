@@ -21,7 +21,6 @@
 #define __GTK_TEXT_BTREE_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 #if 0
 #define DEBUG_VALIDATION_AND_SCROLLING

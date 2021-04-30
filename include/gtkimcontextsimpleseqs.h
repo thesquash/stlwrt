@@ -35,7 +35,6 @@
 #define __GTK_IM_CONTEXT_SIMPLE_SEQS_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 /* === These are the original comments of the file; we keep for historical purposes ===
  *

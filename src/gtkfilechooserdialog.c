@@ -29,7 +29,6 @@
 #include <gtkfilechooserembed.h>
 #include <gtkfilechoosersettings.h>
 #include <gtkfilesystem.h>
-#include <gtktypebuiltins.h>
 #include <gtkintl.h>
 
 

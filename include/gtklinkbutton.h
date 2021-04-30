@@ -26,7 +26,6 @@
 #define __GTK_LINK_BUTTON_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkbutton.h>

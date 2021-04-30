@@ -21,7 +21,6 @@
 #define __GDK_GC_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 #include <gdkcolor.h>
 #include <gdkfont.h>
@@ -38,7 +37,7 @@ typedef struct _GdkGCClass	      GdkGCClass;
  *  CapRound:
  *  CapProjecting:
  */
-typedef enum
+typedef enum 
 {
   GDK_CAP_NOT_LAST,
   GDK_CAP_BUTT,
@@ -52,7 +51,7 @@ typedef enum
  *  Stippled:
  *  OpaqueStippled:
  */
-typedef enum
+typedef enum 
 {
   GDK_SOLID,
   GDK_TILED,
@@ -78,7 +77,7 @@ typedef enum
  *   Nand: (NOT source) OR (NOT destination)
  *   Set: set pixels to 1
  */
-typedef enum
+typedef enum 
 {
   GDK_COPY,
   GDK_INVERT,
@@ -103,7 +102,7 @@ typedef enum
  *  JoinRound:
  *  JoinBevel:
  */
-typedef enum
+typedef enum 
 {
   GDK_JOIN_MITER,
   GDK_JOIN_ROUND,
@@ -115,20 +114,20 @@ typedef enum
  *  OnOffDash:
  *  DoubleDash:
  */
-typedef enum
+typedef enum 
 {
   GDK_LINE_SOLID,
   GDK_LINE_ON_OFF_DASH,
   GDK_LINE_DOUBLE_DASH
 } GdkLineStyle;
 
-typedef enum
+typedef enum 
 {
   GDK_CLIP_BY_CHILDREN	= 0,
   GDK_INCLUDE_INFERIORS = 1
 } GdkSubwindowMode;
 
-enum _GdkGCValuesMask
+typedef enum 
 {
   GDK_GC_FOREGROUND    = 1 << 0,
   GDK_GC_BACKGROUND    = 1 << 1,
@@ -148,10 +147,9 @@ enum _GdkGCValuesMask
   GDK_GC_LINE_STYLE    = 1 << 15,
   GDK_GC_CAP_STYLE     = 1 << 16,
   GDK_GC_JOIN_STYLE    = 1 << 17
-};
+} GdkGCValuesMask;
 
-struct _GdkGCValues
-{
+STLWRT_DECLARE_STRUCTURE(GdkGCValues,
   GdkColor  	    foreground;
   GdkColor	    background;
   GdkFont	   *font;
@@ -170,7 +168,7 @@ struct _GdkGCValues
   GdkLineStyle	    line_style;
   GdkCapStyle	    cap_style;
   GdkJoinStyle	    join_style;
-};
+)
 
 #define GDK_TYPE_GC              (gdk_gc_get_type ())
 #define GDK_GC(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), GDK_TYPE_GC, GdkGC))

@@ -22,7 +22,6 @@
 #define __GTK_FILE_CHOOSER_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkfilefilter.h>
@@ -54,7 +53,7 @@ STLWRT_DECLARE_OPAQUE_TYPE(GtkFileChooser, gtk_file_chooser)
  * Describes whether a #GtkFileChooser is being used to open existing files
  * or to save to a possibly new file.
  */
-typedef enum
+typedef enum 
 {
   GTK_FILE_CHOOSER_ACTION_OPEN,
   GTK_FILE_CHOOSER_ACTION_SAVE,
@@ -79,7 +78,7 @@ typedef enum
  *
  * Since: 2.8
  */
-typedef enum
+typedef enum 
 {
   GTK_FILE_CHOOSER_CONFIRMATION_CONFIRM,
   GTK_FILE_CHOOSER_CONFIRMATION_ACCEPT_FILENAME,
@@ -105,7 +104,7 @@ typedef enum
  * These identify the various errors that can occur while calling
  * #GtkFileChooser functions.
  */
-typedef enum {
+typedef enum  {
   GTK_FILE_CHOOSER_ERROR_NONEXISTENT,
   GTK_FILE_CHOOSER_ERROR_BAD_FILENAME,
   GTK_FILE_CHOOSER_ERROR_ALREADY_EXISTS,

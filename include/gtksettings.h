@@ -20,7 +20,6 @@
 #define __GTK_SETTINGS_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkrc.h>

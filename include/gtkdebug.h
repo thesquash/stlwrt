@@ -21,14 +21,13 @@
 #define __GTK_DEBUG_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <glib.h>
 
 G_BEGIN_DECLS
 
-typedef enum {
+typedef enum  {
   GTK_DEBUG_MISC        = 1 << 0,
   GTK_DEBUG_PLUGSOCKET  = 1 << 1,
   GTK_DEBUG_TEXT        = 1 << 2,

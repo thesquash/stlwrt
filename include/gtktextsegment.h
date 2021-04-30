@@ -21,7 +21,6 @@
 #define __GTK_TEXT_SEGMENT_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtktexttag.h>

@@ -21,7 +21,6 @@
 #define __GDK_PIXMAP_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gdktypes.h>
@@ -49,6 +48,10 @@ struct _GdkPixmapClass
 {
   GdkDrawableClass parent_class;
 };
+
+
+/* This is a stupid hack to deal with the GdkBitmap type. */
+STLWRT_DECLARE_STRUCTURE(GdkBitmap, void * dummy;)
 
 
 /* Pixmaps

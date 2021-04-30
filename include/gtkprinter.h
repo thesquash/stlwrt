@@ -21,7 +21,6 @@
 #define __GTK_PRINTER_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <cairo.h>
@@ -35,7 +34,7 @@ G_BEGIN_DECLS
 /* Note, this type is manually registered with GObject in gtkprinter.c
  * If you add any flags, update the registration as well!
  */
-typedef enum
+typedef enum 
 {
   GTK_PRINT_CAPABILITY_PAGE_SET         = 1 << 0,
   GTK_PRINT_CAPABILITY_COPIES           = 1 << 1,

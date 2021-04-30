@@ -21,7 +21,6 @@
 #define __GTK_EVENT_BOX_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkbin.h>

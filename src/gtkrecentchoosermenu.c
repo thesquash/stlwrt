@@ -45,7 +45,6 @@
 #include <gtklabel.h>
 #include <gtktooltip.h>
 #include <gtkactivatable.h>
-#include <gtktypebuiltins.h>
 #include <gtkprivate.h>
 
 

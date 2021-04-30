@@ -28,7 +28,6 @@
 #define __GTK_COLOR_BUTTON_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 

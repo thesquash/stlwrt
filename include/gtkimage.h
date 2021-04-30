@@ -21,7 +21,6 @@
 #define __GTK_IMAGE_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gio/gio.h>
@@ -117,7 +116,7 @@ struct _GtkImageGIconData
  * images, you can request any storage type (call any of the "get"
  * functions), but they will all return %NULL values.
  */
-typedef enum
+typedef enum 
 {
   GTK_IMAGE_EMPTY,
   GTK_IMAGE_PIXMAP,

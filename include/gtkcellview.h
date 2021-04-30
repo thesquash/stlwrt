@@ -21,7 +21,6 @@
 #define __GTK_CELL_VIEW_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkwidget.h>

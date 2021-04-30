@@ -23,7 +23,6 @@
 #define __GDK_INTERNALS_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gio/gio.h>
@@ -46,7 +45,7 @@ typedef struct _GdkColorInfo           GdkColorInfo;
 typedef struct _GdkEventFilter	       GdkEventFilter;
 typedef struct _GdkClientFilter	       GdkClientFilter;
 
-typedef enum {
+typedef enum  {
   GDK_COLOR_WRITEABLE = 1 << 0
 } GdkColorInfoFlags;
 
@@ -58,7 +57,7 @@ struct _GdkColorInfo
 };
 
 
-typedef enum {
+typedef enum  {
   GDK_EVENT_FILTER_REMOVED = 1 << 0
 } GdkEventFilterFlags;
 
@@ -75,7 +74,7 @@ struct _GdkClientFilter {
   gpointer      data;
 };
 
-typedef enum {
+typedef enum  {
   GDK_DEBUG_MISC          = 1 << 0,
   GDK_DEBUG_EVENTS        = 1 << 1,
   GDK_DEBUG_DND           = 1 << 2,
@@ -128,7 +127,7 @@ extern gboolean _gdk_native_windows;
 
 /* Arg parsing */
 
-typedef enum 
+typedef enum  
 {
   GDK_ARG_STRING,
   GDK_ARG_INT,
@@ -160,7 +159,7 @@ struct _GdkArgDesc
 
 typedef struct _GdkEventPrivate GdkEventPrivate;
 
-typedef enum
+typedef enum 
 {
   /* Following flag is set for events on the event queue during
    * translation and cleared afterwards.

@@ -21,7 +21,6 @@
 #define __GDK_IMAGE_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gdktypes.h>
@@ -39,7 +38,7 @@ G_BEGIN_DECLS
  *	     the image simultaneously and producing undesired results.
  *	     On Win32, also a bitmap.
  */
-typedef enum
+typedef enum 
 {
   GDK_IMAGE_NORMAL,
   GDK_IMAGE_SHARED,

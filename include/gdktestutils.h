@@ -22,7 +22,6 @@
 #define __GDK_TEST_UTILS_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gdkwindow.h>

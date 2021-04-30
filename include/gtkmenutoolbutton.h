@@ -23,7 +23,6 @@
 #define __GTK_MENU_TOOL_BUTTON_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkmenu.h>

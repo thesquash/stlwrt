@@ -21,13 +21,8 @@
 #define __GDK_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 #define __GDK_H_INSIDE__
-
-#include <stlwrt.h>
-#include <stlwrt-typedefs.h>
-
 
 #include <gdkapplaunchcontext.h>
 
@@ -44,8 +39,6 @@
 #include <gdkdnd.h>
 
 #include <gdkdrawable.h>
-
-#include <gdkenumtypes.h>
 
 #include <gdkevents.h>
 

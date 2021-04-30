@@ -25,7 +25,6 @@
 #define __GTK_STATUS_ICON_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkimage.h>

@@ -21,7 +21,6 @@
 #define __GTK_ENUMS_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <glib-object.h>
@@ -29,7 +28,7 @@
 G_BEGIN_DECLS
 
 /* Anchor types */
-typedef enum
+typedef enum 
 {
   GTK_ANCHOR_CENTER,
   GTK_ANCHOR_NORTH,
@@ -51,7 +50,7 @@ typedef enum
 } GtkAnchorType;
 
 /* Arrow placement */
-typedef enum
+typedef enum 
 {
   GTK_ARROWS_BOTH,
   GTK_ARROWS_START,
@@ -59,7 +58,7 @@ typedef enum
 } GtkArrowPlacement;
 
 /* Arrow types */
-typedef enum
+typedef enum 
 {
   GTK_ARROW_UP,
   GTK_ARROW_DOWN,
@@ -69,7 +68,7 @@ typedef enum
 } GtkArrowType;
 
 /* Attach options (for tables) */
-typedef enum
+typedef enum 
 {
   GTK_EXPAND = 1 << 0,
   GTK_SHRINK = 1 << 1,
@@ -77,7 +76,7 @@ typedef enum
 } GtkAttachOptions;
 
 /* Button box styles */
-typedef enum
+typedef enum 
 {
   GTK_BUTTONBOX_DEFAULT_STYLE,
   GTK_BUTTONBOX_SPREAD,
@@ -89,7 +88,7 @@ typedef enum
 
 #ifndef GTK_DISABLE_DEPRECATED
 /* Curve types */
-typedef enum
+typedef enum 
 {
   GTK_CURVE_TYPE_LINEAR,       /* linear interpolation */
   GTK_CURVE_TYPE_SPLINE,       /* spline interpolation */
@@ -97,7 +96,7 @@ typedef enum
 } GtkCurveType;
 #endif
 
-typedef enum
+typedef enum 
 {
   GTK_DELETE_CHARS,
   GTK_DELETE_WORD_ENDS,           /* delete only the portion of the word to the
@@ -112,7 +111,7 @@ typedef enum
 } GtkDeleteType;
 
 /* Focus movement types */
-typedef enum
+typedef enum 
 {
   GTK_DIR_TAB_FORWARD,
   GTK_DIR_TAB_BACKWARD,
@@ -123,7 +122,7 @@ typedef enum
 } GtkDirectionType;
 
 /* Expander styles */
-typedef enum
+typedef enum 
 {
   GTK_EXPANDER_COLLAPSED,
   GTK_EXPANDER_SEMI_COLLAPSED,
@@ -132,7 +131,7 @@ typedef enum
 } GtkExpanderStyle;
 
 /* Built-in stock icon sizes */
-typedef enum
+typedef enum 
 {
   GTK_ICON_SIZE_INVALID,
   GTK_ICON_SIZE_MENU,
@@ -144,7 +143,7 @@ typedef enum
 } GtkIconSize;
 
 /* automatic sensitivity */
-typedef enum
+typedef enum 
 {
   GTK_SENSITIVITY_AUTO,
   GTK_SENSITIVITY_ON,
@@ -153,7 +152,7 @@ typedef enum
 
 #ifndef GTK_DISABLE_DEPRECATED
 /* side types */
-typedef enum
+typedef enum 
 {
   GTK_SIDE_TOP,
   GTK_SIDE_BOTTOM,
@@ -163,7 +162,7 @@ typedef enum
 #endif /* GTK_DISABLE_DEPRECATED */
 
 /* Reading directions for text */
-typedef enum
+typedef enum 
 {
   GTK_TEXT_DIR_NONE,
   GTK_TEXT_DIR_LTR,
@@ -171,7 +170,7 @@ typedef enum
 } GtkTextDirection;
 
 /* justification for label and maybe other widgets (text?) */
-typedef enum
+typedef enum 
 {
   GTK_JUSTIFY_LEFT,
   GTK_JUSTIFY_RIGHT,
@@ -181,7 +180,7 @@ typedef enum
 
 #ifndef GTK_DISABLE_DEPRECATED
 /* GtkPatternSpec match types */
-typedef enum
+typedef enum 
 {
   GTK_MATCH_ALL,       /* "*A?A*" */
   GTK_MATCH_ALL_TAIL,  /* "*A?AA" */
@@ -193,7 +192,7 @@ typedef enum
 #endif /* GTK_DISABLE_DEPRECATED */
 
 /* Menu keyboard movement types */
-typedef enum
+typedef enum 
 {
   GTK_MENU_DIR_PARENT,
   GTK_MENU_DIR_CHILD,
@@ -211,7 +210,7 @@ typedef enum
  *
  * The type of message being displayed in the dialog.
  */
-typedef enum
+typedef enum 
 {
   GTK_MESSAGE_INFO,
   GTK_MESSAGE_WARNING,
@@ -220,14 +219,14 @@ typedef enum
   GTK_MESSAGE_OTHER
 } GtkMessageType;
 
-typedef enum
+typedef enum 
 {
   GTK_PIXELS,
   GTK_INCHES,
   GTK_CENTIMETERS
 } GtkMetricType;
 
-typedef enum
+typedef enum 
 {
   GTK_MOVEMENT_LOGICAL_POSITIONS, /* move by forw/back graphemes */
   GTK_MOVEMENT_VISUAL_POSITIONS,  /* move by left/right graphemes */
@@ -241,7 +240,7 @@ typedef enum
   GTK_MOVEMENT_HORIZONTAL_PAGES   /* move horizontally by pages */
 } GtkMovementStep;
 
-typedef enum
+typedef enum 
 {
   GTK_SCROLL_STEPS,
   GTK_SCROLL_PAGES,
@@ -252,14 +251,14 @@ typedef enum
 } GtkScrollStep;
 
 /* Orientation for toolbars, etc. */
-typedef enum
+typedef enum 
 {
   GTK_ORIENTATION_HORIZONTAL,
   GTK_ORIENTATION_VERTICAL
 } GtkOrientation;
 
 /* Placement type for scrolled window */
-typedef enum
+typedef enum 
 {
   GTK_CORNER_TOP_LEFT,
   GTK_CORNER_BOTTOM_LEFT,
@@ -268,14 +267,14 @@ typedef enum
 } GtkCornerType;
 
 /* Packing types (for boxes) */
-typedef enum
+typedef enum 
 {
   GTK_PACK_START,
   GTK_PACK_END
 } GtkPackType;
 
 /* priorities for path lookups */
-typedef enum
+typedef enum 
 {
   GTK_PATH_PRIO_LOWEST      = 0,
   GTK_PATH_PRIO_GTK	    = 4,
@@ -287,7 +286,7 @@ typedef enum
 #define GTK_PATH_PRIO_MASK 0x0f
 
 /* widget path types */
-typedef enum
+typedef enum 
 {
   GTK_PATH_WIDGET,
   GTK_PATH_WIDGET_CLASS,
@@ -295,14 +294,14 @@ typedef enum
 } GtkPathType;
 
 /* Scrollbar policy types (for scrolled windows) */
-typedef enum
+typedef enum 
 {
   GTK_POLICY_ALWAYS,
   GTK_POLICY_AUTOMATIC,
   GTK_POLICY_NEVER
 } GtkPolicyType;
 
-typedef enum
+typedef enum 
 {
   GTK_POS_LEFT,
   GTK_POS_RIGHT,
@@ -311,7 +310,7 @@ typedef enum
 } GtkPositionType;
 
 #ifndef GTK_DISABLE_DEPRECATED
-typedef enum
+typedef enum 
 {
   GTK_PREVIEW_COLOR,
   GTK_PREVIEW_GRAYSCALE
@@ -319,7 +318,7 @@ typedef enum
 #endif /* GTK_DISABLE_DEPRECATED */
 
 /* Style for buttons */
-typedef enum
+typedef enum 
 {
   GTK_RELIEF_NORMAL,
   GTK_RELIEF_HALF,
@@ -327,7 +326,7 @@ typedef enum
 } GtkReliefStyle;
 
 /* Resize type */
-typedef enum
+typedef enum 
 {
   GTK_RESIZE_PARENT,		/* Pass resize request to the parent */
   GTK_RESIZE_QUEUE,		/* Queue resizes on this widget */
@@ -348,7 +347,7 @@ typedef enum			/*< flags >*/
 #endif /* GTK_DISABLE_DEPRECATED */
 
 /* scrolling types */
-typedef enum
+typedef enum 
 {
   GTK_SCROLL_NONE,
   GTK_SCROLL_JUMP,
@@ -369,7 +368,7 @@ typedef enum
 } GtkScrollType;
 
 /* list selection modes */
-typedef enum
+typedef enum 
 {
   GTK_SELECTION_NONE,                             /* Nothing can be selected */
   GTK_SELECTION_SINGLE,
@@ -379,7 +378,7 @@ typedef enum
 } GtkSelectionMode;
 
 /* Shadow types */
-typedef enum
+typedef enum 
 {
   GTK_SHADOW_NONE,
   GTK_SHADOW_IN,
@@ -389,7 +388,7 @@ typedef enum
 } GtkShadowType;
 
 /* Widget states */
-typedef enum
+typedef enum 
 {
   GTK_STATE_NORMAL,
   GTK_STATE_ACTIVE,
@@ -400,14 +399,14 @@ typedef enum
 
 #if !defined(GTK_DISABLE_DEPRECATED) || defined (GTK_MENU_INTERNALS)
 /* Directions for submenus */
-typedef enum
+typedef enum 
 {
   GTK_DIRECTION_LEFT,
   GTK_DIRECTION_RIGHT
 } GtkSubmenuDirection;
 
 /* Placement of submenus */
-typedef enum
+typedef enum 
 {
   GTK_TOP_BOTTOM,
   GTK_LEFT_RIGHT
@@ -415,7 +414,7 @@ typedef enum
 #endif /* GTK_DISABLE_DEPRECATED */
 
 /* Style for toolbars */
-typedef enum
+typedef enum 
 {
   GTK_TOOLBAR_ICONS,
   GTK_TOOLBAR_TEXT,
@@ -424,7 +423,7 @@ typedef enum
 } GtkToolbarStyle;
 
 /* Data update types (for ranges) */
-typedef enum
+typedef enum 
 {
   GTK_UPDATE_CONTINUOUS,
   GTK_UPDATE_DISCONTINUOUS,
@@ -432,7 +431,7 @@ typedef enum
 } GtkUpdateType;
 
 /* Generic visibility flags */
-typedef enum
+typedef enum 
 {
   GTK_VISIBILITY_NONE,
   GTK_VISIBILITY_PARTIAL,
@@ -440,7 +439,7 @@ typedef enum
 } GtkVisibility;
 
 /* Window position types */
-typedef enum
+typedef enum 
 {
   GTK_WIN_POS_NONE,
   GTK_WIN_POS_CENTER,
@@ -450,14 +449,14 @@ typedef enum
 } GtkWindowPosition;
 
 /* Window types */
-typedef enum
+typedef enum 
 {
   GTK_WINDOW_TOPLEVEL,
   GTK_WINDOW_POPUP
 } GtkWindowType;
 
 /* Text wrap */
-typedef enum
+typedef enum 
 {
   GTK_WRAP_NONE,
   GTK_WRAP_CHAR,
@@ -466,28 +465,28 @@ typedef enum
 } GtkWrapMode;
 
 /* How to sort */
-typedef enum
+typedef enum 
 {
   GTK_SORT_ASCENDING,
   GTK_SORT_DESCENDING
 } GtkSortType;
 
 /* Style for gtk input method preedit/status */
-typedef enum
+typedef enum 
 {
   GTK_IM_PREEDIT_NOTHING,
   GTK_IM_PREEDIT_CALLBACK,
   GTK_IM_PREEDIT_NONE
 } GtkIMPreeditStyle;
 
-typedef enum
+typedef enum 
 {
   GTK_IM_STATUS_NOTHING,
   GTK_IM_STATUS_CALLBACK,
   GTK_IM_STATUS_NONE
 } GtkIMStatusStyle;
 
-typedef enum
+typedef enum 
 {
   GTK_PACK_DIRECTION_LTR,
   GTK_PACK_DIRECTION_RTL,
@@ -495,7 +494,7 @@ typedef enum
   GTK_PACK_DIRECTION_BTT
 } GtkPackDirection;
 
-typedef enum
+typedef enum 
 {
   GTK_PRINT_PAGES_ALL,
   GTK_PRINT_PAGES_CURRENT,
@@ -503,14 +502,14 @@ typedef enum
   GTK_PRINT_PAGES_SELECTION
 } GtkPrintPages;
 
-typedef enum
+typedef enum 
 {
   GTK_PAGE_SET_ALL,
   GTK_PAGE_SET_EVEN,
   GTK_PAGE_SET_ODD
 } GtkPageSet;
 
-typedef enum
+typedef enum 
 {
   GTK_NUMBER_UP_LAYOUT_LEFT_TO_RIGHT_TOP_TO_BOTTOM, /*< nick=lrtb >*/
   GTK_NUMBER_UP_LAYOUT_LEFT_TO_RIGHT_BOTTOM_TO_TOP, /*< nick=lrbt >*/
@@ -522,7 +521,7 @@ typedef enum
   GTK_NUMBER_UP_LAYOUT_BOTTOM_TO_TOP_RIGHT_TO_LEFT  /*< nick=btrl >*/
 } GtkNumberUpLayout;
 
-typedef enum
+typedef enum 
 {
   GTK_PAGE_ORIENTATION_PORTRAIT,
   GTK_PAGE_ORIENTATION_LANDSCAPE,
@@ -530,7 +529,7 @@ typedef enum
   GTK_PAGE_ORIENTATION_REVERSE_LANDSCAPE
 } GtkPageOrientation;
 
-typedef enum
+typedef enum 
 {
   GTK_PRINT_QUALITY_LOW,
   GTK_PRINT_QUALITY_NORMAL,
@@ -538,7 +537,7 @@ typedef enum
   GTK_PRINT_QUALITY_DRAFT
 } GtkPrintQuality;
 
-typedef enum
+typedef enum 
 {
   GTK_PRINT_DUPLEX_SIMPLEX,
   GTK_PRINT_DUPLEX_HORIZONTAL,
@@ -546,7 +545,7 @@ typedef enum
 } GtkPrintDuplex;
 
 
-typedef enum
+typedef enum 
 {
   GTK_UNIT_PIXEL,
   GTK_UNIT_POINTS,
@@ -554,7 +553,7 @@ typedef enum
   GTK_UNIT_MM
 } GtkUnit;
 
-typedef enum
+typedef enum 
 {
   GTK_TREE_VIEW_GRID_LINES_NONE,
   GTK_TREE_VIEW_GRID_LINES_HORIZONTAL,
@@ -562,7 +561,7 @@ typedef enum
   GTK_TREE_VIEW_GRID_LINES_BOTH
 } GtkTreeViewGridLines;
 
-typedef enum
+typedef enum 
 {
   GTK_DRAG_RESULT_SUCCESS,
   GTK_DRAG_RESULT_NO_TARGET,

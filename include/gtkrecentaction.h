@@ -23,7 +23,6 @@
 #define __GTK_RECENT_ACTION_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkaction.h>

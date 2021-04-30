@@ -22,7 +22,6 @@
 #define __GTK_PRINTER_OPTION_SET_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 /* This is a "semi-private" header; it is meant only for
  * alternate GtkPrintDialog backend modules; no stability guarantees

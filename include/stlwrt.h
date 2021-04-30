@@ -29,6 +29,8 @@
 #ifndef __STLWRT_H__
 #define __STLWRT_H__
 
+#include <stlwrt-typedefs.h>
+#include <stlwrt-enum-types.h>
 
 #include <glib.h>
 #include <glib-object.h>
@@ -204,7 +206,7 @@ G_BEGIN_DECLS
                                      g_intern_static_string (#TN), \
                                      sizeof (TN##Class), \
                                      (GClassInitFunc)(void (*)(void)) t_n##_class_intern_init, \
-                                     sizeof (TN##Fat), \
+                                     sizeof (struct _##TN##Fat), \
                                      (GInstanceInitFunc)(void (*)(void)) t_n##_init, \
                                      (GTypeFlags) F); \
       { \
@@ -224,7 +226,7 @@ G_BEGIN_DECLS
                                      g_intern_static_string (#TN), \
                                      sizeof (TN##Class), \
                                      (GClassInitFunc)(void (*)(void)) t_n##_class_intern_init, \
-                                     sizeof (TN##Thin), \
+                                     sizeof (struct _##TN##Thin), \
                                      (GInstanceInitFunc)(void (*)(void)) t_n##_init, \
                                      (GTypeFlags) F); \
       { \
@@ -292,7 +294,7 @@ G_BEGIN_DECLS
                                      g_intern_static_string (#TN), \
                                      sizeof (TN##Class), \
                                      (GClassInitFunc)(void (*)(void)) t_n##_class_intern_init, \
-                                     sizeof (TN##Fat), \
+                                     sizeof (struct _##TN##Fat), \
                                      (GInstanceInitFunc)(void (*)(void)) t_n##_init, \
                                      (GTypeFlags) F); \
       { \
@@ -312,7 +314,7 @@ G_BEGIN_DECLS
                                      g_intern_static_string (#TN), \
                                      sizeof (TN##Class), \
                                      (GClassInitFunc)(void (*)(void)) t_n##_class_intern_init, \
-                                     sizeof (TN##Thin), \
+                                     sizeof (struct _##TN##Thin), \
                                      (GInstanceInitFunc)(void (*)(void)) t_n##_init, \
                                      (GTypeFlags) F); \
       TN##_props_offset = sizeof(TN##Props); \
@@ -350,7 +352,7 @@ G_BEGIN_DECLS
 /* The following stuff deals with _declaring_ types, in C header files. */
 
 #define STLWRT_DECLARE_OPAQUE_TYPE(TN, t_n) \
-  /*typedef struct __##TN TN;*/ \
+  /*typedef real_type TN;*/ \
  \
   STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(t_n)
 
@@ -385,12 +387,12 @@ G_BEGIN_DECLS
   \
    struct _##TN##Fat \
    { \
-     PTN##Fat _parent; \
+     struct _##PTN##Fat _parent; \
    }; \
   \
    struct _##TN##Thin \
    { \
-     PTN##Thin _parent; \
+     struct _##PTN##Thin _parent; \
    }; \
   \
    STLWRT_DECLARE_GET_VTYPE_FUNCTIONS(t_n)
@@ -437,14 +439,14 @@ G_BEGIN_DECLS
   \
    struct _##TN##Fat \
    { \
-     PTN##Fat _parent; \
+     struct _##PTN##Fat _parent; \
   \
      Properties \
    }; \
   \
    struct _##TN##Thin \
    { \
-     PTN##Thin _parent; \
+     struct _##PTN##Thin _parent; \
   \
      gpointer reserved; \
    }; \
@@ -528,9 +530,8 @@ G_BEGIN_DECLS
 #endif
 
 #define STLWRT_DECLARE_INTERFACE(TN, t_n, Properties) \
-  STLWRT_DECLARE_OPAQUE_TYPE(TN, t_n) \
-  typedef struct _##TN##Iface TN##Iface; \
-  typedef struct _##TN##Iface TN##Interface; \
+  /*typedef struct _##TN##Iface TN##Iface; \
+  typedef struct _##TN##Iface TN##Interface;*/ \
  \
   struct _##TN##Iface \
   { \
@@ -540,6 +541,22 @@ G_BEGIN_DECLS
   }; \
  \
   STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(t_n)
+
+#define STLWRT_DECLARE_STRUCTURE(TN, Properties) \
+  /*typedef struct _##TN TN;*/ \
+ \
+  struct _##TN \
+  { \
+    Properties \
+  };
+
+#define STLWRT_DECLARE_UNION(TN, Properties) \
+  /*typedef struct _##TN TN;*/ \
+ \
+  union _##TN \
+  { \
+    Properties \
+  };
 
 
 G_END_DECLS

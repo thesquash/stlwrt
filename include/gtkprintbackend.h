@@ -22,7 +22,6 @@
 #define __GTK_PRINT_BACKEND_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 /* This is a "semi-private" header; it is meant only for
  * alternate GtkPrintDialog backend modules; no stability guarantees
@@ -44,7 +43,7 @@ typedef struct _GtkPrintBackendPrivate  GtkPrintBackendPrivate;
 
 #define GTK_PRINT_BACKEND_ERROR (gtk_print_backend_error_quark ())
 
-typedef enum
+typedef enum 
 {
   /* TODO: add specific errors */
   GTK_PRINT_BACKEND_ERROR_GENERIC
@@ -59,7 +58,7 @@ GQuark     gtk_print_backend_error_quark      (void);
 #define GTK_IS_PRINT_BACKEND_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_PRINT_BACKEND))
 #define GTK_PRINT_BACKEND_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_PRINT_BACKEND, GtkPrintBackendClass))
 
-typedef enum 
+typedef enum  
 {
   GTK_PRINT_BACKEND_STATUS_UNKNOWN,
   GTK_PRINT_BACKEND_STATUS_OK,

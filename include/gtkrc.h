@@ -21,7 +21,6 @@
 #define __GTK_RC_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkstyle.h>
@@ -43,7 +42,7 @@ typedef struct _GtkRcStyleClass GtkRcStyleClass;
 #define GTK_IS_RC_STYLE_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_RC_STYLE))
 #define GTK_RC_STYLE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_RC_STYLE, GtkRcStyleClass))
 
-typedef enum
+typedef enum 
 {
   GTK_RC_FG		= 1 << 0,
   GTK_RC_BG		= 1 << 1,
@@ -181,7 +180,7 @@ gchar*		SF(gtk_rc_get_im_module_path)	(void);
 gchar*		SF(gtk_rc_get_im_module_file)	(void);
 
 /* private functions/definitions */
-typedef enum {
+typedef enum  {
   GTK_RC_TOKEN_INVALID = G_TOKEN_LAST,
   GTK_RC_TOKEN_INCLUDE,
   GTK_RC_TOKEN_NORMAL,
@@ -237,8 +236,7 @@ guint	  SF(gtk_rc_parse_priority)	(GScanner	     *scanner,
 
 /* rc properties
  */
-struct _GtkRcProperty
-{
+STLWRT_DECLARE_STRUCTURE(GtkRcProperty,
   /* quark-ified property identifier like "GtkScrollbar::spacing" */
   GQuark type_name;
   GQuark property_name;
@@ -246,7 +244,8 @@ struct _GtkRcProperty
   /* fields similar to GtkSettingsValue */
   gchar *origin;
   GValue value;
-};
+)
+
 const GtkRcProperty* SF(_gtk_rc_style_lookup_rc_property) (GtkRcStyle *rc_style,
 						       GQuark      type_name,
 						       GQuark      property_name);

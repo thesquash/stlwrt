@@ -22,7 +22,6 @@
 #define __GTK_SIZE_GROUP_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkwidget.h>
@@ -72,7 +71,7 @@ struct _GtkSizeGroupClass
  * The mode of the size group determines the directions in which the size
  * group affects the requested sizes of its component widgets.
  **/
-typedef enum {
+typedef enum  {
   GTK_SIZE_GROUP_NONE,
   GTK_SIZE_GROUP_HORIZONTAL,
   GTK_SIZE_GROUP_VERTICAL,

@@ -83,7 +83,33 @@ typedef struct _GtkFileSystemPrivate GtkFileSystemPrivate;
 typedef struct _GtkFolderPrivate GtkFolderPrivate;
 typedef struct AsyncFuncData AsyncFuncData;
 
+struct _GtkFileSystemPrivate
+{
+  GVolumeMonitor *volume_monitor;
 
+  /* This list contains elements that can be
+   * of type GDrive, GVolume and GMount
+   */
+  GSList *volumes;
+
+  /* This list contains GtkFileSystemBookmark structs */
+  GSList *bookmarks;
+  GFile *bookmarks_file;
+
+  GFileMonitor *bookmarks_monitor;
+};
+
+struct _GtkFolderPrivate
+{
+  GFile *folder_file;
+  GHashTable *children;
+  GFileMonitor *directory_monitor;
+  GFileEnumerator *enumerator;
+  GCancellable *cancellable;
+  gchar *attributes;
+
+  guint finished_loading : 1;
+};
 
 struct AsyncFuncData
 {
@@ -102,9 +128,9 @@ struct GtkFileSystemBookmark
   gchar *label;
 };
 
-G_DEFINE_FTYPE (GtkFileSystem, _gtk_file_system, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_FTYPE (GtkFileSystem, _gtk_file_system, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
-G_DEFINE_FTYPE (GtkFolder, _gtk_folder, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_FTYPE (GtkFolder, _gtk_folder, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
 
 
 static void gtk_folder_set_finished_loading (GtkFolder *folder,

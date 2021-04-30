@@ -21,7 +21,6 @@
 #define __GTK_LIST_STORE_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gdkconfig.h>

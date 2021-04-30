@@ -24,7 +24,6 @@
 #define __GTK_SHOW_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 G_BEGIN_DECLS
 

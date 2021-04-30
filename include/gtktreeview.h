@@ -21,7 +21,6 @@
 #define __GTK_TREE_VIEW_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkcontainer.h>
@@ -37,7 +36,7 @@
 G_BEGIN_DECLS
 
 
-typedef enum
+typedef enum 
 {
   /* drop before/after this row */
   GTK_TREE_VIEW_DROP_BEFORE,

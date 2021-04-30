@@ -21,7 +21,6 @@
 #define __GTK_VPANED_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkpaned.h>

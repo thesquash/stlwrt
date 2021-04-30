@@ -21,7 +21,6 @@
 #define __GTK_IMAGE_MENU_ITEM_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkmenuitem.h>

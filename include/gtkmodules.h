@@ -22,7 +22,6 @@
 #define __GTK_MODULES_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtksettings.h>

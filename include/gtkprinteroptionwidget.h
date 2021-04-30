@@ -20,7 +20,6 @@
 #define __GTK_PRINTER_OPTION_WIDGET_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include "gtkprinteroption.h"

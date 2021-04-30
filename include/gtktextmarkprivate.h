@@ -21,7 +21,6 @@
 #define __GTK_TEXT_MARK_PRIVATE_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtktexttypes.h>

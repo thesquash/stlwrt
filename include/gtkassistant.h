@@ -27,7 +27,6 @@
 #define __GTK_ASSISTANT_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 
@@ -61,7 +60,7 @@ G_BEGIN_DECLS
  * %GTK_ASSISTANT_PAGE_CONFIRM, %GTK_ASSISTANT_PAGE_SUMMARY or
  * %GTK_ASSISTANT_PAGE_PROGRESS to be correct.
  */
-typedef enum
+typedef enum 
 {
   GTK_ASSISTANT_PAGE_CONTENT,
   GTK_ASSISTANT_PAGE_INTRO,

@@ -21,7 +21,6 @@
 #define __GTK_ICON_THEME_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gdk-pixbuf/gdk-pixbuf.h>
@@ -73,7 +72,7 @@ struct _GtkIconThemeClass
  * 
  * Used to specify options for SF(gtk_icon_theme_lookup_icon)()
  **/
-typedef enum
+typedef enum 
 {
   GTK_ICON_LOOKUP_NO_SVG           = 1 << 0,
   GTK_ICON_LOOKUP_FORCE_SVG        = 1 << 1,
@@ -91,7 +90,7 @@ typedef enum
  * 
  * Error codes for GtkIconTheme operations.
  **/
-typedef enum {
+typedef enum  {
   GTK_ICON_THEME_NOT_FOUND,
   GTK_ICON_THEME_FAILED
 } GtkIconThemeError;

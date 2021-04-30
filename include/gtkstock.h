@@ -21,7 +21,6 @@
 #define __GTK_STOCK_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gdk.h>

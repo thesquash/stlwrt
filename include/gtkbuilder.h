@@ -22,7 +22,6 @@
 #define __GTK_BUILDER_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gdkconfig.h>
@@ -43,7 +42,7 @@ G_BEGIN_DECLS
 typedef struct _GtkBuilderClass   GtkBuilderClass;
 typedef struct _GtkBuilderPrivate GtkBuilderPrivate;
 
-typedef enum
+typedef enum 
 {
   GTK_BUILDER_ERROR_INVALID_TYPE_FUNCTION,
   GTK_BUILDER_ERROR_UNHANDLED_TAG,

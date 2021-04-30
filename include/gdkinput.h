@@ -21,7 +21,6 @@
 #define __GDK_INPUT_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gdktypes.h>
@@ -40,14 +39,14 @@ typedef struct _GdkDeviceAxis	    GdkDeviceAxis;
 typedef struct _GdkDeviceClass	    GdkDeviceClass;
 typedef struct _GdkTimeCoord	    GdkTimeCoord;
 
-typedef enum
+typedef enum 
 {
   GDK_EXTENSION_EVENTS_NONE,
   GDK_EXTENSION_EVENTS_ALL,
   GDK_EXTENSION_EVENTS_CURSOR
 } GdkExtensionMode;
 
-typedef enum
+typedef enum 
 {
   GDK_SOURCE_MOUSE,
   GDK_SOURCE_PEN,
@@ -55,14 +54,14 @@ typedef enum
   GDK_SOURCE_CURSOR
 } GdkInputSource;
 
-typedef enum
+typedef enum 
 {
   GDK_MODE_DISABLED,
   GDK_MODE_SCREEN,
   GDK_MODE_WINDOW
 } GdkInputMode;
 
-typedef enum
+typedef enum 
 {
   GDK_AXIS_IGNORE,
   GDK_AXIS_X,

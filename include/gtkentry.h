@@ -25,7 +25,6 @@
 #define __GTK_ENTRY_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkeditable.h>
@@ -52,7 +51,7 @@ G_BEGIN_DECLS
 #define GTK_IS_ENTRY_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_ENTRY))
 #define GTK_ENTRY_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_ENTRY, GtkEntryClass))
 
-typedef enum
+typedef enum 
 {
   GTK_ENTRY_ICON_PRIMARY,
   GTK_ENTRY_ICON_SECONDARY

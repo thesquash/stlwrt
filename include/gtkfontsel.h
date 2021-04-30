@@ -25,7 +25,6 @@
 #define __GTK_FONTSEL_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkdialog.h>

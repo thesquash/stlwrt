@@ -21,7 +21,6 @@
 #define __GTK_FIXED_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #if defined(GTK_DISABLE_SINGLE_INCLUDES) && !defined (__GTK_H_INSIDE__) && !defined (STLWRT_COMPILATION)

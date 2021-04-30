@@ -26,7 +26,6 @@
 #define __GTK_HSV_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkwidget.h>

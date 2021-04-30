@@ -21,7 +21,6 @@
 #define __GTK_TEXT_ITER_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtktexttag.h>
@@ -30,7 +29,7 @@
 
 G_BEGIN_DECLS
 
-typedef enum {
+typedef enum  {
   GTK_TEXT_SEARCH_VISIBLE_ONLY = 1 << 0,
   GTK_TEXT_SEARCH_TEXT_ONLY    = 1 << 1
   /* Possible future plans: SEARCH_CASE_INSENSITIVE, SEARCH_REGEXP */

@@ -22,7 +22,6 @@
 #define __GTK_TEXT_BUFFER_SERIALIZE_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtktextbuffer.h>

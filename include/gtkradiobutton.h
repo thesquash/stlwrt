@@ -21,7 +21,6 @@
 #define __GTK_RADIO_BUTTON_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkcheckbutton.h>

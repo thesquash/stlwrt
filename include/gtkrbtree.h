@@ -23,7 +23,6 @@
 #define __GTK_RBTREE_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <glib.h>
@@ -32,7 +31,7 @@
 G_BEGIN_DECLS
 
 
-typedef enum
+typedef enum 
 {
   GTK_RBNODE_BLACK = 1 << 0,
   GTK_RBNODE_RED = 1 << 1,

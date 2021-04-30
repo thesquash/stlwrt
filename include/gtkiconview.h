@@ -21,7 +21,6 @@
 #define __GTK_ICON_VIEW_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkcontainer.h>
@@ -50,7 +49,7 @@ typedef void (* GtkIconViewForeachFunc)     (GtkIconView      *icon_view,
 					     GtkTreePath      *path,
 					     gpointer          data);
 
-typedef enum
+typedef enum 
 {
   GTK_ICON_VIEW_NO_DROP,
   GTK_ICON_VIEW_DROP_INTO,

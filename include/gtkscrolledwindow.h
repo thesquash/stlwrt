@@ -21,7 +21,6 @@
 #define __GTK_SCROLLED_WINDOW_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkhscrollbar.h>

@@ -23,7 +23,6 @@
 #define __GTK_FILE_CHOOSER_UTILS_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include "gtkfilechooserprivate.h"
@@ -32,7 +31,7 @@ G_BEGIN_DECLS
 
 #define GTK_FILE_CHOOSER_DELEGATE_QUARK	  (_gtk_file_chooser_delegate_get_quark ())
 
-typedef enum {
+typedef enum  {
   GTK_FILE_CHOOSER_PROP_FIRST                  = 0x1000,
   GTK_FILE_CHOOSER_PROP_ACTION                 = GTK_FILE_CHOOSER_PROP_FIRST,
   GTK_FILE_CHOOSER_PROP_FILE_SYSTEM_BACKEND,

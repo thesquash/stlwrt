@@ -1,7 +1,7 @@
 /*** BEGIN file-header ***/
 
-#ifndef __GTK_TYPE_BUILTINS_H__
-#define __GTK_TYPE_BUILTINS_H__
+#ifndef __STLWRT_ENUM_TYPES_H__
+#define __STLWRT_ENUM_TYPES_H__
 
 #include <glib-object.h>
 
@@ -21,5 +21,5 @@ GType @enum_name@_get_type (void) G_GNUC_CONST;
 /*** BEGIN file-tail ***/
 G_END_DECLS
 
-#endif /* __GTK_TYPE_BUILTINS_H__ */
+#endif /* __STLWRT_ENUM_TYPES_H__ */
 /*** END file-tail ***/

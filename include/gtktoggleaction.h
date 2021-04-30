@@ -27,7 +27,6 @@
 #define __GTK_TOGGLE_ACTION_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkaction.h>

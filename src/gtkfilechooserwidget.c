@@ -26,7 +26,6 @@
 #include <gtkfilechooserwidget.h>
 #include <gtkfilechooserdefault.h>
 #include <gtkfilechooserutils.h>
-#include <gtktypebuiltins.h>
 #include <gtkfilechooserembed.h>
 #include <gtkintl.h>
 

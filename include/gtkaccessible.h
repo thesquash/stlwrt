@@ -21,7 +21,6 @@
 #define __GTK_ACCESSIBLE_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <atk/atk.h>

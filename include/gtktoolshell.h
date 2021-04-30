@@ -24,7 +24,6 @@
 #define __GTK_TOOL_SHELL_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkenums.h>

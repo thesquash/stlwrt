@@ -21,7 +21,6 @@
 #define __GDK_TYPES_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <glib.h>
@@ -92,7 +91,7 @@ typedef gpointer GdkNativeWindow;
 typedef guint32 GdkNativeWindow;
 #endif
 
-typedef enum
+typedef enum 
 {
   GDK_LSB_FIRST,
   GDK_MSB_FIRST
@@ -100,7 +99,7 @@ typedef enum
 
 /* Types of modifiers.
  */
-typedef enum
+typedef enum 
 {
   GDK_SHIFT_MASK    = 1 << 0,
   GDK_LOCK_MASK	    = 1 << 1,
@@ -129,14 +128,14 @@ typedef enum
   GDK_MODIFIER_MASK = 0x5c001fff
 } GdkModifierType;
 
-typedef enum
+typedef enum 
 {
   GDK_INPUT_READ       = 1 << 0,
   GDK_INPUT_WRITE      = 1 << 1,
   GDK_INPUT_EXCEPTION  = 1 << 2
 } GdkInputCondition;
 
-typedef enum
+typedef enum 
 {
   GDK_OK	  = 0,
   GDK_ERROR	  = -1,
@@ -149,7 +148,7 @@ typedef enum
  * since old application code may depend on them matching the X values
  * We don't actually depend on the matchup ourselves.
  */
-typedef enum
+typedef enum 
 {
   GDK_GRAB_SUCCESS         = 0,
   GDK_GRAB_ALREADY_GRABBED = 1,

@@ -23,7 +23,6 @@
 #define __GTK_VRULER_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkruler.h>

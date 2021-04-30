@@ -21,7 +21,6 @@
 #define __GTK_CELL_RENDERER_ACCEL_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkcellrenderertext.h>
@@ -38,7 +37,7 @@ G_BEGIN_DECLS
 typedef struct _GtkCellRendererAccelClass GtkCellRendererAccelClass;
 
 
-typedef enum
+typedef enum 
 {
   GTK_CELL_RENDERER_ACCEL_MODE_GTK,
   GTK_CELL_RENDERER_ACCEL_MODE_OTHER

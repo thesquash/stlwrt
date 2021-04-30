@@ -21,7 +21,6 @@
 #define __GTK_ACCEL_GROUP_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 
@@ -42,7 +41,7 @@ G_BEGIN_DECLS
 
 
 /* --- accel flags --- */
-typedef enum
+typedef enum 
 {
   GTK_ACCEL_VISIBLE        = 1 << 0,	/* display in GtkAccelLabel? */
   GTK_ACCEL_LOCKED         = 1 << 1,	/* is it removable? */

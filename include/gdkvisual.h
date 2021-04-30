@@ -21,7 +21,6 @@
 #define __GDK_VISUAL_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gdktypes.h>
@@ -45,7 +44,7 @@ typedef struct _GdkVisualClass    GdkVisualClass;
  *   TrueColor:
  *   DirectColor:
  */
-typedef enum
+typedef enum 
 {
   GDK_VISUAL_STATIC_GRAY,
   GDK_VISUAL_GRAYSCALE,

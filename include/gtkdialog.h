@@ -21,7 +21,6 @@
 #define __GTK_DIALOG_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkwindow.h>
@@ -30,7 +29,7 @@
 G_BEGIN_DECLS
 
 /* Parameters for dialog construction */
-typedef enum
+typedef enum 
 {
   GTK_DIALOG_MODAL               = 1 << 0, /* call SF(gtk_window_set_modal) (win, TRUE) */
   GTK_DIALOG_DESTROY_WITH_PARENT = 1 << 1, /* call SF(gtk_window_set_destroy_with_parent) () */
@@ -45,7 +44,7 @@ typedef enum
  *     if (SF(gtk_dialog_run)(dialog) == GTK_RESPONSE_ACCEPT)
  *       blah();
  */
-typedef enum
+typedef enum 
 {
   /* GTK returns this if a response widget has no response_id,
    * or if the dialog gets programmatically hidden or destroyed.

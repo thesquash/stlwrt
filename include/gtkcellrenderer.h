@@ -21,14 +21,13 @@
 #define __GTK_CELL_RENDERER_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkcelleditable.h>
 
 G_BEGIN_DECLS
 
-typedef enum
+typedef enum 
 {
   GTK_CELL_RENDERER_SELECTED    = 1 << 0,
   GTK_CELL_RENDERER_PRELIT      = 1 << 1,
@@ -38,7 +37,7 @@ typedef enum
   GTK_CELL_RENDERER_FOCUSED     = 1 << 4
 } GtkCellRendererState;
 
-typedef enum
+typedef enum 
 {
   GTK_CELL_RENDERER_MODE_INERT,
   GTK_CELL_RENDERER_MODE_ACTIVATABLE,

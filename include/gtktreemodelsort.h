@@ -21,7 +21,6 @@
 #define __GTK_TREE_MODEL_SORT_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gdkconfig.h>

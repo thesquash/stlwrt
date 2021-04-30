@@ -21,7 +21,6 @@
 #define __GTK_TREE_MODEL_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <glib-object.h>
@@ -40,7 +39,7 @@ G_BEGIN_DECLS
 typedef gboolean (* GtkTreeModelForeachFunc) (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data);
 
 
-typedef enum
+typedef enum 
 {
   GTK_TREE_MODEL_ITERS_PERSIST = 1 << 0,
   GTK_TREE_MODEL_LIST_ONLY = 1 << 1

@@ -24,7 +24,6 @@
 #define __GTK_SEARCH_ENGINE_BEAGLE_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include "gtksearchengine.h"

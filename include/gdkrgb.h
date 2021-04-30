@@ -21,7 +21,6 @@
 #define __GDK_RGB_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gdktypes.h>
@@ -30,7 +29,7 @@ G_BEGIN_DECLS
 
 typedef struct _GdkRgbCmap GdkRgbCmap;
 
-typedef enum
+typedef enum 
 {
   GDK_RGB_DITHER_NONE,
   GDK_RGB_DITHER_NORMAL,

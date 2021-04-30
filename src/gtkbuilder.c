@@ -33,7 +33,6 @@
 #include <gtkmain.h>
 #include <gtkintl.h>
 #include <gtkprivate.h>
-#include <gtktypebuiltins.h>
 #include <gtkwindow.h>
 #include <gtkicontheme.h>
 #include <gtkstock.h>

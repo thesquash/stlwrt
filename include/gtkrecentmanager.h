@@ -22,7 +22,6 @@
 #define __GTK_RECENT_MANAGER_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gdk-pixbuf/gdk-pixbuf.h>
@@ -119,7 +118,7 @@ struct _GtkRecentManagerClass
  *
  * Error codes for GtkRecentManager operations
  **/
-typedef enum
+typedef enum 
 {
   GTK_RECENT_MANAGER_ERROR_NOT_FOUND,
   GTK_RECENT_MANAGER_ERROR_INVALID_URI,

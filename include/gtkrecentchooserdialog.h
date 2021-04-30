@@ -22,7 +22,6 @@
 #define __GTK_RECENT_CHOOSER_DIALOG_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkdialog.h>

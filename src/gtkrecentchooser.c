@@ -29,7 +29,6 @@
 #include <gtkrecentaction.h>
 #include <gtkactivatable.h>
 #include <gtkintl.h>
-#include <gtktypebuiltins.h>
 #include <gtkprivate.h>
 
 

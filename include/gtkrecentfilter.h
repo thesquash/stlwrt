@@ -22,7 +22,6 @@
 #define __GTK_RECENT_FILTER_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <glib-object.h>
@@ -35,7 +34,7 @@ G_BEGIN_DECLS
 
 typedef struct _GtkRecentFilterInfo	GtkRecentFilterInfo;
 
-typedef enum {
+typedef enum  {
   GTK_RECENT_FILTER_URI          = 1 << 0,
   GTK_RECENT_FILTER_DISPLAY_NAME = 1 << 1,
   GTK_RECENT_FILTER_MIME_TYPE    = 1 << 2,

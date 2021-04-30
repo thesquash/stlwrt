@@ -21,7 +21,6 @@
 #define __GTK_PROGRESS_BAR_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 G_BEGIN_DECLS
 
@@ -34,13 +33,13 @@ G_BEGIN_DECLS
 
 typedef struct _GtkProgressBarClass  GtkProgressBarClass;
 
-typedef enum
+typedef enum 
 {
   GTK_PROGRESS_CONTINUOUS,
   GTK_PROGRESS_DISCRETE
 } GtkProgressBarStyle;
 
-typedef enum
+typedef enum 
 {
   GTK_PROGRESS_LEFT_TO_RIGHT,
   GTK_PROGRESS_RIGHT_TO_LEFT,

@@ -22,7 +22,6 @@
 #define __GTK_PRINT_OPERATION_PRIVATE_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include "gtkprintoperation.h"
@@ -30,7 +29,7 @@
 G_BEGIN_DECLS
 
 /* Page drawing states */
-typedef enum
+typedef enum 
 {
   GTK_PAGE_DRAWING_STATE_READY,
   GTK_PAGE_DRAWING_STATE_DRAWING,

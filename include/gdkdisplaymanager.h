@@ -21,7 +21,6 @@
 #define __GDK_DISPLAY_MANAGER_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gdktypes.h>
@@ -39,6 +38,8 @@ typedef struct _GdkDisplayManagerClass GdkDisplayManagerClass;
 #define GDK_IS_DISPLAY_MANAGER_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GDK_TYPE_DISPLAY_MANAGER))
 #define GDK_DISPLAY_MANAGER_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GDK_TYPE_DISPLAY_MANAGER, GdkDisplayManagerClass))
 
+STLWRT_DECLARE_OPAQUE_TYPE(GdkDisplayManager, gtk_display_manager)
+
 struct _GdkDisplayManagerClass
 {
   GObjectClass parent_class;
@@ -46,8 +47,6 @@ struct _GdkDisplayManagerClass
   void (*display_opened) (GdkDisplayManager *display_manager,
 			  GdkDisplay *display);
 };
-
-STLWRT_DECLARE_GET_FTYPE_FUNCTIONS (gdk_display_manager)
 
 GdkDisplayManager *SF(gdk_display_manager_get)                 (void);
 GdkDisplay *       SF(gdk_display_manager_get_default_display) (GdkDisplayManager *display_manager);

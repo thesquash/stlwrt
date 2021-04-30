@@ -22,7 +22,6 @@
 #define __GDK_EVENTS_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gdkcolor.h>
@@ -62,8 +61,6 @@ typedef struct _GdkEventWindowState GdkEventWindowState;
 typedef struct _GdkEventSetting     GdkEventSetting;
 typedef struct _GdkEventGrabBroken  GdkEventGrabBroken;
 
-typedef union  _GdkEvent	    GdkEvent;
-
 typedef void (*GdkEventFunc) (GdkEvent *event,
 			      gpointer	data);
 
@@ -73,7 +70,7 @@ typedef void GdkXEvent;	  /* Can be cast to window system specific
 			   * even type, XEvent on X11, MSG on Win32.
 			   */
 
-typedef enum {
+typedef enum  {
   GDK_FILTER_CONTINUE,	  /* Event not handled, continue processesing */
   GDK_FILTER_TRANSLATE,	  /* Native event translated into a GDK event and
                              stored in the "event" structure that was
@@ -109,7 +106,7 @@ typedef GdkFilterReturn (*GdkFilterFunc) (GdkXEvent *xevent,
  *	    the screen).
  *   Scroll: A mouse wheel was scrolled either up or down.
  */
-typedef enum
+typedef enum 
 {
   GDK_NOTHING		= -1,
   GDK_DELETE		= 0,
@@ -155,7 +152,7 @@ typedef enum
 /* Event masks. (Used to select what types of events a window
  *  will receive).
  */
-typedef enum
+typedef enum 
 {
   GDK_EXPOSURE_MASK		= 1 << 1,
   GDK_POINTER_MOTION_MASK	= 1 << 2,
@@ -181,14 +178,14 @@ typedef enum
   GDK_ALL_EVENTS_MASK		= 0x3FFFFE
 } GdkEventMask;
 
-typedef enum
+typedef enum 
 {
   GDK_VISIBILITY_UNOBSCURED,
   GDK_VISIBILITY_PARTIAL,
   GDK_VISIBILITY_FULLY_OBSCURED
 } GdkVisibilityState;
 
-typedef enum
+typedef enum 
 {
   GDK_SCROLL_UP,
   GDK_SCROLL_DOWN,
@@ -204,7 +201,7 @@ typedef enum
  *   NonlinearVirtual:
  *   Unknown: An unknown type of enter/leave event occurred.
  */
-typedef enum
+typedef enum 
 {
   GDK_NOTIFY_ANCESTOR		= 0,
   GDK_NOTIFY_VIRTUAL		= 1,
@@ -219,7 +216,7 @@ typedef enum
  *   NotifyGrab
  *   NotifyUngrab
  */
-typedef enum
+typedef enum 
 {
   GDK_CROSSING_NORMAL,
   GDK_CROSSING_GRAB,
@@ -229,13 +226,13 @@ typedef enum
   GDK_CROSSING_STATE_CHANGED
 } GdkCrossingMode;
 
-typedef enum
+typedef enum 
 {
   GDK_PROPERTY_NEW_VALUE,
   GDK_PROPERTY_DELETE
 } GdkPropertyState;
 
-typedef enum
+typedef enum 
 {
   GDK_WINDOW_STATE_WITHDRAWN  = 1 << 0,
   GDK_WINDOW_STATE_ICONIFIED  = 1 << 1,
@@ -246,14 +243,14 @@ typedef enum
   GDK_WINDOW_STATE_BELOW      = 1 << 6
 } GdkWindowState;
 
-typedef enum
+typedef enum 
 {
   GDK_SETTING_ACTION_NEW,
   GDK_SETTING_ACTION_CHANGED,
   GDK_SETTING_ACTION_DELETED
 } GdkSettingAction;
 
-typedef enum
+typedef enum 
 {
   GDK_OWNER_CHANGE_NEW_OWNER,
   GDK_OWNER_CHANGE_DESTROY,
@@ -485,8 +482,7 @@ struct _GdkEventDND {
   gshort x_root, y_root;
 };
 
-union _GdkEvent
-{
+STLWRT_DECLARE_UNION(GdkEvent,
   GdkEventType		    type;
   GdkEventAny		    any;
   GdkEventExpose	    expose;
@@ -508,7 +504,7 @@ union _GdkEvent
   GdkEventWindowState       window_state;
   GdkEventSetting           setting;
   GdkEventGrabBroken        grab_broken;
-};
+)
 
 STLWRT_DECLARE_GET_FTYPE_FUNCTIONS(gdk_event)
 

@@ -23,7 +23,6 @@
 #define __GDK_FONT_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gdktypes.h>
@@ -38,7 +37,7 @@ G_BEGIN_DECLS
  *   GDK_FONT_FONT: the font is an XFontStruct.
  *   GDK_FONT_FONTSET: the font is an XFontSet used for I18N.
  */
-typedef enum
+typedef enum 
 {
   GDK_FONT_FONT,
   GDK_FONT_FONTSET

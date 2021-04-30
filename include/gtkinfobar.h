@@ -24,7 +24,6 @@
 #define __GTK_INFO_BAR_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkhbox.h>

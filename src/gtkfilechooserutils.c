@@ -25,7 +25,6 @@
 #include <gtkfilechooserutils.h>
 #include <gtkfilechooser.h>
 #include <gtkfilesystem.h>
-#include <gtktypebuiltins.h>
 #include <gtkintl.h>
 
 

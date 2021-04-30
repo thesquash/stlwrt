@@ -22,7 +22,6 @@
 #define __GTK_NOTEBOOK_H__
 
 #include <stlwrt.h>
-#include <stlwrt-typedefs.h>
 
 
 #include <gtkcontainer.h>
@@ -38,7 +37,7 @@ G_BEGIN_DECLS
 #define GTK_NOTEBOOK_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_NOTEBOOK, GtkNotebookClass))
 
 
-typedef enum
+typedef enum 
 {
   GTK_NOTEBOOK_TAB_FIRST,
   GTK_NOTEBOOK_TAB_LAST

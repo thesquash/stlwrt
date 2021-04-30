@@ -26,7 +26,6 @@
 #include <gtkprintutils.h>
 #include <gtkprintoperation.h> /* for GtkPrintError */
 #include <gtkintl.h>
-#include <gtktypebuiltins.h>
 
 
 #define KEYFILE_GROUP_NAME "Page Setup"

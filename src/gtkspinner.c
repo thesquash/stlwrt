@@ -64,7 +64,8 @@ struct _GtkSpinnerPrivate
   guint timeout;
 };
 
-STLWRT_DEFINE_FTYPE_VPARENT (GtkSpinner, gtk_spinner, GTK_TYPE_DRAWING_AREA, G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkSpinner, gtk_spinner, GTK_TYPE_DRAWING_AREA, G_TYPE_FLAG_NONE,
+                             G_ADD_PRIVATE (GtkSpinner))
 
 enum {
   PROP_0,
@@ -103,7 +104,6 @@ gtk_spinner_class_init (GtkSpinnerClass *klass)
   GtkWidgetClass *widget_class;
 
   gobject_class = G_OBJECT_CLASS(klass);
-  g_type_class_add_private (gobject_class, sizeof (GtkSpinnerPrivate));
   gobject_class->dispose = gtk_spinner_dispose;
   gobject_class->get_property = gtk_spinner_get_property;
   gobject_class->set_property = gtk_spinner_set_property;
@@ -205,7 +205,7 @@ gtk_spinner_init (GtkSpinner *spinner)
 {
   GtkSpinnerPrivate *priv;
 
-  priv = GTK_SPINNER_GET_PRIVATE (spinner);
+  priv = gtk_spinner_get_instance_private (spinner);
   priv->current = 0;
   priv->timeout = 0;
 

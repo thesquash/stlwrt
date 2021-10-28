@@ -122,7 +122,7 @@
  * </refsect2>
  */
 
-#define GTK_INFO_BAR_GET_PRIVATE(object) \
+#define gtk_info_bar_get_instance_private(object) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((object), \
                                 GTK_TYPE_INFO_BAR, \
                                 GtkInfoBarPrivate))
@@ -190,7 +190,8 @@ struct _GtkInfoBarPrivate
 
 STLWRT_DEFINE_FTYPE_VPARENT (GtkInfoBar, gtk_info_bar, GTK_TYPE_HBOX, G_TYPE_FLAG_NONE,
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-                                                    gtk_info_bar_buildable_interface_init))
+                                                    gtk_info_bar_buildable_interface_init)
+                             G_ADD_PRIVATE (GtkInfoBar))
 
 static void
 gtk_info_bar_set_property (GObject      *object,
@@ -202,7 +203,7 @@ gtk_info_bar_set_property (GObject      *object,
   GtkInfoBarPrivate *priv;
 
   info_bar = GTK_INFO_BAR (object);
-  priv = GTK_INFO_BAR_GET_PRIVATE (info_bar);
+  priv = gtk_info_bar_get_instance_private (info_bar);
 
   switch (prop_id)
     {
@@ -225,7 +226,7 @@ gtk_info_bar_get_property (GObject    *object,
   GtkInfoBarPrivate *priv;
 
   info_bar = GTK_INFO_BAR (object);
-  priv = GTK_INFO_BAR_GET_PRIVATE (info_bar);
+  priv = gtk_info_bar_get_instance_private (info_bar);
 
   switch (prop_id)
     {
@@ -309,7 +310,7 @@ static gboolean
 gtk_info_bar_expose (GtkWidget      *widget,
                      GdkEventExpose *event)
 {
-  GtkInfoBarPrivate *priv = GTK_INFO_BAR_GET_PRIVATE (widget);
+  GtkInfoBarPrivate *priv = gtk_info_bar_get_instance_private (widget);
   const char* type_detail[] = {
     "infobar-info",
     "infobar-warning",
@@ -498,8 +499,6 @@ gtk_info_bar_class_init (GtkInfoBarClass *klass)
   binding_set = __gtk_binding_set_by_class (klass);
 
   __gtk_binding_entry_add_signal (binding_set, GDK_Escape, 0, "close", 0);
-
-  g_type_class_add_private (object_class, sizeof (GtkInfoBarPrivate));
 }
 
 static void
@@ -535,7 +534,7 @@ gtk_info_bar_update_colors (GtkInfoBar *info_bar)
     "other_bg_color"
   };
 
-  priv = GTK_INFO_BAR_GET_PRIVATE (info_bar);
+  priv = gtk_info_bar_get_instance_private (info_bar);
   style = __gtk_widget_get_style (widget);
 
   if (__gtk_style_lookup_color (style, fg_color_name[priv->message_type], &sym_fg) &&
@@ -621,7 +620,7 @@ gtk_info_bar_init (GtkInfoBar *info_bar)
 
   __gtk_widget_push_composite_child ();
 
-  gtk_info_bar_get_props (info_bar)->priv = GTK_INFO_BAR_GET_PRIVATE (info_bar);
+  gtk_info_bar_get_props (info_bar)->priv = gtk_info_bar_get_instance_private (info_bar);
 
   content_area = __gtk_hbox_new (FALSE, 0);
   __gtk_widget_show (content_area);
@@ -1187,7 +1186,7 @@ __gtk_info_bar_set_message_type (GtkInfoBar     *info_bar,
 
   g_return_if_fail (GTK_IS_INFO_BAR (info_bar));
 
-  priv = GTK_INFO_BAR_GET_PRIVATE (info_bar);
+  priv = gtk_info_bar_get_instance_private (info_bar);
 
   if (priv->message_type != message_type)
     {
@@ -1258,7 +1257,7 @@ __gtk_info_bar_get_message_type (GtkInfoBar *info_bar)
 
   g_return_val_if_fail (GTK_IS_INFO_BAR (info_bar), GTK_MESSAGE_OTHER);
 
-  priv = GTK_INFO_BAR_GET_PRIVATE (info_bar);
+  priv = gtk_info_bar_get_instance_private (info_bar);
 
   return priv->message_type;
 }

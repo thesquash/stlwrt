@@ -27,13 +27,6 @@
 
 G_BEGIN_DECLS
 
-typedef enum 
-{
-  GDK_PROP_MODE_REPLACE,
-  GDK_PROP_MODE_PREPEND,
-  GDK_PROP_MODE_APPEND
-} GdkPropMode;
-
 GdkAtom SF(gdk_atom_intern) (const gchar *atom_name,
 			 gboolean     only_if_exists);
 GdkAtom SF(gdk_atom_intern_static_string) (const gchar *atom_name);

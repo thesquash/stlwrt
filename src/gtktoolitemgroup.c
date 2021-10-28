@@ -117,7 +117,8 @@ struct _GtkToolItemGroupPrivate
 STLWRT_DEFINE_FTYPE_VPARENT (GtkToolItemGroup, gtk_tool_item_group, GTK_TYPE_CONTAINER,
                              G_TYPE_FLAG_NONE,
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_TOOL_SHELL,
-                                                    gtk_tool_item_group_tool_shell_init))
+                                                    gtk_tool_item_group_tool_shell_init)
+                             G_ADD_PRIVATE (GtkToolItemGroup))
 
 static GtkWidget*
 gtk_tool_item_group_get_alignment (GtkToolItemGroup *group)
@@ -1632,8 +1633,6 @@ gtk_tool_item_group_class_init (GtkToolItemGroupClass *cls)
                                                                 G_MAXINT,
                                                                 0,
                                                                 GTK_PARAM_READWRITE));
-
-  g_type_class_add_private (cls, sizeof (GtkToolItemGroupPrivate));
 }
 
 /**

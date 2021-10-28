@@ -99,7 +99,8 @@ struct _GtkPageSetupUnixDialogPrivate
 };
 
 STLWRT_DEFINE_FTYPE_VPARENT (GtkPageSetupUnixDialog, gtk_page_setup_unix_dialog, GTK_TYPE_DIALOG,
-                             G_TYPE_FLAG_NONE, ;)
+                             G_TYPE_FLAG_NONE, 
+                             G_ADD_PRIVATE (GtkPageSetupUnixDialog))
 
 static void gtk_page_setup_unix_dialog_finalize  (GObject                *object);
 static void populate_dialog                      (GtkPageSetupUnixDialog *dialog);
@@ -143,8 +144,6 @@ gtk_page_setup_unix_dialog_class_init (GtkPageSetupUnixDialogClass *class)
   widget_class = (GtkWidgetClass *) class;
 
   object_class->finalize = gtk_page_setup_unix_dialog_finalize;
-
-  g_type_class_add_private (class, sizeof (GtkPageSetupUnixDialogPrivate));
 }
 
 static void
@@ -154,7 +153,7 @@ gtk_page_setup_unix_dialog_init (GtkPageSetupUnixDialog *dialog)
   GtkTreeIter iter;
   gchar *tmp;
 
-  priv = gtk_page_setup_unix_dialog_get_props (dialog)->priv = GTK_PAGE_SETUP_UNIX_DIALOG_GET_PRIVATE (dialog);
+  priv = gtk_page_setup_unix_dialog_get_props (dialog)->priv = gtk_page_setup_unix_dialog_get_instance_private (dialog);
 
   priv->print_backends = NULL;
 

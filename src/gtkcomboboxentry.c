@@ -82,7 +82,8 @@ struct _GtkComboBoxEntryPrivate
 STLWRT_DEFINE_FTYPE_VPARENT (GtkComboBoxEntry, gtk_combo_box_entry, GTK_TYPE_COMBO_BOX,
                              G_TYPE_FLAG_NONE,
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-                                                    gtk_combo_box_entry_buildable_interface_init))
+                                                    gtk_combo_box_entry_buildable_interface_init)
+                             G_ADD_PRIVATE (GtkComboBoxEntry))
 
 static void
 gtk_combo_box_entry_class_init (GtkComboBoxEntryClass *klass)
@@ -116,9 +117,6 @@ gtk_combo_box_entry_class_init (GtkComboBoxEntryClass *klass)
                                                      G_MAXINT,
                                                      -1,
                                                      GTK_PARAM_READWRITE));
-
-  g_type_class_add_private ((GObjectClass *) klass,
-                            sizeof (GtkComboBoxEntryPrivate));
 }
 
 static void
@@ -126,7 +124,7 @@ gtk_combo_box_entry_init (GtkComboBoxEntry *entry_box)
 {
   GtkWidget *entry;
 
-  gtk_combo_box_entry_get_props (entry_box)->priv = GTK_COMBO_BOX_ENTRY_GET_PRIVATE (entry_box);
+  gtk_combo_box_entry_get_props (entry_box)->priv = gtk_combo_box_entry_get_instance_private (entry_box);
   gtk_combo_box_entry_get_props (entry_box)->priv->text_column = -1;
 
   entry = __gtk_entry_new ();

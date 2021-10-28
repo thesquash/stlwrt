@@ -81,7 +81,8 @@ struct _GtkToggleToolButtonPrivate
 STLWRT_DEFINE_FTYPE_VPARENT (GtkToggleToolButton, gtk_toggle_tool_button, GTK_TYPE_TOOL_BUTTON,
                              G_TYPE_FLAG_NONE,
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_ACTIVATABLE,
-                                                    gtk_toggle_tool_button_activatable_interface_init))
+                                                    gtk_toggle_tool_button_activatable_interface_init)
+                             G_ADD_PRIVATE (GtkToggleToolButton))
 
 static void
 gtk_toggle_tool_button_class_init (GtkToggleToolButtonClass *klass)
@@ -129,8 +130,6 @@ gtk_toggle_tool_button_class_init (GtkToggleToolButtonClass *klass)
 		  NULL, NULL,
 		  g_cclosure_marshal_VOID__VOID,
 		  G_TYPE_NONE, 0);
-
-  g_type_class_add_private (object_class, sizeof (GtkToggleToolButtonPrivate));
 }
 
 static void
@@ -139,7 +138,7 @@ gtk_toggle_tool_button_init (GtkToggleToolButton *button)
   GtkToolButton *tool_button = GTK_TOOL_BUTTON (button);
   GtkToggleButton *toggle_button = GTK_TOGGLE_BUTTON (___gtk_tool_button_get_button (tool_button));
 
-  gtk_toggle_tool_button_get_props (button)->priv = GTK_TOGGLE_TOOL_BUTTON_GET_PRIVATE (button);
+  gtk_toggle_tool_button_get_props (button)->priv = gtk_toggle_tool_button_get_instance_private (button);
 
   /* If the real button is a radio button, it may have been
    * active at the time it was created.

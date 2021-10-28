@@ -109,7 +109,8 @@ static void   gtk_mount_operation_show_processes (GMountOperation *op,
 static void   gtk_mount_operation_aborted      (GMountOperation *op);
 
 STLWRT_DEFINE_FTYPE (GtkMountOperation, gtk_mount_operation, G_TYPE_MOUNT_OPERATION,
-                     G_TYPE_FLAG_NONE, ;)
+                     G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkMountOperation))
 
 enum {
   PROP_0,
@@ -145,8 +146,6 @@ gtk_mount_operation_class_init (GtkMountOperationClass *klass)
 {
   GObjectClass         *object_class = G_OBJECT_CLASS (klass);
   GMountOperationClass *mount_op_class = G_MOUNT_OPERATION_CLASS (klass);
-
-  g_type_class_add_private (klass, sizeof (GtkMountOperationPrivate));
 
   object_class->finalize     = gtk_mount_operation_finalize;
   object_class->get_property = gtk_mount_operation_get_property;

@@ -68,7 +68,8 @@ struct _GtkSearchEngineTrackerPrivate
 };
 
 STLWRT_DEFINE_FTYPE (GtkSearchEngineTracker, _gtk_search_engine_tracker, GTK_TYPE_SEARCH_ENGINE,
-                     G_TYPE_FLAG_NONE, ;)
+                     G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkSearchEngineTracker))
 
 static void
 finalize (GObject *object)
@@ -454,9 +455,6 @@ _gtk_search_engine_tracker_class_init (GtkSearchEngineTrackerClass *class)
   engine_class->start = gtk_search_engine_tracker_start;
   engine_class->stop = gtk_search_engine_tracker_stop;
   engine_class->is_indexed = gtk_search_engine_tracker_is_indexed;
-
-  g_type_class_add_private (gobject_class,
-                            sizeof (GtkSearchEngineTrackerPrivate));
 }
 
 static void

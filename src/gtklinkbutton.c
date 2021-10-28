@@ -112,7 +112,8 @@ static GtkLinkButtonUriFunc uri_func = NULL;
 static gpointer uri_func_data = NULL;
 static GDestroyNotify uri_func_destroy = NULL;
 
-STLWRT_DEFINE_FTYPE_VPARENT (GtkLinkButton, gtk_link_button, GTK_TYPE_BUTTON, G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkLinkButton, gtk_link_button, GTK_TYPE_BUTTON, G_TYPE_FLAG_NONE,
+                             G_ADD_PRIVATE (GtkLinkButton))
 
 static void
 gtk_link_button_class_init (GtkLinkButtonClass *klass)
@@ -163,14 +164,12 @@ gtk_link_button_class_init (GtkLinkButtonClass *klass)
                                                          P_("Whether this link has been visited."),
                                                          FALSE,
                                                          G_PARAM_READWRITE));
-  
-  g_type_class_add_private (gobject_class, sizeof (GtkLinkButtonPrivate));
 }
 
 static void
 gtk_link_button_init (GtkLinkButton *link_button)
 {
-  gtk_link_button_get_props (link_button)->priv = GTK_LINK_BUTTON_GET_PRIVATE (link_button),
+  gtk_link_button_get_props (link_button)->priv = gtk_link_button_get_instance_private (link_button),
   
   __gtk_button_set_relief (GTK_BUTTON (link_button), GTK_RELIEF_NONE);
   

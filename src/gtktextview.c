@@ -435,7 +435,8 @@ static gint           text_window_get_height      (GtkTextWindow     *win);
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-STLWRT_DEFINE_VTYPE (GtkTextView, gtk_text_view, GTK_TYPE_CONTAINER, G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_VTYPE (GtkTextView, gtk_text_view, GTK_TYPE_CONTAINER, G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkTextView))
 
 static void
 add_move_binding (GtkBindingSet  *binding_set,
@@ -1275,8 +1276,6 @@ gtk_text_view_class_init (GtkTextViewClass *klass)
   __gtk_binding_entry_add_signal (binding_set, GDK_KP_Tab, GDK_SHIFT_MASK | GDK_CONTROL_MASK,
 				"move-focus", 1,
 				GTK_TYPE_DIRECTION_TYPE, GTK_DIR_TAB_BACKWARD);
-
-  g_type_class_add_private (gobject_class, sizeof (GtkTextViewPrivate));
 }
 
 static void
@@ -1286,7 +1285,7 @@ gtk_text_view_init (GtkTextView *text_view)
   GtkTargetList *target_list;
   GtkTextViewPrivate *priv;
 
-  priv = GTK_TEXT_VIEW_GET_PRIVATE (text_view);
+  priv = gtk_text_view_get_instance_private (text_view);
 
   __gtk_widget_set_can_focus (widget, TRUE);
 
@@ -2119,7 +2118,7 @@ do_update_im_spot_location (gpointer text_view)
 {
   GtkTextViewPrivate *priv;
 
-  priv = GTK_TEXT_VIEW_GET_PRIVATE (text_view);
+  priv = gtk_text_view_get_instance_private (text_view);
   priv->im_spot_idle = 0;
 
   gtk_text_view_update_im_spot_location (text_view);
@@ -2131,7 +2130,7 @@ queue_update_im_spot_location (GtkTextView *text_view)
 {
   GtkTextViewPrivate *priv;
 
-  priv = GTK_TEXT_VIEW_GET_PRIVATE (text_view);
+  priv = gtk_text_view_get_instance_private (text_view);
 
   /* Use priority a little higher than GTK_TEXT_VIEW_PRIORITY_VALIDATE,
    * so we don't wait until the entire buffer has been validated. */
@@ -2147,7 +2146,7 @@ flush_update_im_spot_location (GtkTextView *text_view)
 {
   GtkTextViewPrivate *priv;
 
-  priv = GTK_TEXT_VIEW_GET_PRIVATE (text_view);
+  priv = gtk_text_view_get_instance_private (text_view);
 
   if (priv->im_spot_idle)
     {
@@ -2887,7 +2886,7 @@ gtk_text_view_finalize (GObject *object)
   GtkTextViewPrivate *priv;
 
   text_view = GTK_TEXT_VIEW (object);
-  priv = GTK_TEXT_VIEW_GET_PRIVATE (text_view);
+  priv = gtk_text_view_get_instance_private (text_view);
 
   gtk_text_view_destroy_layout (text_view);
   __gtk_text_view_set_buffer (text_view, NULL);
@@ -2936,7 +2935,7 @@ gtk_text_view_set_property (GObject         *object,
   GtkTextViewPrivate *priv;
 
   text_view = GTK_TEXT_VIEW (object);
-  priv = GTK_TEXT_VIEW_GET_PRIVATE (text_view);
+  priv = gtk_text_view_get_instance_private (text_view);
 
   switch (prop_id)
     {
@@ -3019,7 +3018,7 @@ gtk_text_view_get_property (GObject         *object,
   GtkTextViewPrivate *priv;
 
   text_view = GTK_TEXT_VIEW (object);
-  priv = GTK_TEXT_VIEW_GET_PRIVATE (text_view);
+  priv = gtk_text_view_get_instance_private (text_view);
 
   switch (prop_id)
     {
@@ -4359,7 +4358,7 @@ gtk_text_view_button_press_event (GtkWidget *widget, GdkEventButton *event)
 
           /* We do not want to scroll back to the insert iter when we paste
              with the middle button */
-          priv = GTK_TEXT_VIEW_GET_PRIVATE (text_view);
+          priv = gtk_text_view_get_instance_private (text_view);
           priv->scroll_after_paste = FALSE;
 
           gtk_text_layout_get_iter_at_pixel (gtk_text_view_get_props (text_view)->layout,
@@ -4865,7 +4864,7 @@ blink_cb (gpointer data)
   gint blink_timeout;
 
   text_view = GTK_TEXT_VIEW (data);
-  priv = GTK_TEXT_VIEW_GET_PRIVATE (text_view);
+  priv = gtk_text_view_get_instance_private (text_view);
 
   if (!__gtk_widget_has_focus (GTK_WIDGET (text_view)))
     {
@@ -4985,7 +4984,7 @@ gtk_text_view_reset_blink_time (GtkTextView *text_view)
 {
   GtkTextViewPrivate *priv;
 
-  priv = GTK_TEXT_VIEW_GET_PRIVATE (text_view);
+  priv = gtk_text_view_get_instance_private (text_view);
 
   priv->blink_time = 0;
 }
@@ -5816,7 +5815,7 @@ gtk_text_view_paste_done_handler (GtkTextBuffer *buffer,
   GtkTextView *text_view = data;
   GtkTextViewPrivate *priv;
 
-  priv = GTK_TEXT_VIEW_GET_PRIVATE (text_view);
+  priv = gtk_text_view_get_instance_private (text_view);
 
   if (priv->scroll_after_paste)
     {

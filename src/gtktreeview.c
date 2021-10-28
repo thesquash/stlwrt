@@ -484,8 +484,9 @@ static guint tree_view_signals [LAST_SIGNAL] = { 0 };
 /* GType Methods
  */
 
-STLWRT_DEFINE_FTYPE (GtkTreeView, gtk_tree_view, GTK_TYPE_CONTAINER, G_TYPE_FLAG_NONE,
-                     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE, gtk_tree_view_buildable_init))
+STLWRT_DEFINE_FTYPE_VPARENT (GtkTreeView, gtk_tree_view, GTK_TYPE_CONTAINER, G_TYPE_FLAG_NONE,
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE, gtk_tree_view_buildable_init)
+                             G_ADD_PRIVATE (GtkTreeView))
 
 static void
 gtk_tree_view_class_init (GtkTreeViewClass *class)
@@ -1314,8 +1315,6 @@ gtk_tree_view_class_init (GtkTreeViewClass *class)
   __gtk_binding_entry_add_signal (binding_set, GDK_f, GDK_CONTROL_MASK, "start-interactive-search", 0);
 
   __gtk_binding_entry_add_signal (binding_set, GDK_F, GDK_CONTROL_MASK, "start-interactive-search", 0);
-
-  g_type_class_add_private (o_class, sizeof (GtkTreeViewPrivate));
 }
 
 static void

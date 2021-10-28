@@ -162,7 +162,8 @@ struct _GtkScaleButtonPrivate
 };
 
 STLWRT_DEFINE_VTYPE (GtkScaleButton, gtk_scale_button, GTK_TYPE_BUTTON, G_TYPE_FLAG_NONE,
-                     G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE, NULL))
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE, NULL)
+                     G_ADD_PRIVATE (GtkScaleButton))
 
 static guint signals[LAST_SIGNAL] = { 0, };
 
@@ -172,8 +173,6 @@ gtk_scale_button_class_init (GtkScaleButtonClass *klass)
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GtkBindingSet *binding_set;
-
-  g_type_class_add_private (klass, sizeof (GtkScaleButtonPrivate));
 
   gobject_class->constructor = gtk_scale_button_constructor;
   gobject_class->finalize = gtk_scale_button_finalize;

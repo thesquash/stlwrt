@@ -319,7 +319,7 @@ STLWRT_DEFINE_FTYPE_VPARENT (GtkFileChooserButton, gtk_file_chooser_button, GTK_
                              G_TYPE_FLAG_NONE,
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_FILE_CHOOSER,
                                                     gtk_file_chooser_button_file_chooser_iface_init)
-)
+                             G_ADD_PRIVATE (GtkFileChooserButton))
 
 
 /* ***************** *
@@ -430,8 +430,6 @@ gtk_file_chooser_button_class_init (GtkFileChooserButtonClass * class)
 						     GTK_PARAM_READWRITE));
 
   _gtk_file_chooser_install_properties (gobject_class);
-
-  g_type_class_add_private (class, sizeof (GtkFileChooserButtonPrivate));
 }
 
 static void
@@ -441,7 +439,7 @@ gtk_file_chooser_button_init (GtkFileChooserButton *button)
   GtkWidget *box, *image, *sep;
   GtkTargetList *target_list;
 
-  priv = gtk_file_chooser_button_get_props (button)->priv = GTK_FILE_CHOOSER_BUTTON_GET_PRIVATE (button);
+  priv = gtk_file_chooser_button_get_props (button)->priv = gtk_file_chooser_button_get_instance_private (button);
 
   priv->icon_size = FALLBACK_ICON_SIZE;
   priv->focus_on_click = TRUE;

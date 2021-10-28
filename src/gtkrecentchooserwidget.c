@@ -28,7 +28,7 @@
 
 
 
-#define GTK_RECENT_CHOOSER_WIDGET_GET_PRIVATE(obj)	(gtk_recent_chooser_widget_get_props (GTK_RECENT_CHOOSER_WIDGET (obj))->priv)
+#define gtk_recent_chooser_widget_get_instance_private(obj)	(gtk_recent_chooser_widget_get_props (GTK_RECENT_CHOOSER_WIDGET (obj))->priv)
 
 static GObject *gtk_recent_chooser_widget_constructor  (GType                  type,
 						        guint                  n_params,
@@ -53,7 +53,8 @@ struct _GtkRecentChooserWidgetPrivate
 STLWRT_DEFINE_FTYPE_VPARENT (GtkRecentChooserWidget, gtk_recent_chooser_widget, GTK_TYPE_VBOX,
                              G_TYPE_FLAG_NONE,
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_RECENT_CHOOSER,
-                                                    _gtk_recent_chooser_delegate_iface_init))
+                                                    _gtk_recent_chooser_delegate_iface_init)
+                             G_ADD_PRIVATE (GtkRecentChooserWidget))
 
 static void
 gtk_recent_chooser_widget_class_init (GtkRecentChooserWidgetClass *klass)
@@ -66,8 +67,6 @@ gtk_recent_chooser_widget_class_init (GtkRecentChooserWidgetClass *klass)
   gobject_class->finalize = gtk_recent_chooser_widget_finalize;
 
   _gtk_recent_chooser_install_properties (gobject_class);
-
-  g_type_class_add_private (klass, sizeof (GtkRecentChooserWidgetPrivate));
 }
 
 
@@ -90,7 +89,7 @@ gtk_recent_chooser_widget_constructor (GType                  type,
 										 n_params,
 										 params);
 
-  priv = GTK_RECENT_CHOOSER_WIDGET_GET_PRIVATE (object);
+  priv = gtk_recent_chooser_widget_get_instance_private (object);
   priv->chooser = _gtk_recent_chooser_default_new (priv->manager);
   
   
@@ -110,7 +109,7 @@ gtk_recent_chooser_widget_set_property (GObject      *object,
 {
   GtkRecentChooserWidgetPrivate *priv;
 
-  priv = GTK_RECENT_CHOOSER_WIDGET_GET_PRIVATE (object);
+  priv = gtk_recent_chooser_widget_get_instance_private (object);
   
   switch (prop_id)
     {
@@ -131,7 +130,7 @@ gtk_recent_chooser_widget_get_property (GObject    *object,
 {
   GtkRecentChooserWidgetPrivate *priv;
 
-  priv = GTK_RECENT_CHOOSER_WIDGET_GET_PRIVATE (object);
+  priv = gtk_recent_chooser_widget_get_instance_private (object);
 
   g_object_get_property (G_OBJECT (priv->chooser), pspec->name, value);
 }
@@ -141,7 +140,7 @@ gtk_recent_chooser_widget_finalize (GObject *object)
 {
   GtkRecentChooserWidgetPrivate *priv;
   
-  priv = GTK_RECENT_CHOOSER_WIDGET_GET_PRIVATE (object);
+  priv = gtk_recent_chooser_widget_get_instance_private (object);
   priv->manager = NULL;
   
   G_OBJECT_CLASS (gtk_recent_chooser_widget_parent_class)->finalize (object);

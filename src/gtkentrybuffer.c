@@ -82,7 +82,8 @@ struct _GtkEntryBufferPrivate
 static guint signals[LAST_SIGNAL] = { 0 };
 
 
-STLWRT_DEFINE_FTYPE (GtkEntryBuffer, gtk_entry_buffer, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_FTYPE (GtkEntryBuffer, gtk_entry_buffer, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkEntryBuffer))
 
 /* --------------------------------------------------------------------------------
  * DEFAULT IMPLEMENTATIONS OF TEXT BUFFER
@@ -340,8 +341,6 @@ gtk_entry_buffer_class_init (GtkEntryBufferClass *klass)
 
   klass->inserted_text = gtk_entry_buffer_real_inserted_text;
   klass->deleted_text = gtk_entry_buffer_real_deleted_text;
-
-  g_type_class_add_private (gobject_class, sizeof (GtkEntryBufferPrivate));
 
   /**
    * GtkEntryBuffer:text:

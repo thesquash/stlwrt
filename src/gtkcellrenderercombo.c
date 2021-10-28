@@ -79,7 +79,8 @@ static guint cell_renderer_combo_signals[LAST_SIGNAL] = { 0, };
 #define GTK_CELL_RENDERER_COMBO_PATH "gtk-cell-renderer-combo-path"
 
 STLWRT_DEFINE_VTYPE (GtkCellRendererCombo, gtk_cell_renderer_combo, GTK_TYPE_CELL_RENDERER_TEXT,
-                     G_TYPE_FLAG_NONE, ;)
+                     G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkCellRendererCombo))
 
 static void
 gtk_cell_renderer_combo_class_init (GtkCellRendererComboClass *klass)
@@ -183,8 +184,6 @@ gtk_cell_renderer_combo_class_init (GtkCellRendererComboClass *klass)
 		  G_TYPE_NONE, 2,
 		  G_TYPE_STRING,
 		  GTK_TYPE_TREE_ITER);
-
-  g_type_class_add_private (klass, sizeof (GtkCellRendererComboPrivate));
 }
 
 static void
@@ -270,7 +269,7 @@ gtk_cell_renderer_combo_set_property (GObject      *object,
       {
         GtkCellRendererComboPrivate *priv;
 
-        priv = GTK_CELL_RENDERER_COMBO_GET_PRIVATE (cell);
+        priv = gtk_cell_renderer_combo_get_instance_private (cell);
 
         if (gtk_cell_renderer_combo_get_props (cell)->model)
           g_object_unref (gtk_cell_renderer_combo_get_props (cell)->model);
@@ -324,7 +323,7 @@ gtk_cell_renderer_combo_editing_done (GtkCellEditable *combo,
   GtkCellRendererComboPrivate *priv;
 
   cell = GTK_CELL_RENDERER_COMBO (data);
-  priv = GTK_CELL_RENDERER_COMBO_GET_PRIVATE (data);
+  priv = gtk_cell_renderer_combo_get_instance_private (data);
 
   if (gtk_cell_renderer_combo_get_props (cell)->focus_out_id > 0)
     {
@@ -427,7 +426,7 @@ gtk_cell_renderer_combo_start_editing (GtkCellRenderer     *cell,
   if (gtk_cell_renderer_combo_get_props (cell_combo)->text_column < 0)
     return NULL;
 
-  priv = GTK_CELL_RENDERER_COMBO_GET_PRIVATE (cell_combo);
+  priv = gtk_cell_renderer_combo_get_instance_private (cell_combo);
 
   if (gtk_cell_renderer_combo_get_props (cell_combo)->has_entry) 
     {

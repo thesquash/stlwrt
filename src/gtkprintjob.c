@@ -94,7 +94,8 @@ struct _GtkPrintJobPrivate
   guint track_print_status : 1;
 };
 
-STLWRT_DEFINE_VTYPE (GtkPrintJob, gtk_print_job, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_VTYPE (GtkPrintJob, gtk_print_job, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkPrintJob))
 
 static void
 gtk_print_job_class_init (GtkPrintJobClass *class)
@@ -106,8 +107,6 @@ gtk_print_job_class_init (GtkPrintJobClass *class)
   object_class->constructor = gtk_print_job_constructor;
   object_class->set_property = gtk_print_job_set_property;
   object_class->get_property = gtk_print_job_get_property;
-
-  g_type_class_add_private (class, sizeof (GtkPrintJobPrivate));
 
   g_object_class_install_property (object_class,
                                    PROP_TITLE,
@@ -180,7 +179,7 @@ gtk_print_job_init (GtkPrintJob *job)
 {
   GtkPrintJobPrivate *priv;
 
-  priv = gtk_print_job_get_props (job)->priv = GTK_PRINT_JOB_GET_PRIVATE (job);
+  priv = gtk_print_job_get_props (job)->priv = gtk_print_job_get_instance_private (job);
 
   priv->spool_io = NULL;
 

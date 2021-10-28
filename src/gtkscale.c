@@ -130,7 +130,8 @@ static void     gtk_scale_buildable_custom_finished  (GtkBuildable  *buildable,
 
 
 STLWRT_DEFINE_VTYPE (GtkScale, gtk_scale, GTK_TYPE_RANGE, G_TYPE_FLAG_NONE,
-                     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE, gtk_scale_buildable_interface_init))
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE, gtk_scale_buildable_interface_init)
+                     G_ADD_PRIVATE (GtkScale))
 
 
 static gint
@@ -158,7 +159,7 @@ gtk_scale_notify (GObject    *object,
     }
   else if (strcmp (pspec->name, "inverted") == 0)
     {
-      GtkScalePrivate *priv = GTK_SCALE_GET_PRIVATE (object);
+      GtkScalePrivate *priv = gtk_scale_get_instance_private (object);
       GtkScaleMark *mark;
       GSList *m;
       gint i, n;
@@ -433,8 +434,6 @@ gtk_scale_class_init (GtkScaleClass *class)
 
   add_slider_binding (binding_set, GDK_KP_End, 0,
                       GTK_SCROLL_END);
-
-  g_type_class_add_private (gobject_class, sizeof (GtkScalePrivate));
 }
 
 static void
@@ -749,7 +748,7 @@ gtk_scale_get_range_border (GtkRange  *range,
   
   widget = GTK_WIDGET (range);
   scale = GTK_SCALE (range);
-  priv = GTK_SCALE_GET_PRIVATE (scale);
+  priv = gtk_scale_get_instance_private (scale);
 
   ___gtk_scale_get_value_size (scale, &w, &h);
 
@@ -875,7 +874,7 @@ gtk_scale_get_mark_label_size (GtkScale        *scale,
                                gint            *width2,
                                gint            *height2)
 {
-  GtkScalePrivate *priv = GTK_SCALE_GET_PRIVATE (scale);
+  GtkScalePrivate *priv = gtk_scale_get_instance_private (scale);
   PangoLayout *layout;
   PangoRectangle logical_rect;
   GSList *m;
@@ -1007,7 +1006,7 @@ gtk_scale_expose (GtkWidget      *widget,
                   GdkEventExpose *event)
 {
   GtkScale *scale = GTK_SCALE (widget);
-  GtkScalePrivate *priv = GTK_SCALE_GET_PRIVATE (scale);
+  GtkScalePrivate *priv = gtk_scale_get_instance_private (scale);
   GtkRange *range = GTK_RANGE (scale);
   GtkStateType state_type;
   gint *marks;
@@ -1327,7 +1326,7 @@ gtk_scale_finalize (GObject *object)
 PangoLayout *
 __gtk_scale_get_layout (GtkScale *scale)
 {
-  GtkScalePrivate *priv = GTK_SCALE_GET_PRIVATE (scale);
+  GtkScalePrivate *priv = gtk_scale_get_instance_private (scale);
   gchar *txt;
 
   g_return_val_if_fail (GTK_IS_SCALE (scale), NULL);
@@ -1388,7 +1387,7 @@ __gtk_scale_get_layout_offsets (GtkScale *scale,
 void
 ___gtk_scale_clear_layout (GtkScale *scale)
 {
-  GtkScalePrivate *priv = GTK_SCALE_GET_PRIVATE (scale);
+  GtkScalePrivate *priv = gtk_scale_get_instance_private (scale);
 
   g_return_if_fail (GTK_IS_SCALE (scale));
 
@@ -1417,7 +1416,7 @@ gtk_scale_mark_free (GtkScaleMark *mark)
 void
 __gtk_scale_clear_marks (GtkScale *scale)
 {
-  GtkScalePrivate *priv = GTK_SCALE_GET_PRIVATE (scale);
+  GtkScalePrivate *priv = gtk_scale_get_instance_private (scale);
 
   g_return_if_fail (GTK_IS_SCALE (scale));
 
@@ -1460,7 +1459,7 @@ __gtk_scale_add_mark (GtkScale        *scale,
                     GtkPositionType  position,
                     const gchar     *markup)
 {
-  GtkScalePrivate *priv = GTK_SCALE_GET_PRIVATE (scale);
+  GtkScalePrivate *priv = gtk_scale_get_instance_private (scale);
   GtkScaleMark *mark;
   GSList *m;
   gdouble *values;

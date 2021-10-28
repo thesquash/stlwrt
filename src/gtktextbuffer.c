@@ -149,7 +149,8 @@ static void gtk_text_buffer_get_property (GObject         *object,
 static void gtk_text_buffer_notify       (GObject         *object,
                                           GParamSpec      *pspec);
 
-STLWRT_DEFINE_VTYPE (GtkTextBuffer, gtk_text_buffer, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_VTYPE (GtkTextBuffer, gtk_text_buffer, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkTextBuffer))
 
 static void
 gtk_text_buffer_class_init (GtkTextBufferClass *klass)
@@ -599,8 +600,6 @@ gtk_text_buffer_class_init (GtkTextBufferClass *klass)
                   G_TYPE_NONE,
                   1,
                   GTK_TYPE_CLIPBOARD);
-
-  g_type_class_add_private (object_class, sizeof (GtkTextBufferPrivate));
 }
 
 static void
@@ -3603,7 +3602,7 @@ update_selection_clipboards (GtkTextBuffer *buffer)
   GtkTextBufferPrivate *priv;
   GSList               *tmp_list = gtk_text_buffer_get_props (buffer)->selection_clipboards;
 
-  priv = GTK_TEXT_BUFFER_GET_PRIVATE (buffer);
+  priv = gtk_text_buffer_get_instance_private (buffer);
 
   __gtk_text_buffer_get_copy_target_list (buffer);
 
@@ -3940,7 +3939,7 @@ cut_or_copy (GtkTextBuffer *buffer,
   GtkTextIter start;
   GtkTextIter end;
 
-  priv = GTK_TEXT_BUFFER_GET_PRIVATE (buffer);
+  priv = gtk_text_buffer_get_instance_private (buffer);
 
   __gtk_text_buffer_get_copy_target_list (buffer);
 
@@ -4111,7 +4110,7 @@ __gtk_text_buffer_end_user_action (GtkTextBuffer *buffer)
 static void
 gtk_text_buffer_free_target_lists (GtkTextBuffer *buffer)
 {
-  GtkTextBufferPrivate *priv = GTK_TEXT_BUFFER_GET_PRIVATE (buffer);
+  GtkTextBufferPrivate *priv = gtk_text_buffer_get_instance_private (buffer);
 
   if (priv->copy_target_list)
     {
@@ -4185,7 +4184,7 @@ __gtk_text_buffer_get_copy_target_list (GtkTextBuffer *buffer)
 
   g_return_val_if_fail (GTK_IS_TEXT_BUFFER (buffer), NULL);
 
-  priv = GTK_TEXT_BUFFER_GET_PRIVATE (buffer);
+  priv = gtk_text_buffer_get_instance_private (buffer);
 
   if (! priv->copy_target_list)
     priv->copy_target_list =
@@ -4217,7 +4216,7 @@ __gtk_text_buffer_get_paste_target_list (GtkTextBuffer *buffer)
 
   g_return_val_if_fail (GTK_IS_TEXT_BUFFER (buffer), NULL);
 
-  priv = GTK_TEXT_BUFFER_GET_PRIVATE (buffer);
+  priv = gtk_text_buffer_get_instance_private (buffer);
 
   if (! priv->paste_target_list)
     priv->paste_target_list =

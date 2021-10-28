@@ -155,7 +155,8 @@ struct _GtkToolItemPrivate
 
 STLWRT_DEFINE_FTYPE_VPARENT (GtkToolItem, gtk_tool_item, GTK_TYPE_BIN, G_TYPE_FLAG_NONE,
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_ACTIVATABLE,
-                                                    gtk_tool_item_activatable_interface_init))
+                                                    gtk_tool_item_activatable_interface_init)
+                             G_ADD_PRIVATE (GtkToolItem))
 
 static void
 gtk_tool_item_class_init (GtkToolItemClass *klass)
@@ -271,8 +272,6 @@ gtk_tool_item_class_init (GtkToolItemClass *klass)
 		  NULL, NULL,
 		  NULL,
 		  G_TYPE_NONE, 0);
-
-  g_type_class_add_private (object_class, sizeof (GtkToolItemPrivate));
 }
 
 static void
@@ -280,7 +279,7 @@ gtk_tool_item_init (GtkToolItem *toolitem)
 {
   __gtk_widget_set_can_focus (GTK_WIDGET (toolitem), FALSE);
 
-  gtk_tool_item_get_props (toolitem)->priv = GTK_TOOL_ITEM_GET_PRIVATE (toolitem);
+  gtk_tool_item_get_props (toolitem)->priv = gtk_tool_item_get_instance_private (toolitem);
 
   gtk_tool_item_get_props (toolitem)->priv->visible_horizontal = TRUE;
   gtk_tool_item_get_props (toolitem)->priv->visible_vertical = TRUE;

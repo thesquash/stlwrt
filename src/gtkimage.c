@@ -186,7 +186,8 @@ enum
   PROP_GICON
 };
 
-STLWRT_DEFINE_VTYPE (GtkImage, gtk_image, GTK_TYPE_MISC, G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_VTYPE (GtkImage, gtk_image, GTK_TYPE_MISC, G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkImage))
 
 static void
 gtk_image_class_init (GtkImageClass *class)
@@ -340,14 +341,12 @@ gtk_image_class_init (GtkImageClass *class)
                                                       GTK_TYPE_IMAGE_TYPE,
                                                       GTK_IMAGE_EMPTY,
                                                       GTK_PARAM_READABLE));
-
-  g_type_class_add_private (object_class, sizeof (GtkImagePrivate));
 }
 
 static void
 gtk_image_init (GtkImage *image)
 {
-  GtkImagePrivate *priv = GTK_IMAGE_GET_PRIVATE (image);
+  GtkImagePrivate *priv = gtk_image_get_instance_private (image);
 
   __gtk_widget_set_has_window (GTK_WIDGET (image), FALSE);
 
@@ -473,7 +472,7 @@ __gtk_image_get_property (GObject     *object,
   GtkImagePrivate *priv;
 
   image = GTK_IMAGE (object);
-  priv = GTK_IMAGE_GET_PRIVATE (image);
+  priv = gtk_image_get_instance_private (image);
 
   /* The "getter" functions whine if you try to get the wrong
    * storage type. This function is instead robust against that,
@@ -932,7 +931,7 @@ void
 __gtk_image_set_from_file   (GtkImage    *image,
                            const gchar *filename)
 {
-  GtkImagePrivate *priv = GTK_IMAGE_GET_PRIVATE (image);
+  GtkImagePrivate *priv = gtk_image_get_instance_private (image);
   GdkPixbufAnimation *anim;
   
   g_return_if_fail (GTK_IS_IMAGE (image));
@@ -1642,7 +1641,7 @@ ensure_pixbuf_for_icon_name (GtkImage *image)
 
   g_return_if_fail (gtk_image_get_props (image)->storage_type == GTK_IMAGE_ICON_NAME);
 
-  priv = GTK_IMAGE_GET_PRIVATE (image);
+  priv = gtk_image_get_instance_private (image);
   screen = __gtk_widget_get_screen (GTK_WIDGET (image));
   icon_theme = __gtk_icon_theme_get_for_screen (screen);
   settings = __gtk_settings_get_for_screen (screen);
@@ -1725,7 +1724,7 @@ ensure_pixbuf_for_gicon (GtkImage *image)
 
   g_return_if_fail (gtk_image_get_props (image)->storage_type == GTK_IMAGE_GICON);
 
-  priv = GTK_IMAGE_GET_PRIVATE (image);
+  priv = gtk_image_get_instance_private (image);
   screen = __gtk_widget_get_screen (GTK_WIDGET (image));
   icon_theme = __gtk_icon_theme_get_for_screen (screen);
   settings = __gtk_settings_get_for_screen (screen);
@@ -1831,7 +1830,7 @@ gtk_image_expose (GtkWidget      *widget,
 
       image = GTK_IMAGE (widget);
       misc = GTK_MISC (widget);
-      priv = GTK_IMAGE_GET_PRIVATE (image);
+      priv = gtk_image_get_instance_private (image);
 
       area = event->area;
 
@@ -2129,7 +2128,7 @@ gtk_image_reset (GtkImage *image)
 {
   GtkImagePrivate *priv;
 
-  priv = GTK_IMAGE_GET_PRIVATE (image);
+  priv = gtk_image_get_instance_private (image);
 
   g_object_freeze_notify (G_OBJECT (image));
   
@@ -2264,7 +2263,7 @@ __gtk_image_clear (GtkImage *image)
 {
   GtkImagePrivate *priv;
 
-  priv = GTK_IMAGE_GET_PRIVATE (image);
+  priv = gtk_image_get_instance_private (image);
 
   priv->need_calc_size = 1;
 
@@ -2279,7 +2278,7 @@ gtk_image_calc_size (GtkImage *image)
   GdkPixbuf *pixbuf = NULL;
   GtkImagePrivate *priv;
 
-  priv = GTK_IMAGE_GET_PRIVATE (image);
+  priv = gtk_image_get_instance_private (image);
 
   priv->need_calc_size = 0;
 
@@ -2406,7 +2405,7 @@ __gtk_image_set_pixel_size (GtkImage *image,
 
   g_return_if_fail (GTK_IS_IMAGE (image));
   
-  priv = GTK_IMAGE_GET_PRIVATE (image);
+  priv = gtk_image_get_instance_private (image);
 
   if (priv->pixel_size != pixel_size)
     {
@@ -2455,7 +2454,7 @@ __gtk_image_get_pixel_size (GtkImage *image)
 
   g_return_val_if_fail (GTK_IS_IMAGE (image), -1);
   
-  priv = GTK_IMAGE_GET_PRIVATE (image);
+  priv = gtk_image_get_instance_private (image);
 
   return priv->pixel_size;
 }

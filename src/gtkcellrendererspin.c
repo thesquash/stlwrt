@@ -68,7 +68,8 @@ struct _GtkCellRendererSpinPrivate
 #define GTK_CELL_RENDERER_SPIN_PATH "gtk-cell-renderer-spin-path"
 
 STLWRT_DEFINE_FTYPE_VPARENT (GtkCellRendererSpin, gtk_cell_renderer_spin, GTK_TYPE_CELL_RENDERER_TEXT,
-                             G_TYPE_FLAG_NONE, ;)
+                             G_TYPE_FLAG_NONE,
+                             G_ADD_PRIVATE (GtkCellRendererSpin))
 
 
 static void
@@ -127,9 +128,7 @@ gtk_cell_renderer_spin_class_init (GtkCellRendererSpinClass *klass)
 						      P_("Digits"),
 						      P_("The number of decimal places to display"),
 						      0, 20, 0,
-						      GTK_PARAM_READWRITE));  
-
-  g_type_class_add_private (object_class, sizeof (GtkCellRendererSpinPrivate));
+						      GTK_PARAM_READWRITE));
 }
 
 static void
@@ -137,7 +136,7 @@ gtk_cell_renderer_spin_init (GtkCellRendererSpin *self)
 {
   GtkCellRendererSpinPrivate *priv;
 
-  priv = GTK_CELL_RENDERER_SPIN_GET_PRIVATE (self);
+  priv = gtk_cell_renderer_spin_get_instance_private (self);
 
   priv->adjustment = NULL;
   priv->climb_rate = 0.0;
@@ -149,7 +148,7 @@ gtk_cell_renderer_spin_finalize (GObject *object)
 {
   GtkCellRendererSpinPrivate *priv;
 
-  priv = GTK_CELL_RENDERER_SPIN_GET_PRIVATE (object);
+  priv = gtk_cell_renderer_spin_get_instance_private (object);
 
   if (priv && priv->adjustment)
     g_object_unref (priv->adjustment);
@@ -167,7 +166,7 @@ gtk_cell_renderer_spin_get_property (GObject      *object,
   GtkCellRendererSpinPrivate *priv;
 
   renderer = GTK_CELL_RENDERER_SPIN (object);
-  priv = GTK_CELL_RENDERER_SPIN_GET_PRIVATE (renderer);
+  priv = gtk_cell_renderer_spin_get_instance_private (renderer);
 
   switch (prop_id)
     {
@@ -197,7 +196,7 @@ gtk_cell_renderer_spin_set_property (GObject      *object,
   GObject *obj;
 
   renderer = GTK_CELL_RENDERER_SPIN (object);
-  priv = GTK_CELL_RENDERER_SPIN_GET_PRIVATE (renderer);
+  priv = gtk_cell_renderer_spin_get_instance_private (renderer);
 
   switch (prop_id)
     {
@@ -306,7 +305,7 @@ gtk_cell_renderer_spin_start_editing (GtkCellRenderer     *cell,
   GtkWidget *spin;
 
   cell_text = GTK_CELL_RENDERER_TEXT (cell);
-  priv = GTK_CELL_RENDERER_SPIN_GET_PRIVATE (cell);
+  priv = gtk_cell_renderer_spin_get_instance_private (cell);
 
   if (!gtk_cell_renderer_text_get_props (cell_text)->editable)
     return NULL;

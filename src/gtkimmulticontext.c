@@ -94,7 +94,8 @@ struct _GtkIMMulticontextPrivate
 };
 
 STLWRT_DEFINE_VTYPE (GtkIMMulticontext, gtk_im_multicontext, GTK_TYPE_IM_CONTEXT,
-                     G_TYPE_FLAG_NONE, ;)
+                     G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkIMMulticontext))
 
 static void
 gtk_im_multicontext_class_init (GtkIMMulticontextClass *class)
@@ -114,8 +115,6 @@ gtk_im_multicontext_class_init (GtkIMMulticontextClass *class)
   im_context_class->get_surrounding = gtk_im_multicontext_get_surrounding;
 
   gobject_class->finalize = gtk_im_multicontext_finalize;
-
-  g_type_class_add_private (gobject_class, sizeof (GtkIMMulticontextPrivate));   
 }
 
 static void

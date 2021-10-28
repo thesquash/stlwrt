@@ -286,12 +286,13 @@ STLWRT_DEFINE_FTYPE (GtkTreeModelFilter, gtk_tree_model_filter, G_TYPE_OBJECT, G
                      G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_MODEL,
                                             gtk_tree_model_filter_tree_model_init)
                      G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_DRAG_SOURCE,
-                                            gtk_tree_model_filter_drag_source_init))
+                                            gtk_tree_model_filter_drag_source_init)
+                     G_ADD_PRIVATE (GtkTreeModelFilter))
 
 static void
 gtk_tree_model_filter_init (GtkTreeModelFilter *filter)
 {
-  filter->priv = GTK_TREE_MODEL_FILTER_GET_PRIVATE (filter);
+  filter->priv = gtk_tree_model_filter_get_instance_private (filter);
 
   filter->priv->visible_column = -1;
   filter->priv->zero_ref_count = 0;
@@ -331,8 +332,6 @@ gtk_tree_model_filter_class_init (GtkTreeModelFilterClass *filter_class)
                                                        ("The virtual root (relative to the child model) for this filtermodel"),
                                                        GTK_TYPE_TREE_PATH,
                                                        GTK_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
-
-  g_type_class_add_private (object_class, sizeof (GtkTreeModelFilterPrivate));
 }
 
 static void

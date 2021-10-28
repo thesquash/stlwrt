@@ -36,24 +36,6 @@ G_BEGIN_DECLS
 
 typedef struct _GdkVisualClass    GdkVisualClass;
 
-/* Types of visuals.
- *   StaticGray:
- *   Grayscale:
- *   StaticColor:
- *   PseudoColor:
- *   TrueColor:
- *   DirectColor:
- */
-typedef enum 
-{
-  GDK_VISUAL_STATIC_GRAY,
-  GDK_VISUAL_GRAYSCALE,
-  GDK_VISUAL_STATIC_COLOR,
-  GDK_VISUAL_PSEUDO_COLOR,
-  GDK_VISUAL_TRUE_COLOR,
-  GDK_VISUAL_DIRECT_COLOR
-} GdkVisualType;
-
 /* The visual type.
  *   "type" is the type of visual this is (PseudoColor, TrueColor, etc).
  *   "depth" is the bit depth of this visual.

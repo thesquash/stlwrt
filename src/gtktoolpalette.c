@@ -182,7 +182,8 @@ struct _GtkToolPalettePrivate
 };
 
 STLWRT_DEFINE_FTYPE_VPARENT (GtkToolPalette, gtk_tool_palette, GTK_TYPE_CONTAINER, G_TYPE_FLAG_NONE,
-                             G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE, NULL))
+                             G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE, NULL)
+                             G_ADD_PRIVATE (GtkToolPalette))
 
 static void
 gtk_tool_palette_init (GtkToolPalette *palette)
@@ -1055,8 +1056,6 @@ gtk_tool_palette_class_init (GtkToolPaletteClass *cls)
                                                                     P_("Whether the item group should receive extra space when the palette grows"),
                                                                     DEFAULT_CHILD_EXPAND,
                                                                     GTK_PARAM_READWRITE));
-
-  g_type_class_add_private (cls, sizeof (GtkToolPalettePrivate));
 
   dnd_target_atom_item = __gdk_atom_intern_static_string (dnd_targets[0].target);
   dnd_target_atom_group = __gdk_atom_intern_static_string (dnd_targets[1].target);

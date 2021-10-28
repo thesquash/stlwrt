@@ -527,7 +527,8 @@ STLWRT_DEFINE_FTYPE_VPARENT (GtkComboBox, gtk_combo_box, GTK_TYPE_BIN, G_TYPE_FL
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_CELL_EDITABLE,
                                                     gtk_combo_box_cell_editable_init)
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-                                                    gtk_combo_box_buildable_init))
+                                                    gtk_combo_box_buildable_init)
+                             G_ADD_PRIVATE (GtkComboBox))
 
 
 /* common */
@@ -971,8 +972,6 @@ gtk_combo_box_class_init (GtkComboBoxClass *klass)
                                                               GTK_TYPE_SHADOW_TYPE,
                                                               GTK_SHADOW_NONE,
                                                               GTK_PARAM_READABLE));
-
-  g_type_class_add_private (object_class, sizeof (GtkComboBoxPrivate));
 }
 
 static void
@@ -1007,7 +1006,7 @@ gtk_combo_box_cell_editable_init (GtkCellEditableIface *iface)
 static void
 gtk_combo_box_init (GtkComboBox *combo_box)
 {
-  GtkComboBoxPrivate *priv = GTK_COMBO_BOX_GET_PRIVATE (combo_box);
+  GtkComboBoxPrivate *priv = gtk_combo_box_get_instance_private (combo_box);
 
   priv->cell_view = __gtk_cell_view_new ();
   __gtk_widget_set_parent (priv->cell_view, GTK_WIDGET (combo_box));
@@ -1136,7 +1135,7 @@ gtk_combo_box_get_property (GObject    *object,
                             GParamSpec *pspec)
 {
   GtkComboBox *combo_box = GTK_COMBO_BOX (object);
-  GtkComboBoxPrivate *priv = GTK_COMBO_BOX_GET_PRIVATE (combo_box);
+  GtkComboBoxPrivate *priv = gtk_combo_box_get_instance_private (combo_box);
 
   switch (prop_id)
     {

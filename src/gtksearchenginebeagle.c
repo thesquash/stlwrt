@@ -165,7 +165,8 @@ struct _GtkSearchEngineBeaglePrivate
 };
 
 STLWRT_DEFINE_FTYPE (GtkSearchEngineBeagle, _gtk_search_engine_beagle, GTK_TYPE_SEARCH_ENGINE,
-                     G_TYPE_FLAG_NONE, ;)
+                     G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkSearchEngineBeagle))
 
 static void
 finalize (GObject *object)
@@ -374,8 +375,6 @@ _gtk_search_engine_beagle_class_init (GtkSearchEngineBeagleClass *class)
   engine_class->start = gtk_search_engine_beagle_start;
   engine_class->stop = gtk_search_engine_beagle_stop;
   engine_class->is_indexed = gtk_search_engine_beagle_is_indexed;
-
-  g_type_class_add_private (gobject_class, sizeof (GtkSearchEngineBeaglePrivate));
 }
 
 static void

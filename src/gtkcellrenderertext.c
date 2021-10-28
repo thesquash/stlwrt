@@ -154,14 +154,15 @@ struct _GtkCellRendererTextPrivate
 };
 
 STLWRT_DEFINE_VTYPE (GtkCellRendererText, gtk_cell_renderer_text, GTK_TYPE_CELL_RENDERER,
-                     G_TYPE_FLAG_NONE, ;)
+                     G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkCellRendererText))
 
 static void
 gtk_cell_renderer_text_init (GtkCellRendererText *celltext)
 {
   GtkCellRendererTextPrivate *priv;
 
-  priv = GTK_CELL_RENDERER_TEXT_GET_PRIVATE (celltext);
+  priv = gtk_cell_renderer_text_get_instance_private (celltext);
 
   gtk_cell_renderer_get_props (GTK_CELL_RENDERER (celltext))->xalign = 0.0;
   gtk_cell_renderer_get_props (GTK_CELL_RENDERER (celltext))->yalign = 0.5;
@@ -587,8 +588,6 @@ gtk_cell_renderer_text_class_init (GtkCellRendererTextClass *class)
 		  G_TYPE_NONE, 2,
 		  G_TYPE_STRING,
 		  G_TYPE_STRING);
-
-  g_type_class_add_private (object_class, sizeof (GtkCellRendererTextPrivate));
 }
 
 static void
@@ -597,7 +596,7 @@ gtk_cell_renderer_text_finalize (GObject *object)
   GtkCellRendererText *celltext = GTK_CELL_RENDERER_TEXT (object);
   GtkCellRendererTextPrivate *priv;
 
-  priv = GTK_CELL_RENDERER_TEXT_GET_PRIVATE (object);
+  priv = gtk_cell_renderer_text_get_instance_private (object);
 
   pango_font_description_free (gtk_cell_renderer_text_get_props (celltext)->font);
 
@@ -643,7 +642,7 @@ gtk_cell_renderer_text_get_property (GObject        *object,
   GtkCellRendererText *celltext = GTK_CELL_RENDERER_TEXT (object);
   GtkCellRendererTextPrivate *priv;
 
-  priv = GTK_CELL_RENDERER_TEXT_GET_PRIVATE (object);
+  priv = gtk_cell_renderer_text_get_instance_private (object);
 
   switch (param_id)
     {
@@ -1012,7 +1011,7 @@ gtk_cell_renderer_text_set_property (GObject      *object,
   GtkCellRendererText *celltext = GTK_CELL_RENDERER_TEXT (object);
   GtkCellRendererTextPrivate *priv;
 
-  priv = GTK_CELL_RENDERER_TEXT_GET_PRIVATE (object);
+  priv = gtk_cell_renderer_text_get_instance_private (object);
 
   switch (param_id)
     {
@@ -1374,7 +1373,7 @@ get_layout (GtkCellRendererText *celltext,
   PangoUnderline uline;
   GtkCellRendererTextPrivate *priv;
 
-  priv = GTK_CELL_RENDERER_TEXT_GET_PRIVATE (celltext);
+  priv = gtk_cell_renderer_text_get_instance_private (celltext);
   
   layout = __gtk_widget_create_pango_layout (widget, gtk_cell_renderer_text_get_props (celltext)->text);
 
@@ -1497,7 +1496,7 @@ get_size (GtkCellRenderer *cell,
   PangoRectangle rect;
   GtkCellRendererTextPrivate *priv;
 
-  priv = GTK_CELL_RENDERER_TEXT_GET_PRIVATE (cell);
+  priv = gtk_cell_renderer_text_get_instance_private (cell);
 
   if (gtk_cell_renderer_text_get_props (celltext)->calc_fixed_height)
     {
@@ -1629,7 +1628,7 @@ gtk_cell_renderer_text_render (GtkCellRenderer      *cell,
   gint y_offset;
   GtkCellRendererTextPrivate *priv;
 
-  priv = GTK_CELL_RENDERER_TEXT_GET_PRIVATE (cell);
+  priv = gtk_cell_renderer_text_get_instance_private (cell);
 
   layout = get_layout (celltext, widget, TRUE, flags);
   get_size (cell, widget, cell_area, layout, &x_offset, &y_offset, NULL, NULL);
@@ -1708,7 +1707,7 @@ gtk_cell_renderer_text_editing_done (GtkCellEditable *entry,
   gboolean canceled;
   GtkCellRendererTextPrivate *priv;
 
-  priv = GTK_CELL_RENDERER_TEXT_GET_PRIVATE (data);
+  priv = gtk_cell_renderer_text_get_instance_private (data);
 
   priv->entry = NULL;
 
@@ -1749,7 +1748,7 @@ popdown_timeout (gpointer data)
 {
   GtkCellRendererTextPrivate *priv;
 
-  priv = GTK_CELL_RENDERER_TEXT_GET_PRIVATE (data);
+  priv = gtk_cell_renderer_text_get_instance_private (data);
 
   priv->entry_menu_popdown_timeout = 0;
 
@@ -1765,7 +1764,7 @@ gtk_cell_renderer_text_popup_unmap (GtkMenu *menu,
 {
   GtkCellRendererTextPrivate *priv;
 
-  priv = GTK_CELL_RENDERER_TEXT_GET_PRIVATE (data);
+  priv = gtk_cell_renderer_text_get_instance_private (data);
 
   priv->in_entry_menu = FALSE;
 
@@ -1783,7 +1782,7 @@ gtk_cell_renderer_text_populate_popup (GtkEntry *entry,
 {
   GtkCellRendererTextPrivate *priv;
 
-  priv = GTK_CELL_RENDERER_TEXT_GET_PRIVATE (data);
+  priv = gtk_cell_renderer_text_get_instance_private (data);
 
   if (priv->entry_menu_popdown_timeout)
     {
@@ -1804,7 +1803,7 @@ gtk_cell_renderer_text_focus_out_event (GtkWidget *entry,
 {
   GtkCellRendererTextPrivate *priv;
 
-  priv = GTK_CELL_RENDERER_TEXT_GET_PRIVATE (data);
+  priv = gtk_cell_renderer_text_get_instance_private (data);
 
   if (priv->in_entry_menu)
     return FALSE;
@@ -1833,7 +1832,7 @@ gtk_cell_renderer_text_start_editing (GtkCellRenderer      *cell,
   GtkCellRendererTextPrivate *priv;
 
   celltext = GTK_CELL_RENDERER_TEXT (cell);
-  priv = GTK_CELL_RENDERER_TEXT_GET_PRIVATE (cell);
+  priv = gtk_cell_renderer_text_get_instance_private (cell);
 
   /* If the cell isn't editable we return NULL. */
   if (gtk_cell_renderer_text_get_props (celltext)->editable == FALSE)

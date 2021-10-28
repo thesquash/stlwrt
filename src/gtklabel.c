@@ -305,7 +305,8 @@ static GQuark quark_angle = 0;
 static GtkBuildableIface *buildable_parent_iface = NULL;
 
 STLWRT_DEFINE_VTYPE (GtkLabel, gtk_label, GTK_TYPE_MISC, G_TYPE_FLAG_NONE,
-                     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE, gtk_label_buildable_interface_init))
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE, gtk_label_buildable_interface_init)
+                     G_ADD_PRIVATE (GtkLabel))
 
 static void
 add_move_binding (GtkBindingSet  *binding_set,
@@ -848,8 +849,6 @@ gtk_label_class_init (GtkLabelClass *class)
 				"activate-current-link", 0);
   __gtk_binding_entry_add_signal (binding_set, GDK_KP_Enter, 0,
 				"activate-current-link", 0);
-
-  g_type_class_add_private (class, sizeof (GtkLabelPrivate));
 }
 
 static void 
@@ -1011,7 +1010,7 @@ gtk_label_init (GtkLabel *label)
 
   __gtk_widget_set_has_window (GTK_WIDGET (label), FALSE);
 
-  priv = GTK_LABEL_GET_PRIVATE (label);
+  priv = gtk_label_get_instance_private (label);
   priv->width_chars = -1;
   priv->max_width_chars = -1;
   priv->wrap_width = -1;
@@ -1576,7 +1575,7 @@ mnemonics_visible_apply (GtkWidget *widget,
 
   label = GTK_LABEL (widget);
 
-  priv = GTK_LABEL_GET_PRIVATE (label);
+  priv = gtk_label_get_instance_private (label);
 
   mnemonics_visible = mnemonics_visible != FALSE;
 
@@ -2293,7 +2292,7 @@ __gtk_label_set_markup_internal (GtkLabel    *label,
                                const gchar *str,
                                gboolean     with_uline)
 {
-  GtkLabelPrivate *priv = GTK_LABEL_GET_PRIVATE (label);
+  GtkLabelPrivate *priv = gtk_label_get_instance_private (label);
   gchar *text = NULL;
   GError *error = NULL;
   PangoAttrList *attrs = NULL;
@@ -2508,7 +2507,7 @@ __gtk_label_set_pattern_internal (GtkLabel    *label,
 				const gchar *pattern,
                                 gboolean     is_mnemonic)
 {
-  GtkLabelPrivate *priv = GTK_LABEL_GET_PRIVATE (label);
+  GtkLabelPrivate *priv = gtk_label_get_instance_private (label);
   PangoAttrList *attrs;
   gboolean enable_mnemonics;
   gboolean auto_mnemonics;
@@ -2674,7 +2673,7 @@ __gtk_label_set_width_chars (GtkLabel *label,
 
   g_return_if_fail (GTK_IS_LABEL (label));
 
-  priv = GTK_LABEL_GET_PRIVATE (label);
+  priv = gtk_label_get_instance_private (label);
 
   if (priv->width_chars != n_chars)
     {
@@ -2701,7 +2700,7 @@ __gtk_label_get_width_chars (GtkLabel *label)
 {
   g_return_val_if_fail (GTK_IS_LABEL (label), -1);
 
-  return GTK_LABEL_GET_PRIVATE (label)->width_chars;
+  return gtk_label_get_instance_private (label)->width_chars;
 }
 
 /**
@@ -2721,7 +2720,7 @@ __gtk_label_set_max_width_chars (GtkLabel *label,
 
   g_return_if_fail (GTK_IS_LABEL (label));
 
-  priv = GTK_LABEL_GET_PRIVATE (label);
+  priv = gtk_label_get_instance_private (label);
 
   if (priv->max_width_chars != n_chars)
     {
@@ -2749,7 +2748,7 @@ __gtk_label_get_max_width_chars (GtkLabel *label)
 {
   g_return_val_if_fail (GTK_IS_LABEL (label), -1);
 
-  return GTK_LABEL_GET_PRIVATE (label)->max_width_chars;
+  return gtk_label_get_instance_private (label)->max_width_chars;
 }
 
 /**
@@ -2900,7 +2899,7 @@ get_label_char_width (GtkLabel *label)
   PangoFontMetrics *metrics;
   gint char_width, digit_width, char_pixels, w;
   
-  priv = GTK_LABEL_GET_PRIVATE (label);
+  priv = gtk_label_get_instance_private (label);
   
   context = pango_layout_get_context (gtk_label_get_props (label)->layout);
   metrics = pango_context_get_metrics (context, gtk_widget_get_props (GTK_WIDGET (label))->style->font_desc, 
@@ -2935,7 +2934,7 @@ gtk_label_invalidate_wrap_width (GtkLabel *label)
 {
   GtkLabelPrivate *priv;
 
-  priv = GTK_LABEL_GET_PRIVATE (label);
+  priv = gtk_label_get_instance_private (label);
 
   priv->wrap_width = -1;
 }
@@ -2945,7 +2944,7 @@ get_label_wrap_width (GtkLabel *label)
 {
   GtkLabelPrivate *priv;
 
-  priv = GTK_LABEL_GET_PRIVATE (label);
+  priv = gtk_label_get_instance_private (label);
   
   if (priv->wrap_width < 0)
     {
@@ -3120,7 +3119,7 @@ gtk_label_size_request (GtkWidget      *widget,
   PangoRectangle logical_rect;
   GtkWidgetAuxInfo *aux_info;
 
-  priv = GTK_LABEL_GET_PRIVATE (widget);
+  priv = gtk_label_get_instance_private (widget);
 
   /*  
    * If word wrapping is on, then the height requisition can depend
@@ -3323,7 +3322,7 @@ get_layout_location (GtkLabel  *label,
   
   misc = GTK_MISC (label);
   widget = GTK_WIDGET (label);
-  priv = GTK_LABEL_GET_PRIVATE (label);
+  priv = gtk_label_get_instance_private (label);
 
   if (__gtk_widget_get_direction (widget) == GTK_TEXT_DIR_LTR)
     xalign = gtk_misc_get_props (misc)->xalign;
@@ -4303,7 +4302,7 @@ gtk_label_button_release (GtkWidget      *widget,
 static void
 connect_mnemonics_visible_notify (GtkLabel *label)
 {
-  GtkLabelPrivate *priv = GTK_LABEL_GET_PRIVATE (label);
+  GtkLabelPrivate *priv = gtk_label_get_instance_private (label);
   GtkWidget *toplevel;
   gboolean connected;
 

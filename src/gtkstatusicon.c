@@ -159,7 +159,8 @@ static void     gtk_status_icon_disable_blinking (GtkStatusIcon  *status_icon);
 static void     gtk_status_icon_reset_image_data (GtkStatusIcon  *status_icon);
 static void     gtk_status_icon_update_image    (GtkStatusIcon *status_icon);
 
-STLWRT_DEFINE_FTYPE (GtkStatusIcon, gtk_status_icon, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_FTYPE (GtkStatusIcon, gtk_status_icon, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkStatusIcon))
 
 static void
 gtk_status_icon_class_init (GtkStatusIconClass *class)
@@ -601,8 +602,6 @@ gtk_status_icon_class_init (GtkStatusIconClass *class)
 		  G_TYPE_INT,
 		  G_TYPE_BOOLEAN,
 		  GTK_TYPE_TOOLTIP);
-
-  g_type_class_add_private (class, sizeof (GtkStatusIconPrivate));
 }
 
 #ifdef GDK_WINDOWING_WIN32

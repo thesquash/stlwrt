@@ -348,7 +348,8 @@ static void gtk_window_buildable_custom_finished (GtkBuildable  *buildable,
 
 STLWRT_DEFINE_VTYPE (GtkWindow, gtk_window, GTK_TYPE_BIN, G_TYPE_FLAG_NONE,
                      G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-                                            gtk_window_buildable_interface_init))
+                                            gtk_window_buildable_interface_init)
+                     G_ADD_PRIVATE (GtkWindow))
 
 static void
 add_tab_bindings (GtkBindingSet    *binding_set,
@@ -465,9 +466,7 @@ gtk_window_class_init (GtkWindowClass *klass)
   klass->activate_focus = gtk_window_real_activate_focus;
   klass->move_focus = __gtk_window_move_focus;
   klass->keys_changed = gtk_window_keys_changed;
-  
-  g_type_class_add_private (gobject_class, sizeof (GtkWindowPrivate));
-  
+
   /* Construct */
   g_object_class_install_property (gobject_class,
                                    PROP_TYPE,
@@ -905,7 +904,7 @@ static void
 gtk_window_init (GtkWindow *window)
 {
   GdkColormap *colormap;
-  GtkWindowPrivate *priv = GTK_WINDOW_GET_PRIVATE (window);
+  GtkWindowPrivate *priv = gtk_window_get_instance_private (window);
   
   __gtk_widget_set_has_window (GTK_WIDGET (window), TRUE);
   ___gtk_widget_set_is_toplevel (GTK_WIDGET (window), TRUE);
@@ -973,7 +972,7 @@ gtk_window_set_property (GObject      *object,
   
   window = GTK_WINDOW (object);
 
-  priv = GTK_WINDOW_GET_PRIVATE (window);
+  priv = gtk_window_get_instance_private (window);
 
   switch (prop_id)
     {
@@ -1090,7 +1089,7 @@ gtk_window_get_property (GObject      *object,
   GtkWindowPrivate *priv;
 
   window = GTK_WINDOW (object);
-  priv = GTK_WINDOW_GET_PRIVATE (window);
+  priv = gtk_window_get_instance_private (window);
   
   switch (prop_id)
     {
@@ -1214,7 +1213,7 @@ gtk_window_buildable_set_buildable_property (GtkBuildable        *buildable,
 					     const gchar         *name,
 					     const GValue        *value)
 {
-  GtkWindowPrivate *priv = GTK_WINDOW_GET_PRIVATE (buildable);
+  GtkWindowPrivate *priv = gtk_window_get_instance_private (buildable);
 
   if (strcmp (name, "visible") == 0 && g_value_get_boolean (value))
     priv->builder_visible = TRUE;
@@ -1226,7 +1225,7 @@ static void
 gtk_window_buildable_parser_finished (GtkBuildable *buildable,
 				      GtkBuilder   *builder)
 {
-  GtkWindowPrivate *priv = GTK_WINDOW_GET_PRIVATE (buildable);
+  GtkWindowPrivate *priv = gtk_window_get_instance_private (buildable);
   GObject *object;
   GSList *accels, *l;
 
@@ -1521,7 +1520,7 @@ __gtk_window_set_startup_id (GtkWindow   *window,
 
   g_return_if_fail (GTK_IS_WINDOW (window));
 
-  priv = GTK_WINDOW_GET_PRIVATE (window);
+  priv = gtk_window_get_instance_private (window);
   
   g_free (priv->startup_id);
   priv->startup_id = g_strdup (startup_id);
@@ -1811,7 +1810,7 @@ static GtkMnemonicHash *
 gtk_window_get_mnemonic_hash (GtkWindow *window,
 			      gboolean   create)
 {
-  GtkWindowPrivate *private = GTK_WINDOW_GET_PRIVATE (window);
+  GtkWindowPrivate *private = gtk_window_get_instance_private (window);
   if (!private->mnemonic_hash && create)
     private->mnemonic_hash = _gtk_mnemonic_hash_new ();
   
@@ -2235,7 +2234,7 @@ gtk_window_transient_parent_screen_changed (GtkWindow	*parent,
 static void       
 gtk_window_unset_transient_for  (GtkWindow *window)
 {
-  GtkWindowPrivate *priv = GTK_WINDOW_GET_PRIVATE (window);
+  GtkWindowPrivate *priv = gtk_window_get_instance_private (window);
   
   if (gtk_window_get_props (window)->transient_parent)
     {
@@ -2294,7 +2293,7 @@ __gtk_window_set_transient_for  (GtkWindow *window,
   g_return_if_fail (parent == NULL || GTK_IS_WINDOW (parent));
   g_return_if_fail (window != parent);
 
-  priv = GTK_WINDOW_GET_PRIVATE (window);
+  priv = gtk_window_get_instance_private (window);
 
   if (gtk_window_get_props (window)->transient_parent)
     {
@@ -2385,7 +2384,7 @@ __gtk_window_set_opacity  (GtkWindow *window,
   
   g_return_if_fail (GTK_IS_WINDOW (window));
 
-  priv = GTK_WINDOW_GET_PRIVATE (window); 
+  priv = gtk_window_get_instance_private (window); 
 
   if (opacity < 0.0)
     opacity = 0.0;
@@ -2417,7 +2416,7 @@ __gtk_window_get_opacity (GtkWindow *window)
   
   g_return_val_if_fail (GTK_IS_WINDOW (window), 0.0);
 
-  priv = GTK_WINDOW_GET_PRIVATE (window); 
+  priv = gtk_window_get_instance_private (window); 
 
   return priv->opacity;
 }
@@ -2446,7 +2445,7 @@ __gtk_window_set_type_hint (GtkWindow           *window,
   g_return_if_fail (GTK_IS_WINDOW (window));
   g_return_if_fail (!__gtk_widget_get_mapped (GTK_WIDGET (window)));
 
-  priv = GTK_WINDOW_GET_PRIVATE (window);
+  priv = gtk_window_get_instance_private (window);
 
   if (hint < GDK_WINDOW_TYPE_HINT_DROPDOWN_MENU)
     gtk_window_get_props (window)->type_hint = hint;
@@ -2472,7 +2471,7 @@ gtk_window_get_type_hint (GtkWindow *window)
   
   g_return_val_if_fail (GTK_IS_WINDOW (window), GDK_WINDOW_TYPE_HINT_NORMAL);
 
-  priv = GTK_WINDOW_GET_PRIVATE (window);
+  priv = gtk_window_get_instance_private (window);
   
   return priv->type_hint;
 }
@@ -2495,7 +2494,7 @@ __gtk_window_set_skip_taskbar_hint (GtkWindow *window,
 
   g_return_if_fail (GTK_IS_WINDOW (window));
   
-  priv = GTK_WINDOW_GET_PRIVATE (window);
+  priv = gtk_window_get_instance_private (window);
 
   setting = setting != FALSE;
 
@@ -2526,7 +2525,7 @@ __gtk_window_get_skip_taskbar_hint (GtkWindow *window)
 
   g_return_val_if_fail (GTK_IS_WINDOW (window), FALSE);
   
-  priv = GTK_WINDOW_GET_PRIVATE (window);
+  priv = gtk_window_get_instance_private (window);
 
   return priv->skips_taskbar;
 }
@@ -2552,7 +2551,7 @@ __gtk_window_set_skip_pager_hint (GtkWindow *window,
 
   g_return_if_fail (GTK_IS_WINDOW (window));
   
-  priv = GTK_WINDOW_GET_PRIVATE (window);
+  priv = gtk_window_get_instance_private (window);
 
   setting = setting != FALSE;
 
@@ -2583,7 +2582,7 @@ __gtk_window_get_skip_pager_hint (GtkWindow *window)
 
   g_return_val_if_fail (GTK_IS_WINDOW (window), FALSE);
   
-  priv = GTK_WINDOW_GET_PRIVATE (window);
+  priv = gtk_window_get_instance_private (window);
 
   return priv->skips_pager;
 }
@@ -2606,7 +2605,7 @@ __gtk_window_set_urgency_hint (GtkWindow *window,
 
   g_return_if_fail (GTK_IS_WINDOW (window));
   
-  priv = GTK_WINDOW_GET_PRIVATE (window);
+  priv = gtk_window_get_instance_private (window);
 
   setting = setting != FALSE;
 
@@ -2637,7 +2636,7 @@ __gtk_window_get_urgency_hint (GtkWindow *window)
 
   g_return_val_if_fail (GTK_IS_WINDOW (window), FALSE);
   
-  priv = GTK_WINDOW_GET_PRIVATE (window);
+  priv = gtk_window_get_instance_private (window);
 
   return priv->urgent;
 }
@@ -2660,7 +2659,7 @@ __gtk_window_set_accept_focus (GtkWindow *window,
 
   g_return_if_fail (GTK_IS_WINDOW (window));
   
-  priv = GTK_WINDOW_GET_PRIVATE (window);
+  priv = gtk_window_get_instance_private (window);
 
   setting = setting != FALSE;
 
@@ -2691,7 +2690,7 @@ __gtk_window_get_accept_focus (GtkWindow *window)
 
   g_return_val_if_fail (GTK_IS_WINDOW (window), FALSE);
   
-  priv = GTK_WINDOW_GET_PRIVATE (window);
+  priv = gtk_window_get_instance_private (window);
 
   return priv->accept_focus;
 }
@@ -2715,7 +2714,7 @@ __gtk_window_set_focus_on_map (GtkWindow *window,
 
   g_return_if_fail (GTK_IS_WINDOW (window));
   
-  priv = GTK_WINDOW_GET_PRIVATE (window);
+  priv = gtk_window_get_instance_private (window);
 
   setting = setting != FALSE;
 
@@ -2747,7 +2746,7 @@ __gtk_window_get_focus_on_map (GtkWindow *window)
 
   g_return_val_if_fail (GTK_IS_WINDOW (window), FALSE);
   
-  priv = GTK_WINDOW_GET_PRIVATE (window);
+  priv = gtk_window_get_instance_private (window);
 
   return priv->focus_on_map;
 }
@@ -2972,7 +2971,7 @@ __gtk_window_set_deletable (GtkWindow *window,
 
   g_return_if_fail (GTK_IS_WINDOW (window));
 
-  priv = GTK_WINDOW_GET_PRIVATE (window);
+  priv = gtk_window_get_instance_private (window);
 
   setting = setting != FALSE;
 
@@ -3012,7 +3011,7 @@ __gtk_window_get_deletable (GtkWindow *window)
 
   g_return_val_if_fail (GTK_IS_WINDOW (window), TRUE);
 
-  priv = GTK_WINDOW_GET_PRIVATE (window);
+  priv = gtk_window_get_instance_private (window);
 
   return priv->deletable;
 }
@@ -4403,7 +4402,7 @@ static void
 gtk_window_finalize (GObject *object)
 {
   GtkWindow *window = GTK_WINDOW (object);
-  GtkWindowPrivate *priv = GTK_WINDOW_GET_PRIVATE (window);
+  GtkWindowPrivate *priv = gtk_window_get_instance_private (window);
   GtkMnemonicHash *mnemonic_hash;
 
   g_free (gtk_window_get_props (window)->title);
@@ -4533,7 +4532,7 @@ static void
 gtk_window_map (GtkWidget *widget)
 {
   GtkWindow *window = GTK_WINDOW (widget);
-  GtkWindowPrivate *priv = GTK_WINDOW_GET_PRIVATE (window);
+  GtkWindowPrivate *priv = gtk_window_get_instance_private (window);
   GdkWindow *toplevel;
   gboolean auto_mnemonics;
 
@@ -4643,7 +4642,7 @@ static void
 gtk_window_unmap (GtkWidget *widget)
 {
   GtkWindow *window = GTK_WINDOW (widget);
-  GtkWindowPrivate *priv = GTK_WINDOW_GET_PRIVATE (widget);
+  GtkWindowPrivate *priv = gtk_window_get_instance_private (widget);
   GtkWindowGeometryInfo *info;    
   GdkWindowState state;
 
@@ -4687,7 +4686,7 @@ gtk_window_realize (GtkWidget *widget)
   GtkWindowPrivate *priv;
   
   window = GTK_WINDOW (widget);
-  priv = GTK_WINDOW_GET_PRIVATE (window);
+  priv = gtk_window_get_instance_private (window);
 
   /* ensure widget tree is properly size allocated */
   if (gtk_widget_get_props (widget)->allocation.x == -1 &&
@@ -7025,7 +7024,7 @@ __gtk_window_fullscreen (GtkWindow *window)
   g_return_if_fail (GTK_IS_WINDOW (window));
 
   widget = GTK_WIDGET (window);
-  priv = GTK_WINDOW_GET_PRIVATE (window);
+  priv = gtk_window_get_instance_private (window);
   
   priv->fullscreen_initially = TRUE;
 
@@ -7065,7 +7064,7 @@ __gtk_window_unfullscreen (GtkWindow *window)
   g_return_if_fail (GTK_IS_WINDOW (window));
 
   widget = GTK_WIDGET (window);
-  priv = GTK_WINDOW_GET_PRIVATE (window);
+  priv = gtk_window_get_instance_private (window);
   
   priv->fullscreen_initially = FALSE;
 
@@ -7117,7 +7116,7 @@ __gtk_window_set_keep_above (GtkWindow *window,
   g_return_if_fail (GTK_IS_WINDOW (window));
 
   widget = GTK_WIDGET (window);
-  priv = GTK_WINDOW_GET_PRIVATE (window);
+  priv = gtk_window_get_instance_private (window);
 
   priv->above_initially = setting != FALSE;
   if (setting)
@@ -7171,7 +7170,7 @@ __gtk_window_set_keep_below (GtkWindow *window,
   g_return_if_fail (GTK_IS_WINDOW (window));
 
   widget = GTK_WIDGET (window);
-  priv = GTK_WINDOW_GET_PRIVATE (window);
+  priv = gtk_window_get_instance_private (window);
 
   priv->below_initially = setting != FALSE;
   if (setting)
@@ -8464,7 +8463,7 @@ __gtk_window_get_mnemonics_visible (GtkWindow *window)
 
   g_return_val_if_fail (GTK_IS_WINDOW (window), FALSE);
 
-  priv = GTK_WINDOW_GET_PRIVATE (window);
+  priv = gtk_window_get_instance_private (window);
 
   return priv->mnemonics_visible;
 }
@@ -8486,7 +8485,7 @@ __gtk_window_set_mnemonics_visible (GtkWindow *window,
 
   g_return_if_fail (GTK_IS_WINDOW (window));
 
-  priv = GTK_WINDOW_GET_PRIVATE (window);
+  priv = gtk_window_get_instance_private (window);
 
   setting = setting != FALSE;
 

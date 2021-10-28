@@ -53,7 +53,8 @@ enum {
   PROP_ACTIVE
 };
 
-STLWRT_DEFINE_FTYPE (GtkToggleAction, gtk_toggle_action, GTK_TYPE_ACTION, G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_FTYPE (GtkToggleAction, gtk_toggle_action, GTK_TYPE_ACTION, G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkToggleAction))
 
 static void gtk_toggle_action_activate     (GtkAction       *action);
 static void set_property                   (GObject         *object,
@@ -131,14 +132,12 @@ gtk_toggle_action_class_init (GtkToggleActionClass *klass)
 		  NULL, NULL,
                   g_cclosure_marshal_VOID__VOID,
                   G_TYPE_NONE, 0);
-
-  g_type_class_add_private (gobject_class, sizeof (GtkToggleActionPrivate));
 }
 
 static void
 gtk_toggle_action_init (GtkToggleAction *action)
 {
-  action->private_data = GTK_TOGGLE_ACTION_GET_PRIVATE (action);
+  action->private_data = gtk_toggle_action_get_instance_private (action);
   action->private_data->active = FALSE;
   action->private_data->draw_as_radio = FALSE;
 }

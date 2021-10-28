@@ -68,7 +68,8 @@ static void gdk_image_finalize    (GObject       *object);
 
 #define PRIVATE_DATA(image) ((GdkImagePrivateX11 *) GDK_IMAGE (image)->windowing_data)
 
-STLWRT_DEFINE_TYPE (GdkImage, gdk_image, G_TYPE_OBJECT)
+STLWRT_DEFINE_FTYPE (GdkImage, gdk_image, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GdkImage))
 
 static void
 gdk_image_init (GdkImage *image)
@@ -84,8 +85,6 @@ gdk_image_class_init (GdkImageClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->finalize = gdk_image_finalize;
-
-  g_type_class_add_private (object_class, sizeof (GdkImagePrivateX11));
 }
 
 static void

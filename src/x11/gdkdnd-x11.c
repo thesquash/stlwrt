@@ -151,7 +151,8 @@ static const struct {
   { "XdndDrop",     xdnd_drop_filter },
 };
 	      
-STLWRT_DEFINE_TYPE (GdkDragContext, gdk_drag_context, G_TYPE_OBJECT)
+STLWRT_DEFINE_FTYPE (GdkDragContext, gdk_drag_context, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GdkDragContext))
 
 static void
 gdk_drag_context_init (GdkDragContext *dragcontext)
@@ -173,8 +174,6 @@ gdk_drag_context_class_init (GdkDragContextClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->finalize = gdk_drag_context_finalize;
-
-  g_type_class_add_private (object_class, sizeof (GdkDragContextPrivateX11));
 }
 
 static void

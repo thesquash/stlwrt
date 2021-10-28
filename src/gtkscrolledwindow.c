@@ -146,7 +146,8 @@ static void  gtk_scrolled_window_update_real_placement (GtkScrolledWindow *scrol
 
 static guint signals[LAST_SIGNAL] = {0};
 
-STLWRT_DEFINE_VTYPE (GtkScrolledWindow, gtk_scrolled_window, GTK_TYPE_BIN, G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_VTYPE (GtkScrolledWindow, gtk_scrolled_window, GTK_TYPE_BIN, G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkScrolledWindow))
 
 static void
 add_scroll_binding (GtkBindingSet  *binding_set,
@@ -350,8 +351,6 @@ gtk_scrolled_window_class_init (GtkScrolledWindowClass *class)
 
   add_tab_bindings (binding_set, GDK_CONTROL_MASK, GTK_DIR_TAB_FORWARD);
   add_tab_bindings (binding_set, GDK_CONTROL_MASK | GDK_SHIFT_MASK, GTK_DIR_TAB_BACKWARD);
-
-  g_type_class_add_private (class, sizeof (GtkScrolledWindowPrivate));
 }
 
 static void
@@ -670,7 +669,7 @@ __gtk_scrolled_window_get_policy (GtkScrolledWindow *scrolled_window,
 static void
 gtk_scrolled_window_update_real_placement (GtkScrolledWindow *scrolled_window)
 {
-  GtkScrolledWindowPrivate *priv = GTK_SCROLLED_WINDOW_GET_PRIVATE (scrolled_window);
+  GtkScrolledWindowPrivate *priv = gtk_scrolled_window_get_instance_private (scrolled_window);
   GtkSettings *settings;
 
   settings = __gtk_widget_get_settings (GTK_WIDGET (scrolled_window));
@@ -704,7 +703,7 @@ __gtk_scrolled_window_set_placement_set (GtkScrolledWindow *scrolled_window,
 				       gboolean           placement_set,
 				       gboolean           emit_resize)
 {
-  GtkScrolledWindowPrivate *priv = GTK_SCROLLED_WINDOW_GET_PRIVATE (scrolled_window);
+  GtkScrolledWindowPrivate *priv = gtk_scrolled_window_get_instance_private (scrolled_window);
 
   if (priv->window_placement_set != placement_set)
     {
@@ -780,7 +779,7 @@ __gtk_scrolled_window_get_placement (GtkScrolledWindow *scrolled_window)
 void
 __gtk_scrolled_window_unset_placement (GtkScrolledWindow *scrolled_window)
 {
-  GtkScrolledWindowPrivate *priv = GTK_SCROLLED_WINDOW_GET_PRIVATE (scrolled_window);
+  GtkScrolledWindowPrivate *priv = gtk_scrolled_window_get_instance_private (scrolled_window);
 
   g_return_if_fail (GTK_IS_SCROLLED_WINDOW (scrolled_window));
 
@@ -894,7 +893,7 @@ gtk_scrolled_window_get_property (GObject    *object,
 				  GParamSpec *pspec)
 {
   GtkScrolledWindow *scrolled_window = GTK_SCROLLED_WINDOW (object);
-  GtkScrolledWindowPrivate *priv = GTK_SCROLLED_WINDOW_GET_PRIVATE (scrolled_window);
+  GtkScrolledWindowPrivate *priv = gtk_scrolled_window_get_instance_private (scrolled_window);
   
   switch (prop_id)
     {
@@ -1300,7 +1299,7 @@ gtk_scrolled_window_relative_allocation (GtkWidget     *widget,
   scrolled_window = GTK_SCROLLED_WINDOW (widget);
   scrollbar_spacing = ___gtk_scrolled_window_get_scrollbar_spacing (scrolled_window);
 
-  priv = GTK_SCROLLED_WINDOW_GET_PRIVATE (scrolled_window);
+  priv = gtk_scrolled_window_get_instance_private (scrolled_window);
 
   allocation->x = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
   allocation->y = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
@@ -1368,7 +1367,7 @@ gtk_scrolled_window_size_allocate (GtkWidget     *widget,
   scrollbar_spacing = ___gtk_scrolled_window_get_scrollbar_spacing (scrolled_window);
   __gtk_widget_style_get (widget, "scrollbars-within-bevel", &scrollbars_within_bevel, NULL);
 
-  priv = GTK_SCROLLED_WINDOW_GET_PRIVATE (scrolled_window);
+  priv = gtk_scrolled_window_get_instance_private (scrolled_window);
 
   gtk_widget_get_props (widget)->allocation = *allocation;
 

@@ -15,43 +15,45 @@ making and have made, and I hope we may be able to collaborate somehow.
 
 ## What's new?
 
-Progress has been slow since the mid-to-late fall, as anybody who reads the
-commit logs can see.  The stuff I've been doing lately is STLWRT-ization of
-the roughly 260 source files.  Specifically, all STLWRT objects need to stop
-using object instance structures directly and need to go through at least one
-generated function.  As an example, the following hypothetical function
-which packs a widget inside of a GtkDialog:
+I've been tied up with other issues for the past few months, so (humiliatingly)
+I haven't been keeping this repo up-to-date very much, and I haven't put in too
+much development time into STLWRT.  However, now I'm finally returning to a
+coding spree here.
 
-        void
-        gtk_dialog_really_stupid_function (GtkDialog *dialog, GtkWidget *child)
-        {
-          g_return_if_fail (GTK_IS_DIALOG (dialog));
-          g_return_if_fail (GTK_IS_WIDGET (child));
-        
-          gtk_container_add (GTK_CONTAINER (dialog->vbox), child);
-        }
+The latest is I've been reducing the warning and error count -- as usual.  I've
+done this most recently by removing old code for GObject per-instance private
+data, and have (mostly) implemented STLWRT so that it uses the new private data
+mechanism provided by GObject.  I trimmed the compiler error list from 1.7 MB
+to 1.2 MB, which isn't bad.  Yes, it would be better if it **just compiled now**
+and you all *didn't have to keep waiting*, but life gets in the way...
 
-...needs to become:
+If you want to take a shot at compiling it yourself, clone this Git repo, then
+`cd` into the parent directory of the repo:
 
-        void
-        gtk_dialog_really_stupid_function (GtkDialog *dialog, GtkWidget *child)
-        {
-          GtkDialogProps *dialog_props;
-        
-          g_return_if_fail (GTK_IS_DIALOG (dialog));
-          g_return_if_fail (GTK_IS_WIDGET (child));
-        
-          dialog_props = gtk_dialog_get_props (dialog);
-        
-          gtk_container_add (GTK_CONTAINER (dialog_props->vbox), child);
-        }
+```
+~/stlwrt $ git clone https://github.com/thesquash/stlwrt
+~/stlwrt $ ls
+stlwrt
+~/stlwrt $
+```
 
-Of course, many functions are a lot longer than this, so the `dialog_props` can
-be used multiple times in the same function, or maybe even shared between local
-functions which have no need for ABI compatibility.  `src/gtkbbox.c` is an
-example of a coding nightmare, something which was allowed to collect a lot of
-bad coding practices over time.  A cursory look at GTK+ 1.0.0 source code
-reveals that GtkButtonBox existed even back then in 1998, when GTK worked much
-differently than it does now.  So in short, there are some files which are hard
-to convert because they're full of inconsistencies, such as inconsistent
-variable naming schemes.
+In this case, you're already in the parent, so there's no need to `cd`.
+
+Now, create a directory called `include`, and create two empty, stub files
+underneath the new `include` directory (as follows).  These files will
+eventually be filled with useful values when I get the build system working.
+
+```
+~/stlwrt $ mkdir include
+~/stlwrt $ touch include/config.h
+~/stlwrt $ touch include/gdkconfig.h
+```
+
+Let's compile it now.  This is the command I use to compile STLWRT so that I
+know how many errors and warnings I need to deal with:
+
+```
+~/stlwrt $ cc -Wall -pipe -o libstlwrt.so -fPIC -shared -Iinclude -Istlwrt/include -Istlwrt/include/x11 $(pkg-config --cflags --libs glib-2.0 pango cairo atk gdk-pixbuf-2.0) -DSTLWRT_COMPILATION -DGETTEXT_PACKAGE='"stlwrt"' stlwrt/src/*.c 2>error_dump.log
+```
+
+You can now view the error dump under the file `~/stlwrt/error_dump.log`.

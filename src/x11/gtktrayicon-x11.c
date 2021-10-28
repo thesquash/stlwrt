@@ -89,7 +89,8 @@ static GdkFilterReturn gtk_tray_icon_manager_filter (GdkXEvent *xevent,
 						     gpointer   user_data);
 
 
-G_DEFINE_TYPE (GtkTrayIcon, gtk_tray_icon, GTK_TYPE_PLUG)
+G_DEFINE_FTYPE (GtkTrayIcon, gtk_tray_icon, GTK_TYPE_PLUG, G_TYPE_FLAG_NONE,
+                G_ADD_PRIVATE (GtkTrayIcon))
 
 static void
 gtk_tray_icon_class_init (GtkTrayIconClass *class)
@@ -114,8 +115,6 @@ gtk_tray_icon_class_init (GtkTrayIconClass *class)
 						      GTK_TYPE_ORIENTATION,
 						      GTK_ORIENTATION_HORIZONTAL,
 						      GTK_PARAM_READABLE));
-
-  g_type_class_add_private (class, sizeof (GtkTrayIconPrivate));
 }
 
 static void

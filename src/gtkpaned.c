@@ -155,7 +155,8 @@ struct _GtkPanedPrivate
 };
 
 STLWRT_DEFINE_VTYPE (GtkPaned, gtk_paned, GTK_TYPE_CONTAINER, G_TYPE_FLAG_NONE,
-                     G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE, NULL))
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE, NULL)
+                     G_ADD_PRIVATE (GtkPaned))
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
@@ -543,8 +544,6 @@ gtk_paned_class_init (GtkPanedClass *class)
   add_move_binding (binding_set, GDK_KP_Home, 0, GTK_SCROLL_START);
   add_move_binding (binding_set, GDK_End, 0, GTK_SCROLL_END);
   add_move_binding (binding_set, GDK_KP_End, 0, GTK_SCROLL_END);
-
-  g_type_class_add_private (object_class, sizeof (GtkPanedPrivate));
 }
 
 static GType

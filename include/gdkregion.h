@@ -156,30 +156,6 @@ typedef struct _POINTBLOCK {
 } POINTBLOCK;
 
 #ifndef GDK_DISABLE_DEPRECATED
-/* GC fill rule for polygons
- *  EvenOddRule
- *  WindingRule
- */
-typedef enum 
-{
-  GDK_EVEN_ODD_RULE,
-  GDK_WINDING_RULE
-} GdkFillRule;
-#endif
-
-/* Types of overlapping between a rectangle and a region
- * GDK_OVERLAP_RECTANGLE_IN: rectangle is in region
- * GDK_OVERLAP_RECTANGLE_OUT: rectangle in not in region
- * GDK_OVERLAP_RECTANGLE_PART: rectangle in partially in region
- */
-typedef enum 
-{
-  GDK_OVERLAP_RECTANGLE_IN,
-  GDK_OVERLAP_RECTANGLE_OUT,
-  GDK_OVERLAP_RECTANGLE_PART
-} GdkOverlapType;
-
-#ifndef GDK_DISABLE_DEPRECATED
 typedef void (* GdkSpanFunc) (GdkSpan *span,
                               gpointer data);
 #endif

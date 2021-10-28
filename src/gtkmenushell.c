@@ -203,7 +203,8 @@ static gboolean gtk_menu_shell_real_move_selected (GtkMenuShell  *menu_shell,
 
 static guint menu_shell_signals[LAST_SIGNAL] = { 0 };
 
-STLWRT_DEFINE_VTYPE (GtkMenuShell, gtk_menu_shell, GTK_TYPE_CONTAINER, G_TYPE_FLAG_ABSTRACT, ;)
+STLWRT_DEFINE_VTYPE (GtkMenuShell, gtk_menu_shell, GTK_TYPE_CONTAINER, G_TYPE_FLAG_ABSTRACT,
+                     G_ADD_PRIVATE (GtkMenuShell))
 
 static void
 gtk_menu_shell_class_init (GtkMenuShellClass *klass)
@@ -403,8 +404,6 @@ gtk_menu_shell_class_init (GtkMenuShellClass *klass)
 							 P_("A boolean that determines whether the menu grabs the keyboard focus"),
 							 TRUE,
 							 GTK_PARAM_READWRITE));
-
-  g_type_class_add_private (object_class, sizeof (GtkMenuShellPrivate));
 }
 
 static GType
@@ -416,7 +415,7 @@ gtk_menu_shell_child_type (GtkContainer     *container)
 static void
 gtk_menu_shell_init (GtkMenuShell *menu_shell)
 {
-  GtkMenuShellPrivate *priv = GTK_MENU_SHELL_GET_PRIVATE (menu_shell);
+  GtkMenuShellPrivate *priv = gtk_menu_shell_get_instance_private (menu_shell);
 
   gtk_menu_shell_get_props (menu_shell)->children = NULL;
   gtk_menu_shell_get_props (menu_shell)->active_menu_item = NULL;
@@ -475,7 +474,7 @@ static void
 gtk_menu_shell_finalize (GObject *object)
 {
   GtkMenuShell *menu_shell = GTK_MENU_SHELL (object);
-  GtkMenuShellPrivate *priv = GTK_MENU_SHELL_GET_PRIVATE (menu_shell);
+  GtkMenuShellPrivate *priv = gtk_menu_shell_get_instance_private (menu_shell);
 
   if (priv->mnemonic_hash)
     _gtk_mnemonic_hash_free (priv->mnemonic_hash);
@@ -640,7 +639,7 @@ gtk_menu_shell_button_press (GtkWidget      *widget,
 
       ___gtk_menu_item_popup_submenu (menu_item, FALSE);
 
-      priv = GTK_MENU_SHELL_GET_PRIVATE (gtk_widget_get_props (menu_item)->parent);
+      priv = gtk_menu_shell_get_instance_private (gtk_widget_get_props (menu_item)->parent);
       priv->activated_submenu = TRUE;
     }
 
@@ -672,7 +671,7 @@ gtk_menu_shell_button_release (GtkWidget      *widget,
 			       GdkEventButton *event)
 {
   GtkMenuShell *menu_shell = GTK_MENU_SHELL (widget);
-  GtkMenuShellPrivate *priv = GTK_MENU_SHELL_GET_PRIVATE (widget);
+  GtkMenuShellPrivate *priv = gtk_menu_shell_get_instance_private (widget);
 
   if (gtk_menu_shell_get_props (menu_shell)->active)
     {
@@ -827,7 +826,7 @@ ___gtk_menu_shell_update_mnemonics (GtkMenuShell *menu_shell)
   found = FALSE;
   while (target)
     {
-      GtkMenuShellPrivate *priv = GTK_MENU_SHELL_GET_PRIVATE (target);
+      GtkMenuShellPrivate *priv = gtk_menu_shell_get_instance_private (target);
       GtkWidget *toplevel = __gtk_widget_get_toplevel (GTK_WIDGET (target));
 
       /* The idea with keyboard mode is that once you start using
@@ -876,7 +875,7 @@ gtk_menu_shell_key_press (GtkWidget   *widget,
 			  GdkEventKey *event)
 {
   GtkMenuShell *menu_shell = GTK_MENU_SHELL (widget);
-  GtkMenuShellPrivate *priv = GTK_MENU_SHELL_GET_PRIVATE (menu_shell);
+  GtkMenuShellPrivate *priv = gtk_menu_shell_get_instance_private (menu_shell);
   gboolean enable_mnemonics;
 
   gtk_menu_shell_get_props (menu_shell)->keyboard_mode = TRUE;
@@ -922,7 +921,7 @@ gtk_menu_shell_enter_notify (GtkWidget        *widget,
         {
           GtkMenuShellPrivate *priv;
 
-          priv = GTK_MENU_SHELL_GET_PRIVATE (menu_shell);
+          priv = gtk_menu_shell_get_instance_private (menu_shell);
           priv->in_unselectable_item = TRUE;
 
           return TRUE;
@@ -952,7 +951,7 @@ gtk_menu_shell_enter_notify (GtkWidget        *widget,
                 {
                   GtkMenuShellPrivate *priv;
 
-                  priv = GTK_MENU_SHELL_GET_PRIVATE (gtk_widget_get_props (menu_item)->parent);
+                  priv = gtk_menu_shell_get_instance_private (gtk_widget_get_props (menu_item)->parent);
                   priv->activated_submenu = TRUE;
 
                   if (!__gtk_widget_get_visible (gtk_menu_item_get_props (GTK_MENU_ITEM (menu_item))->submenu))
@@ -1002,7 +1001,7 @@ gtk_menu_shell_leave_notify (GtkWidget        *widget,
         {
           GtkMenuShellPrivate *priv;
 
-          priv = GTK_MENU_SHELL_GET_PRIVATE (menu_shell);
+          priv = gtk_menu_shell_get_instance_private (menu_shell);
           priv->in_unselectable_item = TRUE;
 
           return TRUE;
@@ -1194,7 +1193,7 @@ gtk_menu_shell_real_select_item (GtkMenuShell *menu_shell,
 
   if (!___gtk_menu_item_is_selectable (menu_item))
     {
-      GtkMenuShellPrivate *priv = GTK_MENU_SHELL_GET_PRIVATE (menu_shell);
+      GtkMenuShellPrivate *priv = gtk_menu_shell_get_instance_private (menu_shell);
 
       priv->in_unselectable_item = TRUE;
       ___gtk_menu_shell_update_mnemonics (menu_shell);
@@ -1449,7 +1448,7 @@ static void
 gtk_real_menu_shell_move_current (GtkMenuShell         *menu_shell,
 				  GtkMenuDirectionType  direction)
 {
-  GtkMenuShellPrivate *priv = GTK_MENU_SHELL_GET_PRIVATE (menu_shell);
+  GtkMenuShellPrivate *priv = gtk_menu_shell_get_instance_private (menu_shell);
   GtkMenuShell *parent_menu_shell = NULL;
   gboolean had_selection;
   gboolean touchscreen_mode;
@@ -1651,7 +1650,7 @@ static GtkMnemonicHash *
 gtk_menu_shell_get_mnemonic_hash (GtkMenuShell *menu_shell,
 				  gboolean      create)
 {
-  GtkMenuShellPrivate *private = GTK_MENU_SHELL_GET_PRIVATE (menu_shell);
+  GtkMenuShellPrivate *private = gtk_menu_shell_get_instance_private (menu_shell);
 
   if (!private->mnemonic_hash && create)
     private->mnemonic_hash = _gtk_mnemonic_hash_new ();
@@ -1673,7 +1672,7 @@ static GtkKeyHash *
 gtk_menu_shell_get_key_hash (GtkMenuShell *menu_shell,
 			     gboolean      create)
 {
-  GtkMenuShellPrivate *private = GTK_MENU_SHELL_GET_PRIVATE (menu_shell);
+  GtkMenuShellPrivate *private = gtk_menu_shell_get_instance_private (menu_shell);
   GtkWidget *widget = GTK_WIDGET (menu_shell);
 
   if (!private->key_hash && create && __gtk_widget_has_screen (widget))
@@ -1698,7 +1697,7 @@ gtk_menu_shell_get_key_hash (GtkMenuShell *menu_shell,
 static void
 gtk_menu_shell_reset_key_hash (GtkMenuShell *menu_shell)
 {
-  GtkMenuShellPrivate *private = GTK_MENU_SHELL_GET_PRIVATE (menu_shell);
+  GtkMenuShellPrivate *private = gtk_menu_shell_get_instance_private (menu_shell);
 
   if (private->key_hash)
     {
@@ -1780,7 +1779,7 @@ __gtk_menu_shell_get_take_focus (GtkMenuShell *menu_shell)
 
   g_return_val_if_fail (GTK_IS_MENU_SHELL (menu_shell), FALSE);
 
-  priv = GTK_MENU_SHELL_GET_PRIVATE (menu_shell);
+  priv = gtk_menu_shell_get_instance_private (menu_shell);
 
   return priv->take_focus;
 }
@@ -1826,7 +1825,7 @@ __gtk_menu_shell_set_take_focus (GtkMenuShell *menu_shell,
 
   g_return_if_fail (GTK_IS_MENU_SHELL (menu_shell));
 
-  priv = GTK_MENU_SHELL_GET_PRIVATE (menu_shell);
+  priv = gtk_menu_shell_get_instance_private (menu_shell);
 
   if (priv->take_focus != take_focus)
     {

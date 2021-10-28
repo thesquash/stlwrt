@@ -257,7 +257,8 @@ static GHashTable *icon_theme_builtin_icons;
 GtkIconCache *_builtin_cache = NULL;
 static GList *builtin_dirs = NULL;
 
-STLWRT_DEFINE_FTYPE (GtkIconTheme, gtk_icon_theme, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_FTYPE (GtkIconTheme, gtk_icon_theme, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkIconTheme))
 
 /**
  * __gtk_icon_theme_new:
@@ -364,8 +365,6 @@ gtk_icon_theme_class_init (GtkIconThemeClass *klass)
 				 NULL, NULL,
 				 g_cclosure_marshal_VOID__VOID,
 				 G_TYPE_NONE, 0);
-
-  g_type_class_add_private (klass, sizeof (GtkIconThemePrivate));
 }
 
 

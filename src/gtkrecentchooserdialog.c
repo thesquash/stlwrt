@@ -31,7 +31,7 @@
 #include <stdarg.h>
 
 
-#define GTK_RECENT_CHOOSER_DIALOG_GET_PRIVATE(obj)	(gtk_recent_chooser_dialog_get_props (GTK_RECENT_CHOOSER_DIALOG (obj))->priv)
+#define gtk_recent_chooser_dialog_get_instance_private(obj)	(gtk_recent_chooser_dialog_get_props (GTK_RECENT_CHOOSER_DIALOG (obj))->priv)
 
 static void gtk_recent_chooser_dialog_class_init (GtkRecentChooserDialogClass *klass);
 static void gtk_recent_chooser_dialog_init       (GtkRecentChooserDialog      *dialog);
@@ -63,7 +63,8 @@ struct _GtkRecentChooserDialogPrivate
 STLWRT_DEFINE_FTYPE_VPARENT (GtkRecentChooserDialog, gtk_recent_chooser_dialog, GTK_TYPE_DIALOG,
                              G_TYPE_FLAG_NONE,
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_RECENT_CHOOSER,
-                                                    _gtk_recent_chooser_delegate_iface_init))
+                                                    _gtk_recent_chooser_delegate_iface_init)
+                             G_ADD_PRIVATE (GtkRecentChooserDialog))
 
 static void
 gtk_recent_chooser_dialog_class_init (GtkRecentChooserDialogClass *klass)
@@ -80,8 +81,6 @@ gtk_recent_chooser_dialog_class_init (GtkRecentChooserDialogClass *klass)
   widget_class->unmap = gtk_recent_chooser_dialog_unmap;
   
   _gtk_recent_chooser_install_properties (gobject_class);
-  
-  g_type_class_add_private (klass, sizeof (GtkRecentChooserDialogPrivate));
 }
 
 static void
@@ -153,7 +152,7 @@ gtk_recent_chooser_dialog_constructor (GType                  type,
   object = G_OBJECT_CLASS (gtk_recent_chooser_dialog_parent_class)->constructor (type,
 		  							         n_construct_properties,
 										 construct_params);
-  priv = GTK_RECENT_CHOOSER_DIALOG_GET_PRIVATE (object);
+  priv = gtk_recent_chooser_dialog_get_instance_private (object);
   
   __gtk_widget_push_composite_child ();
   
@@ -189,7 +188,7 @@ gtk_recent_chooser_dialog_set_property (GObject      *object,
 {
   GtkRecentChooserDialogPrivate *priv;
   
-  priv = GTK_RECENT_CHOOSER_DIALOG_GET_PRIVATE (object);
+  priv = gtk_recent_chooser_dialog_get_instance_private (object);
   
   switch (prop_id)
     {
@@ -210,7 +209,7 @@ gtk_recent_chooser_dialog_get_property (GObject      *object,
 {
   GtkRecentChooserDialogPrivate *priv;
   
-  priv = GTK_RECENT_CHOOSER_DIALOG_GET_PRIVATE (object);
+  priv = gtk_recent_chooser_dialog_get_instance_private (object);
   
   g_object_get_property (G_OBJECT (priv->chooser), pspec->name, value);
 }

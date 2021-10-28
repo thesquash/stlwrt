@@ -32,6 +32,9 @@
 #include <stlwrt-typedefs.h>
 #include <stlwrt-enum-types.h>
 
+#include <gdkenums.h>
+#include <gtkenums.h>
+
 #include <glib.h>
 #include <glib-object.h>
 

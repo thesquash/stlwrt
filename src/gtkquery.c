@@ -34,7 +34,8 @@ struct _GtkQueryPrivate
   GList *mime_types;
 };
 
-STLWRT_DEFINE_FTYPE (GtkQuery, _gtk_query, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;);
+STLWRT_DEFINE_FTYPE (GtkQuery, _gtk_query, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkQuery))
 
 static void
 finalize (GObject *object)
@@ -55,8 +56,6 @@ _gtk_query_class_init (GtkQueryClass *class)
   
   gobject_class = G_OBJECT_CLASS (class);
   gobject_class->finalize = finalize;
-
-  g_type_class_add_private (gobject_class, sizeof (GtkQueryPrivate));  
 }
 
 static void

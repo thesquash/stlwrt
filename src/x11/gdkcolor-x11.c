@@ -63,7 +63,8 @@ static void     gdk_colormap_sync        (GdkColormap *colormap,
 
 static void gdk_colormap_finalize   (GObject              *object);
 
-STLWRT_DEFINE_TYPE (GdkColormap, gdk_colormap, G_TYPE_OBJECT)
+STLWRT_DEFINE_FTYPE (GdkColormap, gdk_colormap, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
+                    G_ADD_PRIVATE (GdkColormap))
 
 static void
 gdk_colormap_init (GdkColormap *colormap)
@@ -90,8 +91,6 @@ gdk_colormap_class_init (GdkColormapClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->finalize = gdk_colormap_finalize;
-
-  g_type_class_add_private (object_class, sizeof (GdkColormapPrivateX11));
 }
 
 static void

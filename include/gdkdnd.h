@@ -30,28 +30,6 @@ G_BEGIN_DECLS
 typedef struct _GdkDragContext        GdkDragContextFat;
 typedef struct _GdkDragContext        GdkDragContextThin;
 
-typedef enum 
-{
-  GDK_ACTION_DEFAULT = 1 << 0,
-  GDK_ACTION_COPY    = 1 << 1,
-  GDK_ACTION_MOVE    = 1 << 2,
-  GDK_ACTION_LINK    = 1 << 3,
-  GDK_ACTION_PRIVATE = 1 << 4,
-  GDK_ACTION_ASK     = 1 << 5
-} GdkDragAction;
-
-typedef enum 
-{
-  GDK_DRAG_PROTO_MOTIF,
-  GDK_DRAG_PROTO_XDND,
-  GDK_DRAG_PROTO_ROOTWIN,	  /* A root window with nobody claiming
-				   * drags */
-  GDK_DRAG_PROTO_NONE,		  /* Not a valid drag window */
-  GDK_DRAG_PROTO_WIN32_DROPFILES, /* The simple WM_DROPFILES dnd */
-  GDK_DRAG_PROTO_OLE2,		  /* The complex OLE2 dnd (not implemented) */
-  GDK_DRAG_PROTO_LOCAL            /* Intra-app */
-} GdkDragProtocol;
-
 /* Object that holds information about a drag in progress.
  * this is used on both source and destination sides.
  */

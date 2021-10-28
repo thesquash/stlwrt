@@ -72,7 +72,8 @@ struct _GtkRadioActionPrivate
 };
 
 STLWRT_DEFINE_FTYPE_VPARENT (GtkRadioAction, gtk_radio_action, GTK_TYPE_TOGGLE_ACTION,
-                             G_TYPE_FLAG_NONE, ;)
+                             G_TYPE_FLAG_NONE,
+                             G_ADD_PRIVATE (GtkRadioAction))
 
 static guint         radio_action_signals[LAST_SIGNAL] = { 0 };
 
@@ -165,14 +166,12 @@ gtk_radio_action_class_init (GtkRadioActionClass *klass)
 		  G_STRUCT_OFFSET (GtkRadioActionClass, changed),  NULL, NULL,
 		  g_cclosure_marshal_VOID__OBJECT,
 		  G_TYPE_NONE, 1, GTK_TYPE_RADIO_ACTION);
-
-  g_type_class_add_private (gobject_class, sizeof (GtkRadioActionPrivate));
 }
 
 static void
 gtk_radio_action_init (GtkRadioAction *action)
 {
-  gtk_radio_action_get_props (action)->private_data = GTK_RADIO_ACTION_GET_PRIVATE (action);
+  gtk_radio_action_get_props (action)->private_data = gtk_radio_action_get_instance_private (action);
   gtk_radio_action_get_props (action)->private_data->group = g_slist_prepend (NULL, gtk_radio_action_get_props (action));
   gtk_radio_action_get_props (action)->private_data->value = 0;
 

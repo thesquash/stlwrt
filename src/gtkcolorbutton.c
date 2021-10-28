@@ -131,7 +131,8 @@ struct _GtkColorButtonPrivate
 };
 
 STLWRT_DEFINE_FTYPE_VPARENT (GtkColorButton, gtk_color_button, GTK_TYPE_BUTTON,
-                             G_TYPE_FLAG_NONE, ;)
+                             G_TYPE_FLAG_NONE,
+                             G_ADD_PRIVATE (GtkColorButton))
 
 static void
 gtk_color_button_class_init (GtkColorButtonClass *klass)
@@ -233,8 +234,6 @@ gtk_color_button_class_init (GtkColorButtonClass *klass)
 						  NULL, NULL,
 						  NULL,
 						  G_TYPE_NONE, 0);
-
-  g_type_class_add_private (gobject_class, sizeof (GtkColorButtonPrivate));
 }
 
 static gboolean
@@ -433,7 +432,7 @@ gtk_color_button_init (GtkColorButton *color_button)
   PangoRectangle rect;
 
   /* Create the widgets */
-  gtk_color_button_get_props (color_button)->priv = GTK_COLOR_BUTTON_GET_PRIVATE (color_button);
+  gtk_color_button_get_props (color_button)->priv = gtk_color_button_get_instance_private (color_button);
 
   __gtk_widget_push_composite_child ();
 

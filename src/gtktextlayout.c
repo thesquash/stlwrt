@@ -180,7 +180,8 @@ static guint signals[LAST_SIGNAL] = { 0 };
 
 PangoAttrType gtk_text_attr_appearance_type = 0;
 
-STLWRT_DEFINE_VTYPE (GtkTextLayout, gtk_text_layout, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_VTYPE (GtkTextLayout, gtk_text_layout, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkTextLayout))
 
 static void
 gtk_text_layout_class_init (GtkTextLayoutClass *klass)
@@ -229,8 +230,6 @@ gtk_text_layout_class_init (GtkTextLayoutClass *klass)
                   G_TYPE_OBJECT,
                   G_TYPE_INT,
                   G_TYPE_INT);
-  
-  g_type_class_add_private (object_class, sizeof (GtkTextLayoutPrivate));
 }
 
 static void
@@ -851,7 +850,7 @@ static void
 gtk_text_layout_invalidate_cursor_line (GtkTextLayout *layout,
 					gboolean cursors_only)
 {
-  GtkTextLayoutPrivate *priv = GTK_TEXT_LAYOUT_GET_PRIVATE (layout);
+  GtkTextLayoutPrivate *priv = gtk_text_layout_get_instance_private (layout);
   GtkTextLineData *line_data;
 
   if (priv->cursor_line == NULL)
@@ -875,7 +874,7 @@ gtk_text_layout_invalidate_cursor_line (GtkTextLayout *layout,
 static void
 gtk_text_layout_update_cursor_line(GtkTextLayout *layout)
 {
-  GtkTextLayoutPrivate *priv = GTK_TEXT_LAYOUT_GET_PRIVATE (layout);
+  GtkTextLayoutPrivate *priv = gtk_text_layout_get_instance_private (layout);
   GtkTextIter iter;
 
   __gtk_text_buffer_get_iter_at_mark (gtk_text_layout_get_props (layout)->buffer, &iter,
@@ -2145,7 +2144,7 @@ gtk_text_layout_get_line_display (GtkTextLayout *layout,
                                   GtkTextLine   *line,
                                   gboolean       size_only)
 {
-  GtkTextLayoutPrivate *priv = GTK_TEXT_LAYOUT_GET_PRIVATE (layout);
+  GtkTextLayoutPrivate *priv = gtk_text_layout_get_instance_private (layout);
   GtkTextLineDisplay *display;
   GtkTextLineSegment *seg;
   GtkTextIter iter;

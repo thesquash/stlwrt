@@ -112,7 +112,8 @@ struct _GtkToolButtonPrivate
 
 STLWRT_DEFINE_FTYPE_VPARENT (GtkToolButton, gtk_tool_button, GTK_TYPE_TOOL_ITEM, G_TYPE_FLAG_NONE,
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_ACTIVATABLE,
-                                                    gtk_tool_button_activatable_interface_init))
+                                                    gtk_tool_button_activatable_interface_init)
+                             G_ADD_PRIVATE (GtkToolButton))
 
 static void
 gtk_tool_button_class_init (GtkToolButtonClass *klass)
@@ -259,8 +260,6 @@ gtk_tool_button_class_init (GtkToolButtonClass *klass)
 		  NULL, NULL,
 		  g_cclosure_marshal_VOID__VOID,
 		  G_TYPE_NONE, 0);
-  
-  g_type_class_add_private (object_class, sizeof (GtkToolButtonPrivate));
 }
 
 static void
@@ -269,7 +268,7 @@ gtk_tool_button_init (GtkToolButton      *button,
 {
   GtkToolItem *toolitem = GTK_TOOL_ITEM (button);
   
-  gtk_tool_button_get_props (button)->priv = GTK_TOOL_BUTTON_GET_PRIVATE (button);
+  gtk_tool_button_get_props (button)->priv = gtk_tool_button_get_instance_private (button);
 
   gtk_tool_button_get_props (button)->priv->contents_invalid = TRUE;
 

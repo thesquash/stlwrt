@@ -142,7 +142,8 @@ static void     gtk_handle_box_end_drag      (GtkHandleBox   *hb,
 
 static guint handle_box_signals[SIGNAL_LAST] = { 0 };
 
-STLWRT_DEFINE_VTYPE (GtkHandleBox, gtk_handle_box, GTK_TYPE_BIN, G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_VTYPE (GtkHandleBox, gtk_handle_box, GTK_TYPE_BIN, G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkHandleBox))
 
 static void
 gtk_handle_box_class_init (GtkHandleBoxClass *class)
@@ -243,8 +244,6 @@ gtk_handle_box_class_init (GtkHandleBoxClass *class)
 		  NULL,
 		  G_TYPE_NONE, 1,
 		  GTK_TYPE_WIDGET);
-
-  g_type_class_add_private (gobject_class, sizeof (GtkHandleBoxPrivate));    
 }
 
 static GtkHandleBoxPrivate *

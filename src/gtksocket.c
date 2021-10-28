@@ -166,7 +166,8 @@ _gtk_socket_get_instance_private (GtkSocket *socket)
   return G_TYPE_INSTANCE_GET_PRIVATE (socket, GTK_TYPE_SOCKET, GtkSocketPrivate);
 }
 
-STLWRT_DEFINE_VTYPE (GtkSocket, gtk_socket, GTK_TYPE_CONTAINER, G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_VTYPE (GtkSocket, gtk_socket, GTK_TYPE_CONTAINER, G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkSocket))
 
 static void
 gtk_socket_finalize (GObject *object)
@@ -246,8 +247,6 @@ gtk_socket_class_init (GtkSocketClass *class)
                   ___gtk_boolean_handled_accumulator, NULL,
 		  NULL,
 		  G_TYPE_BOOLEAN, 0);
-
-  g_type_class_add_private (gobject_class, sizeof (GtkSocketPrivate));
 }
 
 static void

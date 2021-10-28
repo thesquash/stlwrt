@@ -98,7 +98,8 @@ static GType gtk_box_child_type        (GtkContainer   *container);
 
 STLWRT_DEFINE_VTYPE (GtkBox, gtk_box, GTK_TYPE_CONTAINER, G_TYPE_FLAG_NONE,
                      G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE,
-                                            NULL));
+                                            NULL)
+                     G_ADD_PRIVATE (GtkBox));
 
 static void
 gtk_box_class_init (GtkBoxClass *class)
@@ -177,14 +178,12 @@ gtk_box_class_init (GtkBoxClass *class)
 								P_("The index of the child in the parent"),
 								-1, G_MAXINT, 0,
 								GTK_PARAM_READWRITE));
-
-  g_type_class_add_private (object_class, sizeof (GtkBoxPrivate));
 }
 
 static void
 gtk_box_init (GtkBox *box)
 {
-  GtkBoxPrivate *private = GTK_BOX_GET_PRIVATE (box);
+  GtkBoxPrivate *private = gtk_box_get_instance_private (box);
 
   __gtk_widget_set_has_window (GTK_WIDGET (box), FALSE);
   __gtk_widget_set_redraw_on_allocate (GTK_WIDGET (box), FALSE);
@@ -205,7 +204,7 @@ gtk_box_set_property (GObject      *object,
                       GParamSpec   *pspec)
 {
   GtkBox *box = GTK_BOX (object);
-  GtkBoxPrivate *private = GTK_BOX_GET_PRIVATE (box);
+  GtkBoxPrivate *private = gtk_box_get_instance_private (box);
 
   switch (prop_id)
     {
@@ -232,7 +231,7 @@ gtk_box_get_property (GObject    *object,
                       GParamSpec *pspec)
 {
   GtkBox *box = GTK_BOX (object);
-  GtkBoxPrivate *private = GTK_BOX_GET_PRIVATE (box);
+  GtkBoxPrivate *private = gtk_box_get_instance_private (box);
 
   switch (prop_id)
     {
@@ -256,7 +255,7 @@ gtk_box_size_request (GtkWidget      *widget,
                       GtkRequisition *requisition)
 {
   GtkBox *box = GTK_BOX (widget);
-  GtkBoxPrivate *private = GTK_BOX_GET_PRIVATE (box);
+  GtkBoxPrivate *private = gtk_box_get_instance_private (box);
   GtkBoxChild *child;
   GList *children;
   gint nvis_children;
@@ -331,7 +330,7 @@ gtk_box_size_allocate (GtkWidget     *widget,
                        GtkAllocation *allocation)
 {
   GtkBox *box = GTK_BOX (widget);
-  GtkBoxPrivate *private = GTK_BOX_GET_PRIVATE (box);
+  GtkBoxPrivate *private = gtk_box_get_instance_private (box);
   GtkBoxChild *child;
   GList *children;
   GtkAllocation child_allocation;
@@ -984,7 +983,7 @@ ___gtk_box_set_spacing_set (GtkBox  *box,
 
   g_return_if_fail (GTK_IS_BOX (box));
 
-  private = GTK_BOX_GET_PRIVATE (box);
+  private = gtk_box_get_instance_private (box);
 
   private->spacing_set = spacing_set ? TRUE : FALSE;
 }
@@ -996,7 +995,7 @@ ___gtk_box_get_spacing_set (GtkBox *box)
 
   g_return_val_if_fail (GTK_IS_BOX (box), FALSE);
 
-  private = GTK_BOX_GET_PRIVATE (box);
+  private = gtk_box_get_instance_private (box);
 
   return private->spacing_set;
 }
@@ -1177,7 +1176,7 @@ ___gtk_box_set_old_defaults (GtkBox *box)
 
   g_return_if_fail (GTK_IS_BOX (box));
 
-  private = GTK_BOX_GET_PRIVATE (box);
+  private = gtk_box_get_instance_private (box);
 
   private->default_expand = TRUE;
 }
@@ -1186,7 +1185,7 @@ static void
 gtk_box_add (GtkContainer *container,
 	     GtkWidget    *widget)
 {
-  GtkBoxPrivate *private = GTK_BOX_GET_PRIVATE (container);
+  GtkBoxPrivate *private = gtk_box_get_instance_private (container);
 
   __gtk_box_pack_start (GTK_BOX (container), widget,
                       private->default_expand,

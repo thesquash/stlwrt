@@ -160,7 +160,8 @@ struct _GtkRecentManagerPrivate
   guint changed_age;
 };
 
-STLWRT_DEFINE_FTYPE (GtkRecentManager, gtk_recent_manager, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_FTYPE (GtkRecentManager, gtk_recent_manager, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkRecentManager))
 
 static void
 filename_warning (const gchar *format, 
@@ -283,8 +284,6 @@ gtk_recent_manager_class_init (GtkRecentManagerClass *klass)
 		  G_TYPE_NONE, 0);
   
   klass->changed = gtk_recent_manager_real_changed;
-  
-  g_type_class_add_private (klass, sizeof (GtkRecentManagerPrivate));
 }
 
 static void
@@ -292,7 +291,7 @@ gtk_recent_manager_init (GtkRecentManager *manager)
 {
   GtkRecentManagerPrivate *priv;
 
-  manager->priv = priv = GTK_RECENT_MANAGER_GET_PRIVATE (manager);
+  manager->priv = priv = gtk_recent_manager_get_instance_private (manager);
   
   priv->limit = DEFAULT_LIMIT;
   priv->size = 0;

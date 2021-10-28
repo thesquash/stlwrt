@@ -91,9 +91,10 @@ struct _GtkCustomPaperUnixDialogPrivate
 };
 
 STLWRT_DEFINE_FTYPE_VPARENT (GtkCustomPaperUnixDialog, gtk_custom_paper_unix_dialog,
-                             GTK_TYPE_DIALOG, G_TYPE_FLAG_NONE, ;)
+                             GTK_TYPE_DIALOG, G_TYPE_FLAG_NONE,
+                             G_ADD_PRIVATE (GtkCustomPaperUnixDialog))
 
-#define GTK_CUSTOM_PAPER_UNIX_DIALOG_GET_PRIVATE(o)  \
+#define gtk_custom_paper_unix_dialog_get_instance_private(o)  \
    (G_TYPE_INSTANCE_GET_PRIVATE ((o), GTK_TYPE_CUSTOM_PAPER_UNIX_DIALOG, GtkCustomPaperUnixDialogPrivate))
 
 static void gtk_custom_paper_unix_dialog_finalize  (GObject                *object);
@@ -257,8 +258,6 @@ gtk_custom_paper_unix_dialog_class_init (GtkCustomPaperUnixDialogClass *class)
   widget_class = (GtkWidgetClass *) class;
 
   object_class->finalize = gtk_custom_paper_unix_dialog_finalize;
-
-  g_type_class_add_private (class, sizeof (GtkCustomPaperUnixDialogPrivate));
 }
 
 static void
@@ -277,7 +276,7 @@ gtk_custom_paper_unix_dialog_init (GtkCustomPaperUnixDialog *dialog)
   GtkCustomPaperUnixDialogPrivate *priv;
   GtkTreeIter iter;
 
-  priv = gtk_custom_paper_unix_dialog_get_props (dialog)->priv = GTK_CUSTOM_PAPER_UNIX_DIALOG_GET_PRIVATE (dialog);
+  priv = gtk_custom_paper_unix_dialog_get_props (dialog)->priv = gtk_custom_paper_unix_dialog_get_instance_private (dialog);
 
   priv->print_backends = NULL;
 

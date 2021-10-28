@@ -74,7 +74,8 @@ enum {
 
 static guint cell_renderer_signals[LAST_SIGNAL] = { 0 };
 
-STLWRT_DEFINE_VTYPE (GtkCellRenderer, gtk_cell_renderer, G_TYPE_OBJECT, G_TYPE_FLAG_ABSTRACT, ;)
+STLWRT_DEFINE_VTYPE (GtkCellRenderer, gtk_cell_renderer, G_TYPE_OBJECT, G_TYPE_FLAG_ABSTRACT,
+                     G_ADD_PRIVATE (GtkCellRenderer))
 
 static void
 gtk_cell_renderer_init (GtkCellRenderer *cell)
@@ -302,8 +303,6 @@ gtk_cell_renderer_class_init (GtkCellRendererClass *class)
   ADD_SET_PROP ("cell-background-set", PROP_CELL_BACKGROUND_SET,
                 P_("Cell background set"),
                 P_("Whether this tag affects the cell background color"));
-
-  g_type_class_add_private (object_class, sizeof (GtkCellRendererPrivate));
 }
 
 static void
@@ -313,7 +312,7 @@ gtk_cell_renderer_get_property (GObject     *object,
 				GParamSpec  *pspec)
 {
   GtkCellRenderer *cell = GTK_CELL_RENDERER (object);
-  GtkCellRendererPrivate *priv = GTK_CELL_RENDERER_GET_PRIVATE (object);
+  GtkCellRendererPrivate *priv = gtk_cell_renderer_get_instance_private (object);
 
   switch (param_id)
     {
@@ -451,7 +450,7 @@ static void
 set_cell_bg_color (GtkCellRenderer *cell,
 		   GdkColor        *color)
 {
-  GtkCellRendererPrivate *priv = GTK_CELL_RENDERER_GET_PRIVATE (cell);
+  GtkCellRendererPrivate *priv = gtk_cell_renderer_get_instance_private (cell);
 
   if (color)
     {
@@ -557,7 +556,7 @@ __gtk_cell_renderer_render (GtkCellRenderer      *cell,
 			  GtkCellRendererState  flags)
 {
   gboolean selected = FALSE;
-  GtkCellRendererPrivate *priv = GTK_CELL_RENDERER_GET_PRIVATE (cell);
+  GtkCellRendererPrivate *priv = gtk_cell_renderer_get_instance_private (cell);
 
   g_return_if_fail (GTK_IS_CELL_RENDERER (cell));
   g_return_if_fail (GTK_CELL_RENDERER_GET_CLASS (cell)->render != NULL);

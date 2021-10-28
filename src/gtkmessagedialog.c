@@ -139,7 +139,8 @@ enum {
 
 STLWRT_DEFINE_VTYPE (GtkMessageDialog, gtk_message_dialog, GTK_TYPE_DIALOG, G_TYPE_FLAG_NONE,
                      G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-                                            gtk_message_dialog_buildable_interface_init))
+                                            gtk_message_dialog_buildable_interface_init)
+                     G_ADD_PRIVATE (GtkMessageDialog))
 
 static GtkBuildableIface *parent_buildable_iface;
 
@@ -320,9 +321,6 @@ gtk_message_dialog_class_init (GtkMessageDialogClass *class)
 							P_("GtkVBox that holds the dialog's primary and secondary labels"),
 							GTK_TYPE_WIDGET,
 							GTK_PARAM_READABLE));
-
-  g_type_class_add_private (gobject_class,
-			    sizeof (GtkMessageDialogPrivate));
 }
 
 static void
@@ -331,7 +329,7 @@ gtk_message_dialog_init (GtkMessageDialog *dialog)
   GtkWidget *hbox;
   GtkMessageDialogPrivate *priv;
 
-  priv = GTK_MESSAGE_DIALOG_GET_PRIVATE (dialog);
+  priv = gtk_message_dialog_get_instance_private (dialog);
 
   __gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
   __gtk_window_set_title (GTK_WINDOW (dialog), "");
@@ -391,7 +389,7 @@ setup_primary_label_font (GtkMessageDialog *dialog)
   PangoFontDescription *font_desc;
   GtkMessageDialogPrivate *priv;
 
-  priv = GTK_MESSAGE_DIALOG_GET_PRIVATE (dialog);
+  priv = gtk_message_dialog_get_instance_private (dialog);
 
   /* unset the font settings */
   __gtk_widget_modify_font (gtk_message_dialog_get_props (dialog)->label, NULL);
@@ -411,7 +409,7 @@ static void
 setup_type (GtkMessageDialog *dialog,
 	    GtkMessageType    type)
 {
-  GtkMessageDialogPrivate *priv = GTK_MESSAGE_DIALOG_GET_PRIVATE (dialog);
+  GtkMessageDialogPrivate *priv = gtk_message_dialog_get_instance_private (dialog);
   const gchar *stock_id = NULL;
   AtkObject *atk_obj;
  
@@ -471,7 +469,7 @@ gtk_message_dialog_set_property (GObject      *object,
   GtkMessageDialogPrivate *priv;
 
   dialog = GTK_MESSAGE_DIALOG (object);
-  priv = GTK_MESSAGE_DIALOG_GET_PRIVATE (dialog);
+  priv = gtk_message_dialog_get_instance_private (dialog);
   
   switch (prop_id)
     {
@@ -541,7 +539,7 @@ gtk_message_dialog_get_property (GObject     *object,
   GtkMessageDialogPrivate *priv;
 
   dialog = GTK_MESSAGE_DIALOG (object);
-  priv = GTK_MESSAGE_DIALOG_GET_PRIVATE (dialog);
+  priv = gtk_message_dialog_get_instance_private (dialog);
     
   switch (prop_id)
     {
@@ -743,7 +741,7 @@ __gtk_message_dialog_set_image (GtkMessageDialog *dialog,
       __gtk_misc_set_alignment (GTK_MISC (image), 0.5, 0.0);
     }
 
-  priv = GTK_MESSAGE_DIALOG_GET_PRIVATE (dialog);
+  priv = gtk_message_dialog_get_instance_private (dialog);
 
   priv->message_type = GTK_MESSAGE_OTHER;
   
@@ -794,7 +792,7 @@ __gtk_message_dialog_set_markup (GtkMessageDialog *message_dialog,
 
   g_return_if_fail (GTK_IS_MESSAGE_DIALOG (message_dialog));
 
-  priv = GTK_MESSAGE_DIALOG_GET_PRIVATE (message_dialog);
+  priv = gtk_message_dialog_get_instance_private (message_dialog);
   priv->has_primary_markup = TRUE;
   __gtk_label_set_markup (GTK_LABEL (gtk_message_dialog_get_props (message_dialog)->label), str);
 }
@@ -824,7 +822,7 @@ __gtk_message_dialog_format_secondary_text (GtkMessageDialog *message_dialog,
 
   g_return_if_fail (GTK_IS_MESSAGE_DIALOG (message_dialog));
 
-  priv = GTK_MESSAGE_DIALOG_GET_PRIVATE (message_dialog);
+  priv = gtk_message_dialog_get_instance_private (message_dialog);
 
   if (message_format)
     {
@@ -888,7 +886,7 @@ __gtk_message_dialog_format_secondary_markup (GtkMessageDialog *message_dialog,
 
   g_return_if_fail (GTK_IS_MESSAGE_DIALOG (message_dialog));
 
-  priv = GTK_MESSAGE_DIALOG_GET_PRIVATE (message_dialog);
+  priv = gtk_message_dialog_get_instance_private (message_dialog);
 
   if (message_format)
     {
@@ -935,7 +933,7 @@ __gtk_message_dialog_get_message_area (GtkMessageDialog *message_dialog)
 
   g_return_val_if_fail (GTK_IS_MESSAGE_DIALOG (message_dialog), NULL);
 
-  priv = GTK_MESSAGE_DIALOG_GET_PRIVATE (message_dialog);
+  priv = gtk_message_dialog_get_instance_private (message_dialog);
 
   return priv->message_area;
 }

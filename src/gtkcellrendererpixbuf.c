@@ -84,14 +84,15 @@ struct _GtkCellRendererPixbufPrivate
 };
 
 STLWRT_DEFINE_VTYPE (GtkCellRendererPixbuf, gtk_cell_renderer_pixbuf, GTK_TYPE_CELL_RENDERER,
-                     G_TYPE_FLAG_NONE, ;)
+                     G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkCellRendererPixbuf))
 
 static void
 gtk_cell_renderer_pixbuf_init (GtkCellRendererPixbuf *cellpixbuf)
 {
   GtkCellRendererPixbufPrivate *priv;
 
-  priv = GTK_CELL_RENDERER_PIXBUF_GET_PRIVATE (cellpixbuf);
+  priv = gtk_cell_renderer_pixbuf_get_instance_private (cellpixbuf);
   priv->stock_size = GTK_ICON_SIZE_MENU;
 }
 
@@ -210,10 +211,6 @@ gtk_cell_renderer_pixbuf_class_init (GtkCellRendererPixbufClass *class)
                                                         P_("The GIcon being displayed"),
                                                         G_TYPE_ICON,
                                                         GTK_PARAM_READWRITE));
-
-
-
-  g_type_class_add_private (object_class, sizeof (GtkCellRendererPixbufPrivate));
 }
 
 static void
@@ -222,7 +219,7 @@ gtk_cell_renderer_pixbuf_finalize (GObject *object)
   GtkCellRendererPixbuf *cellpixbuf = GTK_CELL_RENDERER_PIXBUF (object);
   GtkCellRendererPixbufPrivate *priv;
 
-  priv = GTK_CELL_RENDERER_PIXBUF_GET_PRIVATE (object);
+  priv = gtk_cell_renderer_pixbuf_get_instance_private (object);
   
   if (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf)
     g_object_unref (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf);
@@ -250,7 +247,7 @@ gtk_cell_renderer_pixbuf_get_property (GObject        *object,
   GtkCellRendererPixbuf *cellpixbuf = GTK_CELL_RENDERER_PIXBUF (object);
   GtkCellRendererPixbufPrivate *priv;
 
-  priv = GTK_CELL_RENDERER_PIXBUF_GET_PRIVATE (object);
+  priv = gtk_cell_renderer_pixbuf_get_instance_private (object);
   
   switch (param_id)
     {
@@ -296,7 +293,7 @@ gtk_cell_renderer_pixbuf_set_property (GObject      *object,
   GtkCellRendererPixbuf *cellpixbuf = GTK_CELL_RENDERER_PIXBUF (object);
   GtkCellRendererPixbufPrivate *priv;
 
-  priv = GTK_CELL_RENDERER_PIXBUF_GET_PRIVATE (object);
+  priv = gtk_cell_renderer_pixbuf_get_instance_private (object);
   
   switch (param_id)
     {
@@ -479,7 +476,7 @@ gtk_cell_renderer_pixbuf_create_stock_pixbuf (GtkCellRendererPixbuf *cellpixbuf,
 {
   GtkCellRendererPixbufPrivate *priv;
 
-  priv = GTK_CELL_RENDERER_PIXBUF_GET_PRIVATE (cellpixbuf);
+  priv = gtk_cell_renderer_pixbuf_get_instance_private (cellpixbuf);
 
   if (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf)
     g_object_unref (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf);
@@ -502,7 +499,7 @@ gtk_cell_renderer_pixbuf_create_themed_pixbuf (GtkCellRendererPixbuf *cellpixbuf
   GtkSettings *settings;
   gint width, height;
 
-  priv = GTK_CELL_RENDERER_PIXBUF_GET_PRIVATE (cellpixbuf);
+  priv = gtk_cell_renderer_pixbuf_get_instance_private (cellpixbuf);
 
   if (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf)
     {
@@ -609,7 +606,7 @@ gtk_cell_renderer_pixbuf_get_size (GtkCellRenderer *cell,
   gint calc_width;
   gint calc_height;
 
-  priv = GTK_CELL_RENDERER_PIXBUF_GET_PRIVATE (cell);
+  priv = gtk_cell_renderer_pixbuf_get_instance_private (cell);
 
   if (!gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf)
     {
@@ -686,7 +683,7 @@ gtk_cell_renderer_pixbuf_render (GtkCellRenderer      *cell,
   GdkRectangle draw_rect;
   cairo_t *cr;
 
-  priv = GTK_CELL_RENDERER_PIXBUF_GET_PRIVATE (cell);
+  priv = gtk_cell_renderer_pixbuf_get_instance_private (cell);
 
   gtk_cell_renderer_pixbuf_get_size (cell, widget, cell_area,
 				     &pix_rect.x,

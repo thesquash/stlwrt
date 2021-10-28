@@ -33,7 +33,7 @@
 #include <gtkprintjob.h>
 
 
-#define GTK_PRINTER_GET_PRIVATE(o)  \
+#define gtk_printer_get_instance_private(o)  \
    (G_TYPE_INSTANCE_GET_PRIVATE ((o), GTK_TYPE_PRINTER, GtkPrinterPrivate))
 
 static void gtk_printer_finalize     (GObject *object);
@@ -93,7 +93,8 @@ struct _GtkPrinterPrivate
   GtkPrintBackend *backend;
 };
 
-STLWRT_DEFINE_FTYPE (GtkPrinter, gtk_printer, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_FTYPE (GtkPrinter, gtk_printer, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkPrinter))
 
 static void
 gtk_printer_class_init (GtkPrinterClass *class)
@@ -105,8 +106,6 @@ gtk_printer_class_init (GtkPrinterClass *class)
 
   object_class->set_property = gtk_printer_set_property;
   object_class->get_property = gtk_printer_get_property;
-
-  g_type_class_add_private (class, sizeof (GtkPrinterPrivate));
 
   g_object_class_install_property (G_OBJECT_CLASS (class),
                                    PROP_NAME,
@@ -231,7 +230,7 @@ gtk_printer_init (GtkPrinter *printer)
 {
   GtkPrinterPrivate *priv;
 
-  priv = printer->priv = GTK_PRINTER_GET_PRIVATE (printer); 
+  priv = printer->priv = gtk_printer_get_instance_private (printer); 
 
   priv->name = NULL;
   priv->location = NULL;

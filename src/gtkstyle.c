@@ -364,7 +364,8 @@ static const GdkColor gtk_default_active_base =    { 0, GTK_VERY_DARK_GRAY };
 static guint realize_signal = 0;
 static guint unrealize_signal = 0;
 
-STLWRT_DEFINE_FTYPE (GtkStyle, gtk_style, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_FTYPE (GtkStyle, gtk_style, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkStyle))
 
 /* --- functions --- */
 
@@ -517,8 +518,6 @@ gtk_style_class_init (GtkStyleClass *klass)
   klass->draw_resize_grip = gtk_default_draw_resize_grip;
   klass->draw_spinner = gtk_default_draw_spinner;
 
-  g_type_class_add_private (object_class, sizeof (GtkStylePrivate));
-
   /**
    * GtkStyle::realize:
    * @style: the object which received the signal
@@ -580,7 +579,7 @@ static void
 gtk_style_finalize (GObject *object)
 {
   GtkStyle *style = GTK_STYLE (object);
-  GtkStylePrivate *priv = GTK_STYLE_GET_PRIVATE (style);
+  GtkStylePrivate *priv = gtk_style_get_instance_private (style);
 
   g_return_if_fail (style->attach_count == 0);
 
@@ -922,7 +921,7 @@ __gtk_style_lookup_color (GtkStyle   *style,
   g_return_val_if_fail (color_name != NULL, FALSE);
   g_return_val_if_fail (color != NULL, FALSE);
 
-  priv = GTK_STYLE_GET_PRIVATE (style);
+  priv = gtk_style_get_instance_private (style);
 
   for (iter = priv->color_hashes; iter != NULL; iter = iter->next)
     {
@@ -1641,8 +1640,8 @@ static void
 gtk_style_real_copy (GtkStyle *style,
 		     GtkStyle *src)
 {
-  GtkStylePrivate *priv = GTK_STYLE_GET_PRIVATE (style);
-  GtkStylePrivate *src_priv = GTK_STYLE_GET_PRIVATE (src);
+  GtkStylePrivate *priv = gtk_style_get_instance_private (style);
+  GtkStylePrivate *src_priv = gtk_style_get_instance_private (src);
   gint i;
   
   for (i = 0; i < 5; i++)
@@ -1699,7 +1698,7 @@ static void
 gtk_style_real_init_from_rc (GtkStyle   *style,
 			     GtkRcStyle *rc_style)
 {
-  GtkStylePrivate *priv = GTK_STYLE_GET_PRIVATE (style);
+  GtkStylePrivate *priv = gtk_style_get_instance_private (style);
   gint i;
 
   /* cache _should_ be still empty */

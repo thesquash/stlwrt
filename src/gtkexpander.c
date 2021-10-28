@@ -139,7 +139,8 @@ struct _GtkExpanderPrivate
 
 STLWRT_DEFINE_FTYPE_VPARENT (GtkExpander, gtk_expander, GTK_TYPE_BIN, G_TYPE_FLAG_NONE,
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-                                                    gtk_expander_buildable_init))
+                                                    gtk_expander_buildable_init)
+                             G_ADD_PRIVATE (GtkExpander))
 
 static void
 gtk_expander_class_init (GtkExpanderClass *klass)
@@ -177,8 +178,6 @@ gtk_expander_class_init (GtkExpanderClass *klass)
   container_class->forall = gtk_expander_forall;
 
   klass->activate = gtk_expander_activate;
-
-  g_type_class_add_private (klass, sizeof (GtkExpanderPrivate));
 
   g_object_class_install_property (gobject_class,
 				   PROP_EXPANDED,
@@ -271,7 +270,7 @@ gtk_expander_init (GtkExpander *expander)
 {
   GtkExpanderPrivate *priv;
 
-  gtk_expander_get_props (expander)->priv = priv = GTK_EXPANDER_GET_PRIVATE (expander);
+  gtk_expander_get_props (expander)->priv = priv = gtk_expander_get_instance_private (expander);
 
   __gtk_widget_set_can_focus (GTK_WIDGET (expander), TRUE);
   __gtk_widget_set_has_window (GTK_WIDGET (expander), FALSE);

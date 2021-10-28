@@ -140,7 +140,8 @@ STLWRT_DEFINE_FTYPE_VPARENT (GtkCellView, gtk_cell_view, GTK_TYPE_WIDGET, G_TYPE
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_CELL_LAYOUT,
                                                     gtk_cell_view_cell_layout_init)
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-                                                    gtk_cell_view_buildable_init))
+                                                    gtk_cell_view_buildable_init)
+                             G_ADD_PRIVATE (GtkCellView))
 
 static void
 gtk_cell_view_class_init (GtkCellViewClass *klass)
@@ -192,8 +193,6 @@ gtk_cell_view_class_init (GtkCellViewClass *klass)
   ADD_SET_PROP ("background-set", PROP_BACKGROUND_SET,
                 P_("Background set"),
                 P_("Whether this tag affects the background color"));
-
-  g_type_class_add_private (gobject_class, sizeof (GtkCellViewPrivate));
 }
 
 static void
@@ -293,7 +292,7 @@ gtk_cell_view_init (GtkCellView *cellview)
 {
   __gtk_widget_set_has_window (GTK_WIDGET (cellview), FALSE);
 
-  gtk_cell_view_get_props (cellview)->priv = GTK_CELL_VIEW_GET_PRIVATE (cellview);
+  gtk_cell_view_get_props (cellview)->priv = gtk_cell_view_get_instance_private (cellview);
 }
 
 static void

@@ -90,14 +90,15 @@ struct _GtkCellRendererTogglePrivate
 
 
 STLWRT_DEFINE_VTYPE (GtkCellRendererToggle, gtk_cell_renderer_toggle, GTK_TYPE_CELL_RENDERER,
-                     G_TYPE_FLAG_NONE, ;)
+                     G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkCellRendererToggle))
 
 static void
 gtk_cell_renderer_toggle_init (GtkCellRendererToggle *celltoggle)
 {
   GtkCellRendererTogglePrivate *priv;
 
-  priv = GTK_CELL_RENDERER_TOGGLE_GET_PRIVATE (celltoggle);
+  priv = gtk_cell_renderer_toggle_get_instance_private (celltoggle);
 
   gtk_cell_renderer_toggle_get_props (celltoggle)->activatable = TRUE;
   gtk_cell_renderer_toggle_get_props (celltoggle)->active = FALSE;
@@ -184,8 +185,6 @@ gtk_cell_renderer_toggle_class_init (GtkCellRendererToggleClass *class)
 		  NULL,
 		  G_TYPE_NONE, 1,
 		  G_TYPE_STRING);
-
-  g_type_class_add_private (object_class, sizeof (GtkCellRendererTogglePrivate));
 }
 
 static void
@@ -197,7 +196,7 @@ gtk_cell_renderer_toggle_get_property (GObject     *object,
   GtkCellRendererToggle *celltoggle = GTK_CELL_RENDERER_TOGGLE (object);
   GtkCellRendererTogglePrivate *priv;
 
-  priv = GTK_CELL_RENDERER_TOGGLE_GET_PRIVATE (object);
+  priv = gtk_cell_renderer_toggle_get_instance_private (object);
   
   switch (param_id)
     {
@@ -232,7 +231,7 @@ gtk_cell_renderer_toggle_set_property (GObject      *object,
   GtkCellRendererToggle *celltoggle = GTK_CELL_RENDERER_TOGGLE (object);
   GtkCellRendererTogglePrivate *priv;
 
-  priv = GTK_CELL_RENDERER_TOGGLE_GET_PRIVATE (object);
+  priv = gtk_cell_renderer_toggle_get_instance_private (object);
 
   switch (param_id)
     {
@@ -289,7 +288,7 @@ gtk_cell_renderer_toggle_get_size (GtkCellRenderer *cell,
   gint calc_height;
   GtkCellRendererTogglePrivate *priv;
 
-  priv = GTK_CELL_RENDERER_TOGGLE_GET_PRIVATE (cell);
+  priv = gtk_cell_renderer_toggle_get_instance_private (cell);
 
   calc_width = gtk_cell_renderer_get_props ((gint) cell)->xpad * 2 + priv->indicator_size;
   calc_height = gtk_cell_renderer_get_props ((gint) cell)->ypad * 2 + priv->indicator_size;
@@ -337,7 +336,7 @@ gtk_cell_renderer_toggle_render (GtkCellRenderer      *cell,
   GtkShadowType shadow;
   GtkStateType state = 0;
 
-  priv = GTK_CELL_RENDERER_TOGGLE_GET_PRIVATE (cell);
+  priv = gtk_cell_renderer_toggle_get_instance_private (cell);
 
   gtk_cell_renderer_toggle_get_size (cell, widget, cell_area,
 				     &x_offset, &y_offset,

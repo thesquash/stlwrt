@@ -68,7 +68,7 @@
 #define RULER_RADIUS 2
 
 
-#define GTK_PRINT_UNIX_DIALOG_GET_PRIVATE(o)  \
+#define gtk_print_unix_dialog_get_instance_private(o)  \
    (G_TYPE_INSTANCE_GET_PRIVATE ((o), GTK_TYPE_PRINT_UNIX_DIALOG, GtkPrintUnixDialogPrivate))
 
 static void     gtk_print_unix_dialog_destroy      (GtkPrintUnixDialog *dialog);
@@ -267,7 +267,8 @@ struct _GtkPrintUnixDialogPrivate
 STLWRT_DEFINE_FTYPE_VPARENT (GtkPrintUnixDialog, gtk_print_unix_dialog, GTK_TYPE_DIALOG,
                              G_TYPE_FLAG_NONE,
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-                                                    gtk_print_unix_dialog_buildable_init))
+                                                    gtk_print_unix_dialog_buildable_init)
+                             G_ADD_PRIVATE (GtkPrintUnixDialog))
 
 static GtkBuildableIface *parent_buildable_iface;
 
@@ -365,8 +366,6 @@ gtk_print_unix_dialog_class_init (GtkPrintUnixDialogClass *class)
  							 P_("TRUE if page setup combos are embedded in GtkPrintUnixDialog"),
  							 FALSE,
  							 GTK_PARAM_READWRITE));
-
-  g_type_class_add_private (class, sizeof (GtkPrintUnixDialogPrivate));
 }
 
 /* Returns a toplevel GtkWindow, or NULL if none */
@@ -533,7 +532,7 @@ gtk_print_unix_dialog_init (GtkPrintUnixDialog *dialog)
 {
   GtkPrintUnixDialogPrivate *priv = gtk_print_unix_dialog_get_props (dialog)->priv;
 
-  priv = gtk_print_unix_dialog_get_props (dialog)->priv = GTK_PRINT_UNIX_DIALOG_GET_PRIVATE (dialog);
+  priv = gtk_print_unix_dialog_get_props (dialog)->priv = gtk_print_unix_dialog_get_instance_private (dialog);
   priv->print_backends = NULL;
   priv->current_page = -1;
   priv->number_up_layout_n_option = NULL;

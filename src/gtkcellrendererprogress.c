@@ -94,7 +94,8 @@ struct _GtkCellRendererProgressPrivate
 
 
 STLWRT_DEFINE_FTYPE_VPARENT (GtkCellRendererProgress, gtk_cell_renderer_progress, GTK_TYPE_CELL_RENDERER,
-                             G_TYPE_FLAG_NONE, ;)
+                             G_TYPE_FLAG_NONE,
+                             G_ADD_PRIVATE (GtkCellRendererProgress))
 
 static void
 gtk_cell_renderer_progress_class_init (GtkCellRendererProgressClass *klass)
@@ -218,16 +219,12 @@ gtk_cell_renderer_progress_class_init (GtkCellRendererProgressClass *klass)
                                                       GTK_TYPE_PROGRESS_BAR_ORIENTATION,
                                                       GTK_PROGRESS_LEFT_TO_RIGHT,
                                                       GTK_PARAM_READWRITE));
-
-
-  g_type_class_add_private (object_class, 
-			    sizeof (GtkCellRendererProgressPrivate));
 }
 
 static void
 gtk_cell_renderer_progress_init (GtkCellRendererProgress *cellprogress)
 {
-  GtkCellRendererProgressPrivate *priv = GTK_CELL_RENDERER_PROGRESS_GET_PRIVATE (cellprogress);
+  GtkCellRendererProgressPrivate *priv = gtk_cell_renderer_progress_get_instance_private (cellprogress);
 
   priv->value = 0;
   priv->text = NULL;

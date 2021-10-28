@@ -201,7 +201,7 @@
  * gtk_button_activatable_sync_action_properties (GtkActivatable       *activatable,
  * 		                                  GtkAction            *action)
  * {
- *   GtkButtonPrivate *priv = GTK_BUTTON_GET_PRIVATE (activatable);
+ *   GtkButtonPrivate *priv = gtk_button_get_instance_private (activatable);
  * 
  *   if (!action)
  *     return;

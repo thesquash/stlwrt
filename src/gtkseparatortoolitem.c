@@ -60,7 +60,8 @@ struct _GtkSeparatorToolItemPrivate
 };
 
 STLWRT_DEFINE_FTYPE_VPARENT (GtkSeparatorToolItem, gtk_separator_tool_item, GTK_TYPE_TOOL_ITEM,
-                             G_TYPE_FLAG_NONE, ;)
+                             G_TYPE_FLAG_NONE,
+                             G_ADD_PRIVATE (GtkSeparatorToolItem))
 
 static gint
 get_space_size (GtkToolItem *tool_item)
@@ -106,14 +107,12 @@ gtk_separator_tool_item_class_init (GtkSeparatorToolItemClass *class)
 							 P_("Whether the separator is drawn, or just blank"),
 							 TRUE,
 							 GTK_PARAM_READWRITE));
-  
-  g_type_class_add_private (object_class, sizeof (GtkSeparatorToolItemPrivate));
 }
 
 static void
 gtk_separator_tool_item_init (GtkSeparatorToolItem      *separator_item)
 {
-  gtk_separator_tool_item_get_props (separator_item)->priv = GTK_SEPARATOR_TOOL_ITEM_GET_PRIVATE (separator_item);
+  gtk_separator_tool_item_get_props (separator_item)->priv = gtk_separator_tool_item_get_instance_private (separator_item);
   gtk_separator_tool_item_get_props (separator_item)->priv->draw = TRUE;
 }
 
@@ -199,7 +198,7 @@ gtk_separator_tool_item_expose (GtkWidget      *widget,
 {
   GtkToolbar *toolbar = NULL;
   GtkSeparatorToolItemPrivate *priv =
-      GTK_SEPARATOR_TOOL_ITEM_GET_PRIVATE (widget);
+      gtk_separator_tool_item_get_instance_private (widget);
 
   if (priv->draw)
     {

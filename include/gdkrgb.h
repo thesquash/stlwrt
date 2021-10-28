@@ -29,13 +29,6 @@ G_BEGIN_DECLS
 
 typedef struct _GdkRgbCmap GdkRgbCmap;
 
-typedef enum 
-{
-  GDK_RGB_DITHER_NONE,
-  GDK_RGB_DITHER_NORMAL,
-  GDK_RGB_DITHER_MAX
-} GdkRgbDither;
-
 #ifndef GDK_DISABLE_DEPRECATED
 
 struct _GdkRgbCmap {

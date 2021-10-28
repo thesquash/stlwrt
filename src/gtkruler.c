@@ -97,7 +97,8 @@ static const GtkRulerMetric ruler_metrics[] =
 
 
 STLWRT_DEFINE_VTYPE (GtkRuler, gtk_ruler, GTK_TYPE_WIDGET, G_TYPE_FLAG_NONE,
-                     G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE, NULL))
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE, NULL)
+                     G_ADD_PRIVATE (GtkRuler))
 
 static void
 gtk_ruler_class_init (GtkRulerClass *class)
@@ -176,15 +177,13 @@ gtk_ruler_class_init (GtkRulerClass *class)
 						      GTK_TYPE_METRIC_TYPE, 
 						      GTK_PIXELS,
 						      GTK_PARAM_READWRITE));  
-
-  g_type_class_add_private (gobject_class, sizeof (GtkRulerPrivate));
 }
 
 static void
 gtk_ruler_init (GtkRuler *ruler)
 {
   GtkWidget *widget = GTK_WIDGET (ruler);
-  GtkRulerPrivate *private = GTK_RULER_GET_PRIVATE (ruler);
+  GtkRulerPrivate *private = gtk_ruler_get_instance_private (ruler);
 
   private->orientation = GTK_ORIENTATION_HORIZONTAL;
 
@@ -210,7 +209,7 @@ gtk_ruler_set_property (GObject      *object,
 			GParamSpec   *pspec)
 {
   GtkRuler *ruler = GTK_RULER (object);
-  GtkRulerPrivate *private = GTK_RULER_GET_PRIVATE (ruler);
+  GtkRulerPrivate *private = gtk_ruler_get_instance_private (ruler);
 
   switch (prop_id)
     {
@@ -250,7 +249,7 @@ gtk_ruler_get_property (GObject      *object,
 			GParamSpec   *pspec)
 {
   GtkRuler *ruler = GTK_RULER (object);
-  GtkRulerPrivate *private = GTK_RULER_GET_PRIVATE (ruler);
+  GtkRulerPrivate *private = gtk_ruler_get_instance_private (ruler);
 
   switch (prop_id)
     {
@@ -475,7 +474,7 @@ static void
 gtk_ruler_size_request (GtkWidget      *widget,
                         GtkRequisition *requisition)
 {
-  GtkRulerPrivate *private = GTK_RULER_GET_PRIVATE (widget);
+  GtkRulerPrivate *private = gtk_ruler_get_instance_private (widget);
 
   if (private->orientation == GTK_ORIENTATION_HORIZONTAL)
     {
@@ -512,7 +511,7 @@ gtk_ruler_motion_notify (GtkWidget      *widget,
                          GdkEventMotion *event)
 {
   GtkRuler *ruler = GTK_RULER (widget);
-  GtkRulerPrivate *private = GTK_RULER_GET_PRIVATE (widget);
+  GtkRulerPrivate *private = gtk_ruler_get_instance_private (widget);
   gint x;
   gint y;
 
@@ -589,7 +588,7 @@ static void
 gtk_ruler_real_draw_ticks (GtkRuler *ruler)
 {
   GtkWidget *widget = GTK_WIDGET (ruler);
-  GtkRulerPrivate *private = GTK_RULER_GET_PRIVATE (ruler);
+  GtkRulerPrivate *private = gtk_ruler_get_instance_private (ruler);
   cairo_t *cr;
   gint i, j;
   gint width, height;
@@ -803,7 +802,7 @@ static void
 gtk_ruler_real_draw_pos (GtkRuler *ruler)
 {
   GtkWidget *widget = GTK_WIDGET (ruler);
-  GtkRulerPrivate *private = GTK_RULER_GET_PRIVATE (ruler);
+  GtkRulerPrivate *private = gtk_ruler_get_instance_private (ruler);
   gint x, y;
   gint width, height;
   gint bs_width, bs_height;

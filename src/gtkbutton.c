@@ -160,7 +160,8 @@ static guint button_signals[LAST_SIGNAL] = { 0 };
 
 STLWRT_DEFINE_VTYPE (GtkButton, gtk_button, GTK_TYPE_BIN, G_TYPE_FLAG_NONE,
                      G_IMPLEMENT_INTERFACE (GTK_TYPE_ACTIVATABLE,
-                                            gtk_button_activatable_interface_init))
+                                            gtk_button_activatable_interface_init)
+                     G_ADD_PRIVATE (GtkButton))
 
 static void
 gtk_button_class_init (GtkButtonClass *klass)
@@ -511,14 +512,12 @@ gtk_button_class_init (GtkButtonClass *klass)
 							     G_MAXINT,
 							     2,
 							     GTK_PARAM_READABLE));
-
-  g_type_class_add_private (gobject_class, sizeof (GtkButtonPrivate));
 }
 
 static void
 gtk_button_init (GtkButton *button)
 {
-  GtkButtonPrivate *priv = GTK_BUTTON_GET_PRIVATE (button);
+  GtkButtonPrivate *priv = gtk_button_get_instance_private (button);
 
   __gtk_widget_set_can_focus (GTK_WIDGET (button), TRUE);
   __gtk_widget_set_receives_default (GTK_WIDGET (button), TRUE);
@@ -579,7 +578,7 @@ static void
 maybe_set_alignment (GtkButton *button,
 		     GtkWidget *widget)
 {
-  GtkButtonPrivate *priv = GTK_BUTTON_GET_PRIVATE (button);
+  GtkButtonPrivate *priv = gtk_button_get_instance_private (button);
 
   if (GTK_IS_MISC (widget))
     {
@@ -611,7 +610,7 @@ static void
 gtk_button_dispose (GObject *object)
 {
   GtkButton *button = GTK_BUTTON (object);
-  GtkButtonPrivate *priv = GTK_BUTTON_GET_PRIVATE (button);
+  GtkButtonPrivate *priv = gtk_button_get_instance_private (button);
 
   if (priv->action)
     {
@@ -628,7 +627,7 @@ gtk_button_set_property (GObject         *object,
                          GParamSpec      *pspec)
 {
   GtkButton *button = GTK_BUTTON (object);
-  GtkButtonPrivate *priv = GTK_BUTTON_GET_PRIVATE (button);
+  GtkButtonPrivate *priv = gtk_button_get_instance_private (button);
 
   switch (prop_id)
     {
@@ -678,7 +677,7 @@ gtk_button_get_property (GObject         *object,
                          GParamSpec      *pspec)
 {
   GtkButton *button = GTK_BUTTON (object);
-  GtkButtonPrivate *priv = GTK_BUTTON_GET_PRIVATE (button);
+  GtkButtonPrivate *priv = gtk_button_get_instance_private (button);
 
   switch (prop_id)
     {
@@ -795,7 +794,7 @@ gtk_button_update (GtkActivatable *activatable,
 		   GtkAction      *action,
 	           const gchar    *property_name)
 {
-  GtkButtonPrivate *priv = GTK_BUTTON_GET_PRIVATE (activatable);
+  GtkButtonPrivate *priv = gtk_button_get_instance_private (activatable);
 
   if (strcmp (property_name, "visible") == 0)
     {
@@ -824,7 +823,7 @@ static void
 gtk_button_sync_action_properties (GtkActivatable *activatable,
 			           GtkAction      *action)
 {
-  GtkButtonPrivate *priv = GTK_BUTTON_GET_PRIVATE (activatable);
+  GtkButtonPrivate *priv = gtk_button_get_instance_private (activatable);
 
   if (!action)
     return;
@@ -849,7 +848,7 @@ static void
 gtk_button_set_related_action (GtkButton *button,
 			       GtkAction *action)
 {
-  GtkButtonPrivate *priv = GTK_BUTTON_GET_PRIVATE (button);
+  GtkButtonPrivate *priv = gtk_button_get_instance_private (button);
 
   if (priv->action == action)
     return;
@@ -872,7 +871,7 @@ static void
 gtk_button_set_use_action_appearance (GtkButton *button,
 				      gboolean   use_appearance)
 {
-  GtkButtonPrivate *priv = GTK_BUTTON_GET_PRIVATE (button);
+  GtkButtonPrivate *priv = gtk_button_get_instance_private (button);
 
   if (priv->use_action_appearance != use_appearance)
     {
@@ -909,7 +908,7 @@ show_image (GtkButton *button)
 static void
 gtk_button_construct_child (GtkButton *button)
 {
-  GtkButtonPrivate *priv = GTK_BUTTON_GET_PRIVATE (button);
+  GtkButtonPrivate *priv = gtk_button_get_instance_private (button);
   GtkStockItem item;
   GtkWidget *label;
   GtkWidget *box;
@@ -1212,7 +1211,7 @@ gtk_button_unmap (GtkWidget *widget)
 static void
 gtk_button_update_image_spacing (GtkButton *button)
 {
-  GtkButtonPrivate *priv = GTK_BUTTON_GET_PRIVATE (button);
+  GtkButtonPrivate *priv = gtk_button_get_instance_private (button);
   GtkWidget *child; 
   gint spacing;
 
@@ -1697,7 +1696,7 @@ gtk_real_button_released (GtkButton *button)
 static void 
 gtk_real_button_clicked (GtkButton *button)
 {
-  GtkButtonPrivate *priv = GTK_BUTTON_GET_PRIVATE (button);
+  GtkButtonPrivate *priv = gtk_button_get_instance_private (button);
 
   if (priv->action)
     __gtk_action_activate (priv->action);
@@ -1718,7 +1717,7 @@ gtk_real_button_activate (GtkButton *button)
   GtkButtonPrivate *priv;
   guint32 time;
 
-  priv = GTK_BUTTON_GET_PRIVATE (button);
+  priv = gtk_button_get_instance_private (button);
 
   if (__gtk_widget_get_realized (widget) && !gtk_button_get_props (button)->activate_timeout)
     {
@@ -1748,7 +1747,7 @@ gtk_button_finish_activate (GtkButton *button,
   GtkWidget *widget = GTK_WIDGET (button);
   GtkButtonPrivate *priv;
   
-  priv = GTK_BUTTON_GET_PRIVATE (button);
+  priv = gtk_button_get_instance_private (button);
 
   g_source_remove (gtk_button_get_props (button)->activate_timeout);
   gtk_button_get_props (button)->activate_timeout = 0;
@@ -1976,7 +1975,7 @@ __gtk_button_set_alignment (GtkButton *button,
 
   g_return_if_fail (GTK_IS_BUTTON (button));
   
-  priv = GTK_BUTTON_GET_PRIVATE (button);
+  priv = gtk_button_get_instance_private (button);
 
   priv->xalign = xalign;
   priv->yalign = yalign;
@@ -2009,7 +2008,7 @@ __gtk_button_get_alignment (GtkButton *button,
 
   g_return_if_fail (GTK_IS_BUTTON (button));
   
-  priv = GTK_BUTTON_GET_PRIVATE (button);
+  priv = gtk_button_get_instance_private (button);
  
   if (xalign) 
     *xalign = priv->xalign;
@@ -2069,7 +2068,7 @@ gtk_button_update_state (GtkButton *button)
 static void 
 show_image_change_notify (GtkButton *button)
 {
-  GtkButtonPrivate *priv = GTK_BUTTON_GET_PRIVATE (button);
+  GtkButtonPrivate *priv = gtk_button_get_instance_private (button);
 
   if (priv->image) 
     {
@@ -2199,7 +2198,7 @@ __gtk_button_set_image (GtkButton *button,
   g_return_if_fail (GTK_IS_BUTTON (button));
   g_return_if_fail (image == NULL || GTK_IS_WIDGET (image));
 
-  priv = GTK_BUTTON_GET_PRIVATE (button);
+  priv = gtk_button_get_instance_private (button);
 
   if (gtk_widget_get_props (priv->image) && gtk_widget_get_props (priv->image)->parent)
     __gtk_container_remove (GTK_CONTAINER (gtk_widget_get_props (priv->image)->parent), gtk_widget_get_props (priv->image));
@@ -2231,7 +2230,7 @@ __gtk_button_get_image (GtkButton *button)
 
   g_return_val_if_fail (GTK_IS_BUTTON (button), NULL);
 
-  priv = GTK_BUTTON_GET_PRIVATE (button);
+  priv = gtk_button_get_instance_private (button);
   
   return priv->image;
 }
@@ -2256,7 +2255,7 @@ __gtk_button_set_image_position (GtkButton       *button,
   g_return_if_fail (GTK_IS_BUTTON (button));
   g_return_if_fail (position >= GTK_POS_LEFT && position <= GTK_POS_BOTTOM);
   
-  priv = GTK_BUTTON_GET_PRIVATE (button);
+  priv = gtk_button_get_instance_private (button);
 
   if (priv->image_position != position)
     {
@@ -2286,7 +2285,7 @@ __gtk_button_get_image_position (GtkButton *button)
 
   g_return_val_if_fail (GTK_IS_BUTTON (button), GTK_POS_LEFT);
 
-  priv = GTK_BUTTON_GET_PRIVATE (button);
+  priv = gtk_button_get_instance_private (button);
   
   return priv->image_position;
 }

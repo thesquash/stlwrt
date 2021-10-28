@@ -33,15 +33,6 @@ G_BEGIN_DECLS
 
 #define GDK_TYPE_FONT SF(gdk_font_get_type) ()
 
-/* Types of font.
- *   GDK_FONT_FONT: the font is an XFontStruct.
- *   GDK_FONT_FONTSET: the font is an XFontSet used for I18N.
- */
-typedef enum 
-{
-  GDK_FONT_FONT,
-  GDK_FONT_FONTSET
-} GdkFontType;
 
 STLWRT_DECLARE_BOXED_TYPE(GdkFont, gdk_font,
   GdkFontType   type;

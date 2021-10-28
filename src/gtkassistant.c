@@ -191,7 +191,8 @@ static guint signals [LAST_SIGNAL] = { 0 };
 
 STLWRT_DEFINE_VTYPE (GtkAssistant, gtk_assistant, GTK_TYPE_WINDOW, G_TYPE_FLAG_NONE,
                      G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-                                            gtk_assistant_buildable_interface_init))
+                                            gtk_assistant_buildable_interface_init)
+                     G_ADD_PRIVATE (GtkAssistant))
 
 
 static void
@@ -401,8 +402,6 @@ gtk_assistant_class_init (GtkAssistantClass *class)
 								    P_("Whether all required fields on the page have been filled out"),
 								    FALSE,
 								    G_PARAM_READWRITE));
-
-  g_type_class_add_private (gobject_class, sizeof (GtkAssistantPrivate));
 }
 
 static gint

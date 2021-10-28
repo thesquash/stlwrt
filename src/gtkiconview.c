@@ -475,7 +475,8 @@ STLWRT_DEFINE_FTYPE_VPARENT (GtkIconView, gtk_icon_view, GTK_TYPE_CONTAINER, G_T
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_CELL_LAYOUT,
                                                     gtk_icon_view_cell_layout_init)
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-                                                    gtk_icon_view_buildable_init))
+                                                    gtk_icon_view_buildable_init)
+                             G_ADD_PRIVATE (GtkIconView))
 
 static void
 gtk_icon_view_class_init (GtkIconViewClass *klass)
@@ -486,8 +487,6 @@ gtk_icon_view_class_init (GtkIconViewClass *klass)
   GtkBindingSet *binding_set;
   
   binding_set = __gtk_binding_set_by_class (klass);
-
-  g_type_class_add_private (klass, sizeof (GtkIconViewPrivate));
 
   gobject_class = (GObjectClass *) klass;
   widget_class = (GtkWidgetClass *) klass;
@@ -1107,7 +1106,7 @@ gtk_icon_view_cell_layout_init (GtkCellLayoutIface *iface)
 static void
 gtk_icon_view_init (GtkIconView *icon_view)
 {
-  gtk_icon_view_get_props (icon_view)->priv = GTK_ICON_VIEW_GET_PRIVATE (icon_view);
+  gtk_icon_view_get_props (icon_view)->priv = gtk_icon_view_get_instance_private (icon_view);
   
   gtk_icon_view_get_props (icon_view)->priv->width = 0;
   gtk_icon_view_get_props (icon_view)->priv->height = 0;

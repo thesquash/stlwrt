@@ -39,40 +39,6 @@ typedef struct _GdkDeviceAxis	    GdkDeviceAxis;
 typedef struct _GdkDeviceClass	    GdkDeviceClass;
 typedef struct _GdkTimeCoord	    GdkTimeCoord;
 
-typedef enum 
-{
-  GDK_EXTENSION_EVENTS_NONE,
-  GDK_EXTENSION_EVENTS_ALL,
-  GDK_EXTENSION_EVENTS_CURSOR
-} GdkExtensionMode;
-
-typedef enum 
-{
-  GDK_SOURCE_MOUSE,
-  GDK_SOURCE_PEN,
-  GDK_SOURCE_ERASER,
-  GDK_SOURCE_CURSOR
-} GdkInputSource;
-
-typedef enum 
-{
-  GDK_MODE_DISABLED,
-  GDK_MODE_SCREEN,
-  GDK_MODE_WINDOW
-} GdkInputMode;
-
-typedef enum 
-{
-  GDK_AXIS_IGNORE,
-  GDK_AXIS_X,
-  GDK_AXIS_Y,
-  GDK_AXIS_PRESSURE,
-  GDK_AXIS_XTILT,
-  GDK_AXIS_YTILT,
-  GDK_AXIS_WHEEL,
-  GDK_AXIS_LAST
-} GdkAxisUse;
-
 struct _GdkDeviceKey
 {
   guint keyval;

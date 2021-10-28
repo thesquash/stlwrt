@@ -228,7 +228,8 @@ static gboolean      gtk_range_key_press                (GtkWidget     *range,
 
 
 STLWRT_DEFINE_VTYPE (GtkRange, gtk_range, GTK_TYPE_WIDGET, G_TYPE_FLAG_NONE,
-                     G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE, NULL))
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE, NULL)
+                     G_ADD_PRIVATE (GtkRange))
 
 static guint signals[LAST_SIGNAL];
 
@@ -602,8 +603,6 @@ gtk_range_class_init (GtkRangeClass *class)
                                                                  P_("When TRUE, the detail string for rendering the steppers is suffixed with position information"),
                                                                  FALSE,
                                                                  GTK_PARAM_READABLE));
-
-  g_type_class_add_private (class, sizeof (GtkRangeLayout));
 }
 
 static void
@@ -723,7 +722,7 @@ gtk_range_init (GtkRange *range)
   gtk_range_get_props (range)->has_stepper_d = FALSE;
   gtk_range_get_props (range)->need_recalc = TRUE;
   gtk_range_get_props (range)->round_digits = -1;
-  gtk_range_get_props (range)->layout = GTK_RANGE_GET_PRIVATE (range);
+  gtk_range_get_props (range)->layout = gtk_range_get_instance_private (range);
   gtk_range_get_props (range)->layout->mouse_location = MOUSE_OUTSIDE;
   gtk_range_get_props (range)->layout->mouse_x = -1;
   gtk_range_get_props (range)->layout->mouse_y = -1;

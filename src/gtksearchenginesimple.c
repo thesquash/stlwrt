@@ -68,7 +68,8 @@ struct _GtkSearchEngineSimplePrivate
 };
 
 STLWRT_DEFINE_FTYPE (GtkSearchEngineSimple, _gtk_search_engine_simple, GTK_TYPE_SEARCH_ENGINE,
-                     G_TYPE_FLAG_NONE, ;)
+                     G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkSearchEngineSimple))
 
 static void
 gtk_search_engine_simple_dispose (GObject *object)
@@ -362,8 +363,6 @@ _gtk_search_engine_simple_class_init (GtkSearchEngineSimpleClass *class)
   engine_class->start = gtk_search_engine_simple_start;
   engine_class->stop = gtk_search_engine_simple_stop;
   engine_class->is_indexed = gtk_search_engine_simple_is_indexed;
-
-  g_type_class_add_private (gobject_class, sizeof (GtkSearchEngineSimplePrivate));
 }
 
 static void

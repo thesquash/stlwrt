@@ -263,7 +263,8 @@ gtk_menu_get_instance_private (GtkMenu *menu)
   return G_TYPE_INSTANCE_GET_PRIVATE (menu, GTK_TYPE_MENU, GtkMenuPrivate);
 }
 
-STLWRT_DEFINE_VTYPE (GtkMenu, gtk_menu, GTK_TYPE_MENU_SHELL, G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_VTYPE (GtkMenu, gtk_menu, GTK_TYPE_MENU_SHELL, G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkMenu))
 
 static void
 menu_queue_resize (GtkMenu *menu)
@@ -797,8 +798,6 @@ gtk_menu_class_init (GtkMenuClass *class)
 				"move-scroll", 1,
 				GTK_TYPE_SCROLL_TYPE,
 				GTK_SCROLL_PAGE_DOWN);
-
-  g_type_class_add_private (gobject_class, sizeof (GtkMenuPrivate));
 }
 
 

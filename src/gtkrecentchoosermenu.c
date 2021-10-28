@@ -174,7 +174,8 @@ STLWRT_DEFINE_FTYPE_VPARENT (GtkRecentChooserMenu, gtk_recent_chooser_menu, GTK_
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_RECENT_CHOOSER,
                                                     gtk_recent_chooser_iface_init)
                              G_IMPLEMENT_INTERFACE (GTK_TYPE_ACTIVATABLE,
-                                                    gtk_recent_chooser_activatable_iface_init))
+                                                    gtk_recent_chooser_activatable_iface_init)
+                             G_ADD_PRIVATE (GtkRecentChooserMenu))
 
 
 static void
@@ -233,8 +234,6 @@ gtk_recent_chooser_menu_class_init (GtkRecentChooserMenuClass *klass)
 
   g_object_class_override_property (gobject_class, PROP_ACTIVATABLE_RELATED_ACTION, "related-action");
   g_object_class_override_property (gobject_class, PROP_ACTIVATABLE_USE_ACTION_APPEARANCE, "use-action-appearance");
-
-  g_type_class_add_private (klass, sizeof (GtkRecentChooserMenuPrivate));
 }
 
 static void
@@ -242,7 +241,7 @@ gtk_recent_chooser_menu_init (GtkRecentChooserMenu *menu)
 {
   GtkRecentChooserMenuPrivate *priv;
   
-  priv = GTK_RECENT_CHOOSER_MENU_GET_PRIVATE (menu);
+  priv = gtk_recent_chooser_menu_get_instance_private (menu);
   
   gtk_recent_chooser_menu_get_props (menu)->priv = priv;
   

@@ -55,7 +55,7 @@ struct _GtkMenuBarPrivate
   GtkPackDirection child_pack_direction;
 };
 
-#define GTK_MENU_BAR_GET_PRIVATE(o)  \
+#define gtk_menu_bar_get_instance_private(o)  \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), GTK_TYPE_MENU_BAR, GtkMenuBarPrivate))
 
 
@@ -83,7 +83,8 @@ static void gtk_menu_bar_move_current      (GtkMenuShell     *menu_shell,
 
 static GtkShadowType get_shadow_type   (GtkMenuBar      *menubar);
 
-STLWRT_DEFINE_FTYPE_VPARENT (GtkMenuBar, gtk_menu_bar, GTK_TYPE_MENU_SHELL, G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkMenuBar, gtk_menu_bar, GTK_TYPE_MENU_SHELL, G_TYPE_FLAG_NONE,
+                             G_ADD_PRIVATE (GtkMenuBar))
 
 static void
 gtk_menu_bar_class_init (GtkMenuBarClass *class)
@@ -203,8 +204,6 @@ gtk_menu_bar_class_init (GtkMenuBarClass *class)
 							     G_MAXINT,
                                                              DEFAULT_IPADDING,
                                                              GTK_PARAM_READABLE));
-
-  g_type_class_add_private (gobject_class, sizeof (GtkMenuBarPrivate));
 }
 
 static void
@@ -285,7 +284,7 @@ gtk_menu_bar_size_request (GtkWidget      *widget,
     {
       menu_bar = GTK_MENU_BAR (widget);
       menu_shell = GTK_MENU_SHELL (widget);
-      priv = GTK_MENU_BAR_GET_PRIVATE (menu_bar);
+      priv = gtk_menu_bar_get_instance_private (menu_bar);
 
       nchildren = 0;
       children = gtk_menu_shell_get_props (menu_shell)->children;
@@ -363,7 +362,7 @@ gtk_menu_bar_size_allocate (GtkWidget     *widget,
 
   menu_bar = GTK_MENU_BAR (widget);
   menu_shell = GTK_MENU_SHELL (widget);
-  priv = GTK_MENU_BAR_GET_PRIVATE (menu_bar);
+  priv = gtk_menu_bar_get_instance_private (menu_bar);
 
   direction = __gtk_widget_get_direction (widget);
 
@@ -833,7 +832,7 @@ __gtk_menu_bar_get_pack_direction (GtkMenuBar *menubar)
   g_return_val_if_fail (GTK_IS_MENU_BAR (menubar), 
 			GTK_PACK_DIRECTION_LTR);
   
-  priv = GTK_MENU_BAR_GET_PRIVATE (menubar);
+  priv = gtk_menu_bar_get_instance_private (menubar);
 
   return priv->pack_direction;
 }
@@ -856,7 +855,7 @@ __gtk_menu_bar_set_pack_direction (GtkMenuBar       *menubar,
 
   g_return_if_fail (GTK_IS_MENU_BAR (menubar));
 
-  priv = GTK_MENU_BAR_GET_PRIVATE (menubar);
+  priv = gtk_menu_bar_get_instance_private (menubar);
 
   if (priv->pack_direction != pack_dir)
     {
@@ -890,7 +889,7 @@ __gtk_menu_bar_get_child_pack_direction (GtkMenuBar *menubar)
   g_return_val_if_fail (GTK_IS_MENU_BAR (menubar), 
 			GTK_PACK_DIRECTION_LTR);
   
-  priv = GTK_MENU_BAR_GET_PRIVATE (menubar);
+  priv = gtk_menu_bar_get_instance_private (menubar);
 
   return priv->child_pack_direction;
 }
@@ -913,7 +912,7 @@ __gtk_menu_bar_set_child_pack_direction (GtkMenuBar       *menubar,
 
   g_return_if_fail (GTK_IS_MENU_BAR (menubar));
 
-  priv = GTK_MENU_BAR_GET_PRIVATE (menubar);
+  priv = gtk_menu_bar_get_instance_private (menubar);
 
   if (priv->child_pack_direction != child_pack_dir)
     {

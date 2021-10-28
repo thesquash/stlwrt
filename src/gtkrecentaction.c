@@ -36,7 +36,7 @@
 
 #define FALLBACK_ITEM_LIMIT     10
 
-#define GTK_RECENT_ACTION_GET_PRIVATE(obj)      \
+#define gtk_recent_action_get_instance_private(obj)      \
         (G_TYPE_INSTANCE_GET_PRIVATE ((obj),    \
          GTK_TYPE_RECENT_ACTION,                \
          GtkRecentActionPrivate))
@@ -78,7 +78,8 @@ struct _GtkRecentActionPrivate
 };
 
 STLWRT_DEFINE_FTYPE (GtkRecentAction, gtk_recent_action, GTK_TYPE_ACTION, G_TYPE_FLAG_NONE,
-                     G_IMPLEMENT_INTERFACE (GTK_TYPE_RECENT_CHOOSER, gtk_recent_chooser_iface_init))
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_RECENT_CHOOSER, gtk_recent_chooser_iface_init)
+                     G_ADD_PRIVATE (GtkRecentAction))
 
 static gboolean
 gtk_recent_action_set_current_uri (GtkRecentChooser  *chooser,
@@ -180,7 +181,7 @@ gtk_recent_action_get_items (GtkRecentChooser *chooser)
 static GtkRecentManager *
 gtk_recent_action_get_recent_manager (GtkRecentChooser *chooser)
 {
-  return GTK_RECENT_ACTION_GET_PRIVATE (chooser)->manager;
+  return gtk_recent_action_get_instance_private (chooser)->manager;
 }
 
 static void
@@ -244,7 +245,7 @@ static void
 gtk_recent_action_add_filter (GtkRecentChooser *chooser,
                               GtkRecentFilter  *filter)
 {
-  GtkRecentActionPrivate *priv = GTK_RECENT_ACTION_GET_PRIVATE (chooser);
+  GtkRecentActionPrivate *priv = gtk_recent_action_get_instance_private (chooser);
 
   if (priv->current_filter != filter)
     set_current_filter (GTK_RECENT_ACTION (chooser), filter);
@@ -254,7 +255,7 @@ static void
 gtk_recent_action_remove_filter (GtkRecentChooser *chooser,
                                  GtkRecentFilter  *filter)
 {
-  GtkRecentActionPrivate *priv = GTK_RECENT_ACTION_GET_PRIVATE (chooser);
+  GtkRecentActionPrivate *priv = gtk_recent_action_get_instance_private (chooser);
 
   if (priv->current_filter == filter)
     set_current_filter (GTK_RECENT_ACTION (chooser), NULL);
@@ -266,7 +267,7 @@ gtk_recent_action_list_filters (GtkRecentChooser *chooser)
   GSList *retval = NULL;
   GtkRecentFilter *current_filter;
 
-  current_filter = GTK_RECENT_ACTION_GET_PRIVATE (chooser)->current_filter;
+  current_filter = gtk_recent_action_get_instance_private (chooser)->current_filter;
   retval = g_slist_prepend (retval, current_filter);
 
   return retval;
@@ -297,7 +298,7 @@ gtk_recent_action_activate (GtkAction *action)
    * direct call of __gtk_action_activate(); since no item has been
    * selected, we must unset the current recent chooser pointer
    */
-  GTK_RECENT_ACTION_GET_PRIVATE (action)->current_chooser = NULL;
+  gtk_recent_action_get_instance_private (action)->current_chooser = NULL;
 }
 
 static void
@@ -546,7 +547,7 @@ gtk_recent_action_get_property (GObject    *gobject,
                                 GValue     *value,
                                 GParamSpec *pspec)
 {
-  GtkRecentActionPrivate *priv = GTK_RECENT_ACTION_GET_PRIVATE (gobject);
+  GtkRecentActionPrivate *priv = gtk_recent_action_get_instance_private (gobject);
 
   switch (prop_id)
     {
@@ -592,8 +593,6 @@ gtk_recent_action_class_init (GtkRecentActionClass *klass)
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
   GtkActionClass *action_class = GTK_ACTION_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (GtkRecentActionPrivate));
-
   gobject_class->finalize = gtk_recent_action_finalize;
   gobject_class->dispose = gtk_recent_action_dispose;
   gobject_class->set_property = gtk_recent_action_set_property;
@@ -625,7 +624,7 @@ gtk_recent_action_init (GtkRecentAction *action)
 {
   GtkRecentActionPrivate *priv;
 
-  action->priv = priv = GTK_RECENT_ACTION_GET_PRIVATE (action);
+  action->priv = priv = gtk_recent_action_get_instance_private (action);
 
   priv->show_numbers = FALSE;
   priv->show_icons = TRUE;

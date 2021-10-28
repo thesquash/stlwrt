@@ -44,7 +44,7 @@
 #include <gtkprinteroptionwidget.h>
 
 
-#define GTK_PRINTER_OPTION_WIDGET_GET_PRIVATE(o)  \
+#define gtk_printer_option_widget_get_instance_private(o)  \
    (G_TYPE_INSTANCE_GET_PRIVATE ((o), GTK_TYPE_PRINTER_OPTION_WIDGET, GtkPrinterOptionWidgetPrivate))
 
 static void gtk_printer_option_widget_finalize (GObject *object);
@@ -80,7 +80,8 @@ struct _GtkPrinterOptionWidgetPrivate
   GtkWidget *box;
 };
 
-STLWRT_DEFINE_FTYPE_VPARENT (GtkPrinterOptionWidget, gtk_printer_option_widget, GTK_TYPE_HBOX, G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_FTYPE_VPARENT (GtkPrinterOptionWidget, gtk_printer_option_widget, GTK_TYPE_HBOX, G_TYPE_FLAG_NONE,
+                             G_ADD_PRIVATE (GtkPrinterOptionWidget))
 
 static void gtk_printer_option_widget_set_property (GObject      *object,
 						    guint         prop_id,
@@ -108,8 +109,6 @@ gtk_printer_option_widget_class_init (GtkPrinterOptionWidgetClass *class)
 
   widget_class->mnemonic_activate = gtk_printer_option_widget_mnemonic_activate;
 
-  g_type_class_add_private (class, sizeof (GtkPrinterOptionWidgetPrivate));  
-
   signals[CHANGED] =
     g_signal_new ("changed",
 		  G_TYPE_FROM_CLASS (class),
@@ -132,7 +131,7 @@ gtk_printer_option_widget_class_init (GtkPrinterOptionWidgetClass *class)
 static void
 gtk_printer_option_widget_init (GtkPrinterOptionWidget *widget)
 {
-  gtk_printer_option_widget_get_props (widget)->priv = GTK_PRINTER_OPTION_WIDGET_GET_PRIVATE (widget);
+  gtk_printer_option_widget_get_props (widget)->priv = gtk_printer_option_widget_get_instance_private (widget);
 
   __gtk_box_set_spacing (GTK_BOX (widget), 12);
 }

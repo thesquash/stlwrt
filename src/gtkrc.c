@@ -1128,12 +1128,13 @@ __gtk_rc_parse (const gchar *filename)
 
 /* Handling of RC styles */
 
-STLWRT_DEFINE_FTYPE (GtkRcStyle, gtk_rc_style, G_TYPE_OBJECT, G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_FTYPE (GtkRcStyle, gtk_rc_style, G_TYPE_OBJECT, G_TYPE_FLAG_NONE,
+                     G_ADD_PRIVATE (GtkRcStyle))
 
 static void
 gtk_rc_style_init (GtkRcStyle *style)
 {
-  GtkRcStylePrivate *priv = GTK_RC_STYLE_GET_PRIVATE (style);
+  GtkRcStylePrivate *priv = gtk_rc_style_get_instance_private (style);
   guint i;
 
   style->name = NULL;
@@ -1171,8 +1172,6 @@ gtk_rc_style_class_init (GtkRcStyleClass *klass)
   klass->create_rc_style = gtk_rc_style_real_create_rc_style;
   klass->merge = gtk_rc_style_real_merge;
   klass->create_style = gtk_rc_style_real_create_style;
-
-  g_type_class_add_private (object_class, sizeof (GtkRcStylePrivate));
 }
 
 static void
@@ -1184,7 +1183,7 @@ gtk_rc_style_finalize (GObject *object)
   gint i;
 
   rc_style = GTK_RC_STYLE (object);
-  rc_priv = GTK_RC_STYLE_GET_PRIVATE (rc_style);
+  rc_priv = gtk_rc_style_get_instance_private (rc_style);
 
   g_free (rc_style->name);
   if (rc_style->font_desc)
@@ -1342,7 +1341,7 @@ gtk_rc_style_real_create_rc_style (GtkRcStyle *style)
 GSList *
 ___gtk_rc_style_get_color_hashes (GtkRcStyle *rc_style)
 {
-  GtkRcStylePrivate *priv = GTK_RC_STYLE_GET_PRIVATE (rc_style);
+  GtkRcStylePrivate *priv = gtk_rc_style_get_instance_private (rc_style);
 
   return priv->color_hashes;
 }
@@ -1490,7 +1489,7 @@ gtk_rc_style_prepend_empty_icon_factory (GtkRcStyle *rc_style)
 static void
 gtk_rc_style_prepend_empty_color_hash (GtkRcStyle *rc_style)
 {
-  GtkRcStylePrivate *priv = GTK_RC_STYLE_GET_PRIVATE (rc_style);
+  GtkRcStylePrivate *priv = gtk_rc_style_get_instance_private (rc_style);
   GHashTable        *hash = g_hash_table_new_full (g_str_hash, g_str_equal,
                                                    g_free,
                                                    (GDestroyNotify) __gdk_color_free);
@@ -1513,8 +1512,8 @@ static void
 gtk_rc_style_append_color_hashes (GtkRcStyle *rc_style,
                                   GtkRcStyle *src_style)
 {
-  GtkRcStylePrivate *priv     = GTK_RC_STYLE_GET_PRIVATE (rc_style);
-  GtkRcStylePrivate *src_priv = GTK_RC_STYLE_GET_PRIVATE (src_style);
+  GtkRcStylePrivate *priv     = gtk_rc_style_get_instance_private (rc_style);
+  GtkRcStylePrivate *src_priv = gtk_rc_style_get_instance_private (src_style);
   GSList            *concat   = g_slist_copy (src_priv->color_hashes);
 
   g_slist_foreach (concat, (GFunc) g_hash_table_ref, NULL);
@@ -1527,11 +1526,11 @@ __gtk_rc_style_copy_icons_and_colors (GtkRcStyle   *rc_style,
                                     GtkRcStyle   *src_style,
                                     GtkRcContext *context)
 {
-  GtkRcStylePrivate *priv = GTK_RC_STYLE_GET_PRIVATE (rc_style);
+  GtkRcStylePrivate *priv = gtk_rc_style_get_instance_private (rc_style);
 
   if (src_style)
     {
-      GtkRcStylePrivate *src_priv = GTK_RC_STYLE_GET_PRIVATE (src_style);
+      GtkRcStylePrivate *src_priv = gtk_rc_style_get_instance_private (src_style);
 
       /* Append src_style's factories, adding a ref to them */
       if (src_style->icon_factories != NULL)
@@ -2491,7 +2490,7 @@ lookup_color (GtkRcStyle *style,
               const char *color_name,
               GdkColor   *color)
 {
-  GtkRcStylePrivate *priv = GTK_RC_STYLE_GET_PRIVATE (style);
+  GtkRcStylePrivate *priv = gtk_rc_style_get_instance_private (style);
   GSList *iter;
 
   for (iter = priv->color_hashes; iter != NULL; iter = iter->next)
@@ -3046,7 +3045,7 @@ __gtk_rc_parse_style (GtkRcContext *context,
 	rc_style->color_flags[i] = 0;
     }
 
-  rc_priv = GTK_RC_STYLE_GET_PRIVATE (rc_style);
+  rc_priv = gtk_rc_style_get_instance_private (rc_style);
 
   /* If there's a list, its first member is always the factory belonging
    * to this RcStyle
@@ -3657,7 +3656,7 @@ __gtk_rc_parse_engine (GtkRcContext *context,
 
       parsed_curlies = TRUE;
 
-      rc_priv = GTK_RC_STYLE_GET_PRIVATE (*rc_style);
+      rc_priv = gtk_rc_style_get_instance_private (*rc_style);
 
       if (G_OBJECT_TYPE (*rc_style) != GTK_TYPE_RC_STYLE)
 	{
@@ -3671,7 +3670,7 @@ __gtk_rc_parse_engine (GtkRcContext *context,
            */
           new_style->icon_factories = (*rc_style)->icon_factories;
           (*rc_style)->icon_factories = NULL;
-          new_priv = GTK_RC_STYLE_GET_PRIVATE (new_style);
+          new_priv = gtk_rc_style_get_instance_private (new_style);
           new_priv->color_hashes = rc_priv->color_hashes;
           rc_priv->color_hashes = NULL;
 	}
@@ -3690,7 +3689,7 @@ __gtk_rc_parse_engine (GtkRcContext *context,
 	{
 	  GtkRcStyleClass *new_class;
 	  
-	  rc_priv = GTK_RC_STYLE_GET_PRIVATE (*rc_style);
+	  rc_priv = gtk_rc_style_get_instance_private (*rc_style);
 	  new_style = gtk_theme_engine_create_rc_style (engine);
 	  g_type_module_unuse (G_TYPE_MODULE (engine));
 	  
@@ -3705,7 +3704,7 @@ __gtk_rc_parse_engine (GtkRcContext *context,
            */
           new_style->icon_factories = (*rc_style)->icon_factories;
           (*rc_style)->icon_factories = NULL;
-          new_priv = GTK_RC_STYLE_GET_PRIVATE (new_style);
+          new_priv = gtk_rc_style_get_instance_private (new_style);
           new_priv->color_hashes = rc_priv->color_hashes;
           rc_priv->color_hashes = NULL;
 	  

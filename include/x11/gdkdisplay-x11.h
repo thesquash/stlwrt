@@ -51,7 +51,7 @@ typedef enum
   GDK_YES
 } GdkTristate;
 
-STLWRT_DECLARE_FTYPE (GdkDisplayX11, _gdk_display_x11, GdkDisplay,
+STLWRT_DECLARE_FTYPE_FPARENT (GdkDisplayX11, _gdk_display_x11, GdkDisplay,
   Display *xdisplay;
   GdkScreen *default_screen;
   GdkScreen **screens;

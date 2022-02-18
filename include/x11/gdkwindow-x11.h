@@ -48,7 +48,7 @@ typedef struct _GdkXPositionInfo GdkXPositionInfo;
 #define GDK_IS_WINDOW_IMPL_X11_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GDK_TYPE_WINDOW_IMPL_X11))
 #define GDK_WINDOW_IMPL_X11_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GDK_TYPE_WINDOW_IMPL_X11, GdkWindowImplX11Class))
 
-STLWRT_DECLARE_FTYPE (GdkWindowImplX11, gdk_window_impl_x11, GdkDrawableImplX11,
+STLWRT_DECLARE_FTYPE_FPARENT (GdkWindowImplX11, gdk_window_impl_x11, GdkDrawableImplX11,
   GdkToplevelX11 *toplevel;	/* Toplevel-specific information */
   GdkCursor *cursor;
   gint8 toplevel_window_type;

@@ -3,10 +3,23 @@
 #ifndef __STLWRT_TYPEDEFS_H__
 #define __STLWRT_TYPEDEFS_H__
 
+/* A workaround for applications that expect that a GdkPixmap can be passed
+ * to a function that accepts a GdkDrawable.  Same workaround for GdkWindow.
+ */
+
+#ifndef STLWRT_COMPILATION
+typedef struct _GdkDrawable GdkBitmap;
+typedef struct _GdkDrawable GdkPixmap;
+typedef struct _GdkDrawable GdkWindow;
+#else
+typedef struct _GdkBitmap GdkBitmap;
+typedef struct _GdkPixmap GdkPixmap;
+typedef struct _GdkWindow GdkWindow;
+#endif
+
 /* Ftypes, boxed types, opaque types, interfaces, structures */
 
 typedef struct _GdkAppLaunchContext GdkAppLaunchContext;
-typedef struct _GdkBitmap GdkBitmap;
 typedef struct _GdkColor GdkColor;
 typedef struct _GdkColormap GdkColormap;
 typedef struct _GdkCursor GdkCursor;
@@ -20,12 +33,10 @@ typedef struct _GdkGC GdkGC;
 typedef struct _GdkGCValues GdkGCValues;
 typedef struct _GdkImage GdkImage;
 typedef struct _GdkPangoRenderer GdkPangoRenderer;
-typedef struct _GdkPixmap GdkPixmap;
 typedef struct _GdkRectangle GdkRectangle;
 typedef struct _GdkRegion GdkRegion;
 typedef struct _GdkScreen GdkScreen;
 typedef struct _GdkVisual GdkVisual;
-typedef struct _GdkWindow GdkWindow;
 typedef struct _GdkWindowImplIface GdkWindowImpl;
 typedef struct _GdkWindowImplIface GdkWindowImplIface;
 typedef struct _GdkWindowImplIface GdkWindowImplInterface;

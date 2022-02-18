@@ -88,39 +88,6 @@ static GQuark          quark_password_hint  = 0;
 static GQuark          quark_cursor_hadjustment = 0;
 static GQuark          quark_capslock_feedback = 0;
 
-typedef struct _GtkEntryPrivate GtkEntryPrivate;
-
-struct _GtkEntryPrivate 
-{
-  GtkEntryBuffer* buffer;
-
-  gfloat xalign;
-  gint insert_pos;
-  guint blink_time;  /* time in msec the cursor has blinked since last user event */
-  guint interior_focus          : 1;
-  guint real_changed            : 1;
-  guint invisible_char_set      : 1;
-  guint caps_lock_warning       : 1;
-  guint caps_lock_warning_shown : 1;
-  guint change_count            : 8;
-  guint progress_pulse_mode     : 1;
-  guint progress_pulse_way_back : 1;
-
-  gint focus_width;
-  GtkShadowType shadow_type;
-
-  gdouble progress_fraction;
-  gdouble progress_pulse_fraction;
-  gdouble progress_pulse_current;
-
-  EntryIconInfo *icons[MAX_ICONS];
-  gint icon_margin;
-  gint start_x;
-  gint start_y;
-
-  gchar *im_module;
-};
-
 typedef struct
 {
   GdkWindow *window;
@@ -157,6 +124,39 @@ struct _GtkEntryCapslockFeedback
   GtkWidget *entry;
   GtkWidget *window;
   GtkWidget *label;
+};
+
+typedef struct _GtkEntryPrivate GtkEntryPrivate;
+
+struct _GtkEntryPrivate 
+{
+  GtkEntryBuffer* buffer;
+
+  gfloat xalign;
+  gint insert_pos;
+  guint blink_time;  /* time in msec the cursor has blinked since last user event */
+  guint interior_focus          : 1;
+  guint real_changed            : 1;
+  guint invisible_char_set      : 1;
+  guint caps_lock_warning       : 1;
+  guint caps_lock_warning_shown : 1;
+  guint change_count            : 8;
+  guint progress_pulse_mode     : 1;
+  guint progress_pulse_way_back : 1;
+
+  gint focus_width;
+  GtkShadowType shadow_type;
+
+  gdouble progress_fraction;
+  gdouble progress_pulse_fraction;
+  gdouble progress_pulse_current;
+
+  EntryIconInfo *icons[MAX_ICONS];
+  gint icon_margin;
+  gint start_x;
+  gint start_y;
+
+  gchar *im_module;
 };
 
 enum {

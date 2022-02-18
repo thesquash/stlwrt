@@ -31,6 +31,7 @@
 
 #include <stlwrt-typedefs.h>
 #include <stlwrt-enum-types.h>
+#include <stlwrt-object-declarations.h>
 
 #include <gdkenums.h>
 #include <gtkenums.h>

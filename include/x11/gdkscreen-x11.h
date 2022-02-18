@@ -44,7 +44,7 @@ typedef struct _GdkScreenX11Class GdkScreenX11Class;
 
 typedef struct _GdkX11Monitor GdkX11Monitor;
 
-STLWRT_DECLARE_FTYPE (GdkScreenX11, _gdk_screen_x11, GdkScreen,
+STLWRT_DECLARE_FTYPE_FPARENT (GdkScreenX11, _gdk_screen_x11, GdkScreen,
   GdkDisplay *display;
   Display *xdisplay;
   Screen *xscreen;

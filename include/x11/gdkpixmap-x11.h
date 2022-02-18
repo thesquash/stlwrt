@@ -39,7 +39,7 @@ typedef struct _GdkPixmapImplX11Class GdkPixmapImplX11Class;
 #define GDK_IS_PIXMAP_IMPL_X11_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GDK_TYPE_PIXMAP_IMPL_X11))
 #define GDK_PIXMAP_IMPL_X11_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GDK_TYPE_PIXMAP_IMPL_X11, GdkPixmapImplX11Class))
 
-STLWRT_DECLARE_FTYPE (GdkPixmapImplX11, gdk_pixmap_impl_x11, GdkDrawableImplX11,
+STLWRT_DECLARE_FTYPE_FPARENT (GdkPixmapImplX11, gdk_pixmap_impl_x11, GdkDrawableImplX11,
   gint width;
   gint height;
 

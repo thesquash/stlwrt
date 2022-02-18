@@ -44,7 +44,7 @@ typedef struct _GdkCursorPrivate       GdkCursorPrivate;
 typedef struct _GdkVisualPrivate       GdkVisualPrivate;
 typedef struct _GdkGCX11Class GdkGCX11Class;
 
-STLWRT_DECLARE_FTYPE (GdkGCX11, _gdk_gc_x11, GdkGC,
+STLWRT_DECLARE_FTYPE_FPARENT (GdkGCX11, _gdk_gc_x11, GdkGC,
   GC xgc;
   GdkScreen *screen;
   guint16 dirty_mask;

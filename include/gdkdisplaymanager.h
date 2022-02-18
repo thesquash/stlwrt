@@ -38,7 +38,7 @@ typedef struct _GdkDisplayManagerClass GdkDisplayManagerClass;
 #define GDK_IS_DISPLAY_MANAGER_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GDK_TYPE_DISPLAY_MANAGER))
 #define GDK_DISPLAY_MANAGER_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GDK_TYPE_DISPLAY_MANAGER, GdkDisplayManagerClass))
 
-STLWRT_DECLARE_OPAQUE_TYPE(GdkDisplayManager, gtk_display_manager)
+STLWRT_DECLARE_OPAQUE_TYPE(GdkDisplayManager, gdk_display_manager)
 
 struct _GdkDisplayManagerClass
 {

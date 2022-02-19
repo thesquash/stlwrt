@@ -585,13 +585,13 @@ make_solid_mask (GdkScreen *screen, gint width, gint height)
   GdkGC *gc;
   GdkGCValues gc_values;
   
-  bitmap = __gdk_pixmap_new (__gdk_screen_get_root_window (screen),
+  bitmap = __gdk_pixmap_new ((GdkDrawable *) __gdk_screen_get_root_window (screen),
 			   width, height, 1);
 
   gc_values.foreground.pixel = 1;
-  gc = __gdk_gc_new_with_values (bitmap, &gc_values, GDK_GC_FOREGROUND);
+  gc = __gdk_gc_new_with_values ((GdkDrawable *) bitmap, &gc_values, GDK_GC_FOREGROUND);
   
-  __gdk_draw_rectangle (bitmap, gc, TRUE, 0, 0, width, height);
+  __gdk_draw_rectangle ((GdkDrawable *) bitmap, gc, TRUE, 0, 0, width, height);
   
   g_object_unref (gc);
   
@@ -613,11 +613,11 @@ gdk_pixmap_colormap_new_from_pixbuf (GdkColormap    *colormap,
   GdkGC *tmp_gc;
   GdkScreen *screen = __gdk_colormap_get_screen (colormap);
   
-  pixmap = __gdk_pixmap_new (__gdk_screen_get_root_window (screen),
+  pixmap = __gdk_pixmap_new ((GdkDrawable *) __gdk_screen_get_root_window (screen),
 			   gdk_pixbuf_get_width (pixbuf),
 			   gdk_pixbuf_get_height (pixbuf),
 			   __gdk_colormap_get_visual (colormap)->depth);
-  __gdk_drawable_set_colormap (pixmap, colormap);
+  __gdk_drawable_set_colormap ((GdkDrawable *) pixmap, colormap);
   
   if (transparent_color)
     {
@@ -631,8 +631,8 @@ gdk_pixmap_colormap_new_from_pixbuf (GdkColormap    *colormap,
   else
     render_pixbuf = pixbuf;
 
-  tmp_gc = _gdk_drawable_get_scratch_gc (pixmap, FALSE);
-  __gdk_draw_pixbuf (pixmap, tmp_gc, render_pixbuf, 0, 0, 0, 0,
+  tmp_gc = _gdk_drawable_get_scratch_gc ((GdkDrawable *) pixmap, FALSE);
+  __gdk_draw_pixbuf ((GdkDrawable *) pixmap, tmp_gc, render_pixbuf, 0, 0, 0, 0,
 		   gdk_pixbuf_get_width (render_pixbuf),
 		   gdk_pixbuf_get_height (render_pixbuf),
 		   GDK_RGB_DITHER_NORMAL, 0, 0);
@@ -841,5 +841,5 @@ __gdk_pixmap_get_size (GdkPixmap *pixmap,
 {
     g_return_if_fail (GDK_IS_PIXMAP (pixmap));
 
-    __gdk_drawable_get_size (pixmap, width, height);
+    __gdk_drawable_get_size ((GdkDrawable *) pixmap, width, height);
 }

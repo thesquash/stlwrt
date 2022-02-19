@@ -1227,7 +1227,7 @@ __gdk_pixbuf_get_from_drawable (GdkPixbuf   *dest,
      * foreign windows or Gdk toplevels.  I.e. if a window manager
      * unmapped one of its own windows, this won't work.
      */
-    g_return_val_if_fail (__gdk_window_is_viewable (src), NULL);
+    g_return_val_if_fail (__gdk_window_is_viewable ((GdkWindow *) src), NULL);
 
   if (!dest)
     g_return_val_if_fail (dest_x == 0 && dest_y == 0, NULL);

@@ -1280,7 +1280,7 @@ __gdk_window_new (GdkWindow     *parent,
       parent = __gdk_screen_get_root_window (screen);
     }
   else
-    screen = __gdk_drawable_get_screen (parent);
+    screen = __gdk_drawable_get_screen ((GdkDrawable *) parent);
 
   g_return_val_if_fail (GDK_IS_WINDOW (parent), NULL);
 
@@ -2781,7 +2781,7 @@ gdk_window_begin_implicit_paint (GdkWindow *window, GdkRectangle *rect)
   paint->flushed = FALSE;
   paint->surface = NULL;
   paint->pixmap =
-    __gdk_pixmap_new (window,
+    __gdk_pixmap_new ((GdkDrawable *) window,
 		    MAX (rect->width, 1), MAX (rect->height, 1), -1);
 
   private->implicit_paint = paint;
@@ -3000,11 +3000,11 @@ __gdk_window_begin_paint_region (GdkWindow       *window,
       paint->x_offset = clip_box.x;
       paint->y_offset = clip_box.y;
       paint->pixmap =
-	__gdk_pixmap_new (window,
+	__gdk_pixmap_new ((GdkDrawable *) window,
 			MAX (clip_box.width, 1), MAX (clip_box.height, 1), -1);
     }
 
-  paint->surface = _gdk_drawable_ref_cairo_surface (paint->pixmap);
+  paint->surface = _gdk_drawable_ref_cairo_surface ((GdkDrawable *) paint->pixmap);
 
   if (paint->surface)
     cairo_surface_set_device_offset (paint->surface,
@@ -3253,7 +3253,7 @@ do_move_region_bits_on_impl (GdkWindow *impl_window,
       dy -= private->parent->abs_y + private->y;
       private = gdk_window_get_impl_window (private->parent);
     }
-  tmp_gc = _gdk_drawable_get_subwindow_scratch_gc ((GdkWindow *)private);
+  tmp_gc = _gdk_drawable_get_subwindow_scratch_gc ((GdkDrawable *) private);
 
   __gdk_region_get_clipbox (dest_region, &copy_rect);
   __gdk_gc_set_clip_region (tmp_gc, dest_region);
@@ -4104,12 +4104,12 @@ gdk_window_get_composite_drawable (GdkDrawable *drawable,
     return g_object_ref (_gdk_drawable_get_source_drawable (drawable));
 
   tmp_pixmap = __gdk_pixmap_new (drawable, width, height, -1);
-  tmp_gc = _gdk_drawable_get_scratch_gc (tmp_pixmap, FALSE);
+  tmp_gc = _gdk_drawable_get_scratch_gc ((GdkDrawable *) tmp_pixmap, FALSE);
 
   source = _gdk_drawable_get_source_drawable (drawable);
 
   /* Copy the current window contents */
-  __gdk_draw_drawable (tmp_pixmap,
+  __gdk_draw_drawable ((GdkDrawable *) tmp_pixmap,
 		     tmp_gc,
 		     GDK_WINDOW (source)->impl,
 		     x - *composite_x_offset,
@@ -4125,7 +4125,7 @@ gdk_window_get_composite_drawable (GdkDrawable *drawable,
       __gdk_gc_set_clip_region (tmp_gc, paint->region);
       __gdk_gc_set_clip_origin (tmp_gc, -x  - paint->x_offset, -y  - paint->y_offset);
 
-      __gdk_draw_drawable (tmp_pixmap, tmp_gc, paint->pixmap,
+      __gdk_draw_drawable ((GdkDrawable *) tmp_pixmap, tmp_gc, paint->pixmap,
 			 x - paint->x_offset,
 			 y - paint->y_offset,
 			 0, 0, width, height);
@@ -4141,7 +4141,7 @@ gdk_window_get_composite_drawable (GdkDrawable *drawable,
       __gdk_gc_set_clip_region (tmp_gc, paint->region);
       __gdk_gc_set_clip_origin (tmp_gc, -x, -y);
 
-      __gdk_draw_drawable (tmp_pixmap, tmp_gc, paint->pixmap,
+      __gdk_draw_drawable ((GdkDrawable *) tmp_pixmap, tmp_gc, paint->pixmap,
 			 x - paint->x_offset,
 			 y - paint->y_offset,
 			 0, 0, width, height);
@@ -4525,7 +4525,7 @@ setup_backing_rect_method (BackingRectMethod *method, GdkWindow *window, GdkWind
 
       gc_mask = GDK_GC_FILL | GDK_GC_TILE | GDK_GC_TS_X_ORIGIN | GDK_GC_TS_Y_ORIGIN;
 
-      method->gc = __gdk_gc_new_with_values (paint->pixmap, &gc_values, gc_mask);
+      method->gc = __gdk_gc_new_with_values ((GdkDrawable *) paint->pixmap, &gc_values, gc_mask);
 #endif
     }
   else
@@ -5145,7 +5145,7 @@ gdk_window_ref_cairo_surface (GdkDrawable *drawable)
 	  int width, height;
 	  GdkDrawable *source;
 
-          __gdk_drawable_get_size ((GdkWindow *) private->impl_window,
+          __gdk_drawable_get_size ((GdkDrawable *) private->impl_window,
                                  &width, &height);
 
 	  source = _gdk_drawable_get_source_drawable (drawable);
@@ -5867,7 +5867,7 @@ draw_ugly_color (GdkWindow       *window,
   GdkGC *ugly_gc;
   GdkRectangle clipbox;
 
-  ugly_gc = __gdk_gc_new (window);
+  ugly_gc = __gdk_gc_new ((GdkDrawable *) window);
   __gdk_gc_set_rgb_fg_color (ugly_gc, &ugly_color);
   __gdk_gc_set_clip_region (ugly_gc, region);
 
@@ -8069,11 +8069,11 @@ __gdk_window_set_back_pixmap (GdkWindow *window,
 
   g_return_if_fail (GDK_IS_WINDOW (window));
   g_return_if_fail (pixmap == NULL || !parent_relative);
-  g_return_if_fail (pixmap == NULL || __gdk_drawable_get_depth ((GdkDrawable *)window) == __gdk_drawable_get_depth (pixmap));
+  g_return_if_fail (pixmap == NULL || __gdk_drawable_get_depth ((GdkDrawable *) window) == __gdk_drawable_get_depth ((GdkDrawable *) pixmap));
 
   private = (GdkWindow *) window;
 
-  if (pixmap && !__gdk_drawable_get_colormap (pixmap))
+  if (pixmap && !__gdk_drawable_get_colormap ((GdkDrawable *) pixmap))
     {
       g_warning ("__gdk_window_set_back_pixmap(): pixmap must have a colormap");
       return;
@@ -8136,7 +8136,7 @@ __gdk_window_get_background_pattern (GdkWindow *window)
           static cairo_user_data_key_t key;
           cairo_surface_t *surface;
 
-          surface = _gdk_drawable_ref_cairo_surface (private->bg_pixmap);
+          surface = _gdk_drawable_ref_cairo_surface ((GdkDrawable *) private->bg_pixmap);
           private->background = cairo_pattern_create_for_surface (surface);
           cairo_surface_destroy (surface);
 
@@ -10412,7 +10412,7 @@ do_synthesize_crossing_event (gpointer data)
   if (GDK_WINDOW_DESTROYED (changed_toplevel))
     return FALSE;
 
-  display = __gdk_drawable_get_display (changed_toplevel);
+  display = __gdk_drawable_get_display ((GdkDrawable *) changed_toplevel);
   serial = _gdk_windowing_window_get_next_serial (display);
 
   if (changed_toplevel == display->pointer_info.toplevel_under_pointer)

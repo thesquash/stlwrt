@@ -688,7 +688,7 @@ _gdk_gc_add_drawable_clip (GdkGC     *gc,
       GdkRectangle r;
       GdkOverlapType overlap;
 
-      __gdk_drawable_get_size (priv->clip_mask, &w, &h);
+      __gdk_drawable_get_size ((GdkDrawable *) priv->clip_mask, &w, &h);
 
       r.x = 0;
       r.y = 0;
@@ -705,13 +705,13 @@ _gdk_gc_add_drawable_clip (GdkGC     *gc,
 	   /* The region and the mask intersect, create a new clip mask that
 	      includes both areas */
 	  priv->old_clip_mask = g_object_ref (priv->clip_mask);
-	  new_mask = __gdk_pixmap_new (priv->old_clip_mask, w, h, -1);
+	  new_mask = __gdk_pixmap_new ((GdkDrawable *) priv->old_clip_mask, w, h, -1);
 	  tmp_gc = _gdk_drawable_get_scratch_gc ((GdkDrawable *)new_mask, FALSE);
 
 	  __gdk_gc_set_foreground (tmp_gc, &black);
-	  __gdk_draw_rectangle (new_mask, tmp_gc, TRUE, 0, 0, -1, -1);
+	  __gdk_draw_rectangle ((GdkDrawable *) new_mask, tmp_gc, TRUE, 0, 0, -1, -1);
 	  _gdk_gc_set_clip_region_internal (tmp_gc, region, TRUE); /* Takes ownership of region */
-	  __gdk_draw_drawable  (new_mask,
+	  __gdk_draw_drawable  ((GdkDrawable *) new_mask,
 			      tmp_gc,
 			      priv->old_clip_mask,
 			      0, 0,
@@ -1375,10 +1375,10 @@ make_stipple_tile_surface (cairo_t   *cr,
   cairo_surface_t *alpha_surface;
   gint width, height;
 
-  __gdk_drawable_get_size (stipple,
+  __gdk_drawable_get_size ((GdkDrawable *) stipple,
 			 &width, &height);
   
-  alpha_surface = _gdk_drawable_ref_cairo_surface (stipple);
+  alpha_surface = _gdk_drawable_ref_cairo_surface ((GdkDrawable *) stipple);
   
   surface = cairo_surface_create_similar (cairo_get_target (cr),
 					  CAIRO_CONTENT_COLOR_ALPHA,
@@ -1518,7 +1518,7 @@ _gdk_gc_update_context (GdkGC          *gc,
       __gdk_cairo_set_source_color (cr, &foreground);
       break;
     case GDK_TILED:
-      tile_surface = _gdk_drawable_ref_cairo_surface (priv->tile);
+      tile_surface = _gdk_drawable_ref_cairo_surface ((GdkDrawable *) priv->tile);
       break;
     case GDK_STIPPLED:
       tile_surface = make_stipple_tile_surface (cr, stipple, &foreground, NULL);

@@ -93,7 +93,7 @@ __gdk_image_get (GdkWindow *drawable,
   g_return_val_if_fail (width >= 0, NULL);
   g_return_val_if_fail (height >= 0, NULL);
   
-  return __gdk_drawable_get_image (drawable, x, y, width, height);
+  return __gdk_drawable_get_image ((GdkDrawable *) drawable, x, y, width, height);
 }
 
 /**

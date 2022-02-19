@@ -88,19 +88,19 @@ __gdk_pixbuf_render_threshold_alpha (GdkPixbuf *pixbuf,
   if (width == 0 || height == 0)
     return;
 
-  gc = _gdk_drawable_get_scratch_gc (bitmap, FALSE);
+  gc = _gdk_drawable_get_scratch_gc ((GdkDrawable *) bitmap, FALSE);
 
   if (!gdk_pixbuf_get_has_alpha (pixbuf))
     {
       color.pixel = (alpha_threshold == 255) ? 0 : 1;
       __gdk_gc_set_foreground (gc, &color);
-      __gdk_draw_rectangle (bitmap, gc, TRUE, dest_x, dest_y, width, height);
+      __gdk_draw_rectangle ((GdkDrawable *) bitmap, gc, TRUE, dest_x, dest_y, width, height);
       return;
     }
 
   color.pixel = 0;
   __gdk_gc_set_foreground (gc, &color);
-  __gdk_draw_rectangle (bitmap, gc, TRUE, dest_x, dest_y, width, height);
+  __gdk_draw_rectangle ((GdkDrawable *) bitmap, gc, TRUE, dest_x, dest_y, width, height);
 
   color.pixel = 1;
   __gdk_gc_set_foreground (gc, &color);
@@ -120,7 +120,7 @@ __gdk_pixbuf_render_threshold_alpha (GdkPixbuf *pixbuf,
 	  if (status != start_status)
 	    {
 	      if (!start_status)
-		__gdk_draw_line (bitmap, gc,
+		__gdk_draw_line ((GdkDrawable *) bitmap, gc,
 			       start + dest_x, y + dest_y,
 			       x - 1 + dest_x, y + dest_y);
 	      
@@ -132,7 +132,7 @@ __gdk_pixbuf_render_threshold_alpha (GdkPixbuf *pixbuf,
 	}
       
       if (!start_status)
-	__gdk_draw_line (bitmap, gc,
+	__gdk_draw_line ((GdkDrawable *) bitmap, gc,
 		       start + dest_x, y + dest_y,
 		       x - 1 + dest_x, y + dest_y);
     }
@@ -304,12 +304,12 @@ __gdk_pixbuf_render_pixmap_and_mask_for_colormap (GdkPixbuf   *pixbuf,
   if (pixmap_return)
     {
       GdkGC *gc;
-      *pixmap_return = __gdk_pixmap_new (__gdk_screen_get_root_window (screen),
+      *pixmap_return = __gdk_pixmap_new ((GdkDrawable *) __gdk_screen_get_root_window (screen),
 				       gdk_pixbuf_get_width (pixbuf), gdk_pixbuf_get_height (pixbuf),
 				       __gdk_colormap_get_visual (colormap)->depth);
 
       __gdk_drawable_set_colormap (GDK_DRAWABLE (*pixmap_return), colormap);
-      gc = _gdk_drawable_get_scratch_gc (*pixmap_return, FALSE);
+      gc = _gdk_drawable_get_scratch_gc ((GdkDrawable *) (*pixmap_return), FALSE);
 
       /* If the pixbuf has an alpha channel, using gdk_pixbuf_draw would give
        * random pixel values in the area that are within the mask, but semi-
@@ -317,13 +317,13 @@ __gdk_pixbuf_render_pixmap_and_mask_for_colormap (GdkPixbuf   *pixbuf,
        * see bug #487865.
        */
       if (gdk_pixbuf_get_has_alpha (pixbuf))
-        __gdk_draw_rgb_32_image (*pixmap_return, gc,
+        __gdk_draw_rgb_32_image ((GdkDrawable *) (*pixmap_return), gc,
                                0, 0,
                                gdk_pixbuf_get_width (pixbuf), gdk_pixbuf_get_height (pixbuf),
                                GDK_RGB_DITHER_NORMAL,
                                gdk_pixbuf_get_pixels (pixbuf), gdk_pixbuf_get_rowstride (pixbuf));
       else
-        __gdk_draw_pixbuf (*pixmap_return, gc, pixbuf, 
+        __gdk_draw_pixbuf ((GdkDrawable *) (*pixmap_return), gc, pixbuf, 
                          0, 0, 0, 0,
                          gdk_pixbuf_get_width (pixbuf), gdk_pixbuf_get_height (pixbuf),
                          GDK_RGB_DITHER_NORMAL,
@@ -334,7 +334,7 @@ __gdk_pixbuf_render_pixmap_and_mask_for_colormap (GdkPixbuf   *pixbuf,
     {
       if (gdk_pixbuf_get_has_alpha (pixbuf))
 	{
-	  *mask_return = __gdk_pixmap_new (__gdk_screen_get_root_window (screen),
+	  *mask_return = __gdk_pixmap_new ((GdkDrawable *) __gdk_screen_get_root_window (screen),
 					 gdk_pixbuf_get_width (pixbuf), gdk_pixbuf_get_height (pixbuf), 1);
 
 	  __gdk_pixbuf_render_threshold_alpha (pixbuf, *mask_return,

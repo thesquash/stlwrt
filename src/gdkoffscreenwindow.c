@@ -145,7 +145,7 @@ gdk_offscreen_window_create_gc (GdkDrawable     *drawable,
 {
   GdkOffscreenWindow *offscreen = GDK_OFFSCREEN_WINDOW (drawable);
 
-  return __gdk_gc_new_with_values (offscreen->pixmap, values, values_mask);
+  return __gdk_gc_new_with_values ((GdkDrawable *) offscreen->pixmap, values, values_mask);
 }
 
 static GdkImage*
@@ -160,7 +160,7 @@ gdk_offscreen_window_copy_to_image (GdkDrawable    *drawable,
 {
   GdkOffscreenWindow *offscreen = GDK_OFFSCREEN_WINDOW (drawable);
 
-  return __gdk_drawable_copy_to_image (offscreen->pixmap,
+  return __gdk_drawable_copy_to_image ((GdkDrawable *) offscreen->pixmap,
 				     image,
 				     src_x,
 				     src_y,
@@ -173,7 +173,7 @@ gdk_offscreen_window_ref_cairo_surface (GdkDrawable *drawable)
 {
   GdkOffscreenWindow *offscreen = GDK_OFFSCREEN_WINDOW (drawable);
 
-  return _gdk_drawable_ref_cairo_surface (offscreen->pixmap);
+  return _gdk_drawable_ref_cairo_surface ((GdkDrawable *) offscreen->pixmap);
 }
 
 static GdkColormap*
@@ -210,7 +210,7 @@ gdk_offscreen_window_get_depth (GdkDrawable *drawable)
 {
   GdkOffscreenWindow *offscreen = GDK_OFFSCREEN_WINDOW (drawable);
 
-  return __gdk_drawable_get_depth (offscreen->wrapper);
+  return __gdk_drawable_get_depth ((GdkDrawable *) offscreen->wrapper);
 }
 
 static GdkDrawable *
@@ -218,7 +218,7 @@ gdk_offscreen_window_get_source_drawable (GdkDrawable  *drawable)
 {
   GdkOffscreenWindow *offscreen = GDK_OFFSCREEN_WINDOW (drawable);
 
-  return _gdk_drawable_get_source_drawable (offscreen->pixmap);
+  return _gdk_drawable_get_source_drawable ((GdkDrawable *) offscreen->pixmap);
 }
 
 static GdkDrawable *
@@ -248,7 +248,7 @@ gdk_offscreen_window_get_visual (GdkDrawable    *drawable)
 {
   GdkOffscreenWindow *offscreen = GDK_OFFSCREEN_WINDOW (drawable);
 
-  return __gdk_drawable_get_visual (offscreen->wrapper);
+  return __gdk_drawable_get_visual ((GdkDrawable *) offscreen->wrapper);
 }
 
 static void
@@ -656,7 +656,7 @@ _gdk_offscreen_window_new (GdkWindow     *window,
 				      private->width,
 				      private->height,
 				      private->depth);
-  __gdk_drawable_set_colormap (offscreen->pixmap, offscreen->colormap);
+  __gdk_drawable_set_colormap ((GdkDrawable *) offscreen->pixmap, offscreen->colormap);
 }
 
 static gboolean
@@ -934,8 +934,8 @@ gdk_offscreen_window_move_resize_internal (GdkWindow *window,
 					  height,
 					  private->depth);
 
-      gc = _gdk_drawable_get_scratch_gc (offscreen->pixmap, FALSE);
-      __gdk_draw_drawable (offscreen->pixmap,
+      gc = _gdk_drawable_get_scratch_gc ((GdkDrawable *) offscreen->pixmap, FALSE);
+      __gdk_draw_drawable ((GdkDrawable *) offscreen->pixmap,
 			 gc,
 			 old_pixmap,
 			 0,0, 0, 0,
@@ -1070,7 +1070,7 @@ gdk_offscreen_window_set_back_pixmap (GdkWindow *window,
   if (pixmap &&
       private->bg_pixmap != GDK_PARENT_RELATIVE_BG &&
       private->bg_pixmap != GDK_NO_BG &&
-      !__gdk_drawable_get_colormap (pixmap))
+      !__gdk_drawable_get_colormap ((GdkDrawable *) pixmap))
     {
       g_warning ("__gdk_window_set_back_pixmap(): pixmap must have a colormap");
       return;

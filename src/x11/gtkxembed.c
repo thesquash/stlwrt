@@ -150,8 +150,6 @@ _gtk_xembed_send_message (GdkWindow        *recipient,
   g_return_if_fail (GDK_IS_WINDOW (recipient));
 
   display = __gdk_window_get_display (recipient);
-  GTK_NOTE (PLUGSOCKET,
-	    g_message ("Sending %s", _gtk_xembed_message_name (message)));
 
   memset (&xclient, 0, sizeof (xclient));
   xclient.window = GDK_WINDOW_XWINDOW (recipient);

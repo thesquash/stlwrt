@@ -823,8 +823,7 @@ gtk_status_icon_init (GtkStatusIcon *status_icon)
 {
   GtkStatusIconPrivate *priv;
 
-  priv = G_TYPE_INSTANCE_GET_PRIVATE (status_icon, GTK_TYPE_STATUS_ICON,
-				      GtkStatusIconPrivate);
+  priv = gtk_status_icon_get_instance_private (status_icon);
   status_icon->priv = priv;
   
   priv->storage_type = GTK_IMAGE_EMPTY;

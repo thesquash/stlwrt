@@ -344,11 +344,6 @@ gtk_builder_get_internal_child (GtkBuilder  *builder,
       if (!info)
         break;
 
-      GTK_NOTE (BUILDER,
-                g_print ("Trying to get internal child %s from %s\n",
-                         childname,
-                         __gtk_buildable_get_name (GTK_BUILDABLE (info->object))));
-
       if (GTK_IS_BUILDABLE (info->object))
           obj = __gtk_buildable_get_internal_child (GTK_BUILDABLE (info->object),
                                                   builder,
@@ -452,9 +447,6 @@ _gtk_builder_construct (GtkBuilder *builder,
       if (G_IS_INITIALLY_UNOWNED (obj))
         g_object_ref_sink (obj);
 
-      GTK_NOTE (BUILDER,
-                g_print ("created %s of type %s\n", info->id, info->class_name));
-
       for (i = 0; i < construct_parameters->len; i++)
         {
           GParameter *param = &g_array_index (construct_parameters,
@@ -540,11 +532,6 @@ _gtk_builder_add (GtkBuilder *builder,
 
   parent = ((ObjectInfo*)child_info->parent)->object;
   g_assert (GTK_IS_BUILDABLE (parent));
-
-  GTK_NOTE (BUILDER,
-            g_print ("adding %s to %s\n",
-                     __gtk_buildable_get_name (GTK_BUILDABLE (object)),
-                     __gtk_buildable_get_name (GTK_BUILDABLE (parent))));
   
   __gtk_buildable_add_child (GTK_BUILDABLE (parent), builder, object,
 			   child_info->type);

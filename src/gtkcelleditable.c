@@ -28,8 +28,6 @@
 
 
 typedef GtkCellEditableIface GtkCellEditableInterface;
-STLWRT_DEFINE_INTERFACE(GtkCellEditable, gtk_cell_editable, GTK_TYPE_WIDGET,
-                        gtk_cell_editable_default_init, ;)
 
 static void
 gtk_cell_editable_default_init (GtkCellEditableInterface *iface)
@@ -94,6 +92,9 @@ gtk_cell_editable_default_init (GtkCellEditableInterface *iface)
                 NULL,
                 G_TYPE_NONE, 0);
 }
+
+STLWRT_DEFINE_INTERFACE(GtkCellEditable, gtk_cell_editable, GTK_TYPE_WIDGET,
+                        gtk_cell_editable_default_init, ;)
 
 /**
  * __gtk_cell_editable_start_editing:

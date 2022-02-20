@@ -318,8 +318,6 @@ check_win32_special_cases (GtkIMContextSimple    *context_simple,
 	{
 	  gtk_im_context_simple_commit_char (GTK_IM_CONTEXT (context_simple), value);
 	  gtk_im_context_simple_get_props (context_simple)->compose_buffer[0] = 0;
-
-	  GTK_NOTE (MISC, g_print ("win32: U+%04X\n", value));
 	  return TRUE;
 	}
     }
@@ -339,7 +337,6 @@ check_win32_special_case_after_compact_match (GtkIMContextSimple    *context_sim
       IS_DEAD_KEY (gtk_im_context_simple_get_props (context_simple)->compose_buffer[0]))
     {
       gtk_im_context_simple_commit_char (GTK_IM_CONTEXT (context_simple), value);
-      GTK_NOTE (MISC, g_print ("win32: U+%04X ", value));
     }
 }
 
@@ -394,8 +391,6 @@ check_quartz_special_cases (GtkIMContextSimple *context_simple,
       gtk_im_context_simple_commit_char (GTK_IM_CONTEXT (context_simple),
                                          __gdk_keyval_to_unicode (value));
       gtk_im_context_simple_get_props (context_simple)->compose_buffer[0] = 0;
-
-      GTK_NOTE (MISC, g_print ("quartz: U+%04X\n", value));
       return TRUE;
     }
 
@@ -427,17 +422,14 @@ check_compact_table (GtkIMContextSimple    *context_simple,
 
   if (!seq_index)
     {
-      GTK_NOTE (MISC, g_print ("compact: no\n"));
       return FALSE;
     }
 
   if (seq_index && n_compose == 1)
     {
-      GTK_NOTE (MISC, g_print ("compact: yes\n"));
       return TRUE;
     }
 
-  GTK_NOTE (MISC, g_print ("compact: %d ", *seq_index));
   seq = NULL;
 
   for (i = n_compose-1; i < table->max_seq_len; i++)
@@ -458,8 +450,6 @@ check_compact_table (GtkIMContextSimple    *context_simple,
               else
                 {
                   g_signal_emit_by_name (context_simple, "preedit-changed");
-
-		  GTK_NOTE (MISC, g_print ("yes\n"));
       		  return TRUE;
                 }
              }
@@ -468,7 +458,6 @@ check_compact_table (GtkIMContextSimple    *context_simple,
 
   if (!seq)
     {
-      GTK_NOTE (MISC, g_print ("no\n"));
       return FALSE;
     }
   else
@@ -482,12 +471,9 @@ check_compact_table (GtkIMContextSimple    *context_simple,
       check_win32_special_case_after_compact_match (context_simple, n_compose, value);
 #endif
       gtk_im_context_simple_get_props (context_simple)->compose_buffer[0] = 0;
-
-      GTK_NOTE (MISC, g_print ("U+%04X\n", value));
       return TRUE;
     }
 
-  GTK_NOTE (MISC, g_print ("no\n"));
   return FALSE;
 }
 
@@ -1100,20 +1086,6 @@ gtk_im_context_simple_filter_keypress (GtkIMContext *context,
             return TRUE;
           tmp_list = tmp_list->next;
         }
-
-      GTK_NOTE (MISC, {
-	  g_print ("[ ");
-	  for (i = 0; i < n_compose; i++)
-	    {
-	      const gchar *keyval_name = __gdk_keyval_name (gtk_im_context_simple_get_props (context_simple)->compose_buffer[i]);
-	      
-	      if (keyval_name != NULL)
-		g_print ("%s ", keyval_name);
-	      else
-		g_print ("%04x ", gtk_im_context_simple_get_props (context_simple)->compose_buffer[i]);
-	    }
-	  g_print ("] ");
-	});
 
 #ifdef GDK_WINDOWING_WIN32
       if (check_win32_special_cases (context_simple, n_compose))

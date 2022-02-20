@@ -42,18 +42,6 @@ typedef enum  {
   GTK_DEBUG_BUILDER	= 1 << 11
 } GtkDebugFlag;
 
-#ifdef G_ENABLE_DEBUG
-
-#define GTK_NOTE(type,action)                G_STMT_START { \
-    if (gtk_debug_flags & GTK_DEBUG_##type)                 \
-       { action; };                          } G_STMT_END
-
-#else /* !G_ENABLE_DEBUG */
-
-#define GTK_NOTE(type, action)
-
-#endif /* G_ENABLE_DEBUG */
-
 #ifdef G_OS_WIN32
 #  ifdef STLWRT_COMPILATION
 #    define GTKVAR __declspec(dllexport)

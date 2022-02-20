@@ -376,7 +376,6 @@ load_module (GSList      *module_list,
 		    }
 		  else
 		    {
-		      GTK_NOTE (MODULES, g_print ("Module already loaded, ignoring: %s\n", name));
 		      info->names = g_slist_prepend (info->names, g_strdup (name));
 		      info->ref_count++;
 		      /* remove new reference count on module, we already have one */
@@ -417,9 +416,6 @@ gtk_module_info_unref (GtkModuleInfo *info)
 
   if (info->ref_count == 0) 
     {
-      GTK_NOTE (MODULES, 
-		g_print ("Unloading module: %s\n", g_module_name (info->module)));
-
       gtk_modules = g_slist_remove (gtk_modules, info);
       g_module_close (info->module);
       for (l = info->names; l; l = l->next)
@@ -435,8 +431,6 @@ load_modules (const char *module_str)
   gchar **module_names;
   GSList *module_list = NULL;
   gint i;
-
-  GTK_NOTE (MODULES, g_print ("Loading module list: %s\n", module_str));
 
   module_names = pango_split_file_list (module_str);
   for (i = 0; module_names[i]; i++) 
@@ -593,8 +587,6 @@ ___gtk_modules_settings_changed (GtkSettings *settings,
 			       const gchar *modules)
 {
   GSList *new_modules = NULL;
-
-  GTK_NOTE (MODULES, g_print ("gtk-modules setting changed to: %s\n", modules));
 
   /* load/ref before unreffing existing */
   if (modules && modules[0])

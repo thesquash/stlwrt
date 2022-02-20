@@ -758,9 +758,6 @@ __gtk_selection_owner_set (GtkWidget *widget,
     display = __gtk_widget_get_display (widget);
   else
     {
-      GTK_NOTE (MULTIHEAD,
-		g_warning ("__gtk_selection_owner_set (NULL,...) is not multihead safe"));
-		 
       display = __gdk_display_get_default ();
     }
   

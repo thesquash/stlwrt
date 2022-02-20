@@ -460,9 +460,7 @@ _gtk_search_engine_tracker_class_init (GtkSearchEngineTrackerClass *class)
 static void
 _gtk_search_engine_tracker_init (GtkSearchEngineTracker *engine)
 {
-  engine->priv = G_TYPE_INSTANCE_GET_PRIVATE (engine,
-                                              GTK_TYPE_SEARCH_ENGINE_TRACKER,
-                                              GtkSearchEngineTrackerPrivate);
+  engine->priv = _gtk_search_engine_tracker_get_instance_private (engine);
 }
 
 

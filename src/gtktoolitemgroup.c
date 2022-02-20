@@ -385,9 +385,7 @@ gtk_tool_item_group_init (GtkToolItemGroup *group)
 
   __gtk_widget_set_redraw_on_allocate (GTK_WIDGET (group), FALSE);
 
-  gtk_tool_item_group_get_props (group)->priv = priv = G_TYPE_INSTANCE_GET_PRIVATE (group,
-                                             GTK_TYPE_TOOL_ITEM_GROUP,
-                                             GtkToolItemGroupPrivate);
+  gtk_tool_item_group_get_props (group)->priv = priv = gtk_tool_item_group_get_instance_private (group);
 
   priv->children = NULL;
   priv->header_spacing = DEFAULT_HEADER_SPACING;

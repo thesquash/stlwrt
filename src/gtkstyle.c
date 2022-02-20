@@ -2313,8 +2313,6 @@ lookup_icon_size (GtkStyle    *style,
   else
     {
       settings = __gtk_settings_get_default ();
-      GTK_NOTE (MULTIHEAD,
-		g_warning ("Using the default screen for gtk_default_render_icon()"));
     }
 
   return __gtk_icon_size_lookup_for_settings (settings, size, width, height);
@@ -6888,8 +6886,6 @@ __gtk_style_get_font_internal (GtkStyle *style)
       else
 	{
 	  display = __gdk_display_get_default ();
-	  GTK_NOTE (MULTIHEAD,
-		    g_warning ("__gtk_style_get_font() should not be called on an unattached style"));
 	}
       
       if (style->font_desc)

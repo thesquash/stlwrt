@@ -358,9 +358,6 @@ handle_xembed_message (GtkSocket        *socket,
 		       glong             data2,
 		       guint32           time)
 {
-  GTK_NOTE (PLUGSOCKET,
-	    g_message ("GtkSocket: %s received", _gtk_xembed_message_name (message)));
-  
   switch (message)
     {
     case XEMBED_EMBEDDED_NOTIFY:
@@ -393,11 +390,6 @@ handle_xembed_message (GtkSocket        *socket,
 
     case XEMBED_GRAB_KEY:
     case XEMBED_UNGRAB_KEY:
-      break;
-      
-    default:
-      GTK_NOTE (PLUGSOCKET,
-		g_message ("GtkSocket: Ignoring unknown _XEMBED message of type %d", message));
       break;
     }
 }
@@ -450,11 +442,6 @@ _gtk_socket_windowing_filter_func (GdkXEvent *gdk_xevent,
 	if (!socket->plug_window)
 	  {
 	    _gtk_socket_add_window (socket, xcwe->window, FALSE);
-
-	    if (socket->plug_window)
-	      {
-		GTK_NOTE (PLUGSOCKET, g_message ("GtkSocket - window created"));
-	      }
 	  }
 	
 	return_val = GDK_FILTER_REMOVE;
@@ -475,11 +462,6 @@ _gtk_socket_windowing_filter_func (GdkXEvent *gdk_xevent,
 	    
 	    if (xcre->value_mask & (CWWidth | CWHeight))
 	      {
-		GTK_NOTE (PLUGSOCKET,
-			  g_message ("GtkSocket - configure request: %d %d",
-				     socket->request_width,
-				     socket->request_height));
-
 		private->resize_count++;
 		__gtk_widget_queue_resize (widget);
 	      }
@@ -504,8 +486,6 @@ _gtk_socket_windowing_filter_func (GdkXEvent *gdk_xevent,
 	if (socket->plug_window && (xdwe->window == GDK_WINDOW_XWINDOW (socket->plug_window)))
 	  {
 	    gboolean result;
-	    
-	    GTK_NOTE (PLUGSOCKET, g_message ("GtkSocket - destroy notify"));
 	    
 	    __gdk_window_destroy_notify (socket->plug_window);
 	    _gtk_socket_end_embedding (socket);
@@ -539,8 +519,6 @@ _gtk_socket_windowing_filter_func (GdkXEvent *gdk_xevent,
 	
       if (socket->plug_window)
 	{
-	  GTK_NOTE (PLUGSOCKET, g_message ("GtkSocket - Map Request"));
-
 	  _gtk_socket_handle_map_request (socket);
 	  return_val = GDK_FILTER_REMOVE;
 	}
@@ -553,7 +531,6 @@ _gtk_socket_windowing_filter_func (GdkXEvent *gdk_xevent,
 
 	  if (xevent->xproperty.atom == __gdk_x11_get_xatom_by_name_for_display (display, "WM_NORMAL_HINTS"))
 	    {
-	      GTK_NOTE (PLUGSOCKET, g_message ("GtkSocket - received PropertyNotify for plug's WM_NORMAL_HINTS"));
 	      socket->have_size = FALSE;
 	      __gtk_widget_queue_resize (widget);
 	      return_val = GDK_FILTER_REMOVE;
@@ -605,15 +582,9 @@ _gtk_socket_windowing_filter_func (GdkXEvent *gdk_xevent,
       {
 	XReparentEvent *xre = &xevent->xreparent;
 
-	GTK_NOTE (PLUGSOCKET, g_message ("GtkSocket - ReparentNotify received"));
 	if (!socket->plug_window && xre->parent == GDK_WINDOW_XWINDOW (widget->window))
 	  {
 	    _gtk_socket_add_window (socket, xre->window, FALSE);
-	    
-	    if (socket->plug_window)
-	      {
-		GTK_NOTE (PLUGSOCKET, g_message ("GtkSocket - window reparented"));
-	      }
 	    
 	    return_val = GDK_FILTER_REMOVE;
 	  }
@@ -641,8 +612,6 @@ _gtk_socket_windowing_filter_func (GdkXEvent *gdk_xevent,
       if (socket->plug_window &&
 	  xevent->xunmap.window == GDK_WINDOW_XWINDOW (socket->plug_window))
 	{
-	  GTK_NOTE (PLUGSOCKET, g_message ("GtkSocket - Unmap notify"));
-
 	  _gtk_socket_unmap_notify (socket);
 	  return_val = GDK_FILTER_REMOVE;
 	}

@@ -32,9 +32,6 @@
 #include <gtkprintbackend.h>
 
 
-#define gtk_print_backend_get_instance_private(o)  \
-   (G_TYPE_INSTANCE_GET_PRIVATE ((o), GTK_TYPE_PRINT_BACKEND, GtkPrintBackendPrivate))
-
 static void gtk_print_backend_dispose      (GObject      *object);
 static void gtk_print_backend_set_property (GObject      *object,
                                             guint         prop_id,
@@ -111,8 +108,7 @@ struct _GtkPrintBackendPrivate
 };
 
 STLWRT_DEFINE_FTYPE (GtkPrintBackendModule, _gtk_print_backend_module, G_TYPE_TYPE_MODULE,
-                     G_TYPE_FLAG_NONE,
-                     G_ADD_PRIVATE (GtkPrintBackendModule))
+                     G_TYPE_FLAG_NONE, ;)
 #define GTK_TYPE_PRINT_BACKEND_MODULE      (_gtk_print_backend_module_get_type ())
 #define GTK_PRINT_BACKEND_MODULE(module)   (G_TYPE_CHECK_INSTANCE_CAST ((module), GTK_TYPE_PRINT_BACKEND_MODULE, GtkPrintBackendModule))
 

@@ -969,11 +969,6 @@ gtk_accel_map_class_init (GtkAccelMapClass *accel_map_class)
 					     G_TYPE_STRING, G_TYPE_UINT, GDK_TYPE_MODIFIER_TYPE);
 }
 
-static void
-___gtk_accel_map_init (GtkAccelMap *accel_map)
-{
-}
-
 /**
  * __gtk_accel_map_get:
  * 

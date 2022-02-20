@@ -86,9 +86,7 @@ gtk_recent_chooser_dialog_class_init (GtkRecentChooserDialogClass *klass)
 static void
 gtk_recent_chooser_dialog_init (GtkRecentChooserDialog *dialog)
 {
-  GtkRecentChooserDialogPrivate *priv = G_TYPE_INSTANCE_GET_PRIVATE (dialog,
-  								     GTK_TYPE_RECENT_CHOOSER_DIALOG,
-  								     GtkRecentChooserDialogPrivate);
+  GtkRecentChooserDialogPrivate *priv = gtk_recent_chooser_dialog_get_instance_private (dialog);
   GtkDialog *rc_dialog = GTK_DIALOG (dialog);
   
   gtk_recent_chooser_dialog_get_props (dialog)->priv = priv;

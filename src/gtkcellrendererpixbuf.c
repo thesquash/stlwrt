@@ -666,7 +666,7 @@ gtk_cell_renderer_pixbuf_get_size (GtkCellRenderer *cell,
 
 static void
 gtk_cell_renderer_pixbuf_render (GtkCellRenderer      *cell,
-				 GdkWindow            *window,
+				 GdkDrawable          *window,
 				 GtkWidget            *widget,
 				 GdkRectangle         *background_area,
 				 GdkRectangle         *cell_area,
@@ -762,7 +762,7 @@ gtk_cell_renderer_pixbuf_render (GtkCellRenderer      *cell,
       pixbuf = colorized;
     }
 
-  cr = __gdk_cairo_create ((GdkDrawable *) (window));
+  cr = __gdk_cairo_create (window);
   
   __gdk_cairo_set_source_pixbuf (cr, pixbuf, pix_rect.x, pix_rect.y);
   __gdk_cairo_rectangle (cr, &draw_rect);

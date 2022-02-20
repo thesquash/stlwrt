@@ -152,20 +152,6 @@ enum {
 
 static guint socket_signals[LAST_SIGNAL] = { 0 };
 
-/*
- * _gtk_socket_get_instance_private:
- *
- * @socket: a #GtkSocket
- *
- * Returns the private data associated with a GtkSocket, creating it
- * first if necessary.
- */
-GtkSocketPrivate *
-_gtk_socket_get_instance_private (GtkSocket *socket)
-{
-  return G_TYPE_INSTANCE_GET_PRIVATE (socket, GTK_TYPE_SOCKET, GtkSocketPrivate);
-}
-
 STLWRT_DEFINE_VTYPE (GtkSocket, gtk_socket, GTK_TYPE_CONTAINER, G_TYPE_FLAG_NONE,
                      G_ADD_PRIVATE (GtkSocket))
 
@@ -437,7 +423,7 @@ gtk_socket_realize (GtkWidget *widget)
 void
 _gtk_socket_end_embedding (GtkSocket *socket)
 {
-  GtkSocketPrivate *private = _gtk_socket_get_instance_private (socket);
+  GtkSocketPrivate *private = gtk_socket_get_instance_private (socket);
   GtkWidget *toplevel = __gtk_widget_get_toplevel (GTK_WIDGET (socket));
   
   if (GTK_IS_WINDOW (toplevel))
@@ -525,7 +511,7 @@ gtk_socket_size_allocate (GtkWidget     *widget,
 	}
       else if (gtk_socket_get_props (socket)->plug_window)
 	{
-	  GtkSocketPrivate *private = _gtk_socket_get_instance_private (socket);
+	  GtkSocketPrivate *private = gtk_socket_get_instance_private (socket);
 	  
 	  __gdk_error_trap_push ();
 	  
@@ -537,10 +523,7 @@ gtk_socket_size_allocate (GtkWidget     *widget,
 				      allocation->width, allocation->height);
 	      if (private->resize_count)
 		private->resize_count--;
-	      
-	      GTK_NOTE (PLUGSOCKET,
-			g_message ("GtkSocket - allocated: %d %d",
-				   allocation->width, allocation->height));
+
 	      gtk_socket_get_props (socket)->current_width = allocation->width;
 	      gtk_socket_get_props (socket)->current_height = allocation->height;
 	    }
@@ -555,9 +538,6 @@ gtk_socket_size_allocate (GtkWidget     *widget,
  	    {
  	      _gtk_socket_windowing_send_configure_event (socket);
  	      private->resize_count--;
- 	      GTK_NOTE (PLUGSOCKET,
-			g_message ("GtkSocket - sending synthetic configure: %d %d",
-				   allocation->width, allocation->height));
  	    }
 	  
 	  __gdk_display_sync (__gtk_widget_get_display (widget));

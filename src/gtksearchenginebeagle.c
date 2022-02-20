@@ -380,7 +380,7 @@ _gtk_search_engine_beagle_class_init (GtkSearchEngineBeagleClass *class)
 static void
 _gtk_search_engine_beagle_init (GtkSearchEngineBeagle *engine)
 {
-  engine->priv = G_TYPE_INSTANCE_GET_PRIVATE (engine, GTK_TYPE_SEARCH_ENGINE_BEAGLE, GtkSearchEngineBeaglePrivate);
+  engine->priv = _gtk_search_engine_beagle_get_instance_private (engine);
 }
 
 

@@ -393,9 +393,6 @@ gtk_tray_icon_manager_filter (GdkXEvent *xevent,
       xev->xclient.message_type == icon->priv->manager_atom &&
       xev->xclient.data.l[1] == icon->priv->selection_atom)
     {
-      GTK_NOTE (PLUGSOCKET,
-		g_print ("GtkStatusIcon %p: tray manager appeared\n", icon));
-
       gtk_tray_icon_update_manager_window (icon);
     }
   else if (xev->xany.window == icon->priv->manager_window)
@@ -403,21 +400,12 @@ gtk_tray_icon_manager_filter (GdkXEvent *xevent,
       if (xev->xany.type == PropertyNotify &&
 	  xev->xproperty.atom == icon->priv->orientation_atom)
 	{
-          GTK_NOTE (PLUGSOCKET,
-		    g_print ("GtkStatusIcon %p: got PropertyNotify on manager window for orientation atom\n", icon));
-
 	  gtk_tray_icon_get_orientation_property (icon);
 	}
       else if (xev->xany.type == DestroyNotify)
 	{
-          GTK_NOTE (PLUGSOCKET,
-		    g_print ("GtkStatusIcon %p: got DestroyNotify for manager window\n", icon));
-
 	  gtk_tray_icon_manager_window_destroyed (icon);
 	}
-      else
-        GTK_NOTE (PLUGSOCKET,
-		  g_print ("GtkStatusIcon %p: got other message on manager window\n", icon));
     }
   
   return GDK_FILTER_CONTINUE;
@@ -457,10 +445,6 @@ gtk_tray_icon_send_manager_message (GtkTrayIcon *icon,
 static void
 gtk_tray_icon_send_dock_request (GtkTrayIcon *icon)
 {
-  GTK_NOTE (PLUGSOCKET,
-	    g_print ("GtkStatusIcon %p: sending dock request to manager window %lx\n",
-	    	     icon, (gulong) icon->priv->manager_window));
-
   gtk_tray_icon_send_manager_message (icon,
 				      SYSTEM_TRAY_REQUEST_DOCK,
 				      icon->priv->manager_window,
@@ -476,15 +460,8 @@ gtk_tray_icon_update_manager_window (GtkTrayIcon *icon)
   GdkDisplay *display = __gdk_screen_get_display (screen);
   Display *xdisplay = GDK_DISPLAY_XDISPLAY (display);
 
-  GTK_NOTE (PLUGSOCKET,
-	    g_print ("GtkStatusIcon %p: updating tray icon manager window, current manager window: %lx\n",
-		     icon, (gulong) icon->priv->manager_window));
-
   if (icon->priv->manager_window != None)
     return;
-
-  GTK_NOTE (PLUGSOCKET,
-	    g_print ("GtkStatusIcon %p: trying to find manager window\n", icon));
 
   XGrabServer (xdisplay);
   
@@ -501,10 +478,6 @@ gtk_tray_icon_update_manager_window (GtkTrayIcon *icon)
   if (icon->priv->manager_window != None)
     {
       GdkWindow *gdkwin;
-
-      GTK_NOTE (PLUGSOCKET,
-		g_print ("GtkStatusIcon %p: is being managed by window %lx\n",
-				icon, (gulong) icon->priv->manager_window));
 
       gdkwin = __gdk_window_lookup_for_display (display,
 					      icon->priv->manager_window);
@@ -534,18 +507,12 @@ gtk_tray_icon_update_manager_window (GtkTrayIcon *icon)
 	    }
 	}
     }
-  else
-    GTK_NOTE (PLUGSOCKET,
-	      g_print ("GtkStatusIcon %p: no tray manager found\n", icon));
 }
 
 static void
 gtk_tray_icon_manager_window_destroyed (GtkTrayIcon *icon)
 {
   g_return_if_fail (icon->priv->manager_window != None);
-
-  GTK_NOTE (PLUGSOCKET,
-	    g_print ("GtkStatusIcon %p: tray manager window destroyed\n", icon));
 
   gtk_tray_icon_clear_manager_window (icon);
 }
@@ -557,10 +524,6 @@ gtk_tray_icon_delete (GtkWidget   *widget,
 #ifdef G_ENABLE_DEBUG
   GtkTrayIcon *icon = GTK_TRAY_ICON (widget);
 #endif
-
-  GTK_NOTE (PLUGSOCKET,
-	    g_print ("GtkStatusIcon %p: delete notify, tray manager window %lx\n",
-		     icon, (gulong) icon->priv->manager_window));
 
   /* A bug in X server versions up to x.org 1.5.0 means that:
    * XFixesChangeSaveSet(...., SaveSetRoot, SaveSetUnmap) doesn't work properly
@@ -628,13 +591,6 @@ gtk_tray_icon_realize (GtkWidget *widget)
       /* Set a parent-relative background pixmap */
       __gdk_window_set_back_pixmap (widget->window, NULL, TRUE);
     }
-
-  GTK_NOTE (PLUGSOCKET,
-	    g_print ("GtkStatusIcon %p: realized, window: %lx, socket window: %lx\n",
-		     widget,
-		     (gulong) GDK_WINDOW_XWINDOW (widget->window),
-		     GTK_PLUG (icon)->socket_window ?
-			     (gulong) GDK_WINDOW_XWINDOW (GTK_PLUG (icon)->socket_window) : 0UL));
 
   if (icon->priv->manager_window != None)
     gtk_tray_icon_send_dock_request (icon);

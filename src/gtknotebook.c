@@ -1677,10 +1677,10 @@ gtk_notebook_get_event_window_position (GtkNotebook  *notebook,
                   if (priv->action_widget[i] &&
                       __gtk_widget_get_visible (priv->action_widget[i]))
                     {
-                      rectangle->width -= priv->action_widget[i])gtk_widget_get_props (->allocation.width;
+                      rectangle->width -= gtk_widget_get_props (priv->action_widget[i])->allocation.width;
                       if ((!is_rtl && i == ACTION_WIDGET_START) ||
                           (is_rtl && i == ACTION_WIDGET_END))
-                        rectangle->x += priv->action_widget[i])gtk_widget_get_props (->allocation.width;
+                        rectangle->x += gtk_widget_get_props (priv->action_widget[i])->allocation.width;
                     }
                 }
 	      break;
@@ -1696,10 +1696,10 @@ gtk_notebook_get_event_window_position (GtkNotebook  *notebook,
                   if (priv->action_widget[i] &&
                       __gtk_widget_get_visible (priv->action_widget[i]))
                     {
-                      rectangle->height -= priv->action_widget[i])gtk_widget_get_props (->allocation.height;
+                      rectangle->height -= gtk_widget_get_props (priv->action_widget[i])->allocation.height;
 
                       if (i == ACTION_WIDGET_START)
-                        rectangle->y += priv->action_widget[i])gtk_widget_get_props (->allocation.height;
+                        rectangle->y += gtk_widget_get_props (priv->action_widget[i])->allocation.height;
                     }
                 }
               break;
@@ -2221,14 +2221,14 @@ gtk_notebook_size_allocate (GtkWidget     *widget,
 			gtk_widget_get_props (widget)->allocation.height - 2 * border_width - gtk_notebook_get_props (notebook)->cur_page->requisition.height;
 		      /* fall through */
 		    case GTK_POS_TOP:
-		      widget_allocation.width = priv->action_widget[i])gtk_widget_get_props (->requisition.width;
+		      widget_allocation.width = gtk_widget_get_props (priv->action_widget[i])->requisition.width;
 		      widget_allocation.height = gtk_notebook_get_props (notebook)->cur_page->requisition.height - gtk_widget_get_props (widget)->style->ythickness;
 
 		      if ((i == ACTION_WIDGET_START && is_rtl) ||
                           (i == ACTION_WIDGET_END && !is_rtl))
 			widget_allocation.x +=
 			  gtk_widget_get_props (widget)->allocation.width - 2 * border_width -
-			  priv->action_widget[i])gtk_widget_get_props (->requisition.width;
+			  gtk_widget_get_props (priv->action_widget[i])->requisition.width;
                       if (tab_pos == GTK_POS_TOP) /* no fall through */
                           widget_allocation.y += 2 * focus_width;
 		      break;
@@ -2237,13 +2237,13 @@ gtk_notebook_size_allocate (GtkWidget     *widget,
 			gtk_widget_get_props (widget)->allocation.width - 2 * border_width - gtk_notebook_get_props (notebook)->cur_page->requisition.width;
 		      /* fall through */
 		    case GTK_POS_LEFT:
-		      widget_allocation.height = priv->action_widget[i])gtk_widget_get_props (->requisition.height;
+		      widget_allocation.height = gtk_widget_get_props (priv->action_widget[i])->requisition.height;
 		      widget_allocation.width = gtk_notebook_get_props (notebook)->cur_page->requisition.width - gtk_widget_get_props (widget)->style->xthickness;
 
                       if (i == ACTION_WIDGET_END)
                         widget_allocation.y +=
                           gtk_widget_get_props (widget)->allocation.height - 2 * border_width -
-                          priv->action_widget[i])gtk_widget_get_props (->requisition.height;
+                          gtk_widget_get_props (priv->action_widget[i])->requisition.height;
                       if (tab_pos == GTK_POS_LEFT) /* no fall through */  
                         widget_allocation.x += 2 * focus_width;
 		      break;
@@ -5128,9 +5128,9 @@ gtk_notebook_tab_space (GtkNotebook *notebook,
             {
               if ((i == ACTION_WIDGET_START && !is_rtl) ||
                   (i == ACTION_WIDGET_END && is_rtl))
-                *min += priv->action_widget[i])gtk_widget_get_props (->allocation.width + gtk_widget_get_props (widget)->style->xthickness;
+                *min += gtk_widget_get_props (priv->action_widget[i])->allocation.width + gtk_widget_get_props (widget)->style->xthickness;
               else
-                *max -= priv->action_widget[i])gtk_widget_get_props (->allocation.width + gtk_widget_get_props (widget)->style->xthickness;
+                *max -= gtk_widget_get_props (priv->action_widget[i])->allocation.width + gtk_widget_get_props (widget)->style->xthickness;
             }
         }
 
@@ -5156,9 +5156,9 @@ gtk_notebook_tab_space (GtkNotebook *notebook,
           if (priv->action_widget[i])
             {
               if (i == ACTION_WIDGET_START)
-                *min += priv->action_widget[i])gtk_widget_get_props (->allocation.height + gtk_widget_get_props (widget)->style->ythickness;
+                *min += gtk_widget_get_props (priv->action_widget[i])->allocation.height + gtk_widget_get_props (widget)->style->ythickness;
               else
-                *max -= priv->action_widget[i])gtk_widget_get_props (->allocation.height + gtk_widget_get_props (widget)->style->ythickness;
+                *max -= gtk_widget_get_props (priv->action_widget[i])->allocation.height + gtk_widget_get_props (widget)->style->ythickness;
             }
         }
 

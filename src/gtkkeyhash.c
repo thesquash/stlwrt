@@ -419,11 +419,6 @@ _gtk_key_hash_lookup (GtkKeyHash      *key_hash,
   __gdk_keymap_map_virtual_modifiers (key_hash->keymap, &mask);
   __gdk_keymap_add_virtual_modifiers (key_hash->keymap, &state);
 
-  GTK_NOTE (KEYBINDINGS,
-	    g_message ("Looking up keycode = %u, modifiers = 0x%04x,\n"
-		       "    keyval = %u, group = %d, level = %d, consumed_modifiers = 0x%04x",
-		       hardware_keycode, state, keyval, effective_group, level, consumed_modifiers));
-
   if (keys)
     {
       GSList *tmp_list = keys;
@@ -455,10 +450,6 @@ _gtk_key_hash_lookup (GtkKeyHash      *key_hash,
                    (entry->modifiers & GTK_TOGGLE_GROUP_MOD_MASK)))
 
 		{
-		  GTK_NOTE (KEYBINDINGS,
-			    g_message ("  found exact match, keyval = %u, modifiers = 0x%04x",
-				       entry->keyval, entry->modifiers));
-
 		  if (!have_exact)
 		    {
 		      g_slist_free (results);
@@ -479,9 +470,6 @@ _gtk_key_hash_lookup (GtkKeyHash      *key_hash,
                           (!group_mod_is_accel_mod ||
                            entry->keys[i].group == effective_group))
 			{
-			  GTK_NOTE (KEYBINDINGS,
-				    g_message ("  found group = %d, level = %d",
-					       entry->keys[i].group, entry->keys[i].level));
 			  results = g_slist_prepend (results, entry);
 			  break;
 			}

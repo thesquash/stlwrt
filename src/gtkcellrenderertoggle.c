@@ -44,7 +44,7 @@ static void gtk_cell_renderer_toggle_get_size   (GtkCellRenderer            *cel
 						 gint                       *width,
 						 gint                       *height);
 static void gtk_cell_renderer_toggle_render     (GtkCellRenderer            *cell,
-						 GdkWindow                  *window,
+						 GdkDrawable                *window,
 						 GtkWidget                  *widget,
 						 GdkRectangle               *background_area,
 						 GdkRectangle               *cell_area,

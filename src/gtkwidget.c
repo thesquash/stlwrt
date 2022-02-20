@@ -7283,9 +7283,6 @@ __gtk_widget_create_pango_context (GtkWidget *widget)
   screen = __gtk_widget_get_screen_unchecked (widget);
   if (!screen)
     {
-      GTK_NOTE (MULTIHEAD,
-		g_warning ("__gtk_widget_create_pango_context ()) called without screen"));
-
       screen = __gdk_screen_get_default ();
     }
 

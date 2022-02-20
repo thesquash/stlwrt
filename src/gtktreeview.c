@@ -1320,7 +1320,7 @@ gtk_tree_view_class_init (GtkTreeViewClass *class)
 static void
 gtk_tree_view_init (GtkTreeView *tree_view)
 {
-  gtk_tree_view_get_props (tree_view)->priv = G_TYPE_INSTANCE_GET_PRIVATE (tree_view, GTK_TYPE_TREE_VIEW, GtkTreeViewPrivate);
+  gtk_tree_view_get_props (tree_view)->priv = gtk_treeView_get_instance_private (tree_view);
 
   __gtk_widget_set_can_focus (GTK_WIDGET (tree_view), TRUE);
   __gtk_widget_set_redraw_on_allocate (GTK_WIDGET (tree_view), FALSE);

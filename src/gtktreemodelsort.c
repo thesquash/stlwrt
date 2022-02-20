@@ -490,13 +490,13 @@ gtk_tree_model_sort_row_changed (GtkTreeModel *s_model,
 
   if (index < old_index)
     {
-      g_memmove (level->array->data + ((index + 1)*sizeof (SortElt)),
+      memmove (level->array->data + ((index + 1)*sizeof (SortElt)),
 		 level->array->data + ((index)*sizeof (SortElt)),
 		 (old_index - index)* sizeof(SortElt));
     }
   else if (index > old_index)
     {
-      g_memmove (level->array->data + ((old_index)*sizeof (SortElt)),
+      memmove (level->array->data + ((old_index)*sizeof (SortElt)),
 		 level->array->data + ((old_index + 1)*sizeof (SortElt)),
 		 (index - old_index)* sizeof(SortElt));
     }

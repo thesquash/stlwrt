@@ -61,7 +61,7 @@ _gtk_query_class_init (GtkQueryClass *class)
 static void
 _gtk_query_init (GtkQuery *query)
 {
-  query->priv = G_TYPE_INSTANCE_GET_PRIVATE (query, GTK_TYPE_QUERY, GtkQueryPrivate);
+  query->priv = _gtk_query_get_instance_private (query);
 }
 
 GtkQuery *

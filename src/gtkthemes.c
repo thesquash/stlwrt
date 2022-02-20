@@ -71,8 +71,6 @@ gtk_theme_engine_load (GTypeModule *module)
     }
     
   /* load the lib */
-  
-  GTK_NOTE (MISC, g_message ("Loading Theme %s\n", engine_path));
        
   engine->library = g_module_open (engine_path, G_MODULE_BIND_LAZY | G_MODULE_BIND_LOCAL);
   g_free(engine_path);

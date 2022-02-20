@@ -46,6 +46,7 @@
 #include <gtkimmulticontext.h>
 #include <gdkkeysyms.h>
 #include <gtkprivate.h>
+#include <gtktextlayout.h>
 #include <gtktextutil.h>
 #include <gtkwindow.h>
 

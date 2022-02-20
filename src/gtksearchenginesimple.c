@@ -193,7 +193,7 @@ send_batch (SearchThreadData *data)
   data->uri_hits = NULL;
 }
 
-static GStaticPrivate search_thread_data = G_STATIC_PRIVATE_INIT;
+static GPrivate search_thread_data = G_PRIVATE_INIT;
 
 #ifdef HAVE_FTW_H
 static int
@@ -210,7 +210,7 @@ search_visit_func (const char        *fpath,
   gboolean hit;
   gboolean is_hidden;
   
-  data = (SearchThreadData*)g_static_private_get (&search_thread_data);
+  data = (SearchThreadData*)g_private_get (&search_thread_data);
 
   if (data->cancelled)
 #ifdef HAVE_GNU_FTW
@@ -275,7 +275,7 @@ search_thread_func (gpointer user_data)
   
   data = user_data;
   
-  g_static_private_set (&search_thread_data, data, NULL);
+  g_private_set (&search_thread_data, data, NULL);
 
   nftw (data->path, search_visit_func, 20,
 #ifdef HAVE_GNU_FTW
@@ -368,7 +368,7 @@ _gtk_search_engine_simple_class_init (GtkSearchEngineSimpleClass *class)
 static void
 _gtk_search_engine_simple_init (GtkSearchEngineSimple *engine)
 {
-  engine->priv = G_TYPE_INSTANCE_GET_PRIVATE (engine, GTK_TYPE_SEARCH_ENGINE_SIMPLE, GtkSearchEngineSimplePrivate);
+  engine->priv = _gtk_search_engine_simple_get_instance_private (engine);
 }
 
 GtkSearchEngine *

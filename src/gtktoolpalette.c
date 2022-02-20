@@ -188,9 +188,7 @@ STLWRT_DEFINE_FTYPE_VPARENT (GtkToolPalette, gtk_tool_palette, GTK_TYPE_CONTAINE
 static void
 gtk_tool_palette_init (GtkToolPalette *palette)
 {
-  gtk_tool_palette_get_props (palette)->priv = G_TYPE_INSTANCE_GET_PRIVATE (palette,
-                                               GTK_TYPE_TOOL_PALETTE,
-                                               GtkToolPalettePrivate);
+  gtk_tool_palette_get_props (palette)->priv = gtk_tool_palette_get_instance_private (palette);
 
   gtk_tool_palette_get_props (palette)->priv->groups = g_ptr_array_sized_new (4);
   g_ptr_array_set_free_func (gtk_tool_palette_get_props (palette)->priv->groups, g_free);

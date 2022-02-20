@@ -55,10 +55,6 @@ struct _GtkMenuBarPrivate
   GtkPackDirection child_pack_direction;
 };
 
-#define gtk_menu_bar_get_instance_private(o)  \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((o), GTK_TYPE_MENU_BAR, GtkMenuBarPrivate))
-
-
 static void gtk_menu_bar_set_property      (GObject             *object,
 					    guint                prop_id,
 					    const GValue        *value,

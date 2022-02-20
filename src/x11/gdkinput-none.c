@@ -18,11 +18,8 @@
  */
 
 #include "config.h"
-#include "gdkinputprivate.h"
-#include "gdkdisplay-x11.h"
-#include "gdkalias.h"
-
-
+#include <gdkinputprivate.h>
+#include <gdkdisplay-x11.h>
 
 void
 _gdk_input_init (GdkDisplay *display)
@@ -116,6 +113,3 @@ gdk_device_set_mode (GdkDevice   *device,
 {
   return FALSE;
 }
-
-#define __GDK_INPUT_NONE_C__
-#include "gdkaliasdef.c"

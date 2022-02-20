@@ -274,7 +274,7 @@ gtk_dialog_init (GtkDialog *dialog)
 {
   GtkDialogPrivate *priv;
 
-  priv = GET_PRIVATE (dialog);
+  priv = gtk_dialog_get_instance_private (dialog);
   priv->ignore_separator = FALSE;
 
   /* To avoid breaking old code that prevents destroy on delete event
@@ -866,7 +866,7 @@ __gtk_dialog_set_has_separator (GtkDialog *dialog,
 
   g_return_if_fail (GTK_IS_DIALOG (dialog));
 
-  priv = GET_PRIVATE (dialog);
+  priv = gtk_dialog_get_instance_private (dialog);
 
   /* this might fail if we get called before _init() somehow */
   g_assert (gtk_dialog_get_props (dialog)->vbox != NULL);
@@ -1122,7 +1122,7 @@ ___gtk_dialog_set_ignore_separator (GtkDialog *dialog,
 {
   GtkDialogPrivate *priv;
 
-  priv = GET_PRIVATE (dialog);
+  priv = gtk_dialog_get_instance_private (dialog);
   priv->ignore_separator = ignore_separator;
 }
 

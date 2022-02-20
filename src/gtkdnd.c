@@ -33,7 +33,7 @@
 #ifdef GDK_WINDOWING_X11
 #include <X11/Xlib.h>
 #include <X11/keysym.h>
-#include <gdk/gdkx.h>
+#include <gdkx.h>
 #endif
 
 #include <gtkdnd.h>

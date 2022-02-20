@@ -1422,12 +1422,10 @@ gtk_real_menu_item_activate (GtkMenuItem *menu_item)
 static void
 gtk_real_menu_item_activate_item (GtkMenuItem *menu_item)
 {
-  GtkMenuItemPrivate *priv;
   GtkWidget *widget;
 
   g_return_if_fail (GTK_IS_MENU_ITEM (menu_item));
 
-  priv   = GET_PRIVATE (menu_item);
   widget = GTK_WIDGET (menu_item);
   
   if (gtk_widget_get_props (widget)->parent &&

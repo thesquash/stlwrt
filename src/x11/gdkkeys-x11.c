@@ -33,14 +33,13 @@
 #include <limits.h>
 #include <errno.h>
 
-#include "gdk.h"
-#include "gdkx.h"
+#include <gdk.h>
+#include <gdkx.h>
 
-#include "gdkprivate-x11.h"
-#include "gdkinternals.h"
-#include "gdkdisplay-x11.h"
-#include "gdkkeysyms.h"
-#include "gdkalias.h"
+#include <gdkprivate-x11.h>
+#include <gdkinternals.h>
+#include <gdkdisplay-x11.h>
+#include <gdkkeysyms.h>
 
 #ifdef HAVE_XKB
 #include <X11/XKBlib.h>
@@ -1851,7 +1850,3 @@ gdk_keymap_map_virtual_modifiers (GdkKeymap       *keymap,
 
   return retval;
 }
-
-
-#define __GDK_KEYS_X11_C__
-#include "gdkaliasdef.c"

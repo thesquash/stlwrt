@@ -120,11 +120,10 @@ gtk_tray_icon_class_init (GtkTrayIconClass *class)
 static void
 gtk_tray_icon_init (GtkTrayIcon *icon)
 {
-  icon->priv = G_TYPE_INSTANCE_GET_PRIVATE (icon, GTK_TYPE_TRAY_ICON,
-					    GtkTrayIconPrivate);
+  gtk_tray_icon_get_props (icon)->priv = gtk_tray_icon_get_instance_private (icon);
   
-  icon->priv->stamp = 1;
-  icon->priv->orientation = GTK_ORIENTATION_HORIZONTAL;
+  gtk_tray_icon_get_props (icon)->priv->stamp = 1;
+  gtk_tray_icon_get_props (icon)->priv->orientation = GTK_ORIENTATION_HORIZONTAL;
 
   __gtk_widget_set_app_paintable (GTK_WIDGET (icon), TRUE);
   __gtk_widget_add_events (GTK_WIDGET (icon), GDK_PROPERTY_CHANGE_MASK);
@@ -146,19 +145,19 @@ gtk_tray_icon_constructed (GObject *object)
 	      "_NET_SYSTEM_TRAY_S%d",
 	      __gdk_screen_get_number (screen));
 
-  icon->priv->selection_atom = XInternAtom (xdisplay, buffer, False);
+  gtk_tray_icon_get_props (icon)->priv->selection_atom = XInternAtom (xdisplay, buffer, False);
   
-  icon->priv->manager_atom = XInternAtom (xdisplay, "MANAGER", False);
+  gtk_tray_icon_get_props (icon)->priv->manager_atom = XInternAtom (xdisplay, "MANAGER", False);
   
-  icon->priv->system_tray_opcode_atom = XInternAtom (xdisplay,
+  gtk_tray_icon_get_props (icon)->priv->system_tray_opcode_atom = XInternAtom (xdisplay,
 						     "_NET_SYSTEM_TRAY_OPCODE",
 						     False);
 
-  icon->priv->orientation_atom = XInternAtom (xdisplay,
+  gtk_tray_icon_get_props (icon)->priv->orientation_atom = XInternAtom (xdisplay,
 					      "_NET_SYSTEM_TRAY_ORIENTATION",
 					      False);
 
-  icon->priv->visual_atom = XInternAtom (xdisplay,
+  gtk_tray_icon_get_props (icon)->priv->visual_atom = XInternAtom (xdisplay,
 					 "_NET_SYSTEM_TRAY_VISUAL",
 					 False);
 
@@ -174,17 +173,17 @@ gtk_tray_icon_clear_manager_window (GtkTrayIcon *icon)
 {
   GdkDisplay *display = __gtk_widget_get_display (GTK_WIDGET (icon));
 
-  if (icon->priv->manager_window != None)
+  if (gtk_tray_icon_get_props (icon)->priv->manager_window != None)
     {
       GdkWindow *gdkwin;
 
       gdkwin = __gdk_window_lookup_for_display (display,
-                                              icon->priv->manager_window);
+                                              gtk_tray_icon_get_props (icon)->priv->manager_window);
 
       __gdk_window_remove_filter (gdkwin, gtk_tray_icon_manager_filter, icon);
 
-      icon->priv->manager_window = None;
-      icon->priv->manager_visual = NULL;
+      gtk_tray_icon_get_props (icon)->priv->manager_window = None;
+      gtk_tray_icon_get_props (icon)->priv->manager_visual = NULL;
     }
 }
 
@@ -213,7 +212,7 @@ gtk_tray_icon_get_property (GObject    *object,
   switch (prop_id)
     {
     case PROP_ORIENTATION:
-      g_value_set_enum (value, icon->priv->orientation);
+      g_value_set_enum (value, gtk_tray_icon_get_props (icon)->priv->orientation);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -230,10 +229,10 @@ gtk_tray_icon_expose (GtkWidget      *widget,
   gint border_width, x, y, width, height;
   gboolean retval = FALSE;
 
-  if (icon->priv->manager_visual_rgba)
+  if (gtk_tray_icon_get_props (icon)->priv->manager_visual_rgba)
     {
       /* Clear to transparent */
-      cairo_t *cr = __gdk_cairo_create (widget->window);
+      cairo_t *cr = __gdk_cairo_create (gtk_widget_get_props (widget)->window);
       cairo_set_source_rgba (cr, 0, 0, 0, 0);
       cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
       __gdk_cairo_region (cr, event->region);
@@ -243,25 +242,25 @@ gtk_tray_icon_expose (GtkWidget      *widget,
   else
     {
       /* Clear to parent-relative pixmap */
-      __gdk_window_clear_area (widget->window, event->area.x, event->area.y,
+      __gdk_window_clear_area (gtk_widget_get_props (widget)->window, event->area.x, event->area.y,
 			     event->area.width, event->area.height);
     }
 
   if (GTK_WIDGET_CLASS (gtk_tray_icon_parent_class)->expose_event)
     retval = GTK_WIDGET_CLASS (gtk_tray_icon_parent_class)->expose_event (widget, event);
 
-  focus_child = GTK_CONTAINER (widget)->focus_child;
+  focus_child = gtk_container_get_props (widget)->focus_child;
   if (focus_child && __gtk_widget_has_focus (focus_child))
     {
-      border_width = GTK_CONTAINER (widget)->border_width;
+      border_width = gtk_container_get_props (widget)->border_width;
 
-      x = widget->allocation.x + border_width;
-      y = widget->allocation.y + border_width;
+      x = gtk_widget_get_props (widget)->allocation.x + border_width;
+      y = gtk_widget_get_props (widget)->allocation.y + border_width;
 
-      width  = widget->allocation.width  - 2 * border_width;
-      height = widget->allocation.height - 2 * border_width;
+      width  = gtk_widget_get_props (widget)->allocation.width  - 2 * border_width;
+      height = gtk_widget_get_props (widget)->allocation.height - 2 * border_width;
 
-      __gtk_paint_focus (widget->style, widget->window,
+      __gtk_paint_focus (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window,
                        __gtk_widget_get_state (widget),
                        &event->area, widget, "tray_icon",
                        x, y, width, height);
@@ -287,13 +286,13 @@ gtk_tray_icon_get_orientation_property (GtkTrayIcon *icon)
   gulong bytes_after;
   int error, result;
 
-  g_assert (icon->priv->manager_window != None);
+  g_assert (gtk_tray_icon_get_props (icon)->priv->manager_window != None);
   
   __gdk_error_trap_push ();
   type = None;
   result = XGetWindowProperty (xdisplay,
-			       icon->priv->manager_window,
-			       icon->priv->orientation_atom,
+			       gtk_tray_icon_get_props (icon)->priv->manager_window,
+			       gtk_tray_icon_get_props (icon)->priv->orientation_atom,
 			       0, G_MAXLONG, FALSE,
 			       XA_CARDINAL,
 			       &type, &format, &nitems,
@@ -311,9 +310,9 @@ gtk_tray_icon_get_orientation_property (GtkTrayIcon *icon)
 					GTK_ORIENTATION_HORIZONTAL :
 					GTK_ORIENTATION_VERTICAL;
 
-      if (icon->priv->orientation != orientation)
+      if (gtk_tray_icon_get_props (icon)->priv->orientation != orientation)
 	{
-	  icon->priv->orientation = orientation;
+	  gtk_tray_icon_get_props (icon)->priv->orientation = orientation;
 
 	  g_object_notify (G_OBJECT (icon), "orientation");
 	}
@@ -340,13 +339,13 @@ gtk_tray_icon_get_visual_property (GtkTrayIcon *icon)
   gulong bytes_after;
   int error, result;
 
-  g_assert (icon->priv->manager_window != None);
+  g_assert (gtk_tray_icon_get_props (icon)->priv->manager_window != None);
 
   __gdk_error_trap_push ();
   type = None;
   result = XGetWindowProperty (xdisplay,
-			       icon->priv->manager_window,
-			       icon->priv->visual_atom,
+			       gtk_tray_icon_get_props (icon)->priv->manager_window,
+			       gtk_tray_icon_get_props (icon)->priv->visual_atom,
 			       0, G_MAXLONG, FALSE,
 			       XA_VISUALID,
 			       &type, &format, &nitems,
@@ -362,20 +361,20 @@ gtk_tray_icon_get_visual_property (GtkTrayIcon *icon)
       visual_id = prop.prop[0];
       visual = __gdk_x11_screen_lookup_visual (screen, visual_id);
 
-      icon->priv->manager_visual = visual;
-      icon->priv->manager_visual_rgba = visual != NULL &&
+      gtk_tray_icon_get_props (icon)->priv->manager_visual = visual;
+      gtk_tray_icon_get_props (icon)->priv->manager_visual_rgba = visual != NULL &&
         (visual->red_prec + visual->blue_prec + visual->green_prec < visual->depth);
     }
   else
     {
-      icon->priv->manager_visual = NULL;
-      icon->priv->manager_visual_rgba = FALSE;
+      gtk_tray_icon_get_props (icon)->priv->manager_visual = NULL;
+      gtk_tray_icon_get_props (icon)->priv->manager_visual_rgba = FALSE;
     }
 
 
   /* For the background-relative hack we use when we aren't using a real RGBA
    * visual, we can't be double-buffered */
-  __gtk_widget_set_double_buffered (GTK_WIDGET (icon), icon->priv->manager_visual_rgba);
+  __gtk_widget_set_double_buffered (GTK_WIDGET (icon), gtk_tray_icon_get_props (icon)->priv->manager_visual_rgba);
 
   if (type != None)
     XFree (prop.prop);
@@ -390,15 +389,15 @@ gtk_tray_icon_manager_filter (GdkXEvent *xevent,
   XEvent *xev = (XEvent *)xevent;
 
   if (xev->xany.type == ClientMessage &&
-      xev->xclient.message_type == icon->priv->manager_atom &&
-      xev->xclient.data.l[1] == icon->priv->selection_atom)
+      xev->xclient.message_type == gtk_tray_icon_get_props (icon)->priv->manager_atom &&
+      xev->xclient.data.l[1] == gtk_tray_icon_get_props (icon)->priv->selection_atom)
     {
       gtk_tray_icon_update_manager_window (icon);
     }
-  else if (xev->xany.window == icon->priv->manager_window)
+  else if (xev->xany.window == gtk_tray_icon_get_props (icon)->priv->manager_window)
     {
       if (xev->xany.type == PropertyNotify &&
-	  xev->xproperty.atom == icon->priv->orientation_atom)
+	  xev->xproperty.atom == gtk_tray_icon_get_props (icon)->priv->orientation_atom)
 	{
 	  gtk_tray_icon_get_orientation_property (icon);
 	}
@@ -425,9 +424,9 @@ gtk_tray_icon_send_manager_message (GtkTrayIcon *icon,
   memset (&ev, 0, sizeof (ev));
   ev.type = ClientMessage;
   ev.window = window;
-  ev.message_type = icon->priv->system_tray_opcode_atom;
+  ev.message_type = gtk_tray_icon_get_props (icon)->priv->system_tray_opcode_atom;
   ev.format = 32;
-  ev.data.l[0] = __gdk_x11_get_server_time (GTK_WIDGET (icon)->window);
+  ev.data.l[0] = __gdk_x11_get_server_time (gtk_widget_get_props (icon)->window);
   ev.data.l[1] = message;
   ev.data.l[2] = data1;
   ev.data.l[3] = data2;
@@ -437,7 +436,7 @@ gtk_tray_icon_send_manager_message (GtkTrayIcon *icon,
   
   __gdk_error_trap_push ();
   XSendEvent (display,
-	      icon->priv->manager_window, False, NoEventMask, (XEvent *)&ev);
+	      gtk_tray_icon_get_props (icon)->priv->manager_window, False, NoEventMask, (XEvent *)&ev);
   __gdk_display_sync (__gtk_widget_get_display (GTK_WIDGET (icon)));
   __gdk_error_trap_pop ();
 }
@@ -447,7 +446,7 @@ gtk_tray_icon_send_dock_request (GtkTrayIcon *icon)
 {
   gtk_tray_icon_send_manager_message (icon,
 				      SYSTEM_TRAY_REQUEST_DOCK,
-				      icon->priv->manager_window,
+				      gtk_tray_icon_get_props (icon)->priv->manager_window,
 				      __gtk_plug_get_id (GTK_PLUG (icon)),
 				      0, 0);
 }
@@ -460,27 +459,27 @@ gtk_tray_icon_update_manager_window (GtkTrayIcon *icon)
   GdkDisplay *display = __gdk_screen_get_display (screen);
   Display *xdisplay = GDK_DISPLAY_XDISPLAY (display);
 
-  if (icon->priv->manager_window != None)
+  if (gtk_tray_icon_get_props (icon)->priv->manager_window != None)
     return;
 
   XGrabServer (xdisplay);
   
-  icon->priv->manager_window = XGetSelectionOwner (xdisplay,
-						   icon->priv->selection_atom);
+  gtk_tray_icon_get_props (icon)->priv->manager_window = XGetSelectionOwner (xdisplay,
+						   gtk_tray_icon_get_props (icon)->priv->selection_atom);
 
-  if (icon->priv->manager_window != None)
+  if (gtk_tray_icon_get_props (icon)->priv->manager_window != None)
     XSelectInput (xdisplay,
-		  icon->priv->manager_window, StructureNotifyMask|PropertyChangeMask);
+		  gtk_tray_icon_get_props (icon)->priv->manager_window, StructureNotifyMask|PropertyChangeMask);
 
   XUngrabServer (xdisplay);
   XFlush (xdisplay);
   
-  if (icon->priv->manager_window != None)
+  if (gtk_tray_icon_get_props (icon)->priv->manager_window != None)
     {
       GdkWindow *gdkwin;
 
       gdkwin = __gdk_window_lookup_for_display (display,
-					      icon->priv->manager_window);
+					      gtk_tray_icon_get_props (icon)->priv->manager_window);
       
       __gdk_window_add_filter (gdkwin, gtk_tray_icon_manager_filter, icon);
 
@@ -489,9 +488,9 @@ gtk_tray_icon_update_manager_window (GtkTrayIcon *icon)
 
       if (__gtk_widget_get_realized (GTK_WIDGET (icon)))
 	{
-	  if ((icon->priv->manager_visual == NULL &&
+	  if ((gtk_tray_icon_get_props (icon)->priv->manager_visual == NULL &&
 	       __gtk_widget_get_visual (widget) == __gdk_screen_get_system_visual (screen)) ||
-	      (icon->priv->manager_visual == __gtk_widget_get_visual (widget)))
+	      (gtk_tray_icon_get_props (icon)->priv->manager_visual == __gtk_widget_get_visual (widget)))
 	    {
 	      /* Already have the right visual, can just dock
 	       */
@@ -512,7 +511,7 @@ gtk_tray_icon_update_manager_window (GtkTrayIcon *icon)
 static void
 gtk_tray_icon_manager_window_destroyed (GtkTrayIcon *icon)
 {
-  g_return_if_fail (icon->priv->manager_window != None);
+  g_return_if_fail (gtk_tray_icon_get_props (icon)->priv->manager_window != None);
 
   gtk_tray_icon_clear_manager_window (icon);
 }
@@ -543,7 +542,7 @@ gtk_tray_icon_set_colormap (GtkTrayIcon *icon)
 {
   GdkScreen *screen = __gtk_widget_get_screen (GTK_WIDGET (icon));
   GdkColormap *colormap;
-  GdkVisual *visual = icon->priv->manager_visual;
+  GdkVisual *visual = gtk_tray_icon_get_props (icon)->priv->manager_visual;
   gboolean new_colormap = FALSE;
 
   /* To avoid uncertainty about colormaps, _NET_SYSTEM_TRAY_VISUAL is supposed
@@ -580,19 +579,19 @@ gtk_tray_icon_realize (GtkWidget *widget)
   gtk_tray_icon_set_colormap (icon);
 
   GTK_WIDGET_CLASS (gtk_tray_icon_parent_class)->realize (widget);
-  if (icon->priv->manager_visual_rgba)
+  if (gtk_tray_icon_get_props (icon)->priv->manager_visual_rgba)
     {
       /* Set a transparent background */
       GdkColor transparent = { 0, 0, 0, 0 }; /* Only pixel=0 matters */
-      __gdk_window_set_background (widget->window, &transparent);
+      __gdk_window_set_background (gtk_widget_get_props (widget)->window, &transparent);
     }
   else
     {
       /* Set a parent-relative background pixmap */
-      __gdk_window_set_back_pixmap (widget->window, NULL, TRUE);
+      __gdk_window_set_back_pixmap (gtk_widget_get_props (widget)->window, NULL, TRUE);
     }
 
-  if (icon->priv->manager_window != None)
+  if (gtk_tray_icon_get_props (icon)->priv->manager_window != None)
     gtk_tray_icon_send_dock_request (icon);
 }
 
@@ -619,13 +618,13 @@ _gtk_tray_icon_send_message (GtkTrayIcon *icon,
   g_return_val_if_fail (timeout >= 0, 0);
   g_return_val_if_fail (message != NULL, 0);
 
-  if (icon->priv->manager_window == None)
+  if (gtk_tray_icon_get_props (icon)->priv->manager_window == None)
     return 0;
 
   if (len < 0)
     len = strlen (message);
 
-  stamp = icon->priv->stamp++;
+  stamp = gtk_tray_icon_get_props (icon)->priv->stamp++;
   
   /* Get ready to send the message */
   gtk_tray_icon_send_manager_message (icon, SYSTEM_TRAY_BEGIN_MESSAGE,
@@ -658,7 +657,7 @@ _gtk_tray_icon_send_message (GtkTrayIcon *icon,
 	}
 
       XSendEvent (xdisplay,
-		  icon->priv->manager_window, False,
+		  gtk_tray_icon_get_props (icon)->priv->manager_window, False,
 		  StructureNotifyMask, (XEvent *)&ev);
     }
   __gdk_display_sync (__gtk_widget_get_display (GTK_WIDGET (icon)));
@@ -704,7 +703,7 @@ _gtk_tray_icon_get_orientation (GtkTrayIcon *icon)
 {
   g_return_val_if_fail (GTK_IS_TRAY_ICON (icon), GTK_ORIENTATION_HORIZONTAL);
 
-  return icon->priv->orientation;
+  return gtk_tray_icon_get_props (icon)->priv->orientation;
 }
 
 

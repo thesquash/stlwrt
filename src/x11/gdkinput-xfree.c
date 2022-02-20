@@ -19,9 +19,8 @@
 
 #include "config.h"
 #include <string.h>
-#include "gdkinputprivate.h"
-#include "gdkdisplay-x11.h"
-#include "gdkalias.h"
+#include <gdkinputprivate.h>
+#include <gdkdisplay-x11.h>
 
 /*
  * Modified by the GTK+ Team and others 1997-2000.  See the AUTHORS
@@ -150,7 +149,7 @@ void
 _gdk_input_configure_event (XConfigureEvent *xevent,
 			    GdkWindow       *window)
 {
-  GdkWindowObject *priv = (GdkWindowObject *)window;
+  GdkWindow *priv = (GdkWindow *)window;
   GdkInputWindow *input_window;
   gint root_x, root_y;
 
@@ -169,7 +168,7 @@ _gdk_input_crossing_event (GdkWindow *window,
 {
   GdkDisplay *display = GDK_WINDOW_DISPLAY (window);
   GdkDisplayX11 *display_impl = GDK_DISPLAY_X11 (display);
-  GdkWindowObject *priv = (GdkWindowObject *)window;
+  GdkWindow *priv = (GdkWindow *)window;
   GdkInputWindow *input_window;
   gint root_x, root_y;
 
@@ -262,7 +261,7 @@ _gdk_input_other_event (GdkEvent *event,
 			GdkWindow *event_window)
 {
   GdkWindow *window;
-  GdkWindowObject *priv;
+  GdkWindow *priv;
   GdkInputWindow *iw;
   GdkDevicePrivate *gdkdev;
   GdkEventType event_type;
@@ -286,7 +285,7 @@ _gdk_input_other_event (GdkEvent *event,
   /* If we're not getting any event window its likely because we're outside the
      window and there is no grab. We should still report according to the
      implicit grab though. */
-  iw = ((GdkWindowObject *)event_window)->input_window;
+  iw = ((GdkWindow *)event_window)->input_window;
 
   if (iw->button_down_window)
     window = iw->button_down_window;
@@ -297,7 +296,7 @@ _gdk_input_other_event (GdkEvent *event,
 						     0, 
                                                      x, y,
                                                      xevent->xany.serial);
-  priv = (GdkWindowObject *)window;
+  priv = (GdkWindow *)window;
   if (window == NULL)
     return FALSE;
 
@@ -333,7 +332,7 @@ _gdk_input_grab_pointer (GdkWindow      *window,
 			 guint32         time)
 {
   GdkInputWindow *input_window;
-  GdkWindowObject *priv, *impl_window;
+  GdkWindow *priv, *impl_window;
   gboolean need_ungrab;
   GdkDevicePrivate *gdkdev;
   GList *tmp_list;
@@ -358,8 +357,8 @@ _gdk_input_grab_pointer (GdkWindow      *window,
       tmp_list = tmp_list->next;
     }
 
-  priv = (GdkWindowObject *)window;
-  impl_window = (GdkWindowObject *)_gdk_window_get_impl_window (window);
+  priv = (GdkWindow *)window;
+  impl_window = (GdkWindow *)_gdk_window_get_impl_window (window);
   input_window = impl_window->input_window;
   if (priv->extension_events)
     {
@@ -446,6 +445,3 @@ _gdk_input_ungrab_pointer (GdkDisplay *display,
 	}
     }
 }
-
-#define __GDK_INPUT_XFREE_C__
-#include "gdkaliasdef.c"

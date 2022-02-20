@@ -1491,7 +1491,6 @@ static void
 gtk_scale_button_update_icon (GtkScaleButton *button)
 {
   GtkScaleButtonPrivate *priv;
-  GtkRange *range;
   GtkAdjustment *adj;
   gdouble value;
   const gchar *name;
@@ -1518,7 +1517,6 @@ gtk_scale_button_update_icon (GtkScaleButton *button)
       return;
     }
 
-  range = GTK_RANGE (priv->scale);
   adj = priv->adjustment;
   value = __gtk_scale_button_get_value (button);
 

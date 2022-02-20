@@ -23,12 +23,11 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "gdkspawn.h"
+#include <gdkspawn.h>
 
 #include <glib.h>
-#include <gdk/gdk.h>
-#include "gdkalias.h"
-  
+#include <gdk.h>
+
 typedef struct {
   char *display;
   GSpawnChildSetupFunc child_setup;
@@ -223,6 +222,3 @@ gdk_spawn_command_line_on_screen (GdkScreen    *screen,
 
   return retval;
 }
-
-#define __GDK_SPAWN_X11_C__
-#include "gdkaliasdef.c"

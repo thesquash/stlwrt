@@ -21,8 +21,8 @@
 
 #include "config.h"
 
-#include "gdkx.h"
-#include "gdkregion-generic.h"
+#include <gdkx.h>
+#include <gdkregion.h>
 
 #include <cairo-xlib.h>
 
@@ -37,13 +37,11 @@
 #include <X11/extensions/XShm.h>
 #endif /* USE_SHM */
 
-#include "gdkprivate-x11.h"
-#include "gdkdrawable-x11.h"
-#include "gdkpixmap-x11.h"
-#include "gdkscreen-x11.h"
-#include "gdkdisplay-x11.h"
-
-#include "gdkalias.h"
+#include <gdkprivate-x11.h>
+#include <gdkdrawable-x11.h>
+#include <gdkpixmap-x11.h>
+#include <gdkscreen-x11.h>
+#include <gdkdisplay-x11.h>
 
 static void gdk_x11_draw_rectangle (GdkDrawable    *drawable,
 				    GdkGC          *gc,
@@ -645,7 +643,7 @@ gdk_x11_draw_drawable (GdkDrawable *drawable,
   if (GDK_IS_DRAWABLE_IMPL_X11 (src))
     src_impl = GDK_DRAWABLE_IMPL_X11 (src);
   else if (GDK_IS_WINDOW (src))
-    src_impl = GDK_DRAWABLE_IMPL_X11(((GdkWindowObject *)src)->impl);
+    src_impl = GDK_DRAWABLE_IMPL_X11(((GdkWindow *)src)->impl);
   else
     src_impl = GDK_DRAWABLE_IMPL_X11(((GdkPixmapObject *)src)->impl);
 
@@ -861,7 +859,7 @@ static GdkDrawable *
 get_impl_drawable (GdkDrawable *drawable)
 {
   if (GDK_IS_WINDOW (drawable))
-    return ((GdkWindowObject *)drawable)->impl;
+    return ((GdkWindow *)drawable)->impl;
   else if (GDK_IS_PIXMAP (drawable))
     return ((GdkPixmapObject *)drawable)->impl;
   else
@@ -938,7 +936,7 @@ gdk_x11_drawable_get_xid (GdkDrawable *drawable)
           return None;
         }
       
-      impl = ((GdkWindowObject *)drawable)->impl;
+      impl = ((GdkWindow *)drawable)->impl;
     }
   else if (GDK_IS_PIXMAP (drawable))
     impl = ((GdkPixmapObject *)drawable)->impl;
@@ -954,7 +952,7 @@ gdk_x11_drawable_get_xid (GdkDrawable *drawable)
 GdkDrawable *
 gdk_x11_window_get_drawable_impl (GdkWindow *window)
 {
-  return ((GdkWindowObject *)window)->impl;
+  return ((GdkWindow *)window)->impl;
 }
 GdkDrawable *
 gdk_x11_pixmap_get_drawable_impl (GdkPixmap *pixmap)
@@ -1592,6 +1590,3 @@ gdk_x11_ref_cairo_surface (GdkDrawable *drawable)
 
   return impl->cairo_surface;
 }
-
-#define __GDK_DRAWABLE_X11_C__
-#include "gdkaliasdef.c"

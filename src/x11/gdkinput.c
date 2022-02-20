@@ -30,13 +30,12 @@
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 
-#include "gdkx.h"
-#include "gdkinput.h"
-#include "gdkprivate.h"
-#include "gdkinputprivate.h"
-#include "gdkscreen-x11.h"
-#include "gdkdisplay-x11.h"
-#include "gdkalias.h"
+#include <gdkx.h>
+#include <gdkinput.h>
+#include <gdkprivate.h>
+#include <gdkinputprivate.h>
+#include <gdkscreen-x11.h>
+#include <gdkdisplay-x11.h>
 
 static GdkDeviceAxis gdk_input_core_axes[] = {
   { GDK_AXIS_X, 0, 0 },
@@ -387,7 +386,7 @@ impl_coord_in_window (GdkWindow *window,
 		      int impl_x,
 		      int impl_y)
 {
-  GdkWindowObject *priv = (GdkWindowObject *)window;
+  GdkWindow *priv = (GdkWindow *)window;
 
   if (impl_x < priv->abs_x ||
       impl_x > priv->abs_x + priv->width)
@@ -445,7 +444,7 @@ gdk_device_get_history  (GdkDevice         *device,
 				  start, stop, &tmp_n_events);
       if (xcoords)
 	{
-	  GdkWindowObject *priv = (GdkWindowObject *)window;
+	  GdkWindow *priv = (GdkWindow *)window;
           int i, j;
 
 	  coords = _gdk_device_allocate_history (device, tmp_n_events);
@@ -534,13 +533,13 @@ gdk_device_free_history (GdkTimeCoord **events,
 static void
 unset_extension_events (GdkWindow *window)
 {
-  GdkWindowObject *window_private;
-  GdkWindowObject *impl_window;
+  GdkWindow *window_private;
+  GdkWindow *impl_window;
   GdkDisplayX11 *display_x11;
   GdkInputWindow *iw;
 
-  window_private = (GdkWindowObject*) window;
-  impl_window = (GdkWindowObject *)_gdk_window_get_impl_window (window);
+  window_private = (GdkWindow*) window;
+  impl_window = (GdkWindow *)_gdk_window_get_impl_window (window);
   iw = impl_window->input_window;
 
   display_x11 = GDK_DISPLAY_X11 (GDK_WINDOW_DISPLAY (window));
@@ -566,8 +565,8 @@ void
 gdk_input_set_extension_events (GdkWindow *window, gint mask,
 				GdkExtensionMode mode)
 {
-  GdkWindowObject *window_private;
-  GdkWindowObject *impl_window;
+  GdkWindow *window_private;
+  GdkWindow *impl_window;
   GdkInputWindow *iw;
   GdkDisplayX11 *display_x11;
 #ifndef XINPUT_NONE
@@ -577,12 +576,12 @@ gdk_input_set_extension_events (GdkWindow *window, gint mask,
   g_return_if_fail (window != NULL);
   g_return_if_fail (GDK_WINDOW_IS_X11 (window));
 
-  window_private = (GdkWindowObject*) window;
+  window_private = (GdkWindow*) window;
   display_x11 = GDK_DISPLAY_X11 (GDK_WINDOW_DISPLAY (window));
   if (GDK_WINDOW_DESTROYED (window))
     return;
 
-  impl_window = (GdkWindowObject *)_gdk_window_get_impl_window (window);
+  impl_window = (GdkWindow *)_gdk_window_get_impl_window (window);
 
   if (mode == GDK_EXTENSION_EVENTS_ALL && mask != 0)
     mask |= GDK_ALL_DEVICES_MASK;
@@ -674,6 +673,3 @@ gdk_device_get_axis (GdkDevice  *device,
 
   return FALSE;
 }
-
-#define __GDK_INPUT_C__
-#include "gdkaliasdef.c"

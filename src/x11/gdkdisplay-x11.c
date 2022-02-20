@@ -30,16 +30,15 @@
 #include <unistd.h>
 
 #include <glib.h>
-#include "gdkx.h"
-#include "gdkasync.h"
-#include "gdkdisplay.h"
-#include "gdkdisplay-x11.h"
-#include "gdkscreen.h"
-#include "gdkscreen-x11.h"
-#include "gdkinternals.h"
-#include "gdkinputprivate.h"
-#include "xsettings-client.h"
-#include "gdkalias.h"
+#include <gdkx.h>
+#include <gdkasync.h>
+#include <gdkdisplay.h>
+#include <gdkdisplay-x11.h>
+#include <gdkscreen.h>
+#include <gdkscreen-x11.h>
+#include <gdkinternals.h>
+#include <gdkinputprivate.h>
+#include <xsettings-client.h>
 
 #include <X11/Xatom.h>
 
@@ -1485,7 +1484,3 @@ gdk_display_supports_composite (GdkDisplay *display)
 	 x11_display->have_xdamage &&
 	 x11_display->have_xfixes;
 }
-
-
-#define __GDK_DISPLAY_X11_C__
-#include "gdkaliasdef.c"

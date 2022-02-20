@@ -3084,12 +3084,10 @@ check_threshold (GtkNotebook *notebook,
 		 gint         current_x,
 		 gint         current_y)
 {
-  GtkWidget *widget;
   gint dnd_threshold;
   GdkRectangle rectangle = { 0, }; /* shut up gcc */
   GtkSettings *settings;
-  
-  widget = GTK_WIDGET (notebook);
+
   settings = __gtk_widget_get_settings (GTK_WIDGET (notebook));
   g_object_get (G_OBJECT (settings), "gtk-dnd-drag-threshold", &dnd_threshold, NULL);
 
@@ -5255,15 +5253,12 @@ gtk_notebook_calculate_shown_tabs (GtkNotebook *notebook,
 				   gint        *remaining_space)
 {
   GtkWidget *widget;
-  GtkContainer *container;
   GList *children;
   GtkNotebookPage *page;
-  gint tab_pos, tab_overlap;
+  gint tab_overlap;
   
   widget = GTK_WIDGET (notebook);
-  container = GTK_CONTAINER (notebook);
   __gtk_widget_style_get (widget, "tab-overlap", &tab_overlap, NULL);
-  tab_pos = get_effective_tab_pos (notebook);
 
   if (show_arrows) /* first_tab <- focus_tab */
     {
@@ -5806,7 +5801,7 @@ gtk_notebook_pages_allocate (GtkNotebook *notebook)
   GList *last_child = NULL;
   gboolean showarrow = FALSE;
   gint tab_space, min, max, remaining_space;
-  gint expanded_tabs, operation;
+  gint expanded_tabs;
   gboolean tab_allocations_changed = FALSE;
 
   if (!gtk_notebook_get_props (notebook)->show_tabs || !gtk_notebook_get_props (notebook)->children || !gtk_notebook_get_props (notebook)->cur_page)
@@ -5842,8 +5837,6 @@ gtk_notebook_pages_allocate (GtkNotebook *notebook)
 	tab_allocations_changed = TRUE;
       children = children->next;
     }
-
-  operation = gtk_notebook_get_instance_private (notebook)->operation;
 
   if (!gtk_notebook_get_props (notebook)->first_tab)
     gtk_notebook_get_props (notebook)->first_tab = gtk_notebook_get_props (notebook)->children;
@@ -6201,13 +6194,11 @@ static void
 gtk_notebook_switch_focus_tab (GtkNotebook *notebook, 
 			       GList       *new_child)
 {
-  GList *old_child;
   GtkNotebookPage *page;
 
   if (gtk_notebook_get_props (notebook)->focus_tab == new_child)
     return;
 
-  old_child = gtk_notebook_get_props (notebook)->focus_tab;
   gtk_notebook_get_props (notebook)->focus_tab = new_child;
 
   if (gtk_notebook_get_props (notebook)->scrollable)

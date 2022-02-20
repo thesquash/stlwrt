@@ -24,13 +24,12 @@
 #include <X11/Xatom.h>
 #include <string.h>
 
-#include "gdkx.h"
-#include "gdkproperty.h"
-#include "gdkselection.h"
-#include "gdkprivate.h"
-#include "gdkprivate-x11.h"
-#include "gdkdisplay-x11.h"
-#include "gdkalias.h"
+#include <gdkx.h>
+#include <gdkproperty.h>
+#include <gdkselection.h>
+#include <gdkprivate.h>
+#include <gdkprivate-x11.h>
+#include <gdkdisplay-x11.h>
 
 typedef struct _OwnerInfo OwnerInfo;
 
@@ -937,6 +936,3 @@ void gdk_x11_free_compound_text (guchar *ctext)
   if (ctext)
     XFree (ctext);
 }
-
-#define __GDK_SELECTION_X11_C__
-#include "gdkaliasdef.c"

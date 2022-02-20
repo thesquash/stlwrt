@@ -2150,7 +2150,7 @@ __gtk_file_chooser_get_preview_file (GtkFileChooser *chooser)
 }
 
 /**
- * ___gtk_file_chooser_add_shortcut_folder:
+ * __gtk_file_chooser_add_shortcut_folder:
  * @chooser: a #GtkFileChooser
  * @file: file for the folder to add
  * @error: (allow-none): location to store error, or %NULL
@@ -2164,7 +2164,7 @@ __gtk_file_chooser_get_preview_file (GtkFileChooser *chooser)
  * Since: 2.4
  **/
 gboolean
-___gtk_file_chooser_add_shortcut_folder (GtkFileChooser  *chooser,
+__gtk_file_chooser_add_shortcut_folder (GtkFileChooser  *chooser,
 				       GFile           *file,
 				       GError         **error)
 {
@@ -2175,7 +2175,7 @@ ___gtk_file_chooser_add_shortcut_folder (GtkFileChooser  *chooser,
 }
 
 /**
- * ___gtk_file_chooser_remove_shortcut_folder:
+ * __gtk_file_chooser_remove_shortcut_folder:
  * @chooser: a #GtkFileChooser
  * @file: file for the folder to remove
  * @error: (allow-none): location to store error, or %NULL
@@ -2189,7 +2189,7 @@ ___gtk_file_chooser_add_shortcut_folder (GtkFileChooser  *chooser,
  * Since: 2.4
  **/
 gboolean
-___gtk_file_chooser_remove_shortcut_folder (GtkFileChooser  *chooser,
+__gtk_file_chooser_remove_shortcut_folder (GtkFileChooser  *chooser,
 					  GFile           *file,
 					  GError         **error)
 {

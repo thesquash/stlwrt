@@ -28,13 +28,11 @@
 #include <glib.h>
 #include <gio/gdesktopappinfo.h>
 
-#include "gdkx.h"
-#include "gdkapplaunchcontext.h"
-#include "gdkscreen.h"
-#include "gdkinternals.h"
-#include "gdkintl.h"
-#include "gdkalias.h"
-
+#include <gdkx.h>
+#include <gdkapplaunchcontext.h>
+#include <gdkscreen.h>
+#include <gdkinternals.h>
+#include <gdkintl.h>
 
 static char *
 get_display_name (GFile     *file,

@@ -1517,14 +1517,11 @@ static GtkWidget*
 palette_new (GtkColorSelection *colorsel)
 {
   GtkWidget *retval;
-  GtkColorSelectionPrivate *priv;
-  
+
   static const GtkTargetEntry targets[] = {
     { "application/x-color", 0 }
   };
 
-  priv = gtk_color_selection_get_instance_private (colorsel);
-  
   retval = __gtk_drawing_area_new ();
 
   __gtk_widget_set_can_focus (retval, TRUE);

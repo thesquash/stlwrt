@@ -1382,8 +1382,7 @@ __gtk_recent_manager_move_item (GtkRecentManager  *recent_manager,
 {
   GtkRecentManagerPrivate *priv;
   GError *move_error;
-  gboolean res;
-  
+
   g_return_val_if_fail (GTK_IS_RECENT_MANAGER (recent_manager), FALSE);
   g_return_val_if_fail (uri != NULL, FALSE);
   g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
@@ -1409,9 +1408,9 @@ __gtk_recent_manager_move_item (GtkRecentManager  *recent_manager,
     }
   
   move_error = NULL;
-  res = g_bookmark_file_move_item (priv->recent_items,
-                                   uri, new_uri,
-                                   &move_error);
+  g_bookmark_file_move_item (priv->recent_items,
+                             uri, new_uri,
+                             &move_error);
   if (move_error)
     {
       g_error_free (move_error);

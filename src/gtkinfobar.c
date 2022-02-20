@@ -122,11 +122,6 @@
  * </refsect2>
  */
 
-#define gtk_info_bar_get_instance_private(object) \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((object), \
-                                GTK_TYPE_INFO_BAR, \
-                                GtkInfoBarPrivate))
-
 enum
 {
   PROP_0,
@@ -200,10 +195,8 @@ gtk_info_bar_set_property (GObject      *object,
                            GParamSpec   *pspec)
 {
   GtkInfoBar *info_bar;
-  GtkInfoBarPrivate *priv;
 
   info_bar = GTK_INFO_BAR (object);
-  priv = gtk_info_bar_get_instance_private (info_bar);
 
   switch (prop_id)
     {
@@ -223,10 +216,8 @@ gtk_info_bar_get_property (GObject    *object,
                            GParamSpec *pspec)
 {
   GtkInfoBar *info_bar;
-  GtkInfoBarPrivate *priv;
 
   info_bar = GTK_INFO_BAR (object);
-  priv = gtk_info_bar_get_instance_private (info_bar);
 
   switch (prop_id)
     {

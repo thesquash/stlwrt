@@ -26,10 +26,6 @@
 #include <gtkrecentchooserdefault.h>
 #include <gtkrecentchooserutils.h>
 
-
-
-#define gtk_recent_chooser_widget_get_instance_private(obj)	(gtk_recent_chooser_widget_get_props (GTK_RECENT_CHOOSER_WIDGET (obj))->priv)
-
 static GObject *gtk_recent_chooser_widget_constructor  (GType                  type,
 						        guint                  n_params,
 						        GObjectConstructParam *params);

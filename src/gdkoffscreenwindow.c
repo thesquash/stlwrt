@@ -900,7 +900,6 @@ gdk_offscreen_window_move_resize_internal (GdkWindow *window,
 {
   GdkWindow *private = (GdkWindow *)window;
   GdkOffscreenWindow *offscreen;
-  gint dx, dy, dw, dh;
   GdkGC *gc;
   GdkPixmap *old_pixmap;
 
@@ -913,11 +912,6 @@ gdk_offscreen_window_move_resize_internal (GdkWindow *window,
 
   if (private->destroyed)
     return;
-
-  dx = x - private->x;
-  dy = y - private->y;
-  dw = width - private->width;
-  dh = height - private->height;
 
   private->x = x;
   private->y = y;
@@ -960,9 +954,6 @@ gdk_offscreen_window_move_resize (GdkWindow *window,
 				  gint       height)
 {
   GdkWindow *private = (GdkWindow *)window;
-  GdkOffscreenWindow *offscreen;
-
-  offscreen = GDK_OFFSCREEN_WINDOW (private->impl);
 
   if (!with_move)
     {
@@ -995,35 +986,6 @@ gdk_offscreen_window_show (GdkWindow *window,
 static void
 gdk_offscreen_window_hide (GdkWindow *window)
 {
-  GdkWindow *private;
-  GdkOffscreenWindow *offscreen;
-  GdkDisplay *display;
-
-  g_return_if_fail (window != NULL);
-
-  private = (GdkWindow*) window;
-  offscreen = GDK_OFFSCREEN_WINDOW (private->impl);
-
-  /* May need to break grabs on children */
-  display = __gdk_drawable_get_display ((GdkDrawable *)window);
-
-  /* TODO: This needs updating to the new grab world */
-#if 0
-  if (display->pointer_grab.window != NULL)
-    {
-      if (is_parent_of (window, display->pointer_grab.window))
-	{
-	  /* Call this ourselves, even though __gdk_display_pointer_ungrab
-	     does so too, since we want to pass implicit == TRUE so the
-	     broken grab event is generated */
-	  _gdk_display_unset_has_pointer_grab (display,
-					       TRUE,
-					       FALSE,
-					       GDK_CURRENT_TIME);
-	  __gdk_display_pointer_ungrab (display, GDK_CURRENT_TIME);
-	}
-    }
-#endif
 }
 
 static void

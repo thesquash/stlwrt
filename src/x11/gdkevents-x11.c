@@ -22,23 +22,22 @@
 
 #include "config.h"
 
-#include "gdk.h"
-#include "gdkprivate-x11.h"
-#include "gdkinternals.h"
-#include "gdkx.h"
-#include "gdkscreen-x11.h"
-#include "gdkdisplay-x11.h"
-#include "gdkasync.h"
+#include <gdk.h>
+#include <gdkprivate-x11.h>
+#include <gdkinternals.h>
+#include <gdkx.h>
+#include <gdkscreen-x11.h>
+#include <gdkdisplay-x11.h>
+#include <gdkasync.h>
 
-#include "gdkkeysyms.h"
+#include <gdkkeysyms.h>
 
-#include "xsettings-client.h"
+#include <xsettings-client.h>
 
 #include <string.h>
 
-#include "gdkinputprivate.h"
-#include "gdksettings.c"
-#include "gdkalias.h"
+#include <gdkinputprivate.h>
+#include <gdksettings.h>
 
 
 #ifdef HAVE_XKB
@@ -345,8 +344,8 @@ gdk_event_apply_filters (XEvent *xevent,
     tmp_list = _gdk_default_filters;
   else
     {
-      GdkWindowObject *window_private;
-      window_private = (GdkWindowObject *) window;
+      GdkWindow *window_private;
+      window_private = (GdkWindow *) window;
       tmp_list = window_private->filters;
     }
 
@@ -940,7 +939,7 @@ gdk_event_translate (GdkDisplay *display,
 {
   
   GdkWindow *window;
-  GdkWindowObject *window_private;
+  GdkWindow *window_private;
   GdkWindow *filter_window;
   GdkWindowImplX11 *window_impl = NULL;
   gboolean return_val;
@@ -982,7 +981,7 @@ gdk_event_translate (GdkDisplay *display,
    */
   if (window && !GDK_IS_WINDOW (window))
     window = NULL;
-  window_private = (GdkWindowObject *) window;
+  window_private = (GdkWindow *) window;
 
   /* We always run the filters for the window where the event
    * is delivered, not the window that it relates to
@@ -1020,7 +1019,7 @@ gdk_event_translate (GdkDisplay *display,
         {
 	  /* Report key event against grab window */
           window = display->keyboard_grab.window;;
-          window_private = (GdkWindowObject *) window;
+          window_private = (GdkWindow *) window;
         }
 
       window_impl = GDK_WINDOW_IMPL_X11 (window_private->impl);
@@ -1059,7 +1058,7 @@ gdk_event_translate (GdkDisplay *display,
   else if (filter_window)
     {
       /* Apply per-window filters */
-      GdkWindowObject *filter_private = (GdkWindowObject *) filter_window;
+      GdkWindow *filter_private = (GdkWindow *) filter_window;
       GdkFilterReturn result;
 
       if (filter_private->filters)
@@ -1836,7 +1835,7 @@ gdk_event_translate (GdkDisplay *display,
       event->any.window = window;
 
       /* Unset iconified if it was set */
-      if (window && (((GdkWindowObject*)window)->state & GDK_WINDOW_STATE_ICONIFIED))
+      if (window && (((GdkWindow*)window)->state & GDK_WINDOW_STATE_ICONIFIED))
         gdk_synthesize_window_state (window,
                                      GDK_WINDOW_STATE_ICONIFIED,
                                      0);
@@ -2275,7 +2274,7 @@ gdk_wm_protocols_filter (GdkXEvent *xev,
   else if (atom == gdk_x11_get_xatom_by_name_for_display (display, "WM_TAKE_FOCUS"))
     {
       GdkToplevelX11 *toplevel = _gdk_x11_window_get_toplevel (event->any.window);
-      GdkWindowObject *private = (GdkWindowObject *)win;
+      GdkWindow *private = (GdkWindow *)win;
 
       /* There is no way of knowing reliably whether we are viewable;
        * _gdk_x11_set_input_focus_safe() traps errors asynchronously.
@@ -3171,6 +3170,3 @@ void
 _gdk_windowing_event_data_free (GdkEvent *event)
 {
 }
-
-#define __GDK_EVENTS_X11_C__
-#include "gdkaliasdef.c"

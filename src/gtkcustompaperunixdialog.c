@@ -94,9 +94,6 @@ STLWRT_DEFINE_FTYPE_VPARENT (GtkCustomPaperUnixDialog, gtk_custom_paper_unix_dia
                              GTK_TYPE_DIALOG, G_TYPE_FLAG_NONE,
                              G_ADD_PRIVATE (GtkCustomPaperUnixDialog))
 
-#define gtk_custom_paper_unix_dialog_get_instance_private(o)  \
-   (G_TYPE_INSTANCE_GET_PRIVATE ((o), GTK_TYPE_CUSTOM_PAPER_UNIX_DIALOG, GtkCustomPaperUnixDialogPrivate))
-
 static void gtk_custom_paper_unix_dialog_finalize  (GObject                *object);
 static void populate_dialog                        (GtkCustomPaperUnixDialog *dialog);
 static void printer_added_cb                       (GtkPrintBackend        *backend,
@@ -252,10 +249,8 @@ static void
 gtk_custom_paper_unix_dialog_class_init (GtkCustomPaperUnixDialogClass *class)
 {
   GObjectClass *object_class;
-  GtkWidgetClass *widget_class;
 
   object_class = (GObjectClass *) class;
-  widget_class = (GtkWidgetClass *) class;
 
   object_class->finalize = gtk_custom_paper_unix_dialog_finalize;
 }

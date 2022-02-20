@@ -1520,7 +1520,7 @@ __gtk_container_foreach_unmarshal (GtkWidget *child,
   /* first argument */
   args[0].name = NULL;
   args[0].type = G_TYPE_FROM_INSTANCE (child);
-  G_VALUE_OBJECT (args[0]) = G_OBJECT (child);
+  GTK_VALUE_OBJECT (args[0]) = G_OBJECT (child);
   
   /* location for return value */
   args[1].name = NULL;

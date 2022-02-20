@@ -25,12 +25,11 @@
  */
 
 #include "config.h"
-#include "gdkinputprivate.h"
-#include "gdkinternals.h"
-#include "gdkx.h"
-#include "gdk.h"		/* For gdk_error_trap_push()/pop() */
-#include "gdkdisplay-x11.h"
-#include "gdkalias.h"
+#include <gdkinputprivate.h>
+#include <gdkinternals.h>
+#include <gdkx.h>
+#include <gdk.h>		/* For gdk_error_trap_push()/pop() */
+#include <gdkdisplay-x11.h>
 
 #include <string.h>
 
@@ -325,12 +324,12 @@ _gdk_input_select_events (GdkWindow *impl_window,
   XEventClass classes[GDK_MAX_DEVICE_CLASSES];
   gint num_classes;
   guint event_mask;
-  GdkWindowObject *w;
+  GdkWindow *w;
   GdkInputWindow *iw;
   GList *l;
 
   event_mask = 0;
-  iw = ((GdkWindowObject *)impl_window)->input_window;
+  iw = ((GdkWindow *)impl_window)->input_window;
 
   if (gdkdev->info.mode != GDK_MODE_DISABLED &&
       iw != NULL)
@@ -426,7 +425,7 @@ gdk_input_translate_coordinates (GdkDevicePrivate *gdkdev,
 				 gdouble          *x_out,
 				 gdouble          *y_out)
 {
-  GdkWindowObject *priv, *impl_window;
+  GdkWindow *priv, *impl_window;
 
   int i;
   int x_axis = 0;
@@ -435,8 +434,8 @@ gdk_input_translate_coordinates (GdkDevicePrivate *gdkdev,
   double device_width, device_height, x_min, y_min;
   double x_offset, y_offset, x_scale, y_scale;
 
-  priv = (GdkWindowObject *) window;
-  impl_window = (GdkWindowObject *)_gdk_window_get_impl_window (window);
+  priv = (GdkWindow *) window;
+  impl_window = (GdkWindow *)_gdk_window_get_impl_window (window);
 
   for (i=0; i<gdkdev->info.num_axes; i++)
     {
@@ -568,11 +567,11 @@ _gdk_input_common_other_event (GdkEvent         *event,
 			       GdkWindow        *window,
 			       GdkDevicePrivate *gdkdev)
 {
-  GdkWindowObject *priv, *impl_window;
+  GdkWindow *priv, *impl_window;
   GdkInputWindow *input_window;
 
-  priv = (GdkWindowObject *) window;
-  impl_window = (GdkWindowObject *)_gdk_window_get_impl_window (window);
+  priv = (GdkWindow *) window;
+  impl_window = (GdkWindow *)_gdk_window_get_impl_window (window);
   input_window = impl_window->input_window;
 
   if ((xevent->type == gdkdev->buttonpress_type) ||
@@ -788,7 +787,7 @@ _gdk_input_common_event_selected (GdkEvent         *event,
 				  GdkWindow        *window,
 				  GdkDevicePrivate *gdkdev)
 {
-  GdkWindowObject *priv = (GdkWindowObject *) window;
+  GdkWindow *priv = (GdkWindow *) window;
 
   switch (event->type) {
     case GDK_BUTTON_PRESS:
@@ -970,6 +969,3 @@ gdk_device_get_state (GdkDevice       *device,
       XFreeDeviceState (state);
     }
 }
-
-#define __GDK_INPUT_X11_C__
-#include "gdkaliasdef.c"

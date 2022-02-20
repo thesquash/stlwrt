@@ -43,10 +43,6 @@
 
 #include <gtkprinteroptionwidget.h>
 
-
-#define gtk_printer_option_widget_get_instance_private(o)  \
-   (G_TYPE_INSTANCE_GET_PRIVATE ((o), GTK_TYPE_PRINTER_OPTION_WIDGET, GtkPrinterOptionWidgetPrivate))
-
 static void gtk_printer_option_widget_finalize (GObject *object);
 
 static void deconstruct_widgets (GtkPrinterOptionWidget *widget);

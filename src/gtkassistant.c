@@ -1908,14 +1908,12 @@ __gtk_assistant_set_page_type (GtkAssistant         *assistant,
 			     GtkWidget            *page,
 			     GtkAssistantPageType  type)
 {
-  GtkAssistantPrivate *priv;
   GtkAssistantPage *page_info;
   GList *child;
 
   g_return_if_fail (GTK_IS_ASSISTANT (assistant));
   g_return_if_fail (GTK_IS_WIDGET (page));
 
-  priv = gtk_assistant_get_instance_private (assistant);
   child = find_page (assistant, page);
 
   g_return_if_fail (child != NULL);
@@ -2147,14 +2145,12 @@ __gtk_assistant_set_page_complete (GtkAssistant *assistant,
 				 GtkWidget    *page,
 				 gboolean      complete)
 {
-  GtkAssistantPrivate *priv;
   GtkAssistantPage *page_info;
   GList *child;
 
   g_return_if_fail (GTK_IS_ASSISTANT (assistant));
   g_return_if_fail (GTK_IS_WIDGET (page));
 
-  priv = gtk_assistant_get_instance_private (assistant);
   child = find_page (assistant, page);
 
   g_return_if_fail (child != NULL);

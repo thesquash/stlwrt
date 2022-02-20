@@ -1166,15 +1166,14 @@ gdk_synthesize_click (GdkDisplay *display,
 {
   GdkEvent temp_event;
   GdkEvent *event_copy;
-  GList *link;
-  
+
   g_return_if_fail (event != NULL);
-  
+
   temp_event = *event;
   temp_event.type = (nclicks == 2) ? GDK_2BUTTON_PRESS : GDK_3BUTTON_PRESS;
 
   event_copy = __gdk_event_copy (&temp_event);
-  link = _gdk_event_queue_append (display, event_copy);
+  _gdk_event_queue_append (display, event_copy);
 }
 
 void

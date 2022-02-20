@@ -173,7 +173,7 @@ static void     gtk_font_selection_ref_family            (GtkFontSelection *font
 static void     gtk_font_selection_ref_face              (GtkFontSelection *fontsel,
 							  PangoFontFace    *face);
 
-STLWRT_DEFINE_VTYPE_VPARENT (GtkFontSelection, gtk_font_selection, GTK_TYPE_VBOX,
+STLWRT_DEFINE_VTYPE (GtkFontSelection, gtk_font_selection, GTK_TYPE_VBOX,
                              G_TYPE_FLAG_NONE, ;)
 
 static void

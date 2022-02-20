@@ -145,6 +145,10 @@ STLWRT_DECLARE_FTYPE_FPARENT(GdkWindow, gdk_window, GdkDrawable,
   GdkWindowRedirect * (redirect);
 )
 
+#else
+
+#include <gdkinternals.h>
+
 #endif
 
 struct _GdkWindowClass

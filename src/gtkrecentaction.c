@@ -36,11 +36,6 @@
 
 #define FALLBACK_ITEM_LIMIT     10
 
-#define gtk_recent_action_get_instance_private(obj)      \
-        (G_TYPE_INSTANCE_GET_PRIVATE ((obj),    \
-         GTK_TYPE_RECENT_ACTION,                \
-         GtkRecentActionPrivate))
-
 
 enum
 {

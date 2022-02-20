@@ -93,7 +93,6 @@ _gtk_icon_cache_new_for_path (const gchar *path)
   gint fd = -1;
   struct stat st;
   struct stat path_st;
-  CacheInfo info;
 
    /* Check if we have a cache file */
   cache_filename = g_build_filename (path, "icon-theme.cache", NULL);
@@ -120,24 +119,6 @@ _gtk_icon_cache_new_for_path (const gchar *path)
 
   if (!map)
     goto done;
-
-  info.cache = g_mapped_file_get_contents (map);
-  info.cache_size = g_mapped_file_get_length (map);
-  info.n_directories = 0;
-  info.flags = CHECK_OFFSETS|CHECK_STRINGS;
-
-#ifdef G_ENABLE_DEBUG
-  if (gtk_debug_flags & GTK_DEBUG_ICONTHEME)
-    {
-      if (!_gtk_icon_cache_validate (&info))
-        {
-          g_mapped_file_unref (map);
-          g_warning ("Icon cache '%s' is invalid\n", cache_filename);
-
-          goto done;
-        }
-    }
-#endif 
 
   cache = g_new0 (GtkIconCache, 1);
   cache->ref_count = 1;

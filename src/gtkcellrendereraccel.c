@@ -530,14 +530,14 @@ _gtk_cell_editable_event_box_cell_editable_init (GtkCellEditableIface *iface)
 
 typedef         GtkEventBoxClass        GtkCellEditableEventBoxClass;
 
-STLWRT_DECLARE_FTYPE_VPARENT(GtkCellEditableEventBox, _gtk_cell_editable_event_box, GtkEventBox,
+STLWRT_DECLARE_VTYPE_VPARENT (GtkCellEditableEventBox, _gtk_cell_editable_event_box, GtkEventBox,
   gboolean editing_canceled;
 )
 
-STLWRT_DEFINE_FTYPE_VPARENT (GtkCellEditableEventBox, _gtk_cell_editable_event_box,
-                             GTK_TYPE_EVENT_BOX,  G_TYPE_FLAG_NONE,
-                             G_IMPLEMENT_INTERFACE (GTK_TYPE_CELL_EDITABLE,
-                                                    _gtk_cell_editable_event_box_cell_editable_init)
+STLWRT_DEFINE_VTYPE (GtkCellEditableEventBox, _gtk_cell_editable_event_box,
+                     GTK_TYPE_EVENT_BOX,  G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GTK_TYPE_CELL_EDITABLE,
+                                            _gtk_cell_editable_event_box_cell_editable_init)
 )
 
 enum {

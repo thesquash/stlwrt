@@ -378,8 +378,6 @@ static char    *default_monthname[12];
 STLWRT_DEFINE_VTYPE (GtkCalendar, gtk_calendar, GTK_TYPE_WIDGET, G_TYPE_FLAG_NONE,
                      G_ADD_PRIVATE (GtkCalendar))
 
-#define gtk_calendar_get_instance_private(calendar) gtk_calendar_get_instance_private (calendar)
-
 static void
 gtk_calendar_class_init (GtkCalendarClass *class)
 {

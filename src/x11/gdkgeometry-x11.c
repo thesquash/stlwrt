@@ -18,15 +18,14 @@
  */
 
 #include "config.h"
-#include "gdk.h"		/* For gdk_rectangle_intersect */
-#include "gdkprivate-x11.h"
-#include "gdkx.h"
-#include "gdkregion.h"
-#include "gdkinternals.h"
-#include "gdkscreen-x11.h"
-#include "gdkdisplay-x11.h"
-#include "gdkwindow-x11.h"
-#include "gdkalias.h"
+#include <gdk.h>		/* For gdk_rectangle_intersect */
+#include <gdkprivate-x11.h>
+#include <gdkx.h>
+#include <gdkregion.h>
+#include <gdkinternals.h>
+#include <gdkscreen-x11.h>
+#include <gdkdisplay-x11.h>
+#include <gdkwindow-x11.h>
 
 typedef struct _GdkWindowQueueItem GdkWindowQueueItem;
 typedef struct _GdkWindowParentPos GdkWindowParentPos;
@@ -60,7 +59,7 @@ _gdk_window_move_resize_child (GdkWindow *window,
 			       gint       width,
 			       gint       height)
 {
-  GdkWindowObject *obj;
+  GdkWindow *obj;
 
   g_return_if_fail (window != NULL);
   g_return_if_fail (GDK_IS_WINDOW (window));
@@ -318,6 +317,3 @@ _gdk_window_process_expose (GdkWindow    *window,
 
   gdk_region_destroy (invalidate_region);
 }
-
-#define __GDK_GEOMETRY_X11_C__
-#include "gdkaliasdef.c"

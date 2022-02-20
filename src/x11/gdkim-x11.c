@@ -25,12 +25,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "gdkx.h"
-#include "gdk.h"		/* For gdk_flush() */
-#include "gdkpixmap.h"
-#include "gdkinternals.h"
-#include "gdkdisplay-x11.h"
-#include "gdkalias.h"
+#include <gdkx.h>
+#include <gdk.h>		/* For gdk_flush() */
+#include <gdkpixmap.h>
+#include <gdkinternals.h>
+#include <gdkdisplay-x11.h>
 
 
 /* If this variable is FALSE, it indicates that we should
@@ -242,6 +241,3 @@ gdk_mbstowcs (GdkWChar *dest, const gchar *src, gint dest_max)
       return i;
     }
 }
-
-#define __GDK_IM_X11_C__
-#include "gdkaliasdef.c"

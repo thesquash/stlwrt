@@ -36,16 +36,15 @@
 #include <X11/XKBlib.h>
 #endif
 
-#include "gdk.h"
+#include <gdk.h>
 
-#include "gdkx.h"
-#include "gdkasync.h"
-#include "gdkdisplay-x11.h"
-#include "gdkinternals.h"
-#include "gdkintl.h"
-#include "gdkregion-generic.h"
-#include "gdkinputprivate.h"
-#include "gdkalias.h"
+#include <gdkx.h>
+#include <gdkasync.h>
+#include <gdkdisplay-x11.h>
+#include <gdkinternals.h>
+#include <gdkintl.h>
+#include <gdkregion.h>
+#include <gdkinputprivate.h>
 
 typedef struct _GdkPredicate  GdkPredicate;
 typedef struct _GdkErrorTrap  GdkErrorTrap;
@@ -326,8 +325,8 @@ _gdk_xgrab_check_unmap (GdkWindow *window,
   if (display->keyboard_grab.window &&
       serial >= display->keyboard_grab.serial)
     {
-      GdkWindowObject *private = GDK_WINDOW_OBJECT (window);
-      GdkWindowObject *tmp = GDK_WINDOW_OBJECT (display->keyboard_grab.window);
+      GdkWindow *private = GDK_WINDOW_OBJECT (window);
+      GdkWindow *tmp = GDK_WINDOW_OBJECT (display->keyboard_grab.window);
 
       while (tmp && tmp != private)
 	tmp = tmp->parent;
@@ -748,6 +747,3 @@ gdk_x11_get_default_xdisplay (void)
 {
   return GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
 }
-
-#define __GDK_MAIN_X11_C__
-#include "gdkaliasdef.c"

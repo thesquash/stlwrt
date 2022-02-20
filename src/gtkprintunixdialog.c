@@ -68,9 +68,6 @@
 #define RULER_RADIUS 2
 
 
-#define gtk_print_unix_dialog_get_instance_private(o)  \
-   (G_TYPE_INSTANCE_GET_PRIVATE ((o), GTK_TYPE_PRINT_UNIX_DIALOG, GtkPrintUnixDialogPrivate))
-
 static void     gtk_print_unix_dialog_destroy      (GtkPrintUnixDialog *dialog);
 static void     gtk_print_unix_dialog_finalize     (GObject            *object);
 static void     gtk_print_unix_dialog_set_property (GObject            *object,

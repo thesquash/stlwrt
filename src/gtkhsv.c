@@ -121,19 +121,17 @@ STLWRT_DEFINE_FTYPE_VPARENT (GtkHSV, gtk_hsv, GTK_TYPE_WIDGET, G_TYPE_FLAG_NONE,
 static void
 gtk_hsv_class_init (GtkHSVClass *class)
 {
-  GObjectClass   *gobject_class;
   GtkWidgetClass *widget_class;
   GtkHSVClass    *hsv_class;
   GtkBindingSet  *binding_set;
   
-  gobject_class = (GObjectClass *) class;
   widget_class = (GtkWidgetClass *) class;
   hsv_class = GTK_HSV_CLASS (class);
   
   object_class->destroy = gtk_hsv_destroy;
   
   widget_class->map = gtk_hsv_map;
-  widget_class->unmap = gtk_hsv_unmap;                                      
+  widget_class->unmap = gtk_hsv_unmap;
   widget_class->realize = gtk_hsv_realize;
   widget_class->unrealize = gtk_hsv_unrealize;
   widget_class->size_request = gtk_hsv_size_request;
@@ -833,7 +831,6 @@ gtk_hsv_motion (GtkWidget      *widget,
   GtkHSV *hsv;
   HSVPrivate *priv;
   double x, y;
-  GdkModifierType mods;
   
   hsv = GTK_HSV (widget);
   priv = gtk_hsv_get_props (hsv)->priv;
@@ -844,7 +841,6 @@ gtk_hsv_motion (GtkWidget      *widget,
   __gdk_event_request_motions (event);
   x = event->x;
   y = event->y;
-  mods = event->state;
 
   if (priv->mode == DRAG_H)
     {

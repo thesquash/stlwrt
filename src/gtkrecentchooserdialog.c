@@ -30,9 +30,6 @@
 
 #include <stdarg.h>
 
-
-#define gtk_recent_chooser_dialog_get_instance_private(obj)	(gtk_recent_chooser_dialog_get_props (GTK_RECENT_CHOOSER_DIALOG (obj))->priv)
-
 static void gtk_recent_chooser_dialog_class_init (GtkRecentChooserDialogClass *klass);
 static void gtk_recent_chooser_dialog_init       (GtkRecentChooserDialog      *dialog);
 static void gtk_recent_chooser_dialog_finalize   (GObject                     *object);

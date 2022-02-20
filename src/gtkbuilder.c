@@ -374,7 +374,7 @@ _gtk_builder_construct (GtkBuilder *builder,
   GtkBuildable *buildable;
 
   g_assert (info->class_name != NULL);
-  object_type = gtk_builder_get_type_from_name (builder, info->class_name);
+  object_type = __gtk_builder_get_type_from_name (builder, info->class_name);
   if (object_type == G_TYPE_INVALID)
     {
       g_set_error (error,
@@ -1575,8 +1575,8 @@ _gtk_builder_flags_from_string (GType         type,
  * Since: 2.12
  */
 GType
-gtk_builder_get_type_from_name (GtkBuilder  *builder, 
-                                const gchar *type_name)
+__gtk_builder_get_type_from_name (GtkBuilder  *builder, 
+                                  const gchar *type_name)
 {
   g_return_val_if_fail (GTK_IS_BUILDER (builder), G_TYPE_INVALID);
   g_return_val_if_fail (type_name != NULL, G_TYPE_INVALID);

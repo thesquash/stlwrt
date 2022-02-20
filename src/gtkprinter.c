@@ -32,10 +32,6 @@
 #include <gtkprintbackend.h>
 #include <gtkprintjob.h>
 
-
-#define gtk_printer_get_instance_private(o)  \
-   (G_TYPE_INSTANCE_GET_PRIVATE ((o), GTK_TYPE_PRINTER, GtkPrinterPrivate))
-
 static void gtk_printer_finalize     (GObject *object);
 
 

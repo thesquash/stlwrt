@@ -34,8 +34,6 @@
 
 #include <stdarg.h>
 
-#define gtk_file_chooser_dialog_get_instance_private(o)  (gtk_file_chooser_default_get_props (GTK_FILE_CHOOSER_DIALOG (o))->priv)
-
 static void gtk_file_chooser_dialog_finalize   (GObject                   *object);
 
 static GObject* gtk_file_chooser_dialog_constructor  (GType                  type,

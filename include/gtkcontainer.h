@@ -37,7 +37,7 @@ G_BEGIN_DECLS
 #define GTK_IS_CONTAINER_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_CONTAINER))
 #define GTK_CONTAINER_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_CONTAINER, GtkContainerClass))
 
-#define GTK_IS_RESIZE_CONTAINER(widget) (GTK_IS_CONTAINER (widget) && gtk_container_get_resize_mode ((GtkContainer*) (widget)) != GTK_RESIZE_PARENT)
+#define GTK_IS_RESIZE_CONTAINER(widget) (GTK_IS_CONTAINER (widget) && __gtk_container_get_resize_mode ((GtkContainer*) (widget)) != GTK_RESIZE_PARENT)
 
 typedef struct _GtkContainerClass  GtkContainerClass;
 

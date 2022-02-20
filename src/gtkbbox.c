@@ -850,7 +850,7 @@ gtk_button_box_size_allocate (GtkWidget     *widget,
  * Return value: a new #GtkButtonBox.
  **/
 GtkWidget*
- __gtk_button_box_new (GtkOrientation orientation,
+__gtk_button_box_new (GtkOrientation orientation)
 {
   return g_object_new (GTK_TYPE_BUTTON_BOX,
                        "orientation", orientation,

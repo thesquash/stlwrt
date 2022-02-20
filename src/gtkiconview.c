@@ -3122,7 +3122,6 @@ gtk_icon_view_paint_item (GtkIconView     *icon_view,
   GdkRectangle cell_area, box;
   GList *l;
   gint i;
-  GtkStateType state;
   GtkCellRendererState flags;
       
   if (gtk_icon_view_get_props (icon_view)->priv->model == NULL)
@@ -3139,15 +3138,10 @@ gtk_icon_view_paint_item (GtkIconView     *icon_view,
   if (item->selected)
     {
       flags = GTK_CELL_RENDERER_SELECTED;
-      if (__gtk_widget_has_focus (GTK_WIDGET (icon_view)))
-	state = GTK_STATE_SELECTED;
-      else
-	state = GTK_STATE_ACTIVE;
     }
   else
     {
       flags = 0;
-      state = GTK_STATE_NORMAL;
     }
   
 #ifdef DEBUG_ICON_VIEW
@@ -4422,8 +4416,6 @@ gtk_icon_view_scroll_to_item (GtkIconView     *icon_view,
 			"focus-line-width", &focus_width,
 			NULL);
 
-  width = __gdk_window_get_width (gtk_icon_view_get_props (icon_view)->priv->bin_window);
-  height = __gdk_window_get_height (gtk_icon_view_get_props (icon_view)->priv->bin_window);
   __gdk_window_get_position (gtk_icon_view_get_props (icon_view)->priv->bin_window, &x, &y);
   
   if (y + item->y - focus_width < 0)

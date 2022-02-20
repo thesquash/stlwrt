@@ -69,10 +69,10 @@ enum
   RUBBER_BAND_ACTIVE = 2
 };
 
-#define GTK_TREE_VIEW_SET_FLAG(tree_view, flag)   G_STMT_START{ (gtk_tree_view_get_instance_private (tree_view)->flags|=flag); }G_STMT_END
-#define GTK_TREE_VIEW_UNSET_FLAG(tree_view, flag) G_STMT_START{ (gtk_tree_view_get_instance_private (tree_view)->flags&=~(flag)); }G_STMT_END
-#define GTK_TREE_VIEW_FLAG_SET(tree_view, flag)   ((gtk_tree_view_get_instance_private (tree_view)->flags&flag)==flag)
-#define TREE_VIEW_HEADER_HEIGHT(tree_view)        (GTK_TREE_VIEW_FLAG_SET (tree_view, GTK_TREE_VIEW_HEADERS_VISIBLE)?gtk_tree_view_get_instance_private (tree_view)->header_height:0)
+#define GTK_TREE_VIEW_SET_FLAG(tree_view, flag)   G_STMT_START{ (gtk_tree_view_get_props (tree_view)->priv->flags|=flag); }G_STMT_END
+#define GTK_TREE_VIEW_UNSET_FLAG(tree_view, flag) G_STMT_START{ (gtk_tree_view_get_props (tree_view)->priv->flags&=~(flag)); }G_STMT_END
+#define GTK_TREE_VIEW_FLAG_SET(tree_view, flag)   ((gtk_tree_view_get_props (tree_view)->priv->flags&flag)==flag)
+#define TREE_VIEW_HEADER_HEIGHT(tree_view)        (GTK_TREE_VIEW_FLAG_SET (tree_view, GTK_TREE_VIEW_HEADERS_VISIBLE)?gtk_tree_view_get_props (tree_view)->priv->header_height:0)
 #define TREE_VIEW_COLUMN_REQUESTED_WIDTH(column)  (CLAMP (column->requested_width, (column->min_width!=-1)?column->min_width:column->requested_width, (column->max_width!=-1)?column->max_width:column->requested_width))
 #define TREE_VIEW_DRAW_EXPANDERS(tree_view)       (!GTK_TREE_VIEW_FLAG_SET (tree_view, GTK_TREE_VIEW_IS_LIST)&&GTK_TREE_VIEW_FLAG_SET (tree_view, GTK_TREE_VIEW_SHOW_EXPANDERS))
 

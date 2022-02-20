@@ -801,7 +801,6 @@ __gtk_paper_size_new_from_key_file (GKeyFile    *key_file,
   GtkPaperSize *paper_size = NULL;
   char *name = NULL, *ppd_name = NULL, *display_name = NULL, *freeme = NULL;
   gdouble width, height;
-  gboolean retval = TRUE;
   GError *err = NULL;
 
   g_return_val_if_fail (key_file != NULL, NULL);
@@ -814,7 +813,6 @@ __gtk_paper_size_new_from_key_file (GKeyFile    *key_file,
                            GTK_PRINT_ERROR,
                            GTK_PRINT_ERROR_INVALID_FILE,
                            _("Not a valid page setup file"));
-      retval = FALSE;
       goto out;
     }
 
@@ -856,7 +854,6 @@ __gtk_paper_size_new_from_key_file (GKeyFile    *key_file,
                            GTK_PRINT_ERROR,
                            GTK_PRINT_ERROR_INVALID_FILE,
                            _("Not a valid page setup file"));
-      retval = FALSE;
       goto out;
     }
   g_assert (paper_size != NULL);

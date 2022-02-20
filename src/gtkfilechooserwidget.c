@@ -29,9 +29,6 @@
 #include <gtkfilechooserembed.h>
 #include <gtkintl.h>
 
-
-#define gtk_file_chooser_widget_get_instance_private(o)  (gtk_file_chooser_widget_get_props (GTK_FILE_CHOOSER_WIDGET (o))->priv)
-
 static void gtk_file_chooser_widget_finalize     (GObject                   *object);
 
 static GObject* gtk_file_chooser_widget_constructor  (GType                  type,

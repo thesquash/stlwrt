@@ -72,10 +72,6 @@ struct _GtkCellRendererSpinnerPrivate
   gint size;
 };
 
-
-#define gtk_cell_renderer_spinner_get_instance_private(object)  \
-        gtk_cell_renderer_spinner_get_instance_private (object)
-
 static void gtk_cell_renderer_spinner_get_property (GObject         *object,
                                                     guint            param_id,
                                                     GValue          *value,
@@ -194,14 +190,12 @@ gtk_cell_renderer_spinner_update_size (GtkCellRendererSpinner *cell,
 {
   GtkCellRendererSpinnerPrivate *priv = gtk_cell_renderer_spinner_get_instance_private (cell);
   GdkScreen *screen;
-  GtkIconTheme *icon_theme;
   GtkSettings *settings;
 
   if (priv->old_icon_size == priv->icon_size)
     return;
 
   screen = __gtk_widget_get_screen (GTK_WIDGET (widget));
-  icon_theme = __gtk_icon_theme_get_for_screen (screen);
   settings = __gtk_settings_get_for_screen (screen);
 
   if (!__gtk_icon_size_lookup_for_settings (settings, priv->icon_size, &priv->size, NULL))

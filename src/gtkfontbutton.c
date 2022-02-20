@@ -267,7 +267,7 @@ gtk_font_button_init (GtkFontButton *font_button)
   gtk_font_button_get_props (font_button)->priv->font_dialog = NULL;
   gtk_font_button_get_props (font_button)->priv->title = g_strdup (_("Pick a Font"));
 
-  gtk_font_button_get_props (font_button)->priv->inside = gtk_font_button_create_inside (gtk_font_button_get_props (font_button));
+  gtk_font_button_get_props (font_button)->priv->inside = gtk_font_button_create_inside (font_button);
   __gtk_container_add (GTK_CONTAINER (font_button), gtk_font_button_get_props (font_button)->priv->inside);
 
   gtk_font_button_update_font_info (font_button);  
@@ -616,7 +616,7 @@ __gtk_font_button_set_show_size (GtkFontButton *font_button,
       gtk_font_button_get_props (font_button)->priv->show_size = show_size;
 
       __gtk_container_remove (GTK_CONTAINER (font_button), gtk_font_button_get_props (font_button)->priv->inside);
-      gtk_font_button_get_props (font_button)->priv->inside = gtk_font_button_create_inside (gtk_font_button_get_props (font_button));
+      gtk_font_button_get_props (font_button)->priv->inside = gtk_font_button_create_inside (font_button);
       __gtk_container_add (GTK_CONTAINER (font_button), gtk_font_button_get_props (font_button)->priv->inside);
       
       gtk_font_button_update_font_info (font_button);

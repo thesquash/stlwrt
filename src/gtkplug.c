@@ -640,7 +640,7 @@ gtk_plug_realize (GtkWidget *widget)
 	gtk_widget_get_props (widget)->window = __gdk_window_new (gtk_plug_get_props (plug)->socket_window, 
 					 &attributes, attributes_mask);
       else /* If it's a passive plug, we use the root window */
-	gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_root_window (gtk_widget_get_props (widget)),
+	gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_root_window (widget),
 					 &attributes, attributes_mask);
 
       __gdk_display_sync (__gtk_widget_get_display (widget));
@@ -650,7 +650,7 @@ gtk_plug_realize (GtkWidget *widget)
 	  __gdk_window_destroy (gtk_widget_get_props (widget)->window);
 	  __gdk_flush ();
 	  __gdk_error_trap_pop ();
-	  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_root_window (gtk_widget_get_props (widget)),
+	  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_root_window (widget),
 					   &attributes, attributes_mask);
 	}
       
@@ -664,7 +664,7 @@ gtk_plug_realize (GtkWidget *widget)
       _gtk_plug_windowing_realize_toplevel (plug);
     }
   else
-    gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (gtk_widget_get_props (widget)), 
+    gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (widget), 
 				     &attributes, attributes_mask);      
   
   __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, window);

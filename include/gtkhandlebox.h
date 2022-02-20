@@ -52,7 +52,7 @@ STLWRT_DECLARE_VTYPE_VPARENT(GtkHandleBox, gtk_handle_box, GtkBin,
   guint            (in_drag) : 1;
   guint            (shrink_on_detach) : 1;
 
-  signed int       (snap_edge : 3); /* -1 == unset */
+  signed int       (snap_edge) : 3; /* -1 == unset */
 
   /* Variables used during a drag
    */

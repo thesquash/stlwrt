@@ -6801,7 +6801,7 @@ gtk_text_btree_node_check_consistency (GtkTextBTree     *tree,
                           break;
                         }
                       g_error ("gtk_text_btree_node_check_consistency: GtkTextBTreeNode tag \"%s\" not %s",
-                               summary->gtk_text_tag_get_props (info->tag)->name,
+                               gtk_text_tag_get_props (summary->info->tag)->name,
                                "present in parent summaries");
                     }
                   if (summary->info == summary2->info)
@@ -6837,7 +6837,7 @@ gtk_text_btree_node_check_consistency (GtkTextBTree     *tree,
       if (summary->info->toggle_count == summary->toggle_count)
         {
           g_error ("gtk_text_btree_node_check_consistency: found unpruned root for \"%s\"",
-                   summary->gtk_text_tag_get_props (info->tag)->name);
+                   gtk_text_tag_get_props (summary->info->tag)->name);
         }
       toggle_count = 0;
       if (node->level == 0)
@@ -6891,7 +6891,7 @@ gtk_text_btree_node_check_consistency (GtkTextBTree     *tree,
           if (summary2->info == summary->info)
             {
               g_error ("gtk_text_btree_node_check_consistency: duplicated GtkTextBTreeNode tag: %s",
-                       summary->gtk_text_tag_get_props (info->tag)->name);
+                       gtk_text_tag_get_props (summary->info->tag)->name);
             }
         }
     }
@@ -7185,7 +7185,7 @@ _gtk_text_btree_spew_line_short (GtkTextLine *line, int indent)
                seg->type == &gtk_text_toggle_off_type)
         {
           printf ("%s tag `%s' %s\n",
-                  spaces, seg->body.toggle.gtk_text_tag_get_props (info->tag)->name,
+                  spaces, gtk_text_tag_get_props (seg->body.toggle.info->tag)->name,
                   seg->type == &gtk_text_toggle_off_type ? "off" : "on");
         }
 
@@ -7212,7 +7212,7 @@ _gtk_text_btree_spew_node (GtkTextBTreeNode *node, int indent)
   while (s)
     {
       printf ("%s %d toggles of `%s' below this node\n",
-              spaces, s->toggle_count, s->gtk_text_tag_get_props (info->tag)->name);
+              spaces, s->toggle_count, gtk_text_tag_get_props (s->info->tag)->name);
       s = s->next;
     }
 
@@ -7287,7 +7287,7 @@ _gtk_text_btree_spew_segment (GtkTextBTree* tree, GtkTextLineSegment * seg)
            seg->type == &gtk_text_toggle_off_type)
     {
       printf ("       tag `%s' priority %d\n",
-              seg->body.toggle.gtk_text_tag_get_props (info->tag)->name,
-              seg->body.toggle.gtk_text_tag_get_props (info->tag)->priority);
+              gtk_text_tag_get_props (seg->body.toggle.info->tag)->name,
+              gtk_text_tag_get_props (seg->body.toggle.info->tag)->priority);
     }
 }

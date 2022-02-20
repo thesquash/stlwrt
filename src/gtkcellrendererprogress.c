@@ -532,10 +532,10 @@ gtk_cell_renderer_progress_render (GtkCellRenderer *cell,
 
   is_rtl = __gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL;
   
-  x = cell_area->x + gtk_cell_renderer_progress_get_props (cell)->xpad;
-  y = cell_area->y + gtk_cell_renderer_progress_get_props (cell)->ypad;
-  w = cell_area->width - gtk_cell_renderer_progress_get_props (cell)->xpad * 2;
-  h = cell_area->height - gtk_cell_renderer_progress_get_props (cell)->ypad * 2;
+  x = cell_area->x + gtk_cell_renderer_get_props (cell)->xpad;
+  y = cell_area->y + gtk_cell_renderer_get_props (cell)->ypad;
+  w = cell_area->width - gtk_cell_renderer_get_props (cell)->xpad * 2;
+  h = cell_area->height - gtk_cell_renderer_get_props (cell)->ypad * 2;
 
   /* FIXME: GtkProgressBar draws the box with "trough" detail,
    * but some engines don't paint anything with that detail for

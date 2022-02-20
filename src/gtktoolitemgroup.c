@@ -1184,7 +1184,7 @@ gtk_tool_item_group_realize (GtkWidget *widget)
                          | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK
                          | GDK_BUTTON_MOTION_MASK;
 
-  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (gtk_widget_get_props (widget)),
+  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (widget),
                                    &attributes, attributes_mask);
 
   display = __gdk_window_get_display (gtk_widget_get_props (widget)->window);
@@ -1192,7 +1192,7 @@ gtk_tool_item_group_realize (GtkWidget *widget)
   if (__gdk_display_supports_composite (display))
     __gdk_window_set_composited (gtk_widget_get_props (widget)->window, TRUE);
 
-  __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, gtk_widget_get_props (widget));
+  __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, widget);
   gtk_widget_get_props (widget)->style = __gtk_style_attach (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window);
   __gtk_style_set_background (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, GTK_STATE_NORMAL);
   __gtk_widget_set_realized (widget, TRUE);
@@ -2304,9 +2304,9 @@ _gtk_tool_item_group_paint (GtkToolItemGroup *group,
       if (!__gtk_widget_get_visible (priv->header))
         v0 = MAX (v0, 0);
       else if (GTK_ORIENTATION_VERTICAL == orientation)
-        v0 = MAX (v0, priv->gtk_widget_get_props (gtk_widget_get_props (header))->allocation.height);
+        v0 = MAX (v0, gtk_widget_get_props (priv->header)->allocation.height);
       else
-        v0 = MAX (v0, priv->gtk_widget_get_props (gtk_widget_get_props (header))->allocation.width);
+        v0 = MAX (v0, gtk_widget_get_props (priv->header)->allocation.width);
 
       v1 = MIN (v0 + 256, v1);
 

@@ -392,7 +392,7 @@ __gtk_image_set_property (GObject      *object,
                                    g_value_get_object (value));
       else if (gtk_image_get_props (image)->storage_type == GTK_IMAGE_IMAGE)
         __gtk_image_set_from_image (image,
-                                  gtk_image_get_props (image)->data.gtk_image_get_props (image).image,
+                                  gtk_image_get_props (image)->data.image.image,
                                   g_value_get_object (value));
       else
         {
@@ -504,7 +504,7 @@ __gtk_image_get_property (GObject     *object,
         g_value_set_object (value, NULL);
       else
         g_value_set_object (value,
-                            gtk_image_get_props (image)->data.gtk_image_get_props (image).image);
+                            gtk_image_get_props (image)->data.image.image);
       break;
     case PROP_FILE:
       g_value_set_string (value, priv->filename);
@@ -902,7 +902,7 @@ __gtk_image_set_from_image  (GtkImage  *image,
     {
       gtk_image_get_props (image)->storage_type = GTK_IMAGE_IMAGE;
 
-      gtk_image_get_props (image)->data.gtk_image_get_props (image).image = gdk_image;
+      gtk_image_get_props (image)->data.image.image = gdk_image;
       gtk_image_get_props (image)->mask = mask;
 
       gtk_image_update_size (image, gdk_image->width, gdk_image->height);
@@ -1299,7 +1299,7 @@ __gtk_image_get_image  (GtkImage   *image,
                     gtk_image_get_props (image)->storage_type == GTK_IMAGE_EMPTY);
 
   if (gdk_image)
-    *gdk_image = gtk_image_get_props (image)->data.gtk_image_get_props (image).image;
+    *gdk_image = gtk_image_get_props (image)->data.image.image;
   
   if (mask)
     *mask = gtk_image_get_props (image)->mask;
@@ -1870,7 +1870,7 @@ gtk_image_expose (GtkWidget      *widget,
         {
         case GTK_IMAGE_PIXMAP:
           mask = gtk_image_get_props (image)->mask;
-          __gdk_drawable_get_size (gtk_image_get_props (image)->data.pixmap.pixmap,
+          __gdk_drawable_get_size ((GdkDrawable *) gtk_image_get_props (image)->data.pixmap.pixmap,
                                  &image_bound.width,
                                  &image_bound.height);
 	  if (rectangle_intersect_even (&area, &image_bound) &&
@@ -1892,14 +1892,14 @@ gtk_image_expose (GtkWidget      *widget,
 
         case GTK_IMAGE_IMAGE:
           mask = gtk_image_get_props (image)->mask;
-          image_bound.width = gtk_image_get_props (image)->data.gtk_image_get_props (image).image->width;
-          image_bound.height = gtk_image_get_props (image)->data.gtk_image_get_props (image).image->height;
+          image_bound.width = gtk_image_get_props (image)->data.image.image->width;
+          image_bound.height = gtk_image_get_props (image)->data.image.image->height;
 
 	  if (rectangle_intersect_even (&area, &image_bound) &&
 	      needs_state_transform)
             {
               pixbuf = __gdk_pixbuf_get_from_image (NULL,
-                                                  gtk_image_get_props (image)->data.gtk_image_get_props (image).image,
+                                                  gtk_image_get_props (image)->data.image.image,
                                                   __gtk_widget_get_colormap (widget),
 						  image_bound.x - x, image_bound.y - y,
                                                   0, 0,
@@ -2090,7 +2090,7 @@ gtk_image_expose (GtkWidget      *widget,
                 case GTK_IMAGE_IMAGE:
                   __gdk_draw_image ((GdkDrawable *)gtk_widget_get_props (widget)->window,
                                   gtk_widget_get_props (widget)->style->black_gc,
-                                  gtk_image_get_props (image)->data.gtk_image_get_props (image).image,
+                                  gtk_image_get_props (image)->data.image.image,
                                   image_bound.x - x, image_bound.y - y,
                                   image_bound.x, image_bound.y,
                                   image_bound.width, image_bound.height);
@@ -2162,9 +2162,9 @@ gtk_image_reset (GtkImage *image)
 
     case GTK_IMAGE_IMAGE:
 
-      if (gtk_image_get_props (image)->data.gtk_image_get_props (image).image)
-        g_object_unref (gtk_image_get_props (image)->data.gtk_image_get_props (image).image);
-      gtk_image_get_props (image)->data.gtk_image_get_props (image).image = NULL;
+      if (gtk_image_get_props (image)->data.image.image)
+        g_object_unref (gtk_image_get_props (image)->data.image.image);
+      gtk_image_get_props (image)->data.image.image = NULL;
       
       g_object_notify (G_OBJECT (image), "image");
       

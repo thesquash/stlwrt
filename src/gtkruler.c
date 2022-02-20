@@ -447,7 +447,7 @@ gtk_ruler_realize (GtkWidget *widget)
 
   attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
 
-  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (gtk_widget_get_props (widget)), &attributes, attributes_mask);
+  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (widget), &attributes, attributes_mask);
   __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, ruler);
 
   gtk_widget_get_props (widget)->style = __gtk_style_attach (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window);
@@ -567,7 +567,7 @@ gtk_ruler_make_pixmap (GtkRuler *ruler)
 
   if (gtk_ruler_get_props (ruler)->backing_store)
     {
-      __gdk_drawable_get_size (gtk_ruler_get_props (ruler)->backing_store, &width, &height);
+      __gdk_drawable_get_size ((GdkDrawable *) gtk_ruler_get_props (ruler)->backing_store, &width, &height);
       if ((width == gtk_widget_get_props (widget)->allocation.width) &&
 	  (height == gtk_widget_get_props (widget)->allocation.height))
 	return;
@@ -575,7 +575,7 @@ gtk_ruler_make_pixmap (GtkRuler *ruler)
       g_object_unref (gtk_ruler_get_props (ruler)->backing_store);
     }
 
-  gtk_ruler_get_props (ruler)->backing_store = __gdk_pixmap_new (gtk_widget_get_props (widget)->window,
+  gtk_ruler_get_props (ruler)->backing_store = __gdk_pixmap_new ((GdkDrawable *) gtk_widget_get_props (widget)->window,
 					 gtk_widget_get_props (widget)->allocation.width,
 					 gtk_widget_get_props (widget)->allocation.height,
 					 -1);

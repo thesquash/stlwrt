@@ -1812,9 +1812,9 @@ gtk_label_compose_effective_attrs (GtkLabel *label)
 	      do
 		{
 		  iter_attrs = pango_attr_iterator_get_attrs (iter);
-		  for (gtk_label_get_props (l) = iter_attrs; gtk_label_get_props (l); gtk_label_get_props (l) = gtk_label_get_props (l)->next)
+		  for (l = iter_attrs; l; l = l->next)
 		    {
-		      attr = gtk_label_get_props (l)->data;
+		      attr = l->data;
 		      pango_attr_list_insert (gtk_label_get_props (label)->effective_attrs, attr);
 		    }
 		  g_slist_free (iter_attrs);
@@ -1864,7 +1864,7 @@ gtk_label_recalculate (GtkLabel *label)
             pango_attr_list_unref (gtk_label_get_props (label)->effective_attrs);
           gtk_label_get_props (label)->effective_attrs = NULL;
         }
-      __gtk_label_set_text_internal (label, g_strdup (gtk_label_get_props (gtk_label_get_props (label)->label)));
+      __gtk_label_set_text_internal (label, g_strdup (gtk_label_get_props (label)->label));
     }
 
   gtk_label_compose_effective_attrs (label);
@@ -3139,8 +3139,8 @@ gtk_label_size_request (GtkWidget      *widget,
 
   gtk_label_ensure_layout (label);
 
-  width = gtk_label_get_props (label)->misc.xpad * 2;
-  height = gtk_label_get_props (label)->misc.ypad * 2;
+  width = gtk_misc_get_props (label)->xpad * 2;
+  height = gtk_misc_get_props (label)->ypad * 2;
 
   aux_info = ___gtk_widget_get_aux_info (widget, FALSE);
 
@@ -3213,7 +3213,7 @@ gtk_label_size_allocate (GtkWidget     *widget,
 	  gint width;
 	  PangoRectangle logical;
 
-	  width = (allocation->width - gtk_label_get_props (label)->misc.xpad * 2) * PANGO_SCALE;
+	  width = (allocation->width - gtk_misc_get_props (label)->xpad * 2) * PANGO_SCALE;
 
 	  pango_layout_set_width (gtk_label_get_props (label)->layout, -1);
 	  pango_layout_get_extents (gtk_label_get_props (label)->layout, NULL, &logical);
@@ -3675,7 +3675,7 @@ gtk_label_expose (GtkWidget      *widget,
                                                        1);
               __gdk_region_get_clipbox (clip, &rect);
 
-              __gtk_paint_focus (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, __gtk_widget_get_state (gtk_widget_get_props (widget)),
+              __gtk_paint_focus (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, __gtk_widget_get_state (widget),
                                &event->area, widget, "label",
                                rect.x, rect.y, rect.width, rect.height);
 
@@ -4370,7 +4370,7 @@ drag_begin_cb (GtkWidget      *widget,
 
   if (pixmap)
     __gtk_drag_set_icon_pixmap (context,
-                              __gdk_drawable_get_colormap (pixmap),
+                              __gdk_drawable_get_colormap ((GdkDrawable *) pixmap),
                               pixmap,
                               NULL,
                               -2, -2);

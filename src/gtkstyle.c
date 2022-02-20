@@ -3618,7 +3618,7 @@ get_darkened_gc (GdkWindow      *window,
   GdkColor shaded = *color;
   GdkGC *gc;
   
-  gc = __gdk_gc_new (window);
+  gc = __gdk_gc_new ((GdkDrawable *) window);
 
   while (darken_count)
     {
@@ -4958,7 +4958,7 @@ gtk_default_draw_handle (GtkStyle      *style,
 	  ___gtk_style_shade (&style->base[GTK_STATE_ACTIVE], &unfocused_light,
                             LIGHTNESS_MULT);
 
-	  light_gc = free_me = __gdk_gc_new (window);
+	  light_gc = free_me = __gdk_gc_new ((GdkDrawable *) window);
 	  __gdk_gc_set_rgb_fg_color (light_gc, &unfocused_light);
 	}
       else
@@ -5328,7 +5328,7 @@ gtk_default_draw_layout (GtkStyle        *style,
     {
       PangoLayout *ins;
 
-      ins = get_insensitive_layout (window, layout);
+      ins = get_insensitive_layout ((GdkDrawable *) window, layout);
       
       __gdk_draw_layout ((GdkDrawable *)window, gc, x, y, ins);
 

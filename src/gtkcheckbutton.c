@@ -152,14 +152,14 @@ gtk_check_button_paint (GtkWidget    *widget,
 	  GtkWidget *child = gtk_bin_get_props (GTK_BIN (widget))->child;
 	  
 	  if (interior_focus && child && __gtk_widget_get_visible (child))
-	    __gtk_paint_focus (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, __gtk_widget_get_state (gtk_widget_get_props (widget)),
+	    __gtk_paint_focus (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, __gtk_widget_get_state (widget),
 			     area, widget, "checkbutton",
 			     gtk_widget_get_props (child)->allocation.x - focus_width - focus_pad,
 			     gtk_widget_get_props (child)->allocation.y - focus_width - focus_pad,
 			     gtk_widget_get_props (child)->allocation.width + 2 * (focus_width + focus_pad),
 			     gtk_widget_get_props (child)->allocation.height + 2 * (focus_width + focus_pad));
 	  else
-	    __gtk_paint_focus (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, __gtk_widget_get_state (gtk_widget_get_props (widget)),
+	    __gtk_paint_focus (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, __gtk_widget_get_state (widget),
 			     area, widget, "checkbutton",
 			     border_width + gtk_widget_get_props (widget)->allocation.x,
 			     border_width + gtk_widget_get_props (widget)->allocation.y,

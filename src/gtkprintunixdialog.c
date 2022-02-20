@@ -1395,9 +1395,9 @@ update_dialog_from_settings (GtkPrintUnixDialog *dialog)
   groups = gtk_printer_option_set_get_groups (priv->options);
 
   has_advanced = FALSE;
-  for (gtk_widget_get_props (l) = groups; gtk_widget_get_props (l) != NULL; gtk_widget_get_props (l) = gtk_widget_get_props (l)->next)
+  for (l = groups; l != NULL; l = l->next)
     {
-      group = gtk_widget_get_props (l)->data;
+      group = l->data;
 
       if (group == NULL)
         continue;

@@ -1523,7 +1523,7 @@ gtk_range_realize (GtkWidget *widget)
   
   __gtk_widget_set_realized (widget, TRUE);
 
-  gtk_widget_get_props (widget)->window = __gtk_widget_get_parent_window (gtk_widget_get_props (widget));
+  gtk_widget_get_props (widget)->window = __gtk_widget_get_parent_window (widget);
   g_object_ref (gtk_widget_get_props (widget)->window);
   
   attributes.window_type = GDK_WINDOW_CHILD;
@@ -2012,7 +2012,7 @@ gtk_range_expose (GtkWidget      *widget,
 	}
 
       if (sensitive && __gtk_widget_has_focus (widget))
-        __gtk_paint_focus (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, __gtk_widget_get_state (gtk_widget_get_props (widget)),
+        __gtk_paint_focus (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, __gtk_widget_get_state (widget),
                          &area, widget, "trough",
                          gtk_widget_get_props (widget)->allocation.x + gtk_range_get_props (range)->range_rect.x,
                          gtk_widget_get_props (widget)->allocation.y + gtk_range_get_props (range)->range_rect.y,
@@ -3470,9 +3470,9 @@ gtk_range_calc_layout (GtkRange *range,
         
         y = top;
         
-	if (gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->upper - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->lower - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->page_size != 0)
+	if (gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->upper - gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->lower - gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->page_size != 0)
 	  y += (bottom - top - height) * ((adjustment_value - gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->lower) /
-					  (gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->upper - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->lower - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->page_size));
+					  (gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->upper - gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->lower - gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->page_size));
         
         y = CLAMP (y, top, bottom);
         
@@ -3619,9 +3619,9 @@ gtk_range_calc_layout (GtkRange *range,
         
         x = left;
         
-	if (gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->upper - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->lower - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->page_size != 0)
+	if (gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->upper - gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->lower - gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->page_size != 0)
           x += (right - left - width) * ((adjustment_value - gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->lower) /
-                                         (gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->upper - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->lower - gtk_range_get_props (gtk_range_get_props (range))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->page_size));
+                                         (gtk_adjustment_get_props (gtk_range_get_props (range))->adjustment)->upper - gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->lower - gtk_adjustment_get_props (gtk_range_get_props (range)->adjustment)->page_size));
         
         x = CLAMP (x, left, right);
         

@@ -1382,7 +1382,7 @@ _gtk_tree_view_column_has_editable_cell (GtkTreeViewColumn *column)
   GList *list;
 
   for (list = gtk_tree_view_column_get_props (column)->cell_list; list; list = list->next)
-    if (((GtkTreeViewColumnCellInfo *)list->data)->gtk_cell_renderer_get_props (cell)->mode ==
+    if (gtk_cell_renderer_get_props (((GtkTreeViewColumnCellInfo *)list->data)->cell)->mode ==
 	GTK_CELL_RENDERER_MODE_EDITABLE)
       return TRUE;
 
@@ -3513,7 +3513,7 @@ _gtk_tree_view_column_cell_draw_focus (GtkTreeViewColumn  *tree_column,
       cell_state = flags & GTK_CELL_RENDERER_SELECTED ? GTK_STATE_SELECTED :
 	      (flags & GTK_CELL_RENDERER_PRELIT ? GTK_STATE_PRELIGHT :
 	      (flags & GTK_CELL_RENDERER_INSENSITIVE ? GTK_STATE_INSENSITIVE : GTK_STATE_NORMAL));
-      __gtk_paint_focus (gtk_tree_view_get_props (gtk_tree_view_column_get_props (tree_column)->tree_view)->style,
+      __gtk_paint_focus (gtk_widget_get_props (gtk_tree_view_column_get_props (tree_column)->tree_view)->style,
 		       window,
 		       cell_state,
 		       cell_area,

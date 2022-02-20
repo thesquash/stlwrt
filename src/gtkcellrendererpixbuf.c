@@ -632,21 +632,21 @@ gtk_cell_renderer_pixbuf_get_size (GtkCellRenderer *cell,
       pixbuf_height = MAX (pixbuf_height, gdk_pixbuf_get_height (gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_closed));
     }
   
-  calc_width  = (gint) gtk_cell_renderer_pixbuf_get_props (cell)->xpad * 2 + pixbuf_width;
-  calc_height = (gint) gtk_cell_renderer_pixbuf_get_props (cell)->ypad * 2 + pixbuf_height;
+  calc_width  = (gint) gtk_cell_renderer_get_props (cell)->xpad * 2 + pixbuf_width;
+  calc_height = (gint) gtk_cell_renderer_get_props (cell)->ypad * 2 + pixbuf_height;
   
   if (cell_area && pixbuf_width > 0 && pixbuf_height > 0)
     {
       if (x_offset)
 	{
 	  *x_offset = (((__gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL) ?
-                        (1.0 - gtk_cell_renderer_pixbuf_get_props (cell)->xalign) : gtk_cell_renderer_pixbuf_get_props (cell)->xalign) * 
+                        (1.0 - gtk_cell_renderer_get_props (cell)->xalign) : gtk_cell_renderer_get_props (cell)->xalign) * 
                        (cell_area->width - calc_width));
 	  *x_offset = MAX (*x_offset, 0);
 	}
       if (y_offset)
 	{
-	  *y_offset = (gtk_cell_renderer_pixbuf_get_props (cell)->yalign *
+	  *y_offset = (gtk_cell_renderer_get_props (cell)->yalign *
                        (cell_area->height - calc_height));
           *y_offset = MAX (*y_offset, 0);
 	}
@@ -691,10 +691,10 @@ gtk_cell_renderer_pixbuf_render (GtkCellRenderer      *cell,
 				     &pix_rect.width,
 				     &pix_rect.height);
 
-  pix_rect.x += cell_area->x + gtk_cell_renderer_pixbuf_get_props (cell)->xpad;
-  pix_rect.y += cell_area->y + gtk_cell_renderer_pixbuf_get_props (cell)->ypad;
-  pix_rect.width  -= gtk_cell_renderer_pixbuf_get_props (cell)->xpad * 2;
-  pix_rect.height -= gtk_cell_renderer_pixbuf_get_props (cell)->ypad * 2;
+  pix_rect.x += cell_area->x + gtk_cell_renderer_get_props (cell)->xpad;
+  pix_rect.y += cell_area->y + gtk_cell_renderer_get_props (cell)->ypad;
+  pix_rect.width  -= gtk_cell_renderer_get_props (cell)->xpad * 2;
+  pix_rect.height -= gtk_cell_renderer_get_props (cell)->ypad * 2;
 
   if (!__gdk_rectangle_intersect (cell_area, &pix_rect, &draw_rect) ||
       !__gdk_rectangle_intersect (expose_area, &draw_rect, &draw_rect))
@@ -702,12 +702,12 @@ gtk_cell_renderer_pixbuf_render (GtkCellRenderer      *cell,
 
   pixbuf = gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf;
 
-  if (gtk_cell_renderer_pixbuf_get_props (cell)->is_expander)
+  if (gtk_cell_renderer_get_props (cell)->is_expander)
     {
-      if (gtk_cell_renderer_pixbuf_get_props (cell)->is_expanded &&
+      if (gtk_cell_renderer_get_props (cell)->is_expanded &&
 	  gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_open != NULL)
 	pixbuf = gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_open;
-      else if (!gtk_cell_renderer_pixbuf_get_props (cell)->is_expanded &&
+      else if (!gtk_cell_renderer_get_props (cell)->is_expanded &&
 	       gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_closed != NULL)
 	pixbuf = gtk_cell_renderer_pixbuf_get_props (cellpixbuf)->pixbuf_expander_closed;
     }
@@ -715,7 +715,7 @@ gtk_cell_renderer_pixbuf_render (GtkCellRenderer      *cell,
   if (!pixbuf)
     return;
 
-  if (__gtk_widget_get_state (widget) == GTK_STATE_INSENSITIVE || !gtk_cell_renderer_pixbuf_get_props (cell)->sensitive)
+  if (__gtk_widget_get_state (widget) == GTK_STATE_INSENSITIVE || !gtk_cell_renderer_get_props (cell)->sensitive)
     {
       GtkIconSource *source;
       

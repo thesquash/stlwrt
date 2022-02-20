@@ -1036,7 +1036,7 @@ static void
 set_title_font (GtkWidget *assistant,
 		GtkWidget *title_label)
 {
-  GtkAssistantProps *assistant_props = gtk_assistant_get_props (assistant);
+  GtkAssistantPrivate *priv = gtk_assistant_get_instance_private (assistant);
   PangoFontDescription *desc;
   gint size;
 
@@ -1384,7 +1384,7 @@ gtk_assistant_focus (GtkWidget        *widget,
   GtkContainer *container;
 
   container = GTK_CONTAINER (widget);
-  priv = gtk_assistant_get_props (GTK_ASSISTANT (widget))->priv;
+  priv = gtk_assistant_get_instance_private (GTK_ASSISTANT (widget));
 
   /* we only have to care about 2 widgets, action area and the current page */
   if (gtk_container_get_props (container)->focus_child == priv->action_area)
@@ -2465,7 +2465,7 @@ gtk_assistant_buildable_get_internal_child (GtkBuildable *buildable,
                                             const gchar  *childname)
 {
     if (strcmp (childname, "action_area") == 0)
-      return G_OBJECT (gtk_assistant_get_props (GTK_ASSISTANT (buildable))->priv->action_area);
+      return G_OBJECT (gtk_assistant_get_instance_private (GTK_ASSISTANT (buildable))->action_area);
 
     return parent_buildable_iface->get_internal_child (buildable,
                                                        builder,

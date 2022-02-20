@@ -866,7 +866,7 @@ gtk_recent_chooser_menu_insert_item (GtkRecentChooserMenu *menu,
                                      GtkWidget            *menuitem,
                                      gint                  position)
 {
-  GtkRecentChooserMenuPrivate *priv = gtk_widget_get_props (menu)->priv;
+  GtkRecentChooserMenuPrivate *priv = gtk_recent_chooser_menu_get_instance_private (menu);
   gint real_position;
 
   if (priv->first_recent_item_pos == -1)
@@ -932,7 +932,7 @@ gtk_recent_chooser_menu_dispose_items (GtkRecentChooserMenu *menu)
     }
 
   /* recalculate the position of the first recent item */
-  gtk_widget_get_props (menu)->priv->first_recent_item_pos = -1;
+  gtk_widget_get_instance_private (menu)->first_recent_item_pos = -1;
 
   g_list_free (children);
 }

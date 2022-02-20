@@ -674,8 +674,6 @@ gtk_toolbar_init (GtkToolbar *toolbar)
   gtk_toolbar_get_props (toolbar)->style = DEFAULT_TOOLBAR_STYLE;
   gtk_toolbar_get_props (toolbar)->icon_size = DEFAULT_ICON_SIZE;
   priv->animation = DEFAULT_ANIMATION_STATE;
-  gtk_toolbar_get_props (toolbar)->tooltips = gtk_tooltips_new ();
-  g_object_ref_sink (gtk_toolbar_get_props (toolbar)->tooltips);
   
   priv->arrow_button = __gtk_toggle_button_new ();
   g_signal_connect (priv->arrow_button, "button-press-event",
@@ -829,7 +827,7 @@ gtk_toolbar_realize (GtkWidget *widget)
   
   attributes_mask = GDK_WA_X | GDK_WA_Y;
   
-  gtk_widget_get_props (widget)->window = __gtk_widget_get_parent_window (gtk_widget_get_props (widget));
+  gtk_widget_get_props (widget)->window = __gtk_widget_get_parent_window (widget);
   g_object_ref (gtk_widget_get_props (widget)->window);
   gtk_widget_get_props (widget)->style = __gtk_style_attach (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window);
   
@@ -2933,14 +2931,6 @@ void
 __gtk_toolbar_set_tooltips (GtkToolbar *toolbar,
 			  gboolean    enable)
 {
-  g_return_if_fail (GTK_IS_TOOLBAR (toolbar));
-  
-  if (enable)
-    gtk_tooltips_enable (gtk_toolbar_get_props (toolbar)->tooltips);
-  else
-    gtk_tooltips_disable (gtk_toolbar_get_props (toolbar)->tooltips);
-
-  g_object_notify (G_OBJECT (toolbar), "tooltips");
 }
 
 /**
@@ -2958,8 +2948,6 @@ __gtk_toolbar_set_tooltips (GtkToolbar *toolbar,
 gboolean
 __gtk_toolbar_get_tooltips (GtkToolbar *toolbar)
 {
-  g_return_val_if_fail (GTK_IS_TOOLBAR (toolbar), FALSE);
-  
   return TRUE;
 }
 
@@ -3182,9 +3170,6 @@ gtk_toolbar_finalize (GObject *object)
   GList *list;
   GtkToolbar *toolbar = GTK_TOOLBAR (object);
   GtkToolbarPrivate *priv = gtk_toolbar_get_instance_private (toolbar);
-  
-  if (gtk_toolbar_get_props (toolbar)->tooltips)
-    g_object_unref (gtk_toolbar_get_props (toolbar)->tooltips);
 
   for (list = priv->content; list != NULL; list = list->next)
     {

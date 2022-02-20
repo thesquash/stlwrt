@@ -1158,7 +1158,7 @@ gtk_button_realize (GtkWidget *widget)
 
   attributes_mask = GDK_WA_X | GDK_WA_Y;
 
-  gtk_widget_get_props (widget)->window = __gtk_widget_get_parent_window (gtk_widget_get_props (widget));
+  gtk_widget_get_props (widget)->window = __gtk_widget_get_parent_window (widget);
   g_object_ref (gtk_widget_get_props (widget)->window);
   
   gtk_button_get_props (button)->event_window = __gdk_window_new (__gtk_widget_get_parent_window (widget),
@@ -1524,7 +1524,7 @@ ___gtk_button_paint (GtkButton          *button,
 	      y += child_displacement_y;
 	    }
 
-	  __gtk_paint_focus (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, __gtk_widget_get_state (gtk_widget_get_props (widget)),
+	  __gtk_paint_focus (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, __gtk_widget_get_state (widget),
 			   area, widget, "button",
 			   x, y, width, height);
 	}
@@ -1636,7 +1636,7 @@ __gtk_button_enter_notify (GtkWidget        *widget,
   event_widget = __gtk_get_event_widget ((GdkEvent*) event);
 
   if ((event_widget == widget) &&
-      (gtk_widget_get_props (event)->detail != GDK_NOTIFY_INFERIOR))
+      (event->detail != GDK_NOTIFY_INFERIOR))
     {
       gtk_button_get_props (button)->in_button = TRUE;
       __gtk_button_enter (button);
@@ -1656,7 +1656,7 @@ __gtk_button_leave_notify (GtkWidget        *widget,
   event_widget = __gtk_get_event_widget ((GdkEvent*) event);
 
   if ((event_widget == widget) &&
-      (gtk_widget_get_props (event)->detail != GDK_NOTIFY_INFERIOR) &&
+      (event->detail != GDK_NOTIFY_INFERIOR) &&
       (__gtk_widget_get_sensitive (event_widget)))
     {
       gtk_button_get_props (button)->in_button = FALSE;

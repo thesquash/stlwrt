@@ -144,7 +144,7 @@ gtk_offscreen_window_realize (GtkWidget *widget)
 
   attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
 
-  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (gtk_widget_get_props (widget)),
+  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (widget),
                                    &attributes, attributes_mask);
   __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, gtk_widget_get_props (widget));
 
@@ -307,7 +307,7 @@ __gtk_offscreen_window_get_pixbuf (GtkOffscreenWindow *offscreen)
     {
       gint width, height;
 
-      __gdk_drawable_get_size (pixmap, &width, &height);
+      __gdk_drawable_get_size ((GdkDrawable *) pixmap, &width, &height);
 
       pixbuf = __gdk_pixbuf_get_from_drawable (NULL, pixmap, NULL,
                                              0, 0, 0, 0,

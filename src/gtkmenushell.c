@@ -553,8 +553,8 @@ gtk_menu_shell_realize (GtkWidget *widget)
 			    GDK_LEAVE_NOTIFY_MASK);
 
   attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
-  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (gtk_widget_get_props (widget)), &attributes, attributes_mask);
-  __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, gtk_widget_get_props (widget));
+  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (widget), &attributes, attributes_mask);
+  __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, widget);
 
   gtk_widget_get_props (widget)->style = __gtk_style_attach (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window);
   __gtk_style_set_background (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, GTK_STATE_NORMAL);
@@ -1010,7 +1010,7 @@ gtk_menu_shell_leave_notify (GtkWidget        *widget,
       if ((gtk_menu_shell_get_props (menu_shell)->active_menu_item == event_widget) &&
 	  (gtk_menu_item_get_props (menu_item)->submenu == NULL))
 	{
-	  if ((gtk_widget_get_props (event)->detail != GDK_NOTIFY_INFERIOR) &&
+	  if ((event->detail != GDK_NOTIFY_INFERIOR) &&
 	      (__gtk_widget_get_state (GTK_WIDGET (menu_item)) != GTK_STATE_NORMAL))
 	    {
 	      __gtk_menu_shell_deselect (menu_shell);

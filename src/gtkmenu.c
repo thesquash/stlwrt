@@ -1278,7 +1278,7 @@ gtk_menu_tearoff_bg_copy (GtkMenu *menu)
       width = __gdk_window_get_width (gtk_widget_get_props (gtk_menu_get_props (menu)->tearoff_window)->window);
       height = __gdk_window_get_height (gtk_widget_get_props (gtk_menu_get_props (menu)->tearoff_window)->window);
       
-      pixmap = __gdk_pixmap_new (gtk_widget_get_props (gtk_menu_get_props (menu)->tearoff_window)->window,
+      pixmap = __gdk_pixmap_new ((GdkDrawable *) gtk_widget_get_props (gtk_menu_get_props (menu)->tearoff_window)->window,
 			       width,
 			       height,
 			       -1);
@@ -2234,8 +2234,8 @@ gtk_menu_realize (GtkWidget *widget)
 			    GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK );
   
   attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
-  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (gtk_widget_get_props (widget)), &attributes, attributes_mask);
-  __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, gtk_widget_get_props (widget));
+  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (widget), &attributes, attributes_mask);
+  __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, widget);
   
   border_width = gtk_container_get_props (GTK_CONTAINER (widget))->border_width;
 
@@ -2878,7 +2878,7 @@ pointer_in_menu_window (GtkWidget *widget,
       GtkMenuShell *menu_shell;
       gint          window_x, window_y;
 
-      __gdk_window_get_position (gtk_widget_get_props (gtk_menu_shell_get_props (menu)->toplevel)->window, &window_x, &window_y);
+      __gdk_window_get_position (gtk_widget_get_props (gtk_menu_get_props (menu)->toplevel)->window, &window_x, &window_y);
 
       if (x_root >= window_x && x_root < window_x + gtk_widget_get_props (widget)->allocation.width &&
           y_root >= window_y && y_root < window_y + gtk_widget_get_props (widget)->allocation.height)
@@ -3570,7 +3570,7 @@ gtk_menu_handle_scrolling (GtkMenu *menu,
                 "gtk-touchscreen-mode", &touchscreen_mode,
                 NULL);
 
-  __gdk_window_get_position (gtk_widget_get_props (gtk_menu_shell_get_props (menu)->toplevel)->window, &top_x, &top_y);
+  __gdk_window_get_position (gtk_widget_get_props (gtk_menu_get_props (menu)->toplevel)->window, &top_x, &top_y);
   x -= top_x;
   y -= top_y;
 
@@ -4404,7 +4404,7 @@ gtk_menu_scroll_to (GtkMenu *menu,
     {
       gtk_adjustment_get_props (gtk_menu_get_props (menu)->tearoff_adjustment)->value =
 	CLAMP (offset,
-	       0, gtk_menu_get_props (menu)->gtk_adjustment_get_props (gtk_adjustment_get_props (tearoff_adjustment))->upper - gtk_menu_get_props (menu)->gtk_adjustment_get_props (gtk_adjustment_get_props (tearoff_adjustment))->page_size);
+	       0, gtk_adjustment_get_props (gtk_menu_get_props (menu)->tearoff_adjustment)->upper - gtk_adjustment_get_props (gtk_menu_get_props (menu)->tearoff_adjustment))->page_size);
       __gtk_adjustment_value_changed (gtk_menu_get_props (menu)->tearoff_adjustment);
     }
   

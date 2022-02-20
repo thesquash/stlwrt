@@ -432,7 +432,7 @@ gtk_expander_realize (GtkWidget *widget)
 
   attributes_mask = GDK_WA_X | GDK_WA_Y;
 
-  gtk_widget_get_props (widget)->window = __gtk_widget_get_parent_window (gtk_widget_get_props (widget));
+  gtk_widget_get_props (widget)->window = __gtk_widget_get_parent_window (widget);
   g_object_ref (gtk_widget_get_props (widget)->window);
 
   priv->event_window = __gdk_window_new (__gtk_widget_get_parent_window (widget),
@@ -896,7 +896,7 @@ gtk_expander_paint_focus (GtkExpander  *expander,
       height = rect.height + 2 * focus_pad;
     }
       
-  __gtk_paint_focus (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, __gtk_widget_get_state (gtk_widget_get_props (widget)),
+  __gtk_paint_focus (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, __gtk_widget_get_state (widget),
 		   area, widget, "expander",
 		   x, y, width, height);
 }
@@ -988,7 +988,7 @@ gtk_expander_enter_notify (GtkWidget        *widget,
   event_widget = __gtk_get_event_widget ((GdkEvent *) event);
 
   if (event_widget == widget &&
-      gtk_widget_get_props (event)->detail != GDK_NOTIFY_INFERIOR)
+      event->detail != GDK_NOTIFY_INFERIOR)
     {
       gtk_expander_get_props (expander)->priv->prelight = TRUE;
 
@@ -1011,7 +1011,7 @@ gtk_expander_leave_notify (GtkWidget        *widget,
   event_widget = __gtk_get_event_widget ((GdkEvent *) event);
 
   if (event_widget == widget &&
-      gtk_widget_get_props (event)->detail != GDK_NOTIFY_INFERIOR)
+      event->detail != GDK_NOTIFY_INFERIOR)
     {
       gtk_expander_get_props (expander)->priv->prelight = FALSE;
 

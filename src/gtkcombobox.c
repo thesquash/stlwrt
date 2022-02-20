@@ -1212,7 +1212,7 @@ gtk_combo_box_state_changed (GtkWidget    *widget,
     {
       if (priv->tree_view && priv->cell_view)
 	__gtk_cell_view_set_background_color (GTK_CELL_VIEW (priv->cell_view), 
-					    &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (gtk_widget_get_props (widget))]);
+					    &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (widget)]);
     }
 
   __gtk_widget_queue_draw (widget);
@@ -1295,7 +1295,7 @@ gtk_combo_box_style_set (GtkWidget *widget,
 
   if (priv->tree_view && priv->cell_view)
     __gtk_cell_view_set_background_color (GTK_CELL_VIEW (priv->cell_view), 
-					&gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (gtk_widget_get_props (widget))]);
+					&gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (widget)]);
 
   if (GTK_IS_ENTRY (gtk_bin_get_props (combo_box)->child))
     g_object_set (gtk_bin_get_props (combo_box)->child, "shadow-type",
@@ -2274,7 +2274,7 @@ gtk_combo_box_size_request (GtkWidget      *widget,
 			"arrow-size", &arrow_size,
 			NULL);
 
-  font_desc = gtk_bin_get_props (GTK_BIN (widget))->gtk_widget_get_props (child)->style->font_desc;
+  font_desc = gtk_widget_get_props (gtk_bin_get_props (GTK_BIN (widget))->child)->style->font_desc;
   context = __gtk_widget_get_pango_context (widget);
   metrics = pango_context_get_metrics (context, font_desc,
 				       pango_context_get_language (context));
@@ -3540,11 +3540,11 @@ find_menu_by_path (GtkWidget   *menu,
   list = __gtk_container_get_children (GTK_CONTAINER (menu));
   skip = skip_first;
   item = NULL;
-  for (gtk_widget_get_props (i) = list; gtk_widget_get_props (i); gtk_widget_get_props (i) = gtk_widget_get_props (i)->next)
+  for (i = list; i; i = i->next)
     {
-      if (GTK_IS_SEPARATOR_MENU_ITEM (gtk_widget_get_props (i)->data))
+      if (GTK_IS_SEPARATOR_MENU_ITEM (i->data))
 	{
-	  mref = g_object_get_data (G_OBJECT (gtk_widget_get_props (i)->data), "gtk-combo-box-item-path");
+	  mref = g_object_get_data (G_OBJECT (i->data), "gtk-combo-box-item-path");
 	  if (!mref)
 	    continue;
 	  else if (!__gtk_tree_row_reference_valid (mref))
@@ -3552,7 +3552,7 @@ find_menu_by_path (GtkWidget   *menu,
 	  else
 	    mpath = __gtk_tree_row_reference_get_path (mref);
 	}
-      else if (GTK_IS_CELL_VIEW (GTK_BIN (gtk_widget_get_props (i)->data)->child))
+      else if (GTK_IS_CELL_VIEW (GTK_BIN (i->data)->child))
 	{
 	  if (skip)
 	    {
@@ -3560,7 +3560,7 @@ find_menu_by_path (GtkWidget   *menu,
 	      continue;
 	    }
 
-	  mpath = __gtk_cell_view_get_displayed_row (GTK_CELL_VIEW (GTK_BIN (gtk_widget_get_props (i)->data)->child));
+	  mpath = __gtk_cell_view_get_displayed_row (GTK_CELL_VIEW (gtk_bin_get_props (i->data)->child));
 	}
       else 
 	continue;
@@ -3570,18 +3570,18 @@ find_menu_by_path (GtkWidget   *menu,
        */
       if (!mpath)
 	{
-	  item = gtk_widget_get_props (i)->data;
+	  item = i->data;
 	  break;
 	}
       if (__gtk_tree_path_compare (mpath, path) == 0)
 	{
 	  __gtk_tree_path_free (mpath);
-	  item = gtk_widget_get_props (i)->data;
+	  item = i->data;
 	  break;
 	}
       if (__gtk_tree_path_is_ancestor (mpath, path))
 	{
-	  submenu = __gtk_menu_item_get_submenu (GTK_MENU_ITEM (gtk_widget_get_props (i)->data));
+	  submenu = __gtk_menu_item_get_submenu (GTK_MENU_ITEM (i->data));
 	  if (submenu != NULL)
 	    {
 	      __gtk_tree_path_free (mpath);
@@ -4262,7 +4262,7 @@ gtk_combo_box_list_select_func (GtkTreeSelection *selection,
   GList *list;
   gboolean sensitive = FALSE;
 
-  for (list = gtk_widget_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->columns; list && !sensitive; list = list->next)
+  for (list = gtk_tree_view_get_props (gtk_tree_selection_get_props (selection)->tree_view)->priv->columns; list && !sensitive; list = list->next)
     {
       GList *cells, *cell;
       gboolean cell_sensitive, cell_visible;

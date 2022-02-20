@@ -2636,7 +2636,7 @@ realize_icon_info (GtkWidget            *widget,
                                       attributes_mask);
   __gdk_window_set_user_data (icon_info->window, widget);
   __gdk_window_set_background (icon_info->window,
-                             &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (gtk_widget_get_props (widget))]);
+                             &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (widget)]);
 
   __gtk_widget_queue_resize (widget);
 }
@@ -2738,7 +2738,7 @@ gtk_entry_realize (GtkWidget *widget)
 			    GDK_LEAVE_NOTIFY_MASK);
   attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
 
-  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (gtk_widget_get_props (widget)), &attributes, attributes_mask);
+  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (widget), &attributes, attributes_mask);
   __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, entry);
 
   get_text_area_size (entry, &attributes.x, &attributes.y, &attributes.width, &attributes.height);
@@ -2758,8 +2758,8 @@ gtk_entry_realize (GtkWidget *widget)
 
   gtk_widget_get_props (widget)->style = __gtk_style_attach (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window);
 
-  __gdk_window_set_background (gtk_widget_get_props (widget)->window, &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (gtk_widget_get_props (widget))]);
-  __gdk_window_set_background (gtk_entry_get_props (entry)->text_area, &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (gtk_widget_get_props (widget))]);
+  __gdk_window_set_background (gtk_widget_get_props (widget)->window, &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (widget)]);
+  __gdk_window_set_background (gtk_entry_get_props (entry)->text_area, &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (widget)]);
 
   __gdk_window_show (gtk_entry_get_props (entry)->text_area);
 
@@ -3932,7 +3932,7 @@ gtk_entry_motion_notify (GtkWidget      *widget,
           
           if (pixmap)
             __gtk_drag_set_icon_pixmap (context,
-                                      __gdk_drawable_get_colormap (pixmap),
+                                      __gdk_drawable_get_colormap ((GdkDrawable *) pixmap),
                                       pixmap,
                                       NULL,
                                       -2, -2);
@@ -4198,13 +4198,13 @@ gtk_entry_state_changed (GtkWidget      *widget,
 
   if (__gtk_widget_get_realized (widget))
     {
-      __gdk_window_set_background (gtk_widget_get_props (widget)->window, &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (gtk_widget_get_props (widget))]);
-      __gdk_window_set_background (gtk_entry_get_props (entry)->text_area, &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (gtk_widget_get_props (widget))]);
+      __gdk_window_set_background (gtk_widget_get_props (widget)->window, &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (widget)]);
+      __gdk_window_set_background (gtk_entry_get_props (entry)->text_area, &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (widget)]);
       for (i = 0; i < MAX_ICONS; i++)
         {
           EntryIconInfo *icon_info = priv->icons[i];
           if (icon_info && icon_info->window)
-            __gdk_window_set_background (icon_info->window, &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (gtk_widget_get_props (widget))]);
+            __gdk_window_set_background (icon_info->window, &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (widget)]);
         }
 
       if (__gtk_widget_is_sensitive (widget))
@@ -4416,13 +4416,13 @@ gtk_entry_style_set (GtkWidget *widget,
 
   if (previous_style && __gtk_widget_get_realized (widget))
     {
-      __gdk_window_set_background (gtk_widget_get_props (widget)->window, &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (gtk_widget_get_props (widget))]);
-      __gdk_window_set_background (gtk_entry_get_props (entry)->text_area, &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (gtk_widget_get_props (widget))]);
+      __gdk_window_set_background (gtk_widget_get_props (widget)->window, &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (widget)]);
+      __gdk_window_set_background (gtk_entry_get_props (entry)->text_area, &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (widget)]);
       for (i = 0; i < MAX_ICONS; i++) 
         {
           EntryIconInfo *icon_info = priv->icons[i];
           if (icon_info && icon_info->window)
-            __gdk_window_set_background (icon_info->window, &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (gtk_widget_get_props (widget))]);
+            __gdk_window_set_background (icon_info->window, &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (widget)]);
         }
     }
 
@@ -6054,12 +6054,12 @@ gtk_entry_move_adjustments (GtkEntry *entry)
   gtk_entry_get_cursor_locations (entry, CURSOR_STANDARD, &x, NULL);
   get_layout_position (entry, &layout_x, NULL);
   _gtk_entry_get_borders (entry, &border_x, &border_y);
-  x += gtk_entry_get_props (entry)->widget.allocation.x + layout_x + border_x;
+  x += gtk_widget_get_props (entry)->allocation.x + layout_x + border_x;
 
   /* Approximate width of a char, so user can see what is ahead/behind */
   context = __gtk_widget_get_pango_context (GTK_WIDGET (entry));
   metrics = pango_context_get_metrics (context, 
-                                       gtk_entry_get_props (entry)->widget.style->font_desc,
+                                       gtk_widget_get_props (entry)->style->font_desc,
 				       pango_context_get_language (context));
   char_width = pango_font_metrics_get_approximate_char_width (metrics) / PANGO_SCALE;
 
@@ -9224,7 +9224,7 @@ blink_cb (gpointer data)
   else if (gtk_entry_get_props (entry)->cursor_visible)
     {
       hide_cursor (entry);
-      gtk_entry_get_props (entry)->blink_timeout = __gdk_threads_add_timeout (get_cursor_time (gtk_entry_get_props (entry)) * CURSOR_OFF_MULTIPLIER / CURSOR_DIVIDER,
+      gtk_entry_get_props (entry)->blink_timeout = __gdk_threads_add_timeout (get_cursor_time (entry) * CURSOR_OFF_MULTIPLIER / CURSOR_DIVIDER,
 					    blink_cb,
 					    entry);
     }
@@ -9232,7 +9232,7 @@ blink_cb (gpointer data)
     {
       show_cursor (entry);
       priv->blink_time += get_cursor_time (entry);
-      gtk_entry_get_props (entry)->blink_timeout = __gdk_threads_add_timeout (get_cursor_time (gtk_entry_get_props (entry)) * CURSOR_ON_MULTIPLIER / CURSOR_DIVIDER,
+      gtk_entry_get_props (entry)->blink_timeout = __gdk_threads_add_timeout (get_cursor_time (entry) * CURSOR_ON_MULTIPLIER / CURSOR_DIVIDER,
 					    blink_cb,
 					    entry);
     }
@@ -9253,7 +9253,7 @@ gtk_entry_check_cursor_blink (GtkEntry *entry)
       if (!gtk_entry_get_props (entry)->blink_timeout)
 	{
 	  show_cursor (entry);
-	  gtk_entry_get_props (entry)->blink_timeout = __gdk_threads_add_timeout (get_cursor_time (gtk_entry_get_props (entry)) * CURSOR_ON_MULTIPLIER / CURSOR_DIVIDER,
+	  gtk_entry_get_props (entry)->blink_timeout = __gdk_threads_add_timeout (get_cursor_time (entry) * CURSOR_ON_MULTIPLIER / CURSOR_DIVIDER,
 						blink_cb,
 						entry);
 	}
@@ -9279,7 +9279,7 @@ gtk_entry_pend_cursor_blink (GtkEntry *entry)
       if (gtk_entry_get_props (entry)->blink_timeout != 0)
 	g_source_remove (gtk_entry_get_props (entry)->blink_timeout);
       
-      gtk_entry_get_props (entry)->blink_timeout = __gdk_threads_add_timeout (get_cursor_time (gtk_entry_get_props (entry)) * CURSOR_PEND_MULTIPLIER / CURSOR_DIVIDER,
+      gtk_entry_get_props (entry)->blink_timeout = __gdk_threads_add_timeout (get_cursor_time (entry) * CURSOR_PEND_MULTIPLIER / CURSOR_DIVIDER,
 					    blink_cb,
 					    entry);
       show_cursor (entry);

@@ -980,7 +980,7 @@ gtk_paned_realize (GtkWidget *widget)
   __gtk_widget_set_realized (widget, TRUE);
   paned = GTK_PANED (widget);
 
-  gtk_widget_get_props (widget)->window = __gtk_widget_get_parent_window (gtk_widget_get_props (widget));
+  gtk_widget_get_props (widget)->window = __gtk_widget_get_parent_window (widget);
   g_object_ref (gtk_widget_get_props (widget)->window);
   
   attributes.window_type = GDK_WINDOW_CHILD;
@@ -2147,7 +2147,7 @@ gtk_paned_cycle_handle_focus (GtkPaned *paned,
       if (!__gtk_widget_is_focus (GTK_WIDGET (paned)))
 	{
 	  gtk_paned_get_props (paned)->original_position = -1;
-	  gtk_paned_get_props (focus)->original_position = __gtk_paned_get_position (gtk_paned_get_props (focus));
+	  gtk_paned_get_props (focus)->original_position = __gtk_paned_get_position (focus);
 	}
     }
   else
@@ -2205,7 +2205,7 @@ gtk_paned_cycle_handle_focus (GtkPaned *paned,
       if (GTK_IS_WINDOW (toplevel))
 	gtk_paned_set_saved_focus (focus, gtk_window_get_props (GTK_WINDOW (toplevel))->focus_widget);
       gtk_paned_set_first_paned (focus, first);
-      gtk_paned_get_props (focus)->original_position = __gtk_paned_get_position (gtk_paned_get_props (focus)); 
+      gtk_paned_get_props (focus)->original_position = __gtk_paned_get_position (focus); 
 
       __gtk_widget_grab_focus (GTK_WIDGET (focus));
    }

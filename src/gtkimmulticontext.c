@@ -240,7 +240,7 @@ get_effective_context_id (GtkIMMulticontext *multicontext)
 static GtkIMContext *
 gtk_im_multicontext_get_slave (GtkIMMulticontext *multicontext)
 {
-  if (g_strcmp0 (gtk_im_multicontext_get_props (multicontext)->context_id, get_effective_context_id (gtk_im_multicontext_get_props (multicontext))) != 0)
+  if (g_strcmp0 (gtk_im_multicontext_get_props (multicontext)->context_id, get_effective_context_id (multicontext)) != 0)
     gtk_im_multicontext_set_slave (multicontext, NULL, FALSE);
 
   if (!gtk_im_multicontext_get_props (multicontext)->slave)
@@ -249,7 +249,7 @@ gtk_im_multicontext_get_slave (GtkIMMulticontext *multicontext)
 
       g_free (gtk_im_multicontext_get_props (multicontext)->context_id);
 
-      gtk_im_multicontext_get_props (multicontext)->context_id = g_strdup (get_effective_context_id (gtk_im_multicontext_get_props (multicontext)));
+      gtk_im_multicontext_get_props (multicontext)->context_id = g_strdup (get_effective_context_id (multicontext));
 
       if (g_strcmp0 (gtk_im_multicontext_get_props (multicontext)->context_id, NONE_ID) == 0)
         return NULL;

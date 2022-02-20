@@ -1837,8 +1837,8 @@ tab_compare (gconstpointer a,
 	     gconstpointer b,
 	     gpointer      data)
 {
-  const GtkWidget *child1 = a;
-  const GtkWidget *child2 = b;
+  GtkWidget *child1 = a;
+  GtkWidget *child2 = b;
   GtkTextDirection text_direction = GPOINTER_TO_INT (data);
 
   gint y1 = gtk_widget_get_props (child1)->allocation.y + gtk_widget_get_props (child1)->allocation.height / 2;

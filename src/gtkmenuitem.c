@@ -1147,7 +1147,7 @@ gtk_menu_item_realize (GtkWidget *widget)
 
   __gtk_widget_set_realized (widget, TRUE);
 
-  gtk_widget_get_props (widget)->window = __gtk_widget_get_parent_window (gtk_widget_get_props (widget));
+  gtk_widget_get_props (widget)->window = __gtk_widget_get_parent_window (widget);
   g_object_ref (gtk_widget_get_props (widget)->window);
   
   attributes.x = gtk_widget_get_props (widget)->allocation.x;
@@ -1780,7 +1780,7 @@ gtk_menu_item_position_menu (GtkMenu  *menu,
       else
 	parent_menu_item = NULL;
       
-      parent_xthickness = gtk_menu_item_get_props (gtk_widget_get_props (widget)->parent)->style->xthickness;
+      parent_xthickness = gtk_widget_get_props (gtk_widget_get_props (widget)->parent)->style->xthickness;
 
       if (parent_menu_item && !gtk_menu_get_props (GTK_MENU (gtk_widget_get_props (widget)->parent))->torn_off)
 	{
@@ -1834,9 +1834,9 @@ gtk_menu_item_position_menu (GtkMenu  *menu,
 
   __gtk_menu_set_monitor (menu, monitor_num);
 
-  if (!__gtk_widget_get_visible (gtk_menu_item_get_props (menu)->toplevel))
+  if (!__gtk_widget_get_visible (gtk_menu_get_props (menu)->toplevel))
     {
-      __gtk_window_set_type_hint (GTK_WINDOW (gtk_menu_item_get_props (menu)->toplevel), gtk_menu_item_get_props (menu_item)->from_menubar?
+      __gtk_window_set_type_hint (GTK_WINDOW (gtk_menu_get_props (menu)->toplevel), gtk_menu_item_get_props (menu_item)->from_menubar?
 				GDK_WINDOW_TYPE_HINT_DROPDOWN_MENU : GDK_WINDOW_TYPE_HINT_POPUP_MENU);
     }
 }

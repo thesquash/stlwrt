@@ -1011,7 +1011,7 @@ gtk_message_dialog_style_set (GtkWidget *widget,
   GtkWidget *parent;
   gint border_width;
 
-  parent = GTK_WIDGET (gtk_message_dialog_get_props (GTK_MESSAGE_DIALOG (widget))->gtk_widget_get_props (image)->parent);
+  parent = GTK_WIDGET (gtk_widget_get_props (gtk_message_dialog_get_props (widget)->image)->parent);
 
   if (parent)
     {

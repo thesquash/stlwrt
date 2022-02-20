@@ -3101,7 +3101,7 @@ icon_window_realize (GtkWidget *window,
 						  __gtk_widget_get_colormap (window),
 						  &pixmap, &mask, 128);
   
-  __gdk_window_set_back_pixmap (gtk_widget_get_props (gtk_widget_get_props (window)->window), pixmap, FALSE);
+  __gdk_window_set_back_pixmap (gtk_widget_get_props (window)->window, pixmap, FALSE);
   g_object_unref (pixmap);
   
   if (mask)
@@ -3268,10 +3268,10 @@ __gtk_drag_set_icon_pixmap (GdkDragContext    *context,
 
   screen = __gdk_colormap_get_screen (colormap);
   
-  g_return_if_fail (__gdk_drawable_get_screen (pixmap) == screen);
-  g_return_if_fail (!mask || __gdk_drawable_get_screen (mask) == screen);
+  g_return_if_fail (__gdk_drawable_get_screen ((GdkDrawable *) pixmap) == screen);
+  g_return_if_fail (!mask || __gdk_drawable_get_screen ((GdkDrawable *) mask) == screen);
 
-  __gdk_drawable_get_size (pixmap, &width, &height);
+  __gdk_drawable_get_size ((GdkDrawable *) pixmap, &width, &height);
 
   __gtk_widget_push_colormap (colormap);
 
@@ -3287,7 +3287,7 @@ __gtk_drag_set_icon_pixmap (GdkDragContext    *context,
   __gtk_widget_set_size_request (window, width, height);
   __gtk_widget_realize (window);
 
-  __gdk_window_set_back_pixmap (gtk_widget_get_props (gtk_widget_get_props (window)->window), pixmap, FALSE);
+  __gdk_window_set_back_pixmap (gtk_widget_get_props (window)->window, pixmap, FALSE);
   
   if (mask)
     __gtk_widget_shape_combine_mask (window, mask, 0, 0);

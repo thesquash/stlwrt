@@ -1286,8 +1286,8 @@ totally_invisible_line (GtkTextLayout *layout,
           invalidate_cached_style (layout);
 
           /* Bail out if an elision-unsetting tag begins */
-          if (seg->body.toggle.gtk_text_tag_get_props (info->tag)->invisible_set &&
-              !seg->body.toggle.gtk_text_tag_get_props (info->tag)->values->invisible)
+          if (gtk_text_tag_get_props (seg->body.toggle.info->tag)->invisible_set &&
+              !gtk_text_tag_get_props (seg->body.toggle.info->tag)->values->invisible)
             break;
         }
       else if (seg->type == &gtk_text_toggle_off_type)
@@ -1295,8 +1295,8 @@ totally_invisible_line (GtkTextLayout *layout,
           invalidate_cached_style (layout);
 
           /* Bail out if an elision-setting tag ends */
-          if (seg->body.toggle.gtk_text_tag_get_props (info->tag)->invisible_set &&
-              seg->body.toggle.gtk_text_tag_get_props (info->tag)->values->invisible)
+          if (gtk_text_tag_get_props (seg->body.toggle.info->tag)->invisible_set &&
+              gtk_text_tag_get_props (seg->body.toggle.info->tag)->values->invisible)
             break;
         }
 

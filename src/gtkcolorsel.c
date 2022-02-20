@@ -1595,7 +1595,7 @@ make_picker_cursor (GdkScreen *screen)
       window = __gdk_screen_get_root_window (screen);
       
 
-      pixmap = __gdk_pixmap_new (window, DROPPER_WIDTH, DROPPER_HEIGHT, 1);
+      pixmap = __gdk_pixmap_new ((GdkDrawable *) window, DROPPER_WIDTH, DROPPER_HEIGHT, 1);
 
       cr = __gdk_cairo_create ((GdkDrawable *) (pixmap));
       cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
@@ -1610,7 +1610,7 @@ make_picker_cursor (GdkScreen *screen)
       cairo_destroy (cr);
       
 
-      mask = __gdk_pixmap_new (window, DROPPER_WIDTH, DROPPER_HEIGHT, 1);
+      mask = __gdk_pixmap_new ((GdkDrawable *) window, DROPPER_WIDTH, DROPPER_HEIGHT, 1);
 
       cr = __gdk_cairo_create ((GdkDrawable *) (mask));
       cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);

@@ -1354,7 +1354,7 @@ shortcuts_find_folder (GtkFileChooserDefault *impl,
 static void
 shortcuts_find_current_folder (GtkFileChooserDefault *impl)
 {
-  shortcuts_find_folder (_gtk_file_chooser_default_get_props (impl), _gtk_file_chooser_default_get_props (impl)->current_folder);
+  shortcuts_find_folder (impl, _gtk_file_chooser_default_get_props (impl)->current_folder);
 }
 
 /* Removes the specified number of rows from the shortcuts list */
@@ -1986,7 +1986,7 @@ shortcuts_add_volumes (GtkFileChooserDefault *impl)
   _gtk_file_chooser_default_get_props (impl)->changing_folder = TRUE;
 
   start_row = shortcuts_get_index (impl, SHORTCUTS_VOLUMES);
-  shortcuts_remove_rows (_gtk_file_chooser_default_get_props (impl), start_row, _gtk_file_chooser_default_get_props (impl)->num_volumes);
+  shortcuts_remove_rows (impl, start_row, _gtk_file_chooser_default_get_props (impl)->num_volumes);
   _gtk_file_chooser_default_get_props (impl)->num_volumes = 0;
 
   list = _gtk_file_system_list_volumes (_gtk_file_chooser_default_get_props (impl)->file_system);
@@ -2130,7 +2130,7 @@ shortcuts_add_current_folder (GtkFileChooserDefault *impl)
 
   g_assert (_gtk_file_chooser_default_get_props (impl)->current_folder != NULL);
 
-  pos = shortcut_find_position (_gtk_file_chooser_default_get_props (impl), _gtk_file_chooser_default_get_props (impl)->current_folder);
+  pos = shortcut_find_position (impl, _gtk_file_chooser_default_get_props (impl)->current_folder);
   if (pos == -1)
     {
       GtkFileSystemVolume *volume;
@@ -2151,7 +2151,7 @@ shortcuts_add_current_folder (GtkFileChooserDefault *impl)
       if (base_file && g_file_equal (base_file, _gtk_file_chooser_default_get_props (impl)->current_folder))
         shortcuts_insert_file (impl, pos, SHORTCUT_TYPE_VOLUME, volume, NULL, NULL, FALSE, SHORTCUTS_CURRENT_FOLDER);
       else
-        shortcuts_insert_file (_gtk_file_chooser_default_get_props (impl), pos, SHORTCUT_TYPE_FILE, NULL, _gtk_file_chooser_default_get_props (impl)->current_folder, NULL, FALSE, SHORTCUTS_CURRENT_FOLDER);
+        shortcuts_insert_file (impl, pos, SHORTCUT_TYPE_FILE, NULL, _gtk_file_chooser_default_get_props (impl)->current_folder, NULL, FALSE, SHORTCUTS_CURRENT_FOLDER);
 
       if (base_file)
         g_object_unref (base_file);
@@ -2227,7 +2227,7 @@ shortcuts_model_create (GtkFileChooserDefault *impl)
       shortcuts_add_volumes (impl);
     }
 
-  _gtk_file_chooser_default_get_props (impl)->shortcuts_pane_filter_model = shortcuts_pane_model_filter_new (_gtk_file_chooser_default_get_props (impl),
+  _gtk_file_chooser_default_get_props (impl)->shortcuts_pane_filter_model = shortcuts_pane_model_filter_new (impl,
 							               GTK_TREE_MODEL (_gtk_file_chooser_default_get_props (impl)->shortcuts_model),
 								       NULL);
 
@@ -2338,7 +2338,7 @@ queue_edited_idle (GtkFileChooserDefault *impl,
    */
 
   if (!_gtk_file_chooser_default_get_props (impl)->edited_idle)
-    _gtk_file_chooser_default_get_props (impl)->edited_idle = add_idle_while_impl_is_alive (_gtk_file_chooser_default_get_props (impl), G_CALLBACK (edited_idle_cb));
+    _gtk_file_chooser_default_get_props (impl)->edited_idle = add_idle_while_impl_is_alive (impl, G_CALLBACK (edited_idle_cb));
 
   g_free (_gtk_file_chooser_default_get_props (impl)->edited_new_text);
   _gtk_file_chooser_default_get_props (impl)->edited_new_text = g_strdup (new_text);
@@ -2532,7 +2532,7 @@ bookmarks_add_selected_folder (GtkFileChooserDefault *impl)
   selection = __gtk_tree_view_get_selection (GTK_TREE_VIEW (_gtk_file_chooser_default_get_props (impl)->browse_files_tree_view));
 
   if (__gtk_tree_selection_count_selected_rows (selection) == 0)
-    shortcuts_add_bookmark_from_file (_gtk_file_chooser_default_get_props (impl), _gtk_file_chooser_default_get_props (impl)->current_folder, -1);
+    shortcuts_add_bookmark_from_file (impl, _gtk_file_chooser_default_get_props (impl)->current_folder, -1);
   else
     __gtk_tree_selection_selected_foreach (selection,
 					 add_bookmark_foreach_cb,
@@ -2762,7 +2762,7 @@ bookmarks_check_add_sensitivity (GtkFileChooserDefault *impl)
   selection_check (impl, &num_selected, NULL, &all_folders);
 
   if (num_selected == 0)
-    active = (_gtk_file_chooser_default_get_props (impl)->current_folder != NULL) && (shortcut_find_position (_gtk_file_chooser_default_get_props (impl), _gtk_file_chooser_default_get_props (impl)->current_folder) == -1);
+    active = (_gtk_file_chooser_default_get_props (impl)->current_folder != NULL) && (shortcut_find_position (impl, _gtk_file_chooser_default_get_props (impl)->current_folder) == -1);
   else if (num_selected == 1)
     {
       GFile *file;
@@ -3706,7 +3706,7 @@ shortcuts_pane_create (GtkFileChooserDefault *impl,
 
   /* Add bookmark button */
   icon = g_themed_icon_new_with_default_fallbacks ("list-add");
-  _gtk_file_chooser_default_get_props (impl)->browse_shortcuts_add_button = toolbutton_new (_gtk_file_chooser_default_get_props (impl),
+  _gtk_file_chooser_default_get_props (impl)->browse_shortcuts_add_button = toolbutton_new (impl,
                                                       icon,
                                                       FALSE,
                                                       TRUE,
@@ -3719,7 +3719,7 @@ shortcuts_pane_create (GtkFileChooserDefault *impl,
 
   /* Remove bookmark button */
   icon = g_themed_icon_new_with_default_fallbacks ("list-remove");
-  _gtk_file_chooser_default_get_props (impl)->browse_shortcuts_remove_button = toolbutton_new (_gtk_file_chooser_default_get_props (impl),
+  _gtk_file_chooser_default_get_props (impl)->browse_shortcuts_remove_button = toolbutton_new (impl,
                                                          icon,
                                                          FALSE,
                                                          TRUE,
@@ -5265,7 +5265,7 @@ operation_mode_set_browse (GtkFileChooserDefault *impl)
       _gtk_file_chooser_default_get_props (impl)->action == GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER)
     {
       __gtk_widget_show (_gtk_file_chooser_default_get_props (impl)->location_button);
-      location_mode_set (_gtk_file_chooser_default_get_props (impl), _gtk_file_chooser_default_get_props (impl)->location_mode, TRUE);
+      location_mode_set (impl, _gtk_file_chooser_default_get_props (impl)->location_mode, TRUE);
 
       if (_gtk_file_chooser_default_get_props (impl)->location_mode == LOCATION_MODE_FILENAME_ENTRY)
 	__gtk_widget_show (_gtk_file_chooser_default_get_props (impl)->location_entry_box);
@@ -5321,7 +5321,7 @@ operation_mode_set (GtkFileChooserDefault *impl, OperationMode mode)
 {
   ShortcutsIndex shortcut_to_select;
 
-  operation_mode_stop (_gtk_file_chooser_default_get_props (impl), _gtk_file_chooser_default_get_props (impl)->operation_mode);
+  operation_mode_stop (impl, _gtk_file_chooser_default_get_props (impl)->operation_mode);
 
   _gtk_file_chooser_default_get_props (impl)->operation_mode = mode;
 
@@ -5388,7 +5388,7 @@ update_appearance (GtkFileChooserDefault *impl)
     {
       __gtk_widget_show (_gtk_file_chooser_default_get_props (impl)->location_button);
       save_widgets_destroy (impl);
-      location_mode_set (_gtk_file_chooser_default_get_props (impl), _gtk_file_chooser_default_get_props (impl)->location_mode, TRUE);
+      location_mode_set (impl, _gtk_file_chooser_default_get_props (impl)->location_mode, TRUE);
     }
 
   if (_gtk_file_chooser_default_get_props (impl)->location_entry)
@@ -6432,7 +6432,7 @@ pending_select_files_process (GtkFileChooserDefault *impl)
 
   if (_gtk_file_chooser_default_get_props (impl)->pending_select_files)
     {
-      show_and_select_files (_gtk_file_chooser_default_get_props (impl), _gtk_file_chooser_default_get_props (impl)->pending_select_files);
+      show_and_select_files (impl, _gtk_file_chooser_default_get_props (impl)->pending_select_files);
       pending_select_files_free (impl);
       browse_files_center_selected_row (impl);
     }
@@ -7790,7 +7790,7 @@ gtk_file_chooser_default_remove_filter (GtkFileChooser *chooser,
   if (filter == _gtk_file_chooser_default_get_props (impl)->current_filter)
     {
       if (_gtk_file_chooser_default_get_props (impl)->filters)
-	set_current_filter (_gtk_file_chooser_default_get_props (impl), _gtk_file_chooser_default_get_props (impl)->filters->data);
+	set_current_filter (impl, _gtk_file_chooser_default_get_props (impl)->filters->data);
       else
 	set_current_filter (impl, NULL);
     }
@@ -9233,7 +9233,7 @@ focus_search_entry_in_idle (GtkFileChooserDefault *impl)
    */
 
   if (!_gtk_file_chooser_default_get_props (impl)->focus_entry_idle)
-    _gtk_file_chooser_default_get_props (impl)->focus_entry_idle = add_idle_while_impl_is_alive (_gtk_file_chooser_default_get_props (impl), G_CALLBACK (focus_entry_idle_cb));
+    _gtk_file_chooser_default_get_props (impl)->focus_entry_idle = add_idle_while_impl_is_alive (impl, G_CALLBACK (focus_entry_idle_cb));
 }
 
 /* Hides the path bar and creates the search entry */
@@ -10140,7 +10140,7 @@ location_popup_handler (GtkFileChooserDefault *impl,
       operation_mode_set (impl, OPERATION_MODE_BROWSE);
       
       if (_gtk_file_chooser_default_get_props (impl)->current_folder)
-        change_folder_and_display_error (_gtk_file_chooser_default_get_props (impl), _gtk_file_chooser_default_get_props (impl)->current_folder, FALSE);
+        change_folder_and_display_error (impl, _gtk_file_chooser_default_get_props (impl)->current_folder, FALSE);
 
       if (_gtk_file_chooser_default_get_props (impl)->location_mode == LOCATION_MODE_PATH_BAR)
         widget_to_focus = _gtk_file_chooser_default_get_props (impl)->browse_files_tree_view;

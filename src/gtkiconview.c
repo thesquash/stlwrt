@@ -1310,10 +1310,10 @@ gtk_icon_view_realize (GtkWidget *widget)
 
   attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
 
-  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (gtk_widget_get_props (widget)),
+  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (widget),
 				   &attributes, attributes_mask);
   __gdk_window_set_back_pixmap (gtk_widget_get_props (widget)->window, NULL, FALSE);
-  __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, gtk_widget_get_props (widget));
+  __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, widget);
 
   /* Make the window for the icon view */
   attributes.x = 0;
@@ -4400,7 +4400,7 @@ __gtk_icon_view_scroll_to_path (GtkIconView *icon_view,
 	col_align * (gtk_widget_get_props (GTK_WIDGET (icon_view))->allocation.width - item->width);
       value = CLAMP (gtk_adjustment_get_props (gtk_icon_view_get_props (icon_view)->priv->hadjustment)->value + offset, 
 		     gtk_adjustment_get_props (gtk_icon_view_get_props (icon_view)->priv->hadjustment)->lower,
-		     gtk_icon_view_get_props (icon_view)->priv->gtk_adjustment_get_props (gtk_adjustment_get_props (hadjustment))->upper - gtk_icon_view_get_props (icon_view)->priv->gtk_adjustment_get_props (gtk_adjustment_get_props (hadjustment))->page_size);
+		     gtk_adjustment_get_props (gtk_icon_view_get_instance_private (icon_view)->hadjustment)->upper - gtk_adjustment_get_props (gtk_icon_view_get_instance_private (icon_view)->hadjustment)->page_size);
       __gtk_adjustment_set_value (gtk_icon_view_get_props (icon_view)->priv->hadjustment, value);
 
       __gtk_adjustment_changed (gtk_icon_view_get_props (icon_view)->priv->hadjustment);
@@ -5173,8 +5173,8 @@ __gtk_icon_view_get_visible_range (GtkIconView  *icon_view,
 
       if ((item->x + item->width >= (int)gtk_adjustment_get_props (gtk_icon_view_get_props (icon_view)->priv->hadjustment)->value) &&
 	  (item->y + item->height >= (int)gtk_adjustment_get_props (gtk_icon_view_get_props (icon_view)->priv->vadjustment)->value) &&
-	  (item->x <= (int) (gtk_icon_view_get_props (icon_view)->priv->gtk_adjustment_get_props (gtk_adjustment_get_props (hadjustment))->value + gtk_icon_view_get_props (icon_view)->priv->gtk_adjustment_get_props (gtk_adjustment_get_props (hadjustment))->page_size)) &&
-	  (item->y <= (int) (gtk_adjustment_get_props (gtk_icon_view_get_props (icon_view)->priv->vadjustment)->value + gtk_adjustment_get_props (gtk_icon_view_get_props (icon_view)->priv->vadjustment)->page_size)))
+	  (item->x <= (int) (gtk_adjustment_get_props (gtk_icon_view_get_instance_private (icon_view)->hadjustment)->value + gtk_adjustment_get_props (gtk_icon_view_get_instance_private (icon_view)->hadjustment)->page_size)) &&
+	  (item->y <= (int) (gtk_adjustment_get_props (gtk_icon_view_get_instance_private (icon_view)->vadjustment)->value + gtk_adjustment_get_props (gtk_icon_view_get_instance_private (icon_view)->vadjustment)->page_size)))
 	{
 	  if (start_index == -1)
 	    start_index = item->index;
@@ -6613,7 +6613,7 @@ gtk_icon_view_autoscroll (GtkIconView *icon_view)
     {
       value = CLAMP (gtk_adjustment_get_props (gtk_icon_view_get_props (icon_view)->priv->hadjustment)->value + hoffset, 
 		     gtk_adjustment_get_props (gtk_icon_view_get_props (icon_view)->priv->hadjustment)->lower,
-		     gtk_icon_view_get_props (icon_view)->priv->gtk_adjustment_get_props (gtk_adjustment_get_props (hadjustment))->upper - gtk_icon_view_get_props (icon_view)->priv->gtk_adjustment_get_props (gtk_adjustment_get_props (hadjustment))->page_size);
+		     gtk_adjustment_get_props (gtk_icon_view_get_instance_private (icon_view)->hadjustment)->upper - gtk_adjustment_get_props (gtk_icon_view_get_instance_private (icon_view)->hadjustment)->page_size);
       __gtk_adjustment_set_value (gtk_icon_view_get_props (icon_view)->priv->hadjustment, value);
     }
 }
@@ -6881,7 +6881,7 @@ gtk_icon_view_drag_begin (GtkWidget      *widget,
   __gtk_tree_path_free (path);
 
   __gtk_drag_set_icon_pixmap (context, 
-			    __gdk_drawable_get_colormap (icon),
+			    __gdk_drawable_get_colormap ((GdkDrawable *) icon),
 			    icon, 
 			    NULL, 
 			    x, y);
@@ -7491,7 +7491,7 @@ __gtk_icon_view_create_drag_icon (GtkIconView *icon_view,
       
       if (index == item->index)
 	{
-	  drawable = __gdk_pixmap_new (gtk_icon_view_get_props (icon_view)->priv->bin_window,
+	  drawable = __gdk_pixmap_new ((GdkDrawable *) gtk_icon_view_get_props (icon_view)->priv->bin_window,
 				     item->width + 2,
 				     item->height + 2,
 				     -1);
@@ -7500,7 +7500,7 @@ __gtk_icon_view_create_drag_icon (GtkIconView *icon_view,
 	  cairo_set_line_width (cr, 1.);
 
 	  __gdk_cairo_set_source_color
-	    (cr, &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (gtk_widget_get_props (widget))]);
+	    (cr, &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (widget)]);
 	  cairo_rectangle (cr, 0, 0, item->width + 2, item->height + 2);
 	  cairo_fill (cr);
 

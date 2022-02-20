@@ -1252,7 +1252,7 @@ gtk_hsv_expose (GtkWidget      *widget,
   hsv = GTK_HSV (widget);
   priv = gtk_hsv_get_props (hsv)->priv;
   
-  if (!(event->window == gtk_widget_get_props (widget)->window && __gtk_widget_is_drawable (gtk_widget_get_props (widget))))
+  if (!(event->window == gtk_widget_get_props (widget)->window && __gtk_widget_is_drawable (widget)))
     return FALSE;
 
   rect.x = gtk_widget_get_props (widget)->allocation.x;

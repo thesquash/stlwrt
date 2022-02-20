@@ -2382,7 +2382,7 @@ __gtk_text_view_set_editable (GtkTextView *text_view,
         {
 	  gtk_text_layout_set_overwrite_mode (gtk_text_view_get_props (text_view)->layout,
 					      gtk_text_view_get_props (text_view)->overwrite_mode && gtk_text_view_get_props (text_view)->editable);
-          gtk_text_view_get_props (gtk_text_view_get_props (text_view))->gtk_text_layout_get_props (layout)->default_style->editable = gtk_text_view_get_props (gtk_text_view_get_props (text_view))->editable;
+          gtk_text_layout_get_props (gtk_text_view_get_props (text_view)->layout)->default_style->editable = gtk_text_view_get_props (text_view)->editable;
           gtk_text_layout_default_style_changed (gtk_text_view_get_props (text_view)->layout);
         }
 
@@ -3451,7 +3451,7 @@ gtk_text_view_size_allocate (GtkWidget *widget,
                                        gtk_text_view_get_props (text_view)->width);
 
   if (gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->hadjustment)->value > gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->hadjustment)->upper - gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->hadjustment)->page_size)
-    __gtk_adjustment_set_value (gtk_text_view_get_props (text_view)->hadjustment, MAX (0, gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (gtk_adjustment_get_props (hadjustment))->upper - gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (gtk_adjustment_get_props (hadjustment))->page_size));
+    __gtk_adjustment_set_value (gtk_text_view_get_props (text_view)->hadjustment, MAX (0, gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->hadjustment)->upper - gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->hadjustment)->page_size));
 
   __gtk_adjustment_changed (gtk_text_view_get_props (text_view)->hadjustment);
 
@@ -3471,7 +3471,7 @@ gtk_text_view_size_allocate (GtkWidget *widget,
   y += gtk_text_view_get_props (text_view)->first_para_pixels;
 
   if (y > gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->vadjustment)->upper - gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->vadjustment)->page_size)
-    y = MAX (0, gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (gtk_adjustment_get_props (vadjustment))->upper - gtk_text_view_get_props (text_view)->gtk_adjustment_get_props (gtk_adjustment_get_props (vadjustment))->page_size);
+    y = MAX (0, gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->vadjustment)->upper - gtk_adjustment_get_props (gtk_text_view_get_props (text_view)->vadjustment)->page_size);
 
   if (y != gtk_text_view_get_props (text_view)->yoffset)
     __gtk_adjustment_set_value (gtk_text_view_get_props (text_view)->vadjustment, y);
@@ -3745,7 +3745,7 @@ changed_handler (GtkTextLayout     *layout,
         {
           gtk_text_view_get_props (text_view)->yoffset += new_first_para_top - old_first_para_top;
           
-          gtk_adjustment_get_props (get_vadjustment (gtk_text_view_get_props (text_view)))->value = gtk_text_view_get_props (text_view)->yoffset;
+          gtk_adjustment_get_props (get_vadjustment (text_view))->value = gtk_text_view_get_props (text_view)->yoffset;
           yoffset_changed = TRUE;
         }
 
@@ -3813,15 +3813,15 @@ gtk_text_view_realize (GtkWidget *widget)
 
   attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
 
-  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (gtk_widget_get_props (widget)),
+  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (widget),
                                    &attributes, attributes_mask);
-  __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, gtk_widget_get_props (widget));
+  __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, widget);
 
   /* must come before text_window_realize calls */
   gtk_widget_get_props (widget)->style = __gtk_style_attach (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window);
 
   __gdk_window_set_background (gtk_widget_get_props (widget)->window,
-                             &gtk_widget_get_props (widget)->style->bg[__gtk_widget_get_state (gtk_widget_get_props (widget))]);
+                             &gtk_widget_get_props (widget)->style->bg[__gtk_widget_get_state (widget)]);
 
   text_window_realize (gtk_text_view_get_props (text_view)->text_window, widget);
 
@@ -3907,25 +3907,25 @@ gtk_text_view_set_background (GtkTextView *text_view)
   GtkWidget *widget = GTK_WIDGET (text_view);
 
   __gdk_window_set_background (gtk_widget_get_props (widget)->window,
-			     &gtk_widget_get_props (widget)->style->bg[__gtk_widget_get_state (gtk_widget_get_props (widget))]);
+			     &gtk_widget_get_props (widget)->style->bg[__gtk_widget_get_state (widget)]);
   
   __gdk_window_set_background (gtk_text_view_get_props (text_view)->text_window->bin_window,
-			     &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (gtk_widget_get_props (widget))]);
+			     &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (widget)]);
   
   if (gtk_text_view_get_props (text_view)->left_window)
     __gdk_window_set_background (gtk_text_view_get_props (text_view)->left_window->bin_window,
-			       &gtk_widget_get_props (widget)->style->bg[__gtk_widget_get_state (gtk_widget_get_props (widget))]);
+			       &gtk_widget_get_props (widget)->style->bg[__gtk_widget_get_state (widget)]);
   if (gtk_text_view_get_props (text_view)->right_window)
     __gdk_window_set_background (gtk_text_view_get_props (text_view)->right_window->bin_window,
-			       &gtk_widget_get_props (widget)->style->bg[__gtk_widget_get_state (gtk_widget_get_props (widget))]);
+			       &gtk_widget_get_props (widget)->style->bg[__gtk_widget_get_state (widget)]);
   
   if (gtk_text_view_get_props (text_view)->top_window)
     __gdk_window_set_background (gtk_text_view_get_props (text_view)->top_window->bin_window,
-			       &gtk_widget_get_props (widget)->style->bg[__gtk_widget_get_state (gtk_widget_get_props (widget))]);
+			       &gtk_widget_get_props (widget)->style->bg[__gtk_widget_get_state (widget)]);
   
   if (gtk_text_view_get_props (text_view)->bottom_window)
     __gdk_window_set_background (gtk_text_view_get_props (text_view)->bottom_window->bin_window,
-			       &gtk_widget_get_props (widget)->style->bg[__gtk_widget_get_state (gtk_widget_get_props (widget))]);
+			       &gtk_widget_get_props (widget)->style->bg[__gtk_widget_get_state (widget)]);
 }
 
 static void
@@ -4272,7 +4272,7 @@ gtk_text_view_key_release_event (GtkWidget *widget, GdkEventKey *event)
   GtkTextMark *insert;
   GtkTextIter iter;
 
-  if (gtk_text_view_get_props (text_view)->layout == NULL || get_buffer (gtk_text_view_get_props (text_view)) == NULL)
+  if (gtk_text_view_get_props (text_view)->layout == NULL || get_buffer (text_view) == NULL)
     return FALSE;
       
   insert = __gtk_text_buffer_get_insert (get_buffer (text_view));
@@ -4661,7 +4661,7 @@ gtk_text_view_draw_focus (GtkWidget *widget)
     {
       if (__gtk_widget_has_focus (widget) && !interior_focus)
         {          
-          __gtk_paint_focus (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, __gtk_widget_get_state (gtk_widget_get_props (widget)),
+          __gtk_paint_focus (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, __gtk_widget_get_state (widget),
                            NULL, widget, "textview",
                            0, 0,
                            gtk_widget_get_props (widget)->allocation.width,
@@ -4891,12 +4891,12 @@ blink_cb (gpointer data)
       gtk_text_view_get_props (text_view)->blink_timeout = 0;
     } 
   else if (visible)
-    gtk_text_view_get_props (text_view)->blink_timeout = __gdk_threads_add_timeout (get_cursor_time (gtk_text_view_get_props (text_view)) * CURSOR_OFF_MULTIPLIER / CURSOR_DIVIDER,
+    gtk_text_view_get_props (text_view)->blink_timeout = __gdk_threads_add_timeout (get_cursor_time (text_view) * CURSOR_OFF_MULTIPLIER / CURSOR_DIVIDER,
 					      blink_cb,
 					      text_view);
   else 
     {
-      gtk_text_view_get_props (text_view)->blink_timeout = __gdk_threads_add_timeout (get_cursor_time (gtk_text_view_get_props (text_view)) * CURSOR_ON_MULTIPLIER / CURSOR_DIVIDER,
+      gtk_text_view_get_props (text_view)->blink_timeout = __gdk_threads_add_timeout (get_cursor_time (text_view) * CURSOR_ON_MULTIPLIER / CURSOR_DIVIDER,
 						blink_cb,
 						text_view);
       priv->blink_time += get_cursor_time (text_view);
@@ -4944,7 +4944,7 @@ gtk_text_view_check_cursor_blink (GtkTextView *text_view)
 	    {
 	      gtk_text_layout_set_cursor_visible (gtk_text_view_get_props (text_view)->layout, TRUE);
 	      
-	      gtk_text_view_get_props (text_view)->blink_timeout = __gdk_threads_add_timeout (get_cursor_time (gtk_text_view_get_props (text_view)) * CURSOR_OFF_MULTIPLIER / CURSOR_DIVIDER,
+	      gtk_text_view_get_props (text_view)->blink_timeout = __gdk_threads_add_timeout (get_cursor_time (text_view) * CURSOR_OFF_MULTIPLIER / CURSOR_DIVIDER,
 							blink_cb,
 							text_view);
 	    }
@@ -4973,7 +4973,7 @@ gtk_text_view_pend_cursor_blink (GtkTextView *text_view)
       gtk_text_view_stop_cursor_blink (text_view);
       gtk_text_layout_set_cursor_visible (gtk_text_view_get_props (text_view)->layout, TRUE);
       
-      gtk_text_view_get_props (text_view)->blink_timeout = __gdk_threads_add_timeout (get_cursor_time (gtk_text_view_get_props (text_view)) * CURSOR_PEND_MULTIPLIER / CURSOR_DIVIDER,
+      gtk_text_view_get_props (text_view)->blink_timeout = __gdk_threads_add_timeout (get_cursor_time (text_view) * CURSOR_PEND_MULTIPLIER / CURSOR_DIVIDER,
 						blink_cb,
 						text_view);
     }
@@ -6436,7 +6436,7 @@ gtk_text_view_ensure_layout (GtkTextView *text_view)
 			text_view);
       
       if (get_buffer (text_view))
-        gtk_text_layout_set_buffer (gtk_text_view_get_props (text_view)->layout, get_buffer (gtk_text_view_get_props (text_view)));
+        gtk_text_layout_set_buffer (gtk_text_view_get_props (text_view)->layout, get_buffer (text_view));
 
       if ((__gtk_widget_has_focus (widget) && gtk_text_view_get_props (text_view)->cursor_visible))
         gtk_text_view_pend_cursor_blink (text_view);
@@ -6656,7 +6656,7 @@ drag_begin_cb (GtkWidget      *widget,
   if (pixmap)
     {
       __gtk_drag_set_icon_pixmap (context,
-                                __gdk_drawable_get_colormap (pixmap),
+                                __gdk_drawable_get_colormap ((GdkDrawable *) pixmap),
                                 pixmap,
                                 NULL,
                                 -2, -2);
@@ -7318,7 +7318,7 @@ gtk_text_view_value_changed (GtkAdjustment *adj,
         {
           gtk_text_layout_get_line_at_y (gtk_text_view_get_props (text_view)->layout, &iter, gtk_adjustment_get_props (adj)->value, &line_top);
 
-          __gtk_text_buffer_move_mark (get_buffer (gtk_text_view_get_props (text_view)), gtk_text_view_get_props (text_view)->first_para_mark, &iter);
+          __gtk_text_buffer_move_mark (get_buffer (text_view), gtk_text_view_get_props (text_view)->first_para_mark, &iter);
 
           gtk_text_view_get_props (text_view)->first_para_pixels = gtk_adjustment_get_props (adj)->value - line_top;
         }
@@ -8151,12 +8151,12 @@ text_window_realize (GtkTextWindow *win,
 
 
       __gdk_window_set_background (win->bin_window,
-                                 &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (gtk_widget_get_props (widget))]);
+                                 &gtk_widget_get_props (widget)->style->base[__gtk_widget_get_state (widget)]);
     }
   else
     {
       __gdk_window_set_background (win->bin_window,
-                                 &gtk_widget_get_props (widget)->style->bg[__gtk_widget_get_state (gtk_widget_get_props (widget))]);
+                                 &gtk_widget_get_props (widget)->style->bg[__gtk_widget_get_state (widget)]);
     }
 
   g_object_set_qdata (G_OBJECT (win->window),

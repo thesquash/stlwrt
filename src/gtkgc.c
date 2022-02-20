@@ -174,12 +174,12 @@ gtk_gc_new (gpointer key)
     {
       drawable = g_slice_new (GtkGCDrawable);
       drawable->depth = keyval->depth;
-      drawable->drawable = __gdk_pixmap_new (__gdk_screen_get_root_window (screen), 
+      drawable->drawable = __gdk_pixmap_new ((GdkDrawable *) __gdk_screen_get_root_window (screen),
 					   1, 1, drawable->depth);
       g_hash_table_insert (ht, &drawable->depth, drawable);
     }
 
-  gc = __gdk_gc_new_with_values (drawable->drawable, &keyval->values, keyval->mask);
+  gc = __gdk_gc_new_with_values ((GdkDrawable *) drawable->drawable, &keyval->values, keyval->mask);
   __gdk_gc_set_colormap (gc, keyval->colormap);
 
   return (gpointer) gc;

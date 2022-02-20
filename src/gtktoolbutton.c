@@ -281,7 +281,7 @@ gtk_tool_button_init (GtkToolButton      *button,
 			   G_CALLBACK (button_clicked), button, 0);
 
   __gtk_container_add (GTK_CONTAINER (button), gtk_tool_button_get_props (gtk_tool_button_get_props (button)->priv->button));
-  __gtk_widget_show (gtk_tool_button_get_props (gtk_tool_button_get_props (button)->priv->button));
+  __gtk_widget_show (gtk_tool_button_get_props (button)->priv->button);
 }
 
 static void

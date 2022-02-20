@@ -1529,7 +1529,7 @@ get_size (GtkCellRenderer *cell,
       
       if (height)
 	{
-	  *height = gtk_cell_renderer_text_get_props (cell)->height;
+	  *height = gtk_cell_renderer_get_props (cell)->height;
 	  height = NULL;
 	}
       gtk_cell_renderer_text_get_props (celltext)->calc_fixed_height = FALSE;

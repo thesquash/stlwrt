@@ -311,7 +311,7 @@ gtk_misc_realize (GtkWidget *widget)
 
   if (!__gtk_widget_get_has_window (widget))
     {
-      gtk_widget_get_props (widget)->window = __gtk_widget_get_parent_window (gtk_widget_get_props (widget));
+      gtk_widget_get_props (widget)->window = __gtk_widget_get_parent_window (widget);
       g_object_ref (gtk_widget_get_props (widget)->window);
       gtk_widget_get_props (widget)->style = __gtk_style_attach (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window);
     }
@@ -328,8 +328,8 @@ gtk_misc_realize (GtkWidget *widget)
       attributes.event_mask = __gtk_widget_get_events (widget) | GDK_EXPOSURE_MASK;
       attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
 
-      gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (gtk_widget_get_props (widget)), &attributes, attributes_mask);
-      __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, gtk_widget_get_props (widget));
+      gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (widget), &attributes, attributes_mask);
+      __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, widget);
 
       gtk_widget_get_props (widget)->style = __gtk_style_attach (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window);
       __gdk_window_set_back_pixmap (gtk_widget_get_props (widget)->window, NULL, TRUE);

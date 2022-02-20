@@ -3924,7 +3924,7 @@ gtk_widget_invalidate_widget_windows (GtkWidget *widget,
   if (!__gtk_widget_get_realized (widget))
     return;
   
-  if (__gtk_widget_get_has_window (gtk_widget_get_props (widget)) && gtk_widget_get_props (widget)->parent)
+  if (__gtk_widget_get_has_window (widget) && gtk_widget_get_props (widget)->parent)
     {
       int x, y;
       
@@ -3958,7 +3958,7 @@ gtk_widget_queue_shallow_draw (GtkWidget *widget)
    * need to convert to the coordinates that gtk_widget_get_props (widget)->allocation
    * is in.
    */
-  if (__gtk_widget_get_has_window (gtk_widget_get_props (widget)) && gtk_widget_get_props (widget)->parent)
+  if (__gtk_widget_get_has_window (widget) && gtk_widget_get_props (widget)->parent)
     {
       int wx, wy;
       
@@ -4186,7 +4186,7 @@ __gtk_widget_translate_coordinates (GtkWidget  *src_widget,
     return FALSE;
 
   /* Translate from allocation relative to window relative */
-  if (__gtk_widget_get_has_window (gtk_widget_get_props (src_widget)) && gtk_widget_get_props (src_widget)->parent)
+  if (__gtk_widget_get_has_window (src_widget) && gtk_widget_get_props (src_widget)->parent)
     {
       gint wx, wy;
       __gdk_window_get_position (gtk_widget_get_props (src_widget)->window, &wx, &wy);
@@ -4245,7 +4245,7 @@ __gtk_widget_translate_coordinates (GtkWidget  *src_widget,
     }
 
   /* Translate from window relative to allocation relative */
-  if (__gtk_widget_get_has_window (gtk_widget_get_props (dest_widget)) && gtk_widget_get_props (dest_widget)->parent)
+  if (__gtk_widget_get_has_window (dest_widget) && gtk_widget_get_props (dest_widget)->parent)
     {
       gint wx, wy;
       __gdk_window_get_position (gtk_widget_get_props (dest_widget)->window, &wx, &wy);
@@ -7864,7 +7864,7 @@ __gtk_widget_set_uposition (GtkWidget *widget,
   if (GTK_IS_WINDOW (widget) && aux_info->x_set && aux_info->y_set)
     ___gtk_window_reposition (GTK_WINDOW (widget), aux_info->x, aux_info->y);
   
-  if (__gtk_widget_get_visible (gtk_widget_get_props (widget)) && gtk_widget_get_props (widget)->parent)
+  if (__gtk_widget_get_visible (widget) && gtk_widget_get_props (widget)->parent)
     __gtk_widget_size_allocate (widget, &gtk_widget_get_props (widget)->allocation);
 }
 
@@ -8853,7 +8853,7 @@ gtk_widget_real_realize (GtkWidget *widget)
   __gtk_widget_set_realized (widget, TRUE);
   if (gtk_widget_get_props (widget)->parent)
     {
-      gtk_widget_get_props (widget)->window = __gtk_widget_get_parent_window (gtk_widget_get_props (widget));
+      gtk_widget_get_props (widget)->window = __gtk_widget_get_parent_window (widget);
       g_object_ref (gtk_widget_get_props (widget)->window);
     }
   gtk_widget_get_props (widget)->style = __gtk_style_attach (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window);
@@ -9077,7 +9077,7 @@ ___gtk_widget_synthesize_crossing (GtkWidget      *from,
       ? ___gtk_widget_get_pointer_window (from) : gtk_widget_get_props (from)->window;
   if (to != NULL)
     to_window = GTK_WIDGET_HAS_POINTER (to)
-      ? ___gtk_widget_get_pointer_window (gtk_widget_get_props (to)) : gtk_widget_get_props (to)->window;
+      ? ___gtk_widget_get_pointer_window (to) : gtk_widget_get_props (to)->window;
 
   if (from_window == NULL && to_window == NULL)
     ;
@@ -9244,7 +9244,7 @@ gtk_widget_propagate_state (GtkWidget           *widget,
 	    gtk_widget_get_props (widget)->saved_state = data->state;
 	}
       else if (__gtk_widget_get_state (widget) != GTK_STATE_INSENSITIVE)
-	gtk_widget_get_props (widget)->saved_state = __gtk_widget_get_state (gtk_widget_get_props (widget));
+	gtk_widget_get_props (widget)->saved_state = __gtk_widget_get_state (widget);
       gtk_widget_get_props (widget)->state = GTK_STATE_INSENSITIVE;
     }
 
@@ -9633,7 +9633,7 @@ __gtk_widget_get_snapshot (GtkWidget    *widget,
   width = gtk_widget_get_props (widget)->allocation.width;
   height = gtk_widget_get_props (widget)->allocation.height;
 
-  if (gtk_widget_get_props (widget)->parent && __gtk_widget_get_has_window (gtk_widget_get_props (widget)))
+  if (gtk_widget_get_props (widget)->parent && __gtk_widget_get_has_window (widget))
     {
       /* grow snapshot rectangle to cover all widget windows */
       parent_window = __gtk_widget_get_parent_window (widget);
@@ -9702,7 +9702,7 @@ __gtk_widget_get_snapshot (GtkWidget    *widget,
     }
 
   /* render snapshot */
-  pixmap = __gdk_pixmap_new (gtk_widget_get_props (widget)->window, width, height, __gdk_drawable_get_depth ((GdkDrawable *)gtk_widget_get_props (widget)->window));
+  pixmap = __gdk_pixmap_new ((GdkDrawable *) gtk_widget_get_props (widget)->window, width, height, __gdk_drawable_get_depth ((GdkDrawable *) gtk_widget_get_props (widget)->window));
   for (list = windows; list; list = list->next) /* !NO_WINDOW widgets */
     {
       GdkWindow *subwin = list->data;

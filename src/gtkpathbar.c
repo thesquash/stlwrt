@@ -411,7 +411,7 @@ gtk_path_bar_realize (GtkWidget *widget)
   __gtk_widget_set_realized (widget, TRUE);
 
   path_bar = GTK_PATH_BAR (widget);
-  gtk_widget_get_props (widget)->window = __gtk_widget_get_parent_window (gtk_widget_get_props (widget));
+  gtk_widget_get_props (widget)->window = __gtk_widget_get_parent_window (widget);
   g_object_ref (gtk_widget_get_props (widget)->window);
 
   attributes.window_type = GDK_WINDOW_CHILD;
@@ -515,7 +515,7 @@ gtk_path_bar_size_allocate (GtkWidget     *widget,
        * button, then count backwards.
        */
       /* Count down the path chain towards the end. */
-      width = BUTTON_DATA (first_button->data)->gtk_widget_get_props (button)->requisition.width;
+      width = gtk_widget_get_props (BUTTON_DATA (first_button->data)->button)->requisition.width;
       list = first_button->prev;
       while (list && !reached_end)
 	{
@@ -822,7 +822,7 @@ gtk_path_bar_scroll_down (GtkPathBar *path_bar)
   space_available = (gtk_widget_get_props (GTK_WIDGET (path_bar))->allocation.width
 		     - 2 * gtk_container_get_props (GTK_CONTAINER (path_bar))->border_width
 		     - 2 * gtk_path_bar_get_props (path_bar)->spacing - 2 * gtk_path_bar_get_props (path_bar)->slider_width
-		     - BUTTON_DATA (down_button->data)->gtk_widget_get_props (button)->allocation.width);
+		     - gtk_widget_get_props (BUTTON_DATA (down_button->data)->button)->allocation.width);
   gtk_path_bar_get_props (path_bar)->first_scrolled_button = down_button;
   
   /* We have space_available free space that's not being used.  
@@ -834,7 +834,7 @@ gtk_path_bar_scroll_down (GtkPathBar *path_bar)
       down_button = down_button->next;
       if (!down_button)
 	break;
-      space_available -= (BUTTON_DATA (down_button->data)->gtk_widget_get_props (button)->allocation.width
+      space_available -= (gtk_widget_get_props (BUTTON_DATA (down_button->data)->button)->allocation.width
 			  + gtk_path_bar_get_props (path_bar)->spacing);
     }
 }
@@ -1784,8 +1784,8 @@ _gtk_path_bar_up (GtkPathBar *path_bar)
 	{
 	  if (l->next)
 	    {
-	      GtkWidget *next_button = BUTTON_DATA (gtk_widget_get_props (l->next)->data)->button;
-	      button_clicked_cb (next_button, gtk_widget_get_props (l->next)->data);
+	      GtkWidget *next_button = BUTTON_DATA (l->next->data)->button;
+	      button_clicked_cb (next_button, l->next->data);
 	    }
 	  break;
 	}
@@ -1811,8 +1811,8 @@ _gtk_path_bar_down (GtkPathBar *path_bar)
 	{
 	  if (l->prev)
 	    {
-	      GtkWidget *prev_button = BUTTON_DATA (gtk_widget_get_props (l->prev)->data)->button;
-	      button_clicked_cb (prev_button, gtk_widget_get_props (l->prev)->data);
+	      GtkWidget *prev_button = BUTTON_DATA (l->prev->data)->button;
+	      button_clicked_cb (prev_button, l->prev->data);
 	    }
 	  break;
 	}

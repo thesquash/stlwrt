@@ -1423,9 +1423,9 @@ static gint
 sort_tag_prio (TextTagPrio *a,
 	       TextTagPrio *b)
 {
-  if (a->prio < gtk_text_buffer_get_props (b)->prio)
+  if (a->prio < b->prio)
     return -1;
-  else if (a->prio > gtk_text_buffer_get_props (b)->prio)
+  else if (a->prio > b->prio)
     return 1;
   else
     return 0;

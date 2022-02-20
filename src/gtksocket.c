@@ -407,7 +407,7 @@ gtk_socket_realize (GtkWidget *widget)
 
   attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
 
-  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (gtk_widget_get_props (widget)), 
+  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (widget), 
 				   &attributes, attributes_mask);
   __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, socket);
 

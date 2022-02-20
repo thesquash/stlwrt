@@ -2745,7 +2745,7 @@ gtk_calendar_expose (GtkWidget	    *widget,
 	calendar_paint_week_numbers (calendar);
       if (event->window == gtk_widget_get_props (widget)->window)
 	{
-	  __gtk_paint_shadow (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, __gtk_widget_get_state (gtk_widget_get_props (widget)),
+	  __gtk_paint_shadow (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, __gtk_widget_get_state (widget),
 			    GTK_SHADOW_IN, NULL, widget, "calendar",
 			    0, 0, gtk_widget_get_props (widget)->allocation.width, gtk_widget_get_props (widget)->allocation.height);
 	}

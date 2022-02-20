@@ -290,8 +290,8 @@ gtk_cell_renderer_toggle_get_size (GtkCellRenderer *cell,
 
   priv = gtk_cell_renderer_toggle_get_instance_private (cell);
 
-  calc_width = gtk_cell_renderer_get_props ((gint) cell)->xpad * 2 + priv->indicator_size;
-  calc_height = gtk_cell_renderer_get_props ((gint) cell)->ypad * 2 + priv->indicator_size;
+  calc_width = (gint) gtk_cell_renderer_get_props (cell)->xpad * 2 + priv->indicator_size;
+  calc_height = (gint) gtk_cell_renderer_get_props (cell)->ypad * 2 + priv->indicator_size;
 
   if (width)
     *width = calc_width;
@@ -341,8 +341,8 @@ gtk_cell_renderer_toggle_render (GtkCellRenderer      *cell,
   gtk_cell_renderer_toggle_get_size (cell, widget, cell_area,
 				     &x_offset, &y_offset,
 				     &width, &height);
-  width -= gtk_cell_renderer_toggle_get_props (cell)->xpad*2;
-  height -= gtk_cell_renderer_toggle_get_props (cell)->ypad*2;
+  width -= gtk_cell_renderer_get_props (cell)->xpad*2;
+  height -= gtk_cell_renderer_get_props (cell)->ypad*2;
 
   if (width <= 0 || height <= 0)
     return;
@@ -352,7 +352,7 @@ gtk_cell_renderer_toggle_render (GtkCellRenderer      *cell,
   else
     shadow = gtk_cell_renderer_toggle_get_props (celltoggle)->active ? GTK_SHADOW_IN : GTK_SHADOW_OUT;
 
-  if (__gtk_widget_get_state (widget) == GTK_STATE_INSENSITIVE || !gtk_cell_renderer_toggle_get_props (cell)->sensitive)
+  if (__gtk_widget_get_state (widget) == GTK_STATE_INSENSITIVE || !gtk_cell_renderer_get_props (cell)->sensitive)
     {
       state = GTK_STATE_INSENSITIVE;
     }
@@ -377,8 +377,8 @@ gtk_cell_renderer_toggle_render (GtkCellRenderer      *cell,
                         window,
                         state, shadow,
                         expose_area, widget, "cellradio",
-                        cell_area->x + x_offset + gtk_cell_renderer_toggle_get_props (cell)->xpad,
-                        cell_area->y + y_offset + gtk_cell_renderer_toggle_get_props (cell)->ypad,
+                        cell_area->x + x_offset + gtk_cell_renderer_get_props (cell)->xpad,
+                        cell_area->y + y_offset + gtk_cell_renderer_get_props (cell)->ypad,
                         width, height);
     }
   else
@@ -387,8 +387,8 @@ gtk_cell_renderer_toggle_render (GtkCellRenderer      *cell,
                        window,
                        state, shadow,
                        expose_area, widget, "cellcheck",
-                       cell_area->x + x_offset + gtk_cell_renderer_toggle_get_props (cell)->xpad,
-                       cell_area->y + y_offset + gtk_cell_renderer_toggle_get_props (cell)->ypad,
+                       cell_area->x + x_offset + gtk_cell_renderer_get_props (cell)->xpad,
+                       cell_area->y + y_offset + gtk_cell_renderer_get_props (cell)->ypad,
                        width, height);
     }
 }

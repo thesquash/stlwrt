@@ -1373,11 +1373,11 @@ cb_scale_grab_notify (GtkWidget *widget,
 #define GTK_SCALE_BUTTON_SCALE(obj)    (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_SCALE_BUTTON_SCALE, GtkScaleButtonScale))
 #define GTK_IS_SCALE_BUTTON_SCALE(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_SCALE_BUTTON_SCALE))
 
-typedef struct _GtkScaleButtonScale
-{
-  GtkScale parent_instance;
+typedef struct _GtkScaleButtonScale GtkScaleButtonScale;
+
+STLWRT_DECLARE_VTYPE_VPARENT (GtkScaleButtonScale, _gtk_scale_button_scale, GtkScale,
   GtkScaleButton *button;
-} GtkScaleButtonScale;
+)
 
 typedef struct _GtkScaleButtonScaleClass
 {
@@ -1442,7 +1442,7 @@ static gboolean
 gtk_scale_button_scale_press (GtkWidget      *widget,
 			      GdkEventButton *event)
 {
-  GtkScaleButtonPrivate *priv = GTK_SCALE_BUTTON_SCALE (widget)->gtk_scale_button_get_props (button)->priv;
+  GtkScaleButtonPrivate *priv = gtk_scale_button_get_instance_private (gtk_scale_button_scale_get_props (widget)->button);
 
   /* the scale will grab input; if we have input grabbed, all goes
    * horribly wrong, so let's not do that.

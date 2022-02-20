@@ -805,11 +805,11 @@ spin_button_at_limit (GtkSpinButton *spin_button,
     effective_arrow = arrow == GTK_ARROW_UP ? GTK_ARROW_DOWN : GTK_ARROW_UP; 
   
   if (effective_arrow == GTK_ARROW_UP &&
-      (gtk_spin_button_get_props (gtk_spin_button_get_props (spin_button))->gtk_adjustment_get_props (adjustment)->upper - gtk_spin_button_get_props (gtk_spin_button_get_props (spin_button))->gtk_adjustment_get_props (adjustment)->value <= EPSILON))
+      (gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->upper - gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->value <= EPSILON))
     return TRUE;
   
   if (effective_arrow == GTK_ARROW_DOWN &&
-      (gtk_spin_button_get_props (gtk_spin_button_get_props (spin_button))->gtk_adjustment_get_props (adjustment)->value - gtk_spin_button_get_props (gtk_spin_button_get_props (spin_button))->gtk_adjustment_get_props (adjustment)->lower <= EPSILON))
+      (gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->value - gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->lower <= EPSILON))
     return TRUE;
   
   return FALSE;
@@ -1919,7 +1919,7 @@ __gtk_spin_button_set_range (GtkSpinButton *spin_button,
 
   value = CLAMP (gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->value,
                  gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->lower,
-                 (gtk_spin_button_get_props (gtk_spin_button_get_props (spin_button))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->upper - gtk_spin_button_get_props (gtk_spin_button_get_props (spin_button))->gtk_adjustment_get_props (gtk_adjustment_get_props (adjustment))->page_size));
+                 (gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->upper - gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->page_size));
 
   if (value != gtk_adjustment_get_props (gtk_spin_button_get_props (spin_button)->adjustment)->value)
     __gtk_spin_button_set_value (spin_button, value);

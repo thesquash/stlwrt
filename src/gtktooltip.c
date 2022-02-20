@@ -813,7 +813,7 @@ window_to_alloc (GtkWidget *dest_widget,
 		 gint      *dest_y)
 {
   /* Translate from window relative to allocation relative */
-  if (__gtk_widget_get_has_window (gtk_widget_get_props (dest_widget)) && gtk_widget_get_props (dest_widget)->parent)
+  if (__gtk_widget_get_has_window (dest_widget) && gtk_widget_get_props (dest_widget)->parent)
     {
       gint wx, wy;
       __gdk_window_get_position (gtk_widget_get_props (dest_widget)->window, &wx, &wy);

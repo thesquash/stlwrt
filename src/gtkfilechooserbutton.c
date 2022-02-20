@@ -849,7 +849,7 @@ gtk_file_chooser_button_constructor (GType                  type,
 			     (gpointer) (&priv->dialog));
 
   priv->fs =
-    g_object_ref (___gtk_file_chooser_get_file_system (GTK_FILE_CHOOSER (priv->dialog)));
+    g_object_ref (_gtk_file_chooser_get_file_system (GTK_FILE_CHOOSER (priv->dialog)));
 
   model_add_special (button);
 

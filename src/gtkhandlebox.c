@@ -403,8 +403,8 @@ gtk_handle_box_realize (GtkWidget *widget)
   attributes.event_mask = (__gtk_widget_get_events (widget)
 			   | GDK_EXPOSURE_MASK);
   attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
-  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (gtk_widget_get_props (widget)), &attributes, attributes_mask);
-  __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, gtk_widget_get_props (widget));
+  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (widget), &attributes, attributes_mask);
+  __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, widget);
 
   attributes.x = 0;
   attributes.y = 0;
@@ -446,9 +446,9 @@ gtk_handle_box_realize (GtkWidget *widget)
   __gdk_window_set_type_hint (gtk_handle_box_get_props (hb)->float_window, GDK_WINDOW_TYPE_HINT_TOOLBAR);
   
   gtk_widget_get_props (widget)->style = __gtk_style_attach (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window);
-  __gtk_style_set_background (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, __gtk_widget_get_state (gtk_widget_get_props (widget)));
-  __gtk_style_set_background (gtk_widget_get_props (widget)->style, gtk_handle_box_get_props (hb)->bin_window, __gtk_widget_get_state (gtk_widget_get_props (widget)));
-  __gtk_style_set_background (gtk_widget_get_props (widget)->style, gtk_handle_box_get_props (hb)->float_window, __gtk_widget_get_state (gtk_widget_get_props (widget)));
+  __gtk_style_set_background (gtk_widget_get_props (widget)->style, gtk_widget_get_props (widget)->window, __gtk_widget_get_state (widget));
+  __gtk_style_set_background (gtk_widget_get_props (widget)->style, gtk_handle_box_get_props (hb)->bin_window, __gtk_widget_get_state (widget));
+  __gtk_style_set_background (gtk_widget_get_props (widget)->style, gtk_handle_box_get_props (hb)->float_window, __gtk_widget_get_state (widget));
   __gdk_window_set_back_pixmap (gtk_widget_get_props (widget)->window, NULL, TRUE);
 }
 

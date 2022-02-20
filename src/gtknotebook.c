@@ -1796,7 +1796,7 @@ gtk_notebook_realize (GtkWidget *widget)
 
   gtk_notebook_get_event_window_position (notebook, &event_window_pos);
   
-  gtk_widget_get_props (widget)->window = __gtk_widget_get_parent_window (gtk_widget_get_props (widget));
+  gtk_widget_get_props (widget)->window = __gtk_widget_get_parent_window (widget);
   g_object_ref (gtk_widget_get_props (widget)->window);
   
   attributes.window_type = GDK_WINDOW_CHILD;

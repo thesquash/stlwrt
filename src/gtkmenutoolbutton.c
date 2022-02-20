@@ -99,10 +99,10 @@ gtk_menu_tool_button_construct_contents (GtkMenuToolButton *button)
       __gtk_arrow_set (GTK_ARROW (priv->arrow), GTK_ARROW_RIGHT, GTK_SHADOW_NONE);
     }
 
-  if (gtk_menu_tool_button_get_props (priv->button) && gtk_menu_tool_button_get_props (priv->button)->parent)
+  if (priv->button && gtk_widget_get_props (priv->button)->parent)
     {
       g_object_ref (priv->button);
-      __gtk_container_remove (GTK_CONTAINER (gtk_menu_tool_button_get_props (priv->button)->parent),
+      __gtk_container_remove (GTK_CONTAINER (gtk_widget_get_props (priv->button)->parent),
                             priv->button);
       __gtk_container_add (GTK_CONTAINER (box), priv->button);
       g_object_unref (priv->button);

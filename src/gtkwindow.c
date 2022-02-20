@@ -2211,7 +2211,7 @@ gtk_window_transient_parent_realized (GtkWidget *parent,
 				      GtkWidget *window)
 {
   if (__gtk_widget_get_realized (GTK_WIDGET (window)))
-    __gdk_window_set_transient_for (gtk_widget_get_props (gtk_widget_get_props (window)->window), gtk_widget_get_props (gtk_widget_get_props (parent)->window));
+    __gdk_window_set_transient_for (gtk_widget_get_props (window)->window, gtk_widget_get_props (parent)->window);
 }
 
 static void
@@ -2219,7 +2219,7 @@ gtk_window_transient_parent_unrealized (GtkWidget *parent,
 					GtkWidget *window)
 {
   if (__gtk_widget_get_realized (GTK_WIDGET (window)))
-    __gdk_property_delete (gtk_widget_get_props (gtk_widget_get_props (window)->window), 
+    __gdk_property_delete (gtk_widget_get_props (window)->window,
 			 __gdk_atom_intern_static_string ("WM_TRANSIENT_FOR"));
 }
 
@@ -4538,10 +4538,10 @@ gtk_window_map (GtkWidget *widget)
 
   __gtk_widget_set_mapped (widget, TRUE);
 
-  if (gtk_window_get_props (window)->bin.child &&
-      __gtk_widget_get_visible (gtk_window_get_props (window)->bin.child) &&
-      !__gtk_widget_get_mapped (gtk_window_get_props (window)->bin.child))
-    __gtk_widget_map (gtk_window_get_props (window)->bin.child);
+  if (gtk_bin_get_props (window)->child &&
+      __gtk_widget_get_visible (gtk_bin_get_props (window)->child) &&
+      !__gtk_widget_get_mapped (gtk_bin_get_props (window)->child))
+    __gtk_widget_map (gtk_bin_get_props (window)->child);
 
   if (gtk_window_get_props (window)->frame)
     toplevel = gtk_window_get_props (window)->frame;
@@ -4813,11 +4813,11 @@ gtk_window_realize (GtkWidget *widget)
   if (gtk_window_get_props (window)->transient_parent &&
       __gtk_widget_get_realized (GTK_WIDGET (gtk_window_get_props (window)->transient_parent)))
     __gdk_window_set_transient_for (gtk_widget_get_props (widget)->window,
-				  gtk_widget_get_props (GTK_WIDGET (gtk_window_get_props (window)->transient_parent))->gtk_window_get_props (window));
+				  gtk_widget_get_props (gtk_window_get_props (window)->transient_parent)->window);
 
   if (gtk_window_get_props (window)->wm_role)
-    __gdk_window_set_role (gtk_window_get_props (gtk_widget_get_props (widget)->window), gtk_window_get_props (window)->wm_role);
-  
+    __gdk_window_set_role (gtk_widget_get_props (widget)->window, gtk_window_get_props (window)->wm_role);
+
   if (!gtk_window_get_props (window)->decorated)
     __gdk_window_set_decorations (gtk_widget_get_props (widget)->window, 0);
 
@@ -4935,7 +4935,7 @@ gtk_window_size_allocate (GtkWidget     *widget,
   window = GTK_WINDOW (widget);
   gtk_widget_get_props (widget)->allocation = *allocation;
 
-  if (gtk_window_get_props (window)->bin.child && __gtk_widget_get_visible (gtk_window_get_props (window)->bin.child))
+  if (gtk_bin_get_props (window)->child && __gtk_widget_get_visible (gtk_bin_get_props (window)->child))
     {
       child_allocation.x = gtk_container_get_props (GTK_CONTAINER (window))->border_width;
       child_allocation.y = gtk_container_get_props (GTK_CONTAINER (window))->border_width;
@@ -4944,7 +4944,7 @@ gtk_window_size_allocate (GtkWidget     *widget,
       child_allocation.height =
 	MAX (1, (gint)allocation->height - child_allocation.y * 2);
 
-      __gtk_widget_size_allocate (gtk_window_get_props (window)->bin.child, &child_allocation);
+      __gtk_widget_size_allocate (gtk_bin_get_props (window)->child, &child_allocation);
     }
 
   if (__gtk_widget_get_realized (widget) && gtk_window_get_props (window)->frame)
@@ -4963,7 +4963,7 @@ gtk_window_event (GtkWidget *widget, GdkEvent *event)
 
   window = GTK_WINDOW (widget);
 
-  if (gtk_window_get_props (window)->frame && (event->any.gtk_window_get_props (window) == gtk_window_get_props (window)->frame))
+  if (gtk_window_get_props (window)->frame && (event->any.window == gtk_window_get_props (window)->frame))
     {
       if ((event->type != GDK_KEY_PRESS) &&
 	  (event->type != GDK_KEY_RELEASE) &&
@@ -8082,7 +8082,7 @@ gtk_window_mnemonic_hash_foreach (guint      keyval,
     gpointer func_data;
   } *info = data;
 
-  (*info->func) (gtk_window_get_props (info->window), keyval, gtk_window_get_props (info->window)->mnemonic_modifier, TRUE, info->func_data);
+  (*info->func) (info->window, keyval, gtk_window_get_props (info->window)->mnemonic_modifier, TRUE, info->func_data);
 }
 
 void

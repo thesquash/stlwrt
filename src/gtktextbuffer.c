@@ -783,7 +783,7 @@ static GtkTextBTree*
 get_btree (GtkTextBuffer *buffer)
 {
   if (gtk_text_buffer_get_props (buffer)->btree == NULL)
-    gtk_text_buffer_get_props (buffer)->btree = _gtk_text_btree_new (__gtk_text_buffer_get_tag_table (gtk_text_buffer_get_props (buffer)),
+    gtk_text_buffer_get_props (buffer)->btree = _gtk_text_btree_new (__gtk_text_buffer_get_tag_table (buffer),
                                          buffer);
 
   return gtk_text_buffer_get_props (buffer)->btree;

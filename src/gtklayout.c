@@ -860,10 +860,10 @@ gtk_layout_realize (GtkWidget *widget)
 
   attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
 
-  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (gtk_widget_get_props (widget)),
+  gtk_widget_get_props (widget)->window = __gdk_window_new (__gtk_widget_get_parent_window (widget),
 				   &attributes, attributes_mask);
   __gdk_window_set_back_pixmap (gtk_widget_get_props (widget)->window, NULL, FALSE);
-  __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, gtk_widget_get_props (widget));
+  __gdk_window_set_user_data (gtk_widget_get_props (widget)->window, widget);
 
   attributes.x = - gtk_adjustment_get_props (gtk_layout_get_props (layout)->hadjustment)->value,
   attributes.y = - gtk_adjustment_get_props (gtk_layout_get_props (layout)->vadjustment)->value;
@@ -1000,7 +1000,7 @@ gtk_layout_size_allocate (GtkWidget     *widget,
   gtk_adjustment_get_props (gtk_layout_get_props (layout)->vadjustment)->page_size = allocation->height;
   gtk_adjustment_get_props (gtk_layout_get_props (layout)->vadjustment)->page_increment = allocation->height * 0.9;
   gtk_adjustment_get_props (gtk_layout_get_props (layout)->vadjustment)->lower = 0;
-  gtk_layout_get_props (gtk_layout_get_props (layout))->gtk_adjustment_get_props (vadjustment)->upper = MAX (allocation->height, gtk_layout_get_props (gtk_layout_get_props (layout))->height);
+  gtk_adjustment_get_props (gtk_layout_get_props (layout)->vadjustment)->upper = MAX (allocation->height, gtk_layout_get_props (layout))->height);
   gtk_layout_set_adjustment_upper (gtk_layout_get_props (layout)->vadjustment, MAX (allocation->height, gtk_layout_get_props (layout)->height), TRUE);
 }
 

@@ -1340,7 +1340,7 @@ __gtk_scale_get_layout (GtkScale *scale)
   if (gtk_scale_get_props (scale)->draw_value) 
     {
       txt = ___gtk_scale_format_value (scale,
-				     gtk_range_get_props (GTK_RANGE (scale))->gtk_adjustment_get_props (adjustment)->value);
+				     gtk_adjustment_get_props (gtk_range_get_props (scale)->adjustment)->value);
       pango_layout_set_text (priv->layout, txt, -1);
       g_free (txt);
     }

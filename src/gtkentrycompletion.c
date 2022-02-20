@@ -1209,7 +1209,7 @@ gtk_entry_completion_insert_action (GtkEntryCompletion *completion,
                       1, markup,
                       -1);
 
-  if (!completion->gtk_widget_get_props (priv->action_view)->parent)
+  if (!gtk_widget_get_props (completion->priv->action_view)->parent)
     {
       GtkTreePath *path = __gtk_tree_path_new_from_indices (0, -1);
 
@@ -1389,10 +1389,10 @@ _gtk_entry_completion_resize_popup (GtkEntryCompletion *completion)
   GtkTreeViewColumn *action_column;
   gint action_height;
 
-  if (!completion->gtk_widget_get_props (priv->entry)->window)
+  if (!gtk_widget_get_props (completion->priv->entry)->window)
     return FALSE;
 
-  __gdk_window_get_origin (completion->gtk_widget_get_props (priv->entry)->window, &x, &y);
+  __gdk_window_get_origin (gtk_widget_get_props (completion->priv->entry)->window, &x, &y);
   _gtk_entry_get_borders (GTK_ENTRY (completion->priv->entry), &x_border, &y_border);
 
   matches = __gtk_tree_model_iter_n_children (GTK_TREE_MODEL (completion->priv->filter_model), NULL);
@@ -1430,7 +1430,7 @@ _gtk_entry_completion_resize_popup (GtkEntryCompletion *completion)
     __gtk_widget_show (completion->priv->scrolled_window);
 
   if (completion->priv->popup_set_width)
-    width = MIN (completion->priv->gtk_widget_get_props (gtk_widget_get_props (entry))->allocation.width, monitor.width) - 2 * x_border;
+    width = MIN (gtk_widget_get_props (completion->priv->entry)->allocation.width, monitor.width) - 2 * x_border;
   else
     width = -1;
 
@@ -1500,7 +1500,7 @@ _gtk_entry_completion_popup (GtkEntryCompletion *completion)
   renderers = __gtk_cell_layout_get_cells (GTK_CELL_LAYOUT (column));
   __gtk_widget_ensure_style (completion->priv->tree_view);
   g_object_set (GTK_CELL_RENDERER (renderers->data), "cell-background-gdk",
-                &completion->gtk_widget_get_props (priv->tree_view)->style->bg[GTK_STATE_NORMAL],
+                &gtk_widget_get_props (completion->priv->tree_view)->style->bg[GTK_STATE_NORMAL],
                 NULL);
   g_list_free (renderers);
 
@@ -1528,7 +1528,7 @@ _gtk_entry_completion_popup (GtkEntryCompletion *completion)
   __gtk_widget_show (completion->priv->popup_window);
     
   __gtk_grab_add (completion->priv->popup_window);
-  __gdk_pointer_grab (completion->gtk_widget_get_props (priv->popup_window)->window, TRUE,
+  __gdk_pointer_grab (gtk_widget_get_props (completion->priv->popup_window)->window, TRUE,
                     GDK_BUTTON_PRESS_MASK |
                     GDK_BUTTON_RELEASE_MASK |
                     GDK_POINTER_MOTION_MASK,

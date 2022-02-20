@@ -78,7 +78,6 @@
 enum {
   CREATE_MENU_PROXY,
   TOOLBAR_RECONFIGURED,
-  SET_TOOLTIP,
   LAST_SIGNAL
 };
 
@@ -182,7 +181,6 @@ gtk_tool_item_class_init (GtkToolItemClass *klass)
   widget_class->parent_set    = gtk_tool_item_parent_set;
 
   klass->create_menu_proxy = ___gtk_tool_item_create_menu_proxy;
-  klass->set_tooltip       = gtk_tool_item_real_set_tooltip;
   
   g_object_class_install_property (object_class,
 				   PROP_VISIBLE_HORIZONTAL,
@@ -433,7 +431,7 @@ gtk_tool_item_realize (GtkWidget *widget)
   toolitem = GTK_TOOL_ITEM (widget);
   __gtk_widget_set_realized (widget, TRUE);
 
-  gtk_widget_get_props (widget)->window = __gtk_widget_get_parent_window (gtk_widget_get_props (widget));
+  gtk_widget_get_props (widget)->window = __gtk_widget_get_parent_window (widget);
   g_object_ref (gtk_widget_get_props (widget)->window);
 
   if (gtk_tool_item_get_props (toolitem)->priv->use_drag_window)

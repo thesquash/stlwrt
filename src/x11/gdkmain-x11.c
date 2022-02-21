@@ -96,7 +96,7 @@ _gdk_windowing_init (void)
   XSetErrorHandler (gdk_x_error);
   XSetIOErrorHandler (gdk_x_io_error);
 
-  _gdk_selection_property = gdk_atom_intern_static_string ("GDK_SELECTION");
+  _gdk_selection_property = __gdk_atom_intern_static_string ("GDK_SELECTION");
 }
 
 void
@@ -107,7 +107,7 @@ gdk_set_use_xshm (gboolean use_xshm)
 gboolean
 gdk_get_use_xshm (void)
 {
-  return GDK_DISPLAY_X11 (gdk_display_get_default ())->use_xshm;
+  return GDK_DISPLAY_X11 (__gdk_display_get_default ())->use_xshm;
 }
 
 static GdkGrabStatus
@@ -264,7 +264,7 @@ gdk_keyboard_grab (GdkWindow *	   window,
   g_return_val_if_fail (window != NULL, 0);
   g_return_val_if_fail (GDK_IS_WINDOW (window), 0);
 
-  native = gdk_window_get_toplevel (window);
+  native = __gdk_window_get_toplevel (window);
 
   /* TODO: What do we do for offscreens and  children? We need to proxy the grab somehow */
   if (!GDK_IS_WINDOW_IMPL_X11 (GDK_WINDOW_OBJECT (native)->impl))
@@ -318,7 +318,7 @@ void
 _gdk_xgrab_check_unmap (GdkWindow *window,
 			gulong     serial)
 {
-  GdkDisplay *display = gdk_drawable_get_display (window);
+  GdkDisplay *display = __gdk_drawable_get_display (window);
 
   _gdk_display_end_pointer_grab (display, serial, window, TRUE);
 
@@ -346,7 +346,7 @@ _gdk_xgrab_check_unmap (GdkWindow *window,
 void
 _gdk_xgrab_check_destroy (GdkWindow *window)
 {
-  GdkDisplay *display = gdk_drawable_get_display (window);
+  GdkDisplay *display = __gdk_drawable_get_display (window);
   GdkPointerGrabInfo *grab;
 
   /* Make sure there is no lasting grab in this native
@@ -380,13 +380,13 @@ _gdk_windowing_display_set_sm_client_id (GdkDisplay  *display,
   if (sm_client_id && strcmp (sm_client_id, ""))
     {
       XChangeProperty (display_x11->xdisplay, display_x11->leader_window,
-		       gdk_x11_get_xatom_by_name_for_display (display, "SM_CLIENT_ID"),
+		       __gdk_x11_get_xatom_by_name_for_display (display, "SM_CLIENT_ID"),
 		       XA_STRING, 8, PropModeReplace, (guchar *)sm_client_id,
 		       strlen (sm_client_id));
     }
   else
     XDeleteProperty (display_x11->xdisplay, display_x11->leader_window,
-		     gdk_x11_get_xatom_by_name_for_display (display, "SM_CLIENT_ID"));
+		     __gdk_x11_get_xatom_by_name_for_display (display, "SM_CLIENT_ID"));
 }
 
 /**
@@ -406,7 +406,7 @@ _gdk_windowing_display_set_sm_client_id (GdkDisplay  *display,
 void
 gdk_x11_set_sm_client_id (const gchar *sm_client_id)
 {
-  gdk_set_sm_client_id (sm_client_id);
+  __gdk_set_sm_client_id (sm_client_id);
 }
 
 /* Close all open displays
@@ -525,21 +525,21 @@ gdk_x_io_error (Display *display)
                "most likely the X server was shut down or you killed/destroyed\n"
                "the application.\n",
                g_get_prgname (),
-               display ? DisplayString (display) : gdk_get_display_arg_name ());
+               display ? DisplayString (display) : __gdk_get_display_arg_name ());
     }
   else
     {
       g_fprintf (stderr, "%s: Fatal IO error %d (%s) on X server %s.\n",
                g_get_prgname (),
 	       errno, g_strerror (errno),
-	       display ? DisplayString (display) : gdk_get_display_arg_name ());
+	       display ? DisplayString (display) : __gdk_get_display_arg_name ());
     }
 
   exit(1);
 }
 
 /*************************************************************
- * gdk_error_trap_push:
+ * __gdk_error_trap_push:
  *     Push an error trap. X errors will be trapped until
  *     the corresponding gdk_error_pop(), which will return
  *     the error code, if any.
@@ -549,7 +549,7 @@ gdk_x_io_error (Display *display)
  *************************************************************/
 
 void
-gdk_error_trap_push (void)
+__gdk_error_trap_push (void)
 {
   GSList *node;
   GdkErrorTrap *trap;
@@ -578,7 +578,7 @@ gdk_error_trap_push (void)
 }
 
 /*************************************************************
- * gdk_error_trap_pop:
+ * __gdk_error_trap_pop:
  *     Pop an error trap added with gdk_error_push()
  *   arguments:
  *     
@@ -587,7 +587,7 @@ gdk_error_trap_push (void)
  *************************************************************/
 
 gint
-gdk_error_trap_pop (void)
+__gdk_error_trap_pop (void)
 {
   GSList *node;
   GdkErrorTrap *trap;
@@ -614,7 +614,7 @@ gdk_error_trap_pop (void)
 gchar *
 gdk_get_display (void)
 {
-  return g_strdup (gdk_display_get_name (gdk_display_get_default ()));
+  return g_strdup (__gdk_display_get_name (__gdk_display_get_default ()));
 }
 
 /**
@@ -644,12 +644,12 @@ _gdk_send_xevent (GdkDisplay *display,
   if (display->closed)
     return FALSE;
 
-  gdk_error_trap_push ();
+  __gdk_error_trap_push ();
   result = XSendEvent (GDK_DISPLAY_XDISPLAY (display), window, 
 		       propagate, event_mask, event_send);
   XSync (GDK_DISPLAY_XDISPLAY (display), False);
   
-  if (gdk_error_trap_pop ())
+  if (__gdk_error_trap_pop ())
     return FALSE;
  
   return result;
@@ -681,7 +681,7 @@ _gdk_region_get_xrectangles (const GdkRegion *region,
 /**
  * gdk_x11_grab_server:
  * 
- * Call gdk_x11_display_grab() on the default display. 
+ * Call __gdk_x11_display_grab() on the default display. 
  * To ungrab the server again, use gdk_x11_ungrab_server(). 
  *
  * gdk_x11_grab_server()/gdk_x11_ungrab_server() calls can be nested.
@@ -689,7 +689,7 @@ _gdk_region_get_xrectangles (const GdkRegion *region,
 void
 gdk_x11_grab_server (void)
 {
-  gdk_x11_display_grab (gdk_display_get_default ());
+  __gdk_x11_display_grab (__gdk_display_get_default ());
 }
 
 /**
@@ -701,7 +701,7 @@ gdk_x11_grab_server (void)
 void
 gdk_x11_ungrab_server (void)
 {
-  gdk_x11_display_ungrab (gdk_display_get_default ());
+  __gdk_x11_display_ungrab (__gdk_display_get_default ());
 }
 
 /**
@@ -716,7 +716,7 @@ gdk_x11_ungrab_server (void)
 gint
 gdk_x11_get_default_screen (void)
 {
-  return gdk_screen_get_number (gdk_screen_get_default ());
+  return __gdk_screen_get_number (__gdk_screen_get_default ());
 }
 
 /**
@@ -730,7 +730,7 @@ gdk_x11_get_default_screen (void)
 Window
 gdk_x11_get_default_root_xwindow (void)
 {
-  return GDK_SCREEN_XROOTWIN (gdk_screen_get_default ());
+  return GDK_SCREEN_XROOTWIN (__gdk_screen_get_default ());
 }
 
 /**
@@ -745,5 +745,5 @@ gdk_x11_get_default_root_xwindow (void)
 Display *
 gdk_x11_get_default_xdisplay (void)
 {
-  return GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
+  return GDK_DISPLAY_XDISPLAY (__gdk_display_get_default ());
 }

@@ -180,7 +180,7 @@ _gdk_drawable_impl_x11_init (GdkDrawableImplX11 *impl)
 static void
 gdk_drawable_impl_x11_finalize (GObject *object)
 {
-  gdk_drawable_set_colormap (GDK_DRAWABLE (object), NULL);
+  __gdk_drawable_set_colormap (GDK_DRAWABLE (object), NULL);
 
   G_OBJECT_CLASS (_gdk_drawable_impl_x11_parent_class)->finalize (object);
 }
@@ -228,7 +228,7 @@ _gdk_x11_drawable_update_size (GdkDrawable *drawable)
     {
       int width, height;
       
-      gdk_drawable_get_size (drawable, &width, &height);
+      __gdk_drawable_get_size (drawable, &width, &height);
       cairo_xlib_surface_set_size (impl->cairo_surface, width, height);
     }
 }
@@ -293,13 +293,13 @@ _gdk_x11_have_render (GdkDisplay *display)
 	       */
 	      if (!(has_8 && has_32))
 		{
-		  gdk_error_trap_push ();
+		  __gdk_error_trap_push ();
 		  if (!has_8)
 		    try_pixmap (xdisplay, screen, 8);
 		  if (!has_32)
 		    try_pixmap (xdisplay, screen, 32);
 		  XSync (xdisplay, False);
-		  if (gdk_error_trap_pop () == 0)
+		  if (__gdk_error_trap_pop () == 0)
 		    {
 		      has_8 = TRUE;
 		      has_32 = TRUE;
@@ -331,7 +331,7 @@ gdk_x11_drawable_get_picture (GdkDrawable *drawable)
       Display *xdisplay = GDK_SCREEN_XDISPLAY (impl->screen);
       XRenderPictFormat *format;
       
-      GdkVisual *visual = gdk_drawable_get_visual (GDK_DRAWABLE_IMPL_X11 (drawable)->wrapper);
+      GdkVisual *visual = __gdk_drawable_get_visual (GDK_DRAWABLE_IMPL_X11 (drawable)->wrapper);
       if (!visual)
 	return None;
 
@@ -633,8 +633,8 @@ gdk_x11_draw_drawable (GdkDrawable *drawable,
 		       gint         height,
 		       GdkDrawable *original_src)
 {
-  int src_depth = gdk_drawable_get_depth (src);
-  int dest_depth = gdk_drawable_get_depth (drawable);
+  int src_depth = __gdk_drawable_get_depth (src);
+  int dest_depth = __gdk_drawable_get_depth (drawable);
   GdkDrawableImplX11 *impl;
   GdkDrawableImplX11 *src_impl;
   
@@ -645,7 +645,7 @@ gdk_x11_draw_drawable (GdkDrawable *drawable,
   else if (GDK_IS_WINDOW (src))
     src_impl = GDK_DRAWABLE_IMPL_X11(((GdkWindow *)src)->impl);
   else
-    src_impl = GDK_DRAWABLE_IMPL_X11(((GdkPixmapObject *)src)->impl);
+    src_impl = GDK_DRAWABLE_IMPL_X11(((GdkPixmap *)src)->impl);
 
   if (GDK_IS_WINDOW_IMPL_X11 (impl) &&
       GDK_IS_PIXMAP_IMPL_X11 (src_impl))
@@ -852,7 +852,7 @@ gdk_x11_get_depth (GdkDrawable *drawable)
 {
   /* This is a bit bogus but I'm not sure the other way is better */
 
-  return gdk_drawable_get_depth (GDK_DRAWABLE_IMPL_X11 (drawable)->wrapper);
+  return __gdk_drawable_get_depth (GDK_DRAWABLE_IMPL_X11 (drawable)->wrapper);
 }
 
 static GdkDrawable *
@@ -861,7 +861,7 @@ get_impl_drawable (GdkDrawable *drawable)
   if (GDK_IS_WINDOW (drawable))
     return ((GdkWindow *)drawable)->impl;
   else if (GDK_IS_PIXMAP (drawable))
-    return ((GdkPixmapObject *)drawable)->impl;
+    return ((GdkPixmap *)drawable)->impl;
   else
     {
       g_warning (G_STRLOC " drawable is not a pixmap or window");
@@ -881,7 +881,7 @@ gdk_x11_get_screen (GdkDrawable *drawable)
 static GdkVisual*
 gdk_x11_get_visual (GdkDrawable    *drawable)
 {
-  return gdk_drawable_get_visual (GDK_DRAWABLE_IMPL_X11 (drawable)->wrapper);
+  return __gdk_drawable_get_visual (GDK_DRAWABLE_IMPL_X11 (drawable)->wrapper);
 }
 
 /**
@@ -921,13 +921,13 @@ gdk_x11_drawable_get_xid (GdkDrawable *drawable)
       /* Try to ensure the window has a native window */
       if (!_gdk_window_has_impl (window))
 	{
-	  gdk_window_ensure_native (window);
+	  __gdk_window_ensure_native (window);
 
 	  /* We sync here to ensure the window is created in the Xserver when
 	   * this function returns. This is required because the returned XID
 	   * for this window must be valid immediately, even with another
 	   * connection to the Xserver */
-	  gdk_display_sync (gdk_drawable_get_display (window));
+	  __gdk_display_sync (__gdk_drawable_get_display (window));
 	}
       
       if (!GDK_WINDOW_IS_X11 (window))
@@ -939,7 +939,7 @@ gdk_x11_drawable_get_xid (GdkDrawable *drawable)
       impl = ((GdkWindow *)drawable)->impl;
     }
   else if (GDK_IS_PIXMAP (drawable))
-    impl = ((GdkPixmapObject *)drawable)->impl;
+    impl = ((GdkPixmap *)drawable)->impl;
   else
     {
       g_warning (G_STRLOC " drawable is not a pixmap or window");
@@ -957,7 +957,7 @@ gdk_x11_window_get_drawable_impl (GdkWindow *window)
 GdkDrawable *
 gdk_x11_pixmap_get_drawable_impl (GdkPixmap *pixmap)
 {
-  return ((GdkPixmapObject *)pixmap)->impl;
+  return ((GdkPixmap *)pixmap)->impl;
 }
 
 /* Code for accelerated alpha compositing using the RENDER extension.
@@ -1286,7 +1286,7 @@ draw_with_images (GdkDrawable       *drawable,
   Picture mask = None;
   gint x0, y0;
 
-  pix = gdk_pixmap_new (gdk_screen_get_root_window (screen), width, height, 32);
+  pix = __gdk_pixmap_new (__gdk_screen_get_root_window (screen), width, height, 32);
 						  
   pict = XRenderCreatePicture (xdisplay, 
 			       GDK_PIXMAP_XID (pix),
@@ -1316,7 +1316,7 @@ draw_with_images (GdkDrawable       *drawable,
                                       format_type, image->byte_order, 
                                       width1, height1);
 
-	  gdk_draw_image (pix, pix_gc,
+	  __gdk_draw_image (pix, pix_gc,
 			  image, xs0, ys0, x0, y0, width1, height1);
 	}
     }
@@ -1476,13 +1476,13 @@ gdk_x11_draw_pixbuf (GdkDrawable     *drawable,
   gboolean use_pixmaps = TRUE;
 #endif /* USE_SHM */
     
-  format_type = select_format (gdk_drawable_get_display (drawable),
+  format_type = select_format (__gdk_drawable_get_display (drawable),
 			       &format, &mask_format);
 
   if (format_type == GDK_X11_FORMAT_NONE ||
       !gdk_pixbuf_get_has_alpha (pixbuf) ||
-      gdk_drawable_get_depth (drawable) == 1 ||
-      (dither == GDK_RGB_DITHER_MAX && gdk_drawable_get_depth (drawable) != 24) ||
+      __gdk_drawable_get_depth (drawable) == 1 ||
+      (dither == GDK_RGB_DITHER_MAX && __gdk_drawable_get_depth (drawable) != 24) ||
       gdk_x11_drawable_get_picture (drawable) == None)
     {
       GdkDrawable *wrapper = GDK_DRAWABLE_IMPL_X11 (drawable)->wrapper;
@@ -1541,13 +1541,13 @@ _gdk_windowing_create_cairo_surface (GdkDrawable *drawable,
   GdkDrawableImplX11 *impl = GDK_DRAWABLE_IMPL_X11 (drawable);
   GdkVisual *visual;
     
-  visual = gdk_drawable_get_visual (drawable);
+  visual = __gdk_drawable_get_visual (drawable);
   if (visual) 
     return cairo_xlib_surface_create (GDK_SCREEN_XDISPLAY (impl->screen),
 				      impl->xid,
 				      GDK_VISUAL_XVISUAL (visual),
 				      width, height);
-  else if (gdk_drawable_get_depth (drawable) == 1)
+  else if (__gdk_drawable_get_depth (drawable) == 1)
     return cairo_xlib_surface_create_for_bitmap (GDK_SCREEN_XDISPLAY (impl->screen),
 						    impl->xid,
 						    GDK_SCREEN_XSCREEN (impl->screen),
@@ -1558,7 +1558,7 @@ _gdk_windowing_create_cairo_surface (GdkDrawable *drawable,
 		 "have a specified colormap. All windows have a colormap,\n"
 		 "however, pixmaps only have colormap by default if they\n"
 		 "were created with a non-NULL window argument. Otherwise\n"
-		 "a colormap must be set on them with gdk_drawable_set_colormap");
+		 "a colormap must be set on them with __gdk_drawable_set_colormap");
       return NULL;
     }
   
@@ -1577,7 +1577,7 @@ gdk_x11_ref_cairo_surface (GdkDrawable *drawable)
     {
       int width, height;
   
-      gdk_drawable_get_size (impl->wrapper, &width, &height);
+      __gdk_drawable_get_size (impl->wrapper, &width, &height);
 
       impl->cairo_surface = _gdk_windowing_create_cairo_surface (drawable, width, height);
       

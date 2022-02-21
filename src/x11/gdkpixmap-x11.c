@@ -149,14 +149,14 @@ _gdk_pixmap_new (GdkDrawable *drawable,
   if (!drawable)
     {
       GDK_NOTE (MULTIHEAD, g_message ("need to specify the screen parent window "
-				      "for gdk_pixmap_new() to be multihead safe"));
-      drawable = gdk_screen_get_root_window (gdk_screen_get_default ());
+				      "for __gdk_pixmap_new() to be multihead safe"));
+      drawable = __gdk_screen_get_root_window (__gdk_screen_get_default ());
     }
 
   if (GDK_IS_WINDOW (drawable) && GDK_WINDOW_DESTROYED (drawable))
     return NULL;
 
-  window_depth = gdk_drawable_get_depth (GDK_DRAWABLE (drawable));
+  window_depth = __gdk_drawable_get_depth (GDK_DRAWABLE (drawable));
   if (depth == -1)
     depth = window_depth;
 
@@ -177,9 +177,9 @@ _gdk_pixmap_new (GdkDrawable *drawable,
 
   if (depth == window_depth)
     {
-      cmap = gdk_drawable_get_colormap (drawable);
+      cmap = __gdk_drawable_get_colormap (drawable);
       if (cmap)
-        gdk_drawable_set_colormap (pixmap, cmap);
+        __gdk_drawable_set_colormap (pixmap, cmap);
     }
   
   _gdk_xid_table_insert (GDK_WINDOW_DISPLAY (drawable), 
@@ -204,8 +204,8 @@ _gdk_bitmap_create_from_data (GdkDrawable *drawable,
   if (!drawable)
     {
       GDK_NOTE (MULTIHEAD, g_message ("need to specify the screen parent window "
-				     "for gdk_bitmap_create_from_data() to be multihead safe"));
-      drawable = gdk_screen_get_root_window (gdk_screen_get_default ());
+				     "for __gdk_bitmap_create_from_data() to be multihead safe"));
+      drawable = __gdk_screen_get_root_window (__gdk_screen_get_default ());
     }
   
   if (GDK_IS_WINDOW (drawable) && GDK_WINDOW_DESTROYED (drawable))
@@ -255,14 +255,14 @@ _gdk_pixmap_create_from_data (GdkDrawable    *drawable,
     {
       GDK_NOTE (MULTIHEAD, g_message ("need to specify the screen parent window"
 				      "for gdk_pixmap_create_from_data() to be multihead safe"));
-      drawable = gdk_screen_get_root_window (gdk_screen_get_default ());
+      drawable = __gdk_screen_get_root_window (__gdk_screen_get_default ());
     }
 
   if (GDK_IS_WINDOW (drawable) && GDK_WINDOW_DESTROYED (drawable))
     return NULL;
 
   if (depth == -1)
-    depth = gdk_drawable_get_visual (drawable)->depth;
+    depth = __gdk_drawable_get_visual (drawable)->depth;
 
   pixmap = g_object_new (gdk_pixmap_get_type (), NULL);
   draw_impl = GDK_DRAWABLE_IMPL_X11 (GDK_PIXMAP_OBJECT (pixmap)->impl);
@@ -328,11 +328,11 @@ gdk_pixmap_foreign_new_for_display (GdkDisplay      *display,
     return NULL;
   
   screen = _gdk_x11_display_screen_for_xrootwin (display, root_return);
-  return gdk_pixmap_foreign_new_for_screen (screen, anid, w_ret, h_ret, depth_ret);
+  return __gdk_pixmap_foreign_new_for_screen (screen, anid, w_ret, h_ret, depth_ret);
 }
 
 /**
- * gdk_pixmap_foreign_new_for_screen:
+ * __gdk_pixmap_foreign_new_for_screen:
  * @screen: a #GdkScreen
  * @anid: a native pixmap handle
  * @width: the width of the pixmap identified by @anid
@@ -355,7 +355,7 @@ gdk_pixmap_foreign_new_for_display (GdkDisplay      *display,
  * Since: 2.10
  */
 GdkPixmap *
-gdk_pixmap_foreign_new_for_screen (GdkScreen       *screen,
+__gdk_pixmap_foreign_new_for_screen (GdkScreen       *screen,
 				   GdkNativeWindow  anid,
 				   gint             width,
 				   gint             height,
@@ -387,7 +387,7 @@ gdk_pixmap_foreign_new_for_screen (GdkScreen       *screen,
   pix_impl->height = height;
   GDK_PIXMAP_OBJECT (pixmap)->depth = depth;
   
-  _gdk_xid_table_insert (gdk_screen_get_display (screen), 
+  _gdk_xid_table_insert (__gdk_screen_get_display (screen), 
 			 &GDK_PIXMAP_XID (pixmap), pixmap);
 
   return pixmap;
@@ -409,7 +409,7 @@ gdk_pixmap_foreign_new_for_screen (GdkScreen       *screen,
 GdkPixmap*
 gdk_pixmap_foreign_new (GdkNativeWindow anid)
 {
-   return gdk_pixmap_foreign_new_for_display (gdk_display_get_default (), anid);
+   return gdk_pixmap_foreign_new_for_display (__gdk_display_get_default (), anid);
 }
 
 /**
@@ -427,11 +427,11 @@ gdk_pixmap_foreign_new (GdkNativeWindow anid)
 GdkPixmap*
 gdk_pixmap_lookup (GdkNativeWindow anid)
 {
-  return (GdkPixmap*) gdk_xid_table_lookup_for_display (gdk_display_get_default (), anid);
+  return (GdkPixmap*) __gdk_xid_table_lookup_for_display (__gdk_display_get_default (), anid);
 }
 
 /**
- * gdk_pixmap_lookup_for_display:
+ * __gdk_pixmap_lookup_for_display:
  * @display: the #GdkDisplay associated with @anid
  * @anid: a native pixmap handle.
  * 
@@ -446,8 +446,8 @@ gdk_pixmap_lookup (GdkNativeWindow anid)
  * Since: 2.2
  **/
 GdkPixmap*
-gdk_pixmap_lookup_for_display (GdkDisplay *display, GdkNativeWindow anid)
+__gdk_pixmap_lookup_for_display (GdkDisplay *display, GdkNativeWindow anid)
 {
   g_return_val_if_fail (GDK_IS_DISPLAY (display), NULL);
-  return (GdkPixmap*) gdk_xid_table_lookup_for_display (display, anid);
+  return (GdkPixmap*) __gdk_xid_table_lookup_for_display (display, anid);
 }

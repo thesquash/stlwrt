@@ -111,7 +111,7 @@ static void
 end_startup_notification (GdkDisplay *display,
                           const char *startup_id)
 {
-  gdk_x11_display_broadcast_startup_message (display, "remove",
+  __gdk_x11_display_broadcast_startup_message (display, "remove",
                                              "ID", startup_id,
                                              NULL);
 }
@@ -245,7 +245,7 @@ add_startup_timeout (GdkScreen  *screen,
     }
 
   sn_data = g_new (StartupNotificationData, 1);
-  sn_data->display = g_object_ref (gdk_screen_get_display (screen));
+  sn_data->display = g_object_ref (__gdk_screen_get_display (screen));
   sn_data->startup_id = g_strdup (startup_id);
   g_get_current_time (&sn_data->time);
 
@@ -283,17 +283,17 @@ _gdk_windowing_get_startup_notify_id (GAppLaunchContext *context,
   if (priv->screen)
     {
       screen = priv->screen;
-      display = gdk_screen_get_display (priv->screen);
+      display = __gdk_screen_get_display (priv->screen);
     }
   else if (priv->display)
     {
       display = priv->display;
-      screen = gdk_display_get_default_screen (display);
+      screen = __gdk_display_get_default_screen (display);
     }
   else
     {
-      display = gdk_display_get_default ();
-      screen = gdk_display_get_default_screen (display);
+      display = __gdk_display_get_default ();
+      screen = __gdk_display_get_default_screen (display);
     }
 
   fileinfo = NULL;
@@ -353,9 +353,9 @@ _gdk_windowing_get_startup_notify_id (GAppLaunchContext *context,
 
   timestamp = priv->timestamp;
   if (timestamp == GDK_CURRENT_TIME)
-    timestamp = gdk_x11_display_get_user_time (display);
+    timestamp = __gdk_x11_display_get_user_time (display);
 
-  screen_str = g_strdup_printf ("%d", gdk_screen_get_number (screen));
+  screen_str = g_strdup_printf ("%d", __gdk_screen_get_number (screen));
   if (priv->workspace > -1)
     workspace_str = g_strdup_printf ("%d", priv->workspace);
   else
@@ -374,7 +374,7 @@ _gdk_windowing_get_startup_notify_id (GAppLaunchContext *context,
                                 sequence++,
                                 (unsigned long)timestamp);
 
-  gdk_x11_display_broadcast_startup_message (display, "new",
+  __gdk_x11_display_broadcast_startup_message (display, "new",
                                              "ID", startup_id,
                                              "NAME", g_app_info_get_name (info),
                                              "SCREEN", screen_str,
@@ -414,9 +414,9 @@ _gdk_windowing_launch_failed (GAppLaunchContext *context,
   if (priv->screen)
     screen = priv->screen;
   else if (priv->display)
-    screen = gdk_display_get_default_screen (priv->display);
+    screen = __gdk_display_get_default_screen (priv->display);
   else
-    screen = gdk_display_get_default_screen (gdk_display_get_default ());
+    screen = __gdk_display_get_default_screen (__gdk_display_get_default ());
 
   data = g_object_get_data (G_OBJECT (screen), "appinfo-startup-data");
 

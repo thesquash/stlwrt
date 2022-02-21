@@ -528,6 +528,7 @@ _gtk_cell_editable_event_box_cell_editable_init (GtkCellEditableIface *iface)
   iface->start_editing = _gtk_cell_editable_event_box_start_editing;
 }
 
+typedef struct _GtkCellEditableEventBox GtkCellEditableEventBox;
 typedef         GtkEventBoxClass        GtkCellEditableEventBoxClass;
 
 STLWRT_DECLARE_VTYPE_VPARENT (GtkCellEditableEventBox, _gtk_cell_editable_event_box, GtkEventBox,
@@ -551,7 +552,7 @@ gtk_cell_editable_event_box_set_property (GObject      *object,
                                           const GValue *value,
                                           GParamSpec   *pspec)
 {
-  GtkCellEditableEventBox *box = (GtkCellEditableEventBox*)object;
+  GtkCellEditableEventBoxProps *box = gtk_cell_editable_event_box_get_props (object);
 
   switch (prop_id)
     {
@@ -570,7 +571,7 @@ gtk_cell_editable_event_box_get_property (GObject    *object,
                                           GValue     *value,
                                           GParamSpec *pspec)
 {
-  GtkCellEditableEventBox *box = (GtkCellEditableEventBox*)object;
+  GtkCellEditableEventBoxProps *box = gtk_cell_editable_event_box_get_props (object);
 
   switch (prop_id)
     {

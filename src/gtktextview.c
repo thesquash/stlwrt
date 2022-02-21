@@ -27,6 +27,8 @@
 
 #include "config.h"
 
+#define GTK_TEXT_USE_INTERNAL_UNSUPPORTED_API
+
 #include <stlwrt.h>
 #include <string.h>
 

@@ -315,7 +315,7 @@ _gdk_visual_init (GdkScreen *screen)
 gint
 gdk_visual_get_best_depth (void)
 {
-  GdkScreen *screen = gdk_screen_get_default();
+  GdkScreen *screen = __gdk_screen_get_default();
   
   return GDK_SCREEN_X11 (screen)->available_depths[0];
 }
@@ -330,13 +330,13 @@ gdk_visual_get_best_depth (void)
 GdkVisualType
 gdk_visual_get_best_type (void)
 {
-  GdkScreen *screen = gdk_screen_get_default();
+  GdkScreen *screen = __gdk_screen_get_default();
   
   return GDK_SCREEN_X11 (screen)->available_types[0];
 }
 
 /**
- * gdk_screen_get_system_visual:
+ * __gdk_screen_get_system_visual:
  * @screen: a #GdkScreen.
  * 
  * Get the system's default visual for @screen.
@@ -348,7 +348,7 @@ gdk_visual_get_best_type (void)
  * Since: 2.2
  **/
 GdkVisual *
-gdk_screen_get_system_visual (GdkScreen * screen)
+__gdk_screen_get_system_visual (GdkScreen * screen)
 {
   g_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);
 
@@ -366,7 +366,7 @@ gdk_screen_get_system_visual (GdkScreen * screen)
 GdkVisual*
 gdk_visual_get_best (void)
 {
-  GdkScreenX11 *screen_x11 = GDK_SCREEN_X11 (gdk_screen_get_default());
+  GdkScreenX11 *screen_x11 = GDK_SCREEN_X11 (__gdk_screen_get_default());
 
   return (GdkVisual *)screen_x11->visuals[0];
 }
@@ -385,7 +385,7 @@ gdk_visual_get_best (void)
 GdkVisual*
 gdk_visual_get_best_with_depth (gint depth)
 {
-  GdkScreenX11 *screen_x11 = GDK_SCREEN_X11 (gdk_screen_get_default ());
+  GdkScreenX11 *screen_x11 = GDK_SCREEN_X11 (__gdk_screen_get_default ());
   GdkVisual *return_val;
   int i;
   
@@ -414,7 +414,7 @@ gdk_visual_get_best_with_depth (gint depth)
 GdkVisual*
 gdk_visual_get_best_with_type (GdkVisualType visual_type)
 {
-  GdkScreenX11 *screen_x11 = GDK_SCREEN_X11 (gdk_screen_get_default ());
+  GdkScreenX11 *screen_x11 = GDK_SCREEN_X11 (__gdk_screen_get_default ());
   GdkVisual *return_val;
   int i;
 
@@ -443,7 +443,7 @@ GdkVisual*
 gdk_visual_get_best_with_both (gint          depth,
 			       GdkVisualType visual_type)
 {
-  GdkScreenX11 *screen_x11 = GDK_SCREEN_X11 (gdk_screen_get_default ());
+  GdkScreenX11 *screen_x11 = GDK_SCREEN_X11 (__gdk_screen_get_default ());
   GdkVisual *return_val;
   int i;
 
@@ -476,7 +476,7 @@ void
 gdk_query_depths  (gint **depths,
 		   gint  *count)
 {
-  GdkScreenX11 *screen_x11 = GDK_SCREEN_X11 (gdk_screen_get_default ());
+  GdkScreenX11 *screen_x11 = GDK_SCREEN_X11 (__gdk_screen_get_default ());
   
   *count = screen_x11->navailable_depths;
   *depths = screen_x11->available_depths;
@@ -498,7 +498,7 @@ void
 gdk_query_visual_types (GdkVisualType **visual_types,
 			gint           *count)
 {
-  GdkScreenX11 *screen_x11 = GDK_SCREEN_X11 (gdk_screen_get_default ());
+  GdkScreenX11 *screen_x11 = GDK_SCREEN_X11 (__gdk_screen_get_default ());
   
   *count = screen_x11->navailable_types;
   *visual_types = screen_x11->available_types;
@@ -539,7 +539,7 @@ gdk_screen_list_visuals (GdkScreen *screen)
 }
 
 /**
- * gdk_x11_screen_lookup_visual:
+ * __gdk_x11_screen_lookup_visual:
  * @screen: a #GdkScreen.
  * @xvisualid: an X Visual ID.
  *
@@ -551,7 +551,7 @@ gdk_screen_list_visuals (GdkScreen *screen)
  * Since: 2.2
  */
 GdkVisual *
-gdk_x11_screen_lookup_visual (GdkScreen *screen,
+__gdk_x11_screen_lookup_visual (GdkScreen *screen,
 			      VisualID   xvisualid)
 {
   int i;
@@ -574,12 +574,12 @@ gdk_x11_screen_lookup_visual (GdkScreen *screen,
  *
  * Return value: the #GdkVisual.
  *
- * Deprecated:2.24: Use gdk_x11_screen_lookup_visual() instead
+ * Deprecated:2.24: Use __gdk_x11_screen_lookup_visual() instead
  */
 GdkVisual*
 gdkx_visual_get (VisualID xvisualid)
 {
-  return gdk_x11_screen_lookup_visual (gdk_screen_get_default (), xvisualid);
+  return __gdk_x11_screen_lookup_visual (__gdk_screen_get_default (), xvisualid);
 }
 
 static void
@@ -652,7 +652,7 @@ gdk_x11_visual_get_xvisual (GdkVisual *visual)
 }
 
 /**
- * gdk_visual_get_screen:
+ * __gdk_visual_get_screen:
  * @visual: a #GdkVisual
  * 
  * Gets the screen to which this visual belongs
@@ -662,7 +662,7 @@ gdk_x11_visual_get_xvisual (GdkVisual *visual)
  * Since: 2.2
  **/
 GdkScreen *
-gdk_visual_get_screen (GdkVisual *visual)
+__gdk_visual_get_screen (GdkVisual *visual)
 {
   g_return_val_if_fail (GDK_IS_VISUAL (visual), NULL);
 

@@ -72,7 +72,7 @@ _gdk_xid_table_remove (GdkDisplay *display,
 }
 
 /**
- * gdk_xid_table_lookup_for_display:
+ * __gdk_xid_table_lookup_for_display:
  * @display: the #GdkDisplay.
  * @xid: an X id.
  *
@@ -86,10 +86,10 @@ _gdk_xid_table_remove (GdkDisplay *display,
  *
  * Deprecated:2.24: This function will be removed in GTK+ 3.0. GTK+
  *     only stores windows in its X id table nowadays, so use
- *     gdk_x11_window_lookup_for_display() instead.
+ *     __gdk_x11_window_lookup_for_display() instead.
  */
 gpointer
-gdk_xid_table_lookup_for_display (GdkDisplay  *display,
+__gdk_xid_table_lookup_for_display (GdkDisplay  *display,
 				  XID	       xid)
 {
   GdkDisplayX11 *display_x11;
@@ -107,7 +107,7 @@ gdk_xid_table_lookup_for_display (GdkDisplay  *display,
 
 
 /**
- * gdk_xid_table_lookup:
+ * __gdk_xid_table_lookup:
  * @xid: an X id.
  *
  * Returns the Gdk object associated with the given X id for the default
@@ -119,12 +119,12 @@ gdk_xid_table_lookup_for_display (GdkDisplay  *display,
  *
  * Deprecated:2.24: This function will be removed in GTK+ 3.0. GTK+
  *     only stores windows in its X id table nowadays, so use
- *     gdk_x11_window_lookup_for_display() instead.
+ *     __gdk_x11_window_lookup_for_display() instead.
  */
 gpointer
-gdk_xid_table_lookup (XID xid)
+__gdk_xid_table_lookup (XID xid)
 {
-  return gdk_xid_table_lookup_for_display (gdk_display_get_default (), xid);
+  return __gdk_xid_table_lookup_for_display (__gdk_display_get_default (), xid);
 }
 
 static guint

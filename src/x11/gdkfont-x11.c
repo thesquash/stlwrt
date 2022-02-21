@@ -157,7 +157,7 @@ gdk_font_hash_lookup (GdkDisplay  *display,
     {
       result = g_hash_table_lookup (hash, font_name);
       if (result)
-	gdk_font_ref (result);
+	__gdk_font_ref (result);
       
       return result;
     }
@@ -202,7 +202,7 @@ gdk_font_load_for_display (GdkDisplay  *display,
       if (xfont != private->xfont)
 	XFreeFont (GDK_DISPLAY_XDISPLAY (display), xfont);
 
-      gdk_font_ref (font);
+      __gdk_font_ref (font);
     }
   else
     {
@@ -350,7 +350,7 @@ gdk_fontset_load_for_display (GdkDisplay  *display,
 GdkFont*
 gdk_fontset_load (const gchar *fontset_name)
 {
-  return gdk_fontset_load_for_display (gdk_display_get_default (), fontset_name);
+  return gdk_fontset_load_for_display (__gdk_display_get_default (), fontset_name);
 }
 
 void

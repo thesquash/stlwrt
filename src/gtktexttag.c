@@ -1917,10 +1917,10 @@ _gtk_text_tag_array_sort (GtkTextTag** tag_array_p,
 
     for (i = len-1; i > 0; i--, iter++) {
       maxPtrPtr = tag = iter;
-      prio = tag[0])gtk_text_tag_get_props (->priority;
+      prio = gtk_text_tag_get_props (tag[0])->priority;
       for (j = i, tag++; j > 0; j--, tag++) {
-        if (tag[0])gtk_text_tag_get_props (->priority < prio) {
-          prio = tag[0])gtk_text_tag_get_props (->priority;
+        if (gtk_text_tag_get_props (tag[0])->priority < prio) {
+          prio = gtk_text_tag_get_props (tag[0])->priority;
           maxPtrPtr = tag;
         }
       }
@@ -2190,7 +2190,7 @@ _gtk_text_attributes_fill_from_tags (GtkTextAttributes *dest,
 
       g_assert (gtk_text_tag_get_props (tag)->table != NULL);
       if (n > 0)
-        g_assert (tags[n])gtk_text_tag_get_props (->priority > tags[n-1])gtk_text_tag_get_props (->priority);
+        g_assert (gtk_text_tag_get_props (tags[n])->priority > gtk_text_tag_get_props (tags[n-1])->priority);
 
       if (gtk_text_tag_get_props (tag)->bg_color_set)
         {

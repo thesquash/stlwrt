@@ -107,7 +107,7 @@ _gdk_x11_gc_new (GdkDrawable      *drawable,
     
   private->screen = GDK_DRAWABLE_IMPL_X11 (drawable)->screen;
 
-  private->depth = gdk_drawable_get_depth (drawable);
+  private->depth = __gdk_drawable_get_depth (drawable);
 
   if (values_mask & (GDK_GC_CLIP_X_ORIGIN | GDK_GC_CLIP_Y_ORIGIN))
     {
@@ -271,9 +271,9 @@ gdk_x11_gc_get_values (GdkGC       *gc,
 	  break;
 	}
 
-      values->tile = gdk_pixmap_lookup_for_display (GDK_GC_DISPLAY (gc),
+      values->tile = __gdk_pixmap_lookup_for_display (GDK_GC_DISPLAY (gc),
 						    xvalues.tile);
-      values->stipple = gdk_pixmap_lookup_for_display (GDK_GC_DISPLAY (gc),
+      values->stipple = __gdk_pixmap_lookup_for_display (GDK_GC_DISPLAY (gc),
 						       xvalues.stipple);
       values->clip_mask = NULL;
       values->subwindow_mode = xvalues.subwindow_mode;

@@ -26,7 +26,7 @@
 #include <string.h>
 
 #include <gdkx.h>
-#include <gdk.h>		/* For gdk_flush() */
+#include <gdk.h>		/* For __gdk_flush() */
 #include <gdkpixmap.h>
 #include <gdkinternals.h>
 #include <gdkdisplay-x11.h>
@@ -101,7 +101,7 @@ gdk_set_locale (void)
 static GdkDisplay *
 find_a_display (void)
 {
-  GdkDisplay *display = gdk_display_get_default ();
+  GdkDisplay *display = __gdk_display_get_default ();
 
   if (!display)
     display = _gdk_displays->data;

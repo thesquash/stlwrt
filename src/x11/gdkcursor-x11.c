@@ -69,7 +69,7 @@ add_to_cache (GdkCursorPrivate* cursor)
   cursor_cache = g_slist_prepend (cursor_cache, cursor);
 
   /* Take a ref so that if the caller frees it we still have it */
-  gdk_cursor_ref ((GdkCursor*) cursor);
+  __gdk_cursor_ref ((GdkCursor*) cursor);
 }
 
 /* Returns 0 on a match
@@ -134,7 +134,7 @@ _gdk_x11_cursor_display_finalize (GdkDisplay *display)
       if (cursor->display == display)
         {
 	  GSList* olditem;
-          gdk_cursor_unref ((GdkCursor*) cursor);
+          __gdk_cursor_unref ((GdkCursor*) cursor);
 	  /* Remove this item from the list */
 	  *(itemp) = item->next;
 	  olditem = item;
@@ -158,8 +158,8 @@ get_blank_cursor (GdkDisplay *display)
   XColor color;
   Cursor cursor;
 
-  screen = gdk_display_get_default_screen (display);
-  pixmap = gdk_bitmap_create_from_data (gdk_screen_get_root_window (screen), 
+  screen = __gdk_display_get_default_screen (display);
+  pixmap = __gdk_bitmap_create_from_data (__gdk_screen_get_root_window (screen), 
 					"\0\0\0\0\0\0\0\0", 1, 1);
  
   source_pixmap = GDK_PIXMAP_XID (pixmap);
@@ -267,7 +267,7 @@ gdk_cursor_new_for_display (GdkDisplay    *display,
       if (private)
         {
           /* Cache had it, add a ref for this user */
-          gdk_cursor_ref ((GdkCursor*) private);
+          __gdk_cursor_ref ((GdkCursor*) private);
        
           return (GdkCursor*) private;
         } 
@@ -337,9 +337,9 @@ gdk_cursor_new_for_display (GdkDisplay    *display,
  *  GdkColor bg = { 0, 0, 0, 65535 }; /<!-- -->* Blue. *<!-- -->/
  *  
  *  
- *  source = gdk_bitmap_create_from_data (NULL, cursor1_bits,
+ *  source = __gdk_bitmap_create_from_data (NULL, cursor1_bits,
  *                                        cursor1_width, cursor1_height);
- *  mask = gdk_bitmap_create_from_data (NULL, cursor1mask_bits,
+ *  mask = __gdk_bitmap_create_from_data (NULL, cursor1mask_bits,
  *                                      cursor1_width, cursor1_height);
  *  cursor = gdk_cursor_new_from_pixmap (source, mask, &amp;fg, &amp;bg, 8, 8);
  *  g_object_unref (source);
@@ -864,7 +864,7 @@ gdk_cursor_new_from_name (GdkDisplay  *display,
       if (private)
         {
           /* Cache had it, add a ref for this user */
-          gdk_cursor_ref ((GdkCursor*) private);
+          __gdk_cursor_ref ((GdkCursor*) private);
 
           return (GdkCursor*) private;
         }
@@ -1002,11 +1002,11 @@ gdk_cursor_new_from_pixbuf (GdkDisplay *display,
 	}
     }
       
-  screen = gdk_display_get_default_screen (display);
-  pixmap = gdk_bitmap_create_from_data (gdk_screen_get_root_window (screen), 
+  screen = __gdk_display_get_default_screen (display);
+  pixmap = __gdk_bitmap_create_from_data (__gdk_screen_get_root_window (screen), 
 					data, width, height);
  
-  mask = gdk_bitmap_create_from_data (gdk_screen_get_root_window (screen),
+  mask = __gdk_bitmap_create_from_data (__gdk_screen_get_root_window (screen),
 				      mask_data, width, height);
    
   cursor = gdk_cursor_new_from_pixmap (pixmap, mask, &fg, &bg, x, y);
@@ -1077,8 +1077,8 @@ gdk_display_get_maximal_cursor_size (GdkDisplay *display,
 
   g_return_if_fail (GDK_IS_DISPLAY (display));
   
-  screen = gdk_display_get_default_screen (display);
-  window = gdk_screen_get_root_window (screen);
+  screen = __gdk_display_get_default_screen (display);
+  window = __gdk_screen_get_root_window (screen);
   XQueryBestCursor (GDK_DISPLAY_XDISPLAY (display), 
 		    GDK_WINDOW_XWINDOW (window), 
 		    128, 128, width, height);

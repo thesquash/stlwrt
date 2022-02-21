@@ -43,7 +43,7 @@ gdk_device_get_state (GdkDevice       *device,
   g_return_if_fail (device != NULL);
   g_return_if_fail (GDK_IS_WINDOW (window));
 
-  gdk_window_get_pointer (window, &x_int, &y_int, mask);
+  __gdk_window_get_pointer (window, &x_int, &y_int, mask);
 
   if (axes)
     {

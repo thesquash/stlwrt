@@ -1566,8 +1566,8 @@ gtk_menu_item_popup_timeout (gpointer data)
       (GTK_IS_MENU (parent) && gtk_menu_get_props (GTK_MENU (parent))->torn_off))
     {
       gtk_menu_item_real_popup_submenu (GTK_WIDGET (menu_item), TRUE);
-      gtk_menu_shell_get_props (if (gtk_menu_item_get_props (menu_item)->timer_from_keypress && gtk_menu_item_get_props (menu_item)->submenu)
-	GTK_MENU_SHELL (gtk_menu_item_get_props (menu_item)->submenu))->ignore_enter = TRUE;
+      if (gtk_menu_item_get_props (menu_item)->timer_from_keypress && gtk_menu_item_get_props (menu_item)->submenu)
+	gtk_menu_shell_get_props (gtk_menu_item_get_props (menu_item)->submenu)->ignore_enter = TRUE;
     }
 
   gtk_menu_item_get_props (menu_item)->timer = 0;

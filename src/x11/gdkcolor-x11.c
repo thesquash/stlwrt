@@ -113,7 +113,7 @@ gdk_colormap_finalize (GObject *object)
 }
 
 /**
- * gdk_colormap_new:
+ * __gdk_colormap_new:
  * @visual: a #GdkVisual.
  * @allocate: if %TRUE, the newly created colormap will be
  * a private colormap, and all colors in it will be
@@ -124,7 +124,7 @@ gdk_colormap_finalize (GObject *object)
  * Return value: the new #GdkColormap.
  **/
 GdkColormap*
-gdk_colormap_new (GdkVisual *visual,
+__gdk_colormap_new (GdkVisual *visual,
 		  gboolean   allocate)
 {
   GdkColormap *colormap;
@@ -145,7 +145,7 @@ gdk_colormap_new (GdkVisual *visual,
   private = GDK_COLORMAP_PRIVATE_DATA (colormap);
 
   colormap->visual = visual;
-  private->screen = gdk_visual_get_screen (visual);
+  private->screen = __gdk_visual_get_screen (visual);
   
   xvisual = ((GdkVisualPrivate*) visual)->xvisual;
   xdisplay = GDK_SCREEN_XDISPLAY (private->screen);
@@ -173,7 +173,7 @@ gdk_colormap_new (GdkVisual *visual,
 	  XColor *default_colors;
           gint n_default_colors;
 
-          system_visual = gdk_screen_get_system_visual (private->screen);
+          system_visual = __gdk_screen_get_system_visual (private->screen);
 	  n_default_colors = MIN (system_visual->colormap_size, colormap->size);
 
  	  default_colors = g_new (XColor, colormap->size);
@@ -193,7 +193,7 @@ gdk_colormap_new (GdkVisual *visual,
 	      colormap->colors[i].blue = default_colors[i].blue;
 	    }
 
-	  gdk_colormap_change (colormap, n_default_colors);
+	  __gdk_colormap_change (colormap, n_default_colors);
 	  
 	  g_free (default_colors);
 	}
@@ -217,7 +217,7 @@ gdk_colormap_new (GdkVisual *visual,
       for (i = 0; i < size; i++)
 	colormap->colors[i].blue = i * 65535 / (size - 1);
 
-      gdk_colormap_change (colormap, colormap->size);
+      __gdk_colormap_change (colormap, colormap->size);
       break;
 
     case GDK_VISUAL_STATIC_GRAY:
@@ -339,7 +339,7 @@ gdk_colormap_sync (GdkColormap *colormap,
 }
 		   
 /**
- * gdk_screen_get_system_colormap:
+ * __gdk_screen_get_system_colormap:
  * @screen: a #GdkScreen
  *
  * Gets the system's default colormap for @screen
@@ -349,7 +349,7 @@ gdk_colormap_sync (GdkColormap *colormap,
  * Since: 2.2
  */
 GdkColormap *
-gdk_screen_get_system_colormap (GdkScreen *screen)
+__gdk_screen_get_system_colormap (GdkScreen *screen)
 {
   GdkColormap *colormap = NULL;
   GdkColormapPrivateX11 *private;
@@ -365,7 +365,7 @@ gdk_screen_get_system_colormap (GdkScreen *screen)
   private = GDK_COLORMAP_PRIVATE_DATA (colormap);
 
   private->screen = screen;
-  colormap->visual = gdk_screen_get_system_visual (screen);
+  colormap->visual = __gdk_screen_get_system_visual (screen);
   
   private->xcolormap = DefaultColormapOfScreen (screen_x11->xscreen);
   private->private_val = FALSE;
@@ -413,12 +413,12 @@ gdk_screen_get_system_colormap (GdkScreen *screen)
 gint
 gdk_colormap_get_system_size (void)
 {
-  return DisplayCells (GDK_SCREEN_XDISPLAY (gdk_screen_get_default()),
-		       GDK_SCREEN_X11 (gdk_screen_get_default())->screen_num);
+  return DisplayCells (GDK_SCREEN_XDISPLAY (__gdk_screen_get_default()),
+		       GDK_SCREEN_X11 (__gdk_screen_get_default())->screen_num);
 }
 
 /**
- * gdk_colormap_change:
+ * __gdk_colormap_change:
  * @colormap: a #GdkColormap.
  * @ncolors: the number of colors to change.
  * 
@@ -428,7 +428,7 @@ gdk_colormap_get_system_size (void)
  * should not be used. See gdk_color_change().
  **/
 void
-gdk_colormap_change (GdkColormap *colormap,
+__gdk_colormap_change (GdkColormap *colormap,
 		     gint         ncolors)
 {
   GdkColormapPrivateX11 *private;
@@ -1164,7 +1164,7 @@ gdk_colormap_query_color (GdkColormap *colormap,
   
   private = GDK_COLORMAP_PRIVATE_DATA (colormap);
 
-  visual = gdk_colormap_get_visual (colormap);
+  visual = __gdk_colormap_get_visual (colormap);
 
   switch (visual->type) {
   case GDK_VISUAL_DIRECT_COLOR:
@@ -1240,7 +1240,7 @@ gdk_color_change (GdkColormap *colormap,
 }
 
 /**
- * gdk_x11_colormap_foreign_new:
+ * __gdk_x11_colormap_foreign_new:
  * @visual: a #GdkVisual
  * @xcolormap: The XID of a colormap with visual @visual
  * 
@@ -1250,14 +1250,14 @@ gdk_color_change (GdkColormap *colormap,
  *
  * Return value: the #GdkColormap object for @xcolormap.
  *   Free with g_object_unref(). Note that for colormap created
- *   with gdk_x11_colormap_foreign_new(), unref'ing the last
+ *   with __gdk_x11_colormap_foreign_new(), unref'ing the last
  *   reference to the object will only free the #GdkColoramp
  *   object and not call XFreeColormap()
  *
  * Since: 2.2
  **/
 GdkColormap *
-gdk_x11_colormap_foreign_new (GdkVisual *visual,
+__gdk_x11_colormap_foreign_new (GdkVisual *visual,
 			      Colormap   xcolormap)
 {
   GdkColormap *colormap;
@@ -1267,11 +1267,11 @@ gdk_x11_colormap_foreign_new (GdkVisual *visual,
   g_return_val_if_fail (GDK_IS_VISUAL (visual), NULL);
   g_return_val_if_fail (xcolormap != None, NULL);
 
-  screen = gdk_visual_get_screen (visual);
+  screen = __gdk_visual_get_screen (visual);
   
   if (xcolormap == DefaultColormap (GDK_SCREEN_XDISPLAY (screen),
 				    GDK_SCREEN_XNUMBER (screen)))
-    return g_object_ref (gdk_screen_get_system_colormap (screen));
+    return g_object_ref (__gdk_screen_get_system_colormap (screen));
 
   colormap = gdk_colormap_lookup (screen, xcolormap);
   if (colormap)
@@ -1322,7 +1322,7 @@ gdk_x11_colormap_foreign_new (GdkVisual *visual,
  * known to GTK+ (a colormap created by GTK+ or the default
  * colormap for the screen), since GTK+ 
  *
- * Always use gdk_x11_colormap_foreign_new() instead.
+ * Always use __gdk_x11_colormap_foreign_new() instead.
  *
  * Return value: the existing #GdkColormap object if it was
  *  already known to GTK+, otherwise warns and return
@@ -1331,12 +1331,12 @@ gdk_x11_colormap_foreign_new (GdkVisual *visual,
 GdkColormap*
 gdkx_colormap_get (Colormap xcolormap)
 {
-  GdkScreen *screen = gdk_screen_get_default ();
+  GdkScreen *screen = __gdk_screen_get_default ();
   GdkColormap *colormap;
 
   if (xcolormap == DefaultColormap (GDK_SCREEN_XDISPLAY (screen),
 				    GDK_SCREEN_XNUMBER (screen)))
-    return g_object_ref (gdk_screen_get_system_colormap (screen));
+    return g_object_ref (__gdk_screen_get_system_colormap (screen));
 
   colormap = gdk_colormap_lookup (screen, xcolormap);
   if (colormap)

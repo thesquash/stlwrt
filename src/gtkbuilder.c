@@ -1561,7 +1561,7 @@ _gtk_builder_flags_from_string (GType         type,
 }
 
 /**
- * gtk_builder_get_type_from_name:
+ * __gtk_builder_get_type_from_name:
  * @builder: a #GtkBuilder
  * @type_name: type name to lookup
  *

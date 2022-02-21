@@ -28,7 +28,7 @@
 #include <gdkinputprivate.h>
 #include <gdkinternals.h>
 #include <gdkx.h>
-#include <gdk.h>		/* For gdk_error_trap_push()/pop() */
+#include <gdk.h>		/* For __gdk_error_trap_push()/pop() */
 #include <gdkdisplay-x11.h>
 
 #include <string.h>
@@ -199,17 +199,17 @@ gdk_input_device_new (GdkDisplay  *display,
 	    }
 	  j=0;
 	  if (j<xvi->num_axes)
-	    gdk_device_set_axis_use (&gdkdev->info, j++, GDK_AXIS_X);
+	    __gdk_device_set_axis_use (&gdkdev->info, j++, GDK_AXIS_X);
 	  if (j<xvi->num_axes)
-	    gdk_device_set_axis_use (&gdkdev->info, j++, GDK_AXIS_Y);
+	    __gdk_device_set_axis_use (&gdkdev->info, j++, GDK_AXIS_Y);
 	  if (j<xvi->num_axes)
-	    gdk_device_set_axis_use (&gdkdev->info, j++, GDK_AXIS_PRESSURE);
+	    __gdk_device_set_axis_use (&gdkdev->info, j++, GDK_AXIS_PRESSURE);
 	  if (j<xvi->num_axes)
-	    gdk_device_set_axis_use (&gdkdev->info, j++, GDK_AXIS_XTILT);
+	    __gdk_device_set_axis_use (&gdkdev->info, j++, GDK_AXIS_XTILT);
 	  if (j<xvi->num_axes)
-	    gdk_device_set_axis_use (&gdkdev->info, j++, GDK_AXIS_YTILT);
+	    __gdk_device_set_axis_use (&gdkdev->info, j++, GDK_AXIS_YTILT);
 	  if (j<xvi->num_axes)
-	    gdk_device_set_axis_use (&gdkdev->info, j++, GDK_AXIS_WHEEL);
+	    __gdk_device_set_axis_use (&gdkdev->info, j++, GDK_AXIS_WHEEL);
 
 	  break;
 	}
@@ -223,12 +223,12 @@ gdk_input_device_new (GdkDisplay  *display,
 
   if (device->use != IsXPointer)
     {
-      gdk_error_trap_push ();
+      __gdk_error_trap_push ();
       gdkdev->xdevice = XOpenDevice (GDK_DISPLAY_XDISPLAY (display),
 				     gdkdev->deviceid);
 
       /* return NULL if device is not ready */
-      if (gdk_error_trap_pop ())
+      if (__gdk_error_trap_pop ())
 	goto error;
     }
 
@@ -381,7 +381,7 @@ _gdk_input_common_init (GdkDisplay *display,
   if (XQueryExtension (display_x11->xdisplay, "XInputExtension",
 		       &ignore, &event_base, &ignore))
     {
-      gdk_x11_register_standard_event_type (display,
+      __gdk_x11_register_standard_event_type (display,
 					    event_base, 15 /* Number of events */);
 
       devices = XListInputDevices(display_x11->xdisplay, &num_devices);
@@ -459,7 +459,7 @@ gdk_input_translate_coordinates (GdkDevicePrivate *gdkdev,
     }
   else
     {
-      device_width = gdk_screen_get_width (gdk_drawable_get_screen (window));
+      device_width = __gdk_screen_get_width (__gdk_drawable_get_screen (window));
       x_min = 0;
     }
 
@@ -470,14 +470,14 @@ gdk_input_translate_coordinates (GdkDevicePrivate *gdkdev,
     }
   else
     {
-      device_height = gdk_screen_get_height (gdk_drawable_get_screen (window));
+      device_height = __gdk_screen_get_height (__gdk_drawable_get_screen (window));
       y_min = 0;
     }
 
   if (gdkdev->info.mode == GDK_MODE_SCREEN)
     {
-      x_scale = gdk_screen_get_width (gdk_drawable_get_screen (window)) / device_width;
-      y_scale = gdk_screen_get_height (gdk_drawable_get_screen (window)) / device_height;
+      x_scale = __gdk_screen_get_width (__gdk_drawable_get_screen (window)) / device_width;
+      y_scale = __gdk_screen_get_height (__gdk_drawable_get_screen (window)) / device_height;
 
       x_offset = - impl_window->input_window->root_x - priv->abs_x;
       y_offset = - impl_window->input_window->root_y - priv->abs_y;
@@ -614,7 +614,7 @@ _gdk_input_common_other_event (GdkEvent         *event,
       event->button.button = xdbe->button;
 
       if (event->button.type == GDK_BUTTON_PRESS)
-	_gdk_event_button_generate (gdk_drawable_get_display (event->button.window),
+	_gdk_event_button_generate (__gdk_drawable_get_display (event->button.window),
 				    event);
 
       GDK_NOTE (EVENTS,
@@ -628,9 +628,9 @@ _gdk_input_common_other_event (GdkEvent         *event,
       /* Update the timestamp of the latest user interaction, if the event has
        * a valid timestamp.
        */
-      if (gdk_event_get_time (event) != GDK_CURRENT_TIME)
-	gdk_x11_window_set_user_time (gdk_window_get_toplevel (window),
-				      gdk_event_get_time (event));
+      if (__gdk_event_get_time (event) != GDK_CURRENT_TIME)
+	gdk_x11_window_set_user_time (__gdk_window_get_toplevel (window),
+				      __gdk_event_get_time (event));
       return TRUE;
   }
 
@@ -694,9 +694,9 @@ _gdk_input_common_other_event (GdkEvent         *event,
       /* Update the timestamp of the latest user interaction, if the event has
        * a valid timestamp.
        */
-      if (gdk_event_get_time (event) != GDK_CURRENT_TIME)
-	gdk_x11_window_set_user_time (gdk_window_get_toplevel (window),
-				      gdk_event_get_time (event));
+      if (__gdk_event_get_time (event) != GDK_CURRENT_TIME)
+	gdk_x11_window_set_user_time (__gdk_window_get_toplevel (window),
+				      __gdk_event_get_time (event));
       return TRUE;
     }
 
@@ -733,9 +733,9 @@ _gdk_input_common_other_event (GdkEvent         *event,
       /* Update the timestamp of the latest user interaction, if the event has
        * a valid timestamp.
        */
-      if (gdk_event_get_time (event) != GDK_CURRENT_TIME)
-	gdk_x11_window_set_user_time (gdk_window_get_toplevel (window),
-				      gdk_event_get_time (event));
+      if (__gdk_event_get_time (event) != GDK_CURRENT_TIME)
+	gdk_x11_window_set_user_time (__gdk_window_get_toplevel (window),
+				      __gdk_event_get_time (event));
       return TRUE;
     }
 
@@ -773,9 +773,9 @@ _gdk_input_common_other_event (GdkEvent         *event,
       /* Update the timestamp of the latest user interaction, if the event has
        * a valid timestamp.
        */
-      if (gdk_event_get_time (event) != GDK_CURRENT_TIME)
-	gdk_x11_window_set_user_time (gdk_window_get_toplevel (window),
-				      gdk_event_get_time (event));
+      if (__gdk_event_get_time (event) != GDK_CURRENT_TIME)
+	gdk_x11_window_set_user_time (__gdk_window_get_toplevel (window),
+				      __gdk_event_get_time (event));
       return TRUE;
   }
 
@@ -905,7 +905,7 @@ gdk_device_get_state (GdkDevice       *device,
     {
       gint x_int, y_int;
 
-      gdk_window_get_pointer (window, &x_int, &y_int, mask);
+      __gdk_window_get_pointer (window, &x_int, &y_int, mask);
 
       if (axes)
 	{
@@ -921,7 +921,7 @@ gdk_device_get_state (GdkDevice       *device,
       XInputClass *input_class;
 
       if (mask)
-	gdk_window_get_pointer (window, NULL, NULL, mask);
+	__gdk_window_get_pointer (window, NULL, NULL, mask);
 
       gdkdev = (GdkDevicePrivate *)device;
 

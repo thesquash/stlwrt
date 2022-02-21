@@ -136,7 +136,7 @@ gdk_image_new_bitmap (GdkVisual *visual,
   
   image = g_object_new (gdk_image_get_type (), NULL);
   private = PRIVATE_DATA (image);
-  private->screen = gdk_visual_get_screen (visual);
+  private->screen = __gdk_visual_get_screen (visual);
   display = GDK_SCREEN_DISPLAY (private->screen);
   
   image->type = GDK_IMAGE_NORMAL;
@@ -183,7 +183,7 @@ _gdk_windowing_image_init (GdkDisplay *display)
 	  display_x11->have_shm_pixmaps = pixmaps;
 	  event_base = XShmGetEventBase (xdisplay);
 
-	  gdk_x11_register_standard_event_type (display,
+	  __gdk_x11_register_standard_event_type (display,
 						event_base, ShmNumberEvents);
 	}
       else
@@ -301,12 +301,12 @@ _gdk_image_new_for_depth (GdkScreen    *screen,
 		  goto error;
 		}
 
-	      gdk_error_trap_push ();
+	      __gdk_error_trap_push ();
 
 	      XShmAttach (screen_x11->xdisplay, x_shm_info);
 	      XSync (screen_x11->xdisplay, False);
 
-	      if (gdk_error_trap_pop ())
+	      if (__gdk_error_trap_pop ())
 		{
 		  /* this is the common failure case so omit warning */
 		  display_x11->use_xshm = FALSE;
@@ -439,10 +439,10 @@ get_full_image (GdkDrawable    *drawable,
   private->ximage = ximage;
   
   image->type = GDK_IMAGE_NORMAL;
-  image->visual = gdk_drawable_get_visual (drawable); /* could be NULL */
+  image->visual = __gdk_drawable_get_visual (drawable); /* could be NULL */
   image->width = width;
   image->height = height;
-  image->depth = gdk_drawable_get_depth (drawable);
+  image->depth = __gdk_drawable_get_depth (drawable);
   
   image->mem = private->ximage->data;
   image->bpl = private->ximage->bytes_per_line;
@@ -477,10 +477,10 @@ _gdk_x11_copy_to_image (GdkDrawable    *drawable,
   g_return_val_if_fail (GDK_IS_DRAWABLE_IMPL_X11 (drawable), NULL);
   g_return_val_if_fail (image != NULL || (dest_x == 0 && dest_y == 0), NULL);
 
-  visual = gdk_drawable_get_visual (drawable);
+  visual = __gdk_drawable_get_visual (drawable);
   impl = GDK_DRAWABLE_IMPL_X11 (drawable);
-  display = gdk_drawable_get_display (drawable);
-  xdisplay = gdk_x11_display_get_xdisplay (display);
+  display = __gdk_drawable_get_display (drawable);
+  xdisplay = __gdk_x11_display_get_xdisplay (display);
 
   if (display->closed)
     return NULL;
@@ -489,7 +489,7 @@ _gdk_x11_copy_to_image (GdkDrawable    *drawable,
 
 #define UNGRAB() G_STMT_START {					\
     if (have_grab) {						\
-      gdk_x11_display_ungrab (display);				\
+      __gdk_x11_display_ungrab (display);				\
       have_grab = FALSE; }					\
   } G_STMT_END
 
@@ -529,7 +529,7 @@ _gdk_x11_copy_to_image (GdkDrawable    *drawable,
       Window child;
 
       have_grab = TRUE;
-      gdk_x11_display_grab (display);
+      __gdk_x11_display_grab (display);
 
       /* Translate screen area into window coordinates */
       XTranslateCoordinates (xdisplay,
@@ -539,15 +539,15 @@ _gdk_x11_copy_to_image (GdkDrawable    *drawable,
 			     &screen_rect.x, &screen_rect.y, 
 			     &child);
 
-      screen_rect.width = gdk_screen_get_width (impl->screen);
-      screen_rect.height = gdk_screen_get_height (impl->screen);
+      screen_rect.width = __gdk_screen_get_width (impl->screen);
+      screen_rect.height = __gdk_screen_get_height (impl->screen);
       
-      gdk_error_trap_push ();
+      __gdk_error_trap_push ();
 
       window_rect.x = 0;
       window_rect.y = 0;
       
-      gdk_window_get_geometry (GDK_WINDOW (impl->wrapper),
+      __gdk_window_get_geometry (GDK_WINDOW (impl->wrapper),
                                NULL, NULL,
                                &window_rect.width,
                                &window_rect.height,
@@ -556,8 +556,8 @@ _gdk_x11_copy_to_image (GdkDrawable    *drawable,
       /* compute intersection of screen and window, in window
        * coordinates
        */
-      if (gdk_error_trap_pop () ||
-          !gdk_rectangle_intersect (&window_rect, &screen_rect, 
+      if (__gdk_error_trap_pop () ||
+          !__gdk_rectangle_intersect (&window_rect, &screen_rect, 
                                     &window_rect))
 	goto out;
     }
@@ -565,7 +565,7 @@ _gdk_x11_copy_to_image (GdkDrawable    *drawable,
     {
       window_rect.x = 0;
       window_rect.y = 0;
-      gdk_drawable_get_size (drawable,
+      __gdk_drawable_get_size (drawable,
 			     &window_rect.width,
 			     &window_rect.height);
     }
@@ -580,10 +580,10 @@ _gdk_x11_copy_to_image (GdkDrawable    *drawable,
    * For pixmaps this is all of the pixmap, for windows it is just 
    * the onscreen part.
    */
-  if (!gdk_rectangle_intersect (&req, &window_rect, &req))
+  if (!__gdk_rectangle_intersect (&req, &window_rect, &req))
     goto out;
 
-  gdk_error_trap_push ();
+  __gdk_error_trap_push ();
   
   if (!image &&
       req.x == src_x && req.y == src_y && req.width == width && req.height == height)
@@ -600,7 +600,7 @@ _gdk_x11_copy_to_image (GdkDrawable    *drawable,
 	{
 	  image = _gdk_image_new_for_depth (impl->screen, GDK_IMAGE_NORMAL, 
 					    visual, width, height,
-					    gdk_drawable_get_depth (drawable));
+					    __gdk_drawable_get_depth (drawable));
 	  created_image = TRUE;
 	}
 
@@ -622,13 +622,13 @@ _gdk_x11_copy_to_image (GdkDrawable    *drawable,
 	}
     }
 
-  gdk_error_trap_pop ();
+  __gdk_error_trap_pop ();
 
  out:
   
   if (have_grab)
     {				
-      gdk_x11_display_ungrab (display);
+      __gdk_x11_display_ungrab (display);
       have_grab = FALSE;
     }
   
@@ -637,7 +637,7 @@ _gdk_x11_copy_to_image (GdkDrawable    *drawable,
       /* We "succeeded", but could get no content for the image so return junk */
       image = _gdk_image_new_for_depth (impl->screen, GDK_IMAGE_NORMAL, 
 					visual, width, height,
-					gdk_drawable_get_depth (drawable));
+					__gdk_drawable_get_depth (drawable));
     }
       
   return image;
@@ -708,7 +708,7 @@ gdk_x11_image_destroy (GdkImage *image)
 #ifdef USE_SHM
 	  if (!private->screen->closed)
 	    {
-	      gdk_display_sync (GDK_SCREEN_DISPLAY (private->screen));
+	      __gdk_display_sync (GDK_SCREEN_DISPLAY (private->screen));
 
 	      if (private->shm_pixmap)
 		XFreePixmap (GDK_SCREEN_XDISPLAY (private->screen), private->shm_pixmap);

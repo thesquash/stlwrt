@@ -147,11 +147,11 @@ gdk_device_dispose (GObject *object)
 GList *
 gdk_devices_list (void)
 {
-  return gdk_display_list_devices (gdk_display_get_default ());
+  return __gdk_display_list_devices (__gdk_display_get_default ());
 }
 
 /**
- * gdk_display_list_devices:
+ * __gdk_display_list_devices:
  * @display: a #GdkDisplay
  *
  * Returns the list of available input devices attached to @display.
@@ -162,7 +162,7 @@ gdk_devices_list (void)
  * Since: 2.2
  **/
 GList *
-gdk_display_list_devices (GdkDisplay *display)
+__gdk_display_list_devices (GdkDisplay *display)
 {
   g_return_val_if_fail (GDK_IS_DISPLAY (display), NULL);
 
@@ -353,7 +353,7 @@ gdk_device_get_n_axes (GdkDevice *device)
 }
 
 void
-gdk_device_set_axis_use (GdkDevice   *device,
+__gdk_device_set_axis_use (GdkDevice   *device,
 			 guint        index,
 			 GdkAxisUse   use)
 {
@@ -478,7 +478,7 @@ gdk_device_get_history  (GdkDevice         *device,
             }
           else
             {
-              gdk_device_free_history (coords, tmp_n_events);
+              __gdk_device_free_history (coords, tmp_n_events);
               coords = NULL;
             }
 	}
@@ -492,7 +492,7 @@ gdk_device_get_history  (GdkDevice         *device,
   if (events)
     *events = coords;
   else if (coords)
-    gdk_device_free_history (coords, tmp_n_events);
+    __gdk_device_free_history (coords, tmp_n_events);
 
   return result;
 }
@@ -512,14 +512,14 @@ _gdk_device_allocate_history (GdkDevice *device,
 }
 
 /**
- * gdk_device_free_history:
+ * __gdk_device_free_history:
  * @events: (inout) (transfer none): an array of #GdkTimeCoord.
  * @n_events: the length of the array.
  *
  * Frees an array of #GdkTimeCoord that was returned by gdk_device_get_history().
  */
 void
-gdk_device_free_history (GdkTimeCoord **events,
+__gdk_device_free_history (GdkTimeCoord **events,
 			 gint           n_events)
 {
   gint i;

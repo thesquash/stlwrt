@@ -202,7 +202,7 @@ gdk_window_impl_x11_finalize (GObject *object)
   g_free (window_impl->toplevel);
 
   if (window_impl->cursor)
-    gdk_cursor_unref (window_impl->cursor);
+    __gdk_cursor_unref (window_impl->cursor);
 
   G_OBJECT_CLASS (gdk_window_impl_x11_parent_class)->finalize (object);
 }
@@ -371,9 +371,9 @@ gdk_window_impl_x11_get_colormap (GdkDrawable *drawable)
                             drawable_impl->xid,
                             &window_attributes);
 
-      visual = gdk_x11_screen_lookup_visual (drawable_impl->screen,
+      visual = __gdk_x11_screen_lookup_visual (drawable_impl->screen,
 					     window_attributes.visual->visualid);
-      drawable_impl->colormap = gdk_x11_colormap_foreign_new (visual,
+      drawable_impl->colormap = __gdk_x11_colormap_foreign_new (visual,
 							      window_attributes.colormap);
     }
   
@@ -420,8 +420,8 @@ _gdk_windowing_window_init (GdkScreen * screen)
 
   g_assert (screen_x11->root_window == NULL);
 
-  gdk_screen_set_default_colormap (screen,
-				   gdk_screen_get_system_colormap (screen));
+  __gdk_screen_set_default_colormap (screen,
+				   __gdk_screen_get_system_colormap (screen));
 
   screen_x11->root_window = g_object_new (GDK_TYPE_WINDOW, NULL);
 
@@ -434,7 +434,7 @@ _gdk_windowing_window_init (GdkScreen * screen)
   draw_impl->screen = screen;
   draw_impl->xid = screen_x11->xroot_window;
   draw_impl->wrapper = GDK_DRAWABLE (private);
-  draw_impl->colormap = gdk_screen_get_system_colormap (screen);
+  draw_impl->colormap = __gdk_screen_get_system_colormap (screen);
   g_object_ref (draw_impl->colormap);
   
   private->window_type = GDK_WINDOW_ROOT;
@@ -461,17 +461,17 @@ _gdk_windowing_window_init (GdkScreen * screen)
 static void
 set_wm_protocols (GdkWindow *window)
 {
-  GdkDisplay *display = gdk_drawable_get_display (window);
+  GdkDisplay *display = __gdk_drawable_get_display (window);
   Atom protocols[4];
   int n = 0;
   
-  protocols[n++] = gdk_x11_get_xatom_by_name_for_display (display, "WM_DELETE_WINDOW");
-  protocols[n++] = gdk_x11_get_xatom_by_name_for_display (display, "WM_TAKE_FOCUS");
-  protocols[n++] = gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_PING");
+  protocols[n++] = __gdk_x11_get_xatom_by_name_for_display (display, "WM_DELETE_WINDOW");
+  protocols[n++] = __gdk_x11_get_xatom_by_name_for_display (display, "WM_TAKE_FOCUS");
+  protocols[n++] = __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_PING");
 
 #ifdef HAVE_XSYNC
   if (GDK_DISPLAY_X11 (display)->use_sync)
-    protocols[n++] = gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_SYNC_REQUEST");
+    protocols[n++] = __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_SYNC_REQUEST");
 #endif
   
   XSetWMProtocols (GDK_DISPLAY_XDISPLAY (display), GDK_WINDOW_XID (window), protocols, n);
@@ -547,7 +547,7 @@ ensure_sync_counter (GdkWindow *window)
 	  
 	  toplevel->update_counter = XSyncCreateCounter (xdisplay, value);
 	  
-	  atom = gdk_x11_get_xatom_by_name_for_display (display,
+	  atom = __gdk_x11_get_xatom_by_name_for_display (display,
 							"_NET_WM_SYNC_REQUEST_COUNTER");
 	  
 	  XChangeProperty (xdisplay, GDK_WINDOW_XID (window),
@@ -606,7 +606,7 @@ setup_toplevel_window (GdkWindow *window,
   
   pid = getpid ();
   XChangeProperty (xdisplay, xid,
-		   gdk_x11_get_xatom_by_name_for_display (screen_x11->display, "_NET_WM_PID"),
+		   __gdk_x11_get_xatom_by_name_for_display (screen_x11->display, "_NET_WM_PID"),
 		   XA_CARDINAL, 32,
 		   PropModeReplace,
 		   (guchar *)&pid, 1);
@@ -615,13 +615,13 @@ setup_toplevel_window (GdkWindow *window,
   if (!leader_window)
     leader_window = xid;
   XChangeProperty (xdisplay, xid, 
-		   gdk_x11_get_xatom_by_name_for_display (screen_x11->display, "WM_CLIENT_LEADER"),
+		   __gdk_x11_get_xatom_by_name_for_display (screen_x11->display, "WM_CLIENT_LEADER"),
 		   XA_WINDOW, 32, PropModeReplace,
 		   (guchar *) &leader_window, 1);
 
   if (toplevel->focus_window != None)
     XChangeProperty (xdisplay, xid, 
-                     gdk_x11_get_xatom_by_name_for_display (screen_x11->display, "_NET_WM_USER_TIME_WINDOW"),
+                     __gdk_x11_get_xatom_by_name_for_display (screen_x11->display, "_NET_WM_USER_TIME_WINDOW"),
                      XA_WINDOW, 32, PropModeReplace,
                      (guchar *) &toplevel->focus_window, 1);
 
@@ -727,14 +727,14 @@ _gdk_window_impl_new (GdkWindow     *window,
         }
       else
 	{
-	  if ((((GdkVisualPrivate *)gdk_screen_get_system_visual (screen))->xvisual) ==  xvisual)
+	  if ((((GdkVisualPrivate *)__gdk_screen_get_system_visual (screen))->xvisual) ==  xvisual)
             {
-	      draw_impl->colormap = gdk_screen_get_system_colormap (screen);
+	      draw_impl->colormap = __gdk_screen_get_system_colormap (screen);
               g_object_ref (draw_impl->colormap);
             }
 	  else
             {
-              draw_impl->colormap = gdk_colormap_new (visual, FALSE);
+              draw_impl->colormap = __gdk_colormap_new (visual, FALSE);
             }
 	}
       
@@ -766,7 +766,7 @@ _gdk_window_impl_new (GdkWindow     *window,
   else
     {
       class = InputOnly;
-      draw_impl->colormap = gdk_screen_get_system_colormap (screen);
+      draw_impl->colormap = __gdk_screen_get_system_colormap (screen);
       g_object_ref (draw_impl->colormap);
     }
 
@@ -801,7 +801,7 @@ _gdk_window_impl_new (GdkWindow     *window,
       else
 	title = get_default_title ();
       
-      gdk_window_set_title (window, title);
+      __gdk_window_set_title (window, title);
       
       if (attributes_mask & GDK_WA_WMCLASS)
 	{
@@ -817,8 +817,8 @@ _gdk_window_impl_new (GdkWindow     *window,
 
     case GDK_WINDOW_CHILD:
       if (!private->input_only &&
-	  (draw_impl->colormap != gdk_screen_get_system_colormap (screen)) &&
-	  (draw_impl->colormap != gdk_drawable_get_colormap (gdk_window_get_toplevel (window))))
+	  (draw_impl->colormap != __gdk_screen_get_system_colormap (screen)) &&
+	  (draw_impl->colormap != __gdk_drawable_get_colormap (__gdk_window_get_toplevel (window))))
 	{
 	  GDK_NOTE (MISC, g_message ("adding colormap window\n"));
 	  gdk_window_add_colormap_windows (window);
@@ -830,7 +830,7 @@ _gdk_window_impl_new (GdkWindow     *window,
     }
 
   if (attributes_mask & GDK_WA_TYPE_HINT)
-    gdk_window_set_type_hint (window, attributes->type_hint);
+    __gdk_window_set_type_hint (window, attributes->type_hint);
 }
 
 static GdkEventMask
@@ -849,7 +849,7 @@ x_event_mask_to_gdk_event_mask (long mask)
 }
 
 /**
- * gdk_window_foreign_new_for_display:
+ * __gdk_window_foreign_new_for_display:
  * @display: the #GdkDisplay where the window handle comes from.
  * @anid: a native window handle.
  * 
@@ -867,18 +867,18 @@ x_event_mask_to_gdk_event_mask (long mask)
  *
  * Since: 2.2
  *
- * Deprecated:2.24: Use gdk_x11_window_foreign_new_for_display() or
+ * Deprecated:2.24: Use __gdk_x11_window_foreign_new_for_display() or
  *     equivalent backend-specific API instead
  **/
 GdkWindow *
-gdk_window_foreign_new_for_display (GdkDisplay     *display,
+__gdk_window_foreign_new_for_display (GdkDisplay     *display,
 				    GdkNativeWindow anid)
 {
-  return gdk_x11_window_foreign_new_for_display (display, anid);
+  return __gdk_x11_window_foreign_new_for_display (display, anid);
 }
 
 /**
- * gdk_x11_window_foreign_new_for_display:
+ * __gdk_x11_window_foreign_new_for_display:
  * @display: the #GdkDisplay where the window handle comes from.
  * @window: an XLib <type>Window</type>
  *
@@ -895,7 +895,7 @@ gdk_window_foreign_new_for_display (GdkDisplay     *display,
  * Since: 2.24
  */
 GdkWindow *
-gdk_x11_window_foreign_new_for_display (GdkDisplay *display,
+__gdk_x11_window_foreign_new_for_display (GdkDisplay *display,
                                         Window      window)
 {
   GdkWindow *win;
@@ -913,19 +913,19 @@ gdk_x11_window_foreign_new_for_display (GdkDisplay *display,
 
   display_x11 = GDK_DISPLAY_X11 (display);
 
-  if ((win = gdk_xid_table_lookup_for_display (display, window)) != NULL)
+  if ((win = __gdk_xid_table_lookup_for_display (display, window)) != NULL)
     return g_object_ref (win);
 
-  gdk_error_trap_push ();
+  __gdk_error_trap_push ();
   result = XGetWindowAttributes (display_x11->xdisplay, window, &attrs);
-  if (gdk_error_trap_pop () || !result)
+  if (__gdk_error_trap_pop () || !result)
     return NULL;
 
   /* FIXME: This is pretty expensive. Maybe the caller should supply
    *        the parent */
-  gdk_error_trap_push ();
+  __gdk_error_trap_push ();
   result = XQueryTree (display_x11->xdisplay, window, &root, &parent, &children, &nchildren);
-  if (gdk_error_trap_pop () || !result)
+  if (__gdk_error_trap_pop () || !result)
     return NULL;
 
   if (children)
@@ -942,10 +942,10 @@ gdk_x11_window_foreign_new_for_display (GdkDisplay *display,
   draw_impl->wrapper = GDK_DRAWABLE (win);
   draw_impl->screen = _gdk_x11_display_screen_for_xrootwin (display, root);
   
-  private->parent = gdk_xid_table_lookup_for_display (display, parent);
+  private->parent = __gdk_xid_table_lookup_for_display (display, parent);
   
   if (!private->parent || GDK_WINDOW_TYPE (private->parent) == GDK_WINDOW_FOREIGN)
-    private->parent = (GdkWindow *) gdk_screen_get_root_window (draw_impl->screen);
+    private->parent = (GdkWindow *) __gdk_screen_get_root_window (draw_impl->screen);
   
   private->parent->children = g_list_prepend (private->parent->children, win);
 
@@ -978,7 +978,7 @@ gdk_x11_window_foreign_new_for_display (GdkDisplay *display,
 }
 
 /**
- * gdk_window_lookup_for_display:
+ * __gdk_window_lookup_for_display:
  * @display: the #GdkDisplay corresponding to the window handle
  * @anid: a native window handle.
  *
@@ -992,17 +992,17 @@ gdk_x11_window_foreign_new_for_display (GdkDisplay *display,
  *
  * Since: 2.2
  *
- * Deprecated:2.24: Use gdk_x11_window_lookup_for_display() instead
+ * Deprecated:2.24: Use __gdk_x11_window_lookup_for_display() instead
  **/
 GdkWindow *
-gdk_window_lookup_for_display (GdkDisplay      *display,
+__gdk_window_lookup_for_display (GdkDisplay      *display,
                                GdkNativeWindow  anid)
 {
-  return gdk_x11_window_lookup_for_display (display, anid);
+  return __gdk_x11_window_lookup_for_display (display, anid);
 }
 
 /**
- * gdk_x11_window_lookup_for_display:
+ * __gdk_x11_window_lookup_for_display:
  * @display: the #GdkDisplay corresponding to the window handle
  * @window: an XLib <type>Window</type>
  *
@@ -1014,10 +1014,10 @@ gdk_window_lookup_for_display (GdkDisplay      *display,
  * Since: 2.24
  */
 GdkWindow *
-gdk_x11_window_lookup_for_display (GdkDisplay *display,
+__gdk_x11_window_lookup_for_display (GdkDisplay *display,
                                    Window       window)
 {
-  return (GdkWindow*) gdk_xid_table_lookup_for_display (display, window);
+  return (GdkWindow*) __gdk_xid_table_lookup_for_display (display, window);
 }
 
 /**
@@ -1032,13 +1032,13 @@ gdk_x11_window_lookup_for_display (GdkDisplay *display,
  * Return value: the #GdkWindow wrapper for the native window,
  *    or %NULL if there is none.
  *
- * Deprecated: 2.24: Use gdk_x11_window_lookup_for_display() or equivalent
+ * Deprecated: 2.24: Use __gdk_x11_window_lookup_for_display() or equivalent
  *    backend-specific functionality instead
  **/
 GdkWindow *
 gdk_window_lookup (GdkNativeWindow anid)
 {
-  return (GdkWindow*) gdk_xid_table_lookup (anid);
+  return (GdkWindow*) __gdk_xid_table_lookup (anid);
 }
 
 static void
@@ -1110,17 +1110,17 @@ _gdk_windowing_window_destroy_foreign (GdkWindow *window)
    */
   XClientMessageEvent xclient;
   
-  gdk_error_trap_push ();
-  gdk_window_hide (window);
-  gdk_window_reparent (window, NULL, 0, 0);
+  __gdk_error_trap_push ();
+  __gdk_window_hide (window);
+  __gdk_window_reparent (window, NULL, 0, 0);
   
   memset (&xclient, 0, sizeof (xclient));
   xclient.type = ClientMessage;
   xclient.window = GDK_WINDOW_XID (window);
-  xclient.message_type = gdk_x11_get_xatom_by_name_for_display (GDK_WINDOW_DISPLAY (window),
+  xclient.message_type = __gdk_x11_get_xatom_by_name_for_display (GDK_WINDOW_DISPLAY (window),
 							       "WM_PROTOCOLS");
   xclient.format = 32;
-  xclient.data.l[0] = gdk_x11_get_xatom_by_name_for_display (GDK_WINDOW_DISPLAY (window),
+  xclient.data.l[0] = __gdk_x11_get_xatom_by_name_for_display (GDK_WINDOW_DISPLAY (window),
 							    "WM_DELETE_WINDOW");
   xclient.data.l[1] = CurrentTime;
   xclient.data.l[2] = 0;
@@ -1130,16 +1130,16 @@ _gdk_windowing_window_destroy_foreign (GdkWindow *window)
   XSendEvent (GDK_WINDOW_XDISPLAY (window),
 	      GDK_WINDOW_XID (window),
 	      False, 0, (XEvent *)&xclient);
-  gdk_display_sync (GDK_WINDOW_DISPLAY (window));
-  gdk_error_trap_pop ();
+  __gdk_display_sync (GDK_WINDOW_DISPLAY (window));
+  __gdk_error_trap_pop ();
 }
 
 static GdkWindow *
 get_root (GdkWindow *window)
 {
-  GdkScreen *screen = gdk_drawable_get_screen (window);
+  GdkScreen *screen = __gdk_drawable_get_screen (window);
 
-  return gdk_screen_get_root_window (screen);
+  return __gdk_screen_get_root_window (screen);
 }
 
 /* This function is called when the XWindow is really gone.
@@ -1255,10 +1255,10 @@ set_initial_hints (GdkWindow *window)
 
   if (private->state & GDK_WINDOW_STATE_MAXIMIZED)
     {
-      atoms[i] = gdk_x11_get_xatom_by_name_for_display (display,
+      atoms[i] = __gdk_x11_get_xatom_by_name_for_display (display,
 							"_NET_WM_STATE_MAXIMIZED_VERT");
       ++i;
-      atoms[i] = gdk_x11_get_xatom_by_name_for_display (display,
+      atoms[i] = __gdk_x11_get_xatom_by_name_for_display (display,
 							"_NET_WM_STATE_MAXIMIZED_HORZ");
       ++i;
       toplevel->have_maxhorz = toplevel->have_maxvert = TRUE;
@@ -1266,21 +1266,21 @@ set_initial_hints (GdkWindow *window)
 
   if (private->state & GDK_WINDOW_STATE_ABOVE)
     {
-      atoms[i] = gdk_x11_get_xatom_by_name_for_display (display,
+      atoms[i] = __gdk_x11_get_xatom_by_name_for_display (display,
 							"_NET_WM_STATE_ABOVE");
       ++i;
     }
   
   if (private->state & GDK_WINDOW_STATE_BELOW)
     {
-      atoms[i] = gdk_x11_get_xatom_by_name_for_display (display,
+      atoms[i] = __gdk_x11_get_xatom_by_name_for_display (display,
 							"_NET_WM_STATE_BELOW");
       ++i;
     }
   
   if (private->state & GDK_WINDOW_STATE_STICKY)
     {
-      atoms[i] = gdk_x11_get_xatom_by_name_for_display (display,
+      atoms[i] = __gdk_x11_get_xatom_by_name_for_display (display,
 							"_NET_WM_STATE_STICKY");
       ++i;
       toplevel->have_sticky = TRUE;
@@ -1288,7 +1288,7 @@ set_initial_hints (GdkWindow *window)
 
   if (private->state & GDK_WINDOW_STATE_FULLSCREEN)
     {
-      atoms[i] = gdk_x11_get_xatom_by_name_for_display (display,
+      atoms[i] = __gdk_x11_get_xatom_by_name_for_display (display,
 							"_NET_WM_STATE_FULLSCREEN");
       ++i;
       toplevel->have_fullscreen = TRUE;
@@ -1296,28 +1296,28 @@ set_initial_hints (GdkWindow *window)
 
   if (private->modal_hint)
     {
-      atoms[i] = gdk_x11_get_xatom_by_name_for_display (display,
+      atoms[i] = __gdk_x11_get_xatom_by_name_for_display (display,
 							"_NET_WM_STATE_MODAL");
       ++i;
     }
 
   if (toplevel->skip_taskbar_hint)
     {
-      atoms[i] = gdk_x11_get_xatom_by_name_for_display (display,
+      atoms[i] = __gdk_x11_get_xatom_by_name_for_display (display,
 							"_NET_WM_STATE_SKIP_TASKBAR");
       ++i;
     }
 
   if (toplevel->skip_pager_hint)
     {
-      atoms[i] = gdk_x11_get_xatom_by_name_for_display (display,
+      atoms[i] = __gdk_x11_get_xatom_by_name_for_display (display,
 							"_NET_WM_STATE_SKIP_PAGER");
       ++i;
     }
 
   if (private->state & GDK_WINDOW_STATE_ICONIFIED)
     {
-      atoms[i] = gdk_x11_get_xatom_by_name_for_display (display,
+      atoms[i] = __gdk_x11_get_xatom_by_name_for_display (display,
 							"_NET_WM_STATE_HIDDEN");
       ++i;
       toplevel->have_hidden = TRUE;
@@ -1327,7 +1327,7 @@ set_initial_hints (GdkWindow *window)
     {
       XChangeProperty (xdisplay,
                        xwindow,
-		       gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_STATE"),
+		       __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_STATE"),
                        XA_ATOM, 32, PropModeReplace,
                        (guchar*) atoms, i);
     }
@@ -1335,7 +1335,7 @@ set_initial_hints (GdkWindow *window)
     {
       XDeleteProperty (xdisplay,
                        xwindow,
-		       gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_STATE"));
+		       __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_STATE"));
     }
 
   if (private->state & GDK_WINDOW_STATE_STICKY)
@@ -1343,7 +1343,7 @@ set_initial_hints (GdkWindow *window)
       atoms[0] = 0xFFFFFFFF;
       XChangeProperty (xdisplay,
                        xwindow,
-		       gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_DESKTOP"),
+		       __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_DESKTOP"),
                        XA_CARDINAL, 32, PropModeReplace,
                        (guchar*) atoms, 1);
       toplevel->on_all_desktops = TRUE;
@@ -1352,7 +1352,7 @@ set_initial_hints (GdkWindow *window)
     {
       XDeleteProperty (xdisplay,
                        xwindow,
-		       gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_DESKTOP"));
+		       __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_DESKTOP"));
     }
 
   toplevel->map_serial = NextRequest (xdisplay);
@@ -1375,7 +1375,7 @@ gdk_window_x11_show (GdkWindow *window, gboolean already_mapped)
       
   if (WINDOW_IS_TOPLEVEL (window))
     {
-      display = gdk_drawable_get_display (window);
+      display = __gdk_drawable_get_display (window);
       display_x11 = GDK_DISPLAY_X11 (display);
       toplevel = _gdk_x11_window_get_toplevel (window);
       
@@ -1388,7 +1388,7 @@ gdk_window_x11_show (GdkWindow *window, gboolean already_mapped)
   unset_bg = !private->input_only &&
     (private->window_type == GDK_WINDOW_CHILD ||
      impl->override_redirect) &&
-    gdk_window_is_viewable (window);
+    __gdk_window_is_viewable (window);
   
   if (unset_bg)
     _gdk_x11_window_tmp_unset_bg (window, TRUE);
@@ -1439,10 +1439,10 @@ post_unmap (GdkWindow *window)
 	{
 	  GdkRectangle invalid_rect;
       
-	  gdk_window_get_position (window, &invalid_rect.x, &invalid_rect.y);
-	  gdk_drawable_get_size (GDK_DRAWABLE (window),
+	  __gdk_window_get_position (window, &invalid_rect.x, &invalid_rect.y);
+	  __gdk_drawable_get_size (GDK_DRAWABLE (window),
 				 &invalid_rect.width, &invalid_rect.height);
-	  gdk_window_invalidate_rect ((GdkWindow *)private->parent,
+	  __gdk_window_invalidate_rect ((GdkWindow *)private->parent,
 				      &invalid_rect, TRUE);
 	}
     }
@@ -1468,7 +1468,7 @@ gdk_window_x11_hide (GdkWindow *window)
     case GDK_WINDOW_TOPLEVEL:
     case GDK_WINDOW_DIALOG:
     case GDK_WINDOW_TEMP: /* ? */
-      gdk_window_withdraw (window);
+      __gdk_window_withdraw (window);
       return;
       
     case GDK_WINDOW_FOREIGN:
@@ -1669,7 +1669,7 @@ gdk_window_x11_reparent (GdkWindow *window,
   _gdk_x11_window_tmp_reset_bg (window, TRUE);
 
   if (GDK_WINDOW_TYPE (new_parent) == GDK_WINDOW_FOREIGN)
-    new_parent = gdk_screen_get_root_window (GDK_WINDOW_SCREEN (window));
+    new_parent = __gdk_screen_get_root_window (GDK_WINDOW_SCREEN (window));
 
   window_private->parent = parent_private;
 
@@ -1728,7 +1728,7 @@ gdk_window_x11_clear_region (GdkWindow *window,
   GdkRectangle *rectangles;
   int n_rectangles, i;
 
-  gdk_region_get_rectangles  (region,
+  __gdk_region_get_rectangles  (region,
 			      &rectangles,
 			      &n_rectangles);
 
@@ -1780,7 +1780,7 @@ gdk_window_x11_restack_toplevel (GdkWindow *window,
   changes.stack_mode = above ? Above : Below;
   XReconfigureWMWindow (GDK_WINDOW_XDISPLAY (window),
 			GDK_WINDOW_XID (window),
-			gdk_screen_get_number (GDK_WINDOW_SCREEN (window)),
+			__gdk_screen_get_number (GDK_WINDOW_SCREEN (window)),
 			CWStackMode | CWSibling, &changes);
 }
 
@@ -1821,8 +1821,8 @@ gdk_x11_window_move_to_current_desktop (GdkWindow *window)
 static void
 move_to_current_desktop (GdkWindow *window)
 {
-  if (gdk_x11_screen_supports_net_wm_hint (GDK_WINDOW_SCREEN (window),
-					   gdk_atom_intern_static_string ("_NET_WM_DESKTOP")))
+  if (__gdk_x11_screen_supports_net_wm_hint (GDK_WINDOW_SCREEN (window),
+					   __gdk_atom_intern_static_string ("_NET_WM_DESKTOP")))
     {
       Atom type;
       gint format;
@@ -1832,14 +1832,14 @@ move_to_current_desktop (GdkWindow *window)
       gulong *current_desktop;
       GdkDisplay *display;
       
-      display = gdk_drawable_get_display (window);
+      display = __gdk_drawable_get_display (window);
 
       /* Get current desktop, then set it; this is a race, but not
        * one that matters much in practice.
        */
       XGetWindowProperty (GDK_DISPLAY_XDISPLAY (display), 
                           GDK_WINDOW_XROOTWIN (window),
-			  gdk_x11_get_xatom_by_name_for_display (display, "_NET_CURRENT_DESKTOP"),
+			  __gdk_x11_get_xatom_by_name_for_display (display, "_NET_CURRENT_DESKTOP"),
                           0, G_MAXLONG,
                           False, XA_CARDINAL, &type, &format, &nitems,
                           &bytes_after, &data);
@@ -1854,7 +1854,7 @@ move_to_current_desktop (GdkWindow *window)
           xclient.serial = 0;
           xclient.send_event = True;
           xclient.window = GDK_WINDOW_XWINDOW (window);
-	  xclient.message_type = gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_DESKTOP");
+	  xclient.message_type = __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_DESKTOP");
           xclient.format = 32;
 
           xclient.data.l[0] = *current_desktop;
@@ -1897,15 +1897,15 @@ gdk_window_focus (GdkWindow *window,
 
   display = GDK_WINDOW_DISPLAY (window);
 
-  if (gdk_x11_screen_supports_net_wm_hint (GDK_WINDOW_SCREEN (window),
-					   gdk_atom_intern_static_string ("_NET_ACTIVE_WINDOW")))
+  if (__gdk_x11_screen_supports_net_wm_hint (GDK_WINDOW_SCREEN (window),
+					   __gdk_atom_intern_static_string ("_NET_ACTIVE_WINDOW")))
     {
       XClientMessageEvent xclient;
 
       memset (&xclient, 0, sizeof (xclient));
       xclient.type = ClientMessage;
       xclient.window = GDK_WINDOW_XWINDOW (window);
-      xclient.message_type = gdk_x11_get_xatom_by_name_for_display (display,
+      xclient.message_type = __gdk_x11_get_xatom_by_name_for_display (display,
 									"_NET_ACTIVE_WINDOW");
       xclient.format = 32;
       xclient.data.l[0] = 1; /* requestor type; we're an app */
@@ -1998,7 +1998,7 @@ gdk_window_set_hints (GdkWindow *window,
 }
 
 /**
- * gdk_window_set_type_hint:
+ * __gdk_window_set_type_hint:
  * @window: A toplevel #GdkWindow
  * @hint: A hint of the function this window will have
  *
@@ -2010,7 +2010,7 @@ gdk_window_set_hints (GdkWindow *window,
  * The hint must be set before the window is mapped.
  **/
 void
-gdk_window_set_type_hint (GdkWindow        *window,
+__gdk_window_set_type_hint (GdkWindow        *window,
 			  GdkWindowTypeHint hint)
 {
   GdkDisplay *display;
@@ -2020,59 +2020,59 @@ gdk_window_set_type_hint (GdkWindow        *window,
       !WINDOW_IS_TOPLEVEL_OR_FOREIGN (window))
     return;
 
-  display = gdk_drawable_get_display (window);
+  display = __gdk_drawable_get_display (window);
 
   switch (hint)
     {
     case GDK_WINDOW_TYPE_HINT_DIALOG:
-      atom = gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_DIALOG");
+      atom = __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_DIALOG");
       break;
     case GDK_WINDOW_TYPE_HINT_MENU:
-      atom = gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_MENU");
+      atom = __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_MENU");
       break;
     case GDK_WINDOW_TYPE_HINT_TOOLBAR:
-      atom = gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_TOOLBAR");
+      atom = __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_TOOLBAR");
       break;
     case GDK_WINDOW_TYPE_HINT_UTILITY:
-      atom = gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_UTILITY");
+      atom = __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_UTILITY");
       break;
     case GDK_WINDOW_TYPE_HINT_SPLASHSCREEN:
-      atom = gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_SPLASH");
+      atom = __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_SPLASH");
       break;
     case GDK_WINDOW_TYPE_HINT_DOCK:
-      atom = gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_DOCK");
+      atom = __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_DOCK");
       break;
     case GDK_WINDOW_TYPE_HINT_DESKTOP:
-      atom = gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_DESKTOP");
+      atom = __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_DESKTOP");
       break;
     case GDK_WINDOW_TYPE_HINT_DROPDOWN_MENU:
-      atom = gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_DROPDOWN_MENU");
+      atom = __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_DROPDOWN_MENU");
       break;
     case GDK_WINDOW_TYPE_HINT_POPUP_MENU:
-      atom = gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_POPUP_MENU");
+      atom = __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_POPUP_MENU");
       break;
     case GDK_WINDOW_TYPE_HINT_TOOLTIP:
-      atom = gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_TOOLTIP");
+      atom = __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_TOOLTIP");
       break;
     case GDK_WINDOW_TYPE_HINT_NOTIFICATION:
-      atom = gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_NOTIFICATION");
+      atom = __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_NOTIFICATION");
       break;
     case GDK_WINDOW_TYPE_HINT_COMBO:
-      atom = gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_COMBO");
+      atom = __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_COMBO");
       break;
     case GDK_WINDOW_TYPE_HINT_DND:
-      atom = gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_DND");
+      atom = __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_DND");
       break;
     default:
-      g_warning ("Unknown hint %d passed to gdk_window_set_type_hint", hint);
+      g_warning ("Unknown hint %d passed to __gdk_window_set_type_hint", hint);
       /* Fall thru */
     case GDK_WINDOW_TYPE_HINT_NORMAL:
-      atom = gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_NORMAL");
+      atom = __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_NORMAL");
       break;
     }
 
   XChangeProperty (GDK_DISPLAY_XDISPLAY (display), GDK_WINDOW_XID (window),
-		   gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE"),
+		   __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE"),
 		   XA_ATOM, 32, PropModeReplace,
 		   (guchar *)&atom, 1);
 }
@@ -2106,10 +2106,10 @@ gdk_window_get_type_hint (GdkWindow *window)
 
   type = GDK_WINDOW_TYPE_HINT_NORMAL;
 
-  display = gdk_drawable_get_display (window);
+  display = __gdk_drawable_get_display (window);
 
   if (XGetWindowProperty (GDK_DISPLAY_XDISPLAY (display), GDK_WINDOW_XID (window),
-                          gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE"),
+                          __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE"),
                           0, G_MAXLONG, False, XA_ATOM, &type_return,
                           &format_return, &nitems_return, &bytes_after_return,
                           &data) == Success)
@@ -2119,31 +2119,31 @@ gdk_window_get_type_hint (GdkWindow *window)
         {
           Atom atom = *(Atom*)data;
 
-          if (atom == gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_DIALOG"))
+          if (atom == __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_DIALOG"))
             type = GDK_WINDOW_TYPE_HINT_DIALOG;
-          else if (atom == gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_MENU"))
+          else if (atom == __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_MENU"))
             type = GDK_WINDOW_TYPE_HINT_MENU;
-          else if (atom == gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_TOOLBAR"))
+          else if (atom == __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_TOOLBAR"))
             type = GDK_WINDOW_TYPE_HINT_TOOLBAR;
-          else if (atom == gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_UTILITY"))
+          else if (atom == __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_UTILITY"))
             type = GDK_WINDOW_TYPE_HINT_UTILITY;
-          else if (atom == gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_SPLASH"))
+          else if (atom == __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_SPLASH"))
             type = GDK_WINDOW_TYPE_HINT_SPLASHSCREEN;
-          else if (atom == gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_DOCK"))
+          else if (atom == __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_DOCK"))
             type = GDK_WINDOW_TYPE_HINT_DOCK;
-          else if (atom == gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_DESKTOP"))
+          else if (atom == __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_DESKTOP"))
             type = GDK_WINDOW_TYPE_HINT_DESKTOP;
-	  else if (atom == gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_DROPDOWN_MENU"))
+	  else if (atom == __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_DROPDOWN_MENU"))
 	    type = GDK_WINDOW_TYPE_HINT_DROPDOWN_MENU;
-	  else if (atom == gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_POPUP_MENU"))
+	  else if (atom == __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_POPUP_MENU"))
 	    type = GDK_WINDOW_TYPE_HINT_POPUP_MENU;
-	  else if (atom == gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_TOOLTIP"))
+	  else if (atom == __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_TOOLTIP"))
 	    type = GDK_WINDOW_TYPE_HINT_TOOLTIP;
-	  else if (atom == gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_NOTIFICATION"))
+	  else if (atom == __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_NOTIFICATION"))
 	    type = GDK_WINDOW_TYPE_HINT_NOTIFICATION;
-	  else if (atom == gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_COMBO"))
+	  else if (atom == __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_COMBO"))
 	    type = GDK_WINDOW_TYPE_HINT_COMBO;
-	  else if (atom == gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_DND"))
+	  else if (atom == __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_TYPE_DND"))
 	    type = GDK_WINDOW_TYPE_HINT_DND;
         }
 
@@ -2170,11 +2170,11 @@ gdk_wmspec_change_state (gboolean   add,
   memset (&xclient, 0, sizeof (xclient));
   xclient.type = ClientMessage;
   xclient.window = GDK_WINDOW_XID (window);
-  xclient.message_type = gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_STATE");
+  xclient.message_type = __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_STATE");
   xclient.format = 32;
   xclient.data.l[0] = add ? _NET_WM_STATE_ADD : _NET_WM_STATE_REMOVE;
-  xclient.data.l[1] = gdk_x11_atom_to_xatom_for_display (display, state1);
-  xclient.data.l[2] = gdk_x11_atom_to_xatom_for_display (display, state2);
+  xclient.data.l[1] = __gdk_x11_atom_to_xatom_for_display (display, state1);
+  xclient.data.l[2] = __gdk_x11_atom_to_xatom_for_display (display, state2);
   xclient.data.l[3] = 0;
   xclient.data.l[4] = 0;
   
@@ -2212,7 +2212,7 @@ gdk_window_set_modal_hint (GdkWindow *window,
 
   if (GDK_WINDOW_IS_MAPPED (window))
     gdk_wmspec_change_state (modal, window,
-			     gdk_atom_intern_static_string ("_NET_WM_STATE_MODAL"), 
+			     __gdk_atom_intern_static_string ("_NET_WM_STATE_MODAL"), 
 			     GDK_NONE);
 }
 
@@ -2223,7 +2223,7 @@ gdk_window_set_modal_hint (GdkWindow *window,
  * 
  * Toggles whether a window should appear in a task list or window
  * list. If a window's semantic type as specified with
- * gdk_window_set_type_hint() already fully describes the window, this
+ * __gdk_window_set_type_hint() already fully describes the window, this
  * function should <emphasis>not</emphasis> be called in addition, 
  * instead you should allow the window to be treated according to 
  * standard policy for its semantic type.
@@ -2247,7 +2247,7 @@ gdk_window_set_skip_taskbar_hint (GdkWindow *window,
 
   if (GDK_WINDOW_IS_MAPPED (window))
     gdk_wmspec_change_state (skips_taskbar, window,
-			     gdk_atom_intern_static_string ("_NET_WM_STATE_SKIP_TASKBAR"),
+			     __gdk_atom_intern_static_string ("_NET_WM_STATE_SKIP_TASKBAR"),
 			     GDK_NONE);
 }
 
@@ -2259,7 +2259,7 @@ gdk_window_set_skip_taskbar_hint (GdkWindow *window,
  * Toggles whether a window should appear in a pager (workspace
  * switcher, or other desktop utility program that displays a small
  * thumbnail representation of the windows on the desktop). If a
- * window's semantic type as specified with gdk_window_set_type_hint()
+ * window's semantic type as specified with __gdk_window_set_type_hint()
  * already fully describes the window, this function should 
  * <emphasis>not</emphasis> be called in addition, instead you should 
  * allow the window to be treated according to standard policy for 
@@ -2284,7 +2284,7 @@ gdk_window_set_skip_pager_hint (GdkWindow *window,
   
   if (GDK_WINDOW_IS_MAPPED (window))
     gdk_wmspec_change_state (skips_pager, window,
-			     gdk_atom_intern_static_string ("_NET_WM_STATE_SKIP_PAGER"), 
+			     __gdk_atom_intern_static_string ("_NET_WM_STATE_SKIP_PAGER"), 
 			     GDK_NONE);
 }
 
@@ -2332,7 +2332,7 @@ gdk_window_set_urgency_hint (GdkWindow *window,
  * will typically  (but is not required to) also constrain the
  * current size of the window to the provided values and
  * constrain programatic resizing via gdk_window_resize() or
- * gdk_window_move_resize().
+ * __gdk_window_move_resize().
  * 
  * Note that on X11, this effect has no effect on windows
  * of type %GDK_WINDOW_TEMP or windows where override redirect
@@ -2341,7 +2341,7 @@ gdk_window_set_urgency_hint (GdkWindow *window,
  * 
  * Since you can't count on the windowing system doing the
  * constraints for programmatic resizes, you should generally
- * call gdk_window_constrain_size() yourself to determine
+ * call __gdk_window_constrain_size() yourself to determine
  * appropriate sizes.
  *
  **/
@@ -2548,7 +2548,7 @@ set_text_property (GdkDisplay  *display,
   if (utf8_is_latin1 (utf8_str))
     {
       prop_type = XA_STRING;
-      prop_text = gdk_utf8_to_string_target (utf8_str);
+      prop_text = __gdk_utf8_to_string_target (utf8_str);
       prop_length = prop_text ? strlen (prop_text) : 0;
       prop_format = 8;
       is_compound_text = FALSE;
@@ -2557,10 +2557,10 @@ set_text_property (GdkDisplay  *display,
     {
       GdkAtom gdk_type;
       
-      gdk_utf8_to_compound_text_for_display (display,
+      __gdk_utf8_to_compound_text_for_display (display,
 					     utf8_str, &gdk_type, &prop_format,
 					     (guchar **)&prop_text, &prop_length);
-      prop_type = gdk_x11_atom_to_xatom_for_display (display, gdk_type);
+      prop_type = __gdk_x11_atom_to_xatom_for_display (display, gdk_type);
       is_compound_text = TRUE;
     }
 
@@ -2574,7 +2574,7 @@ set_text_property (GdkDisplay  *display,
 		       prop_length);
 
       if (is_compound_text)
-	gdk_free_compound_text ((guchar *)prop_text);
+	__gdk_free_compound_text ((guchar *)prop_text);
       else
 	g_free (prop_text);
     }
@@ -2588,17 +2588,17 @@ set_wm_name (GdkDisplay  *display,
 	     const gchar *name)
 {
   XChangeProperty (GDK_DISPLAY_XDISPLAY (display), xwindow,
-		   gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_NAME"),
-		   gdk_x11_get_xatom_by_name_for_display (display, "UTF8_STRING"), 8,
+		   __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_NAME"),
+		   __gdk_x11_get_xatom_by_name_for_display (display, "UTF8_STRING"), 8,
 		   PropModeReplace, (guchar *)name, strlen (name));
   
   set_text_property (display, xwindow,
-		     gdk_x11_get_xatom_by_name_for_display (display, "WM_NAME"),
+		     __gdk_x11_get_xatom_by_name_for_display (display, "WM_NAME"),
 		     name);
 }
 
 /**
- * gdk_window_set_title:
+ * __gdk_window_set_title:
  * @window: a toplevel #GdkWindow
  * @title: title of @window
  *
@@ -2609,7 +2609,7 @@ set_wm_name (GdkDisplay  *display,
  * user-readable strings in GDK/GTK+). @title may not be %NULL.
  **/
 void
-gdk_window_set_title (GdkWindow   *window,
+__gdk_window_set_title (GdkWindow   *window,
 		      const gchar *title)
 {
   GdkDisplay *display;
@@ -2622,7 +2622,7 @@ gdk_window_set_title (GdkWindow   *window,
       !WINDOW_IS_TOPLEVEL_OR_FOREIGN (window))
     return;
   
-  display = gdk_drawable_get_display (window);
+  display = __gdk_drawable_get_display (window);
   xdisplay = GDK_DISPLAY_XDISPLAY (display);
   xwindow = GDK_WINDOW_XID (window);
 
@@ -2631,12 +2631,12 @@ gdk_window_set_title (GdkWindow   *window,
   if (!gdk_window_icon_name_set (window))
     {
       XChangeProperty (xdisplay, xwindow,
-		       gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_ICON_NAME"),
-		       gdk_x11_get_xatom_by_name_for_display (display, "UTF8_STRING"), 8,
+		       __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_ICON_NAME"),
+		       __gdk_x11_get_xatom_by_name_for_display (display, "UTF8_STRING"), 8,
 		       PropModeReplace, (guchar *)title, strlen (title));
       
       set_text_property (display, xwindow,
-			 gdk_x11_get_xatom_by_name_for_display (display, "WM_ICON_NAME"),
+			 __gdk_x11_get_xatom_by_name_for_display (display, "WM_ICON_NAME"),
 			 title);
     }
 }
@@ -2666,7 +2666,7 @@ gdk_window_set_role (GdkWindow   *window,
 {
   GdkDisplay *display;
 
-  display = gdk_drawable_get_display (window);
+  display = __gdk_drawable_get_display (window);
 
   if (GDK_WINDOW_DESTROYED (window) ||
       !WINDOW_IS_TOPLEVEL_OR_FOREIGN (window))
@@ -2674,11 +2674,11 @@ gdk_window_set_role (GdkWindow   *window,
 
   if (role)
     XChangeProperty (GDK_DISPLAY_XDISPLAY (display), GDK_WINDOW_XID (window),
-                     gdk_x11_get_xatom_by_name_for_display (display, "WM_WINDOW_ROLE"),
+                     __gdk_x11_get_xatom_by_name_for_display (display, "WM_WINDOW_ROLE"),
                      XA_STRING, 8, PropModeReplace, (guchar *)role, strlen (role));
   else
     XDeleteProperty (GDK_DISPLAY_XDISPLAY (display), GDK_WINDOW_XID (window),
-                     gdk_x11_get_xatom_by_name_for_display (display, "WM_WINDOW_ROLE"));
+                     __gdk_x11_get_xatom_by_name_for_display (display, "WM_WINDOW_ROLE"));
 }
 
 /**
@@ -2700,7 +2700,7 @@ gdk_window_set_startup_id (GdkWindow   *window,
 
   g_return_if_fail (GDK_IS_WINDOW (window));
 
-  display = gdk_drawable_get_display (window);
+  display = __gdk_drawable_get_display (window);
 
   if (GDK_WINDOW_DESTROYED (window) ||
       !WINDOW_IS_TOPLEVEL_OR_FOREIGN (window))
@@ -2708,12 +2708,12 @@ gdk_window_set_startup_id (GdkWindow   *window,
 
   if (startup_id)
     XChangeProperty (GDK_DISPLAY_XDISPLAY (display), GDK_WINDOW_XID (window),
-                     gdk_x11_get_xatom_by_name_for_display (display, "_NET_STARTUP_ID"), 
-                     gdk_x11_get_xatom_by_name_for_display (display, "UTF8_STRING"), 8,
+                     __gdk_x11_get_xatom_by_name_for_display (display, "_NET_STARTUP_ID"), 
+                     __gdk_x11_get_xatom_by_name_for_display (display, "UTF8_STRING"), 8,
                      PropModeReplace, (unsigned char *)startup_id, strlen (startup_id));
   else
     XDeleteProperty (GDK_DISPLAY_XDISPLAY (display), GDK_WINDOW_XID (window),
-                     gdk_x11_get_xatom_by_name_for_display (display, "_NET_STARTUP_ID"));
+                     __gdk_x11_get_xatom_by_name_for_display (display, "_NET_STARTUP_ID"));
 }
 
 /**
@@ -2781,7 +2781,7 @@ gdk_window_x11_set_cursor (GdkWindow *window,
 
   if (impl->cursor)
     {
-      gdk_cursor_unref (impl->cursor);
+      __gdk_cursor_unref (impl->cursor);
       impl->cursor = NULL;
     }
 
@@ -2800,7 +2800,7 @@ gdk_window_x11_set_cursor (GdkWindow *window,
 		     xcursor);
       
       if (cursor)
-	impl->cursor = gdk_cursor_ref (cursor);
+	impl->cursor = __gdk_cursor_ref (cursor);
     }
 }
 
@@ -2892,7 +2892,7 @@ gdk_window_x11_get_deskrelative_origin (GdkWindow *window,
   gulong number_return, bytes_after_return;
   guchar *data_return;
   
-  atom = gdk_x11_get_xatom_by_name_for_display (GDK_WINDOW_DISPLAY (window),
+  atom = __gdk_x11_get_xatom_by_name_for_display (GDK_WINDOW_DISPLAY (window),
 						"ENLIGHTENMENT_DESKTOP");
   win = GDK_WINDOW_XID (window);
   
@@ -2948,7 +2948,7 @@ gdk_window_get_root_origin (GdkWindow *window,
 {
   GdkRectangle rect;
 
-  gdk_window_get_frame_extents (window, &rect);
+  __gdk_window_get_frame_extents (window, &rect);
 
   if (x)
     *x = rect.x;
@@ -2958,18 +2958,18 @@ gdk_window_get_root_origin (GdkWindow *window,
 }
 
 /**
- * gdk_window_get_frame_extents:
+ * __gdk_window_get_frame_extents:
  * @window: a toplevel #GdkWindow
  * @rect: rectangle to fill with bounding box of the window frame
  *
  * Obtains the bounding box of the window, including window manager
  * titlebar/borders if any. The frame position is given in root window
  * coordinates. To get the position of the window itself (rather than
- * the frame) in root window coordinates, use gdk_window_get_origin().
+ * the frame) in root window coordinates, use __gdk_window_get_origin().
  * 
  **/
 void
-gdk_window_get_frame_extents (GdkWindow    *window,
+__gdk_window_get_frame_extents (GdkWindow    *window,
                               GdkRectangle *rect)
 {
   GdkDisplay *display;
@@ -3008,7 +3008,7 @@ gdk_window_get_frame_extents (GdkWindow    *window,
   /* Refine our fallback answer a bit using local information */
   rect->x = private->x;
   rect->y = private->y;
-  gdk_drawable_get_size ((GdkDrawable *)private, &rect->width, &rect->height);
+  __gdk_drawable_get_size ((GdkDrawable *)private, &rect->width, &rect->height);
 
   impl = GDK_WINDOW_IMPL_X11 (private->impl);
   if (GDK_WINDOW_DESTROYED (private) || impl->override_redirect)
@@ -3017,14 +3017,14 @@ gdk_window_get_frame_extents (GdkWindow    *window,
   nvroots = 0;
   vroots = NULL;
 
-  gdk_error_trap_push();
+  __gdk_error_trap_push();
   
-  display = gdk_drawable_get_display (window);
+  display = __gdk_drawable_get_display (window);
   xwindow = GDK_WINDOW_XID (window);
 
   /* first try: use _NET_FRAME_EXTENTS */
   if (XGetWindowProperty (GDK_DISPLAY_XDISPLAY (display), xwindow,
-			  gdk_x11_get_xatom_by_name_for_display (display,
+			  __gdk_x11_get_xatom_by_name_for_display (display,
 								 "_NET_FRAME_EXTENTS"),
 			  0, G_MAXLONG, False, XA_CARDINAL, &type_return,
 			  &format_return, &nitems_return, &bytes_after_return,
@@ -3071,7 +3071,7 @@ gdk_window_get_frame_extents (GdkWindow    *window,
   root = GDK_WINDOW_XROOTWIN (window);
 
   if (XGetWindowProperty (GDK_DISPLAY_XDISPLAY (display), root,
-			  gdk_x11_get_xatom_by_name_for_display (display, 
+			  __gdk_x11_get_xatom_by_name_for_display (display, 
 								 "_NET_VIRTUAL_ROOTS"),
 			  0, G_MAXLONG, False, XA_WINDOW, &type_return,
 			  &format_return, &nitems_return, &bytes_after_return,
@@ -3124,7 +3124,7 @@ gdk_window_get_frame_extents (GdkWindow    *window,
   if (vroots)
     XFree (vroots);
 
-  gdk_error_trap_pop ();
+  __gdk_error_trap_pop ();
 }
 
 void
@@ -3147,7 +3147,7 @@ _gdk_windowing_get_pointer (GdkDisplay       *display,
   if (display->closed)
     return;
 
-  default_screen = gdk_display_get_default_screen (display);
+  default_screen = __gdk_display_get_default_screen (display);
 
   xdisplay = GDK_SCREEN_XDISPLAY (default_screen);
   xwindow = GDK_SCREEN_XROOTWIN (default_screen);
@@ -3172,8 +3172,8 @@ _gdk_windowing_get_pointer (GdkDisplay       *display,
   
   if (root != None)
     {
-      GdkWindow *gdk_root = gdk_window_lookup_for_display (display, root);
-      *screen = gdk_drawable_get_screen (gdk_root);
+      GdkWindow *gdk_root = __gdk_window_lookup_for_display (display, root);
+      *screen = __gdk_drawable_get_screen (gdk_root);
     }
   
   *x = rootx;
@@ -3209,16 +3209,16 @@ gdk_window_x11_get_pointer (GdkWindow       *window,
 			     &root, &child, &rootx, &rooty, &winx, &winy, &xmask))
 	    {
 	      if (child)
-		return_val = gdk_window_lookup_for_display (GDK_WINDOW_DISPLAY (window), child) != NULL;
+		return_val = __gdk_window_lookup_for_display (GDK_WINDOW_DISPLAY (window), child) != NULL;
 	    }
 	}
       else
 	{
 	  GdkScreen *screen;
 	  int originx, originy;
-	  _gdk_windowing_get_pointer (gdk_drawable_get_display (window), &screen,
+	  _gdk_windowing_get_pointer (__gdk_drawable_get_display (window), &screen,
 				      &rootx, &rooty, &xmask);
-	  gdk_window_get_origin (window, &originx, &originy);
+	  __gdk_window_get_origin (window, &originx, &originy);
 	  winx = rootx - originx;
 	  winy = rooty - originy;
 	}
@@ -3262,7 +3262,7 @@ gdk_display_warp_pointer (GdkDisplay *display,
   Window dest;
 
   xdisplay = GDK_DISPLAY_XDISPLAY (display);
-  dest = GDK_WINDOW_XWINDOW (gdk_screen_get_root_window (screen));
+  dest = GDK_WINDOW_XWINDOW (__gdk_screen_get_root_window (screen));
 
   XWarpPointer (xdisplay, None, dest, 0, 0, 0, 0, x, y);  
 }
@@ -3285,7 +3285,7 @@ _gdk_windowing_window_at_pointer (GdkDisplay *display,
   int winx, winy;
   unsigned int xmask;
 
-  screen = gdk_display_get_default_screen (display);
+  screen = __gdk_display_get_default_screen (display);
   
   xwindow = GDK_SCREEN_XROOTWIN (screen);
   xdisplay = GDK_SCREEN_XDISPLAY (screen);
@@ -3295,7 +3295,7 @@ _gdk_windowing_window_at_pointer (GdkDisplay *display,
    * than we'll end up with inaccurate values for win_x, win_y
    * and the result.
    */
-  gdk_x11_display_grab (display);
+  __gdk_x11_display_grab (display);
   if (G_LIKELY (GDK_DISPLAY_X11 (display)->trusted_client)) 
     {
       XQueryPointer (xdisplay, xwindow,
@@ -3311,7 +3311,7 @@ _gdk_windowing_window_at_pointer (GdkDisplay *display,
 	  XQueryPointer (xdisplay, xwindow,
 			 &root, &xwindow, &rootx, &rooty, &winx, &winy, &xmask);
 	  if (get_toplevel && xwindow_last != root &&
-	      (window = gdk_window_lookup_for_display (display, xwindow_last)) != NULL &&
+	      (window = __gdk_window_lookup_for_display (display, xwindow_last)) != NULL &&
 	      GDK_WINDOW_TYPE (window) != GDK_WINDOW_FOREIGN)
 	    {
 	      xwindow = xwindow_last;
@@ -3326,25 +3326,25 @@ _gdk_windowing_window_at_pointer (GdkDisplay *display,
       Window pointer_window;
       
       pointer_window = None;
-      screens = gdk_display_get_n_screens (display);
+      screens = __gdk_display_get_n_screens (display);
       for (i = 0; i < screens; ++i) {
-	screen = gdk_display_get_screen (display, i);
-	toplevels = gdk_screen_get_toplevel_windows (screen);
+	screen = __gdk_display_get_screen (display, i);
+	toplevels = __gdk_screen_get_toplevel_windows (screen);
 	for (list = toplevels; list != NULL; list = g_list_next (list)) {
 	  window = GDK_WINDOW (list->data);
 	  xwindow = GDK_WINDOW_XWINDOW (window);
-	  gdk_error_trap_push ();
+	  __gdk_error_trap_push ();
 	  XQueryPointer (xdisplay, xwindow,
 			 &root, &child, &rootx, &rooty, &winx, &winy, &xmask);
-	  gdk_flush ();
-	  if (gdk_error_trap_pop ())
+	  __gdk_flush ();
+	  if (__gdk_error_trap_pop ())
 	    continue;
 	  if (child != None) 
 	    {
 	      pointer_window = child;
 	      break;
 	    }
-	  gdk_window_get_geometry (window, NULL, NULL, &width, &height, NULL);
+	  __gdk_window_get_geometry (window, NULL, NULL, &width, &height, NULL);
 	  if (winx >= 0 && winy >= 0 && winx < width && winy < height) 
 	    {
 	      /* A childless toplevel, or below another window? */
@@ -3374,22 +3374,22 @@ _gdk_windowing_window_at_pointer (GdkDisplay *display,
       while (xwindow)
 	{
 	  xwindow_last = xwindow;
-	  gdk_error_trap_push ();
+	  __gdk_error_trap_push ();
 	  XQueryPointer (xdisplay, xwindow,
 			 &root, &xwindow, &rootx, &rooty, &winx, &winy, &xmask);
-	  gdk_flush ();
-	  if (gdk_error_trap_pop ())
+	  __gdk_flush ();
+	  if (__gdk_error_trap_pop ())
 	    break;
 	  if (get_toplevel && xwindow_last != root &&
-	      (window = gdk_window_lookup_for_display (display, xwindow_last)) != NULL &&
+	      (window = __gdk_window_lookup_for_display (display, xwindow_last)) != NULL &&
 	      GDK_WINDOW_TYPE (window) != GDK_WINDOW_FOREIGN)
 	    break;
 	}
     }
   
-  gdk_x11_display_ungrab (display);
+  __gdk_x11_display_ungrab (display);
 
-  window = gdk_window_lookup_for_display (display, xwindow_last);
+  window = __gdk_window_lookup_for_display (display, xwindow_last);
   *win_x = window ? winx : -1;
   *win_y = window ? winy : -1;
   if (mask)
@@ -3456,7 +3456,7 @@ gdk_window_add_colormap_windows (GdkWindow *window)
   if (GDK_WINDOW_DESTROYED (window))
     return;
 
-  toplevel = gdk_window_get_toplevel (window);
+  toplevel = __gdk_window_get_toplevel (window);
   
   old_windows = NULL;
   if (!XGetWMColormapWindows (GDK_WINDOW_XDISPLAY (toplevel),
@@ -3502,8 +3502,8 @@ do_shape_combine_region (GdkWindow       *window,
     {
       /* Use NULL mask to unset the shape */
       if (shape == ShapeBounding
-	  ? gdk_display_supports_shapes (GDK_WINDOW_DISPLAY (window))
-	  : gdk_display_supports_input_shapes (GDK_WINDOW_DISPLAY (window)))
+	  ? __gdk_display_supports_shapes (GDK_WINDOW_DISPLAY (window))
+	  : __gdk_display_supports_input_shapes (GDK_WINDOW_DISPLAY (window)))
 	{
 	  if (shape == ShapeBounding)
 	    {
@@ -3526,8 +3526,8 @@ do_shape_combine_region (GdkWindow       *window,
     }
   
   if (shape == ShapeBounding
-      ? gdk_display_supports_shapes (GDK_WINDOW_DISPLAY (window))
-      : gdk_display_supports_input_shapes (GDK_WINDOW_DISPLAY (window)))
+      ? __gdk_display_supports_shapes (GDK_WINDOW_DISPLAY (window))
+      : __gdk_display_supports_input_shapes (GDK_WINDOW_DISPLAY (window)))
     {
       gint n_rects = 0;
       XRectangle *xrects = NULL;
@@ -3721,7 +3721,7 @@ gdk_x11_window_set_user_time (GdkWindow *window,
       !WINDOW_IS_TOPLEVEL_OR_FOREIGN (window))
     return;
 
-  display = gdk_drawable_get_display (window);
+  display = __gdk_drawable_get_display (window);
   display_x11 = GDK_DISPLAY_X11 (display);
   toplevel = _gdk_x11_window_get_toplevel (window);
 
@@ -3732,14 +3732,14 @@ gdk_x11_window_set_user_time (GdkWindow *window,
     }
 
   if (toplevel->focus_window != None &&
-      gdk_x11_screen_supports_net_wm_hint (GDK_WINDOW_SCREEN (window),
-                                           gdk_atom_intern_static_string ("_NET_WM_USER_TIME_WINDOW")))
+      __gdk_x11_screen_supports_net_wm_hint (GDK_WINDOW_SCREEN (window),
+                                           __gdk_atom_intern_static_string ("_NET_WM_USER_TIME_WINDOW")))
     xid = toplevel->focus_window;
   else
     xid = GDK_WINDOW_XID (window);
 
   XChangeProperty (GDK_DISPLAY_XDISPLAY (display), xid,
-                   gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_USER_TIME"),
+                   __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_USER_TIME"),
                    XA_CARDINAL, 32, PropModeReplace,
                    (guchar *)&timestamp_long, 1);
 
@@ -3793,7 +3793,7 @@ gdk_window_set_icon_list (GdkWindow *window,
       !WINDOW_IS_TOPLEVEL_OR_FOREIGN (window))
     return;
 
-  display = gdk_drawable_get_display (window);
+  display = __gdk_drawable_get_display (window);
   
   l = pixbufs;
   size = 0;
@@ -3863,7 +3863,7 @@ gdk_window_set_icon_list (GdkWindow *window,
     {
       XChangeProperty (GDK_DISPLAY_XDISPLAY (display),
                        GDK_WINDOW_XID (window),
-		       gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_ICON"),
+		       __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_ICON"),
                        XA_CARDINAL, 32,
                        PropModeReplace,
                        (guchar*) data, size);
@@ -3872,7 +3872,7 @@ gdk_window_set_icon_list (GdkWindow *window,
     {
       XDeleteProperty (GDK_DISPLAY_XDISPLAY (display),
                        GDK_WINDOW_XID (window),
-		       gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_ICON"));
+		       __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_ICON"));
     }
   
   g_free (data);
@@ -3951,11 +3951,11 @@ gdk_window_icon_name_set (GdkWindow *window)
  * idea from a user interface standpoint. But you can set such a name
  * with this function, if you like.
  *
- * After calling this with a non-%NULL @name, calls to gdk_window_set_title()
+ * After calling this with a non-%NULL @name, calls to __gdk_window_set_title()
  * will not update the icon title.
  *
  * Using %NULL for @name unsets the icon title; further calls to
- * gdk_window_set_title() will again update the icon title as well.
+ * __gdk_window_set_title() will again update the icon title as well.
  **/
 void
 gdk_window_set_icon_name (GdkWindow   *window, 
@@ -3967,7 +3967,7 @@ gdk_window_set_icon_name (GdkWindow   *window,
       !WINDOW_IS_TOPLEVEL_OR_FOREIGN (window))
     return;
 
-  display = gdk_drawable_get_display (window);
+  display = __gdk_drawable_get_display (window);
 
   g_object_set_qdata (G_OBJECT (window), g_quark_from_static_string ("gdk-icon-name-set"),
                       GUINT_TO_POINTER (name != NULL));
@@ -3976,22 +3976,22 @@ gdk_window_set_icon_name (GdkWindow   *window,
     {
       XChangeProperty (GDK_DISPLAY_XDISPLAY (display),
                        GDK_WINDOW_XID (window),
-                       gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_ICON_NAME"),
-                       gdk_x11_get_xatom_by_name_for_display (display, "UTF8_STRING"), 8,
+                       __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_ICON_NAME"),
+                       __gdk_x11_get_xatom_by_name_for_display (display, "UTF8_STRING"), 8,
                        PropModeReplace, (guchar *)name, strlen (name));
 
       set_text_property (display, GDK_WINDOW_XID (window),
-                         gdk_x11_get_xatom_by_name_for_display (display, "WM_ICON_NAME"),
+                         __gdk_x11_get_xatom_by_name_for_display (display, "WM_ICON_NAME"),
                          name);
     }
   else
     {
       XDeleteProperty (GDK_DISPLAY_XDISPLAY (display),
                        GDK_WINDOW_XID (window),
-                       gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_ICON_NAME"));
+                       __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_ICON_NAME"));
       XDeleteProperty (GDK_DISPLAY_XDISPLAY (display),
                        GDK_WINDOW_XID (window),
-                       gdk_x11_get_xatom_by_name_for_display (display, "WM_ICON_NAME"));
+                       __gdk_x11_get_xatom_by_name_for_display (display, "WM_ICON_NAME"));
     }
 }
 
@@ -4017,7 +4017,7 @@ gdk_window_iconify (GdkWindow *window)
     {  
       XIconifyWindow (GDK_WINDOW_XDISPLAY (window),
 		      GDK_WINDOW_XWINDOW (window),
-		      gdk_screen_get_number (GDK_WINDOW_SCREEN (window)));
+		      __gdk_screen_get_number (GDK_WINDOW_SCREEN (window)));
     }
   else
     {
@@ -4026,7 +4026,7 @@ gdk_window_iconify (GdkWindow *window)
                                    0,
                                    GDK_WINDOW_STATE_ICONIFIED);
       gdk_wmspec_change_state (TRUE, window,
-                               gdk_atom_intern_static_string ("_NET_WM_STATE_HIDDEN"),
+                               __gdk_atom_intern_static_string ("_NET_WM_STATE_HIDDEN"),
                                GDK_NONE);
     }
 }
@@ -4051,9 +4051,9 @@ gdk_window_deiconify (GdkWindow *window)
 
   if (GDK_WINDOW_IS_MAPPED (window))
     {  
-      gdk_window_show (window);
+      __gdk_window_show (window);
       gdk_wmspec_change_state (FALSE, window,
-                               gdk_atom_intern_static_string ("_NET_WM_STATE_HIDDEN"),
+                               __gdk_atom_intern_static_string ("_NET_WM_STATE_HIDDEN"),
                                GDK_NONE);
     }
   else
@@ -4063,7 +4063,7 @@ gdk_window_deiconify (GdkWindow *window)
                                    GDK_WINDOW_STATE_ICONIFIED,
                                    0);
       gdk_wmspec_change_state (FALSE, window,
-                               gdk_atom_intern_static_string ("_NET_WM_STATE_HIDDEN"),
+                               __gdk_atom_intern_static_string ("_NET_WM_STATE_HIDDEN"),
                                GDK_NONE);
     }
 }
@@ -4100,7 +4100,7 @@ gdk_window_stick (GdkWindow *window)
 
       /* Request stick during viewport scroll */
       gdk_wmspec_change_state (TRUE, window,
-			       gdk_atom_intern_static_string ("_NET_WM_STATE_STICKY"),
+			       __gdk_atom_intern_static_string ("_NET_WM_STATE_STICKY"),
 			       GDK_NONE);
 
       /* Request desktop 0xFFFFFFFF */
@@ -4108,7 +4108,7 @@ gdk_window_stick (GdkWindow *window)
       xclient.type = ClientMessage;
       xclient.window = GDK_WINDOW_XWINDOW (window);
       xclient.display = GDK_WINDOW_XDISPLAY (window);
-      xclient.message_type = gdk_x11_get_xatom_by_name_for_display (GDK_WINDOW_DISPLAY (window), 
+      xclient.message_type = __gdk_x11_get_xatom_by_name_for_display (GDK_WINDOW_DISPLAY (window), 
 									"_NET_WM_DESKTOP");
       xclient.format = 32;
 
@@ -4150,7 +4150,7 @@ gdk_window_unstick (GdkWindow *window)
     {
       /* Request unstick from viewport */
       gdk_wmspec_change_state (FALSE, window,
-			       gdk_atom_intern_static_string ("_NET_WM_STATE_STICKY"),
+			       __gdk_atom_intern_static_string ("_NET_WM_STATE_STICKY"),
 			       GDK_NONE);
 
       move_to_current_desktop (window);
@@ -4191,8 +4191,8 @@ gdk_window_maximize (GdkWindow *window)
 
   if (GDK_WINDOW_IS_MAPPED (window))
     gdk_wmspec_change_state (TRUE, window,
-			     gdk_atom_intern_static_string ("_NET_WM_STATE_MAXIMIZED_VERT"),
-			     gdk_atom_intern_static_string ("_NET_WM_STATE_MAXIMIZED_HORZ"));
+			     __gdk_atom_intern_static_string ("_NET_WM_STATE_MAXIMIZED_VERT"),
+			     __gdk_atom_intern_static_string ("_NET_WM_STATE_MAXIMIZED_HORZ"));
   else
     gdk_synthesize_window_state (window,
 				 0,
@@ -4225,8 +4225,8 @@ gdk_window_unmaximize (GdkWindow *window)
 
   if (GDK_WINDOW_IS_MAPPED (window))
     gdk_wmspec_change_state (FALSE, window,
-			     gdk_atom_intern_static_string ("_NET_WM_STATE_MAXIMIZED_VERT"),
-			     gdk_atom_intern_static_string ("_NET_WM_STATE_MAXIMIZED_HORZ"));
+			     __gdk_atom_intern_static_string ("_NET_WM_STATE_MAXIMIZED_VERT"),
+			     __gdk_atom_intern_static_string ("_NET_WM_STATE_MAXIMIZED_HORZ"));
   else
     gdk_synthesize_window_state (window,
 				 GDK_WINDOW_STATE_MAXIMIZED,
@@ -4262,7 +4262,7 @@ gdk_window_fullscreen (GdkWindow *window)
 
   if (GDK_WINDOW_IS_MAPPED (window))
     gdk_wmspec_change_state (TRUE, window,
-			     gdk_atom_intern_static_string ("_NET_WM_STATE_FULLSCREEN"),
+			     __gdk_atom_intern_static_string ("_NET_WM_STATE_FULLSCREEN"),
                              GDK_NONE);
 
   else
@@ -4297,7 +4297,7 @@ gdk_window_unfullscreen (GdkWindow *window)
 
   if (GDK_WINDOW_IS_MAPPED (window))
     gdk_wmspec_change_state (FALSE, window,
-			     gdk_atom_intern_static_string ("_NET_WM_STATE_FULLSCREEN"),
+			     __gdk_atom_intern_static_string ("_NET_WM_STATE_FULLSCREEN"),
                              GDK_NONE);
 
   else
@@ -4337,10 +4337,10 @@ gdk_window_set_keep_above (GdkWindow *window,
     {
       if (setting)
 	gdk_wmspec_change_state (FALSE, window,
-				 gdk_atom_intern_static_string ("_NET_WM_STATE_BELOW"),
+				 __gdk_atom_intern_static_string ("_NET_WM_STATE_BELOW"),
 				 GDK_NONE);
       gdk_wmspec_change_state (setting, window,
-			       gdk_atom_intern_static_string ("_NET_WM_STATE_ABOVE"),
+			       __gdk_atom_intern_static_string ("_NET_WM_STATE_ABOVE"),
 			       GDK_NONE);
     }
   else
@@ -4379,10 +4379,10 @@ gdk_window_set_keep_below (GdkWindow *window, gboolean setting)
     {
       if (setting)
 	gdk_wmspec_change_state (FALSE, window,
-				 gdk_atom_intern_static_string ("_NET_WM_STATE_ABOVE"),
+				 __gdk_atom_intern_static_string ("_NET_WM_STATE_ABOVE"),
 				 GDK_NONE);
       gdk_wmspec_change_state (setting, window,
-			       gdk_atom_intern_static_string ("_NET_WM_STATE_BELOW"),
+			       __gdk_atom_intern_static_string ("_NET_WM_STATE_BELOW"),
 			       GDK_NONE);
     }
   else
@@ -4449,7 +4449,7 @@ gdk_window_set_group (GdkWindow *window,
   toplevel = _gdk_x11_window_get_toplevel (window);
 
   if (leader == NULL)
-    leader = gdk_display_get_default_group (gdk_drawable_get_display (window));
+    leader = __gdk_display_get_default_group (__gdk_drawable_get_display (window));
   
   if (toplevel->group_leader != leader)
     {
@@ -4476,9 +4476,9 @@ gdk_window_get_mwm_hints (GdkWindow *window)
   if (GDK_WINDOW_DESTROYED (window))
     return NULL;
 
-  display = gdk_drawable_get_display (window);
+  display = __gdk_drawable_get_display (window);
   
-  hints_atom = gdk_x11_get_xatom_by_name_for_display (display, _XA_MOTIF_WM_HINTS);
+  hints_atom = __gdk_x11_get_xatom_by_name_for_display (display, _XA_MOTIF_WM_HINTS);
 
   XGetWindowProperty (GDK_DISPLAY_XDISPLAY (display), GDK_WINDOW_XID (window),
 		      hints_atom, 0, sizeof (MotifWmHints)/sizeof (long),
@@ -4507,9 +4507,9 @@ gdk_window_set_mwm_hints (GdkWindow *window,
   if (GDK_WINDOW_DESTROYED (window))
     return;
   
-  display = gdk_drawable_get_display (window);
+  display = __gdk_drawable_get_display (window);
   
-  hints_atom = gdk_x11_get_xatom_by_name_for_display (display, _XA_MOTIF_WM_HINTS);
+  hints_atom = __gdk_x11_get_xatom_by_name_for_display (display, _XA_MOTIF_WM_HINTS);
 
   XGetWindowProperty (GDK_WINDOW_XDISPLAY (window), GDK_WINDOW_XID (window),
 		      hints_atom, 0, sizeof (MotifWmHints)/sizeof (long),
@@ -4681,7 +4681,7 @@ _xwindow_get_shape (Display *xdisplay,
   xrl = XShapeGetRectangles (xdisplay, window, shape_type, &rn, &ord);
 
   if (rn == 0)
-    return gdk_region_new (); /* Empty */
+    return __gdk_region_new (); /* Empty */
 
   if (ord != YXBanded)
     {
@@ -4717,10 +4717,10 @@ _gdk_windowing_get_shape_for_mask (GdkBitmap *mask)
   Window window;
   GdkRegion *region;
 
-  display = gdk_drawable_get_display (GDK_DRAWABLE (mask));
+  display = __gdk_drawable_get_display (GDK_DRAWABLE (mask));
 
   window = XCreateSimpleWindow (GDK_DISPLAY_XDISPLAY (display),
-                                GDK_SCREEN_XROOTWIN (gdk_drawable_get_screen (mask)),
+                                GDK_SCREEN_XROOTWIN (__gdk_drawable_get_screen (mask)),
                                 -1, -1, 1, 1, 0,
                                 0, 0);
   XShapeCombineMask (GDK_DISPLAY_XDISPLAY (display),
@@ -4742,7 +4742,7 @@ GdkRegion *
 _gdk_windowing_window_get_shape (GdkWindow *window)
 {
   if (!GDK_WINDOW_DESTROYED (window) &&
-      gdk_display_supports_shapes (GDK_WINDOW_DISPLAY (window)))
+      __gdk_display_supports_shapes (GDK_WINDOW_DISPLAY (window)))
     return _xwindow_get_shape (GDK_WINDOW_XDISPLAY (window),
 			      GDK_WINDOW_XID (window), ShapeBounding);
 
@@ -4754,7 +4754,7 @@ _gdk_windowing_window_get_input_shape (GdkWindow *window)
 {
 #if defined(ShapeInput)
   if (!GDK_WINDOW_DESTROYED (window) &&
-      gdk_display_supports_input_shapes (GDK_WINDOW_DISPLAY (window)))
+      __gdk_display_supports_input_shapes (GDK_WINDOW_DISPLAY (window)))
     return _xwindow_get_shape (GDK_WINDOW_XDISPLAY (window),
                               GDK_WINDOW_XID (window),
                               ShapeInput);
@@ -4840,13 +4840,13 @@ wmspec_moveresize (GdkWindow *window,
   XClientMessageEvent xclient;
 
   /* Release passive grab */
-  gdk_display_pointer_ungrab (display, timestamp);
+  __gdk_display_pointer_ungrab (display, timestamp);
 
   memset (&xclient, 0, sizeof (xclient));
   xclient.type = ClientMessage;
   xclient.window = GDK_WINDOW_XID (window);
   xclient.message_type =
-    gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_MOVERESIZE");
+    __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_MOVERESIZE");
   xclient.format = 32;
   xclient.data.l[0] = root_x;
   xclient.data.l[1] = root_y;
@@ -5037,12 +5037,12 @@ update_pos (MoveResizeData *mv_resize,
 
       if (mv_resize->moveresize_geom_mask)
 	{
-	  gdk_window_constrain_size (&mv_resize->moveresize_geometry,
+	  __gdk_window_constrain_size (&mv_resize->moveresize_geometry,
 				     mv_resize->moveresize_geom_mask,
 				     w, h, &w, &h);
 	}
 
-      gdk_window_move_resize (mv_resize->moveresize_window, x, y, w, h);
+      __gdk_window_move_resize (mv_resize->moveresize_window, x, y, w, h);
     }
   else
     {
@@ -5051,14 +5051,14 @@ update_pos (MoveResizeData *mv_resize,
       x = mv_resize->moveresize_orig_x + dx;
       y = mv_resize->moveresize_orig_y + dy;
 
-      gdk_window_move (mv_resize->moveresize_window, x, y);
+      __gdk_window_move (mv_resize->moveresize_window, x, y);
     }
 }
 
 static void
 finish_drag (MoveResizeData *mv_resize)
 {
-  gdk_window_destroy (mv_resize->moveresize_emulation_window);
+  __gdk_window_destroy (mv_resize->moveresize_emulation_window);
   mv_resize->moveresize_emulation_window = NULL;
   g_object_unref (mv_resize->moveresize_window);
   mv_resize->moveresize_window = NULL;
@@ -5076,7 +5076,7 @@ lookahead_motion_predicate (Display *xdisplay,
 			    XPointer arg)
 {
   gboolean *seen_release = (gboolean *)arg;
-  GdkDisplay *display = gdk_x11_lookup_xdisplay (xdisplay);
+  GdkDisplay *display = __gdk_x11_lookup_xdisplay (xdisplay);
   MoveResizeData *mv_resize = get_move_resize_data (display, FALSE);
 
   if (*seen_release)
@@ -5126,7 +5126,7 @@ _gdk_moveresize_handle_event (XEvent *event)
 {
   guint button_mask = 0;
   GdkWindow *window_private;
-  GdkDisplay *display = gdk_x11_lookup_xdisplay (event->xany.display);
+  GdkDisplay *display = __gdk_x11_lookup_xdisplay (event->xany.display);
   MoveResizeData *mv_resize = get_move_resize_data (display, FALSE);
 
   if (!mv_resize || !mv_resize->moveresize_window)
@@ -5221,13 +5221,13 @@ create_moveresize_window (MoveResizeData *mv_resize,
   attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_NOREDIR;
 
   mv_resize->moveresize_emulation_window = 
-    gdk_window_new (gdk_screen_get_root_window (gdk_display_get_default_screen (mv_resize->display)),
+    __gdk_window_new (__gdk_screen_get_root_window (__gdk_display_get_default_screen (mv_resize->display)),
 		    &attributes,
 		    attributes_mask);
 
-  gdk_window_show (mv_resize->moveresize_emulation_window);
+  __gdk_window_show (mv_resize->moveresize_emulation_window);
 
-  status = gdk_pointer_grab (mv_resize->moveresize_emulation_window,
+  status = __gdk_pointer_grab (mv_resize->moveresize_emulation_window,
                              FALSE,
                              GDK_BUTTON_RELEASE_MASK |
                              GDK_POINTER_MOTION_MASK,
@@ -5262,14 +5262,14 @@ calculate_unmoving_origin (MoveResizeData *mv_resize)
   if (mv_resize->moveresize_geom_mask & GDK_HINT_WIN_GRAVITY &&
       mv_resize->moveresize_geometry.win_gravity == GDK_GRAVITY_STATIC)
     {
-      gdk_window_get_origin (mv_resize->moveresize_window,
+      __gdk_window_get_origin (mv_resize->moveresize_window,
 			     &mv_resize->moveresize_orig_x,
 			     &mv_resize->moveresize_orig_y);
     }
   else
     {
-      gdk_window_get_frame_extents (mv_resize->moveresize_window, &rect);
-      gdk_window_get_geometry (mv_resize->moveresize_window, 
+      __gdk_window_get_frame_extents (mv_resize->moveresize_window, &rect);
+      __gdk_window_get_geometry (mv_resize->moveresize_window, 
 			       NULL, NULL, &width, &height, NULL);
       
       switch (mv_resize->moveresize_geometry.win_gravity) 
@@ -5335,7 +5335,7 @@ emulate_resize_drag (GdkWindow     *window,
   mv_resize->moveresize_y = root_y;
   mv_resize->moveresize_window = g_object_ref (window);
 
-  gdk_drawable_get_size (window,
+  __gdk_drawable_get_size (window,
 			 &mv_resize->moveresize_orig_width,
 			 &mv_resize->moveresize_orig_height);
 
@@ -5377,7 +5377,7 @@ emulate_move_drag (GdkWindow     *window,
  * @button: the button being used to drag
  * @root_x: root window X coordinate of mouse click that began the drag
  * @root_y: root window Y coordinate of mouse click that began the drag
- * @timestamp: timestamp of mouse click that began the drag (use gdk_event_get_time())
+ * @timestamp: timestamp of mouse click that began the drag (use __gdk_event_get_time())
  *
  * Begins a window resize operation (for a toplevel window).
  * You might use this function to implement a "window resize grip," for
@@ -5398,8 +5398,8 @@ gdk_window_begin_resize_drag (GdkWindow     *window,
       !WINDOW_IS_TOPLEVEL_OR_FOREIGN (window))
     return;
 
-  if (gdk_x11_screen_supports_net_wm_hint (GDK_WINDOW_SCREEN (window),
-					   gdk_atom_intern_static_string ("_NET_WM_MOVERESIZE")))
+  if (__gdk_x11_screen_supports_net_wm_hint (GDK_WINDOW_SCREEN (window),
+					   __gdk_atom_intern_static_string ("_NET_WM_MOVERESIZE")))
     wmspec_resize_drag (window, edge, button, root_x, root_y, timestamp);
   else
     emulate_resize_drag (window, edge, button, root_x, root_y, timestamp);
@@ -5432,8 +5432,8 @@ gdk_window_begin_move_drag (GdkWindow *window,
       !WINDOW_IS_TOPLEVEL (window))
     return;
 
-  if (gdk_x11_screen_supports_net_wm_hint (GDK_WINDOW_SCREEN (window),
-					   gdk_atom_intern_static_string ("_NET_WM_MOVERESIZE")))
+  if (__gdk_x11_screen_supports_net_wm_hint (GDK_WINDOW_SCREEN (window),
+					   __gdk_atom_intern_static_string ("_NET_WM_MOVERESIZE")))
     wmspec_moveresize (window, _NET_WM_MOVERESIZE_MOVE, root_x, root_y,
 		       timestamp);
   else
@@ -5472,7 +5472,7 @@ gdk_window_enable_synchronized_configure (GdkWindow *window)
     {
       /* This basically means you want to do fancy X specific stuff, so
 	 ensure we have a native window */
-      gdk_window_ensure_native (window);
+      __gdk_window_ensure_native (window);
 
       impl->use_synchronized_configure = TRUE;
       ensure_sync_counter (window);
@@ -5543,7 +5543,7 @@ _gdk_windowing_window_beep (GdkWindow *window)
 	     None);
   else
 #endif
-    gdk_display_beep (display);
+    __gdk_display_beep (display);
 }
 
 /**
@@ -5577,7 +5577,7 @@ gdk_window_set_opacity (GdkWindow *window,
       !WINDOW_IS_TOPLEVEL (window))
     return;
 
-  display = gdk_drawable_get_display (window);
+  display = __gdk_drawable_get_display (window);
 
   if (opacity < 0)
     opacity = 0;
@@ -5589,11 +5589,11 @@ gdk_window_set_opacity (GdkWindow *window,
   if (cardinal == 0xffffffff)
     XDeleteProperty (GDK_DISPLAY_XDISPLAY (display),
 		     GDK_WINDOW_XID (window),
-		     gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_OPACITY"));
+		     __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_OPACITY"));
   else
     XChangeProperty (GDK_DISPLAY_XDISPLAY (display),
 		     GDK_WINDOW_XID (window),
-		     gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_OPACITY"),
+		     __gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_WINDOW_OPACITY"),
 		     XA_CARDINAL, 32,
 		     PropModeReplace,
 		     (guchar *) &cardinal, 1);
@@ -5612,7 +5612,7 @@ _gdk_windowing_window_set_composited (GdkWindow *window,
 
   impl = GDK_WINDOW_IMPL_X11 (private->impl);
 
-  display = gdk_screen_get_display (GDK_DRAWABLE_IMPL_X11 (impl)->screen);
+  display = __gdk_screen_get_display (GDK_DRAWABLE_IMPL_X11 (impl)->screen);
   dpy = GDK_DISPLAY_XDISPLAY (display);
   xid = GDK_WINDOW_XWINDOW (private);
 

@@ -191,7 +191,7 @@ extern const int         _gdk_event_mask_table[];
 extern GdkAtom		 _gdk_selection_property;
 extern gboolean          _gdk_synchronize;
 
-#define GDK_PIXMAP_SCREEN(pix)	      (GDK_DRAWABLE_IMPL_X11 (((GdkPixmapObject *)pix)->impl)->screen)
+#define GDK_PIXMAP_SCREEN(pix)	      (GDK_DRAWABLE_IMPL_X11 (((GdkPixmap *)pix)->impl)->screen)
 #define GDK_PIXMAP_DISPLAY(pix)       (GDK_SCREEN_X11 (GDK_PIXMAP_SCREEN (pix))->display)
 #define GDK_PIXMAP_XROOTWIN(pix)      (GDK_SCREEN_X11 (GDK_PIXMAP_SCREEN (pix))->xroot_window)
 #define GDK_DRAWABLE_DISPLAY(win)     (GDK_IS_WINDOW (win) ? GDK_WINDOW_DISPLAY (win) : GDK_PIXMAP_DISPLAY (win))

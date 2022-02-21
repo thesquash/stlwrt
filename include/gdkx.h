@@ -89,7 +89,7 @@ gint     SF(gdk_x11_get_default_screen)       (void);
 #define GDK_WINDOW_XDISPLAY(win)      (GDK_SCREEN_X11 (GDK_WINDOW_SCREEN (win))->xdisplay)
 #define GDK_WINDOW_XID(win)           (GDK_DRAWABLE_IMPL_X11(((GdkWindow *)win)->impl)->xid)
 #define GDK_PIXMAP_XDISPLAY(pix)      (GDK_SCREEN_X11 (GDK_PIXMAP_SCREEN (pix))->xdisplay)
-#define GDK_PIXMAP_XID(pix)           (GDK_DRAWABLE_IMPL_X11(((GdkPixmapObject *)pix)->impl)->xid)
+#define GDK_PIXMAP_XID(pix)           (GDK_DRAWABLE_IMPL_X11(((GdkPixmap *)pix)->impl)->xid)
 #define GDK_DRAWABLE_XDISPLAY(win)    (GDK_IS_WINDOW (win) ? GDK_WINDOW_XDISPLAY (win) : GDK_PIXMAP_XDISPLAY (win))
 #define GDK_DRAWABLE_XID(win)         (GDK_IS_WINDOW (win) ? GDK_WINDOW_XID (win) : GDK_PIXMAP_XID (win))
 #define GDK_GC_XDISPLAY(gc)           (GDK_SCREEN_XDISPLAY(GDK_GC_X11(gc)->screen))

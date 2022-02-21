@@ -169,7 +169,7 @@ send_event_handler (Display *dpy,
 	}
 
       if (state->callback)
-        gdk_threads_add_idle (callback_idle, state);
+        __gdk_threads_add_idle (callback_idle, state);
 
       DeqAsyncHandler(state->dpy, &state->async);
 
@@ -642,19 +642,19 @@ _gdk_x11_get_window_child_info (GdkDisplay       *display,
   
   dpy = GDK_DISPLAY_XDISPLAY (display);
   if (get_wm_state)
-    wm_state_atom = gdk_x11_get_xatom_by_name_for_display (display, "WM_STATE");
+    wm_state_atom = __gdk_x11_get_xatom_by_name_for_display (display, "WM_STATE");
   else
     wm_state_atom = None;
 
   state.children = NULL;
   state.nchildren = 0;
 
-  gdk_error_trap_push ();
+  __gdk_error_trap_push ();
   result = list_children_and_wm_state (dpy, window,
 				       win_has_wm_state ? wm_state_atom : None,
 				       &has_wm_state,
 				       &state.children, &state.nchildren);
-  gdk_error_trap_pop ();
+  __gdk_error_trap_pop ();
   if (!result)
     {
       g_free (state.children);
@@ -792,7 +792,7 @@ roundtrip_handler (Display *dpy,
 
       
       if (state->callback)
-        gdk_threads_add_idle (roundtrip_callback_idle, state);
+        __gdk_threads_add_idle (roundtrip_callback_idle, state);
 
       DeqAsyncHandler(state->dpy, &state->async);
 

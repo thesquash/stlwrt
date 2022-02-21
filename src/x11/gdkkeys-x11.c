@@ -285,7 +285,7 @@ get_xkb (GdkKeymapX11 *keymap_x11)
  */
 
 /** 
- * gdk_keymap_get_for_display:
+ * __gdk_keymap_get_for_display:
  * @display: the #GdkDisplay.
  * @returns: the #GdkKeymap attached to @display.
  *
@@ -294,7 +294,7 @@ get_xkb (GdkKeymapX11 *keymap_x11)
  * Since: 2.2
  **/
 GdkKeymap*
-gdk_keymap_get_for_display (GdkDisplay *display)
+__gdk_keymap_get_for_display (GdkDisplay *display)
 {
   GdkDisplayX11 *display_x11;
   g_return_val_if_fail (GDK_IS_DISPLAY (display), NULL);
@@ -405,7 +405,7 @@ update_keymaps (GdkKeymapX11 *keymap_x11)
               guint lower;
               guint upper;
 
-              gdk_keyval_convert_case (get_symbol (syms, keymap_x11, 0, 0), &lower, &upper);
+              __gdk_keyval_convert_case (get_symbol (syms, keymap_x11, 0, 0), &lower, &upper);
               if (lower != upper)
                 {
 		  set_symbol (syms, keymap_x11, 0, 0, lower);
@@ -544,7 +544,7 @@ get_effective_keymap (GdkKeymap  *keymap,
       GDK_NOTE (MULTIHEAD,
 		g_message ("reverting to default display keymap in %s",
 			   function));
-      return gdk_keymap_get_default ();
+      return __gdk_keymap_get_default ();
     }
 
   return keymap;
@@ -563,7 +563,7 @@ get_direction (XkbDescRec *xkb,
     {
       gint level = 0;
       KeySym sym = XkbKeySymEntry (xkb, code, level, group);
-      PangoDirection dir = pango_unichar_direction (gdk_keyval_to_unicode (sym));
+      PangoDirection dir = pango_unichar_direction (__gdk_keyval_to_unicode (sym));
 
       switch (dir)
 	{
@@ -736,7 +736,7 @@ _gdk_keymap_keys_changed (GdkDisplay *display)
  * Returns the direction of effective layout of the keymap.
  *
  * Note that passing %NULL for @keymap is deprecated and will stop
- * to work in GTK+ 3.0. Use gdk_keymap_get_for_display() instead.
+ * to work in GTK+ 3.0. Use __gdk_keymap_get_for_display() instead.
  *
  * Returns: %PANGO_DIRECTION_LTR or %PANGO_DIRECTION_RTL
  *   if it can determine the direction. %PANGO_DIRECTION_NEUTRAL
@@ -777,7 +777,7 @@ gdk_keymap_get_direction (GdkKeymap *keymap)
  * languages are in use.
  *
  * Note that passing %NULL for @keymap is deprecated and will stop
- * to work in GTK+ 3.0. Use gdk_keymap_get_for_display() instead.
+ * to work in GTK+ 3.0. Use __gdk_keymap_get_for_display() instead.
  *
  * Returns: %TRUE if there are layouts in both directions, %FALSE otherwise
  *
@@ -857,7 +857,7 @@ gdk_keymap_get_caps_lock_state (GdkKeymap *keymap)
  * with g_free().
  *
  * Note that passing %NULL for @keymap is deprecated and will stop
- * to work in GTK+ 3.0. Use gdk_keymap_get_for_display() instead.
+ * to work in GTK+ 3.0. Use __gdk_keymap_get_for_display() instead.
  *
  * Return value: %TRUE if keys were found and returned
  **/
@@ -1003,10 +1003,10 @@ gdk_keymap_get_entries_for_keyval (GdkKeymap     *keymap,
  * keyval in @keyvals. Free the returned arrays with g_free().
  * When a keycode is pressed by the user, the keyval from
  * this list of entries is selected by considering the effective
- * keyboard group and level. See gdk_keymap_translate_keyboard_state().
+ * keyboard group and level. See __gdk_keymap_translate_keyboard_state().
  *
  * Note that passing %NULL for @keymap is deprecated and will stop
- * to work in GTK+ 3.0. Use gdk_keymap_get_for_display() instead.
+ * to work in GTK+ 3.0. Use __gdk_keymap_get_for_display() instead.
  *
  * Returns: %TRUE if there were any entries
  **/
@@ -1160,12 +1160,12 @@ gdk_keymap_get_entries_for_keycode (GdkKeymap     *keymap,
  * 
  * Looks up the keyval mapped to a keycode/group/level triplet.
  * If no keyval is bound to @key, returns 0. For normal user input,
- * you want to use gdk_keymap_translate_keyboard_state() instead of
+ * you want to use __gdk_keymap_translate_keyboard_state() instead of
  * this function, since the effective group/level may not be
  * the same as the current keyboard state.
  * 
  * Note that passing %NULL for @keymap is deprecated and will stop
- * to work in GTK+ 3.0. Use gdk_keymap_get_for_display() instead.
+ * to work in GTK+ 3.0. Use __gdk_keymap_get_for_display() instead.
  *
  * Return value: a keyval, or 0 if none was mapped to the given @key
  **/
@@ -1202,7 +1202,7 @@ gdk_keymap_lookup_key (GdkKeymap          *keymap,
 /* This is copied straight from XFree86 Xlib, to:
  *  - add the group and level return.
  *  - change the interpretation of mods_rtrn as described
- *    in the docs for gdk_keymap_translate_keyboard_state()
+ *    in the docs for __gdk_keymap_translate_keyboard_state()
  * It's unchanged for ease of diff against the Xlib sources; don't
  * reformat it.
  */
@@ -1413,7 +1413,7 @@ translate_keysym (GdkKeymapX11   *keymap_x11,
       
       if (keymap_x11->lock_keysym == GDK_Caps_Lock && (state & GDK_LOCK_MASK) != 0)
 	{
-	  guint upper = gdk_keyval_to_upper (tmp_keyval);
+	  guint upper = __gdk_keyval_to_upper (tmp_keyval);
 	  if (upper != tmp_keyval)
 	    tmp_keyval = upper;
 	}
@@ -1431,7 +1431,7 @@ translate_keysym (GdkKeymapX11   *keymap_x11,
 }
 
 /**
- * gdk_keymap_translate_keyboard_state:
+ * __gdk_keymap_translate_keyboard_state:
  * @keymap: (allow-none): a #GdkKeymap, or %NULL to use the default
  * @hardware_keycode: a keycode
  * @state: a modifier state
@@ -1463,7 +1463,7 @@ translate_keysym (GdkKeymapX11   *keymap_x11,
  * <informalexample><programlisting>
  * &sol;* We want to ignore irrelevant modifiers like ScrollLock *&sol;
  * &num;define ALL_ACCELS_MASK (GDK_CONTROL_MASK | GDK_SHIFT_MASK | GDK_MOD1_MASK)
- * gdk_keymap_translate_keyboard_state (keymap, event->hardware_keycode,
+ * __gdk_keymap_translate_keyboard_state (keymap, event->hardware_keycode,
  *                                      event->state, event->group,
  *                                      &amp;keyval, NULL, NULL, &amp;consumed);
  * if (keyval == GDK_PLUS &&
@@ -1496,12 +1496,12 @@ translate_keysym (GdkKeymapX11   *keymap_x11,
  * </para></note>
  * 
  * Note that passing %NULL for @keymap is deprecated and will stop
- * to work in GTK+ 3.0. Use gdk_keymap_get_for_display() instead.
+ * to work in GTK+ 3.0. Use __gdk_keymap_get_for_display() instead.
  *
  * Return value: %TRUE if there was a keyval bound to the keycode/state/group
  **/
 gboolean
-gdk_keymap_translate_keyboard_state (GdkKeymap       *keymap,
+__gdk_keymap_translate_keyboard_state (GdkKeymap       *keymap,
                                      guint            hardware_keycode,
                                      GdkModifierType  state,
                                      gint             group,
@@ -1553,7 +1553,7 @@ gdk_keymap_translate_keyboard_state (GdkKeymap       *keymap,
                                      level);
 
       if (state & ~tmp_modifiers & LockMask)
-	tmp_keyval = gdk_keyval_to_upper (tmp_keyval);
+	tmp_keyval = __gdk_keyval_to_upper (tmp_keyval);
 
       /* We need to augment the consumed modifiers with LockMask, since
        * we handle that ourselves, and also with the group bits
@@ -1635,7 +1635,7 @@ gdk_keyval_from_name (const gchar *keyval_name)
 
 #ifdef HAVE_XCONVERTCASE
 void
-gdk_keyval_convert_case (guint symbol,
+__gdk_keyval_convert_case (guint symbol,
 			 guint *lower,
 			 guint *upper)
 {
@@ -1676,7 +1676,7 @@ _gdk_x11_get_group_for_state (GdkDisplay      *display,
   else
 #endif
     {
-      GdkKeymapX11 *keymap_impl = GDK_KEYMAP_X11 (gdk_keymap_get_for_display (display));
+      GdkKeymapX11 *keymap_impl = GDK_KEYMAP_X11 (__gdk_keymap_get_for_display (display));
       update_keymaps (keymap_impl);
       return (state & keymap_impl->group_switch_mask) ? 1 : 0;
     }

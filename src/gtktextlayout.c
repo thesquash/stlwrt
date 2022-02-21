@@ -2123,7 +2123,7 @@ tags_array_toggle_tag (GPtrArray  *array,
 
   tags = (GtkTextTag**) array->pdata;
 
-  for (pos = 0; pos < array->len && tags[pos])gtk_text_tag_get_props (->priority < gtk_text_tag_get_props (tag)->priority; pos++) ;
+  for (pos = 0; pos < array->len && gtk_text_tag_get_props (tags[pos])->priority < gtk_text_tag_get_props (tag)->priority; pos++) ;
 
   if (pos < array->len && tags[pos] == tag)
     g_ptr_array_remove_index (array, pos);
@@ -2199,9 +2199,9 @@ gtk_text_layout_get_line_display (GtkTextLayout *layout,
   if (totally_invisible_line (layout, line, &iter))
     {
       if (display->direction == GTK_TEXT_DIR_RTL)
-	gtk_text_layout_get_props (display->layout) = pango_layout_new (gtk_text_layout_get_props (layout)->rtl_context);
+	display->layout = pango_layout_new (gtk_text_layout_get_props (layout)->rtl_context);
       else
-	gtk_text_layout_get_props (display->layout) = pango_layout_new (gtk_text_layout_get_props (layout)->ltr_context);
+	display->layout = pango_layout_new (gtk_text_layout_get_props (layout)->ltr_context);
       
       return display;
     }

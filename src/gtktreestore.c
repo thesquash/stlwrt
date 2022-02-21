@@ -3257,7 +3257,7 @@ tree_model_end_element (GMarkupParseContext *context,
 
       for (l = data->items, i = 0; l; l = l->next, i++)
         {
-          type = gtk_builder_get_type_from_name (data->builder, l->data);
+          type = __gtk_builder_get_type_from_name (data->builder, l->data);
           if (type == G_TYPE_INVALID)
             {
               g_warning ("Unknown type %s specified in treemodel %s",

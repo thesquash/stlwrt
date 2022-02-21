@@ -92,7 +92,7 @@ gdk_spawn_on_screen (GdkScreen             *screen,
 
   g_return_val_if_fail (GDK_IS_SCREEN (screen), FALSE);
 
-  setup_data.display = gdk_screen_make_display_name (screen);
+  setup_data.display = __gdk_screen_make_display_name (screen);
   setup_data.child_setup = child_setup;
   setup_data.user_data = user_data;
 
@@ -158,7 +158,7 @@ gdk_spawn_on_screen_with_pipes (GdkScreen            *screen,
 
   g_return_val_if_fail (GDK_IS_SCREEN (screen), FALSE);
 
-  setup_data.display = gdk_screen_make_display_name (screen);
+  setup_data.display = __gdk_screen_make_display_name (screen);
   setup_data.child_setup = child_setup;
   setup_data.user_data = user_data;
 

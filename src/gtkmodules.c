@@ -153,32 +153,11 @@ ___gtk_get_module_path (const gchar *type)
   count = 0;
   for (path = get_module_path (); *path; path++)
     {
-      gint use_version, use_host;
-      
-      for (use_version = TRUE; use_version >= FALSE; use_version--)
-	for (use_host = TRUE; use_host >= FALSE; use_host--)
-	  {
-	    gchar *tmp_dir;
-	    
-	    if (use_version && use_host)
-	    {
-	      tmp_dir = g_build_filename (*path, GTK2_BINARY_VERSION, STLWRT_HOST, type, NULL);
-	      result[count++] = tmp_dir;
-	      tmp_dir = g_build_filename (*path, GTK3_BINARY_VERSION, STLWRT_HOST, type, NULL);
-	    }
-	    else if (use_version)
-	    {
-	      tmp_dir = g_build_filename (*path, GTK2_BINARY_VERSION, type, NULL);
-	      result[count++] = tmp_dir;
-	      tmp_dir = g_build_filename (*path, GTK3_BINARY_VERSION, type, NULL);
-	    }
-	    else if (use_host)
-	      tmp_dir = g_build_filename (*path, STLWRT_HOST, type, NULL);
-	    else
-	      tmp_dir = g_build_filename (*path, type, NULL);
+      gchar *tmp_dir;
 
-	    result[count++] = tmp_dir;
-	  }
+      tmp_dir = g_build_filename (*path, type, NULL);
+
+      result[count++] = tmp_dir;
     }
 
   result[count++] = NULL;

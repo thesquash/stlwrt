@@ -1041,7 +1041,7 @@ set_title_font (GtkWidget *assistant,
   gint size;
 
   desc = pango_font_description_new ();
-  size = pango_font_description_get_size (assistant_props->style->font_desc);
+  size = pango_font_description_get_size (gtk_widget_get_props (assistant)->style->font_desc);
 
   pango_font_description_set_weight (desc, PANGO_WEIGHT_ULTRABOLD);
   pango_font_description_set_size   (desc, size * PANGO_SCALE_XX_LARGE);

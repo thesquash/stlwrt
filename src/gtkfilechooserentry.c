@@ -50,10 +50,7 @@ struct _GtkFileChooserEntryClass
   GtkEntryClass parent_class;
 };
 
-struct _GtkFileChooserEntry
-{
-  GtkEntry parent_instance;
-
+STLWRT_DECLARE_VTYPE_VPARENT (GtkFileChooserEntry, _gtk_file_chooser_entry, GtkEntry,
   GtkFileChooserAction action;
 
   GFile *base_folder;
@@ -67,7 +64,7 @@ struct _GtkFileChooserEntry
   guint complete_on_load : 1;
   guint eat_tabs       : 1;
   guint local_only     : 1;
-};
+)
 
 enum
 {
@@ -111,8 +108,8 @@ static void finished_loading_cb (GtkFileSystemModel  *model,
                                  GError              *error,
 		                 GtkFileChooserEntry *chooser_entry);
 
-STLWRT_DEFINE_FTYPE_VPARENT (GtkFileChooserEntry, _gtk_file_chooser_entry, GTK_TYPE_ENTRY,
-                             G_TYPE_FLAG_NONE, ;)
+STLWRT_DEFINE_VTYPE (GtkFileChooserEntry, _gtk_file_chooser_entry, GTK_TYPE_ENTRY,
+                     G_TYPE_FLAG_NONE, ;)
 
 static char *
 gtk_file_chooser_entry_get_completion_text (GtkFileChooserEntry *chooser_entry)

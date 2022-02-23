@@ -929,6 +929,12 @@ end_element (GMarkupParseContext *context,
 
   if (strcmp (element_name, "requires") == 0)
     {
+      /* We aim to support all versions of GTK+, so testing the "requires"
+       * field here is sort of pointless.  Maybe re-enable it in the future
+       * to sanity check whether an application wants support for a GTK+
+       * release we don't emulate.
+       */
+#if 0
       RequiresInfo *req_info = state_pop_info (data, RequiresInfo);
 
       /* TODO: Allow third party widget developers to check their
@@ -947,6 +953,7 @@ end_element (GMarkupParseContext *context,
 			 GTK_MAJOR_VERSION, GTK_MINOR_VERSION);
 	}
       _free_requires_info (req_info, NULL);
+#endif
     }
   else if (strcmp (element_name, "interface") == 0)
     {

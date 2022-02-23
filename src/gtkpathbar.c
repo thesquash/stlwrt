@@ -235,7 +235,7 @@ gtk_path_bar_class_init (GtkPathBarClass *path_bar_class)
 
   path_bar_signals [PATH_CLICKED] =
     g_signal_new (I_("path-clicked"),
-		  G_OBJECT_CLASS_TYPE (object_class),
+		  G_OBJECT_CLASS_TYPE (gobject_class),
 		  G_SIGNAL_RUN_FIRST,
 		  G_STRUCT_OFFSET (GtkPathBarClass, path_clicked),
 		  NULL, NULL,

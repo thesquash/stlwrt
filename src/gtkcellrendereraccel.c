@@ -552,7 +552,7 @@ gtk_cell_editable_event_box_set_property (GObject      *object,
                                           const GValue *value,
                                           GParamSpec   *pspec)
 {
-  GtkCellEditableEventBoxProps *box = gtk_cell_editable_event_box_get_props (object);
+  GtkCellEditableEventBoxProps *box = _gtk_cell_editable_event_box_get_props (object);
 
   switch (prop_id)
     {
@@ -571,7 +571,7 @@ gtk_cell_editable_event_box_get_property (GObject    *object,
                                           GValue     *value,
                                           GParamSpec *pspec)
 {
-  GtkCellEditableEventBoxProps *box = gtk_cell_editable_event_box_get_props (object);
+  GtkCellEditableEventBoxProps *box = _gtk_cell_editable_event_box_get_props (object);
 
   switch (prop_id)
     {

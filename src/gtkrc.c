@@ -397,9 +397,9 @@ gtk_rc_make_default_dir (const gchar *type)
   var = g_getenv ("GTK_EXE_PREFIX");
 
   if (var)
-    path = g_build_filename (var, "lib", "gtk-2.0", GTK2_BINARY_VERSION, type, NULL);
+    path = g_build_filename (var, "lib", "stlwrt", type, NULL);
   else
-    path = g_build_filename (STLWRT_LIBDIR, "gtk-2.0", GTK2_BINARY_VERSION, type, NULL);
+    path = g_build_filename (STLWRT_LIBDIR, "stlwrt", type, NULL);
 
   return path;
 }

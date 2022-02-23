@@ -4829,7 +4829,6 @@ gtk_entry_move_cursor (GtkEntry       *entry,
 	case GTK_MOVEMENT_DISPLAY_LINE_ENDS:
 	case GTK_MOVEMENT_PARAGRAPH_ENDS:
 	case GTK_MOVEMENT_BUFFER_ENDS:
-	  priv = gtk_entry_get_instance_private (entry);
 	  new_pos = count < 0 ? 0 : __gtk_entry_buffer_get_length (get_buffer (entry));
           if (gtk_entry_get_props (entry)->current_pos == new_pos)
             __gtk_widget_error_bell (GTK_WIDGET (entry));

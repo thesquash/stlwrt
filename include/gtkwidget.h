@@ -189,6 +189,19 @@ STLWRT_DECLARE_BOXED_TYPE(GtkRequisition, gtk_requisition,
  */
 
 STLWRT_DECLARE_VTYPE_FPARENT(GtkWidget, gtk_widget, GObject,
+  /* This flags member contains GtkWidget flags such as GTK_TOPLEVEL,
+   * GTK_VISIBLE, etc (see the above GtkWidgetFlags enumeration).  This
+   * flags member is distinct from the `private_flags` member below.
+   * (This confusion is all due to the historical use of GtkObject in GTK+
+   * until version 3.  In version 2 GtkObject was already superfluous,
+   * but it couldn't be removed at the time for backward compatibility
+   * reasons.  STLWRT puts this flags field, normally a member of GtkObject,
+   * into GtkWidget directly, jettisons GtkObject, and pads all other former
+   * derivative types of GtkObject so that everything is aligned and
+   * (hopefully) copacetic.
+   */
+  guint32  flags;
+
   /* 16 bits of internally used private flags.
    * this will be packed into the same 4 byte alignment frame that
    * state and saved_state go. we therefore don't waste any new

@@ -182,7 +182,8 @@ gtk_offscreen_window_show (GtkWidget *widget)
   gboolean need_resize;
   GtkContainer *container;
 
-  GTK_WIDGET_SET_FLAGS (widget, GTK_VISIBLE);
+  /* Enable the widget's visibility flag. */
+  gtk_widget_get_props (widget)->flags |= GTK_VISIBLE;
 
   container = GTK_CONTAINER (widget);
   need_resize = gtk_container_get_props (container)->need_resize || !__gtk_widget_get_realized (widget);
@@ -201,7 +202,8 @@ gtk_offscreen_window_show (GtkWidget *widget)
 static void
 gtk_offscreen_window_hide (GtkWidget *widget)
 {
-  GTK_WIDGET_UNSET_FLAGS (widget, GTK_VISIBLE);
+  /* Disable the widget's visibility flag. */
+  gtk_widget_get_props (widget)->flags &= ~GTK_VISIBLE;
   __gtk_widget_unmap (widget);
 }
 

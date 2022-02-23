@@ -57,7 +57,8 @@ static void gdk_pixmap_impl_x11_get_size   (GdkDrawable        *drawable,
 static void gdk_pixmap_impl_x11_dispose    (GObject            *object);
 static void gdk_pixmap_impl_x11_finalize   (GObject            *object);
 
-STLWRT_DEFINE_TYPE (GdkPixmapImplX11, gdk_pixmap_impl_x11, GDK_TYPE_DRAWABLE_IMPL_X11)
+STLWRT_DEFINE_FTYPE (GdkPixmapImplX11, gdk_pixmap_impl_x11, GDK_TYPE_DRAWABLE_IMPL_X11,
+                     G_TYPE_FLAG_NONE, ;)
 
 GType
 _gdk_pixmap_impl_get_type (void)

@@ -98,7 +98,7 @@ gint     SF(gdk_x11_get_default_screen)       (void);
 #define GDK_SCREEN_XSCREEN(screen)    (GDK_SCREEN_X11 (screen)->xscreen)
 #define GDK_SCREEN_XNUMBER(screen)    (GDK_SCREEN_X11 (screen)->screen_num) 
 #define GDK_VISUAL_XVISUAL(vis)       (((GdkVisualPrivate *) vis)->xvisual)
-#define GDK_GC_GET_XGC(gc)	      (GDK_GC_X11(gc)->dirty_mask ? SF(_gdk_x11_gc_flush) (gc) : ((GdkGCX11 *)(gc))->xgc)
+#define GDK_GC_GET_XGC(gc)	      (GDK_GC_X11(gc)->dirty_mask ? _gdk_x11_gc_flush (gc) : ((GdkGCX11 *)(gc))->xgc)
 #define GDK_WINDOW_XWINDOW	      GDK_DRAWABLE_XID
 
 #else /* STLWRT_COMPILATION */
@@ -204,7 +204,7 @@ void        SF(gdk_x11_register_standard_event_type) (GdkDisplay *display,
 gpointer             SF(gdk_x11_font_get_xfont)    (GdkFont *font);
 #define GDK_FONT_XFONT(font)          (SF(gdk_x11_font_get_xfont) (font))
 
-#define gdk_font_lookup_for_display(display, xid) ((GdkFont*) gdk_xid_table_lookup_for_display (display, ((xid)|XID_FONT_BIT)))
+#define gdk_font_lookup_for_display(display, xid) ((GdkFont*) SF(gdk_xid_table_lookup_for_display) (display, ((xid)|XID_FONT_BIT)))
 
 #endif /* !GDK_DISABLE_DEPRECATED || STLWRT_COMPILATION */
 

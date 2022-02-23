@@ -176,6 +176,8 @@ static void     gtk_font_selection_ref_face              (GtkFontSelection *font
 STLWRT_DEFINE_VTYPE (GtkFontSelection, gtk_font_selection, GTK_TYPE_VBOX,
                              G_TYPE_FLAG_NONE, ;)
 
+static GtkBuildableIface *parent_buildable_iface;
+
 static void
 gtk_font_selection_class_init (GtkFontSelectionClass *klass)
 {
@@ -1585,10 +1587,10 @@ static GObject * gtk_font_selection_dialog_buildable_get_internal_child (GtkBuil
 									  GtkBuilder   *builder,
 									  const gchar  *childname);
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GtkFontSelectionDialog, gtk_font_selection_dialog,
-			 GTK_TYPE_DIALOG,
-			 G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-						gtk_font_selection_dialog_buildable_interface_init))
+STLWRT_DEFINE_VTYPE (GtkFontSelectionDialog, gtk_font_selection_dialog, GTK_TYPE_DIALOG,
+		     G_TYPE_FLAG_NONE,
+		     G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
+					    gtk_font_selection_dialog_buildable_interface_init))
 
 static GtkBuildableIface *parent_buildable_iface;
 

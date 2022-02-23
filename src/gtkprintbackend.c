@@ -109,7 +109,7 @@ struct _GtkPrintBackendPrivate
 
 STLWRT_DEFINE_FTYPE (GtkPrintBackendModule, _gtk_print_backend_module, G_TYPE_TYPE_MODULE,
                      G_TYPE_FLAG_NONE, ;)
-#define GTK_TYPE_PRINT_BACKEND_MODULE      (_gtk_print_backend_module_get_type ())
+#define GTK_TYPE_PRINT_BACKEND_MODULE      (___gtk_print_backend_module_get_type ())
 #define GTK_PRINT_BACKEND_MODULE(module)   (G_TYPE_CHECK_INSTANCE_CAST ((module), GTK_TYPE_PRINT_BACKEND_MODULE, GtkPrintBackendModule))
 
 static GSList *loaded_backends;
@@ -454,7 +454,7 @@ gtk_print_backend_init (GtkPrintBackend *backend)
 {
   GtkPrintBackendPrivate *priv;
 
-  priv = backend->priv = gtk_print_backend_get_instance_private (backend); 
+  priv = backend->priv = _gtk_print_backend_get_instance_private (backend); 
 
   priv->printers = g_hash_table_new_full (g_str_hash, g_str_equal, 
 					  (GDestroyNotify) g_free,

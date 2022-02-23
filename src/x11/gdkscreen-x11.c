@@ -63,7 +63,8 @@ enum
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-STLWRT_DEFINE_TYPE (GdkScreenX11, _gdk_screen_x11, GDK_TYPE_SCREEN)
+STLWRT_DEFINE_FTYPE (GdkScreenX11, _gdk_screen_x11, GDK_TYPE_SCREEN,
+                     G_TYPE_FLAG_NONE, ;)
 
 struct _GdkX11Monitor
 {

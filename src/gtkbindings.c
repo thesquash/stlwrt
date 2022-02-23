@@ -33,6 +33,7 @@
 #include <gtkkeyhash.h>
 #include <gtkwidget.h>
 #include <gtkrc.h>
+#include <gtktypeutils.h>
 
 
 

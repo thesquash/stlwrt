@@ -642,7 +642,7 @@ gtk_recent_chooser_menu_get_items (GtkRecentChooser *chooser)
   GtkRecentChooserMenu *menu = GTK_RECENT_CHOOSER_MENU (chooser);
   GtkRecentChooserMenuPrivate *priv = gtk_recent_chooser_menu_get_props (menu)->priv;
 
-  return ___gtk_recent_chooser_get_items (chooser,
+  return __gtk_recent_chooser_get_items (chooser,
                                         priv->current_filter,
                                         priv->sort_func,
                                         priv->sort_data);
@@ -932,7 +932,7 @@ gtk_recent_chooser_menu_dispose_items (GtkRecentChooserMenu *menu)
     }
 
   /* recalculate the position of the first recent item */
-  gtk_widget_get_instance_private (menu)->first_recent_item_pos = -1;
+  gtk_recent_chooser_menu_get_instance_private (menu)->first_recent_item_pos = -1;
 
   g_list_free (children);
 }

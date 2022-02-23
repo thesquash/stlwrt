@@ -45,9 +45,7 @@ struct _GdkKeymapKey
  * in the keymap and see what keyval it corresponds to.
  */
 
-typedef struct _GdkKeymap      GdkKeymapFat;
-typedef struct _GdkKeymap      GdkKeymapThin;
-
+typedef struct _GdkKeymap      GdkKeymap;
 typedef struct _GdkKeymapClass GdkKeymapClass;
 
 #define GDK_TYPE_KEYMAP              (gdk_keymap_get_type ())
@@ -57,42 +55,9 @@ typedef struct _GdkKeymapClass GdkKeymapClass;
 #define GDK_IS_KEYMAP_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GDK_TYPE_KEYMAP))
 #define GDK_KEYMAP_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GDK_TYPE_KEYMAP, GdkKeymapClass))
 
-/********************************************************************/
-struct _GdkKeymapProps
-{
-
+STLWRT_DECLARE_FTYPE_FPARENT (GdkKeymap, gdk_keymap, GObject,
   GdkDisplay * (display);
-};
-
-struct _GdkKeymapFat
-{
-  GObject       parent_instance;
-
-  struct _GdkKeymapProps instance_properties;
-};
-
-struct _GdkKeymapThin
-{
-  GObject      parent_instance;
-
-  gpointer reserved;
-};
-
-
-#ifdef STLWRT_COMPILATION
-typedef union
-{
-  struct _GdkKeymapFat   fat_instance;
-  struct _GdkKeymapThin  thin_instance;
-}   GdkKeymap;
-#elif STLWRT_GTK_VERSION <= 2
-typedef struct _GdkKeymapFat GdkKeymap;
-#elif STLWRT_GTK_VERSION >= 3
-typedef struct _GdkKeymapThin GdkKeymap;
-#endif
-/********************************************************************/
-
-
+)
 
 struct _GdkKeymapClass
 {
@@ -102,11 +67,6 @@ struct _GdkKeymapClass
   void (*keys_changed)      (GdkKeymap *keymap);
   void (*state_changed)     (GdkKeymap *keymap);
 };
-
-GType SF(_T2_gdk_keymap_get_type) (void) G_GNUC_CONST;
-GType SF(_3T_gdk_keymap_get_type) (void) G_GNUC_CONST;
-/* Supplied in the STLWRT public libraries */
-GType SF(gdk_keymap_get_type) (void) G_GNUC_CONST;
 
 #ifndef GDK_MULTIHEAD_SAFE
 GdkKeymap* SF(gdk_keymap_get_default)     (void);

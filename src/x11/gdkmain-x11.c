@@ -267,7 +267,7 @@ gdk_keyboard_grab (GdkWindow *	   window,
   native = __gdk_window_get_toplevel (window);
 
   /* TODO: What do we do for offscreens and  children? We need to proxy the grab somehow */
-  if (!GDK_IS_WINDOW_IMPL_X11 (GDK_WINDOW_OBJECT (native)->impl))
+  if (!GDK_IS_WINDOW_IMPL_X11 (GDK_WINDOW (native)->impl))
     return GDK_GRAB_SUCCESS;
 
   display = GDK_WINDOW_DISPLAY (native);
@@ -325,8 +325,8 @@ _gdk_xgrab_check_unmap (GdkWindow *window,
   if (display->keyboard_grab.window &&
       serial >= display->keyboard_grab.serial)
     {
-      GdkWindow *private = GDK_WINDOW_OBJECT (window);
-      GdkWindow *tmp = GDK_WINDOW_OBJECT (display->keyboard_grab.window);
+      GdkWindow *private = GDK_WINDOW (window);
+      GdkWindow *tmp = GDK_WINDOW (display->keyboard_grab.window);
 
       while (tmp && tmp != private)
 	tmp = tmp->parent;

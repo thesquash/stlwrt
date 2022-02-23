@@ -158,12 +158,6 @@ static GList *current_events = NULL;
 
 static GSList *main_loops = NULL;      /* stack of currently executing main loops */
 
-static GList *init_functions = NULL;	   /* A list of init functions.
-					    */
-static GList *quit_functions = NULL;	   /* A list of quit functions.
-					    */
-static GSList *key_snoopers = NULL;
-
 guint gtk_debug_flags = 0;		   /* Global GTK debug flag */
 
 #ifdef G_ENABLE_DEBUG
@@ -579,17 +573,6 @@ typedef struct
 } OptionGroupInfo;
 
 static gboolean
-pre_parse_hook (GOptionContext *context,
-		GOptionGroup   *group,
-		gpointer	data,
-		GError        **error)
-{
-  do_pre_parse_initialization (NULL, NULL);
-  
-  return TRUE;
-}
-
-static gboolean
 post_parse_hook (GOptionContext *context,
 		 GOptionGroup   *group,
 		 gpointer	data,
@@ -646,7 +629,7 @@ __gtk_get_option_group (gboolean open_default_display)
   info->open_default_display = open_default_display;
   
   group = g_option_group_new ("gtk", _("GTK+ Options"), _("Show GTK+ Options"), info, g_free);
-  g_option_group_set_parse_hooks (group, pre_parse_hook, post_parse_hook);
+  g_option_group_set_parse_hooks (group, NULL, post_parse_hook);
 
   __gdk_add_option_entries_libgtk_only (group);
   g_option_group_add_entries (group, gtk_args);
@@ -929,28 +912,12 @@ __gtk_get_default_language (void)
 void
 __gtk_main (void)
 {
-  GList *tmp_list;
-  GList *functions;
-  GtkInitFunction *init;
   GMainLoop *loop;
 
   __gtk_main_loop_level++;
   
   loop = g_main_loop_new (NULL, TRUE);
   main_loops = g_slist_prepend (main_loops, loop);
-
-  tmp_list = functions = init_functions;
-  init_functions = NULL;
-  
-  while (tmp_list)
-    {
-      init = tmp_list->data;
-      tmp_list = tmp_list->next;
-      
-      (* init->function) (init->data);
-      g_free (init);
-    }
-  g_list_free (functions);
 
   if (g_main_loop_is_running (main_loops->data))
     {
@@ -960,43 +927,6 @@ __gtk_main (void)
       __gdk_flush ();
     }
 
-  if (quit_functions)
-    {
-      GList *reinvoke_list = NULL;
-      GtkQuitFunction *quitf;
-
-      while (quit_functions)
-	{
-	  quitf = quit_functions->data;
-
-	  tmp_list = quit_functions;
-	  quit_functions = g_list_remove_link (quit_functions, quit_functions);
-	  g_list_free_1 (tmp_list);
-
-	  if ((quitf->main_level && quitf->main_level != __gtk_main_loop_level) ||
-	      gtk_quit_invoke_function (quitf))
-	    {
-	      reinvoke_list = g_list_prepend (reinvoke_list, quitf);
-	    }
-	  else
-	    {
-	      gtk_quit_destroy (quitf);
-	    }
-	}
-      if (reinvoke_list)
-	{
-	  GList *work;
-	  
-	  work = g_list_last (reinvoke_list);
-	  if (quit_functions)
-	    quit_functions->prev = work;
-	  work->next = quit_functions;
-	  quit_functions = work;
-	}
-
-      __gdk_flush ();
-    }
-    
   main_loops = g_slist_remove (main_loops, loop);
 
   g_main_loop_unref (loop);
@@ -1349,11 +1279,6 @@ __gtk_main_do_event (GdkEvent *event)
 
     case GDK_KEY_PRESS:
     case GDK_KEY_RELEASE:
-      if (key_snoopers)
-	{
-	  if (gtk_invoke_key_snoopers (grab_widget, event))
-	    break;
-	}
       /* Catch alt press to enable auto-mnemonics;
        * menus are handled elsewhere
        */
@@ -1718,26 +1643,6 @@ __gtk_get_event_widget (GdkEvent *event)
     }
   
   return widget;
-}
-
-static gint
-gtk_quit_invoke_function (GtkQuitFunction *quitf)
-{
-  if (!quitf->marshal)
-    return quitf->function (quitf->data);
-  else
-    {
-      GtkArg args[1];
-      gint ret_val = FALSE;
-
-      args[0].name = NULL;
-      args[0].type = G_TYPE_BOOLEAN;
-      args[0].d.pointer_data = &ret_val;
-      ((GtkCallbackMarshal) quitf->marshal) (NULL,
-					     quitf->data,
-					     0, args);
-      return ret_val;
-    }
 }
 
 /**

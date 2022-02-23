@@ -29,7 +29,7 @@
 #include <gtkprivate.h>
 #include <gtkintl.h>
 
-
+static void gtk_orientable_default_init (GtkOrientableInterface *iface);
 
 typedef GtkOrientableIface GtkOrientableInterface;
 STLWRT_DEFINE_INTERFACE (GtkOrientable, gtk_orientable, G_TYPE_OBJECT,

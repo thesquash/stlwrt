@@ -48,12 +48,10 @@
 #include <gtksettings.h>
 #include <gtkprivate.h>
 
+#include <stlwrt-builtin-icons.h>
+
 
 #define DEFAULT_THEME_NAME "hicolor"
-
-
-/* Provided by stlwrt-builtin-icons.c: */
-extern const guint8 *builtin_icons;
 
 
 typedef enum

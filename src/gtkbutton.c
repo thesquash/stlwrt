@@ -330,7 +330,7 @@ gtk_button_class_init (GtkButtonClass *klass)
    */ 
   button_signals[PRESSED] =
     g_signal_new (I_("pressed"),
-		  G_OBJECT_CLASS_TYPE (object_class),
+		  G_OBJECT_CLASS_TYPE (gobject_class),
 		  G_SIGNAL_RUN_FIRST,
 		  G_STRUCT_OFFSET (GtkButtonClass, pressed),
 		  NULL, NULL,
@@ -347,7 +347,7 @@ gtk_button_class_init (GtkButtonClass *klass)
    */ 
   button_signals[RELEASED] =
     g_signal_new (I_("released"),
-		  G_OBJECT_CLASS_TYPE (object_class),
+		  G_OBJECT_CLASS_TYPE (gobject_class),
 		  G_SIGNAL_RUN_FIRST,
 		  G_STRUCT_OFFSET (GtkButtonClass, released),
 		  NULL, NULL,
@@ -362,7 +362,7 @@ gtk_button_class_init (GtkButtonClass *klass)
    */ 
   button_signals[CLICKED] =
     g_signal_new (I_("clicked"),
-		  G_OBJECT_CLASS_TYPE (object_class),
+		  G_OBJECT_CLASS_TYPE (gobject_class),
 		  G_SIGNAL_RUN_FIRST | G_SIGNAL_ACTION,
 		  G_STRUCT_OFFSET (GtkButtonClass, clicked),
 		  NULL, NULL,
@@ -379,7 +379,7 @@ gtk_button_class_init (GtkButtonClass *klass)
    */ 
   button_signals[ENTER] =
     g_signal_new (I_("enter"),
-		  G_OBJECT_CLASS_TYPE (object_class),
+		  G_OBJECT_CLASS_TYPE (gobject_class),
 		  G_SIGNAL_RUN_FIRST,
 		  G_STRUCT_OFFSET (GtkButtonClass, enter),
 		  NULL, NULL,
@@ -396,7 +396,7 @@ gtk_button_class_init (GtkButtonClass *klass)
    */ 
   button_signals[LEAVE] =
     g_signal_new (I_("leave"),
-		  G_OBJECT_CLASS_TYPE (object_class),
+		  G_OBJECT_CLASS_TYPE (gobject_class),
 		  G_SIGNAL_RUN_FIRST,
 		  G_STRUCT_OFFSET (GtkButtonClass, leave),
 		  NULL, NULL,
@@ -414,7 +414,7 @@ gtk_button_class_init (GtkButtonClass *klass)
    */
   button_signals[ACTIVATE] =
     g_signal_new (I_("activate"),
-		  G_OBJECT_CLASS_TYPE (object_class),
+		  G_OBJECT_CLASS_TYPE (gobject_class),
 		  G_SIGNAL_RUN_FIRST | G_SIGNAL_ACTION,
 		  G_STRUCT_OFFSET (GtkButtonClass, activate),
 		  NULL, NULL,

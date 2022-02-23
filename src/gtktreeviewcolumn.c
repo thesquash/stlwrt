@@ -3625,7 +3625,7 @@ _gtk_tree_view_column_cell_set_dirty (GtkTreeViewColumn *tree_column,
       if (install_handler)
 	_gtk_tree_view_install_mark_rows_col_dirty (GTK_TREE_VIEW (gtk_tree_view_column_get_props (tree_column)->tree_view));
       else
-	gtk_tree_view_get_props (gtk_tree_view_column_get_props (tree_column)->tree_view))->priv->mark_rows_col_dirty = TRUE;
+	gtk_tree_view_get_props (gtk_tree_view_column_get_props (tree_column)->tree_view)->priv->mark_rows_col_dirty = TRUE;
       __gtk_widget_queue_resize (gtk_tree_view_column_get_props (tree_column)->tree_view);
     }
 }

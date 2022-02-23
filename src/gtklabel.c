@@ -467,7 +467,7 @@ gtk_label_class_init (GtkLabelClass *class)
      */
     signals[ACTIVATE_CURRENT_LINK] =
       g_signal_new_class_handler ("activate-current-link",
-                                  G_TYPE_FROM_CLASS (object_class),
+                                  G_TYPE_FROM_CLASS (gobject_class),
                                   G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
                                   G_CALLBACK (gtk_label_activate_current_link),
                                   NULL, NULL,
@@ -489,7 +489,7 @@ gtk_label_class_init (GtkLabelClass *class)
      */
     signals[ACTIVATE_LINK] =
       g_signal_new ("activate-link",
-                    G_TYPE_FROM_CLASS (object_class),
+                    G_TYPE_FROM_CLASS (gobject_class),
                     G_SIGNAL_RUN_LAST,
                     G_STRUCT_OFFSET (GtkLabelClass, activate_link),
                     ___gtk_boolean_handled_accumulator, NULL,

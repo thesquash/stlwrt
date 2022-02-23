@@ -1472,7 +1472,7 @@ gtk_range_size_request (GtkWidget      *widget,
   
   range = GTK_RANGE (widget);
   
-  get_range_properties (range,
+  range_get_properties (range,
                        &slider_width, &stepper_size,
                        &focus_width, &trough_border,
                        &stepper_spacing, NULL,
@@ -2212,7 +2212,7 @@ coord_to_value (GtkRange *range,
       slider_length = gtk_range_get_props (range)->layout->slider.width;
     }
 
-  get_range_properties (range, NULL, NULL, NULL, &trough_border, NULL,
+  range_get_properties (range, NULL, NULL, NULL, &trough_border, NULL,
                        &trough_under_steppers, NULL, NULL);
 
   if (! trough_under_steppers)
@@ -3311,7 +3311,7 @@ gtk_range_calc_layout (GtkRange *range,
   widget = GTK_WIDGET (range);
   layout = gtk_range_get_props (range)->layout;
   
-  get_range_properties (range,
+  range_get_properties (range,
                        &slider_width, &stepper_size,
                        &focus_width, &trough_border,
                        &stepper_spacing, &trough_under_steppers,

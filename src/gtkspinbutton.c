@@ -70,7 +70,7 @@ enum
   LAST_SIGNAL
 };
 
-static void gtk_spin_button_editable_init  (GtkEditableClass   *iface);
+static void gtk_spin_button_editable_init  (GtkEditableIface   *iface);
 static void gtk_spin_button_finalize       (GObject            *object);
 static void gtk_spin_button_set_property   (GObject         *object,
 					    guint            prop_id,
@@ -371,7 +371,7 @@ gtk_spin_button_class_init (GtkSpinButtonClass *class)
 }
 
 static void
-gtk_spin_button_editable_init (GtkEditableClass *iface)
+gtk_spin_button_editable_init (GtkEditableIface *iface)
 {
   iface->insert_text = gtk_spin_button_insert_text;
 }
@@ -1445,7 +1445,7 @@ gtk_spin_button_insert_text (GtkEditable *editable,
 {
   GtkEntry *entry = GTK_ENTRY (editable);
   GtkSpinButton *spin = GTK_SPIN_BUTTON (editable);
-  GtkEditableClass *parent_editable_iface = g_type_interface_peek (gtk_spin_button_parent_class, GTK_TYPE_EDITABLE);
+  GtkEditableIface *parent_editable_iface = g_type_interface_peek (gtk_spin_button_parent_class, GTK_TYPE_EDITABLE);
  
   if (gtk_spin_button_get_props (spin)->numeric)
     {

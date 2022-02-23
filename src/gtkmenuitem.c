@@ -99,8 +99,8 @@ static void gtk_menu_item_parent_set     (GtkWidget        *widget,
 					  GtkWidget        *previous_parent);
 
 
-static void gtk_real_menu_item_select               (GtkItem     *item);
-static void gtk_real_menu_item_deselect             (GtkItem     *item);
+static void gtk_real_menu_item_select               (GtkMenuItem *item);
+static void gtk_real_menu_item_deselect             (GtkMenuItem *item);
 static void gtk_real_menu_item_activate             (GtkMenuItem *item);
 static void gtk_real_menu_item_activate_item        (GtkMenuItem *item);
 static void gtk_real_menu_item_toggle_size_request  (GtkMenuItem *menu_item,
@@ -1345,14 +1345,9 @@ gtk_menu_item_expose (GtkWidget      *widget,
 }
 
 static void
-gtk_real_menu_item_select (GtkItem *item)
+gtk_real_menu_item_select (GtkMenuItem *menu_item)
 {
-  GtkMenuItem *menu_item;
   gboolean touchscreen_mode;
-
-  g_return_if_fail (GTK_IS_MENU_ITEM (item));
-
-  menu_item = GTK_MENU_ITEM (item);
 
   g_object_get (__gtk_widget_get_settings (GTK_WIDGET (item)),
                 "gtk-touchscreen-mode", &touchscreen_mode,
@@ -1371,14 +1366,8 @@ gtk_real_menu_item_select (GtkItem *item)
 }
 
 static void
-gtk_real_menu_item_deselect (GtkItem *item)
+gtk_real_menu_item_deselect (GtkMenuItem *menu_item)
 {
-  GtkMenuItem *menu_item;
-
-  g_return_if_fail (GTK_IS_MENU_ITEM (item));
-
-  menu_item = GTK_MENU_ITEM (item);
-
   if (gtk_menu_item_get_props (menu_item)->submenu)
     ___gtk_menu_item_popdown_submenu (GTK_WIDGET (menu_item));
 

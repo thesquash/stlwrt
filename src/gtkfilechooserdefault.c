@@ -440,7 +440,7 @@ typedef struct {
   GtkTreeModelFilterClass parent_class;
 } ShortcutsPaneModelFilterClass;
 
-#define SHORTCUTS_PANE_MODEL_FILTER_TYPE (_shortcuts_pane_model_filter_get_type ())
+#define SHORTCUTS_PANE_MODEL_FILTER_TYPE (___shortcuts_pane_model_filter_get_type ())
 #define SHORTCUTS_PANE_MODEL_FILTER(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), SHORTCUTS_PANE_MODEL_FILTER_TYPE, ShortcutsPaneModelFilter))
 
 static void shortcuts_pane_model_filter_drag_source_iface_init (GtkTreeDragSourceIface *iface);

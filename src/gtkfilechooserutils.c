@@ -248,7 +248,7 @@ delegate_get_preview_file (GtkFileChooser *chooser)
 static GtkFileSystem *
 delegate_get_file_system (GtkFileChooser *chooser)
 {
-  return ___gtk_file_chooser_get_file_system (get_delegate (chooser));
+  return _gtk_file_chooser_get_file_system (get_delegate (chooser));
 }
 
 static void
@@ -276,7 +276,7 @@ delegate_add_shortcut_folder (GtkFileChooser  *chooser,
 			      GFile           *file,
 			      GError         **error)
 {
-  return ___gtk_file_chooser_add_shortcut_folder (get_delegate (chooser), file, error);
+  return _gtk_file_chooser_add_shortcut_folder (get_delegate (chooser), file, error);
 }
 
 static gboolean
@@ -284,7 +284,7 @@ delegate_remove_shortcut_folder (GtkFileChooser  *chooser,
 				 GFile           *file,
 				 GError         **error)
 {
-  return ___gtk_file_chooser_remove_shortcut_folder (get_delegate (chooser), file, error);
+  return _gtk_file_chooser_remove_shortcut_folder (get_delegate (chooser), file, error);
 }
 
 static GSList *

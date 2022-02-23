@@ -41,9 +41,6 @@ typedef struct _GtkFileChooserButtonPrivate GtkFileChooserButtonPrivate;
 typedef struct _GtkFileChooserButtonClass   GtkFileChooserButtonClass;
 
 STLWRT_DECLARE_VTYPE_VPARENT(GtkFileChooserButton, gtk_file_chooser_button, GtkHBox,
-  /*< private >*/
-  GtkHBox parent;
-
   GtkFileChooserButtonPrivate * (priv);
 )
 

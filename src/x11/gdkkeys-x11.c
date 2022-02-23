@@ -68,10 +68,7 @@ struct _DirectionCacheEntry
   PangoDirection direction;
 };
 
-struct _GdkKeymapX11
-{
-  GdkKeymap     parent_instance;
-
+STLWRT_DECLARE_FTYPE_FPARENT (GdkKeymapX11, gdk_keymap_x11, GdkKeymap,
   gint min_keycode;
   gint max_keycode;
   KeySym* keymap;
@@ -99,45 +96,13 @@ struct _GdkKeymapX11
    */
   DirectionCacheEntry group_direction_cache[4];
 #endif
-};
+)
 
 #define KEYMAP_USE_XKB(keymap) GDK_DISPLAY_X11 ((keymap)->display)->use_xkb
 #define KEYMAP_XDISPLAY(keymap) GDK_DISPLAY_XDISPLAY ((keymap)->display)
 
-static GType gdk_keymap_x11_get_type   (void);
-static void  gdk_keymap_x11_class_init (GdkKeymapX11Class *klass);
-static void  gdk_keymap_x11_init       (GdkKeymapX11      *keymap);
-static void  gdk_keymap_x11_finalize   (GObject           *object);
-
-static GdkKeymapClass *parent_class = NULL;
-
-static GType
-gdk_keymap_x11_get_type (void)
-{
-  static GType object_type = 0;
-
-  if (!object_type)
-    {
-      const GTypeInfo object_info =
-	{
-	  sizeof (GdkKeymapClass),
-	  (GBaseInitFunc) NULL,
-	  (GBaseFinalizeFunc) NULL,
-	  (GClassInitFunc) gdk_keymap_x11_class_init,
-	  NULL,           /* class_finalize */
-	  NULL,           /* class_data */
-	  sizeof (GdkKeymapX11),
-	  0,              /* n_preallocs */
-	  (GInstanceInitFunc) gdk_keymap_x11_init,
-	};
-      
-      object_type = g_type_register_static (GDK_TYPE_KEYMAP,
-                                            g_intern_static_string ("GdkKeymapX11"),
-                                            &object_info, 0);
-    }
-  
-  return object_type;
-}
+STLWRT_DEFINE_FTYPE (GdkKeymapX11, gdk_keymap_x11, GDK_TYPE_KEYMAP,
+                     G_TYPE_FLAG_NONE, ;)
 
 static void
 gdk_keymap_x11_class_init (GdkKeymapX11Class *klass)

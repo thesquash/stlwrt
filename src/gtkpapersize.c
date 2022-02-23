@@ -34,6 +34,8 @@
 #include <gtkprintoperation.h>  /* for GtkPrintError */
 #include <gtkintl.h>
 
+#include <paper_names_offsets.h>
+
 struct _GtkPaperSize
 {
   const PaperInfo *info;
@@ -821,7 +823,6 @@ __gtk_paper_size_new_from_key_file (GKeyFile    *key_file,
   if (err != NULL) \
     {\
       g_propagate_error (error, err);\
-      retval = FALSE;\
       goto out;\
     }
 

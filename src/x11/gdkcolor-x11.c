@@ -160,8 +160,8 @@ __gdk_colormap_new (GdkVisual *visual,
       private->info = g_new0 (GdkColorInfo, colormap->size);
       colormap->colors = g_new (GdkColor, colormap->size);
       
-      private->hash = g_hash_table_new ((GHashFunc) gdk_color_hash,
-					(GEqualFunc) gdk_color_equal);
+      private->hash = g_hash_table_new ((GHashFunc) __gdk_color_hash,
+					(GEqualFunc) __gdk_color_equal);
       
       private->private_val = allocate;
       private->xcolormap = XCreateColormap (xdisplay, xrootwin,
@@ -382,8 +382,8 @@ __gdk_screen_get_system_colormap (GdkScreen *screen)
     case GDK_VISUAL_GRAYSCALE:
     case GDK_VISUAL_PSEUDO_COLOR:
       private->info = g_new0 (GdkColorInfo, colormap->size);
-      private->hash = g_hash_table_new ((GHashFunc) gdk_color_hash,
-					(GEqualFunc) gdk_color_equal);
+      private->hash = g_hash_table_new ((GHashFunc) __gdk_color_hash,
+					(GEqualFunc) __gdk_color_equal);
       /* Fall through */
     case GDK_VISUAL_STATIC_GRAY:
     case GDK_VISUAL_STATIC_COLOR:
@@ -1294,8 +1294,8 @@ __gdk_x11_colormap_foreign_new (GdkVisual *visual,
     case GDK_VISUAL_GRAYSCALE:
     case GDK_VISUAL_PSEUDO_COLOR:
       private->info = g_new0 (GdkColorInfo, colormap->size);
-      private->hash = g_hash_table_new ((GHashFunc) gdk_color_hash,
-					(GEqualFunc) gdk_color_equal);
+      private->hash = g_hash_table_new ((GHashFunc) __gdk_color_hash,
+					(GEqualFunc) __gdk_color_equal);
       /* Fall through */
     case GDK_VISUAL_STATIC_GRAY:
     case GDK_VISUAL_STATIC_COLOR:

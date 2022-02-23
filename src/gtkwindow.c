@@ -1638,9 +1638,9 @@ ___gtk_window_internal_set_focus (GtkWindow *window,
  * presses Enter in a dialog (for example). This function sets or
  * unsets the default widget for a #GtkWindow about. When setting
  * (rather than unsetting) the default widget it's generally easier to
- * call __gtk_widget_grab_focus() on the widget. Before making a widget
+ * call gtk_widget_grab_focus() on the widget. Before making a widget
  * the default widget, you must set the #GTK_CAN_DEFAULT flag on the
- * widget you'd like to make the default using GTK_WIDGET_SET_FLAGS().
+ * widget you'd like to make the default using gtk_widget_set_can_default().
  **/
 void
 __gtk_window_set_default (GtkWindow *window,
@@ -4445,7 +4445,8 @@ gtk_window_show (GtkWidget *widget)
   GtkContainer *container = GTK_CONTAINER (window);
   gboolean need_resize;
 
-  GTK_WIDGET_SET_FLAGS (widget, GTK_VISIBLE);
+  /* Enable the widget's visibility flag. */
+  gtk_widget_get_props (widget)->flags |= GTK_VISIBLE;
   
   need_resize = gtk_container_get_props (container)->need_resize || !__gtk_widget_get_realized (widget);
   gtk_container_get_props (container)->need_resize = FALSE;
@@ -4521,7 +4522,8 @@ gtk_window_hide (GtkWidget *widget)
 {
   GtkWindow *window = GTK_WINDOW (widget);
 
-  GTK_WIDGET_UNSET_FLAGS (widget, GTK_VISIBLE);
+  /* Disable the widget's visibility flag. */
+  gtk_widget_get_props (widget)->flags &= ~GTK_VISIBLE;
   __gtk_widget_unmap (widget);
 
   if (gtk_window_get_props (window)->modal)

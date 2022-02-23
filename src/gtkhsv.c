@@ -119,17 +119,15 @@ STLWRT_DEFINE_FTYPE_VPARENT (GtkHSV, gtk_hsv, GTK_TYPE_WIDGET, G_TYPE_FLAG_NONE,
 
 /* Class initialization function for the HSV color selector */
 static void
-gtk_hsv_class_init (GtkHSVClass *class)
+gtk_hsv_class_init (GtkHSVClass *hsv_class)
 {
+  GObjectClass   *object_class;
   GtkWidgetClass *widget_class;
-  GtkHSVClass    *hsv_class;
   GtkBindingSet  *binding_set;
-  
+
+  object_class = (GObjectClass *) class;
   widget_class = (GtkWidgetClass *) class;
-  hsv_class = GTK_HSV_CLASS (class);
-  
-  object_class->destroy = gtk_hsv_destroy;
-  
+
   widget_class->map = gtk_hsv_map;
   widget_class->unmap = gtk_hsv_unmap;
   widget_class->realize = gtk_hsv_realize;

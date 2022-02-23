@@ -64,7 +64,7 @@ _gdk_window_move_resize_child (GdkWindow *window,
   g_return_if_fail (window != NULL);
   g_return_if_fail (GDK_IS_WINDOW (window));
 
-  obj = GDK_WINDOW_OBJECT (window);
+  obj = GDK_WINDOW (window);
 
   if (width > 65535 ||
       height > 65535)

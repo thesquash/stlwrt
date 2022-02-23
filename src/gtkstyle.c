@@ -34,6 +34,7 @@
 #include <gtkiconfactory.h>
 #include <gtksettings.h>	/* ___gtk_settings_parse_convert() */
 #include <gtkintl.h>
+#include <gtkgc.h>
 
 
 #define LIGHTNESS_MULT  1.3
@@ -3452,37 +3453,6 @@ gtk_default_draw_string (GtkStyle      *style,
     }
 }
 
-static void
-option_menu_get_props (GtkWidget      *widget,
-		       GtkRequisition *indicator_size,
-		       GtkBorder      *indicator_spacing)
-{
-  GtkRequisition *tmp_size = NULL;
-  GtkBorder *tmp_spacing = NULL;
-  
-  if (GTK_IS_OPTION_MENU (widget))
-    __gtk_widget_style_get (widget, 
-			  "indicator-size", &tmp_size,
-			  "indicator-spacing", &tmp_spacing,
-			  NULL);
-
-  if (tmp_size)
-    {
-      *indicator_size = *tmp_size;
-      __gtk_requisition_free (tmp_size);
-    }
-  else
-    *indicator_size = default_option_indicator_size;
-
-  if (tmp_spacing)
-    {
-      *indicator_spacing = *tmp_spacing;
-      __gtk_border_free (tmp_spacing);
-    }
-  else
-    *indicator_spacing = default_option_indicator_spacing;
-}
-
 static void 
 gtk_default_draw_box (GtkStyle      *style,
 		      GdkWindow     *window,
@@ -3583,28 +3553,6 @@ gtk_default_draw_box (GtkStyle      *style,
 
   __gtk_paint_shadow (style, window, state_type, shadow_type, area, widget, detail,
                     x, y, width, height);
-
-  if (detail && strcmp (detail, "optionmenu") == 0)
-    {
-      GtkRequisition indicator_size;
-      GtkBorder indicator_spacing;
-      gint vline_x;
-
-      option_menu_get_props (widget, &indicator_size, &indicator_spacing);
-
-      sanitize_size (window, &width, &height);
-
-      if (get_direction (widget) == GTK_TEXT_DIR_RTL)
-	vline_x = x + indicator_size.width + indicator_spacing.left + indicator_spacing.right;
-      else 
-	vline_x = x + width - (indicator_size.width + indicator_spacing.left + indicator_spacing.right) - style->xthickness;
-
-      __gtk_paint_vline (style, window, state_type, area, widget,
-		       detail,
-		       y + style->ythickness + 1,
-		       y + height - style->ythickness - 3,
-		       vline_x);
-    }
 }
 
 static GdkGC *
@@ -4094,11 +4042,8 @@ gtk_default_draw_tab (GtkStyle      *style,
 {
 #define ARROW_SPACE 4
 
-  GtkRequisition indicator_size;
-  GtkBorder indicator_spacing;
+  GtkRequisition indicator_size = default_option_indicator_size;
   gint arrow_height;
-  
-  option_menu_get_props (widget, &indicator_size, &indicator_spacing);
 
   indicator_size.width += (indicator_size.width % 2) - 1;
   arrow_height = indicator_size.width / 2 + 1;
@@ -4111,7 +4056,7 @@ gtk_default_draw_tab (GtkStyle      *style,
       draw_arrow (window, &style->white, area,
 		  GTK_ARROW_UP, x + 1, y + 1,
 		  indicator_size.width, arrow_height);
-      
+
       draw_arrow (window, &style->white, area,
 		  GTK_ARROW_DOWN, x + 1, y + arrow_height + ARROW_SPACE + 1,
 		  indicator_size.width, arrow_height);

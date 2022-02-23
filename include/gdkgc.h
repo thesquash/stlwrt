@@ -23,8 +23,6 @@
 #include <stlwrt.h>
 
 #include <gdkcolor.h>
-#include <gdkfont.h>
-#include <gdkpixmap.h>
 #include <gdktypes.h>
 
 G_BEGIN_DECLS

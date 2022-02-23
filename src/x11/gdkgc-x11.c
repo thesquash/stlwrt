@@ -50,7 +50,8 @@ static void gdk_x11_gc_set_dashes (GdkGC           *gc,
 
 static void gdk_gc_x11_finalize   (GObject         *object);
 
-STLWRT_DEFINE_TYPE (GdkGCX11, _gdk_gc_x11, GDK_TYPE_GC)
+STLWRT_DEFINE_FTYPE (GdkGCX11, _gdk_gc_x11, GDK_TYPE_GC,
+                     G_TYPE_FLAG_NONE, ;)
 
 static void
 _gdk_gc_x11_class_init (GdkGCX11Class *klass)

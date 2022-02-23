@@ -124,11 +124,12 @@ static void        gdk_window_impl_iface_init     (GdkWindowImplIface *iface);
     (( time1 < time2 ) && ( time2 - time1 > ((guint32)-1)/2 ))     \
   )
 
-STLWRT_DEFINE_TYPE_WITH_CODE (GdkWindowImplX11,
-                         gdk_window_impl_x11,
-                         GDK_TYPE_DRAWABLE_IMPL_X11,
-                         G_IMPLEMENT_INTERFACE (GDK_TYPE_WINDOW_IMPL,
-                                                gdk_window_impl_iface_init));
+STLWRT_DEFINE_FTYPE (GdkWindowImplX11,
+                     gdk_window_impl_x11,
+                     GDK_TYPE_DRAWABLE_IMPL_X11,
+                     G_TYPE_FLAG_NONE,
+                     G_IMPLEMENT_INTERFACE (GDK_TYPE_WINDOW_IMPL,
+                                            gdk_window_impl_iface_init));
 
 GType
 _gdk_window_impl_get_type (void)
@@ -3415,7 +3416,7 @@ gdk_window_x11_get_events (GdkWindow *window)
       event_mask = x_event_mask_to_gdk_event_mask (attrs.your_event_mask);
       /* if property change was filtered out before, keep it filtered out */
       filtered = GDK_STRUCTURE_MASK | GDK_PROPERTY_CHANGE_MASK;
-      GDK_WINDOW_OBJECT (window)->event_mask = event_mask & ((GDK_WINDOW_OBJECT (window)->event_mask & filtered) | ~filtered);
+      GDK_WINDOW (window)->event_mask = event_mask & ((GDK_WINDOW (window)->event_mask & filtered) | ~filtered);
 
       return event_mask;
     }
@@ -4773,7 +4774,7 @@ gdk_window_set_static_bit_gravity (GdkWindow *window,
   
   g_return_if_fail (GDK_IS_WINDOW (window));
 
-  private = GDK_WINDOW_OBJECT (window);
+  private = GDK_WINDOW (window);
   if (private->input_only)
     return;
   

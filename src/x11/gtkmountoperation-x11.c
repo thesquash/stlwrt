@@ -34,7 +34,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <gio/gio.h>
-#include "gdkx.h"
+#include <gdkx.h>
 #include <X11/Xatom.h>
 #include <gtkicontheme.h>
 #include <gtkintl.h>

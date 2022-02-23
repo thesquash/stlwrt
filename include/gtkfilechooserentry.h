@@ -30,11 +30,11 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_FILE_CHOOSER_ENTRY    (SF(_gtk_file_chooser_entry_get_type) ())
+#define GTK_TYPE_FILE_CHOOSER_ENTRY    (_gtk_file_chooser_entry_get_type ())
 #define GTK_FILE_CHOOSER_ENTRY(obj)    (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_FILE_CHOOSER_ENTRY, GtkFileChooserEntry))
 #define GTK_IS_FILE_CHOOSER_ENTRY(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FILE_CHOOSER_ENTRY))
 
-STLWRT_DECLARE_OPAQUE_TYPE(GtkFileChooserEntry, gtk_file_chooser_entry)
+STLWRT_DECLARE_OPAQUE_TYPE(GtkFileChooserEntry, _gtk_file_chooser_entry)
 
 GtkWidget *        _gtk_file_chooser_entry_new                (gboolean             eat_tab);
 void               _gtk_file_chooser_entry_set_action         (GtkFileChooserEntry *chooser_entry,

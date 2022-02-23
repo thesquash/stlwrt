@@ -341,7 +341,7 @@ gtk_scale_button_init (GtkScaleButton *button)
   GtkScaleButtonPrivate *priv;
   GtkWidget *frame;
 
-  gtk_scale_button_get_props (button)->priv = priv = GET_PRIVATE (button);
+  gtk_scale_button_get_props (button)->priv = priv = gtk_scale_button_get_instance_private (button);
 
   priv->timeout = FALSE;
   priv->click_id = 0;
@@ -381,18 +381,18 @@ gtk_scale_button_init (GtkScaleButton *button)
   /* + */
   gtk_scale_button_get_props (button)->plus_button = __gtk_button_new_with_label ("+");
   __gtk_button_set_relief (GTK_BUTTON (gtk_scale_button_get_props (button)->plus_button), GTK_RELIEF_NONE);
-  g_signal_connect (gtk_scale_button_get_props (button)->plus_button, "gtk_scale_button_get_props (button)-press-event",
+  g_signal_connect (gtk_scale_button_get_props (button)->plus_button, "button-press-event",
 		    G_CALLBACK (cb_button_press), button);
-  g_signal_connect (gtk_scale_button_get_props (button)->plus_button, "gtk_scale_button_get_props (button)-release-event",
+  g_signal_connect (gtk_scale_button_get_props (button)->plus_button, "button-release-event",
 		    G_CALLBACK (cb_button_release), button);
   __gtk_box_pack_start (GTK_BOX (priv->box), gtk_scale_button_get_props (button)->plus_button, FALSE, FALSE, 0);
 
   /* - */
   gtk_scale_button_get_props (button)->minus_button = __gtk_button_new_with_label ("-");
   __gtk_button_set_relief (GTK_BUTTON (gtk_scale_button_get_props (button)->minus_button), GTK_RELIEF_NONE);
-  g_signal_connect (gtk_scale_button_get_props (button)->minus_button, "gtk_scale_button_get_props (button)-press-event",
+  g_signal_connect (gtk_scale_button_get_props (button)->minus_button, "button-press-event",
 		   G_CALLBACK (cb_button_press), button);
-  g_signal_connect (gtk_scale_button_get_props (button)->minus_button, "gtk_scale_button_get_props (button)-release-event",
+  g_signal_connect (gtk_scale_button_get_props (button)->minus_button, "button-release-event",
 		    G_CALLBACK (cb_button_release), button);
   __gtk_box_pack_end (GTK_BOX (priv->box), gtk_scale_button_get_props (button)->minus_button, FALSE, FALSE, 0);
 
@@ -1389,7 +1389,8 @@ static gboolean	gtk_scale_button_scale_press   (GtkWidget      *widget,
 static gboolean gtk_scale_button_scale_release (GtkWidget      *widget,
                                                 GdkEventButton *event);
 
-STLWRT_DEFINE_FTYPE_VPARENT (GtkScaleButtonScale, _gtk_scale_button_scale, GTK_TYPE_SCALE)
+STLWRT_DEFINE_VTYPE (GtkScaleButtonScale, _gtk_scale_button_scale, GTK_TYPE_SCALE,
+                     G_TYPE_FLAG_NONE, ;)
 
 static void
 _gtk_scale_button_scale_class_init (GtkScaleButtonScaleClass *klass)
@@ -1442,7 +1443,7 @@ static gboolean
 gtk_scale_button_scale_press (GtkWidget      *widget,
 			      GdkEventButton *event)
 {
-  GtkScaleButtonPrivate *priv = gtk_scale_button_get_instance_private (gtk_scale_button_scale_get_props (widget)->button);
+  GtkScaleButtonPrivate *priv = gtk_scale_button_get_instance_private (_gtk_scale_button_scale_get_props (widget)->button);
 
   /* the scale will grab input; if we have input grabbed, all goes
    * horribly wrong, so let's not do that.

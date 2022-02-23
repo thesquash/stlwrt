@@ -231,7 +231,8 @@ gtk_invisible_style_set (GtkWidget *widget,
 static void
 gtk_invisible_show (GtkWidget *widget)
 {
-  GTK_WIDGET_SET_FLAGS (widget, GTK_VISIBLE);
+  /* Enable the widget's visibility flag. */
+  gtk_widget_get_props (widget)->flags |= GTK_VISIBLE;
   __gtk_widget_map (widget);
 }
 

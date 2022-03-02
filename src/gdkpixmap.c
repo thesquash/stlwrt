@@ -228,6 +228,7 @@ __gdk_pixmap_new (GdkDrawable *drawable,
   return _gdk_pixmap_new (source_drawable, width, height, depth);
 }
 
+/*
 GdkPixmap *
 __gdk_bitmap_create_from_data (GdkDrawable *drawable,
                              const gchar *data,
@@ -242,6 +243,7 @@ __gdk_bitmap_create_from_data (GdkDrawable *drawable,
     source_drawable = NULL;
   return _gdk_bitmap_create_from_data (source_drawable, data, width, height);
 }
+*/
 
 GdkPixmap*
 __gdk_pixmap_create_from_data (GdkDrawable    *drawable,

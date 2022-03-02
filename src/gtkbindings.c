@@ -805,6 +805,7 @@ __gtk_binding_entry_remove (GtkBindingSet	 *binding_set,
  * Override or install a new key binding for @keyval with @modifiers on
  * @binding_set.
  */
+/*
 void
 ___gtk_binding_entry_add_signall (GtkBindingSet  *binding_set,
                                guint	       keyval,
@@ -816,6 +817,7 @@ ___gtk_binding_entry_add_signall (GtkBindingSet  *binding_set,
                                   keyval, modifiers,
                                   signal_name, binding_args);
 }
+*/
 
 void
 ___gtk_binding_entry_add_signall (GtkBindingSet  *binding_set,

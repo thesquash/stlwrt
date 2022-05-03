@@ -80,6 +80,7 @@ __gdk_image_unref (GdkImage *image)
  * 
  * Return value: a new #GdkImage or %NULL
  **/
+/*
 GdkImage*
 __gdk_image_get (GdkWindow *drawable,
 	       gint       x,
@@ -95,6 +96,7 @@ __gdk_image_get (GdkWindow *drawable,
   
   return __gdk_drawable_get_image ((GdkDrawable *) drawable, x, y, width, height);
 }
+*/
 
 /**
  * __gdk_image_set_colormap:
